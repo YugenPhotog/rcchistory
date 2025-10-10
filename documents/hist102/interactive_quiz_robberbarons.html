@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gilded Age & Modern Billionaires Quiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .question { margin-bottom: 15px; }
+        .hidden { display: none; }
+        .feedback { margin-top: 10px; font-weight: bold; }
+        .correct { color: green; }
+        .incorrect { color: red; }
+    </style>
+</head>
+<body>
+
+    <h2>Gilded Age & Modern Billionaires Quiz</h2>
+    <p>For 10 points extra credit, answer the following questions based on the reading. Click "Submit" to check your answers.&nbsp; &nbsp;Take a screencap of your results and send to Professor Austin in a Canvas Email.&nbsp; Extra credit will be added to chapter 19 quiz.&nbsp; &nbsp; &nbsp;&nbsp;</p>
+
+    <div class="quiz">
+        <!-- Questions 1-10 -->
+        <script>
+            let questions = {
+                "q1": ["According to the essay, why have modern historians challenged the 'Robber Baron' label for Carnegie and Rockefeller?", "C", 
+                    ["A) They believe Carnegie and Rockefeller had little impact on American industry.",
+                    "B) They argue that these industrialists were solely focused on accumulating wealth.",
+                    "C) They claim that Carnegie and Rockefeller revolutionized industries and contributed to society through philanthropy.",
+                    "D) They contend that the government protected them from criticism."],
+                    "The essay argues that Carnegie and Rockefeller were more than just exploitative businessmen; they helped industrial progress and gave to society."
+                ],
+                "q2": ["How did Carnegie’s innovations in the steel industry impact infrastructure?", "B",
+                    ["A) It made construction more expensive.",
+                    "B) It helped build railroads, skyscrapers, and bridges more efficiently.",
+                    "C) It had no major impact on infrastructure.",
+                    "D) It slowed industrial growth due to high production costs."],
+                    "Carnegie’s steel innovations made construction faster and cheaper, enabling large-scale infrastructure projects."
+                ],
+                "q3": ["What strategy did Rockefeller use to dominate the oil industry?", "C",
+                    ["A) Buying only gas stations to control fuel prices.",
+                    "B) Avoiding competition and staying within a small market.",
+                    "C) Using vertical integration to control multiple aspects of oil production.",
+                    "D) Refusing to innovate and relying on traditional refining methods."],
+                    "Rockefeller controlled all stages of oil production, from drilling to refining and distribution, making his company highly competitive."
+                ],
+                "q4": ["Which of the following best describes the main similarity between Carnegie, Rockefeller, Musk, and Bezos?", "B",
+                    ["A) All four built their empires in the steel and oil industries.",
+                    "B) They each played a key role in transforming major industries.",
+                    "C) They all avoided monopoly accusations.",
+                    "D) They prioritized personal wealth over business growth."],
+                    "Each of these figures revolutionized major industries, changing how goods and services were produced and delivered."
+                ],
+                "q5": ["Why has Musk been compared to Carnegie and Rockefeller?", "A",
+                    ["A) Like them, he has been accused of unfair business practices while also pushing technological innovation.",
+                    "B) He has stayed out of public debates, similar to Rockefeller.",
+                    "C) He focuses only on philanthropy rather than expanding his businesses.",
+                    "D) Unlike them, he has refused to create large-scale business empires."],
+                    "Musk, like Carnegie and Rockefeller, has been both praised for his innovations and criticized for his aggressive business tactics."
+                ],
+                "q6": ["Which of the following best describes a major difference between Gilded Age industrialists and modern billionaires?", "C",
+                    ["A) Gilded Age figures faced stricter government regulations.",
+                    "B) Modern billionaires do not engage in philanthropy.",
+                    "C) Modern billionaires operate in a more heavily regulated economy.",
+                    "D) Carnegie and Rockefeller used social media to influence the public."],
+                    "Unlike the largely unregulated Gilded Age, today's billionaires operate under stricter antitrust and labor laws."
+                ],
+                "q7": ["What was the purpose of the Bessemer Process, introduced by Carnegie?", "B",
+                    ["A) To refine oil more efficiently.",
+                    "B) To improve steel production by making it cheaper and faster.",
+                    "C) To create new business regulations.",
+                    "D) To reduce the power of monopolies."],
+                    "The Bessemer Process revolutionized steelmaking, making it faster and more affordable, fueling industrial growth."
+                ],
+                "q8": ["What is one criticism that both Carnegie and Bezos have faced?", "B",
+                    ["A) They focus too much on public image and ignore economic growth.",
+                    "B) They use aggressive business tactics that create labor disputes.",
+                    "C) They avoid technological innovation.",
+                    "D) They donate all of their wealth rather than reinvesting in their industries."],
+                    "Both have been criticized for their labor practices, facing strikes and worker disputes over wages and conditions."
+                ],
+                "q9": ["How does the essay suggest modern billionaires differ from Carnegie and Rockefeller in their philanthropy?", "A",
+                    ["A) Modern billionaires tend to reinvest in technology and space rather than large-scale public institutions.",
+                    "B) Modern billionaires have donated a greater percentage of their wealth than Carnegie and Rockefeller.",
+                    "C) Carnegie and Rockefeller refused to donate to universities or public projects.",
+                    "D) Musk and Bezos have already surpassed the philanthropic efforts of their predecessors."],
+                    "Unlike Carnegie and Rockefeller, modern billionaires focus their wealth on innovation, like space exploration and AI."
+                ],
+                "q10": ["What is the main question the essay poses about today’s billionaires?", "B",
+                    ["A) Whether they are truly innovative.",
+                    "B) Whether they will be remembered as philanthropists or self-serving moguls.",
+                    "C) Whether they have enough government protection.",
+                    "D) Whether they can compete with historical figures like Carnegie."],
+                    "The essay questions whether modern billionaires will leave a legacy of philanthropy or be remembered for corporate dominance."
+                ]
+            };
+
+            Object.keys(questions).forEach(q => {
+                document.write(`
+                    <div class="question" id="${q}">
+                        <p>${questions[q][0]}</p>
+                        ${questions[q][2].map((choice, index) => 
+                            `<input type="radio" name="${q}" value="${String.fromCharCode(65 + index)}"> ${choice}<br>`
+                        ).join("")}
+                        <p class="feedback hidden" id="${q}-feedback"></p>
+                    </div>
+                `);
+            });
+        </script>
+
+        <button onclick="checkAnswers()">Submit</button>
+        <p id="result" class="hidden"></p>
+    </div>
+
+    <script>
+        function checkAnswers() {
+            let score = 0;
+
+            Object.keys(questions).forEach(q => {
+                let selected = document.querySelector(`input[name="${q}"]:checked`);
+                let feedback = document.getElementById(`${q}-feedback`);
+                if (selected) {
+                    if (selected.value === questions[q][1]) {
+                        score++;
+                        feedback.textContent = "Correct! " + questions[q][3];
+                        feedback.classList.add("correct");
+                    } else {
+                        feedback.textContent = "Incorrect. " + questions[q][3];
+                        feedback.classList.add("incorrect");
+                    }
+                    feedback.classList.remove("hidden");
+                } else {
+                    feedback.textContent = "Please select an answer.";
+                    feedback.classList.add("incorrect");
+                    feedback.classList.remove("hidden");
+                }
+            });
+
+            document.getElementById("result").textContent = `You got ${score} out of ${Object.keys(questions).length} correct.`;
+            document.getElementById("result").classList.remove("hidden");
+        }
+    </script>
+
+</body>
+</html>
