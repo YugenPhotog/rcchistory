@@ -1,20 +1,35 @@
 /* ========================================
    Parchment & Ink Academic Website Styles
    Professor Steven Austin
+   Updated with Pantone 2025 Color Harmony
+   Primary: Mocha Mousse
    ======================================== */
 
-/* CSS Custom Properties - Color Palette */
+/* CSS Custom Properties - Updated Color Palette */
 :root {
-    /* Parchment & Ink Color System */
-    --parchment-base: #D4A574;
-    --parchment-light: #F7EBD1;
-    --parchment-mid: #B07C44;
-    --parchment-dark: #6E3F1F;
+    /* Pantone 2025 Color Harmony */
+    --mocha-mousse: #A67B5B;        /* Primary - Pantone 17-1230 TCX */
+    --tapestry: #5C7A8A;            /* Accent - Pantone 18-4417 TCX */
+    --laurel-oak: #9C9675;          /* Secondary - Pantone 17-0610 TCX */
+    --coffee-quartz: #6E5E58;       /* Dark Accent - Pantone 18-1307 TCX */
+    --arona: #8FADB8;               /* Light Blue - Pantone 16-4109 TCX */
+    --warm-taupe: #AB9B8E;          /* Light Neutral - Pantone 16-1318 TCX */
+    --dull-gold: #9B8550;           /* Gold Accent - Pantone 17-0935 TCX */
+    --buffed-beige: #C7B299;        /* Light Base - Pantone 20-0025 TPM */
+    
+    /* Semantic Color Variables */
+    --parchment-base: var(--mocha-mousse);
+    --parchment-light: var(--buffed-beige);
+    --parchment-mid: var(--warm-taupe);
+    --parchment-dark: var(--coffee-quartz);
     
     --ink-primary: #2B1810;
     --ink-medium: #3A2B20;
-    --accent-gold: #B8935E;
-    --accent-line: #704A2B;
+    --accent-gold: var(--dull-gold);
+    --accent-line: var(--coffee-quartz);
+    --accent-blue: var(--tapestry);
+    --accent-sage: var(--laurel-oak);
+    --accent-light-blue: var(--arona);
     
     /* Typography */
     --font-display: 'Playfair Display', serif;
@@ -39,27 +54,92 @@ body {
     font-size: 16px;
     line-height: 1.7;
     color: var(--ink-primary);
-    background: radial-gradient(ellipse at center, var(--parchment-light) 0%, var(--parchment-base) 50%, var(--parchment-mid) 100%);
-    background-attachment: fixed;
+    background: var(--parchment-light);
     min-height: 100vh;
 }
 
-/* ========================================
-   Banner Section
-   ======================================== */
-
-.banner {
-    width: 100%;
-    margin-bottom: 0;
-    box-shadow: 0 4px 12px rgba(46, 24, 16, 0.3);
-    max-height: 350px;
-    overflow: hidden;
+/* Course page backgrounds - override for course pages */
+body:has(.course-banner) {
+    background: var(--arona);
 }
 
-.banner-image {
+/* ========================================
+   Text Banner Section
+   ======================================== */
+
+.text-banner {
     width: 100%;
-    height: auto;
-    display: block;
+    background: var(--mocha-mousse);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(46, 24, 16, 0.3);
+    position: relative;
+    margin-bottom: 0;
+    border-bottom: 3px solid var(--coffee-quartz);
+}
+
+.banner-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.banner-main-title {
+    font-family: var(--font-display);
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--ink-primary);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.75rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.banner-subtitle {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--coffee-quartz);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+}
+
+.banner-decorative-rule {
+    width: 100%;
+    max-width: 500px;
+    height: 2px;
+    background: linear-gradient(to right, 
+        transparent 0%, 
+        var(--tapestry) 20%, 
+        var(--dull-gold) 50%, 
+        var(--tapestry) 80%, 
+        transparent 100%);
+    margin: 1.25rem auto;
+    position: relative;
+}
+
+.rule-ornament {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--mocha-mousse);
+    color: var(--dull-gold);
+    padding: 0 12px;
+    font-size: 1.2rem;
+}
+
+.banner-quote {
+    font-family: var(--font-accent);
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--ink-medium);
+    margin-top: 1rem;
+    margin-bottom: 0;
+}
+
+.banner-quote em {
+    color: var(--tapestry);
+    font-weight: 500;
 }
 
 /* ========================================
@@ -67,13 +147,14 @@ body {
    ======================================== */
 
 .main-nav {
-    background: linear-gradient(180deg, var(--parchment-dark) 0%, var(--accent-line) 100%);
+    background: var(--tapestry);
     padding: 1rem 0;
     text-align: center;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     position: sticky;
     top: 0;
     z-index: 100;
+    border-top: 5px solid var(--parchment-light);
 }
 
 .nav-link {
@@ -92,8 +173,8 @@ body {
 }
 
 .nav-link:hover {
-    color: var(--accent-gold);
-    border-bottom-color: var(--accent-gold);
+    color: var(--dull-gold);
+    border-bottom-color: var(--dull-gold);
     transform: translateY(-2px);
 }
 
@@ -135,9 +216,9 @@ body {
     height: 2px;
     background: linear-gradient(to right, 
         transparent 0%, 
-        var(--accent-line) 20%, 
-        var(--accent-gold) 50%, 
-        var(--accent-line) 80%, 
+        var(--tapestry) 20%, 
+        var(--dull-gold) 50%, 
+        var(--tapestry) 80%, 
         transparent 100%);
     margin: 2rem auto;
     max-width: 600px;
@@ -150,15 +231,15 @@ body {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    background: var(--parchment-base);
-    color: var(--accent-gold);
+    background: var(--mocha-mousse);
+    color: var(--dull-gold);
     padding: 0 10px;
     font-size: 0.8rem;
 }
 
 .decorative-rule-thin {
     height: 1px;
-    background: var(--accent-line);
+    background: var(--laurel-oak);
     margin: 1.5rem auto;
     max-width: 400px;
 }
@@ -195,7 +276,7 @@ body {
 
 .course-card {
     background: var(--parchment-light);
-    border: 2px solid var(--accent-line);
+    border: 3px solid var(--laurel-oak);
     border-radius: 8px;
     padding: 2rem;
     text-align: center;
@@ -212,14 +293,105 @@ body {
     right: 0;
     bottom: 0;
     border-radius: 8px;
-    background: radial-gradient(circle at top left, rgba(247, 235, 209, 0.8), transparent 70%);
+    background: radial-gradient(circle at top left, rgba(199, 178, 153, 0.8), transparent 70%);
     pointer-events: none;
+}
+
+/* Individual Course Color Schemes */
+.course-card:nth-child(1) {
+    border-color: var(--tapestry);
+    background: var(--arona);
+}
+
+.course-card:nth-child(1):hover {
+    border-color: var(--tapestry);
+    box-shadow: 0 12px 24px rgba(92, 122, 138, 0.4);
+    background: var(--parchment-light);
+}
+
+.course-card:nth-child(1) .course-number {
+    color: var(--tapestry);
+}
+
+.course-card:nth-child(1) .course-button {
+    background: linear-gradient(135deg, var(--tapestry) 0%, var(--arona) 100%);
+}
+
+.course-card:nth-child(1) .course-button:hover {
+    background: linear-gradient(135deg, var(--arona) 0%, var(--tapestry) 100%);
+}
+
+.course-card:nth-child(2) {
+    border-color: var(--dull-gold);
+    background: var(--warm-taupe);
+}
+
+.course-card:nth-child(2):hover {
+    border-color: var(--dull-gold);
+    box-shadow: 0 12px 24px rgba(155, 133, 80, 0.4);
+    background: var(--parchment-light);
+}
+
+.course-card:nth-child(2) .course-number {
+    color: var(--dull-gold);
+}
+
+.course-card:nth-child(2) .course-button {
+    background: linear-gradient(135deg, var(--dull-gold) 0%, var(--laurel-oak) 100%);
+}
+
+.course-card:nth-child(2) .course-button:hover {
+    background: linear-gradient(135deg, var(--laurel-oak) 0%, var(--dull-gold) 100%);
+}
+
+.course-card:nth-child(3) {
+    border-color: var(--coffee-quartz);
+    background: var(--mocha-mousse);
+}
+
+.course-card:nth-child(3):hover {
+    border-color: var(--coffee-quartz);
+    box-shadow: 0 12px 24px rgba(110, 94, 88, 0.4);
+    background: var(--warm-taupe);
+}
+
+.course-card:nth-child(3) .course-number {
+    color: var(--coffee-quartz);
+}
+
+.course-card:nth-child(3) .course-button {
+    background: linear-gradient(135deg, var(--coffee-quartz) 0%, var(--mocha-mousse) 100%);
+}
+
+.course-card:nth-child(3) .course-button:hover {
+    background: linear-gradient(135deg, var(--mocha-mousse) 0%, var(--coffee-quartz) 100%);
+}
+
+.course-card:nth-child(4) {
+    border-color: var(--arona);
+    background: var(--laurel-oak);
+}
+
+.course-card:nth-child(4):hover {
+    border-color: var(--arona);
+    box-shadow: 0 12px 24px rgba(143, 173, 184, 0.4);
+    background: var(--parchment-light);
+}
+
+.course-card:nth-child(4) .course-number {
+    color: var(--arona);
+}
+
+.course-card:nth-child(4) .course-button {
+    background: linear-gradient(135deg, var(--arona) 0%, var(--tapestry) 100%);
+}
+
+.course-card:nth-child(4) .course-button:hover {
+    background: linear-gradient(135deg, var(--tapestry) 0%, var(--arona) 100%);
 }
 
 .course-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 24px rgba(46, 24, 16, 0.3);
-    border-color: var(--accent-gold);
 }
 
 .course-icon {
@@ -232,7 +404,6 @@ body {
     font-family: var(--font-heading);
     font-size: 1.1rem;
     font-weight: 700;
-    color: var(--accent-line);
     letter-spacing: 0.1em;
     margin-bottom: 0.5rem;
 }
@@ -260,7 +431,6 @@ body {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    background: linear-gradient(135deg, var(--accent-line) 0%, var(--parchment-dark) 100%);
     color: var(--parchment-light);
     border: none;
     padding: 0.75rem 1.5rem;
@@ -268,10 +438,11 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    display: inline-block;
 }
 
 .course-button:hover {
-    background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-line) 100%);
     transform: scale(1.05);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
@@ -282,7 +453,7 @@ body {
 
 .content-box {
     background: var(--parchment-light);
-    border: 2px solid var(--accent-line);
+    border: 2px solid var(--laurel-oak);
     border-radius: 8px;
     padding: 3rem;
     margin-bottom: 3rem;
@@ -309,8 +480,8 @@ body {
 }
 
 .profile-frame {
-    background: var(--parchment-base);
-    border: 3px solid var(--accent-line);
+    background: var(--mocha-mousse);
+    border: 3px solid var(--tapestry);
     border-radius: 8px;
     padding: 2rem;
     text-align: center;
@@ -347,8 +518,8 @@ body {
     font-family: var(--font-accent);
     font-size: 1.1rem;
     font-style: italic;
-    color: var(--accent-line);
-    border-left: 3px solid var(--accent-gold);
+    color: var(--tapestry);
+    border-left: 3px solid var(--dull-gold);
     padding-left: 1.5rem;
     margin: 2rem 0;
 }
@@ -371,9 +542,9 @@ body {
 .contact-item {
     text-align: center;
     padding: 1.5rem;
-    background: var(--parchment-base);
+    background: var(--mocha-mousse);
     border-radius: 6px;
-    border: 1px solid var(--accent-line);
+    border: 1px solid var(--laurel-oak);
     transition: all 0.3s ease;
 }
 
@@ -408,7 +579,7 @@ body {
    ======================================== */
 
 .site-footer {
-    background: linear-gradient(180deg, transparent 0%, var(--parchment-dark) 100%);
+    background: linear-gradient(180deg, transparent 0%, var(--coffee-quartz) 100%);
     padding: 3rem 2rem 2rem;
     text-align: center;
     margin-top: 5rem;
@@ -424,94 +595,8 @@ body {
 .footer-text {
     font-family: var(--font-ui);
     font-size: 0.9rem;
-    color: var(--parchment-base);
+    color: var(--warm-taupe);
     letter-spacing: 0.05em;
-}
-
-/* ========================================
-   Responsive Design
-   ======================================== */
-
-@media (max-width: 768px) {
-    .container {
-        padding: 2rem 1rem;
-    }
-    
-    .section-title {
-        font-size: 2rem;
-    }
-    
-    .course-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
-    .about-content {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-    
-    .profile-frame {
-        max-width: 250px;
-        margin: 0 auto;
-    }
-    
-    .contact-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    
-    .nav-link {
-        padding: 0.5rem 1rem;
-        margin: 0 0.25rem;
-        font-size: 0.85rem;
-    }
-    
-    .welcome-text {
-        font-size: 1rem;
-        padding: 0 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .banner {
-        max-height: 200px;
-    }
-    
-    .main-nav {
-        padding: 0.75rem 0;
-    }
-    
-    .nav-link {
-        display: block;
-        margin: 0.25rem 0;
-        padding: 0.5rem;
-    }
-    
-    .content-box {
-        padding: 2rem 1.5rem;
-    }
-}
-
-/* ========================================
-   Print Styles
-   ======================================== */
-
-@media print {
-    body {
-        background: white;
-    }
-    
-    .main-nav,
-    .course-button {
-        display: none;
-    }
-    
-    .course-card {
-        break-inside: avoid;
-        box-shadow: none;
-        border: 1px solid #333;
-    }
 }
 
 /* ========================================
@@ -543,7 +628,7 @@ body {
     font-family: var(--font-heading);
     font-size: 1.8rem;
     font-weight: 400;
-    color: var(--accent-line);
+    color: var(--tapestry);
     margin-bottom: 2rem;
 }
 
@@ -561,7 +646,7 @@ body {
 
 .info-card {
     background: var(--parchment-light);
-    border: 2px solid var(--accent-line);
+    border: 2px solid var(--laurel-oak);
     border-radius: 8px;
     padding: 2rem;
     box-shadow: 0 4px 6px rgba(46, 24, 16, 0.15);
@@ -573,7 +658,7 @@ body {
     color: var(--ink-primary);
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--accent-gold);
+    border-bottom: 2px solid var(--dull-gold);
 }
 
 .info-card p {
@@ -582,7 +667,7 @@ body {
 }
 
 .info-card strong {
-    color: var(--accent-line);
+    color: var(--tapestry);
 }
 
 /* Learning Objectives */
@@ -597,16 +682,16 @@ body {
     align-items: start;
     gap: 1.5rem;
     padding: 1.5rem;
-    background: var(--parchment-base);
+    background: var(--mocha-mousse);
     border-radius: 8px;
-    border-left: 4px solid var(--accent-gold);
+    border-left: 4px solid var(--dull-gold);
 }
 
 .objective-number {
     font-family: var(--font-display);
     font-size: 2rem;
     font-weight: 700;
-    color: var(--accent-line);
+    color: var(--tapestry);
     background: var(--parchment-light);
     width: 50px;
     height: 50px;
@@ -639,10 +724,10 @@ body {
 }
 
 .topic-card {
-    background: var(--parchment-base);
+    background: var(--mocha-mousse);
     padding: 1.5rem;
     border-radius: 8px;
-    border: 1px solid var(--accent-line);
+    border: 1px solid var(--laurel-oak);
     transition: all 0.3s ease;
 }
 
@@ -694,7 +779,7 @@ body {
     content: '▸';
     position: absolute;
     left: 0.5rem;
-    color: var(--accent-gold);
+    color: var(--dull-gold);
     font-weight: bold;
 }
 
@@ -708,7 +793,7 @@ body {
 }
 
 .grade-bar {
-    background: linear-gradient(90deg, var(--accent-line) 0%, var(--accent-gold) 100%);
+    background: linear-gradient(90deg, var(--tapestry) 0%, var(--dull-gold) 100%);
     color: var(--parchment-light);
     padding: 1rem;
     border-radius: 6px;
@@ -741,7 +826,7 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     padding: 1.5rem;
-    background: var(--parchment-base);
+    background: var(--mocha-mousse);
     border-radius: 8px;
 }
 
@@ -750,7 +835,7 @@ body {
     font-weight: 600;
     padding: 0.5rem 1rem;
     background: var(--parchment-light);
-    border: 1px solid var(--accent-line);
+    border: 1px solid var(--laurel-oak);
     border-radius: 4px;
 }
 
@@ -760,7 +845,7 @@ body {
 }
 
 .cta-box {
-    background: linear-gradient(135deg, var(--parchment-dark) 0%, var(--accent-line) 100%);
+    background: linear-gradient(135deg, var(--coffee-quartz) 0%, var(--tapestry) 100%);
     color: var(--parchment-light);
     padding: 3rem;
     border-radius: 12px;
@@ -778,7 +863,7 @@ body {
 .cta-box p {
     font-size: 1.1rem;
     margin-bottom: 2rem;
-    color: var(--parchment-base);
+    color: var(--warm-taupe);
 }
 
 .cta-button {
@@ -787,7 +872,7 @@ body {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    background: var(--accent-gold);
+    background: var(--dull-gold);
     color: var(--ink-primary);
     border: none;
     padding: 1rem 2rem;
@@ -828,8 +913,159 @@ body {
     transform: translateY(-2px);
 }
 
-/* Course Page Responsive */
+/* ========================================
+   Chapter & Lecture Presentation Styles
+   ======================================== */
+
+.chapter-section {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: var(--mocha-mousse);
+    border-radius: 12px;
+    border: 2px solid var(--laurel-oak);
+}
+
+.chapter-title {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    color: var(--ink-primary);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 3px solid var(--dull-gold);
+    text-align: center;
+}
+
+.lecture-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.lecture-card {
+    background: var(--parchment-light);
+    border: 2px solid var(--tapestry);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 6px rgba(46, 24, 16, 0.15);
+    position: relative;
+}
+
+.lecture-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 16px rgba(46, 24, 16, 0.25);
+    border-color: var(--dull-gold);
+}
+
+.lecture-number {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--tapestry);
+    margin-bottom: 0.5rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.lecture-card h4 {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    color: var(--ink-primary);
+    margin-bottom: 0.75rem;
+}
+
+.lecture-card p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--ink-medium);
+    margin-bottom: 1.25rem;
+    min-height: 45px;
+}
+
+.lecture-button {
+    font-family: var(--font-ui);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: linear-gradient(135deg, var(--tapestry) 0%, var(--coffee-quartz) 100%);
+    color: var(--parchment-light);
+    border: none;
+    padding: 0.75rem 1.25rem;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.lecture-button:hover {
+    background: linear-gradient(135deg, var(--dull-gold) 0%, var(--tapestry) 100%);
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ========================================
+   Responsive Design
+   ======================================== */
+
 @media (max-width: 768px) {
+    .container {
+        padding: 2rem 1rem;
+    }
+    
+    .banner-main-title {
+        font-size: 2rem;
+    }
+    
+    .banner-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .banner-quote {
+        font-size: 1rem;
+    }
+    
+    .text-banner {
+        padding: 2rem 1.5rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .course-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .profile-frame {
+        max-width: 250px;
+        margin: 0 auto;
+    }
+    
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .nav-link {
+        padding: 0.5rem 1rem;
+        margin: 0 0.25rem;
+        font-size: 0.85rem;
+    }
+    
+    .welcome-text {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+    
     .course-page-title {
         font-size: 2.5rem;
     }
@@ -859,103 +1095,7 @@ body {
     .cta-box {
         padding: 2rem 1.5rem;
     }
-}
-
-/* ========================================
-   Chapter & Lecture Presentation Styles
-   ======================================== */
-
-.chapter-section {
-    margin-bottom: 3rem;
-    padding: 2rem;
-    background: var(--parchment-base);
-    border-radius: 12px;
-    border: 2px solid var(--accent-line);
-}
-
-.chapter-title {
-    font-family: var(--font-heading);
-    font-size: 1.6rem;
-    color: var(--ink-primary);
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 3px solid var(--accent-gold);
-    text-align: center;
-}
-
-.lecture-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-}
-
-.lecture-card {
-    background: var(--parchment-light);
-    border: 2px solid var(--accent-line);
-    border-radius: 8px;
-    padding: 1.5rem;
-    text-align: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 3px 6px rgba(46, 24, 16, 0.15);
-    position: relative;
-}
-
-.lecture-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 8px 16px rgba(46, 24, 16, 0.25);
-    border-color: var(--accent-gold);
-}
-
-.lecture-number {
-    font-family: var(--font-display);
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--accent-gold);
-    margin-bottom: 0.5rem;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-.lecture-card h4 {
-    font-family: var(--font-heading);
-    font-size: 1.2rem;
-    color: var(--ink-primary);
-    margin-bottom: 0.75rem;
-}
-
-.lecture-card p {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    color: var(--ink-medium);
-    margin-bottom: 1.25rem;
-    min-height: 45px;
-}
-
-.lecture-button {
-    font-family: var(--font-ui);
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    background: linear-gradient(135deg, var(--accent-line) 0%, var(--parchment-dark) 100%);
-    color: var(--parchment-light);
-    border: none;
-    padding: 0.75rem 1.25rem;
-    border-radius: 4px;
-    text-decoration: none;
-    display: inline-block;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.lecture-button:hover {
-    background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-line) 100%);
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-/* Responsive Lecture Cards */
-@media (max-width: 768px) {
+    
     .lecture-grid {
         grid-template-columns: 1fr;
     }
@@ -965,6 +1105,191 @@ body {
     }
     
     .chapter-title {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .text-banner {
+        padding: 1.5rem 1rem;
+    }
+    
+    .banner-main-title {
+        font-size: 1.6rem;
+        letter-spacing: 0.05em;
+    }
+    
+    .banner-subtitle {
+        font-size: 0.95rem;
+    }
+    
+    .banner-quote {
+        font-size: 0.9rem;
+    }
+    
+    .main-nav {
+        padding: 0.75rem 0;
+    }
+    
+    .nav-link {
+        display: block;
+        margin: 0.25rem 0;
+        padding: 0.5rem;
+    }
+    
+    .content-box {
+        padding: 2rem 1.5rem;
+    }
+}
+
+/* ========================================
+   Print Styles
+   ======================================== */
+
+@media print {
+    body {
+        background: white;
+    }
+    
+    .main-nav,
+    .course-button {
+        display: none;
+    }
+    
+    .course-card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #333;
+    }
+}
+
+/* ========================================
+   Course Page Specific Styles
+   ======================================== */
+
+/* HIST 101 Course Page Background */
+body.hist-101-page {
+    background: var(--arona);
+}
+
+/* Abbreviated Course Banner */
+.course-banner {
+    padding: 2rem 2rem;
+    background: var(--tapestry);
+}
+
+.course-banner .banner-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.banner-course-title {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--parchment-light);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.banner-course-subtitle {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--parchment-light);
+    letter-spacing: 0.05em;
+    margin-bottom: 0;
+}
+
+/* Responsive Course Banner */
+@media (max-width: 768px) {
+    .course-banner {
+        padding: 1.5rem 1.5rem;
+    }
+    
+    .banner-course-title {
+        font-size: 2rem;
+    }
+    
+    .banner-course-subtitle {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .course-banner {
+        padding: 1.25rem 1rem;
+    }
+    
+    .banner-course-title {
+        font-size: 1.6rem;
+    }
+    
+    .banner-course-subtitle {
+        font-size: 1rem;
+    }
+}
+
+/* ========================================
+   Syllabus Download Section
+   ======================================== */
+
+.syllabus-download {
+    margin: 2rem auto;
+    max-width: 800px;
+}
+
+.syllabus-box {
+    background: linear-gradient(135deg, var(--parchment-light) 0%, rgba(199, 178, 153, 0.3) 100%);
+    border: 3px solid var(--dull-gold);
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(155, 133, 80, 0.3);
+}
+
+.syllabus-box h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--ink-primary);
+    margin-bottom: 1rem;
+}
+
+.syllabus-box p {
+    font-size: 1rem;
+    color: var(--ink-medium);
+    margin-bottom: 1.5rem;
+}
+
+.syllabus-button {
+    display: inline-block;
+    font-family: var(--font-ui);
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: linear-gradient(135deg, var(--dull-gold) 0%, var(--laurel-oak) 100%);
+    color: var(--parchment-light);
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.syllabus-button:hover {
+    background: linear-gradient(135deg, var(--laurel-oak) 0%, var(--dull-gold) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    .syllabus-box {
+        padding: 1.5rem;
+    }
+    
+    .syllabus-box h3 {
         font-size: 1.3rem;
     }
 }
