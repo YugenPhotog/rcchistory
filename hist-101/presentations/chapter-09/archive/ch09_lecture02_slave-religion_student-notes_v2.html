@@ -10,7 +10,10 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/night.css" id="theme" />
 
-  <!-- Local refinements -->
+  <!-- Shared palette & fonts (your site-wide styles) -->
+  <link rel="stylesheet" href="presentation-style.css" />
+
+  <!-- Local refinements (dark gold on navy) -->
   <style>
     :root{
       --r-main-font-size: 36px;
@@ -23,6 +26,7 @@
       --gold: #D4AF37;
       --gold-2: #E5C050;
       --navy: #0C1730;
+      --navy-2: #122143;
       --teal: #4ecdc4;
       --rose: #f38181;
       --ink: #ECF0F1;
@@ -49,6 +53,7 @@
     .two-col{ display: grid; grid-template-columns: 1.4fr 1fr; gap: 28px; align-items: start; }
     @media (max-width:1100px){ .two-col{ grid-template-columns: 1fr; } }
 
+    /* Right column cards / images */
     .quote-card{
       background: rgba(255,255,255,.06);
       border-left: 6px solid var(--rose);
@@ -67,11 +72,17 @@
     }
     .image-box img{ width: 100%; height: auto; border-radius: 10px; display: block; }
 
+    .image-placeholder{
+      background: #1a274c; border: 2px dashed var(--teal); padding: 24px; border-radius: 10px;
+      color: #95e1d3; font-style: italic; text-align: center; min-height: 160px;
+      display: flex; align-items: center; justify-content: center;
+    }
     .quote{
       font-style: italic; border-left: 6px solid var(--rose); padding: 16px 20px;
       margin: 18px 0; background: rgba(255,255,255,.06); border-radius: 8px; color: #EEE;
     }
 
+    /* List rhythm in scroll areas */
     .scroll-content h3{ margin-top: 14px; }
     .scroll-content ul{ margin: 8px 0 14px; }
     .scroll-content ul>li{ padding: 4px 0; border-bottom: 1px dashed rgba(255,255,255,.08); }
@@ -96,8 +107,18 @@
       overflow: hidden;
       box-shadow: 0 6px 20px rgba(0,0,0,.25);
     }
-    .video-frame::before{ content: ""; display: block; padding-top: 56.25%; }
-    .video-frame iframe{ position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .video-frame::before{
+      content: "";
+      display: block;
+      padding-top: 56.25%; /* 16:9 */
+    }
+    .video-frame iframe{
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
 
     /* Glossary */
     .gloss{ color:#ffe08a; cursor:pointer; border-bottom:1px dotted #ffe08a; }
@@ -116,61 +137,6 @@
       margin-top: 10px;
     }
     .why strong{ color:#7dd3fc; }
-
-    /* Simple notes modal (HIGH CONTRAST light scheme) */
-    .sf-modal{ position:fixed; inset:0; background:rgba(0,0,0,.65); display:none; align-items:center; justify-content:center; z-index:9999; }
-    .sf-card{
-      background:#fff8e6; /* beige */
-      color:#111;
-      border:2px solid #222;
-      border-radius:12px;
-      width:min(980px,92vw);
-      max-height:82vh;
-      overflow:auto;
-      padding:20px 22px;
-      box-shadow:0 10px 30px rgba(0,0,0,.55);
-    }
-    .sf-card h3{ margin:0 0 8px 0; color:#111; }
-    .sf-card h4, .sf-card strong{ color:#000; }
-    .sf-card a{ color:#0a56c2; text-decoration: underline; }
-    .sf-close{
-      background:#fff;
-      border:2px solid #222;
-      color:#111;
-      padding:6px 12px;
-      border-radius:8px;
-      cursor:pointer;
-      transition: background .15s ease;
-    }
-    .sf-close:hover{ background:#f3e9cf; }
-    .sf-kb{ font-size:.95em; color:#222; margin-top:8px; }
-    /* Ensure list text is dark and readable in the notes modal */
-    .sf-card ul li{ border-bottom-color: rgba(0,0,0,.12); }
-    /* Light variant of WHY box inside the modal */
-    .sf-card .why{
-      background:#fff1c2;
-      border:1px solid #e0c878;
-      border-left:6px solid #0ea5e9;
-      border-radius:10px;
-      color:#111;
-    }
-
-    /* First-slide hint (persistent until slide change) */
-    #sHint{
-      position: fixed;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: 3vh;
-      background: rgba(0,0,0,.7);
-      color: #fff;
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: .9rem;
-      z-index: 1001;
-      pointer-events: none;
-      box-shadow: 0 6px 20px rgba(0,0,0,.25);
-      display:none;
-    }
   </style>
 </head>
 <body>
@@ -199,6 +165,7 @@
         <p class="subtitle">African Roots, American Soil: The Birth of Slave Religion</p>
 
         <div class="two-col">
+          <!-- Left: scrollable framing content (quote is inside scroll) -->
           <div class="scroll-content">
             <h3>Middle Passage as Cultural Crossing</h3>
             <ul>
@@ -229,6 +196,7 @@
             </div>
           </div>
 
+          <!-- Right: image -->
           <div>
             <div class="image-box" style="margin-bottom:14px;">
               <img src="images/Gemini_Generated_Image_iv5ab5iv5ab5iv5a.png"
@@ -249,11 +217,12 @@
         </aside>
       </section>
 
-      <!-- White Religious Control -->
+      <!-- White Religious Control (images right, scroll together) -->
       <section data-transition="fade" data-auto-animate>
         <h2>White Religious Control</h2>
         <div class="scroll-content">
           <div class="two-col">
+            <!-- Left: text -->
             <div>
               <h3>From Withholding the Gospel to Weaponizing It</h3>
               <ul>
@@ -273,6 +242,7 @@
               </ul>
             </div>
 
+            <!-- Right: images + quote (scroll with text) -->
             <div>
               <div class="image-box" style="margin-bottom:14px;">
                 <img src="images/Picture1.png" alt="White preacher instructing enslaved people" />
@@ -362,7 +332,7 @@
         </aside>
       </section>
 
-      <!-- Invisible Institution -->
+      <!-- The “Invisible Institution” -->
       <section data-transition="fade" data-auto-animate>
         <h2>The “Invisible Institution”</h2>
         <div class="scroll-content">
@@ -398,7 +368,9 @@
             <li><strong>Function:</strong> Theology + protest + communication network.</li>
           </ul>
 
+          <!-- Two-column video row -->
           <div class="two-col" style="margin-top:20px;">
+            <!-- GO DOWN, MOSES (thumbnail link - embedding disabled by uploader) -->
             <div style="text-align:center;">
               <p style="margin-bottom:10px;">🎥 <em>“Go Down, Moses” (opens on YouTube)</em></p>
               <a href="https://www.youtube.com/watch?v=vf6jBP4YXwo" target="_blank" rel="noopener"
@@ -409,6 +381,7 @@
               </a>
             </div>
 
+            <!-- WADE IN THE WATER (embedded) -->
             <div style="text-align:center;">
               <p style="margin-bottom:10px;">🎥 <em>“Wade in the Water” (Spiritual)</em></p>
               <div class="video-frame">
@@ -421,6 +394,7 @@
             </div>
           </div>
 
+          <!-- Bottom row: Swing Low (embedded) -->
           <div style="text-align:center; margin-top:24px;">
             <p style="margin-bottom:10px;">🎥 <em>“Swing Low, Sweet Chariot” (Spiritual)</em></p>
             <div class="video-frame" style="max-width:800px;">
@@ -470,11 +444,12 @@
         </aside>
       </section>
 
-      <!-- Nat Turner -->
+      <!-- Nat Turner: Prophet & Revolutionary -->
       <section data-transition="fade" data-auto-animate>
         <h2>Nat Turner: Prophet & Revolutionary</h2>
         <div class="scroll-content">
           <div class="two-col">
+            <!-- Left: text -->
             <div>
               <ul>
                 <li><strong>Early life & faith:</strong> Literate; deep Bible study, fasting and prayer; called “The Prophet.”</li>
@@ -483,6 +458,8 @@
                 <li><strong>Meaning:</strong> Apocalyptic faith can push from patience to action.</li>
               </ul>
             </div>
+
+            <!-- Right: images (scroll with text) -->
             <div>
               <div class="image-box" style="margin-bottom:14px;">
                 <img src="images/Picture3.png" alt="Portrait of Nat Turner" loading="lazy" />
@@ -531,20 +508,11 @@
     </div>
   </div>
 
-  <!-- Persistent first-slide hint -->
-  <div id="sHint" aria-hidden="true">Press <b>S</b> for Study Notes</div>
+  <div class="nav-hint">Press <b>S</b> for slide notes • Click highlighted words for definitions</div>
 
-  <!-- Simple Study Notes modal -->
-  <div class="sf-modal" id="sfModal" aria-hidden="true">
-    <div class="sf-card" role="dialog" aria-modal="true" aria-labelledby="sfTitle">
-      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px;">
-        <h3 id="sfTitle">Study Notes</h3>
-        <button class="sf-close" id="sfClose" title="Close (Esc)">Close ✕</button>
-      </div>
-      <div id="sfBody"></div>
-      <div class="sf-kb">Tip: Press <kbd>S</kbd> again or <kbd>Esc</kbd> to close.</div>
-    </div>
-  </div>
+  <!-- Reveal.js -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/notes/notes.js"></script>
 
   <!-- Glossary popup -->
   <div class="g-pop" id="gPop" role="dialog" aria-modal="false">
@@ -553,11 +521,8 @@
     <p id="gHist" class="small"></p>
   </div>
 
-  <!-- Reveal.js -->
-  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
-
   <script>
-    // Initialize Reveal (no presenter console)
+    // Initialize Reveal
     Reveal.initialize({
       controls: true,
       controlsTutorial: false,
@@ -576,47 +541,59 @@
       minScale: 0.2,
       maxScale: 2.0,
       autoAnimate: true,
-      pdfSeparateFragments: false
+      pdfSeparateFragments: false,
+      plugins: [ RevealNotes ]
     });
 
-    // First-slide hint: show on first slide, hide after leaving it
+    // Scroll-inside-slide helper
+    function scrollWithinSlide(direction){
+      const slide = Reveal.getCurrentSlide();
+      const sc = slide ? slide.querySelector('.scroll-content') : null;
+      if(!sc) return false;
+
+      const step = 70; // px per key press
+      if(direction === 'down') sc.scrollTop += step;
+      else sc.scrollTop -= step;
+
+      const atTop = sc.scrollTop <= 0;
+      const atBottom = sc.scrollHeight - sc.scrollTop <= sc.clientHeight + 2;
+
+      if((direction === 'down' && !atBottom) || (direction === 'up' && !atTop)) return true;
+      return false;
+    }
+
+    // Arrow ↓ / ↑ scroll first; advance slides only at ends
+    Reveal.addKeyBinding({ keyCode: 40, key: 'ArrowDown' }, function(){
+      if(scrollWithinSlide('down')) return false;
+      Reveal.down();
+    });
+    Reveal.addKeyBinding({ keyCode: 38, key: 'ArrowUp' }, function(){
+      if(scrollWithinSlide('up')) return false;
+      Reveal.up();
+    });
+
+    // Throttled Mouse wheel: only scrolls .scroll-content; never advances slides
     (function(){
-      const hint = document.getElementById('sHint');
-      function updateHint(){
-        const idx = Reveal.getIndices();
-        if(idx && idx.h === 0){
-          hint.style.display = 'block';
-        }else{
-          hint.style.display = 'none';
+      let ticking = false;
+      document.addEventListener('wheel', function(e){
+        const slide = Reveal.getCurrentSlide();
+        const sc = slide ? slide.querySelector('.scroll-content') : null;
+        if(!sc) return;
+
+        e.preventDefault();
+        const delta = e.deltaY;
+
+        if(!ticking){
+          window.requestAnimationFrame(function(){
+            sc.scrollTop += delta;
+            ticking = false;
+          });
+          ticking = true;
         }
-      }
-      Reveal.on('ready', updateHint);
-      Reveal.on('slidechanged', updateHint);
+      }, { passive: false });
     })();
 
-    /* --- Student-facing notes modal (press S) --- */
-    const modal = document.getElementById('sfModal');
-    const modalBody = document.getElementById('sfBody');
-    const modalClose = document.getElementById('sfClose');
-    function openNotes(){
-      const slide = Reveal.getCurrentSlide();
-      const notes = slide ? slide.querySelector('aside.notes') : null;
-      modalBody.innerHTML = notes ? notes.innerHTML : '<p>No study notes for this slide.</p>';
-      modal.style.display = 'flex';
-      modal.setAttribute('aria-hidden','false');
-    }
-    function closeNotes(){
-      modal.style.display = 'none';
-      modal.setAttribute('aria-hidden','true');
-    }
-    document.addEventListener('keydown', (e)=>{
-      if(e.key.toLowerCase() === 's'){ e.preventDefault(); modal.style.display === 'flex' ? closeNotes() : openNotes(); }
-      if(e.key === 'Escape'){ closeNotes(); }
-    });
-    modalClose.addEventListener('click', closeNotes);
-    modal.addEventListener('click', (e)=>{ if(e.target === modal) closeNotes(); });
-
-    /* --- Glossary --- */
+    // Glossary data (unchanged)
     const GLOSSARY = {
       ringshout: {
         t: "Ring shout",

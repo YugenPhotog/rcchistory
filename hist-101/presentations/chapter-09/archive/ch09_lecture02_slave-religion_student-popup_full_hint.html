@@ -23,6 +23,7 @@
       --gold: #D4AF37;
       --gold-2: #E5C050;
       --navy: #0C1730;
+      --navy-2: #122143;
       --teal: #4ecdc4;
       --rose: #f38181;
       --ink: #ECF0F1;
@@ -67,6 +68,11 @@
     }
     .image-box img{ width: 100%; height: auto; border-radius: 10px; display: block; }
 
+    .image-placeholder{
+      background: #1a274c; border: 2px dashed var(--teal); padding: 24px; border-radius: 10px;
+      color: #95e1d3; font-style: italic; text-align: center; min-height: 160px;
+      display: flex; align-items: center; justify-content: center;
+    }
     .quote{
       font-style: italic; border-left: 6px solid var(--rose); padding: 16px 20px;
       margin: 18px 0; background: rgba(255,255,255,.06); border-radius: 8px; color: #EEE;
@@ -117,59 +123,37 @@
     }
     .why strong{ color:#7dd3fc; }
 
-    /* Simple notes modal (HIGH CONTRAST light scheme) */
+    /* Simple notes modal */
     .sf-modal{ position:fixed; inset:0; background:rgba(0,0,0,.65); display:none; align-items:center; justify-content:center; z-index:9999; }
-    .sf-card{
-      background:#fff8e6; /* beige */
-      color:#111;
-      border:2px solid #222;
-      border-radius:12px;
-      width:min(980px,92vw);
-      max-height:82vh;
-      overflow:auto;
-      padding:20px 22px;
-      box-shadow:0 10px 30px rgba(0,0,0,.55);
-    }
-    .sf-card h3{ margin:0 0 8px 0; color:#111; }
-    .sf-card h4, .sf-card strong{ color:#000; }
-    .sf-card a{ color:#0a56c2; text-decoration: underline; }
-    .sf-close{
-      background:#fff;
-      border:2px solid #222;
-      color:#111;
-      padding:6px 12px;
-      border-radius:8px;
-      cursor:pointer;
-      transition: background .15s ease;
-    }
-    .sf-close:hover{ background:#f3e9cf; }
-    .sf-kb{ font-size:.95em; color:#222; margin-top:8px; }
-    /* Ensure list text is dark and readable in the notes modal */
-    .sf-card ul li{ border-bottom-color: rgba(0,0,0,.12); }
-    /* Light variant of WHY box inside the modal */
-    .sf-card .why{
-      background:#fff1c2;
-      border:1px solid #e0c878;
-      border-left:6px solid #0ea5e9;
-      border-radius:10px;
-      color:#111;
-    }
+    .sf-card{ background:#0e1a38; border:1px solid #2b3a68; border-radius:12px; width:min(900px,92vw); max-height:82vh; overflow:auto; padding:18px 22px; box-shadow:0 10px 30px rgba(0,0,0,.45); }
+    .sf-card h3{ margin:0 0 8px 0; color:#D4AF37; }
+    .sf-close{ background:#15244a; border:1px solid #2b3a68; color:#fff; padding:6px 10px; border-radius:8px; cursor:pointer; }
+    .sf-kb{ font-size:.85em; color:#cbd5e1; margin-top:8px; }
 
-    /* First-slide hint (persistent until slide change) */
+    /* First-slide hint (auto fade) */
     #sHint{
       position: fixed;
       left: 50%;
       transform: translateX(-50%);
       bottom: 3vh;
-      background: rgba(0,0,0,.7);
+      background: rgba(0,0,0,.55);
       color: #fff;
       padding: 8px 12px;
       border-radius: 8px;
       font-size: .9rem;
       z-index: 1001;
+      opacity: 0;
+      animation: hintFade 1s ease 1.5s forwards, hintOut 1s ease 6s forwards;
       pointer-events: none;
       box-shadow: 0 6px 20px rgba(0,0,0,.25);
-      display:none;
+    }
+    @keyframes hintFade {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes hintOut {
+      from { opacity: 1; }
+      to   { opacity: 0; }
     }
   </style>
 </head>
@@ -531,7 +515,7 @@
     </div>
   </div>
 
-  <!-- Persistent first-slide hint -->
+  <!-- Tiny first-slide hint -->
   <div id="sHint" aria-hidden="true">Press <b>S</b> for Study Notes</div>
 
   <!-- Simple Study Notes modal -->
@@ -579,19 +563,30 @@
       pdfSeparateFragments: false
     });
 
-    // First-slide hint: show on first slide, hide after leaving it
+    // Show hint ONLY on the first slide, then remove it after fade completes
     (function(){
       const hint = document.getElementById('sHint');
-      function updateHint(){
+      function maybeShowHint(){
         const idx = Reveal.getIndices();
         if(idx && idx.h === 0){
           hint.style.display = 'block';
+          // Remove after animation ends
+          hint.addEventListener('animationend', () => {
+            hint.parentNode && hint.parentNode.removeChild(hint);
+          }, { once: true });
         }else{
-          hint.style.display = 'none';
+          // Not first slide; ensure hint is gone
+          hint.parentNode && hint.parentNode.removeChild(hint);
         }
       }
-      Reveal.on('ready', updateHint);
-      Reveal.on('slidechanged', updateHint);
+      Reveal.on('ready', maybeShowHint);
+      // If someone loads deep-linked slide, still suppress hint
+      Reveal.on('slidechanged', function(e){
+        if(e.indexh !== 0){
+          const h = document.getElementById('sHint');
+          if(h && h.parentNode) h.parentNode.removeChild(h);
+        }
+      });
     })();
 
     /* --- Student-facing notes modal (press S) --- */
