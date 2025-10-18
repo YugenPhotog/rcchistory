@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flashcards — Early Republic Key Terms (Ch. 7)</title>
+  <meta name="description" content="Simple flip-card study deck for Early Republic terminology: Washington to 1812.">
+  <style>
+    /* ---------- THEME ---------- */
+    :root{
+      --bg: #0b132b;           /* deep navy */
+      --bg2: #0f1b3d;          /* gradient stop */
+      --ink: #f8fafc;          /* near-white text */
+      --muted: #cbd5e1;        /* slate-300 */
+      --card: #101827;         /* card base */
+      --card2:#0b1220;         /* card gradient */
+      --ring: #ffd166;         /* focus ring */
+      --shadow: 0 14px 40px rgba(0,0,0,.35);
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#fff8e6; --bg2:#fff0c8; --ink:#111; --muted:#334155; --card:#fffdf6; --card2:#fff7e0; --ring:#d9b56f; --shadow:0 10px 28px rgba(0,0,0,.12) }
+    }
+
+    html,body{margin:0;height:100%}
+    body{
+      font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+      color:var(--ink);
+      background: radial-gradient(1200px 600px at 10% -10%, var(--bg2), transparent),
+                  radial-gradient(1200px 600px at 110% 10%, #1a2a6c22, transparent),
+                  linear-gradient(180deg, var(--bg), #0a0f1f 80%);
+      min-height:100%;
+    }
+    .wrap{max-width:1180px;margin:40px auto;padding:0 20px}
+    header{display:flex;gap:16px;align-items:center;justify-content:space-between;margin:0 0 12px}
+    h1{font-size:clamp(1.4rem,1rem + 2vw,2.1rem);margin:0;font-weight:900;letter-spacing:.2px}
+    .sub{opacity:.85;margin:4px 0 18px}
+    .legend{font-size:.95rem; opacity:.85; margin:10px 0 0}
+
+    /* ---------- GRID & CARDS ---------- */
+    .grid{display:grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap:16px}
+    .fc{ perspective:1200px; position:relative; -webkit-perspective:1200px }
+    .fc input{ position:absolute; opacity:0; pointer-events:none }
+    .card{
+      position:relative; height:210px; border-radius:18px;
+      border:1px solid rgba(255,255,255,.22);
+      background: radial-gradient(120% 120% at 10% 10%, var(--card), var(--card2));
+      box-shadow: var(--shadow);
+      display:grid; place-items:center; padding:0; cursor:pointer; outline:none; overflow:hidden
+    }
+    .rotator{
+      position:relative; width:100%; height:100%;
+      transform-style:preserve-3d; -webkit-transform-style:preserve-3d;
+      will-change: transform;
+      transition: transform .55s cubic-bezier(.2,.7,.2,1);
+    }
+    .fc input:checked + .card .rotator{ transform: rotateY(180deg) }
+    .fc input:focus + .card, .card:focus{ box-shadow: 0 0 0 3px var(--ring) }
+    .card:hover{ border-color:#ffffff55 }
+    .card:before{
+      content:""; position:absolute; inset:-2px; pointer-events:none;
+      background: conic-gradient(from 180deg, transparent, #ffffff15 20%, transparent 35%);
+      transform: rotate(0deg); animation: sheen 6s linear infinite;
+    }
+    @keyframes sheen{ to { transform: rotate(1turn) } }
+
+    .face{
+      position:absolute; inset:0; padding:18px;
+      display:grid; place-items:center; text-align:center; border-radius:16px;
+      backface-visibility:hidden; -webkit-backface-visibility:hidden;
+    }
+    .front{ transform: rotateY(0deg) }
+    .back { transform: rotateY(180deg) }
+    .front h3{margin:0 0 8px; font-weight:900; font-size:1.05rem; letter-spacing:.2px}
+    .front .meta{font-size:.85rem; opacity:.8; margin:0}
+    .badge{
+      position:absolute; top:12px; right:12px; font-size:.75rem; letter-spacing:.4px;
+      padding:4px 8px; border-radius:999px; border:1px solid #ffffff40; background:#ffffff14
+    }
+    .back .hint{ font-size:.8rem; opacity:.8; margin-top:8px }
+
+    /* ---------- TOGGLE ---------- */
+    .toggle{display:inline-flex; gap:8px; align-items:center}
+    .toggle input{appearance:none; width:38px; height:22px; background:#ffffff25; border-radius:999px; position:relative; outline:none; cursor:pointer; border:1px solid #ffffff33}
+    .toggle input:after{content:""; position:absolute; top:2px; left:2px; width:18px; height:18px; border-radius:50%; background:#fff; transition:left .2s ease}
+    .toggle input:checked{ background: #ffffff40; border-color: var(--ring) }
+    .toggle input:checked:after{ left:18px }
+    .sr-only{ position:absolute; width:1px; height:1px; margin:-1px; clip:rect(0 0 0 0); overflow:hidden; white-space:nowrap; border:0; padding:0 }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Early Republic — Key Terms (Flip Cards)</h1>
+        <div class="sub">Washington, Jefferson, Diplomacy, and Native Resistance • Chapter 7</div>
+      </div>
+      <div class="toggle" title="High contrast mode">
+        <label class="sr-only" for="contrast">High contrast</label>
+        <input id="contrast" type="checkbox" aria-label="High contrast">
+        <span>High Contrast</span>
+      </div>
+    </header>
+
+    <div id="grid" class="grid" aria-live="polite"></div>
+
+    <p class="legend">Keyboard: Tab to a card, then press <strong>Space</strong> or <strong>Enter</strong> to flip.</p>
+  </div>
+
+  <script>
+    // ----------------- DATA -----------------
+    const CARDS = [
+      {t:"Neutrality Dilemma", meta:"1793", d:"U.S. torn between alliance to France and trade with Britain; set stage for official neutrality."},
+      {t:"Neutrality Proclamation", meta:"1793", d:"Washington declared friendly impartiality and asserted executive authority to keep the U.S. out of European wars."},
+      {t:"Genet Affair", meta:"1793", d:"French envoy Citizen Genet violated neutrality by recruiting privateers and expeditions on U.S. soil."},
+      {t:"Federalists vs. Democratic-Republicans", meta:"1790s", d:"Opposing political coalitions: Federalists for order and Britain; Republicans for France and agrarian republicanism."},
+      {t:"First Party System", meta:"1790s", d:"Institutionalized rivalry of Federalists and Democratic-Republicans across the 1790s."},
+      {t:"Jay’s Treaty", meta:"1794–1795", d:"Britain left western forts; limited West Indies trade; U.S. repaid debts—averted war but fueled partisanship."},
+      {t:"Whiskey Rebellion", meta:"1794", d:"Frontier protests over whiskey excise; Washington’s militia response affirmed federal authority."},
+      {t:"Farewell Address", meta:"1796", d:"Washington warned against factionalism and permanent alliances; urged unity and civic virtue."},
+      {t:"Federalist No. 10 (Faction)", meta:"Madison, 1787", d:"Madison argued that a large republic dilutes factional mischief, safeguarding liberty."},
+      {t:"Marbury v. Madison", meta:"1803", d:"Landmark case establishing judicial review by striking part of the Judiciary Act of 1789."},
+      {t:"Louisiana Purchase", meta:"1803", d:"U.S. acquired Louisiana from France, doubling territory and securing the Mississippi."},
+      {t:"Jefferson’s Constitutional Dilemma", meta:"1803", d:"Strict construction conflicted with purchasing territory; he used treaty power with Senate approval."},
+      {t:"“Empire of Liberty”", meta:"after 1803", d:"Jefferson’s vision of expansion through yeoman settlement, often at the expense of Native nations."},
+      {t:"Napoleonic Wars & Neutrality", meta:"1803–1815", d:"U.S. neutrality squeezed by both France and Britain during European conflict."},
+      {t:"Impressment", meta:"Royal Navy", d:"Seizure of alleged British deserters from U.S. vessels—coerced service violated American sovereignty."},
+      {t:"Chesapeake–Leopard Affair", meta:"1807", d:"HMS Leopard attacked USS Chesapeake, killing and seizing sailors; sparked national outrage."},
+      {t:"Embargo Act", meta:"1807", d:"Banned U.S. ships from foreign ports to pressure Britain and France without war—devastated commerce."},
+      {t:"Jefferson’s Indian Policy", meta:"early 1800s", d:"‘Civilization’ programs and pressure for land cessions; relocation when resisted."},
+      {t:"Tecumseh", meta:"1768–1813", d:"Shawnee leader building a pan-Indian confederacy; later allied with Britain in the Old Northwest."},
+      {t:"Tenskwatawa (The Prophet)", meta:"Prophetstown", d:"Religious revivalist preaching abstinence and rejection of American goods to resist encroachment."},
+      {t:"Battle of Tippecanoe", meta:"1811", d:"Harrison’s forces destroyed Prophetstown after a surprise attack; weakened the confederacy."},
+    ];
+
+    // ----------------- RENDER -----------------
+    const grid = document.getElementById('grid');
+    function cardHTML(item, i){
+      const id = `fc_${i}`;
+      return `<label class="fc">
+        <input type="checkbox" id="${id}" aria-label="Flip card: ${item.t}">
+        <div class="card" tabindex="0" role="button" aria-controls="${id}" aria-pressed="false">
+          <div class="rotator">
+            <div class="face front">
+              <div>
+                <div class="badge">Flip</div>
+                <h3>${item.t}</h3>
+                <p class="meta">${item.meta}</p>
+              </div>
+            </div>
+            <div class="face back">
+              <div>
+                <div class="badge">Back</div>
+                <p>${item.d}</p>
+                <p class="hint">Press Space or Enter to flip back</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </label>`;
+    }
+    function render(list){
+      grid.innerHTML = list.map(cardHTML).join("");
+      grid.querySelectorAll('.card').forEach((el) => {
+        const input = el.previousElementSibling;
+        el.addEventListener('keydown', (e)=>{
+          if(e.key === ' ' || e.key === 'Enter'){
+            e.preventDefault();
+            input.checked = !input.checked;
+          }
+        });
+      });
+    }
+    render(CARDS);
+
+    // ----------------- CONTRAST TOGGLE -----------------
+    const contrast = document.getElementById('contrast');
+    const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+    contrast.checked = !prefersLight;
+    contrast.addEventListener('change', () => {
+      if(contrast.checked){
+        document.documentElement.style.setProperty('--bg', '#0b132b');
+        document.documentElement.style.setProperty('--bg2', '#0f1b3d');
+        document.documentElement.style.setProperty('--ink', '#f8fafc');
+        document.documentElement.style.setProperty('--muted', '#cbd5e1');
+        document.documentElement.style.setProperty('--card', '#101827');
+        document.documentElement.style.setProperty('--card2', '#0b1220');
+        document.documentElement.style.setProperty('--ring', '#ffd166');
+        document.documentElement.style.setProperty('--shadow', '0 14px 40px rgba(0,0,0,.35)');
+      }else{
+        document.documentElement.style.setProperty('--bg', '#fff8e6');
+        document.documentElement.style.setProperty('--bg2', '#fff0c8');
+        document.documentElement.style.setProperty('--ink', '#111');
+        document.documentElement.style.setProperty('--muted', '#334155');
+        document.documentElement.style.setProperty('--card', '#fffdf6');
+        document.documentElement.style.setProperty('--card2', '#fff7e0');
+        document.documentElement.style.setProperty('--ring', '#d9b56f');
+        document.documentElement.style.setProperty('--shadow', '0 10px 28px rgba(0,0,0,.12)');
+      }
+    });
+  </script>
+</body>
+</html>
