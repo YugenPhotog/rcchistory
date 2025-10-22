@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 3: Staging America - Performance, Race, and Identity</title>
+    
+    <!-- All Styles -->
+    <style>
+        /* Base Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #1a1a1a;
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif;
+        }
+        
+        /* Reveal Container */
+        .reveal {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .reveal .slides {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            text-align: left;
+        }
+        
+        .reveal .slides section {
+            position: absolute;
+            width: 90%;
+            height: 85%;
+            left: 5%;
+            top: 7.5%;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        
+        /* Progress Bar */
+        .progress-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: rgba(92, 122, 138, 0.2);
+            z-index: 1000;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: #5C7A8A;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        /* Slide Number */
+        .slide-number {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #5C7A8A;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-size: 18px;
+            font-weight: 600;
+            z-index: 1000;
+        }
+        
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: rgba(92, 122, 138, 0.8);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 1000;
+            display: none;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        /* Navigation Controls */
+        .nav-controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+        
+        .nav-button {
+            background: #5C7A8A;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-button:hover {
+            background: #9B8550;
+            transform: translateY(-2px);
+        }
+        
+        .nav-button:active {
+            transform: translateY(0);
+        }
+        
+        /* Overview Mode */
+        .reveal .slides.overview-mode {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .reveal .slides.overview-mode section {
+            position: relative;
+            width: 100%;
+            height: auto;
+            left: 0;
+            top: 0;
+            transform: scale(0.3);
+            transform-origin: top left;
+            cursor: pointer;
+            border: 2px solid #5C7A8A;
+        }
+        
+        .reveal .slides.overview-mode section:hover {
+            border-color: #9B8550;
+        }
+        
+        :root {
+            /* Color palette */
+            --mocha-mousse: #A67B5B;
+            --tapestry: #5C7A8A;
+            --laurel-oak: #9C9675;
+            --coffee-quartz: #6E5E58;
+            --arona: #8FADB8;
+            --warm-taupe: #AB9B8E;
+            --dull-gold: #9B8550;
+            --buffed-beige: #C7B299;
+            --ink-primary: #2B1810;
+            --ink-medium: #3A2B20;
+        }
+        
+        /* Typography and Content Styling */
+        .reveal {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Libre Baskerville', Georgia, serif;
+            font-size: 32px;
+            font-weight: normal;
+            color: var(--ink-primary);
+        }
+        
+        .reveal .slides section {
+            background: linear-gradient(135deg, #FFF8E7 0%, #F5EDD6 100%);
+            padding: 40px 60px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            height: 100%;
+            overflow-y: auto;
+        }
+        
+        /* Headings optimized for distance viewing */
+        .reveal h1 {
+            font-size: 2.8em;
+            font-weight: 900;
+            color: var(--tapestry);
+            text-transform: none;
+            margin-bottom: 0.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            line-height: 1.2;
+            border-bottom: 4px solid var(--dull-gold);
+            padding-bottom: 0.3em;
+        }
+        
+        .reveal h2 {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: var(--coffee-quartz);
+            text-transform: none;
+            margin-bottom: 0.6em;
+            margin-top: 1em;
+            border-left: 6px solid var(--tapestry);
+            padding-left: 0.4em;
+        }
+        
+        .reveal h3 {
+            font-size: 1.6em;
+            font-weight: 600;
+            color: var(--mocha-mousse);
+            text-transform: none;
+            margin-bottom: 0.5em;
+            margin-top: 0.8em;
+        }
+        
+        .reveal h4 {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: var(--tapestry);
+            text-transform: none;
+            margin-bottom: 0.4em;
+        }
+        
+        /* Body text optimized for readability */
+        .reveal p, .reveal li {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 0.6em;
+            color: var(--ink-primary);
+        }
+        
+        .reveal ul, .reveal ol {
+            margin-left: 1.5em;
+            margin-bottom: 1em;
+        }
+        
+        .reveal li {
+            margin-bottom: 0.5em;
+        }
+        
+        .reveal strong {
+            color: var(--coffee-quartz);
+            font-weight: 700;
+        }
+        
+        .reveal em {
+            color: var(--tapestry);
+            font-style: italic;
+        }
+        
+        /* Title slide styling */
+        .reveal .title-slide {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            background: linear-gradient(135deg, var(--tapestry) 0%, var(--arona) 100%);
+        }
+        
+        .reveal .title-slide h1 {
+            font-size: 3.5em;
+            color: #FFFFFF;
+            border: none;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+            margin-bottom: 0.3em;
+        }
+        
+        .reveal .title-slide .subtitle {
+            font-size: 1.8em;
+            color: var(--buffed-beige);
+            font-style: italic;
+            margin-top: 0.5em;
+        }
+        
+        .reveal .title-slide .lecture-number {
+            font-size: 1.4em;
+            color: #FFFFFF;
+            margin-bottom: 1em;
+            opacity: 0.9;
+        }
+        
+        /* Section divider slides */
+        .reveal .section-slide {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            background: linear-gradient(135deg, var(--coffee-quartz) 0%, var(--mocha-mousse) 100%);
+        }
+        
+        .reveal .section-slide h1 {
+            color: #FFFFFF;
+            border: none;
+            font-size: 3em;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* Image placeholder styling */
+        .image-placeholder {
+            background: linear-gradient(135deg, #E8E8E8 0%, #D0D0D0 100%);
+            border: 3px dashed var(--laurel-oak);
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            font-style: italic;
+            color: #666666;
+            font-size: 1.1em;
+            margin: 20px 0;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Box styles for emphasis */
+        .highlight-box {
+            background: rgba(143, 173, 184, 0.2);
+            border-left: 6px solid var(--tapestry);
+            padding: 20px 30px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .quote-box {
+            background: rgba(199, 178, 153, 0.3);
+            border-left: 6px solid var(--dull-gold);
+            padding: 25px 35px;
+            margin: 25px 0;
+            font-style: italic;
+            font-size: 1.15em;
+            border-radius: 4px;
+        }
+        
+        .quote-box cite {
+            display: block;
+            text-align: right;
+            margin-top: 15px;
+            font-size: 0.9em;
+            font-weight: 600;
+            color: var(--tapestry);
+        }
+        
+        .feature-box {
+            background: rgba(255, 255, 255, 0.6);
+            border: 2px solid var(--mocha-mousse);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        .conclusion-box {
+            background: linear-gradient(135deg, rgba(92, 122, 138, 0.25), rgba(155, 133, 80, 0.25));
+            border: 3px solid var(--tapestry);
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+        
+        /* Two-column layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+        
+        .two-column.narrow-wide {
+            grid-template-columns: 1fr 2fr;
+        }
+        
+        .two-column.wide-narrow {
+            grid-template-columns: 2fr 1fr;
+        }
+        
+        /* Comparison grid */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 20px 0;
+        }
+        
+        .comparison-box {
+            background: rgba(255, 255, 255, 0.7);
+            border: 2px solid var(--tapestry);
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        .comparison-box h4 {
+            border-bottom: 2px solid var(--dull-gold);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        
+        /* Feature list styling */
+        .feature-list {
+            margin: 20px 0;
+        }
+        
+        .feature-item {
+            background: rgba(255, 255, 255, 0.5);
+            border-left: 5px solid var(--tapestry);
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .feature-item strong {
+            display: block;
+            font-size: 1.15em;
+            margin-bottom: 8px;
+            color: var(--coffee-quartz);
+        }
+        
+        /* Controls styling */
+        button {
+            font-family: inherit;
+        }
+        
+        /* Accessibility improvements */
+        .reveal a {
+            color: var(--tapestry);
+            text-decoration: underline;
+        }
+        
+        .reveal a:hover {
+            color: var(--dull-gold);
+        }
+        
+        /* Responsive adjustments */
+        @media screen and (max-width: 1024px) {
+            .reveal {
+                font-size: 28px;
+            }
+            
+            .two-column,
+            .comparison-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+        
+        /* Print styles */
+        @media print {
+            .reveal .slides section {
+                page-break-after: always;
+            }
+        }
+        
+        /* Scrollbar styling for overflow content */
+        .reveal .slides section::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        .reveal .slides section::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        
+        .reveal .slides section::-webkit-scrollbar-thumb {
+            background: var(--tapestry);
+            border-radius: 5px;
+        }
+        
+        .reveal .slides section::-webkit-scrollbar-thumb:hover {
+            background: var(--dull-gold);
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar"></div>
+    </div>
+    
+    <!-- Slide Number -->
+    <div class="slide-number">1 / 18</div>
+    
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">↓ Scroll Down ↓</div>
+    
+    <!-- Navigation Controls -->
+    <div class="nav-controls">
+        <button class="nav-button" onclick="showSlide(0)" title="First Slide (Home or H key)">⏮ First</button>
+        <button class="nav-button" onclick="prevSlide()" title="Previous (← Left Arrow)">← Prev</button>
+        <button class="nav-button" onclick="nextSlide()" title="Next (→ Right Arrow or Space)">Next →</button>
+        <button class="nav-button" onclick="showSlide(totalSlides - 1)" title="Last Slide (End or E key)">Last ⏭</button>
+    </div>
+    
+    <div class="reveal">
+        <div class="slides">
+            
+            <!-- Slide 1: Title -->
+            <section class="title-slide" data-transition="fade">
+                <h1>Staging America:<br>Performance, Race, and Identity</h1>
+                <p class="subtitle">Lecture 3</p>
+                <p class="lecture-number">HIST 101: American History to 1865</p>
+            </section>
+
+            <!-- Slide 2: Creation of Leisure Time -->
+            <section>
+                <h1>The Creation of Leisure Time</h1>
+                
+                <div class="two-column">
+                    <div>
+                        <h2>Pre-1815: Traditional Work Patterns</h2>
+                        <ul>
+                            <li><strong>Seasonal rhythms</strong> governed agricultural work</li>
+                            <li><strong>Task-based labor</strong> in artisan shops</li>
+                            <li>Work and life intermingled</li>
+                            <li>No clear division between "work time" and "free time"</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h2>Post-1815: Industrial Time</h2>
+                        <ul>
+                            <li><strong>Factory bells</strong> regulate the working day</li>
+                            <li><strong>Wage labor</strong> creates fixed schedules</li>
+                            <li>Separation of work time from free time</li>
+                            <li>The working day creates its opposite: <strong>Leisure Time</strong></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="highlight-box" style="margin-top: 30px;">
+                    <h3>Structured Time Off:</h3>
+                    <ul>
+                        <li>Sundays (Sabbath observance)</li>
+                        <li>Evenings after work</li>
+                        <li>Saturday half-holidays (emerging practice)</li>
+                    </ul>
+                </div>
+                
+                <div class="conclusion-box">
+                    <p><strong>New Question:</strong> What do you do when you're not working?</p>
+                </div>
+            </section>
+
+            <!-- Slide 3: Middle Class and Respectable Recreation -->
+            <section>
+                <h1>The Middle Class and Respectable Recreation</h1>
+                
+                <h2>The New Middle Class</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <strong>Who They Are</strong>
+                        <p>Clerks, shopkeepers, small manufacturers, professionals</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <strong>What They Gain</strong>
+                        <p>Leisure time and discretionary spending power</p>
+                    </div>
+                </div>
+                
+                <h2>Leisure as Status Marker</h2>
+                <div class="highlight-box">
+                    <p><strong>How you spend your free time signals who you are</strong></p>
+                    <p>Leisure becomes a way to perform and display middle-class identity</p>
+                </div>
+                
+                <h3>Demand for "Improving" Amusements:</h3>
+                <ul>
+                    <li><strong>Museums</strong> (natural history, curiosities)</li>
+                    <li><strong>Moral lectures</strong> and lyceums</li>
+                    <li><strong>Theater</strong> (but the "right" kind—respectable venues)</li>
+                </ul>
+                
+                <h3>Affordability:</h3>
+                <ul>
+                    <li>Barnum's Museum: ~$0.25 admission</li>
+                    <li>Theater galleries: $0.50–$1.00</li>
+                </ul>
+                
+                <h2>Geography of Respectability</h2>
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <h4>Broadway Theaters</h4>
+                        <p>Upscale venues catering to middle-class tastes and values</p>
+                    </div>
+                    
+                    <div class="comparison-box">
+                        <h4>Astor Place Opera House</h4>
+                        <p>Elite uptown venue symbolizing refined culture</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 4: Working-Class City Conditions -->
+            <section>
+                <h1>The Working-Class City: Conditions</h1>
+                
+                <div class="two-column">
+                    <div>
+                        <h2>Immigration Wave</h2>
+                        <p style="font-size: 1.2em;">Massive waves of <strong>Irish and German immigrants</strong> crowd into cities</p>
+                        
+                        <h2>Working Conditions</h2>
+                        <ul>
+                            <li><strong>Factory workers:</strong> 12-14 hour days, dangerous machinery</li>
+                            <li><strong>Dockhands:</strong> Heavy physical labor, irregular employment</li>
+                            <li><strong>Day laborers:</strong> Casual work, no job security</li>
+                            <li>Low wages, no benefits</li>
+                            <li>Child labor common</li>
+                        </ul>
+                        
+                        <h2>Living Conditions</h2>
+                        <ul>
+                            <li><strong>Overcrowding:</strong> Multiple families per room</li>
+                            <li><strong>Slums:</strong> Poor sanitation, disease</li>
+                            <li>Tenement buildings with no running water</li>
+                            <li>High mortality rates</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <div class="image-placeholder" style="height: 100%;">
+                            [Insert image: Tenement building showing multiple floors with families visible through windows, laundry hanging between buildings, crowded conditions]
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 5: Working-Class Geography of Amusement -->
+            <section>
+                <h1>The Working-Class City:<br>Geography of Amusement</h1>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <h4>The Bowery</h4>
+                        <div class="image-placeholder" style="margin: 15px 0;">
+                            [Insert image: The Bowery Theatre and street scene]
+                        </div>
+                        <ul>
+                            <li><strong>Visible working-class culture</strong></li>
+                            <li><strong>Bowery Theatre:</strong> 12¢ tickets (affordable for workers)</li>
+                            <li><strong>Fire companies:</strong> Working-class social clubs and mutual aid societies</li>
+                            <li><strong>Gangs:</strong> Street organizations providing identity and protection</li>
+                            <li><strong>"Bowery B'hoy" swagger:</strong> Distinctive masculine style and attitude</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="comparison-box">
+                        <h4>Five Points</h4>
+                        <div class="image-placeholder" style="margin: 15px 0;">
+                            [Insert image: Five Points intersection with crowded street scene]
+                        </div>
+                        <ul>
+                            <li><strong>New York's most notorious slum</strong></li>
+                            <li><strong>Underground amusements</strong></li>
+                            <li><strong>Cockfights and blood sports</strong> in cellars and alleyways</li>
+                            <li>Dance halls and grog shops</li>
+                            <li>Gambling dens</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="conclusion-box">
+                    <p>Leisure as release from drudgery <strong>AND</strong> as defiance of middle-class "improvement"</p>
+                </div>
+            </section>
+
+            <!-- Slide 6: The Bowery Images -->
+            <section>
+                <h1>The Bowery</h1>
+                
+                <div class="two-column">
+                    <div class="image-placeholder" style="height: 300px;">
+                        [Insert image: Historical illustration of Bowery Theatre building with classical facade]
+                    </div>
+                    
+                    <div class="image-placeholder" style="height: 300px;">
+                        [Insert image: "Rowdy Carousals" book cover showing Bowery Boy character in distinctive dress]
+                    </div>
+                </div>
+                
+                <h2>The Bowery B'hoy</h2>
+                <div class="feature-box">
+                    <p><strong>Distinctive working-class masculine identity:</strong></p>
+                    <ul>
+                        <li>Flashy dress style (loud shirts, soap-locked hair)</li>
+                        <li>Swagger and aggressive posture</li>
+                        <li>Loyalty to fire companies and neighborhood</li>
+                        <li>Rejection of middle-class respectability</li>
+                        <li>Physical toughness and street smarts valued over education</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Slide 7: Fire Companies -->
+            <section>
+                <h1>Bowery Fire Companies</h1>
+                
+                <div class="two-column">
+                    <div class="image-placeholder" style="height: 350px;">
+                        [Insert image: Group portrait of volunteer fire company members in uniform with equipment]
+                    </div>
+                    
+                    <div class="image-placeholder" style="height: 350px;">
+                        [Insert image: Fire scene with horse-drawn fire wagon and crowds]
+                    </div>
+                </div>
+                
+                <h2>Social Function of Fire Companies</h2>
+                <ul>
+                    <li><strong>Volunteer fire brigades:</strong> Essential civic service before professional fire departments</li>
+                    <li><strong>Working-class social clubs:</strong> Centers of male sociability and identity</li>
+                    <li><strong>Political machines:</strong> Connected to Democratic Party ward politics</li>
+                    <li><strong>Competitive culture:</strong> Rivalries between companies, sometimes leading to fights</li>
+                    <li><strong>Masculine performance:</strong> Physical courage, loyalty, and toughness on display</li>
+                </ul>
+            </section>
+
+            <!-- Slide 8: Five Points -->
+            <section>
+                <h1>Five Points</h1>
+                
+                <div class="two-column">
+                    <div class="image-placeholder" style="height: 400px;">
+                        [Insert image: Painting of Five Points intersection showing diverse crowd, street vendors, activity]
+                    </div>
+                    
+                    <div class="image-placeholder" style="height: 400px;">
+                        [Insert image: Photograph of Five Points street with tenements and crowded conditions]
+                    </div>
+                </div>
+                
+                <h2>Five Points: America's Most Infamous Slum</h2>
+                <div class="highlight-box">
+                    <ul>
+                        <li>Intersection of five streets in Lower Manhattan</li>
+                        <li>Home to Irish and Black New Yorkers in extreme poverty</li>
+                        <li>Notorious in middle-class imagination as site of vice and danger</li>
+                        <li>Actually: Complex community with families, churches, mutual aid societies</li>
+                        <li>Underground economy of entertainment and survival</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Slide 9: The Hunger for Spectacle -->
+            <section>
+                <h1>The Hunger for Spectacle</h1>
+                
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <strong>Urban Density Creates Mass Audiences</strong>
+                        <p>Concentration of people in cities produces unprecedented demand for novelty and sensation</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <strong>Media Saturation</strong>
+                        <p>Newspapers and posters saturate public space; the city itself becomes a theater</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <strong>Performance of Identity</strong>
+                        <p>Citizens perform their identity through choices of amusement—where you go and what you see defines who you are</p>
+                    </div>
+                </div>
+                
+                <div class="conclusion-box">
+                    <p>Americans across classes crave spectacle but disagree on what forms are legitimate</p>
+                </div>
+            </section>
+
+            <!-- Slide 10: Democratic Paradox of Taste -->
+            <section>
+                <h1>The Democratic Paradox of Taste</h1>
+                
+                <div class="highlight-box">
+                    <p style="font-size: 1.2em;"><strong>Both middle and working classes claim to speak for "the people"</strong></p>
+                </div>
+                
+                <h2>Class Division Through Entertainment</h2>
+                <ul>
+                    <li><strong>Distinct amusements</strong> in distinct geographies</li>
+                    <li><strong>Separate cultures</strong> with different values and aesthetics</li>
+                    <li>Each class claims democratic legitimacy</li>
+                </ul>
+                
+                <h2>When Worlds Collide</h2>
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <h4>Overlap</h4>
+                        <p><strong>Barnum's Museum:</strong> Cross-class appeal through clever marketing and multiple levels of meaning</p>
+                    </div>
+                    
+                    <div class="comparison-box">
+                        <h4>Violent Collision</h4>
+                        <p><strong>Astor Place Riot (1849):</strong> Class warfare erupts at theater over competing claims to Shakespeare</p>
+                    </div>
+                </div>
+                
+                <div class="conclusion-box">
+                    <p>Your choice of theater is simultaneously a <strong>class statement</strong>, a <strong>cultural performance</strong>, and a <strong>political act</strong></p>
+                </div>
+            </section>
+
+            <!-- Slide 11: Section Divider - Urban Public Sphere -->
+            <section class="section-slide">
+                <h1>Setting the Stage:<br>The Urban Public Sphere</h1>
+            </section>
+
+            <!-- Slide 12: The City as Theater -->
+            <section>
+                <h1>The City as Theater</h1>
+                
+                <h2>Post-1815 Urbanization</h2>
+                <ul>
+                    <li><strong>Rapid growth</strong> of cities creates new forms of sociability</li>
+                    <li><strong>Novelty and change</strong> become constant features of urban life</li>
+                    <li>Streets become stages for social performance</li>
+                </ul>
+                
+                <h2>Media Turn Streets into Stages</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <strong>Playbills and Posters</strong>
+                        <p>Colorful advertisements plaster walls and buildings</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <strong>Newspapers</strong>
+                        <p>Daily coverage of theatrical performances, scandals, and sensations</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <strong>Street Performance</strong>
+                        <p>Walking Broadway or the Bowery means encountering performance at every turn</p>
+                    </div>
+                </div>
+                
+                <div class="conclusion-box">
+                    <p><strong>Urban space becomes a place to see and be seen</strong></p>
+                    <p style="margin-top: 10px;">The city itself is theatrical—everyone is both performer and audience</p>
+                </div>
+            </section>
+
+            <!-- Slide 13: Public Sphere Becomes Performative -->
+            <section>
+                <h1>The Public Sphere Becomes Performative</h1>
+                
+                <h2>Traditional Ideal of Public Sphere</h2>
+                <div class="feature-box">
+                    <p><strong>Rational debate</strong> in coffeehouses, salons, and through newspapers</p>
+                    <p>Citizens participate through <strong>reading and reasoned discussion</strong></p>
+                    <p>Enlightenment model: Ideas triumph through logical argument</p>
+                </div>
+                
+                <h2>The Shift: Democracy as Spectacle</h2>
+                <div class="highlight-box">
+                    <p><strong>From rational debate toward spectacle and display</strong></p>
+                    <ul>
+                        <li>Democracy means having the right to <strong>watch, judge, and participate</strong> in public amusements</li>
+                        <li>Citizens act by <strong>seeing and being seen</strong>, not just by reading and debating</li>
+                        <li>Identity is <strong>performed</strong> through your choice of amusement and your physical presence</li>
+                    </ul>
+                </div>
+                
+                <h2>New Rules of Citizenship</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <strong>Citizenship Through Spectatorship</strong>
+                        <p>Participating by attending, watching, and judging public entertainment</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <strong>Identity Through Performance</strong>
+                        <p>Your identity is performed through where you go and how you behave there</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <strong>Representing "The People"</strong>
+                        <p>Different entertainment venues = different claims about who represents "the people"</p>
+                    </div>
+                </div>
+                
+                <div class="conclusion-box">
+                    <p>Public culture becomes <strong>contested terrain</strong> for representing "the people"</p>
+                </div>
+            </section>
+
+            <!-- Slide 14: Section Divider - Blood Sports -->
+            <section class="section-slide">
+                <h1>Blood Sports, Boxing,<br>and Working-Class Masculinity</h1>
+            </section>
+
+            <!-- Slide 15: Blood Sports -->
+            <section>
+                <h1>Blood Sports as Rough Amusement</h1>
+                
+                <div class="image-placeholder">
+                    [Insert image: Illustration of cockfighting ring with spectators or rat-baiting contest]
+                </div>
+                
+                <h2>Types of Blood Sports</h2>
+                <ul>
+                    <li><strong>Cockfighting:</strong> Roosters fitted with metal spurs fight to the death</li>
+                    <li><strong>Dogfights:</strong> Pit bulls and terriers battle in underground rings</li>
+                    <li><strong>Rat-baiting:</strong> Dogs kill as many rats as possible in a pit</li>
+                    <li><strong>Bare-knuckle fights:</strong> Human boxing without gloves, few rules</li>
+                </ul>
+                
+                <h2>Social Meaning</h2>
+                <div class="highlight-box">
+                    <p><strong>Working-class masculine sociability</strong> and defiance of middle-class restraint</p>
+                    <ul>
+                        <li>Held in Five Points and Bowery taverns, cellars, and back rooms</li>
+                        <li>Heavy gambling on outcomes</li>
+                        <li>Often illegal yet widely practiced</li>
+                        <li>Entrepreneurs monetize despite reformers' opposition</li>
+                    </ul>
+                </div>
+                
+                <div class="conclusion-box">
+                    <p>Sets the stage for the culture of the <strong>prize ring</strong></p>
+                </div>
+            </section>
+
+            <!-- Slide 16: Boxing and Prize Ring Culture -->
+            <section>
+                <h1>Boxing and the Culture of the Prize Ring</h1>
+                
+                <h2>The Sporting Fraternity</h2>
+                <div class="feature-box">
+                    <p><strong>Bare-knuckle prizefighting:</strong> Illegal, staged in secret venues</p>
+                    <p><strong>"The fancy"</strong> or <strong>"sporting men"</strong>—subculture of fight enthusiasts</p>
+                </div>
+                
+                <h2>Who Were the Sporting Men?</h2>
+                <div class="highlight-box">
+                    <p>Diffuse subculture around prizefighting spanning urban America</p>
+                    <ul>
+                        <li><strong>Working-class men:</strong> butchers, mechanics, firemen, tavern keepers</li>
+                        <li>Across different ethnic backgrounds but united by sporting culture</li>
+                        <li>Found in every major city from New York to New Orleans</li>
+                    </ul>
+                </div>
+                
+                <h2>Shared Culture of "The Fancy"</h2>
+                <ul>
+                    <li><strong>Sports newspapers:</strong> <em>Spirit of the Times</em> and similar publications</li>
+                    <li><strong>Tavern gatherings:</strong> Discussion and planning of matches</li>
+                    <li><strong>Insider slang:</strong> Specialized vocabulary marking membership</li>
+                    <li><strong>"Flash" style:</strong> Distinctive dress and swagger</li>
+                    <li><strong>Fan identity:</strong> Following fights, knowing fighters, attending matches</li>
+                </ul>
+                
+                <div class="conclusion-box">
+                    <p>Prizefighting creates a <strong>working-class male counterpublic</strong>—an alternative public sphere with its own values and heroes</p>
+                </div>
+            </section>
+
+            <!-- Slide 17: Physical Mastery as Democratic Metaphor -->
+            <section>
+                <h1>Physical Mastery as Democratic Metaphor</h1>
+                
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <strong>Virtue Proven in the Ring</strong>
+                        <p>Rather than by birth or wealth, a man's worth is demonstrated through physical courage and skill</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <strong>The Masculine Body as Site of Value</strong>
+                        <p>The body becomes the site of value and citizenship—physical prowess equals democratic legitimacy</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <strong>Rejection of Elite Values</strong>
+                        <p>Rejection of "refinement" and self-restraint as elite values—toughness, not polish, defines the man</p>
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>Democratic Ideology of the Prize Ring</h3>
+                    <p>In the ring, all men are equal—only strength, skill, and courage matter. Birth and wealth count for nothing. The working-class body becomes a <strong>democratic symbol</strong>.</p>
+                </div>
+                
+                <div class="conclusion-box">
+                    <p><strong>The prize ring offers an alternative vision of American democracy</strong>—one based on physical prowess rather than property or education</p>
+                </div>
+            </section>
+
+            <!-- Slide 18: Section Divider - P.T. Barnum -->
+            <section class="section-slide">
+                <h1>P. T. Barnum:<br>The Art of Humbug</h1>
+            </section>
+
+            <!-- Slide 19: Barnum's American Museum -->
+            <section>
+                <h1>Barnum's American Museum (1841–1865)</h1>
+                
+                <div class="image-placeholder">
+                    [Insert image: Exterior of Barnum's American Museum, five-story building with flags and banners]
+                </div>
+                
+                <h2>Overview</h2>
+                <div class="highlight-box">
+                    <p>Established in <strong>1841</strong>, Barnum's five-story museum attracted <strong>over 15 million visitors</strong> during its 24-year run</p>
+                </div>
+                
+                <h2>What Was Inside?</h2>
+                <ul>
+                    <li><strong>Natural curiosities:</strong> Stuffed animals, geological specimens, natural oddities</li>
+                    <li><strong>Living "human wonders":</strong> People with unusual physical characteristics</li>
+                    <li><strong>Theatrical performances:</strong> Plays, musical acts, variety shows</li>
+                    <li><strong>Scientific lectures:</strong> Educational talks (allegedly)</li>
+                    <li><strong>Elaborate hoaxes:</strong> Fake mermaids, questionable artifacts</li>
+                </ul>
+                
+                <h2>Hybrid Institution</h2>
+                <div class="feature-box">
+                    <p>A unique combination of:</p>
+                    <ul>
+                        <li>Moral lecture hall</li>
+                        <li>Curiosity cabinet</li>
+                        <li>Theater</li>
+                        <li>"Freak show"</li>
+                    </ul>
+                </div>
+                
+                <h2>Cross-Class Appeal</h2>
+                <ul>
+                    <li><strong>Broadway location:</strong> Respectable enough for middle-class families</li>
+                    <li><strong>Low admission (~$0.25):</strong> Affordable for working-class visitors</li>
+                    <li><strong>Cross-gender appeal:</strong> Women and children explicitly welcomed</li>
+                    <li>Marketed as educational and moral</li>
+                </ul>
+            </section>
+
+            <!-- Slide 20: Humbug as Art Form -->
+            <section>
+                <h1>Humbug as an Art Form</h1>
+                
+                <h2>Famous Hoaxes</h2>
+                <div class="two-column">
+                    <div class="image-placeholder" style="height: 250px;">
+                        [Insert image: Joice Heth exhibit poster or illustration]
+                    </div>
+                    
+                    <div class="image-placeholder" style="height: 250px;">
+                        [Insert image: Feejee Mermaid taxidermy specimen]
+                    </div>
+                </div>
+                
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <strong>Joice Heth (1835)</strong>
+                        <p>Elderly Black woman Barnum claimed was 161 years old and George Washington's former nurse. Obviously false, but thousands paid to see her.</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <strong>Feejee Mermaid (1842)</strong>
+                        <p>Taxidermy creation combining a monkey torso with a fish tail. Barnum presented it as authentic with fake scientific credentials.</p>
+                    </div>
+                </div>
+                
+                <h2>What Is Humbug?</h2>
+                <div class="highlight-box">
+                    <p><strong>Humbug:</strong> A blend of education, fraud, and emotional manipulation</p>
+                    <ul>
+                        <li>Not simple deception—audiences know they might be fooled</li>
+                        <li>The <strong>desire to be deceived</strong> is part of the pleasure</li>
+                        <li>Spectacle of <strong>belief and doubt</strong> performed publicly</li>
+                        <li>Value measured by <strong>experience</strong> rather than authenticity</li>
+                    </ul>
+                </div>
+                
+                <div class="conclusion-box">
+                    <p><strong>The question isn't "Is it real?" but "Is it worth my quarter?"</strong></p>
+                </div>
+            </section>
+
+            <!-- Slide 21: Democratizing Curiosity -->
+            <section>
+                <h1>Democratizing Curiosity and Emotion</h1>
+                
+                <h2>Barnum's Democratic Genius</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <strong>Everyone Can Play</strong>
+                        <p>Everyone can participate in the game of belief and doubt—you don't need education or refinement</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <strong>Performing Sophistication</strong>
+                        <p>Audiences perform sophistication by debating authenticity with each other</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <strong>Commercialization of Wonder</strong>
+                        <p>Commercialization of wonder and feeling forms a public around shared experience</p>
+                    </div>
+                </div>
+                
+                <h2>Creating "The Public"</h2>
+                <div class="highlight-box">
+                    <p><strong>Shared spectacular experiences produce "the public"</strong></p>
+                    <p style="margin-top: 15px;">Strangers become a community through common experience of spectacle, debate, and collective judgment</p>
+                </div>
+                
+                <h2>Persistent Tension</h2>
+                <div class="conclusion-box">
+                    <p><strong>Democratization vs. Exploitation</strong></p>
+                    <p style="margin-top: 15px; font-size: 1em;">Does Barnum empower audiences or manipulate them? Does he democratize culture or commercialize human dignity?</p>
+                </div>
+            </section>
+
+            <!-- Slide 22: Barnum's Rhetoric and Politics -->
+            <section>
+                <h1>Barnum's Rhetoric and Politics</h1>
+                
+                <h2>The Paradox of Barnum</h2>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <h4>What Barnum Claims</h4>
+                        <ul>
+                            <li>Moral uplift and education</li>
+                            <li>Family-friendly entertainment</li>
+                            <li>Democratizing high culture</li>
+                            <li>Making wonder accessible</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="comparison-box">
+                        <h4>What Barnum Does</h4>
+                        <ul>
+                            <li>Traffics in mockery and sensation</li>
+                            <li>Exploits human difference</li>
+                            <li>Profits from deception</li>
+                            <li>Commercializes everything</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h2>Democratic Achievements</h2>
+                <div class="feature-box">
+                    <ul>
+                        <li><strong>Low prices:</strong> Makes culture accessible across class lines</li>
+                        <li><strong>Broad access:</strong> Welcomes women, children, working class</li>
+                        <li><strong>Participatory culture:</strong> Audiences actively debate and judge</li>
+                        <li><strong>Meritocracy of pleasure:</strong> Your enjoyment is what matters, not your refinement</li>
+                    </ul>
+                </div>
+                
+                <h2>Problematic Aspects</h2>
+                <div class="feature-box">
+                    <ul>
+                        <li><strong>Exploitation:</strong> Displays people with disabilities as "freaks"</li>
+                        <li><strong>Racial mockery:</strong> Perpetuates racist stereotypes (Joice Heth)</li>
+                        <li><strong>Deception for profit:</strong> Capitalizes on gullibility</li>
+                        <li><strong>Commercialization:</strong> Everything becomes commodity</li>
+                    </ul>
+                </div>
+                
+                <div class="conclusion-box">
+                    <p style="font-size: 1.1em;"><strong>Barnum represents both the promise and the problems of democratic commercial culture</strong></p>
+                    <p style="margin-top: 15px; font-size: 1em;">He democratizes access but also exploits vulnerability. He empowers audiences but also manipulates them. He challenges elite culture but creates new hierarchies of his own.</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Simple Navigation Script -->
+    <script>
+        // Simple presentation navigation system
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.reveal .slides section');
+        const totalSlides = slides.length;
+        let isTransitioning = false;
+
+        // Initialize
+        function init() {
+            showSlide(0);
+            updateProgress();
+            updateSlideNumber();
+        }
+
+        function showSlide(n) {
+            if (isTransitioning) return;
+            
+            // Hide current slide
+            if (slides[currentSlide]) {
+                slides[currentSlide].style.display = 'none';
+                slides[currentSlide].style.opacity = '0';
+            }
+            
+            // Calculate new slide index
+            currentSlide = Math.max(0, Math.min(n, totalSlides - 1));
+            
+            // Show new slide with transition
+            if (slides[currentSlide]) {
+                isTransitioning = true;
+                slides[currentSlide].style.display = 'block';
+                
+                // Reset scroll position to top when entering a new slide
+                slides[currentSlide].scrollTop = 0;
+                
+                setTimeout(() => {
+                    slides[currentSlide].style.opacity = '1';
+                    setTimeout(() => {
+                        isTransitioning = false;
+                    }, 300);
+                }, 10);
+            }
+            
+            updateProgress();
+            updateSlideNumber();
+            checkScrollIndicator();
+            
+            // Log for accessibility
+            console.log(`Slide ${currentSlide + 1} of ${totalSlides}`);
+        }
+
+        // Check if slide has scrollable content and show indicator
+        function checkScrollIndicator() {
+            const currentSlideElement = slides[currentSlide];
+            const indicator = document.querySelector('.scroll-indicator');
+            
+            if (currentSlideElement && currentSlideElement.scrollHeight > currentSlideElement.clientHeight) {
+                // Slide has scrollable content
+                if (indicator) {
+                    indicator.style.display = 'block';
+                }
+            } else {
+                if (indicator) {
+                    indicator.style.display = 'none';
+                }
+            }
+            
+            // Update indicator visibility based on scroll position
+            updateScrollIndicator();
+        }
+
+        // Update scroll indicator based on position
+        function updateScrollIndicator() {
+            const indicator = document.querySelector('.scroll-indicator');
+            if (!indicator) return;
+            
+            if (isSlideAtBottom()) {
+                indicator.style.display = 'none';
+            } else {
+                const currentSlideElement = slides[currentSlide];
+                if (currentSlideElement.scrollHeight > currentSlideElement.clientHeight) {
+                    indicator.style.display = 'block';
+                }
+            }
+        }
+
+        // Listen for scroll events to update indicator
+        document.addEventListener('scroll', function(e) {
+            if (e.target.classList && e.target.classList.contains('reveal')) return;
+            updateScrollIndicator();
+        }, true);
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                showSlide(currentSlide + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        }
+
+        function updateProgress() {
+            const progress = document.querySelector('.progress-bar');
+            if (progress) {
+                const percentage = (currentSlide / (totalSlides - 1)) * 100;
+                progress.style.width = percentage + '%';
+            }
+        }
+
+        function updateSlideNumber() {
+            const slideNumber = document.querySelector('.slide-number');
+            if (slideNumber) {
+                slideNumber.textContent = `${currentSlide + 1} / ${totalSlides}`;
+            }
+        }
+
+        // Check if current slide is scrollable and at edge
+        function isSlideAtTop() {
+            const currentSlideElement = slides[currentSlide];
+            return currentSlideElement.scrollTop === 0;
+        }
+
+        function isSlideAtBottom() {
+            const currentSlideElement = slides[currentSlide];
+            return Math.abs(currentSlideElement.scrollHeight - currentSlideElement.scrollTop - currentSlideElement.clientHeight) < 5;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const currentSlideElement = slides[currentSlide];
+            
+            switch(e.key) {
+                case 'ArrowRight':
+                case 'PageDown':
+                    e.preventDefault();
+                    nextSlide();
+                    break;
+                case 'ArrowLeft':
+                case 'PageUp':
+                    e.preventDefault();
+                    prevSlide();
+                    break;
+                case 'ArrowDown':
+                    // Only prevent default and change slides if we're at the bottom of current slide
+                    if (isSlideAtBottom()) {
+                        e.preventDefault();
+                        nextSlide();
+                    }
+                    // Otherwise let the default scrolling happen
+                    break;
+                case 'ArrowUp':
+                    // Only prevent default and change slides if we're at the top of current slide
+                    if (isSlideAtTop()) {
+                        e.preventDefault();
+                        prevSlide();
+                    }
+                    // Otherwise let the default scrolling happen
+                    break;
+                case ' ':
+                    // Space bar advances slides
+                    e.preventDefault();
+                    nextSlide();
+                    break;
+                case 'Home':
+                case 'h':
+                case 'H':
+                    e.preventDefault();
+                    showSlide(0);
+                    break;
+                case 'End':
+                case 'e':
+                case 'E':
+                    e.preventDefault();
+                    showSlide(totalSlides - 1);
+                    break;
+                case 'Escape':
+                    e.preventDefault();
+                    showOverview();
+                    break;
+            }
+        });
+
+        // Mouse wheel navigation - smart scrolling
+        let wheelTimeout;
+        let isWheeling = false;
+        
+        document.addEventListener('wheel', (e) => {
+            const currentSlideElement = slides[currentSlide];
+            
+            // Check if we're scrolling down
+            if (e.deltaY > 0) {
+                // If we're at the bottom of the slide, go to next slide
+                if (isSlideAtBottom()) {
+                    e.preventDefault();
+                    clearTimeout(wheelTimeout);
+                    if (!isWheeling) {
+                        isWheeling = true;
+                        nextSlide();
+                        setTimeout(() => {
+                            isWheeling = false;
+                        }, 500);
+                    }
+                }
+                // Otherwise, let normal scrolling happen
+            } 
+            // Check if we're scrolling up
+            else if (e.deltaY < 0) {
+                // If we're at the top of the slide, go to previous slide
+                if (isSlideAtTop()) {
+                    e.preventDefault();
+                    clearTimeout(wheelTimeout);
+                    if (!isWheeling) {
+                        isWheeling = true;
+                        prevSlide();
+                        setTimeout(() => {
+                            isWheeling = false;
+                        }, 500);
+                    }
+                }
+                // Otherwise, let normal scrolling happen
+            }
+        }, { passive: false });
+
+        // Touch navigation
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchEndX = 0;
+        let touchEndY = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const diffX = touchEndX - touchStartX;
+            const diffY = touchEndY - touchStartY;
+            
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                // Horizontal swipe
+                if (diffX > 50) {
+                    prevSlide();
+                } else if (diffX < -50) {
+                    nextSlide();
+                }
+            } else {
+                // Vertical swipe
+                if (diffY < -50) {
+                    nextSlide();
+                } else if (diffY > 50) {
+                    prevSlide();
+                }
+            }
+        }
+
+        // Click navigation (optional)
+        document.addEventListener('click', (e) => {
+            // Ignore clicks on interactive elements
+            if (e.target.closest('a, button')) return;
+            
+            const clickX = e.clientX;
+            const windowWidth = window.innerWidth;
+            
+            if (clickX > windowWidth * 0.7) {
+                nextSlide();
+            } else if (clickX < windowWidth * 0.3) {
+                prevSlide();
+            }
+        });
+
+        // Overview mode (simple grid view)
+        function showOverview() {
+            const container = document.querySelector('.reveal .slides');
+            if (container.classList.contains('overview-mode')) {
+                container.classList.remove('overview-mode');
+                showSlide(currentSlide);
+            } else {
+                container.classList.add('overview-mode');
+                slides.forEach(slide => {
+                    slide.style.display = 'block';
+                    slide.style.opacity = '1';
+                });
+            }
+        }
+
+        // Initialize on load
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>
