@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Harriet Beecher Stowe & Uncle Tom’s Cabin — Study Buddy Edition</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Google Fonts: Playfair Display (headings) + Raleway (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Raleway:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Reveal.js (CDN). If you keep local copies elsewhere, replace with relative paths. -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/white.css" id="theme">
+
+  <style>
+    /* ========= Color System (parchment + ink + antique gold accents) ========= */
+    :root{
+      --bg-parchment: #f9f5ee;  /* soft parchment */
+      --ink: #222426;           /* deep ink */
+      --muted: #6b7280;         /* slate */
+      --accent: #9a6f2b;        /* antique gold */
+      --accent-ink: #3a2a0f;    /* dark gold-brown */
+      --panel-bg: #0f172a;      /* notes panel background */
+      --panel-ink: #e6e7eb;     /* notes panel text */
+      --chip: #efe7d9;          /* tag chip background */
+      --rule: #ded6c7;          /* hairline rule */
+    }
+
+    /* ========= Global Reveal overrides ========= */
+    body{
+      background:
+        radial-gradient(1200px 800px at 20% 10%, #ffffff 0%, var(--bg-parchment) 60%, #f6efe5 100%);
+      font-family: "Raleway", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--ink);
+      text-rendering: optimizeLegibility;
+    }
+    .reveal .slides{
+      text-align: left;
+    }
+    .reveal .slides section{
+      padding-right: 1rem; /* space when sidebar is open */
+    }
+
+    /* Headings: Playfair for a bookish tone */
+    .reveal h1,.reveal h2,.reveal h3{
+      font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+      color: var(--accent-ink);
+      letter-spacing: .2px;
+      line-height: 1.2;
+    }
+    .reveal h2{ font-size: 2.2rem; }
+    .reveal h3{ font-size: 1.6rem; }
+
+    /* Body text & bullets tuned for desk reading */
+    .reveal p, .reveal li{
+      font-size: 1.08rem;
+      line-height: 1.55;
+      color: var(--ink);
+    }
+    .tight li{ margin: .35rem 0 .35rem 0; }
+
+    /* Subtle section separator (optional) */
+    hr{
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin: .9rem 0;
+    }
+
+    /* Definition terms (clickable with ?) */
+    .def{
+      border-bottom: 2px dotted var(--accent);
+      cursor: pointer;
+      position: relative;
+      padding-right: .35rem;
+      transition: background .15s ease;
+    }
+    .def:hover{ background: #fcfaf6; }
+    .def-icon{
+      display:inline-block;
+      width: 18px; height: 18px;
+      line-height: 18px; text-align: center;
+      border-radius: 50%;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-weight:700; font-size:.75rem;
+      margin-left:.25rem;
+      cursor:pointer;
+      vertical-align: baseline;
+      background: #fff8ee;
+    }
+
+    /* Tooltip popup */
+    .tooltip{
+      position: absolute;
+      z-index: 9999;
+      max-width: 420px;
+      background:#ffffff;
+      border:1px solid #e6dccb;
+      box-shadow:0 12px 28px rgba(0,0,0,.12);
+      border-radius:12px;
+      padding:.9rem 1rem;
+      font-size:1rem;
+      color:#1a1c1e;
+    }
+    .tooltip h4{
+      margin:.1rem 0 .4rem 0; font-size:1.05rem; color:#1a1c1e; font-family:"Playfair Display", serif;
+    }
+    .tooltip p{ margin:.25rem 0 0 0; color:#1a1c1e; }
+
+    /* Notes sidebar (toggle with L) */
+    #notesSidebar{
+      position: fixed;
+      top: 0; right: 0;
+      width: 380px; max-width: 34vw;
+      height: 100%;
+      background: var(--panel-bg);
+      color: var(--panel-ink);
+      transform: translateX(100%);
+      transition: transform .25s ease-in-out;
+      z-index: 9000;
+      display: flex; flex-direction: column;
+      border-left: 3px solid #1e293b;
+    }
+    #notesSidebar.open{ transform: translateX(0%); }
+    #notesHeader{
+      padding: .95rem 1rem;
+      border-bottom: 1px solid #172036;
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    #notesHeader h3{ margin:0; font-size:1.08rem; font-family:"Raleway",system-ui; }
+    #notesContent{
+      padding: 1rem 1.1rem 1.2rem 1.1rem;
+      overflow:auto;
+      font-size: 1.02rem; line-height:1.55;
+    }
+    #notesHint{
+      font-size:.85rem; color:#a7b0c2; margin-left:.5rem;
+    }
+    .kbd{
+      display:inline-block; padding:.05rem .4rem; border:1px solid #64748b; border-bottom-width:2px;
+      border-radius:6px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size:.85rem; color:#e5e7eb; margin:0 .15rem; background:#111827;
+    }
+
+    /* Image placeholders */
+    .img-slot{
+      border: 2px dashed #b7a78f;
+      border-radius: 14px;
+      padding: 1rem;
+      min-height: 160px;
+      display:flex; align-items:center; justify-content:center;
+      margin-top: .9rem;
+      background: #fffdf8;
+      color:#3b3a38;
+      text-align:center;
+      font-style: italic;
+    }
+    .img-meta{
+      margin-top:.5rem; font-size:.93rem; color:#5b5242;
+      background: var(--chip);
+      padding:.45rem .6rem; border-radius: 10px;
+      border: 1px solid #e6dccb;
+    }
+    .tag{ font-weight:700; color:var(--accent); }
+
+    /* Small helper chips */
+    .chip{
+      display:inline-block; background: var(--chip); color:#6b4b1b; border-radius:999px;
+      padding:.2rem .55rem; font-size:.8rem; margin-left:.35rem; border:1px solid #e6dccb;
+    }
+
+    /* Footer helper */
+    .helper{
+      position: fixed; bottom: 10px; left: 10px;
+      background: #1c1d21; color:#f0f1f2; padding:.4rem .6rem;
+      border-radius:9px; font-size:.9rem; z-index: 8500; opacity:.92;
+      border: 1px solid #2a2c30;
+      box-shadow: 0 6px 18px rgba(0,0,0,.25);
+    }
+
+    /* Decorative title underline */
+    .title-underline{
+      display:inline-block; border-bottom: 4px solid var(--accent); padding-bottom:.15rem;
+      box-shadow: inset 0 -10px 0 rgba(154,111,43,.08);
+    }
+  </style>
+</head>
+<body>
+
+<div class="reveal">
+  <div class="slides">
+
+    <!-- 1. Title -->
+    <section>
+      <h2><span class="title-underline">Harriet Beecher Stowe & <em>Uncle Tom’s Cabin</em></span></h2>
+      <p class="tight">
+        <strong>Goal:</strong> See how one novel helped shift public feeling about slavery and pushed the nation toward open conflict.
+      </p>
+      <div class="img-slot">[Image Placeholder — Title Slide]</div>
+      <div class="img-meta"><span class="tag">Search:</span> “Harriet Beecher Stowe portrait 1852 high-res” •
+        <span class="tag">AI prompt:</span> “19th-century author portrait, oval vignette, daguerreotype style, soft studio lighting”
+      </div>
+
+      <div class="notes-panel-content" data-title="Welcome">
+        This deck is for self-paced study. Click the underlined terms or the little <strong>?</strong> to get quick definitions. Press <span class="kbd">L</span> any time for my side notes—short, conversational nudges to keep you focused on what matters most.
+      </div>
+    </section>
+
+    <!-- 2. The 1850s Climate -->
+    <section>
+      <h3>America in the Early 1850s</h3>
+      <ul class="tight">
+        <li>The <span class="def" data-term="Fugitive Slave Act (1850)" data-def="A federal law requiring the return of people who escaped slavery; it also penalized those who helped them.">Fugitive Slave Act<span class="def-icon">?</span></span> made slavery feel local in Northern cities, not just a Southern issue.</li>
+        <li>Religious beliefs and everyday morality increasingly clashed with laws protecting slaveholders’ “property.”</li>
+        <li>Many Northerners tried to stay neutral, but the growing conflict made neutrality feel like taking a side.</li>
+      </ul>
+
+      <div class="img-slot">[Image Placeholder — Northern street scene, 1850s]</div>
+      <div class="img-meta"><span class="tag">Search:</span> “1850s Northern street engraving” •
+        <span class="tag">AI prompt:</span> “Mid-19th-century city street, wood-engraving look, pedestrians, storefront signs, subdued ink tones”
+      </div>
+
+      <div class="notes-panel-content" data-title="Why the FSA Matters">
+        Think of the FSA as a moral tripwire in Northern life—suddenly, neighbors and police are involved. Stowe writes to turn that shock into moral clarity.
+      </div>
+    </section>
+
+    <!-- 3. Women, Religion & Sentimental Reform -->
+    <section>
+      <h3>Women’s Voice & Moral Persuasion</h3>
+      <ul class="tight">
+        <li>Women writers used <span class="def" data-term="Sentimental Fiction" data-def="Popular 19th-century fiction that used strong feeling—especially family love and suffering—to teach moral lessons.">sentimental fiction<span class="def-icon">?</span></span> to move readers’ hearts toward reform.</li>
+        <li>Stowe’s religious background framed slavery as a sin against God and family, not just a policy problem.</li>
+        <li>The “home” became a platform for moral judgment, turning private feeling into public action.</li>
+      </ul>
+
+      <div class="img-slot">[Image Placeholder — 1850s parlor reading scene]</div>
+      <div class="img-meta"><span class="tag">Search:</span> “1850s parlor reading woodcut” •
+        <span class="tag">AI prompt:</span> “Victorian parlor, family reading aloud, warm lamplight, engraved illustration aesthetic”
+      </div>
+
+      <div class="notes-panel-content" data-title="Sentiment as Strategy">
+        Don’t underestimate the strategy here—Stowe aims straight at the conscience via home, children, and faith. Head plus heart.
+      </div>
+    </section>
+
+    <!-- 4. Print Revolution -->
+    <section>
+      <h3>Print Boom: Reaching a Mass Audience</h3>
+      <ul class="tight">
+        <li>Cheap editions and newspapers spread stories quickly across towns and states.</li>
+        <li>Stowe first serialized the novel in the <span class="def" data-term="National Era" data-def="A Washington, D.C., antislavery weekly where Stowe serialized Uncle Tom’s Cabin in 1851–52.">National Era<span class="def-icon">?</span></span>, building excitement and discussion week by week.</li>
+        <li>Rising literacy meant new ideas could outpace slow political compromises.</li>
+      </ul>
+
+      <div class="img-slot">[Image Placeholder — newspaper compositor shop]</div>
+      <div class="img-meta"><span class="tag">Search:</span> “19th-century printing press shop engraving” •
+        <span class="tag">AI prompt:</span> “Letterpress printshop, movable type, ink rollers, woodcut look, bustling artisans”
+      </div>
+
+      <div class="notes-panel-content" data-title="Serialization’s Drumbeat">
+        Weekly installments = built-in buzz. Readers debate, anticipate, and persuade each other. Culture moves faster than Congress.
+      </div>
+    </section>
+
+    <!-- 5. Stowe’s Intent -->
+    <section>
+      <h3>Why Stowe Wrote the Book</h3>
+      <ul class="tight">
+        <li>She wanted readers to feel slavery as a human crisis, not a distant controversy.</li>
+        <li>She framed the story as a Christian call to conscience in ordinary life.</li>
+        <li>Her aim: make indifference impossible by showing the cost to real people and families.</li>
+      </ul>
+
+      <div class="img-slot">[Image Placeholder — Stowe writing at desk]</div>
+      <div class="img-meta"><span class="tag">Search:</span> “Harriet Beecher Stowe writing desk illustration” •
+        <span class="tag">AI prompt:</span> “19th-century author at desk by window, quill and papers, intimate vignette, engraved style”
+      </div>
+
+      <div class="notes-panel-content" data-title="A Targeted Audience">
+        She writes for the persuadable middle—churchgoing readers who feel uneasy but haven’t acted. The book is a push.
+      </div>
+    </section>
+
+    <!-- 6. Characters & Themes -->
+    <section>
+      <h3>Characters That Carry the Message</h3>
+      <ul class="tight">
+        <li><strong>Uncle Tom</strong> models steady Christian mercy, even under brutal treatment, challenging readers to rethink “virtue.”</li>
+        <li><strong>Eliza</strong> turns motherhood into a moral claim, making readers root for her flight to protect her child.</li>
+        <li><strong>Simon Legree</strong> personifies how slavery twists the soul of masters and corrodes the nation’s morals.</li>
+      </ul>
+
+      <div class="img-slot">[Image Placeholder — Eliza crossing the ice]</div>
+      <div class="img-meta"><span class="tag">Search:</span> “Eliza crossing the ice engraving high resolution” •
+        <span class="tag">AI prompt:</span> “Dramatic river ice escape, mother carrying child, moonlit tension, wood-engraving style”
+      </div>
+
+      <div class="notes-panel-content" data-title="A Moral Triangle">
+        Tom (faith), Eliza (innocence), and Legree (cruelty) set up a moral triangle that makes the stakes emotionally obvious.
+      </div>
+    </section>
+
+    <!-- 7. Technique & Emotion -->
+    <section>
+      <h3>How the Book Moves You</h3>
+      <ul class="tight">
+        <li>Pathos—especially scenes of loss—helps readers share the pain of enslaved families.</li>
+        <li>Religious language turns sympathy into a sense of duty, not just a passing feeling.</li>
+        <li>Short, vivid episodes keep the story moving and the message hard to forget.</li>
+      </ul>
+
+      <div class="img-slot">[Image Placeholder — Revival meeting / prayer scene]</div>
+      <div class="img-meta"><span class="tag">Search:</span> “19th-century revival meeting engraving” •
+        <span class="tag">AI prompt:</span> “Camp-meeting prayer circle, candlelit gloom, earnest faces, engraved illustration tone”
+      </div>
+
+      <div class="notes-panel-content" data-title="Feeling → Action">
+        Stowe doesn’t want tears for their own sake. Tears are fuel—for charity, organizing, and resisting unjust laws.
+      </div>
+    </section>
+
+    <!-- 8. Northern Reception -->
+    <section>
+      <h3>How the North Responded</h3>
+      <ul class="tight">
+        <li>The book sold at a stunning rate, turning private reading into public conversation.</li>
+        <li>Clubs, churches, and lectures used it to channel anti-slavery energy into action.</li>
+        <li>Readers who felt “neutral” began to see neutrality as looking away from injustice.</li>
+      </ul>
+
+      <div class="img-slot">[Image Placeholder — bookstore window display]</div>
+      <div class="img-meta"><span class="tag">Search:</span> “1850s American bookstore window display engraving” •
+        <span class="tag">AI prompt:</span> “Victorian shop window piled with books, pedestrians pausing, line-art hatching”
+      </div>
+
+      <div class="notes-panel-content" data-title="From Book to Movement">
+        Readings, dramatizations, children named “Eva”—the story saturates daily life and primes voters for change.
+      </div>
+    </section>
+
+    <!-- 9. Southern Backlash -->
+    <section>
+      <h3>Southern Critiques & “Anti-Tom” Novels</h3>
+      <ul class="tight">
+        <li>Southern critics said Stowe exaggerated and ignored “kind” masters.</li>
+        <li>Pro-slavery writers answered with <span class="def" data-term="Anti-Tom Novels" data-def="Pro-slavery fiction written in response to Stowe, portraying slavery as humane and Northern critics as unfair.">Anti-Tom fiction<span class="def-icon">?</span></span> that defended slavery.</li>
+        <li>The dispute exposed a deeper divide over whose stories counted as “truth.”</li>
+      </ul>
+
+      <div class="img-slot">[Image Placeholder — pamphlets in debate]</div>
+      <div class="img-meta"><span class="tag">Search:</span> “1850s pamphlet debate illustration” •
+        <span class="tag">AI prompt:</span> “Two stacks of pamphlets on table, opposing titles, etched shadows, period typography”
+      </div>
+
+      <div class="notes-panel-content" data-title="The ‘Truth’ Fight">
+        This is a culture war in print—competing moral claims packaged as page-turners. That’s why it spreads so fast.
+      </div>
+    </section>
+
+    <!-- 10. Global Impact -->
+    <section>
+      <h3>Across the Atlantic</h3>
+      <ul class="tight">
+        <li>Translations carried the story across Europe, adding foreign sympathy to the anti-slavery cause.</li>
+        <li>Stowe’s fame turned American slavery into a global moral question.</li>
+        <li>The novel helped frame the conflict as freedom versus oppression, not just North versus South.</li>
+      </ul>
+
+      <div class="img-slot">[Image Placeholder — European bookstall]</div>
+      <div class="img-meta"><span class="tag">Search:</span> “1850s European bookstall engraving” •
+        <span class="tag">AI prompt:</span> “Outdoor bookstall, crowded pedestrians, cobblestone street, etching look”
+      </div>
+
+      <div class="notes-panel-content" data-title="Pressure from Abroad">
+        International opinion matters—trade, diplomacy, and public image can shape what’s politically possible.
+      </div>
+    </section>
+
+    <!-- 11. Toward the Civil War -->
+    <section>
+      <h3>From Feeling to Fracture</h3>
+      <ul class="tight">
+        <li>The novel made slavery a household conversation that people could no longer dodge.</li>
+        <li>By shifting hearts, it made old compromises feel morally thin and unsatisfying.</li>
+        <li>Many Americans began to see slavery as a national sin that demanded decisive change.</li>
+      </ul>
+
+      <div class="img-slot">[Image Placeholder — divided map motif]</div>
+      <div class="img-meta"><span class="tag">Search:</span> “1850s sectional map free vs slave states engraving” •
+        <span class="tag">AI prompt:</span> “Antique map, subtle color wash for sections, engraved borders, aged paper texture”
+      </div>
+
+      <div class="notes-panel-content" data-title="The Famous Line">
+        Lincoln’s “little woman who made this great war” line is probably apocryphal—but it captures a true point: stories can tilt history.
+      </div>
+    </section>
+
+    <!-- 12. Key Terms Recap -->
+    <section>
+      <h3>Key Terms — Click the ? for Definitions</h3>
+      <p class="tight">
+        <span class="def" data-term="Fugitive Slave Act (1850)" data-def="Required the return of people who escaped slavery and criminalized assistance.">Fugitive Slave Act<span class="def-icon">?</span></span>
+        <span class="chip">Law</span>
+        &nbsp;&nbsp;•&nbsp;&nbsp;
+        <span class="def" data-term="Sentimental Fiction" data-def="Emotion-driven fiction used to teach moral lessons and inspire reform.">Sentimental Fiction<span class="def-icon">?</span></span>
+        <span class="chip">Genre</span>
+        &nbsp;&nbsp;•&nbsp;&nbsp;
+        <span class="def" data-term="National Era" data-def="Antislavery weekly where Stowe serialized her novel in 1851–52.">National Era<span class="def-icon">?</span></span>
+        <span class="chip">Press</span>
+        &nbsp;&nbsp;•&nbsp;&nbsp;
+        <span class="def" data-term="Anti-Tom Novels" data-def="Pro-slavery responses portraying slavery as benevolent and criticizing Stowe.">Anti-Tom Novels<span class="def-icon">?</span></span>
+        <span class="chip">Counter-Literature</span>
+      </p>
+
+      <div class="img-slot">[Image Placeholder — closing slide art]</div>
+      <div class="img-meta"><span class="tag">Search:</span> “Uncle Tom’s Cabin 1852 illustrated edition title page” •
+        <span class="tag">AI prompt:</span> “Victorian title page design, flourished borders, engraved ornaments, bookish tone”
+      </div>
+
+      <div class="notes-panel-content" data-title="What to Remember">
+        Keep the chain in mind: law → conscience → story → public → politics. Stowe sits in the middle of that chain and accelerates it.
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- Notes Sidebar -->
+<aside id="notesSidebar" aria-hidden="true">
+  <div id="notesHeader">
+    <h3 id="notesTitle">Notes</h3>
+    <div><span id="notesHint">(toggle with <span class="kbd">L</span>)</span></div>
+  </div>
+  <div id="notesContent">Slide notes will appear here.</div>
+</aside>
+
+<!-- Little helper -->
+<div class="helper">Press <span class="kbd">L</span> for my side notes • Click <span style="border-bottom:2px dotted #9a6f2b;">underlined terms</span> or the <span class="def-icon" style="vertical-align:middle;">?</span> for quick definitions</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+<script>
+  // Initialize Reveal
+  const deck = new Reveal({
+    hash: true,
+    controls: true,
+    progress: true,
+    slideNumber: true,
+    history: true,
+    center: true
+  });
+  deck.initialize();
+
+  /* ========== Definition Tooltips ========== */
+  let activeTip = null;
+
+  function closeTip(){
+    if(activeTip && activeTip.parentNode){
+      activeTip.parentNode.removeChild(activeTip);
+      activeTip = null;
+    }
+  }
+
+  function showTip(target){
+    closeTip();
+    const term = target.getAttribute('data-term') || 'Definition';
+    const def  = target.getAttribute('data-def')  || '';
+    const tip = document.createElement('div');
+    tip.className = 'tooltip';
+    tip.innerHTML = '<h4>'+term+'</h4><p>'+def+'</p>';
+    document.body.appendChild(tip);
+
+    // position near the clicked element
+    const rect = target.getBoundingClientRect();
+    const pad = 8;
+    let left = rect.left + window.scrollX;
+    let top  = rect.bottom + window.scrollY + pad;
+
+    // keep within viewport
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    if(left + tip.offsetWidth > vw - 10){
+      left = vw - tip.offsetWidth - 10;
+    }
+    if(top + tip.offsetHeight > vh + window.scrollY - 10){
+      top = rect.top + window.scrollY - tip.offsetHeight - pad;
+    }
+
+    tip.style.left = left + 'px';
+    tip.style.top  = top + 'px';
+    activeTip = tip;
+  }
+
+  document.addEventListener('click', (e)=>{
+    const t = e.target;
+    if(t.classList.contains('def') || t.classList.contains('def-icon')){
+      // Ensure we target the host span.def
+      let host = t;
+      if(!t.classList.contains('def')){
+        const prev = t.previousElementSibling;
+        host = (prev && prev.classList.contains('def')) ? prev : t.closest('.def') || t;
+      }
+      showTip(host);
+      e.stopPropagation();
+    }else{
+      closeTip();
+    }
+  });
+  window.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape'){ closeTip(); }
+  });
+
+  /* ========== Notes Sidebar (L toggle) ========== */
+  const sidebar = document.getElementById('notesSidebar');
+  const notesTitle = document.getElementById('notesTitle');
+  const notesContent = document.getElementById('notesContent');
+
+  function loadSlideNotes(){
+    const current = deck.getCurrentSlide();
+    if(!current) return;
+    const note = current.querySelector('.notes-panel-content');
+    const title = note?.getAttribute('data-title') || 'Notes';
+    notesTitle.textContent = title;
+    notesContent.innerHTML = note ? note.innerHTML : '<em>No notes for this slide.</em>';
+  }
+
+  document.addEventListener('keydown', (e)=>{
+    if(e.key.toLowerCase() === 'l'){
+      // load notes for the current slide and toggle
+      loadSlideNotes();
+      const open = sidebar.classList.toggle('open');
+      sidebar.setAttribute('aria-hidden', (!open).toString());
+    }
+  });
+
+  deck.on('slidechanged', () => {
+    if(sidebar.classList.contains('open')) loadSlideNotes();
+  });
+  deck.on('ready', () => loadSlideNotes());
+</script>
+</body>
+</html>
