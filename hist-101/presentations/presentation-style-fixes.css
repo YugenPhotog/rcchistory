@@ -1,0 +1,155 @@
+/* ============================================
+   PRESENTATION VISUAL FIXES (Overrides)
+   Purpose: neutral, high-contrast look; align
+   with .reveal/.slides structure in HTML.
+   Load this AFTER base/pro CSS.
+   ============================================ */
+
+/* 0) Palette & base text */
+:root {
+  --ink: #1f2937;          /* dark neutral */
+  --ink-2: #374151;
+  --accent: #9B8550;       /* muted gold */
+  --surface: #F8F5EE;      /* warm parchment */
+  --surface-2: #FFFDF7;
+  --border: #e5e7eb;
+}
+
+html, body {
+  background: var(--surface);
+  color: var(--ink);
+  overflow: hidden;
+}
+
+/* 1) Reveal structure alignment */
+.reveal {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  color: var(--ink);
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.reveal .slides section {
+  background: var(--surface-2);
+  color: var(--ink);
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  padding: 40px 56px;
+}
+
+/* Title & section slides */
+.reveal .title-slide {
+  background: linear-gradient(135deg, #556070 0%, #8aa0ad 100%);
+  color: #ffffff;
+  box-shadow: none;
+}
+.reveal .title-slide h1 { color: #fff; border: 0; text-shadow: 2px 3px 6px rgba(0,0,0,.35); }
+.reveal .title-slide .subtitle,
+.reveal .title-slide .lecture-number { color: #f3efe6; }
+
+.section-slide {
+  background: linear-gradient(135deg, #645a4b 0%, #9B8550 100%);
+  color: #fff;
+  box-shadow: none;
+}
+.section-slide h1 { color: #fff; border: 0; text-shadow: 2px 3px 6px rgba(0,0,0,.35); }
+
+/* 2) Typography & headings */
+.reveal h1 {
+  color: var(--ink);
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: .25em;
+  margin-bottom: .5em;
+  line-height: 1.15;
+}
+.reveal h2 { color: var(--ink-2); border-left: 5px solid #8FA5B2; padding-left: .4em; }
+.reveal h3 { color: #786a5a; }
+.reveal p, .reveal li { font-size: 1.06em; line-height: 1.6; }
+
+/* Lists spacing */
+.reveal ul, .reveal ol { margin: .6em 0 1em 1.2em; }
+.reveal li { margin: .25em 0; }
+
+/* 3) Image sizing and grids */
+.slide-img {
+  display: block;
+  max-width: 70%;
+  max-height: 65vh;
+  height: auto;
+  margin: 0 auto 1rem auto;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 6px 22px rgba(0,0,0,.06);
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+.image-grid .slide-img {
+  max-width: 100%;
+  max-height: 55vh;
+}
+
+/* Two-column content */
+.two-column {
+  display: grid !important;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 36px;
+  align-items: start;
+}
+.two-column.narrow-wide { grid-template-columns: 1fr 1.6fr; }
+.two-column.wide-narrow { grid-template-columns: 1.6fr 1fr; }
+
+/* 4) UI elements */
+.progress-container { background: rgba(0,0,0,.08); }
+.progress-bar { background: #8FA5B2; }
+.slide-number {
+  background: #1f2937; color: #fff; border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.15);
+}
+.scroll-indicator {
+  background: rgba(31,41,55,.92); color: #fff; border-radius: 999px; padding: 8px 14px;
+}
+.nav-button {
+  background: #1f2937; color: #fff; border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.15);
+}
+.nav-button:hover { background: #9B8550; }
+
+/* 5) Content boxes */
+.highlight-box {
+  background: rgba(143,165,178,.16);
+  border-left: 6px solid #8FA5B2;
+}
+.feature-box {
+  background: #fff;
+  border: 1px solid var(--border);
+}
+.conclusion-box {
+  background: linear-gradient(135deg, rgba(143,165,178,.2), rgba(155,133,80,.2));
+  border: 2px solid #8FA5B2;
+}
+
+/* 6) Accessibility */
+a, button { outline: none; }
+a:focus-visible, button:focus-visible {
+  outline: 3px solid #E5C050; outline-offset: 3px; border-radius: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+/* 7) Responsive */
+@media (max-width: 1024px) {
+  .reveal { font-size: 28px; }
+  .two-column, .image-grid { grid-template-columns: 1fr; gap: 20px; }
+  .slide-img { max-width: 100%; max-height: 55vh; }
+}
+@media (max-width: 768px) {
+  .reveal { font-size: 26px; }
+  .slide-img { max-height: 45vh; }
+}
