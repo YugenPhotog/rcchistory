@@ -84,78 +84,32 @@
             z-index: 1000;
         }
         
-        /* Help Icon - Within First Slide */
-        .help-icon-container {
-            position: absolute;
-            top: 20px;
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 80px;
             right: 20px;
-            z-index: 100;
-        }
-        
-        .help-icon {
-            width: 150px;
-            height: auto;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            display: block;
-        }
-        
-        .help-icon:hover {
-            transform: scale(1.1);
-        }
-        
-        .help-menu {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            margin-top: 10px;
-            background: white;
-            border: 2px solid var(--tapestry);
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            min-width: 300px;
+            background: rgba(92, 122, 138, 0.8);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 1000;
             display: none;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            animation: bounce 2s infinite;
         }
         
-        .help-icon-container:hover .help-menu {
-            display: block;
-            opacity: 1;
-        }
-        
-        .help-menu h3 {
-            margin-top: 0;
-            color: var(--tapestry);
-            font-size: 1.4em;
-            border-bottom: 2px solid var(--dull-gold);
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-        }
-        
-        .help-menu ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        
-        .help-menu li {
-            padding: 8px 0;
-            color: var(--ink-primary);
-            font-size: 0.9em;
-            line-height: 1.4;
-        }
-        
-        .help-menu strong {
-            color: var(--tapestry);
-            display: inline-block;
-            min-width: 120px;
-        }
-        
-        /* Make title slide position relative for help icon */
-        .title-slide {
-            position: relative;
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
         }
         
         /* Navigation Controls */
@@ -551,6 +505,8 @@
     <!-- Slide Number -->
     <div class="slide-number">1 / 18</div>
     
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">↓ Scroll Down ↓</div>
     
     <!-- Navigation Controls -->
     <div class="nav-controls">
@@ -565,22 +521,6 @@
             
             <!-- Slide 1: Title -->
             <section class="title-slide" data-transition="fade">
-                <div class="help-icon-container">
-                    <img src="images/help.png" alt="Help" class="help-icon">
-                    <div class="help-menu">
-                        <h3>Navigation Guide</h3>
-                        <ul>
-                            <li><strong>Left/Right Arrows:</strong> Previous/Next slide</li>
-                            <li><strong>Up/Down Arrows:</strong> Scroll within slide</li>
-                            <li><strong>Mouse Wheel:</strong> Scroll within slide</li>
-                            <li><strong>PageUp/PageDown:</strong> Previous/Next slide</li>
-                            <li><strong>Spacebar:</strong> Next slide</li>
-                            <li><strong>Home/End:</strong> First/Last slide</li>
-                            <li><strong>Escape:</strong> Overview mode</li>
-                            <li><strong>Click edges:</strong> Navigate slides</li>
-                        </ul>
-                    </div>
-                </div>
                 <h1>Staging America:<br>Performance, Race, and Identity</h1>
                 <p class="subtitle">Lecture 3</p>
                 <p class="lecture-number">HIST 101: American History to 1865</p>
@@ -1299,10 +1239,52 @@
             
             updateProgress();
             updateSlideNumber();
+            checkScrollIndicator();
             
             // Log for accessibility
             console.log(`Slide ${currentSlide + 1} of ${totalSlides}`);
         }
+
+        // Check if slide has scrollable content and show indicator
+        function checkScrollIndicator() {
+            const currentSlideElement = slides[currentSlide];
+            const indicator = document.querySelector('.scroll-indicator');
+            
+            if (currentSlideElement && currentSlideElement.scrollHeight > currentSlideElement.clientHeight) {
+                // Slide has scrollable content
+                if (indicator) {
+                    indicator.style.display = 'block';
+                }
+            } else {
+                if (indicator) {
+                    indicator.style.display = 'none';
+                }
+            }
+            
+            // Update indicator visibility based on scroll position
+            updateScrollIndicator();
+        }
+
+        // Update scroll indicator based on position
+        function updateScrollIndicator() {
+            const indicator = document.querySelector('.scroll-indicator');
+            if (!indicator) return;
+            
+            if (isSlideAtBottom()) {
+                indicator.style.display = 'none';
+            } else {
+                const currentSlideElement = slides[currentSlide];
+                if (currentSlideElement.scrollHeight > currentSlideElement.clientHeight) {
+                    indicator.style.display = 'block';
+                }
+            }
+        }
+
+        // Listen for scroll events to update indicator
+        document.addEventListener('scroll', function(e) {
+            if (e.target.classList && e.target.classList.contains('reveal')) return;
+            updateScrollIndicator();
+        }, true);
 
         function nextSlide() {
             if (currentSlide < totalSlides - 1) {
@@ -1358,20 +1340,20 @@
                     prevSlide();
                     break;
                 case 'ArrowDown':
-                    // Programmatically scroll the current slide down
-                    e.preventDefault();
-                    currentSlideElement.scrollBy({
-                        top: 100,
-                        behavior: 'smooth'
-                    });
+                    // Only prevent default and change slides if we're at the bottom of current slide
+                    if (isSlideAtBottom()) {
+                        e.preventDefault();
+                        nextSlide();
+                    }
+                    // Otherwise let the default scrolling happen
                     break;
                 case 'ArrowUp':
-                    // Programmatically scroll the current slide up
-                    e.preventDefault();
-                    currentSlideElement.scrollBy({
-                        top: -100,
-                        behavior: 'smooth'
-                    });
+                    // Only prevent default and change slides if we're at the top of current slide
+                    if (isSlideAtTop()) {
+                        e.preventDefault();
+                        prevSlide();
+                    }
+                    // Otherwise let the default scrolling happen
                     break;
                 case ' ':
                     // Space bar advances slides
@@ -1397,10 +1379,46 @@
             }
         });
 
-        // Mouse wheel navigation - only scrolls within slides, never advances
+        // Mouse wheel navigation - smart scrolling
+        let wheelTimeout;
+        let isWheeling = false;
+        
         document.addEventListener('wheel', (e) => {
-            // Let default scrolling happen - never advance slides
-        }, { passive: true });
+            const currentSlideElement = slides[currentSlide];
+            
+            // Check if we're scrolling down
+            if (e.deltaY > 0) {
+                // If we're at the bottom of the slide, go to next slide
+                if (isSlideAtBottom()) {
+                    e.preventDefault();
+                    clearTimeout(wheelTimeout);
+                    if (!isWheeling) {
+                        isWheeling = true;
+                        nextSlide();
+                        setTimeout(() => {
+                            isWheeling = false;
+                        }, 500);
+                    }
+                }
+                // Otherwise, let normal scrolling happen
+            } 
+            // Check if we're scrolling up
+            else if (e.deltaY < 0) {
+                // If we're at the top of the slide, go to previous slide
+                if (isSlideAtTop()) {
+                    e.preventDefault();
+                    clearTimeout(wheelTimeout);
+                    if (!isWheeling) {
+                        isWheeling = true;
+                        prevSlide();
+                        setTimeout(() => {
+                            isWheeling = false;
+                        }, 500);
+                    }
+                }
+                // Otherwise, let normal scrolling happen
+            }
+        }, { passive: false });
 
         // Touch navigation
         let touchStartX = 0;
@@ -1423,15 +1441,21 @@
             const diffX = touchEndX - touchStartX;
             const diffY = touchEndY - touchStartY;
             
-            // Only handle horizontal swipes for slide navigation
-            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                // Horizontal swipe
                 if (diffX > 50) {
                     prevSlide();
                 } else if (diffX < -50) {
                     nextSlide();
                 }
+            } else {
+                // Vertical swipe
+                if (diffY < -50) {
+                    nextSlide();
+                } else if (diffY > 50) {
+                    prevSlide();
+                }
             }
-            // Vertical swipes are ignored, allowing normal scrolling
         }
 
         // Click navigation (optional)
