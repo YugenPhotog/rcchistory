@@ -88,9 +88,46 @@
 
     /* Make slide content vertically scrollable when it overflows */
     .reveal .slides section {
-      overflow-y: auto;            /* allow vertical scrolling inside slides */
-      overscroll-behavior: contain;/* keep scroll events from bubbling the deck */
-      max-height: calc(100vh - 8vh); /* leave a little room for controls */
+      overflow-y: auto !important;            /* allow vertical scrolling inside slides */
+      overflow-x: hidden !important;          /* prevent horizontal scroll */
+      overscroll-behavior: contain;           /* keep scroll events from bubbling the deck */
+      max-height: 100vh !important;           /* use full viewport height */
+      height: 100% !important;                /* ensure section takes full height */
+    }
+    
+    /* Custom scrollbar styling for better visibility */
+    .reveal .slides section::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    .reveal .slides section::-webkit-scrollbar-track {
+      background: rgba(92, 122, 138, 0.1);
+      border-radius: 4px;
+    }
+    
+    .reveal .slides section::-webkit-scrollbar-thumb {
+      background: var(--tapestry);
+      border-radius: 4px;
+    }
+    
+    .reveal .slides section::-webkit-scrollbar-thumb:hover {
+      background: var(--mocha-mousse);
+    }
+
+    /* Fullscreen mode adjustments */
+    .reveal.fullscreen {
+      max-width: 100vw !important;
+      max-height: 100vh !important;
+    }
+    
+    .reveal.fullscreen .slides {
+      max-width: 100% !important;
+      max-height: 100% !important;
+    }
+    
+    /* Ensure proper scaling in fullscreen */
+    .reveal .slides section {
+      box-sizing: border-box;
     }
 
     /* Title slide */
@@ -1058,9 +1095,26 @@
     function scrollCurrentSlide(delta) {
       const slide = Reveal.getCurrentSlide();
       if (!slide) return;
+      
       // Scroll the section (it has overflow-y: auto)
       slide.scrollBy({ top: delta, left: 0, behavior: 'smooth' });
     }
+
+    // Prevent up/down arrow default behavior at the earliest point
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        
+        // Handle scrolling directly
+        if (e.key === 'ArrowUp') {
+          scrollCurrentSlide(-100);
+        } else if (e.key === 'ArrowDown') {
+          scrollCurrentSlide(100);
+        }
+      }
+    }, { capture: true, passive: false });
 
     Reveal.initialize({
       hash: true,
@@ -1071,33 +1125,46 @@
       backgroundTransition: 'fade',
       width: 1280,
       height: 720,
-      margin: 0.04,
+      margin: 0.1,        // Increased margin to prevent content going off-screen
+      minScale: 0.2,      // Minimum scale factor
+      maxScale: 1.5,      // Prevent scaling too large in fullscreen
+      center: true,       // Center slides vertically
 
-      // Ensure deck is purely horizontal (no vertical stacks to steal ↑/↓)
+      // Ensure deck is purely horizontal (no vertical stacks)
       navigationMode: 'linear',
 
-      // Override keyboard so ↑/↓ ONLY scroll content (do NOT change slides)
+      // Disable all default keyboard navigation for up/down arrows
       keyboard: {
-        // ArrowUp
-        38: function(event) {
-          event && event.preventDefault();
-          scrollCurrentSlide(-90);
-        },
-        // ArrowDown
-        40: function(event) {
-          event && event.preventDefault();
-          scrollCurrentSlide(90);
-        }
+        // Completely disable ArrowUp and ArrowDown for slide navigation
+        38: null,  // ArrowUp - disabled
+        40: null,  // ArrowDown - disabled
+        
+        // Keep default navigation for left/right
+        37: 'left',   // ArrowLeft
+        39: 'right',  // ArrowRight
+        
+        // Keep other useful defaults
+        32: 'next',   // Space
+        33: 'prev',   // PageUp
+        34: 'next',   // PageDown
+        35: 'end',    // End
+        36: 'home'    // Home
       }
     });
 
-    // Also prevent default Reveal vertical navigation via wheel on empty slides
-    // (keeps scroll intent inside slides that actually overflow)
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
-        e.stopPropagation(); // don't let Reveal handle it
+    // Additional safeguard: prevent any wheel-based vertical navigation
+    Reveal.configure({
+      mouseWheel: false
+    });
+
+    // Ensure mouse wheel scrolls slide content, not deck
+    document.querySelector('.reveal').addEventListener('wheel', function(e) {
+      const slide = Reveal.getCurrentSlide();
+      if (slide && slide.scrollHeight > slide.clientHeight) {
+        // Let the slide handle the scroll naturally
+        e.stopPropagation();
       }
-    }, { capture: true });
+    }, { passive: true });
   </script>
 </body>
 </html>
