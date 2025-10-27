@@ -866,116 +866,96 @@ This made policy more insidious—justified by claimed benevolence
 </section>
 </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+
+	
+	<!-- Reveal.js Core JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/notes/notes.min.js"></script>
+	
+<!-- Initialize Reveal.js with Cinematic Mode Configuration -->
 <script>
-Reveal.initialize({
-    hash: true,
-    center: false,
-    slideNumber: true,
-    transition: 'slide',
-    backgroundTransition: 'fade',
-    width: 1280,
-    height: 720,
-    margin: 0.04,
-    minScale: 0.2,
-    maxScale: 2.0,
-    controls: true,
-    progress: true,
-    history: true,
-    keyboard: {
-        37: 'prev',  // left arrow - previous slide
-        39: 'next',  // right arrow - next slide
-        38: null,    // up arrow - disable default, allow scrolling
-        40: null     // down arrow - disable default, allow scrolling
-    },
-    overview: true,
-    touch: true,
-    loop: false,
-    rtl: false,
-    fragments: true,
-    embedded: false,
-    help: true,
-    showNotes: false,
-    autoSlide: 0,
-    autoSlideStoppable: true,
-    mouseWheel: false,
-    hideAddressBar: true,
-    previewLinks: false,
-    transitionSpeed: 'default',
-    viewDistance: 3,
-    display: 'block'
-});
+    Reveal.initialize({
+        hash: true,
+        transition: 'convex',
+        backgroundTransition: 'zoom',
+        transitionSpeed: 'slow',
+        controls: true,
+        controlsLayout: 'bottom-right',
+        progress: true,
+        slideNumber: 'c/t',
+        center: true,
+        width: 1280,
+        height: 720,   // virtual 16:9 slide size
+        margin: 0.04,
+        minScale: 0.2,
+        maxScale: 2.0,
+        plugins: [ RevealNotes ]
+    });
 
-// Custom keyboard handler for up/down arrows to scroll within slides
-document.addEventListener('keydown', function(e) {
-    var currentSlide = Reveal.getCurrentSlide();
-    if (!currentSlide) return;
-    
-    var scrollAmount = 100; // pixels to scroll
-    
-    if (e.keyCode === 38) { // Up arrow
-        e.preventDefault();
-        currentSlide.scrollTop -= scrollAmount;
-    } else if (e.keyCode === 40) { // Down arrow
-        e.preventDefault();
-        currentSlide.scrollTop += scrollAmount;
-    }
-});
-
-// Improved mouse wheel handler for smooth scrolling within slides
-document.addEventListener('wheel', function(e) {
-    var currentSlide = Reveal.getCurrentSlide();
-    if (!currentSlide) return;
-    
-    var scrollHeight = currentSlide.scrollHeight;
-    var clientHeight = currentSlide.clientHeight;
-    var scrollTop = currentSlide.scrollTop;
-    
-    // Check if slide has scrollable content
-    var hasScroll = scrollHeight > clientHeight;
-    
-    if (hasScroll) {
-        var isScrollingDown = e.deltaY > 0;
-        var isScrollingUp = e.deltaY < 0;
+    // Custom keyboard handler for up/down arrows to scroll within slides
+    document.addEventListener('keydown', function(e) {
+        var currentSlide = Reveal.getCurrentSlide();
+        if (!currentSlide) return;
         
-        var isAtTop = scrollTop <= 1; // Small threshold for floating point
-        var isAtBottom = scrollTop + clientHeight >= scrollHeight - 1;
+        var scrollAmount = 100; // pixels to scroll
         
-        // If scrolling down and not at bottom, scroll within slide
-        if (isScrollingDown && !isAtBottom) {
-            e.stopPropagation();
+        if (e.keyCode === 38) { // Up arrow
             e.preventDefault();
-            currentSlide.scrollTop += e.deltaY;
-            return false;
-        }
-        
-        // If scrolling up and not at top, scroll within slide
-        if (isScrollingUp && !isAtTop) {
-            e.stopPropagation();
+            currentSlide.scrollTop -= scrollAmount;
+        } else if (e.keyCode === 40) { // Down arrow
             e.preventDefault();
-            currentSlide.scrollTop += e.deltaY;
-            return false;
+            currentSlide.scrollTop += scrollAmount;
         }
-    }
+    });
     
-    // At boundaries or no scroll needed - let Reveal.js handle navigation
-    // But prevent default browser scroll
-    if (hasScroll) {
-        e.preventDefault();
-        if (e.deltaY > 0) {
-            Reveal.next();
-        } else {
-            Reveal.prev();
+    // Improved mouse wheel handler for smooth scrolling within slides
+    document.addEventListener('wheel', function(e) {
+        var currentSlide = Reveal.getCurrentSlide();
+        if (!currentSlide) return;
+        
+        var scrollHeight = currentSlide.scrollHeight;
+        var clientHeight = currentSlide.clientHeight;
+        var scrollTop = currentSlide.scrollTop;
+        
+        var hasScroll = scrollHeight > clientHeight;
+        
+        if (hasScroll) {
+            var isScrollingDown = e.deltaY > 0;
+            var isScrollingUp = e.deltaY < 0;
+            var isAtTop = scrollTop <= 1;
+            var isAtBottom = scrollTop + clientHeight >= scrollHeight - 1;
+            
+            if (isScrollingDown && !isAtBottom) {
+                e.stopPropagation();
+                e.preventDefault();
+                currentSlide.scrollTop += e.deltaY;
+                return false;
+            }
+            
+            if (isScrollingUp && !isAtTop) {
+                e.stopPropagation();
+                e.preventDefault();
+                currentSlide.scrollTop += e.deltaY;
+                return false;
+            }
         }
-    }
-}, { passive: false });
 
-// Reset scroll position when changing slides
-Reveal.on('slidechanged', function(event) {
-    if (event.currentSlide) {
-        event.currentSlide.scrollTop = 0;
-    }
-});
+        if (hasScroll) {
+            e.preventDefault();
+            if (e.deltaY > 0) {
+                Reveal.next();
+            } else {
+                Reveal.prev();
+            }
+        }
+    }, { passive: false });
+    
+    // Reset scroll position when changing slides
+    Reveal.on('slidechanged', function(event) {
+        if (event.currentSlide) {
+            event.currentSlide.scrollTop = 0;
+        }
+    });
 </script>
 </body>
 </html>
