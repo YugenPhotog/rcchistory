@@ -77,6 +77,12 @@
   /* Prevent the parent .slides container from eating the scroll */
   .reveal .slides { overflow: hidden; }
 </style>
+<style>
+  /* Make each slide vertically scrollable when content overflows */
+  .reveal section { max-height: 100%; overflow-y: auto; }
+  /* Keep parent from swallowing wheel events */
+  .reveal .slides { overflow: hidden; }
+</style>
 
 </head>
 <body>
@@ -1794,138 +1800,138 @@
     </div>
   </div>
 
-<!-- Reveal.js core -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
-<!-- Plugins: Notes (Presenter View), Search, Zoom -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/search/search.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/zoom/zoom.min.js"></script>
+<!-- Reveal.js core (jsDelivr dist build) -->
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.min.js"></script>
+
+<!-- Plugins: Notes, Search, Zoom (match same version & load AFTER core) -->
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/notes/notes.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/search/search.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/zoom/zoom.min.js"></script>
 
 <script>
-  // --- Sanity check: prove this script runs ---
-  console.log("[Reveal init] script attached");
-  window.__revealBootErrors = [];
+  // --- Sanity logging so you can see what loaded ---
+  console.log("[Reveal] core:", !!window.Reveal);
+  console.log("[Reveal] notes plugin present?", !!window.RevealNotes);
+  console.log("[Reveal] search plugin present?", !!window.RevealSearch);
+  console.log("[Reveal] zoom plugin present?", !!window.RevealZoom);
 
-  // Wait until DOM is ready to avoid timing issues
+  // Initialize AFTER DOM is ready so everything can bind correctly
   document.addEventListener('DOMContentLoaded', function () {
-    try {
-      // Initialize Reveal with plugins, free ↑/↓ for scrolling
-      Reveal.initialize({
-        hash: true,
-        center: false,
-        slideNumber: true,
-        transition: 'slide',
-        backgroundTransition: 'fade',
-        width: 1280,
-        height: 720,
-        margin: 0.04,
-        minScale: 0.2,
-        maxScale: 2.0,
-        controls: true,
-        progress: true,
-        history: true,
-        keyboard: {
-          37: 'prev',   // left → previous slide
-          39: 'next',   // right → next slide
-          38: null,     // up disabled for nav (we'll scroll)
-          40: null      // down disabled for nav (we'll scroll)
-        },
-        overview: true,
-        touch: true,
-        loop: false,
-        rtl: false,
-        fragments: true,
-        embedded: false,
-        help: true,
-        showNotes: false, // audience notes overlay (unrelated to presenter view)
-        autoSlide: 0,
-        autoSlideStoppable: true,
-        mouseWheel: false,
-        hideAddressBar: true,
-        previewLinks: false,
-        transitionSpeed: 'default',
-        viewDistance: 3,
-        display: 'block',
-        plugins: [ RevealNotes, RevealSearch, RevealZoom ]
-      });
 
-      // Prove plugins loaded
-      console.log("[Reveal init] plugins loaded:", {
-        RevealNotes: !!window.RevealNotes,
-        RevealSearch: !!window.RevealSearch,
-        RevealZoom: !!window.RevealZoom
-      });
-
-      // Explicit S binding for Presenter View (notes plugin should also bind S by default)
-      Reveal.configure({
-        keyboard: Object.assign({}, Reveal.getConfig().keyboard, {
-          83: function () {  // 'S'
-            if (window.RevealNotes && RevealNotes.open) {
-              RevealNotes.open();
-            } else {
-              alert("Notes plugin not available – check console/CDN.");
-            }
-          }
-        })
-      });
-
-      // Make ↑/↓ scroll inside the current slide
-      document.addEventListener('keydown', function(e) {
-        const currentSlide = Reveal.getCurrentSlide();
-        if (!currentSlide) return;
-
-        // Ignore when focus is inside inputs/textareas to not block typing
-        const tag = (document.activeElement && document.activeElement.tagName) || '';
-        if (tag === 'INPUT' || tag === 'TEXTAREA' || document.activeElement?.isContentEditable) return;
-
-        const scrollAmount = 120; // px per keypress
-        if (e.key === 'ArrowUp' || e.keyCode === 38) {
-          e.preventDefault();
-          currentSlide.scrollTop = Math.max(0, currentSlide.scrollTop - scrollAmount);
-        } else if (e.key === 'ArrowDown' || e.keyCode === 40) {
-          e.preventDefault();
-          currentSlide.scrollTop = currentSlide.scrollTop + scrollAmount;
-        }
-      }, { capture: true });
-
-      // Mouse wheel: scroll inside slide; hand off to Reveal at edges
-      document.addEventListener('wheel', function(e) {
-        const currentSlide = Reveal.getCurrentSlide();
-        if (!currentSlide) return;
-
-        const scrollHeight = currentSlide.scrollHeight;
-        const clientHeight = currentSlide.clientHeight;
-        const scrollTop = currentSlide.scrollTop;
-        const hasScroll = scrollHeight > clientHeight;
-
-        if (hasScroll) {
-          const atTop = scrollTop <= 1;
-          const atBottom = scrollTop + clientHeight >= scrollHeight - 1;
-
-          if ((e.deltaY > 0 && !atBottom) || (e.deltaY < 0 && !atTop)) {
-            e.stopPropagation();
-            e.preventDefault();
-            currentSlide.scrollTop += e.deltaY;
-            return false;
-          }
-
-          // At boundary: let Reveal navigate but prevent page scroll
-          e.preventDefault();
-          if (e.deltaY > 0) Reveal.next(); else Reveal.prev();
-        }
-      }, { passive: false, capture: true });
-
-      // Reset scroll position when changing slides
-      Reveal.on('slidechanged', function(event) {
-        if (event.currentSlide) event.currentSlide.scrollTop = 0;
-      });
-
-      console.log("[Reveal init] complete");
-    } catch (err) {
-      window.__revealBootErrors.push(err);
-      console.error("Reveal boot error:", err);
-      alert("Reveal failed to initialize. Open DevTools → Console for details.");
+    if (!window.Reveal) {
+      alert("Reveal core failed to load. Check network/CSP.");
+      return;
     }
+
+    // Initialize Reveal (free ↑/↓ for in-slide scroll)
+    Reveal.initialize({
+      hash: true,
+      center: false,
+      slideNumber: true,
+      transition: 'slide',
+      backgroundTransition: 'fade',
+      width: 1280,
+      height: 720,
+      margin: 0.04,
+      minScale: 0.2,
+      maxScale: 2.0,
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: {
+        37: 'prev',   // left → previous slide
+        39: 'next',   // right → next slide
+        38: null,     // up disabled for nav (custom scroll)
+        40: null      // down disabled for nav (custom scroll)
+      },
+      overview: true,
+      touch: true,
+      loop: false,
+      rtl: false,
+      fragments: true,
+      embedded: false,
+      help: true,
+      showNotes: false, // audience overlay (Presenter View is separate)
+      autoSlide: 0,
+      autoSlideStoppable: true,
+      mouseWheel: false,
+      hideAddressBar: true,
+      previewLinks: false,
+      transitionSpeed: 'default',
+      viewDistance: 3,
+      display: 'block',
+      plugins: [ window.RevealNotes, window.RevealSearch, window.RevealZoom ]
+    });
+
+    // If notes plugin isn't present, tell the user early
+    if (!window.RevealNotes) {
+      console.warn("RevealNotes plugin not available (window.RevealNotes is falsy).");
+      alert("Notes plugin not available. Try these: \n• Use jsDelivr URLs (already in this block)\n• Serve over http:// (not file://)\n• Disable popup blockers");
+    }
+
+    // Explicit S binding for Presenter View (in addition to plugin default)
+    Reveal.configure({
+      keyboard: Object.assign({}, Reveal.getConfig().keyboard, {
+        83: function () { // 'S'
+          if (window.RevealNotes && RevealNotes.open) {
+            RevealNotes.open();
+          } else {
+            alert("Presenter View not available (Notes plugin missing).");
+          }
+        }
+      })
+    });
+
+    // ↑/↓ scroll inside the current slide only
+    document.addEventListener('keydown', function(e) {
+      const slide = Reveal.getCurrentSlide();
+      if (!slide) return;
+
+      // Don't hijack typing/focusable elements
+      const el = document.activeElement;
+      if (el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.isContentEditable)) return;
+
+      const amt = 120; // px per tap
+      if (e.key === 'ArrowUp' || e.keyCode === 38) {
+        e.preventDefault();
+        slide.scrollTop = Math.max(0, slide.scrollTop - amt);
+      } else if (e.key === 'ArrowDown' || e.keyCode === 40) {
+        e.preventDefault();
+        slide.scrollTop += amt;
+      }
+    }, { capture: true });
+
+    // Wheel: scroll inside slide; at edges, hand off to Reveal
+    document.addEventListener('wheel', function(e) {
+      const slide = Reveal.getCurrentSlide();
+      if (!slide) return;
+
+      const sh = slide.scrollHeight, ch = slide.clientHeight, st = slide.scrollTop;
+      const hasScroll = sh > ch;
+
+      if (hasScroll) {
+        const atTop = st <= 1;
+        const atBottom = st + ch >= sh - 1;
+
+        if ((e.deltaY > 0 && !atBottom) || (e.deltaY < 0 && !atTop)) {
+          e.stopPropagation();
+          e.preventDefault();
+          slide.scrollTop += e.deltaY;
+          return false;
+        }
+
+        // At the boundary: prevent page scroll, let Reveal navigate
+        e.preventDefault();
+        if (e.deltaY > 0) Reveal.next(); else Reveal.prev();
+      }
+    }, { passive: false, capture: true });
+
+    // Reset slide scroll when changing slides
+    Reveal.on('slidechanged', function(evt) {
+      if (evt.currentSlide) evt.currentSlide.scrollTop = 0;
+    });
+
+    console.log("[Reveal] init complete");
   });
 </script>
 
