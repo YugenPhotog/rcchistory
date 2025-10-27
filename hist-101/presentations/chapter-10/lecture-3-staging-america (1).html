@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staging America: Performance, Race, and Identity</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Lecture 3: Staging America - Performance, Race, and Identity</title>
     
     <!-- Reveal.js CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reset.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/black.css">
     
@@ -155,6 +154,14 @@
             border-left: 4px solid var(--accent-color);
         }
         
+        /* Three-column layouts */
+        .three-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            margin: 1.5em 0;
+        }
+        
         /* Content boxes */
         .content-box {
             background: var(--card-background);
@@ -198,89 +205,43 @@
             margin: 1em 0;
         }
         
-        /* Help button and modal */
-        .help-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background: var(--accent-color);
-            border-radius: 50%;
-            border: none;
-            cursor: pointer;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: white;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .help-button:hover {
-            background: #b7791f;
-            transform: scale(1.1);
-        }
-        
-        .help-modal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--secondary-color);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
-            z-index: 1001;
-            max-width: 500px;
-            border: 2px solid var(--accent-color);
-        }
-        
-        .help-modal.active {
-            display: block;
-        }
-        
-        .help-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 1000;
-        }
-        
-        .help-overlay.active {
-            display: block;
-        }
-        
-        .help-modal h3 {
-            margin-top: 0;
-            color: var(--accent-color);
-            font-size: 1.5em;
-        }
-        
-        .help-modal p {
-            line-height: 1.8;
-            margin: 0.5em 0;
-        }
-        
-        .help-close {
+        /* Help icon - only visible on first slide */
+        .help-container {
             position: absolute;
-            top: 10px;
+            top: 15px;
             right: 15px;
-            font-size: 28px;
-            color: var(--accent-color);
             cursor: pointer;
-            border: none;
-            background: none;
+            z-index: 100;
         }
         
-	
+        .help-container img {
+            width: 150px;
+            height: auto;
+            opacity: 0.85;
+            margin: 0;
+            box-shadow: none;
+        }
+        
+        .help-popup {
+            display: none;
+            position: absolute;
+            top: 160px;
+            right: 0;
+            background: rgba(0,0,0,0.9);
+            color: #fff;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 0.55em;
+            text-align: left;
+            width: 220px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+            line-height: 1.5;
+        }
+        
+        .help-container:hover .help-popup {
+            display: block;
+        }
+        
         /* Special slide backgrounds */
         .reveal section[data-background-image] h2 {
             display: none;
@@ -366,6 +327,26 @@
             margin: 1.5em 0;
         }
         
+        /* Feature boxes */
+        .feature-box {
+            background: var(--card-background);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1em 0;
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        /* Conclusion boxes */
+        .conclusion-box {
+            background: linear-gradient(135deg, rgba(45, 55, 72, 0.9), rgba(42, 82, 130, 0.9));
+            border: 3px solid var(--accent-color);
+            padding: 25px;
+            margin: 1.5em 0;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        
         /* Appendix styling */
         .appendix-slide h1::before {
             content: "";
@@ -379,8 +360,13 @@
             }
             
             .two-columns,
+            .three-columns,
             .comparison-grid,
             .image-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -388,23 +374,6 @@
 </head>
 
 <body>
-    <!-- Help button -->
-    <button class="help-button" onclick="toggleHelp()" aria-label="Help">?</button>
-    
-    <!-- Help modal -->
-    <div class="help-overlay" onclick="toggleHelp()"></div>
-    <div class="help-modal">
-        <button class="help-close" onclick="toggleHelp()">&times;</button>
-        <h3>Navigation</h3>
-        <p><strong>→ or Space:</strong> Next slide<br>
-        <strong>←:</strong> Previous slide<br>
-        <strong>↑↓:</strong> Scroll slide content<br>
-        <strong>PgUp/PgDn:</strong> Previous/Next slide<br>
-        <strong>Home/End:</strong> First/Last slide<br>
-        <strong>F:</strong> Fullscreen<br>
-        <strong>Esc:</strong> Overview mode</p>
-    </div>
-
     <div class="reveal">
         <div class="slides">
             
@@ -413,6 +382,25 @@
                 <h1>Staging America:<br/>Performance, Race, and Identity</h1>
                 <p>Lecture 3</p>
                 <p>HIST 101: American History to 1865</p>
+                
+                <!-- Help popup - only on slide 1 -->
+                <div class="help-container"
+                     onmouseover="document.getElementById('help-popup').style.display='block';"
+                     onmouseout="document.getElementById('help-popup').style.display='none';"
+                     onclick="document.getElementById('help-popup').style.display='block';">
+                    <img src="images/help.png" alt="Help">
+                    <div id="help-popup" class="help-popup">
+                        <strong style="display:block; margin-bottom:6px;">Navigation:</strong>
+                        <div>
+                            → or Space: Next<br>
+                            ←: Previous<br>
+                            ↑↓: Scroll slide content<br>
+                            PgUp/PgDn: Prev/Next<br>
+                            Home/End: First/Last<br>
+                            F: Fullscreen · Esc: Overview
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <!-- Slide 2: The Creation of Leisure Time -->
@@ -484,7 +472,7 @@
                     <div class="two-columns">
                         <div>
                             <h2>The Feminization of Respectability</h2>
-                            <div class="content-box">
+                            <div class="feature-box">
                                 <p><em>Middle-class women</em> became powerful symbols of moral refinement. Their presence in museums, lyceums, and theaters helped define which amusements were "safe," "improving," and socially acceptable.</p>
                                 <ul>
                                     <li>Visibility in public space became part of performing respectability.</li>
@@ -510,7 +498,7 @@
                         <li><strong>Theater galleries:</strong> $0.50–$1.00</li>
                     </ul>
                     <h2>Geography of Respectability</h2>
-                    <div class="two-columns">
+                    <div class="comparison-grid">
                         <div class="content-box">
                             <h4>Broadway Theaters</h4>
                             <p>Upscale venues catering to middle-class tastes and values</p>
@@ -520,7 +508,7 @@
                             <p>Elite uptown venue symbolizing refined culture</p>
                         </div>
                     </div>
-                    <div class="content-box">
+                    <div class="conclusion-box">
                         <p><strong>Respectable recreation</strong> fused class aspiration with moral performance—on public display.</p>
                     </div>
                 </div>
@@ -533,7 +521,7 @@
                     <div class="two-columns">
                         <div>
                             <h2>Immigration Wave</h2>
-                            <p>Massive waves of <strong>Irish and German immigrants</strong> crowd into cities</p>
+                            <p style="font-size: 1.1em;">Massive waves of <strong>Irish and German immigrants</strong> crowd into cities</p>
                             <h2>Working Conditions</h2>
                             <ul>
                                 <li><strong>Factory workers:</strong> 12–14 hour days, dangerous machinery</li>
@@ -556,51 +544,6 @@
                     </div>
                 </div>
             </section>
-			
-			<!-- Slide 6: The Working-Class City: Bowery · Fire Companies · Five Points -->
-            <section>
-                <h1>The Working-Class City:<br/>Bowery · Fire Companies · Five Points</h1>
-                <div class="scrollable">
-                    <div class="info-grid">
-                        <div>
-                            <h4>The Bowery</h4>
-                            <div class="image-container">
-                                <img src="images/Slide_5–The_Working-Class_City_Bowery_Theatre.jpg" alt="The Bowery Theatre">
-                            </div>
-                            <ul>
-                                <li><strong>Visible working-class culture</strong></li>
-                                <li><strong>Bowery Theatre:</strong> 12¢ tickets (affordable)</li>
-                                <li><strong>Gangs &amp; swagger:</strong> The "Bowery B'hoy" style</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4>Fire Companies</h4>
-                            <div class="image-grid">
-                                <img src="images/Slide_7–Bowery_Fire_Companies_group_portrait.jpg" alt="Volunteer fire company group portrait">
-                                <img src="images/Slide_7–Bowery_Fire_Companies_fire_scene.jpg" alt="Fire scene with fire wagon and crowds">
-                            </div>
-                            <ul>
-                                <li><strong>Volunteer brigades:</strong> civic service + identity</li>
-                                <li><strong>Ward politics:</strong> ties to Democratic machines</li>
-                                <li><strong>Masculine performance:</strong> courage, rivalry</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4>Five Points</h4>
-                            <div class="image-grid">
-                                <img src="images/Slide_8–Five_Points_intersection_painting.jpg" alt="Five Points intersection">
-                                <img src="images/Slide_8–Five_Points_tenement_street_view.jpg" alt="Five Points tenement street">
-                            </div>
-                            <ul>
-                                <li><strong>Infamous slum</strong> in middle-class imagination</li>
-                                <li><strong>Underground amusements:</strong> cockfights, dance halls</li>
-                                <li><strong>Community &amp; survival:</strong> families, mutual aid</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
 
             <!-- Slide 5: The Hunger for Spectacle -->
             <section>
@@ -619,12 +562,86 @@
                         <p>Citizens perform their identity through choices of amusement—where you go and what you see defines who you are</p>
                     </div>
                 </div>
-                <div class="content-box">
+                <div class="conclusion-box">
                     <p>Americans across classes crave spectacle but disagree on what forms are legitimate</p>
                 </div>
             </section>
-                       		
-			<!-- Slide 8: Section Divider - Urban Public Sphere -->
+
+            <!-- Slide 6: The Working-Class City: Bowery · Fire Companies · Five Points -->
+            <section>
+                <h1>The Working-Class City:<br/>Bowery · Fire Companies · Five Points</h1>
+                <div class="scrollable">
+                    <div class="three-columns">
+                        <div class="content-box">
+                            <h4>The Bowery</h4>
+                            <div class="image-container">
+                                <img src="images/Slide_5–The_Working-Class_City_Bowery_Theatre.jpg" alt="The Bowery Theatre">
+                            </div>
+                            <ul>
+                                <li><strong>Visible working-class culture</strong></li>
+                                <li><strong>Bowery Theatre:</strong> 12¢ tickets (affordable)</li>
+                                <li><strong>Gangs &amp; swagger:</strong> The "Bowery B'hoy" style</li>
+                            </ul>
+                        </div>
+                        <div class="content-box">
+                            <h4>Fire Companies</h4>
+                            <div class="image-grid">
+                                <img src="images/Slide_7–Bowery_Fire_Companies_group_portrait.jpg" alt="Volunteer fire company group portrait">
+                                <img src="images/Slide_7–Bowery_Fire_Companies_fire_scene.jpg" alt="Fire scene with fire wagon and crowds">
+                            </div>
+                            <ul>
+                                <li><strong>Volunteer brigades:</strong> civic service + identity</li>
+                                <li><strong>Ward politics:</strong> ties to Democratic machines</li>
+                                <li><strong>Masculine performance:</strong> courage, rivalry</li>
+                            </ul>
+                        </div>
+                        <div class="content-box">
+                            <h4>Five Points</h4>
+                            <div class="image-grid">
+                                <img src="images/Slide_8–Five_Points_intersection_painting.jpg" alt="Five Points intersection">
+                                <img src="images/Slide_8–Five_Points_tenement_street_view.jpg" alt="Five Points tenement street">
+                            </div>
+                            <ul>
+                                <li><strong>Infamous slum</strong> in middle-class imagination</li>
+                                <li><strong>Underground amusements:</strong> cockfights, dance halls</li>
+                                <li><strong>Community &amp; survival:</strong> families, mutual aid</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 7: The Democratic Paradox of Taste -->
+            <section>
+                <h1>The Democratic Paradox of Taste</h1>
+                <div class="scrollable">
+                    <div class="content-box">
+                        <p style="font-size: 1.1em;"><strong>Both middle and working classes claim to speak for "the people"</strong></p>
+                    </div>
+                    <h2>Class Division Through Entertainment</h2>
+                    <ul>
+                        <li><strong>Distinct amusements</strong> in distinct geographies</li>
+                        <li><strong>Separate cultures</strong> with different values and aesthetics</li>
+                        <li>Each class claims democratic legitimacy</li>
+                    </ul>
+                    <h2>When Worlds Collide</h2>
+                    <div class="comparison-grid">
+                        <div class="content-box">
+                            <h4>Overlap</h4>
+                            <p><strong>Barnum's Museum:</strong> Cross-class appeal through clever marketing and multiple levels of meaning</p>
+                        </div>
+                        <div class="content-box">
+                            <h4>Violent Collision</h4>
+                            <p><strong>Astor Place Riot (1849):</strong> Class warfare erupts at theater over competing claims to Shakespeare</p>
+                        </div>
+                    </div>
+                    <div class="conclusion-box">
+                        <p>Your choice of theater is simultaneously a <strong>class statement</strong>, a <strong>cultural performance</strong>, and a <strong>political act</strong></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 8: Section Divider - Urban Public Sphere -->
             <section class="section-divider">
                 <h1>Setting the Stage:<br/>The Urban Public Sphere</h1>
             </section>
@@ -701,73 +718,43 @@
                 </div>
             </section>
 
-           
-            <!-- Slide 13: Blackface Minstrelsy -->
+            <!-- Slide 11: Race on Stage: Minstrelsy and the Invention of "Blackness" -->
             <section>
-                <h1>Blackface Minstrelsy</h1>
+                <h1>Race on Stage: Minstrelsy and the Invention of "Blackness"</h1>
                 <div class="scrollable">
-                    <h2>What Is Minstrelsy?</h2>
-                    <div class="content-box">
-                        <p><strong>Blackface minstrelsy:</strong> White performers in blackface makeup performing racist caricatures of Black Americans</p>
-                        <ul>
-                            <li>Emerges in the 1830s–1840s</li>
-                            <li>Becomes the most popular form of American entertainment by mid-century</li>
-                            <li>Performed across class lines—in elite theaters and working-class venues</li>
-                        </ul>
+                    <div class="two-columns">
+                        <div>
+                            <h2>What It Was</h2>
+                            <ul>
+                                <li><strong>Blackface minstrelsy (1830s–1850s):</strong> White performers in burnt-cork makeup staging caricatured "Blackness."</li>
+                                <li><strong>Origins:</strong> Bowery &amp; working-class venues; popularized by acts like T. D. Rice's "Jim Crow."</li>
+                            </ul>
+                            <h2>What It Did</h2>
+                            <ul>
+                                <li><strong>Invented racial types:</strong> Codified stereotypes as mass entertainment.</li>
+                                <li><strong>Class performance:</strong> Claimed to represent "the people" while mocking elites <em>and</em> Black Americans.</li>
+                                <li><strong>Public sphere as spectacle:</strong> Laughter and judgment as civic participation.</li>
+                            </ul>
+                            <div class="content-box">
+                                <p><strong>Key Throughline:</strong> Minstrelsy links Bowery amusements to Barnum's commercial spectacle—democracy performed through race.</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div style="background:#333; border:2px dashed #666; border-radius:6px; padding:40px 16px; text-align:center; color:#999; margin: 12px 0;">
+                                Image Placeholder — period lithograph or playbill (e.g., Dan Emmett troupe)
+                            </div>
+                            <p style="font-size: 0.9em; text-align: center; margin-top: 8px;">
+                                <em>Blackface troupe advertisement, c. 1840s—codifying racial caricature for mass audiences.</em>
+                            </p>
+                        </div>
                     </div>
-                    <h2>The Minstrel Show Format</h2>
-                    <div class="content-box">
-                        <ul>
-                            <li><strong>Part 1:</strong> Plantation scenes with singing, dancing, comic exchanges</li>
-                            <li><strong>Part 2:</strong> "Olio" or variety section with individual acts</li>
-                            <li><strong>Part 3:</strong> One-act farce or skit</li>
-                            <li>Stock characters: Jim Crow (rural slave), Zip Coon (urban dandy)</li>
-                        </ul>
-                    </div>
-                    <div class="image-container">
-                        <img src="images/Slide_15–Blackface_Minstrelsy_poster.jpg" alt="Minstrel show poster">
+                    <div class="conclusion-box">
+                        <p><strong>Discussion:</strong> How can a culture claim democratic authenticity while staging race as ridicule?</p>
                     </div>
                 </div>
             </section>
 
-			<!-- Slide 14: The Ideology of Minstrelsy -->
-            <section>
-                <h1>The Ideology of Minstrelsy</h1>
-                <div class="scrollable">
-                    <h2>Racist Stereotypes</h2>
-                    <div class="content-box">
-                        <p><strong>Minstrelsy portrays Black Americans as:</strong></p>
-                        <ul>
-                            <li>Childlike, ignorant, lazy</li>
-                            <li>Happy in slavery</li>
-                            <li>Incapable of citizenship or self-governance</li>
-                            <li>Comic, ridiculous, non-threatening</li>
-                        </ul>
-                    </div>
-                    <h2>Political Function</h2>
-                    <div class="content-box">
-                        <p><strong>Minstrelsy serves to:</strong></p>
-                        <ul>
-                            <li><strong>Justify slavery</strong> by depicting enslaved people as content</li>
-                            <li><strong>Oppose abolition</strong> by mocking Black claims to freedom and equality</li>
-                            <li><strong>Define whiteness</strong> by contrast—to be white is to be NOT Black</li>
-                            <li><strong>Unite white working and middle classes</strong> around shared racial identity</li>
-                        </ul>
-                    </div>
-                    <h2>The Paradox of Fascination</h2>
-                    <div class="content-box">
-                        <p>White Americans are simultaneously attracted to and repulsed by Blackness</p>
-                        <ul>
-                            <li><strong>Desire:</strong> Black music, dance, style, and expressiveness fascinate white audiences</li>
-                            <li><strong>Anxiety:</strong> This attraction threatens white identity and hierarchy</li>
-                            <li><strong>Solution:</strong> Minstrelsy allows whites to "play Black" while maintaining racial boundaries</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            
-			<!-- Slide 12: Section Divider - Blood Sports -->
+            <!-- Slide 12: Section Divider - Blood Sports -->
             <section class="section-divider">
                 <h1>Blood Sports, Boxing,<br/>and Working-Class Masculinity</h1>
             </section>
@@ -834,8 +821,35 @@
                 </div>
             </section>
 
-          
-            <!-- Slide 16: P. T. Barnum: The Art of Humbug -->
+            <!-- Slide 15: Physical Mastery as Democratic Metaphor -->
+            <section>
+                <h1>Physical Mastery as Democratic Metaphor</h1>
+                <div class="scrollable">
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <strong>Virtue Proven in the Ring</strong>
+                            <p>Rather than by birth or wealth, a man's worth is demonstrated through physical courage and skill</p>
+                        </div>
+                        <div class="info-card">
+                            <strong>The Masculine Body as Site of Value</strong>
+                            <p>The body becomes the site of value and citizenship—physical prowess equals democratic legitimacy</p>
+                        </div>
+                        <div class="info-card">
+                            <strong>Rejection of Elite Values</strong>
+                            <p>Rejection of "refinement" and self-restraint as elite values—toughness, not polish, defines the man</p>
+                        </div>
+                    </div>
+                    <div class="content-box">
+                        <h3>Democratic Ideology of the Prize Ring</h3>
+                        <p>In the ring, all men are equal—only strength, skill, and courage matter. Birth and wealth count for nothing. The working-class body becomes a <strong>democratic symbol</strong>.</p>
+                    </div>
+                    <div class="conclusion-box">
+                        <p><strong>The prize ring offers an alternative vision of American democracy</strong>—one based on physical prowess rather than property or education</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 16: Section Divider - P.T. Barnum -->
             <section class="section-divider">
                 <h1>P. T. Barnum:<br/>The Art of Humbug</h1>
             </section>
@@ -845,7 +859,7 @@
                 <h1>Barnum's American Museum (1841–1865)</h1>
                 <div class="scrollable">
                     <div class="image-container">
-                        <img src="images/Slide_19–Barnums_Museum_exterior.jpg" alt="Barnum's American Museum exterior">
+                        <img src="images/Slide_19–Barnums_Museum_exterior.jpg" alt="Barnum's American Museum exterior" style="max-height: 450px; object-fit: contain;">
                     </div>
                     <h2>Overview</h2>
                     <div class="content-box">
@@ -860,7 +874,7 @@
                         <li><strong>Elaborate hoaxes:</strong> Fake mermaids, questionable artifacts</li>
                     </ul>
                     <h2>Hybrid Institution</h2>
-                    <div class="content-box">
+                    <div class="feature-box">
                         <p>A unique combination of:</p>
                         <ul>
                             <li>Moral lecture hall</li>
@@ -897,11 +911,11 @@
                         </div>
                         <div>
                             <div class="image-grid">
-                                <div class="image-container">
+                                <div class="image-container" style="cursor:pointer;" onclick="window.open('images/Slide_20–Humbug_Joice_Heth_exhibit.jpg','_blank')">
                                     <img src="images/Slide_20–Humbug_Joice_Heth_exhibit.jpg" alt="Joice Heth exhibit">
                                     <p>Click to enlarge</p>
                                 </div>
-                                <div class="image-container">
+                                <div class="image-container" style="cursor:pointer;" onclick="window.open('images/Slide_20–Humbug_Feejee_Mermaid_specimen.jpg','_blank')">
                                     <img src="images/Slide_20–Humbug_Feejee_Mermaid_specimen.jpg" alt="Feejee Mermaid specimen">
                                     <p>Click to enlarge</p>
                                 </div>
@@ -918,19 +932,71 @@
                             <li>Value measured by <strong>experience</strong> rather than authenticity</li>
                         </ul>
                     </div>
-                    <div class="content-box">
+                    <div class="conclusion-box">
                         <p><strong>The question isn't "Is it real?" but "Is it worth my quarter?"</strong></p>
                     </div>
                 </div>
             </section>
 
-          
-          <!-- Slide 20: Barnum's Rhetoric and Politics -->
+            <!-- Slide 19: Democratizing Curiosity and Emotion -->
+            <section>
+                <h1>Democratizing Curiosity and Emotion</h1>
+                <div class="scrollable">
+                    <h2>Barnum's Democratic Genius</h2>
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <strong>Everyone Can Play</strong>
+                            <p>Everyone can participate in the game of belief and doubt—you don't need education or refinement</p>
+                        </div>
+                        <div class="info-card">
+                            <strong>Performing Sophistication</strong>
+                            <p>Audiences perform sophistication by debating authenticity with each other</p>
+                        </div>
+                        <div class="info-card">
+                            <strong>Commercialization of Wonder</strong>
+                            <p>Commercialization of wonder and feeling forms a public around shared experience</p>
+                        </div>
+                    </div>
+                    <h2>Creating "The Public"</h2>
+                    <div class="content-box">
+                        <p><strong>Shared spectacular experiences produce "the public"</strong></p>
+                        <p style="margin-top: 12px;">Strangers become a community through common experience of spectacle, debate, and collective judgment</p>
+                    </div>
+                    <h2>Persistent Tension</h2>
+                    <div class="conclusion-box">
+                        <p><strong>Democratization vs. Exploitation</strong></p>
+                        <p style="margin-top: 10px; font-size: 0.98em;">Does Barnum empower audiences or manipulate them? Does he democratize culture or commercialize human dignity?</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 20: Barnum's Rhetoric and Politics -->
             <section>
                 <h1>Barnum's Rhetoric and Politics</h1>
                 <div class="scrollable">
+                    <h2>The Paradox of Barnum</h2>
+                    <div class="comparison-grid">
+                        <div class="content-box">
+                            <h4>What Barnum Claims</h4>
+                            <ul>
+                                <li>Moral uplift and education</li>
+                                <li>Family-friendly entertainment</li>
+                                <li>Democratizing high culture</li>
+                                <li>Making wonder accessible</li>
+                            </ul>
+                        </div>
+                        <div class="content-box">
+                            <h4>What Barnum Does</h4>
+                            <ul>
+                                <li>Traffics in mockery and sensation</li>
+                                <li>Exploits human difference</li>
+                                <li>Profits from deception</li>
+                                <li>Commercializes everything</li>
+                            </ul>
+                        </div>
+                    </div>
                     <h2>Democratic Achievements</h2>
-                    <div class="content-box">
+                    <div class="feature-box">
                         <ul>
                             <li><strong>Low prices:</strong> Makes culture accessible across class lines</li>
                             <li><strong>Broad access:</strong> Welcomes women, children, working class</li>
@@ -939,7 +1005,7 @@
                         </ul>
                     </div>
                     <h2>Problematic Aspects</h2>
-                    <div class="content-box">
+                    <div class="feature-box">
                         <ul>
                             <li><strong>Exploitation:</strong> Displays people with disabilities as "freaks"</li>
                             <li><strong>Racial mockery:</strong> Perpetuates racist stereotypes (Joice Heth)</li>
@@ -947,32 +1013,36 @@
                             <li><strong>Commercialization:</strong> Everything becomes commodity</li>
                         </ul>
                     </div>
-                    <div class="content-box">
-                        <p><strong>Barnum represents both the promise and the problems of democratic commercial culture</strong></p>
-                        <p>He democratizes access but also exploits vulnerability. He empowers audiences but also manipulates them. He challenges elite culture but creates new hierarchies of his own.</p>
+                    <div class="conclusion-box">
+                        <p style="font-size: 1.05em;"><strong>Barnum represents both the promise and the problems of democratic commercial culture</strong></p>
+                        <p style="margin-top: 10px; font-size: 0.98em;">He democratizes access but also exploits vulnerability. He empowers audiences but also manipulates them. He challenges elite culture but creates new hierarchies of his own.</p>
                     </div>
                 </div>
             </section>
-			
-			<!-- Ending slides with background images -->
-      <section data-background-image="images/the_end.png" data-background-size="cover" data-background-position="center">
-      </section>
 
-            
-            <section data-background-image="images/Pierian_Spring.png" data-background-position="center" data-background-size="cover">
-                <div class="quote-slide">
-                    <p>"A little learning is a dangerous thing;<br/>Drink deep, or taste not the Pierian spring."</p>
+            <!-- Ending slide: The End -->
+            <section data-background-image="images/the_end.png" data-background-size="cover" data-background-position="center">
+            </section>
+
+            <!-- Ending slide: Pierian Spring Quote -->
+            <section data-background-image="images/Pierian_Spring.png" data-background-size="cover" data-background-position="center">
+                <div style="position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); width: 85%; background: rgba(0, 0, 0, 0.75); padding: 30px 40px; border-radius: 10px; border: 2px solid #00d9ff;">
+                    <p style="color: #ffffff; font-size: 1.1em; font-style: italic; margin: 0; line-height: 1.5; text-align: center;">
+                        "A little learning is a dangerous thing;<br/>Drink deep, or taste not the Pierian spring."
+                    </p>
                 </div>
             </section>
 
-            <!-- Slide 22: (Appendix) The Bowery -->
+            <!-- APPENDIX SLIDES -->
+
+            <!-- (Appendix) The Bowery -->
             <section class="appendix-slide">
                 <h1>(Appendix) The Bowery</h1>
                 <div class="scrollable">
                     <div class="two-columns">
                         <div>
                             <h2>The Bowery B'hoy</h2>
-                            <div class="content-box">
+                            <div class="feature-box">
                                 <p><strong>Distinctive working-class masculine identity:</strong></p>
                                 <ul>
                                     <li>Flashy dress style (loud shirts, soap-locked hair)</li>
@@ -985,11 +1055,11 @@
                         </div>
                         <div>
                             <div class="image-grid">
-                                <div class="image-container">
+                                <div class="image-container" style="cursor:pointer;" onclick="window.open('images/Slide_6–The_Bowery_theatre_facade.jpg','_blank')">
                                     <img src="images/Slide_6–The_Bowery_theatre_facade.jpg" alt="Bowery Theatre facade (click to enlarge)">
                                     <p>Click to enlarge</p>
                                 </div>
-                                <div class="image-container">
+                                <div class="image-container" style="cursor:pointer;" onclick="window.open('images/Slide_6–The_Bowery_Rowdy_Carousals_cover.jpg','_blank')">
                                     <img src="images/Slide_6–The_Bowery_Rowdy_Carousals_cover.jpg" alt="Rowdy Carousals book cover (click to enlarge)">
                                     <p>Click to enlarge</p>
                                 </div>
@@ -999,7 +1069,7 @@
                 </div>
             </section>
 
-            <!-- Slide 23: (Appendix) Bowery Fire Companies -->
+            <!-- (Appendix) Bowery Fire Companies -->
             <section class="appendix-slide">
                 <h1>(Appendix) Bowery Fire Companies</h1>
                 <div class="scrollable">
@@ -1016,11 +1086,11 @@
                         </div>
                         <div>
                             <div class="image-grid">
-                                <div class="image-container">
+                                <div class="image-container" style="cursor:pointer;" onclick="window.open('images/Slide_7–Bowery_Fire_Companies_group_portrait.jpg','_blank')">
                                     <img src="images/Slide_7–Bowery_Fire_Companies_group_portrait.jpg" alt="Volunteer fire company group portrait">
                                     <p>Click to enlarge</p>
                                 </div>
-                                <div class="image-container">
+                                <div class="image-container" style="cursor:pointer;" onclick="window.open('images/Slide_7–Bowery_Fire_Companies_fire_scene.jpg','_blank')">
                                     <img src="images/Slide_7–Bowery_Fire_Companies_fire_scene.jpg" alt="Fire scene with fire wagon and crowds">
                                     <p>Click to enlarge</p>
                                 </div>
@@ -1030,7 +1100,7 @@
                 </div>
             </section>
 
-            <!-- Slide 24: (Appendix) Five Points -->
+            <!-- (Appendix) Five Points -->
             <section class="appendix-slide">
                 <h1>(Appendix) Five Points</h1>
                 <div class="scrollable">
@@ -1055,66 +1125,6 @@
                 </div>
             </section>
 
-			  <!-- Slide 15: Physical Mastery as Democratic Metaphor -->
-            <section>
-                <h1>Physical Mastery as Democratic Metaphor</h1>
-                <div class="scrollable">
-                    <div class="info-grid">
-                        <div class="info-card">
-                            <strong>Virtue Proven in the Ring</strong>
-                            <p>Rather than by birth or wealth, a man's worth is demonstrated through physical courage and skill</p>
-                        </div>
-                        <div class="info-card">
-                            <strong>The Masculine Body as Site of Value</strong>
-                            <p>The body becomes the site of value and citizenship—physical prowess equals democratic legitimacy</p>
-                        </div>
-                        <div class="info-card">
-                            <strong>Rejection of Elite Values</strong>
-                            <p>Rejection of "refinement" and self-restraint as elite values—toughness, not polish, defines the man</p>
-                        </div>
-                    </div>
-                    <div class="content-box">
-                        <h3>Democratic Ideology of the Prize Ring</h3>
-                        <p>In the ring, all men are equal—only strength, skill, and courage matter. Birth and wealth count for nothing. The working-class body becomes a <strong>democratic symbol</strong>.</p>
-                    </div>
-                    <div class="conclusion-box">
-                        <p><strong>The prize ring offers an alternative vision of American democracy</strong>—one based on physical prowess rather than property or education</p>
-                    </div>
-                </div>
-            </section>
-
-			  <!-- Slide 19: Democratizing Curiosity and Emotion -->
-            <section>
-                <h1>Democratizing Curiosity and Emotion</h1>
-                <div class="scrollable">
-                    <h2>Barnum's Democratic Genius</h2>
-                    <div class="info-grid">
-                        <div class="info-card">
-                            <strong>Everyone Can Play</strong>
-                            <p>Everyone can participate in the game of belief and doubt—you don't need education or refinement</p>
-                        </div>
-                        <div class="info-card">
-                            <strong>Performing Sophistication</strong>
-                            <p>Audiences perform sophistication by debating authenticity with each other</p>
-                        </div>
-                        <div class="info-card">
-                            <strong>Commercialization of Wonder</strong>
-                            <p>Commercialization of wonder and feeling forms a public around shared experience</p>
-                        </div>
-                    </div>
-                    <h2>Creating "The Public"</h2>
-                    <div class="content-box">
-                        <p><strong>Shared spectacular experiences produce "the public"</strong></p>
-                        <p>Strangers become a community through common experience of spectacle, debate, and collective judgment</p>
-                    </div>
-                    <h2>Persistent Tension</h2>
-                    <div class="content-box">
-                        <p><strong>Democratization vs. Exploitation</strong></p>
-                        <p>Does Barnum empower audiences or manipulate them? Does he democratize culture or commercialize human dignity?</p>
-                    </div>
-                </div>
-            </section>
-
         </div>
     </div>
 
@@ -1122,11 +1132,18 @@
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
     
     <script>
+        // Function to scroll within slides
+        function scrollCurrentSlide(delta) {
+            const slide = Reveal.getCurrentSlide();
+            if (!slide) return;
+            slide.scrollBy({ top: delta, left: 0, behavior: 'smooth' });
+        }
+
         // Initialize Reveal.js
         Reveal.initialize({
             // Display settings
-            width: 1920,
-            height: 1080,
+            width: 1280,
+            height: 720,
             margin: 0.04,
             minScale: 0.2,
             maxScale: 2.0,
@@ -1139,15 +1156,10 @@
             hash: true,
             respondToHashChanges: true,
             
-            // Keyboard navigation
+            // Keyboard navigation - up/down ONLY for scrolling
             keyboard: {
-                // Up/Down arrows ONLY for scrolling, not navigation
-                38: null, // Up arrow - disabled for slide navigation
-                40: null, // Down arrow - disabled for slide navigation
-                // All other default shortcuts remain functional:
-                // Left arrow (37), Right arrow (39), Space (32), 
-                // PgUp (33), PgDn (34), Home (36), End (35), 
-                // F (fullscreen), ESC (overview), etc.
+                38: function(event) { event && event.preventDefault(); scrollCurrentSlide(-90); }, // Up: scroll up
+                40: function(event) { event && event.preventDefault(); scrollCurrentSlide(90); }  // Down: scroll down
             },
             
             // Slide navigation
@@ -1176,12 +1188,6 @@
             autoAnimateDuration: 1.0,
             autoAnimateUnmatched: true,
             
-            // Parallax background
-            parallaxBackgroundImage: '',
-            parallaxBackgroundSize: '',
-            parallaxBackgroundHorizontal: null,
-            parallaxBackgroundVertical: null,
-            
             // Display mode
             display: 'block',
             
@@ -1197,52 +1203,13 @@
             // Plugins
             plugins: []
         });
-        
-        // Help modal toggle function
-        function toggleHelp() {
-            const modal = document.querySelector('.help-modal');
-            const overlay = document.querySelector('.help-overlay');
-            modal.classList.toggle('active');
-            overlay.classList.toggle('active');
-        }
-        
-        // Close help modal on ESC key (unless in overview mode)
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape' && document.querySelector('.help-modal.active')) {
-                event.stopPropagation();
-                toggleHelp();
-            }
-        });
-        
-        // Ensure all reveal.js keyboard shortcuts work
-        // This is redundant but ensures clarity
-        Reveal.configure({
-            keyboard: {
-                38: null, // Disable up arrow for slide navigation
-                40: null, // Disable down arrow for slide navigation
-                // All other keys use reveal.js defaults
-            }
-        });
-		
-		// Hide help button except on first slide
-Reveal.on('slidechanged', event => {
-    const helpButton = document.querySelector('.help-button');
-    const helpModal = document.querySelector('.help-modal');
-    const helpOverlay = document.querySelector('.help-overlay');
-    
-    if (event.indexh === 0) {
-        helpButton.style.display = 'flex';
-    } else {
-        helpButton.style.display = 'none';
-        helpModal.classList.remove('active');
-        helpOverlay.classList.remove('active');
-    }
-});
 
-// Hide on initial load if not on first slide
-if (Reveal.getIndices().h !== 0) {
-    document.querySelector('.help-button').style.display = 'none';
-}
+        // Prevent default up/down arrow behavior
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+                e.stopPropagation();
+            }
+        }, { capture: true });
     </script>
 </body>
 </html>
