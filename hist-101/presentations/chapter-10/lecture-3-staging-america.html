@@ -280,7 +280,42 @@
             background: none;
         }
         
-	
+	/* Help icon - only visible on first slide */
+        .help-container {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            cursor: pointer;
+            z-index: 100;
+        }
+        
+        .help-container img {
+            width: 150px;
+            height: auto;
+            opacity: 0.85;
+            margin: 0;
+            box-shadow: none;
+        }
+        
+        .help-popup {
+            display: none;
+            position: absolute;
+            top: 160px;
+            right: 0;
+            background: rgba(0,0,0,0.9);
+            color: #fff;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 0.55em;
+            text-align: left;
+            width: 220px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+            line-height: 1.5;
+        }
+        
+        .help-container:hover .help-popup {
+            display: block;
+        }
         /* Special slide backgrounds */
         .reveal section[data-background-image] h2 {
             display: none;
@@ -413,7 +448,33 @@
                 <h1>Staging America:<br/>Performance, Race, and Identity</h1>
                 <p>Lecture 3</p>
                 <p>HIST 101: American History to 1865</p>
+                
+                <!-- PUT THE HELP POPUP CODE RIGHT HERE -->
+                <div class="help-container"
+                     onmouseover="document.getElementById('help-popup').style.display='block';"
+                     onmouseout="document.getElementById('help-popup').style.display='none';"
+                     onclick="document.getElementById('help-popup').style.display='block';">
+                    <img src="images/help.png" alt="Help">
+                    <div id="help-popup" class="help-popup">
+                        <strong style="display:block; margin-bottom:6px;">Navigation:</strong>
+                        <div>
+                            → or Space: Next slide<br>
+                            ←: Previous slide<br>
+                            ↑↓: Scroll slide content<br>
+                            PgUp/PgDn: Previous/Next slide<br>
+                            Home: First slide<br>
+                            End: Last slide<br>
+                            F: Fullscreen<br>
+                            Esc: Overview mode<br>
+                            S: Speaker notes<br>
+                            ?: Help menu<br>
+                            B or .: Pause (blackout)<br>
+                            Alt+Click: Zoom
+                        </div>
+                    </div>
+                </div>
             </section>
+
 
             <!-- Slide 2: The Creation of Leisure Time -->
             <section>
@@ -1160,11 +1221,19 @@
 
         </div>
     </div>
-
-    <!-- Reveal.js JavaScript -->
+<!-- Reveal.js JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
+    <!-- Add the Notes plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/notes/notes.js"></script>
     
     <script>
+        // Function to scroll within slides
+        function scrollCurrentSlide(delta) {
+            const slide = Reveal.getCurrentSlide();
+            if (!slide) return;
+            slide.scrollBy({ top: delta, left: 0, behavior: 'smooth' });
+        }
+
         // Initialize Reveal.js
         Reveal.initialize({
             // Display settings
@@ -1182,15 +1251,10 @@
             hash: true,
             respondToHashChanges: true,
             
-            // Keyboard navigation
+            // Keyboard navigation - up/down ONLY for scrolling
             keyboard: {
-                // Up/Down arrows ONLY for scrolling, not navigation
-                38: null, // Up arrow - disabled for slide navigation
-                40: null, // Down arrow - disabled for slide navigation
-                // All other default shortcuts remain functional:
-                // Left arrow (37), Right arrow (39), Space (32), 
-                // PgUp (33), PgDn (34), Home (36), End (35), 
-                // F (fullscreen), ESC (overview), etc.
+                38: function(event) { event && event.preventDefault(); scrollCurrentSlide(-90); }, // Up: scroll up
+                40: function(event) { event && event.preventDefault(); scrollCurrentSlide(90); }  // Down: scroll down
             },
             
             // Slide navigation
@@ -1219,12 +1283,6 @@
             autoAnimateDuration: 1.0,
             autoAnimateUnmatched: true,
             
-            // Parallax background
-            parallaxBackgroundImage: '',
-            parallaxBackgroundSize: '',
-            parallaxBackgroundHorizontal: null,
-            parallaxBackgroundVertical: null,
-            
             // Display mode
             display: 'block',
             
@@ -1238,54 +1296,35 @@
             focusBodyOnPageVisibilityChange: true,
             
             // Plugins
-            plugins: []
+            plugins: [RevealNotes]
         });
-        
-        // Help modal toggle function
-        function toggleHelp() {
-            const modal = document.querySelector('.help-modal');
-            const overlay = document.querySelector('.help-overlay');
-            modal.classList.toggle('active');
-            overlay.classList.toggle('active');
-        }
-        
-        // Close help modal on ESC key (unless in overview mode)
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape' && document.querySelector('.help-modal.active')) {
-                event.stopPropagation();
-                toggleHelp();
-            }
-        });
-        
-        // Ensure all reveal.js keyboard shortcuts work
-        // This is redundant but ensures clarity
-        Reveal.configure({
-            keyboard: {
-                38: null, // Disable up arrow for slide navigation
-                40: null, // Disable down arrow for slide navigation
-                // All other keys use reveal.js defaults
-            }
-        });
-		
-		// Hide help button except on first slide
-Reveal.on('slidechanged', event => {
-    const helpButton = document.querySelector('.help-button');
-    const helpModal = document.querySelector('.help-modal');
-    const helpOverlay = document.querySelector('.help-overlay');
-    
-    if (event.indexh === 0) {
-        helpButton.style.display = 'flex';
-    } else {
-        helpButton.style.display = 'none';
-        helpModal.classList.remove('active');
-        helpOverlay.classList.remove('active');
-    }
-});
 
-// Hide on initial load if not on first slide
-if (Reveal.getIndices().h !== 0) {
-    document.querySelector('.help-button').style.display = 'none';
-}
+        // Prevent default up/down arrow behavior
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+                e.stopPropagation();
+            }
+        }, { capture: true });
+        
+        // Hide help button except on first slide
+        Reveal.on('slidechanged', event => {
+            const helpButton = document.querySelector('.help-button');
+            const helpModal = document.querySelector('.help-modal');
+            const helpOverlay = document.querySelector('.help-overlay');
+            
+            if (event.indexh === 0) {
+                helpButton.style.display = 'flex';
+            } else {
+                helpButton.style.display = 'none';
+                helpModal.classList.remove('active');
+                helpOverlay.classList.remove('active');
+            }
+        });
+
+        // Hide on initial load if not on first slide
+        if (Reveal.getIndices().h !== 0) {
+            document.querySelector('.help-button').style.display = 'none';
+        }
     </script>
 </body>
 </html>
