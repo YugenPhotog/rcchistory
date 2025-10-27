@@ -87,66 +87,9 @@
             z-index: 1000;
         }
         
-        /* Scroll Indicator */
-        .scroll-indicator {
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            background: rgba(92, 122, 138, 0.8);
-            color: white;
-            padding: 10px 15px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            z-index: 1000;
-            display: none;
-            animation: bounce 2s infinite;
-        }
+       
         
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-10px);
-            }
-            60% {
-                transform: translateY(-5px);
-            }
-        }
-        
-        /* Navigation Controls */
-        .nav-controls {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 15px;
-            z-index: 1000;
-        }
-        
-        .nav-button {
-            background: #5C7A8A;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-button:hover {
-            background: #9B8550;
-            transform: translateY(-2px);
-        }
-        
-        .nav-button:active {
-            transform: translateY(0);
-        }
-        
+               
         /* Overview Mode */
         .reveal .slides.overview-mode {
             display: grid;
@@ -507,17 +450,8 @@
     <!-- Slide Number -->
     <div class="slide-number">1 / 17</div>
     
-    <!-- Scroll Indicator -->
-    <div class="scroll-indicator">↓ Scroll Down ↓</div>
-    
-    <!-- Navigation Controls -->
-    <div class="nav-controls">
-        <button class="nav-button" onclick="showSlide(0)" title="First Slide (Home or H key)">⏮ First</button>
-        <button class="nav-button" onclick="prevSlide()" title="Previous (← Left Arrow)">← Prev</button>
-        <button class="nav-button" onclick="nextSlide()" title="Next (→ Right Arrow or Space)">Next →</button>
-        <button class="nav-button" onclick="showSlide(totalSlides - 1)" title="Last Slide (End or E key)">Last ⏭</button>
-    </div>
-    
+       
+        
     <div class="reveal">
         <div class="slides">
             
@@ -917,7 +851,8 @@
 
         // Initialize
         function init() {
-            showSlide(0);
+            slides.forEach(s => s.setAttribute('tabindex', '0'));
+			showSlide(0);
             updateProgress();
             updateSlideNumber();
         }
@@ -949,7 +884,8 @@
                     }, 300);
                 }, 10);
             }
-            
+            // Ensure current slide gets keyboard focus for scrolling
+            slides[currentSlide].focus();
             updateProgress();
             updateSlideNumber();
             checkScrollIndicator();
@@ -1052,22 +988,7 @@
                     e.preventDefault();
                     prevSlide();
                     break;
-                case 'ArrowDown':
-                    // Only prevent default and change slides if we're at the bottom of current slide
-                    if (isSlideAtBottom()) {
-                        e.preventDefault();
-                        nextSlide();
-                    }
-                    // Otherwise let the default scrolling happen
-                    break;
-                case 'ArrowUp':
-                    // Only prevent default and change slides if we're at the top of current slide
-                    if (isSlideAtTop()) {
-                        e.preventDefault();
-                        prevSlide();
-                    }
-                    // Otherwise let the default scrolling happen
-                    break;
+               
                 case ' ':
                     // Space bar advances slides
                     e.preventDefault();
