@@ -1153,10 +1153,13 @@
 
     <!-- Make this heading a clickable popup trigger -->
     <h2>
-      <a href="#habermas-modal" class="popup-link" data-modal="habermas-modal" aria-haspopup="dialog" aria-controls="habermas-modal">
-        Structural Transformation: Democracy as Spectacle
-      </a>
-    </h2>
+  <a href="#habermas-modal" class="popup-link" data-modal="habermas-modal">
+    Structural Transformation: Democracy as Spectacle
+    <span class="popup-icon" aria-hidden="true">ℹ️</span>
+  </a>
+</h2>
+
+
 
     <div class="content-box">
       <p><strong>From rational debate toward spectacle and display</strong></p>
@@ -1290,16 +1293,53 @@
 
 <!-- Inline styles for the modal; minimal, scoped -->
 <style>
-  .popup-link {
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
-    text-underline-offset: 3px;
-    cursor: pointer;
-  }
+ 
   .popup-link:focus {
     outline: 2px solid #444;
     outline-offset: 2px;
   }
+/* Clickable popup link styling */
+.popup-link {
+  position: relative;
+  color: #0044cc;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+/* Underline animation */
+.popup-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease-out;
+}
+.popup-link:hover {
+  color: #002b80;
+}
+.popup-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Question-mark icon */
+.popup-icon {
+  font-size: 0.9em;
+  margin-left: 0.35em;
+  color: #0044cc;
+  transition: transform 0.25s ease, color 0.25s ease;
+  display: inline-block;
+}
+.popup-link:hover .popup-icon {
+  transform: scale(1.25) rotate(8deg);
+  color: #002b80;
+}
 
   .modal-overlay {
     position: fixed;
