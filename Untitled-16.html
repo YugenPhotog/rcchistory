@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+<section>
+  <h2>Primary Source Excerpt</h2>
+  <button id="play-excerpt"
+          style="font: inherit; padding: .6rem 1rem; border-radius: .5rem; border: 1px solid #888;">
+    ▶ Play 45-second clip
+  </button>
+  <span id="status" style="margin-left:.75rem; font-size: .95em; opacity:.8;"></span>
+
+  <script>
+    (function () {
+      const btn = document.getElementById('play-excerpt');
+      const status = document.getElementById('status');
+      const audio = new Audio('assets/audio/excerpt-45s.mp3');
+      audio.preload = 'none';
+      audio.crossOrigin = 'anonymous';
+
+      function setStatus(msg) { status.textContent = msg; }
+
+      btn.addEventListener('click', async () => {
+        try {
+          if (audio.paused) {
+            await audio.play();
+            btn.textContent = '⏸ Pause';
+            setStatus('Playing…');
+          } else {
+            audio.pause();
+            btn.textContent = '▶ Play 45-second clip';
+            setStatus('Paused');
+          }
+        } catch (e) {
+          setStatus('Playback blocked—click again to allow audio.');
+        }
+      });
+
+      audio.addEventListener('ended', () => {
+        btn.textContent = '▶ Play 45-second clip';
+        setStatus('Ended');
+      });
+
+      // Pause when leaving the slide
+      Reveal.on('slidechanged', () => {
+        if (!audio.paused) audio.pause();
+        btn.textContent = '▶ Play 45-second clip';
+        setStatus('');
+      });
+    })();
+  </script>
+</section>
+
+<body>
+</body>
+</html>

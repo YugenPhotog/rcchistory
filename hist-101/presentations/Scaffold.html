@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<!-- =========================
+Keep the following style sheet; drop in slides below
+========================= -->
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chapter ? Lecture ?: Title</title>
+<!-- Reveal.js CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/white.min.css" rel="stylesheet"/>
+<!-- Custom CSS -->
+<style>
+        :root {
+            --main-color: #1a1a1a;          /* Nearly black for high contrast text */
+            --accent-color: #0066cc;        /* Deep blue for emphasis */
+            --highlight-color: #cc0000;     /* Bright red for warnings/losers */
+            --success-color: #009900;       /* Vivid green for success/winners */
+            --warning-color: #ff8800;       /* Bright orange for caution */
+            --bg-light: #f5f5f5;           /* Light gray background */
+            --bg-accent: #e6f2ff;          /* Light blue background */
+            --bg-warning: #fff5e6;         /* Light orange background */
+        }
+        
+        .reveal {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        /* Stop within-slide scrolling and keep the viewport fixed */
+.reveal .slides section { height: auto !important; overflow: visible !important; }
+html, body, .reveal { height: 100%; overflow: hidden !important; }
+
+      
+        
+        .reveal h1, .reveal h2, .reveal h3 {
+            color: var(--main-color);
+            text-transform: none;
+            font-weight: 600;
+        }
+        
+        .reveal h1 {
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+        }
+        
+        .reveal h2 {
+            font-size: 1.8em;
+            margin-bottom: 0.8em;
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 0.3em;
+        }
+        
+        .reveal h3 {
+            font-size: 1.4em;
+            color: var(--accent-color);
+            margin-top: 1em;
+        }
+        
+        .reveal ul, .reveal ol {
+            text-align: left;
+            line-height: 1.6;
+        }
+        
+        .reveal li {
+            margin-bottom: 0.5em;
+        }
+        
+        .reveal strong {
+            color: var(--main-color);
+            font-weight: 700;
+        }
+        
+        /* Title slide styling */
+        .title-slide h1 {
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
+            margin-top: 2em;
+        }
+        
+        .title-slide {
+            background: linear-gradient(135deg, #0066cc 0%, #003d7a 100%);
+            color: white;
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            color: #ffffff;
+            margin-top: 1em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+        }
+        
+        /* Section divider styling */
+        .section-divider {
+            background: linear-gradient(135deg, #0066cc 0%, #003d7a 100%);
+            color: white;
+        }
+        
+        .section-divider h2 {
+            border-bottom: none;
+            color: white;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+        }
+        
+        /* Learning objectives styling */
+        .objectives {
+            background-color: var(--bg-light);
+            border-left: 8px solid var(--accent-color);
+            padding: 1.5em;
+            text-align: left;
+        }
+        
+        .objectives h2 {
+            color: var(--main-color);
+            border-bottom: none;
+        }
+        
+        .objectives ol {
+            font-size: 0.9em;
+            color: var(--main-color);
+        }
+        
+        /* Key terms inline styling */
+        .key-term {
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+        
+        /* Box styling for important concepts */
+        .concept-box {
+            background-color: var(--bg-accent);
+            border: 3px solid var(--accent-color);
+            border-radius: 8px;
+            padding: 1em;
+            margin: 1em 0;
+        }
+        
+        .concept-box h3 {
+            margin-top: 0;
+            color: var(--main-color);
+        }
+        
+        .concept-box ul, .concept-box ol, .concept-box p {
+            color: var(--main-color);
+        }
+        
+        /* Question slides */
+        .discussion-slide {
+            background-color: var(--bg-warning);
+            border: 4px solid var(--warning-color);
+        }
+        
+        .discussion-slide h2 {
+            color: var(--main-color);
+            border-bottom: 3px solid var(--warning-color);
+        }
+        
+        .discussion-slide h3, .discussion-slide p, .discussion-slide ul, .discussion-slide li {
+            color: var(--main-color);
+        }
+        
+        .question {
+            font-size: 1.3em;
+            font-style: italic;
+            color: var(--main-color);
+            margin: 1em 0;
+            padding: 1em;
+            background-color: white;
+            border-radius: 8px;
+            border: 2px solid var(--warning-color);
+        }
+        
+        /* Two column layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2em;
+            text-align: left;
+        }
+        
+        /* Winners/Losers styling */
+        .winner {
+            color: var(--success-color);
+        }
+        
+        .loser {
+            color: var(--highlight-color);
+        }
+        
+        .winner::before {
+            content: "✓ ";
+            font-weight: bold;
+        }
+        
+        .loser::before {
+            content: "✗ ";
+            font-weight: bold;
+        }
+        
+        /* Power shift visual */
+        .power-shift {
+            font-size: 1.2em;
+            text-align: left;
+            margin: 1em 0;
+            padding: 0.5em;
+            background-color: white;
+            color: var(--main-color);
+        }
+        
+        .power-up::after {
+            content: " ↑";
+            color: var(--success-color);
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        
+        .power-down::after {
+            content: " ↓";
+            color: var(--highlight-color);
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        
+        /* Image placeholder styling */
+        .image-placeholder {
+            border: 4px dashed var(--accent-color);
+            background-color: var(--bg-light);
+            padding: 3em;
+            text-align: center;
+            color: var(--main-color);
+            font-style: italic;
+            margin: 1em 0;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+        
+        /* Quote styling */
+        .quote {
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--main-color);
+            border-left: 5px solid var(--accent-color);
+            padding-left: 1em;
+            margin: 1em 0;
+            font-weight: 500;
+        }
+        
+        /* Number callouts */
+        .number-list li {
+            position: relative;
+            padding-left: 2em;
+        }
+        
+        .number-list li::before {
+            content: counter(list-item);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: var(--accent-color);
+            color: white;
+            width: 1.5em;
+            height: 1.5em;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        
+        /* Emphasis boxes */
+        .emphasis {
+            background-color: var(--bg-warning);
+            border-left: 6px solid var(--warning-color);
+            padding: 1em;
+            margin: 1em 0;
+            color: var(--main-color);
+        }
+        
+        .emphasis strong {
+            color: var(--main-color);
+        }
+        
+        /* Review checkmark styling */
+        .checkmark::before {
+            content: "✓ ";
+            color: var(--success-color);
+            font-weight: bold;
+            margin-right: 0.3em;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            
+            .reveal h1 {
+                font-size: 2em;
+            }
+            
+            .reveal h2 {
+                font-size: 1.5em;
+            }
+        }
+   /* Compact rules only for this slide */
+.reveal section.compact h2 {
+  font-size: 1.55em;              /* down from 1.8em */
+  margin-bottom: 0.5em;
+}
+
+.reveal section.compact .policy-grid {
+  align-items: start;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(8px, 1.2vw, 16px);
+}
+
+.reveal section.compact .concept-box {
+  padding: clamp(6px, 0.9vw, 10px);  /* tighter padding */
+  margin: 0.5em 0 0;                 /* less vertical space */
+  border-width: 2px;                  /* thinner border */
+}
+
+.reveal section.compact .concept-box h3 {
+  font-size: 1.05em;                 /* override global 1.4em */
+  line-height: 1.2;
+  margin: 0;
+}
+
+.reveal section.compact .policy-title {
+  font-size: clamp(0.85rem, 0.95vw, 1rem);
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .4rem;
+  flex-wrap: wrap;                   /* allow wrap next to the button */
+}
+
+.reveal section.compact .popup-trigger {
+  padding: .28rem .48rem;
+  border-radius: 7px;
+  font-size: 0.9em;
+  flex: 0 0 auto;                    /* don’t let it grow and push text */
+}
+
+	
+	/* Two-column lists inside concept boxes */
+.reveal .concept-box ul.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .35em 1.25em;          /* row gap, column gap */
+  margin: .4em 0 .2em;
+  padding-left: 1.2em;        /* keep bullets aligned */
+}
+.reveal .concept-box ul.two-col > li { margin: 0; }
+
+/* Responsive: collapse to one column on narrow widths */
+@media (max-width: 900px) {
+  .reveal .concept-box ul.two-col { grid-template-columns: 1fr; }
+}
+
+	</style>
+	<style>
+  /* Tighter boxes so long headings fit */
+  .policy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(10px, 1.6vw, 18px);
+  }
+  .concept-box {
+    padding: clamp(8px, 1.2vw, 12px);
+  }
+
+  /* Make the titles slightly smaller and allow smart wrapping */
+  .policy-title {
+    font-size: clamp(0.9rem, 1.05vw, 1.05rem); /* smaller than before */
+    line-height: 1.2;
+    word-break: normal;
+    overflow-wrap: anywhere;   /* lets “United States” wrap instead of overflow */
+    hyphens: auto;             /* enables soft hyphenation when available */
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5rem;
+  }
+
+  /* Keep the info button compact so it doesn't push text */
+  .popup-trigger {
+    padding: .3rem .5rem;
+    border-radius: 7px;
+    font-size: 0.9em;
+  }
+
+  /* If space is still tight, let the grid switch to 2 columns */
+  @media (max-width: 1200px) {
+    .policy-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* On very small widths, one column is safer */
+  @media (max-width: 800px) {
+    .policy-grid { grid-template-columns: 1fr; }
+  }
+</style>
+<style>
+  /* Scoped compact rules for Slide 5A */
+  .reveal section.compact h2 { font-size: 1.55em; margin-bottom: .5em; }
+  .reveal section.compact .policy-grid { align-items: start; grid-template-columns: repeat(3,1fr); gap: clamp(8px,1.2vw,16px); }
+  .reveal section.compact .concept-box { padding: clamp(6px,.9vw,10px); margin: .5em 0 0; border-width: 2px; }
+  .reveal section.compact .concept-box h3 { font-size: 1.05em; line-height: 1.2; margin: 0; }
+  .reveal section.compact .policy-title { font-size: clamp(.85rem,.95vw,1rem); line-height: 1.2; overflow-wrap: anywhere; hyphens: auto; display: flex; align-items: center; justify-content: space-between; gap: .4rem; flex-wrap: wrap; }
+  .reveal section.compact .popup-trigger { padding: .28rem .48rem; border-radius: 7px; font-size: .9em; flex: 0 0 auto; }
+
+  /* Scoped compact-small rules for Slide 6A/6B */
+  .reveal section.compact-sm h2 { font-size: 1.55em; margin-bottom: .5em; }
+  .reveal section.compact-sm h3 { font-size: 1.14em; margin: .8em 0 .3em; }
+  .reveal section.compact-sm ul { margin: .25em 0 .6em; }
+  .reveal section.compact-sm li { margin-bottom: .25em; }
+  .reveal section.compact-sm .policy-title { font-size: 1.05em; gap: .4rem; }
+  .reveal section.compact-sm .popup-trigger { padding: .28rem .48rem; font-size: .9em; border-radius: 7px; border: 1px solid rgba(0,0,0,.2); background: #0b3d91; color: #fff; }
+
+  /* Portrait wrapper that resizes with the image */
+  .portrait{
+    background:#F3F4F6;
+    padding:1em;
+    border-radius:12px;
+    width: clamp(220px, 50vw, 600px);
+    margin: 0 auto;
+  }
+  .portrait img{
+    display:block;
+    width:100%;
+    height:auto;
+    border-radius:8px;
+    box-shadow:0 4px 8px rgba(0,0,0,.25);
+  }
+	/* Per-slide font utilities (scale relative to the deck base) */
+/* Font scale utility classes */
+
+.fs-80 { font-size: 0.8em; }
+
+.fs-75 { font-size: 0.75em; }
+
+.fs-70 { font-size: 0.7em; }
+
+
+	.reveal section.fs-80 { font-size: 80%; }
+.reveal section.fs-85 { font-size: 85%; }
+.reveal section.fs-90 { font-size: 90%; }
+.reveal section.fs-95 { font-size: 95%; }
+.reveal section.fs-100 { font-size: 100%; } /* default */
+.reveal section.fs-110 { font-size: 110%; }
+.reveal section.fs-120 { font-size: 120%; }
+
+/* Optional spacing helpers for dense slides */
+.reveal section.tight   { --gap: 1em; }
+.reveal section.tight .two-column { gap: var(--gap, 1.2em); }
+</style>
+	
+
+</head>
+
+	<body>
+<div class="reveal">
+<div class="slides">
+	
+	<!-- =========================
+Replace the following two slides with your slide deck
+========================= -->
+
+<!-- SLIDE 1: Title Slide -->
+<section class="title-slide">
+<h1>Whigs and Democrats</h1>
+<p class="subtitle">Chapter 11</p>
+<p class="subtitle">Lecture 1: Post-War of 1812 Political Events</p>
+</section>
+<!-- SLIDE 4: National Republicans -->
+<section>
+<h2>National Republicans</h2>
+<ul>
+<li>By the end of the War of 1812, the Federalist Party was no longer a significant force in American Politics</li>
+<li><span class="key-term">Era of Good Feelings</span> (one-party dominance)</li>
+<li><strong>Irony:</strong> Republicans adopt Federalist policies after Federalists disappear</li>
+</ul>
+<aside class="notes">
+<div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;">
+<h3 style="margin:0 0 .4em 0;">📖 Understanding This Slide</h3>
+<p><strong>Main idea:</strong> After the War of 1812, the <strong>Federalists</strong> fade, and Republicans briefly dominate—ironically adopting some <strong>Federalist-style policies</strong> during the <em>Era of Good Feelings</em>. Think of it like a team keeping its rival’s playbook because it works.</p>
+</div>
+<div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;">
+<h3 style="margin:0 0 .4em 0;">⚡ Content Breakdown</h3>
+<ul>
+<li><strong>Federalists decline:</strong> By 1815, they’re no longer a major force.</li>
+<li><strong>Era of Good Feelings:</strong> One-party dominance means fewer open partisan fights, but tensions still simmer.</li>
+<li><strong>Policy irony:</strong> Republicans begin backing nation-building measures once linked to Federalists.</li>
+</ul>
+</div>
+<div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;">
+<h3 style="margin:0 0 .4em 0;">🏛️ Big Picture Synthesis</h3>
+<p>This slide sets up a political realignment: labels stay “Republican,” but the governing toolkit borrows from the old Federalist emphasis on national capacity. <em>This means</em> later debates won’t be about whether the nation should build; they’ll be about <strong>who</strong> has the power to do it and <strong>who benefits</strong>.</p>
+</div>
+<div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;">
+<h3 style="margin:0 0 .4em 0;">🎓 Historians Weigh In</h3>
+<h4 style="margin:.2em 0 .2em 0;"><em>Daniel Walker Howe,</em> <span style="white-space:nowrap;">*What Hath God Wrought*</span></h4>
+<p>Howe emphasizes how national development and communications reshaped politics—clarifying why Republican adoption of “national” policies felt natural in this moment.</p>
+</div>
+</aside>
+	</section>
+	
+<!-- =========================
+Keep the following Reveal.JS Script
+========================= -->
+
+<!-- Reveal.js Core JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/notes/notes.min.js"></script>
+<!-- Initialize Reveal.js with Cinematic Mode Configuration -->
+<script>
+    Reveal.initialize({
+        hash: true,
+        transition: 'convex',
+        backgroundTransition: 'zoom',
+        transitionSpeed: 'slow',
+        controls: true,
+        controlsLayout: 'bottom-right',
+        progress: true,
+        slideNumber: 'c/t',
+        center: true,
+        width: 1280,
+        height: 720,   // virtual 16:9 slide size
+        margin: 0.04,
+        minScale: 0.2,
+        maxScale: 2.0,
+        plugins: [ RevealNotes ]
+    });
+	</script>
+	
+	<script>
+// Popup handling (place AFTER Reveal.initialize)
+(function () {
+  const backdrop = document.querySelector('[data-popup-backdrop]');
+
+  function openPopup(id, openerBtn) {
+    const pop = document.getElementById(id);
+    if (!pop) return;
+    pop.hidden = false;
+    pop.setAttribute('aria-hidden', 'false');
+    backdrop.hidden = false;
+
+    // remember opener for focus return
+    if (openerBtn) pop.dataset.opener = openerBtn;
+
+    // focus close button if present
+    const closeBtn = pop.querySelector('.popup-close');
+    if (closeBtn) closeBtn.focus();
+  }
+
+  function closePopup(pop) {
+    if (!pop) return;
+    pop.hidden = true;
+    pop.setAttribute('aria-hidden', 'true');
+
+    // if no other popups are open, hide backdrop
+    const anyOpen = !!document.querySelector('.popup:not([hidden])');
+    if (!anyOpen) backdrop.hidden = true;
+
+    // return focus to opener if we have it
+    const openerSelector = pop.dataset.opener;
+    if (openerSelector) {
+      const opener = document.querySelector(`.popup-trigger[data-popup="${pop.id}"]`);
+      if (opener) opener.focus();
+      delete pop.dataset.opener;
+    }
+  }
+
+  // Event delegation: works for all triggers in the deck
+  document.addEventListener('click', (e) => {
+    // open
+    const trigger = e.target.closest('.popup-trigger');
+    if (trigger && trigger.dataset.popup) {
+      openPopup(trigger.dataset.popup, trigger.dataset.popup);
+      return;
+    }
+    // close
+    if (e.target.matches('.popup-close')) {
+      const pop = e.target.closest('.popup');
+      closePopup(pop);
+      return;
+    }
+    // backdrop click closes all
+    if (e.target.hasAttribute('data-popup-backdrop')) {
+      document.querySelectorAll('.popup:not([hidden])').forEach(closePopup);
+    }
+  });
+
+  // ESC to close any open popup
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.popup:not([hidden])').forEach(closePopup);
+    }
+  });
+
+  // Close popups when changing slides (prevents “sticky” dialogs)
+  if (window.Reveal && Reveal.on) {
+    Reveal.on('slidechanged', () => {
+      document.querySelectorAll('.popup:not([hidden])').forEach(closePopup);
+      // also hide backdrop if it was left visible
+      backdrop.hidden = true;
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
+
+		
+		
+		
+		
+
