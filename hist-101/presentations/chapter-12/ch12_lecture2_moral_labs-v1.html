@@ -5,93 +5,193 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lecture 2: Moral Laboratories - Prisons, Asylums, and Schools</title>
     
-    <!-- Reveal.js CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/white.min.css">
-    
+    <!-- All Styles -->
     <style>
-        /* Color Palette - Optimized for HD TV Display */
-        :root {
-            /* Primary Colors - High contrast, professionally balanced */
-            --primary-dark: #1a3a52;        /* Deep navy blue */
-            --primary-medium: #2e5266;      /* Medium slate blue */
-            --primary-light: #4a7c9e;       /* Soft blue */
-            --accent-warm: #c17c52;         /* Warm terracotta */
-            --accent-gold: #d4a574;         /* Soft gold */
-            --text-primary: #2c2c2c;        /* Near black for body text */
-            --text-secondary: #4a4a4a;      /* Dark gray for secondary text */
-            --background-cream: #fdfaf5;    /* Warm cream background */
-            --background-light: #f5f1e8;    /* Light tan */
-            --highlight-yellow: #fff4d6;    /* Soft yellow highlight */
-            --border-color: #c9b896;        /* Warm tan border */
+        /* Base Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
-        /* Base Reveal Overrides */
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #1a1a1a;
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif;
+        }
+        
+        /* Reveal Container */
         .reveal {
-            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Libre Baskerville', Georgia, serif;
-            font-size: 32px;
-            font-weight: normal;
-            color: var(--text-primary);
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
         }
         
         .reveal .slides {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
             text-align: left;
         }
         
         .reveal .slides section {
-            background: linear-gradient(135deg, var(--background-cream) 0%, var(--background-light) 100%);
-            padding: 50px 70px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-            height: 100%;
+            position: absolute;
+            width: 90%;
+            height: 85%;
+            left: 5%;
+            top: 7.5%;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            overflow-y: auto;
+            overflow-x: hidden;
         }
         
-        /* Typography - Optimized for Distance Viewing */
+        /* Progress Bar */
+        .progress-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: rgba(92, 122, 138, 0.2);
+            z-index: 1000;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: #5C7A8A;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        /* Slide Number */
+        .slide-number {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #5C7A8A;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-size: 18px;
+            font-weight: 600;
+            z-index: 1000;
+        }
+        
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: rgba(92, 122, 138, 0.8);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 1000;
+            display: none;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        :root {
+            /* Color palette */
+            --mocha-mousse: #A67B5B;
+            --tapestry: #5C7A8A;
+            --laurel-oak: #9C9675;
+            --coffee-quartz: #6E5E58;
+            --arona: #8FADB8;
+            --warm-taupe: #AB9B8E;
+            --dull-gold: #9B8550;
+            --buffed-beige: #C7B299;
+            --ink-primary: #2B1810;
+            --ink-medium: #3A2B20;
+            --dark-red: #8B3A3A;
+            --warning-orange: #D47A3A;
+        }
+        
+        /* Typography and Content Styling */
+        .reveal {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Libre Baskerville', Georgia, serif;
+            font-size: 32px;
+            font-weight: normal;
+            color: var(--ink-primary);
+        }
+        
+        .reveal .slides section {
+            background: linear-gradient(135deg, #FFF8E7 0%, #F5EDD6 100%);
+            padding: 40px 60px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            height: 100%;
+            overflow-y: auto;
+        }
+        
+        /* Headings optimized for distance viewing */
         .reveal h1 {
-            font-size: 2.6em;
+            font-size: 2.8em;
             font-weight: 900;
-            color: var(--primary-dark);
+            color: var(--tapestry);
             text-transform: none;
-            margin-bottom: 0.6em;
+            margin-bottom: 0.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
             line-height: 1.2;
-            border-bottom: 5px solid var(--accent-gold);
+            border-bottom: 4px solid var(--dull-gold);
             padding-bottom: 0.3em;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
         
         .reveal h2 {
-            font-size: 2em;
+            font-size: 2.2em;
             font-weight: 700;
-            color: var(--primary-medium);
+            color: var(--coffee-quartz);
             text-transform: none;
             margin-bottom: 0.6em;
-            margin-top: 1.2em;
-            border-left: 6px solid var(--primary-light);
-            padding-left: 0.5em;
+            margin-top: 1em;
+            border-left: 6px solid var(--tapestry);
+            padding-left: 0.4em;
         }
         
         .reveal h3 {
-            font-size: 1.5em;
+            font-size: 1.6em;
             font-weight: 600;
-            color: var(--accent-warm);
+            color: var(--mocha-mousse);
             text-transform: none;
             margin-bottom: 0.5em;
-            margin-top: 1em;
+            margin-top: 0.8em;
         }
         
         .reveal h4 {
-            font-size: 1.2em;
+            font-size: 1.3em;
             font-weight: 600;
-            color: var(--primary-light);
+            color: var(--tapestry);
             text-transform: none;
             margin-bottom: 0.4em;
         }
         
-        /* Body Text - High Readability */
-        .reveal p {
-            font-size: 1.05em;
-            line-height: 1.65;
-            margin-bottom: 0.8em;
-            color: var(--text-primary);
+        /* Body text optimized for readability */
+        .reveal p, .reveal li {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 0.6em;
+            color: var(--ink-primary);
         }
         
         .reveal ul, .reveal ol {
@@ -100,310 +200,654 @@
         }
         
         .reveal li {
-            font-size: 1.05em;
-            line-height: 1.6;
             margin-bottom: 0.5em;
-            color: var(--text-primary);
         }
         
         .reveal strong {
-            color: var(--primary-dark);
+            color: var(--coffee-quartz);
             font-weight: 700;
         }
         
         .reveal em {
-            color: var(--primary-medium);
+            color: var(--tapestry);
             font-style: italic;
         }
         
-        /* Title Slide - High Contrast */
+        /* Title slide styling */
         .reveal .title-slide {
             text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-medium) 100%);
-            padding: 80px 60px;
+            height: 100%;
+            background: linear-gradient(135deg, var(--tapestry) 0%, var(--arona) 100%);
         }
         
         .reveal .title-slide h1 {
-            font-size: 3.2em;
-            color: #1a3a52;
+            font-size: 3.5em;
+            color: #FFFFFF;
             border: none;
-            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
-            margin-bottom: 0.5em;
-        }
-        
-        .reveal .title-slide p {
-            font-size: 1.4em;
-            color: #1a3a52;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
             margin-bottom: 0.3em;
         }
         
-        /* Section Divider Slides - High Contrast */
+        .reveal .title-slide .subtitle {
+            font-size: 1.8em;
+            color: var(--buffed-beige);
+            font-style: italic;
+            margin-top: 0.5em;
+        }
+        
+        .reveal .title-slide .lecture-number {
+            font-size: 1.4em;
+            color: #FFFFFF;
+            margin-bottom: 1em;
+            opacity: 0.9;
+        }
+        
+        /* Section divider slides */
         .reveal .section-slide {
             text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, var(--accent-warm) 0%, var(--accent-gold) 100%);
-            padding: 80px 60px;
+            height: 100%;
+            background: linear-gradient(135deg, var(--coffee-quartz) 0%, var(--mocha-mousse) 100%);
         }
         
         .reveal .section-slide h1 {
-            font-size: 3em;
-            color: #1a3a52;
+            color: #FFFFFF;
             border: none;
-            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
-            font-weight: 900;
+            font-size: 3em;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
         }
         
-        /* Dark Section Slides */
+        /* Dark section slides for difficult content */
         .reveal .dark-section-slide {
             text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, var(--primary-dark) 0%, #0d1f2d 100%);
-            padding: 80px 60px;
+            height: 100%;
+            background: linear-gradient(135deg, #2B1810 0%, var(--coffee-quartz) 100%);
         }
         
         .reveal .dark-section-slide h1 {
-            font-size: 3em;
-            color: #1a3a52;
+            color: #FFFFFF;
             border: none;
-            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6);
-            font-weight: 900;
+            font-size: 3em;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
         }
         
-        /* Content Boxes */
-        .feature-box {
-            background: var(--highlight-yellow);
-            border-left: 5px solid var(--accent-gold);
-            padding: 25px 30px;
+        /* Image placeholder styling */
+        .image-placeholder {
+            background: linear-gradient(135deg, #E8E8E8 0%, #D0D0D0 100%);
+            border: 3px dashed var(--laurel-oak);
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            font-style: italic;
+            color: #666666;
+            font-size: 1.1em;
             margin: 20px 0;
-            border-radius: 4px;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
-        .dark-box {
-            background: linear-gradient(135deg, #e8dcc8 0%, #ddd1b8 100%);
-            border-left: 5px solid var(--primary-dark);
-            padding: 25px 30px;
+        /* Box styles for emphasis */
+        .highlight-box {
+            background: rgba(143, 173, 184, 0.2);
+            border-left: 6px solid var(--tapestry);
+            padding: 20px 30px;
             margin: 20px 0;
             border-radius: 4px;
         }
         
         .warning-box {
-            background: #fff4e6;
-            border: 3px solid var(--accent-warm);
-            padding: 25px 30px;
+            background: rgba(212, 122, 58, 0.15);
+            border-left: 6px solid var(--warning-orange);
+            padding: 20px 30px;
             margin: 20px 0;
             border-radius: 4px;
         }
         
-        .conclusion-box {
-            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-medium) 100%);
-            color: white;
-            padding: 30px 40px;
-            margin: 30px 0;
-            border-radius: 8px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        .warning-box h3 {
+            color: var(--warning-orange);
         }
         
-        .conclusion-box p {
-            color: white;
+        .dark-box {
+            background: rgba(43, 24, 16, 0.08);
+            border-left: 6px solid var(--dark-red);
+            padding: 20px 30px;
+            margin: 20px 0;
+            border-radius: 4px;
         }
         
-        .conclusion-box strong {
-            color: white;
-        }
-        
-        /* Feature Lists */
-        .feature-list {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
+        .quote-box {
+            background: rgba(199, 178, 153, 0.3);
+            border-left: 6px solid var(--dull-gold);
+            padding: 25px 35px;
             margin: 25px 0;
+            font-style: italic;
+            font-size: 1.15em;
+            border-radius: 4px;
+        }
+        
+        .quote-box cite {
+            display: block;
+            text-align: right;
+            margin-top: 15px;
+            font-size: 0.9em;
+            font-weight: 600;
+            color: var(--tapestry);
+        }
+        
+        .feature-box {
+            background: rgba(255, 255, 255, 0.6);
+            border: 2px solid var(--mocha-mousse);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        .conclusion-box {
+            background: linear-gradient(135deg, rgba(92, 122, 138, 0.25), rgba(155, 133, 80, 0.25));
+            border: 3px solid var(--tapestry);
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+        
+        /* Two-column layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+        
+        .two-column.narrow-wide {
+            grid-template-columns: 1fr 2fr;
+        }
+        
+        .two-column.wide-narrow {
+            grid-template-columns: 2fr 1fr;
+        }
+        
+        /* Comparison grid */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 20px 0;
+        }
+        
+        .comparison-box {
+            background: rgba(255, 255, 255, 0.7);
+            border: 2px solid var(--tapestry);
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        .comparison-box h4 {
+            border-bottom: 2px solid var(--dull-gold);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        
+        /* Feature list styling */
+        .feature-list {
+            margin: 20px 0;
         }
         
         .feature-item {
-            background: var(--background-light);
-            border-left: 5px solid var(--primary-light);
-            padding: 20px 25px;
+            background: rgba(255, 255, 255, 0.5);
+            border-left: 5px solid var(--tapestry);
+            padding: 15px 20px;
+            margin: 15px 0;
             border-radius: 4px;
         }
         
         .feature-item strong {
             display: block;
-            font-size: 1.2em;
-            color: var(--primary-dark);
-            margin-bottom: 0.4em;
+            font-size: 1.15em;
+            margin-bottom: 8px;
+            color: var(--coffee-quartz);
         }
         
-        /* Two Column Layout */
-        .two-column {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin: 25px 0;
+        /* Statistics/numbers emphasis */
+        .stat-highlight {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--dark-red);
         }
         
-        /* Images */
-        .reveal img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 20px auto;
-            border: 3px solid var(--border-color);
-            border-radius: 4px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        /* Accessibility improvements */
+        .reveal a {
+            color: var(--tapestry);
+            text-decoration: underline;
         }
         
-        .image-caption {
-            font-size: 0.85em;
-            color: var(--text-secondary);
-            text-align: center;
-            font-style: italic;
-            margin-top: 10px;
+        .reveal a:hover {
+            color: var(--dull-gold);
         }
         
-        /* Speaker Notes Style */
-        .reveal aside.notes {
-            font-size: 16px;
-            line-height: 1.5;
-        }
-        
-        /* Progress Bar */
-        .reveal .progress {
-            background: rgba(0, 0, 0, 0.1);
-            color: var(--primary-dark);
-            height: 6px;
-        }
-        
-        /* Controls */
-        .reveal .controls {
-            color: var(--primary-dark);
-        }
-        
-        /* Responsive Adjustments */
-        @media screen and (max-width: 1600px) {
+        /* Responsive adjustments */
+        @media screen and (max-width: 1024px) {
             .reveal {
-                font-size: 28px;
+                font-size: 26px;
             }
-            .reveal h1 {
-                font-size: 2.4em;
+            
+            .reveal .slides section {
+                width: 95%;
+                left: 2.5%;
+                padding: 30px 40px;
             }
-            .reveal h2 {
-                font-size: 1.8em;
-            }
-        }
-        
-        @media screen and (max-width: 1200px) {
-            .reveal {
-                font-size: 24px;
-            }
-            .two-column {
+            
+            .two-column,
+            .comparison-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
+            
+            .two-column.narrow-wide,
+            .two-column.wide-narrow {
+                grid-template-columns: 1fr;
+            }
+            
+            .reveal h1 {
+                font-size: 2.4em;
+            }
+            
+            .reveal h2 {
+                font-size: 1.9em;
+            }
+            
+            .reveal h3 {
+                font-size: 1.4em;
+            }
+            
+            .slide-number {
+                font-size: 16px;
+                padding: 6px 12px;
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .scroll-indicator {
+                font-size: 13px;
+                padding: 8px 12px;
+                bottom: 70px;
+                right: 15px;
+            }
+        }
+        
+        /* Mobile phones */
+        @media screen and (max-width: 768px) {
+            .reveal {
+                font-size: 22px;
+            }
+            
+            .reveal .slides section {
+                width: 96%;
+                left: 2%;
+                top: 5%;
+                height: 90%;
+                padding: 20px 25px;
+            }
+            
+            .reveal h1 {
+                font-size: 2em;
+                margin-bottom: 0.4em;
+                padding-bottom: 0.2em;
+                border-bottom-width: 3px;
+            }
+            
+            .reveal h2 {
+                font-size: 1.6em;
+                margin-bottom: 0.5em;
+                margin-top: 0.8em;
+                border-left-width: 4px;
+                padding-left: 0.3em;
+            }
+            
+            .reveal h3 {
+                font-size: 1.3em;
+                margin-bottom: 0.4em;
+                margin-top: 0.6em;
+            }
+            
+            .reveal h4 {
+                font-size: 1.15em;
+            }
+            
+            .reveal p, .reveal li {
+                font-size: 1em;
+                line-height: 1.5;
+                margin-bottom: 0.5em;
+            }
+            
+            .reveal ul, .reveal ol {
+                margin-left: 1.2em;
+                margin-bottom: 0.8em;
+            }
+            
+            .two-column,
+            .comparison-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .highlight-box,
+            .warning-box,
+            .dark-box,
+            .feature-box {
+                padding: 15px 20px;
+                margin: 15px 0;
+            }
+            
+            .quote-box {
+                padding: 18px 22px;
+                margin: 18px 0;
+                font-size: 1.05em;
+            }
+            
+            .conclusion-box {
+                padding: 20px;
+                margin: 20px 0;
+                font-size: 1.1em;
+            }
+            
+            .feature-item {
+                padding: 12px 15px;
+                margin: 12px 0;
+                border-left-width: 4px;
+            }
+            
+            .feature-item strong {
+                font-size: 1.1em;
+                margin-bottom: 6px;
+            }
+            
+            .comparison-box {
+                padding: 15px;
+            }
+            
+            .comparison-box h4 {
+                padding-bottom: 8px;
+                margin-bottom: 12px;
+            }
+            
+            .image-placeholder {
+                padding: 25px;
+                min-height: 150px;
+                font-size: 1em;
+                margin: 15px 0;
+            }
+            
+            .slide-number {
+                font-size: 14px;
+                padding: 5px 10px;
+                bottom: 12px;
+                right: 12px;
+            }
+            
+            .scroll-indicator {
+                font-size: 12px;
+                padding: 6px 10px;
+                bottom: 60px;
+                right: 12px;
+            }
+            
+            .progress-container {
+                height: 4px;
+            }
+            
+            .reveal .title-slide h1 {
+                font-size: 2.5em;
+            }
+            
+            .reveal .title-slide .subtitle {
+                font-size: 1.4em;
+            }
+            
+            .reveal .title-slide .lecture-number {
+                font-size: 1.1em;
+            }
+            
+            .reveal .section-slide h1,
+            .reveal .dark-section-slide h1 {
+                font-size: 2.2em;
+            }
+        }
+        
+        /* Small mobile phones */
+        @media screen and (max-width: 480px) {
+            .reveal {
+                font-size: 20px;
+            }
+            
+            .reveal .slides section {
+                padding: 15px 20px;
+            }
+            
+            .reveal h1 {
+                font-size: 1.8em;
+            }
+            
+            .reveal h2 {
+                font-size: 1.5em;
+            }
+            
+            .reveal h3 {
+                font-size: 1.25em;
+            }
+            
+            .highlight-box,
+            .warning-box,
+            .dark-box,
+            .feature-box,
+            .quote-box {
+                padding: 12px 15px;
+                margin: 12px 0;
+            }
+            
+            .conclusion-box {
+                padding: 15px;
+                margin: 15px 0;
+                font-size: 1.05em;
+            }
+            
+            .feature-item {
+                padding: 10px 12px;
+                margin: 10px 0;
+            }
+            
+            .image-placeholder {
+                padding: 20px;
+                min-height: 120px;
+                font-size: 0.95em;
+            }
+            
+            .slide-number {
+                font-size: 13px;
+                padding: 4px 8px;
+                bottom: 10px;
+                right: 10px;
+            }
+            
+            .scroll-indicator {
+                font-size: 11px;
+                padding: 5px 8px;
+                bottom: 50px;
+                right: 10px;
+            }
+            
+            .reveal .title-slide h1 {
+                font-size: 2.2em;
+            }
+            
+            .reveal .title-slide .subtitle {
+                font-size: 1.3em;
+            }
+            
+            .reveal .title-slide .lecture-number {
+                font-size: 1em;
+            }
+            
+            .reveal .section-slide h1,
+            .reveal .dark-section-slide h1 {
+                font-size: 2em;
+            }
+        }
+        
+        /* Landscape mobile devices */
+        @media screen and (max-width: 896px) and (orientation: landscape) {
+            .reveal .slides section {
+                width: 94%;
+                left: 3%;
+                top: 3%;
+                height: 94%;
+                padding: 20px 30px;
+            }
+            
+            .reveal h1 {
+                font-size: 2em;
+                margin-bottom: 0.3em;
+            }
+            
+            .reveal h2 {
+                font-size: 1.6em;
+                margin-top: 0.6em;
+                margin-bottom: 0.4em;
+            }
+            
+            .highlight-box,
+            .warning-box,
+            .dark-box,
+            .feature-box {
+                padding: 12px 18px;
+                margin: 12px 0;
+            }
+            
+            .conclusion-box {
+                padding: 18px;
+                margin: 18px 0;
+            }
+        }
+        
+        /* Touch device improvements */
+        @media (hover: none) and (pointer: coarse) {
+            .reveal .slides section {
+                /* Better scrolling on touch devices */
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            /* Larger touch targets */
+            .slide-number,
+            .scroll-indicator {
+                min-width: 44px;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+        
+        /* Print styles */
+        @media print {
+            .reveal .slides section {
+                page-break-after: always;
+            }
+        }
+        
+        /* Scrollbar styling for overflow content */
+        .reveal .slides section::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        .reveal .slides section::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        
+        .reveal .slides section::-webkit-scrollbar-thumb {
+            background: var(--tapestry);
+            border-radius: 5px;
+        }
+        
+        .reveal .slides section::-webkit-scrollbar-thumb:hover {
+            background: var(--dull-gold);
         }
     </style>
 </head>
 <body>
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar"></div>
+    </div>
+    
+    <!-- Slide Number -->
+    <div class="slide-number">1 / 30</div>
+    
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">↓ Scroll Down ↓</div>
+    
     <div class="reveal">
         <div class="slides">
             
-            <!-- Slide 1: Title Slide -->
-            
-
-<section class="title-slide" data-transition="fade">
+            <!-- Slide 1: Title -->
+            <section class="title-slide" data-transition="fade">
                 <h1>Moral Laboratories:<br>Prisons, Asylums, and Schools</h1>
                 <p class="subtitle">Reformers as Architects of the Human Soul</p>
                 <p class="lecture-number">Lecture 2 — HIST 101: American History to 1865</p>
-            
-                <aside class="notes">
-                    <strong>Opening:</strong> Welcome class. Today: how 1820s-1860s reformers believed institutions could perfect people. Three "moral laboratories": prisons, asylums, schools. Key question: Can you engineer virtue?
-    <strong>Lecture Opening Notes:</strong>
-                    <ul>
-                        <li>Welcome students and introduce today's topic</li>
-                        <li>This lecture examines how reformers in the 1820s-1860s believed they could perfect society through institutions</li>
-                        <li>Key question: Can institutions transform human character?</li>
-                        <li>Connect to previous lecture on reform movements</li>
-                        <li>Preview: We'll explore prisons, asylums, and schools as "moral laboratories"</li>
-                    </ul>            
-	</aside>
             </section>
 
-      
-
-           <!-- Slide 2: Introduction - The Reformer's Vision -->
-<section style="font-size: 0.85em;">
-  <h1>The Reformer’s Vision</h1>
-
-  <div class="two-column" style="gap: 32px; align-items: flex-start;">
-    
-    <!-- Left column: the vision and question -->
-    <div>
-      <div class="quote-box">
-        <p>"The reformation of criminals, not their punishment, should be the object of imprisonment."</p>
-        <cite>— Reformers' Creed, 1820s</cite>
-      </div>
-
-      <h2 style="margin-top: 20px;">The Central Question</h2>
-      <p style="font-size: 1.3em; font-weight: 600; color: var(--tapestry);">
-        Can institutions reshape human character and create a moral society?
-      </p>
-
-      <div class="conclusion-box" style="margin-top: 25px;">
-        <p>Reformers believed they could <strong>design institutions that would redesign people.</strong></p>
-      </div>
-    </div>
-
-    <!-- Right column: the experiment -->
-    <div>
-      <h2>The Experiment</h2>
-      <div class="feature-list">
-        <div class="feature-item">
-          <strong>Hypothesis</strong>
-          <p>The right environment, structure, and discipline can cure crime, madness, and ignorance.</p>
-        </div>
-
-        <div class="feature-item">
-          <strong>Laboratory</strong>
-          <p>Prisons, asylums, and schools became testing grounds for theories of human transformation.</p>
-        </div>
-
-        <div class="feature-item">
-          <strong>Goal</strong>
-          <p>Social perfection through institutional engineering.</p>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <aside class="notes">
-    <p><strong>Student Guide:</strong> Reformers saw moral reform as a kind of social science. They truly believed the right institutional design could fix society’s deepest problems — turning prisons, asylums, and schools into moral laboratories.</p>
-    <p><strong>Discussion cue:</strong> Does this sound idealistic or authoritarian — or both?</p>
-  </aside>
-</section>
-
-<!-- Slide 6: Section Divider - Prisons -->
-            <section class="dark-section-slide">
-                <h1>Part I:<br>Prisons as Moral Laboratories</h1>
-            
-                <aside class="notes">
-                    <strong>Transition:</strong> Now to prisons. Note term "penitentiary" = place for penitence. Americans invented new incarceration approach. Section: ~12-15 min.
-                </aside>
+            <!-- Slide 2: Introduction - The Reformer's Vision -->
+            <section>
+                <h1>The Reformer's Vision</h1>
+                
+                <div class="quote-box">
+                    <p>"The reformation of criminals, not their punishment, should be the object of imprisonment."</p>
+                    <cite>— Reformers' Creed, 1820s</cite>
+                </div>
+                
+                <h2>The Central Question</h2>
+                <p style="font-size: 1.3em; font-weight: 600; color: var(--tapestry);">Can institutions reshape human character and create a moral society?</p>
+                
+                <h2>The Experiment</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <strong>Hypothesis</strong>
+                        <p>The right environment, structure, and discipline can cure crime, madness, and ignorance</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <strong>Laboratory</strong>
+                        <p>Prisons, asylums, and schools become testing grounds for theories of human transformation</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <strong>Goal</strong>
+                        <p>Social perfection through institutional engineering</p>
+                    </div>
+                </div>
+                
+                <div class="conclusion-box">
+                    <p>Reformers believed they could <strong>design institutions that would redesign people</strong></p>
+                </div>
             </section>
-
 
             <!-- Slide 3: The World Before Reform -->
-            <section style="font-size: 0.75em;">
+            <section>
                 <h1>The World Before Reform</h1>
                 
                 <h2>Early Republic Approaches to Crime and Madness</h2>
@@ -432,360 +876,325 @@
                     </div>
                 </div>
                 
-              <div class="warning-box">
-  <h3 style="text-align: center; margin-bottom: 10px;">The Logic of the Old System</h3>
-  <p><strong>Punishment was about:</strong></p>
-
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px;">
-
-    <ul style="margin:0;">
-      <li>Public deterrence through fear and shame</li>
-      <li>Retribution, not rehabilitation</li>
-    </ul>
-
-    <ul style="margin:0;">
-      <li>Removal or elimination of the deviant</li>
-      <li>Sin as the explanation for crime and madness</li>
-    </ul>
-
-  </div>
-</div>
-
-
-            
-                <aside class="notes">
-                    <strong>Teaching Points:</strong> Review main concepts. Check understanding. Connect to previous material. Preview next topic.
-                </aside>
+                <div class="warning-box">
+                    <h3>The Logic of the Old System</h3>
+                    <p><strong>Punishment was about:</strong></p>
+                    <ul>
+                        <li>Public deterrence through fear and shame</li>
+                        <li>Retribution, not rehabilitation</li>
+                        <li>Removal or elimination of the deviant</li>
+                        <li>Sin as the explanation for crime and madness</li>
+                    </ul>
+                </div>
             </section>
 
-
-
-           
-
+            <!-- Slide 4: Why Reform Now? -->
+            <section>
+                <h1>Why Reform Now? The Crisis of the 1820s-1840s</h1>
+                
+                <h2>Social Transformations Creating Crisis</h2>
+                
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <strong>Urbanization</strong>
+                        <p>Cities growing rapidly — strangers living among strangers. Traditional community controls breaking down. Crime becomes more visible and threatening.</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <strong>Immigration</strong>
+                        <p>Massive influx of Irish and German immigrants. Native-born Americans fear cultural chaos and moral decline. Poverty and vice concentrate in urban slums.</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <strong>Market Revolution</strong>
+                        <p>Traditional economic relationships dissolving. Wage labor creates rootless working class. Old forms of social discipline no longer work.</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <strong>Religious Awakening</strong>
+                        <p>Second Great Awakening emphasizes human perfectibility. If people can be saved spiritually, they can be reformed morally. Optimism about human transformation.</p>
+                    </div>
+                </div>
+                
+                <div class="conclusion-box">
+                    <p><strong>Old methods seem barbaric and ineffective</strong></p>
+                    <p style="margin-top: 15px; font-size: 1em;">Society needs new institutions to create order and moral discipline in a rapidly changing world</p>
+                </div>
+            </section>
 
             <!-- Slide 5: The New Philosophy of Reform -->
-<section style="font-size: 0.80em;">
-  <h1>The New Philosophy of Reform</h1>
+            <section>
+                <h1>The New Philosophy of Reform</h1>
+                
+                <h2>Revolutionary Ideas</h2>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <h4>Old View</h4>
+                        <ul>
+                            <li>Crime = Sin</li>
+                            <li>Madness = Moral failing or demonic possession</li>
+                            <li>Punishment deters through pain and shame</li>
+                            <li>Some people are simply evil or defective</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="comparison-box">
+                        <h4>New View</h4>
+                        <ul>
+                            <li>Crime = Product of environment and upbringing</li>
+                            <li>Madness = Curable disease of the mind</li>
+                            <li>Proper environment and discipline can transform character</li>
+                            <li>All people can be reformed through science and structure</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h2>Core Principles of Moral Reform</h2>
+                <div class="highlight-box">
+                    <ol>
+                        <li><strong>Environmental determinism:</strong> Bad environment creates bad people; good environment creates good people</li>
+                        <li><strong>Perfectibility:</strong> Human nature is malleable and can be improved</li>
+                        <li><strong>Scientific discipline:</strong> Systematic routine and structure can reshape character</li>
+                        <li><strong>Isolation and reflection:</strong> Remove corrupting influences, create space for moral contemplation</li>
+                        <li><strong>Institutional solution:</strong> Purpose-built institutions as engines of transformation</li>
+                    </ol>
+                </div>
+                
+                <div class="conclusion-box">
+                    <p>Reform becomes a science: <strong>if we can just design the right institution, we can cure society's ills</strong></p>
+                </div>
+            </section>
 
-  <h2>Revolutionary Ideas</h2>
-
-  <div class="two-column" style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start;">
-
-    <!-- Old View -->
-    <div class="comparison-box">
-      <h3>Old View</h3>
-      <ul>
-        <li><strong>Crime = Sin</strong></li>
-        <li>Madness = Moral failing or demonic possession</li>
-        <li>Punishment deters through pain and shame</li>
-        <li>Some people are simply evil or defective</li>
-      </ul>
-    </div>
-
-    <!-- New View -->
-    <div class="comparison-box">
-      <h3>New View</h3>
-      <ul>
-        <li><strong>Crime = Product of environment and upbringing</strong></li>
-        <li>Madness = Curable disease of the mind</li>
-        <li>Proper environment and discipline can transform character</li>
-        <li>All people can be reformed through science and structure</li>
-      </ul>
-    </div>
-
-  </div>
-
-  <h2 style="margin-top: 28px;">Core Principles of Moral Reform</h2>
-  <div class="highlight-box" style="margin-top: 10px;">
-    <ol>
-      <li><strong>Environmental determinism:</strong> Bad environments produce bad behavior; good environments cultivate virtue.</li>
-      <li><strong>Perfectibility:</strong> Human nature is flexible — improvement is always possible.</li>
-      <li><strong>Scientific discipline:</strong> Routine, order, and structure can reshape moral character.</li>
-      <li><strong>Isolation and reflection:</strong> Separation from corruption allows self-examination and reform.</li>
-      <li><strong>Institutional solution:</strong> Purpose-built environments become laboratories for moral transformation.</li>
-    </ol>
-  </div>
-
-  
-
-  <aside class="notes">
-    <p><strong>Student Guide:</strong> This slide contrasts a punitive worldview with the reformers’ new optimism about human nature. Their key belief: the environment, not innate sin, shapes behavior — and institutions could therefore engineer moral improvement.</p>
-    <p><strong>Historical link:</strong> This same faith in social design would influence education, mental health, and criminal justice reform throughout the century.</p>
-    <p><strong>Reflection:</strong> Is this moral optimism empowering—or dangerously naive?</p>
-	  <p>Reform becomes a science: <strong>if we can just design the right institution, we can cure society’s ills.</strong></p>
-  </aside>
-</section>
-
-
-
-      
-
-
+            <!-- Slide 6: Section Divider - Prisons -->
+            <section class="dark-section-slide">
+                <h1>Part I:<br>Prisons as Moral Laboratories</h1>
+            </section>
 
             <!-- Slide 7: The Birth of the Penitentiary -->
-            <section style="font-size: 0.85em;">
-
+            <section>
                 <h1>The Birth of the Penitentiary</h1>
                 
                 <div class="highlight-box">
                     <p style="font-size: 1.2em;"><strong>"Penitentiary"</strong> — from "penitence" — a place where criminals would reflect on their sins and emerge morally transformed</p>
                 </div>
-				   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: start;">
                 
-               
- 
+                <h2>The Philosophy</h2>
+                <ul>
+                    <li><strong>Replace punishment with reformation:</strong> Prison should change criminals, not just hurt them</li>
+                    <li><strong>Scientific discipline:</strong> Strict routine and structure would instill habits of order and industry</li>
+                    <li><strong>Isolation from corruption:</strong> Remove prisoners from evil influences of society and each other</li>
+                    <li><strong>Moral reflection:</strong> Solitude would force prisoners to confront their sins</li>
+                    <li><strong>Religious instruction:</strong> Christianity would provide moral foundation for new life</li>
+                </ul>
+                
+                <h2>The Promise</h2>
+                <div class="feature-box">
+                    <p>A perfectly designed prison system could:</p>
+                    <ul>
+                        <li>Cure criminality</li>
+                        <li>Reduce crime rates</li>
+                        <li>Transform convicts into productive citizens</li>
+                        <li>Serve as model for all social institutions</li>
+                    </ul>
+                </div>
+                
+                <div class="warning-box">
+                    <h3>The Unspoken Agenda</h3>
+                    <p>Prison reform also served to control <strong>dangerous classes</strong> — immigrants, the poor, the working class — by teaching discipline, routine, and submission to authority</p>
+                </div>
+            </section>
 
-    <!-- LEFT COLUMN: Philosophy -->
-    <div>
-      <h2>The Philosophy</h2>
-      <ul>
-        <li><strong>Replace punishment with reformation:</strong> Prison should change criminals, not just hurt them</li>
-        <li><strong>Scientific discipline:</strong> Routine + structure instill habits of order and industry</li>
-        <li><strong>Isolation from corruption:</strong> Remove prisoners from evil influences</li>
-        <li><strong>Moral reflection:</strong> Solitude forces confrontation with one's sins</li>
-        <li><strong>Religious instruction:</strong> Christianity as moral foundation for rebirth</li>
-      </ul>
-    </div>
+            <!-- Slide 8: Two Competing Systems -->
+            <section>
+                <h1>Two Competing Systems:<br>Pennsylvania vs. Auburn</h1>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <h4>Pennsylvania System<br>(Separate Confinement)</h4>
+                        <p><strong>Eastern State Penitentiary, Philadelphia (1829)</strong></p>
+                        <ul>
+                            <li><strong>Complete isolation:</strong> Prisoners in individual cells 24/7</li>
+                            <li><strong>No contact with other inmates</strong></li>
+                            <li><strong>Work alone in cell</strong></li>
+                            <li><strong>Exercise alone in small yard</strong></li>
+                            <li><strong>Meals delivered to cell</strong></li>
+                            <li><strong>Religious instruction only human contact</strong></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="comparison-box">
+                        <h4>Auburn System<br>(Congregate Labor)</h4>
+                        <p><strong>Auburn Prison, New York (1821)</strong></p>
+                        <ul>
+                            <li><strong>Solitary at night:</strong> Individual cells</li>
+                            <li><strong>Work together during day</strong></li>
+                            <li><strong>Eat together in silence</strong></li>
+                            <li><strong>Lockstep marching</strong></li>
+                            <li><strong>Absolute silence rule:</strong> No talking ever</li>
+                            <li><strong>Violent enforcement</strong></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="conclusion-box">
+                    <p>Both systems shared one goal: <strong>Break down the criminal's identity and rebuild it according to middle-class values of discipline, industry, and obedience</strong></p>
+                </div>
+            </section>
 
-    <!-- RIGHT COLUMN: Promise -->
+            
+			<!-- Slide 9: Pennsylvania System - The Reality of Total Isolation -->
+<section>
+  <h1>Pennsylvania System:<br>The Reality of Total Isolation</h1>
+
+  <!-- Row 1: Image (left) + Text (right) -->
+  <div class="two-column">
+    <figure style="margin:0;">
+      <img
+        src="images/Eastern-State-Penitentiary-Philadelphia-65-copy.webp"
+        alt="Eastern State Penitentiary cell with stone walls and a small skylight"
+        style="width:100%; height:auto; border-radius:6px;"
+      />
+      <figcaption style="font-size:0.9em; color: var(--ink-medium); margin-top:8px;">
+        Eastern State Penitentiary — skylight (“eye of God”) and solitary cell.
+      </figcaption>
+    </figure>
+
     <div>
-      <h2>The Promise</h2>
-      <div class="feature-box">
-        <p>A perfectly designed prison system could:</p>
+      <div class="dark-box">
+        <h3>The Cell</h3>
         <ul>
-          <li>Cure criminality</li>
-          <li>Reduce crime rates</li>
-          <li>Transform convicts into productive citizens</li>
-          <li>Model moral order for all social institutions</li>
+          <li><strong>Dimensions:</strong> Approximately 8 feet by 12 feet</li>
+          <li><strong>Stone walls:</strong> Thick, cold, dampness seeping through</li>
+          <li><strong>One small skylight:</strong> Called “the eye of God” — sole source of light</li>
+          <li><strong>Individual exercise yard:</strong> High walls preventing sight of anything beyond</li>
+          <li><strong>Furniture:</strong> Bed, small table, Bible</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 2: Text (left) + Image (right + warning box under image) -->
+  <div class="two-column" style="margin-top: 24px;">
+    <div>
+      <h2>Daily Routine</h2>
+      <div class="feature-box">
+        <ul>
+          <li><strong>6:00 AM:</strong> Wake — begin work in cell (weaving, shoemaking, carpentry)</li>
+          <li><strong>8:00 AM:</strong> Breakfast passed through food slot</li>
+          <li><strong>Work continues in silence</strong></li>
+          <li><strong>12:00 PM:</strong> Lunch through slot</li>
+          <li><strong>Work continues</strong></li>
+          <li><strong>6:00 PM:</strong> Supper through slot</li>
+          <li><strong>One hour of exercise:</strong> Alone in small walled yard</li>
+          <li><strong>Bible reading and prayer</strong></li>
+          <li><strong>9:00 PM:</strong> Lights out</li>
+          <li><strong>Repeat daily for years</strong></li>
         </ul>
       </div>
     </div>
 
+    <div>
+      <figure style="margin:0;">
+        <img
+          src="images/Eastern-State-Penitentiary-abandoned-cell-block-1024x682.webp"
+          alt="Abandoned Eastern State Penitentiary cell block showing isolation and decay"
+          style="width:100%; height:auto; border-radius:6px;"
+        />
+        <figcaption style="font-size:0.9em; color: var(--ink-medium); margin-top:8px;">
+          Abandoned cell block — corridors of enforced silence and separation.
+        </figcaption>
+      </figure>
+
+      <!-- Warning box directly beneath image -->
+      <div class="warning-box" style="margin-top:12px;">
+        <h3>Human Contact</h3>
+        <p>The <em>only</em> people a prisoner might see:</p>
+        <ul>
+          <li>Prison chaplain (weekly visits)</li>
+          <li>Guards passing food (no conversation allowed)</li>
+          <li>That’s all. For years. Sometimes for life.</li>
+        </ul>
+      </div>
+    </div>
   </div>
- <aside class="notes">
-                    <strong>Teaching Points:</strong> Review main concepts. Check understanding. Connect to previous material. Preview next topic. <h3>The Unspoken Agenda</h3>
-                    <p>Prison reform also served to control <strong>dangerous classes</strong> — immigrants, the poor, the working class — by teaching discipline, routine, and submission to authority</p>
-                </aside>
 </section>
 
-
-
-            <!-- Slide 8: Two Competing Systems -->
-            <section style="font-size: 0.85em;">
-  <h1>Two Competing Systems:<br>Pennsylvania vs. Auburn</h1>
-
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 20px;">
-
-    <!-- LEFT COLUMN: Pennsylvania System -->
-    <div class="comparison-box">
-      <h4>Pennsylvania System<br>(Separate Confinement)</h4>
-      <p><strong>Eastern State Penitentiary, Philadelphia (1829)</strong></p>
-      <ul>
-        <li><strong>Complete isolation:</strong> Prisoners kept in individual cells 24/7</li>
-        <li><strong>No inmate contact</strong></li>
-        <li><strong>Work alone</strong> inside cell</li>
-        <li><strong>Exercise alone</strong> in walled yard</li>
-        <li><strong>Meals delivered</strong> to cell</li>
-        <li><strong>Religious instruction</strong> only human contact</li>
-      </ul>
-    </div>
-
-    <!-- RIGHT COLUMN: Auburn System -->
-    <div class="comparison-box">
-      <h4>Auburn System<br>(Congregate Labor)</h4>
-      <p><strong>Auburn Prison, New York (1821)</strong></p>
-      <ul>
-        <li><strong>Solitary at night:</strong> Individual cells</li>
-        <li><strong>Work together</strong> during day</li>
-        <li><strong>Eat together</strong> in silence</li>
-        <li><strong>Lockstep marching</strong> as discipline</li>
-        <li><strong>Absolute silence rule</strong>: No talking ever</li>
-        <li><strong>Enforced by violence</strong></li>
-      </ul>
-    </div>
-
-  </div>
+            <!-- Slide 10: Pennsylvania System - Psychological Effects -->
+            <section>
+                <h1>Pennsylvania System:<br>The Psychological Toll</h1>
                 
+                <div class="quote-box">
+                    <p>"I believe that very few men are capable of estimating the immense amount of torture and agony which this dreadful punishment, prolonged for years, inflicts upon the sufferers."</p>
+                    <cite>— Charles Dickens, visiting Eastern State Penitentiary, 1842</cite>
+                </div>
                 
-            
-                <aside class="notes">
-                    <strong>Teaching Points:</strong>  <p>Both systems shared one goal: <strong>Break down the criminal's identity and rebuild it according to middle-class values of discipline, industry, and obedience</strong></p>
-                </aside>
+                <h2>What Total Isolation Does to the Human Mind</h2>
+                
+                <div class="dark-box">
+                    <h3>Documented Effects</h3>
+                    <ul>
+                        <li><strong>Hallucinations:</strong> Visual and auditory, often within weeks</li>
+                        <li><strong>Time distortion:</strong> Loss of sense of days, weeks, months</li>
+                        <li><strong>Self-harm:</strong> Prisoners injuring themselves for stimulation or escape</li>
+                        <li><strong>Talking to themselves:</strong> Constant muttering or shouting to hear a voice</li>
+                        <li><strong>Catatonia:</strong> Some prisoners becoming completely unresponsive</li>
+                        <li><strong>Insanity:</strong> Permanent psychological damage</li>
+                        <li><strong>Suicide:</strong> Higher rates than in other prison systems</li>
+                    </ul>
+                </div>
+                
+                <h2>Prison Doctors' Observations</h2>
+                <div class="feature-box">
+                    <p>From Eastern State annual reports:</p>
+                    <ul>
+                        <li>"Prisoner 127 has been found beating his head against the wall repeatedly"</li>
+                        <li>"Prisoner 204 no longer responds to questions or acknowledges presence of others"</li>
+                        <li>"Prisoner 89 transferred to insane asylum after two years of separate confinement"</li>
+                        <li>"Several prisoners have attempted to blind themselves to escape to the infirmary"</li>
+                    </ul>
+                </div>
+                
+                <div class="conclusion-box">
+                    <p><strong>The "humane" alternative to physical punishment was driving prisoners insane</strong></p>
+                </div>
             </section>
-
-
-
-            
-			<section style="font-size:0.85em; line-height:1.25;">
-  <h1>Pennsylvania System:<br>The Reality of Total Isolation</h1>
-
-  <div style="
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 24px;
-      margin-top: 20px;
-      align-items: start;
-  ">
-
-    <!-- COLUMN 1: The Cell -->
-    <div class="dark-box">
-      <h3 style="margin-top:0; font-size:1.3em;">
-        <a href="images/Eastern-State-Penitentiary-Philadelphia-65-copy.webp"
-           target="_blank" rel="noopener"
-           style="text-decoration:none; color:inherit;">
-          The Cell 📷
-        </a>
-      </h3>
-      <ul>
-        <li><strong>Dimensions:</strong> 8 × 12 ft</li>
-        <li><strong>Stone walls:</strong> cold, damp, sound-deadening</li>
-        <li><strong>Skylight:</strong> the “eye of God”</li>
-        <li><strong>Exercise yard:</strong> totally enclosed</li>
-        <li><strong>Furniture:</strong> bed, stool, small table, Bible</li>
-      </ul>
-    </div>
-
-
-    <!-- COLUMN 2: Daily Routine -->
-    <div class="feature-box">
-      <h3 style="margin-top:0; font-size:1.3em;">
-        <a href="images/Eastern-State-Penitentiary-abandoned-cell-block-1024x682.webp"
-           target="_blank" rel="noopener"
-           style="text-decoration:none; color:inherit;">
-          Daily Routine 📷
-        </a>
-      </h3>
-      <ul style="margin:0; padding-left:18px;">
-        <li><strong>6:00 AM:</strong> Work begins in cell</li>
-        <li><strong>8:00 AM:</strong> Breakfast through slot</li>
-        <li><strong>Noon:</strong> Lunch through slot</li>
-        <li><strong>Work continues in silence</strong></li>
-        <li><strong>6:00 PM:</strong> Supper through slot</li>
-        <li><strong>Exercise:</strong> One hour alone</li>
-        <li><strong>Evening:</strong> Bible reading & prayer</li>
-        <li><strong>9:00 PM:</strong> Lights out</li>
-        <li><strong>Routine repeated for years</strong></li>
-      </ul>
-    </div>
-
-
-    <!-- COLUMN 3: Human Contact -->
-    <div class="warning-box">
-      <h3 style="margin-top:0; text-align:center; font-size:1.3em;">Human Contact</h3>
-      <p>The <em>only</em> people a prisoner might see:</p>
-      <ul>
-        <li>Prison chaplain (weekly)</li>
-        <li>Guards passing food (no talking)</li>
-        <li>That’s all — sometimes for years</li>
-      </ul>
-    </div>
-
-  </div>
-
-  <aside class="notes">
-    <p><strong>Guidance:</strong> Students should recognize how extreme this system was. Emphasize the theory: solitude → reflection → moral reform. Then contrast with psychological realities. The images linked in the headings help reveal the architecture of isolation.</p>
-  </aside>
-
-</section>
-
-
-
-          <!-- Slide 10: Pennsylvania System - Psychological Effects -->
-<section style="font-size:0.85em; line-height:1.25;">
-  <h1>Pennsylvania System:<br>The Psychological Toll</h1>
-
-  <div class="quote-box">
-    <p>"I believe that very few men are capable of estimating the immense amount of torture and agony which this dreadful punishment, prolonged for years, inflicts upon the sufferers."</p>
-    <cite>— Charles Dickens, visiting Eastern State Penitentiary, 1842</cite>
-  </div>
-
-  <h2>What Total Isolation Does to the Human Mind</h2>
-
-  <!-- Stack the two mini-slides and swap them on click -->
-  <div class="r-stack" style="min-height: 340px;">
-
-    <!-- Mini-slide 1: visible first, then fades out -->
-    <div class="dark-box fragment fade-out" data-fragment-index="1" style="font-size:0.78em; line-height:1.25; margin:0;">
-      <h3 style="margin-top:0;">Documented Effects</h3>
-      <ul>
-        <li><strong>Hallucinations:</strong> Visual and auditory, often within weeks</li>
-        <li><strong>Time distortion:</strong> Loss of sense of days, weeks, months</li>
-        <li><strong>Self-harm:</strong> Injury for stimulation or escape</li>
-        <li><strong>Talking to themselves:</strong> Constant muttering or shouting to hear a voice</li>
-        <li><strong>Catatonia:</strong> Some prisoners become unresponsive</li>
-        <li><strong>Insanity:</strong> Lasting psychological damage</li>
-        <li><strong>Suicide:</strong> Higher rates than in other prison systems</li>
-      </ul>
-    </div>
-
-    <!-- Mini-slide 2: appears as the first fades out (same index) -->
-    <div class="feature-box fragment" data-fragment-index="1" style="font-size:0.78em; line-height:1.25; margin:0;">
-      <h3 style="margin-top:0;">Prison Doctors’ Observations</h3>
-      <p>From Eastern State annual reports:</p>
-      <ul>
-        <li>"Prisoner 127 has been found beating his head against the wall repeatedly."</li>
-        <li>"Prisoner 204 no longer responds to questions or acknowledges presence of others."</li>
-        <li>"Prisoner 89 transferred to insane asylum after two years of separate confinement."</li>
-        <li>"Several prisoners have attempted to blind themselves to escape to the infirmary."</li>
-      </ul>
-    </div>
-
-  </div>
-
-  <aside class="notes">
-    <p><strong>Guide:</strong> Let students read the list first, then click to surface the doctors’ notes. Emphasize how the theory of moral reflection collided with clinical reality. Prompt: “Which effects flow from isolation itself versus discipline and silence?”</p>
-	  <p><strong>The "humane" alternative to physical punishment was driving prisoners insane</strong></p>
-  </aside>
-</section>
-
-
 
             <!-- Slide 11: Auburn System - Congregation and Control -->
-           <section style="font-size:0.85em; line-height:1.25;">
-                <h1>Auburn System: Congregation and Control</h1>
+            <section>
+                <h1>Auburn System:<br>Congregation and Control</h1>
                 
-             <h2 style="margin-bottom: 6px;">The Auburn Compromise</h2>
-<div class="highlight-box" style="margin-top: 0; margin-bottom: 10px;">
-  <p><strong>Theory:</strong> Prisoners work together during the day (more economically productive) but are kept in solitary cells at night and <strong>forced into absolute silence</strong> at all times</p>
-</div>
-
-<!-- Initially visible - fades out on click -->
-<div class="fragment fade-out" data-fragment-index="1" style="margin-top: 6px;">
-  <h2 style="margin: 0 0 6px 0;">The Silence Rule</h2>
-  <div class="dark-box" style="margin-top: 0; margin-bottom: 10px;">
-    <h3>Total Prohibition</h3>
-    <ul>
-      <li><strong>No talking</strong> — ever, under any circumstances</li>
-      <li><strong>No looking at other prisoners</strong></li>
-      <li><strong>No gestures or signs</strong></li>
-      <li><strong>Eyes on your work</strong> at all times</li>
-      <li><strong>Lockstep marching:</strong> Hand on shoulder of prisoner ahead, shuffling in unison</li>
-    </ul>
-  </div>
-</div>
-
-<!-- Fades in on click, replacing the Silence Rule box -->
-<div class="fragment fade-in" data-fragment-index="1" style="margin-top: 6px;">
-  <h2 style="margin: 0 0 6px 0;">Enforcement</h2>
-  <div class="warning-box" style="margin-top: 0;">
-    <h3>The Cat-o'-Nine-Tails</h3>
-    <p>Punishment for breaking silence:</p>
-    <ul>
-      <li><strong>Whipping:</strong> Standard punishment, administered publicly to other prisoners as warning</li>
-      <li><strong>"The shower bath":</strong> Ice-cold water poured over naked prisoner from height</li>
-      <li><strong>"The yoke":</strong> Iron collar with extending arms preventing sitting or lying down</li>
-      <li><strong>Dark cells:</strong> Solitary confinement in completely dark punishment cells, no food</li>
-      <li><strong>Ball and chain:</strong> Heavy iron ball attached to ankle for weeks</li>
-    </ul>
-  </div>
-</div>
-
-                <aside class="notes">
-                    <strong>Teaching Points:</strong> Review main concepts. Check understanding. Connect to previous material. Preview next topic.
-                </aside>
+                              
+                <h2>The Auburn Compromise</h2>
+                <div class="highlight-box">
+                    <p><strong>Theory:</strong> Prisoners work together during the day (more economically productive) but are kept in solitary cells at night and <strong>forced into absolute silence</strong> at all times</p>
+                </div>
+                
+                <h2>The Silence Rule</h2>
+                <div class="dark-box">
+                    <h3>Total Prohibition</h3>
+                    <ul>
+                        <li><strong>No talking</strong> — ever, under any circumstances</li>
+                        <li><strong>No looking at other prisoners</strong></li>
+                        <li><strong>No gestures or signs</strong></li>
+                        <li><strong>Eyes on your work</strong> at all times</li>
+                        <li><strong>Lockstep marching:</strong> Hand on shoulder of prisoner ahead, shuffling in unison</li>
+                    </ul>
+                </div>
+                
+                <h2>Enforcement</h2>
+                <div class="warning-box">
+                    <h3>The Cat-o'-Nine-Tails</h3>
+                    <p>Punishment for breaking silence:</p>
+                    <ul>
+                        <li><strong>Whipping:</strong> Standard punishment, administered publicly to other prisoners as warning</li>
+                        <li><strong>"The shower bath":</strong> Ice-cold water poured over naked prisoner from height</li>
+                        <li><strong>"The yoke":</strong> Iron collar with extending arms preventing sitting or lying down</li>
+                        <li><strong>Dark cells:</strong> Solitary confinement in completely dark punishment cells, no food</li>
+                        <li><strong>Ball and chain:</strong> Heavy iron ball attached to ankle for weeks</li>
+                    </ul>
+                </div>
             </section>
-
-
 
             <!-- Slide 12: Auburn System - Daily Life -->
             <section>
@@ -862,13 +1271,7 @@
                 <div class="conclusion-box">
                     <p><strong>This is life for 5, 10, 20 years. Some die in Auburn.</strong></p>
                 </div>
-            
-                <aside class="notes">
-                    <strong>Teaching Points:</strong> Review main concepts. Check understanding. Connect to previous material. Preview next topic.
-                </aside>
             </section>
-
-
 
             <!-- Slide 13: The Economic Dimension -->
             <section>
@@ -911,13 +1314,7 @@
                 <div class="conclusion-box">
                     <p>The <strong>moral laboratory</strong> became a <strong>factory floor</strong> — and the whip ensured productivity</p>
                 </div>
-            
-                <aside class="notes">
-                    <strong>Teaching Points:</strong> Review main concepts. Check understanding. Connect to previous material. Preview next topic.
-                </aside>
             </section>
-
-
 
             <!-- Slide 14: Did It Work? Prison Reform Assessment -->
             <section>
@@ -964,24 +1361,12 @@
                     <p><strong>The penitentiary created obedient subjects through trauma, not moral citizens through reflection</strong></p>
                     <p style="margin-top: 15px; font-size: 1em;">But reformers believed they had created a scientific solution to crime. Other states rushed to copy the model.</p>
                 </div>
-            
-                <aside class="notes">
-                    <strong>Teaching Points:</strong> Review main concepts. Check understanding. Connect to previous material. Preview next topic.
-                </aside>
             </section>
-
-
 
             <!-- Slide 15: Section Divider - Asylums -->
             <section class="dark-section-slide">
                 <h1>Part II:<br>Asylums and the Treatment of Madness</h1>
-            
-                <aside class="notes">
-                    <strong>Transition:</strong> Now to prisons. Note term "penitentiary" = place for penitence. Americans invented new incarceration approach. Section: ~12-15 min.
-                </aside>
             </section>
-
-
 
             <!-- Slide 16: Mental Illness Before Reform -->
             <section>
@@ -1030,13 +1415,7 @@
                         <li><strong>The belief:</strong> Physical punishment could drive out madness</li>
                     </ul>
                 </div>
-            
-                <aside class="notes">
-                    <strong>Teaching Points:</strong> Review main concepts. Check understanding. Connect to previous material. Preview next topic.
-                </aside>
             </section>
-
-
 
           <!-- Slide 17: Dorothea Dix - The Crusader -->
 <section style="font-size: 0.95em;">
@@ -1096,13 +1475,7 @@
       <p>People chained in cellars. Caged in pens. Beaten regularly. Kept in unheated sheds in winter. Starved. Left to die in filth.</p>
     </div>
   </div>
-
-                <aside class="notes">
-                    <strong>Points:</strong> Dix is genuine hero. Show her courage. Note gender angle: unmarried woman with political influence. Ask: "What motivated Dix?" Preview: her success → asylums.
-                </aside>
-            </section>
-
-
+</section>
 
 
 
@@ -1142,13 +1515,7 @@
                     <p>Massachusetts appropriated funds to expand Worcester State Hospital (1843)</p>
                     <p><strong>Dix didn't stop.</strong> She spent the next 40 years traveling across America, investigating conditions and lobbying state legislatures. She was directly responsible for founding or expanding <strong>32 mental hospitals</strong>.</p>
                 </div>
-            
-                <aside class="notes">
-                    <strong>Teaching Points:</strong> Review main concepts. Check understanding. Connect to previous material. Preview next topic.
-                </aside>
             </section>
-
-
 
             <!-- Slide 19: Moral Treatment - The New Approach -->
             <section>
@@ -1202,13 +1569,7 @@
                         <li><strong>Medical superintendent:</strong> Physician in charge, living on grounds</li>
                     </ul>
                 </div>
-            
-                <aside class="notes">
-                    <strong>Teaching Points:</strong> Review main concepts. Check understanding. Connect to previous material. Preview next topic.
-                </aside>
             </section>
-
-
 
             <!-- Slide 20: Early Success Stories -->
             <section>
@@ -1251,13 +1612,7 @@
                 <div class="conclusion-box">
                     <p><strong>Early moral treatment seemed to work—and reformers believed they had discovered the cure for madness</strong></p>
                 </div>
-            
-                <aside class="notes">
-                    <strong>Teaching Points:</strong> Review main concepts. Check understanding. Connect to previous material. Preview next topic.
-                </aside>
             </section>
-
-
 
             <!-- Slide 21: The Reality of Asylum Life -->
             <section>
@@ -1313,13 +1668,7 @@
                         <li><strong>Restraint:</strong> Used frequently despite reform ideals</li>
                     </ul>
                 </div>
-            
-                <aside class="notes">
-                    <strong>Teaching Points:</strong> Review main concepts. Check understanding. Connect to previous material. Preview next topic.
-                </aside>
             </section>
-
-
 
             <!-- Slide 22: Who Was in the Asylum? -->
             <section>
@@ -1381,13 +1730,7 @@
                 <div class="conclusion-box">
                     <p><strong>Asylums became warehouses for social problems the middle class wanted removed from sight</strong></p>
                 </div>
-            
-                <aside class="notes">
-                    <strong>Teaching Points:</strong> Review main concepts. Check understanding. Connect to previous material. Preview next topic.
-                </aside>
             </section>
-
-
 
             <!-- Slide 23: Assessment of Asylum Reform -->
             <section>
@@ -1446,24 +1789,12 @@
                 <div class="conclusion-box">
                     <p><strong>Dorothea Dix's crusade produced genuine compassion — but also created a system for hiding away society's "inconvenient" members</strong></p>
                 </div>
-            
-                <aside class="notes">
-                    <strong>Teaching Points:</strong> Review main concepts. Check understanding. Connect to previous material. Preview next topic.
-                </aside>
             </section>
-
-
 
             <!-- Slide 24: Section Divider - Schools -->
             <section class="section-slide">
                 <h1>Part III:<br>Common Schools and<br>the Shaping of Citizens</h1>
-            
-                <aside class="notes">
-                    <strong>Transition:</strong> Now to prisons. Note term "penitentiary" = place for penitence. Americans invented new incarceration approach. Section: ~12-15 min.
-                </aside>
             </section>
-
-
 
             <!-- Slide 25: Education Before Reform -->
             <section>
@@ -1518,13 +1849,7 @@
                         <li>Enslaved people: Illegal to teach in most slave states</li>
                     </ul>
                 </div>
-            
-                <aside class="notes">
-                    <strong>Teaching Points:</strong> Review main concepts. Check understanding. Connect to previous material. Preview next topic.
-                </aside>
             </section>
-
-
 
             <!-- Slide 26: Horace Mann and the Common School Movement -->
             <section>
@@ -1562,13 +1887,7 @@
                         <li><strong>Comprehensive:</strong> Academic subjects plus moral training</li>
                     </ul>
                 </div>
-            
-                <aside class="notes">
-                    <strong>Discussion:</strong> Note North-South divide. Connect to broader differences about democracy, labor, society. Ask: "Why would Southern elites resist?" Schools succeeded where prisons/asylums failed. But: whose values?
-                </aside>
             </section>
-
-
 
             <!-- Slide 27: Why Common Schools? The Reformers' Arguments -->
             <section>
@@ -1606,13 +1925,7 @@
                 <div class="conclusion-box">
                     <p><strong>Schools would create orderly, productive, moral citizens who accepted their place in the social order</strong></p>
                 </div>
-            
-                <aside class="notes">
-                    <strong>Discussion:</strong> Note mix of idealistic + controlling motives. Democratic rhetoric + cultural imperialism. Ask: "Which argument most compelling? Most problematic?" Preview Horace Mann.
-                </aside>
             </section>
-
-
 
             <!-- Slide 28: Mann's Reforms in Massachusetts -->
             <section>
@@ -1651,13 +1964,7 @@
                         <p>Better buildings with ventilation, heating, lighting. Blackboards, maps, books for every school. Making school environment conducive to learning.</p>
                     </div>
                 </div>
-            
-                <aside class="notes">
-                    <strong>Teaching Points:</strong> Review main concepts. Check understanding. Connect to previous material. Preview next topic.
-                </aside>
             </section>
-
-
 
             <!-- Slide 29: The Common School Classroom -->
             <section>
@@ -1705,13 +2012,7 @@
                         <li><strong>Discipline:</strong> Rules strictly enforced, corporal punishment common</li>
                     </ul>
                 </div>
-            
-                <aside class="notes">
-                    <strong>Teaching Points:</strong> Review main concepts. Check understanding. Connect to previous material. Preview next topic.
-                </aside>
             </section>
-
-
 
             <!-- Slide 30: The Hidden Curriculum -->
             <section>
@@ -1760,13 +2061,7 @@
                         <p>McGuffey Readers teaching honesty, industry, sobriety, deferred gratification. Middle-class values as universal.</p>
                     </div>
                 </div>
-            
-                <aside class="notes">
-                    <strong>Teaching Points:</strong> Review main concepts. Check understanding. Connect to previous material. Preview next topic.
-                </aside>
             </section>
-
-
 
             <!-- Slide 31: Resistance and Limitations -->
             <section>
@@ -1809,13 +2104,7 @@
                 <div class="conclusion-box">
                     <p><strong>Common schools were common—but not for everyone</strong></p>
                 </div>
-            
-                <aside class="notes">
-                    <strong>Teaching Points:</strong> Review main concepts. Check understanding. Connect to previous material. Preview next topic.
-                </aside>
             </section>
-
-
 
             <!-- Slide 32: Assessment of School Reform -->
             <section>
@@ -1872,13 +2161,7 @@
                     <p><strong>Schools did create more educated citizens—but also created more disciplined subjects</strong></p>
                     <p style="margin-top: 15px; font-size: 1em;">The question remains: Education for liberation or for control?</p>
                 </div>
-            
-                <aside class="notes">
-                    <strong>Teaching Points:</strong> Review main concepts. Check understanding. Connect to previous material. Preview next topic.
-                </aside>
             </section>
-
-
 
             <!-- Slide 33: Conclusion - The Tension at the Heart of Reform -->
             <section>
@@ -1939,13 +2222,7 @@
                         <li>Systems that reproduced inequalities they claimed to solve</li>
                     </ul>
                 </div>
-            
-                <aside class="notes">
-                    <strong>Teaching Points:</strong> Review main concepts. Check understanding. Connect to previous material. Preview next topic.
-                </aside>
             </section>
-
-
 
             <!-- Slide 34: Final Reflection -->
             <section>
@@ -1979,75 +2256,170 @@
                     <p style="font-size: 1.3em;"><strong>The moral laboratory of the 1820s-1860s created modern institutions—prisons, asylums, schools—that still shape our lives today</strong></p>
                     <p style="margin-top: 20px; font-size: 1em;">We inherit both their compassion and their contradictions. The question remains: Can we design institutions that truly liberate rather than just control?</p>
                 </div>
-            
-                <aside class="notes">
-                    <strong>Closing:</strong> No easy answers—that's the point. Ask students to reflect on modern parallels. Think critically about institutions in their lives. Preview next lecture. Open floor for questions/discussion.
-                </aside>
             </section>
 
         </div>
     </div>
 
-    <!-- Reveal.js JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/zoom/zoom.min.js"></script>
-
+    <!-- Navigation Script -->
     <script>
-        // Initialize Reveal.js
-        Reveal.initialize({
-            // Display settings
-            width: 1920,
-            height: 1080,
-            margin: 0.04,
+        // Presentation navigation system
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.reveal .slides section');
+        const totalSlides = slides.length;
+        let isTransitioning = false;
+
+        function init() {
+            showSlide(0);
+            updateProgress();
+            updateSlideNumber();
+        }
+
+        function showSlide(n) {
+            if (isTransitioning) return;
             
-            // Navigation
-            controls: true,
-            controlsLayout: 'bottom-right',
-            progress: true,
-            slideNumber: 'c/t',
-            hash: true,
+            if (slides[currentSlide]) {
+                slides[currentSlide].style.display = 'none';
+                slides[currentSlide].style.opacity = '0';
+            }
             
-            // Behavior
-            keyboard: true,
-            overview: true,
-            center: false,
-            touch: true,
-            loop: false,
-            rtl: false,
-            navigationMode: 'linear',
-            shuffle: false,
-            fragments: true,
+            currentSlide = Math.max(0, Math.min(n, totalSlides - 1));
             
-            // Transitions
-            transition: 'slide', // none/fade/slide/convex/concave/zoom
-            transitionSpeed: 'default', // default/fast/slow
-            backgroundTransition: 'fade',
+            if (slides[currentSlide]) {
+                isTransitioning = true;
+                slides[currentSlide].style.display = 'block';
+                slides[currentSlide].scrollTop = 0;
+                
+                setTimeout(() => {
+                    slides[currentSlide].style.opacity = '1';
+                    setTimeout(() => {
+                        isTransitioning = false;
+                    }, 300);
+                }, 10);
+            }
             
-            // Presentation Mode
-            showNotes: false,
+            updateProgress();
+            updateSlideNumber();
+            checkScrollIndicator();
+        }
+
+        function checkScrollIndicator() {
+            const currentSlideElement = slides[currentSlide];
+            const indicator = document.querySelector('.scroll-indicator');
             
-            // Plugins
-            plugins: [ RevealNotes, RevealZoom ],
+            if (currentSlideElement && currentSlideElement.scrollHeight > currentSlideElement.clientHeight) {
+                if (indicator) indicator.style.display = 'block';
+            } else {
+                if (indicator) indicator.style.display = 'none';
+            }
             
-            // Keyboard shortcuts (all standard Reveal.js shortcuts enabled)
-            // Key shortcuts include:
-            // - Arrow keys: Navigate slides
-            // - Space: Next slide
-            // - Shift+Space: Previous slide
-            // - Home/End: First/last slide
-            // - F: Fullscreen
-            // - S: Speaker notes view
-            // - O or Esc: Overview mode
-            // - B or .: Pause (black screen)
-            // - Alt+Click: Zoom
-            // - ?: Show keyboard shortcuts help
+            updateScrollIndicator();
+        }
+
+        function updateScrollIndicator() {
+            const indicator = document.querySelector('.scroll-indicator');
+            if (!indicator) return;
+            
+            if (isSlideAtBottom()) {
+                indicator.style.display = 'none';
+            } else {
+                const currentSlideElement = slides[currentSlide];
+                if (currentSlideElement.scrollHeight > currentSlideElement.clientHeight) {
+                    indicator.style.display = 'block';
+                }
+            }
+        }
+
+        document.addEventListener('scroll', function(e) {
+            if (e.target.classList && e.target.classList.contains('reveal')) return;
+            updateScrollIndicator();
+        }, true);
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                showSlide(currentSlide + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        }
+
+        function updateProgress() {
+            const progress = document.querySelector('.progress-bar');
+            if (progress) {
+                const percentage = (currentSlide / (totalSlides - 1)) * 100;
+                progress.style.width = percentage + '%';
+            }
+        }
+
+        function updateSlideNumber() {
+            const slideNumber = document.querySelector('.slide-number');
+            if (slideNumber) {
+                slideNumber.textContent = `${currentSlide + 1} / ${totalSlides}`;
+            }
+        }
+
+        function isSlideAtTop() {
+            const currentSlideElement = slides[currentSlide];
+            return currentSlideElement.scrollTop === 0;
+        }
+
+        function isSlideAtBottom() {
+            const currentSlideElement = slides[currentSlide];
+            return Math.abs(currentSlideElement.scrollHeight - currentSlideElement.scrollTop - currentSlideElement.clientHeight) < 5;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case 'ArrowRight':
+                case 'PageDown':
+                    e.preventDefault();
+                    nextSlide();
+                    break;
+                case 'ArrowLeft':
+                case 'PageUp':
+                    e.preventDefault();
+                    prevSlide();
+                    break;
+                case 'ArrowDown':
+                    if (isSlideAtBottom()) {
+                        e.preventDefault();
+                        nextSlide();
+                    }
+                    break;
+                case 'ArrowUp':
+                    if (isSlideAtTop()) {
+                        e.preventDefault();
+                        prevSlide();
+                    }
+                    break;
+                case ' ':
+                    e.preventDefault();
+                    nextSlide();
+                    break;
+                case 'Home':
+                case 'h':
+                case 'H':
+                    e.preventDefault();
+                    showSlide(0);
+                    break;
+                case 'End':
+                case 'e':
+                case 'E':
+                    e.preventDefault();
+                    showSlide(totalSlides - 1);
+                    break;
+            }
         });
-        
-        // Optional: Add custom keyboard shortcuts if needed
-        Reveal.addKeyBinding({ keyCode: 72, key: 'H', description: 'Go to first slide' }, () => {
-            Reveal.slide(0);
-        });
+
+        // Mouse wheel only scrolls content, does not advance slides
+        // Navigation requires arrow keys, space bar, or touch gestures
+
+        window.addEventListener('load', init);
     </script>
 </body>
 </html>
