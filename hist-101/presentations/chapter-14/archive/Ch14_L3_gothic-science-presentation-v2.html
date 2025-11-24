@@ -1,0 +1,2116 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gothic Science - HIST 101</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --gothic-crimson: #8B0000;
+            --gothic-purple: #9D4EDD;
+            --gothic-gold: #DAA520;
+            --gothic-silver: #C0C0C0;
+            --gothic-black: #0A0A0A;
+            --gothic-grey: #2F2F2F;
+            --blood-red: #AA0000;
+            --bone-white: #F5F5DC;
+        }
+
+        .reveal {
+            font-family: 'Crimson Text', serif;
+            font-size: 32px;
+            background: radial-gradient(circle at center, var(--gothic-grey) 0%, var(--gothic-black) 100%);
+        }
+
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            color: var(--gothic-gold);
+            text-transform: uppercase;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+            letter-spacing: 2px;
+        }
+
+        .reveal h1 { 
+            font-size: 3.2em; 
+            color: var(--gothic-crimson);
+            border-bottom: 3px solid var(--gothic-gold);
+            padding-bottom: 0.3em;
+        }
+        
+        .reveal h2 { 
+            font-size: 2.2em; 
+            color: var(--gothic-gold);
+        }
+        
+        .reveal h3 { 
+            font-size: 1.6em; 
+            color: var(--gothic-silver);
+        }
+
+        .reveal p, .reveal li {
+            color: var(--bone-white);
+            line-height: 1.6;
+        }
+
+        .reveal strong {
+            color: var(--gothic-crimson);
+            font-weight: 700;
+        }
+
+        .reveal em {
+            color: var(--gothic-gold);
+            font-style: italic;
+        }
+
+        .reveal a {
+            color: var(--gothic-purple);
+            text-decoration: underline;
+        }
+
+        .reveal a:hover {
+            color: var(--gothic-crimson);
+        }
+
+        /* Pop-up/Modal styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, var(--gothic-grey) 0%, var(--gothic-black) 100%);
+            color: var(--bone-white);
+            padding: 2.5em;
+            border-radius: 5px;
+            box-shadow: 0 10px 50px rgba(139,0,0,0.7);
+            max-width: 70%;
+            max-height: 70%;
+            overflow-y: auto;
+            z-index: 1000;
+            border: 4px solid var(--gothic-crimson);
+        }
+
+        .popup.active { display: block; }
+
+        .popup h3 {
+            color: var(--gothic-gold);
+            border-bottom: 2px solid var(--gothic-crimson);
+            padding-bottom: 0.5em;
+            margin-bottom: 0.8em;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 2.5em;
+            cursor: pointer;
+            color: var(--blood-red);
+            transition: all 0.3s;
+        }
+
+        .popup-close:hover {
+            color: var(--gothic-gold);
+            transform: scale(1.2);
+        }
+
+        .popup-trigger {
+            color: var(--gothic-purple);
+            text-decoration: underline dotted;
+            cursor: pointer;
+            border-bottom: 2px dotted var(--gothic-purple);
+            transition: all 0.2s;
+        }
+
+        .popup-trigger:hover {
+            color: var(--gothic-crimson);
+            border-bottom-color: var(--gothic-crimson);
+        }
+
+        /* Image placeholder styling */
+        .img-placeholder {
+            background: linear-gradient(135deg, var(--gothic-grey) 0%, var(--gothic-black) 100%);
+            border: 3px dashed var(--gothic-gold);
+            padding: 2.5em;
+            text-align: center;
+            color: var(--bone-white);
+            font-style: italic;
+            border-radius: 5px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        }
+        
+        /* General Image Styling for replaced placeholders */
+        .reveal img.gothic-img {
+            border: 3px solid var(--gothic-gold);
+            border-radius: 5px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.6);
+            display: block;
+            margin: 1em auto;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        .img-placeholder strong {
+            color: var(--gothic-gold);
+            font-size: 1.2em;
+        }
+
+        /* Key term styling */
+        .key-term {
+            color: var(--gothic-crimson);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Primary source styling */
+        .primary-source {
+            background: rgba(139, 0, 0, 0.2);
+            border-left: 5px solid var(--blood-red);
+            padding: 1.5em;
+            margin: 1em 0;
+            font-style: italic;
+            font-size: 0.95em;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.4);
+        }
+
+        /* Timeline styling */
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 0.8em 0;
+            padding: 0.8em;
+            border-left: 4px solid var(--gothic-crimson);
+            background: rgba(75, 0, 130, 0.1);
+        }
+
+        .timeline-date {
+            color: var(--gothic-gold);
+            font-weight: bold;
+            min-width: 120px;
+            font-size: 1.1em;
+        }
+
+        /* Quote styling */
+        .gothic-quote {
+            border-left: 5px solid var(--gothic-gold);
+            padding-left: 1.5em;
+            font-style: italic;
+            color: var(--gothic-silver);
+            font-size: 1.1em;
+        }
+
+        .gothic-attribution {
+            text-align: right;
+            font-size: 0.9em;
+            color: var(--gothic-gold);
+            margin-top: 0.5em;
+        }
+
+        /* Section divider */
+        .section-divider {
+            height: 3px;
+            background: linear-gradient(to right, var(--gothic-crimson), var(--gothic-gold), var(--gothic-crimson));
+            margin: 1.5em 0;
+        }
+
+        /* Two column layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2em;
+            align-items: start;
+        }
+
+        /* Box styling */
+        .gothic-box {
+            border: 3px solid var(--gothic-gold);
+            padding: 1.5em;
+            border-radius: 5px;
+            background: rgba(75, 0, 130, 0.15);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        }
+
+        /* List styling */
+        .reveal ul {
+            list-style-type: none;
+        }
+
+        .reveal ul li:before {
+            content: "✠ ";
+            color: var(--gothic-crimson);
+            font-weight: bold;
+            margin-right: 0.5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <section>
+                <h1>Gothic Science</h1>
+                <h2>Phrenology, Mesmerism, and Monster Shows in Antebellum America</h2>
+                <p style="margin-top: 2em; font-size: 0.9em; color: var(--gothic-silver);">
+                    <em>"The boundary between science and spectacle, reason and the uncanny"</em>
+                </p>
+                
+                <aside class="notes">
+                    <h4>📚 Welcome to Gothic Science!</h4>
+                    <p>This lecture explores one of the most fascinating (and weird) aspects of American history: the "Gothic Science" movement of the 1830s-1850s. We're going to look at three interconnected practices that mixed science, spectacle, and Gothic horror in ways that shaped American culture.</p>
+                    
+                    <h4>📖 What You'll Learn Today</h4>
+                    <ul>
+                        <li>How phrenology claimed to read character from skull bumps</li>
+                        <li>How mesmerism promised to control invisible "magnetic forces"</li>
+                        <li>How "monster shows" displayed preserved anatomical specimens</li>
+                        <li>Why these practices felt scientific to Americans of the 1840s-50s</li>
+                        <li>How these movements connected to slavery, scientific racism, and reform</li>
+                    </ul>
+                    
+                    <h4>💭 The Big Picture</h4>
+                    <p>Think of this period as America's first encounter with "viral pseudoscience." Just like today we have debates about what's real science vs. misinformation, Americans in the 1840s struggled to tell scientific truth from spectacular fraud. These Gothic sciences weren't just entertainment—they shaped real social policy, influenced debates about slavery and race, and helped Americans process their anxieties about a rapidly changing world.</p>
+                    
+                    <h4>🎓 Why "Gothic"?</h4>
+                    <p>We call these practices "Gothic" because they shared the same obsessions as Gothic literature (like Mary Shelley's <em>Frankenstein</em>): hidden forces, forbidden knowledge, unstable bodies, and the boundary between life and death. Americans read <em>Frankenstein</em> and then walked down the street to see a mesmerist put someone in a trance or examine jars of preserved "monsters"—it was all part of the same cultural moment.</p>
+					
+					<h3>The Word “Gothic”: Roots and Core Idea</h3>
+<p>
+    The adjective <strong>“Gothic”</strong> comes from the name of the <strong>Goths</strong>, an East Germanic people known to Roman and later European writers. Renaissance critics used the term as a cultural insult meaning <em>barbarian, unclassical, not-Roman</em>.
+</p>
+<p>
+    In this lecture, the term develops along three important historical branches: <strong>architecture</strong>, <strong>literature</strong>, and a wider <strong>cultural mood</strong>. All share a core idea: Gothic marks a move away from classical clarity toward darkness, intensity, and the uncanny.
+</p>
+
+<h3>Branch 1: Gothic as Architecture</h3>
+<p>
+    Renaissance Italians first popularized <strong>“Gothic”</strong> to describe the tall, pointed-arch cathedrals of medieval Europe. They meant it dismissively, contrasting them with the balanced geometry of ancient Rome.
+</p>
+<ul>
+    <li><strong>Origins:</strong> 15th–16th century critics naming medieval church architecture.</li>
+    <li><strong>Features:</strong> pointed arches, ribbed vaults, flying buttresses, stained glass, and dramatic vertical height.</li>
+    <li><strong>Value judgment:</strong> “Gothic” originally meant <em>barbarian, chaotic, over-ornamented</em>.</li>
+    <li><strong>Irony:</strong> the insult becomes the standard art-historical term for technically sophisticated medieval building.</li>
+</ul>
+<p>
+    Gothic architecture foreshadows later meanings: it pushes past calm rational order toward emotional intensity and overwhelming scale.
+</p>
+
+<h3>Branch 2: Gothic as Literature</h3>
+<p>
+    In the late eighteenth century, <strong>“Gothic”</strong> migrates into literature to describe stories steeped in fear, mystery, and emotional extremes—often set in ruins or remote landscapes.
+</p>
+<ul>
+    <li><strong>Spaces:</strong> castles, monasteries, abandoned estates, wild terrains.</li>
+    <li><strong>Atmosphere:</strong> dread, suspense, secrets waiting beneath the surface.</li>
+    <li><strong>Themes:</strong> forbidden knowledge, family curses, lingering pasts.</li>
+    <li><strong>Reason vs. emotion:</strong> Gothic fiction tests the limits of Enlightenment rationality when it encounters the uncanny.</li>
+</ul>
+<p>
+    Gothic literature uses the uncanny not as decoration but as a tool for exploring anxieties about modernity, religion, science, gender, and power.
+</p>
+
+<h3>Branch 3: Gothic as Cultural Mood</h3>
+<p>
+    By the nineteenth century, <strong>“Gothic”</strong> expands into a wider cultural mood, used to describe anything blending fear, curiosity, and the unsettling.
+</p>
+<ul>
+    <li><strong>Applications:</strong> ghost shows, lantern displays, spiritualism, phrenology, mesmerism, pseudo-scientific demonstrations.</li>
+    <li><strong>Core mood:</strong> fascinated horror—attraction mixed with discomfort.</li>
+    <li><strong>Boundary anxieties:</strong> human/animal, sane/insane, science/superstition, civilized/“savage.”</li>
+    <li><strong>Science as theater:</strong> new technologies presented with dramatic flair, blurring education and spectacle.</li>
+</ul>
+<p>
+    In this broader sense, Gothic becomes a tool for thinking about how societies confront uncertainty at the edges of knowledge.
+</p>
+			
+                </aside>
+            </section>
+
+<section>
+    <h2>Frankenstein's America</h2>
+
+    <div class="two-column">
+        
+        <div>
+            <img src="images/frankenstein_engraving.avif" 
+                 alt="Frankenstein Engraving" 
+                 class="gothic-img" 
+                 style="width: 100%; margin: 0;">
+        </div>
+
+        <div style="font-size: 1.3em;">
+            <div class="primary-source">
+                Imagine: New York City, 1851. You've just finished reading Mary Shelley's <em><span class="popup-trigger" onclick="togglePopup('frankenstein-popup')">Frankenstein</span></em>. You walk down Broadway and see posters advertising:
+                
+                <ul>
+                    <li>A <span class="popup-trigger" onclick="togglePopup('galvanism-popup')">galvanic</span> demonstration (frog legs twitching with electricity)</li>
+                    <li>A mesmerist's trance show</li>
+                    <li>A "monster" exhibit of preserved anatomical curiosities</li>
+                </ul>
+            </div>
+
+            <p style="margin-top: 1em;">
+                To the antebellum audience, <strong>Gothic literature and scientific spectacle were not separate</strong>—they were part of the same search for <span class="key-term">hidden forces</span>, <span class="key-term">forbidden knowledge</span>, and <span class="key-term">uncanny truths</span>.
+            </p>
+        </div>
+    </div>
+
+    <div id="frankenstein-popup" class="popup">
+        <span class="popup-close" onclick="togglePopup('frankenstein-popup')">&times;</span>
+        <h3>Frankenstein</h3>
+        <p><strong>Frankenstein; or, The Modern Prometheus</strong> (1818) by Mary Shelley. A novel about a scientist who creates a living creature from dead body parts, only to be horrified by what he's made.</p>
+        <p>By the 1850s, <em>Frankenstein</em> had been adapted into popular stage plays, making the monster a household image and priming Americans to see scientific demonstrations as potentially dangerous glimpses into nature's secrets.</p>
+    </div>
+
+    <div id="galvanism-popup" class="popup">
+        <span class="popup-close" onclick="togglePopup('galvanism-popup')">&times;</span>
+        <h3>Galvanism</h3>
+        <p>The use of electrical current to stimulate muscle contractions. Named after Luigi Galvani, who discovered that dead frog legs would twitch when exposed to electricity.</p>
+        <p>This phenomenon inspired Mary Shelley's <em>Frankenstein</em> and became a popular public demonstration in the 1840s.</p>
+    </div>
+			<aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This opening is designed to help you understand that what we today dismiss as "pseudoscience" wasn't seen that way by most Americans in the 1840s-50s. For them, phrenology, mesmerism, and monster shows felt like legitimate windows into nature's hidden secrets—just like the experiments in <em>Frankenstein</em>.</p>
+                    
+                    <h4>📖 Key Context</h4>
+                    <p><strong>Mary Shelley's <em>Frankenstein</em></strong> was published in 1818 and became wildly popular in America by the 1830s-40s. The novel explores what happens when science goes too far, when humans try to unlock the secrets of life and death. By the 1850s, the book had been adapted into stage plays that were often more popular than the novel itself.</p>
+                    
+                    <p><strong>The "Gothic" aesthetic</strong> was all about exploring fears: fear of death, fear of losing control, fear of hidden forces we can't see or understand. Gothic literature featured haunted castles, mad scientists, supernatural events, and the breaking of natural boundaries (like bringing the dead back to life).</p>
+                    
+                    <h4>💭 Why This Matters</h4>
+                    <p>Understanding the connection between Gothic fiction and Gothic science helps explain why Americans were so fascinated by phrenology, mesmerism, and anatomical displays. These weren't just "weird fads"—they were serious attempts to understand the human mind, body, and spirit at a time when institutional science was weak and Americans were desperate for explanations about how the world worked.</p>
+                    
+                    <h4>🎬 The Theatrical Connection</h4>
+                    <p>Stage adaptations of <em>Frankenstein</em> created a visual culture around Gothic science. When people went to see <em>Frankenstein</em> on stage, they saw the monster brought to life through dramatic special effects. Then they'd go see a mesmerist seemingly bring a "dead" person back to consciousness through magnetic passes, or view jars containing "monstrous" specimens that seemed to prove nature could create horrors as disturbing as any in fiction.</p>
+                    
+                    <h4>🤔 Discussion Question</h4>
+                    <p>What are some modern examples of things that blur the line between science and spectacle? Think about: viral health trends on social media, TV shows about forensics or medicine, conspiracy theories that use scientific-sounding language.</p>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Setting the Stage: A Nation in Flux</h2>
+                
+                <div class="two-column">
+                    <div>
+                        <h3>The Media Landscape</h3>
+                        <p>The <span class="popup-trigger" onclick="togglePopup('penny-press-popup')">Penny Press</span> blurred the line between science and hoax</p>
+                        <p style="font-size: 0.9em; margin-top: 1em;"><em>Example: The "Great Moon Hoax" of 1835 claimed astronomers discovered bat-winged humanoids on the moon—and thousands believed it!</em></p>
+                    </div>
+                    
+                    <div>
+                        <h3>Technological Vertigo</h3>
+                        <ul>
+                            <li>Railroads collapsed distance</li>
+                            <li>Telegraphs collapsed time</li>
+                            <li>Cities exploded in size</li>
+                            <li>Immigration reshaped society</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <div class="gothic-box" style="margin-top: 1.5em;">
+                    <h3>The Void</h3>
+                    <p><strong>Institutional science was weak.</strong> Medicine lacked germ theory. Psychology didn't exist. Religious certainty was fragmenting.</p>
+                    <p style="margin-top: 1em;">When technology raced ahead of understanding, <span class="key-term">spectacle-science filled the void</span>.</p>
+                </div>
+
+                <div id="penny-press-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('penny-press-popup')">&times;</span>
+                    <h3>Penny Press</h3>
+                    <p>Cheap newspapers that cost only one cent, making news accessible to working-class Americans for the first time. Started in the 1830s with papers like <em>The New York Sun</em>.</p>
+                    <p>These papers prioritized sensational stories over accuracy, conditioning the public to accept "scientific marvels" that sounded like fiction.</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 Understanding the Context</h4>
+                    <p>To understand why phrenology, mesmerism, and monster shows became so popular, you need to understand the world Americans lived in during the 1830s-1850s. This was a period of MASSIVE change and uncertainty.</p>
+                    
+                    <h4>📖 The Media Revolution</h4>
+                    <p><strong>The Penny Press</strong> began in 1833 with Benjamin Day's <em>New York Sun</em>. Before this, newspapers cost 6 cents—a day's wages for many workers. The penny press made news accessible to everyone, but it also prioritized sensation over accuracy.</p>
+                    
+                    <p><strong>The Great Moon Hoax (1835)</strong>: The <em>New York Sun</em> published a series of articles claiming that astronomer Sir John Herschel had discovered life on the moon using a powerful new telescope. The articles described forests, oceans, and even winged humanoid creatures called "Vespertilio-homo" (bat-men). Thousands of Americans believed it! This hoax showed how willing people were to believe in "scientific discoveries" that sounded fantastical.</p>
+                    
+                    <h4>💭 Technological Vertigo</h4>
+                    <p>Think about how much changed in just 30 years (1820-1850):</p>
+                    <ul>
+                        <li><strong>Railroads</strong>: In 1830, there were only 23 miles of railroad track in the US. By 1850, there were 9,000 miles. Travel time between cities was cut by 80-90%.</li>
+                        <li><strong>Telegraphs</strong>: Invented in 1837, by 1850 there were telegraph lines connecting major cities. You could send a message from New York to Washington DC in seconds—something that used to take days.</li>
+                        <li><strong>Cities</strong>: New York City's population grew from 123,000 in 1820 to 515,000 in 1850. Imagine your town quadrupling in size in 30 years!</li>
+                        <li><strong>Immigration</strong>: In the 1840s, over 1.5 million Irish immigrants arrived fleeing the Potato Famine. This created massive social anxiety about who was "American."</li>
+                    </ul>
+                    
+                    <h4>🏥 The Scientific Void</h4>
+                    <p><strong>Why were Americans so receptive to pseudoscience?</strong> Because legitimate science couldn't answer their questions:</p>
+                    <ul>
+                        <li><strong>Medicine</strong>: Doctors didn't know what caused disease (germ theory wasn't accepted until the 1880s). Their treatments often made patients worse.</li>
+                        <li><strong>Psychology</strong>: The field didn't exist yet. There was no scientific way to understand the mind, personality, or mental illness.</li>
+                        <li><strong>Religion</strong>: The Second Great Awakening (1790s-1840s) created religious diversity and experimentation, but also uncertainty.</li>
+                    </ul>
+                    
+                    <h4>🎓 Why This Matters</h4>
+                    <p>When you live in a world changing faster than you can understand it, and when traditional authorities (doctors, churches, scientists) don't have good answers, you look for new explanations. Phrenology promised to explain personality. Mesmerism promised to control invisible forces. Monster shows promised to reveal nature's hidden rules. They filled a genuine need.</p>
+                    
+                    <h4>🤔 Modern Parallel</h4>
+                    <p>Think about periods of rapid technological change today: the internet, social media, AI. During times of rapid change, people become more susceptible to misinformation because they're desperate for explanations and the "experts" seem out of touch.</p>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Phrenology</h2>
+                <h3>Mapping the Gothic Self</h3>
+                
+                <img src="images/phrenological_head_numbered_organs.avif" alt="Phrenology Chart" class="gothic-img" style="max-height: 600px;">
+
+                <aside class="notes">
+                    <h4>📚 Section Preview</h4>
+                    <p>Phrenology was the most popular and influential of the three "Gothic sciences" we're studying. At its peak in the 1840s-50s, phrenology was a nationwide craze. People got phrenology readings like we might get personality tests today.</p>
+                    
+                    <h4>📖 What We'll Cover</h4>
+                    <ul>
+                        <li>The basic theory: bumps on your skull reveal your character</li>
+                        <li>How phrenology readings worked (visiting the Fowler brothers)</li>
+                        <li>Why it became so popular (democratic, practical, comforting)</li>
+                        <li>The literary connection (Poe, Hawthorne, Whitman)</li>
+                        <li>The dark turn: scientific racism and slavery justification</li>
+                    </ul>
+                    
+                    <h4>💭 Key Theme</h4>
+                    <p>Phrenology shows how a "science" can start as self-help and end as oppression. The same practice that helped middle-class Americans understand themselves was also used to justify slavery and Native American removal.</p>
+                </aside>
+            </section>
+
+           <section>
+    <h2>The Core Idea: A Gothic Map of the Mind</h2>
+    
+    <div class="two-column" style="align-items: center;">
+        
+        <div>
+            <img src="images/Fowler_Wells-phrenology-diagram.avif" 
+                 alt="Phrenology Organs Map" 
+                 class="gothic-img" 
+                 style="max-height: 650px; width: 100%; object-fit: contain;">
+        </div>
+        
+        <div style="font-size: 1.3em;">
+            
+            <div class="gothic-box">
+                <h3>The Theory</h3>
+                <p>The skull's shape reflects hidden "organs" of character. Traits like <span class="popup-trigger" onclick="togglePopup('amativeness-popup')">amativeness</span> (romance), <span class="popup-trigger" onclick="togglePopup('combativeness-popup')">combativeness</span>, and <span class="popup-trigger" onclick="togglePopup('acquisitiveness-popup')">acquisitiveness</span> (greed) are measurable.</p>
+            </div>
+
+            <p style="margin-top: 1.5em;">The <span class="key-term">Gothic Map</span>: The self has hidden chambers the skull betrays. The body becomes a legible text—<strong>outer bone revealing inner monstrosity or virtue</strong>.</p>
+        </div>
+    </div>
+
+    <div id="amativeness-popup" class="popup">
+        <span class="popup-close" onclick="togglePopup('amativeness-popup')">&times;</span>
+        <h3>Amativeness</h3>
+        <p>In phrenology, the faculty of romantic and sexual love. Located at the base of the skull at the back of the head.</p>
+    </div>
+
+    <div id="combativeness-popup" class="popup">
+        <span class="popup-close" onclick="togglePopup('combativeness-popup')">&times;</span>
+        <h3>Combativeness</h3>
+        <p>In phrenology, the propensity for conflict, courage, and defensive resistance. Located above the ears on both sides of the head.</p>
+    </div>
+
+    <div id="acquisitiveness-popup" class="popup">
+        <span class="popup-close" onclick="togglePopup('acquisitiveness-popup')">&times;</span>
+        <h3>Acquisitiveness</h3>
+        <p>In phrenology, the desire to possess and accumulate property. Located on the sides of the head above the temples.</p>
+    </div>
+
+                <aside class="notes">
+                    <h4>📚 Understanding Phrenology's Appeal</h4>
+                    <p>To modern ears, phrenology sounds ridiculous: you can't tell someone's personality by feeling bumps on their head! But in the 1840s, this seemed like cutting-edge neuroscience.</p>
+                    
+                    <h4>📖 The Basic Theory</h4>
+                    <p><strong>Inventor:</strong> Franz Joseph Gall (1758-1828), an Austrian physician, developed the theory in the 1790s. His student Johann Spurzheim (1776-1832) brought it to America.</p>
+                    
+                    <p><strong>The Three Core Claims:</strong></p>
+                    <ol>
+                        <li>The brain is the organ of the mind (revolutionary idea at the time!)</li>
+                        <li>The brain is divided into distinct "organs," each responsible for a different character trait</li>
+                        <li>The size of each organ determines how strongly you possess that trait, and this size is reflected in the shape of your skull</li>
+                    </ol>
+                    
+                    <h4>💭 The "Organs" of Character</h4>
+                    <p>Phrenologists identified 27-37 different "organs" (the number varied by practitioner). Some examples:</p>
+                    <ul>
+                        <li><strong>Amativeness</strong>: Romantic/sexual love (back base of skull)</li>
+                        <li><strong>Philoprogenitiveness</strong>: Love of children (back top of skull)</li>
+                        <li><strong>Combativeness</strong>: Courage and defensiveness (sides above ears)</li>
+                        <li><strong>Destructiveness</strong>: Propensity for violence (sides near ears)</li>
+                        <li><strong>Acquisitiveness</strong>: Desire for property (sides above temples)</li>
+                        <li><strong>Secretiveness</strong>: Tendency to conceal (sides behind ears)</li>
+                        <li><strong>Cautiousness</strong>: Prudence and worry (top middle back)</li>
+                        <li><strong>Benevolence</strong>: Kindness and charity (top front center)</li>
+                        <li><strong>Veneration</strong>: Respect for authority (top center)</li>
+                        <li><strong>Conscientiousness</strong>: Sense of right/wrong (top rear center)</li>
+                    </ul>
+                    
+                    <h4>🎭 Why "Gothic"?</h4>
+                    <p>Phrenology was "Gothic" because it suggested your skull could betray your darkest secrets. Gothic literature was obsessed with hidden selves, dual natures (Dr. Jekyll and Mr. Hyde), and the idea that you might have monstrous impulses lurking beneath a civilized exterior. Phrenology made this literary trope "scientific"—your skull might reveal you have a large "organ of Destructiveness" that you're struggling to control!</p>
+                    
+                    <h4>🎓 Why People Believed It</h4>
+                    <p>Why did this seem plausible in 1840?</p>
+                    <ul>
+                        <li><strong>Materialism</strong>: The idea that mind = brain was actually progressive. Before phrenology, most people thought the mind/soul was separate from the body.</li>
+                        <li><strong>Localization</strong>: The idea that different brain regions control different functions was correct! Modern neuroscience proves this (though not in the way phrenologists thought).</li>
+                        <li><strong>Folk wisdom</strong>: People already believed you could judge character by physical appearance. Phrenology just systematized this belief.</li>
+                        <li><strong>Confirmation bias</strong>: Phrenologists were skilled at reading social cues and telling people what they wanted to hear, then pointing to "skull evidence."</li>
+                    </ul>
+                    
+                    <h4>🤔 Critical Thinking</h4>
+                    <p>What made phrenology pseudoscience rather than science?</p>
+                    <ul>
+                        <li>No controlled experiments</li>
+                        <li>Couldn't make accurate predictions</li>
+                        <li>When evidence contradicted the theory, they changed the theory rather than admitting it was wrong</li>
+                        <li>Practitioners had financial incentives to find positive results</li>
+                    </ul>
+                </aside>
+            </section>
+
+           <section>
+    <h2>The Experience: Visiting the Fowlers</h2>
+    
+    <div class="two-column" style="align-items: center;">
+        
+        <div>
+            <img src="images/phrenology_office.avif" 
+                 alt="Fowler Phrenology Office" 
+                 class="gothic-img" 
+                 style="width: 100%; max-height: 500px; object-fit: cover;">
+        </div>
+        
+        <div style="font-size: 1.3em;">
+            <h3>The Fowler Brothers</h3>
+            <p>Orson and Lorenzo Fowler turned phrenology into big business in 1830s-50s New York.</p>
+            
+            <div class="gothic-box" style="margin-top: 1em;">
+                <h4>The Reading Process:</h4>
+                <ul>
+                    <li>Straight-backed chair in intimate room</li>
+                    <li>Examiner's hands glide over scalp</li>
+                    <li>Running commentary on bumps and depressions</li>
+                    <li>Discussion of moral strengths and dangerous tendencies</li>
+                </ul>
+            </div>
+            
+            <p style="margin-top: 1em;"><strong>Cost:</strong> 25¢ per reading, $3 for a printed chart</p>
+        </div>
+    </div>
+</section>
+                <aside class="notes">
+                    <h4>📚 The Fowler Phrenology Empire</h4>
+                    <p>To understand how phrenology became a mass movement in America, you need to understand the Fowler brothers: Orson Squire Fowler (1809-1887) and Lorenzo Niles Fowler (1811-1896). They were the most successful popularizers of phrenology in America.</p>
+                    
+                    <h4>📖 The Fowler Brothers' Background</h4>
+                    <p><strong>Orson Fowler</strong> attended Amherst College with Henry Ward Beecher (who became a famous preacher). After graduation in 1834, while Beecher went into ministry, Fowler dedicated himself to phrenology. He started by traveling through New York and New England, giving lectures and "reading heads."</p>
+                    
+                    <p><strong>Lorenzo Fowler</strong>, Orson's younger brother, studied at Amherst Academy but skipped college to join Orson as an itinerant phrenologist. By 1835, their younger sister Charlotte was also promoting phrenology.</p>
+                    
+                    <h4>💼 The Business Model</h4>
+                    <p>The Fowlers established their main office and "Phrenological Cabinet" in New York City (131 Nassau Street, later moved to Broadway). Their business included:</p>
+                    <ul>
+                        <li><strong>Individual readings</strong>: 25¢ for a basic examination, $3 for a detailed printed chart with recommendations</li>
+                        <li><strong>Phrenological cabinets</strong>: Display of skulls, busts, and casts showing famous people's head shapes</li>
+                        <li><strong>Publishing</strong>: Fowler & Wells published the <em>American Phrenological Journal</em> (1838-1911), reaching 50,000 subscribers at its peak</li>
+                        <li><strong>Lectures</strong>: The Fowlers traveled extensively, giving public lectures that could attract hundreds</li>
+                        <li><strong>Training courses</strong>: They taught others to become phrenologists</li>
+                        <li><strong>Products</strong>: Sold porcelain phrenological heads (made by Lorenzo) for about $10 each—expensive!</li>
+                    </ul>
+                    
+                    <h4>🪑 What Happened During a Reading</h4>
+                    <p><strong>The Setting:</strong> You'd enter a small, calm room with a straight-backed chair. The atmosphere was intimate and professional—more like a doctor's office than a fortune-teller's tent.</p>
+                    
+                    <p><strong>The Examination:</strong> The phrenologist would have you sit while they stood behind you. They'd place their hands on your head and slowly move their fingers across your scalp, pausing at various points. They'd make a running commentary:</p>
+                    <ul>
+                        <li>"I feel a strong development of Benevolence here—you have a generous nature."</li>
+                        <li>"Your Combativeness is moderate—you're not naturally aggressive, but you'll defend yourself when necessary."</li>
+                        <li>"Hmm, your Secretiveness is quite large—you have a tendency to keep things to yourself. This can be good for discretion, but be careful it doesn't become dishonesty."</li>
+                    </ul>
+                    
+                    <p><strong>The Chart:</strong> If you paid for the full service, you'd receive a printed chart with a profile of your head and scores for each of the 27-37 organs, typically rated on a scale from 1-7 (Very Small, Small, Moderate, Average, Full, Large, Very Large).</p>
+                    
+                    <p><strong>The Advice:</strong> The phrenologist would give practical recommendations based on your chart:</p>
+                    <ul>
+                        <li>Career advice: "With your large Constructiveness and moderate Acquisitiveness, you'd make an excellent carpenter or architect—more interested in building than in money."</li>
+                        <li>Marriage compatibility: "Your large Amativeness suggests you need a spouse with equally strong romantic feelings."</li>
+                        <li>Self-improvement: "Your small Cautiousness means you take risks. Cultivate this organ by practicing deliberation before acting."</li>
+                    </ul>
+                    
+                    <h4>👥 Who Got Readings?</h4>
+                    <p>EVERYONE. The Fowlers examined over 200,000 people in their careers. Famous clients included:</p>
+                    <ul>
+                        <li><strong>Walt Whitman</strong>: Got his reading in 1849, was told he had "large Amativeness" (he published his chart in <em>Leaves of Grass</em>!)</li>
+                        <li><strong>Clara Barton</strong>: Founder of the American Red Cross</li>
+                        <li><strong>Edgar Allan Poe</strong>: Yes, even skeptical Poe got examined</li>
+                        <li><strong>Mark Twain</strong>: Got two readings under different names to expose phrenology as fraud (both readings said opposite things!)</li>
+                    </ul>
+                    
+                    <h4>💰 The Commodification</h4>
+                    <p>What made the Fowlers revolutionary was democratizing and commercializing phrenology:</p>
+                    <ul>
+                        <li><strong>Affordable</strong>: 25¢ was a day's wages for some workers, but much cheaper than medical consultations</li>
+                        <li><strong>Democratic</strong>: Anyone could learn phrenology from their books and practice it themselves</li>
+                        <li><strong>Practical</strong>: Unlike abstract philosophy, phrenology promised concrete, useful information</li>
+                        <li><strong>Scientific-seeming</strong>: The charts, measurements, and technical terminology gave phrenology an aura of objectivity</li>
+                    </ul>
+                    
+                    <h4>🎓 Why It Worked</h4>
+                    <p>The Fowlers were successful because they understood psychology (even if their phrenology was wrong):</p>
+                    <ul>
+                        <li><strong>Cold reading</strong>: Like modern psychics, they observed clothing, speech, and mannerisms to make educated guesses</li>
+                        <li><strong>Barnum statements</strong>: "You have a tendency to be critical of yourself" (true of almost everyone!)</li>
+                        <li><strong>Confirmation bias</strong>: People remembered the hits and forgot the misses</li>
+                        <li><strong>Flattery</strong>: They emphasized positive traits and framed negative traits as "underdeveloped" rather than absent</li>
+                    </ul>
+                    
+                    <h4>🤔 Discussion Question</h4>
+                    <p>What modern practices are similar to phrenology readings? Think about: personality tests (Myers-Briggs, Enneagram), astrology, DNA ancestry tests that claim to reveal your "personality traits." What makes something scientific vs. pseudoscientific?</p>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Why Phrenology Became a National Craze</h2>
+                
+                <div class="two-column">
+                    <div class="gothic-box">
+                        <h3>Democratic</h3>
+                        <p>Anyone could learn the system—not reserved for elites</p>
+                    </div>
+                    
+                    <div class="gothic-box">
+                        <h3>Practical</h3>
+                        <p>Used for hiring, courtship, child-rearing, career choice</p>
+                    </div>
+                </div>
+
+                <div class="two-column" style="margin-top: 1.5em;">
+                    <div class="gothic-box">
+                        <h3>Objective-Seeming</h3>
+                        <p>Gave scientific authority to intuition about character</p>
+                    </div>
+                    
+                    <div class="gothic-box">
+                        <h3>Comforting</h3>
+                        <p>Imposed order on inner chaos; first mass-market personality system</p>
+                    </div>
+                </div>
+
+                <p style="margin-top: 2em; text-align: center; font-size: 1.2em;">
+                    <span class="key-term">America's first scientific self-help movement</span>
+                </p>
+
+                <aside class="notes">
+                    <h4>📚 Understanding Phrenology's Mass Appeal</h4>
+                    <p>Why did phrenology become such a huge craze in America (more than in Europe)? It's because phrenology perfectly fit American values and anxieties in the 1840s.</p>
+                    
+                    <h4>📖 Democratic Appeal</h4>
+                    <p><strong>Why it mattered:</strong> In the Age of Jackson (1820s-1840s), Americans were obsessed with democracy and egalitarianism. They distrusted experts and elites. Phrenology was perfect because:</p>
+                    <ul>
+                        <li><strong>You didn't need medical training</strong>: Anyone could buy a phrenology book, study the charts, and start examining heads. The Fowlers' <em>Self-Instructor in Phrenology</em> (1857) sold hundreds of thousands of copies.</li>
+                        <li><strong>It challenged medical authority</strong>: Regular doctors were often seen as out-of-touch elites. Phrenologists were "people's scientists."</li>
+                        <li><strong>It spread through voluntary associations</strong>: Phrenology clubs, lectures at lyceums and mechanics' institutes, traveling lecturers—all very democratic, participatory forms.</li>
+                    </ul>
+                    
+                    <h4>🛠️ Practical Applications</h4>
+                    <p><strong>Employers used it for hiring decisions:</strong> "Let me examine your head before I offer you this position." Phrenology claimed to reveal honesty, industry, and intelligence.</p>
+                    
+                    <p><strong>Parents used it for child-rearing:</strong> "My daughter has a small organ of Cautiousness—I need to teach her to be more careful." The Fowlers sold a book called <em>Phrenology Applied to Education and Self-Improvement</em>.</p>
+                    
+                    <p><strong>Courtship and marriage:</strong> Phrenological compatibility was serious business! The Fowlers offered "matrimonial advice" based on comparing charts. If your Amativeness and your partner's didn't match, the marriage might fail!</p>
+                    
+                    <p><strong>Career counseling:</strong> Your phrenological chart could guide you to the right profession. Large Combativeness and Destructiveness? Maybe you should be a soldier. Large Constructiveness and small Acquisitiveness? An artist or craftsman.</p>
+                    
+                    <p><strong>Self-improvement:</strong> Phrenologists believed you could strengthen weak organs through exercise, just like muscles. Small Veneration? Practice respecting your elders. Large Secretiveness? Work on being more open and honest.</p>
+                    
+                    <h4>🔬 The Illusion of Objectivity</h4>
+                    <p><strong>Why it seemed scientific:</strong></p>
+                    <ul>
+                        <li><strong>Measurements</strong>: Phrenologists used calipers and measuring tape—tools of science!</li>
+                        <li><strong>Charts and diagrams</strong>: Printed charts with numerical scores looked very official</li>
+                        <li><strong>Technical vocabulary</strong>: Terms like "Philoprogenitiveness" and "Adhesiveness" sounded learned</li>
+                        <li><strong>Journals</strong>: The <em>American Phrenological Journal</em> looked like a medical journal</li>
+                        <li><strong>Testimonials</strong>: Published success stories (selection bias!)</li>
+                    </ul>
+                    
+                    <p>Phrenology gave scientific authority to what people already believed about character judgment. Instead of saying "I have a gut feeling you're dishonest," you could say "Your organ of Secretiveness is overdeveloped."</p>
+                    
+                    <h4>🧘 Comforting Structure</h4>
+                    <p><strong>The psychological appeal:</strong> Phrenology offered something people desperately needed in the chaotic 1840s: a map of the self.</p>
+                    
+                    <p><strong>Before personality psychology</strong>: Remember, Sigmund Freud wasn't born until 1856, and psychology as a scientific discipline didn't exist. Americans had no framework for understanding their own minds and personalities. Phrenology provided that framework.</p>
+                    
+                    <p><strong>Managing anxiety</strong>: If you knew which organs were strong and which were weak, you had a plan for self-improvement. This was enormously comforting during a period of rapid change and uncertainty.</p>
+                    
+                    <p><strong>Social navigation</strong>: In rapidly growing cities full of strangers, how do you know who to trust? Phrenology promised a way to quickly assess character.</p>
+                    
+                    <p><strong>It's like Myers-Briggs today</strong>: Just as people today say "I'm an INTJ" to explain their behavior, people in the 1840s would say "I have large Firmness and small Cautiousness." It provided a shared language for understanding personality.</p>
+                    
+                    <h4>📊 Scale of the Movement</h4>
+                    <p>To give you a sense of how big phrenology was:</p>
+                    <ul>
+                        <li>The Fowlers' <em>American Phrenological Journal</em> reached 50,000 subscribers (huge for the 1840s!)</li>
+                        <li>Phrenology lectures could fill halls with 500-1,000 people</li>
+                        <li>Over 200 phrenology books were published in the US between 1820-1860</li>
+                        <li>Hundreds of people set up as practicing phrenologists</li>
+                        <li>By 1850, most educated Americans had at least heard of phrenology and many believed in it</li>
+                    </ul>
+                    
+                    <h4>🎓 Senior Historians' Perspective</h4>
+                    <p><strong>Historian John D. Davies</strong> (<em>Phrenology: Fad and Science</em>, 1955) argues phrenology was America's first "scientific" self-help movement, paving the way for pop psychology.</p>
+                    
+                    <p><strong>Historian Charles Colbert</strong> (<em>A Measure of Perfection</em>, 1997) emphasizes how phrenology fit with American optimism—the belief that anyone could improve themselves through knowledge and effort.</p>
+                    
+                    <h4>🤔 Critical Thinking Question</h4>
+                    <p>Why are people still drawn to personality classification systems (astrology, Myers-Briggs, Enneagram, etc.) even when scientists say they're not valid? What psychological needs do these systems fill?</p>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Literary & Cultural Echoes</h2>
+                
+                <div class="two-column">
+                    <div>
+                        <h3>The Gothic Writers</h3>
+                        <div class="gothic-box">
+                            <p><strong>Edgar Allan Poe & Nathaniel Hawthorne:</strong></p>
+                            <ul style="font-size: 0.9em;">
+                                <li>Hidden compulsions</li>
+                                <li>Psychological doubling</li>
+                                <li>Concealed sin</li>
+                                <li>The layered,unstable self</li>
+                            </ul>
+                            <p style="margin-top: 1em; font-style: italic;">Phrenology provided the "technology" for reading the darker psyche</p>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3>The Optimist</h3>
+                        <div class="gothic-box" style="background: rgba(218, 165, 32, 0.15);">
+                            <p><strong>Walt Whitman:</strong></p>
+                            <p style="font-size: 0.95em;">Saw phrenology as democratic proof of human potential. Published his own phrenological chart in <em>Leaves of Grass</em> (1855).</p>
+                            <p style="margin-top: 1em; font-style: italic;">"This science could be sunny as well as spooky"</p>
+                        </div>
+                        
+                        <img src="images/walt_whitman.avif" alt="Walt Whitman" class="gothic-img" style="max-height: 250px; margin-top: 1em;">
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 Phrenology in American Literature</h4>
+                    <p>Phrenology didn't just exist alongside American literature—it deeply influenced how writers thought about character, psychology, and the self. But different writers used it in very different ways.</p>
+                    
+                    <h4>📖 The Gothic Interpretation: Poe & Hawthorne</h4>
+<p><strong>Edgar Allan Poe</strong> (1809–1849) was deeply familiar with phrenology and used its ideas—sometimes seriously, sometimes satirically—to explore the psychology of guilt, perverseness, and moral decay.</p>
+
+<ul>
+    <li><strong>"The Black Cat" (1843)</strong>: The narrator’s idea of “perverseness” echoes phrenological thinking about innate destructive impulses.</li>
+    <li><strong>"The Tell-Tale Heart" (1843)</strong>: Although not explicitly phrenological, the narrator’s fixation on physical signs revealing inner character reflects nineteenth-century assumptions about the body betraying the mind.</li>
+    <li><strong>"The Facts in the Case of M. Valdemar" (1845)</strong>: A mesmerism tale rather than a phrenology tale; it reflects the broader Gothic culture in which phrenology, mesmerism, and other “hidden forces” coexisted.</li>
+</ul>
+
+<p>
+    For Poe, these pseudosciences raised unsettling questions: what if your darkest impulses are innate? What if the body itself reveals what you most want to hide?
+</p>
+
+                    
+                    analyze for historical accuracy
+<p><strong>Nathaniel Hawthorne</strong> (1804–1864) did not weave literal phrenology into his fiction, but he wrote within the same cultural worldview: the belief that outward physical signs reveal inward moral truths. His stories probe the dangers of interpreting character through appearance, mirroring the assumptions behind phrenology and physiognomy.</p>
+
+<ul>
+    <li><strong><em>The Scarlet Letter</em> (1850)</strong>: Characters continually try to decipher moral interiority from outward signs—Dimmesdale’s bodily deterioration, Hester’s scarlet emblem, Chillingworth’s “anatomizing” scrutiny. This mirrors the era’s obsession with reading the hidden self from physical indicators.</li>
+
+    <li><strong>"The Birthmark" (1843)</strong>: Aylmer interprets his wife’s small birthmark as a physical manifestation of innate imperfection. The belief that a bodily mark signals deeper moral truth reflects the same logic that underpinned phrenology and physiognomy.</li>
+
+    <li><strong>"Ethan Brand" (1850)</strong>: Brand’s quest for the “unpardonable sin” ultimately inscribes itself onto his face—his features hardened, his expression fixed in a kind of moral fossilization. The story dramatizes the belief that sin reshapes the body, a core assumption shared by nineteenth-century moral science and phrenological thinking.</li>
+</ul>
+                    
+                    <h4>🌞 The Optimistic Interpretation: Walt Whitman</h4>
+                    <p><strong>Walt Whitman</strong> (1819-1892) embraced phrenology enthusiastically. In 1849, at age 30, he visited Lorenzo Fowler for a reading. Fowler's analysis said Whitman had:</p>
+                    <ul>
+                        <li><strong>Large Amativeness</strong>: "You are capable of strong attachments"</li>
+                        <li><strong>Large Adhesiveness</strong>: "You are very fond of the company of others"</li>
+                        <li><strong>Large Alimentiveness</strong>: "You enjoy good food and drink"</li>
+                        <li><strong>Large Individuality</strong>: "You notice things keenly"</li>
+                    </ul>
+                    
+                    <p>Whitman was so pleased that he <strong>published this chart</strong> in the 1855 edition of <em>Leaves of Grass</em>! For Whitman, phrenology proved that human nature was good, that bodies were sacred, and that everyone had divine potential encoded in their skulls.</p>
+                    
+                    <p><strong>Democratic vision:</strong> Whitman saw phrenology as democratic science—anyone could understand it, and it showed that all humans shared the same basic organs of character. Your skull proved you were part of the democratic whole.</p>
+                    
+                    <h4>🎭 Two Faces of the Same Science</h4>
+                    <p>The contrast between Poe/Hawthorne and Whitman shows how the same "science" could support opposite worldviews:</p>
+                    <ul>
+                        <li><strong>Gothic view</strong>: Your skull betrays your hidden darkness. You might have monstrous impulses you can't control.</li>
+                        <li><strong>Optimistic view</strong>: Your skull reveals your divine potential. Understanding yourself leads to self-improvement and harmony.</li>
+                    </ul>
+                    
+                    <h4>🎓 Why Literature Matters Here</h4>
+                    <p>Studying how writers used phrenology helps us understand that it wasn't just a medical fad—it was a lens through which Americans understood human nature, morality, and the self. When we read these authors today, recognizing their phrenological assumptions helps us understand what they meant.</p>
+                    
+                    <h4>🤔 Discussion Question</h4>
+                    <p>Do you think personality tests today (Myers-Briggs, Enneagram) are used in "Gothic" ways (to explain why you have dark impulses) or "optimistic" ways (to help you reach your potential)? Or both?</p>
+                </aside>
+            </section>
+
+            <section>
+                <h2>The Darkest Turn: Scientific Racism</h2>
+                
+                <div class="two-column">
+                    <div>
+                        <img src="images/Samuel-Morton-Crania-Americana-skulls.avif" alt="Samuel Morton Crania Americana" class="gothic-img" style="max-height: 550px;">
+                    </div>
+                    
+                    <div>
+                        <h3>Samuel Morton's <em>Crania Americana</em> (1839)</h3>
+                        <p>Morton collected over 1,000 skulls to rank races "scientifically"</p>
+                        
+                        <div class="section-divider"></div>
+                        
+                        <div class="gothic-box" style="border-color: var(--blood-red); background: rgba(139,0,0,0.2);">
+                            <h4>The Shift</h4>
+                            <p>Phrenology moved from <span class="key-term">self-help</span> to <span class="key-term">oppression</span></p>
+                            <ul style="margin-top: 1em; font-size: 0.95em;">
+                                <li>Used to justify slavery</li>
+                                <li>Used to justify Native American removal</li>
+                                <li>Used to justify anti-immigrant prejudice</li>
+                            </ul>
+                        </div>
+                        
+                        <p style="margin-top: 1.5em;"><strong>Legacy:</strong> Laid groundwork for Social Darwinism, eugenics, and racial anthropology</p>
+                    </div>
+                </div>
+
+                <div id="morton-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('morton-popup')">&times;</span>
+                    <h3>Samuel George Morton (1799-1851)</h3>
+                    <p>Philadelphia physician who collected over 1,000 human skulls and measured their internal capacity (cranial volume) to argue that different races had different intellectual capacities.</p>
+                    <p>His work was later proven to be based on flawed measurements and racist assumptions, but it was highly influential in the 1840s-50s.</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 When Self-Help Becomes Oppression</h4>
+                    <p>This is the hardest but most important part of the phrenology story. We need to understand how a practice that started as self-improvement became a tool of racist oppression.</p>
+                    
+                    <h4>📖 Samuel George Morton (1799-1851)</h4>
+                    <p><strong>Who he was:</strong> A respected Philadelphia physician and scientist, Morton was a founder of physical anthropology in America. He graduated from the University of Pennsylvania Medical School and was a member of the Academy of Natural Sciences.</p>
+                    
+                    <p><strong>His collection:</strong> Morton spent decades collecting human skulls from around the world—over 1,000 by his death in 1851. This was the largest collection in America and was considered scientifically valuable at the time.</p>
+                    
+                    <p><strong>His method:</strong> Morton measured the internal capacity of skulls by filling them with mustard seed (later switched to lead shot) and then measuring the volume. He claimed this revealed brain size, which he believed correlated with intelligence.</p>
+                    
+                    <p><strong>His "findings" (all false):</strong></p>
+                    <ul>
+                        <li>"Caucasian" skulls averaged 87 cubic inches (supposedly the largest)</li>
+                        <li>"Mongolian" skulls averaged 83 cubic inches</li>
+                        <li>"Native American" skulls averaged 82 cubic inches</li>
+                        <li>"African" skulls averaged 78 cubic inches (supposedly the smallest)</li>
+                    </ul>
+                    
+                    <h4>❌ What Was Wrong With Morton's Science</h4>
+                    <p>In 1978, paleontologist Stephen Jay Gould re-examined Morton's data and found:</p>
+                    <ul>
+                        <li><strong>Selection bias</strong>: Morton included more large-skulled specimens for "Caucasians" and more small-skulled specimens for "Africans"</li>
+                        <li><strong>Faulty measurements</strong>: His measurements were inconsistent and showed evidence of unconscious (or conscious) bias</li>
+                        <li><strong>Misattribution</strong>: Some skulls were incorrectly identified by race</li>
+                        <li><strong>Ignored variation</strong>: Individual variation within any group is larger than average differences between groups</li>
+                        <li><strong>Wrong assumption</strong>: Even if races had different average brain sizes (they don't), this doesn't correlate with intelligence</li>
+                    </ul>
+                    
+                    <h4>⚫ How Phrenology Justified Slavery</h4>
+                    <p><strong>The argument slaveholders used:</strong></p>
+                    <p>"Scientific evidence" (Morton's measurements + phrenological analysis) supposedly proved that Africans had:</p>
+                    <ul>
+                        <li>Smaller brains overall</li>
+                        <li>Large "organs" of Amativeness and Alimentiveness (love and appetite) but small organs of Intellect</li>
+                        <li>Large organs of Imitation but small organs of Reason</li>
+                        <li>Natural propensity for servitude and manual labor</li>
+                    </ul>
+                    
+                    <p><strong>The impact:</strong> Pro-slavery politicians, newspaper editors, and ministers cited Morton's work to argue that slavery was not just economically necessary but scientifically justified. They claimed they were being kind by "managing" a race that supposedly couldn't manage itself.</p>
+                    
+                    <h4>🪶 Native American Removal</h4>
+                    <p>Phrenologists examined Native American skulls and claimed to find:</p>
+                    <ul>
+                        <li>Large organs of Destructiveness and Combativeness ("naturally warlike")</li>
+                        <li>Small organs of Veneration and Conscientiousness ("lack moral sense")</li>
+                        <li>Proof that Native Americans were a "dying race" that couldn't adapt to civilization</li>
+                    </ul>
+                    
+                    <p>This "evidence" was used to justify forced removal policies like the Trail of Tears (1838-1839).</p>
+                    
+                    <h4>🚢 Anti-Immigrant Prejudice</h4>
+                    <p>In the 1840s-50s, over 2 million Irish and German immigrants arrived in America. Nativists used phrenology to argue that:</p>
+                    <ul>
+                        <li>Irish had large organs of Combativeness and Alimentiveness ("violent drunks")</li>
+                        <li>Germans had large organs of Acquisitiveness ("greedy")</li>
+                        <li>Neither group could become truly "American"</li>
+                    </ul>
+                    
+                    <h4>💀 Criminal Phrenology</h4>
+                    <p>Phrenologists also examined the skulls of executed criminals and created "criminal types." They claimed you could identify potential criminals by their skull shapes—leading to unjust profiling and discrimination.</p>
+                    
+                    <h4>📊 The Sectional Crisis Connection</h4>
+                    <p><strong>Timing matters:</strong> Phrenology's peak popularity (1830s-1850s) exactly coincides with:</p>
+                    <ul>
+                        <li>The expansion of slavery into new territories (Mexican-American War, Kansas-Nebraska Act)</li>
+                        <li>Indian Removal Act (1830) and forced relocations</li>
+                        <li>Peak of Irish and German immigration (1840s-50s)</li>
+                        <li>Rising sectional tensions leading to Civil War</li>
+                    </ul>
+                    
+                    <p>Phrenology didn't cause these conflicts, but it provided pseudoscientific ammunition for every side.</p>
+                    
+                    <h4>🎓 Legacy and Modern Impact</h4>
+                    <p><strong>Direct descendants of phrenology:</strong></p>
+                    <ul>
+                        <li><strong>Cesare Lombroso's "criminal anthropology" (1870s)</strong>: Claimed criminals had distinctive physical features</li>
+                        <li><strong>Francis Galton's eugenics (1880s)</strong>: Argued for selective breeding to "improve" the human race</li>
+                        <li><strong>IQ testing</strong>: Early IQ tests (1910s-20s) were explicitly designed to prove racial hierarchies</li>
+                        <li><strong>Nazi racial science (1930s-40s)</strong>: Drew directly on 19th-century racial anthropology</li>
+                    </ul>
+                    
+                    <p><strong>Modern echoes:</strong> Claims about racial differences in intelligence, criminal profiling based on appearance, and other forms of "scientific racism" all trace back to practices like phrenology.</p>
+                    
+                    <h4>⚠️ Why We Study This</h4>
+                    <p>We study this dark chapter because:</p>
+                    <ol>
+                        <li>It shows how "science" can be corrupted to serve political agendas</li>
+                        <li>It reveals how racism gets coded into supposedly objective systems</li>
+                        <li>It helps us recognize similar patterns today</li>
+                        <li>It reminds us that just because something uses scientific language doesn't mean it's true</li>
+                    </ol>
+                    
+                    <h4>🤔 Critical Thinking</h4>
+                    <p>How can we tell the difference between legitimate science and "science" being used to justify existing prejudices? Look for:</p>
+                    <ul>
+                        <li>Peer review and replication</li>
+                        <li>Transparency about methods and data</li>
+                        <li>Willingness to be proven wrong</li>
+                        <li>Lack of financial or political conflicts of interest</li>
+                        <li>Consensus among experts vs. lone voices</li>
+                    </ul>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Mesmerism</h2>
+                <h3>The Gothic Spirit on Stage</h3>
+                
+                <img src="images/mesmerism-baquet-illustration-1780s.avif" alt="Mesmerism Baquet" class="gothic-img" style="max-height: 600px;">
+
+                <aside class="notes">
+                    <h4>📚 Section Preview: Mesmerism</h4>
+                    <p>If phrenology was about reading the hidden mind through the skull, mesmerism was about controlling hidden forces through the will. This section explores the second major "Gothic science" we're studying.</p>
+                    
+                    <h4>📖 What We'll Cover</h4>
+                    <ul>
+                        <li>The theory of "animal magnetism"—an invisible fluid supposedly flowing through all living things</li>
+                        <li>How mesmerist performances worked (the theater of the trance)</li>
+                        <li>Phreno-mesmerism: the hybrid spectacle</li>
+                        <li>Edgar Allan Poe's ultimate Gothic vision: "M. Valdemar"</li>
+                        <li>The leap from mesmerism to Spiritualism (1848)</li>
+                    </ul>
+                    
+                    <h4>💭 Why Mesmerism Matters</h4>
+                    <p>Mesmerism was proto-psychology—an early, flawed attempt to explore the subconscious mind. It eventually led to legitimate developments: hypnosis, psychotherapy, and the study of suggestion and placebo effects.</p>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Animal Magnetism: The Theory</h2>
+                
+                <div class="gothic-box">
+                    <h3>The Claim</h3>
+                    <p>An invisible <span class="popup-trigger" onclick="togglePopup('magnetic-fluid-popup')">magnetic fluid</span> flows through all living bodies. An "operator" can manipulate this fluid using <strong>will</strong> and rhythmic hand passes.</p>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <div class="two-column" style="margin-top: 1.5em;">
+                    <div>
+                        <h3>The Promise</h3>
+                        <ul>
+                            <li>Unlock <span class="popup-trigger" onclick="togglePopup('clairvoyance-popup')">clairvoyance</span></li>
+                            <li>Suppress pain</li>
+                            <li>Release trapped emotions</li>
+                            <li>Master unseen forces</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <img src="images/Mesmer-treating-patients.avif" alt="Mesmer treating patients" class="gothic-img" style="max-height: 300px;">
+                    </div>
+                </div>
+
+                <div id="magnetic-fluid-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('magnetic-fluid-popup')">&times;</span>
+                    <h3>Magnetic Fluid / Animal Magnetism</h3>
+                    <p>An invisible, universal force that Franz Anton Mesmer (1734-1815) believed flowed through all living things. He thought this "fluid" could be manipulated to restore health and that blockages in its flow caused disease.</p>
+                    <p>The fluid was later proven not to exist, but the psychological effects of mesmerism were real—leading to the development of hypnosis.</p>
+                </div>
+
+                <div id="clairvoyance-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('clairvoyance-popup')">&times;</span>
+                    <h3>Clairvoyance</h3>
+                    <p>The supposed ability to perceive things beyond normal sensory perception—to "see" events happening far away, read sealed letters, or perceive the future.</p>
+                    <p>Mesmerists claimed their subjects, when in a trance, could develop clairvoyant powers.</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 Understanding Animal Magnetism</h4>
+                    <p>Mesmerism (or "animal magnetism") was developed by Franz Anton Mesmer (1734-1815), an Austrian physician. Like phrenology, it started in Europe but became hugely popular in America in the 1830s-40s.</p>
+                    
+                    <h4>📖 Franz Anton Mesmer's Background</h4>
+                    <p><strong>Education:</strong> Mesmer studied medicine at the University of Vienna. His 1766 doctoral dissertation was titled "On the Influence of the Planets on the Human Body"—already showing his interest in invisible forces.</p>
+                    
+                    <p><strong>Early theory (1770s):</strong> Mesmer initially believed he could use magnets to redirect the flow of a universal fluid in the human body, curing disease by restoring "magnetic equilibrium." He called this "animal gravitation," later "animal magnetism."</p>
+                    
+                    <p><strong>Inspiration:</strong> Mesmer was influenced by:</p>
+                    <ul>
+                        <li><strong>Isaac Newton's theories</strong>: If gravity was an invisible force acting at a distance, why not other invisible forces?</li>
+                        <li><strong>Recent discoveries about electricity and magnetism</strong>: Benjamin Franklin's experiments with electricity were hugely popular in the 1770s</li>
+                        <li><strong>Medical theories</strong>: The idea that disease resulted from imbalances or blockages in the body</li>
+                    </ul>
+                    
+                    <h4>🧲 The Theory Explained</h4>
+                    <p><strong>The magnetic fluid:</strong> Mesmer believed that:</p>
+                    <ol>
+                        <li>An invisible, subtle fluid permeates the universe and connects all things</li>
+                        <li>This fluid is particularly concentrated in living bodies</li>
+                        <li>The fluid flows through the body along pathways (similar to Chinese concepts of qi or Indian concepts of prana)</li>
+                        <li>When the fluid flows freely, you're healthy. When it's blocked or imbalanced, you're sick</li>
+                        <li>A skilled operator can manipulate another person's magnetic fluid through force of will and hand movements</li>
+                    </ol>
+                    
+                    <p><strong>The method:</strong> Mesmer would:</p>
+                    <ul>
+                        <li>Stare intensely into the patient's eyes</li>
+                        <li>Make slow, rhythmic passes with his hands over the patient's body (without touching)</li>
+                        <li>Sometimes use magnets or iron rods to "direct" the magnetic fluid</li>
+                        <li>Induce a "crisis"—emotional and physical reactions (crying, shaking, sometimes fainting)</li>
+                        <li>Claim the crisis indicated the magnetic fluid was being restored to balance</li>
+                    </ul>
+                    
+                    <h4>🇫🇷 The Paris Years (1778-1784)</h4>
+                    <p>Mesmer moved to Paris in 1778 after controversy in Vienna. In Paris he became a sensation:</p>
+                    <ul>
+                        <li><strong>Wealthy clientele</strong>: Aristocrats flocked to his salon</li>
+                        <li><strong>Group treatments</strong>: He developed the "baquet"—a wooden tub filled with "magnetized water" and iron rods. Patients would sit around it holding the rods while Mesmer waved his hands</li>
+                        <li><strong>Dramatic results</strong>: Patients would fall into convulsions, have emotional outbursts, or enter trance-like states</li>
+                    </ul>
+                    
+                    <h4>🔬 The 1784 Royal Commission</h4>
+                    <p>King Louis XVI appointed a commission to investigate mesmerism. The commission included:</p>
+                    <ul>
+                        <li><strong>Benjamin Franklin</strong> (American ambassador and famous scientist)</li>
+                        <li><strong>Antoine Lavoisier</strong> (founder of modern chemistry)</li>
+                        <li><strong>Joseph-Ignace Guillotin</strong> (yes, that Guillotin)</li>
+                    </ul>
+                    
+                    <p><strong>Their experiments (early scientific method!):</strong></p>
+                    <ul>
+                        <li>They blindfolded subjects and told them they were being mesmerized when they weren't (no effects)</li>
+                        <li>They told subjects they weren't being mesmerized when they were (subjects still showed effects if they believed it was happening)</li>
+                        <li>They tried to detect the magnetic fluid using instruments (found nothing)</li>
+                    </ul>
+                    
+                    <p><strong>Conclusion:</strong> The commission determined there was no magnetic fluid. The effects were caused by imagination, expectation, and "imitation" (what we'd now call suggestion and social influence).</p>
+                    
+                    <p><strong>Impact:</strong> This report damaged Mesmer's reputation in France, but it didn't kill mesmerism! The practice continued and even grew, especially in America.</p>
+                    
+                    <h4>🇺🇸 Mesmerism Comes to America (1830s-40s)</h4>
+                    <p>Mesmerism arrived in America in the 1830s and exploded in popularity in the 1840s. Key figures:</p>
+                    <ul>
+                        <li><strong>Charles Poyen</strong> (French mesmerist) toured New England in 1836, giving lectures and demonstrations</li>
+                        <li><strong>Robert H. Collyer</strong> (English mesmerist) toured America in the 1840s, attracting huge crowds</li>
+                        <li><strong>Andrew Jackson Davis</strong> ("Poughkeepsie Seer") claimed mesmerism unlocked his clairvoyant powers</li>
+                    </ul>
+                    
+                    <h4>💭 Why Americans Believed It</h4>
+                    <p>Why did mesmerism seem plausible?</p>
+                    <ul>
+                        <li><strong>Electricity and magnetism were new and mysterious</strong>: If electricity could make dead frog legs twitch and magnets could attract iron at a distance, why not a "magnetic fluid" in humans?</li>
+                        <li><strong>The effects were real</strong>: People really did enter trance states, experience pain relief, and have emotional releases</li>
+                        <li><strong>No concept of the unconscious</strong>: Before Freud, Americans had no framework for understanding suggestion, placebo effects, or hypnosis</li>
+                        <li><strong>Medical desperation</strong>: Regular medicine in the 1840s was often harmful. If mesmerism seemed to help, why not try it?</li>
+                    </ul>
+                    
+                    <h4>🎓 What Was Really Happening</h4>
+                    <p>Modern understanding: Mesmerists had accidentally discovered:</p>
+                    <ul>
+                        <li><strong>Hypnosis</strong>: A trance-like state of focused attention and heightened suggestibility</li>
+                        <li><strong>Placebo effects</strong>: Belief in treatment can cause real physiological changes</li>
+                        <li><strong>The power of suggestion</strong>: People in trance states are highly responsive to suggestions</li>
+                        <li><strong>Dissociation</strong>: The trance state involves a partial disconnection from ordinary consciousness</li>
+                    </ul>
+                    
+                    <p>So mesmerism was "wrong" about the magnetic fluid, but it stumbled onto real psychological phenomena!</p>
+                    
+                    <h4>🤔 Discussion Question</h4>
+                    <p>Are there modern practices that might be "wrong" in their explanations but still produce real effects? Think about: acupuncture, chiropractic, energy healing, meditation apps claiming to change your "vibrations."</p>
+                </aside>
+            </section>
+			
+<section>
+                <h2>The Performance: Theatre of the Trance</h2>
+                
+                <div class="gothic-box">
+                    <h3>The Setting</h3>
+                    <p>Dimly lit lyceums or parlors. Usually a <strong>male mesmerist</strong> operating on a <strong>young female subject</strong> (reinforcing gender norms of women as "natural" mediums)</p>
+                </div>
+
+                <div class="two-column" style="margin-top: 1.5em;">
+                    <div>
+                        <h3>The Tests</h3>
+                        <ul>
+                            <li>Cold reading sealed envelopes</li>
+                            <li>Exhibiting pain resistance</li>
+                            <li>Describing distant events</li>
+                            <li>Speaking in languages never learned</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <img src="images/animal-magnetism-female-subject-etching.avif" alt="Mesmerism Female Subject" class="gothic-img" style="max-height: 350px;">
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 The Spectacle of Mesmerism</h4>
+                    <p>Mesmerism wasn't practiced in laboratories or hospitals—it was public entertainment. Understanding the theatrical nature of mesmeric demonstrations helps explain both why they were so popular and why they raised moral concerns.</p>
+                    
+                    <h4>📖 The Typical Mesmeric Session</h4>
+                    <p><strong>The venue:</strong> Mesmerist demonstrations happened in:</p>
+                    <ul>
+                        <li><strong>Lyceums</strong>: Public lecture halls where middle-class Americans gathered for education and culture</li>
+                        <li><strong>Hotel parlors</strong>: Traveling mesmerists would rent rooms</li>
+                        <li><strong>Private homes</strong>: Wealthy patrons would host mesmeric "salons"</li>
+                        <li><strong>Public halls</strong>: Large demonstrations could attract hundreds of spectators</li>
+                    </ul>
+                    
+                    <p><strong>The atmosphere:</strong></p>
+                    <ul>
+                        <li>Dim lighting (creating a sense of mystery)</li>
+                        <li>Hushed audience</li>
+                        <li>The mesmerist dressed formally, often in black</li>
+                        <li>Subjects (usually women) seated in prominent positions</li>
+                    </ul>
+                    
+                    <p><strong>The process:</strong></p>
+                    <ol>
+                        <li><strong>Introduction</strong>: The mesmerist would explain the theory of animal magnetism</li>
+                        <li><strong>Induction</strong>: The mesmerist would stand before the subject, staring into their eyes, making slow rhythmic passes with their hands over the subject's head and body (without touching)</li>
+                        <li><strong>The trance</strong>: After 5-20 minutes, the subject would typically close their eyes, become very still, and enter a trance-like state (what we'd now call hypnosis)</li>
+                        <li><strong>Demonstrations</strong>: While in trance, the subject would be tested for various phenomena</li>
+                        <li><strong>Awakening</strong>: The mesmerist would make reverse passes, and the subject would "wake up," often claiming to remember nothing</li>
+                    </ol>
+                    
+                    <h4>🎭 The Tests and Demonstrations</h4>
+                    <p><strong>Clairvoyance tests:</strong></p>
+                    <ul>
+                        <li>The subject would be given a sealed envelope and asked to "read" its contents</li>
+                        <li>Asked to describe events happening in distant locations</li>
+                        <li>Asked to diagnose illnesses in people not present</li>
+                    </ul>
+                    
+                    <p><em>How it actually worked:</em> This was classic cold reading—mesmerists were skilled at reading audience cues, asking leading questions, and making vague statements that seemed specific.</p>
+                    
+                    <p><strong>Pain resistance:</strong></p>
+                    <ul>
+                        <li>Subjects in deep trance seemed to feel no pain when pricked with pins</li>
+                        <li>Some mesmerists performed surgery on mesmerized patients (before anesthesia was invented!)</li>
+                    </ul>
+                    
+                    <p><em>Real phenomenon:</em> Hypnosis can actually reduce pain perception—this was the most legitimate part of mesmerism!</p>
+                    
+                    <p><strong>Catalepsy and rigidity:</strong></p>
+                    <ul>
+                        <li>Subjects' limbs would become rigid when the mesmerist suggested it</li>
+                        <li>Famous demonstration: subject made rigid as a board, placed between two chairs, mesmerist would stand on them!</li>
+                    </ul>
+                    
+                    <p><strong>Automatic behaviors:</strong></p>
+                    <ul>
+                        <li>Subjects would laugh, cry, or act out emotions when the mesmerist suggested them</li>
+                        <li>Told to forget their own names, they'd act confused when asked</li>
+                        <li>Given post-hypnotic suggestions: "When you wake up and I tap the table, you'll stand and sing"</li>
+                    </ul>
+                    
+                    <h4>👥 Gender Dynamics</h4>
+                    <p><strong>Why were subjects usually women?</strong></p>
+                    <ul>
+                        <li><strong>Gender ideology</strong>: 19th-century Americans believed women were more "sensitive," "emotional," and "impressionable" than men—supposedly making them better subjects</li>
+                        <li><strong>Passivity</strong>: The trance required submission to the mesmerist's will—seen as "unmanly" for male subjects</li>
+                        <li><strong>Spectacle</strong>: The male mesmerist/female subject dynamic had erotic undertones that audiences found fascinating (and critics found scandalous)</li>
+                    </ul>
+                    
+                    <p><strong>Moral concerns:</strong> Critics worried that:</p>
+                    <ul>
+                        <li>Young women were being placed in vulnerable, suggestible states</li>
+                        <li>Male mesmerists might take advantage of female subjects</li>
+                        <li>The demonstrations were sexually charged</li>
+                        <li>Women's modesty and virtue were at risk</li>
+                    </ul>
+                    
+                    <p>The 1784 French commission explicitly warned about mesmerism being "a threat... especially to the virtue of weak women."</p>
+                    
+                    <h4>🎭 Famous Demonstrations</h4>
+                    <p><strong>Cynthia Ann Gleason</strong> (1840s): A teenage girl who became a famous mesmeric subject. She claimed that in trance she could diagnose diseases, describe events happening miles away, and speak in languages she'd never learned. Her demonstrations attracted hundreds.</p>
+                    
+                    <p><strong>Andrew Jackson Davis</strong> (1826-1910): The "Poughkeepsie Seer" claimed that while in mesmeric trance he could "see" the human body transparently and diagnose illnesses. He also claimed to channel the spirits of ancient philosophers. Edgar Allan Poe attended one of his sessions in 1845!</p>
+                </aside>
+            </section>
+			
+		<section style="font-size: 0.8em;">
+                <h2>Phreno-Mesmerism: The Hybrid Spectacular</h2>
+                
+                <div class="gothic-box" style="background: rgba(75,0,130,0.2);">
+                    <h3>The Demonstration</h3>
+                    <p>A subject is entranced, and the mesmerist touches specific phrenological bumps to elicit instant reactions:</p>
+                    
+                    <div class="two-column" style="margin-top: 1.5em;">
+                        <div>
+                            <p style="font-style: italic; font-size: 1.05em;">
+                                Touch "benevolence" produces tenderness<br>
+                                Touch "combativeness" produces aggression<br>
+                                Touch "amativeness" produces flirtation<br>
+                                Touch "veneration" produces reverence<br>
+                                Touch "mirthfulness" produces laughter
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <img src="images/touching-phrenological-organs-trance.avif" alt="Phreno-mesmerism demonstration" class="gothic-img" style="max-height: 300px;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <div class="two-column" style="margin-top: 1.5em;">
+                    <div class="gothic-box">
+                        <h4>Why It Was Compelling</h4>
+                        <ul style="font-size: 0.9em;">
+                            <li>Gave phrenology "experimental proof"</li>
+                            <li>Made mesmerism more "scientific"</li>
+                            <li>Spectacular entertainment</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="gothic-box">
+                        <h4>What Was Really Happening</h4>
+                        <p style="font-size: 0.9em;">Pure <span class="key-term">suggestion</span>. The mesmerist's touch combined with expectation and the subject's understanding equals convincing performance</p>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    [KEEP ALL YOUR ORIGINAL NOTES]
+                </aside>
+            </section>
+			
+                        <section>
+                <h2>The Ultimate Gothic Vision: Edgar Allan Poe</h2>
+                
+                <div class="two-column">
+                    <div>
+                        <img src="images/Facts-Case-Valdemar.avif" alt="Facts in the Case of M. Valdemar" class="gothic-img" style="max-height: 650px;">
+                    </div>
+                    
+                    <div>
+                        <div class="primary-source" style="font-size: 0.9em;">
+                            <strong>"The Facts in the Case of M. Valdemar" (1845)</strong>
+                            
+                            <p style="margin-top: 1em;">Poe's story: A mesmerist hypnotizes a dying man, suspending him <em>at the exact moment of death</em> for months—a "living corpse" trapped by science.</p>
+                            
+                            <p style="margin-top: 1em;">When finally awakened, Valdemar's body instantly dissolves into "a nearly liquid mass of loathsome—of detestable putridity."</p>
+                        </div>
+
+                        <div class="gothic-box" style="margin-top: 1.5em; border-color: var(--blood-red);">
+                            <h3>Significance</h3>
+                            <p style="font-size: 0.95em;">This is the <span class="key-term">ultimate proof text</span> for mesmerism as a "Gothic" bridge between life and death.</p>
+                            <p style="margin-top: 1em; font-size: 0.95em;">Poe takes mesmerism to its logical, terrifying extreme: humans tampering with invisible, dangerous forces—echoing <em>Frankenstein</em>'s warnings.</p>
+                        </div>
+                    </div>
+                </div>
+				
+                <aside class="notes">
+                    <h4>📚 Poe's Mesmerism Obsession</h4>
+                    <p>Edgar Allan Poe (1809-1849) was both fascinated and skeptical about mesmerism. He attended mesmeric demonstrations, read about it extensively, and used it in several of his stories. "M. Valdemar" is his masterpiece of mesmeric horror.</p>
+                    
+                    <h4>📖 "The Facts in the Case of M. Valdemar" (1845)</h4>
+                    <p><strong>The plot:</strong></p>
+                    <ul>
+                        <li>The narrator is a mesmerist experimenting with animal magnetism</li>
+                        <li>His friend M. Valdemar is dying of tuberculosis</li>
+                        <li>The narrator asks: Can mesmerism stop the process of death?</li>
+                        <li>At Valdemar's request, the narrator mesmerizes him at the moment of death</li>
+                        <li>Valdemar enters a trance and appears to die—but he's not quite dead</li>
+                        <li>For nearly SEVEN MONTHS, Valdemar remains in this suspended state</li>
+                        <li>He can speak, but his tongue is swollen and blackened</li>
+                        <li>He begs: "For God's sake!—quick!—quick!—put me to sleep—or, quick!—waken me!—quick!—I say to you that I am dead!"</li>
+                        <li>When the narrator finally breaks the trance, Valdemar's body instantly decomposes into "a nearly liquid mass of loathsome—of detestable putridity"</li>
+                    </ul>
+                    
+                    <h4>😱 Why It's So Horrifying</h4>
+                    <p><strong>The ultimate Gothic fear:</strong> Being trapped between life and death, conscious but unable to escape, your body decaying while your mind remains aware. This is the nightmare at the heart of Gothic literature.</p>
+                    
+                    <p><strong>Science as violation:</strong> Like Frankenstein, the narrator uses scientific knowledge to violate natural boundaries—and the results are monstrous. The story asks: Are there things science shouldn't do?</p>
+                    
+                    <p><strong>The unreliable body:</strong> Valdemar's body becomes horrifyingly unstable. Is he alive? Dead? Something in between? The story plays on anxieties about the boundary between living and dead tissue.</p>
+                    
+                    <h4>🎭 The Story's Reception</h4>
+                    <p><strong>Many readers thought it was TRUE!</strong> Poe wrote it in a matter-of-fact, scientific style that made it seem like a legitimate medical case study. When it was published in the <em>American Review</em> (December 1845), some readers and even some editors believed it was a real account!</p>
+                    
+                    <p><strong>Reprinted as fact:</strong> The story was reprinted in newspapers and magazines, sometimes presented as genuine scientific reportage. Some mesmerists cited it as proof of animal magnetism's power!</p>
+                    
+                    <p><strong>Poe's response:</strong> Poe was amused by this but also disturbed. He had meant it as Gothic fiction exposing mesmerism's dangers, but some people took it as validation of mesmeric science.</p>
+                    
+                    <h4>📚 Poe's Other Mesmerism Stories</h4>
+                    <p><strong>"A Tale of the Ragged Mountains" (1844)</strong>: A man under mesmeric influence experiences visions that seem to be memories from another person's life—exploring the idea of mental "magnetism" transferring consciousness.</p>
+                    
+                    <p><strong>"Mesmeric Revelation" (1844)</strong>: A dying man, under mesmerism, describes the afterlife and the nature of God. The story uses mesmerism as a way to access metaphysical truth.</p>
+                    
+                    <p>All three stories use mesmerism to explore the boundary between life and death, consciousness and unconsciousness, the material and spiritual worlds.</p>
+                    
+                    <h4>💭 Why Mesmerism Fit Gothic Literature</h4>
+                    <p>Mesmerism was perfect for Gothic writers because it offered:</p>
+                    <ul>
+                        <li><strong>Loss of control</strong>: The trance meant surrendering will to another person</li>
+                        <li><strong>Boundary-crossing</strong>: Between conscious/unconscious, living/dead, natural/supernatural</li>
+                        <li><strong>Hidden forces</strong>: Invisible "magnetic fluid" as threatening as any ghost</li>
+                        <li><strong>Scientific horror</strong>: The terror comes from science, not the supernatural</li>
+                        <li><strong>Power dynamics</strong>: The mesmerist's control over the subject echoed anxieties about domination</li>
+                    </ul>
+                    
+                    <h4>🎓 Literary Significance</h4>
+                    <p><strong>Modern horror tropes:</strong> Poe's mesmerism stories established patterns still used today:</p>
+                    <ul>
+                        <li>The scientist who goes too far</li>
+                        <li>The experiment that violates natural law</li>
+                        <li>The moment when you realize the horror is real, not imagined</li>
+                        <li>The body that becomes horrifyingly unstable or uncanny</li>
+                    </ul>
+                    
+                    <p>Think about movies like <em>The Fly</em>, <em>Re-Animator</em>, or <em>Flatliners</em>—they're all descendants of "M. Valdemar."</p>
+                    
+                    <h4>🤔 Discussion Question</h4>
+                    <p>Why do we find scientific horror (like "M. Valdemar") scarier than supernatural horror (like ghost stories)? Is it because science is supposed to be rational and controlled, so when it goes wrong, there's no saving us?</p>
+                </aside>
+            </section>
+
+            <section style="font-size: 0.8em;">
+                <h2>From Science to Religion: The Birth of Spiritualism (1848)</h2>
+                
+                <div class="timeline-item">
+                    <span class="timeline-date">1848</span>
+                    <span>The Fox Sisters in Hydesville, NY claim to hear "rappings" from a dead peddler</span>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <div class="two-column" style="margin-top: 1.5em;">
+                    <div>
+                        <h3>The Connection</h3>
+                        <p>Mesmerism prepared the public to believe in <strong>"invisible telegraphs"</strong> between minds.</p>
+                        <p style="margin-top: 1em;">The Fox Sisters simply <em>extended the line</em> from the living to the dead.</p>
+                   
+					<div class="gothic-box" style="margin-top: 1.5em; background: rgba(75,0,130,0.2);">
+                    <h3>Significance</h3>
+                    <p><span class="key-term">Gothic Science becomes American Religion</span></p>
+                    <p style="margin-top: 1em;">By 1855, an estimated 2 million Americans considered themselves Spiritualists. The movement merged science, religion, and spectacle.</p>
+                </div>
+					
+					</div>
+                    
+                    <div>
+                        <img src="images/kate-maggie-fox-horiz.avif" alt="Fox Sisters Portrait" class="gothic-img" style="max-height: 500px;">
+                    </div>
+                </div>
+
+                
+
+                <aside class="notes">
+                    <h4>📚 The Leap from Mesmerism to Spiritualism</h4>
+                    <p>Mesmerism's most significant legacy wasn't hypnosis or psychology—it was Spiritualism, America's homegrown religion that claimed the dead could communicate with the living.</p>
+                    
+                    <h4>📖 The Fox Sisters and the Hydesville Rappings</h4>
+                    <p><strong>March 31, 1848—The Night That Changed Everything:</strong></p>
+                    <p>In Hydesville, New York (near Rochester), the Fox family was troubled by mysterious "rapping" sounds in their small wooden cottage. The sounds seemed to come from the walls and floors, occurring mostly at night.</p>
+                    
+                    <p><strong>Kate and Margaret Fox</strong> (ages 11 and 14) claimed to develop a communication system with the spirit causing the raps:</p>
+                    <ul>
+                        <li>Kate would snap her fingers: "Mr. Splitfoot, do as I do!"</li>
+                        <li>The raps would respond, mimicking the number of snaps</li>
+                        <li>The family developed a code: one rap for "yes," two for "no"</li>
+                        <li>By calling out letters, they could spell out messages</li>
+                    </ul>
+                    
+                    <p><strong>The "spirit's" story:</strong> Through the raps, the Fox sisters learned they were communicating with Charles B. Rosna, a peddler who had been murdered in the house five years earlier and buried in the cellar. (They later dug and claimed to find bone fragments, though this was never conclusively proven.)</p>
+                    
+                    <p><strong>Word spreads:</strong> Hundreds of people came to witness the phenomenon. By summer 1848, the Fox sisters were giving public demonstrations in Rochester, the town where the Spiritualist movement would be born.</p>
+                    
+                    <h4>🔮 How Mesmerism Prepared the Way</h4>
+                    <p><strong>The conceptual bridge:</strong> Mesmerism had already convinced Americans that:</p>
+                    <ul>
+                        <li><strong>Invisible forces exist</strong>: Animal magnetism couldn't be seen, but supposedly had real effects</li>
+                        <li><strong>Minds can communicate at a distance</strong>: Clairvoyant subjects claimed to "see" distant events</li>
+                        <li><strong>Trance states access hidden realms</strong>: Mesmerized subjects seemed to perceive things beyond normal senses</li>
+                        <li><strong>Some people are "sensitive" receivers</strong>: Women and children were thought especially susceptible to magnetic influence</li>
+                    </ul>
+                    
+                    <p>So when the Fox sisters claimed to communicate with the dead, it didn't seem that much stranger than mesmeric clairvoyance—just a different kind of "invisible telegraph."</p>
+                    
+                    <h4>📈 The Explosive Growth of Spiritualism</h4>
+                    <p><strong>Speed of spread:</strong></p>
+                    <ul>
+                        <li><strong>1848</strong>: Fox sisters in Hydesville</li>
+                        <li><strong>1849-50</strong>: Spiritualist circles forming in New York and New England</li>
+                        <li><strong>1851</strong>: First Spiritualist newspaper, <em>The Spiritual Telegraph</em></li>
+                        <li><strong>1852</strong>: Spiritualism reaches major cities (Boston, Philadelphia, Baltimore)</li>
+                        <li><strong>1854</strong>: Estimated 1-2 million believers in America</li>
+                        <li><strong>1855-56</strong>: Peak of first wave; séances in the White House(!) (First Lady Jane Pierce trying to contact her dead son)</li>
+                    </ul>
+                    
+                    <p><strong>Why so fast?</strong></p>
+                    <ul>
+                        <li><strong>Mesmerism had primed the audience</strong>: People were already comfortable with "invisible forces"</li>
+                        <li><strong>Telegraph technology</strong>: The electric telegraph (invented 1837) had demonstrated long-distance communication—Spiritualists called their practice "spiritual telegraphy"</li>
+                        <li><strong>Second Great Awakening aftershock</strong>: Religious experimentation was socially acceptable</li>
+                        <li><strong>Grief and loss</strong>: High childhood mortality meant nearly every family had lost someone</li>
+                        <li><strong>Democratic appeal</strong>: Anyone could be a medium; no priests or churches needed</li>
+                    </ul>
+                    
+                    <h4>🕯️ What Spiritualist Séances Looked Like</h4>
+                    <p><strong>Typical elements:</strong></p>
+                    <ul>
+                        <li>Small group gathering in a darkened room</li>
+                        <li>Participants sitting around a table, often holding hands</li>
+                        <li>A medium (often female) who would enter a trance-like state</li>
+                        <li>Phenomena reported: rapping sounds, table-tipping, levitation, mysterious breezes, spirit voices, automatic writing, materialized objects</li>
+                        <li>Messages from the dead—usually reassuring loved ones they were happy in the afterlife</li>
+                    </ul>
+                    
+                    <p><strong>The appeal:</strong> Unlike traditional Christianity, Spiritualism offered:</p>
+                    <ul>
+                        <li><strong>Direct evidence</strong>: You could hear/see the spirits yourself</li>
+                        <li><strong>Comfort</strong>: The dead weren't far away; they were right here, wanting to communicate</li>
+                        <li><strong>Universal salvation</strong>: Spirits almost always reported being happy, regardless of their earthly behavior</li>
+                        <li><strong>Progressive values</strong>: Spiritualism was linked to women's rights, abolitionism, and reform movements</li>
+                    </ul>
+                    
+                    <h4>👻 Famous Spiritualists</h4>
+                    <p><strong>Andrew Jackson Davis</strong>: The "Poughkeepsie Seer" became a Spiritualist philosopher. His book <em>The Principles of Nature</em> (1847) was supposedly channeled from spirits while he was in mesmeric trance.</p>
+                    
+                    <p><strong>The Davenport Brothers</strong>: Famous for "spirit cabinet" demonstrations—tied up in a cabinet, they'd produce seemingly impossible phenomena (instruments playing, objects flying about).</p>
+                    
+                    <p><strong>Emma Hardinge Britten</strong>: British Spiritualist who toured America giving trance lectures supposedly delivered by spirits.</p>
+                    
+                    <h4>🎓 The Fox Sisters' Later Confession</h4>
+                    <p><strong>1888—The Scandal:</strong> Margaret Fox publicly confessed that the rappings were fraudulent! She demonstrated how she and Kate had produced the sounds by cracking their toe joints. They'd started as children and the deception had spiraled out of control.</p>
+                    
+                    <p><strong>But Spiritualism didn't die!</strong> By 1888, Spiritualism had evolved beyond the Fox sisters. Believers argued that even if the Fox sisters were frauds, real spirit communication still existed. The movement continued (and still exists today in modified form).</p>
+                    
+                    <h4>🔬 Why It Matters for American History</h4>
+                    <p>Spiritualism shows how "Gothic science" (mesmerism) could transform into religion. This blending of science, religion, and spectacle is distinctively American. It represents:</p>
+                    <ul>
+                        <li><strong>Democratic religion</strong>: No clergy needed, anyone could contact spirits</li>
+                        <li><strong>Technological metaphors</strong>: "Spiritual telegraph" showed Americans making sense of new technology through spiritual frameworks</li>
+                        <li><strong>Women's empowerment</strong>: Most mediums were women, giving them public authority unusual for the era</li>
+                        <li><strong>Reform connections</strong>: Spiritualists were heavily involved in abolition, women's suffrage, temperance</li>
+                    </ul>
+                    
+                    <h4>🤔 Discussion Question</h4>
+                    <p>Why do you think Spiritualism appealed especially to women? (Hint: Think about women's social roles in the 1850s, restrictions on their public speech and authority, and the fact that most mediums were female.)</p>
+                </aside>
+            </section>
+
+           <section>
+    <h2>Monster Shows</h2>
+    <h3>Nature's Secrets in Jars</h3>
+
+    <div class="img-placeholder" style="width: 900px; margin: 1em auto; border: 1px dashed #999; padding: 10px;">
+		<img src="images/Mütter-Museum-specimens.avif"</img>
+        
+        
+    </div>
+
+                <aside class="notes">
+                    <h4>📚 Section Preview: Monster Shows</h4>
+                    <p>The third major component of Gothic Science was the most visceral: the public display of anatomical specimens, preserved organs, and congenital anomalies—what Americans called "monster shows" or "anatomical museums."</p>
+                    
+                    <h4>📖 What We'll Cover</h4>
+                    <ul>
+                        <li>What audiences saw in these exhibits</li>
+                        <li>The connection to photography and the "forensic gaze"</li>
+                        <li>Human exhibitions and exploitation in dime museums</li>
+                        <li>Why these shows drew huge crowds</li>
+                        <li>The cultural function: public science before institutions</li>
+                    </ul>
+                    
+                    <h4>💭 Key Theme</h4>
+                    <p>Monster shows reveal American anxieties about the body, disease, heredity, and the boundaries of the human. They made death, disease, and deformity visible and "scientifically" understandable—but at great human cost.</p>
+                </aside>
+            </section>
+
+                        <section>
+                <h2>The Exhibits: Organizing the Grotesque</h2>
+                
+                <div class="two-column">
+                    <div>
+                        <h3>What Audiences Saw</h3>
+                        <ul style="font-size: 0.95em;">
+                            <li>Jars of preserved organs, tumors, diseased tissue</li>
+                            <li>Wax models of burns, skin diseases, STDs</li>
+                            <li>Congenital anomalies: conjoined twins, hydrocephalus</li>
+                            <li>"Two-headed calves" and animal deformities</li>
+                            <li>Pathological specimens labeled as "clues to nature's exceptions"</li>
+                        </ul>
+                        
+                        <div class="gothic-box" style="margin-top: 1em;">
+                            <h3>The Narrative</h3>
+                            <p style="font-size: 0.9em;">Lecturers blended <strong>moral instruction</strong> with <strong>spectacle</strong>, framing anomalies as warnings about sin, chance, or heredity</p>
+                            <p style="margin-top: 0.8em; font-style: italic; font-size: 0.85em;">Darkened lighting, dramatic handling of specimens, scientific language legitimizing voyeurism</p>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="img-placeholder" style="width: 700px; height: 700px;">
+							<img src="images/Museo_Palazzo_Poggi.jpg"</img>
+							<img src="images/medical-specimen-jar-preserved.avif"</img>
+                        </div>
+                    </div>
+                </div>
+                <aside class="notes">
+                    <h4>📚 Understanding Anatomical Exhibitions</h4>
+                    <p>Anatomical museums and "monster shows" were hugely popular in American cities from the 1820s-1860s. They existed in a space between education and entertainment, science and spectacle.</p>
+                    
+                    <h4>📖 What Was Displayed</h4>
+                    <p><strong>Preserved specimens in jars:</strong></p>
+                    <ul>
+                        <li><strong>Organs</strong>: Hearts, lungs, livers showing various diseases</li>
+                        <li><strong>Tumors and growths</strong>: Particularly large or unusual ones</li>
+                        <li><strong>Diseased tissue</strong>: Showing effects of tuberculosis, syphilis, cancer</li>
+                        <li><strong>Fetuses and infants</strong>: Preserved at various developmental stages, including those with congenital anomalies</li>
+                        <li><strong>Conjoined twins</strong>: Complete specimens or casts</li>
+                        <li><strong>Hydrocephalic specimens</strong>: "Water on the brain" cases</li>
+                        <li><strong>Other anomalies</strong>: Extra limbs, missing organs, unusual formations</li>
+                    </ul>
+                    
+                    <p><strong>Wax anatomical models:</strong></p>
+                    <ul>
+                        <li><strong>Normal anatomy</strong>: Showing muscles, organs, circulatory system</li>
+                        <li><strong>Diseased conditions</strong>: Burns, skin diseases, venereal diseases</li>
+                        <li><strong>"Anatomical Venuses"</strong>: Beautiful reclining female figures that could be opened to reveal internal organs—combining beauty and horror</li>
+                    </ul>
+                    
+                    <p><strong>Animal curiosities:</strong></p>
+                    <ul>
+                        <li>Two-headed calves, lambs</li>
+                        <li>Skeletal oddities</li>
+                        <li>Preserved "monsters" of various species</li>
+                    </ul>
+                    
+                    <h4>🎭 The Performance</h4>
+                    <p><strong>The lecturer:</strong> These weren't silent museums. A lecturer (almost always male, often claiming medical credentials) would guide audiences through the exhibits, providing "scientific" explanations.</p>
+                    
+                    <p><strong>The moral frame:</strong> Lecturers presented specimens as:</p>
+                    <ul>
+                        <li><strong>Warnings</strong>: "This liver shows the effects of intemperance" (alcohol abuse)</li>
+                        <li><strong>Divine lessons</strong>: "This deformity reminds us of our fragile mortality"</li>
+                        <li><strong>Scientific evidence</strong>: "Notice how this skull's shape reveals criminal tendencies" (phrenology again!)</li>
+                        <li><strong>Hereditary concerns</strong>: "This shows why we must be careful in choosing marriage partners"</li>
+                    </ul>
+                    
+                    <p><strong>The atmosphere:</strong></p>
+                    <ul>
+                        <li><strong>Dramatic lighting</strong>: Specimens often displayed in dim rooms with focused light</li>
+                        <li><strong>Theatrical handling</strong>: The lecturer would carefully remove specimens from cases, holding them up for inspection</li>
+                        <li><strong>Technical language</strong>: Latin terms, anatomical vocabulary—making it seem educational</li>
+                        <li><strong>Hushed reverence</strong>: The tone was serious, scientific, educational—not frivolous</li>
+                    </ul>
+                    
+                    <h4>🏛️ Famous Anatomical Museums</h4>
+                    <p><strong>Dr. Joseph Cain's Anatomical Museum</strong> (Boston, 1840s): One of the most successful. Claimed to be "for medical students and the educated public."</p>
+                    
+                    <p><strong>Dr. Kahn's Anatomical and Pathological Museum</strong> (New York, 1850s): Advertised as "a source of medical knowledge for those who cannot attend medical school."</p>
+                    
+                    <p><strong>The American Museum of Anatomy</strong> (various cities): Traveling exhibitions that brought specimens to smaller towns.</p>
+                    
+                    <h4>👥 Who Attended?</h4>
+                    <p><strong>The audience was surprisingly broad:</strong></p>
+                    <ul>
+                        <li><strong>Medical students</strong>: Legitimate educational use (before widespread access to cadavers)</li>
+                        <li><strong>Middle-class families</strong>: Seen as educational, morally improving</li>
+                        <li><strong>Young men</strong>: Attracted by the more sensational exhibits</li>
+                        <li><strong>Women</strong>: Present but often in separate viewing hours or sections (especially for exhibits of "female disorders")</li>
+                    </ul>
+                    
+                    <p><strong>Admission fees:</strong> Usually 25 cents to 50 cents—affordable for middle class, expensive for workers.</p>
+                    
+                    <h4>📸 The "Scientific Eye" and Photography</h4>
+                    <p><strong>The Daguerreotype (1839)</strong>: The invention of photography trained Americans to look at reality with an "objective," unflinching gaze. The camera doesn't blink or look away—it records everything.</p>
+                    
+                    <p><strong>The forensic gaze:</strong> Monster shows trained Americans to:</p>
+                    <ul>
+                        <li>Look at bodies "scientifically" rather than squeamishly</li>
+                        <li>Classify and categorize human differences</li>
+                        <li>See the body as an object of study rather than a sacred mystery</li>
+                        <li>Believe that visual evidence reveals truth</li>
+                    </ul>
+                    
+                    <p><strong>Connection to future photographic practices:</strong></p>
+                    <ul>
+                        <li><strong>Jacob Riis (1880s-90s)</strong>: Used photography to expose poverty in New York slums—treating poor people's bodies as objects of horrified fascination, just like anatomical specimens</li>
+                        <li><strong>Civil War photography (1860s)</strong>: Mathew Brady and others photographed battlefield dead—Americans had been "trained" by monster shows to look at corpses unflinchingly</li>
+                        <li><strong>Medical photography</strong>: Documenting diseases and anomalies</li>
+                        <li><strong>Criminal photography</strong>: Mugshots and crime scene photos</li>
+                    </ul>
+                    
+                    <h4>🤔 Why It Matters</h4>
+                    <p>Monster shows were training grounds for a new way of seeing—what Michel Foucault would later call the "medical gaze." They taught Americans to:</p>
+                    <ol>
+                        <li>See the body as a machine that can malfunction</li>
+                        <li>Believe that looking closely reveals truth</li>
+                        <li>Think of "normal" and "abnormal" as scientific categories</li>
+                        <li>Use visual evidence to make moral judgments</li>
+                    </ol>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Human Exhibitions & Dime Museums</h2>
+                
+                <div class="gothic-box" style="border-color: var(--blood-red); background: rgba(139,0,0,0.15);">
+                    <h3>The Darkest Chapter: Living "Exhibits"</h3>
+                    <p><strong>Dime museums</strong> featured living performers alongside anatomical specimens</p>
+                    <p style="margin-top: 1em;">Showmen used <span class="key-term">phrenology</span> to classify performers as "missing links" or "primitives"</p>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <div class="two-column" style="margin-top: 1.5em;">
+                    <div>
+                        <h3>Exploitation</h3>
+                        <ul style="font-size: 0.95em;">
+                            <li>Measuring heads on stage</li>
+                            <li>Pseudoscientific measurements</li>
+                            <li>Claimed "educational value"</li>
+                            <li>Actually entertainment and sensationalism</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3>Gender and Power</h3>
+                        <ul style="font-size: 0.95em;">
+                            <li>Male lecturers controlled interpretation</li>
+                            <li>Women rarely speaking</li>
+                            <li>Displays of "female disorders"</li>
+                            <li>Voyeuristic dynamics under guise of education</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <p style="margin-top: 2em; text-align: center; font-size: 1.1em;">
+                    <span class="key-term">The line between education and exploitation was razor-thin</span>
+                </p>
+
+                <aside class="notes">
+                    <h4>📚 The Exploitation of Living People</h4>
+                    <p>This is the most disturbing aspect of "Gothic science"—the exhibition of living human beings with physical differences, often framed using pseudoscientific racism and phrenology.</p>
+                    
+                    <h4>📖 Dime Museums and "Freak Shows"</h4>
+                    <p><strong>What were dime museums?</strong> Popular entertainment venues (1840s-1930s) that charged 10 cents admission and featured a mix of:</p>
+                    <ul>
+                        <li>Curiosities and oddities</li>
+                        <li>Wax figures and taxidermy</li>
+                        <li>Stage performances</li>
+                        <li>Living human exhibits</li>
+                    </ul>
+                    
+                    <p><strong>P.T. Barnum's American Museum</strong> (New York, 1841-1865) was the most famous, attracting 15 million visitors!</p>
+                    
+                    <h4>🎭 How Phrenology Was Used</h4>
+                    <p><strong>The pseudoscientific frame:</strong> Showmen would:</p>
+                    <ol>
+                        <li>Bring a "scientist" on stage</li>
+                        <li>Measure the head of a performer with calipers</li>
+                        <li>Announce "findings" about their "primitive" or "missing link" characteristics</li>
+                        <li>Use this to "justify" the exhibition as "educational"</li>
+                    </ol>
+                    
+                    <p><strong>Examples of exploitation:</strong></p>
+                    <ul>
+                        <li><strong>"What Is It?" exhibitions</strong>: P.T. Barnum exhibited William Henry Johnson, an African American man with microcephaly, as a "missing link" between humans and apes. He was given a fake backstory about being captured in Africa.</li>
+                        <li><strong>"Hottentot Venus" tours</strong>: Sarah Baartman, a Khoikhoi woman from South Africa, was exhibited in Europe and America (1810s) because of her body shape. She was measured, poked, and treated as a scientific specimen while alive, and dissected after death.</li>
+                        <li><strong>Indigenous people</strong>: Native Americans, Pacific Islanders, and Africans were sometimes exhibited as "savage" or "primitive" races, with phrenological "analysis" to "prove" their inferiority.</li>
+                    </ul>
+                    
+                    <h4>⚖️ The "Educational" Defense</h4>
+                    <p><strong>Showmen's justification:</strong></p>
+                    <ul>
+                        <li>"We're educating the public about human diversity"</li>
+                        <li>"This is science, not entertainment"</li>
+                        <li>"The public has a right to see these wonders of nature"</li>
+                        <li>"We're treating these people better than they'd be treated in their home countries"</li>
+                    </ul>
+                    
+                    <p>But the reality: These were profit-making spectacles that dehumanized living people by presenting them as objects of scientific curiosity or horror.</p>
+                    
+                    <h4>👩 Gender Dynamics</h4>
+                    <p><strong>Male authority:</strong></p>
+                    <ul>
+                        <li>Lecturers and "scientists" were almost always men</li>
+                        <li>They controlled the narrative about what bodies meant</li>
+                        <li>Women's bodies were particularly scrutinized</li>
+                    </ul>
+                    
+                    <p><strong>Displays of "female disorders":</strong></p>
+                    <ul>
+                        <li>Wax models showing reproductive anatomy and childbirth</li>
+                        <li>Preserved specimens of uteri, ovaries, breasts with tumors</li>
+                        <li>Models showing venereal diseases</li>
+                        <li>These were presented as "medical education" but had voyeuristic elements</li>
+                    </ul>
+                    
+                    <p><strong>Segregation:</strong> Many museums had "gentlemen's hours" for exhibits considered too graphic for women, and "ladies' hours" for reproductive anatomy exhibits.</p>
+                    
+                    <h4>🎓 Why This History Matters</h4>
+                    <p><strong>Legacy of dehumanization:</strong></p>
+                    <ul>
+                        <li>These practices reinforced racist pseudoscience</li>
+                        <li>They naturalized the idea that some bodies are "normal" and others "abnormal"</li>
+                        <li>They trained Americans to see certain people as objects rather than subjects</li>
+                        <li>They linked science with exploitation and spectacle</li>
+                    </ul>
+                    
+                    <p><strong>Modern echoes:</strong></p>
+                    <ul>
+                        <li>Medical tourism and "poverty porn"</li>
+                        <li>Reality TV that exploits people with differences</li>
+                        <li>Social media accounts that display unusual bodies for shock value</li>
+                        <li>The ongoing tension between education and exploitation in medical museums</li>
+                    </ul>
+                    
+                    <h4>✊ Resistance and Reform</h4>
+                    <p>Not everyone accepted these practices:</p>
+                    <ul>
+                        <li><strong>Some performers fought back</strong>: Used their platform to speak on their own terms, earned money, gained some agency</li>
+                        <li><strong>Critics emerged</strong>: By the late 1800s, reformers began criticizing "freak shows" as degrading</li>
+                        <li><strong>Legal changes</strong>: Eventually laws restricted exhibition of living people</li>
+                    </ul>
+                    
+                    <h4>🤔 Ethical Discussion</h4>
+                    <p>Where is the line between legitimate education and exploitative spectacle? Consider:</p>
+                    <ul>
+                        <li>Medical museums today—when is display of human remains educational vs. voyeuristic?</li>
+                        <li>Documentary films about people with unusual conditions—how can we avoid exploitation?</li>
+                        <li>Social media and "body positive" movements—empowerment or new form of display?</li>
+                    </ul>
+                </aside>
+            </section>
+
+            <section style="font-size: 0.8em;">
+                <h2>Bringing the Threads Together</h2>
+                
+                <div class="two-column">
+                    <div class="gothic-box">
+                        <h3>Phrenology</h3>
+                        <p>Mapped hidden chambers of <span class="key-term">personality</span></p>
+                    </div>
+                    
+                    <div class="gothic-box">
+                        <h3>Mesmerism</h3>
+                        <p>Explored hidden forces of the <span class="key-term">mind</span></p>
+                    </div>
+                </div>
+
+                <div class="gothic-box" style="margin-top: 1.5em;">
+                    <h3>Monster Shows</h3>
+                    <p>Exposed hidden vulnerabilities of the <span class="key-term">body</span></p>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <div class="gothic-box" style="margin-top: 1.5em; background: rgba(139,0,0,0.2); border-color: var(--gothic-gold);">
+                    <h3>Together</h3>
+                    <p style="font-size: 1.1em;">They formed a <span class="key-term">Gothic Scientific Culture</span> where spectacle and truth blurred</p>
+                    
+                    <ul style="margin-top: 1em; font-size: 0.95em;">
+                        <li>Phrenology gave mesmerism credibility</li>
+                        <li>Phrenology gave monster shows a classification system</li>
+                        <li>All three made Gothic fears measurable and "scientific"</li>
+                    </ul>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 The Unified Gothic Scientific Culture</h4>
+                    <p>Phrenology, mesmerism, and monster shows weren't three separate fads—they were interconnected practices that formed a coherent cultural system.</p>
+                    
+                    <h4>📖 How They Connected</h4>
+                    <p><strong>Phrenology as connective tissue:</strong></p>
+                    <ul>
+                        <li><strong>Gave mesmerism scientific legitimacy</strong>: Phreno-mesmerism demonstrations showed that when you touched phrenological organs during trance, specific behaviors emerged—"proof" that both systems worked</li>
+                        <li><strong>Gave monster shows a classification system</strong>: Anatomical anomalies could be explained as overdevelopment or underdevelopment of specific organs</li>
+                        <li><strong>Provided a shared vocabulary</strong>: All three used similar language about "organs," "faculties," "natural laws"</li>
+                    </ul>
+                    
+                    <p><strong>Shared assumptions:</strong></p>
+                    <ul>
+                        <li><strong>Hidden forces exist</strong>: Whether phrenological organs, magnetic fluid, or disease processes, there are invisible things shaping our bodies and minds</li>
+                        <li><strong>Bodies reveal truth</strong>: Your skull, your response to mesmerism, or your physical anomalies all reveal something essential about who you are</li>
+                        <li><strong>Science can decode nature's secrets</strong>: With the right techniques, we can understand and control these hidden forces</li>
+                        <li><strong>Spectacle serves truth</strong>: Public demonstrations, dramatic reveals, theatrical presentations—these don't undermine science, they make it accessible</li>
+                    </ul>
+                    
+                    <h4>🎭 The Gothic Element</h4>
+                    <p><strong>Why "Gothic"?</strong> Because all three practices explored themes central to Gothic literature:</p>
+                    <ul>
+                        <li><strong>Hidden selves</strong>: Your skull might hide criminal impulses (phrenology)</li>
+                        <li><strong>Loss of control</strong>: Mesmerism could make you lose your will</li>
+                        <li><strong>Unstable bodies</strong>: Monster shows proved bodies could go horribly wrong</li>
+                        <li><strong>Forbidden knowledge</strong>: All three promised to reveal secrets meant to be hidden</li>
+                        <li><strong>Boundary violations</strong>: Between surface/depth, life/death, normal/abnormal, human/animal</li>
+                    </ul>
+                    
+                    <h4>⚖️ The Paradox</h4>
+                    <p><strong>Democratic yet oppressive:</strong></p>
+                    <ul>
+                        <li>These practices were "democratic" (anyone could access them)</li>
+                        <li>But they were also used to justify hierarchy, slavery, and exploitation</li>
+                        <li>"Objective science" became a tool of subjective oppression</li>
+                    </ul>
+                    
+                    <p><strong>Truth and spectacle:</strong></p>
+                    <ul>
+                        <li>In a marketplace where truth competed with spectacle, how do you tell them apart?</li>
+                        <li>This is the core problem of American popular science in the 1840s</li>
+                        <li>It remains a problem today (think: Dr. Oz, viral health trends, scientific-sounding advertisements)</li>
+                    </ul>
+                    
+                    <h4>🌍 Legacy</h4>
+                    <p><strong>These practices foreshadow modern debates about:</strong></p>
+                    <ul>
+                        <li><strong>Misinformation</strong>: How do we distinguish real science from pseudoscience?</li>
+                        <li><strong>Entertainment-education blur</strong>: Can spectacle serve truth, or does it always distort?</li>
+                        <li><strong>Scientific racism</strong>: How do we prevent science from being weaponized for oppression?</li>
+                        <li><strong>Body politics</strong>: Who gets to define "normal" and "abnormal"?</li>
+                        <li><strong>Medical ethics</strong>: When does study become exploitation?</li>
+                    </ul>
+                    
+                    <h4>🎓 Senior Historians' Corner</h4>
+                    <p><strong>Robert C. Fuller</strong> (<em>Mesmerism and the American Cure of Souls</em>, 1982): Argues these movements were proto-psychology, early attempts to understand the unconscious mind.</p>
+                    
+                    <p><strong>Courtney Thompson</strong> (<em>An Organ of Murder</em>, 2021): Shows how phrenology shaped criminal justice and medico-legal theory in ways that persist today.</p>
+                    
+                    <p><strong>John D. Davies</strong> (<em>Phrenology: Fad and Science</em>, 1955): Emphasizes how phrenology exemplifies the public's hunger for scientific self-understanding.</p>
+                    
+                    <h4>🤔 Final Discussion Questions</h4>
+                    <ol>
+                        <li>What modern practices blend science, spectacle, and self-help in similar ways?</li>
+                        <li>How can we tell the difference between legitimate science and "scientific-sounding" claims?</li>
+                        <li>What role does visual evidence (photos, scans, charts) play in making something seem scientific today?</li>
+                        <li>Are there modern examples of "democratic" science that becomes oppressive?</li>
+                    </ol>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Conclusion: The Gothic Scientific Culture</h2>
+                
+                <div class="primary-source" style="font-size: 1em;">
+                    <h3>These practices reveal deep Antebellum anxieties about boundary breakdowns:</h3>
+                   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5em; margin-top: 0.8em; font-size: 1.2em;">
+    <ul style="margin: 0;">
+        <li>Science vs. Religion</li>
+        <li>Civilized vs. Savage</li>
+        <li>Male vs. Female</li>
+    </ul>
+    <ul style="margin: 0;">
+        <li>Surface vs. Depth</li>
+        <li>Life vs. Death</li>
+    </ul>
+</div>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <div class="gothic-box" style="margin-top: 1.5em; background: rgba(218,165,32,0.15);">
+                    <h3>Modern Echoes</h3>
+                    <p>The blurring of entertainment and education, the spread of medical misinformation, and the long shadow of scientific racism all find their roots in this era where <strong>truth competed with spectacle</strong>.</p>
+                </div>
+
+                <p style="margin-top: 2em; text-align: center; font-size: 1.3em; color: var(--gothic-gold);">
+                    <em>"The boundary between science and spectacle, reason and the uncanny"</em>
+                </p>
+
+                <aside class="notes">
+                    <h4>📚 Wrapping Up: What We've Learned</h4>
+                    <p>This lecture has explored a fascinating and weird moment in American history when science, spectacle, and Gothic horror merged into a distinctive cultural phenomenon.</p>
+                    
+                    <h4>📖 Key Takeaways</h4>
+                    <ol>
+                        <li><strong>Context matters</strong>: Phrenology, mesmerism, and monster shows seemed plausible in the 1840s because institutional science was weak, technology was changing rapidly, and Americans were desperate for explanations.</li>
+                        
+                        <li><strong>Science isn't neutral</strong>: These practices show how "objective science" can be used to justify existing prejudices about race, gender, class, and ability.</li>
+                        
+                        <li><strong>Spectacle shapes belief</strong>: The theatrical presentation of these practices made them convincing. Americans learned to see what the showmen wanted them to see.</li>
+                        
+                        <li><strong>Good intentions ≠ good outcomes</strong>: Phrenology started as self-help but became a tool of oppression. Mesmerism started as healing but sometimes exploited vulnerable people. Monster shows claimed education but dehumanized living people.</li>
+                        
+                        <li><strong>The past explains the present</strong>: Modern debates about misinformation, scientific racism, medical ethics, and the entertainment-education divide all have roots in this period.</li>
+                    </ol>
+                    
+                    <h4>💭 The Boundary Problem</h4>
+                    <p>The central issue of Gothic Science was: <strong>How do you tell truth from spectacle?</strong></p>
+                    
+                    <p>Americans in the 1840s struggled with this, and we still do. When:</p>
+                    <ul>
+                        <li>Science is presented theatrically (TED talks, TV shows about forensics)</li>
+                        <li>Entertainment uses scientific language (wellness influencers citing "studies")</li>
+                        <li>Real science competes with fake science for attention (climate change vs. denialism)</li>
+                        <li>Financial incentives shape "scientific" claims (pharmaceutical ads)</li>
+                    </ul>
+                    
+                    <p>...we face the same challenges Americans faced in 1845.</p>
+                    
+                    <h4>🎓 What Made Gothic Science Possible</h4>
+                    <p><strong>The perfect storm of factors:</strong></p>
+                    <ol>
+                        <li><strong>Weak institutions</strong>: No FDA, no AMA standards, no peer review system</li>
+                        <li><strong>Rapid change</strong>: Technology outpacing understanding</li>
+                        <li><strong>Democratic culture</strong>: Distrust of elites, belief anyone can understand "science"</li>
+                        <li><strong>Market economy</strong>: Science became a commodity to buy and sell</li>
+                        <li><strong>Media revolution</strong>: Penny press spread sensational "scientific" claims</li>
+                        <li><strong>Cultural anxieties</strong>: Slavery, immigration, urbanization, religious change</li>
+                    </ol>
+                    
+                    <h4>✊ Resistance and Reform</h4>
+                    <p>Not everyone was fooled:</p>
+                    <ul>
+                        <li><strong>Mark Twain</strong> exposed phrenology as fraud by getting contradictory readings</li>
+                        <li><strong>Medical professionals</strong> increasingly criticized mesmerism and phrenology</li>
+                        <li><strong>The 1784 Franklin Commission</strong> showed early scientific skepticism</li>
+                        <li><strong>Abolitionists</strong> fought against scientific racism</li>
+                        <li><strong>Women's rights advocates</strong> challenged medical claims about female "weakness"</li>
+                    </ul>
+                    
+                    <h4>🔮 What Came Next</h4>
+                    <p><strong>After the Civil War (1865):</strong></p>
+                    <ul>
+                        <li>Phrenology rapidly declined as neuroscience developed</li>
+                        <li>Mesmerism evolved into hypnosis and psychotherapy</li>
+                        <li>Monster shows became less respectable as medical photography developed</li>
+                        <li>BUT the legacy persisted: eugenics (1880s-1940s) drew directly on phrenological thinking</li>
+                    </ul>
+                    
+                    <h4>🎬 Why This Matters for Understanding America</h4>
+                    <p>Gothic Science reveals core tensions in American culture:</p>
+                    <ul>
+                        <li><strong>Democracy vs. expertise</strong>: Who gets to define truth?</li>
+                        <li><strong>Progress vs. tradition</strong>: How fast should we embrace new ideas?</li>
+                        <li><strong>Individual vs. community</strong>: Phrenology focused on individual traits, but was used to judge whole groups</li>
+                        <li><strong>Science vs. religion</strong>: These practices tried to bridge the gap but often created new conflicts</li>
+                        <li><strong>Entertainment vs. education</strong>: Can serious learning be fun, or does fun trivialize learning?</li>
+                    </ul>
+                    
+                    <h4>🤔 Final Reflection Questions</h4>
+                    <ol>
+                        <li>If you lived in 1845, do you think you would have believed in phrenology or mesmerism? Why or why not?</li>
+                        
+                        <li>What would convince you that a modern practice is pseudoscience rather than real science?</li>
+                        
+                        <li>How do we balance the democratic ideal that "everyone can understand science" with the reality that expertise matters?</li>
+                        
+                        <li>Are there things we believe today that people in 2175 will look back on as obviously wrong, the way we view phrenology?</li>
+                        
+                        <li>How can we learn from history to make better decisions about what scientific claims to trust?</li>
+                    </ol>
+                    
+                    <h4>📚 For Further Reading</h4>
+                    <p>If you're interested in learning more:</p>
+                    <ul>
+                        <li>Robert C. Fuller, <em>Mesmerism and the American Cure of Souls</em> (1982)</li>
+                        <li>John D. Davies, <em>Phrenology: Fad and Science</em> (1955)</li>
+                        <li>Courtney Thompson, <em>An Organ of Murder: Crime, Violence, and Phrenology in Nineteenth-Century America</em> (2021)</li>
+                        <li>Robert Darnton, <em>Mesmerism and the End of the Enlightenment in France</em> (1968)</li>
+                        <li>Stephen Jay Gould, <em>The Mismeasure of Man</em> (1981) - on scientific racism</li>
+                    </ul>
+                    
+                    <h4>🎯 Study Tips</h4>
+                    <p>To remember this material:</p>
+                    <ul>
+                        <li><strong>Think of the progression: Mind (phrenology) → Spirit (mesmerism) → Body (monster shows)</strong></li>
+                        <li><strong>Remember the key dates: 1830s-1850s peak; 1848 Fox Sisters launch Spiritualism</strong></li>
+                        <li><strong>Connect to other topics: Market Revolution, Second Great Awakening, Sectional Crisis</strong></li>
+                        <li><strong>Think about modern parallels—they'll help you remember and understand</strong></li>
+                    </ul>
+                </aside>
+            </section>
+          
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/zoom/zoom.js"></script>
+    
+    <script>
+        // Initialize Reveal.js
+        Reveal.initialize({
+            width: 1920,
+            height: 1080,
+            margin: 0.1,
+            minScale: 0.2,
+            maxScale: 2.0,
+            controls: true,
+            progress: true,
+            center: true,
+            hash: true,
+            transition: 'slide',
+            plugins: [ RevealNotes, RevealHighlight, RevealZoom ]
+        });
+
+        // Pop-up toggle function
+        function togglePopup(id) {
+            const popup = document.getElementById(id);
+            if (popup) {
+                popup.classList.toggle('active');
+            }
+        }
+
+        // Close popup when clicking outside
+        document.addEventListener('click', function(event) {
+            const popups = document.querySelectorAll('.popup.active');
+            popups.forEach(popup => {
+                if (!popup.contains(event.target) && !event.target.classList.contains('popup-trigger')) {
+                    popup.classList.remove('active');
+                }
+            });
+        });
+
+        // Prevent popup from closing when clicking inside it
+        document.querySelectorAll('.popup').forEach(popup => {
+            popup.addEventListener('click', function(event) {
+                event.stopPropagation();
+            });
+        });
+    </script>
+</body>
+</html>
