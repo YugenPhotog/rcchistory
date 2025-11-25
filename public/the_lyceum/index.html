@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Lyceum: Studies in History, Faith, and Civilization</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --parchment: #f4e9d8;
+            --parchment-light: #faf6f0;
+            --terracotta: #c45c3e;
+            --terracotta-dark: #a34a30;
+            --bronze: #8b7355;
+            --bronze-dark: #6b5a47;
+            --olive: #6b7c4c;
+            --olive-dark: #4a5635;
+            --ink: #2c2416;
+            --ink-light: #4a3f2f;
+            --marble: #e8e4dc;
+            --shadow: rgba(44, 36, 22, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: var(--parchment);
+            color: var(--ink);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* Decorative background pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(107, 124, 76, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(196, 92, 62, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(139, 115, 85, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Header Section */
+        header {
+            background: linear-gradient(180deg, var(--ink) 0%, var(--ink-light) 100%);
+            color: var(--parchment);
+            padding: 3rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20'%3E%3Cpath d='M0 20 Q25 0 50 20 Q75 0 100 20 L100 20 L0 20 Z' fill='%23f4e9d8'/%3E%3C/svg%3E");
+            background-size: 100px 20px;
+            background-repeat: repeat-x;
+        }
+
+        /* Decorative columns */
+        .column-decoration {
+            position: absolute;
+            top: 0;
+            bottom: 20px;
+            width: 60px;
+            opacity: 0.1;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                var(--parchment) 20%, 
+                var(--parchment) 30%,
+                transparent 30%,
+                transparent 70%,
+                var(--parchment) 70%,
+                var(--parchment) 80%,
+                transparent 100%
+            );
+        }
+
+        .column-decoration.left {
+            left: 5%;
+        }
+
+        .column-decoration.right {
+            right: 5%;
+        }
+
+        /* Laurel wreath decoration */
+        .laurel-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .laurel {
+            font-size: 2.5rem;
+            color: var(--olive);
+            opacity: 0.8;
+        }
+
+        .owl-icon {
+            font-size: 2.5rem;
+            color: var(--bronze);
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            font-style: italic;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+
+        /* Greek key border */
+        .greek-key {
+            width: 80%;
+            max-width: 500px;
+            height: 12px;
+            margin: 1.5rem auto 0;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='12' viewBox='0 0 40 12'%3E%3Cpath d='M0 6 L4 6 L4 2 L8 2 L8 6 L12 6 L12 10 L16 10 L16 6 L20 6 L20 2 L24 2 L24 6 L28 6 L28 10 L32 10 L32 6 L36 6 L36 2 L40 2' stroke='%23c45c3e' stroke-width='1.5' fill='none' opacity='0.6'/%3E%3C/svg%3E");
+            background-repeat: repeat-x;
+            opacity: 0.7;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem 4rem;
+        }
+
+        .intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-size: 1.2rem;
+            color: var(--ink-light);
+        }
+
+        /* Course Cards Grid */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .course-card {
+            background: var(--parchment-light);
+            border: 1px solid var(--marble);
+            border-radius: 8px;
+            padding: 2rem;
+            text-decoration: none;
+            color: var(--ink);
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px var(--shadow);
+            overflow: hidden;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: var(--terracotta);
+            transition: height 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+
+        .course-card:hover::before {
+            height: 8px;
+        }
+
+        .course-card.american::before { background: var(--terracotta); }
+        .course-card.chinese::before { background: #c4a03e; }
+        .course-card.japanese::before { background: #9e3e3e; }
+        .course-card.world-religions::before { background: var(--olive); }
+        .course-card.asian-religions::before { background: #7c6c8a; }
+        .course-card.world-history::before { background: var(--bronze); }
+        .course-card.ethics::before { background: #4a6b7c; }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .course-card h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+            color: var(--ink);
+        }
+
+        .course-card p {
+            font-size: 1.1rem;
+            color: var(--ink-light);
+            line-height: 1.5;
+        }
+
+        .card-arrow {
+            position: absolute;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            font-size: 1.5rem;
+            color: var(--bronze);
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .course-card:hover .card-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--ink);
+            color: var(--parchment);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        footer p {
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        .footer-quote {
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .footer-attribution {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header {
+                padding: 2rem 1rem 3rem;
+            }
+
+            .column-decoration {
+                display: none;
+            }
+
+            main {
+                padding: 2rem 1rem 3rem;
+            }
+
+            .courses-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .course-card {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Focus states for accessibility */
+        .course-card:focus {
+            outline: 3px solid var(--terracotta);
+            outline-offset: 2px;
+        }
+
+        /* Print styles */
+        @media print {
+            header::before,
+            .card-arrow {
+                display: none;
+            }
+
+            .course-card {
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="column-decoration left"></div>
+        <div class="column-decoration right"></div>
+        
+        <div class="laurel-container">
+            <span class="laurel">🌿</span>
+            <span class="owl-icon">🦉</span>
+            <span class="laurel">🌿</span>
+        </div>
+        
+        <h1>The Lyceum</h1>
+        <p class="tagline">Studies in History, Faith, and Civilization</p>
+        
+        <div class="greek-key"></div>
+    </header>
+
+    <main>
+        <p class="intro">
+            Welcome to The Lyceum—a digital gathering place for the study of humanity's great stories, 
+            beliefs, and moral traditions. Here you will find lectures spanning continents and millennia, 
+            each designed to illuminate the past and inform the present.
+        </p>
+
+        <div class="courses-grid">
+            <a href="american-history/index.html" class="course-card american">
+                <span class="card-icon">🦅</span>
+                <h2>American History</h2>
+                <p>From colonial foundations through reconstruction—the forging of a republic and its ongoing experiment in self-governance.</p>
+                <span class="card-arrow">→</span>
+            </a>
+
+            <a href="chinese-history/index.html" class="course-card chinese">
+                <span class="card-icon">🐉</span>
+                <h2>Chinese History</h2>
+                <p>Five millennia of dynastic rise and fall, philosophical revolution, and the world's longest continuous civilization.</p>
+                <span class="card-arrow">→</span>
+            </a>
+
+            <a href="japanese-history/index.html" class="course-card japanese">
+                <span class="card-icon">🏯</span>
+                <h2>Japanese History</h2>
+                <p>From the age of the gods through samurai ascendancy to modern transformation—an island nation's singular path.</p>
+                <span class="card-arrow">→</span>
+            </a>
+
+            <a href="world-religions/index.html" class="course-card world-religions">
+                <span class="card-icon">🕊️</span>
+                <h2>World Religions</h2>
+                <p>Comparative studies in faith and practice—exploring humanity's diverse answers to life's ultimate questions.</p>
+                <span class="card-arrow">→</span>
+            </a>
+
+            <a href="asian-religions/index.html" class="course-card asian-religions">
+                <span class="card-icon">☸️</span>
+                <h2>Asian Religions</h2>
+                <p>Buddhism, Hinduism, Confucianism, Daoism, and Shinto—the spiritual traditions that shaped the East.</p>
+                <span class="card-arrow">→</span>
+            </a>
+
+            <a href="world-history/index.html" class="course-card world-history">
+                <span class="card-icon">🌍</span>
+                <h2>World History</h2>
+                <p>The grand narrative of human civilization—empires, exchanges, and the forces that connect all peoples.</p>
+                <span class="card-arrow">→</span>
+            </a>
+
+            <a href="ethics/index.html" class="course-card ethics">
+                <span class="card-icon">⚖️</span>
+                <h2>Ethics</h2>
+                <p>The examined life—virtue, duty, consequence, and the perennial search for how we ought to live.</p>
+                <span class="card-arrow">→</span>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p class="footer-quote">"The roots of education are bitter, but the fruit is sweet."</p>
+        <p class="footer-attribution">— Aristotle</p>
+    </footer>
+</body>
+</html>
