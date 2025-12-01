@@ -13,166 +13,171 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     
     <style>
-        :root {
-            --desert-flower: #FF9B8A;
-            --cattleya-orchid: #A25FB0;
-            --opera-mauve: #D4A5C8;
-            --blue-curacao: #48C9C9;
-            --spicy-mustard: #D9A757;
-            --mocha-mousse: #A78674;
-            --arabesque: #C8826D;
-            --dark-bg: #2F2F2F;
-            --light-text: #FAFAFA;
-        }
+    :root {
+        --desert-flower: #FF9B8A;
+        --cattleya-orchid: #A25FB0;
+        --opera-mauve: #D4A5C8;
+        --blue-curacao: #48C9C9;
+        --spicy-mustard: #D9A757;
+        --mocha-mousse: #A78674;
+        --arabesque: #C8826D;
+        --dark-bg: #2F2F2F;
+        --light-text: #FAFAFA;
+    }
 
-        .reveal {
-            font-family: 'Open Sans', sans-serif;
-            font-size: 32px;
-            background-color: var(--dark-bg);
-            color: var(--light-text);
-        }
+    .reveal {
+        font-family: 'Open Sans', sans-serif;
+        /* INCREASED BASE FONT SIZE for better 16:9 readability */
+        font-size: 44px; 
+        background-color: var(--dark-bg);
+        color: var(--light-text);
+    }
 
-        .reveal h1, .reveal h2, .reveal h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            color: var(--desert-flower);
-            text-transform: none;
-        }
+    .reveal h1, .reveal h2, .reveal h3 {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        color: var(--desert-flower);
+        text-transform: none;
+    }
 
-        .reveal h1 { font-size: 3em; margin-bottom: 0.5em; }
-        .reveal h2 { font-size: 2em; margin-bottom: 0.8em; }
-        .reveal h3 { font-size: 1.5em; margin-bottom: 0.5em; }
+    /* Adjusted heading sizes proportionally */
+    .reveal h1 { font-size: 3.2em; margin-bottom: 0.5em; } /* From 3em */
+    .reveal h2 { font-size: 2.2em; margin-bottom: 0.8em; } /* From 2em */
+    .reveal h3 { font-size: 1.7em; margin-bottom: 0.5em; } /* From 1.5em */
 
-        .reveal a {
-            color: var(--blue-curacao);
-            text-decoration: underline;
-        }
+    .reveal a {
+        color: var(--blue-curacao);
+        text-decoration: underline;
+    }
 
-        .reveal a:hover {
-            color: var(--opera-mauve);
-        }
+    .reveal a:hover {
+        color: var(--opera-mauve);
+    }
 
-        .reveal ul {
-            line-height: 1.6;
-        }
+    .reveal ul {
+        line-height: 1.6;
+    }
 
-        .reveal li {
-            margin-bottom: 0.5em;
-        }
+    .reveal li {
+        margin-bottom: 0.5em;
+    }
 
-        /* Pop-up/Modal styling */
-        .popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--light-text);
-            color: var(--dark-bg);
-            padding: 2em;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            max-width: 70%;
-            max-height: 70%;
-            overflow-y: auto;
-            z-index: 1000;
-            border: 3px solid var(--cattleya-orchid);
-        }
+    /* Pop-up/Modal styling */
+    .popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: var(--light-text);
+        color: var(--dark-bg);
+        padding: 2em;
+        border-radius: 15px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        max-width: 70%;
+        max-height: 70%;
+        overflow-y: auto;
+        z-index: 1000;
+        border: 3px solid var(--cattleya-orchid);
+        /* Ensure popups also scale up */
+        font-size: 0.8em; 
+    }
 
-        .popup.active { display: block; }
+    .popup.active { display: block; }
 
-        .popup-close {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            font-size: 2em;
-            cursor: pointer;
-            color: var(--arabesque);
-        }
+    .popup-close {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        font-size: 2em;
+        cursor: pointer;
+        color: var(--arabesque);
+    }
 
-        .popup-trigger {
-            color: var(--blue-curacao);
-            text-decoration: underline dotted;
-            cursor: pointer;
-            border-bottom: 2px dotted var(--blue-curacao);
-        }
+    .popup-trigger {
+        color: var(--blue-curacao);
+        text-decoration: underline dotted;
+        cursor: pointer;
+        border-bottom: 2px dotted var(--blue-curacao);
+    }
 
-        .popup-trigger:hover {
-            color: var(--cattleya-orchid);
-            border-bottom-color: var(--cattleya-orchid);
-        }
+    .popup-trigger:hover {
+        color: var(--cattleya-orchid);
+        border-bottom-color: var(--cattleya-orchid);
+    }
 
-        /* Image placeholder styling */
-        .img-placeholder {
-            background: var(--opera-mauve);
-            border: 3px dashed var(--cattleya-orchid);
-            padding: 3em;
-            text-align: center;
-            color: var(--dark-bg);
-            font-style: italic;
-            border-radius: 10px;
-        }
+    /* Image placeholder styling */
+    .img-placeholder {
+        background: var(--opera-mauve);
+        border: 3px dashed var(--cattleya-orchid);
+        padding: 3em;
+        text-align: center;
+        color: var(--dark-bg);
+        font-style: italic;
+        border-radius: 10px;
+    }
 
-        /* Key term styling */
-        .key-term {
-            color: var(--cattleya-orchid);
-            font-weight: 600;
-        }
+    /* Key term styling */
+    .key-term {
+        color: var(--cattleya-orchid);
+        font-weight: 600;
+    }
 
-        /* Timeline styling */
-        .timeline-item {
-            display: flex;
-            align-items: center;
-            margin: 0.8em 0;
-            padding: 0.5em;
-            border-left: 4px solid var(--blue-curacao);
-        }
+    /* Timeline styling */
+    .timeline-item {
+        display: flex;
+        align-items: center;
+        margin: 0.8em 0;
+        padding: 0.5em;
+        border-left: 4px solid var(--blue-curacao);
+    }
 
-        .timeline-date {
-            color: var(--spicy-mustard);
-            font-weight: bold;
-            min-width: 160px;
-        }
+    .timeline-date {
+        color: var(--spicy-mustard);
+        font-weight: bold;
+        min-width: 160px;
+    }
 
-        /* Section header styling */
-        .section-header {
-            background: linear-gradient(135deg, var(--cattleya-orchid), var(--arabesque));
-            padding: 1em;
-            border-radius: 15px;
-            margin: 1em 0;
-        }
+    /* Section header styling */
+    .section-header {
+        background: linear-gradient(135deg, var(--cattleya-orchid), var(--arabesque));
+        padding: 1em;
+        border-radius: 15px;
+        margin: 1em 0;
+    }
 
-        /* Comparison grid */
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2em;
-            margin-top: 1em;
-        }
+    /* Comparison grid */
+    .comparison-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2em;
+        margin-top: 1em;
+    }
 
-        .comparison-box {
-            border: 3px solid var(--cattleya-orchid);
-            padding: 1.5em;
-            border-radius: 10px;
-            background: rgba(162, 95, 176, 0.1);
-        }
+    .comparison-box {
+        border: 3px solid var(--cattleya-orchid);
+        padding: 1.5em;
+        border-radius: 10px;
+        background: rgba(162, 95, 176, 0.1);
+    }
 
-        /* Emphasis box */
-        .emphasis-box {
-            background: rgba(217, 167, 87, 0.2);
-            border-left: 5px solid var(--spicy-mustard);
-            padding: 1em;
-            margin: 1em 0;
-            font-style: italic;
-        }
+    /* Emphasis box */
+    .emphasis-box {
+        background: rgba(217, 167, 87, 0.2);
+        border-left: 5px solid var(--spicy-mustard);
+        padding: 1em;
+        margin: 1em 0;
+        font-style: italic;
+    }
 
-        /* Subtitle styling */
-        .subtitle {
-            color: var(--opera-mauve);
-            font-size: 0.8em;
-            margin-top: -0.5em;
-        }
-    </style>
+    /* Subtitle styling */
+    .subtitle {
+        color: var(--opera-mauve);
+        /* Slightly larger subtitle to match new base size */
+        font-size: 0.9em; 
+        margin-top: -0.5em;
+    }
+</style>
 </head>
 <body>
     <div class="reveal">
@@ -184,13 +189,9 @@
                 <h2 style="color: var(--opera-mauve);">Why the Union Won and What the War Did to America</h2>
                 <p class="subtitle">HIST 101 — United States to 1877</p>
                 
-                <div class="img-placeholder" style="width: 800px; height: 400px; margin: 2em auto;">
-                    <strong>IMAGE PLACEHOLDER</strong><br>
-                    <em>Dimensions: 800x400px</em><br><br>
-                    <strong>Search terms:</strong> "Civil War battlefield photograph Matthew Brady"<br>
-                    "Gettysburg battlefield 1863 historic photograph"
-                </div>
-
+                
+					<img src="images/dead_of_antietam/dead_of_antietam_1.jpg" style="max-width: 800px; max-height: 800px; height: auto;">
+					
                 <aside class="notes">
                     <h4>📚 What You Need to Know</h4>
                     <p>This lecture explores the American Civil War (1861-1865), the deadliest conflict in American history with approximately 750,000 deaths. We'll examine why the Union won despite early Confederate advantages and how the war fundamentally transformed the United States.</p>
@@ -245,8 +246,6 @@
                 <ul>
                     <li>Expansion of <span class="popup-trigger" onclick="togglePopup('slavery-popup')">slavery</span> divides every national debate</li>
                     <li>Failure of compromises (Missouri, Compromise of 1850)</li>
-                    <li>Growth of sectional party identities</li>
-                    <li>Polarization accelerates in the 1850s</li>
                 </ul>
 
                 <div id="slavery-popup" class="popup">
@@ -274,10 +273,10 @@
             <section>
                 <h2>Political Collapse of the 1850s</h2>
                 <ul>
-                    <li><span class="popup-trigger" onclick="togglePopup('kn-popup')">Kansas-Nebraska Act</span> shatters the old order</li>
-                    <li>Republican Party rises in the North</li>
-                    <li>Dred Scott intensifies sectional crisis</li>
+                    <li><span class="popup-trigger" onclick="togglePopup('kn-popup')">Kansas-Nebraska Act</span> shatters the old party system</li>
+                    <li>National parties replaced by <span class="key-term">sectional parties</span></li>
                     <li>Violence in "Bleeding Kansas" and Congress</li>
+                    <li>Dred Scott and John Brown radicalize both sides</li>
                 </ul>
 
                 <div id="kn-popup" class="popup">
@@ -290,16 +289,17 @@
                 <aside class="notes">
                     <h4>📖 The Cascade of Crises</h4>
                     <ul>
-                        <li>1854: Kansas-Nebraska Act</li>
+                        <li>1854: Kansas-Nebraska Act—Whig Party dies, Republicans born</li>
                         <li>1855-56: "Bleeding Kansas" violence</li>
-                        <li>1856: Preston Brooks beats Charles Sumner on Senate floor</li>
+                        <li>1856: Preston Brooks beats Charles Sumner on Senate floor—Southerners send Brooks new canes as gifts</li>
                         <li>1857: Dred Scott decision</li>
                         <li>1859: John Brown's raid</li>
                         <li>1860: Democratic Party splits; Lincoln wins</li>
                     </ul>
+                    <h4>📚 Key Point</h4>
+                    <p>The Second Party System (Whigs vs. Democrats) was national—both parties had Northern and Southern wings, forcing compromise. After 1854, Republicans are purely Northern; Democrats increasingly Southern. Parties now amplify sectional conflict instead of muffling it.</p>
                 </aside>
             </section>
-
             <!-- SLIDE 5: ELECTION OF 1860 -->
             <section>
                 <h2>Election of 1860: The Breaking Point</h2>
@@ -345,6 +345,10 @@
                     <span class="timeline-date">April–May 1861</span>
                     <span>Upper South joins (VA, AR, TN, NC)</span>
                 </div>
+				<div class="timeline-item">
+    <span class="timeline-date">Throughout</span>
+    <span>&nbsp;<span class="key-term">Border states</span> (MD, DE, KY, MO) stay in Union—critical to victory</span>
+</div>
 
                 <aside class="notes">
                     <h4>📖 Two Waves of Secession</h4>
@@ -362,7 +366,7 @@
 
             <!-- SLIDE 7: FIRST BULL RUN -->
             <section>
-                <h2>First Bull Run (Manassas)</h2>
+                <h2>"On to Richmond!" or First Bull Run (Manassas)</h2>
                 <p class="subtitle">July 21, 1861</p>
                 <ul>
                     <li>Americans expect a short war</li>
@@ -372,16 +376,27 @@
                 </ul>
 
                 <div class="emphasis-box">
-                    "On to Richmond!" Reality: Union army fled in panic back to Washington
+                    Reality: Union army fled in panic back to Washington
                 </div>
-
-                <aside class="notes">
-                    <h4>📚 What Happened</h4>
-                    <p>First major battle fought near Manassas, Virginia. Civilians came with picnic baskets. Union initially pushed back Confederates, but Confederate railroad reinforcements turned the tide. Union retreat became a rout.</p>
-                    <p><strong>Consequences:</strong> North realized this would be a long war. South became overconfident.</p>
-                </aside>
-            </section>
-
+             
+<aside class="notes">
+    <h4>📚 How Battles Happened</h4>
+    <p>Battles weren't scheduled by appointment. They happened where armies collided while pursuing strategic objectives. Manassas Junction was a critical railroad intersection—whoever controlled it controlled the rail lines into Virginia's interior. McDowell marched south to seize it; Beauregard positioned his forces along Bull Run creek to block him. The battle happened there because the terrain and the objective dictated it.</p>
+    
+   <h4>💡 Why Two Names?</h4>
+<p>Bull Run is the creek where Beauregard set his defensive line. The Union named battles after natural features (Bull Run, Antietam); the Confederacy named them after towns (Manassas, Sharpsburg). Same battle, different names—two cultures who couldn't even agree on what to call the fight.</p>
+	
+	<h4>📚 What Happened</h4>
+    <p>First major battle fought near Manassas Junction, Virginia—about 25 miles from Washington. Both armies were green: 90-day volunteers, officers who'd never commanded large units, confusion everywhere. Civilians from Washington came out with picnic baskets expecting to watch a quick Union victory.</p>
+    <p>Union forces under Irvin McDowell initially pushed the Confederates back. But Confederate reinforcements arrived by rail—one of the first times railroads decisively affected a battle. Thomas Jackson earned his nickname "Stonewall" rallying troops on Henry House Hill. By afternoon, the Union line collapsed. Retreat became a rout, soldiers and civilians fleeing together back to Washington.</p>
+    
+    <h4>📖 Why It Matters</h4>
+    <p><strong>For the North:</strong> The "On to Richmond!" fantasy died. Lincoln called for 500,000 three-year volunteers the next day. This would not be a 90-day war.</p>
+    <p><strong>For the South:</strong> Victory bred dangerous overconfidence. Some believed one Confederate could whip ten Yankees. This complacency would cost them later.</p>
+    <p><strong>Key insight:</strong> Both sides learned that enthusiasm and courage weren't enough. This would be a war of logistics, training, and industrial capacity—exactly where the North held advantages it hadn't yet learned to use.</p>
+</aside>
+			</section>
+			
             <!-- SLIDE 8: UNION STRUGGLES -->
             <section>
                 <h2>Early Union Struggles</h2>
@@ -393,9 +408,25 @@
                 </ul>
 
                 <aside class="notes">
-                    <h4>📖 Union Problems 1861-1862</h4>
-                    <p>McClellan organized well but wouldn't fight. Political generals appointed for connections. No unified command. Limited war aims confused goals. Early defeats questioned whether war was worth the cost.</p>
-                </aside>
+    <h4>📚 The McClellan Problem</h4>
+    <p>George McClellan was brilliant at organization—he took the demoralized mob that fled Bull Run and built the Army of the Potomac into a disciplined fighting force. Soldiers loved him. But he wouldn't fight. He consistently overestimated Confederate strength (sometimes by 200%), demanded more troops, and found endless reasons to delay. Lincoln's frustration boiled over: "If McClellan is not using the army, I should like to borrow it for a while."</p>
+    <p>The Peninsula Campaign (spring 1862) captured McClellan's problem perfectly: he moved 100,000 men by sea to outflank the Confederates, got within miles of Richmond, then convinced himself he was outnumbered and retreated. A pattern emerged—McClellan prepared beautifully and executed timidly.</p>
+    
+    <h4>📖 Structural Problems</h4>
+    <p><strong>Political generals:</strong> Lincoln appointed men like Benjamin Butler and Nathaniel Banks not for military skill but to hold together his coalition—Democrats, ethnic constituencies, key states. These men commanded armies and got soldiers killed while learning on the job.</p>
+    <p><strong>No unified command:</strong> Union armies in different theaters operated independently, sometimes at cross-purposes. The Confederacy could shift troops by rail to meet threats one at a time. Not until Grant took overall command in 1864 did the Union coordinate offensives.</p>
+    <p><strong>Limited war aims:</strong> In 1861-62, the official goal was simply restoring the Union—not ending slavery. This created confusion. Why not negotiate? What were soldiers dying for? And it left the South's enslaved labor force intact, feeding Confederate armies.</p>
+    
+    <h4>💡 Key Insight</h4>
+    <p>The Union had overwhelming advantages in men and materiel but hadn't yet developed the leadership, strategy, or political will to use them. The Confederacy didn't need to win—just outlast Northern resolve. In 1861-62, that looked achievable.</p>
+	
+	<h4>🤔 Why Was McClellan So Cautious?</h4>
+<p><strong>Bad intelligence:</strong> His chief, Allan Pinkerton, consistently reported Confederate forces at double or triple actual strength. McClellan may have acted rationally on terrible information.</p>
+<p><strong>Perfectionism:</strong> He loved building armies but couldn't stomach watching them get torn apart. Always needed one more division, one more week. Some historians see a deep fear of failure—if he never fully committed, he couldn't fully lose.</p>
+<p><strong>Politics:</strong> McClellan was a Democrat who opposed emancipation. He wanted a limited war ending in negotiated reunion with slavery intact. Crushing the Confederacy would empower Radical Republicans—an outcome he may not have wanted. His 1864 presidential run against Lincoln on a peace platform suggests his heart was never in total victory.</p>
+<p><strong>Training:</strong> He came from the army's engineering tradition, which emphasized caution and siege warfare over aggressive maneuver. He fought like an engineer, not a risk-taker.</p>
+<p>Probably all four factors combined. Lincoln needed a general willing to fight even knowing he'd take losses. McClellan never could.</p>
+</aside>
             </section>
 
             <!-- SLIDE 9: CONFEDERATE ADVANTAGES -->
@@ -424,7 +455,7 @@
 
             <!-- SLIDE 10: ANTIETAM -->
             <section>
-                <h2>Antietam: Bloodiest Day</h2>
+                <h2>Antietam: Bloodiest Day<br>(Sharpsburg)</h2>
                 <p class="subtitle">September 17, 1862</p>
                 <ul>
                     <li>Lee invades the North</li>
@@ -455,14 +486,27 @@
                 </ul>
 
                 <aside class="notes">
-                    <h4>📖 What It Did</h4>
-                    <p>Only applied to areas in rebellion, but it transformed the war. Made emancipation a Union war aim. Authorized 180,000 Black soldiers. Made European intervention impossible. Encouraged enslaved people to flee to Union lines.</p>
-                    <p><strong>Eric Foner:</strong> "Lincoln's most revolutionary act."</p>
-                </aside>
+    <h4>📚 The Timing</h4>
+    <p>Lincoln had drafted the Proclamation in July 1862, but Secretary of State Seward convinced him to wait for a military victory—otherwise it would look like desperation, "the last shriek on the retreat." Antietam (September 17, 1862) gave Lincoln his victory. He issued the preliminary proclamation five days later, warning the Confederacy: return to the Union by January 1, or emancipation becomes policy. No states returned.</p>
+    
+    <h4>📖 What It Actually Said</h4>
+    <p>The Proclamation only freed enslaved people in areas "in rebellion"—meaning Confederate-controlled territory where Lincoln had no practical authority. It explicitly exempted the border states (still in the Union) and parts of the Confederacy already under Union control (like New Orleans and parts of Virginia). Critics then and now have mocked this: Lincoln "freed" people he couldn't reach while leaving enslaved people in areas he controlled.</p>
+    <p><strong>But this misses the point.</strong> The limitation was constitutional—Lincoln justified emancipation as a war measure, a military necessity to weaken the enemy. He couldn't claim military necessity in areas not at war. The Proclamation's real power wasn't immediate liberation; it was transforming every Union soldier into an agent of emancipation. As armies advanced, slavery died.</p>
+    
+    <h4>💡 Why It Mattered</h4>
+    <p><strong>Transformed the war's purpose:</strong> Before January 1863, the Union fought to restore the old Union—potentially with slavery intact. After, the Union fought to create something new. There was no going back.</p>
+    <p><strong>European intervention became impossible:</strong> Britain and France had antislavery publics. Once the war became explicitly about ending slavery, no European government could recognize the Confederacy without massive domestic backlash. Confederate hopes for foreign intervention died.</p>
+    <p><strong>Authorized Black soldiers:</strong> The Proclamation explicitly opened military service to Black men. By war's end, 180,000 Black soldiers served—about 10% of the Union army. They weren't just fighting for the Union; they were fighting for their own freedom.</p>
+    <p><strong>Encouraged self-emancipation:</strong> Enslaved people had been fleeing to Union lines since the war began. The Proclamation gave official sanction to what was already happening and accelerated the collapse of slavery wherever Union armies went.</p>
+    
+    <h4>🎓 Historian's Corner</h4>
+    <p><strong>Eric Foner</strong> calls it "Lincoln's most revolutionary act." But Foner also emphasizes that emancipation was a process, not a single moment—shaped by military events, political pressures, and the actions of enslaved people themselves who forced the issue by fleeing to Union lines.</p>
+    <p><strong>Key point for students:</strong> Lincoln moved slowly, but when he moved, he moved decisively. The Proclamation couldn't be undone. Even if the North grew war-weary, even if Lincoln lost in 1864, emancipation was now Union policy. That's why Lincoln later pushed for the 13th Amendment—to make it constitutional and permanent.</p>
+</aside>
             </section>
 
             <!-- SLIDE 12: BLACK SOLDIERS -->
-            <section>
+            <!-- section>
                 <h2>Black Military Service</h2>
                 <ul>
                     <li>180,000 Black soldiers enlist by war's end</li>
@@ -502,10 +546,28 @@
                     </div>
                 </div>
 
-                <aside class="notes">
-                    <h4>📚 The Turning Point</h4>
-                    <p><strong>Gettysburg:</strong> Three days of savage fighting. Pickett's Charge catastrophic. 51,000 casualties total. Lee's offensive capacity ended. <strong>Vicksburg:</strong> Grant's brilliant campaign gave Union control of Mississippi River. Confederacy cut in two. After July 1863, question changed from "Can Union win?" to "Will Union keep fighting?"</p>
-                </aside>
+               <aside class="notes">
+    <h4>📚 Gettysburg: How It Happened</h4>
+    <p>Lee invaded the North for the second time in summer 1863, hoping to win a decisive victory on Union soil that might break Northern morale or bring European recognition. The armies stumbled into each other near Gettysburg, Pennsylvania—Lee was actually looking for supplies (possibly shoes). Neither commander planned to fight there, but once engaged, neither could back down.</p>
+    <p><strong>Day 1 (July 1):</strong> Confederate forces pushed Union troops through the town, but the Union army dug in on high ground south of town—Cemetery Hill, Cemetery Ridge, Little Round Top. This terrain advantage shaped everything that followed.</p>
+    <p><strong>Day 2 (July 2):</strong> Lee attacked both Union flanks. Savage fighting at Little Round Top, Devil's Den, the Wheatfield, the Peach Orchard. The Union line bent but didn't break. Colonel Joshua Chamberlain's 20th Maine held Little Round Top with a desperate bayonet charge when they ran out of ammunition.</p>
+    <p><strong>Day 3 (July 3):</strong> Lee ordered a massive frontal assault on the Union center—12,500 men marching across open ground toward Cemetery Ridge. Pickett's Charge. It was a catastrophe. Confederate soldiers advanced nearly a mile under artillery and rifle fire. A few hundred briefly breached the Union line ("the high water mark of the Confederacy"), then were killed or captured. Half the men who made the charge became casualties.</p>
+    <p><strong>Aftermath:</strong> Lee retreated to Virginia. He offered his resignation to Jefferson Davis (refused). The Army of Northern Virginia would never again have the strength for major offensive operations. Lee told his men, "It is all my fault."</p>
+    
+    <h4>📚 Vicksburg: Grant's Masterpiece</h4>
+    <p>Vicksburg, Mississippi, sat on high bluffs overlooking the Mississippi River—the last Confederate stronghold blocking Union control of the entire river. Grant tried multiple approaches through winter 1862-63: digging canals, running gunboats past the batteries, swampy overland routes. All failed. Critics called for his removal.</p>
+    <p><strong>The brilliant gamble:</strong> Grant marched his army down the Louisiana side of the river, ran gunboats and supply barges past Vicksburg's guns at night (losing some), then crossed the river south of the city. He was now deep in enemy territory with no supply line. Instead of retreating, he moved fast—living off the land, winning five battles in three weeks, and driving the Confederate army back into Vicksburg.</p>
+    <p><strong>The siege:</strong> Unable to take the city by assault, Grant besieged it for 47 days. Civilians dug caves into hillsides to escape bombardment. Food ran out—soldiers and civilians ate mules, then rats. On July 4, 1863—the day after Pickett's Charge—Vicksburg surrendered. 30,000 Confederate soldiers became prisoners.</p>
+    <p><strong>Lincoln on Grant:</strong> When critics complained Grant was a butcher or a drunk, Lincoln replied, "I can't spare this man. He fights."</p>
+    
+    <h4>💡 Why July 1863 Was the Turning Point</h4>
+    <p><strong>Strategic shift:</strong> Before July 1863, the Confederacy could still win—one more invasion, one more European intervention, one more Northern election. After July 1863, the question changed. The Confederacy couldn't win militarily; it could only hope the North would tire of the war.</p>
+    <p><strong>The Mississippi:</strong> Lincoln said it best: "The Father of Waters again goes unvexed to the sea." The Confederacy was now split in two. Texas, Arkansas, and most of Louisiana were cut off from the rest of the South.</p>
+    <p><strong>Morale:</strong> July 4, 1863—Independence Day—Vicksburg fell. The symbolism was crushing. Vicksburg didn't celebrate July 4th again until 1945.</p>
+    
+    <h4>🎓 The Counterfactual</h4>
+    <p>What if Pickett's Charge had broken through? What if Grant had been removed during the failed winter campaigns? These were genuine possibilities that would have changed everything. After July 1863, Confederate victory required the North to choose to stop fighting—and that choice would come down to the 1864 election.</p>
+</aside>
             </section>
 
             <!-- SECTION DIVIDER -->
@@ -526,10 +588,29 @@
                     <li>Enormous logistical demands</li>
                 </ul>
 
-                <aside class="notes">
-                    <h4>📖 The Scope</h4>
-                    <p>2.1 million Union soldiers, 750,000-1 million Confederate. Cost $6.7 billion. Required industrial-scale production. Union created income tax, national banks, transcontinental railroad, Homestead Act, land-grant colleges. Confederacy faced contradiction: seceded for states' rights but needed strong central government.</p>
-                </aside>
+              <aside class="notes">
+    <h4>📚 The Scale</h4>
+    <p>Nothing like this had happened before in American history. 2.1 million men served in Union forces; 750,000 to 1 million in Confederate forces. At the war's peak, the Union army was larger than the entire federal government had been in 1860. The war cost roughly $6.7 billion—more than all federal expenditures from 1789 to 1860 combined.</p>
+    
+    <h4>📖 The Draft</h4>
+    <p><strong>Confederacy:</strong> Implemented conscription first (April 1862)—an astonishing step for a government founded on states' rights and individual liberty. All white men 18-35 were subject to the draft (later expanded to 17-50).</p>
+    <p><strong>Union:</strong> Followed with the Enrollment Act (March 1863). But both systems allowed substitutes and exemptions that favored the wealthy. In the North, you could pay $300 (a year's wages for a laborer) to avoid service or hire a substitute. This created the bitter slogan: "Rich man's war, poor man's fight."</p>
+    <p><strong>Draft riots:</strong> New York City exploded in July 1863—the worst urban violence in American history. Mostly Irish working-class men, furious about being drafted to fight a war they saw as freeing Black people who would then compete for their jobs. Rioters lynched Black New Yorkers, burned the Colored Orphan Asylum, and attacked abolitionists. Over 100 people died. Federal troops fresh from Gettysburg had to restore order.</p>
+    
+    <h4>📖 Building a Modern State</h4>
+    <p>The war forced the federal government to do things it had never done before:</p>
+    <p><strong>Income tax:</strong> First in American history (Revenue Act of 1861). 3% on incomes over $800. Americans had never paid direct federal taxes like this.</p>
+    <p><strong>National banking system:</strong> The National Banking Acts (1863-64) created a uniform national currency. Before the war, money was chaos—thousands of different banknotes from state-chartered banks, many worthless. "Greenbacks" (federal paper money) became the first truly national currency.</p>
+    <p><strong>Transcontinental railroad:</strong> Pacific Railroad Act (1862) chartered the Union Pacific and Central Pacific. Couldn't have passed before the war—Southern congressmen had blocked northern routes. With them gone, Congress acted.</p>
+    <p><strong>Homestead Act (1862):</strong> Free land (160 acres) to settlers who would farm it. Again, blocked before the war by Southern opposition.</p>
+    <p><strong>Land-grant colleges:</strong> Morrill Act (1862) gave federal land to states to fund public universities—the origin of schools like Illinois, Michigan State, Purdue.</p>
+    
+    <h4>💡 The Confederate Contradiction</h4>
+    <p>The Confederacy seceded to protect states' rights from federal overreach. Then it had to fight a modern war, which required: conscription, impressment of property, suspension of habeas corpus, taxes, and centralized control of railroads. Jefferson Davis's government became more centralized than Lincoln's in many ways. Georgia's governor, Joseph Brown, spent as much energy fighting Richmond as fighting the Union. The Confederacy was undermined by its own founding ideology.</p>
+    
+    <h4>🎓 Long-Term Significance</h4>
+    <p>The Civil War built the modern American state. Income taxes, national currency, federal support for higher education, continental railroads—all emerged from wartime necessity. The federal government that entered the war was tiny and weak; the one that emerged was powerful enough to reshape society. This is part of what historians mean when they call the Civil War a "Second American Revolution."</p>
+</aside>
             </section>
 
             <!-- SLIDE 15: NORTHERN ADVANTAGES -->
@@ -547,9 +628,23 @@
                 </div>
 
                 <aside class="notes">
-                    <h4>📖 The Numbers</h4>
-                    <p>Population: 22M North vs 9M South (including 3.5M enslaved). North manufactured 97% of firearms, 96% of railroad equipment. Union 22,000 miles of rail vs. Confederate 9,000. Naval blockade dropped Southern exports 95% by 1864.</p>
-                </aside>
+    <h4>📚 The Numbers</h4>
+    <p><strong>Population:</strong> 22 million in the North vs. 9 million in the South—and 3.5 million of those Southerners were enslaved people who wouldn't be fighting for the Confederacy. The Union could absorb staggering losses and keep fielding armies; the Confederacy couldn't replace its dead.</p>
+    <p><strong>Industry:</strong> The North manufactured 97% of American firearms, 96% of railroad equipment, 94% of cloth, 90% of shoes and boots. The South had agriculture and cotton—but you can't eat cotton, and you can't shoot it at the enemy.</p>
+    <p><strong>Railroads:</strong> Union had 22,000 miles of track vs. Confederate 9,000—and the Union could manufacture new rails while the Confederacy couldn't. As the war ground on, Confederate railroads fell apart. Broken rails couldn't be replaced. Locomotives wore out. By 1864, moving troops and supplies across the South had become agonizingly slow.</p>
+    <p><strong>Immigration:</strong> During the war, roughly 800,000 immigrants arrived in the North—many of them military-age men who could enlist or work in factories. The South received almost none. The Union was actually growing stronger in manpower while fighting the war.</p>
+    
+    <h4>📖 The Naval Blockade</h4>
+    <p>Lincoln declared a blockade of Southern ports in April 1861. Initially it was leaky—the Union didn't have enough ships to cover 3,500 miles of coastline. But the navy grew from 42 ships to over 600. By 1864, Southern exports had dropped 95%.</p>
+    <p><strong>King Cotton failed:</strong> Southerners believed cotton would force European intervention—"Cotton is King," they said. Britain would have to break the blockade to keep its textile mills running. It didn't happen. Britain had stockpiled cotton before the war, found new sources in Egypt and India, and had no appetite for war with the Union. The Confederacy's one economic trump card turned out to be worthless.</p>
+    <p><strong>What couldn't get in:</strong> Medicine, manufactured goods, shoes, salt (essential for preserving meat), coffee, weapons, ammunition. Confederate soldiers fought barefoot, ate half-rations, and died from wounds that could have been treated with proper supplies.</p>
+    
+    <h4>💡 Why Advantages Took Time</h4>
+    <p>Students sometimes wonder: if the North was so much stronger, why didn't it win immediately? Because advantages on paper take time to convert into battlefield results. You need to mobilize industry, train soldiers, find competent generals, and build political will. The South had interior lines, better initial officer corps, and the morale that comes from defending home. By 1864, Northern advantages had fully materialized while Confederate resources were exhausted. That's when the war became unwinnable for the South.</p>
+    
+    <h4>🎓 What the South Had</h4>
+    <p>It's easy to make the Confederacy look hopeless, but they had real advantages early on: fighting on the defensive (requiring fewer troops), interior lines (shorter distances to move troops), a professional officer corps (many of the best U.S. Army officers were Southern), and fierce motivation—they were defending their homes. The American Revolution proved a weaker force could outlast a stronger one. The South didn't need to win; it just needed the North to give up. That remained possible until Sherman took Atlanta in September 1864.</p>
+</aside>
             </section>
 
             <!-- SLIDE 16: SOCIAL UPHEAVAL -->
@@ -582,11 +677,33 @@
                     The Civil War was the Second American Revolution—it destroyed an entire social system and forced the nation to rebuild on new foundations.
                 </div>
 
-                <aside class="notes">
-                    <h4>💭 Multiple Meanings of Freedom</h4>
-                    <p>For freedpeople: personal autonomy, family reunification, economic independence, political rights, education, dignity. What they didn't get: land redistribution, sustained federal protection, economic resources, long-term political power.</p>
-                    <p><strong>Eric Foner:</strong> "Reconstruction was an 'unfinished revolution.'"</p>
-                </aside>
+               <aside class="notes">
+    <h4>📚 Slavery's Collapse</h4>
+    <p>Slavery didn't end with a single proclamation—it collapsed as Union armies advanced. Every time Union forces occupied new territory, enslaved people fled to their lines. By 1863, this wasn't just tolerated; it was policy. Union armies became engines of liberation whether individual soldiers wanted that or not.</p>
+    <p><strong>Self-emancipation:</strong> Enslaved people didn't wait to be freed. They escaped at enormous risk, provided intelligence to Union forces, sabotaged Confederate operations, and forced the issue politically. When "contraband" (escaped enslaved people) showed up at Union camps, commanders had to decide what to do—and those decisions pushed Washington toward emancipation. Foner and other historians emphasize that enslaved people were actors in their own liberation, not passive recipients of freedom granted by Lincoln.</p>
+    
+    <h4>📖 The Southern Home Front Cracks</h4>
+    <p><strong>White women's burden:</strong> With men at war, white women ran plantations and farms. Many had never managed enslaved workers directly. Discipline broke down. Enslaved people slowed work, feigned illness, demanded better treatment, or simply walked away when the opportunity came.</p>
+    <p><strong>Class resentment:</strong> The "twenty-negro law" exempted overseers on plantations with 20+ enslaved people from the draft. Poor whites, already suspicious of a "rich man's war," saw planters' sons staying home while they died in Virginia. Desertion rates soared. By 1865, perhaps half of Confederate soldiers had deserted at some point—many to help starving families.</p>
+    <p><strong>Food riots:</strong> Richmond's bread riot (April 1863) saw hundreds of women, many of them soldiers' wives, march through the Confederate capital demanding food, smashing shop windows, shouting "Bread or blood!" Jefferson Davis personally confronted the crowd. Similar riots broke out across the South. The Confederacy was collapsing from within.</p>
+    
+    <h4>💭 What Freedom Meant</h4>
+    <p>For freedpeople, freedom meant many things at once:</p>
+    <p><strong>Family:</strong> First priority for many—finding spouses, children, parents sold away. Freedpeople traveled hundreds of miles searching. They legalized marriages that slavery had denied recognition.</p>
+    <p><strong>Autonomy:</strong> Control over your own body, your own time, your own movement. No more passes, no more whips, no more being sold.</p>
+    <p><strong>Education:</strong> Literacy had been illegal for enslaved people in most Southern states. Freedpeople built schools almost immediately—sometimes before they had stable housing. They understood that education meant power.</p>
+    <p><strong>Land:</strong> "Forty acres and a mule" became the symbol of economic independence. Without land, freedpeople would remain dependent on white landowners. This was the great failure of Reconstruction—land redistribution never happened at scale.</p>
+    <p><strong>Political participation:</strong> Voting, holding office, serving on juries—the full rights of citizenship. During Reconstruction, Black men voted in huge numbers, held state and federal offices, shaped Southern governments.</p>
+    
+    <h4>📖 What They Didn't Get</h4>
+    <p><strong>Land:</strong> Most freedpeople became sharecroppers—working land they didn't own, caught in cycles of debt. Economic independence remained elusive.</p>
+    <p><strong>Sustained protection:</strong> Federal troops withdrew in 1877. Without protection, Black political power was crushed through violence, fraud, and eventually Jim Crow laws.</p>
+    <p><strong>Long-term power:</strong> The revolution was real but incomplete. By the 1890s, Black Southerners had been systematically disenfranchised. The gains of Reconstruction wouldn't be recovered until the Civil Rights Movement.</p>
+    
+    <h4>🎓 Historian's Corner</h4>
+    <p><strong>Eric Foner:</strong> "Reconstruction was an 'unfinished revolution.'" The war destroyed slavery—revolutionary and permanent. But the promise of full equality was abandoned. The Civil War settled that the nation would survive and slavery would end; it didn't settle what freedom would actually mean for four million people.</p>
+    <p><strong>The Second American Revolution:</strong> Historians call the Civil War this because it destroyed a social system (slavery), redefined citizenship (14th Amendment), and permanently expanded federal power. The America that emerged in 1865 was a fundamentally different nation than the one that existed in 1860.</p>
+</aside>
             </section>
 
             <!-- SECTION DIVIDER -->
@@ -607,10 +724,35 @@
                     <li>Goal: destroy capacity to resist</li>
                 </ul>
 
-                <aside class="notes">
-                    <h4>📖 Grant's Grand Strategy (1864)</h4>
-                    <p>Attack everywhere at once. Grant fought Lee through Wilderness, Spotsylvania, Cold Harbor—horrific casualties but never retreated. Petersburg siege (June 1864-April 1865). Sherman destroyed armies in Georgia. Sheridan destroyed Shenandoah Valley. "I propose to fight it out on this line."</p>
-                </aside>
+              <aside class="notes">
+    <h4>📚 What Changed in 1864</h4>
+    <p>In March 1864, Lincoln promoted Grant to lieutenant general—a rank no one had held since George Washington—and gave him command of all Union armies. For the first time, the Union had a general-in-chief who would actually coordinate the war.</p>
+    <p><strong>The problem Grant inherited:</strong> Union armies had been fighting separate wars. While one army attacked, others rested, allowing the Confederacy to shift troops by rail to meet each threat. Lee had exploited this repeatedly—reinforcing at critical moments because he only faced one enemy at a time.</p>
+    <p><strong>Grant's solution:</strong> Attack everywhere simultaneously. Lee couldn't reinforce one theater if every theater was under assault. Even if individual Union armies didn't win, constant pressure would grind down Confederate resources. Grant compared it to a man holding a bulldog's ears: "He doesn't want to hold on but he's afraid to let go."</p>
+    
+    <h4>📖 The Overland Campaign (May-June 1864)</h4>
+    <p>Grant personally accompanied the Army of the Potomac against Lee in Virginia. What followed was six weeks of nearly continuous combat—the most intense sustained fighting of the war.</p>
+    <p><strong>The Wilderness, Virginia (May 5-7):</strong> Dense forest negated Union advantages in artillery. Fighting was chaotic, sometimes hand-to-hand. Woods caught fire; wounded men burned to death. Tactically inconclusive.</p>
+    <p><strong>The critical moment:</strong> After the Wilderness, soldiers expected what always happened—retreat north to lick their wounds, like every commander before. Instead, Grant ordered the army to march south, around Lee's flank, toward Spotsylvania Court House. Soldiers realized this general was different. They cheered.</p>
+    <p><strong>Spotsylvania Court House, Virginia (May 8-21):</strong> Twelve days of brutal trench warfare. At the "Bloody Angle," men fought hand-to-hand for nearly 24 hours in pouring rain. Trees were cut down by musket fire alone.</p>
+    <p><strong>Cold Harbor, Virginia (June 3):</strong> Grant's worst mistake. A frontal assault against entrenched Confederates cost 7,000 Union casualties in under an hour. Grant later wrote, "I have always regretted that the last assault at Cold Harbor was ever made."</p>
+    <p><strong>The cost:</strong> In six weeks, Grant lost roughly 55,000 men—almost as many as Lee's entire army. Northern newspapers called him "Butcher Grant." But Lee lost 35,000 he couldn't replace. Grant could get reinforcements; Lee couldn't.</p>
+    
+    <h4>📖 The Siege of Petersburg (June 1864-April 1865)</h4>
+    <p>Unable to destroy Lee's army in open battle, Grant pinned it at Petersburg, Virginia—a railroad hub 25 miles south of Richmond. If Petersburg fell, Richmond couldn't be supplied. Lee had to hold it.</p>
+    <p>For ten months, the armies faced each other across elaborate trench networks. Grant extended his lines westward, forcing Lee to stretch thinner and thinner. Lee couldn't retreat without abandoning Richmond; he couldn't attack without suicidal losses. He was trapped, slowly strangling.</p>
+    
+    <h4>📖 The Other Offensives</h4>
+    <p><strong>Sherman in Georgia:</strong> While Grant pinned Lee, Sherman advanced toward Atlanta, Georgia with 100,000 men. His capture of Atlanta in September 1864 saved Lincoln's re-election and broke Southern morale.</p>
+    <p><strong>Sheridan in the Shenandoah Valley, Virginia:</strong> Philip Sheridan destroyed the Shenandoah Valley—the "breadbasket of the Confederacy"—so thoroughly that, as he reported, "a crow flying over it would have to carry its own provisions." No more food, no more invasion route toward Washington.</p>
+    
+    <h4>💡 Grant's Philosophy</h4>
+    <p>Grant understood something his predecessors hadn't: the math favored the Union. Every battle cost both sides, but only the Union could replace its losses. If Grant traded casualties one-for-one, he would eventually win. This wasn't butchery—it was brutal arithmetic. The war couldn't end until Lee's army was destroyed, and destroying it required accepting horrific losses.</p>
+    <p>"I propose to fight it out on this line if it takes all summer." It took longer than summer. But it worked.</p>
+    
+    <h4>🎓 The Reputation Question</h4>
+    <p>Was Grant a butcher or a strategic genius? Both views persist. Critics note his staggering casualty rates. Defenders argue he did what had to be done—that the war would have dragged on far longer under more cautious generals, costing more lives in the long run. Grant himself was tormented by the losses. But he kept fighting because he believed the Union cause justified the cost.</p>
+</aside>
             </section>
 
             <!-- SLIDE 19: SHERMAN'S MARCH -->
@@ -623,10 +765,33 @@
                     <li>Shows the shift to total war</li>
                 </ul>
 
-                <aside class="notes">
-                    <h4>📖 Total War</h4>
-                    <p>After capturing Atlanta (September 1864—secured Lincoln's re-election), Sherman marched 60,000 men to Savannah, cutting 60-mile path of destruction. Destroyed railroads, factories, crops, plantations. Then turned north through Carolinas. Sherman: "War is cruelty. The crueler it is, the sooner it will be over."</p>
-                </aside>
+               <aside class="notes">
+    <h4>📚 Atlanta and the 1864 Election</h4>
+    <p>By summer 1864, Lincoln expected to lose re-election. Grant was stuck at Petersburg, Virginia, casualties were horrific, and war-weariness was overwhelming. The Democrats nominated George McClellan on a platform calling the war a "failure" and seeking negotiated peace. If McClellan won, the Confederacy might survive.</p>
+    <p>Then, on September 2, 1864, Sherman telegraphed: "Atlanta is ours, and fairly won." The fall of Atlanta, Georgia—the Deep South's industrial and railroad hub—transformed Northern morale overnight. Suddenly the war looked winnable. Lincoln won re-election with 55% of the vote. The Confederacy's last political hope died.</p>
+    
+    <h4>📖 The March to the Sea (November-December 1864)</h4>
+    <p>After taking Atlanta, Sherman did something unprecedented: he cut loose from his supply lines entirely. He burned Atlanta's military infrastructure, severed his own communications with the North, and marched 60,000 men southeast toward Savannah, Georgia—285 miles away. For a month, the North had no idea where Sherman was or whether he was alive.</p>
+    <p><strong>The method:</strong> Sherman's army advanced on a 60-mile-wide front, living off the land. Soldiers were authorized to "forage liberally"—a polite term for taking whatever food, livestock, and supplies they found. Special units destroyed anything of military value: railroads (heating the rails and twisting them around trees into "Sherman's neckties"), factories, cotton gins, warehouses, bridges.</p>
+    <p><strong>What was targeted:</strong> Sherman was explicit—this was war on Confederate resources and morale, not on civilians directly. His orders prohibited entering private homes and harming non-combatants. In practice, discipline varied. Some units followed orders strictly; others looted freely. The destruction was enormous either way.</p>
+    <p><strong>Savannah falls:</strong> Sherman reached Savannah, Georgia on December 21, 1864, presenting the city to Lincoln as a "Christmas gift." He'd lost only 2,000 men while destroying an estimated $100 million in property and proving the Confederacy couldn't protect its own heartland.</p>
+    
+    <h4>📖 The Carolinas Campaign (January-April 1865)</h4>
+    <p>Sherman then turned north through the Carolinas—and here the destruction intensified. South Carolina, as the birthplace of secession, received special attention. Columbia, South Carolina burned (whether by Sherman's orders, fleeing Confederates, or accident remains debated). Soldiers who had restrained themselves in Georgia felt South Carolina deserved punishment.</p>
+    <p>By the time Sherman reached North Carolina, Confederate resistance had collapsed. Joseph Johnston surrendered his army on April 26, 1865—the largest Confederate surrender of the war.</p>
+    
+    <h4>💡 Total War</h4>
+    <p>Sherman pioneered what later generations would call "total war"—the idea that modern war isn't just army vs. army but society vs. society. Destroying the enemy's capacity to fight meant destroying infrastructure, supplies, and morale. Make war so terrible that the enemy gives up.</p>
+    <p>Sherman was blunt about it: "War is cruelty. There is no use trying to reform it. The crueler it is, the sooner it will be over." And: "We are not only fighting hostile armies, but a hostile people, and must make old and young, rich and poor, feel the hard hand of war."</p>
+    <p><strong>Did it work?</strong> Arguably, yes. Confederate morale collapsed. Desertion skyrocketed. Soldiers who might have fought to the last man realized their families were unprotected. The march didn't just destroy property—it destroyed the Confederate will to fight.</p>
+    
+    <h4>🎓 The Controversy</h4>
+    <p>Sherman remains controversial. Was the march a war crime or a strategic masterstroke that shortened the war and saved lives? Lost Cause mythology portrayed Sherman as a monster who waged war on women and children. Modern historians generally argue the destruction, while severe, was targeted at military resources, and that Sherman's methods—however brutal—ended the war faster than prolonged conventional fighting would have.</p>
+    <p>Sherman himself never apologized: "War is hell." He believed he'd done what was necessary.</p>
+    
+    <h4>📚 Enslaved People and the March</h4>
+    <p>Thousands of enslaved people fled plantations to follow Sherman's army—a "jubilee" of self-liberation. Sherman's attitude toward them was complicated at best; he saw them as a logistical burden and wasn't fighting for racial equality. At Ebenezer Creek, Georgia, Union officers pulled up pontoon bridges after crossing, leaving hundreds of Black refugees stranded with Confederate cavalry approaching. Many drowned trying to swim across; others were captured. It was one of the war's uglier episodes—liberation and abandonment in the same campaign.</p>
+</aside>
             </section>
 
             <!-- SLIDE 20: COLLAPSE -->
@@ -735,7 +900,7 @@
                         The Confederacy was defeated militarily, but many of the ideas it fought for—white supremacy, racial hierarchy—survived and shaped the post-war South.
                     </p>
                     <p style="font-size: 1.2em; margin-top: 1em; color: var(--opera-mauve);">
-                        Next lecture: Reconstruction and the struggle to define freedom
+                        Next lecture: Lost Cause Historiography: Myth, Memory, and Power
                     </p>
                 </div>
 
