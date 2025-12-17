@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lecture 12.3 (Study Buddy + Glossary v3): Temperance & Prohibition</title>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { margin: 0; padding: 0; overflow: hidden; background: #1a1a1a;
+      font-family: 'Palatino Linotype','Book Antiqua',Palatino,Georgia,serif; }
+
+    .reveal { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
+    .reveal .slides { position: absolute; width: 100%; height: 100%; left: 0; top: 0; text-align: left; }
+    .reveal .slides section {
+      position: absolute; width: 90%; height: 85%; left: 5%; top: 7.5%;
+      display: none; opacity: 0; transition: opacity .5s ease-in-out;
+      overflow-y: auto; overflow-x: hidden;
+      background: linear-gradient(135deg, #FFF8E7 0%, #F5EDD6 100%);
+      padding: 40px 60px; box-shadow: 0 10px 40px rgba(0,0,0,.3);
+      border-radius: 8px;
+    }
+
+    .progress-container{ position: fixed; bottom: 0; left: 0; width: 100%; height: 6px;
+      background: rgba(92,122,138,.2); z-index: 1000; }
+    .progress-bar{ height: 100%; background: #5C7A8A; width: 0%; transition: width .3s ease; }
+    .slide-number{ position: fixed; bottom: 20px; right: 20px; background: #5C7A8A; color: #fff;
+      padding: 8px 15px; border-radius: 4px; font-size: 18px; font-weight: 600; z-index: 1000; }
+
+    :root{
+      --mocha-mousse:#A67B5B; --tapestry:#5C7A8A; --laurel-oak:#9C9675; --coffee-quartz:#6E5E58;
+      --arona:#8FADB8; --warm-taupe:#AB9B8E; --dull-gold:#9B8550; --buffed-beige:#C7B299;
+      --ink-primary:#2B1810;
+    }
+
+    .reveal{ font-size: 32px; color: var(--ink-primary); }
+    .reveal h1{ font-size:2.8em; font-weight:900; color:var(--tapestry); margin-bottom:.5em;
+      text-shadow:2px 2px 4px rgba(0,0,0,.2); line-height:1.2; border-bottom:4px solid var(--dull-gold); padding-bottom:.3em; }
+    .reveal h2{ font-size:2.2em; font-weight:700; color:#6E5E58; margin:.8em 0 .6em; border-left:6px solid var(--tapestry); padding-left:.4em; }
+    .reveal h3{ font-size:1.6em; font-weight:600; color:#A67B5B; margin:.8em 0 .5em; }
+    .reveal p, .reveal li{ font-size:1.1em; line-height:1.6; margin-bottom:.6em; }
+    .reveal ul{ margin-left:1.5em; }
+
+    .title-slide, .section-slide{
+      text-align:center; display:flex; flex-direction:column; justify-content:center; align-items:center; height:100%; color:#fff;
+    }
+    .title-slide{ background: linear-gradient(135deg, var(--tapestry) 0%, var(--arona) 100%); }
+    .title-slide h1{ color:#fff; border:none; font-size:3.5em; text-shadow:3px 3px 6px rgba(0,0,0,.4); }
+    .title-slide .subtitle{ font-size:1.8em; color:var(--buffed-beige); font-style:italic; margin-top:.5em; }
+    .title-slide .lecture-number{ font-size:1.4em; opacity:.9; }
+    .section-slide{ background: linear-gradient(135deg, #6E5E58 0%, #A67B5B 100%); }
+    .section-slide h1{ color:#fff; border:none; font-size:3em; text-shadow:3px 3px 6px rgba(0,0,0,.4); }
+
+    .highlight-box{ background: rgba(143,173,184,.2); border-left:6px solid var(--tapestry); padding:20px 30px; margin:20px 0; border-radius:4px; }
+    .feature-box{ background: rgba(255,255,255,.6); border:2px solid #A67B5B; border-radius:8px; padding:20px; margin:15px 0; }
+    .conclusion-box{ background: linear-gradient(135deg, rgba(92,122,138,.25), rgba(155,133,80,.25));
+      border:3px solid var(--tapestry); padding:30px; margin:30px 0; text-align:center; border-radius:8px; font-size:1.2em; font-weight:600; }
+
+    .two-column{ display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start; }
+    .img-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:16px; margin:16px 0; }
+    .img-grid img{ width:100%; height:auto; display:block; border:2px solid #9C9675; border-radius:6px; }
+    .img-sm{ max-width:38%; height:auto; border:2px solid #9C9675; border-radius:6px; display:block; }
+    .float-right{ float:right; margin:0 0 1rem 1.5rem; } .float-left{ float:left; margin:0 1.5rem 1rem 0; }
+    .img-link{ display:inline-block; }
+    .reveal a{ color:var(--tapestry); text-decoration:underline; }
+    .reveal a:hover{ color:var(--dull-gold); }
+
+    @media (max-width:1024px){
+      .reveal{ font-size:28px; }
+      .two-column{ grid-template-columns:1fr; gap:20px; }
+      .img-sm{ max-width:100%; }
+      .float-right, .float-left{ float:none; margin:0 0 1rem 0; }
+    }
+
+    .study-modal{
+      position: fixed; inset: 0; background: rgba(0,0,0,.6);
+      backdrop-filter: blur(2px);
+      display:none; opacity:0; transition: opacity .2s ease; z-index: 2000;
+    }
+    .study-modal.visible{ display:block; opacity:1; }
+    .study-content{
+      position: absolute; left: 50%; top: 8%; transform: translateX(-50%);
+      width: min(900px, 92vw); max-height: 84vh; overflow: auto;
+      background: #fff; color: #222; border-radius: 10px; box-shadow: 0 20px 60px rgba(0,0,0,.35);
+      border: 3px solid var(--tapestry);
+    }
+    .study-header{
+      padding: 16px 22px; background: linear-gradient(90deg, var(--tapestry), var(--arona));
+      color: #fff; border-top-left-radius: 8px; border-top-right-radius: 8px;
+      display:flex; justify-content:space-between; align-items:center;
+      position:sticky; top:0; z-index:1;
+    }
+    .study-header .title{ font-size: 1.1em; font-weight: 700; letter-spacing:.3px; }
+    .study-header .hint{ font-size:.95em; opacity:.9; }
+    .study-body{ padding: 18px 22px; font-size: 1.05em; line-height: 1.65; }
+    .study-body p{ margin-bottom: .9em; }
+    .study-body ul{ margin-left: 1.2em; margin-bottom: .9em; }
+    .kbd{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      background:#f2f2f2; border:1px solid #ccc; padding:.1em .35em; border-radius:4px; }
+
+    .gloss-link{ cursor: help; border-bottom: 2px dotted rgba(92,122,138,.9);
+      color: var(--ink-primary); text-decoration: none; font-weight: 600; }
+    .gloss-link:hover{ color: var(--tapestry); }
+
+    .def-modal { position: fixed; inset: 0; display:none; z-index: 2200; background: rgba(0,0,0,.15); }
+    .def-modal.visible{ display:block; }
+    .def-card{
+      position: absolute; left: 50%; top: 12%; transform: translateX(-50%);
+      width: min(600px, 92vw); max-height: 70vh; overflow:auto;
+      background: #fff; color: #222; border-radius: 10px;
+      border: 3px solid var(--dull-gold); box-shadow: 0 16px 48px rgba(0,0,0,.35);
+    }
+    .def-head{
+      background: linear-gradient(90deg, var(--dull-gold), var(--mocha-mousse));
+      color:#fff; padding: 12px 16px; border-top-left-radius: 8px; border-top-right-radius: 8px;
+      display:flex; justify-content:space-between; align-items:center; position: sticky; top: 0;
+    }
+    .def-title{ font-size: 1.05em; font-weight: 800; letter-spacing:.2px; }
+    .def-body{ padding: 14px 16px; font-size: 1em; line-height: 1.6; }
+    .def-close{ background: transparent; border: none; color: #fff; font-size: 1.2em; cursor: pointer; }
+
+    .reveal .slides section::-webkit-scrollbar{ width:10px; }
+    .reveal .slides section::-webkit-scrollbar-thumb{ background:var(--tapestry); border-radius:5px; }
+    .study-content::-webkit-scrollbar{ width:10px; }
+    .study-content::-webkit-scrollbar-thumb{ background:var(--tapestry); border-radius:6px; }
+    .def-card::-webkit-scrollbar{ width:10px; }
+    .def-card::-webkit-scrollbar-thumb{ background:var(--dull-gold); border-radius:6px; }
+  
+	/* Force identical size for leader portraits */
+.two-column img.leader-photo {
+  width: 300px !important;
+  height: 400px !important;
+  max-width: none !important;     /* ignore any global max-width */
+  object-fit: cover;              /* neat square crop */
+  border: 2px solid #9C9675;
+  border-radius: 6px;
+  display: block;
+  margin: 0 0 12px 0;
+}
+.two-column .img-link { display: inline-block; }
+
+	
+	</style>
+</head>
+<body>
+  <div class="progress-container"><div class="progress-bar"></div></div>
+  <div class="slide-number">1 / 16</div>
+
+  <div id="studyModal" class="study-modal" aria-hidden="true" aria-label="Study Buddy notes">
+    <div class="study-content" role="dialog" aria-modal="true">
+      <div class="study-header">
+        <div class="title">Study Buddy Notes</div>
+        <div class="hint">Press <span class="kbd">S</span> again to close</div>
+      </div>
+      <div class="study-body" id="studyBody"></div>
+    </div>
+  </div>
+
+  <div id="defModal" class="def-modal" aria-hidden="true" aria-label="Term definition window">
+    <div class="def-card" role="dialog" aria-modal="true">
+      <div class="def-head">
+        <div class="def-title" id="defTitle">Term</div>
+        <button class="def-close" id="defClose" aria-label="Close definition">&times;</button>
+      </div>
+      <div class="def-body" id="defBody">Definition</div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <section class="title-slide">
+        <h1>The Temperance Movement and<br>the Origins of Prohibition</h1>
+        <p class="subtitle">Moral Reform, Women's Activism, and the Politics of Alcohol in Antebellum America</p>
+        <p class="lecture-number">Lecture 12.3 • HIST 101: American History to 1865</p>
+      </section>
+
+    
+		<!-- Fix: your image is 4:1 but was forced to 16:9 + cover. 
+     Use a 4:1 banner container and let the image fill it cleanly. -->
+
+<style>
+  /* 4:1 banner container (responsive) */
+  .hero-banner {
+    width: 100%;
+    aspect-ratio: 4 / 1;       /* correct ratio for your image */
+    max-height: 360px;          /* clamp height if it still feels tall; adjust as needed */
+    overflow: hidden;
+    position: relative;
+  }
+  .hero-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;          /* fills the 4:1 box; minimal/no crop if the source is truly 4:1 */
+    object-position: center;
+    display: block;
+  }
+  /* Optional: tighten spacing around the banner area */
+  .banner h1 { margin-bottom: 0.5rem; }
+  .hero-figure { margin: 0; }
+</style>
+
+<section>
+  <div class="banner">
+    <h1>The “Alcoholic Republic”</h1>
+
+    <!-- 4:1 banner -->
+    <figure class="hero-figure hero-banner">
+      <img
+        src="images/alcoholic_republic.webp"
+        alt="Amber torrent flooding a beige field with small home shapes nearly submerged (Alcoholic Republic)"
+        loading="eager"
+        decoding="async">
+    </figure>
+
+  </div>
+
+  <h2>Record Alcohol Consumption in 1830s America</h2>
+  <div class="highlight-box">
+    <ul>
+      <li><strong>Whiskey cheaper than milk</strong> in many communities</li>
+      <li>Common at work sites and family tables</li>
+      <li>Workers often paid partially in alcohol</li>
+      <li>Drinking integrated into daily social life</li>
+    </ul>
+  </div>
+
+  <h2>Reformers' Fears</h2>
+  <div class="feature-box">
+    <p style="font-size:1.2em;"><strong>Central Question:</strong> Could a free people also govern their passions?</p>
+    <p style="margin-top:15px;">Reformers feared moral collapse threatened the viability of republican self-government</p>
+  </div>
+
+  <div class="conclusion-box">
+    <p><strong>Thesis:</strong> Temperance evolved from moral persuasion to organized political reform, testing the moral foundations of democracy and offering women a powerful—if unofficial—public voice</p>
+  </div>
+</section>
+
+
+      <section>
+        <h1>Early Movement and Moral Foundations</h1>
+        <h2>Religious Roots</h2>
+        <div class="highlight-box">
+          <h3>The Second Great Awakening and Evangelical Perfectionism</h3>
+          <ul>
+            <li>Revival movement swept across America in early 19th century</li>
+            <li>Emphasis on <strong>perfectionism</strong>—humans could achieve moral perfection</li>
+            <li>Personal salvation linked to social reform</li>
+            <li>Moral choice as path to individual and collective redemption</li>
+          </ul>
+        </div>
+
+        <h2>American Temperance Society (1826)</h2>
+        <div class="feature-list">
+          <div class="feature-item"><strong>Nationwide Moral Crusade</strong>
+            <p>Preached voluntary abstinence and self-control as religious duty</p></div>
+          <div class="feature-item"><strong>Network of Local Societies</strong>
+            <p>Spread rapidly through churches and community organizations</p></div>
+          <div class="feature-item"><strong>Distribution of Literature</strong>
+            <p>Pamphlets, newspapers, and testimonials spread the message</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h1>Temperance as Civic Virtue</h1>
+        <h2>Civil Virtue Frame</h2>
+        <div class="highlight-box">
+          <p style="font-size:1.2em;"><strong>Reformers linked sobriety to republican self-government</strong></p>
+          <p style="margin-top:15px;">Moral discipline as civic duty—only a temperate people could sustain democracy</p>
+        </div>
+
+        <h2>Women's Early Involvement</h2>
+        <div class="two-column">
+          <div>
+            <h3>Acting Within "Separate Spheres"</h3>
+            <ul>
+              <li>Women claimed <strong>moral authority</strong> to protect the home</li>
+              <li>Temperance as extension of domestic duty</li>
+              <li>Guardians of family welfare and virtue</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Legal and Economic Vulnerability</h3>
+            <ul>
+              <li><strong>Coverture:</strong> Married women had no legal identity</li>
+              <li>No control over wages or property</li>
+              <li>Legally and economically dependent on husbands</li>
+              <li>Vulnerable to addiction and violence</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="conclusion-box">
+          <p>Women's moral authority in the domestic sphere became justification for public activism</p>
+        </div>
+      </section>
+
+      <section>
+        <h1>Why Women Led the Temperance Charge</h1>
+        <a class="img-link" href="images/Gemini_Generated_Image_ic8ymaic8ymaic8y.png" target="_blank" rel="noopener">
+          <img class="img-sm float-right" src="images/Gemini_Generated_Image_ic8ymaic8ymaic8y.webp" alt="Illustration emphasizing women leading temperance activism">
+        </a>
+
+        <div class="feature-list">
+          <div class="feature-item"><strong>Economic Vulnerability</strong>
+            <p>Drunkenness threatened household survival.</p></div>
+          <div class="feature-item"><strong>Domestic Violence</strong>
+            <p>Alcohol consumption linked to increased violence at home.</p></div>
+          <div class="feature-item"><strong>Moral Duty and Activism</strong>
+            <p>Women as guardians of virtue justified public engagement.</p></div>
+        </div>
+
+        <h2>Female Temperance Societies</h2>
+        <div class="highlight-box">
+          <p><strong>Emerged by the 1830s</strong></p>
+          <ul>
+            <li>Women's auxiliaries to male temperance organizations</li>
+            <li>Organizing pledges and signing campaigns</li>
+            <li>Distribution of temperance literature</li>
+            <li>Fundraising for the cause</li>
+            <li>Visiting homes to persuade families</li>
+          </ul>
+        </div>
+
+        <div class="conclusion-box">
+          <p><strong>Temperance became women's entry into the moral public sphere</strong></p>
+        </div>
+      </section>
+
+     <section>
+        <h1>The Washingtonians and the<br>Democratization of Reform</h1>
+        <div style="display: flex; gap: 20px; margin-bottom: 20px;">
+          <div style="flex: 0 0 auto;">
+            <a class="img-link" href="images/Gemini_Generated_Image_e3cnfje3cnfje3cn.webp" target="_blank" rel="noopener">
+              <img class="img-md" src="images/Gemini_Generated_Image_e3cnfje3cnfje3cn.png" alt="Washingtonian Society meeting depiction">
+            </a>
+          </div>
+          <div style="flex: 1;">
+            <h2>Origins (1840, Baltimore)</h2>
+            <div class="highlight-box">
+              <p><strong>Working-class reformed drinkers</strong> created new approach to temperance</p>
+              <ul>
+                <li>Emphasized personal storytelling and confession</li>
+                <li>Public testimonials about struggles with alcohol</li>
+                <li>Mutual aid and support networks</li>
+                <li>Community rather than condemnation</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <h2>Inclusive Spirit</h2>
+        <div class="two-column">
+          <div>
+            <h3>Democratic Approach</h3>
+            <ul>
+              <li>Valued <strong>experience over status</strong></li>
+              <li>Former drinkers as most effective reformers</li>
+              <li>No class barriers to participation</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Martha Washingtonians</h3>
+            <ul>
+              <li>Women supported meetings and outreach</li>
+              <li>Visited families of reformed drinkers</li>
+              <li>Provided practical aid and encouragement</li>
+            </ul>
+          </div>
+        </div>
+        <h2>Contrast to Elite Reformers</h2>
+        <div class="feature-box">
+          <p><strong>Emotional fellowship over moral lecturing</strong></p>
+          <p style="margin-top:10px;">Reform "from below" rather than imposed from above</p>
+        </div>
+        <div class="conclusion-box">
+          <p><strong>Legacy:</strong> Introduced modern ideas of recovery, peer support, and moral community—precursor to organizations like Alcoholics Anonymous</p>
+        </div>
+      </section>
+      <section class="section-slide">
+        <h1>From Moral Suasion<br>to Legal Prohibition</h1>
+      </section>
+      <section>
+        <h1>From Persuasion to Law</h1>
+        <h2>Disillusionment with Moral Suasion</h2>
+        <div class="highlight-box">
+          <p>By the 1840s, reformers grew frustrated with voluntary approach</p>
+          <ul>
+            <li>Moral persuasion alone seemed insufficient</li>
+            <li>Alcohol remained readily available</li>
+            <li>Economic interests resisted change</li>
+            <li><strong>Reformers demanded law to back morality</strong></li>
+          </ul>
+        </div>
+
+        <h2>The Maine Law (1851)</h2>
+        <div class="feature-box">
+          <p style="font-size:1.2em;"><strong>First statewide prohibition</strong></p>
+          <ul style="margin-top:15px;">
+            <li>Banned manufacture and sale of alcoholic beverages</li>
+            <li>Symbol of the <strong>moral state</strong> enforcing virtue</li>
+            <li>Sparked similar legislation in other states</li>
+            <li>By 1855, 13 states had prohibition laws</li>
+          </ul>
+        </div>
+
+        <h2>Women Lobbying Legislators</h2>
+        <div class="highlight-box">
+          <p><strong>Despite having no vote, women wielded political influence:</strong></p>
+          <ul>
+            <li>Circulated petitions with thousands of signatures</li>
+            <li>Met with lawmakers to advocate for prohibition</li>
+            <li>Published appeals in newspapers</li>
+            <li>Organized public demonstrations</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h1>Cultural Conflict Over Prohibition</h1>
+        <h2>Ethnicity</h2>
+        <div class="feature-box">
+          <p><strong>Irish and German immigrants defended alcohol as cultural identity</strong></p>
+          <ul>
+            <li>Beer and spirits central to ethnic traditions</li>
+            <li>Taverns as community gathering spaces</li>
+            <li>Prohibition seen as attack on immigrant culture</li>
+            <li>Nativist undertones in temperance rhetoric</li>
+          </ul>
+        </div>
+
+        <h2>Class</h2>
+        <div class="highlight-box">
+          <p><strong>Temperance coded as middle-class respectability</strong></p>
+          <ul>
+            <li>Taverns served as <strong>working-class social hubs</strong></li>
+            <li>Informal "safety valves" where laborers forged solidarity and autonomy</li>
+            <li>Reformers' crusade felt like <strong>moral policing</strong> of working-class life</li>
+          </ul>
+        </div>
+
+        <h2>Region</h2>
+        <div class="feature-box">
+          <p><strong>Southern evangelicals favored personal piety but resisted organized reform</strong></p>
+          <ul>
+            <li>Suspicious of centralized moral authority</li>
+            <li>Emphasis on individual conviction over law</li>
+            <li>Less support for prohibition legislation in South</li>
+          </ul>
+        </div>
+
+        <div class="conclusion-box">
+          <p><strong>Key Question:</strong> Can virtue be legislated—or only chosen?</p>
+        </div>
+      </section>
+
+      <section class="section-slide">
+        <h1>Temperance, Women's Rights,<br>and Political Awakening</h1>
+      </section>
+
+      <section>
+        <h1>Temperance as Political Training Ground</h1>
+        <h2>Breaking the Boundaries of Silence</h2>
+        <div class="highlight-box">
+          <h3>Public Voice</h3>
+          <p><strong>Women speaking in mixed audiences broke norms of female silence</strong></p>
+          <ul>
+            <li>Temperance meetings provided platform for women's voices</li>
+            <li>Public speaking challenged "separate spheres" ideology</li>
+            <li>Women gained confidence addressing public issues</li>
+          </ul>
+        </div>
+
+        <div class="img-grid" aria-label="Women speaking and organizing in temperance movement">
+          <a class="img-link" href="images/Gemini_Generated_Image_etz90qetz90qetz9.png" target="_blank" rel="noopener">
+            <img src="images/Gemini_Generated_Image_etz90qetz90qetz9.webp" alt="Women addressing a mixed audience at a temperance meeting">
+          </a>
+          <a class="img-link" href= "images\Gemini_Generated_Image_gfzq9jgfzq9jgfzq.png"target="_blank" rel="noopener">
+            <img src="images\Gemini_Generated_Image_gfzq9jgfzq9jgfzq.webp" alt="Organizing and petitioning in the temperance movement">
+          </a>
+        </div>
+
+        <h2>Organizational Training</h2>
+        <div class="feature-list">
+          <div class="feature-item"><strong>Petitioning</strong>
+            <p>Gathering signatures, presenting demands to legislators</p></div>
+          <div class="feature-item"><strong>Fundraising</strong>
+            <p>Managing finances, organizing events, sustaining organizations</p></div>
+          <div class="feature-item"><strong>Managing Societies</strong>
+            <p>Leadership roles, coordinating campaigns, building networks</p></div>
+        </div>
+
+        <div class="conclusion-box">
+          <p><strong>These skills cultivated political expertise</strong> that women later deployed in suffrage and other reform movements</p>
+        </div>
+      </section>
+
+     <section>
+  <h1>Leaders in the Movement</h1>
+  <div class="two-column">
+    <div>
+      <a class="img-link" href="images/Bloom_Amelia_Public_Domain_from1881book square.png" target="_blank" rel="noopener">
+        <img class="leader-photo" src="images/Bloom_Amelia_Public_Domain_from1881book square.png" alt="Portrait of Amelia Bloomer">
+      </a>
+      <h3>Amelia Bloomer</h3>
+      <div class="feature-box">
+        <p><strong><em>The Lily</em> newspaper</strong></p>
+        <ul>
+          <li>Combined temperance with women's rights advocacy</li>
+          <li>First newspaper edited by and for women</li>
+          <li>Championed dress reform (bloomers)</li>
+          <li>Connected temperance to broader women's issues</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <a class="img-link" href="images/Susan-B-Anthony.webp" target="_blank" rel="noopener">
+        <img class="leader-photo" src="images/Susan-B-Anthony.webp" alt="Portrait of Susan B. Anthony">
+      </a>
+      <h3>Susan B. Anthony</h3>
+      <div class="feature-box">
+        <p><strong>Entry into activism through temperance</strong></p>
+        <ul>
+          <li>Started as temperance organizer in 1850s</li>
+          <li>Experienced exclusion from male societies</li>
+          <li>Realized need for women's suffrage</li>
+          <li>Became leading suffragist</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+		<section>
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+          <div style="width: 48%; text-align: center;">
+            <!-- Placeholder for image: Replace 'path/to/image.jpg' with the actual image URL or path -->
+            <img src="images/carrie_nation.webp" alt="Carrie Nation with hatchet" style="max-width: 100%; margin-top: 20px;">
+          </div>
+          <div style="width: 48%; padding-left: 20px;">
+            <h1>Carrie Nation: Temperance Activist</h1>
+            <p>A radical leader in the fight against alcohol in the late 19th and early 20th centuries.</p>
+            <ul>
+              <li>Born in 1846, she was a member of the Women's Christian Temperance Union.</li>
+              <li>Famous for using a hatchet to destroy saloons and bars, starting in Kansas around 1900.</li>
+              <li>Her "hatchetations" drew national attention to the prohibition cause.</li>
+              <li>Arrested multiple times but helped pave the way for the 18th Amendment.</li>
+              <li>Died in 1911, leaving a legacy as a fierce advocate for temperance.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+
+      <section>
+        <h1>Opposition and Cultural Backlash</h1>
+        <h2>Personal Liberty Defense</h2>
+        <div class="feature-box">
+          <p><strong>Critics saw prohibition as moral tyranny</strong></p>
+          <ul>
+            <li>Violation of individual freedom</li>
+            <li>Government overreach into private life</li>
+            <li>"Who are they to tell us how to live?"</li>
+            <li>Defense of traditional masculine prerogatives</li>
+          </ul>
+        </div>
+
+        <h2>Economic Interests</h2>
+        <div class="highlight-box">
+          <p><strong>Powerful industries resisted reform:</strong></p>
+          <ul>
+            <li><strong>Brewers and distillers:</strong> Threatened livelihoods</li>
+            <li><strong>Tavern keepers:</strong> Loss of business</li>
+            <li><strong>Farmers:</strong> Grain sales to distilleries</li>
+            <li>Organized lobbying against prohibition laws</li>
+          </ul>
+        </div>
+
+        <h2>Immigrant Culture</h2>
+        <div class="feature-box">
+          <p><strong>Beer gardens and taverns as communal spaces of identity</strong></p>
+          <ul>
+            <li>Centers of ethnic community life</li>
+            <li>Sites of cultural celebration and tradition</li>
+            <li>Prohibition seen as attack on ethnic identity</li>
+          </ul>
+        </div>
+
+        <h2>Gendered Backlash</h2>
+        <div class="highlight-box">
+          <p><strong>Public women mocked as "unfeminine"</strong></p>
+          <ul>
+            <li>Cartoons depicting temperance women as ugly and aggressive</li>
+            <li>Accusations of neglecting domestic duties</li>
+            <li>Revealing social boundaries of acceptable female behavior</li>
+            <li>Anxiety about changing gender roles</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h1>Legacy and Conclusion</h1>
+        <h2>Largest Mass Movement of the Era</h2>
+        <div class="highlight-box">
+          <p style="font-size:1.2em;"><strong>Temperance became the largest mass movement of the antebellum period</strong></p>
+          <p style="margin-top:15px;">Moral reform fused with civic action, mobilizing hundreds of thousands of Americans</p>
+        </div>
+
+        <h2>Women's Political Training</h2>
+        <div class="feature-list">
+          <div class="feature-item"><strong>Wielding Influence Without the Ballot</strong>
+            <p>Women learned to exert political power through organization, persuasion, and public pressure</p></div>
+          <div class="feature-item"><strong>Foundation for Future Activism</strong>
+            <p>Laying groundwork for the <strong>Woman's Christian Temperance Union (1874)</strong></p></div>
+          <div class="feature-item"><strong>Path to Suffrage</strong>
+            <p>Temperance experience convinced many women they needed the vote</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h1>Post-Civil War Continuity</h1>
+        <h2>Industrialization Reignites the Crusade</h2>
+        <div class="highlight-box">
+          <p><strong>Post-Civil War industrialization brought new urgency to temperance reform</strong></p>
+          <ul>
+            <li>Urban growth and factory culture</li>
+            <li>Increased immigration and ethnic tensions</li>
+            <li>Concerns about industrial discipline and productivity</li>
+            <li>Saloon culture in working-class neighborhoods</li>
+          </ul>
+        </div>
+
+        <h2>Frances Willard's Leadership</h2>
+        <div class="two-column">
+          <div>
+            <a class="img-link" href="images/frances-willard-portrait-circa-1885-war-is-hell-store.webp" target="_blank" rel="noopener">
+              <img class="img-sm float-left" src="images/frances-willard-portrait-circa-1885-war-is-hell-store.jpg" alt="Portrait of Frances Willard, ca. 1885">
+            </a>
+          </div>
+          <div>
+            <div class="feature-box">
+              <p><strong>Woman's Christian Temperance Union (WCTU)</strong></p>
+              <ul>
+                <li>Founded 1874, Willard president from 1879</li>
+                <li>Linked moral reform with <strong>social gospel activism</strong></li>
+                <li>Advocated for women's suffrage</li>
+                <li>Expanded into labor reform, prison reform</li>
+                <li>"Do Everything" policy</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="img-grid" aria-label="Progressive Era and WCTU-related imagery">
+          <a class="img-link" href="images/Gemini_Generated_Image_7onhwl7onhwl7onh.webp" target="_blank" rel="noopener">
+            <img src="images/Gemini_Generated_Image_7onhwl7onhwl7onh.png" alt="Progressive Era reform symbolism connected to temperance">
+          </a>
+          <a class="img-link" href="images/Gemini_Generated_Image_arojwgarojwgaroj.webp" target="_blank" rel="noopener">
+            <img src="images/Gemini_Generated_Image_arojwgarojwgaroj.png" alt="Women organizing and civic reform symbolism">
+          </a>
+          <a class="img-link" href="images/Gemini_Generated_Image_drusvadrusvadrus.webp" target="_blank" rel="noopener">
+            <img src="images/Gemini_Generated_Image_drusvadrusvadrus.png" alt="Allegory of social gospel activism and reform">
+          </a>
+        </div>
+
+        <h2>Women's Expanded Public Roles</h2>
+        <div class="feature-box">
+          <p>By the Progressive Era, temperance was inseparable from:</p>
+          <ul>
+            <li>Women's suffrage movement</li>
+            <li>Social welfare reforms</li>
+            <li>Municipal housekeeping ideology</li>
+            <li>Scientific approaches to social problems</li>
+          </ul>
+        </div>
+
+        <div class="conclusion-box">
+          <p>Culminated in <strong>18th Amendment (1919)</strong> establishing national prohibition</p>
+        </div>
+      </section>
+
+      <section>
+        <h1>Broader Historical Significance</h1>
+        <div class="feature-list">
+          <div class="feature-item"><strong>Democracy's Moral Tensions</strong>
+            <p>Balancing <strong>liberty, virtue, and social control</strong></p></div>
+          <div class="feature-item"><strong>Can Morality Be Legislated?</strong>
+            <p>Law vs. virtue in a democracy</p></div>
+          <div class="feature-item"><strong>Women's Path to Political Power</strong>
+            <p>Moral authority to political influence</p></div>
+          <div class="feature-item"><strong>Reform from Below and Above</strong>
+            <p>Elite reform vs. working-class organizing</p></div>
+        </div>
+        <h2>Discussion Questions</h2>
+        <div class="highlight-box">
+          <ul>
+            <li><strong>How did women turn "moral authority" into civic power?</strong></li>
+            <li><strong>Did temperance challenge or reinforce the idea of "separate spheres"?</strong></li>
+            <li><strong>What does the temperance crusade reveal about the moral anxieties of democracy?</strong></li>
+          </ul>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.reveal .slides section');
+    const totalSlides = slides.length;
+    let isTransitioning = false;
+
+    function init(){
+      showSlide(0);
+      updateProgress();
+      updateSlideNumber();
+      autoLinkGlossary();
+    }
+
+    function showSlide(n){
+      if(isTransitioning) return;
+      if(slides[currentSlide]){
+        slides[currentSlide].style.display = 'none';
+        slides[currentSlide].style.opacity = '0';
+      }
+      currentSlide = Math.max(0, Math.min(n, totalSlides - 1));
+      if(slides[currentSlide]){
+        isTransitioning = true;
+        slides[currentSlide].style.display = 'block';
+        slides[currentSlide].scrollTop = 0;
+        setTimeout(()=>{
+          slides[currentSlide].style.opacity = '1';
+          isTransitioning = false;
+        }, 10);
+      }
+      updateProgress();
+      updateSlideNumber();
+      if (studyModal.classList.contains('visible')) setStudyNotes(currentSlide);
+    }
+
+    function nextSlide(){ if(currentSlide < totalSlides-1) showSlide(currentSlide+1); }
+    function prevSlide(){ if(currentSlide > 0) showSlide(currentSlide-1); }
+
+    function updateProgress(){
+      const progress = document.querySelector('.progress-bar');
+      if(progress) progress.style.width = (currentSlide/(totalSlides-1))*100 + '%';
+    }
+    function updateSlideNumber(){
+      const el = document.querySelector('.slide-number');
+      if(el) el.textContent = `${currentSlide + 1} / ${totalSlides}`;
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown',(e)=>{
+      // If any modal is open, don't navigate slides with arrow keys or space
+      if (defModal.classList.contains('visible') || studyModal.classList.contains('visible')) {
+        if (e.key === 'Escape') {
+          if (defModal.classList.contains('visible')) closeDef();
+          if (studyModal.classList.contains('visible')) closeStudy();
+        }
+        return;
+      }
+      switch(e.key){
+        case 'ArrowRight':
+        case 'PageDown': e.preventDefault(); nextSlide(); break;
+        case 'ArrowLeft':
+        case 'PageUp': e.preventDefault(); prevSlide(); break;
+        case ' ': e.preventDefault(); nextSlide(); break;
+        case 'Home':
+        case 'h': case 'H': e.preventDefault(); showSlide(0); break;
+        case 'End':
+        case 'e': case 'E': e.preventDefault(); showSlide(totalSlides-1); break;
+        case 's': case 'S': e.preventDefault(); toggleStudyModal(); break;
+        // IMPORTANT: Up/Down now ONLY SCROLL. We do not preventDefault here.
+        case 'ArrowDown':
+        case 'ArrowUp':
+          // Let the browser handle scrolling within the current slide
+          break;
+        case 'Escape': break;
+      }
+    });
+
+    // Touch swipe
+    let tSX=0,tSY=0,tEX=0,tEY=0;
+    document.addEventListener('touchstart',(e)=>{ tSX=e.changedTouches[0].screenX; tSY=e.changedTouches[0].screenY; },{passive:true});
+    document.addEventListener('touchend',(e)=>{ tEX=e.changedTouches[0].screenX; tEY=e.changedTouches[0].screenY; handleSwipe(); },{passive:true});
+    function handleSwipe(){
+      const dx=tEX-tSX, dy=tEY-tSY;
+      if(Math.abs(dx) > Math.abs(dy)){
+        if(dx>50) prevSlide(); else if(dx<-50) nextSlide();
+      }else{
+        if(dy<-50) nextSlide(); else if(dy>50) prevSlide();
+      }
+    }
+
+    document.addEventListener('click',(e)=>{
+      if(e.target.closest('a, button, #studyModal, #defModal')) return;
+      const x=e.clientX, w=window.innerWidth;
+      if(x>w*.7) nextSlide(); else if(x<w*.3) prevSlide();
+    });
+
+    // Study Buddy
+    const studyModal = document.getElementById('studyModal');
+    const studyBody = document.getElementById('studyBody');
+    const notes = [
+`<p><strong>Big idea:</strong> Americans fought over alcohol because it raised questions about freedom, self-control, and good citizenship. Women used this debate to step into public life.</p>
+<p>Remember: Temperance = more than drinking. It’s about who gets to define “morality” in a democracy.</p>`,
+`<p>In the early 1800s, Americans drank <em>a lot</em>. Alcohol was often cheaper than other safe drinks and used at work and home.</p>
+<ul><li>Heavy drinking worried reformers—could a republic survive if citizens couldn’t control themselves?</li>
+<li>Temperance began as a <em>persuasion</em> movement: convince people to drink less or take a pledge of abstinence.</li></ul>`,
+`<p><strong>Why religion matters:</strong> The Second Great Awakening said people could choose salvation and moral improvement.</p>
+<ul><li>That logic extended to society: if individuals can change, so can communities.</li>
+<li>American Temperance Society (1826) organized speakers, pledges, and printed materials to spread the word.</li></ul>`,
+`<p>Temperance wasn’t only about personal health—it was presented as a <strong>civic duty</strong>.</p>
+<ul><li>Good citizens needed self-control to keep a free government stable.</li>
+<li>Women entered the cause by claiming a moral duty to protect home and children, even though law left them vulnerable.</li></ul>`,
+`<p><strong>Why women led:</strong> Drinking often harmed families’ money and safety, but women had few legal protections.</p>
+<ul><li>Organizing for temperance let women act publicly as “guardians of the home.”</li>
+<li>These efforts trained women in leadership and persuasion.</li></ul>`,
+`<p>The Washingtonians were working-class reformed drinkers (1840).</p>
+<ul><li>They focused on <em>stories, confession, and support</em> instead of lectures.</li>
+<li>This “help one another” style foreshadows groups like AA.</li></ul>`,
+`<p>When persuasion didn’t seem to work, many reformers turned to <strong>law</strong>. Could the state enforce virtue?</p>`,
+`<p><strong>Maine Law (1851):</strong> First statewide prohibition of making/selling alcohol.</p>
+<ul><li>Symbolized the “moral state”—government backing moral reform.</li>
+<li>Women, without the vote, still influenced lawmakers through petitions and public pressure.</li></ul>`,
+`<p>Temperance sparked culture wars:</p>
+<ul><li><strong>Ethnicity:</strong> Irish/German communities defended drinking traditions and taverns.</li>
+<li><strong>Class:</strong> Taverns were working-class social hubs; reform felt like middle-class policing.</li>
+<li><strong>Region:</strong> Southern evangelicals favored personal piety over legal bans.</li></ul>`,
+`<p>Temperance activism taught women skills—and showed the limits of their power without political rights.</p>`,
+`<p>Temperance became a <strong>political classroom</strong> for women.</p>
+<ul><li>Public speaking, organizing, fundraising, running societies.</li>
+<li>These skills later powered the women’s suffrage movement.</li></ul>`,
+`<p><strong>Leaders:</strong> Amelia Bloomer used journalism to link temperance and women’s rights; Susan B. Anthony moved from temperance organizing to leading the fight for suffrage.</p>
+<ul><li>Being silenced by male leaders convinced many women they needed the vote.</li></ul>`,
+`<p>Not everyone agreed:</p>
+<ul><li><strong>Liberty:</strong> Critics said prohibition violated personal freedom.</li>
+<li><strong>Economy:</strong> Brewers, saloon keepers, farmers resisted.</li>
+<li><strong>Identity:</strong> Immigrant communities saw bans as cultural attacks.</li>
+<li><strong>Gender:</strong> Reform women faced ridicule for stepping outside “proper” roles.</li></ul>`,
+`<p><strong>Legacy:</strong> Temperance became a huge mass movement and a training ground for women’s public leadership.</p>
+<p>It laid stepping stones toward later reforms and the suffrage campaign.</p>`,
+`<p>After the Civil War, industrial cities and new social problems revived the crusade.</p>
+<ul><li><strong>WCTU (1874):</strong> Under Frances Willard, linked temperance with broad social reforms and women’s rights.</li>
+<li>By the Progressive Era, temperance connected to suffrage and “municipal housekeeping.”</li></ul>`,
+`<p><strong>Zoom out:</strong> Temperance raises big questions.</p>
+<ul><li>Can laws make people virtuous—or must virtue be chosen?</li>
+<li>How do groups without formal power (like women) use moral authority to reshape politics?</li>
+<li>Where’s the balance between freedom and social order?</li></ul>`
+    ];
+    function setStudyNotes(idx){ studyBody.innerHTML = notes[Math.max(0, Math.min(idx, notes.length-1))]; }
+    function openStudy(){ setStudyNotes(currentSlide); studyModal.classList.add('visible'); studyModal.setAttribute('aria-hidden','false'); }
+    function closeStudy(){ studyModal.classList.remove('visible'); studyModal.setAttribute('aria-hidden','true'); }
+    function toggleStudyModal(){ if(studyModal.classList.contains('visible')) closeStudy(); else openStudy(); }
+    studyModal.addEventListener('click',(e)=>{ if(e.target === studyModal){ closeStudy(); } });
+
+    // Glossary
+    const GLOSSARY = {
+      "Temperance": "A reform movement encouraging people to limit or stop drinking alcohol.",
+      "Prohibition": "A legal ban on making, selling, or transporting alcohol. U.S. national Prohibition began in 1919.",
+      "Second Great Awakening": "A major religious revival in the early 1800s emphasizing personal salvation and reform.",
+      "Evangelical Perfectionism": "Belief that believers should strive for moral perfection through faith and discipline.",
+      "Perfectionism": "In a 19th-century religious sense, striving for moral perfection in daily life.",
+      "American Temperance Society": "Founded 1826; promoted abstinence via pledges, lectures, and publications.",
+      "Civil Virtue": "Citizens’ self-control and good conduct needed for a republic to survive.",
+      "Coverture": "Legal doctrine: married women lacked a separate legal identity; husbands controlled wages/property.",
+      "Separate Spheres": "Idea that men belonged in public life while women belonged in the home.",
+      "Washingtonians": "Temperance group (1840) of reformed drinkers emphasizing mutual support and testimony.",
+      "Moral Suasion": "Changing behavior by persuasion/appeals to conscience instead of law.",
+      "Maine Law": "1851 Maine statute prohibiting manufacture and sale of alcohol—early prohibition model.",
+      "Republican self-government": "Citizens rule via elected representatives; assumes citizen virtue/self-control.",
+      "Petition": "A signed request asking authorities to take action.",
+      "Suffrage": "The right to vote; often refers to women’s right to vote.",
+      "WCTU": "Woman’s Christian Temperance Union, founded 1874 under leaders like Frances Willard."
+    };
+    const SLIDE_TERMS = {
+      0: ["Temperance","Prohibition"],
+      1: ["Perfectionism","Republican self-government"],    // Added Perfectionism -> Slide 2
+      2: ["Second Great Awakening","Evangelical Perfectionism","American Temperance Society"],
+      3: ["Civil Virtue","Separate Spheres","Coverture"],   // Ensure Coverture links on Slide 4
+      4: [],
+      5: ["Washingtonians"],
+      6: [],
+      7: ["Maine Law","Moral Suasion","Petition"],          // Ensure Moral Suasion on Slide 8
+      8: [],
+      9: [],
+      10:["Suffrage","Petition"],
+      11:[],
+      12:[],
+      13:["Suffrage"],                                      // Ensure Suffrage on Slide 14
+      14:[],
+      15:[]
+    };
+
+    const defModal = document.getElementById('defModal');
+    const defTitle = document.getElementById('defTitle');
+    const defBody = document.getElementById('defBody');
+    const defClose = document.getElementById('defClose');
+
+    function lookupDef(term){
+      const clean = term.trim().toLowerCase();
+      if (GLOSSARY[term]) return GLOSSARY[term];
+      for (const k of Object.keys(GLOSSARY)){
+        if (k.toLowerCase() === clean) return GLOSSARY[k];
+      }
+      return "Definition not found.";
+    }
+    function openDef(term){
+      defTitle.textContent = term;
+      defBody.textContent = lookupDef(term);
+      defModal.classList.add('visible');
+      defModal.setAttribute('aria-hidden','false');
+    }
+    function closeDef(){
+      defModal.classList.remove('visible');
+      defModal.setAttribute('aria-hidden','true');
+    }
+    defClose.addEventListener('click', closeDef);
+    defModal.addEventListener('click', (e)=>{ if(e.target === defModal){ closeDef(); } });
+
+    function autoLinkGlossary(){
+      slides.forEach((slide, idx)=>{
+        const terms = SLIDE_TERMS[idx] || [];
+        if(!terms.length) return;
+        const walker = document.createTreeWalker(slide, NodeFilter.SHOW_TEXT, {
+          acceptNode(node){
+            if(!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+            const parentTag = node.parentElement && node.parentElement.tagName;
+            if(parentTag === 'A' || parentTag === 'SCRIPT' || parentTag === 'STYLE') return NodeFilter.FILTER_REJECT;
+            return NodeFilter.FILTER_ACCEPT;
+          }
+        });
+        const toProcess = [];
+        while(walker.nextNode()){ toProcess.push(walker.currentNode); }
+        terms.forEach(term => {
+          const pattern = new RegExp('\\b' + term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + '\\b','gi');
+          toProcess.forEach(textNode => {
+            if(!pattern.test(textNode.nodeValue)) return;
+            const frag = document.createDocumentFragment();
+            let remaining = textNode.nodeValue;
+            let match;
+            pattern.lastIndex = 0;
+            while((match = pattern.exec(remaining))){
+              const before = remaining.slice(0, match.index);
+              const matched = match[0];
+              if(before) frag.appendChild(document.createTextNode(before));
+              const a = document.createElement('a');
+              a.href = '#'; a.className = 'gloss-link'; a.textContent = matched;
+              a.setAttribute('data-term', matched);
+              a.addEventListener('click', (e)=>{ e.preventDefault(); openDef(matched); });
+              frag.appendChild(a);
+              remaining = remaining.slice(match.index + matched.length);
+              pattern.lastIndex = 0;
+            }
+            if(remaining) frag.appendChild(document.createTextNode(remaining));
+            if(textNode.parentNode) textNode.parentNode.replaceChild(frag, textNode);
+          });
+        });
+      });
+    }
+
+    window.addEventListener('load', init);
+  </script>
+</body>
+</html>

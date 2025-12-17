@@ -1,0 +1,3117 @@
+<!DOCTYPE html>
+<!-- =========================
+Keep the following style sheet; drop in slides below
+========================= -->
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chapter ? Lecture ?: Title</title>
+<!-- Reveal.js CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/white.min.css" rel="stylesheet"/>
+<!-- Custom CSS -->
+<style>
+        :root {
+            --main-color: #1a1a1a;          /* Nearly black for high contrast text */
+            --accent-color: #0066cc;        /* Deep blue for emphasis */
+            --highlight-color: #cc0000;     /* Bright red for warnings/losers */
+            --success-color: #009900;       /* Vivid green for success/winners */
+            --warning-color: #ff8800;       /* Bright orange for caution */
+            --bg-light: #f5f5f5;           /* Light gray background */
+            --bg-accent: #e6f2ff;          /* Light blue background */
+            --bg-warning: #fff5e6;         /* Light orange background */
+        }
+        
+        .reveal {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        /* Stop within-slide scrolling and keep the viewport fixed */
+.reveal .slides section { height: auto !important; overflow: visible !important; }
+html, body, .reveal { height: 100%; overflow: hidden !important; }
+
+      
+        
+        .reveal h1, .reveal h2, .reveal h3 {
+            color: var(--main-color);
+            text-transform: none;
+            font-weight: 600;
+        }
+        
+        .reveal h1 {
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+        }
+        
+        .reveal h2 {
+            font-size: 1.8em;
+            margin-bottom: 0.8em;
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 0.3em;
+        }
+        
+        .reveal h3 {
+            font-size: 1.4em;
+            color: var(--accent-color);
+            margin-top: 1em;
+        }
+        
+        .reveal ul, .reveal ol {
+            text-align: left;
+            line-height: 1.6;
+        }
+        
+        .reveal li {
+            margin-bottom: 0.5em;
+        }
+        
+        .reveal strong {
+            color: var(--main-color);
+            font-weight: 700;
+        }
+        
+        /* Title slide styling */
+        .title-slide h1 {
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
+            margin-top: 2em;
+        }
+        
+        .title-slide {
+            background: linear-gradient(135deg, #0066cc 0%, #003d7a 100%);
+            color: white;
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            color: #ffffff;
+            margin-top: 1em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+        }
+        
+        /* Section divider styling */
+        .section-divider {
+            background: linear-gradient(135deg, #0066cc 0%, #003d7a 100%);
+            color: white;
+        }
+        
+        .section-divider h2 {
+            border-bottom: none;
+            color: white;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+        }
+        
+        /* Learning objectives styling */
+        .objectives {
+            background-color: var(--bg-light);
+            border-left: 8px solid var(--accent-color);
+            padding: 1.5em;
+            text-align: left;
+        }
+        
+        .objectives h2 {
+            color: var(--main-color);
+            border-bottom: none;
+        }
+        
+        .objectives ol {
+            font-size: 0.9em;
+            color: var(--main-color);
+        }
+        
+        /* Key terms inline styling */
+        .key-term {
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+        
+        /* Box styling for important concepts */
+        .concept-box {
+            background-color: var(--bg-accent);
+            border: 3px solid var(--accent-color);
+            border-radius: 8px;
+            padding: 1em;
+            margin: 1em 0;
+        }
+        
+        .concept-box h3 {
+            margin-top: 0;
+            color: var(--main-color);
+        }
+        
+        .concept-box ul, .concept-box ol, .concept-box p {
+            color: var(--main-color);
+        }
+        
+        /* Question slides */
+        .discussion-slide {
+            background-color: var(--bg-warning);
+            border: 4px solid var(--warning-color);
+        }
+        
+        .discussion-slide h2 {
+            color: var(--main-color);
+            border-bottom: 3px solid var(--warning-color);
+        }
+        
+        .discussion-slide h3, .discussion-slide p, .discussion-slide ul, .discussion-slide li {
+            color: var(--main-color);
+        }
+        
+        .question {
+            font-size: 1.3em;
+            font-style: italic;
+            color: var(--main-color);
+            margin: 1em 0;
+            padding: 1em;
+            background-color: white;
+            border-radius: 8px;
+            border: 2px solid var(--warning-color);
+        }
+        
+        /* Two column layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2em;
+            text-align: left;
+        }
+        
+        /* Winners/Losers styling */
+        .winner {
+            color: var(--success-color);
+        }
+        
+        .loser {
+            color: var(--highlight-color);
+        }
+        
+        .winner::before {
+            content: "✓ ";
+            font-weight: bold;
+        }
+        
+        .loser::before {
+            content: "✗ ";
+            font-weight: bold;
+        }
+        
+        /* Power shift visual */
+        .power-shift {
+            font-size: 1.2em;
+            text-align: left;
+            margin: 1em 0;
+            padding: 0.5em;
+            background-color: white;
+            color: var(--main-color);
+        }
+        
+        .power-up::after {
+            content: " ↑";
+            color: var(--success-color);
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        
+        .power-down::after {
+            content: " ↓";
+            color: var(--highlight-color);
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        
+        /* Image placeholder styling */
+        .image-placeholder {
+            border: 4px dashed var(--accent-color);
+            background-color: var(--bg-light);
+            padding: 3em;
+            text-align: center;
+            color: var(--main-color);
+            font-style: italic;
+            margin: 1em 0;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+        
+        /* Quote styling */
+        .quote {
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--main-color);
+            border-left: 5px solid var(--accent-color);
+            padding-left: 1em;
+            margin: 1em 0;
+            font-weight: 500;
+        }
+        
+        /* Number callouts */
+        .number-list li {
+            position: relative;
+            padding-left: 2em;
+        }
+        
+        .number-list li::before {
+            content: counter(list-item);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: var(--accent-color);
+            color: white;
+            width: 1.5em;
+            height: 1.5em;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        
+        /* Emphasis boxes */
+        .emphasis {
+            background-color: var(--bg-warning);
+            border-left: 6px solid var(--warning-color);
+            padding: 1em;
+            margin: 1em 0;
+            color: var(--main-color);
+        }
+        
+        .emphasis strong {
+            color: var(--main-color);
+        }
+        
+        /* Review checkmark styling */
+        .checkmark::before {
+            content: "✓ ";
+            color: var(--success-color);
+            font-weight: bold;
+            margin-right: 0.3em;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            
+            .reveal h1 {
+                font-size: 2em;
+            }
+            
+            .reveal h2 {
+                font-size: 1.5em;
+            }
+        }
+   /* Compact rules only for this slide */
+.reveal section.compact h2 {
+  font-size: 1.55em;              /* down from 1.8em */
+  margin-bottom: 0.5em;
+}
+
+.reveal section.compact .policy-grid {
+  align-items: start;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(8px, 1.2vw, 16px);
+}
+
+.reveal section.compact .concept-box {
+  padding: clamp(6px, 0.9vw, 10px);  /* tighter padding */
+  margin: 0.5em 0 0;                 /* less vertical space */
+  border-width: 2px;                  /* thinner border */
+}
+
+.reveal section.compact .concept-box h3 {
+  font-size: 1.05em;                 /* override global 1.4em */
+  line-height: 1.2;
+  margin: 0;
+}
+
+.reveal section.compact .policy-title {
+  font-size: clamp(0.85rem, 0.95vw, 1rem);
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .4rem;
+  flex-wrap: wrap;                   /* allow wrap next to the button */
+}
+
+.reveal section.compact .popup-trigger {
+  padding: .28rem .48rem;
+  border-radius: 7px;
+  font-size: 0.9em;
+  flex: 0 0 auto;                    /* don’t let it grow and push text */
+}
+
+	
+	/* Two-column lists inside concept boxes */
+.reveal .concept-box ul.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .35em 1.25em;          /* row gap, column gap */
+  margin: .4em 0 .2em;
+  padding-left: 1.2em;        /* keep bullets aligned */
+}
+.reveal .concept-box ul.two-col > li { margin: 0; }
+
+/* Responsive: collapse to one column on narrow widths */
+@media (max-width: 900px) {
+  .reveal .concept-box ul.two-col { grid-template-columns: 1fr; }
+}
+
+	</style>
+	<style>
+  /* Tighter boxes so long headings fit */
+  .policy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(10px, 1.6vw, 18px);
+  }
+  .concept-box {
+    padding: clamp(8px, 1.2vw, 12px);
+  }
+
+  /* Make the titles slightly smaller and allow smart wrapping */
+  .policy-title {
+    font-size: clamp(0.9rem, 1.05vw, 1.05rem); /* smaller than before */
+    line-height: 1.2;
+    word-break: normal;
+    overflow-wrap: anywhere;   /* lets “United States” wrap instead of overflow */
+    hyphens: auto;             /* enables soft hyphenation when available */
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5rem;
+  }
+
+  /* Keep the info button compact so it doesn't push text */
+  .popup-trigger {
+    padding: .3rem .5rem;
+    border-radius: 7px;
+    font-size: 0.9em;
+  }
+
+  /* If space is still tight, let the grid switch to 2 columns */
+  @media (max-width: 1200px) {
+    .policy-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* On very small widths, one column is safer */
+  @media (max-width: 800px) {
+    .policy-grid { grid-template-columns: 1fr; }
+  }
+</style>
+<style>
+  /* Scoped compact rules for Slide 5A */
+  .reveal section.compact h2 { font-size: 1.55em; margin-bottom: .5em; }
+  .reveal section.compact .policy-grid { align-items: start; grid-template-columns: repeat(3,1fr); gap: clamp(8px,1.2vw,16px); }
+  .reveal section.compact .concept-box { padding: clamp(6px,.9vw,10px); margin: .5em 0 0; border-width: 2px; }
+  .reveal section.compact .concept-box h3 { font-size: 1.05em; line-height: 1.2; margin: 0; }
+  .reveal section.compact .policy-title { font-size: clamp(.85rem,.95vw,1rem); line-height: 1.2; overflow-wrap: anywhere; hyphens: auto; display: flex; align-items: center; justify-content: space-between; gap: .4rem; flex-wrap: wrap; }
+  .reveal section.compact .popup-trigger { padding: .28rem .48rem; border-radius: 7px; font-size: .9em; flex: 0 0 auto; }
+
+  /* Scoped compact-small rules for Slide 6A/6B */
+  .reveal section.compact-sm h2 { font-size: 1.55em; margin-bottom: .5em; }
+  .reveal section.compact-sm h3 { font-size: 1.14em; margin: .8em 0 .3em; }
+  .reveal section.compact-sm ul { margin: .25em 0 .6em; }
+  .reveal section.compact-sm li { margin-bottom: .25em; }
+  .reveal section.compact-sm .policy-title { font-size: 1.05em; gap: .4rem; }
+  .reveal section.compact-sm .popup-trigger { padding: .28rem .48rem; font-size: .9em; border-radius: 7px; border: 1px solid rgba(0,0,0,.2); background: #0b3d91; color: #fff; }
+
+  /* Portrait wrapper that resizes with the image */
+  .portrait{
+    background:#F3F4F6;
+    padding:1em;
+    border-radius:12px;
+    width: clamp(220px, 50vw, 600px);
+    margin: 0 auto;
+  }
+  .portrait img{
+    display:block;
+    width:100%;
+    height:auto;
+    border-radius:8px;
+    box-shadow:0 4px 8px rgba(0,0,0,.25);
+  }
+	/* Per-slide font utilities (scale relative to the deck base) */
+/* Font scale utility classes */
+
+.fs-80 { font-size: 0.8em; }
+
+.fs-75 { font-size: 0.75em; }
+
+.fs-70 { font-size: 0.7em; }
+
+
+	.reveal section.fs-80 { font-size: 80%; }
+.reveal section.fs-85 { font-size: 85%; }
+.reveal section.fs-90 { font-size: 90%; }
+.reveal section.fs-95 { font-size: 95%; }
+.reveal section.fs-100 { font-size: 100%; } /* default */
+.reveal section.fs-110 { font-size: 110%; }
+.reveal section.fs-120 { font-size: 120%; }
+
+/* Optional spacing helpers for dense slides */
+.reveal section.tight   { --gap: 1em; }
+.reveal section.tight .two-column { gap: var(--gap, 1.2em); }
+</style>
+	<!-- Add this CSS once in your <head> (keeps your existing styles) -->
+
+<style>
+
+  /* Flip-card scaffolding for Reveal.js */
+
+  .flip-stage { perspective: 1200px; }
+
+  .flip-card {
+
+    position: relative;
+
+    width: min(100%, 980px);
+
+    margin: 0 auto;
+
+    transform-style: preserve-3d;
+
+    transition: transform 700ms ease;
+
+  }
+
+  .flip-face {
+
+    position: relative;
+
+    padding: 1.1rem 1.25rem;
+
+    border-radius: 12px;
+
+    box-shadow: 0 8px 18px rgba(0,0,0,.12);
+
+    backface-visibility: hidden;
+
+  }
+
+  .flip-front { background: var(--bg-accent, #e6f2ff); border: 2px solid var(--accent-color,#0b3d91); }
+
+  .flip-back  { background: #fff; border: 2px solid var(--success-color,#0b7c0b); transform: rotateY(180deg); }
+
+  .flip-card h3 { margin: 0 0 .5rem 0; }
+
+  .flip-q {
+
+    font-size: clamp(1.1rem, 1.9vw, 1.35rem);
+
+    font-weight: 600;
+
+    color: var(--main-color,#1a1a1a);
+
+  }
+
+  .flip-instr {
+
+    margin-top: .4rem;
+
+    font-size: .95em;
+
+    opacity: .85;
+
+    font-style: italic;
+
+  }
+
+  .flip-ans-yes {
+
+    color: var(--success-color,#0b7c0b);
+
+    font-weight: 800;
+
+    letter-spacing: .02em;
+
+  }
+
+</style>
+
+</head>
+
+	<body>
+<div class="reveal">
+<div class="slides">
+	
+	<!-- =========================
+Replace the following two slides with your slide deck
+========================= -->
+
+<section class="title-slide">
+<h1>Indian Removal &amp; Ethnic Cleansing</h1>
+<p class="subtitle">1820-1845</p>
+</section>
+
+	<!-- SLIDE: Native Americans After the War of 1812 — Two Column Layout -->
+<section class="compact-sm fs-80">
+  <h2>Native Americans After the War of 1812</h2>
+
+  <div class="two-column">
+    <!-- LEFT COLUMN: The Situation -->
+    <div>
+      <h3>The Situation:</h3>
+      <ul>
+        <li>~125,000 Native peoples live east of Mississippi River</li>
+        <li><strong>"Five Civilized Tribes" in Southeast: ~60,000 people</strong></li>
+        <li style="margin-left:2em;">Cherokee, Creek, Choctaw, Chickasaw, Seminole</li>
+        <li>Increasingly surrounded by white settlement</li>
+      </ul>
+    </div>
+
+    <!-- RIGHT COLUMN: Federal Policy Claims -->
+    <div>
+      <h3>Federal Policy Claims:</h3>
+      <ul>
+        <li>"Civilize" and "Christianize" Native peoples</li>
+        <li>Then they can remain on their lands</li>
+        <li>Assimilation is the official goal</li>
+      </ul>
+   	  </div>
+	  
+	  
+  </div>
+
+ 
+  <aside class="notes">
+    <div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;">
+      <h3 style="margin:0 0 .4em 0;">📖 Understanding This Slide</h3>
+      <p><strong>Main idea:</strong> After 1815, roughly <strong>125,000</strong> Native people still lived east of the Mississippi—about <strong>60,000</strong> in the Southeast among the so-called “Five Civilized Tribes.” U.S. policy <em>claimed</em> assimilation would secure their place; reality moved another way.</p>
+    </div>
+
+    <div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;">
+      <h3 style="margin:0 0 .4em 0;">⚡ Content Breakdown</h3>
+      <ul>
+        <li><strong>Population & location:</strong> Dense Native presence remained in the East even as white settlement expanded.</li>
+        <li><strong>Policy promise:</strong> “Civilize and Christianize” → remain on ancestral land.</li>
+        <li><strong>Tension:</strong> Official rhetoric vs. outcomes you’ll see on later slides.</li>
+      </ul>
+    </div>
+
+    <div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;">
+      <h3 style="margin:0 0 .4em 0;">🏛️ Big Picture Synthesis</h3>
+      <p>From the start, there’s a mismatch between <strong>stated goals</strong> and <strong>material pressures</strong> (land, migration, profit). This gap is the through-line that explains why “assimilation” didn’t protect communities.</p>
+    </div>
+
+    <div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;">
+      <h3 style="margin:0 0 .4em 0;">🎓 Historians Weigh In</h3>
+      <h4 style="margin:.2em 0 .2em 0;"><em>Francis Paul Prucha,</em> <span style="white-space:nowrap;">*The Great Father*</span></h4>
+      <p>Prucha shows federal Indian policy often presented itself as benevolent while aligning with expansionist imperatives—and those imperatives won.</p>
+    </div>
+  </aside>
+</section>
+
+
+	
+<!-- SLIDE: Why Removal? Three Intertwined Reasons (all reasons in one box) -->
+<section class="compact-sm fs-80">
+  <h2>Why Removal? Three Intertwined Reasons</h2>
+
+  <!-- ONE concept box with all three reasons; each has a popup for details -->
+  <div class="concept-box">
+    <h3>Three Intertwined Reasons</h3>
+    <ul style="margin:.4rem 0;">
+      <li style="display:flex;align-items:center;gap:.5rem;">
+        <strong>1) Economic Greed: Land Hunger</strong>
+        <button class="popup-trigger"
+                data-popup="popup-economic"
+                aria-haspopup="dialog"
+                aria-controls="popup-economic"
+                aria-label="Show details: Economic Greed"
+                style="padding:.25rem .5rem; font-size:.9em; border-radius:6px;">
+          ⓘ Details
+        </button>
+      </li>
+      <li style="display:flex;align-items:center;gap:.5rem; margin-top:.35rem;">
+        <strong>2) Racial Ideology: “Civilization” Rhetoric as Cover</strong>
+        <button class="popup-trigger"
+                data-popup="popup-racial"
+                aria-haspopup="dialog"
+                aria-controls="popup-racial"
+                aria-label="Show details: Racial Ideology"
+                style="padding:.25rem .5rem; font-size:.9em; border-radius:6px;">
+          ⓘ Details
+        </button>
+      </li>
+      <li style="display:flex;align-items:center;gap:.5rem; margin-top:.35rem;">
+        <strong>3) Political Pressure</strong>
+        <button class="popup-trigger"
+                data-popup="popup-political"
+                aria-haspopup="dialog"
+                aria-controls="popup-political"
+                aria-label="Show details: Political Pressure"
+                style="padding:.25rem .5rem; font-size:.9em; border-radius:6px;">
+          ⓘ Details
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Pattern / takeaway -->
+  <div class="concept-box" style="margin-top:1rem;">
+    <strong>The Pattern:</strong> Assimilation was never the real goal—land acquisition was.
+  </div>
+
+  <!-- POPUPS (hidden by default; use your existing popup JS/backdrop) -->
+  <div class="popup" id="popup-economic" role="dialog" aria-modal="true" hidden>
+    <div class="popup-card" role="document">
+      <h3>Economic Greed: Land Hunger</h3>
+      <ul>
+        <li>Southeast has most fertile land in U.S.</li>
+        <li>Perfect for cotton cultivation (slavery expanding)</li>
+        <li><strong>Gold discovered in Georgia (1828)</strong></li>
+        <li>White settlers want this land NOW</li>
+      </ul>
+      <button class="popup-close" aria-label="Close">Close</button>
+    </div>
+  </div>
+
+  <div class="popup" id="popup-racial" role="dialog" aria-modal="true" hidden>
+    <div class="popup-card" role="document">
+      <h3>Racial Ideology: “Civilization” Rhetoric as Cover</h3>
+      <ul>
+        <li><strong>Official claim:</strong> “Indians can’t civilize, so they must move.”</li>
+        <li><strong>Reality:</strong> Even when tribes adopted American culture, whites wanted them gone.</li>
+        <li>Racial hierarchy: Indians seen as inferior regardless of behavior.</li>
+      </ul>
+      <button class="popup-close" aria-label="Close">Close</button>
+    </div>
+  </div>
+
+  <div class="popup" id="popup-political" role="dialog" aria-modal="true" hidden>
+    <div class="popup-card" role="document">
+      <h3>Political Pressure</h3>
+      <ul>
+        <li><strong>Georgia’s 1802 Compact:</strong> U.S. promised to extinguish Indian title.</li>
+        <li>Georgia threatens to defy federal government.</li>
+        <li>Federal government caves to state pressure.</li>
+      </ul>
+      <button class="popup-close" aria-label="Close">Close</button>
+    </div>
+  </div>
+
+  <!-- Single backdrop for the deck (only include once per file) -->
+  <div class="popup-backdrop" data-popup-backdrop hidden></div>
+
+  <!-- Lecture notes -->
+  <aside class="notes">
+    <h3>📖 Understanding This Slide</h3>
+    <p><strong>Main idea:</strong> Removal is driven by a triad—<strong>land hunger</strong>, <strong>racial ideology</strong>, and <strong>political pressure</strong>—three gears turning the same shaft toward dispossession.</p>
+
+    <h3>⚡ Content Breakdown</h3>
+    <ul>
+      <li><strong>Economic:</strong> Cotton profits on fertile southeastern land + 1828 gold discovery intensify demand.</li>
+      <li><strong>Racial ideology:</strong> “Civilization” talk functions as cover; status didn’t change prejudice.</li>
+      <li><strong>Political:</strong> Georgia’s compact and state defiance push Washington toward accommodation.</li>
+    </ul>
+
+    <h3>🏛️ Big Picture Synthesis</h3>
+    <p>When <strong>profit</strong>, <strong>prejudice</strong>, and <strong>politics</strong> align, policy follows. Even perfect compliance with white norms couldn’t alter the destination.</p>
+  </aside>
+</section>
+
+
+<!-- SLIDE: Competing Sovereignties — Three Column Layout -->
+<section class="compact-sm fs-75">
+  <h2>Competing Sovereignties: The Legal Battle</h2>
+
+  <!-- THREE-COLUMN LAYOUT -->
+  <div class="three-column">
+    <!-- COLUMN 1: Tribes -->
+    <div>
+      <h3>Tribes Assert Nationhood</h3>
+      <ul>
+        <li><strong>Cherokee Nation writes constitution (1827)</strong></li>
+        <li>Declares Cherokee sovereignty and independence</li>
+        <li>"We are a nation, not subjects of Georgia"</li>
+      </ul>
+    </div>
+
+    <!-- COLUMN 2: U.S. Government -->
+    <div>
+      <h3>U.S. Government’s Position</h3>
+      <ul>
+        <li>Tribes are <span class="key-term">“domestic dependent nations”</span></li>
+        <li>Subject to federal (not state) authority</li>
+        <li>But NOT fully sovereign</li>
+      </ul>
+    </div>
+
+    <!-- COLUMN 3: Georgia -->
+    <div>
+      <h3>Georgia’s Position</h3>
+      <ul>
+        <li>Indians have NO sovereignty</li>
+        <li>State law applies to all people in Georgia</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- THE CLASH -->
+  <div class="concept-box" style="margin-top:1.2rem;">
+    <strong>The Clash:</strong> Three competing claims to authority will be decided by the Supreme Court—and then ignored.
+  </div>
+
+  <aside class="notes">
+    <h3>📖 Understanding This Slide</h3>
+    <p><strong>Main idea:</strong> Three overlapping sovereignty claims—tribal nationhood, federal oversight, and Georgia’s state authority—collide in court and in practice.</p>
+
+    <h3>⚡ Content Breakdown</h3>
+    <ul>
+      <li><strong>Cherokee nationhood:</strong> Constitution (1827) asserts sovereignty.</li>
+      <li><strong>Federal stance:</strong> Tribes as <em>“domestic dependent nations”</em> → limited but real autonomy.</li>
+      <li><strong>Georgia:</strong> Denies sovereignty, asserting state law over all within its borders.</li>
+    </ul>
+
+    <h3>🏛️ Big Picture Synthesis</h3>
+    <p>Law doesn’t operate in a vacuum—<strong>enforcement</strong> is the hinge. Even clear doctrines can be nullified by defiance on the ground.</p>
+
+    <h3>🎓 Historians Weigh In</h3>
+    <h4><em>Francis Paul Prucha,</em> <span style="white-space:nowrap;">*American Indian Policy in the Formative Years*</span></h4>
+    <p>Prucha explains how legal categories balanced between treaty recognition and paternal oversight—fertile ground for conflict.</p>
+  </aside>
+</section>
+
+<!-- CSS helper for three-column layout -->
+<style>
+  .three-column {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+    align-items: start;
+  }
+  .three-column ul {
+    margin-top: .5rem;
+    margin-left: 1.2rem;
+  }
+</style>
+
+	
+	<!-- SLIDE: Intra-Tribal Divisions — Two Column Layout (Revised with quote under image) -->
+<section class="compact-sm fs-70">
+  <h2>Intra-Tribal Divisions: The McIntosh Case</h2>
+
+  <div class="two-column">
+    <!-- LEFT COLUMN: TEXT -->
+    <div>
+      <p><strong>Economic transformation creates winners and losers WITHIN tribes</strong></p>
+
+      <h3>Major shift in Creek society:</h3>
+      <ul>
+        <li>Away from communal sharing toward private property</li>
+        <li>Rise of <span class="key-term">planter-elite</span> of mixed heritage</li>
+        <li>Christian missionaries catalyze changes</li>
+      </ul>
+
+      <h3>Chief William McIntosh (Creek):</h3>
+      <ul>
+        <li>Mixed Creek-Scottish heritage, wealthy planter</li>
+        <li>Believed removal was inevitable</li>
+      </ul>
+
+      
+    </div>
+
+    <!-- RIGHT COLUMN: IMAGE + QUOTE -->
+    <div style="text-align:center;">
+      <div style="background-color:#F3F4F6; padding:1em; border-radius:12px;">
+        <img src="../chapter-11/images/chief_mcintosh.jpg"
+             alt="Portrait of Chief William McIntosh"
+             loading="lazy"
+             style="max-width:100%; height:auto; border-radius:8px; box-shadow:0 4px 8px rgba(0,0,0,0.25);" />
+        <p style="font-family:'Georgia',serif; color:#1E3A8A; font-size:0.9em; margin-top:0.5em;">
+          Chief William McIntosh (Creek)
+        </p>
+      </div>
+      <p style="font-style:italic; font-size:0.9em; margin-top:0.8em;">
+        “Better to negotiate the best deal and move west.”
+      </p>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <h3>📖 Understanding This Slide</h3>
+    <p><strong>Main idea:</strong> Economic change created <strong>class divisions</strong> within Native societies, producing factional strategies—from resistance to negotiated removal.</p>
+
+    <h3>⚡ Content Breakdown</h3>
+    <ul>
+      <li><strong>Shift to private property:</strong> A planter elite emerges with different incentives.</li>
+      <li><strong>William McIntosh:</strong> Anticipates removal; seeks terms rather than catastrophe.</li>
+      <li><strong>Creek Council:</strong> Tries to deter land sales with capital penalties.</li>
+    </ul>
+
+    <h3>🏛️ Big Picture Synthesis</h3>
+    <p>When external pressure rises, internal disagreements sharpen. <em>This means</em> “tribal decision” isn’t singular—policy fractures communities.</p>
+
+    <h3>🎓 Historians Weigh In</h3>
+    <h4><em>John W. Caughey,</em> <span style="white-space:nowrap;">*McIntosh and the Creek Nation*</span></h4>
+    <p>Caughey details how economic transformation and U.S. pressure produced fatal rifts inside the Creek polity.</p>
+  </aside>
+</section>
+
+	
+	<!-- SLIDE: Creek National Council Decree — Abridged with Concept Box -->
+<section class="compact-sm fs-75">
+  <h2>The Creek National Council Decree (1821)</h2>
+
+  <div class="two-column">
+    <!-- LEFT COLUMN: Brief Historical Context -->
+    <div>
+      <h3>Lead-Up to the Decree</h3>
+      <ul>
+        <li>After the War of 1812, U.S. pressure for Creek land cessions intensified.</li>
+        <li>Federal and Georgia officials bribed chiefs to sign unauthorized treaties.</li>
+        <li>Internal rifts grew between traditional leaders and mixed-heritage elites.</li>
+        <li>The National Council acted to defend tribal sovereignty and unity.</li>
+      </ul>
+    </div>
+
+    <!-- RIGHT COLUMN: Concept Box Decree -->
+    <div>
+      <div class="concept-box" role="article" aria-label="Creek National Council decree (styled text)">
+        <h3 style="text-align:center;">Decree of the Creek National Council</h3>
+        <p style="font-style:italic; text-align:center; margin-top:-.4em;">Adopted at Broken Arrow, 1821</p>
+        <hr style="border:none; border-top:1px solid rgba(0,0,0,.25); width:80%; margin:.4rem auto;" />
+        <ul style="line-height:1.5;">
+          <li>Any Creek who sells or conveys national land without Council consent shall suffer <strong>death</strong>.</li>
+          <li>Private land agreements with settlers hold no legal standing.</li>
+          <li>All lands are held in common under the protection of the Council.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <h3>📖 Full Context</h3>
+    <p>After the War of 1812, the Creek Nation was under relentless pressure from federal and state governments to cede more land. The 1814 <em>Treaty of Fort Jackson</em> had already forced the loss of over 20 million acres—half the Creek domain. U.S. agents began using bribery and private negotiations to secure further cessions, bypassing the Creek National Council entirely. This tactic fractured the nation: a wealthy mixed-heritage planter class sought accommodation with American authorities, while traditionalists insisted on communal ownership and independence.</p>
+    <p>By 1821, the Creek leadership recognized that these private land sales were destroying their sovereignty from within. The National Council met at Broken Arrow and declared that any individual who sold national land without the Council’s authorization would be executed. This decree represented both a desperate defense of tribal integrity and a declaration of independence against U.S. manipulation.</p>
+
+    <h3>🏛️ Big Picture Synthesis</h3>
+    <p>The 1821 decree illustrates how Native nations used written law to protect sovereignty when external force and internal division threatened to destroy it. <em>This means</em> the Creeks pursued legal nationalism—codifying resistance rather than merely rebelling.</p>
+
+    <h3>🎓 Historians Weigh In</h3>
+    <h4><em>Michael D. Green,</em> <span style="white-space:nowrap;">*The Politics of Indian Removal*</span></h4>
+    <p>Green argues that this decree represents a final assertion of Creek political unity, rooted in law rather than warfare. It was the last stand of Creek nationalism before federal removal policy overwhelmed Native sovereignty.</p>
+  </aside>
+</section>
+
+<!-- SLIDE: Treaty of Indian Springs (1825) — Two Columns with Image + Audio -->
+<section class="compact-sm fs-75">
+  <h2>Treaty of Indian Springs (1825)</h2>
+
+  <div class="two-column">
+    <!-- LEFT COLUMN: Text -->
+    <div>
+      <h3>February 1825: McIntosh signs treaty at his inn</h3>
+
+      <p><strong>The Deal:</strong></p>
+      <ul>
+        <li>Ceded ALL Creek land in Georgia to United States</li>
+        <li>McIntosh and supporters receive $40,000 (bribe)</li>
+        <li>Opposed by majority of Creek people</li>
+      </ul>
+      </div>
+
+    <!-- RIGHT COLUMN: Image + Audio -->
+    <div style="text-align:center;">
+      <figure style="background-color:#F3F4F6; padding:1em; border-radius:12px; margin:0;">
+        <img
+          src="images/execution_mcintosh.png"
+          alt="Illustration of the execution of Chief William McIntosh following the 1825 treaty"
+          loading="lazy"
+          style="max-width:100%; height:auto; border-radius:8px; box-shadow:0 4px 8px rgba(0,0,0,0.25);" />
+        <figcaption style="font-family:'Georgia',serif; color:#1E3A8A; font-size:0.9em; margin-top:0.5em;">
+          Execution of William McIntosh (Creek), 1825
+        </figcaption>
+      </figure>
+
+      <!-- Audio directly beneath image -->
+      <audio controls preload="metadata" style="margin-top:.75rem; width:100%;">
+        <source src="audio/execution_mcintosh.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  </div>
+
+  <!-- Moved “What This Reveals” into notes -->
+  <aside class="notes">
+    <h3>📖 What This Reveals</h3>
+    <p><strong>Removal created INTERNAL violence, not just external:</strong> many tribes split into factions under U.S. pressure. Minority deals claimed as “treaties” bound majorities, provoking retribution under tribal law. The pattern will repeat with the Cherokee “Treaty Party.”</p>
+
+    <h3>⚡ Content Recap</h3>
+    <ul>
+      <li><strong>The deal:</strong> All Creek land in Georgia ceded; faction leaders compensated.</li>
+      <li><strong>Response:</strong> McIntosh executed under Creek law as a land-seller.</li>
+      <li><strong>Pattern:</strong> U.S. recognition of a faction enabled dispossession despite majority opposition.</li>
+    </ul>
+
+    <h3>🏛️ Big Picture</h3>
+    <p>“Treaty” functioned as a legal instrument to leverage internal division. <em>This means</em> sovereignty contests were fought both inside Native nations and in U.S. forums.</p>
+  </aside>
+</section>
+
+	
+	<!-- SLIDE: Cherokee "Civilization" Strategy — Three Columns w/ Numbers Popup -->
+<section class="compact-sm fs-75">
+  <h2>Cherokee “Civilization” Strategy</h2>
+	
+  <!-- THREE COLUMNS -->
+  <div class="three-column" style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem;">
+    <!-- Economic -->
+    <div>
+      <h3>Economic Transformation:</h3>
+      <ul>
+        <li>Most Cherokee abandon hunting, adopt settled agriculture</li>
+        <li>Own farms, plantations, enslaved people</li>
+        <li>Operate mills, stores, ferries, inns</li>
+      </ul>
+    </div>
+
+    <!-- Cultural -->
+    <div>
+      <h3>Cultural Adaptation:</h3>
+      <ul>
+        <li><strong>Sequoyah creates <span class="key-term">Cherokee syllabary</span> (1821)</strong></li>
+        <li>Cherokee literacy rate equals or exceeds white South</li>
+        <li><strong><span class="key-term">Cherokee Phoenix</span> (1828):</strong> First Native American newspaper</li>
+      </ul>
+    </div>
+
+    <!-- Political -->
+    <div>
+      <h3>Political Innovation:</h3>
+      <ul>
+        <li>Cherokee National Council passes written law codes</li>
+        <li>Establish police force and court system</li>
+        <li><strong>Cherokee Constitution (1827):</strong> Mirrors U.S. Constitution</li>
+      </ul>
+    	  
+	  <!-- NUMBERS TRIGGER (popup only; no inline numbers) -->
+  <div class="concept-box" style="margin-top:1rem;">
+    <h3 style="display:flex; align-items:center; gap:.6rem; margin:0;">
+      The Numbers (by 1835)
+      <button class="popup-trigger"
+              data-popup="popup-cherokee-numbers"
+              aria-haspopup="dialog"
+              aria-controls="popup-cherokee-numbers"
+              aria-label="Open Cherokee numbers (by 1835)"
+              style="padding:.3rem .6rem; font-size:.9em; border-radius:7px;">
+        ⓘ Show
+      </button>
+    </h3>
+    </div>
+  </div>
+</div>
+	
+  
+
+  <!-- POPUP: Numbers -->
+  <div class="popup" id="popup-cherokee-numbers" role="dialog" aria-modal="true"
+       aria-labelledby="popup-cherokee-numbers-title" aria-describedby="popup-cherokee-numbers-desc"
+       hidden>
+    <div class="popup-card" role="document">
+      <h3 id="popup-cherokee-numbers-title">The Numbers (by 1835)</h3>
+      <div id="popup-cherokee-numbers-desc">
+        <p>18 schools • 2 grist mills • 62 blacksmith shops • 8 cotton machines • 1,300 spinning wheels</p>
+        <p><strong>By any measure, this was successful “civilization.”</strong></p>
+      </div>
+      <div class="popup-actions">
+        <button class="popup-close" aria-label="Close">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Backdrop (include once per deck; remove if already present globally) -->
+  <div class="popup-backdrop" data-popup-backdrop hidden></div>
+
+  <!-- Notes (unchanged, kept for presenter) -->
+  <aside class="notes">
+    <div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;">
+      <h3 style="margin:0 0 .4em 0;">📖 Understanding This Slide</h3>
+      <p><strong>Main idea:</strong> By the 1820s–1830s, the Cherokee Nation had built institutions that met — and sometimes exceeded — U.S. “civilization” benchmarks: agriculture, literacy, Christianity, written laws, courts, schools, and a constitution. Their later removal exposes the policy’s true motives.</p>
+    </div>
+    <div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;">
+      <h3 style="margin:0 0 .4em 0;">⚡ Content Breakdown</h3>
+      <ul>
+        <li><strong>Economic:</strong> Productive farms, mills, stores; market agriculture; some enslaved labor mirroring Southern norms.</li>
+        <li><strong>Cultural:</strong> Sequoyah’s syllabary (1821); <em>Cherokee Phoenix</em> (1828); widespread literacy.</li>
+        <li><strong>Political:</strong> Courts, police, constitution; functioning schools and civic institutions.</li>
+        <li><strong>Mid-1830s:</strong> Property valued at $15–$20 million; prosperous communities by U.S. standards.</li>
+      </ul>
+    </div>
+    <div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;">
+      <h3 style="margin:0 0 .4em 0;">🏛️ Big Picture Synthesis — The Assimilation Paradox</h3>
+      <p>Success increased white desire for Cherokee land. Criteria for “belonging” were a moving target aligned with white interests, not achievable standards.</p>
+    </div>
+    <div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;">
+      <h3 style="margin:0 0 .4em 0;">🎓 Historians Weigh In</h3>
+      <h4 style="margin:.2em 0 .2em 0;"><em>Theda Perdue &amp; Michael D. Green</em>, <span style="white-space:nowrap;">*The Cherokee Nation and the Trail of Tears*</span></h4>
+      <p>They document deep Cherokee institution-building, underscoring that <strong>capacity</strong> was not the obstacle; <strong>race and land hunger</strong> were.</p>
+    </div>
+    <div style="line-height:1.6; font-size:1.02em;">
+      <h3 style="margin:0 0 .4em 0;">🔎 Core Lesson</h3>
+      <p>No amount of adaptation would secure Native land or sovereignty. This was not a civilizing mission; it was <strong>ethnic cleansing justified as policy reform</strong>.</p>
+    </div>
+  </aside>
+</section>
+
+	
+	
+	
+<section class="compact-sm fs-80">
+
+  <h2>Georgia Forces the Crisis</h2>
+
+
+
+  <div class="two-column">
+
+    <!-- LEFT COLUMN -->
+
+    <div>
+
+      <h3>Gold Discovered (1828)</h3>
+
+      <ul>
+
+        <li>Gold found at Dahlonega, Georgia (Cherokee territory)</li>
+
+        <li>Gold rush begins</li>
+
+        <li>White settlers surge illegally into Cherokee land</li>
+
+      </ul>
+
+
+
+      <!-- Thought Question Popup Trigger -->
+
+      <p style="margin-top:.6rem;">
+
+        <button class="popup-trigger"
+
+                data-popup="popup-effect-question"
+
+                aria-haspopup="dialog"
+
+                aria-controls="popup-effect-question"
+
+                aria-label="Open thought question about effects"
+
+                style="padding:.35rem .6rem; border-radius:8px; font-size:.95em;">
+
+          Lets Think Deeper!
+
+        </button>
+
+      </p>
+
+    </div>
+
+
+
+    <!-- RIGHT COLUMN -->
+
+    <div>
+
+      <h3>Georgia’s <span class="key-term">“Extension Laws”</span> (1829–1831)</h3>
+
+      <ol>
+
+        <li>Cherokee laws void within Georgia</li>
+
+        <li>Cherokees barred from testifying against whites</li>
+
+        <li>Cherokees prohibited from mining gold on their own land</li>
+
+        <li>White missionaries require Georgia license to remain</li>
+
+      </ol>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- POPUP: Thought Question (no answers shown) -->
+
+  <div class="popup" id="popup-effect-question" role="dialog" aria-modal="true"
+
+       aria-labelledby="popup-effect-title" aria-describedby="popup-effect-desc"
+
+       aria-hidden="true" hidden>
+
+    <div class="popup-card" role="document">
+
+      <h3 id="popup-effect-title">Think It Through</h3>
+
+      <div id="popup-effect-desc">
+
+        <p><strong>Prompt:</strong> If gold rush migration coincides with Georgia’s “Extension Laws,” what short- and long-term <em>effects</em> might you expect on Cherokee sovereignty, daily life, and federal–state relations?</p>
+
+        <ul>
+
+          <li>Identify at least one immediate consequence.</li>
+
+          <li>Project one medium-term political outcome.</li>
+
+          <li>Note one legal or constitutional tension this creates.</li>
+
+        </ul>
+
+      </div>
+
+      <div class="popup-actions">
+
+        <button class="popup-close" aria-label="Close">Close</button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- Do NOT add another backdrop if one already exists in the deck -->
+
+  <!-- <div class="popup-backdrop" data-popup-backdrop hidden></div> -->
+
+
+
+  <aside class="notes">
+
+    <h3>?? Understanding This Slide</h3>
+
+    <p>Georgia leverages the gold rush to normalize illegal settlement, then hard-codes it through state law, collapsing Cherokee legal protections.</p>
+
+
+
+    <h3>? Possible Answers to the Thought Question (for instructor)</h3>
+
+    <ul>
+
+      <li><strong>Immediate:</strong> Rapid dispossession via arrests, intimidation, and unenforceable Cherokee claims; economic displacement as miners seize sites.</li>
+
+      <li><strong>Medium-term:</strong> Escalation to federal–state confrontation (missionary prosecutions ? <em>Worcester v. Georgia</em>), national political polarization over removal.</li>
+
+      <li><strong>Legal/constitutional:</strong> State nullification of treaties/federal authority in practice; tests the supremacy of federal Indian policy and the Court’s capacity to enforce rulings.</li>
+
+    </ul>
+
+
+
+    <h3>??? Big Picture</h3>
+
+    <p>Lawfare replaces negotiation: by voiding Cherokee law and access to courts, Georgia manufactures a reality that federal power struggles to reverse.</p>
+
+
+
+    <h3>?? Historians Weigh In</h3>
+
+    <h4><em>Robert V. Remini</em>, <span style="white-space:nowrap;">*Andrew Jackson and His Indian Wars*</span></h4>
+
+    <p>Remini argues Georgia engineered a constitutional showdown that made removal the path of least resistance for national politicians.</p>
+
+  </aside>
+
+</section>
+
+
+	
+<section class="compact-sm fs-70">
+
+  <h2>Cherokee Legal Resistance: Two Supreme Court Cases</h2>
+
+
+
+  <div class="two-column">
+
+    <!-- LEFT COLUMN: Cherokee Nation v. Georgia -->
+
+    <div>
+
+      <div class="concept-box">
+
+        <h3>Cherokee Nation v. Georgia (1831)</h3>
+
+        <ul>
+
+          <li><strong>Question:</strong> Is Cherokee Nation a “foreign nation” that can sue Georgia?</li>
+
+          <li><strong>Marshall’s Decision:</strong> NO — Cherokees are a <span class="key-term">“domestic dependent nation.”</span></li>
+
+          <li>Not a foreign nation, but not Georgia citizens either</li>
+
+          <li>Case dismissed on procedural grounds</li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- RIGHT COLUMN: Worcester v. Georgia -->
+
+    <div>
+
+      <div class="concept-box">
+
+        <h3>Worcester v. Georgia (1832)</h3>
+
+        <ul>
+
+          <li><strong>Question:</strong> Can Georgia enforce laws in Cherokee territory?</li>
+
+          <li><strong>Marshall’s Decision:</strong> <strong>NO — Cherokee Nation is sovereign</strong></li>
+
+          <li>Georgia laws in Cherokee territory are unconstitutional</li>
+
+          <li>Only the federal government has authority over tribes</li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <aside class="notes">
+
+    <h3>?? Understanding This Slide</h3>
+
+    <p>The Supreme Court asserted federal supremacy and recognized limited tribal sovereignty. However, without executive backing, these victories were symbolic rather than practical.</p>
+
+
+
+    <h3>? Content Breakdown</h3>
+
+    <ul>
+
+      <li><strong>1831:</strong> Cherokee Nation v. Georgia — status dispute; “domestic dependent nation” doctrine established.</li>
+
+      <li><strong>1832:</strong> Worcester v. Georgia — state laws void; federal power over Indian affairs reaffirmed.</li>
+
+    </ul>
+
+
+
+    <h3>??? Big Picture Synthesis</h3>
+
+    <p>Law alone couldn’t secure justice. The rulings drew the line between moral principle and political will, foreshadowing the impotence of the judiciary in the face of executive indifference.</p>
+
+
+
+    <h3>?? Historians Weigh In</h3>
+
+    <h4><em>Francis Paul Prucha,</em> *The Great Father*</h4>
+
+    <p>Prucha notes that these cases show the fragility of judicial authority when the executive branch refuses enforcement — a key insight into 19th-century federalism.</p>
+
+  </aside>
+
+</section>
+
+<section class="compact-sm fs-80">
+
+  <h2>When Law Meets Power</h2>
+
+
+
+  <div class="text-box" style="background-color:#f9f5e9; border:2px solid #b58900; border-radius:12px; padding:1.5em; box-shadow:0 4px 8px rgba(0,0,0,0.15);">
+
+    <h3>This Should Have Stopped Removal… But:</h3>
+
+    <ul>
+
+      <li>Georgia refuses to comply with the Supreme Court ruling</li>
+
+      <li>President Jackson refuses to enforce it</li>
+
+      <li><em>Apocryphally:</em> “John Marshall has made his decision; now let him enforce it.”</li>
+
+    </ul>
+
+    <p style="font-weight:bold;">Legal victory becomes meaningless without enforcement.</p>
+
+  </div>
+
+
+
+  <aside class="notes">
+
+    <h3>?? Understanding This Slide</h3>
+
+    <p>This moment demonstrates how constitutional authority collapses when political actors ignore judicial restraint. The Court declared justice; the state defied it; the president looked away.</p>
+
+
+
+    <h3>??? Analytical Note</h3>
+
+    <p>Jackson’s refusal to enforce <em>Worcester</em> turns the decision into a case study in the limits of judicial independence — a precedent with implications reaching through U.S. constitutional history.</p>
+
+
+
+    <h3>?? Historians Weigh In</h3>
+
+    <h4><em>Robert Remini,</em> *Andrew Jackson and His Indian Wars*</h4>
+
+    <p>Remini calls this “a triumph of will over law,” arguing that Georgia’s defiance and Jackson’s silence made removal inevitable despite the Court’s clear rulings.</p>
+
+  </aside>
+
+</section>
+
+<section class="compact-sm fs-80">
+
+  <h2>Jackson's Indian Policy</h2>
+
+
+
+  <h3>Jackson's Motivations:</h3>
+
+  <ul>
+
+    <li>Indians seen as barrier to American settlement of valuable farmland</li>
+
+    <li>Doubted Native peoples would ever fully join American society</li>
+
+
+
+    <li>
+
+      <strong>
+
+        <span class="popup-trigger"
+
+              data-popup="popup-paternalism"
+
+              aria-haspopup="dialog"
+
+              aria-controls="popup-paternalism"
+
+              style="text-decoration: underline; cursor: pointer; color: var(--highlight-color);">
+
+          Paternalistic racism
+
+        </span>
+
+      </strong>:
+
+      Thought Indians were degraded by contact with whites
+
+    </li>
+
+
+
+    <li>Believed removal would "save" Native peoples from extinction</li>
+
+    <li>Opening Indian land would strengthen Democratic Party power</li>
+
+  </ul>
+
+
+
+  <!-- POPUP -->
+
+  <div class="popup" id="popup-paternalism" role="dialog" aria-modal="true" hidden>
+
+    <div class="popup-card" role="document">
+
+      <h3>Paternalism Makes It Worse</h3>
+
+      <p>
+
+        Jackson framed removal as <strong>humanitarian protection</strong> — a paternal duty to “save”
+
+        Native peoples from decline.
+
+      </p>
+
+      <p>
+
+        That rhetoric masked coercion. If it’s “for your own good,”
+
+        then rejecting it appears irrational — or hostile.
+
+      </p>
+
+      <p style="font-weight:bold; color: var(--highlight-color);">
+
+        Benevolence became a mask for forced dispossession.
+
+      </p>
+
+      <button class="popup-close" aria-label="Close">Close</button>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- BACKDROP -->
+
+  <div class="popup-backdrop" data-popup-backdrop hidden></div>
+
+
+
+  <aside class="notes">
+
+    <h3>?? Understanding This Slide</h3>
+
+    <p>
+
+      Jackson grounded removal in paternalist logic —
+
+      claiming it protected Native nations from destruction.
+
+      It softened the brutality of the policy in public eyes,
+
+      while directly enabling removal.
+
+    </p>
+
+
+
+    <h3>? Content Breakdown</h3>
+
+    <ul>
+
+      <li><strong>Land hunger:</strong> Clear farmland for white settlement</li>
+
+      <li><strong>Racial worldview:</strong> Native peoples infantilized, cast as wards</li>
+
+      <li><strong>Paternal spin:</strong> Removal framed as rescue, not coercion</li>
+
+      <li><strong>Partisan calculus:</strong> Helps Democratic frontier base</li>
+
+    </ul>
+
+
+
+    <h3>??? Synthesis</h3>
+
+    <p>
+
+      When domination is cast as protection, resistance becomes harder —
+
+      and cruelty hides behind “care.”
+
+    </p>
+
+
+
+    <h3>?? Historians Weigh In</h3>
+
+    <p>
+
+      Remini argues Jackson saw himself as a guardian, not a conqueror —
+
+      a belief that made his policy more resolute, not less.
+
+    </p>
+
+  </aside>
+
+</section>
+
+<section class="compact-sm fs-70">
+
+  <h2>Indian Removal Act (1830)</h2>
+
+
+
+  <div class="two-column">
+
+    <!-- LEFT: The Law -->
+
+    <div>
+
+      <div class="concept-box" style="margin-top:.25rem;">
+
+        <h3 style="margin-top:0;">The Law:</h3>
+
+        <ul>
+
+          <li>Stipulated exchange of Indian territory in East for lands west of Mississippi</li>
+
+          <li>United States would <strong>"forever secure and guaranty"</strong> new lands in West</li>
+
+          <li>Government would pay for lost homes and removal</li>
+
+          <li>Government would protect Indians from all threats</li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- RIGHT: The Vote -->
+
+    <div>
+
+      <div class="concept-box" style="background:var(--bg-warning); border-color:var(--warning-color);">
+
+        <h3 style="margin-top:0;">The Vote:</h3>
+
+        <ul>
+
+          <li>Passed by only 5 votes in House</li>
+
+          <li>Strong opposition, especially from northern representatives</li>
+
+          <li><strong>Shows removal was controversial even at the time</strong></li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <aside class="notes">
+
+    <div style="line-height:1.6; margin-bottom:1.2em; font-size:1.02em;">
+
+      <h3 style="margin:0 0 .4em 0;">?? Understanding This Slide</h3>
+
+      <p><strong>Main idea:</strong> Congress authorized exchange of lands west for eastern homelands, promising protection “forever”—a pledge quickly overtaken by expansion.</p>
+
+    </div>
+
+    <div style="line-height:1.6; margin-bottom:1.2em; font-size:1.02em;">
+
+      <h3 style="margin:0 0 .4em 0;">? Content Breakdown</h3>
+
+      <ul>
+
+        <li><strong>Statute:</strong> Legal framework for removals and treaty-making.</li>
+
+        <li><strong>Promises vs. practice:</strong> Guarantees eroded within decades.</li>
+
+        <li><strong>Vote margin:</strong> Passage was <em>narrow</em>—controversy existed at the time.</li>
+
+      </ul>
+
+    </div>
+
+    <div style="line-height:1.6; margin-bottom:1.2em; font-size:1.02em;">
+
+      <h3 style="margin:0 0 .4em 0;">??? Big Picture Synthesis</h3>
+
+      <p>Legality does not equal legitimacy. Narrow passage and broken guarantees reveal how contingent and contested the policy was.</p>
+
+    </div>
+
+    <div style="line-height:1.6; font-size:1.02em;">
+
+      <h3 style="margin:0 0 .4em 0;">?? Historians Weigh In</h3>
+
+      <h4 style="margin:.2em 0 .2em 0;"><em>Francis Paul Prucha,</em> <span style="white-space:nowrap;">*The Great Father*</span></h4>
+
+      <p>Prucha’s archival focus shows the gulf between statutory language and administrative reality.</p>
+
+    </div>
+
+  </aside>
+
+</section>
+
+
+	<section class="compact-sm fs-70">
+
+  <h2>The Treaty of New Echota (1835)</h2>
+
+
+
+  <div class="two-column">
+
+    <!-- Left Column: Who Signed -->
+
+    <div>
+
+      <h3>Who Signed:</h3>
+
+      <ul>
+
+        <li><strong>"Treaty Party"</strong> — Major Ridge, John Ridge, Elias Boudinot</li>
+
+        <li>Represented ~<strong>500 of 17,000 Cherokees</strong> (~3%)</li>
+
+        <li><strong>Principal Chief John Ross</strong> + elected Cherokee gov't opposed</li>
+
+      </ul>
+
+    </div>
+
+
+
+    <!-- Right Column: Treaty Terms -->
+
+    <div>
+
+      <h3>The Deal:</h3>
+
+      <ul>
+
+        <li>Cede all lands east of the Mississippi</li>
+
+        <li>Receive <strong>$5 million</strong></li>
+
+        <li>Land in “Indian Territory” (Oklahoma)</li>
+
+        <li>U.S. promises land will be theirs <strong>“forever”</strong></li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- Single-line opposition box -->
+
+  <div class="concept-box" style="margin-top:1em;">
+
+    <strong>Opposition:</strong> 15,000 Cherokees (˜88%) petitioned Congress — declaring this treaty illegitimate and unauthorized
+
+  </div>
+
+
+
+  <aside class="notes">
+
+    <h3>?? Key Insight</h3>
+
+    <p>
+
+      A tiny minority signed; the overwhelming Cherokee majority rejected the treaty as illegitimate.
+
+      This was not consent — it was a faction leveraged against a nation.
+
+    </p>
+
+
+
+    <h3>?? Historiography</h3>
+
+    <p>
+
+      Perdue & Green stress that U.S. officials knowingly empowered a small, unrepresentative faction to force removal.
+
+      The Senate ratified by a single vote — legality stretched over democratic failure.
+
+    </p>
+
+  </aside>
+
+</section>
+
+
+
+
+	
+<section class="compact-sm fs-75">
+
+  <h2>Treaty of New Echota: Aftermath</h2>
+
+
+
+  <div class="concept-box">
+
+    <h3>Senate Ratification:</h3>
+
+    <ul>
+
+      <li>May 1836 — Ratified by <strong>one vote</strong></li>
+
+      <li>Legal — but not legitimate</li>
+
+    </ul>
+
+  </div>
+
+
+
+  <div class="warning-box" style="margin-top:1rem;">
+
+    <h3>The Price Paid:</h3>
+
+    <ul>
+
+      <li><strong>1839:</strong> Major Ridge, John Ridge, Elias Boudinot assassinated</li>
+
+      <li>Executed by Cherokee for treason against the nation</li>
+
+      <li>Internal justice ? internal tragedy</li>
+
+    </ul>
+
+  </div>
+
+
+
+  <aside class="notes">
+
+    <h3>?? Interpretation</h3>
+
+    <p>
+
+      Ratification by a single vote signals deep national division. The assassinations mark how violently 
+
+      contested “consent” and legitimacy were inside the Cherokee Nation.
+
+    </p>
+
+
+
+    <h3>??? Big Picture</h3>
+
+    <p>
+
+      A treaty can be constitutional and still be coercive. The state recognized a faction because 
+
+      recognizing the majority would have meant respecting Cherokee sovereignty.
+
+    </p>
+
+  </aside>
+
+</section>
+
+<section class="compact-sm fs-75">
+
+  <h2>The Trail of Tears (1838–1839)</h2>
+
+
+
+  <div class="two-column">
+
+    <!-- LEFT COLUMN -->
+
+    <div>
+
+      <h3>Forced Removal Begins:</h3>
+
+      <ul>
+
+        <li>~16,000 Cherokees rounded up by U.S. Army</li>
+
+        <li>Held in stockades before departure</li>
+
+        <li>Removal executed under Van Buren (Jackson’s policy)</li>
+
+      </ul>
+
+    </div>
+
+
+
+    <!-- RIGHT COLUMN -->
+
+    <div>
+
+      <h3>The March:</h3>
+
+      <ul>
+
+        <li>~1,000-mile journey to "Indian Territory"</li>
+
+        <li>Traveled mostly on foot through harsh winter</li>
+
+        <li>~4,000 die from disease, exposure, starvation</li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="concept-box" style="margin-top:1.2em;">
+
+    The Trail of Tears = forced relocation, mass death, and destruction of homeland ties.
+
+    Next: How historians interpret this as <strong>ethnic cleansing</strong>.
+
+  </div>
+
+
+
+  <aside class="notes">
+
+    <h3>?? Context for Lecture</h3>
+
+    <p>
+
+      This slide situates the forced march as the operational phase of federal removal policy. 
+
+      Students have the documentary for eyewitness stories and suffering — this frame shows scale, 
+
+      state authority, and lethal conditions without dramatizing over the film.
+
+    </p>
+
+
+
+    <h3>? Key Teaching Points</h3>
+
+    <ul>
+
+      <li>Removal was military-enforced and involuntary.</li>
+
+      <li>Conditions reflect administrative indifference to Indigenous life.</li>
+
+      <li>Mortality ~25% — catastrophic population loss.</li>
+
+      <li>Policy continuity: Jackson sets it; Van Buren carries it out.</li>
+
+    </ul>
+
+
+
+    <h3>??? Interpretive Note</h3>
+
+    <p>
+
+      This march wasn’t an unfortunate accident — it was the predictable outcome of
+
+      state-planned displacement. The terminology shift (“migration” vs “ethnic cleansing”) matters.
+
+    </p>
+
+
+
+    <h3>?? Historians</h3>
+
+    <p>
+
+      Perdue & Green emphasize bureaucratic violence and the way the federal state framed coercion 
+
+      as legality and inevitability rather than choice.
+
+    </p>
+
+  </aside>
+
+</section>
+<section class="compact-sm fs-70">
+
+  <h2>Defining Ethnic Cleansing</h2>
+
+  <h3>What It Means:</h3>
+
+  <p><strong>Ethnic cleansing</strong> is the deliberate, organized removal of an ethnic or religious group
+
+     from a territory to create a homogeneous population.</p>
+
+
+
+  <div class="concept-box">
+
+    <h3>Core Elements:</h3>
+
+    <ol>
+
+      <li><strong>Forced displacement</strong> — not voluntary migration</li>
+
+      <li><strong>Goal:</strong> Create ethnically "pure" or “orderly” territory</li>
+
+      <li><strong>Systematic policy</strong> — planned and administered by authority</li>
+
+      <li><strong>Coercion and violence</strong> — intimidation, imprisonment, or death</li>
+
+      <li><strong>Destruction</strong> — of homes, religion, and memory</li>
+
+    </ol>
+
+  </div>
+
+
+
+  
+
+  <aside class="notes">
+
+    <h3>?? Understanding This Slide</h3>
+
+    <p>
+
+      Ethnic cleansing lies on a continuum of state violence—short of genocide but often inseparable from it.
+
+      It’s not spontaneous hatred; it’s policy designed to remove an “undesirable” group while preserving
+
+      territory, resources, and hierarchy.
+
+    </p>
+
+	  <div class="emphasis">
+
+
+
+    <strong>Distinction:</strong> <br>
+
+
+
+    <strong>Genocide</strong> aims to destroy a people.<br>
+
+
+
+    <strong>Ethnic cleansing</strong> aims to expel them.
+
+
+
+  </div>
+
+
+
+
+
+
+    <h3>?? Historians Weigh In</h3>
+
+    <p>
+
+      The term was coined during the 1990s Balkan Wars but describes patterns that appear throughout
+
+      the modern era—from the Highland Clearances to the Armenian and Rohingya expulsions.
+
+    </p>
+
+  </aside>
+
+</section>
+
+
+<section class="compact-sm fs-70">
+
+  <h2>Ethnic Cleansing Across History</h2>
+
+
+
+  <div class="two-column">
+
+    <!-- LEFT COLUMN: GLOBAL EXAMPLES -->
+
+    <div>
+
+      <h3>Modern Examples:</h3>
+
+      <ul>
+
+        <li>
+
+          <a class="popup-trigger" data-popup="popup-balkans">Balkans (1990s)</a>
+
+        </li>
+
+        <li>
+
+          <a class="popup-trigger" data-popup="popup-palestine">Palestine (1948)</a>
+
+        </li>
+
+        <li>
+
+          <a class="popup-trigger" data-popup="popup-jews-arabworld">Jewish Expulsions from Arab States (1948–1967)</a>
+
+        </li>
+
+      </ul>
+
+    </div>
+
+
+
+    <!-- RIGHT COLUMN: STRUCTURAL FEATURES -->
+
+    <div>
+
+      <h3>Shared Features:</h3>
+
+      <ul>
+
+        <li>Use of state law and bureaucracy to force removal</li>
+
+        <li>Framed as "orderly relocation" or “necessary security”</li>
+
+        <li>Often presented as humanitarian protection</li>
+
+        <li>Destruction of land ties, heritage, and political identity</li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- POPUPS -->
+
+
+
+  <!-- Balkans -->
+
+  <div class="popup" id="popup-balkans" role="dialog" hidden>
+
+    <div class="popup-card">
+
+      <h3>Balkans (1990s)</h3>
+
+      <p>Forced removal and mass expulsions during the breakup of Yugoslavia to create ethnically-homogeneous territories.</p>
+
+      <button class="popup-close">Close</button>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- Palestine -->
+
+  <div class="popup" id="popup-palestine" role="dialog" hidden>
+
+    <div class="popup-card">
+
+      <h3>Palestine (1948)</h3>
+
+      <p>Mass displacement of ~700,000 Palestinian Arabs during creation of Israel — mix of flight, panic from war, and forced expulsions.</p>
+
+      <button class="popup-close">Close</button>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- Jewish refugees from Arab countries -->
+
+  <div class="popup" id="popup-jews-arabworld" role="dialog" hidden>
+
+    <div class="popup-card">
+
+      <h3>Jews from Arab States (1948–1967)</h3>
+
+      <p>Expulsion, confiscation of property, and pressure campaigns leading to migration of ~800,000 Jews from Arab nations.</p>
+
+      <button class="popup-close">Close</button>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- BACKDROP -->
+
+  <div class="popup-backdrop" data-popup-backdrop hidden></div>
+
+
+
+  <!-- NOTES -->
+
+  <aside class="notes">
+
+    <h3>Teaching Notes</h3>
+
+    <p>
+
+      We intentionally excluded <strong>Armenia (1915)</strong> and <strong>Nazi Europe (1939–45)</strong> from the slide because both are classified primarily as <em>genocide</em>, not just ethnic cleansing.  
+
+      <br><br>
+
+      They belong in discussion because they demonstrate how ethnic cleansing can escalate to genocide — but they are handled in the notes to maintain definitional clarity.
+
+    </p>
+
+
+
+    <p>
+
+      Sources cross-referenced with <strong>grokipedia.com</strong> to ensure neutral and academically defensible descriptions.
+
+    </p>
+
+
+
+    <p>
+
+      Pedagogical goal: show students that removal in U.S. history aligns with a broader global pattern — states forcibly re-shaping population geography for demographic, political, and ideological aims.
+
+    </p>
+
+  </aside>
+
+</section>
+
+
+	<section class="compact-sm fs-75">
+
+  <h2>Indian Removal as Ethnic Cleansing</h2>
+
+
+
+  <div class="two-column">
+
+    <!-- LEFT COLUMN -->
+
+    <div>
+
+      <h3>Policy in Practice:</h3>
+
+      <ul>
+
+        <li>Government planned and administered mass removals (1830–1850s)</li>
+
+        <li>Used treaties, military force, and legislation to expel Native nations</li>
+
+        <li>Goal: open land for white settlement and cotton cultivation</li>
+
+        <li>Language of “protection” masked deliberate territorial redesign</li>
+
+      </ul>
+
+    </div>
+
+
+
+    <!-- RIGHT COLUMN -->
+
+    <div>
+
+      <h3>What Makes It Ethnic Cleansing:</h3>
+
+      <ul>
+
+        <li><strong>Targeted by ethnicity:</strong> all Native nations in the Southeast</li>
+
+        <li><strong>Compelled under force:</strong> imprisonment, marches, and death</li>
+
+        <li><strong>Erasure of homeland identity:</strong> renaming, redistribution, myth of “vacant land”</li>
+
+        <li><strong>Result:</strong> removal, not coexistence — a “clean” map for settlers</li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+
+  <aside class="notes">
+
+    <h3>?? Lecture Context</h3>
+
+    <p>
+
+      When historians label Indian Removal as ethnic cleansing, they emphasize policy intent and
+
+      administrative design rather than wartime chaos.
+
+      The U.S. state mobilized military, legislative, and ideological tools to remove a defined population
+
+      and transfer their land — the core definition of ethnic cleansing.
+
+    </p>
+
+
+
+    <h3>?? Historiography</h3>
+
+    <ul>
+
+      <li><strong>Theda Perdue & Michael Green:</strong> Removal policy as “legalized dispossession.”</li>
+
+      <li><strong>David Stannard,</strong> <em>American Holocaust:</em> situates it within colonial genocide continuum.</li>
+
+      <li><strong>Patrick Wolfe:</strong> Defines settler colonialism as a “structure, not an event” — 
+
+      removal is the system working as designed.</li>
+
+    </ul>
+
+
+
+    <h3>??? Synthesis</h3>
+
+    <p>
+
+      Ethnic cleansing reframes Indian Removal from national tragedy to deliberate 
+
+      exercise of racialized state power. Students should connect this to broader logics of expansion, 
+
+      profit, and national identity formation.
+
+    </p>
+
+  </aside>
+
+</section>
+
+	<section class="compact-sm fs-75" data-auto-animate>
+
+  <h2>Flashcard 1</h2>
+
+  <div class="flip-stage">
+
+    <div class="flip-card" data-id="fc1" style="transform: rotateY(0deg);">
+
+      <div class="flip-face flip-front">
+
+        <h3>1) Forced Displacement?</h3>
+
+        <p class="flip-q">Were Native nations <em>forcibly</em> removed (vs. voluntary migration)?</p>
+
+        <p class="flip-instr">Discuss first. Advance to flip.</p>
+
+      </div>
+
+      <div class="flip-face flip-back">
+
+        <!-- Back is hidden on this slide; will flip in the next slide -->
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <aside class="notes">
+
+    Prompt: Ask for 1–2 student examples of coercion they recall (stockades, armed escorts).
+
+  </aside>
+
+</section>
+
+
+
+<!-- FLASHCARD 1 — BACK (auto-animates + flips) -->
+
+<section class="compact-sm fs-75" data-auto-animate>
+
+  <h2>Flashcard 1</h2>
+
+  <div class="flip-stage">
+
+    <div class="flip-card" data-id="fc1" style="transform: rotateY(180deg);">
+
+      <div class="flip-face flip-front">
+
+        <h3>1) Forced Displacement?</h3>
+
+        <p class="flip-q">Discussion side (front)</p>
+
+      </div>
+
+      <div class="flip-face flip-back">
+
+        <h3>Answer: <span class="flip-ans-yes">YES</span></h3>
+
+        <ul>
+
+          <li>~60,000–100,000 people removed from the Southeast</li>
+
+          <li>Army/militia round-ups; stockade camps prior to departure</li>
+
+          <li>Those who hid were hunted, jailed, or forced out</li>
+
+          <li>Marches conducted under compulsion, not choice</li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <aside class="notes">
+
+    Connect to sources describing stockade conditions and forced columns under guard.
+
+  </aside>
+
+</section>
+
+
+
+<!-- FLASHCARD 2 — FRONT -->
+
+<section class="compact-sm fs-75" data-auto-animate>
+
+  <h2>Flashcard 2</h2>
+
+  <div class="flip-stage">
+
+    <div class="flip-card" data-id="fc2" style="transform: rotateY(0deg);">
+
+      <div class="flip-face flip-front">
+
+        <h3>2) Goal: Ethnic Homogeneity?</h3>
+
+        <p class="flip-q">Was the aim to clear the East for a single (white) polity?</p>
+
+        <p class="flip-instr">Discuss first. Advance to flip.</p>
+
+      </div>
+
+      <div class="flip-face flip-back"></div>
+
+    </div>
+
+  </div>
+
+  <aside class="notes">
+
+    Guide: “What language in laws/treaties reflects a clearing logic?”
+
+  </aside>
+
+</section>
+
+
+
+<!-- FLASHCARD 2 — BACK -->
+
+<section class="compact-sm fs-75" data-auto-animate>
+
+  <h2>Flashcard 2</h2>
+
+  <div class="flip-stage">
+
+    <div class="flip-card" data-id="fc2" style="transform: rotateY(180deg);">
+
+      <div class="flip-face flip-front">
+
+        <h3>2) Goal: Ethnic Homogeneity?</h3>
+
+        <p class="flip-q">Discussion side (front)</p>
+
+      </div>
+
+      <div class="flip-face flip-back">
+
+        <h3>Answer: <span class="flip-ans-yes">YES</span></h3>
+
+        <ul>
+
+          <li>Policy intent: “remove all Indians” east of the Mississippi</li>
+
+          <li>Georgia’s extension laws barred Native jurisdiction or presence</li>
+
+          <li>Creation of an “Indian Territory” to segregate Native nations</li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <aside class="notes">
+
+    Tie to the “dual map” of white states vs. Indian Territory; emphasize territorial engineering.
+
+  </aside>
+
+</section>
+
+
+
+<!-- FLASHCARD 3 — FRONT -->
+
+<section class="compact-sm fs-75" data-auto-animate>
+
+  <h2>Flashcard 3</h2>
+
+  <div class="flip-stage">
+
+    <div class="flip-card" data-id="fc3" style="transform: rotateY(0deg);">
+
+      <div class="flip-face flip-front">
+
+        <h3>3) Systematic Policy?</h3>
+
+        <p class="flip-q">Was removal coordinated by statute, treaties, and the military?</p>
+
+        <p class="flip-instr">Discuss first. Advance to flip.</p>
+
+      </div>
+
+      <div class="flip-face flip-back"></div>
+
+    </div>
+
+  </div>
+
+  <aside class="notes">
+
+    Nudge: “Which branch did what? Where do treaties fit?”
+
+  </aside>
+
+</section>
+
+
+
+<!-- FLASHCARD 3 — BACK -->
+
+<section class="compact-sm fs-75" data-auto-animate>
+
+  <h2>Flashcard 3</h2>
+
+  <div class="flip-stage">
+
+    <div class="flip-card" data-id="fc3" style="transform: rotateY(180deg);">
+
+      <div class="flip-face flip-front">
+
+        <h3>3) Systematic Policy?</h3>
+
+        <p class="flip-q">Discussion side (front)</p>
+
+      </div>
+
+      <div class="flip-face flip-back">
+
+        <h3>Answer: <span class="flip-ans-yes">YES</span></h3>
+
+        <ul>
+
+          <li><strong>Indian Removal Act (1830)</strong> — federal authorization</li>
+
+          <li><strong>70+ treaties</strong> (1830–1842) operationalized removals</li>
+
+          <li>Army coordination; Gen. Winfield Scott deployed ~7,000 troops</li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <aside class="notes">
+
+    Summarize the paper trail: statute ? treaties ? military execution.
+
+  </aside>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- SLIDE: Building the Case — Systematic Policy and Forced Displacement (with fragments) -->
+
+<section class="compact-sm fs-75">
+
+  <h2>Building the Case: Systematic Policy and Forced Displacement</h2>
+
+
+
+  <h3>Let's Apply the Framework Systematically:</h3>
+
+
+
+  <div class="concept-box">
+
+    <h3>1. Was it Forced Displacement?</h3>
+
+    <p class="fragment" style="color:var(--success-color);font-weight:bold;font-size:1.2em">? YES</p>
+
+    <ul>
+
+      <li class="fragment">60,000–100,000 people forcibly removed from the Southeast</li>
+
+      <li class="fragment">Military force used when tribes resisted</li>
+
+      <li class="fragment">Those who tried to stay were hunted down and imprisoned</li>
+
+      <li class="fragment">Not voluntary “migration” — it was coerced removal</li>
+
+    </ul>
+
+  </div>
+
+
+
+  <div class="concept-box">
+
+    <h3>2. Was the Goal Ethnic Homogeneity?</h3>
+
+    <p class="fragment" style="color:var(--success-color);font-weight:bold;font-size:1.2em">? YES</p>
+
+    <ul>
+
+      <li class="fragment">Explicit goal: clear all Indians from east of the Mississippi</li>
+
+      <li class="fragment">Create “white” states in the East and “Indian Territory” in the West</li>
+
+      <li class="fragment">Georgia’s Extension Laws: no Indians could remain under state jurisdiction</li>
+
+    </ul>
+
+  </div>
+
+
+
+  <div class="concept-box">
+
+    <h3>3. Was it Systematic Policy?</h3>
+
+    <p class="fragment" style="color:var(--success-color);font-weight:bold;font-size:1.2em">? YES</p>
+
+    <ul>
+
+      <li class="fragment"><span class="key-term">Indian Removal Act (1830)</span> — federal legislative authorization</li>
+
+      <li class="fragment"><strong>70+ removal treaties</strong> signed 1830–1842</li>
+
+      <li class="fragment">Coordinated action between federal government, states, and the military</li>
+
+      <li class="fragment"><strong>Gen. Winfield Scott commanded ~7,000 troops</strong> for the Cherokee removal</li>
+
+    </ul>
+
+  </div>
+
+
+
+  <aside class="notes">
+
+    <div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;">
+
+      <h3 style="margin:0 0 .4em 0;">?? Understanding This Slide</h3>
+
+      <p><strong>Main idea:</strong> The <strong>five-part test</strong> begins: statutory authorization, coordination, and coercion demonstrate policy design — not accident.</p>
+
+    </div>
+
+    <div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;">
+
+      <h3 style="margin:0 0 .4em 0;">? Content Breakdown</h3>
+
+      <ul>
+
+        <li><strong>Forced nature:</strong> Military collection, imprisonment, and compelled marches show compulsion.</li>
+
+        <li><strong>Territorial aim:</strong> “Clear the East” while designating “Indian Territory.”</li>
+
+        <li><strong>Systematic apparatus:</strong> Federal acts, dozens of treaties, and army oversight.</li>
+
+      </ul>
+
+    </div>
+
+    <div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;">
+
+      <h3 style="margin:0 0 .4em 0;">??? Big Picture Synthesis</h3>
+
+      <p>When intention, instruments, and outcomes align, the policy logic is unmistakable. This meets the structural criteria.</p>
+
+    </div>
+
+    <div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;">
+
+      <h3 style="margin:0 0 .4em 0;">?? Historians Weigh In</h3>
+
+      <h4 style="margin:.2em 0 .2em 0;"><em>Francis Paul Prucha,</em> <span style="white-space:nowrap;">*The Great Father*</span></h4>
+
+      <p>Prucha’s documentation of treaties and administration provides the paper trail for “systematic policy.”</p>
+
+    </div>
+
+  </aside>
+
+</section>
+
+
+
+<!-- SLIDE: Building the Case — Violence and Community Destruction (with fragments) -->
+
+<section class="compact-sm fs-75">
+
+  <h2>Building the Case: Violence and Community Destruction</h2>
+
+
+
+  <div class="concept-box">
+
+    <h3>4. Was Violence/Coercion Used?</h3>
+
+    <p class="fragment" style="color:var(--success-color);font-weight:bold;font-size:1.2em">? YES</p>
+
+    <ul>
+
+      <li class="fragment">Georgia militia harassment and intimidation</li>
+
+      <li class="fragment"><strong>Stockade camps:</strong> families imprisoned prior to removal</li>
+
+      <li class="fragment">Forced marches with inadequate food, shelter, and medicine</li>
+
+      <li class="fragment">Those who resisted were hunted, killed, or imprisoned</li>
+
+      <li class="fragment">Winter marches deliberately scheduled (e.g., Choctaw)</li>
+
+    </ul>
+
+  </div>
+
+
+
+  <div class="concept-box">
+
+    <h3>5. Was There Community Destruction?</h3>
+
+    <p class="fragment" style="color:var(--success-color);font-weight:bold;font-size:1.2em">? YES</p>
+
+    <ul>
+
+      <li class="fragment">Homes burned; farms confiscated</li>
+
+      <li class="fragment">Cherokee capital (New Echota) destroyed</li>
+
+      <li class="fragment">Burial grounds desecrated; sacred sites lost</li>
+
+      <li class="fragment">Churches, schools, and businesses abandoned</li>
+
+      <li class="fragment"><strong>Property worth $15–20 million confiscated</strong> (Cherokee alone)</li>
+
+    </ul>
+
+  </div>
+
+
+
+  <div class="warning-box fragment" style="border-color:var(--success-color)">
+
+    <h3 style="color:var(--success-color)">All Five Elements Present</h3>
+
+    <p class="fragment" style="font-size:1.2em;font-weight:bold">? This meets the definition of <em>ethnic cleansing</em></p>
+
+  </div>
+
+
+
+  <aside class="notes">
+
+    <div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;">
+
+      <h3 style="margin:0 0 .4em 0;">?? Understanding This Slide</h3>
+
+      <p><strong>Main idea:</strong> Coercion escalated into widespread <strong>violence</strong> and <strong>community destruction</strong> — from stockades to scorched homes.</p>
+
+    </div>
+
+    <div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;">
+
+      <h3 style="margin:0 0 .4em 0;">? Content Breakdown</h3>
+
+      <ul>
+
+        <li><strong>Coercion:</strong> Militias and army detachments; winter marches; inadequate provisions.</li>
+
+        <li><strong>Destruction:</strong> Homes, farms, sacred sites, and civic institutions wiped out.</li>
+
+        <li><strong>Material losses:</strong> Confiscations measured in contemporary valuations.</li>
+
+      </ul>
+
+    </div>
+
+    <div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;">
+
+      <h3 style="margin:0 0 .4em 0;">??? Big Picture Synthesis</h3>
+
+      <p>These weren’t incidental harms; they were baked into execution. The social fabric was targeted alongside territory.</p>
+
+    </div>
+
+    <div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;">
+
+      <h3 style="margin:0 0 .4em 0;">?? Historians Weigh In</h3>
+
+      <h4 style="margin:.2em 0 .2em 0;"><em>Theda Perdue &amp; Michael D. Green,</em> <span style="white-space:nowrap;">*The Cherokee Nation and the Trail of Tears*</span></h4>
+
+      <p>They trace how logistical choices — timing, provisioning, routes — amplified suffering and mortality.</p>
+
+    </div>
+
+  </aside>
+
+</section>
+
+
+
+	
+	<section class="compact-sm fs-75">
+<h2>The Human Cost: Mortality Statistics</h2>
+<h3>The Numbers Tell the Story:</h3>
+<table>
+<thead>
+<tr>
+<th>Tribe</th>
+<th>Number Removed</th>
+<th>Deaths</th>
+<th>Mortality Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cherokee</strong></td>
+<td>17,000</td>
+<td>4,000-8,000</td>
+<td><strong>23-47%</strong></td>
+</tr>
+<tr>
+<td><strong>Creek</strong></td>
+<td>15,000</td>
+<td>3,500</td>
+<td><strong>23%</strong></td>
+</tr>
+<tr>
+<td><strong>Choctaw</strong></td>
+<td>15,000-20,000</td>
+<td>2,500-6,000</td>
+<td><strong>17-30%</strong></td>
+</tr>
+<tr>
+<td><strong>Chickasaw</strong></td>
+<td>6,000</td>
+<td>~600</td>
+<td><strong>~10%</strong></td>
+</tr>
+<tr>
+<td><strong>Seminole</strong></td>
+<td>3,000</td>
+<td>Unknown</td>
+<td>Many died resisting</td>
+</tr>
+</tbody>
+</table>
+<div class="warning-box">
+<h3>Total: ~60,000 removed; ~15,000-25,000 died (20-25% overall mortality)</h3>
+<p><strong>For Comparison:</strong></p>
+<ul>
+<li><strong>Transatlantic Middle Passage mortality: ~15%</strong></li>
+<li style="color:var(--highlight-color);font-weight:bold;font-size:1.1em">Cherokee removal mortality was HIGHER than the slave trade</li>
+</ul>
+</div>
+<h3>Causes of Death:</h3>
+<ul>
+<li>Exposure, disease, starvation during forced marches</li>
+<li>Inadequate provisions provided by government</li>
+<li>Deliberate scheduling in winter months</li>
+<li>Overcrowded, unsanitary stockade camps</li>
+</ul>
+<aside class="notes"><div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;"><h3 style="margin:0 0 .4em 0;">📖 Understanding This Slide</h3>
+<p><strong>Main idea:</strong> Mortality rates across removals were devastating—evidence for the <strong>scale</strong> of harm and the <strong>failure</strong> of promised protection.</p>
+</div><div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;"><h3 style="margin:0 0 .4em 0;">⚡ Content Breakdown</h3>
+<ul>
+<li><strong>Rates:</strong> Cherokee ~23–47%; Creek ~23%; Choctaw ~17–30%; others significant.</li>
+<li><strong>Causes:</strong> Exposure, disease, starvation, and poor logistics—not inevitable.</li>
+<li><strong>Inference:</strong> Administrative choices directly affected death rates.</li>
+</ul>
+</div><div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;"><h3 style="margin:0 0 .4em 0;">🏛️ Big Picture Synthesis</h3>
+<p>Numbers translate policy to human cost. Once you see the rates, claims of “humane removal” collapse.</p>
+</div><div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;"><h3 style="margin:0 0 .4em 0;">🎓 Historians Weigh In</h3>
+<h4 style="margin:.2em 0 .2em 0;"><em>Francis Paul Prucha</em></h4>
+<p>Prucha’s quantitative summaries help anchor interpretation in contemporary reports and federal records.</p>
+</div>
+		</aside>
+	</section>
+
+	<section class="compact-sm fs-75">
+<h2>Why "Ethnic Cleansing" Rather Than "Removal"?</h2>
+<div class="two-column" style="grid-template-columns:1fr 1fr">
+<div>
+<h3>The Problem with "Removal":</h3>
+<ul>
+<li>Sounds voluntary or bureaucratic</li>
+<li>Sanitizes the violence</li>
+<li>Hides the intent</li>
+<li>Makes it seem like policy, not atrocity</li>
+</ul>
+</div>
+<div>
+<h3>Why "Ethnic Cleansing" Is Accurate:</h3>
+<ul style="color:var(--success-color);font-weight:bold">
+<li>✓ Describes racial ideology</li>
+<li>✓ Describes territorial goal</li>
+<li>✓ Describes systematic violence</li>
+<li>✓ Places U.S. in global context</li>
+</ul>
+</div>
+</div>
+<div class="concept-box" style="margin-top:1em">
+<h3>1. Describes the Racial Ideology:</h3>
+<ul>
+<li>Indians seen as racially incompatible with white civilization</li>
+<li>No amount of "civilization" would change white attitudes</li>
+<li>Goal was racial purity of eastern territory</li>
+</ul>
+</div>
+<div class="concept-box">
+<h3>2. Describes the Territorial Goal:</h3>
+<ul>
+<li>Create homogeneous white settler state east of Mississippi</li>
+<li>Indians must be completely removed from region</li>
+<li>Not about behavior or culture—about race and land</li>
+</ul>
+</div>
+<div class="concept-box">
+<h3>3. Describes the Systematic Violence:</h3>
+<ul>
+<li>Not random, accidental, or unintended</li>
+<li>Coordinated state policy with military enforcement</li>
+<li>Resulted in mass death (20-25% mortality)</li>
+</ul>
+</div>
+<aside class="notes"><div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;"><h3 style="margin:0 0 .4em 0;">📖 Understanding This Slide</h3>
+<p><strong>Main idea:</strong> Terminology should match <strong>intent</strong>, <strong>means</strong>, and <strong>outcomes</strong>—not sanitize them.</p>
+</div><div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;"><h3 style="margin:0 0 .4em 0;">⚡ Content Breakdown</h3>
+<ul>
+<li><strong>“Removal” language:</strong> Bureaucratic and euphemistic.</li>
+<li><strong>“Ethnic cleansing”:</strong> Captures racial ideology, territorial design, and systematic coercion.</li>
+<li><strong>Comparative framing:</strong> Places U.S. policy within global patterns without collapsing distinctions.</li>
+</ul>
+</div><div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;"><h3 style="margin:0 0 .4em 0;">🏛️ Big Picture Synthesis</h3>
+<p>Precise language clarifies civic memory and moral learning. It also sharpens students’ ability to assess 19th‑century state power critically.</p>
+</div><div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;"><h3 style="margin:0 0 .4em 0;">🎓 Historians Weigh In</h3>
+<h4 style="margin:.2em 0 .2em 0;"><em>Francis Paul Prucha</em></h4>
+<p>Prucha’s neutral archival stance allows later scholars to apply modern terminology while remaining grounded in the record.</p>
+</div>
+		</aside>
+	</section>
+
+	<section class="compact-sm fs-75">
+<h2>Historical Memory and Terminology</h2>
+<h3>Why Does Terminology Matter?</h3>
+<div class="two-column">
+<div class="warning-box">
+<h3>Traditional Language (Sanitizing):</h3>
+<ul>
+<li>"Indian Removal"</li>
+<li>"Relocation"</li>
+<li>"Migration"</li>
+<li>"Resettlement"</li>
+</ul>
+<p><strong>These Terms:</strong></p>
+<ul>
+<li>Normalize state violence</li>
+<li>Obscure human suffering</li>
+<li>Protect nationalist mythologies</li>
+</ul>
+</div>
+<div class="concept-box" style="border-color:var(--success-color)">
+<h3>Scholar's Language (Accurate):</h3>
+<ul>
+<li><strong>"Ethnic cleansing"</strong></li>
+<li><strong>"Forced displacement"</strong></li>
+<li><strong>"Systematic violence"</strong></li>
+<li><strong>"Mass death march"</strong></li>
+</ul>
+<p><strong>These Terms:</strong></p>
+<ul>
+<li>Acknowledge violence accurately</li>
+<li>Honor Indigenous memory</li>
+<li>Place U.S. in global context</li>
+<li>Recognize it as atrocity</li>
+</ul>
+</div>
+</div>
+<div class="emphasis" style="margin-top:1em">
+<h3>This Is Not "Presentism"—It's Historical Accuracy</h3>
+<p><strong>Recent Scholarship:</strong></p>
+<ul>
+<li>Claudio Saunt, <em>Unworthy Republic</em> (2020)</li>
+<li>Theda Perdue &amp; Michael Green, <em>Cherokee Nation and the Trail of Tears</em> (2007)</li>
+<li>Historians increasingly adopt "ethnic cleansing" framework</li>
+</ul>
+<p style="font-weight:bold;margin-top:1em">Using accurate terminology is part of honest historical reckoning</p>
+</div>
+<aside class="notes"><div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;"><h3 style="margin:0 0 .4em 0;">📖 Understanding This Slide</h3>
+<p><strong>Main idea:</strong> Language shapes memory. Choosing accurate terms resists mythmaking and centers accountable narratives.</p>
+</div><div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;"><h3 style="margin:0 0 .4em 0;">⚡ Content Breakdown</h3>
+<ul>
+<li><strong>Sanitizing terms:</strong> Make coercion sound administrative.</li>
+<li><strong>Scholarly terms:</strong> Name violence and policy directly.</li>
+<li><strong>Recent scholarship:</strong> Synthesizes evidence under clearer frameworks.</li>
+</ul>
+</div><div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;"><h3 style="margin:0 0 .4em 0;">🏛️ Big Picture Synthesis</h3>
+<p>This isn’t “presentism”; it’s method: align labels with evidence. That’s how historical argument matures.</p>
+</div><div style="line-height:1.6; margin-bottom:1.5em; font-size:1.02em;"><h3 style="margin:0 0 .4em 0;">🎓 Historians Weigh In</h3>
+<h4 style="margin:.2em 0 .2em 0;"><em>Francis Paul Prucha</em>; <em>Theda Perdue &amp; Michael D. Green</em></h4>
+<p>Across their work, careful documentation and clear categories help the public talk honestly about U.S. expansion.</p>
+</div></aside></section>
+
+</div>
+</div>
+	
+<!-- =========================
+Keep the following Reveal.JS Script
+========================= -->
+
+<!-- Reveal.js Core JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/notes/notes.min.js"></script>
+<!-- Initialize Reveal.js with Cinematic Mode Configuration -->
+<script>
+    Reveal.initialize({
+        hash: true,
+        transition: 'convex',
+        backgroundTransition: 'zoom',
+        transitionSpeed: 'slow',
+        controls: true,
+        controlsLayout: 'bottom-right',
+        progress: true,
+        slideNumber: 'c/t',
+        center: true,
+        width: 1280,
+        height: 720,   // virtual 16:9 slide size
+        margin: 0.04,
+        minScale: 0.2,
+        maxScale: 2.0,
+        plugins: [ RevealNotes ]
+    });
+	</script>
+	
+	<script>
+// Popup handling (place AFTER Reveal.initialize)
+(function () {
+  const backdrop = document.querySelector('[data-popup-backdrop]');
+
+  function openPopup(id, openerBtn) {
+    const pop = document.getElementById(id);
+    if (!pop) return;
+    pop.hidden = false;
+    pop.setAttribute('aria-hidden', 'false');
+    backdrop.hidden = false;
+
+    // remember opener for focus return
+    if (openerBtn) pop.dataset.opener = openerBtn;
+
+    // focus close button if present
+    const closeBtn = pop.querySelector('.popup-close');
+    if (closeBtn) closeBtn.focus();
+  }
+
+  function closePopup(pop) {
+    if (!pop) return;
+    pop.hidden = true;
+    pop.setAttribute('aria-hidden', 'true');
+
+    // if no other popups are open, hide backdrop
+    const anyOpen = !!document.querySelector('.popup:not([hidden])');
+    if (!anyOpen) backdrop.hidden = true;
+
+    // return focus to opener if we have it
+    const openerSelector = pop.dataset.opener;
+    if (openerSelector) {
+      const opener = document.querySelector(`.popup-trigger[data-popup="${pop.id}"]`);
+      if (opener) opener.focus();
+      delete pop.dataset.opener;
+    }
+  }
+
+  // Event delegation: works for all triggers in the deck
+  document.addEventListener('click', (e) => {
+    // open
+    const trigger = e.target.closest('.popup-trigger');
+    if (trigger && trigger.dataset.popup) {
+      openPopup(trigger.dataset.popup, trigger.dataset.popup);
+      return;
+    }
+    // close
+    if (e.target.matches('.popup-close')) {
+      const pop = e.target.closest('.popup');
+      closePopup(pop);
+      return;
+    }
+    // backdrop click closes all
+    if (e.target.hasAttribute('data-popup-backdrop')) {
+      document.querySelectorAll('.popup:not([hidden])').forEach(closePopup);
+    }
+  });
+
+  // ESC to close any open popup
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.popup:not([hidden])').forEach(closePopup);
+    }
+  });
+
+  // Close popups when changing slides (prevents “sticky” dialogs)
+  if (window.Reveal && Reveal.on) {
+    Reveal.on('slidechanged', () => {
+      document.querySelectorAll('.popup:not([hidden])').forEach(closePopup);
+      // also hide backdrop if it was left visible
+      backdrop.hidden = true;
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
+
+		
+		
+		
+		
+		
+

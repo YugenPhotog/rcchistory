@@ -1,0 +1,962 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Through the Lens of War - HIST 101</title>
+    
+    <!-- Reveal.js CSS from CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lora:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Sepia/Archival Palette */
+            --deep-brown: #2C1810;
+            --dark-sepia: #3D2914;
+            --medium-brown: #5C3D2E;
+            --cream: #F5E6D3;
+            --antique-white: #FAF0E6;
+            --muted-gold: #B8860B;
+            --aged-paper: #E8DCC8;
+            --slate-gray: #708090;
+            --blood-red: #8B0000;
+            --faded-blue: #4A5568;
+        }
+
+        .reveal {
+            font-family: 'Lora', serif;
+            font-size: 32px;
+            background: var(--deep-brown);
+        }
+
+        .reveal .slides {
+            text-align: left;
+        }
+
+        .reveal .slides section {
+            background: var(--deep-brown);
+        }
+
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: var(--cream);
+            text-transform: none;
+            text-align: center;
+        }
+
+        .reveal h1 { 
+            font-size: 2.8em; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .reveal h2 { 
+            font-size: 2em; 
+            color: var(--muted-gold);
+        }
+        .reveal h3 { 
+            font-size: 1.5em; 
+            color: var(--aged-paper);
+        }
+
+        .reveal p, .reveal li {
+            color: var(--cream);
+            line-height: 1.6;
+        }
+
+        .reveal ul {
+            margin-left: 1em;
+        }
+
+        .reveal li {
+            margin-bottom: 0.8em;
+        }
+
+        .reveal a {
+            color: var(--muted-gold);
+            text-decoration: underline;
+        }
+
+        .reveal a:hover {
+            color: var(--aged-paper);
+        }
+
+        /* Pop-up/Modal styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--aged-paper);
+            color: var(--deep-brown);
+            padding: 2em;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+            max-width: 70%;
+            max-height: 70%;
+            overflow-y: auto;
+            z-index: 1000;
+            border: 4px solid var(--medium-brown);
+        }
+
+        .popup.active { display: block; }
+
+        .popup h3 {
+            color: var(--deep-brown);
+            text-align: left;
+            margin-top: 0;
+        }
+
+        .popup p, .popup li {
+            color: var(--deep-brown);
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 2em;
+            cursor: pointer;
+            color: var(--medium-brown);
+        }
+
+        .popup-close:hover {
+            color: var(--blood-red);
+        }
+
+        .popup-trigger {
+            color: var(--muted-gold);
+            text-decoration: underline dotted;
+            cursor: pointer;
+            border-bottom: 2px dotted var(--muted-gold);
+        }
+
+        .popup-trigger:hover {
+            color: var(--aged-paper);
+            border-bottom-color: var(--aged-paper);
+        }
+
+        /* Image placeholder styling */
+        .img-placeholder {
+            background: var(--dark-sepia);
+            border: 3px dashed var(--medium-brown);
+            padding: 2em;
+            text-align: center;
+            color: var(--aged-paper);
+            font-style: italic;
+            border-radius: 8px;
+            margin: 1em auto;
+        }
+
+        /* Actual image styling */
+        .slide-image {
+            max-width: 90%;
+            max-height: 65vh;
+            margin: 0 auto;
+            display: block;
+            border: 4px solid var(--medium-brown);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+        }
+
+        .image-caption {
+            text-align: center;
+            font-style: italic;
+            color: var(--aged-paper);
+            font-size: 0.9em;
+            margin-top: 1em;
+        }
+
+        /* Key term styling */
+        .key-term {
+            color: var(--muted-gold);
+            font-weight: 600;
+        }
+
+        /* Primary source/quote styling */
+        .primary-source {
+            background: rgba(184, 134, 11, 0.15);
+            border-left: 5px solid var(--muted-gold);
+            padding: 1em 1.5em;
+            margin: 1em 0;
+            font-style: italic;
+        }
+
+        .source-attribution {
+            text-align: right;
+            font-size: 0.85em;
+            color: var(--aged-paper);
+            margin-top: 0.8em;
+            font-style: normal;
+        }
+
+        /* Key point box */
+        .key-point {
+            background: rgba(139, 0, 0, 0.2);
+            border: 2px solid var(--blood-red);
+            border-radius: 8px;
+            padding: 1em 1.5em;
+            margin: 1em 0;
+            text-align: center;
+        }
+
+        .key-point p {
+            margin: 0;
+            font-weight: 600;
+            color: var(--cream);
+        }
+
+        /* Core question styling */
+        .core-question {
+            font-size: 1.3em;
+            font-style: italic;
+            text-align: center;
+            color: var(--muted-gold);
+            padding: 1em;
+        }
+
+        /* Carte-de-visite grid */
+        .cdv-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1em;
+            margin: 1em auto;
+            max-width: 900px;
+        }
+
+        .cdv-placeholder {
+            background: var(--dark-sepia);
+            border: 2px solid var(--medium-brown);
+            padding: 1em;
+            text-align: center;
+            color: var(--aged-paper);
+            font-size: 0.7em;
+            aspect-ratio: 2.5/4;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Video placeholder */
+        .video-placeholder {
+            background: var(--dark-sepia);
+            border: 3px solid var(--medium-brown);
+            padding: 3em;
+            text-align: center;
+            color: var(--aged-paper);
+            border-radius: 8px;
+            margin: 1em auto;
+            max-width: 800px;
+        }
+
+        .video-placeholder::before {
+            content: "▶";
+            font-size: 3em;
+            display: block;
+            margin-bottom: 0.5em;
+            color: var(--muted-gold);
+        }
+
+        /* Study buddy notes styling */
+        .study-notes {
+            background: var(--aged-paper);
+            color: var(--deep-brown);
+            padding: 1.5em;
+            border-radius: 8px;
+            font-size: 0.85em;
+            line-height: 1.5;
+        }
+
+        .study-notes h4 {
+            color: var(--deep-brown);
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .study-notes p, .study-notes li {
+            color: var(--deep-brown);
+            margin-bottom: 0.5em;
+        }
+
+        .study-notes ul {
+            margin-left: 1.2em;
+            padding-left: 0;
+        }
+
+        /* Subtitle styling */
+        .subtitle {
+            font-style: italic;
+            color: var(--aged-paper);
+            font-size: 1.2em;
+            text-align: center;
+        }
+
+        /* Centered content */
+        .centered {
+            text-align: center;
+        }
+
+        /* Transition text */
+        .transition-text {
+            font-style: italic;
+            color: var(--slate-gray);
+            font-size: 0.95em;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- SLIDE 1: Title -->
+            <section>
+                <h1>Through the Lens of War</h1>
+                <p class="subtitle">Civil War Photography and the Making of Modern Memory</p>
+                <p class="centered" style="margin-top: 2em; color: var(--slate-gray);">HIST 101</p>
+                
+                <aside class="notes">
+                    <div class="study-notes">
+                        <h4>📚 Study Buddy Notes</h4>
+                        <p>This lecture explores how photography changed the way Americans experienced and remembered the Civil War. We'll look at how the camera created a new relationship between civilians and warfare—and why that relationship was more complicated than "showing the truth."</p>
+                        <h4>🎯 Learning Goals</h4>
+                        <ul>
+                            <li>Understand how photography technology shaped what could be shown</li>
+                            <li>Analyze the difference between "truth" and "framing"</li>
+                            <li>Recognize whose stories were told—and whose were left out</li>
+                        </ul>
+                    </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 2: Core Question -->
+            <section>
+                <h2>Core Question</h2>
+                <p class="core-question">How did photography change how Americans witnessed war and understood its cost?</p>
+                
+                <aside class="notes">
+                    <div class="study-notes">
+                        <h4>📚 Study Buddy Notes</h4>
+                        <p>Keep this question in mind throughout the lecture. We're not just asking "what did photographs show?" We're asking how the act of seeing—through this new technology—changed what Americans knew, felt, and believed about their war.</p>
+                        <p>By the end, you should be able to answer this question with specific examples and your own analysis.</p>
+                    </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 3: Opening Image - Harvest of Death -->
+            <section>
+                <img src="images/1324px-Timothy_H._O'Sullivan_(American_-_A_Harvest_of_Death_-_Google_Art_Project.jpg" alt="A Harvest of Death by Timothy O'Sullivan/Alexander Gardner, Gettysburg, July 1863" class="slide-image">
+                <p class="image-caption">Alexander Gardner, "A Harvest of Death," Gettysburg, July 1863</p>
+                
+                <aside class="notes">
+                    <div class="study-notes">
+                        <h4>📚 Study Buddy Notes</h4>
+                        <p>Look closely at this image—especially the face of the soldier in the foreground. His features are distorted: lips swollen, face bloated. This isn't artistic choice; it's decomposition. These bodies lay in July heat for days.</p>
+                        <p>A painter would have softened this. The camera couldn't—or rather, Gardner chose not to. This is what war looks like when there's no artist to make it noble.</p>
+                        <h4>🔍 Key Detail</h4>
+                        <p>The photographer is usually listed as Timothy O'Sullivan, who worked for Alexander Gardner. The image appeared in Gardner's <em>Photographic Sketch Book of the War</em> (1866).</p>
+                    </div>
+                </aside>
+            </section>
+
+                        <!-- SLIDE 4: Before Photography -->
+            <section>
+                <h2>Before Photography: War as Art</h2>
+                <p style="font-size: 1.3em; text-align: center; margin: 2em 0;">War existed through <span class="key-term">paintings, sketches, and words</span>—all filtered through artistic interpretation</p>
+                <p style="text-align: center; color: var(--aged-paper);">An artist chose what to include, what to omit, how to pose the figures, what expressions to give them.</p>
+                
+                <aside class="notes">
+                    <div class="study-notes">
+                        <h4>📚 Study Buddy Notes</h4>
+                        <p>Before 1839, if you wanted to know what a battle looked like, you had to rely on someone's painting or sketch. Even "realistic" battle paintings were composed for dramatic effect—heroic poses, clear sight lines, moral clarity.</p>
+                        <p>The next three slides show examples of how pre-photography war imagery worked. Pay attention to the staging, the drama, the way death is made noble.</p>
+                    </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 5: Washington Crossing the Delaware -->
+            <section>
+                <img src="images/pre-photo_war_paintings/1884px-Washington_Crossing_the_Delaware_by_Emanuel_Leutze,_MMA-NYC,_1851.jpg" alt="Washington Crossing the Delaware" class="slide-image">
+                <p class="image-caption"><em>Washington Crossing the Delaware</em><br>Emanuel Leutze, 1851</p>
+                
+                <aside class="notes">
+                    <div class="study-notes">
+                        <h4>📚 Study Buddy Notes</h4>
+                        <p>This is probably the most famous American war painting. It's also historically inaccurate in almost every detail:</p>
+                        <ul>
+                            <li>Wrong flag (the Stars and Stripes didn't exist yet in 1776)</li>
+                            <li>Wrong boat (too small for the Delaware crossing)</li>
+                            <li>Impossible ice conditions (not chunks like this)</li>
+                            <li>Washington standing heroically (he would have sat to avoid capsizing)</li>
+                        </ul>
+                        <p>Leutze painted this in 1851 to inspire German revolutionaries—it's about drama and heroism, not historical accuracy. That's how pre-photography war imagery worked.</p>
+                    </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 6: Death of General Warren -->
+            <section>
+                <img src="images/pre-photo_war_paintings/The_Death_of_General_Warren_at_the_Battle_of_Bunker's_Hill,_June_17,_1775.jpg" alt="The Death of General Warren at the Battle of Bunker's Hill" class="slide-image">
+                <p class="image-caption"><em>The Death of General Warren at the Battle of Bunker's Hill, June 17, 1775</em><br>John Trumbull, 1786</p>
+                
+                <aside class="notes">
+                    <div class="study-notes">
+                        <h4>📚 Study Buddy Notes</h4>
+                        <p>John Trumbull was an eyewitness to the Revolutionary War, but his paintings are still carefully staged for dramatic effect. Look at how Warren dies:</p>
+                        <ul>
+                            <li>Noble pose, reaching toward the sky</li>
+                            <li>Officers arranged in classical composition</li>
+                            <li>Clean uniform, dignified expression</li>
+                            <li>The battle becomes a theatrical scene</li>
+                        </ul>
+                        <p>Compare this to Gardner's photographs you saw earlier—bloated faces, distorted features, bodies sprawled in awkward positions. Death in reality vs. death as art.</p>
+                    </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 7: Death of General Wolfe -->
+            <section>
+                <img src="images/pre-photo_war_paintings/1620px-Benjamin_West_005.jpg" alt="The Death of General Wolfe" class="slide-image">
+                <p class="image-caption"><em>The Death of General Wolfe</em><br>Benjamin West, 1770</p>
+                
+                <aside class="notes">
+                    <div class="study-notes">
+                        <h4>📚 Study Buddy Notes</h4>
+                        <p>Benjamin West's painting of British General Wolfe dying at the Battle of Quebec (1759) established the template for heroic military death in art. Notice:</p>
+                        <ul>
+                            <li>Wolfe posed like Christ in a pietà</li>
+                            <li>Officers gathered around like apostles</li>
+                            <li>Dramatic lighting from above</li>
+                            <li>Death made sacred and beautiful</li>
+                        </ul>
+                        <p>This is how war was visualized for almost a century—as noble sacrifice, staged like religious painting. Photography would change everything.</p>
+                    </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 8: Photography's Promise -->
+            <section>
+                <h2>Then Came the Camera</h2>
+                <ul>
+                    <li>Photography promised <span class="key-term">mechanical reproduction</span>: the camera recorded what was there</li>
+                    <li>Radical idea: seeing could be separated from human judgment</li>
+                    <li>No artist to idealize, no painter to make death noble</li>
+                </ul>
+                <p class="transition-text" style="margin-top: 1.5em;">Or could it?</p>
+                
+                <aside class="notes">
+                    <div class="study-notes">
+                        <h4>📚 Study Buddy Notes</h4>
+                        <p>After seeing those three paintings, you understand what photography seemed to replace: artistic interpretation, dramatic staging, idealized death.</p>
+                        <p>The camera just recorded light hitting a plate. No interpretation, no idealization. The truth, mechanically captured.</p>
+                        <h4>🤔 Think About It</h4>
+                        <p>But is that really true? Someone still has to point the camera, choose the moment, decide what to include in the frame. Keep that tension in mind—it's central to the whole lecture. We'll come back to it when we talk about Gardner's staged sharpshooter.</p>
+                    </div>
+                </aside>
+            </section>
+
+                                    <!-- SLIDE 5: The Entrepreneurs -->
+            <section>
+                <h2>The Photographers</h2>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2em; margin: 2em 0;">
+                    <div style="text-align: center;">
+                        <img src="images/960px-Mathew_Brady_circa_1875_v2.png" alt="Mathew Brady" style="width: 280px; height: 280px; object-fit: cover; border-radius: 50%; border: 4px solid var(--medium-brown); box-shadow: 0 8px 30px rgba(0,0,0,0.5);">
+                        <h3 style="font-size: 1.2em; margin-top: 1em; color: var(--muted-gold);">Mathew Brady</h3>
+                        <p style="font-size: 0.9em;">Famous portraitist, financed teams, claimed credit</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="images/960px-Alexander_Gardner.jpg" alt="Alexander Gardner" style="width: 280px; height: 280px; object-fit: cover; border-radius: 50%; border: 4px solid var(--medium-brown); box-shadow: 0 8px 30px rgba(0,0,0,0.5);">
+                        <h3 style="font-size: 1.2em; margin-top: 1em; color: var(--muted-gold);">Alexander Gardner</h3>
+                        <p style="font-size: 0.9em;">Did the dangerous fieldwork</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="images/Timothy_H_O'Sullivan_by_F.G._Ludlow,_Carson_City,_c1871-74.jpg" alt="Timothy O'Sullivan" style="width: 280px; height: 280px; object-fit: cover; border-radius: 50%; border: 4px solid var(--medium-brown); box-shadow: 0 8px 30px rgba(0,0,0,0.5);">
+                        <h3 style="font-size: 1.2em; margin-top: 1em; color: var(--muted-gold);">Timothy O'Sullivan</h3>
+                        <p style="font-size: 0.9em;">Did the dangerous fieldwork</p>
+                    </div>
+                </div>
+                
+                <div class="key-point" style="margin-top: 2em;">
+                    <p>Photography was an industry, not just documentation</p>
+                </div>
+                
+                <aside class="notes">
+                    <div class="study-notes">
+                        <h4>📚 Study Buddy Notes</h4>
+                        <p>Mathew Brady was already the most famous photographer in America—he'd made portraits of presidents and celebrities. When war came, he saw opportunity: create a comprehensive visual record and sell it.</p>
+                        <p>Gardner and O'Sullivan hauled heavy equipment to battlefields, worked near combat, and developed images in portable darkrooms. Brady put his name on their work. Gardner eventually broke with Brady over this and published his own book, crediting individual photographers.</p>
+                        <h4>💡 Why This Matters</h4>
+                        <p>Understanding that these were commercial enterprises—not neutral documentation—helps explain the choices they made about what to photograph and how to present it.</p>
+                    </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 6: Technology's Limits -->
+            <section>
+                <h2>What the Camera Could—and Couldn't—Show</h2>
+                <ul>
+                    <li><span class="popup-trigger" onclick="togglePopup('wetplate-popup')">Wet-plate collodion</span> required <span class="key-term">5-15 second exposures</span></li>
+                    <li>You could photograph <span class="key-term">corpses</span>—they held still</li>
+                    <li>You could <em>not</em> photograph <span class="key-term">combat</span>—everything blurred</li>
+                </ul>
+                <p style="margin-top: 1.5em;">Civil War photography is a record of <span class="key-term">stillness</span>—which is why it feels so haunted.</p>
+                
+                <div id="wetplate-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('wetplate-popup')">&times;</span>
+                    <h3>Wet-Plate Collodion Process</h3>
+                    <p>The dominant photographic process of the 1850s-1880s. Here's how it worked:</p>
+                    <ul>
+                        <li>Coat a glass plate with collodion (a syrupy solution)</li>
+                        <li>Sensitize it with silver nitrate</li>
+                        <li>Expose while still wet (it lost sensitivity as it dried)</li>
+                        <li>Develop immediately in a portable darkroom</li>
+                    </ul>
+                    <p>Imagine doing this in July heat, under artillery fire, surrounded by decomposing bodies. The physical demands were extraordinary.</p>
+                </div>
+                
+                <aside class="notes">
+                    <div class="study-notes">
+                        <h4>📚 Study Buddy Notes</h4>
+                        <p>This is crucial: the technology determined what could be seen. A 5-15 second exposure meant anything moving would blur. So Civil War photographs show: the dead, troops posing before or after battle, landscapes, fortifications. They don't show: charges, artillery fire, hand-to-hand combat, the chaos of battle.</p>
+                        <p>The absence of motion is the presence of death. That's why these images feel so eerie—they're records of absolute stillness in a war that was defined by violence and movement.</p>
+                        <h4>📖 Click the Term</h4>
+                        <p>Click "wet-plate collodion" for more on the technology.</p>
+                    </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 7: Antietam - Video Placeholder -->
+            <section>
+                <h2>"The Dead of Antietam"</h2>
+                <div style="display: flex; justify-content: center; margin: 1em 0;">
+                    <iframe width="960" height="540" src="https://www.youtube.com/embed/yYz-jMDWBuQ?si=2b8D_7oDQVFtJ0rY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                
+                <aside class="notes">
+                    <div class="study-notes">
+                        <h4>📚 Study Buddy Notes</h4>
+                        <p>This video covers the October 1862 exhibition at Mathew Brady's New York gallery—the first time Americans saw photographs of their war dead.</p>
+                        <p>Pay attention to: the public's reaction, what the <em>New York Times</em> said about it, and why this moment was so significant in American history.</p>
+                    </div>
+                </aside>
+            </section>
+
+
+            <!-- SLIDE 8: Antietam Context -->
+            <section>
+                <h2>What Made Antietam Different</h2>
+                <ul>
+                    <li><span class="key-term">Scale</span>: September 17, 1862—bloodiest single day in American history (~23,000 casualties)</li>
+                    <li><span class="key-term">Intimacy</span>: Close-up views showed buttons, belt buckles, facial expressions</li>
+                    <li><span class="key-term">Civilian confrontation</span>: Horror invaded domestic space—a gallery on Broadway</li>
+                </ul>
+                
+                <aside class="notes">
+                    <div class="study-notes">
+                        <h4>📚 Study Buddy Notes</h4>
+                        <p><strong>Scale:</strong> 23,000 casualties in one day is almost incomprehensible. The photographs gave that number bodies—you couldn't think of it as an abstraction anymore.</p>
+                        <p><strong>Intimacy:</strong> Gardner got close. These weren't distant panoramas. You could see individual details that made the dead specific—this man, with these shoes, in this position.</p>
+                        <p><strong>Civilian confrontation:</strong> Before this, war's visual horror stayed at the front. Now it came to Manhattan, surrounded by shops and theaters. The distance between battlefield and home collapsed.</p>
+                    </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 9: NYT Quote -->
+            <section>
+                <h2>Contemporary Reaction</h2>
+                <div class="primary-source">
+                    "Mr. Brady has done something to bring home to us the terrible reality and earnestness of war. If he has not brought bodies and laid them in our dooryards and along the streets, he has done something very like it."
+                    <div class="source-attribution">— <em>New York Times</em>, October 1862</div>
+                </div>
+                
+                <aside class="notes">
+                    <div class="study-notes">
+                        <h4>📚 Study Buddy Notes</h4>
+                        <p>This quote captures the shock of the moment. The reviewer understood that something new had happened: war's dead had come home. Not literally, but visually—which was almost as powerful.</p>
+                        <p>Notice the language: "bring home," "dooryards," "streets." The photographs invaded domestic space. You couldn't keep the war at a comfortable distance anymore.</p>
+                        <h4>🤔 Think About It</h4>
+                        <p>The review credits Brady, but Gardner took the photographs. This was common—Brady put his name on his employees' work. It's a reminder that even attributing these images is complicated.</p>
+                    </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 10: Limits of Vision -->
+            <section>
+                <h2>What Viewers Didn't See</h2>
+                <ul>
+                    <li>Most Antietam dead were <span class="key-term">already buried</span>—Gardner arrived two days later</li>
+                    <li>His "harvest" was selective: mainly <span class="key-term">Confederate dead</span> (Union burial details prioritized their own)</li>
+                    <li>No photographs of <span class="key-term">field hospitals, surgery, the wounded</span>—too much motion, not commercially viable</li>
+                </ul>
+                
+                <div class="key-point">
+                    <p>The camera forced a moral choice: to look was to become complicit in knowing</p>
+                </div>
+                
+                <aside class="notes">
+                    <div class="study-notes">
+                        <h4>📚 Study Buddy Notes</h4>
+                        <p>The photographs were powerful but partial. What you <em>didn't</em> see matters as much as what you did.</p>
+                        <p>Gardner showed a skewed sample—more rebel dead than Yankee. And he couldn't show the wounded, the surgery, the screaming. The technology couldn't capture it, and audiences might not have bought it.</p>
+                        <p>So the "truth" of Antietam was a selected truth. Still powerful, still important—but not the whole story.</p>
+                        <h4>💡 Key Insight</h4>
+                        <p>Once you saw these images, you couldn't unsee them. You had to decide whether to look, and once you looked, you couldn't claim ignorance of what war cost. That's a new kind of civilian responsibility.</p>
+                    </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 11: Cartes-de-visite -->
+            <section>
+                <h2>The Intimate War: <span class="popup-trigger" onclick="togglePopup('cdv-popup')">Cartes-de-Visite</span></h2>
+                <div class="cdv-grid">
+                    <div class="cdv-placeholder" style="padding: 0; border: none;">
+                        <img src="images/carte_de_visite/union_soldier.jpeg" alt="Union soldier carte-de-visite" style="width: 100%; height: 100%; object-fit: cover; border: 2px solid var(--medium-brown);">
+                    </div>
+                    <div class="cdv-placeholder" style="padding: 0; border: none;">
+                        <img src="images/carte_de_visite/abelincoln1.jpg" alt="Abraham Lincoln carte-de-visite" style="width: 100%; height: 100%; object-fit: cover; border: 2px solid var(--medium-brown);">
+                    </div>
+                    <div class="cdv-placeholder" style="padding: 0; border: none;">
+                        <img src="images/carte_de_visite/charlesdickens1.jpg" alt="Charles Dickens carte-de-visite" style="width: 100%; height: 100%; object-fit: cover; border: 2px solid var(--medium-brown);">
+                    </div>
+                    <div class="cdv-placeholder" style="padding: 0; border: none;">
+                        <img src="images/carte_de_visite/general.jpg" alt="Military general carte-de-visite" style="width: 100%; height: 100%; object-fit: cover; border: 2px solid var(--medium-brown);">
+                    </div>
+                    <div class="cdv-placeholder" style="padding: 0; border: none;">
+                        <img src="images/carte_de_visite/queenvictoria1.jpg" alt="Queen Victoria carte-de-visite" style="width: 100%; height: 100%; object-fit: cover; border: 2px solid var(--medium-brown);">
+                    </div>
+                    <div class="cdv-placeholder" style="padding: 0; border: none;">
+                        <img src="images/carte_de_visite/tennyson1.jpg" alt="Alfred Lord Tennyson carte-de-visite" style="width: 100%; height: 100%; object-fit: cover; border: 2px solid var(--medium-brown);">
+                    </div>
+                </div>
+                
+                <div id="cdv-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('cdv-popup')">&times;</span>
+                    <h3>Cartes-de-Visite (kart-duh-vee-ZEET)</h3>
+                    <p>French for "visiting cards." Small albumen prints (2.5 x 4 inches) mounted on cardstock.</p>
+                    <ul>
+                        <li><strong>Format:</strong> A multi-lens camera made 8 exposures on one plate, then cut apart—that's why they were cheap</li>
+                        <li><strong>Cost:</strong> About 25 cents (down from several dollars for earlier processes)</li>
+                        <li><strong>Scale:</strong> Millions produced during the war</li>
+                        <li><strong>Function:</strong> Soldiers sent them home; families kept them in albums, lockets, Bibles. If a soldier died, the carte became a sacred relic.</li>
+                    </ul>
+                </div>
+                
+                <aside class="notes">
+                    <div class="study-notes">
+                        <h4>📚 Study Buddy Notes</h4>
+                        <p>Click the term "Cartes-de-Visite" for the full definition. Key points:</p>
+                        <ul>
+                            <li>Cheap enough for ordinary families (25 cents)</li>
+                            <li>Portable and easy to mail</li>
+                            <li>Millions made during the war</li>
+                            <li>If a soldier died, the photograph became a sacred object</li>
+                        </ul>
+                        <p>This is photography entering the home—not public spectacle like Brady's gallery, but private grief. Families mourned a specific face they could hold in their hands.</p>
+                        <h4>🔍 Notice the Images</h4>
+                        <p>These six cartes show the range: a Union soldier, Lincoln, a general, plus international celebrities like Charles Dickens, Queen Victoria, and Tennyson. People collected and traded these like baseball cards—the birth of modern celebrity culture.</p>
+                    </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 12: CDV Key Point -->
+            <section>
+                <h2>Photography Enters the Home</h2>
+                <ul>
+                    <li>Brady's gallery = <span class="key-term">public spectacle</span></li>
+                    <li>Cartes-de-visite = <span class="key-term">private intimacy</span></li>
+                    <li>Grief became visual and personal—mourning a face, not an abstraction</li>
+                </ul>
+                <p class="transition-text" style="margin-top: 1.5em;">But whose grief was recorded? Who controlled these images?</p>
+                
+                <aside class="notes">
+                    <div class="study-notes">
+                        <h4>📚 Study Buddy Notes</h4>
+                        <p>This is the shift: from public to private. The Antietam exhibition shocked New York crowds. Cartes-de-visite transformed how families mourned in their own homes.</p>
+                        <p>Women bore most of the labor here—curating albums, arranging photographs, maintaining the visual archives of memory. This was gendered work: men went back to business while women tended the altars of remembrance.</p>
+                        <h4>🤔 Transition Question</h4>
+                        <p>The question at the end of this slide sets up Section III. Not everyone could afford 25 cents. Enslaved people couldn't commission portraits. So the "democratization" had limits—which we'll explore next.</p>
+                    </div>
+                </aside>
+            </section>
+
+                        <!-- SLIDE 13: The Staged Sharpshooter -->
+            <section>
+                <h2>The Staged Sharpshooter</h2>
+                <div style="display: flex; gap: 2em; align-items: center; height: 80vh;">
+                    <div style="flex: 1; cursor: pointer;" onclick="togglePopup('sharpshooter-fullres')">
+                        <img src="images/1463px-Pennsylvania,_Gettysburg._The_Home_of_a_Rebel_Sharpshooter_-_NARA_-_533315.jpg" alt="Home of a Rebel Sharpshooter" style="width: 100%; border: 4px solid var(--medium-brown); box-shadow: 0 8px 30px rgba(0,0,0,0.5);">
+                        <p class="image-caption">Alexander Gardner, "Home of a Rebel Sharpshooter," 1863<br><span style="font-size: 0.8em; color: var(--slate-gray);">(Click to enlarge)</span></p>
+                    </div>
+                    <div style="flex: 1; text-align: left;">
+                        <ul>
+                            <li>The body was <span class="key-term">moved</span>—likely dragged 40 yards to a more photogenic spot</li>
+                            <li>The rifle was a <span class="key-term">prop</span>—wrong model for a sharpshooter</li>
+                            <li>The same body appears in other Gardner photographs in <span class="key-term">different positions</span></li>
+                        </ul>
+                        <p style="margin-top: 1.5em;">This wasn't fraud—it was <span class="key-term">standard practice</span>.</p>
+                    </div>
+                </div>
+                
+                <!-- Full resolution popup -->
+                <div id="sharpshooter-fullres" class="popup" style="max-width: 90%; max-height: 90%;">
+                    <span class="popup-close" onclick="togglePopup('sharpshooter-fullres')">&times;</span>
+                    <img src="images/1463px-Pennsylvania,_Gettysburg._The_Home_of_a_Rebel_Sharpshooter_-_NARA_-_533315.jpg" alt="Home of a Rebel Sharpshooter - Full Resolution" style="width: 100%; height: auto;">
+                </div>
+                
+                <aside class="notes">
+                    <div class="study-notes">
+                        <h4>📚 Study Buddy Notes</h4>
+                        <p>This became one of the most iconic images from the war. A Confederate sniper lies dead in his rocky nest at Devil's Den, his rifle propped beside him. The caption tells a story: he died alone at his post, a soldier to the end.</p>
+                        <p>It's powerful and moving. It's also staged.</p>
+                        <h4>🔍 The Evidence</h4>
+                        <p>Scholars have studied Gardner's Gettysburg images closely. The evidence is clear: he moved bodies, arranged limbs, added props. This wasn't unusual—it's what photographers did to make compelling images.</p>
+                        <p>A random corpse in an open field was less commercially interesting than a sniper in his "home" with his weapon beside him. Gardner was running a business. He needed images that sold.</p>
+                        <h4>🤔 The Big Question</h4>
+                        <p>So was this a lie? Or was Gardner using staging to tell a larger truth about war's tragedy—the young man who would never go home? When does artistic shaping become deception?</p>
+                    </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 15: Sontag's Challenge -->
+            <section>
+                <h2>All Photographs Are Framed</h2>
+                <div class="primary-source">
+                    "To photograph is to frame, and to frame is to exclude."
+                    <div class="source-attribution">— Susan Sontag, <em>Regarding the Pain of Others</em> (2003)</div>
+                </div>
+                <ul style="margin-top: 1em;">
+                    <li>Someone chose what to include and exclude</li>
+                    <li>Someone chose the angle, the moment, the caption</li>
+                    <li>The mechanical process <span class="key-term">conceals</span> human judgment—it doesn't eliminate it</li>
+                </ul>
+                
+                <aside class="notes">
+                    <div class="study-notes">
+                        <h4>📚 Study Buddy Notes</h4>
+                        <p><strong>Susan Sontag</strong> (1933-2004) was a major American critic who wrote extensively about photography's power and ethics. Her book <em>Regarding the Pain of Others</em> is essential reading on war photography.</p>
+                        <p>Her argument: we look at photographs and think we're seeing "reality." But every photograph is a selection. What's outside the frame? What moment came before or after? What did the caption tell you to see?</p>
+                        <p>Gardner's staging is just an extreme version of what all photographs do. Even "authentic" images make choices about what to show and how to show it.</p>
+                        <h4>💡 Key Insight</h4>
+                        <p>The question isn't "Did he lie?" It's "What truth was he trying to tell?" and "Whose interests did that truth serve?"</p>
+                    </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 16: Sojourner Truth -->
+            <section>
+                <h2>Controlling the Frame</h2>
+                <div style="display: flex; gap: 2em; align-items: start;">
+                    <img src="images/Sojourner_Truth_carte-de-visite.jpg" alt="Sojourner Truth carte-de-visite" style="width: 300px; border: 4px solid var(--medium-brown); box-shadow: 0 8px 30px rgba(0,0,0,0.5);">
+                    <div style="text-align: left;">
+                        <p><span class="key-term">Sojourner Truth</span> (c. 1797-1883)</p>
+                        <ul>
+                            <li>Sold cartes-de-visite to fund her activism</li>
+                            <li>Caption: <em>"I Sell the Shadow to Support the Substance"</em></li>
+                            <li>She controlled: pose, caption, distribution</li>
+                        </ul>
+                        <p style="margin-top: 1em;">Most Black Americans <span class="key-term">didn't</span> get this control.</p>
+                    </div>
+                </div>
+                
+                <aside class="notes">
+                    <div class="study-notes">
+                        <h4>📚 Study Buddy Notes</h4>
+                        <p>Sojourner Truth is the crucial counterexample. She understood photography's political power and used it strategically.</p>
+                        <p>She controlled everything: how she was photographed (dignified, composed, well-dressed), how she was captioned (her own words), and how her image circulated (sold by her, for her cause). She refused to let white photographers or publishers define her.</p>
+                        <h4>⚠️ Critical Point</h4>
+                        <p>Most Black Americans didn't have this power. When freedpeople were photographed in contraband camps, they were captioned as types—"contraband," "freedwoman and children"—not as named individuals. Their images were taken and used by others.</p>
+                        <p>The "democratization of memory" recorded some lives and erased others. The camera told some people's truths, not everyone's.</p>
+                    </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 17: Race and the Frame -->
+            <section>
+                <h2>Whose Truth?</h2>
+                <ul>
+                    <li><span class="popup-trigger" onclick="togglePopup('usct-popup')">USCT</span> regiments (180,000 soldiers) photographed far less than white units</li>
+                    <li>Freedpeople captioned as <span class="key-term">types</span>: "contraband," "freedman"—not named individuals</li>
+                    <li>The archive itself is a form of selection</li>
+                </ul>
+                
+                <div class="key-point">
+                    <p>The ethical question isn't "Is this photograph true?" It's "Whose truth does this photograph serve?"</p>
+                </div>
+                
+                <div id="usct-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('usct-popup')">&times;</span>
+                    <h3>USCT: United States Colored Troops</h3>
+                    <p>African American soldiers who served in the Union Army during the Civil War. About 180,000 Black men served in the USCT, making up roughly 10% of the Union Army by war's end.</p>
+                    <p>They fought in major engagements including the assault on Fort Wagner (1863), the Battle of the Crater (1864), and the capture of Richmond (1865). Despite their service, they faced discrimination in pay, equipment, and recognition—including in how often they were photographed.</p>
+                </div>
+                
+                <aside class="notes">
+                    <div class="study-notes">
+                        <h4>📚 Study Buddy Notes</h4>
+                        <p>This is the most important point about "democratization": it had sharp limits based on race, class, and geography.</p>
+                        <p>Black soldiers served in huge numbers but were photographed far less. When enslaved or formerly enslaved people appeared in photographs, they were often presented as specimens or types, not individuals with names and stories.</p>
+                        <p>The photographs that survive shape our memory of the war. We see the faces that were recorded. We don't see the faces that weren't. That absence is itself a kind of framing.</p>
+                        <h4>🎯 Key Takeaway</h4>
+                        <p>Ask of any photograph: whose truth does it serve? Who benefits from this image? Whose story is being told—and whose is being left out?</p>
+                    </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 18: Democratic Monuments -->
+            <section>
+                <h2>Democratic Monuments</h2>
+                <ul>
+                    <li>Before photography: only generals and statesmen got monuments</li>
+                    <li>Civil War photographs created memorials for <span class="key-term">ordinary soldiers</span>—privates, corporals, farmboys</li>
+                    <li>The common dead could now be <span class="key-term">seen</span>, not just counted</li>
+                </ul>
+                <p style="margin-top: 1em;">This was radical—even if incomplete.</p>
+                
+                <aside class="notes">
+                    <div class="study-notes">
+                        <h4>📚 Study Buddy Notes</h4>
+                        <p>Monuments are selective: they tell us which deaths matter. Before photography, ordinary soldiers were buried in mass graves and forgotten. Only the famous got statues.</p>
+                        <p>Civil War photography changed that—imperfectly, incompletely, but genuinely. A carte-de-visite in a family album was a monument. Gardner's photograph of an unknown soldier was a monument. The dead became visible in a new way.</p>
+                        <h4>🤔 Think About It</h4>
+                        <p>We've already discussed the limits of this democratization (race, class). But within those limits, something real happened. Ordinary people's faces survived. That mattered.</p>
+                    </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 19: Preserving the Horror -->
+            <section>
+                <h2>Preserving the Horror</h2>
+                <ul>
+                    <li>After the war, memory would be <span class="key-term">contested</span>—Lost Cause, reconciliation narratives</li>
+                    <li>But the photographs remained: bloated corpses couldn't be rewritten into noble sacrifice</li>
+                    <li>The camera fixed the <span class="key-term">raw emotional register</span> before ideology could sanitize it</li>
+                </ul>
+                
+                <aside class="notes">
+                    <div class="study-notes">
+                        <h4>📚 Study Buddy Notes</h4>
+                        <p>We'll talk in Lecture 3 about the Lost Cause—how Southerners transformed military defeat into a story of noble sacrifice and erased slavery from the narrative. Reconciliationist memories emphasized shared valor and downplayed causes.</p>
+                        <p>But you can't make Gardner's "Harvest of Death" into a noble sacrifice. Those swollen faces resist easy mythology. The photographs preserved the shock of 1862 before anyone could explain it away.</p>
+                        <h4>💡 Key Insight</h4>
+                        <p>The photographs are evidence against easy stories. They're not the whole truth, but they're a check on comfortable lies.</p>
+                    </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 20: The Long Legacy -->
+            <section>
+                <h2>The Long Legacy</h2>
+                <ul>
+                    <li>Civil War photography established a principle: <span class="key-term">war should be seen</span></li>
+                    <li>This shaped every subsequent conflict—most dramatically <span class="key-term">Vietnam</span></li>
+                    <li>But it also taught governments to <span class="key-term">manage</span> visual access</li>
+                </ul>
+                
+                <div class="key-point">
+                    <p>The camera promised democratic witness—but seeing is never neutral</p>
+                </div>
+                <p class="centered" style="font-size: 0.9em; color: var(--slate-gray); margin-top: 1em;">(See Part 2: Independent Study for extended discussion of Vietnam photography)</p>
+                
+                <aside class="notes">
+                    <div class="study-notes">
+                        <h4>📚 Study Buddy Notes</h4>
+                        <p>Civil War photography established an ideal: citizens have the right to see what is done in their name. That ideal would be tested a century later in Vietnam, where television and photography influenced public opinion and arguably policy.</p>
+                        <p>But the counter-tradition also began here: once governments learned that images could shape opinion, they learned to control visual access. Embedded journalism, restricted zones, Pentagon media strategy—all responses to what happened when Gardner's photos reached New York.</p>
+                        <h4>📖 For More</h4>
+                        <p>Part 2 (Independent Study) has extended material on Vietnam—the same promises, the same tensions, the same power to shock. The line from 1862 to 1968 is direct.</p>
+                    </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 21: Closing Synthesis -->
+            <section>
+                <h2>What We've Seen</h2>
+                <ul>
+                    <li>Photography created a <span class="key-term">new relationship</span> between citizens and warfare</li>
+                    <li>It promised truth but delivered <span class="key-term">framed selections</span></li>
+                    <li>It democratized memory but <span class="key-term">not equally</span></li>
+                    <li>It preserved horror but also <span class="key-term">sold</span> it</li>
+                </ul>
+                <p style="margin-top: 1.5em;">These tensions remain unresolved.</p>
+                
+                <aside class="notes">
+                    <div class="study-notes">
+                        <h4>📚 Study Buddy Notes</h4>
+                        <p>Here's the synthesis. Photography changed how Americans witnessed war—but that change was complicated:</p>
+                        <ul>
+                            <li><strong>Truth vs. framing:</strong> mechanical objectivity, but always selected and shaped</li>
+                            <li><strong>Democratization vs. exclusion:</strong> more people remembered, but not everyone equally</li>
+                            <li><strong>Horror vs. commerce:</strong> confronting reality, but also packaging it for sale</li>
+                        </ul>
+                        <p>These aren't problems that got solved. They're the permanent condition of war photography, from 1862 to today.</p>
+                    </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 22: Bridge to Lecture 2 -->
+            <section>
+                <h2>Next: From Seeing to Believing</h2>
+                <p style="font-size: 1.2em; text-align: center; margin-top: 1em;">If photography showed what war <span class="key-term">looked like</span>,<br>language told Americans what it <span class="key-term">meant</span>.</p>
+                <p style="margin-top: 1.5em; text-align: center;">Lecture 2: Civil Religion—Lincoln, Howe, and the sacred story of the nation</p>
+                
+                <aside class="notes">
+                    <div class="study-notes">
+                        <h4>📚 Study Buddy Notes</h4>
+                        <p>We've covered <em>seeing</em>—how photography created new ways of witnessing war. Next time we'll cover <em>believing</em>—how words transformed political conflict into sacred narrative.</p>
+                        <p>Lincoln's Gettysburg Address and Second Inaugural, Julia Ward Howe's "Battle Hymn of the Republic," the Emancipation Proclamation—these texts gave the war religious meaning. That's American civil religion, and it's Lecture 2.</p>
+                        <h4>✅ Before Next Class</h4>
+                        <p>Review the Independent Study material on cartes-de-visite and Vietnam if you want to go deeper. Think about: how do images and words work differently in shaping memory?</p>
+                    </div>
+                </aside>
+            </section>
+
+        </div>
+    </div>
+    
+    <!-- Reveal.js and plugins from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/zoom/zoom.js"></script>
+    
+    <script>
+        Reveal.initialize({
+            width: 1920,
+            height: 1080,
+            margin: 0.1,
+            minScale: 0.2,
+            maxScale: 2.0,
+            controls: true,
+            progress: true,
+            center: true,
+            hash: true,
+            transition: 'fade',
+            transitionSpeed: 'slow',
+            plugins: [ RevealNotes, RevealHighlight, RevealZoom ]
+        });
+
+        function togglePopup(id) {
+            document.getElementById(id).classList.toggle('active');
+        }
+
+        // Close popup when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('popup')) {
+                e.target.classList.remove('active');
+            }
+        });
+
+        // Close popup with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.popup.active').forEach(function(popup) {
+                    popup.classList.remove('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

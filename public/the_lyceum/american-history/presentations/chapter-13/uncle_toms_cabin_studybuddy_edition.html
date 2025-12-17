@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Harriet Beecher Stowe &amp; Uncle Tom's Cabin — Study Buddy Edition</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<!-- Google Fonts: Playfair Display (headings) + Raleway (body) -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<!-- Reveal.js (CDN) -->
+<link href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css" rel="stylesheet"/>
+<link id="theme" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/white.css" rel="stylesheet"/>
+<style>
+    :root{
+      --bg-parchment: #f9f5ee;
+      --bg-light: #fffdf9;
+      --ink: #222426;
+      --muted: #6b7280;
+      --accent: #7a5c2f;
+      --accent-light: #c49957;
+      --accent-ink: #3a2a0f;
+      --panel-bg: #0f172a;
+      --panel-ink: #e6e7eb;
+      --chip: #efe7d9;
+      --rule: #ded6c7;
+      --shadow: rgba(58, 42, 15, 0.12);
+      --shadow-strong: rgba(58, 42, 15, 0.2);
+    }
+    body{
+      background: linear-gradient(135deg, #fffdf8 0%, var(--bg-parchment) 50%, #f6efe5 100%);
+      font-family: "Raleway", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.01) 2px, rgba(0,0,0,.01) 4px);
+      pointer-events: none; z-index: 1;
+    }
+    .reveal{ z-index: 2; }
+    .reveal .slides{ text-align: left; }
+    .reveal .slides section{
+      padding: 2rem 3rem 2rem 2.5rem;
+      max-width: 1100px; margin: 0 auto;
+      transition: opacity .5s ease, transform .5s ease;
+    }
+    .reveal h1, .reveal h2, .reveal h3{
+      font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+      color: var(--accent-ink);
+      letter-spacing: .3px; line-height: 1.25; font-weight: 700;
+      margin-bottom: 1.2rem; text-shadow: 0 1px 2px rgba(0,0,0,.03);
+    }
+    .reveal h2{ font-size: 2.5rem; margin-bottom: 1.5rem; }
+    .reveal h3{ font-size: 1.8rem; font-weight: 600; color: var(--accent); }
+    .reveal p, .reveal li{ font-size: 1.12rem; line-height: 1.65; margin-bottom: .8rem; }
+    .reveal strong{ color: var(--accent-ink); font-weight: 600; }
+    .reveal em{ color: var(--accent); font-style: italic; }
+    .tight li{ margin: .5rem 0; padding-left: .3rem; }
+    .reveal ul{ margin-top: 1.2rem; }
+    hr{
+      border: none; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--rule) 20%, var(--rule) 80%, transparent);
+      margin: 1.2rem 0; opacity: .6;
+    }
+    .title-underline{
+      display: inline-block; border-bottom: 4px solid var(--accent); padding-bottom: .3rem;
+      background: linear-gradient(180deg, transparent 60%, rgba(154,111,43,.12) 60%);
+      animation: fadeInUp .8s ease;
+    }
+    @keyframes fadeInUp{ from{opacity:0; transform: translateY(20px);} to{opacity:1; transform: translateY(0);} }
+
+    /* Definition hover */
+    .def{
+      border-bottom: 2px dotted var(--accent-light); cursor: pointer; position: relative;
+      padding-right: .4rem; transition: all .2s ease;
+      background: linear-gradient(180deg, transparent 80%, rgba(154,111,43,.08) 80%);
+    }
+    .def:hover{ background: linear-gradient(180deg, transparent 70%, rgba(154,111,43,.15) 70%); border-bottom-color: var(--accent); }
+    .def-icon{
+      display: inline-block; width: 20px; height: 20px; line-height: 19px; text-align: center; border-radius: 50%;
+      border: 1.5px solid var(--accent); color: var(--accent); font-weight: 700; font-size: .75rem; margin-left: .3rem;
+      cursor: pointer; vertical-align: baseline; background: var(--bg-light); transition: all .2s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,.05);
+    }
+    .def-icon:hover{ background: var(--accent); color: #fff; transform: scale(1.1); }
+    .tooltip{
+      position: absolute; z-index: 9999; max-width: 440px; background: #fff;
+      border: 2px solid var(--accent-light); box-shadow: 0 16px 32px var(--shadow-strong);
+      border-radius: 14px; padding: 1.2rem 1.3rem; font-size: 1.02rem; color: var(--ink);
+      animation: tooltipIn .25s ease;
+    }
+    @keyframes tooltipIn{ from{opacity:0; transform: translateY(-10px) scale(.95);} to{opacity:1; transform: translateY(0) scale(1);} }
+    .tooltip h4{
+      margin: 0 0 .6rem 0; font-size: 1.15rem; color: var(--accent-ink);
+      font-family: "Playfair Display", serif; font-weight: 700; border-bottom: 2px solid var(--accent-light); padding-bottom: .4rem;
+    }
+
+    /* Notes Sidebar */
+    #notesSidebar{
+      position: fixed; top: 0; right: 0; width: 400px; max-width: 36vw; height: 100%;
+      background: var(--panel-bg); color: var(--panel-ink);
+      transform: translateX(100%); transition: transform .3s cubic-bezier(.4,0,.2,1);
+      z-index: 9000; display: flex; flex-direction: column; border-left: 4px solid var(--accent);
+      box-shadow: -4px 0 24px rgba(0,0,0,.3);
+    }
+    #notesSidebar.open{ transform: translateX(0); }
+    #notesHeader{ padding: 1.2rem 1.3rem; border-bottom: 2px solid rgba(255,255,255,.1); display:flex; align-items:center; justify-content:space-between; background: rgba(0,0,0,.2);}
+    #notesHeader h3{ margin: 0; font-size: 1.15rem; font-family: "Raleway", system-ui; font-weight: 600; color: var(--accent-light); }
+    #notesContent{ padding: 1.3rem 1.4rem; overflow: auto; font-size: 1.05rem; line-height: 1.7; flex: 1; }
+    #notesHint{ font-size: .88rem; color: #94a3b8; }
+    .kbd{
+      display: inline-block; padding: .15rem .5rem; border: 1.5px solid #475569; border-bottom-width: 3px; border-radius: 6px;
+      font-family: ui-monospace, "SF Mono", Menlo, Monaco, "Cascadia Code", monospace; font-size: .85rem; color: #e5e7eb;
+      margin: 0 .2rem; background: #1e293b8c; box-shadow: 0 2px 4px rgba(0,0,0,.2);
+    }
+/* Hide lecture notes from main slides, keep visible in sidebar */
+.reveal .slides .notes-panel-content {
+  display: none !important;
+}
+
+    /* Images */
+    .img-wrap{ margin: 1rem 0; text-align: center; float: right; margin: .25rem 0 1rem 1.25rem; }
+    .img-wrap a{ display:inline-block; text-decoration: none; }
+    .img-wrap img.thumb{
+      max-width: 320px; width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 16px rgba(0,0,0,.15); cursor: zoom-in;
+    }
+    @media (min-width: 900px){ .img-wrap img.thumb{ max-width: 320px; } }
+    @media (max-width: 820px){
+      .img-wrap{ float: none; margin: .5rem auto 1rem auto; text-align: center; }
+      .img-wrap img.thumb{ max-width: 70vw; }
+    }
+    .img-meta{ display:none !important; }
+
+    .reveal .slides section::after{ content:""; display:block; clear:both; }
+
+    .helper{
+      position: fixed; bottom: 12px; left: 12px;
+      background: linear-gradient(135deg, #1c1d21 0%, #2a2c30 100%); color: #f0f1f2;
+      padding: .6rem .9rem; border-radius: 12px; font-size: .92rem; z-index: 8500; opacity: .95;
+      border: 1.5px solid #3a3c42; box-shadow: 0 8px 20px rgba(0,0,0,.3); transition: all .3s ease; max-width: 500px; line-height: 1.5;
+    }
+    .reveal .progress{ height: 4px; background: rgba(154,111,43,.2); }
+    .reveal .progress span{ background: var(--accent); box-shadow: 0 0 10px rgba(154,111,43,.5); }
+    .reveal .slide-number{
+      background: rgba(15,23,42,.85); color: var(--accent-light); font-family: "Raleway", sans-serif; font-weight: 600;
+      padding: .4rem .7rem; border-radius: 8px; border: 1.5px solid rgba(154,111,43,.3); box-shadow: 0 4px 12px rgba(0,0,0,.2);
+    }
+    .reveal .controls{ color: var(--accent); }
+
+    @media (max-width: 768px){
+      .reveal .slides section{ padding: 1.5rem; }
+      .reveal h2{ font-size: 2rem; }
+      .reveal h3{ font-size: 1.5rem; }
+      #notesSidebar{ width: 100%; max-width: 100vw; }
+      .helper{ font-size: .8rem; padding: .4rem .6rem; }
+    }
+
+    @media print {
+      .helper, #notesSidebar, .reveal .controls, .reveal .progress { display: none; }
+      body{ background: white; }
+    }
+
+    /* Why-it-matters POPUP */
+    .why-content{ display:none; }
+    .why-link{
+      display:inline-block; font-weight:600; border:0; background:transparent;
+      border-bottom:2px dotted var(--accent); padding:0 0 1px 0; cursor:pointer; font-size:1.02rem;
+    }
+    .why-link:focus, .why-link:hover{ outline:none; border-bottom-color: var(--accent-ink); }
+
+    .modal-overlay{
+      position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 9500; display:none;
+    }
+    .modal{
+      position: fixed; z-index: 9600; max-width: 720px; width: calc(100% - 2rem);
+      left: 50%; top: 50%; transform: translate(-50%, -50%);
+      background: #fff; border: 2px solid var(--accent-light); border-radius: 14px;
+      box-shadow: 0 24px 60px rgba(0,0,0,.35); display:none;
+    }
+    .modal-header{
+      padding: .9rem 1rem; border-bottom: 1px solid #e7e0d4; display:flex; align-items:center; justify-content:space-between;
+      background: linear-gradient(180deg, #fff, #fffaf3);
+    }
+    .modal-title{ font-family: "Playfair Display", serif; font-weight: 700; color: var(--accent-ink); font-size: 1.15rem; margin: 0; }
+    .modal-close{
+      border: 1.5px solid var(--accent); background: #fff; border-radius: 8px; padding: .25rem .55rem; cursor: pointer; font-weight: 700;
+    }
+    .modal-body{ padding: 1rem 1.1rem 1.2rem 1.1rem; color: var(--ink); line-height: 1.65; font-size: 1.06rem; }
+
+    /* Split layout utility */
+    .split{
+      display:flex; gap:1.25rem; align-items:flex-start;
+    }
+    .split .col-text{ flex:1 1 62%; min-width: 0; }
+    .split .col-media{ flex:0 0 320px; margin:0; }
+    .split .col-media .thumb{ max-width:320px; }
+    @media (max-width: 900px){
+      .split{ flex-direction:column; }
+      .split .col-media{ order:2; }
+    }
+</style>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+
+    <!-- 1. Title -->
+    <section>
+      <h2><span class="title-underline">Harriet Beecher Stowe &amp; <em>Uncle Tom's Cabin</em></span></h2>
+
+      <!-- IMAGE directly beneath title -->
+      <figure class="img-wrap">
+        <a href="images/portrait_stowe.jpg" target="_blank" rel="noopener">
+          <img class="thumb" src="images/portrait_stowe.jpg" alt="Harriet Beecher Stowe portrait"/>
+        </a>
+      </figure>
+      <div class="img-meta"><span class="tag">Search:</span> "Harriet Beecher Stowe portrait 1852 high-res" •
+        <span class="tag">AI prompt:</span> "19th-century author portrait, oval vignette, daguerreotype style, soft studio lighting"
+      </div>
+
+      <p><strong>Goal:</strong> See how one novel helped shift public feeling about slavery and pushed the nation toward open conflict.</p>
+
+      <!-- WHY it matters -> popup -->
+      <div class="why-content" data-title="Why It Matters">
+        This case shows how culture can move politics. A single book turned private feeling into public pressure, pushing slavery from a policy argument into a moral crisis.
+      </div>
+      <p class="why-bullet"><button type="button" class="why-link">See Why it Matters</button></p>
+
+      <!-- Study Buddy intro (kept) -->
+      <div class="why-box"><span class="why-label">Study Buddy Edition</span>
+        <p>Welcome! This slide deck is your space to learn and explore at your own pace. As you move through each slide, click on the underlined words to see what they mean, and press L to open the notes. Stay curious—follow ideas that spark your interest, look up new terms, and see where your curiosity takes you!</p>
+      </div><br/>
+
+      <div class="notes-panel-content" data-title="Welcome">
+        This lecture digs into how a story can remake political reality. Stowe proved that emotional power can do what legal arguments sometimes can't.
+      </div>
+    </section>
+<! -- My Youtube Video on Harriet Beecher Stowe and Uncle Toms Cabin -- >
+	  <section>
+	  <iframe width="560" height="315" src="https://www.youtube.com/embed/1oS5Zp2iNUs?si=VJLPetkAqDg4B38p" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </section>
+	  
+   <!-- 2. Context — 1850 Crisis (split layout: text left, image right, top-aligned) -->
+<section>
+  <h3>The 1850 Crisis</h3>
+
+  <div class="split">
+    <div class="col-text">
+      <ul class="tight">
+        <li>The <span class="def" data-term="Fugitive Slave Act (1850)" data-def="Federal law requiring citizens to assist in capturing people who escaped slavery, with heavy penalties for those who refused. It eliminated due process protections and increased federal enforcement.">Fugitive Slave Act<span class="def-icon">?</span></span> forced Northerners to help return people who had escaped slavery, making them feel complicit.</li>
+        <li>The law sparked moral outrage and turned personal conscience into a flashpoint.</li>
+        <li>For many white Northerners, it was the moment slavery stopped being "someone else's problem."</li>
+        <li><button type="button" class="why-link">See Why it Matters</button></li>
+      </ul>
+    </div>
+    <figure class="img-wrap col-media">
+      <a href="images/1851-poster-warning-blacks-about-kidnapping-by-pol-20559.jpeg" target="_blank" rel="noopener">
+        <img class="thumb" src="images/1851-poster-warning-blacks-about-kidnapping-by-pol-20559.jpeg" alt="1851 warning poster to Black residents re: kidnappers / Fugitive Slave Law"/>
+      </a>
+    </figure>
+  </div>
+
+  <div class="img-meta"><span class="tag">Search:</span> "Fugitive Slave Law poster 1850 warning notice" •
+    <span class="tag">AI prompt:</span> "Vintage wanted poster, distressed paper, bold typography, period government seal"
+  </div>
+
+  <!-- WHY popup content -->
+  <div class="why-content" data-title="Why It Matters">
+    Think about the effect: a posted warning like this makes the law feel personal. It put freedom under surveillance in the North and forced ordinary people to choose a side.
+  </div>
+
+  <!-- NOTES -->
+  <div class="notes-panel-content" data-title="Notes">
+    The 1850 Crisis was one of those turning points where everything people thought they could avoid suddenly landed right on their doorstep. Congress was trying to calm tensions between North and South with a big compromise — the Compromise of 1850 — but one part of it backfired badly: the Fugitive Slave Act. This law required ordinary Northerners to help capture and return people who had escaped slavery, even if they wanted no part of it. Judges were even paid more if they ruled that someone was an escaped slave, which made the whole thing feel rigged and unjust.
+    <br><br>
+    For many Northerners, this was the first time slavery stopped being a distant issue happening “down South.” Suddenly, it was at their train stations, in their neighborhoods, and even in their courts. People who thought of themselves as law-abiding citizens were being told to ignore their conscience and enforce a system they found morally wrong. That’s why it caused such moral outrage — it wasn’t just about politics anymore, it was about personal responsibility and guilt.
+    <br><br>
+    This shift in feeling was huge. The Fugitive Slave Act forced people to decide what kind of nation they wanted to live in — one that obeyed unjust laws, or one that challenged them. Some Northerners began helping escapees through the Underground Railroad despite the risk. Others started speaking out, writing, and organizing in protest. In a sense, this law did the opposite of what it was supposed to: instead of preserving national unity, it made more people realize that compromise with slavery had a moral cost they couldn’t accept.
+  </div>
+</section>
+
+
+    <!-- 3. Harriet Beecher Stowe's Background -->
+    <section>
+      <h3>Who Was Harriet Beecher Stowe?</h3>
+
+      <figure class="img-wrap">
+        <a href="images/Stowe_writing_at_.png" target="_blank" rel="noopener">
+          <img class="thumb" src="images/Stowe_writing_at_.png" alt="Stowe writing at a desk"/>
+        </a>
+      </figure>
+      <div class="img-meta"><span class="tag">Search:</span> "19th-century woman writing desk lamp Victorian" •
+        <span class="tag">AI prompt:</span> "Writer at wooden desk, candlelight, quill and papers, warm interior glow, realistic period detail"
+      </div>
+
+      <ul class="tight">
+        <li>Born into a famous minister's family—the Beechers shaped reform culture.</li>
+        <li>Lived briefly in Cincinnati near the border, witnessing slavery's direct effects.</li>
+        <li>Drew on her faith, family connections, and eyewitness accounts when writing.</li>
+        <li><button type="button" class="why-link">See Why it Matters</button></li>
+      </ul>
+
+      <div class="why-content" data-title="Why It Matters">
+        Context counts: the Beecher network gave Stowe instant credibility. Reform circles amplified her voice so the novel arrived with moral authority, not just publicity. The Beechers were a power family in reform circles—religion, abolition, education. Stowe had moral authority before she had fame.
+      </div>
+
+      <!-- NOTES -->
+ <div class="notes-panel-content" data-title="Notes">
+  <p>Harriet Beecher Stowe came from a remarkable family—the Beechers were practically a reform movement of their own. Her father was a famous minister, and her brothers and sisters were active in education, religion, and social causes. So from an early age, she grew up surrounded by big moral debates about faith, justice, and reform. Writing about slavery wasn’t random for her—it was part of the world she’d always known.</p>
+  <p>When Stowe moved to Cincinnati, she lived right across the river from Kentucky, a slave state. That border setting made the issue of slavery real and immediate. She met people who had escaped slavery, heard their stories firsthand, and saw how the system reached into everyday life. Those experiences shaped her imagination and gave her the emotional truth that comes through in <em>Uncle Tom’s Cabin.</em></p>
+  <p>When she sat down to write, Stowe drew on everything she had—her religious faith, her reform-minded upbringing, and the eyewitness accounts she’d collected. The result wasn’t just a novel; it was a moral argument told through storytelling. She believed that if people <em>felt</em> the pain of slavery the way her characters did, they would no longer be able to ignore it.</p>
+</div>
+
+    </section>
+
+    <!-- 4. Writing the Novel -->
+    <section>
+      <h3>Writing <em>Uncle Tom's Cabin</em></h3>
+
+      <figure class="img-wrap">
+        <a href="images/1217px-The_National_Era_masthead_June_5%2C_1851.png" target="_blank" rel="noopener">
+          <img class="thumb" src="images/1217px-The_National_Era_masthead_June_5%2C_1851.png" alt="The National Era masthead, June 5, 1851"/>
+        </a>
+      </figure>
+      <div class="img-meta"><span class="tag">Search:</span> "National Era 1851 newspaper page layout" •
+        <span class="tag">AI prompt:</span> "Antique newspaper page, serif headlines, dense column text, aged newsprint texture"
+      </div>
+
+      <ul class="tight">
+        <li>First serialized in the <span class="def" data-term="National Era" data-def="Antislavery weekly newspaper published in Washington, D.C. It reached a wide Northern readership and serialized Stowe's novel from 1851–52.">National Era<span class="def-icon">?</span></span> (1851–52), a weekly abolitionist paper.</li>
+        <li>Published as a book in 1852, selling over 300,000 copies in the U.S. in its first year.</li>
+        <li>Stowe said she was inspired by a vision during church—she believed God directed her pen.</li>
+        <li><button type="button" class="why-link">See Why it Matters</button></li>
+      </ul>
+
+      <div class="why-content" data-title="Why It Matters">
+        Why serialization works: weekly installments kept readers talking together. The story became a national conversation in real time—not a one-and-done read.
+      </div>
+
+      <!-- NOTES -->
+<div class="notes-panel-content" data-title="Notes">
+  <p><em>Uncle Tom’s Cabin</em> didn’t start as a book—it began as a weekly story in the <em>National Era</em>, an abolitionist newspaper published in Washington, D.C. Between 1851 and 1852, readers followed the story in short installments, almost like a TV series of its time. The emotional impact was immediate, and by the time the full novel came out in 1852, it became a publishing sensation, selling over 300,000 copies in its first year in the United States alone.</p>
+  <p>Stowe often said the idea for the book came to her during church, almost like a vision. She believed that God was guiding her hand as she wrote. That sense of divine mission gave the novel its emotional intensity—it wasn’t just meant to entertain but to convict the conscience of its readers. She saw her work as both art and activism, something that could move hearts where political arguments had failed.</p>
+</div>
+
+    </section>
+
+    <!-- 5. The Story's Power (SPLIT) -->
+    <section>
+      <h3>Why the Story Hit So Hard</h3>
+
+      <div class="split">
+        <div class="col-text">
+          <ul class="tight">
+            <li>It used <span class="def" data-term="Sentimental Fiction" data-def="19th-century genre that emphasized emotion, domestic life, and moral lessons. It was especially popular with middle-class women and used to promote social reform causes.">sentimental fiction<span class="def-icon">?</span></span>—emotional storytelling that made readers <em>feel</em> the injustice.</li>
+            <li>Characters like Uncle Tom and Eliza became symbols; their suffering felt personal.</li>
+            <li>The novel invited white readers to imagine themselves in the place of the enslaved.</li>
+            <li><button type="button" class="why-link">See Why it Matters</button></li>
+          </ul>
+        </div>
+        <figure class="img-wrap col-media">
+          <a href="images/eliza_crossing.png" target="_blank" rel="noopener">
+            <img class="thumb" src="images/eliza_crossing.png" alt="Eliza crossing the ice illustration"/>
+          </a>
+        </figure>
+      </div>
+
+      <div class="img-meta"><span class="tag">Search:</span> "Eliza crossing ice Uncle Tom's Cabin illustration 1850s" •
+        <span class="tag">AI prompt:</span> "Dramatic river crossing scene, mother and child fleeing, ice chunks, theatrical engraving style"
+      </div>
+
+      <div class="why-content" data-title="Why It Matters">
+        Here’s the tradeoff: sentimental fiction is an empathy engine. It opens hearts quickly but can flatten complexity; that’s its superpower and its limit.
+      </div>
+<!-- NOTES -->
+<div class="notes-panel-content" data-title="Notes">
+  <p>Part of what made <em>Uncle Tom’s Cabin</em> so powerful was its use of sentimental fiction—writing designed to pull at the reader’s emotions. Stowe wanted her audience to not just understand slavery as a political issue, but to <em>feel</em> its cruelty. The book’s emotional tone wasn’t accidental; it was meant to make readers cry, empathize, and question how such suffering could exist in a so-called Christian nation.</p>
+  <p>Characters like Uncle Tom, Eliza, and little Eva became more than just figures in a story—they turned into moral symbols. Readers followed their struggles, heartbreaks, and acts of courage as if they were real people. Through them, Stowe created an emotional bridge between enslaved people and white Northern readers who had never seen slavery firsthand.</p>
+  <p>In doing so, the novel asked its audience to imagine themselves in the place of the enslaved—to see what it would feel like to have one’s family torn apart or to be treated as property. That act of imagination was revolutionary. It made empathy a form of activism, and for many readers, once they felt that connection, they couldn’t go back to indifference.</p>
+</div>
+
+      
+    </section>
+
+    <!-- 6. Huge Sales & Cultural Reach -->
+    <section>
+      <h3>An Instant Phenomenon</h3>
+
+      <figure class="img-wrap">
+        <a href="images/vintage_theater_poster.jpeg" target="_blank" rel="noopener">
+          <img class="thumb" src="images/vintage_theater_poster.jpeg" alt="Uncle Tom's Cabin vintage theater poster"/>
+        </a>
+      </figure>
+      <div class="img-meta"><span class="tag">Search:</span> "Uncle Tom's Cabin theater poster 1850s vintage" •
+        <span class="tag">AI prompt:</span> "Victorian theater poster, dramatic scene illustration, ornate borders, period typography"
+      </div>
+
+      <ul class="tight">
+        <li>Became the best-selling novel of the 19th century after the Bible.</li>
+        <li>Theatrical adaptations toured constantly, reaching people who never read books.</li>
+        <li>Everyone from politicians to preachers had to respond—it forced conversation.</li>
+        <li><button type="button" class="why-link">See Why it Matters</button></li>
+      </ul>
+
+      <div class="why-content" data-title="Why It Matters">
+        Follow the audience: the stage reached people who didn’t read much -- read—working-class audiences, or illiterate folks. Theater carried the novel’s moral argument into working-class spaces and made it unforgettable.
+      </div>
+<!-- NOTES -->
+<div class="notes-panel-content" data-title="Notes">
+  <p><em>Uncle Tom’s Cabin</em> exploded in popularity. After the Bible, it became the best-selling book of the entire 19th century—a cultural event that reached far beyond the page. People everywhere were talking about it, quoting it, and arguing over it. It wasn’t just a novel anymore; it was part of the national conversation.</p>
+  <p>The story spread even further through stage adaptations called “Tom Shows.” These theatrical versions toured constantly, performing in towns big and small. Many people who never read the book still experienced the story in theaters, where its emotional power played out live. In some ways, the plays had an even bigger impact because they made the story visual and unforgettable.</p>
+  <p>Politicians, preachers, and newspaper editors all felt the ripple effect. Everyone had to take a position—whether to defend the book, denounce it, or use it to make a point about slavery. In that sense, <em>Uncle Tom’s Cabin</em> didn’t just tell a story; it created a public debate that crossed class, region, and even national boundaries.</p>
+</div>
+
+          </section>
+
+    <!-- 7. Shaping Northern Opinion -->
+    <section>
+      <h3>Changing Minds in the North</h3>
+
+      <figure class="img-wrap">
+        <a href="images/family_reading.png" target="_blank" rel="noopener">
+          <img class="thumb" src="images/family_reading.png" alt="Victorian family reading together"/>
+        </a>
+      </figure>
+      <div class="img-meta"><span class="tag">Search:</span> "Victorian family reading by fireplace 1850s painting" •
+        <span class="tag">AI prompt:</span> "Interior domestic scene, family gathered around hearth, soft lamplight, realistic oil painting style"
+      </div>
+
+      <ul class="tight">
+        <li>Many Northerners who weren't committed abolitionists began questioning slavery.</li>
+        <li>The book made slavery feel morally intolerable, not just politically inconvenient.</li>
+        <li>It turned abstract policy debates into stories about families torn apart.</li>
+        <li><button type="button" class="why-link">See Why it Matters</button></li>
+      </ul>
+
+      <div class="why-content" data-title="Why It Matters">
+       This is where culture does the work politics can't: it makes the status quo feel wrong. Once enough people feel that, compromise gets harder to sustain. 
+      </div>
+<!-- NOTES -->
+<div class="notes-panel-content" data-title="Notes">
+  <p>Before <em>Uncle Tom’s Cabin</em>, many Northerners didn’t see slavery as their responsibility—it was something happening far away in the South. The novel changed that. It made readers face the human side of slavery through powerful stories about love, loss, and injustice. Suddenly, what had been a political issue became a personal one.</p>
+  <p>For people who weren’t committed abolitionists, the book was eye-opening. Stowe’s characters—families torn apart, parents fighting to protect their children—made slavery feel morally unbearable. It was no longer just about laws or compromises; it was about real people and real suffering.</p>
+  <p>That shift in feeling was crucial. By bringing the pain of slavery into Northern living rooms, the novel made neutrality impossible. Readers started asking themselves hard questions about what kind of nation they were part of—and whether their silence made them complicit.</p>
+</div>
+
+      
+    </section>
+
+    <!-- 8. Lincoln's (Possible) Greeting (SPLIT) -->
+    <section>
+      <h3>The Famous Line</h3>
+
+      <div class="split">
+        <div class="col-text">
+          <ul class="tight">
+            <li>Lincoln supposedly greeted Stowe with: "So you're the little woman who wrote the book that made this great war!"</li>
+            <li>The story is likely exaggerated or invented, but it captures a real truth.</li>
+            <li>The novel helped prepare the cultural ground for conflict over slavery.</li>
+            <li><button type="button" class="why-link">See Why it Matters</button></li>
+          </ul>
+        </div>
+        <figure class="img-wrap col-media">
+          <a href="images/lincoln_stowe.png" target="_blank" rel="noopener">
+            <img class="thumb" src="images/lincoln_stowe.png" alt="Abraham Lincoln meeting Harriet Beecher Stowe"/>
+          </a>
+        </figure>
+      </div>
+
+      <div class="img-meta"><span class="tag">Search:</span> "Abraham Lincoln Harriet Beecher Stowe meeting painting" •
+        <span class="tag">AI prompt:</span> "Historical figures meeting in White House office, period clothing, warm lighting, painted portrait style"
+      </div>
+
+      <div class="why-content" data-title="Why It Matters">
+        Whether Lincoln actually said it or not, the line stuck because it feels true. Uncle Tom’s Cabin didn’t start the Civil War by itself, but it helped people see slavery in a way they couldn’t ignore anymore. Stories don’t load cannons or pass laws—but they do shape how people think and feel, and that can change what a country is willing to fight for. So even if the quote is made up, the idea behind it makes sense: a powerful story can shift public opinion enough to make action inevitable.
+      </div>
+<!-- NOTES -->
+<div class="notes-panel-content" data-title="Notes">
+  <p>According to a famous story, when Abraham Lincoln met Harriet Beecher Stowe, he greeted her by saying, “So you’re the little woman who wrote the book that made this great war!” It’s one of those lines that’s probably too perfect to be true—but it stuck, because it captured what people already believed about the novel’s influence.</p>
+  <p>Whether Lincoln actually said it or not, the story reflects a real truth: <em>Uncle Tom’s Cabin</em> helped prepare the cultural ground for conflict. It didn’t cause the Civil War, but it made it harder for Americans to pretend that slavery could be ignored or endlessly compromised over. The book changed how people saw the moral stakes.</p>
+  <p>By the time the war began, Stowe’s story had already reshaped public feeling. It made readers view slavery not just as an economic or political issue, but as a test of national conscience. So even if the quote is apocryphal, its meaning endures—the power of a story to move hearts can end up moving history too.</p>
+</div>
+
+      
+    </section>
+
+    <!-- 9. Southern Backlash -->
+    <section>
+      <h3>Southern Critiques &amp; "Anti-Tom" Novels</h3>
+
+      <div class="split">
+        <div class="col-text">
+          <ul class="tight">
+		<ul class="tight">
+        <li>Southern critics said Stowe exaggerated and ignored "kind" masters.</li>
+        <li>Pro-slavery writers answered with <span class="def" data-term="Anti-Tom Novels" data-def="Pro-slavery fiction written in response to Stowe, portraying slavery as humane and Northern critics as unfair.">Anti-Tom fiction<span class="def-icon">?</span></span> that defended slavery.</li>
+        <li>The dispute exposed a deeper divide over whose stories counted as "truth."</li>
+        <li><button type="button" class="why-link">See Why it Matters</button></li>
+      </ul>
+      </div>
+        <figure class="img-wrap col-media">
+		<a href="images/960px-Aunt_Phillis's_Cabin.jpg" target="_blank" rel="noopener">
+            <img class="thumb" src="images/960px-Aunt_Phillis's_Cabin.jpg" alt="Book cover Aunt Phillis Cabin"/>
+          </a>
+        </figure>
+      </div>
+		  
+      <div class="why-content" data-title="Why It Matters">
+       This was basically a culture war fought through books. Both sides were using stories to make their moral arguments, just wrapped in dramatic, easy-to-read fiction. That’s part of why these novels spread so quickly—people weren’t just reading for entertainment; they were reading to confirm what they already believed or to challenge what others did. The “Tom” and “Anti-Tom” novels created a kind of feedback loop, each side answering the other, until reading itself became a way to take a stand.
+      </div>
+<!-- NOTES -->
+<div class="notes-panel-content" data-title="Notes">
+  <p>Southern critics reacted fiercely to <em>Uncle Tom’s Cabin</em>. They claimed Stowe had twisted the truth—portraying only the worst examples of slavery and ignoring what they called the “kindly, paternal” relationships between masters and enslaved people. Many accused her of having no firsthand knowledge of plantation life, dismissing her as a Northern woman who didn’t understand the South’s “real” culture.</p>
+  <p>In response, pro-slavery writers began publishing what became known as “Anti-Tom” novels—stories meant to set the record straight from the Southern point of view. Among the most popular were <em>Aunt Phillis’s Cabin</em> (1852) by Mary Eastman, <em>The Planter’s Northern Bride</em> (1854) by Caroline Hentz, and <em>Uncle Robin, in His Cabin in Virginia, and Tom Without One in Boston</em> (1853) by J.W. Page. These books portrayed enslaved people as loyal, content, and dependent, while painting abolitionists as dangerous meddlers who stirred up unrest.</p>
+  <p>The clash between <em>Tom</em> and <em>Anti-Tom</em> novels showed how divided the nation had become—not just politically, but morally and emotionally. Both sides were using fiction as a weapon to define “truth.” For one audience, Stowe revealed the human cost of slavery; for the other, her story was seen as a threat to their entire way of life.</p>
+</div>
+
+      
+    </section>
+
+    <!-- 10. Global Impact -->
+    <section>
+      <h3>Across the Atlantic</h3>
+
+      <ul class="tight">
+        <li>Translations carried the story across Europe, adding foreign sympathy to the anti-slavery cause.</li>
+        <li>Stowe's fame turned American slavery into a global moral question.</li>
+        <li>The novel helped frame the conflict as freedom versus oppression, not just North versus South.</li>
+        <li><button type="button" class="why-link">See Why it Matters</button></li>
+      </ul>
+
+      <div class="why-content" data-title="Why It Matters">
+        It’s important to think bigger than U.S. borders here—Uncle Tom’s Cabin wasn’t just an American story. It became an international bestseller, and that foreign audience actually mattered during the war years. Readers in Britain and France, for example, were deeply moved by Stowe’s portrayal of slavery, and that shaped how their governments thought about supporting the Confederacy. Public opinion abroad made it politically risky for European powers to side with a nation defending slavery. In other words, the book didn’t just stir emotions—it influenced trade, diplomacy, and the moral climate that U.S. leaders had to navigate. Stories like this could make certain political choices unthinkable and others suddenly necessary.
+      </div>
+<!-- NOTES -->
+<div class="notes-panel-content" data-title="Notes">
+  <p>The novel didn’t just stay in the United States. It crossed the Atlantic and became a phenomenon in Europe too. For instance, the first London edition of <em>Uncle Tom’s Cabin</em> appeared in May 1852 and sold about **200,000 copies** in its first run.</p>
+  
+  <p>By the mid-1850s, the book had been translated into dozens of languages. One source notes that by 1857 more than two million copies had been sold worldwide. These translations carried the story—and its moral message—into foreign homes, turning American slavery into a subject of global concern.</p>
+  
+  <p>What this meant for the U.S. debate was big: the novel helped frame the struggle not just as a regional conflict (North vs. South) but as a question of **freedom versus oppression** on a global stage. Readers abroad wondered how a republic that prided itself on liberty could allow human bondage—and that external scrutiny added pressure at home. </p>
+</div>
+
+      
+    </section>
+
+    <!-- 11. Toward the Civil War -->
+    <section>
+      <h3>From Feeling to Fracture</h3>
+
+      <figure class="img-wrap">
+        <a href="images/free_slave_map.jpg" target="_blank" rel="noopener">
+          <img class="thumb" src="images/free_slave_map.jpg" alt="Free vs. Slave States sectional map, 1850s"/>
+        </a>
+      </figure>
+      <div class="img-meta"><span class="tag">Search:</span> "1850s sectional map free vs slave states engraving" •
+        <span class="tag">AI prompt:</span> "Antique map, subtle color wash for sections, engraved borders, aged paper texture"
+      </div>
+
+      <ul class="tight">
+        <li>The novel made slavery a household conversation that people could no longer dodge.</li>
+        <li>By shifting hearts, it made old compromises feel morally thin and unsatisfying.</li>
+        <li>Many Americans began to see slavery as a national sin that demanded decisive change.</li>
+        <li><button type="button" class="why-link">See Why it Matters</button></li>
+      </ul>
+
+      <div class="why-content" data-title="Why It Matters">
+       The novel made slavery impossible to ignore. It brought the issue into everyday conversation and made people feel its injustice. Once hearts began to change, old compromises no longer felt acceptable—many Americans started to see slavery as a national sin that had to be confronted. You can think of it a bit like how Common Sense worked during the Revolution: Paine’s pamphlet didn’t start the war, but it gave people a new moral language to understand what was at stake. Stowe’s book did something similar—it turned a political argument into a personal conviction.
+      </div>
+<!-- NOTES -->
+<div class="notes-panel-content" data-title="Notes">
+  <p><em>Uncle Tom’s Cabin</em> turned the question of slavery into something people could no longer avoid. Before its publication, many Americans—especially in the North—treated slavery as a distant political issue. Stowe’s novel changed that by bringing the suffering of enslaved people into homes, churches, and parlors. It made slavery part of everyday conversation, something families debated around the dinner table.</p>
+  <p>That emotional awakening had real political consequences. By making readers <em>feel</em> the injustice, the novel made old compromises—like the Missouri Compromise or the Fugitive Slave Act—seem morally hollow. The story didn’t offer policy solutions; it changed people’s sense of right and wrong. Once that happened, the old political balancing acts no longer satisfied the moral urgency many now felt.</p>
+  <p>In this way, Stowe’s book helped push the nation from discomfort to confrontation. Many Americans began to see slavery not as someone else’s problem, but as a national sin that demanded action. That moral clarity helped prepare the ground for the political fractures—and ultimately, the war—that followed.</p>
+</div>
+
+      
+    </section>
+
+    <!-- 12. Key Terms Recap (SPLIT + removed leftover intro box) -->
+    <section>
+      <h3>Key Terms — Click the ? for Definitions</h3>
+
+      <div class="split">
+        <div class="col-text">
+          <p class="tight" style="margin-top: 1rem;">
+            <span class="def" data-term="Fugitive Slave Act (1850)" data-def="Required the return of people who escaped slavery and criminalized assistance.">Fugitive Slave Act<span class="def-icon">?</span></span>
+            <span class="chip">Law</span>
+              •  
+            <span class="def" data-term="Sentimental Fiction" data-def="Emotion-driven fiction used to teach moral lessons and inspire reform.">Sentimental Fiction<span class="def-icon">?</span></span>
+            <span class="chip">Genre</span>
+            <br style="margin: .8rem 0;"/>
+            <span class="def" data-term="National Era" data-def="Antislavery weekly where Stowe serialized her novel in 1851–52.">National Era<span class="def-icon">?</span></span>
+            <span class="chip">Press</span>
+              •  
+            <span class="def" data-term="Anti-Tom Novels" data-def="Pro-slavery responses portraying slavery as benevolent and criticizing Stowe.">Anti-Tom Novels<span class="def-icon">?</span></span>
+            <span class="chip">Counter-Literature</span>
+          </p>
+        </div>
+        <figure class="img-wrap col-media">
+          <a href="images/title_page.jpg" target="_blank" rel="noopener">
+            <img class="thumb" src="images/title_page.jpg" alt="Illustrated title page style art"/>
+          </a>
+        </figure>
+      </div>
+
+      <div class="img-meta"><span class="tag">Search:</span> "Uncle Tom's Cabin 1852 illustrated edition title page" •
+        <span class="tag">AI prompt:</span> "Victorian title page design, flourished borders, engraved ornaments, bookish tone"
+      </div>
+
+      <div class="notes-panel-content" data-title="What to Remember">
+        Keep the chain in mind: law → conscience → story → public → politics. Stowe sits in the middle of that chain and accelerates it.
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- Notes Sidebar -->
+<aside id="notesSidebar" aria-hidden="true">
+  <div id="notesHeader">
+    <h3 id="notesTitle">Notes</h3>
+    <div><span id="notesHint">toggle with <span class="kbd">L</span></span></div>
+  </div>
+  <div class="notesContent" id="notesContent">Slide notes will appear here.</div>
+</aside>
+
+<!-- Helper -->
+<div class="helper">
+  Press <span class="kbd">L</span> for side notes • Click <span style="border-bottom:2px dotted var(--accent-light); padding-bottom: 1px;">underlined terms</span> or the <span class="def-icon" style="vertical-align:middle; margin: 0 3px;">?</span> for definitions • Click <strong>See Why it Matters</strong> for a quick purpose pop-up
+</div>
+
+<!-- Why-it-matters modal -->
+<div class="modal-overlay" id="whyOverlay" aria-hidden="true"></div>
+<div class="modal" id="whyModal" role="dialog" aria-modal="true" aria-labelledby="whyTitle">
+  <div class="modal-header">
+    <h4 class="modal-title" id="whyTitle">Why It Matters</h4>
+    <button class="modal-close" type="button" id="whyClose" aria-label="Close">✕</button>
+  </div>
+  <div class="modal-body" id="whyBody"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+<script>
+  const deck = new Reveal({
+    hash: true, controls: true, progress: true, slideNumber: 'c/t', history: true, center: true,
+    transition: 'slide', backgroundTransition: 'fade',
+    autoPlayMedia: true, preloadIframes: true,
+    width: 1280, height: 720, margin: 0.04, minScale: 0.2, maxScale: 2.0
+  });
+  deck.initialize();
+
+  // Disable Up/Down to allow native scrolling inside slides
+  deck.configure({ keyboard: { 38: null, 40: null } });
+
+  function toggleHelper(){
+    const helper = document.querySelector('.helper'); if(!helper) return;
+    const idx = deck.getIndices(); helper.style.display = (idx.h===0 && idx.v===0) ? '' : 'none';
+  }
+  deck.on('ready', toggleHelper);
+  deck.on('slidechanged', toggleHelper);
+
+  /* Definition Tooltips */
+  let activeTip = null;
+  function closeTip(){ if(activeTip && activeTip.parentNode){ activeTip.parentNode.removeChild(activeTip); activeTip=null; } }
+  function showTip(target){
+    closeTip();
+    const term = target.getAttribute('data-term') || 'Definition';
+    const def  = target.getAttribute('data-def')  || '';
+    const tip = document.createElement('div');
+    tip.className = 'tooltip';
+    tip.innerHTML = '<h4>'+term+'</h4><p>'+def+'</p>';
+    document.body.appendChild(tip);
+    const rect = target.getBoundingClientRect(); const pad = 10;
+    let left = rect.left + window.scrollX; let top = rect.bottom + window.scrollY + pad;
+    const vw = window.innerWidth, vh = window.innerHeight;
+    if(left + tip.offsetWidth > vw - 15) left = vw - tip.offsetWidth - 15;
+    if(top + tip.offsetHeight > vh + window.scrollY - 15) top = rect.top + window.scrollY - tip.offsetHeight - pad;
+    tip.style.left = left + 'px'; tip.style.top  = top + 'px';
+    activeTip = tip;
+  }
+  document.addEventListener('click', (e)=>{
+    const t = e.target;
+    if(t.classList.contains('def') || t.classList.contains('def-icon')){
+      let host = t;
+      if(!t.classList.contains('def')){
+        const prev = t.previousElementSibling;
+        host = (prev && prev.classList.contains('def')) ? prev : t.closest('.def') || t;
+      }
+      showTip(host); e.stopPropagation();
+    }else{ closeTip(); }
+  });
+  window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ closeTip(); closeWhy(); } });
+
+  /* Notes Sidebar (L toggle) */
+  const sidebar = document.getElementById('notesSidebar');
+  const notesTitle = document.getElementById('notesTitle');
+  const notesContent = document.getElementById('notesContent');
+  function loadSlideNotes(){
+    const current = deck.getCurrentSlide(); if(!current) return;
+    const note = current.querySelector('.notes-panel-content');
+    const title = note?.getAttribute('data-title') || 'Notes';
+    notesTitle.textContent = title;
+    notesContent.innerHTML = note ? note.innerHTML : '<em>No notes for this slide.</em>';
+  }
+  document.addEventListener('keydown', (e)=>{
+    if(e.key.toLowerCase() === 'l'){
+      loadSlideNotes();
+      const open = sidebar.classList.toggle('open');
+      sidebar.setAttribute('aria-hidden', (!open).toString());
+    }
+  });
+  deck.on('slidechanged', () => { if(sidebar.classList.contains('open')) loadSlideNotes(); });
+  deck.on('ready', () => {
+    loadSlideNotes();
+    const firstSlide = deck.getCurrentSlide(); if(firstSlide) firstSlide.classList.add('fade-in');
+  });
+  deck.on('slidechanged', closeTip);
+
+  /* Why-it-matters Modal */
+  const overlay = document.getElementById('whyOverlay');
+  const modal = document.getElementById('whyModal');
+  const bodyEl = document.getElementById('whyBody');
+  const titleEl = document.getElementById('whyTitle');
+  const closeBtn = document.getElementById('whyClose');
+
+  function openWhy(title, html){
+    titleEl.textContent = title || 'Why It Matters';
+    bodyEl.innerHTML = html || '';
+    overlay.style.display = 'block';
+    modal.style.display = 'block';
+    overlay.setAttribute('aria-hidden','false');
+  }
+  function closeWhy(){
+    overlay.style.display = 'none';
+    modal.style.display = 'none';
+    overlay.setAttribute('aria-hidden','true');
+  }
+  closeBtn.addEventListener('click', closeWhy);
+  overlay.addEventListener('click', closeWhy);
+
+  document.addEventListener('click', (e)=>{
+    const link = e.target.closest('.why-link');
+    if(!link) return;
+    e.preventDefault(); // ensure no navigation
+    const section = link.closest('section');
+    const holder = section.querySelector('.why-content');
+    const title = holder?.getAttribute('data-title') || 'Why It Matters';
+    const html  = holder ? holder.innerHTML.trim() : '';
+    openWhy(title, html);
+  });
+</script>
+</body>
+</html>

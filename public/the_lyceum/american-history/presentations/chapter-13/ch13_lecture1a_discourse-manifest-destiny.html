@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discourse &amp; Manifest Destiny - HIST 101</title>
+    
+    <!-- Reveal.js CSS from CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --desert-flower: #FF9B8A;
+            --cattleya-orchid: #A25FB0;
+            --opera-mauve: #D4A5C8;
+            --blue-curacao: #48C9C9;
+            --spicy-mustard: #D9A757;
+            --mocha-mousse: #A78674;
+            --arabesque: #C8826D;
+            --dark-bg: #2F2F2F;
+            --light-text: #FAFAFA;
+        }
+        
+        .reveal {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 32px;
+        }
+        
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--desert-flower);
+            text-transform: none;
+        }
+        
+        .reveal h1 { font-size: 3em; }
+        .reveal h2 { font-size: 2em; }
+        .reveal h3 { font-size: 1.5em; color: var(--spicy-mustard); }
+        
+        .reveal a {
+            color: var(--blue-curacao);
+            text-decoration: underline;
+        }
+        
+        .reveal a:hover {
+            color: var(--opera-mauve);
+        }
+        
+        /* Pop-up/Modal styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--light-text);
+            color: var(--dark-bg);
+            padding: 2em;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            max-width: 70%;
+            max-height: 70%;
+            overflow-y: auto;
+            z-index: 1000;
+            border: 3px solid var(--cattleya-orchid);
+            text-align: left;
+        }
+        
+        .popup.active { display: block; }
+        
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 2em;
+            cursor: pointer;
+            color: var(--arabesque);
+        }
+        
+        .popup-trigger {
+            color: var(--blue-curacao);
+            cursor: pointer;
+            border-bottom: 2px dotted var(--blue-curacao);
+        }
+        
+        .popup-trigger:hover {
+            color: var(--cattleya-orchid);
+            border-bottom-color: var(--cattleya-orchid);
+        }
+        
+        /* Key term styling */
+        .key-term {
+            color: var(--cattleya-orchid);
+            font-weight: 600;
+        }
+        
+        /* Definition box */
+        .definition-box {
+            background: rgba(162, 95, 176, 0.2);
+            border: 3px solid var(--cattleya-orchid);
+            border-radius: 15px;
+            padding: 1.5em;
+            margin: 1em auto;
+            max-width: 85%;
+            text-align: left;
+        }
+        
+        /* Example box */
+        .example-box {
+            background: rgba(217, 167, 87, 0.2);
+            border-left: 5px solid var(--spicy-mustard);
+            padding: 1em 1.5em;
+            margin: 1em auto;
+            max-width: 85%;
+            text-align: left;
+        }
+        
+        /* Concept list */
+        .concept-list {
+            text-align: left;
+            margin: 0 auto;
+            max-width: 85%;
+        }
+        
+        .concept-list li {
+            margin-bottom: 0.8em;
+            line-height: 1.5;
+        }
+        
+        /* Segue arrow */
+        .segue-arrow {
+            color: var(--blue-curacao);
+            font-size: 1.5em;
+            margin: 0.5em 0;
+        }
+        
+        /* Two column layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2em;
+            text-align: left;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+        
+        .col-box {
+            background: rgba(72, 201, 201, 0.15);
+            border: 2px solid var(--blue-curacao);
+            border-radius: 10px;
+            padding: 1.2em;
+        }
+        
+        .col-box h3 {
+            margin-top: 0;
+            font-size: 1.3em;
+        }
+        
+        /* Embedded discourse special styling */
+        .embedded-box {
+            background: rgba(200, 130, 109, 0.2);
+            border: 3px solid var(--arabesque);
+            border-radius: 15px;
+            padding: 1.5em;
+            margin: 1em auto;
+            max-width: 85%;
+            text-align: left;
+        }
+        
+        .embedded-box h3 {
+            color: var(--arabesque);
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+            <!-- Slide 1: What is Discourse? -->
+            <section>
+                <h1>Discourse</h1>
+                <h3>An Analytical Tool</h3>
+                
+                <div class="definition-box">
+                    <p><strong>Discourse is the system of language, ideas, and rules that a society uses to define what is true, normal, and possible.  It shapes both how we think and how power operates.  Discourse</strong> is a system of <span class="popup-trigger" onclick="togglePopup('knowledge-popup')">knowledge-production</span> that shapes what can be said, thought, and known about a subject</p>
+                </div>
+                
+                <div class="example-box">
+                    <p><strong>Example:</strong> "Scientific racism" wasn't just prejudice—it was a discourse that organized research questions, institutional practices, and policy decisions around the assumption of racial hierarchy</p>
+                </div>
+                
+                <!-- Knowledge-production popup -->
+                <div id="knowledge-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('knowledge-popup')">&times;</span>
+                    <h3>Knowledge-Production</h3>
+                    <p>Discourses don't just describe reality—they <em>create</em> what counts as true, scientific, or common sense. They determine:</p>
+                    <ul>
+                        <li>What questions are worth asking</li>
+                        <li>What evidence is considered valid</li>
+                        <li>Who has authority to speak</li>
+                        <li>What conclusions seem natural or inevitable</li>
+                    </ul>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>Discourse is MORE than just talk or language. Think of it as an invisible architecture that shapes how a whole society sees the world. Once you recognize the architecture, you start seeing how it shows up everywhere—in paintings, laws, sermons, scientific reports, and everyday conversation.</p>
+                    
+                    <h4>📖 Key Definitions</h4>
+                    <ul>
+                        <li><strong>Discourse</strong>: A system of knowledge-production that determines what can be said, thought, and known about a subject at a particular historical moment</li>
+                        <li><strong>Knowledge-production</strong>: The process by which certain ideas come to be accepted as true, natural, or common sense</li>
+                    </ul>
+                    
+                    <h4>💭 Context & Connections</h4>
+                    <p>This concept comes from Michel Foucault, a French philosopher. You don't need to know Foucault's work in detail—just understand that discourse analysis helps us see how IDEAS have real POWER because they shape institutions, policies, and what people believe is possible or inevitable.</p>
+                    
+                    <h4>🎓 Senior Historians' Corner</h4>
+                    <p>Foucault argued that power operates not just through force but through systems of knowledge that make certain arrangements seem natural. Historians use discourse analysis to examine how language, imagery, and institutional practices worked together to create "common sense" about race, gender, nation, and progress.</p>
+                </aside>
+            </section>
+            
+            <!-- Slide 2: Manifest Destiny as Discourse -->
+            <section>
+                <h2>Manifest Destiny as Discourse</h2>
+                
+                <p style="font-style: italic; color: var(--opera-mauve); margin-bottom: 1em;">Not just an idea—a knowledge system that made expansion feel inevitable</p>
+                
+                <ul class="concept-list">
+                    <li><span class="key-term">Naturalized violence</span> — Dispossession became historical process, not political choice</li>
+                    <li><span class="key-term">Organized knowledge</span> — Surveys, ethnography, travel writing all reinforced the same message</li>
+                    <li><span class="key-term">Created identities</span> — Anglo-Americans = agents of progress; Indigenous peoples = obstacles</li>
+                    <li><span class="key-term">Had material effects</span> — Shaped policy, law, and physical transformation of landscapes</li>
+                </ul>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>Manifest Destiny wasn't just something Americans believed—it was a whole system that made continental expansion feel self-evident and inevitable. It didn't just justify expansion; it made expansion seem unthinkable NOT to pursue.</p>
+                    
+                    <h4>📖 Key Definitions</h4>
+                    <ul>
+                        <li><strong>Naturalized violence</strong>: Making violent acts appear to be natural processes rather than human choices</li>
+                        <li><strong>Subject positions</strong>: The identities or roles that a discourse creates for different groups of people</li>
+                    </ul>
+                    
+                    <h4>💭 Context & Connections</h4>
+                    <p>The term "Manifest Destiny" emerged in the 1840s, but it crystallized older ideas: Puritan "errand into the wilderness," republican empire, and racial hierarchy. The discourse wove together religious providentialism, racial science, gender norms (feminized landscape needing masculine conquest), and economic development theory.</p>
+                    
+                    <h4>🤔 Discussion Prompts</h4>
+                    <ul>
+                        <li>What's the difference between saying "Americans chose to expand westward" versus "America's destiny was to expand westward"?</li>
+                        <li>Can you think of modern examples where political choices are framed as inevitable?</li>
+                    </ul>
+                </aside>
+            </section>
+            
+            <!-- Slide 3: Art & Photography as Discursive Artifacts -->
+            <section>
+                <h2>Art &amp; Photography as <span class="popup-trigger" onclick="togglePopup('artifact-popup')">Discursive Artifacts</span></h2>
+                
+                <div class="two-col">
+                    <div class="col-box">
+                        <h3>Painting</h3>
+                        <p>Gast's <em>American Progress</em> (1872) doesn't just <em>show</em> Manifest Destiny—it <strong>constructs</strong> it as visual truth</p>
+                        <ul style="font-size: 0.9em;">
+                            <li>Organizes space (light → dark)</li>
+                            <li>Organizes time (one direction)</li>
+                            <li>Assigns roles (agents vs. obstacles)</li>
+                        </ul>
+                    </div>
+                    <div class="col-box">
+                        <h3>Photography</h3>
+                        <p>Survey photography claimed <strong>objectivity</strong> while carefully constructing the West</p>
+                        <ul style="font-size: 0.9em;">
+                            <li>Emphasized resources & emptiness</li>
+                            <li>Excluded Indigenous presence</li>
+                            <li>Framing = discursive practice</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Discursive artifact popup -->
+                <div id="artifact-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('artifact-popup')">&times;</span>
+                    <h3>Discursive Artifacts</h3>
+                    <p>A <strong>discursive artifact</strong> is a material object—a painting, photograph, map, or document—that embodies and reproduces a discourse's core assumptions.</p>
+                    <p>These artifacts don't just <em>reflect</em> ideology; they actively <em>produce and circulate</em> it. They make the discourse visible, tangible, and emotionally resonant.</p>
+                    <p>Every image of the West was teaching Americans how to see, what to value, and who had the right to possess.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>Visual culture—paintings, photographs, maps—didn't just reflect Manifest Destiny ideology. These images actively PRODUCED and CIRCULATED the discourse. They convinced congressmen to fund surveys, investors to back railroads, settlers to move west, and the public to support wars of conquest.</p>
+                    
+                    <h4>📖 Key Definitions</h4>
+                    <ul>
+                        <li><strong>Discursive artifact</strong>: A material object (painting, photo, map) that embodies and reproduces a discourse's core assumptions</li>
+                        <li><strong>Visual discourse</strong>: The way images produce and circulate knowledge and power</li>
+                    </ul>
+                    
+                    <h4>💭 Context & Connections</h4>
+                    <p>Photography was especially powerful because it claimed to be objective "truth." Photographers like Timothy O'Sullivan and William Henry Jackson accompanied government surveys in the 1860s-70s. Their images were understood as scientific documents, not artistic interpretations—but the choice of what to photograph (and what to leave out) was itself a discursive practice.</p>
+                    
+                    <h4>🎓 Senior Historians' Corner</h4>
+                    <p><strong>Alan Trachtenberg</strong> argues that photography helped Americans "incorporate" the West into national consciousness. <strong>Martha Sandweiss</strong> shows how survey photographs served multiple audiences—Congress, investors, general public—each reading the images differently but all reinforced by the same expansionist assumptions.</p>
+                </aside>
+            </section>
+            
+            <!-- Slide 4: Vanishing Indian as Embedded Discourse -->
+            <section>
+                <h2>Myth of the "Vanishing Indian" as <span class="popup-trigger" onclick="togglePopup('embedded-popup')">Embedded Discourse</span></h2>
+                
+                <div class="embedded-box">
+                    <h3>The Ideological Work</h3>
+                    <p>The myth of the vanishing Indian is a false, but influential story that claimed Native peoples were naturally disappearing, which helped justify U.S. expansion and hide the violence of removal, war, and assimilation.</p>
+                </div>
+                
+                <ul class="concept-list">
+                    <li><strong>Literature:</strong> Cooper's <em>Last of the Mohicans</em> — noble but doomed</li>
+                    <li><strong>Anthropology:</strong> "Salvage ethnography" assumed extinction was inevitable</li>
+                    <li><strong>Photography:</strong> Curtis staged "traditional" life as naturally fading</li>
+                    <li><strong>Effect:</strong> Transforms perpetrators into mourners; makes present Indigenous peoples "inauthentic"</li>
+                </ul>
+                
+                <!-- Embedded discourse popup -->
+                <div id="embedded-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('embedded-popup')">&times;</span>
+                    <h3>Embedded Discourse</h3>
+                    <p>An <strong>embedded discourse</strong> is a sub-discourse that operates within a larger discursive framework, doing specific ideological work.</p>
+                    <p>The "Vanishing Indian" myth resolved a fundamental contradiction: How could a nation founded on liberty justify dispossession and destruction of Indigenous peoples?</p>
+                    <p><strong>Answer:</strong> If Indians are "vanishing" naturally—through some inevitable historical or biological process—then Americans are absolved of responsibility.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>The "Vanishing Indian" was a powerful sub-discourse that solved a problem: How could democratic Americans justify what they were doing to Indigenous peoples? Answer: If Indians were naturally disappearing, Americans weren't responsible—they were just witnesses (or even sympathetic mourners) to an inevitable historical process.</p>
+                    
+                    <h4>📖 Key Definitions</h4>
+                    <ul>
+                        <li><strong>Embedded discourse</strong>: A sub-discourse operating within a larger discursive framework, doing specific ideological work</li>
+                        <li><strong>Salvage ethnography</strong>: Anthropological practice based on the assumption that Indigenous cultures were disappearing and needed to be documented before extinction</li>
+                    </ul>
+                    
+                    <h4>💭 Context & Connections</h4>
+                    <p>This discourse persists TODAY. Indigenous peoples did not vanish—they survived, adapted, and continue to assert sovereignty. Yet the discourse was so powerful that many Americans are still surprised to learn Native peoples exist. The "vanishing" narrative shaped policy (why honor treaties with peoples assumed to be disappearing?) and continues to affect representation and recognition.</p>
+                    
+                    <h4>🎓 Senior Historians' Corner</h4>
+                    <p><strong>Brian Dippie's</strong> <em>The Vanishing American</em> traces this idea through American culture. <strong>Philip Deloria</strong> shows how "playing Indian" allowed white Americans to claim Indigenous identity while actual Indigenous peoples were being dispossessed. The myth of vanishing reconciled American democratic self-image with the reality.</p>
+                    
+                    <h4>🤔 Discussion Prompts</h4>
+                    <ul>
+                        <li>Why is it significant that this discourse made Americans feel like "mourners" rather than perpetrators?</li>
+                        <li>Where do you still see the "Vanishing Indian" narrative today?</li>
+                    </ul>
+                </aside>
+            </section>
+            
+        </div>
+    </div>
+    
+    <!-- Reveal.js and plugins from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/zoom/zoom.js"></script>
+    
+    <script>
+        Reveal.initialize({
+            width: 1920,
+            height: 1080,
+            margin: 0.1,
+            minScale: 0.2,
+            maxScale: 2.0,
+            controls: true,
+            progress: true,
+            center: true,
+            hash: true,
+            transition: 'slide',
+            plugins: [ RevealNotes, RevealHighlight, RevealZoom ]
+        });
+        
+        function togglePopup(id) {
+            document.getElementById(id).classList.toggle('active');
+        }
+        
+        // Close popup when clicking outside
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('popup')) {
+                event.target.classList.remove('active');
+            }
+        });
+        
+        // Close popup with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                document.querySelectorAll('.popup.active').forEach(function(popup) {
+                    popup.classList.remove('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

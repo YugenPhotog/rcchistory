@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading Quiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .question { margin-bottom: 15px; }
+        .hidden { display: none; }
+        .feedback { margin-top: 10px; font-weight: bold; }
+        .correct { color: green; }
+        .incorrect { color: red; }
+    </style>
+</head>
+<body>
+
+    <h2>Quick Quiz on the Reading</h2>
+
+    <div class="quiz">
+        <div class="question" id="q1">
+            <p>1. What was a major effect of the First Great Awakening?</p>
+            <input type="radio" name="q1" value="A"> A. Strengthened the power of colonial elites<br>
+            <input type="radio" name="q1" value="B"> B. Increased religious diversity and personal faith experiences<br>
+            <input type="radio" name="q1" value="C"> C. Led directly to the American Revolution<br>
+            <input type="radio" name="q1" value="D"> D. Reduced interest in religious gatherings<br>
+            <p class="feedback hidden" id="q1-feedback"></p>
+        </div>
+
+        <div class="question" id="q2">
+            <p>2. Who was a key preacher of the Great Awakening?</p>
+            <input type="radio" name="q2" value="A"> A. Benjamin Franklin<br>
+            <input type="radio" name="q2" value="B"> B. Thomas Jefferson<br>
+            <input type="radio" name="q2" value="C"> C. Jonathan Edwards<br>
+            <input type="radio" name="q2" value="D"> D. Alexander Hamilton<br>
+            <p class="feedback hidden" id="q2-feedback"></p>
+        </div>
+
+        <button onclick="checkAnswers()">Submit</button>
+        <p id="result" class="hidden"></p>
+    </div>
+
+    <script>
+        function checkAnswers() {
+            let score = 0;
+            let answers = {
+                "q1": "B",
+                "q2": "C"
+            };
+            let feedbackMessages = {
+                "q1": {
+                    "A": "Incorrect. The Great Awakening actually challenged elite authority by emphasizing personal faith over church hierarchy.",
+                    "B": "Correct! The movement encouraged individual religious experiences and led to the rise of new denominations.",
+                    "C": "Incorrect. While the Great Awakening influenced revolutionary thinking, it did not directly cause the Revolution.",
+                    "D": "Incorrect. Religious participation increased as revival meetings became widespread."
+                },
+                "q2": {
+                    "A": "Incorrect. Benjamin Franklin was a key Enlightenment figure but not a preacher in the Great Awakening.",
+                    "B": "Incorrect. Thomas Jefferson focused on political philosophy, not religious revivalism.",
+                    "C": "Correct! Jonathan Edwards was a leading preacher who delivered the famous sermon 'Sinners in the Hands of an Angry God.'",
+                    "D": "Incorrect. Alexander Hamilton played a major role in early U.S. politics but was not a religious leader."
+                }
+            };
+
+            let totalQuestions = Object.keys(answers).length;
+            for (let key in answers) {
+                let selected = document.querySelector(`input[name="${key}"]:checked`);
+                let feedback = document.getElementById(`${key}-feedback`);
+                if (selected) {
+                    if (selected.value === answers[key]) {
+                        score++;
+                        feedback.classList.add("correct");
+                    } else {
+                        feedback.classList.add("incorrect");
+                    }
+                    feedback.textContent = feedbackMessages[key][selected.value];
+                    feedback.classList.remove("hidden");
+                } else {
+                    feedback.textContent = "Please select an answer.";
+                    feedback.classList.add("incorrect");
+                    feedback.classList.remove("hidden");
+                }
+            }
+
+            let resultText = `You got ${score} out of ${totalQuestions} correct.`;
+            document.getElementById("result").textContent = resultText;
+            document.getElementById("result").classList.remove("hidden");
+        }
+    </script>
+
+</body>
+</html>

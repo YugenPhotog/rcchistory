@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Reveal Deck Template</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/theme/black.min.css">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides" id="slides-root">
+      <section>
+        <h2>Loading…</h2>
+        <p>If this persists, serve via http://localhost to avoid local file fetch restrictions.</p>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    fetch('slides.html')
+      .then(r => r.text())
+      .then(html => { document.getElementById('slides-root').innerHTML = html; })
+      .then(() => {
+        const s = document.createElement('script');
+        s.src = 'assets/reveal-init.js';
+        document.body.appendChild(s);
+      })
+      .catch(err => console.error('Failed to load slides.html:', err));
+  </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Slave Religion in the Antebellum South</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/night.css" id="theme" />
+  <style>
+    body{background:#0C1730;color:#ECF0F1;font-family:'Segoe UI',sans-serif;}
+    .reveal .slides section{max-width:1200px;margin:0 auto;text-align:left;padding:22px;}
+    h1,h2,h3{color:#D4AF37;}
+    .scroll-content{max-height:68vh;overflow-y:auto;padding-right:14px;border-left:4px solid rgba(212,175,55,.6);}
+    .quote{border-left:6px solid #f38181;padding:16px;margin:18px 0;background:rgba(255,255,255,.06);border-radius:8px;}
+    .image-box img{width:100%;border-radius:8px;}
+    .nav-hint{position:fixed;bottom:2vh;right:2vw;background:rgba(0,0,0,.45);padding:10px 14px;border-radius:6px;font-size:.7em;color:#fff;}
+    /* Modal popup */
+    .sf-modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:9999;}
+    .sf-card{background:#0e1a38;border:1px solid #2b3a68;border-radius:12px;max-width:min(900px,92vw);max-height:82vh;overflow:auto;padding:18px 22px;box-shadow:0 10px 30px rgba(0,0,0,.45);}
+    .sf-card h3{color:#D4AF37;margin-top:0;}
+    #sfClose{background:#15244a;border:1px solid #2b3a68;color:#fff;padding:6px 10px;border-radius:8px;cursor:pointer;}
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <h1>Slave Religion in the Antebellum South</h1>
+        <p class="subtitle">Religion as Control and Resistance</p>
+        <aside class="notes">
+          <h3>Study Notes</h3>
+          <p>Religion could both control and liberate. Enslaved people reinterpreted Christianity to find meaning, justice, and community.</p>
+        </aside>
+      </section>
+    </div>
+  </div>
+
+  <div class="sf-modal" id="sfModal">
+    <div class="sf-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <h3>Study Notes</h3>
+        <button id="sfClose">Close ✕</button>
+      </div>
+      <div id="sfBody"></div>
+      <p style="font-size:.85em;color:#cbd5e1;margin-top:8px;">Press <kbd>S</kbd> again or <kbd>Esc</kbd> to close.</p>
+    </div>
+  </div>
+
+  <div class="nav-hint">Press <b>S</b> for Study Notes</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      controls:true,progress:true,hash:true,slideNumber:'c/t',
+      transition:'fade',transitionSpeed:'default',width:1200,height:800,
+      margin:0.08,minScale:0.2,maxScale:2.0,autoAnimate:true
+    });
+
+    // Simple popup notes on S
+    const modal=document.getElementById('sfModal');
+    const body=document.getElementById('sfBody');
+    const closeBtn=document.getElementById('sfClose');
+    function openNotes(){
+      const slide=Reveal.getCurrentSlide();
+      const notes=slide?slide.querySelector('aside.notes'):null;
+      body.innerHTML=notes?notes.innerHTML:'<p>No study notes for this slide.</p>';
+      modal.style.display='flex';
+    }
+    function closeNotes(){modal.style.display='none';}
+    document.addEventListener('keydown',e=>{
+      if(e.key.toLowerCase()==='s'){e.preventDefault();modal.style.display==='flex'?closeNotes():openNotes();}
+      if(e.key==='Escape')closeNotes();
+    });
+    closeBtn.addEventListener('click',closeNotes);
+    modal.addEventListener('click',e=>{if(e.target===modal)closeNotes();});
+  </script>
+</body>
+</html>

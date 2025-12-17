@@ -1,0 +1,929 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why the North Won: The Civil War as Second Revolution - HIST 101</title>
+    
+    <!-- Reveal.js CSS from CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+    :root {
+        --desert-flower: #FF9B8A;
+        --cattleya-orchid: #A25FB0;
+        --opera-mauve: #D4A5C8;
+        --blue-curacao: #48C9C9;
+        --spicy-mustard: #D9A757;
+        --mocha-mousse: #A78674;
+        --arabesque: #C8826D;
+        --dark-bg: #2F2F2F;
+        --light-text: #FAFAFA;
+    }
+
+    .reveal {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 44px;
+        background-color: var(--dark-bg);
+        color: var(--light-text);
+    }
+
+    .reveal h1, .reveal h2, .reveal h3 {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        color: var(--desert-flower);
+        text-transform: none;
+    }
+
+    .reveal h1 { font-size: 3.2em; margin-bottom: 0.5em; }
+    .reveal h2 { font-size: 2.2em; margin-bottom: 0.8em; }
+    .reveal h3 { font-size: 1.7em; margin-bottom: 0.5em; }
+
+    .reveal a {
+        color: var(--blue-curacao);
+        text-decoration: underline;
+    }
+
+    .reveal a:hover {
+        color: var(--opera-mauve);
+    }
+
+    .reveal ul {
+        line-height: 1.6;
+    }
+
+    .reveal li {
+        margin-bottom: 0.5em;
+    }
+
+    /* Pop-up/Modal styling */
+    .popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: var(--light-text);
+        color: var(--dark-bg);
+        padding: 2em;
+        border-radius: 15px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        max-width: 70%;
+        max-height: 70%;
+        overflow-y: auto;
+        z-index: 1000;
+        border: 3px solid var(--cattleya-orchid);
+        font-size: 0.8em;
+    }
+
+    .popup.active { display: block; }
+
+    .popup-close {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        font-size: 2em;
+        cursor: pointer;
+        color: var(--arabesque);
+    }
+
+    .popup-trigger {
+        color: var(--blue-curacao);
+        text-decoration: underline dotted;
+        cursor: pointer;
+        border-bottom: 2px dotted var(--blue-curacao);
+    }
+
+    .popup-trigger:hover {
+        color: var(--cattleya-orchid);
+        border-bottom-color: var(--cattleya-orchid);
+    }
+
+    /* Key term styling */
+    .key-term {
+        color: var(--cattleya-orchid);
+        font-weight: 600;
+    }
+
+    /* Section header styling */
+    .section-header {
+        background: linear-gradient(135deg, var(--cattleya-orchid), var(--arabesque));
+        padding: 1em;
+        border-radius: 15px;
+        margin: 1em 0;
+    }
+
+    /* Comparison grid */
+    .comparison-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2em;
+        margin-top: 1em;
+    }
+
+    .comparison-box {
+        border: 3px solid var(--cattleya-orchid);
+        padding: 1.5em;
+        border-radius: 10px;
+        background: rgba(162, 95, 176, 0.1);
+    }
+
+    .comparison-box.highlight {
+        border-color: var(--spicy-mustard);
+        background: rgba(217, 167, 87, 0.15);
+    }
+
+    /* Emphasis box */
+    .emphasis-box {
+        background: rgba(217, 167, 87, 0.2);
+        border-left: 5px solid var(--spicy-mustard);
+        padding: 1em;
+        margin: 1em 0;
+        font-style: italic;
+    }
+
+    /* Primary source styling */
+    .primary-source {
+        background: rgba(217, 167, 87, 0.2);
+        border-left: 5px solid var(--spicy-mustard);
+        padding: 1em;
+        margin: 1em 0;
+        font-style: italic;
+    }
+
+    /* Historian quote styling */
+    .historian-quote {
+        border-left: 5px solid var(--arabesque);
+        padding-left: 1.5em;
+        font-style: italic;
+        color: var(--opera-mauve);
+    }
+
+    .historian-attribution {
+        text-align: right;
+        font-size: 0.9em;
+        color: var(--mocha-mousse);
+        margin-top: 0.5em;
+    }
+
+    /* Subtitle styling */
+    .subtitle {
+        color: var(--opera-mauve);
+        font-size: 0.9em;
+        margin-top: -0.5em;
+    }
+
+    /* Analysis box */
+    .analysis-box {
+        background: rgba(72, 201, 201, 0.15);
+        border: 2px solid var(--blue-curacao);
+        padding: 1.2em;
+        border-radius: 10px;
+        margin: 1em 0;
+    }
+
+    /* Big question styling */
+    .big-question {
+        font-size: 1.4em;
+        color: var(--spicy-mustard);
+        text-align: center;
+        padding: 1em;
+        margin: 1em 0;
+    }
+
+    /* Factor list styling */
+    .factor-item {
+        display: flex;
+        align-items: flex-start;
+        margin: 0.8em 0;
+        padding: 0.5em;
+        border-left: 4px solid var(--blue-curacao);
+        padding-left: 1em;
+    }
+
+    .factor-label {
+        color: var(--spicy-mustard);
+        font-weight: bold;
+        min-width: 180px;
+    }
+</style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- SLIDE 1: TITLE -->
+            <section>
+                <h1>Why the North Won</h1>
+                <h2 style="color: var(--opera-mauve);">The Civil War as America's Second Revolution</h2>
+                <p class="subtitle">HIST 101 — United States to 1877</p>
+                
+                <div class="emphasis-box" style="margin-top: 2em;">
+                    Today we move from <em>what happened</em> to <em>why it mattered</em>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 Lecture Goals</h4>
+                    <p>This lecture assumes students have already learned the chronology and key events of the Civil War. Today we shift from narrative to analysis. We're asking the historian's question: <strong>Why?</strong></p>
+                    
+                    <h4>📖 Three Big Questions</h4>
+                    <ul>
+                        <li>Why did the North win a war many thought the South could win?</li>
+                        <li>How did the Emancipation Proclamation transform the war's meaning?</li>
+                        <li>Why do historians call this a "Second American Revolution"?</li>
+                    </ul>
+                    
+                    <h4>🎓 The Analytical Shift</h4>
+                    <p>In the study materials, you learned dates, battles, and key figures. That's essential foundation. But history isn't just memorizing what happened—it's understanding <em>why</em> things happened and <em>what difference they made</em>. That's what separates historical thinking from trivia.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 2: FRAMING QUESTION -->
+            <section>
+                <h2>The Puzzle of Union Victory</h2>
+                
+                <div class="big-question">
+                    Why did the North win a war it was losing through 1862?
+                </div>
+                
+                <ul>
+                    <li>Northern advantages in population and industry were <em>not</em> enough</li>
+                    <li>The Confederacy didn't need to win—just <span class="key-term">outlast Northern will</span></li>
+                    <li>The American Revolution proved weaker forces could win</li>
+                </ul>
+
+                <aside class="notes">
+                    <h4>📚 Why This Question Matters</h4>
+                    <p>It's tempting to see Northern victory as inevitable—they had more people, more factories, more railroads. But advantages on paper don't automatically translate into battlefield victory. The Confederacy had a viable path to independence through mid-1863.</p>
+                    
+                    <h4>📖 The Confederate Strategy</h4>
+                    <p>The South didn't need to conquer the North. They just needed to make the war so costly that Northerners would vote for peace. Think about it: if Lincoln had lost the 1864 election to McClellan, the Democratic platform called the war a "failure" and sought negotiation. The Confederacy could have survived.</p>
+                    
+                    <h4>🎓 James McPherson's Argument</h4>
+                    <p>Historian <strong>James McPherson</strong> emphasizes <em>contingency</em>—the outcome wasn't predetermined. Different decisions at key moments could have changed everything. This matters because it means we can't just point to industrial statistics. We have to explain why those advantages became decisive when they didn't have to be.</p>
+                </aside>
+            </section>
+
+            <!-- SECTION DIVIDER -->
+            <section>
+                <div class="section-header">
+                    <h1>SECTION I</h1>
+                    <h2>Explaining Union Victory</h2>
+                </div>
+            </section>
+
+            <!-- SLIDE 3: FOUR FACTORS -->
+            <section>
+                <h2>Four Factors That Decided the War</h2>
+                
+                <div class="factor-item">
+                    <span class="factor-label">Leadership</span>
+                    <span>Lincoln found Grant; Davis couldn't replace Lee's losses</span>
+                </div>
+                <div class="factor-item">
+                    <span class="factor-label">Strategy</span>
+                    <span>Union learned to use its advantages; coordinated multi-theater war</span>
+                </div>
+                <div class="factor-item">
+                    <span class="factor-label">Will</span>
+                    <span>Emancipation gave the war moral purpose that sustained sacrifice</span>
+                </div>
+                <div class="factor-item">
+                    <span class="factor-label">Resources</span>
+                    <span>Industrial and demographic advantages—<em>when finally mobilized</em></span>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 Why Four Factors?</h4>
+                    <p>Historians debate which mattered most. Resources alone don't explain victory—the North had those advantages from day one but was losing. What changed was <em>how</em> the North used its advantages and <em>why</em> it kept fighting.</p>
+                    
+                    <h4>📖 The Leadership Factor</h4>
+                    <p>Lincoln cycled through generals—McDowell, McClellan, Burnside, Hooker, Meade—before finding Grant. Grant wasn't brilliant; he was relentless. He understood the math: if he traded casualties one-for-one, the Union would eventually win. McClellan never understood this.</p>
+                    
+                    <h4>📖 The Strategy Factor</h4>
+                    <p>Before Grant took overall command in 1864, Union armies fought separate wars. The Confederacy shifted troops by rail to meet each threat one at a time. Grant's genius was simple: attack everywhere simultaneously. Lee couldn't reinforce Virginia if Sherman was burning Georgia.</p>
+                    
+                    <h4>📖 The Will Factor</h4>
+                    <p>This is where the Emancipation Proclamation becomes crucial. Before 1863, the war was about "preserving the Union"—an abstraction. After, soldiers knew they were fighting to end slavery. That moral clarity sustained the war effort through horrific casualties.</p>
+                    
+                    <h4>📖 The Resources Factor</h4>
+                    <p>Yes, the North had more men, factories, and railroads. But these only became decisive when the North developed the <em>will</em> to use them fully—accepting massive casualties, implementing conscription, waging total war. Resources matter, but only when you're willing to spend them.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 4: THE GRANT DIFFERENCE -->
+            <section>
+                <h2>The Grant Difference</h2>
+                <p class="subtitle">"I propose to fight it out on this line if it takes all summer"</p>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <h3>Before Grant (1861-63)</h3>
+                        <ul>
+                            <li>Generals sought decisive battles</li>
+                            <li>Retreated after setbacks</li>
+                            <li>Separate, uncoordinated campaigns</li>
+                            <li>Lee could reinforce at will</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-box highlight">
+                        <h3>Under Grant (1864-65)</h3>
+                        <ul>
+                            <li>War of attrition</li>
+                            <li>Kept advancing after defeats</li>
+                            <li>All theaters attacked together</li>
+                            <li>Lee pinned, strangled, destroyed</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 What Changed</h4>
+                    <p>The Army of the Potomac had lost or stalemated repeatedly against Lee—Bull Run, the Peninsula, Fredericksburg, Chancellorsville. Each time, they retreated north to regroup. Soldiers expected it. After the Wilderness (May 1864)—another bloody draw—they assumed they'd retreat again. Instead, Grant marched <em>south</em>. Soldiers cheered. This general was different.</p>
+                    
+                    <h4>📖 The Brutal Arithmetic</h4>
+                    <p>Grant's Overland Campaign cost 55,000 Union casualties in six weeks—almost as many as Lee's entire army. Northern newspapers called him "Butcher Grant." But here's the math: Lee lost 35,000 men he couldn't replace. Grant got reinforcements. If every battle cost both sides equally, the Union would eventually win. Grant was willing to accept that terrible equation.</p>
+                    
+                    <h4>🎓 Was Grant a Butcher?</h4>
+                    <p>This debate continues. Critics say he threw away lives in frontal assaults (Cold Harbor was a disaster). Defenders argue he ended the war faster than cautious generals would have, ultimately saving lives. Grant himself was tormented by the losses. But he believed the cause justified the cost—and that prolonging the war would cost more lives than ending it quickly.</p>
+                    
+                    <h4>💡 The Coordination Revolution</h4>
+                    <p>Equally important: Grant coordinated all Union armies. While he pinned Lee at Petersburg, Sherman marched through Georgia, Sheridan devastated the Shenandoah Valley, and other armies kept pressure everywhere. The Confederacy couldn't shift troops to meet each threat because every threat was simultaneous. This was modern warfare.</p>
+                </aside>
+            </section>
+
+            <!-- SECTION DIVIDER -->
+            <section>
+                <div class="section-header">
+                    <h1>SECTION II</h1>
+                    <h2>Turning Points Reconsidered</h2>
+                </div>
+            </section>
+
+            <!-- SLIDE 5: WHAT MAKES A TURNING POINT -->
+            <section>
+                <h2>What Makes a <span class="popup-trigger" onclick="togglePopup('turning-popup')">Turning Point</span>?</h2>
+                
+                <div id="turning-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('turning-popup')">&times;</span>
+                    <h3>Defining "Turning Point"</h3>
+                    <p>A turning point is a moment after which the trajectory of events shifts fundamentally. But historians debate what counts:</p>
+                    <ul>
+                        <li><strong>Military turning points</strong>: Battles that changed strategic possibilities</li>
+                        <li><strong>Political turning points</strong>: Decisions that redefined war aims</li>
+                        <li><strong>Psychological turning points</strong>: Moments that shifted morale and perception</li>
+                    </ul>
+                    <p>Key test: Could the losing side still have won before this moment? Could they after?</p>
+                </div>
+                
+                <ul>
+                    <li>Not just "important events"—moments that <em>changed what was possible</em></li>
+                    <li>Before: Confederate victory remained plausible</li>
+                    <li>After: Only Northern collapse could save the Confederacy</li>
+                </ul>
+                
+                <div class="analysis-box">
+                    Three candidates: Antietam (Sept 1862), Gettysburg/Vicksburg (July 1863), Atlanta (Sept 1864)
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 The Turning Point Problem</h4>
+                    <p>Students often identify turning points without explaining <em>why</em> they turned anything. The Battle of Antietam matters—but why? Gettysburg was bloody—but what changed? We need to analyze what became possible or impossible after each moment.</p>
+                    
+                    <h4>📖 Criteria for Analysis</h4>
+                    <p>Ask these questions about any proposed turning point:</p>
+                    <ul>
+                        <li>What could the Confederacy still do before this moment?</li>
+                        <li>What could they no longer do after?</li>
+                        <li>How did this change Northern politics and morale?</li>
+                        <li>How did this affect international possibilities?</li>
+                    </ul>
+                    
+                    <h4>🎓 Historians' Perspectives</h4>
+                    <p><strong>Gary Gallagher</strong> argues we focus too much on why the Confederacy lost and not enough on why they lasted so long. The real puzzle is why Confederate resistance continued after it was clearly hopeless. Understanding turning points means understanding <em>whose</em> perception shifted and when.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 6: ANTIETAM ANALYSIS -->
+            <section>
+                <h2>Antietam: The Political Turning Point</h2>
+                <p class="subtitle">September 17, 1862</p>
+                
+                <ul>
+                    <li>Military: Tactical draw, strategic Union victory (Lee retreated)</li>
+                    <li>Political: Enabled the <span class="key-term">Emancipation Proclamation</span></li>
+                    <li>Diplomatic: Ended British/French intervention plans</li>
+                </ul>
+                
+                <div class="emphasis-box">
+                    Antietam didn't win the war—it transformed what the war was <em>for</em>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 Why Antietam Matters</h4>
+                    <p>McClellan didn't destroy Lee's army (he could have with more aggression). The battle itself was inconclusive. But the <em>consequences</em> were enormous.</p>
+                    
+                    <h4>📖 The Emancipation Connection</h4>
+                    <p>Lincoln had drafted the Emancipation Proclamation in July 1862, but Seward convinced him to wait for a military victory—otherwise it would look like desperation. Antietam wasn't a great victory, but Lee retreated. Five days later, Lincoln issued the preliminary proclamation. The war's meaning had changed.</p>
+                    
+                    <h4>📖 The Diplomatic Consequence</h4>
+                    <p>Britain and France had been considering recognizing the Confederacy. Recognition would have meant diplomatic pressure on the Union, possibly breaking the blockade. After Antietam—and especially after Emancipation—intervention became politically impossible. No European government would support a slaveholding nation against one fighting to end slavery. The Confederacy's best diplomatic hope died.</p>
+                    
+                    <h4>💡 The Counterfactual</h4>
+                    <p>What if Lee had won at Antietam? He was outnumbered and far from home. But imagine: Confederate victory on Northern soil, Washington panicking, midterm elections weeks away. Lincoln might have been forced to negotiate. British recognition might have followed. Antietam didn't just stop an invasion—it closed off an entire path to Confederate survival.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 7: JULY 1863 -->
+            <section>
+                <h2>July 1863: The Military Turning Point</h2>
+                <p class="subtitle">Gettysburg (July 1-3) & Vicksburg (July 4)</p>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <h3>Before July 1863</h3>
+                        <ul>
+                            <li>Lee could still invade North</li>
+                            <li>Mississippi River blocked</li>
+                            <li>Confederate morale high</li>
+                            <li>Military victory still possible</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-box highlight">
+                        <h3>After July 1863</h3>
+                        <ul>
+                            <li>Lee never invaded again</li>
+                            <li>Confederacy split in two</li>
+                            <li>Only hope: Northern exhaustion</li>
+                            <li>War of attrition favors Union</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 The Twin Victories</h4>
+                    <p>Gettysburg and Vicksburg happened almost simultaneously—and together they closed off Confederate strategic options.</p>
+                    
+                    <h4>📖 What Gettysburg Changed</h4>
+                    <p>Before Gettysburg, Lee's Army of Northern Virginia was the Confederacy's best weapon. It had beaten every Union general. Another invasion, another victory—maybe in Pennsylvania, maybe threatening Washington—could break Northern will. After Pickett's Charge, Lee's offensive capacity was shattered. He lost 28,000 men (a third of his army). He would spend the rest of the war defending, not attacking. The initiative shifted permanently.</p>
+                    
+                    <h4>📖 What Vicksburg Changed</h4>
+                    <p>Vicksburg gave the Union control of the entire Mississippi River. The Confederacy was now physically split—Texas, Arkansas, and Louisiana cut off from the rest. Lincoln's phrase: "The Father of Waters again goes unvexed to the sea." Beyond logistics, the psychological blow was crushing. Vicksburg surrendered on July 4th—Independence Day. The city wouldn't celebrate that holiday again until 1945.</p>
+                    
+                    <h4>🎓 The Strategic Shift</h4>
+                    <p>Before July 1863, the Confederacy could still win militarily—defeat Union armies, threaten Northern cities, break morale. After July 1863, military victory was no longer realistic. The Confederacy's only remaining hope was that the North would choose to stop fighting. That's a political strategy, not a military one—and it depended on the 1864 election.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 8: ATLANTA -->
+            <section>
+                <h2>Atlanta: The Electoral Turning Point</h2>
+                <p class="subtitle">September 2, 1864</p>
+                
+                <div class="big-question">
+                    "Atlanta is ours, and fairly won"<br>
+                    <span style="font-size: 0.6em; color: var(--opera-mauve);">— Sherman's telegram to Lincoln</span>
+                </div>
+                
+                <ul>
+                    <li>Before Atlanta: Lincoln expected to lose reelection</li>
+                    <li>McClellan's platform called the war a "failure"</li>
+                    <li>After Atlanta: Lincoln won with 55% of the vote</li>
+                    <li>Confederate political strategy collapsed</li>
+                </ul>
+
+                <aside class="notes">
+                    <h4>📚 The 1864 Crisis</h4>
+                    <p>By August 1864, Lincoln privately believed he would lose. Grant was stuck at Petersburg, casualties were horrific, and war-weariness was overwhelming. The Democratic platform declared the war a "failure" and called for an armistice and negotiation. If McClellan won, Confederate independence was possible.</p>
+                    
+                    <h4>📖 How Atlanta Changed Everything</h4>
+                    <p>Sherman's capture of Atlanta—the Deep South's railroad hub and industrial center—transformed Northern morale overnight. Suddenly, the war looked winnable. Victory was visible. Lincoln won reelection decisively, carrying all but three states. Even Union soldiers voted overwhelmingly for Lincoln—the men doing the dying chose to keep fighting.</p>
+                    
+                    <h4>💡 The Confederate Gamble</h4>
+                    <p>By 1864, Confederate strategy depended almost entirely on the Northern election. They couldn't win militarily, but they could outlast Northern will. If the North elected a peace candidate, the Confederacy survives. Atlanta destroyed that hope. With Lincoln reelected, the Union would fight to victory. The Confederacy had no remaining path to independence.</p>
+                    
+                    <h4>🎓 Contingency in Action</h4>
+                    <p>This is what historians mean by contingency. If Sherman hadn't taken Atlanta, if McClellan had won, if the Northern public had chosen peace—the Confederacy might have survived. History didn't have to turn out this way. Understanding that makes us take the people seriously, not just the trends.</p>
+                </aside>
+            </section>
+
+            <!-- SECTION DIVIDER -->
+            <section>
+                <div class="section-header">
+                    <h1>SECTION III</h1>
+                    <h2>The Emancipation Proclamation</h2>
+                </div>
+            </section>
+
+            <!-- SLIDE 9: EMANCIPATION'S SIGNIFICANCE -->
+            <section>
+                <h2>Emancipation: More Than Freedom</h2>
+                
+                <ul>
+                    <li><span class="key-term">Moral transformation</span>: War for Union → War against slavery</li>
+                    <li><span class="key-term">Military transformation</span>: 180,000 Black soldiers join the fight</li>
+                    <li><span class="key-term">Diplomatic transformation</span>: European intervention now impossible</li>
+                    <li><span class="key-term">Economic transformation</span>: Confederate labor system undermined</li>
+                </ul>
+                
+                <div class="analysis-box">
+                    The Proclamation didn't just free people—it <em>changed what the war meant</em>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 Beyond the Textbook Version</h4>
+                    <p>The standard account focuses on what the Proclamation <em>didn't</em> do—it only freed slaves in rebel states, not border states; Lincoln couldn't enforce it where Confederates controlled. All true. But this misses the transformation it caused.</p>
+                    
+                    <h4>📖 The Moral Transformation</h4>
+                    <p>Before January 1, 1863, Union soldiers fought to "preserve the Union"—an abstraction. Many didn't care about slavery. After, they knew they were fighting to end an institution they increasingly saw as evil. That moral clarity sustained the war effort through 1864's horrific casualties. Soldiers could believe their deaths meant something.</p>
+                    
+                    <h4>📖 The Military Transformation</h4>
+                    <p>180,000 Black men served in Union forces—roughly 10% of the total. That's not just numbers; it's the difference between victory and stalemate. And beyond soldiers: enslaved people who fled to Union lines provided intelligence, labor, and guidance. Every escaped slave weakened the Confederate war effort and strengthened the Union's.</p>
+                    
+                    <h4>📖 The Diplomatic Transformation</h4>
+                    <p>Britain had abolished slavery in 1833. British public opinion was deeply antislavery. Before Emancipation, the British government could see the war as a dispute over union vs. independence—not their concern. After, supporting the Confederacy meant supporting slavery. Intervention became politically impossible.</p>
+                    
+                    <h4>📖 The Economic Transformation</h4>
+                    <p>The Confederacy depended on enslaved labor to grow food, build fortifications, and free white men for combat. Emancipation turned that labor force into a liability. Every enslaved person was now a potential refugee, spy, or soldier for the other side. The Proclamation weaponized the Confederacy's own population.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 10: LINCOLN'S EVOLUTION -->
+            <section>
+                <h2>Lincoln's Evolution on Slavery</h2>
+                
+                <div class="primary-source">
+                    "My paramount object in this struggle is to save the Union, and is not either to save or to destroy slavery."
+                    <div style="text-align: right; margin-top: 0.5em;">— Lincoln to Horace Greeley, August 22, 1862</div>
+                </div>
+                
+                <div class="primary-source" style="border-color: var(--blue-curacao);">
+                    "If slavery is not wrong, nothing is wrong."
+                    <div style="text-align: right; margin-top: 0.5em;">— Lincoln to Albert Hodges, April 4, 1864</div>
+                </div>
+                
+                <p style="margin-top: 1em; text-align: center; color: var(--opera-mauve);">
+                    Same man. Twenty months apart. What changed?
+                </p>
+
+                <aside class="notes">
+                    <h4>📚 Reading Lincoln Carefully</h4>
+                    <p>These quotes seem contradictory, and that's the point. Lincoln's public statements shifted dramatically. Was he a reluctant emancipator who only freed slaves for military reasons? Or did he always oppose slavery but waited for the right moment? The evidence supports something more complex.</p>
+                    
+                    <h4>📖 The August 1862 Letter</h4>
+                    <p>When Lincoln wrote to Greeley, he had already drafted the Emancipation Proclamation and was waiting for a military victory to announce it. The letter wasn't his real view—it was political positioning, reassuring border states and conservative Northerners. Lincoln was always more antislavery than his public statements suggested.</p>
+                    
+                    <h4>📖 The 1864 Statement</h4>
+                    <p>By 1864, emancipation was policy. Lincoln could speak more honestly. "If slavery is not wrong, nothing is wrong" reflects what he'd believed for decades—but couldn't always say as a politician trying to hold a coalition together.</p>
+                    
+                    <h4>🎓 Historians' Debate</h4>
+                    <p><strong>Eric Foner</strong> traces Lincoln's evolution—he moved from opposing slavery's <em>expansion</em> to supporting <em>immediate abolition</em>. The war radicalized him. <strong>James Oakes</strong> argues Lincoln was always more antislavery than he appeared—his political constraints, not his beliefs, limited his statements. Both agree: by 1864, Lincoln had become a revolutionary on slavery, committed to the 13th Amendment that would end it everywhere.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 11: BLACK SOLDIERS -->
+            <section>
+                <h2>Black Military Service</h2>
+                <p class="subtitle">"Once let the black man get upon his person the brass letters U.S."</p>
+                
+                <ul>
+                    <li>180,000 Black soldiers; 19,000 in the Navy</li>
+                    <li>Fought in 449 engagements; 40,000 died</li>
+                    <li>Faced unequal pay until 1864 protests won equality</li>
+                    <li>Faced massacre if captured (Fort Pillow, 1864)</li>
+                </ul>
+                
+                <div class="emphasis-box">
+                    Military service became the strongest argument for citizenship
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 Why This Mattered</h4>
+                    <p>Black military service wasn't just about numbers (though 180,000 soldiers mattered enormously). It was about what service <em>meant</em> for citizenship claims.</p>
+                    
+                    <h4>📖 Frederick Douglass's Argument</h4>
+                    <p>"Once let the black man get upon his person the brass letters U.S., let him get an eagle on his button, and a musket on his shoulder and bullets in his pocket, and there is no power on earth which can deny that he has earned the right to citizenship." Douglass understood that military service—dying for the nation—was the strongest possible claim to belong to it.</p>
+                    
+                    <h4>📖 The Risks They Faced</h4>
+                    <p>Black soldiers faced dangers white soldiers didn't. The Confederacy refused to treat them as prisoners of war. At Fort Pillow (April 1864), Confederate forces under Nathan Bedford Forrest murdered Black soldiers who had surrendered. This wasn't an isolated incident—it was policy. Black soldiers knew capture likely meant death. They fought anyway.</p>
+                    
+                    <h4>📖 The Pay Struggle</h4>
+                    <p>Black soldiers initially received $10/month (minus $3 for clothing) while white soldiers got $13 with no deductions. The 54th Massachusetts refused pay entirely rather than accept discrimination. Their protest—and abolitionist pressure—led Congress to equalize pay in 1864, with back pay to 1863. Even in fighting for freedom, Black soldiers had to fight for equality.</p>
+                    
+                    <h4>🎓 Long-Term Significance</h4>
+                    <p>Black military service created facts on the ground for Reconstruction debates. How could you deny citizenship to men who had died for the nation? The 14th Amendment (citizenship) and 15th Amendment (voting) built on this foundation. Military service didn't guarantee equality—Jim Crow proved that—but it created a moral argument that couldn't be entirely dismissed.</p>
+                </aside>
+            </section>
+
+            <!-- SECTION DIVIDER -->
+            <section>
+                <div class="section-header">
+                    <h1>SECTION IV</h1>
+                    <h2>The Second American Revolution</h2>
+                </div>
+            </section>
+
+            <!-- SLIDE 12: SECOND REVOLUTION THESIS -->
+            <section>
+                <h2>Why "Second Revolution"?</h2>
+                
+                <div class="historian-quote">
+                    "The Civil War, although it never took on the characteristics of a social revolution, was nonetheless the most revolutionary event in American history."
+                </div>
+                <div class="historian-attribution">— Charles Beard, 1927</div>
+                
+                <ul style="margin-top: 1em;">
+                    <li>Destroyed the largest slave society in the Western Hemisphere</li>
+                    <li>Transferred power from South to North, agriculture to industry</li>
+                    <li>Created the modern federal government</li>
+                    <li>Redefined American citizenship and freedom</li>
+                </ul>
+
+                <aside class="notes">
+                    <h4>📚 The Revolution Question</h4>
+                    <p>Was the Civil War a revolution? It didn't overthrow a government or create a new political system. But it transformed American society more fundamentally than many events we call revolutions.</p>
+                    
+                    <h4>📖 What Changed</h4>
+                    <p><strong>Slavery's destruction</strong>: Four million people went from property to persons. The largest forced labor system in the Western Hemisphere ended. This was revolutionary by any definition.</p>
+                    <p><strong>Power transfer</strong>: Before the war, Southern slaveholders dominated national politics—most presidents, Supreme Court justices, and congressional leaders were Southerners or Southern sympathizers. After, the Republican Party dominated national politics for 70 years. The South went from ruling the nation to being occupied by it.</p>
+                    <p><strong>Federal power</strong>: The federal government that entered the war was tiny and weak. The one that emerged taxed incomes, printed currency, conscripted soldiers, and had proven it could crush state resistance. The constitutional balance between states and federal government shifted permanently.</p>
+                    
+                    <h4>🎓 Historians' Perspectives</h4>
+                    <p><strong>Charles Beard</strong> (1920s) saw the war as a transfer of power from the agrarian South to the industrial North—an economic revolution. <strong>Eric Foner</strong> emphasizes the transformation in the meaning of freedom and citizenship. <strong>James McPherson</strong> calls it "the second American Revolution" because it fulfilled promises the first Revolution had left incomplete—particularly the Declaration's claim that "all men are created equal."</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 13: CONSTITUTIONAL REVOLUTION -->
+            <section>
+                <h2>The Constitutional Revolution</h2>
+                
+                <div class="factor-item">
+                    <span class="factor-label">13th Amendment</span>
+                    <span>Abolished slavery throughout the United States (1865)</span>
+                </div>
+                <div class="factor-item">
+                    <span class="factor-label">14th Amendment</span>
+                    <span>Defined citizenship, guaranteed equal protection and due process (1868)</span>
+                </div>
+                <div class="factor-item">
+                    <span class="factor-label">15th Amendment</span>
+                    <span>Prohibited denying the vote based on race (1870)</span>
+                </div>
+                
+                <div class="analysis-box">
+                    These amendments didn't just end slavery—they created a <span class="key-term">second founding</span> of the nation on the principle of equality
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 Why These Amendments Matter</h4>
+                    <p>The original Constitution protected slavery without naming it. The Reconstruction Amendments didn't just undo that protection—they transformed the Constitution's meaning.</p>
+                    
+                    <h4>📖 The 13th Amendment</h4>
+                    <p>Abolished slavery everywhere—not just in rebel states (like the Emancipation Proclamation) but in border states and anywhere else. This was the first constitutional amendment to expand federal power to protect individual rights against state governments.</p>
+                    
+                    <h4>📖 The 14th Amendment</h4>
+                    <p>Arguably the most important amendment since the Bill of Rights. It defined citizenship for the first time (anyone born in the U.S. is a citizen), overturning Dred Scott. It prohibited states from denying "equal protection of the laws" or "due process of law." Almost every modern civil rights case—Brown v. Board, Loving v. Virginia, Obergefell—rests on the 14th Amendment.</p>
+                    
+                    <h4>📖 The 15th Amendment</h4>
+                    <p>Prohibited denying the vote based on "race, color, or previous condition of servitude." Note what it didn't prohibit: literacy tests, poll taxes, grandfather clauses. Southern states would exploit these loopholes to disenfranchise Black voters for nearly a century. The amendment's promise wasn't fully realized until the Voting Rights Act of 1965.</p>
+                    
+                    <h4>🎓 The "Second Founding"</h4>
+                    <p>Historian <strong>Eric Foner</strong> calls this a "second founding"—the Reconstruction Amendments created a new constitutional order based on equality and federal protection of rights. The original Constitution was a compromise with slavery. The reconstructed Constitution was a promise of equality. That promise was betrayed by Jim Crow—but it remained in the Constitution, waiting to be redeemed.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 14: BUILDING THE MODERN STATE -->
+            <section>
+                <h2>Building the Modern State</h2>
+                
+                <ul>
+                    <li><span class="key-term">Income tax</span>: First in American history (Revenue Act, 1861)</li>
+                    <li><span class="key-term">National currency</span>: Greenbacks replaced chaotic state banknotes</li>
+                    <li><span class="key-term">National banking system</span>: Uniform financial standards</li>
+                    <li><span class="key-term">Conscription</span>: Federal draft for the first time</li>
+                </ul>
+                
+                <div class="emphasis-box">
+                    The federal government that entered the war was tiny. The one that emerged could reshape society.
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 The Transformation</h4>
+                    <p>Before 1861, the federal government barely touched most Americans' lives. No income tax, no national currency, no draft, limited federal bureaucracy. The Post Office was the main way most citizens encountered federal power. The Civil War changed everything.</p>
+                    
+                    <h4>📖 Why This Matters</h4>
+                    <p>The institutions created during the war—income tax, national banking, federal authority over states—became permanent features of American government. You can draw a direct line from the Civil War to the modern federal government. The war didn't just preserve the Union; it transformed what the Union was.</p>
+                    
+                    <h4>📖 The Republican Program</h4>
+                    <p>With Southern Democrats gone from Congress, Republicans passed legislation they'd wanted for years: Homestead Act (free land), Morrill Act (land-grant colleges), Pacific Railroad Acts (transcontinental railroad). These laws shaped American development for generations. None could have passed before the war.</p>
+                    
+                    <h4>🎓 The Confederate Contradiction</h4>
+                    <p>Here's the irony: the Confederacy seceded to protect states' rights from federal overreach. But fighting a modern war required exactly what they opposed—conscription, centralized control of railroads, impressment of property, suspension of habeas corpus. Jefferson Davis's government became more centralized than Lincoln's in some ways. States' rights ideology undermined the Confederate war effort.</p>
+                </aside>
+            </section>
+
+            <!-- SECTION DIVIDER -->
+            <section>
+                <div class="section-header">
+                    <h1>SECTION V</h1>
+                    <h2>Legacy & Memory</h2>
+                </div>
+            </section>
+
+            <!-- SLIDE 15: UNFINISHED REVOLUTION -->
+            <section>
+                <h2>The Unfinished Revolution</h2>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <h3>What Was Won</h3>
+                        <ul>
+                            <li>Slavery destroyed—permanent</li>
+                            <li>Union preserved—secession dead</li>
+                            <li>Constitutional amendments</li>
+                            <li>Federal supremacy established</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-box">
+                        <h3>What Was Lost</h3>
+                        <ul>
+                            <li>Reconstruction abandoned (1877)</li>
+                            <li>Jim Crow replaced slavery</li>
+                            <li>Black voting suppressed</li>
+                            <li>White supremacy survived</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 The Central Paradox</h4>
+                    <p>The Union won the war decisively. The Confederacy was destroyed, slavery abolished, federal authority established. But in many ways, white Southerners won the peace. By 1877, federal troops withdrew. By the 1890s, Black Southerners were disenfranchised. Jim Crow lasted until the 1960s.</p>
+                    
+                    <h4>📖 What Was Permanent</h4>
+                    <p>Slavery's destruction was irreversible. Four million people could never be re-enslaved. That's revolutionary and permanent. The constitutional amendments remained—dormant under Jim Crow, but available for the civil rights movement to invoke. The legal and moral foundation for equality survived even when equality itself was denied.</p>
+                    
+                    <h4>📖 What Was Temporary</h4>
+                    <p>Black political power during Reconstruction—Black congressmen, state legislators, voters—was crushed by violence and legal manipulation. The Reconstruction project of creating a biracial democracy was abandoned. The promise of the Reconstruction Amendments wasn't fulfilled until a century later.</p>
+                    
+                    <h4>🎓 Eric Foner's Framework</h4>
+                    <p>Foner calls Reconstruction an "unfinished revolution." The Civil War destroyed slavery; Reconstruction tried to build something new in its place. That project was abandoned, not defeated. The struggle for racial equality became a long arc—Civil War to Reconstruction to Jim Crow to Civil Rights Movement to ongoing struggles today. The Civil War was the first phase of a continuing revolution.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 16: COMPETING MEMORIES -->
+            <section>
+                <h2>The Battle Over Memory</h2>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <h3>Emancipationist Memory</h3>
+                        <ul>
+                            <li>War was about slavery</li>
+                            <li>Union fought for freedom</li>
+                            <li>Black soldiers were heroes</li>
+                            <li>Supported by evidence</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-box">
+                        <h3><span class="popup-trigger" onclick="togglePopup('lc-popup')">Lost Cause</span> Memory</h3>
+                        <ul>
+                            <li>War was about "states' rights"</li>
+                            <li>Confederates were noble</li>
+                            <li>Slavery was benevolent</li>
+                            <li>Created to justify white supremacy</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="lc-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('lc-popup')">&times;</span>
+                    <h3>Lost Cause Mythology</h3>
+                    <p>A post-war interpretation created by white Southerners that:</p>
+                    <ul>
+                        <li>Denied slavery caused the war</li>
+                        <li>Portrayed enslaved people as content</li>
+                        <li>Celebrated Confederate soldiers as heroes</li>
+                        <li>Claimed the South only lost due to numbers</li>
+                        <li>Depicted Reconstruction as corrupt "negro rule"</li>
+                    </ul>
+                    <p><strong>Reality:</strong> Confederate leaders explicitly said they seceded to preserve slavery. Alexander Stephens called slavery the Confederacy's "cornerstone."</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 Why Memory Matters</h4>
+                    <p>How we remember the Civil War shapes how we think about race today. The Lost Cause wasn't just nostalgia—it was a political project to justify white supremacy and oppose civil rights. Most Confederate monuments were erected not after the war but during Jim Crow (1890s-1920s) and the Civil Rights era (1950s-60s)—as statements against Black equality.</p>
+                    
+                    <h4>📖 The Lost Cause's Success</h4>
+                    <p>For much of the 20th century, Lost Cause mythology dominated American culture—textbooks, movies (Gone With the Wind), public memory. Many Americans believed the war was about "states' rights," that Robert E. Lee was a tragic hero, that slavery was a side issue. This wasn't accident; it was a deliberate campaign.</p>
+                    
+                    <h4>📖 What the Evidence Shows</h4>
+                    <p>Confederate leaders were explicit about why they seceded. Mississippi's declaration: "Our position is thoroughly identified with the institution of slavery—the greatest material interest of the world." Alexander Stephens's "Cornerstone Speech" called slavery the Confederacy's foundation. The "states' rights" interpretation has no support in the historical record.</p>
+                    
+                    <h4>🎓 David Blight's Argument</h4>
+                    <p>Historian <strong>David Blight</strong> argues that white reconciliation between North and South came at the cost of Black equality. By the early 1900s, white Northerners and Southerners agreed to remember the war as a tragedy of brother against brother, heroism on both sides—and to forget that it was about slavery. This reconciliation enabled Jim Crow.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 17: CLOSING QUESTION -->
+            <section>
+                <h2>The Living Question</h2>
+                
+                <div class="big-question">
+                    Did the Union win the war but lose the peace?
+                </div>
+                
+                <ul>
+                    <li>The Confederacy was destroyed—but its ideology survived</li>
+                    <li>Slavery ended—but white supremacy endured</li>
+                    <li>Equality was promised—but not delivered for a century</li>
+                    <li>The revolution was started—but remains unfinished</li>
+                </ul>
+                
+                <div class="emphasis-box" style="margin-top: 1em;">
+                    The Civil War isn't just history. Its questions—about race, equality, citizenship, federal power—remain America's questions today.
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 The Central Question</h4>
+                    <p>This question has no single answer—it's designed to provoke thought. The war definitively settled some things (secession, slavery) while leaving others unresolved (racial equality, the meaning of freedom).</p>
+                    
+                    <h4>📖 What Was Settled</h4>
+                    <p>Secession is dead—no serious movement has tried since. Slavery was destroyed—permanently. Federal authority over states was established. These were revolutionary and permanent changes.</p>
+                    
+                    <h4>📖 What Wasn't Settled</h4>
+                    <p>Racial equality remains contested. The meaning of the Reconstruction Amendments is still debated in courts. The relationship between federal and state power still generates conflict. The Civil War created a framework for equality; achieving it has been the work of subsequent generations.</p>
+                    
+                    <h4>🎓 The Long Arc</h4>
+                    <p>Think of American history as a continuing struggle to fulfill the promises of the Declaration and the Reconstruction Amendments. The Civil War was a crucial chapter—but not the final one. The Civil Rights Movement, ongoing debates about voting rights, arguments about Confederate symbols—all are continuations of conflicts the Civil War started but didn't finish.</p>
+                    
+                    <h4>💭 For Discussion</h4>
+                    <ul>
+                        <li>What would it mean to "finish" the Civil War's revolution?</li>
+                        <li>Why do debates about Confederate monuments matter today?</li>
+                        <li>How should we remember a war that was both a triumph (ending slavery) and an incomplete revolution (failing to achieve equality)?</li>
+                    </ul>
+                </aside>
+            </section>
+
+            <!-- SLIDE 18: SUMMARY -->
+            <section>
+                <h2>Key Takeaways</h2>
+                
+                <ul>
+                    <li><strong>Victory wasn't inevitable</strong>: Leadership, strategy, will, and resources all had to align</li>
+                    <li><strong>Emancipation transformed everything</strong>: Military, moral, diplomatic, and economic dimensions</li>
+                    <li><strong>Turning points closed options</strong>: Antietam, July 1863, Atlanta each ended Confederate paths to victory</li>
+                    <li><strong>The war was revolutionary</strong>: Destroyed slavery, created modern state, redefined citizenship</li>
+                    <li><strong>The revolution remains unfinished</strong>: Promises made, promises delayed, struggles ongoing</li>
+                </ul>
+
+                <aside class="notes">
+                    <h4>📚 Exam Preparation</h4>
+                    <p>Be ready to explain not just <em>what</em> happened but <em>why</em> it mattered. Can you:</p>
+                    <ul>
+                        <li>Explain why Northern advantages didn't guarantee victory?</li>
+                        <li>Analyze what made Antietam, Gettysburg/Vicksburg, and Atlanta turning points?</li>
+                        <li>Describe how the Emancipation Proclamation transformed the war?</li>
+                        <li>Argue for or against calling the Civil War a "Second Revolution"?</li>
+                        <li>Explain the difference between what the war settled and what it left unresolved?</li>
+                    </ul>
+                    
+                    <h4>🎓 Historical Thinking</h4>
+                    <p>This lecture emphasized analysis over narrative. History isn't just memorizing facts—it's asking why things happened and what difference they made. The best historical thinking recognizes complexity: the Civil War was both a triumph (ending slavery) and a tragedy (750,000 dead, equality deferred). Hold both truths together.</p>
+                </aside>
+            </section>
+
+        </div>
+    </div>
+    
+    <!-- Reveal.js and plugins -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/zoom/zoom.js"></script>
+    
+    <script>
+        Reveal.initialize({
+            width: 1920,
+            height: 1080,
+            margin: 0.1,
+            minScale: 0.2,
+            maxScale: 2.0,
+            controls: true,
+            progress: true,
+            center: true,
+            hash: true,
+            transition: 'slide',
+            plugins: [ RevealNotes, RevealHighlight, RevealZoom ]
+        });
+
+        function togglePopup(id) {
+            document.getElementById(id).classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

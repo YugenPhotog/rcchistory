@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Trail of Tears — Ethnic Cleansing Worksheet (Student Fillable • Print to PDF)</title>
+
+<!-- ========== DESIGN ========== -->
+<style>
+  /* ---- Theme ---- */
+  :root{
+    --bg: #faf9f7;
+    --panel:#ffffff;
+    --ink:#1f2937;         /* primary text */
+    --muted:#6b7280;       /* secondary text */
+    --line:#e5e7eb;        /* borders */
+    --brand:#8b5e34;       /* accent (warm umber) */
+    --brand-ink:#fff7ed;   /* light accent bg */
+    --hl:#f7f9fb;          /* table head bg */
+    --shadow: 0 8px 22px rgba(17,24,39,.08), 0 2px 6px rgba(17,24,39,.05);
+    --radius: 18px;
+    --pad: 14px;
+  }
+
+  /* ---- Page ---- */
+  html,body{height:100%;margin:0;background:var(--bg);color:var(--ink);font:16px/1.4 "Georgia","Times New Roman",serif;}
+  .wrap{max-width:1200px;margin:24px auto;padding:0 20px 48px;}
+  .card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+
+  /* ---- Header ---- */
+  header.hero{
+    background: linear-gradient(135deg, var(--brand) 0%, #a06f3d 50%, #b88249 100%);
+    color:white;
+    padding:28px 28px 20px 28px;
+    display:flex; align-items:flex-end; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  }
+  .hero h1{font-size:30px;line-height:1.15;margin:0;}
+  .hero .sub{opacity:.9;font-size:14px;margin-top:6px;}
+  .toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .btn{
+    appearance:none; border:1px solid rgba(255,255,255,.7); color:#111827;
+    background:white; border-radius:12px; padding:10px 14px; cursor:pointer; font-weight:600;
+  }
+  .hint{font-size:12px; color:#fefefe; opacity:.9}
+
+  /* ---- Student meta ---- */
+  .meta{
+    display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    gap:18px; padding:20px 24px; border-bottom:1px solid var(--line); background:var(--brand-ink);
+  }
+  .field{background:white;border:1px solid var(--line);border-radius:12px;padding:10px 12px;}
+  .label{font-size:12px;color:var(--muted);letter-spacing:.02em;margin-bottom:6px;}
+  [contenteditable].input{min-height:22px;outline:none;}
+
+  /* ---- Sections ---- */
+  section.body{padding:18px 24px 26px 24px;}
+  h2{font-size:18px;margin:16px 0 8px;}
+  p{margin:8px 0;}
+  a{color:#0f766e;text-decoration:underline;}
+
+  /* ---- Table ---- */
+  .table-wrap{margin-top:12px;overflow:auto;border:1px solid var(--line);border-radius:14px;}
+  table{width:100%;border-collapse:separate;border-spacing:0;background:white;}
+  thead th{
+    position:sticky; top:0; z-index:1; background:var(--hl);
+    text-align:left; font-size:13px; letter-spacing:.02em; border-bottom:1px solid var(--line);
+    padding:12px var(--pad);
+  }
+  tbody td{border-top:1px solid var(--line); vertical-align:top; padding:var(--pad);}
+  tbody tr:nth-child(even) td{background:#fcfcfd;}
+  .char{width:auto}
+  .yn{width:170px;text-align:center}
+  .cite{width:260px}
+
+  .q{margin:6px 0 0 0; font-size:14px;}
+  .group-title{font-weight:700; font-size:15px; margin-bottom:4px; color:#111827}
+
+  /* ---- Evidence/Citation editable cells ---- */
+  td[contenteditable]{min-height:70px; outline:none; border-radius:8px;}
+  td[contenteditable]:focus{box-shadow: inset 0 0 0 2px #bfdbfe; background:#f8fbff;}
+
+  /* ---- YES/NO - clickable radios styled as pills ---- */
+  .choices{display:flex; justify-content:center; gap:10px; flex-wrap:wrap}
+  .pill{
+    --on:#16a34a; /* yes */
+    --off:#dc2626; /* no */
+    position:relative; display:inline-flex; align-items:center; gap:8px;
+    padding:8px 14px; border-radius:999px; font-weight:700; cursor:pointer;
+    border:1px solid var(--line); user-select:none;
+    transition:transform .04s ease, box-shadow .2s ease;
+    background:#ffffff;
+  }
+  .pill:hover{box-shadow:0 4px 10px rgba(0,0,0,.06)}
+  .pill:active{transform:translateY(1px)}
+  .pill input{position:absolute; opacity:0; pointer-events:none}
+  .pill .dot{
+    width:14px;height:14px;border-radius:50%;
+    box-shadow: inset 0 0 0 2px #cbd5e1; background:#fff;
+    transition: box-shadow .2s ease, background .2s ease;
+  }
+  /* checked states */
+  .pill input:checked + .dot[data-type="yes"]{background:var(--on); box-shadow: inset 0 0 0 2px rgba(0,0,0,.05)}
+  .pill input:checked + .dot[data-type="no"]{background:var(--off); box-shadow: inset 0 0 0 2px rgba(0,0,0,.05)}
+  .pill[data-yes] .text{color:#065f46}
+  .pill[data-no] .text{color:#7f1d1d}
+
+  .tiny{color:var(--muted);font-size:12px}
+
+  /* ---- Conclusion ---- */
+  .conclusion{min-height:110px;border:1px dashed #cbd5e1;border-radius:12px;padding:12px;background:white;}
+  .conclusion:focus{outline:none; box-shadow: inset 0 0 0 2px #bfdbfe;}
+
+  /* ---- Print (landscape) ---- */
+  @page{size: landscape; margin: 0.5in;}
+  @media print{
+    .toolbar{display:none !important;}
+    .wrap{margin:0; padding:0;}
+    a[href]:after{content:" (" attr(href) ")";font-size:10px;color:#6b7280}
+    .card{box-shadow:none;border:1px solid #ddd}
+    body{background:white}
+  }
+</style>
+</head>
+
+<body>
+<div class="wrap">
+  <div class="card">
+    <!-- ======= HEADER ======= -->
+    <header class="hero">
+      <div>
+        <h1>Was the Trail of Tears an Instance of Ethnic Cleansing?</h1>
+        <div class="sub">HIST 101 — Primary Source Analysis Worksheet</div>
+      </div>
+      <div class="toolbar">
+        <button class="btn" type="button" onclick="window.print()">🖨️ Print / Save to PDF</button>
+        <div class="hint">In the print dialog, enable <b>Background graphics</b> and disable <b>Headers/Footers</b>.</div>
+      </div>
+    </header>
+
+    <!-- ======= STUDENT META ======= -->
+    <div class="meta">
+      <div class="field">
+        <div class="label">Name</div>
+        <div class="input" contenteditable="true" aria-label="Student name"></div>
+      </div>
+      <div class="field">
+        <div class="label">Course / Section</div>
+        <div class="input" contenteditable="true" aria-label="Course and section"></div>
+      </div>
+      <div class="field">
+        <div class="label">Date</div>
+        <div class="input" contenteditable="true" aria-label="Date"></div>
+      </div>
+    </div>
+
+    <!-- ======= BODY ======= -->
+    <section class="body">
+      <p><strong>Instructions.</strong> Read the primary sources at
+        <a href="https://stevenaustin.netlify.app/hist-101/presentations/chapter-11/ch11_trail_of_tears-primary_source_reader-v1">
+          Trail of Tears — Primary Source Reader
+        </a>
+        (and other credible sources as needed). For each characteristic below, select <em>Yes</em> or <em>No</em> based on the guiding questions,
+        then provide brief evidence (quotation, data, or description) and a citation (author/title + working URL). When finished, click
+        <em>Print / Save to PDF</em> and upload your PDF to Canvas. <span class="tiny">Suggested filename: <em>Last_First_TrailOfTears_EC.pdf</em></span>
+      </p>
+
+      <h2>Working Definition: Ethnic Cleansing</h2>
+      <p>
+        Ethnic cleansing is the systematic forced removal of an ethnic, racial, or religious group from a geographic area through violence,
+        intimidation, forced deportation, or other coercive means, with the intent to create an ethnically homogeneous region. It is distinct
+        from genocide in that the primary goal is removal rather than complete physical destruction (though the two can overlap).
+      </p>
+
+      <h2>Analytical Checklist for Identifying Ethnic Cleansing</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+          <tr>
+            <th class="char">Characteristics (with guiding questions)</th>
+            <th class="yn">Yes or No</th>
+            <th>Evidence (brief quotation, data, or description)</th>
+            <th class="cite">Citation (author/title + URL)</th>
+          </tr>
+          </thead>
+          <tbody id="rows">
+            <!-- Targeted Group Identification -->
+            <tr>
+              <td class="char">
+                <div class="group-title">Targeted Group Identification</div>
+                <div class="q">– Was a specific ethnic, racial, or religious group targeted?</div>
+                <div class="q">– Was targeting based on group identity rather than individual actions?</div>
+                <div class="q">– Were group members treated collectively as a single category?</div>
+              </td>
+              <td class="yn">
+                <div class="choices">
+                  <label class="pill" data-yes>
+                    <input type="radio" name="yn-1" value="Yes" />
+                    <span class="dot" data-type="yes"></span>
+                    <span class="text">Yes</span>
+                  </label>
+                  <label class="pill" data-no>
+                    <input type="radio" name="yn-1" value="No" />
+                    <span class="dot" data-type="no"></span>
+                    <span class="text">No</span>
+                  </label>
+                </div>
+              </td>
+              <td contenteditable="true" aria-label="Evidence"></td>
+              <td contenteditable="true" aria-label="Citation" class="tiny">e.g., Author, “Title,” URL</td>
+            </tr>
+
+            <!-- Intent and Goal -->
+            <tr>
+              <td class="char">
+                <div class="group-title">Intent and Goal</div>
+                <div class="q">– Is there evidence of intent to remove the group from a territory?</div>
+                <div class="q">– Do official or de facto policies aim to create ethnic or racial homogeneity?</div>
+                <div class="q">– Were stated justifications (e.g., security, progress, civilization) used to legitimize removal?</div>
+              </td>
+              <td class="yn">
+                <div class="choices">
+                  <label class="pill" data-yes>
+                    <input type="radio" name="yn-2" value="Yes" />
+                    <span class="dot" data-type="yes"></span>
+                    <span class="text">Yes</span>
+                  </label>
+                  <label class="pill" data-no>
+                    <input type="radio" name="yn-2" value="No" />
+                    <span class="dot" data-type="no"></span>
+                    <span class="text">No</span>
+                  </label>
+                </div>
+              </td>
+              <td contenteditable="true"></td>
+              <td contenteditable="true" class="tiny"></td>
+            </tr>
+
+            <!-- Methods of Removal -->
+            <tr>
+              <td class="char">
+                <div class="group-title">Methods of Removal</div>
+                <div class="q">– Was forced deportation or relocation used?</div>
+                <div class="q">– Were homes, villages, or cultural sites destroyed?</div>
+                <div class="q">– Were basic needs (food, water, shelter, medical care) denied or withheld?</div>
+                <div class="q">– Were conditions made unlivable to coerce departure?</div>
+                <div class="q">– Was physical violence or the threat of violence used?</div>
+                <div class="q">– Were families separated during the process?</div>
+              </td>
+              <td class="yn">
+                <div class="choices">
+                  <label class="pill" data-yes>
+                    <input type="radio" name="yn-3" value="Yes" />
+                    <span class="dot" data-type="yes"></span>
+                    <span class="text">Yes</span>
+                  </label>
+                  <label class="pill" data-no>
+                    <input type="radio" name="yn-3" value="No" />
+                    <span class="dot" data-type="no"></span>
+                    <span class="text">No</span>
+                  </label>
+                </div>
+              </td>
+              <td contenteditable="true"></td>
+              <td contenteditable="true" class="tiny"></td>
+            </tr>
+
+            <!-- Systematic Nature -->
+            <tr>
+              <td class="char">
+                <div class="group-title">Systematic Nature</div>
+                <div class="q">– Was the process organized or coordinated rather than random?</div>
+                <div class="q">– Was there state or institutional involvement?</div>
+                <div class="q">– Were policies or laws enacted to facilitate removal?</div>
+                <div class="q">– Were the military or police used to enforce removal?</div>
+              </td>
+              <td class="yn">
+                <div class="choices">
+                  <label class="pill" data-yes>
+                    <input type="radio" name="yn-4" value="Yes" />
+                    <span class="dot" data-type="yes"></span>
+                    <span class="text">Yes</span>
+                  </label>
+                  <label class="pill" data-no>
+                    <input type="radio" name="yn-4" value="No" />
+                    <span class="dot" data-type="no"></span>
+                    <span class="text">No</span>
+                  </label>
+                </div>
+              </td>
+              <td contenteditable="true"></td>
+              <td contenteditable="true" class="tiny"></td>
+            </tr>
+
+            <!-- Scale and Scope -->
+            <tr>
+              <td class="char">
+                <div class="group-title">Scale and Scope</div>
+                <div class="q">– Were large numbers of people affected?</div>
+                <div class="q">– Did the actions cover a significant geographic area?</div>
+                <div class="q">– Was there a comprehensive attempt to remove the group from the region?</div>
+              </td>
+              <td class="yn">
+                <div class="choices">
+                  <label class="pill" data-yes>
+                    <input type="radio" name="yn-5" value="Yes" />
+                    <span class="dot" data-type="yes"></span>
+                    <span class="text">Yes</span>
+                  </label>
+                  <label class="pill" data-no>
+                    <input type="radio" name="yn-5" value="No" />
+                    <span class="dot" data-type="no"></span>
+                    <span class="text">No</span>
+                  </label>
+                </div>
+              </td>
+              <td contenteditable="true"></td>
+              <td contenteditable="true" class="tiny"></td>
+            </tr>
+
+            <!-- Accompanying Atrocities -->
+            <tr>
+              <td class="char">
+                <div class="group-title">Accompanying Atrocities</div>
+                <div class="q">– Did mass killings or massacres occur?</div>
+                <div class="q">– Was sexual violence used as a weapon?</div>
+                <div class="q">– Was torture or cruel treatment used?</div>
+                <div class="q">– Were cultural or religious sites destroyed?</div>
+                <div class="q">– Were property and assets seized from the targeted group?</div>
+              </td>
+              <td class="yn">
+                <div class="choices">
+                  <label class="pill" data-yes>
+                    <input type="radio" name="yn-6" value="Yes" />
+                    <span class="dot" data-type="yes"></span>
+                    <span class="text">Yes</span>
+                  </label>
+                  <label class="pill" data-no>
+                    <input type="radio" name="yn-6" value="No" />
+                    <span class="dot" data-type="no"></span>
+                    <span class="text">No</span>
+                  </label>
+                </div>
+              </td>
+              <td contenteditable="true"></td>
+              <td contenteditable="true" class="tiny"></td>
+            </tr>
+
+            <!-- Outcomes -->
+            <tr>
+              <td class="char">
+                <div class="group-title">Outcomes</div>
+                <div class="q">– Did the population demographics change significantly?</div>
+                <div class="q">– Was displacement permanent or long-term for most victims?</div>
+                <div class="q">– Was land or property transferred to the dominant group?</div>
+                <div class="q">– Did the actions produce lasting trauma and destruction of community structures?</div>
+              </td>
+              <td class="yn">
+                <div class="choices">
+                  <label class="pill" data-yes>
+                    <input type="radio" name="yn-7" value="Yes" />
+                    <span class="dot" data-type="yes"></span>
+                    <span class="text">Yes</span>
+                  </label>
+                  <label class="pill" data-no>
+                    <input type="radio" name="yn-7" value="No" />
+                    <span class="dot" data-type="no"></span>
+                    <span class="text">No</span>
+                  </label>
+                </div>
+              </td>
+              <td contenteditable="true"></td>
+              <td contenteditable="true" class="tiny"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Short Conclusion (2–4 sentences)</h2>
+      <div class="conclusion" contenteditable="true" aria-label="Conclusion text"></div>
+    </section>
+  </div>
+</div>
+
+<!-- ========== ACCESSIBILITY & USABILITY HELPERS (no external deps) ========== -->
+<script>
+  // Allow clicking anywhere on the Y/N cell to toggle the first unchecked option for speed.
+  document.querySelectorAll('td.yn').forEach(td => {
+    td.addEventListener('click', (e) => {
+      // If the actual label/input was clicked, let default behavior run.
+      if (e.target.tagName === 'INPUT' || e.target.closest('label')) return;
+      const yes = td.querySelector('input[value="Yes"]');
+      const no  = td.querySelector('input[value="No"]');
+      // Toggle: if neither or "No" checked -> Yes; else -> No
+      if (!yes.checked && !no.checked) { yes.checked = true; }
+      else if (yes.checked) { no.checked = true; }
+      else { yes.checked = true; }
+    });
+  });
+
+  // Improve keyboard nav: pressing Y or N while focused in a Y/N cell toggles selection.
+  document.querySelectorAll('td.yn').forEach(td => {
+    td.setAttribute('tabindex','0');
+    td.addEventListener('keydown', (e) => {
+      const yes = td.querySelector('input[value="Yes"]');
+      const no  = td.querySelector('input[value="No"]');
+      if (e.key.toLowerCase() === 'y') { yes.checked = true; e.preventDefault(); }
+      if (e.key.toLowerCase() === 'n') { no.checked  = true; e.preventDefault(); }
+    });
+  });
+
+  // Contenteditable placeholders: show faint hint text until user types.
+  const hints = document.querySelectorAll('[contenteditable][aria-label], td[contenteditable][aria-label]');
+  hints.forEach(el => {
+    const label = el.getAttribute('aria-label');
+    const place = el.textContent.trim();
+    if (!place) {
+      el.dataset.placeholder = label;
+      el.classList.add('placeholder');
+      el.addEventListener('focus', () => { if (el.textContent.trim()==='') el.textContent=''; });
+      el.addEventListener('blur',  () => { if (el.textContent.trim()==='') el.textContent=''; });
+    }
+  });
+</script>
+</body>
+</html>
