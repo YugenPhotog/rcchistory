@@ -1,0 +1,952 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Ethnic Cleansing - HIST 101</title>
+    
+    <!-- Reveal.js CSS from CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --desert-flower: #FF9B8A;
+            --cattleya-orchid: #A25FB0;
+            --opera-mauve: #D4A5C8;
+            --blue-curacao: #48C9C9;
+            --spicy-mustard: #D9A757;
+            --mocha-mousse: #A78674;
+            --arabesque: #C8826D;
+            --dark-bg: #2F2F2F;
+            --light-text: #FAFAFA;
+        }
+
+        .reveal {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 32px;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+        }
+
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--desert-flower);
+            text-transform: none;
+        }
+
+        .reveal h1 { font-size: 3em; margin-bottom: 0.5em; }
+        .reveal h2 { font-size: 2em; margin-bottom: 0.5em; }
+        .reveal h3 { font-size: 1.5em; margin-bottom: 0.5em; }
+
+        .reveal a {
+            color: var(--blue-curacao);
+            text-decoration: underline;
+        }
+
+        .reveal a:hover {
+            color: var(--opera-mauve);
+        }
+
+        .reveal ul, .reveal ol {
+            text-align: left;
+            line-height: 1.6;
+        }
+
+        .reveal li {
+            margin: 0.5em 0;
+        }
+
+        /* Pop-up/Modal styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--light-text);
+            color: var(--dark-bg);
+            padding: 2em;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            max-width: 70%;
+            max-height: 70%;
+            overflow-y: auto;
+            z-index: 1000;
+            border: 3px solid var(--cattleya-orchid);
+        }
+
+        .popup.active { display: block; }
+
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 2em;
+            cursor: pointer;
+            color: var(--arabesque);
+        }
+
+        .popup-trigger {
+            color: var(--blue-curacao);
+            text-decoration: underline dotted;
+            cursor: pointer;
+            border-bottom: 2px dotted var(--blue-curacao);
+        }
+
+        .popup-trigger:hover {
+            color: var(--cattleya-orchid);
+            border-bottom-color: var(--cattleya-orchid);
+        }
+
+        /* Key term styling */
+        .key-term {
+            color: var(--cattleya-orchid);
+            font-weight: 600;
+        }
+
+        /* Comparison table styling */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1em 0;
+            font-size: 0.9em;
+        }
+
+        .comparison-table th {
+            background: var(--cattleya-orchid);
+            color: var(--light-text);
+            padding: 0.8em;
+            border: 2px solid var(--opera-mauve);
+        }
+
+        .comparison-table td {
+            padding: 0.8em;
+            border: 2px solid var(--opera-mauve);
+            background: rgba(164, 95, 176, 0.1);
+        }
+
+        /* Timeline styling */
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 0.8em 0;
+            padding: 0.8em;
+            border-left: 4px solid var(--blue-curacao);
+            background: rgba(72, 201, 201, 0.1);
+        }
+
+        .timeline-date {
+            color: var(--spicy-mustard);
+            font-weight: bold;
+            min-width: 150px;
+            font-size: 1.1em;
+        }
+
+        /* Warning/Important box */
+        .warning-box {
+            background: rgba(217, 167, 87, 0.2);
+            border: 3px solid var(--spicy-mustard);
+            padding: 1.5em;
+            margin: 1em 0;
+            border-radius: 10px;
+        }
+
+        /* Info box */
+        .info-box {
+            background: rgba(72, 201, 201, 0.15);
+            border-left: 5px solid var(--blue-curacao);
+            padding: 1.5em;
+            margin: 1em 0;
+        }
+
+        /* Statistics highlight */
+        .stat-highlight {
+            font-size: 1.4em;
+            color: var(--desert-flower);
+            font-weight: bold;
+        }
+
+        /* Two-column layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2em;
+            text-align: left;
+        }
+
+        .col-box {
+            border: 3px solid var(--cattleya-orchid);
+            padding: 1.5em;
+            border-radius: 10px;
+            background: rgba(164, 95, 176, 0.1);
+        }
+
+        /* Framework questions */
+        .framework-question {
+            background: rgba(255, 155, 138, 0.15);
+            border-left: 5px solid var(--desert-flower);
+            padding: 1em;
+            margin: 0.8em 0;
+            font-size: 0.95em;
+        }
+
+        /* Image placeholder */
+        .img-placeholder {
+            background: var(--opera-mauve);
+            border: 3px dashed var(--cattleya-orchid);
+            padding: 2em;
+            text-align: center;
+            color: var(--dark-bg);
+            font-style: italic;
+            border-radius: 10px;
+            margin: 1em auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Title Slide -->
+            <section>
+                <h1>Understanding Ethnic Cleansing</h1>
+                <h3>Concepts, Patterns, and Historical Examples</h3>
+                <p style="margin-top: 2em; font-size: 0.9em; color: var(--opera-mauve);">HIST 101 - U.S. History Survey</p>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This lecture covers one of the most difficult topics in modern history: ethnic cleansing. We'll examine what it is, how it works, and look at the Yugoslav Wars of the 1990s as a detailed case study. This material is challenging but essential to understanding patterns of violence in the modern world.</p>
+                    
+                    <h4>⚠️ Content Warning</h4>
+                    <p>This presentation discusses mass violence, systematic killing, sexual violence, and genocide. Take care of yourself during this material - it's okay to step out if you need a break.</p>
+                    
+                    <h4>🎯 Learning Objectives</h4>
+                    <ul>
+                        <li>Define ethnic cleansing and distinguish it from genocide</li>
+                        <li>Identify the systematic methods used in ethnic cleansing campaigns</li>
+                        <li>Analyze the Yugoslav Wars as a case study</li>
+                        <li>Apply an analytical framework to recognize ethnic cleansing patterns</li>
+                    </ul>
+                </aside>
+            </section>
+
+            <!-- Definition Slide -->
+            <section>
+                <h2>What Is Ethnic Cleansing?</h2>
+                <div class="info-box">
+                    <p><span class="key-term">Ethnic cleansing</span> is the <span class="popup-trigger" onclick="togglePopup('systematic-popup')">systematic</span> forced removal or extermination of ethnic, racial, or religious groups from a specific territory.</p>
+                    <p style="margin-top: 1em;"><strong>Goal:</strong> Create an ethnically homogeneous region by expelling or eliminating the targeted group.</p>
+                </div>
+
+                <!-- Pop-up for "systematic" -->
+                <div id="systematic-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('systematic-popup')">&times;</span>
+                    <h3>What Does "Systematic" Mean?</h3>
+                    <p><strong>Systematic</strong> means the violence is organized, planned, and coordinated - not random acts by individuals. Key features:</p>
+                    <ul>
+                        <li><strong>Organized policy:</strong> Follows a deliberate plan with clear goals</li>
+                        <li><strong>Coordination:</strong> Multiple agencies work together (military, police, government)</li>
+                        <li><strong>Consistency:</strong> Same methods applied across different locations</li>
+                        <li><strong>Resources:</strong> Requires state infrastructure, logistics, and manpower</li>
+                    </ul>
+                    <p><em>Think of it like the difference between a mugging (random violence) and a military operation (systematic violence).</em></p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📖 Key Definitions</h4>
+                    <p><strong>Ethnic cleansing</strong>: The systematic forced removal or extermination of ethnic, racial, or religious groups from a specific territory. The term became widely used during the Yugoslav Wars in the 1990s, though the practice is much older.</p>
+                    
+                    <p><strong>Systematic</strong>: This is crucial - ethnic cleansing isn't random mob violence. It requires planning, organization, and state resources. The violence follows a pattern and serves a strategic goal.</p>
+                    
+                    <h4>💭 Context & Connections</h4>
+                    <p>The term "ethnic cleansing" is relatively new (1990s), but the practice has a long history. Examples include: Armenian Genocide (1915), forced population transfers in Eastern Europe after WWII, Partition of India (1947), and many others throughout history.</p>
+                    
+                    <h4>🤔 Discussion Prompts</h4>
+                    <ul>
+                        <li>Why does the "systematic" nature of ethnic cleansing make it different from other forms of violence?</li>
+                        <li>What kind of state capacity is required to carry out ethnic cleansing?</li>
+                    </ul>
+                </aside>
+            </section>
+
+            <!-- Four Characteristics -->
+            <section>
+                <h2>Four Key Characteristics</h2>
+                <div class="two-col">
+                    <div class="col-box">
+                        <h3 style="color: var(--blue-curacao);">1. Systematic</h3>
+                        <p>Not random violence but organized policy</p>
+                    </div>
+                    <div class="col-box">
+                        <h3 style="color: var(--blue-curacao);">2. State-Sponsored</h3>
+                        <p>Requires government authority and resources</p>
+                    </div>
+                    <div class="col-box">
+                        <h3 style="color: var(--blue-curacao);">3. Targeted</h3>
+                        <p>Aims at specific ethnic, racial, or religious groups</p>
+                    </div>
+                    <div class="col-box">
+                        <h3 style="color: var(--blue-curacao);">4. Territorial</h3>
+                        <p>Seeks to create homogeneous demographic zones</p>
+                    </div>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>These four characteristics help us distinguish ethnic cleansing from other forms of violence:</p>
+                    
+                    <p><strong>1. Systematic:</strong> There's a plan, an organization, and coordination. This isn't a riot that gets out of hand - it's deliberate.</p>
+                    
+                    <p><strong>2. State-Sponsored:</strong> Only governments have the resources to carry out ethnic cleansing. You need military forces, transportation infrastructure, bureaucratic systems to track populations, etc. Individual hate groups can't do this alone.</p>
+                    
+                    <p><strong>3. Targeted:</strong> The violence is directed at a specific group based on ethnicity, race, or religion - not random or based on individual actions.</p>
+                    
+                    <p><strong>4. Territorial:</strong> The goal is to control geography - to make a specific place "pure" of the targeted group. This is why forced removal is central.</p>
+                    
+                    <h4>💡 Real-World Example</h4>
+                    <p>In Bosnia (1992-1995), Serbian forces systematically removed Bosniak (Muslim) populations from specific territories. They used military forces (state-sponsored), followed consistent patterns across regions (systematic), targeted Bosniaks specifically (targeted), and aimed to create ethnically Serbian territories (territorial).</p>
+                </aside>
+            </section>
+
+            <!-- Methods Slide -->
+            <section>
+                <h2>Methods of Ethnic Cleansing</h2>
+                <p style="font-size: 0.9em; color: var(--opera-mauve); margin-bottom: 1.5em;">How is ethnic cleansing carried out?</p>
+                
+                <div style="text-align: left;">
+                    <h3 style="color: var(--spicy-mustard); font-size: 1.3em;">Forced Displacement</h3>
+                    <ul style="font-size: 0.9em;">
+                        <li>Mass deportations</li>
+                        <li>Forced marches</li>
+                        <li>Removal to designated zones</li>
+                        <li>Denial of return rights</li>
+                    </ul>
+                    
+                    <h3 style="color: var(--spicy-mustard); font-size: 1.3em; margin-top: 1em;">Violence and Terror</h3>
+                    <ul style="font-size: 0.9em;">
+                        <li>Massacres and executions</li>
+                        <li>Rape as weapon of war</li>
+                        <li>Torture and intimidation</li>
+                        <li>Destruction of cultural sites</li>
+                    </ul>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>Ethnic cleansing uses multiple methods simultaneously to force people from their homes:</p>
+                    
+                    <p><strong>Forced Displacement:</strong> The primary goal is removal. People are loaded onto trains or trucks, forced to march long distances, or driven into designated areas (like camps or ghettos). Laws prevent them from returning or reclaiming property.</p>
+                    
+                    <p><strong>Violence and Terror:</strong> Violence serves to intimidate populations into leaving "voluntarily" (under threat) and to prevent resistance. Sexual violence is used as a deliberate weapon to terrorize communities and make return psychologically impossible. Destroying mosques, churches, temples, and cultural heritage sites erases the group's historical presence in the area.</p>
+                    
+                    <h4>⚠️ Important Point</h4>
+                    <p>The violence isn't just cruelty - it's strategic. Each method serves the goal of permanent removal. Destroying homes ensures people can't return. Sexual violence traumatizes entire communities. Cultural destruction erases historical claims to the land.</p>
+                    
+                    <h4>🎓 Senior Historians' Corner</h4>
+                    <p>Scholars like Norman Naimark have documented how ethnic cleansing campaigns follow remarkably similar patterns across different times and places, suggesting these aren't random acts but learned strategies of population removal.</p>
+                </aside>
+            </section>
+
+            <!-- Systematic Destruction -->
+            <section>
+                <h2>Systematic Destruction</h2>
+                <div style="text-align: left;">
+                    <ul>
+                        <li><span class="key-term">Property confiscation</span> - Seizing homes, land, businesses</li>
+                        <li><span class="key-term">Infrastructure destruction</span> - Burning villages, demolishing homes and farms</li>
+                        <li><span class="key-term">Cultural erasure</span> - Destroying religious sites, cemeteries, monuments</li>
+                        <li><span class="key-term">Economic elimination</span> - Making return economically impossible</li>
+                    </ul>
+                </div>
+                
+                <div class="warning-box" style="margin-top: 1.5em;">
+                    <strong>Key Insight:</strong> Destruction isn't just violence - it's designed to make return impossible by eliminating the physical, economic, and cultural foundation of the targeted community.
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This slide shows how ethnic cleansing doesn't just remove people - it systematically destroys everything that would allow them to return and rebuild their lives.</p>
+                    
+                    <p><strong>Property confiscation:</strong> Laws are passed allowing the state or settlers to take ownership of abandoned property. This creates economic incentives for the cleansing and makes legal return nearly impossible.</p>
+                    
+                    <p><strong>Infrastructure destruction:</strong> Villages are burned, homes demolished with bulldozers, farms destroyed. This ensures there's literally nowhere for people to return to.</p>
+                    
+                    <p><strong>Cultural erasure:</strong> Destroying mosques, churches, temples, and cemeteries serves multiple purposes: it erases historical evidence of the group's presence, it removes sacred sites that anchor communities to place, and it signals that return is unwelcome.</p>
+                    
+                    <p><strong>Economic elimination:</strong> By destroying livelihoods - farms, shops, infrastructure - ethnic cleansing makes it economically impossible for refugees to return even if they wanted to.</p>
+                    
+                    <h4>💡 Historical Example</h4>
+                    <p>During the Bosnian War, Serbian forces systematically destroyed over 1,000 mosques - not for military purposes, but to erase the Muslim historical presence in those territories. This pattern has been documented in ethnic cleansing campaigns worldwide.</p>
+                </aside>
+            </section>
+
+            <!-- Comparison: Ethnic Cleansing vs Genocide -->
+            <section>
+                <h2>Ethnic Cleansing vs. Genocide</h2>
+                <p style="font-size: 0.9em; margin-bottom: 1em;">What's the difference?</p>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Ethnic Cleansing</th>
+                            <th>Genocide</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Primary Goal</strong></td>
+                            <td>Remove group from territory</td>
+                            <td>Destroy group entirely</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Intent</strong></td>
+                            <td>Forced displacement</td>
+                            <td>Annihilation</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Methods</strong></td>
+                            <td>Deportation, terror, violence</td>
+                            <td>Mass killing, extermination</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Legal Status</strong></td>
+                            <td>Crime against humanity</td>
+                            <td>Specific international crime (1948 Convention)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="warning-box" style="margin-top: 1em; font-size: 0.85em;">
+                    <strong>Important:</strong> Ethnic cleansing can include genocidal violence. The categories overlap when mass killing is used to force removal or prevent return.
+                </div>
+                
+                <aside class="notes">
+                    <h4>📖 Key Definitions</h4>
+                    <p><strong>Genocide</strong>: Defined by the 1948 UN Convention as acts committed with intent to destroy, in whole or in part, a national, ethnic, racial, or religious group. This includes killing, causing serious harm, inflicting destructive living conditions, preventing births, and forcibly transferring children.</p>
+                    
+                    <p><strong>Crime against humanity</strong>: Widespread or systematic attacks against civilian populations. Ethnic cleansing falls under this category in international law, though "ethnic cleansing" itself isn't a separate legal term.</p>
+                    
+                    <h4>💭 Context & Connections</h4>
+                    <p>The distinction between ethnic cleansing and genocide matters legally and practically:</p>
+                    <ul>
+                        <li><strong>Legally:</strong> Genocide has a specific legal definition (1948 Convention) with special obligations for states to prevent and punish it. Ethnic cleansing is prosecuted under "crimes against humanity."</li>
+                        <li><strong>Practically:</strong> The intent matters. Genocide seeks to destroy a group wherever they are. Ethnic cleansing seeks to remove them from a specific place - perpetrators may not care what happens to the group elsewhere.</li>
+                    </ul>
+                    
+                    <h4>⚠️ The Overlap</h4>
+                    <p>These categories aren't clean. The Srebrenica massacre (covered later) was ruled genocide because the killing aimed to destroy the Bosniak community in that region. But the broader campaign in Bosnia was ethnic cleansing. Many campaigns include both elements.</p>
+                    
+                    <h4>🤔 Discussion Prompts</h4>
+                    <ul>
+                        <li>Why would the legal distinction between ethnic cleansing and genocide matter to international prosecution?</li>
+                        <li>Can you think of why the "intent" distinction is important?</li>
+                    </ul>
+                </aside>
+            </section>
+
+            <!-- Pattern Recognition -->
+            <section>
+                <h2>Recognizing the Pattern</h2>
+                <p style="font-size: 0.9em; margin-bottom: 1.5em;">Common elements across cases</p>
+                
+                <div style="text-align: left;">
+                    <div class="timeline-item">
+                        <span class="timeline-date">Step 1</span>
+                        <span><span class="key-term">Dehumanization</span> - Propaganda portrays target group as inferior, dangerous, or subhuman</span>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-date">Step 2</span>
+                        <span><span class="key-term">Legal Marginalization</span> - Laws strip rights, citizenship, or property protections</span>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-date">Step 3</span>
+                        <span><span class="key-term">Physical Segregation</span> - Ghettos, reservations, or zones concentrate population</span>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-date">Step 4</span>
+                        <span><span class="key-term">Economic Destruction</span> - Confiscation of assets, denial of livelihoods</span>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-date">Step 5</span>
+                        <span><span class="key-term">Forced Removal</span> - Mass deportations under armed guard</span>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-date">Step 6</span>
+                        <span><span class="key-term">Prevention of Return</span> - Homes destroyed, land redistributed, legal barriers erected</span>
+                    </div>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>Ethnic cleansing campaigns follow remarkably consistent patterns. Understanding these six steps helps us recognize ethnic cleansing when it's happening:</p>
+                    
+                    <p><strong>Step 1 - Dehumanization:</strong> Propaganda campaigns prepare the population psychologically. The target group is portrayed as less than human, as a threat, as vermin or disease. This makes ordinary people willing to participate in or accept violence against them. Example: Hutu extremists in Rwanda called Tutsis "cockroaches" before the 1994 genocide.</p>
+                    
+                    <p><strong>Step 2 - Legal Marginalization:</strong> Laws are changed to strip the target group of citizenship, property rights, or legal protections. This creates a legal framework for persecution and makes resistance difficult. Example: Nuremberg Laws in Nazi Germany (1935) stripped Jews of citizenship rights.</p>
+                    
+                    <p><strong>Step 3 - Physical Segregation:</strong> The target group is concentrated in specific areas - ghettos, reservations, designated zones. This makes later removal easier and begins physical separation. Example: Jewish ghettos in Nazi-occupied Poland.</p>
+                    
+                    <p><strong>Step 4 - Economic Destruction:</strong> Property is confiscated, businesses closed, employment banned. This makes the population economically vulnerable and dependent, easier to control. It also enriches those doing the cleansing.</p>
+                    
+                    <p><strong>Step 5 - Forced Removal:</strong> The actual deportations, forced marches, or expulsions. Violence and terror are used to force compliance.</p>
+                    
+                    <p><strong>Step 6 - Prevention of Return:</strong> Ensuring permanence through destruction of homes, redistribution of land to settlers, and legal barriers to return.</p>
+                    
+                    <h4>🎓 Senior Historians' Corner</h4>
+                    <p>Genocide scholar Gregory Stanton developed a "10 Stages of Genocide" model that includes similar progressions. Understanding these patterns helps early warning and prevention efforts.</p>
+                </aside>
+            </section>
+
+            <!-- Yugoslav Wars - Background -->
+            <section>
+                <h2>Case Study: Yugoslav Wars (1990s)</h2>
+                <div class="img-placeholder" style="width: 900px; height: 500px;">
+                    <strong>IMAGE PLACEHOLDER</strong><br>
+                    <em>Dimensions: 900x500px</em><br><br>
+                    <strong>Search terms:</strong> "Yugoslavia map 1991 ethnic distribution"<br>
+                    "Former Yugoslavia republics ethnic groups map"<br><br>
+                    <strong>Suggested sources:</strong> Library of Congress, National Archives, UN Archives
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>We're now going to examine the Yugoslav Wars (1991-1995) as a detailed case study of ethnic cleansing. This happened in Europe in the 1990s - recent history that many of your parents remember.</p>
+                    
+                    <h4>🗺️ Geographic Context</h4>
+                    <p>Yugoslavia was located in southeastern Europe (the Balkans). It bordered Italy, Austria, Hungary, Romania, Bulgaria, Greece, and Albania. After it broke apart, it became seven different countries: Slovenia, Croatia, Bosnia-Herzegovina, Serbia, Montenegro, North Macedonia, and Kosovo.</p>
+                    
+                    <h4>💭 Why This Matters</h4>
+                    <p>The Yugoslav Wars shattered the post-WWII assumption that genocide and ethnic cleansing were things of the past. The international community's failure to prevent or quickly stop the violence led to major changes in how the UN and NATO approach humanitarian crises.</p>
+                    
+                    <h4>📖 Recommended Map</h4>
+                    <p>Look for a map showing the ethnic distribution of Yugoslavia in 1991. You'll see how Serbs, Croats, and Bosniaks (Muslims) were intermixed, especially in Bosnia-Herzegovina. This mixing is what made ethnic cleansing so brutal - the groups lived side by side.</p>
+                </aside>
+            </section>
+
+            <!-- Background Context -->
+            <section>
+                <h2>Background: Breakup of Yugoslavia</h2>
+                
+                <div class="info-box">
+                    <p><span class="popup-trigger" onclick="togglePopup('yugoslavia-popup')">Yugoslavia</span> was a multi-ethnic federation created after World War I, held together under communist rule after World War II.</p>
+                    <p style="margin-top: 1em;">After the death of leader Josip Broz Tito (1980) and the collapse of communism (1989-1991), the federation began to dissolve.</p>
+                </div>
+                
+                <h3 style="color: var(--spicy-mustard); margin-top: 1em;">Key Groups Involved</h3>
+                <ul style="text-align: left; font-size: 0.9em;">
+                    <li><strong>Serbs:</strong> Largest ethnic group, Orthodox Christian</li>
+                    <li><strong>Croats:</strong> Roman Catholic, declared independence in 1991</li>
+                    <li><strong>Bosniaks:</strong> Muslim population, primarily in Bosnia-Herzegovina</li>
+                    <li><strong>Others:</strong> Slovenes, Montenegrins, Albanians (in Kosovo), Macedonians</li>
+                </ul>
+
+                <!-- Pop-up for Yugoslavia -->
+                <div id="yugoslavia-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('yugoslavia-popup')">&times;</span>
+                    <h3>Yugoslavia: Historical Background</h3>
+                    <p><strong>Creation (1918):</strong> Yugoslavia ("Land of the South Slavs") was created after World War I from territories of the collapsed Austro-Hungarian and Ottoman Empires. It united several ethnic groups who shared Slavic heritage but had different religions, histories, and cultures.</p>
+                    
+                    <p><strong>Communist Era (1945-1991):</strong> After World War II, communist leader Josip Broz Tito held Yugoslavia together through a combination of charisma, authoritarian control, and a policy of "Brotherhood and Unity" that suppressed ethnic nationalism. Different republics had significant autonomy within the federation.</p>
+                    
+                    <p><strong>The Collapse (1989-1991):</strong> When communism collapsed across Eastern Europe and Tito had been dead for a decade, nationalist politicians in Yugoslavia's republics began competing for power by appealing to ethnic identity. Slovenia and Croatia declared independence in 1991, triggering wars as Serbia (controlling the Yugoslav army) tried to maintain the federation and protect Serbian minorities in other republics.</p>
+                    
+                    <p><strong>Key Tension:</strong> About 25% of Serbs lived outside Serbia proper, especially in Croatia and Bosnia. Serbian leader Slobodan Milošević used fears about Serbian minorities to justify military intervention and territorial expansion.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📖 Key Definitions</h4>
+                    <p><strong>Josip Broz Tito (1892-1980):</strong> Communist leader of Yugoslavia from 1945-1980. He kept the multi-ethnic federation together through authoritarian control combined with more economic freedom than other communist states. After his death, ethnic tensions that he had suppressed began to resurface.</p>
+                    
+                    <p><strong>Bosniaks:</strong> The term for Bosnian Muslims. They're Slavs who converted to Islam during Ottoman rule (1463-1878). Before the 1990s, they were often called "Muslim" as an ethnic category, but during the war they increasingly used "Bosniak" to emphasize their distinct national identity.</p>
+                    
+                    <h4>💭 Context & Connections</h4>
+                    <p>Yugoslavia's collapse connects to broader patterns in the early 1990s:</p>
+                    <ul>
+                        <li><strong>End of Cold War:</strong> The Soviet Union collapsed in 1991, ending the bipolar world order</li>
+                        <li><strong>Rise of nationalism:</strong> Across Eastern Europe, ethnic nationalism replaced communist ideology</li>
+                        <li><strong>Weak international response:</strong> The UN and major powers were uncertain how to respond to "internal" conflicts</li>
+                    </ul>
+                    
+                    <h4>🎓 Senior Historians' Corner</h4>
+                    <p>Historians debate whether Yugoslavia's collapse was inevitable or if different leadership could have managed a peaceful transition. Some argue Tito's system only delayed inevitable conflicts; others point to nationalist politicians like Slobodan Milošević who deliberately inflamed ethnic tensions for political gain.</p>
+                    
+                    <h4>🤔 Discussion Prompts</h4>
+                    <ul>
+                        <li>Why would the death of a strong leader trigger ethnic conflicts?</li>
+                        <li>How might politicians benefit from stirring up ethnic nationalism?</li>
+                    </ul>
+                </aside>
+            </section>
+
+            <!-- Ethnic Cleansing in Bosnia -->
+            <section>
+                <h2>Ethnic Cleansing in Bosnia (1992-1995)</h2>
+                
+                <div class="warning-box">
+                    <h3 style="color: var(--dark-bg); margin-top: 0;">Scale of Violence</h3>
+                    <p class="stat-highlight">~100,000 killed in Bosnia-Herzegovina</p>
+                    <p class="stat-highlight">Over 2 million displaced (half the pre-war population)</p>
+                    <p class="stat-highlight">Systematic rape camps used as weapon of terror</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>The war in Bosnia-Herzegovina (1992-1995) became the most brutal theater of the Yugoslav Wars and the site of Europe's worst atrocities since World War II.</p>
+                    
+                    <h4>📊 Understanding the Numbers</h4>
+                    <p><strong>~100,000 killed:</strong> This is a conservative estimate. Some estimates go higher. To put it in perspective, Bosnia's pre-war population was only about 4.4 million - this represents over 2% of the entire population killed in just 3.5 years.</p>
+                    
+                    <p><strong>Over 2 million displaced:</strong> More than half of Bosnia's population was forced from their homes. This included both refugees who fled to other countries and internally displaced persons who fled to different parts of Bosnia. Many have never returned.</p>
+                    
+                    <p><strong>Systematic rape:</strong> Sexual violence was used as a deliberate weapon of war. Women were detained in "rape camps" where they were repeatedly assaulted. The goal was to terrorize communities, destroy social bonds, and force people to flee. Estimates suggest 20,000-50,000 women were raped during the war.</p>
+                    
+                    <h4>💭 Context & Connections</h4>
+                    <p>Bosnia was particularly vulnerable because its population was the most mixed: roughly 44% Bosniak (Muslim), 31% Serb, and 17% Croat in 1991. Families often included members of different ethnic groups. This made the ethnic cleansing campaign especially tragic - neighbors and former friends became enemies.</p>
+                    
+                    <h4>⚠️ Content Warning Reminder</h4>
+                    <p>The next few slides will detail specific methods of violence. This is difficult material but necessary to understand what ethnic cleansing looks like in practice.</p>
+                </aside>
+            </section>
+
+            <!-- Methods Used in Bosnia -->
+            <section>
+                <h2>Methods Used in Bosnia</h2>
+                
+                <div style="text-align: left; font-size: 0.85em;">
+                    <ol>
+                        <li><span class="key-term">Mass Killings:</span> Srebrenica massacre (July 1995) - 8,000+ Bosniak men and boys executed</li>
+                        <li><span class="key-term">Concentration Camps:</span> Civilians detained, tortured, killed (Omarska, Trnopolje camps)</li>
+                        <li><span class="key-term">Forced Deportations:</span> Villages surrounded, residents expelled at gunpoint</li>
+                        <li><span class="key-term">Destruction of Heritage:</span> Mosques, churches, and cultural sites demolished</li>
+                        <li><span class="key-term">Sexual Violence:</span> Estimated 20,000-50,000 women raped, often in organized camps</li>
+                        <li><span class="key-term">Siege Tactics:</span> Sarajevo besieged for 1,425 days (longest in modern history)</li>
+                    </ol>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This slide catalogs the systematic methods used during the Bosnian ethnic cleansing campaign. Notice how it combines all the elements we discussed earlier: violence, forced displacement, cultural destruction, and prevention of return.</p>
+                    
+                    <p><strong>1. Mass Killings:</strong> The Srebrenica massacre (covered in detail on the next slide) was the single worst atrocity, but massacres occurred throughout Bosnia. Villages would be surrounded by Serbian forces, men separated from women and children, then executed.</p>
+                    
+                    <p><strong>2. Concentration Camps:</strong> Camps like Omarska and Trnopolje held thousands of civilians. Conditions were horrific - starvation, torture, executions. When Western journalists exposed these camps in August 1992, the images shocked the world because they echoed Nazi concentration camps.</p>
+                    
+                    <p><strong>3. Forced Deportations:</strong> The core of ethnic cleansing. Serbian forces (and in some areas, Croatian forces) would surround villages, order residents to leave, and bus or march them to territory controlled by their ethnic group. Homes were then destroyed or given to Serbian settlers.</p>
+                    
+                    <p><strong>4. Destruction of Heritage:</strong> Over 1,000 mosques were destroyed during the war, along with Catholic churches, cultural monuments, and libraries. The destruction of Sarajevo's National Library (which held irreplaceable manuscripts) was particularly devastating. This wasn't collateral damage - it was deliberate erasure of cultural heritage.</p>
+                    
+                    <p><strong>5. Sexual Violence:</strong> Rape was used systematically as a weapon of war. Women were held in "rape camps," repeatedly assaulted, often until pregnant. The goal was to terrorize communities and make return psychologically impossible. In 2001, the International Criminal Tribunal ruled that rape used as a weapon of war constitutes a crime against humanity.</p>
+                    
+                    <p><strong>6. Siege of Sarajevo:</strong> Bosnia's capital was surrounded and subjected to constant sniper fire and shelling for nearly four years (April 1992 - February 1996). About 11,000 people were killed, including 1,500 children. Residents lived in basements, without electricity or water, under constant bombardment.</p>
+                    
+                    <h4>🎓 Senior Historians' Corner</h4>
+                    <p>Historian Norman Naimark argues that the Bosnian case shows how ethnic cleansing often escalates from forced deportation to genocidal violence when populations resist or when perpetrators fear accountability.</p>
+                </aside>
+            </section>
+
+            <!-- Srebrenica Genocide -->
+            <section>
+                <h2>Srebrenica Genocide (July 1995)</h2>
+                
+                <div class="info-box">
+                    <p><span class="popup-trigger" onclick="togglePopup('srebrenica-popup')">Srebrenica</span> was a UN-designated "safe area" supposedly protected by Dutch peacekeepers.</p>
+                    <p style="margin-top: 1em;">Bosnian Serb forces, led by General Ratko Mladić, overran the town in July 1995.</p>
+                </div>
+                
+                <h3 style="color: var(--spicy-mustard); margin-top: 1em;">The Massacre</h3>
+                <ul style="text-align: left; font-size: 0.9em;">
+                    <li>Serb forces separated men and boys (ages 12-77) from women and children</li>
+                    <li>Over 8,000 Bosniak males were executed over several days</li>
+                    <li>Bodies buried in mass graves; many later reburied to hide evidence</li>
+                    <li>Women and children were forcibly expelled to Bosniak-controlled territory</li>
+                </ul>
+                
+                <div class="warning-box" style="margin-top: 1em; font-size: 0.85em;">
+                    <strong>Legal Recognition:</strong> The International Criminal Tribunal for the former Yugoslavia (ICTY) ruled Srebrenica was <span class="key-term">genocide</span> - the only event in the Yugoslav Wars to receive that designation.
+                </div>
+
+                <!-- Pop-up for Srebrenica context -->
+                <div id="srebrenica-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('srebrenica-popup')">&times;</span>
+                    <h3>Srebrenica: Background</h3>
+                    <p><strong>Location:</strong> Srebrenica is a small town in eastern Bosnia, near the Serbian border. Before the war, it had about 37,000 people, mostly Bosniaks (Muslims).</p>
+                    
+                    <p><strong>"Safe Area" Designation:</strong> In 1993, the UN Security Council declared Srebrenica (and five other besieged cities) a "safe area" that should be protected from attack. About 400 lightly-armed Dutch peacekeepers were deployed to protect the town and the approximately 40,000 Bosniak refugees who had fled there.</p>
+                    
+                    <p><strong>The Siege:</strong> Serbian forces surrounded Srebrenica throughout the war, cutting off supplies and occasionally shelling the town. Conditions inside were desperate - malnutrition, no medical care, constant fear.</p>
+                    
+                    <p><strong>Why It Happened:</strong> In July 1995, Bosnian Serb forces led by General Ratko Mladić launched an assault on Srebrenica. The Dutch peacekeepers, outnumbered and outgunned, did not resist. Within days, Serbian forces had complete control of the town.</p>
+                    
+                    <p><strong>The Aftermath:</strong> The massacre at Srebrenica became a symbol of international failure - the UN had promised protection but failed to provide it. It also helped push NATO toward military intervention that eventually ended the war.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>Srebrenica represents the worst massacre in Europe since World War II. It's particularly significant because it happened in a UN-designated "safe area," representing a catastrophic failure of international protection.</p>
+                    
+                    <h4>📖 Key Definitions</h4>
+                    <p><strong>General Ratko Mladić:</strong> Commander of the Bosnian Serb Army. He was convicted of genocide, crimes against humanity, and war crimes in 2017 and sentenced to life in prison. During the Srebrenica massacre, he was filmed telling terrified refugees "no one will harm you."</p>
+                    
+                    <p><strong>UN Safe Area:</strong> Areas designated by the UN Security Council as demilitarized zones that should be protected from attack. Six cities in Bosnia received this designation. The concept failed catastrophically when the international community didn't provide adequate forces or mandate to actually protect them.</p>
+                    
+                    <h4>⚠️ The Mechanics of the Massacre</h4>
+                    <p>After taking Srebrenica on July 11, 1995, Serbian forces began systematically separating males from females. Men and boys ages 12-77 were detained at various locations (schools, warehouses, fields). Over the next several days, they were transported to execution sites and shot. Bodies were buried in mass graves. When evidence began to emerge, many bodies were dug up and reburied in secondary graves to hide the crime.</p>
+                    
+                    <p>Women and children were forced onto buses and driven to Bosniak-controlled territory. Many women were raped during the process. Survivors reported seeing male relatives for the last time as they were separated.</p>
+                    
+                    <h4>💭 Why It Was Ruled Genocide</h4>
+                    <p>The ICTY ruled Srebrenica was genocide (not just ethnic cleansing or crimes against humanity) because the killing of all military-age males had the intent to destroy the Bosniak community in that region. Without men, the community couldn't maintain itself as a group. This met the legal definition of genocide: "acts committed with intent to destroy, in whole or in part, a national, ethnic, racial or religious group."</p>
+                    
+                    <h4>🎓 Senior Historians' Corner</h4>
+                    <p>The distinction between genocide and ethnic cleansing becomes clear at Srebrenica. The goal wasn't just to remove Bosniaks from the territory (ethnic cleansing) but to destroy the community itself by killing all the men and boys (genocide).</p>
+                </aside>
+            </section>
+
+            <!-- International Response -->
+            <section>
+                <h2>International Response</h2>
+                
+                <div class="two-col" style="font-size: 0.85em;">
+                    <div>
+                        <h3 style="color: var(--arabesque);">Failures</h3>
+                        <ul>
+                            <li>UN peacekeepers unable/unwilling to stop massacres</li>
+                            <li>Arms embargo prevented Bosnian self-defense</li>
+                            <li>Delayed military intervention (until 1995)</li>
+                            <li>"Safe areas" designation proved meaningless</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--blue-curacao);">Eventual Actions</h3>
+                        <ul>
+                            <li>NATO airstrikes (Operation Deliberate Force, Aug-Sep 1995)</li>
+                            <li>Dayton Accords (Dec 1995) ended fighting</li>
+                            <li>ICTY created to prosecute war crimes</li>
+                            <li>Peacekeeping forces deployed to enforce peace</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="info-box" style="margin-top: 1em; font-size: 0.85em;">
+                    <strong>Prosecutions:</strong> 161 individuals indicted by ICTY, including Slobodan Milošević (Serbian president, died during trial), Radovan Karadžić (Bosnian Serb leader, convicted 2016), and Ratko Mladić (military commander, convicted 2017).
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>The international response to the Yugoslav Wars was initially weak and ineffective, but eventually led to significant changes in how the international community approaches mass atrocities.</p>
+                    
+                    <h4>💭 The Failures</h4>
+                    <p><strong>Ineffective peacekeeping:</strong> UN peacekeepers had a mandate to "keep the peace" but not to enforce it. They were lightly armed and had rules of engagement that prevented them from using force to protect civilians. This became tragically clear at Srebrenica.</p>
+                    
+                    <p><strong>Arms embargo:</strong> The UN imposed an arms embargo on all of Yugoslavia in 1991. But this mainly hurt Bosnian government forces, who had almost no weapons, while Serbian forces had inherited most of the Yugoslav army's equipment. Many critics argue this guaranteed Serbian military dominance.</p>
+                    
+                    <p><strong>Delayed intervention:</strong> Despite clear evidence of ethnic cleansing starting in 1992, NATO didn't conduct sustained airstrikes until 1995 - after Srebrenica. Political divisions (especially between European powers and the US) delayed decisive action.</p>
+                    
+                    <h4>💭 What Changed</h4>
+                    <p><strong>Operation Deliberate Force:</strong> After Srebrenica, NATO launched a major bombing campaign against Bosnian Serb military targets in August-September 1995. Combined with Croatian and Bosnian military advances, this finally forced Serbian leaders to negotiate.</p>
+                    
+                    <p><strong>Dayton Accords:</strong> Negotiated in Dayton, Ohio, and signed in Paris in December 1995. It ended the fighting by dividing Bosnia into two entities: the Republika Srpska (Serb) and the Federation of Bosnia and Herzegovina (Bosniak-Croat). This partition essentially rewarded ethnic cleansing by recognizing the territorial gains, which remains controversial.</p>
+                    
+                    <p><strong>International Criminal Tribunal for the former Yugoslavia (ICTY):</strong> Established in 1993, the ICTY was the first international war crimes tribunal since Nuremberg. It indicted 161 people and successfully convicted many major war criminals. It established important precedents: that rape is a crime against humanity, that commanders are responsible for their subordinates' crimes, and that "following orders" is not a defense.</p>
+                    
+                    <h4>🎓 Senior Historians' Corner</h4>
+                    <p>The Yugoslav Wars influenced the development of the "Responsibility to Protect" (R2P) doctrine, which holds that the international community has a responsibility to intervene when states fail to protect their populations from genocide, war crimes, ethnic cleansing, and crimes against humanity. This represented a major shift in thinking about sovereignty and intervention.</p>
+                </aside>
+            </section>
+
+            <!-- Legacy and Lessons -->
+            <section>
+                <h2>Legacy and Lessons</h2>
+                
+                <div class="warning-box">
+                    <strong>Recognition:</strong> The Yugoslav Wars demonstrated that ethnic cleansing could happen in modern Europe despite "Never Again" promises after the Holocaust.
+                </div>
+                
+                <h3 style="color: var(--spicy-mustard); margin-top: 1em;">Key Takeaways</h3>
+                <div style="text-align: left; font-size: 0.85em;">
+                    <ol>
+                        <li><span class="key-term">Ethnic cleansing is not ancient history</span> - It occurs in the modern world when conditions allow</li>
+                        <li><span class="key-term">State power is essential</span> - Systematic violence requires military, police, and logistical resources</li>
+                        <li><span class="key-term">Propaganda precedes violence</span> - Dehumanization campaigns prepare populations to accept atrocities</li>
+                        <li><span class="key-term">International law matters</span> - ICTY prosecutions showed perpetrators could be held accountable</li>
+                        <li><span class="key-term">Early intervention saves lives</span> - Delayed response allowed mass atrocities to occur</li>
+                    </ol>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This slide summarizes the most important lessons from studying ethnic cleansing generally and the Yugoslav Wars specifically.</p>
+                    
+                    <p><strong>1. Not ancient history:</strong> One of the most sobering lessons is that genocide and ethnic cleansing didn't end with the Holocaust. Despite promises of "Never Again," it happened in Europe in the 1990s - and continues to happen in various forms around the world today. Examples since Bosnia include: Rwanda (1994), Darfur (2003-present), Myanmar/Rohingya (2017-present).</p>
+                    
+                    <p><strong>2. State power is essential:</strong> Individuals or small groups cannot carry out ethnic cleansing. It requires the resources of a state: military forces, transportation infrastructure, bureaucratic systems, control of media, etc. This is why focusing solely on individual perpetrators misses the systemic nature of these crimes.</p>
+                    
+                    <p><strong>3. Propaganda precedes violence:</strong> In every case of ethnic cleansing, there's a preparatory phase of propaganda and dehumanization. In Bosnia, Serbian media portrayed Bosniaks as Islamic extremists threatening Serbian survival. This psychological preparation made ordinary people willing to participate in or accept extreme violence. Recognizing dehumanization campaigns can provide early warning.</p>
+                    
+                    <p><strong>4. International law matters:</strong> The ICTY showed that international prosecution is possible. Major political and military leaders have been convicted and imprisoned. This matters both for justice (victims see perpetrators held accountable) and deterrence (future leaders know they might face trial). The ICTY's legal precedents influenced the creation of the permanent International Criminal Court (ICC) in 2002.</p>
+                    
+                    <p><strong>5. Early intervention saves lives:</strong> The most painful lesson from Bosnia is that delayed intervention cost lives. If NATO had intervened forcefully in 1992-1993, the Srebrenica massacre likely wouldn't have happened. This has influenced debates about intervention in subsequent crises, though the international community still often responds too slowly.</p>
+                    
+                    <h4>💭 Contemporary Relevance</h4>
+                    <p>Understanding these patterns helps us recognize early warning signs of potential ethnic cleansing in the present. When we see dehumanization campaigns, legal marginalization of minorities, or concentration of populations, we can recognize dangerous patterns and potentially intervene before mass atrocities occur.</p>
+                    
+                    <h4>🤔 Discussion Prompts</h4>
+                    <ul>
+                        <li>Why do you think "Never Again" promises failed to prevent Bosnia?</li>
+                        <li>What makes early intervention difficult for the international community?</li>
+                        <li>How can ordinary people recognize and resist dehumanization campaigns?</li>
+                    </ul>
+                </aside>
+            </section>
+
+            <!-- Analytical Framework -->
+            <section>
+                <h2>Analytical Framework</h2>
+                <p style="font-size: 0.9em; margin-bottom: 1em;">How to identify ethnic cleansing</p>
+                
+                <div style="text-align: left;">
+                    <p style="margin-bottom: 1em;">When examining historical or contemporary events, ask:</p>
+                    
+                    <div class="framework-question">
+                        1. Is there <span class="key-term">systematic targeting</span> of a specific group?
+                    </div>
+                    
+                    <div class="framework-question">
+                        2. Does <span class="key-term">state authority</span> direct or enable the violence?
+                    </div>
+                    
+                    <div class="framework-question">
+                        3. Is the goal to <span class="key-term">remove a population from territory?</span>
+                    </div>
+                    
+                    <div class="framework-question">
+                        4. Are <span class="key-term">multiple tactics</span> used (violence, deportation, property destruction)?
+                    </div>
+                    
+                    <div class="framework-question">
+                        5. Is there <span class="key-term">prevention of return</span> (legal, physical, or demographic)?
+                    </div>
+                </div>
+                
+                <div class="warning-box" style="margin-top: 1em; font-size: 0.9em;">
+                    <strong>If the answer to most of these questions is "yes," you are likely examining ethnic cleansing.</strong>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This framework gives you a systematic way to analyze historical and contemporary events to determine if they constitute ethnic cleansing. Let's break down each question:</p>
+                    
+                    <p><strong>Question 1 - Systematic targeting:</strong> Is violence directed at a specific ethnic, racial, or religious group? Is it organized and patterned, or random? Ethnic cleansing targets groups, not individuals based on their actions. Example: In Bosnia, Bosniaks were targeted regardless of their individual politics or actions, simply for being Bosniak.</p>
+                    
+                    <p><strong>Question 2 - State authority:</strong> Is the government directing the violence, or at minimum enabling it by not intervening? Ethnic cleansing requires state resources. Example: In Bosnia, the Bosnian Serb government (Republika Srpska) used military forces, police, and bureaucracy to carry out ethnic cleansing.</p>
+                    
+                    <p><strong>Question 3 - Territorial goal:</strong> Is the purpose to control specific territory by removing a group? This distinguishes ethnic cleansing from other forms of persecution. Example: Serbian forces aimed to create ethnically pure Serbian territories in Bosnia, not to persecute Bosniaks everywhere.</p>
+                    
+                    <p><strong>Question 4 - Multiple tactics:</strong> Does the campaign use various methods (killing, deportation, property destruction, legal measures)? Ethnic cleansing is comprehensive, using whatever methods are needed to achieve removal. Example: Bosnia saw massacres, forced deportations, rape camps, destruction of homes and mosques, and legal barriers to return - all working together.</p>
+                    
+                    <p><strong>Question 5 - Prevention of return:</strong> Are measures taken to ensure the removal is permanent? This might include destroying homes, redistributing land, changing demographics, or creating legal barriers. Example: Serbian forces destroyed Bosniak homes and mosques, resettled Serbian refugees in the emptied areas, and created legal frameworks that made return nearly impossible.</p>
+                    
+                    <h4>💡 How to Use This Framework</h4>
+                    <p>This framework can be applied to historical cases (like the Trail of Tears, the Armenian Genocide, or the partition of India) or contemporary situations. The more "yes" answers, the more likely you're examining ethnic cleansing. If you answer "yes" to all five questions, you're almost certainly looking at ethnic cleansing.</p>
+                    
+                    <h4>🤔 Practice Application</h4>
+                    <p>Consider applying this framework to other historical cases you might study: the removal of Cherokee Nation (Trail of Tears, 1838), the Armenian Genocide (1915), or the Rohingya crisis in Myanmar (2017). Does this framework help you understand what happened?</p>
+                    
+                    <h4>⚠️ Important Reminder</h4>
+                    <p>This framework is analytical, not political. Identifying ethnic cleansing is about understanding patterns of violence, not making moral equivalencies or political statements. Each case has unique historical circumstances that must be understood in context.</p>
+                </aside>
+            </section>
+
+            <!-- Conclusion Slide -->
+            <section>
+                <h2>Conclusion</h2>
+                
+                <div class="info-box">
+                    <p>Ethnic cleansing remains a critical challenge for the international community. Understanding its patterns, methods, and warning signs is essential for:</p>
+                    <ul style="margin-top: 1em;">
+                        <li>Recognizing early warning signs in contemporary conflicts</li>
+                        <li>Supporting accountability and justice for victims</li>
+                        <li>Developing more effective prevention and intervention strategies</li>
+                        <li>Honoring the memory of those who suffered</li>
+                    </ul>
+                </div>
+                
+                <div class="warning-box" style="margin-top: 1.5em;">
+                    <p style="font-size: 1.1em;"><em>"Those who cannot remember the past are condemned to repeat it."</em></p>
+                    <p style="text-align: right; margin-top: 0.5em;">— George Santayana</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 Wrapping Up</h4>
+                    <p>We've covered difficult material in this lecture. You now understand what ethnic cleansing is, how it operates systematically, and how it unfolded in the Yugoslav Wars. This knowledge is important for several reasons:</p>
+                    
+                    <h4>💭 Why This Matters</h4>
+                    <p><strong>Historical understanding:</strong> Ethnic cleansing has shaped the modern world - from the creation of nation-states to refugee crises to ongoing conflicts. You can't understand 20th and 21st century history without understanding this pattern of violence.</p>
+                    
+                    <p><strong>Contemporary relevance:</strong> Ethnic cleansing didn't end with Bosnia. Understanding the patterns helps us recognize similar situations today and support effective responses. Recent examples include the Rohingya in Myanmar, the Yazidis in Iraq, and ongoing situations in various parts of the world.</p>
+                    
+                    <p><strong>Civic responsibility:</strong> As informed citizens, you'll make decisions (through voting, advocacy, donations) about how your country responds to humanitarian crises. Understanding what ethnic cleansing looks like helps you evaluate policy proposals and media coverage.</p>
+                    
+                    <p><strong>Preventing future atrocities:</strong> Education is one of the most powerful tools for prevention. When populations understand the warning signs and mechanisms of ethnic cleansing, they're better equipped to resist propaganda, support vulnerable groups, and demand action from leaders.</p>
+                    
+                    <h4>📖 Further Study</h4>
+                    <p>If you're interested in learning more, consider:</p>
+                    <ul>
+                        <li><strong>Books:</strong> Samantha Power's "A Problem from Hell" (on genocide and US policy), Norman Naimark's "Fires of Hatred" (on ethnic cleansing), David Rohde's "Endgame" (on Srebrenica)</li>
+                        <li><strong>Films:</strong> "The Death of Yugoslavia" (BBC documentary), "Quo Vadis, Aida?" (2020 film about Srebrenica)</li>
+                        <li><strong>Museums:</strong> United States Holocaust Memorial Museum (includes exhibits on Bosnia and other genocides), Museum of Crimes Against Humanity and Genocide in Sarajevo</li>
+                    </ul>
+                    
+                    <h4>🙏 Taking Care of Yourself</h4>
+                    <p>This material is heavy. It's normal to feel disturbed, sad, or overwhelmed when learning about mass atrocities. If you need to talk to someone, please reach out to campus counseling services. Remember: learning about these events honors the victims and helps prevent future atrocities.</p>
+                    
+                    <h4>📝 What's Next</h4>
+                    <p>In our next class, we'll [mention whatever comes next in your course]. For now, take time to process this material. Review your notes, discuss with classmates if that's helpful, and don't hesitate to ask questions.</p>
+                </aside>
+            </section>
+
+        </div>
+    </div>
+    
+    <!-- Reveal.js and plugins from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/zoom/zoom.js"></script>
+    
+    <script>
+        // Pop-up toggle function
+        function togglePopup(id) {
+            document.getElementById(id).classList.toggle('active');
+        }
+        
+        // Close pop-ups when clicking outside
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('popup')) {
+                event.target.classList.remove('active');
+            }
+        });
+        
+        // Initialize Reveal.js
+        Reveal.initialize({
+            width: 1920,
+            height: 1080,
+            margin: 0.1,
+            minScale: 0.2,
+            maxScale: 2.0,
+            controls: true,
+            progress: true,
+            center: true,
+            hash: true,
+            transition: 'slide',
+            plugins: [ RevealNotes, RevealHighlight, RevealZoom ]
+        });
+    </script>
+</body>
+</html>
