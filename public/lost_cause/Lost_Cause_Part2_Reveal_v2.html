@@ -1,0 +1,1623 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Myth of the Lost Cause, Part 2 - HIST 102</title>
+    
+    <!-- Reveal.js CSS from CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --desert-flower: #FF9B8A;
+            --cattleya-orchid: #A25FB0;
+            --opera-mauve: #D4A5C8;
+            --blue-curacao: #48C9C9;
+            --spicy-mustard: #D9A757;
+            --mocha-mousse: #A78674;
+            --arabesque: #C8826D;
+            --dark-bg: #1A1A1A;
+            --light-text: #FAFAFA;
+            --popup-bg: #FAFAFA;
+            --popup-text: #1A1A1A;
+        }
+        
+        .reveal {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 28px;
+            background: var(--dark-bg);
+        }
+        
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--desert-flower);
+            text-transform: none;
+            line-height: 1.2;
+        }
+        
+        .reveal h1 { font-size: 2.8em; }
+        .reveal h2 { font-size: 2em; }
+        .reveal h3 { font-size: 1.5em; color: var(--opera-mauve); }
+        
+        .reveal p, .reveal li {
+            color: var(--light-text);
+            line-height: 1.5;
+        }
+        
+        .reveal a {
+            color: var(--blue-curacao);
+            text-decoration: underline;
+        }
+        
+        /* Section Title Slide */
+        .section-title-slide {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        
+        .section-title-slide h2 {
+            font-size: 2.5em;
+            color: var(--desert-flower);
+            border-bottom: 4px solid var(--cattleya-orchid);
+            padding-bottom: 0.3em;
+            margin-bottom: 0.5em;
+        }
+        
+        .section-title-slide .section-number {
+            font-size: 1.2em;
+            color: var(--blue-curacao);
+            margin-bottom: 0.5em;
+            font-weight: 600;
+        }
+        
+        .section-title-slide .section-subtitle {
+            font-size: 1.1em;
+            color: var(--opera-mauve);
+            font-style: italic;
+        }
+        
+        /* Keyboard Shortcuts Menu */
+        .shortcuts-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(72, 201, 201, 0.2);
+            border: 2px solid var(--blue-curacao);
+            color: var(--blue-curacao);
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.7em;
+            z-index: 100;
+            font-family: 'Open Sans', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .shortcuts-btn:hover {
+            background: rgba(72, 201, 201, 0.4);
+        }
+        
+        .shortcuts-popup {
+            display: none;
+            position: fixed;
+            bottom: 70px;
+            left: 20px;
+            background: var(--popup-bg);
+            color: var(--popup-text);
+            padding: 1.2em;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            z-index: 1000;
+            font-size: 0.65em;
+            max-width: 320px;
+            border: 3px solid var(--cattleya-orchid);
+        }
+        
+        .shortcuts-popup.active { display: block; }
+        
+        .shortcuts-popup h4 {
+            margin: 0 0 0.8em 0;
+            color: var(--cattleya-orchid);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1em;
+        }
+        
+        .shortcuts-popup table {
+            width: 100%;
+            border-collapse: collapse;
+            color: var(--popup-text);
+        }
+        
+        .shortcuts-popup td {
+            padding: 4px 8px;
+            border-bottom: 1px solid #ddd;
+            color: var(--popup-text);
+        }
+        
+        .shortcuts-popup kbd {
+            background: var(--dark-bg);
+            color: var(--desert-flower);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.95em;
+        }
+        
+        .shortcuts-close {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            cursor: pointer;
+            color: var(--arabesque);
+            font-size: 1.3em;
+        }
+        
+        /* Pop-up/Modal styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--popup-bg);
+            color: var(--popup-text);
+            padding: 2em;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            max-width: 65%;
+            max-height: 70%;
+            overflow-y: auto;
+            z-index: 1000;
+            border: 4px solid var(--cattleya-orchid);
+            font-size: 0.85em;
+        }
+        
+        .popup.active { display: block; }
+        
+        .popup h3 {
+            color: var(--cattleya-orchid);
+            margin-top: 0;
+        }
+        
+        .popup p, .popup li {
+            color: var(--popup-text);
+        }
+        
+        .popup ul {
+            padding-left: 1.5em;
+        }
+        
+        .popup li {
+            margin-bottom: 0.5em;
+        }
+        
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 2em;
+            cursor: pointer;
+            color: var(--arabesque);
+        }
+        
+        .popup-trigger {
+            color: var(--blue-curacao);
+            text-decoration: underline dotted;
+            cursor: pointer;
+            border-bottom: 2px dotted var(--blue-curacao);
+        }
+        
+        .popup-trigger:hover {
+            color: var(--cattleya-orchid);
+            border-bottom-color: var(--cattleya-orchid);
+        }
+        
+        /* Image placeholder styling */
+        .img-placeholder {
+            background: linear-gradient(135deg, var(--opera-mauve) 0%, var(--arabesque) 100%);
+            border: 3px dashed var(--cattleya-orchid);
+            padding: 2em;
+            text-align: center;
+            color: var(--dark-bg);
+            font-style: italic;
+            border-radius: 12px;
+            margin: 1em auto;
+        }
+        
+        .img-placeholder strong {
+            display: block;
+            font-size: 1.1em;
+            margin-bottom: 0.5em;
+        }
+        
+        /* Key term styling */
+        .key-term {
+            color: var(--cattleya-orchid);
+            font-weight: 600;
+        }
+        
+        /* Primary source styling */
+        .primary-source {
+            background: rgba(217, 167, 87, 0.15);
+            border-left: 5px solid var(--spicy-mustard);
+            padding: 1em 1.5em;
+            margin: 1em 0;
+            font-style: italic;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .primary-source .attribution {
+            text-align: right;
+            font-size: 0.85em;
+            color: var(--mocha-mousse);
+            margin-top: 0.8em;
+            font-style: normal;
+        }
+        
+        /* Claim box styling */
+        .claim-box {
+            background: rgba(162, 95, 176, 0.15);
+            border: 3px solid var(--cattleya-orchid);
+            padding: 1.2em;
+            border-radius: 12px;
+            margin: 1em 0;
+        }
+        
+        .claim-box h3 {
+            color: var(--cattleya-orchid);
+            margin-top: 0;
+            font-size: 1.3em;
+        }
+        
+        /* Timeline styling */
+        .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            margin: 0.8em 0;
+            padding: 0.5em;
+            border-left: 4px solid var(--blue-curacao);
+            padding-left: 1em;
+        }
+        
+        .timeline-date {
+            color: var(--spicy-mustard);
+            font-weight: bold;
+            min-width: 120px;
+            font-size: 1.1em;
+        }
+        
+        /* Assessment Section Styling */
+        .assessment-section {
+            background: linear-gradient(135deg, rgba(162, 95, 176, 0.1) 0%, rgba(72, 201, 201, 0.1) 100%);
+            border: 3px solid var(--cattleya-orchid);
+            border-radius: 15px;
+            padding: 1.5em;
+            text-align: left;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        
+        .assessment-section h2 {
+            text-align: center;
+            margin-bottom: 0.8em;
+        }
+        
+        /* Fillable Form Styling */
+        .fillable-form {
+            background: white;
+            color: var(--popup-text);
+            padding: 1.5em;
+            border-radius: 10px;
+            margin: 1em 0;
+            page-break-inside: avoid;
+        }
+        
+        .fillable-form h4 {
+            color: var(--cattleya-orchid);
+            margin-top: 0;
+            font-family: 'Montserrat', sans-serif;
+            border-bottom: 2px solid var(--cattleya-orchid);
+            padding-bottom: 0.3em;
+        }
+        
+        .fillable-form label {
+            display: block;
+            margin: 1em 0 0.3em 0;
+            font-weight: 600;
+            color: var(--popup-text);
+        }
+        
+        .fillable-form textarea {
+            width: 100%;
+            min-height: 80px;
+            padding: 10px;
+            border: 2px solid var(--mocha-mousse);
+            border-radius: 8px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.9em;
+            resize: vertical;
+            box-sizing: border-box;
+            color: var(--popup-text);
+            background: #fff;
+        }
+        
+        .fillable-form textarea:focus {
+            outline: none;
+            border-color: var(--blue-curacao);
+            box-shadow: 0 0 5px rgba(72, 201, 201, 0.5);
+        }
+        
+        .fillable-form .question-number {
+            color: var(--cattleya-orchid);
+            font-weight: bold;
+        }
+        
+        /* Multiple Choice Quiz Styling */
+        .mc-quiz {
+            background: white;
+            color: var(--popup-text);
+            padding: 1.5em;
+            border-radius: 10px;
+            margin: 1em 0;
+            text-align: left;
+        }
+        
+        .mc-quiz h4 {
+            color: var(--cattleya-orchid);
+            margin-top: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .mc-question {
+            margin-bottom: 1.5em;
+            padding-bottom: 1em;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .mc-question:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .mc-question p {
+            color: var(--popup-text);
+            font-weight: 600;
+            margin-bottom: 0.8em;
+        }
+        
+        .mc-option {
+            display: block;
+            padding: 0.6em 1em;
+            margin: 0.4em 0;
+            background: #f5f5f5;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--popup-text);
+        }
+        
+        .mc-option:hover {
+            background: #e8e8e8;
+            border-color: var(--blue-curacao);
+        }
+        
+        .mc-option.selected {
+            border-color: var(--blue-curacao);
+            background: rgba(72, 201, 201, 0.15);
+        }
+        
+        .mc-option.correct {
+            border-color: #27ae60;
+            background: rgba(39, 174, 96, 0.2);
+        }
+        
+        .mc-option.incorrect {
+            border-color: #c0392b;
+            background: rgba(192, 57, 43, 0.15);
+        }
+        
+        .mc-feedback {
+            display: none;
+            padding: 0.8em;
+            border-radius: 8px;
+            margin-top: 0.5em;
+            font-weight: 600;
+        }
+        
+        .mc-feedback.show { display: block; }
+        
+        .mc-feedback.correct {
+            background: rgba(39, 174, 96, 0.2);
+            color: #27ae60;
+        }
+        
+        .mc-feedback.incorrect {
+            background: rgba(192, 57, 43, 0.15);
+            color: #c0392b;
+        }
+        
+        /* Print Styles */
+        @media print {
+            .reveal { background: white !important; }
+            .fillable-form { border: 2px solid #333; page-break-inside: avoid; }
+            .fillable-form textarea { border: 1px solid #333; min-height: 100px; }
+            .shortcuts-btn, .shortcuts-popup { display: none !important; }
+            .mc-quiz { border: 2px solid #333; }
+        }
+        
+        .subtitle { color: var(--opera-mauve); font-style: italic; font-size: 0.9em; }
+        
+        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 2em; text-align: left; }
+        .column { padding: 1em; }
+        
+        .reveal ul { list-style-type: none; padding-left: 0; }
+        .reveal ul li { padding-left: 1.5em; position: relative; margin-bottom: 0.6em; }
+        .reveal ul li::before { content: "•"; color: var(--desert-flower); position: absolute; left: 0; font-size: 1.2em; }
+        
+        .scrollable-slide { height: 90vh; overflow-y: auto; padding-right: 20px; }
+        
+        .bio-card { display: flex; gap: 2em; align-items: flex-start; text-align: left; }
+        .bio-card .bio-text { flex: 1; }
+        .bio-card .bio-text h3 { margin-top: 0; }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+            <!-- TITLE SLIDE -->
+            <section>
+                <h1>The Myth of the Lost Cause</h1>
+                <p class="subtitle">Part 2: The Afterlife of the Myth (1877–Present)</p>
+                <p style="margin-top: 1.5em; color: var(--opera-mauve);">
+                    <em>How a regional psychological defense becomes<br>a national memory system</em>
+                </p>
+                <p style="margin-top: 2em; font-size: 0.7em; color: var(--mocha-mousse);">
+                    HIST 102 · U.S. History Since 1877
+                </p>
+                
+                <div class="img-placeholder" style="width: 500px; height: 280px; margin: 1.5em auto;">
+                    <strong>IMAGE PLACEHOLDER</strong><br>
+                    <em>500×280px</em><br><br>
+                    <strong>Search:</strong> "United Daughters Confederacy monument dedication"<br>
+                    "Confederate monument unveiling ceremony 1920s"<br>
+                    <strong>Sources:</strong> Library of Congress, Southern Historical Collection
+                </div>
+                
+                <button class="shortcuts-btn" onclick="toggleShortcuts()">⌨️ Shortcuts</button>
+                
+                <div id="shortcuts-popup" class="shortcuts-popup">
+                    <span class="shortcuts-close" onclick="toggleShortcuts()">×</span>
+                    <h4>⌨️ Keyboard Shortcuts</h4>
+                    <table>
+                        <tr><td><kbd>→</kbd> / <kbd>←</kbd></td><td>Next / Previous slide</td></tr>
+                        <tr><td><kbd>F</kbd></td><td>Fullscreen mode</td></tr>
+                        <tr><td><kbd>S</kbd></td><td>Speaker notes view</td></tr>
+                        <tr><td><kbd>O</kbd> / <kbd>Esc</kbd></td><td>Overview mode</td></tr>
+                        <tr><td><kbd>B</kbd> / <kbd>.</kbd></td><td>Blackout screen</td></tr>
+                        <tr><td><kbd>?</kbd></td><td>Show all shortcuts</td></tr>
+                    </table>
+                    <p style="margin-top: 0.8em; font-size: 0.85em; color: #666;">
+                        <em>Tip: Press <kbd>S</kbd> on a second monitor for presenter view.</em>
+                    </p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 Instructor Notes</h4>
+                    <p>Part 2 covers 1877 to the present. Part 1 traced origins during and immediately after the Civil War.</p>
+                </aside>
+            </section>
+            
+            <!-- INTRODUCTION SECTION -->
+            <section>
+                <div class="section-title-slide">
+                    <p class="section-number">Introduction</p>
+                    <h2>From Regional Coping to National Memory</h2>
+                    <p class="section-subtitle">The transformation of the Lost Cause after 1877</p>
+                </div>
+            </section>
+            
+            <section>
+                <h2>Where We Left Off</h2>
+                <p>In Part 1, we traced how the Lost Cause emerged:</p>
+                <ul>
+                    <li>First as a <strong>wartime coping mechanism</strong></li>
+                    <li>Then as a <strong>postwar apologetic project</strong></li>
+                </ul>
+                <p style="margin-top: 1em;">We examined its core claims:</p>
+                <ul style="font-size: 0.9em;">
+                    <li>The war wasn't about slavery</li>
+                    <li>Enslaved people were loyal and content</li>
+                    <li>Confederate leaders were saints</li>
+                    <li>Southern society was harmonious and superior</li>
+                    <li>Fanatical abolitionists caused the war</li>
+                </ul>
+                <p style="margin-top: 1em; color: var(--spicy-mustard);">Today: how these claims became a <span class="key-term">national memory system</span>.</p>
+            </section>
+            
+            <section>
+                <h2>The Arc of Part 2</h2>
+                <div class="timeline-item"><span class="timeline-date">1877</span><span>End of Reconstruction</span></div>
+                <div class="timeline-item"><span class="timeline-date">1890s–1920s</span><span>Institutionalization: veterans, women, monuments</span></div>
+                <div class="timeline-item"><span class="timeline-date">1915–1939</span><span>Popular culture: Birth of a Nation, Gone with the Wind</span></div>
+                <div class="timeline-item"><span class="timeline-date">1950s–1960s</span><span>Civil rights backlash and second monument wave</span></div>
+                <div class="timeline-item"><span class="timeline-date">Present</span><span>Monument debates and curriculum wars</span></div>
+            </section>
+            
+            <section>
+                <h2>Understanding the Lost Cause as a Memory Regime</h2>
+                <p style="font-size: 1.1em; margin-bottom: 1em;">The Lost Cause isn't merely <em>wrong</em>.</p>
+                <div class="claim-box">
+                    <h3>It is a <span class="popup-trigger" onclick="togglePopup('memory-regime-popup')">Memory Regime</span></h3>
+                    <ul>
+                        <li>Intentionally constructed</li>
+                        <li>Deliberately institutionalized</li>
+                        <li>Carefully ritualized</li>
+                        <li>Fiercely defended</li>
+                    </ul>
+                </div>
+                <div id="memory-regime-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('memory-regime-popup')">×</span>
+                    <h3>Memory Regime</h3>
+                    <p><strong>Definition:</strong> A system of organized, institutionalized memory that shapes how a society understands its past.</p>
+                    <ul>
+                        <li><strong>Constructed:</strong> Deliberately created by specific actors with specific goals</li>
+                        <li><strong>Institutionalized:</strong> Embedded in organizations, schools, laws, and public spaces</li>
+                        <li><strong>Ritualized:</strong> Maintained through regular ceremonies, commemorations, and practices</li>
+                        <li><strong>Defended:</strong> Protected against challenges through social pressure, political power, or violence</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- SECTION I: VETERANS AND WOMEN -->
+            <section>
+                <div class="section-title-slide">
+                    <p class="section-number">Section I</p>
+                    <h2>Veterans, Women, and the Machinery of Memory</h2>
+                    <p class="section-subtitle">1880–1930</p>
+                </div>
+            </section>
+            
+            <section>
+                <h2>The United Confederate Veterans</h2>
+                <div class="two-column">
+                    <div class="column">
+                        <div class="img-placeholder" style="height: 320px;">
+                            <strong>IMAGE PLACEHOLDER</strong><br>
+                            <em>UCV reunion photograph</em><br><br>
+                            <strong>Search:</strong> "United Confederate Veterans reunion"<br>
+                            <strong>Sources:</strong> Library of Congress
+                        </div>
+                    </div>
+                    <div class="column" style="text-align: left;">
+                        <p><strong>Founded:</strong> 1889</p>
+                        <p style="margin-top: 0.5em;">These weren't just social clubs for aging soldiers. They were political organizations dedicated to shaping how the war would be remembered.</p>
+                        <ul style="font-size: 0.9em;">
+                            <li>Veterans' reunions featured speeches reinforcing honor and sacrifice</li>
+                            <li>Gatherings brought together thousands</li>
+                            <li>Created shared identity around Lost Cause principles</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <section>
+                <h2>Veterans' Print Culture</h2>
+                <div class="two-column">
+                    <div class="column" style="text-align: left;">
+                        <p>Periodicals like <em>Confederate Veteran</em> magazine circulated standardized interpretations of the war.</p>
+                        <p style="margin-top: 1em;">These publications <span class="popup-trigger" onclick="togglePopup('policing-popup')"><strong>policed acceptable memory</strong></span>:</p>
+                        <ul style="font-size: 0.9em;">
+                            <li>Elevated favored leaders like Lee and Jackson</li>
+                            <li>Marginalized or demonized figures who didn't fit</li>
+                            <li>Created an "authorized version" of Civil War memory</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <div class="img-placeholder" style="height: 350px;">
+                            <strong>IMAGE PLACEHOLDER</strong><br>
+                            <em>Confederate Veteran magazine cover</em><br><br>
+                            <strong>Search:</strong> "Confederate Veteran magazine cover"<br>
+                            <strong>Sources:</strong> HathiTrust, Internet Archive
+                        </div>
+                    </div>
+                </div>
+                <div id="policing-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('policing-popup')">×</span>
+                    <h3>Policing Acceptable Memory</h3>
+                    <p>These publications actively enforced what could and couldn't be said about the Civil War:</p>
+                    <ul>
+                        <li>Published attacks on anyone who deviated from the approved narrative</li>
+                        <li>Elevated some figures while demonizing others</li>
+                        <li>Created social pressure to conform</li>
+                        <li>Established which memories were "authentic"</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- UDC SUBSECTION -->
+            <section>
+                <div class="section-title-slide">
+                    <p class="section-number">The Real Power</p>
+                    <h2>The United Daughters of the Confederacy</h2>
+                    <p class="section-subtitle">Women as warriors for memory</p>
+                </div>
+            </section>
+            
+            <section>
+                <h2>The United Daughters of the Confederacy</h2>
+                <div class="two-column">
+                    <div class="column">
+                        <div class="img-placeholder" style="height: 350px;">
+                            <strong>IMAGE PLACEHOLDER</strong><br>
+                            <em>UDC members at monument dedication</em><br><br>
+                            <strong>Search:</strong> "United Daughters Confederacy monument"<br>
+                            <strong>Sources:</strong> Library of Congress
+                        </div>
+                    </div>
+                    <div class="column" style="text-align: left;">
+                        <p><strong>Founded:</strong> 1894</p>
+                        <p style="margin-top: 0.5em;">While men aged and died, women extended the myth into:</p>
+                        <ul style="font-size: 0.9em;">
+                            <li>Schools</li>
+                            <li>Churches</li>
+                            <li>Homes</li>
+                            <li>Public spaces</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <section>
+                <h2>Dixie's Daughters</h2>
+                <div class="bio-card">
+                    <div class="img-placeholder" style="width: 300px; height: 380px; flex-shrink: 0;">
+                        <strong>IMAGE PLACEHOLDER</strong><br>
+                        <em>Book cover</em><br><br>
+                        <strong>Search:</strong> "Karen Cox Dixie's Daughters book cover"<br>
+                        <strong>Sources:</strong> Publisher website
+                    </div>
+                    <div class="bio-text">
+                        <h3>Karen L. Cox's Essential Study</h3>
+                        <p><em>Dixie's Daughters: The United Daughters of the Confederacy and the Preservation of Confederate Culture</em> (2003)</p>
+                        <p style="margin-top: 1em;">Cox documents how UDC members saw themselves as <strong>warriors for truth</strong>—even though the "truth" they defended was historically false.</p>
+                        <p style="margin-top: 1em; color: var(--spicy-mustard);">
+                            <strong>Key insight:</strong> If you want to shape how a society thinks, you <span class="key-term">control what children learn in school</span>.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- ASSESSMENT BREAK 1 -->
+            <section data-auto-animate>
+                <div class="assessment-section scrollable-slide">
+                    <h2>📝 Assessment Break 1</h2>
+                    <p style="text-align: center; color: var(--opera-mauve);">Complete these questions, then we'll discuss.<br><em>You may print this page to PDF.</em></p>
+                    
+                    <div class="fillable-form">
+                        <h4>Discussion Questions</h4>
+                        <label><span class="question-number">1.</span> Why do you think women's organizations like the UDC proved more effective at institutionalizing the Lost Cause than veterans' organizations?</label>
+                        <textarea placeholder="Type your response here..."></textarea>
+                        <label><span class="question-number">2.</span> The lecture describes Confederate Veteran magazine as "policing acceptable memory." What does this phrase mean?</label>
+                        <textarea placeholder="Type your response here..."></textarea>
+                        <label><span class="question-number">3.</span> Why might controlling what children learn in school be more powerful than building monuments?</label>
+                        <textarea placeholder="Type your response here..."></textarea>
+                    </div>
+                    
+                    <div class="mc-quiz">
+                        <h4>Quick Check</h4>
+                        <div class="mc-question" data-correct="B">
+                            <p>1. The United Confederate Veterans organization primarily served to:</p>
+                            <div class="mc-option" data-value="A">A) Provide pensions and healthcare for aging soldiers</div>
+                            <div class="mc-option" data-value="B">B) Transmit Lost Cause ideology through reunions and publications</div>
+                            <div class="mc-option" data-value="C">C) Advocate for reconciliation with the North</div>
+                            <div class="mc-option" data-value="D">D) Document accurate accounts of Civil War battles</div>
+                            <div class="mc-feedback"></div>
+                        </div>
+                        <div class="mc-question" data-correct="C">
+                            <p>2. The United Daughters of the Confederacy was founded in:</p>
+                            <div class="mc-option" data-value="A">A) 1865</div>
+                            <div class="mc-option" data-value="B">B) 1877</div>
+                            <div class="mc-option" data-value="C">C) 1894</div>
+                            <div class="mc-option" data-value="D">D) 1915</div>
+                            <div class="mc-feedback"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SECTION II: EDUCATIONAL CONTROL -->
+            <section>
+                <div class="section-title-slide">
+                    <p class="section-number">Section II</p>
+                    <h2>The UDC and Educational Control</h2>
+                    <p class="section-subtitle">Shaping what children learned about the war</p>
+                </div>
+            </section>
+            
+            <section>
+                <h2>Textbook Regulation</h2>
+                <p>UDC pressure ensured that textbooks conformed to Lost Cause narratives.</p>
+                <p style="margin-top: 1em;"><strong>Conforming textbooks portrayed:</strong></p>
+                <ul style="font-size: 0.9em;">
+                    <li><strong>Slavery:</strong> As benevolent, a civilizing institution</li>
+                    <li><strong>Enslaved people:</strong> As loyal and content</li>
+                    <li><strong>Abolitionists:</strong> As fanatics who provoked unnecessary war</li>
+                    <li><strong>Reconstruction:</strong> As catastrophe and "black rule"</li>
+                    <li><strong>The Confederacy:</strong> As honorable, fighting for principle</li>
+                </ul>
+            </section>
+            
+            <section>
+                <h2>Children's Catechisms</h2>
+                <p>Beyond textbooks, the UDC created <span class="popup-trigger" onclick="togglePopup('catechism-popup')"><strong>children's catechisms</strong></span>—question-and-answer manuals that taught Lost Cause doctrine as moral truth.</p>
+                <div class="primary-source" style="margin-top: 1em;">
+                    <p><strong>Q:</strong> What caused the war between the states?</p>
+                    <p><strong>A:</strong> [memorized Lost Cause answer]</p>
+                    <div class="attribution">Format borrowed from religious instruction</div>
+                </div>
+                <div id="catechism-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('catechism-popup')">×</span>
+                    <h3>Children's Catechisms</h3>
+                    <p><strong>What is a catechism?</strong> A summary of religious doctrine in question-and-answer format for teaching children.</p>
+                    <p><strong>Why use this format for history?</strong></p>
+                    <ul>
+                        <li>Made historical claims feel as certain as religious truth</li>
+                        <li>Required children to memorize "correct" answers</li>
+                        <li>Presented interpretation as established fact</li>
+                        <li>Made questioning feel like heresy</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- MONUMENTS SUBSECTION -->
+            <section>
+                <div class="section-title-slide">
+                    <p class="section-number">The First Monument Wave</p>
+                    <h2>Confederate Monuments and Jim Crow</h2>
+                    <p class="section-subtitle">1890s–1920s</p>
+                </div>
+            </section>
+            
+            <section>
+                <h2>The First Monument Wave</h2>
+                <p style="font-size: 1.1em; color: var(--spicy-mustard);"><strong>Most Confederate monuments were not built immediately after the Civil War.</strong></p>
+                <p style="margin-top: 1em;">The first major wave occurred from the <strong>1890s through the 1920s</strong>—a full generation after the war.</p>
+                <p style="margin-top: 1em;"><strong>What else was happening during this period?</strong></p>
+                <ul>
+                    <li>Systematic disenfranchisement of Black voters</li>
+                    <li>Creation of segregation laws</li>
+                    <li>Rise of racial terror, including thousands of lynchings</li>
+                </ul>
+            </section>
+            
+            <section>
+                <h2>Aligning Memory with Power</h2>
+                <div class="two-column">
+                    <div class="column">
+                        <div class="img-placeholder" style="height: 350px;">
+                            <strong>IMAGE PLACEHOLDER</strong><br>
+                            <em>Confederate monument at courthouse</em><br><br>
+                            <strong>Search:</strong> "Confederate monument courthouse square"<br>
+                            <strong>Sources:</strong> SPLC, state archives
+                        </div>
+                    </div>
+                    <div class="column" style="text-align: left;">
+                        <p>These monuments weren't simply about mourning the dead.</p>
+                        <p style="margin-top: 1em;">They were about <span class="key-term">aligning memory with power</span>.</p>
+                        <p style="margin-top: 1em;">A Confederate statue in front of a courthouse where Black citizens couldn't serve on juries sent a very clear message about who belonged in public life and who didn't.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- ASSESSMENT BREAK 2 -->
+            <section data-auto-animate>
+                <div class="assessment-section scrollable-slide">
+                    <h2>📝 Assessment Break 2</h2>
+                    <div class="fillable-form">
+                        <h4>Discussion Questions</h4>
+                        <label><span class="question-number">1.</span> Why might the UDC have chosen the "catechism" format for teaching Lost Cause doctrine?</label>
+                        <textarea placeholder="Type your response here..."></textarea>
+                        <label><span class="question-number">2.</span> The lecture argues that the timing of monument construction (1890s-1920s) reveals their true purpose. Do you find this convincing?</label>
+                        <textarea placeholder="Type your response here..."></textarea>
+                    </div>
+                    <div class="mc-quiz">
+                        <h4>Quick Check</h4>
+                        <div class="mc-question" data-correct="B">
+                            <p>1. According to UDC-approved textbooks, abolitionists were portrayed as:</p>
+                            <div class="mc-option" data-value="A">A) Heroes who fought for human rights</div>
+                            <div class="mc-option" data-value="B">B) Fanatics who provoked an unnecessary war</div>
+                            <div class="mc-option" data-value="C">C) Moderates who sought compromise</div>
+                            <div class="mc-option" data-value="D">D) European agitators</div>
+                            <div class="mc-feedback"></div>
+                        </div>
+                        <div class="mc-question" data-correct="C">
+                            <p>2. The first major wave of Confederate monument construction coincided with:</p>
+                            <div class="mc-option" data-value="A">A) The immediate aftermath of the Civil War</div>
+                            <div class="mc-option" data-value="B">B) World War I</div>
+                            <div class="mc-option" data-value="C">C) Jim Crow laws, disenfranchisement, and racial terror</div>
+                            <div class="mc-option" data-value="D">D) The Great Depression</div>
+                            <div class="mc-feedback"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SECTION III: ACADEMIC AND CIVIL RELIGION -->
+            <section>
+                <div class="section-title-slide">
+                    <p class="section-number">Section III</p>
+                    <h2>Academic Legitimation and Civil Religion</h2>
+                    <p class="section-subtitle">How mythology became "respectable knowledge"</p>
+                </div>
+            </section>
+            
+            <section>
+                <div class="section-title-slide">
+                    <p class="section-number">Academic Legitimation</p>
+                    <h2>The Dunning School</h2>
+                    <p class="section-subtitle">When Columbia University validated the Lost Cause</p>
+                </div>
+            </section>
+            
+            <section>
+                <h2>The Dunning School</h2>
+                <div class="bio-card">
+                    <div class="img-placeholder" style="width: 300px; height: 380px; flex-shrink: 0;">
+                        <strong>IMAGE PLACEHOLDER</strong><br>
+                        <em>William Dunning portrait</em><br><br>
+                        <strong>Search:</strong> "William Archibald Dunning portrait"<br>
+                        <strong>Sources:</strong> Columbia University Archives
+                    </div>
+                    <div class="bio-text">
+                        <h3>William Archibald Dunning (1857–1922)</h3>
+                        <p>Columbia University professor whose students gave academic credibility to Lost Cause assumptions.</p>
+                        <p style="margin-top: 1em;"><strong>Dunning School historians depicted:</strong></p>
+                        <ul style="font-size: 0.9em;">
+                            <li>Reconstruction as corrupt and incompetent</li>
+                            <li>Black political participation as a disaster</li>
+                            <li>White "Redemption" as necessary and noble</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <section>
+                <div class="section-title-slide">
+                    <p class="section-number">The Challenge</p>
+                    <h2>W.E.B. Du Bois</h2>
+                    <p class="section-subtitle">Black Reconstruction and the scholarly counterattack</p>
+                </div>
+            </section>
+            
+            <section>
+                <h2>W.E.B. Du Bois's Scholarly Challenge</h2>
+                <div class="bio-card">
+                    <div class="img-placeholder" style="width: 300px; height: 380px; flex-shrink: 0;">
+                        <strong>IMAGE PLACEHOLDER</strong><br>
+                        <em>W.E.B. Du Bois portrait</em><br><br>
+                        <strong>Search:</strong> "WEB Du Bois portrait photograph"<br>
+                        <strong>Sources:</strong> Library of Congress
+                    </div>
+                    <div class="bio-text">
+                        <h3>W.E.B. Du Bois (1868–1963)</h3>
+                        <p><em>Black Reconstruction in America</em> (1935)</p>
+                        <p style="margin-top: 1em;">One of the earliest academic critiques:</p>
+                        <ul style="font-size: 0.9em;">
+                            <li>Highlighted Black agency during Reconstruction</li>
+                            <li>Documented political achievements Dunning historians ignored</li>
+                            <li>Exposed systemic racism underlying the myth</li>
+                        </ul>
+                        <p style="margin-top: 1em; font-size: 0.9em; color: var(--opera-mauve);">It would take decades for mainstream academia to catch up.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section>
+                <div class="section-title-slide">
+                    <p class="section-number">Beyond Academia</p>
+                    <h2>The Lost Cause as Civil Religion</h2>
+                    <p class="section-subtitle">When memory becomes sacred</p>
+                </div>
+            </section>
+            
+            <section>
+                <h2>Civil Religion and the Sacralization of the Confederacy</h2>
+                <p>The historian <strong>Charles Reagan Wilson</strong> developed this framework in <em>Baptized in Blood</em> (1980).</p>
+                <div class="claim-box" style="margin-top: 1em;">
+                    <h3>The Lost Cause Had:</h3>
+                    <ul style="font-size: 0.9em;">
+                        <li><strong>Sacred figures:</strong> Lee and Jackson, portrayed as Christ-like</li>
+                        <li><strong>Rituals:</strong> Confederate Memorial Days</li>
+                        <li><strong>Liturgy:</strong> Catechisms, standardized speeches, prayers</li>
+                        <li><strong>Shrines:</strong> Cemeteries and monuments</li>
+                        <li><strong>Heresy narratives:</strong> Abolitionists as destroyers</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>When Memory Becomes Identity</h2>
+                <p style="font-size: 1.1em;">This is crucial for understanding why the Lost Cause is so hard to dislodge:</p>
+                <div class="primary-source" style="margin-top: 1em;">"To abandon the myth is to abandon the self."</div>
+                <p style="margin-top: 1em;">When someone's sense of who they are is wrapped up in Lost Cause narratives, challenging those narratives feels like a <strong>personal attack</strong>.</p>
+            </section>
+            
+            <!-- ASSESSMENT BREAK 3 -->
+            <section data-auto-animate>
+                <div class="assessment-section scrollable-slide">
+                    <h2>📝 Assessment Break 3</h2>
+                    <div class="fillable-form">
+                        <h4>Discussion Questions</h4>
+                        <label><span class="question-number">1.</span> The lecture describes the Lost Cause as a "civil religion." What other movements have taken on religious characteristics?</label>
+                        <textarea placeholder="Type your response here..."></textarea>
+                        <label><span class="question-number">2.</span> Why did it take decades for mainstream academia to accept Du Bois's critique?</label>
+                        <textarea placeholder="Type your response here..."></textarea>
+                    </div>
+                    <div class="mc-quiz">
+                        <h4>Quick Check</h4>
+                        <div class="mc-question" data-correct="B">
+                            <p>1. The Dunning School portrayed Reconstruction as:</p>
+                            <div class="mc-option" data-value="A">A) A period of Black political achievement</div>
+                            <div class="mc-option" data-value="B">B) Corrupt, incompetent, and disastrous</div>
+                            <div class="mc-option" data-value="C">C) A model for racial reconciliation</div>
+                            <div class="mc-option" data-value="D">D) A challenge to Lost Cause mythology</div>
+                            <div class="mc-feedback"></div>
+                        </div>
+                        <div class="mc-question" data-correct="C">
+                            <p>2. Du Bois's Black Reconstruction was significant because it:</p>
+                            <div class="mc-option" data-value="A">A) Confirmed Dunning School conclusions</div>
+                            <div class="mc-option" data-value="B">B) Ignored Black agency</div>
+                            <div class="mc-option" data-value="C">C) Offered an early academic critique and highlighted Black agency</div>
+                            <div class="mc-option" data-value="D">D) Was immediately accepted by mainstream historians</div>
+                            <div class="mc-feedback"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SECTION IV: POPULAR CULTURE -->
+            <section>
+                <div class="section-title-slide">
+                    <p class="section-number">Section IV</p>
+                    <h2>Cultural Super-Spreaders and Political Technology</h2>
+                    <p class="section-subtitle">How popular culture nationalized the Lost Cause</p>
+                </div>
+            </section>
+            
+            <!-- MOONLIGHT AND MAGNOLIAS SUBSECTION -->
+            <section>
+                <div class="section-title-slide">
+                    <p class="section-number">The Cultural Mood</p>
+                    <h2>Moonlight and Magnolias</h2>
+                    <p class="section-subtitle">The aesthetic that made the Lost Cause feel beautiful</p>
+                </div>
+            </section>
+            
+            <section>
+                <h2>Moonlight and Magnolias: The Division of Labor</h2>
+                
+                <p style="font-size: 1.1em; margin-bottom: 1em;">In Part 1, we examined the Lost Cause as <em>argument</em>. Now we examine it as <em>feeling</em>.</p>
+                
+                <div class="two-column">
+                    <div class="column">
+                        <div class="claim-box">
+                            <h3>The Lost Cause</h3>
+                            <p>Tells you what to <strong>think</strong></p>
+                            <ul style="font-size: 0.85em;">
+                                <li>Slavery wasn't central</li>
+                                <li>The South was right</li>
+                                <li>Reconstruction was disaster</li>
+                            </ul>
+                            <p style="margin-top: 0.5em; color: var(--spicy-mustard);"><strong>Function: Justification</strong></p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="claim-box" style="border-color: var(--desert-flower);">
+                            <h3 style="color: var(--desert-flower);">Moonlight and Magnolias</h3>
+                            <p>Tells you what to <strong>feel</strong></p>
+                            <ul style="font-size: 0.85em;">
+                                <li>Things were better before</li>
+                                <li>Everyone knew their place</li>
+                                <li>What was lost was beautiful</li>
+                            </ul>
+                            <p style="margin-top: 0.5em; color: var(--spicy-mustard);"><strong>Function: Longing</strong></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <p style="margin-top: 1em; font-size: 1.05em; color: var(--desert-flower);">
+                    One convinces. The other makes resistance feel cruel.
+                </p>
+            </section>
+            
+            <section>
+                <h2>How the Aesthetic Spread</h2>
+                
+                <p><span class="popup-trigger" onclick="togglePopup('moonlight-popup')"><strong>Moonlight and Magnolias</strong></span> became dominant through multiple channels:</p>
+                
+                <ul>
+                    <li><strong>Plantation fiction</strong> romanticizing the Old South</li>
+                    <li><strong>Stage melodramas</strong> featuring loyal slaves and noble planters</li>
+                    <li><strong>Illustrations</strong> depicting gracious plantation life</li>
+                    <li><strong>Postcards and advertisements</strong> selling Southern nostalgia</li>
+                    <li><strong>Hollywood spectacle</strong> reaching millions nationwide</li>
+                </ul>
+                
+                <p style="margin-top: 1em; font-size: 0.95em; color: var(--opera-mauve);">
+                    Each medium reinforced the same emotional message: the antebellum South was a lost paradise.
+                </p>
+                
+                <div id="moonlight-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('moonlight-popup')">×</span>
+                    <h3>Moonlight and Magnolias</h3>
+                    <p><strong>Definition:</strong> The romantic, nostalgic aesthetic through which the Lost Cause becomes emotionally livable, nationally marketable, and morally survivable.</p>
+                    <p><strong>Key features:</strong></p>
+                    <ul>
+                        <li>Gracious plantations bathed in soft light</li>
+                        <li>Beautiful belles and gallant gentlemen</li>
+                        <li>Loyal, contented enslaved servants</li>
+                        <li>A world of manners, honor, and refinement</li>
+                        <li>Loss and longing for "the way things were"</li>
+                    </ul>
+                    <p><strong>The trick:</strong> It transforms the brutality of slavery into scenery. It replaces suffering with romance. It makes hierarchy feel like harmony.</p>
+                    <p><strong>Why it's so effective:</strong> Many people treat Moonlight and Magnolias as "just nostalgia" or "just romance." That misreading is part of its success. It allows defenders to say "It's not political—it's just culture." In reality, it is <strong>memory laundering</strong>: violence stripped out, hierarchy aestheticized, suffering replaced with scenery.</p>
+                </div>
+            </section>
+            
+            <section>
+                <h2>Plantation Fiction</h2>
+                <div class="two-column">
+                    <div class="column" style="text-align: left;">
+                        <p>Writers like <strong>Thomas Nelson Page</strong> created <span class="key-term">plantation fiction</span>—stories that romanticized slavery.</p>
+                        <ul style="font-size: 0.9em;">
+                            <li>Loyal, happy enslaved servants</li>
+                            <li>Characters speaking in dialect</li>
+                            <li>Nostalgia for "the good old days"</li>
+                            <li>Abolitionists as intruders</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <div class="img-placeholder" style="height: 380px;">
+                            <strong>IMAGE PLACEHOLDER</strong><br>
+                            <em>Plantation fiction illustration</em><br><br>
+                            <strong>Search:</strong> "Thomas Nelson Page In Ole Virginia"<br>
+                            <strong>Sources:</strong> Internet Archive
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section>
+                <div class="section-title-slide">
+                    <p class="section-number">Cultural Super-Spreader</p>
+                    <h2>The Birth of a Nation</h2>
+                    <p class="section-subtitle">1915: The film that revived the Klan</p>
+                </div>
+            </section>
+            
+            <section>
+                <h2>The Birth of a Nation (1915)</h2>
+                <div class="two-column">
+                    <div class="column">
+                        <div class="img-placeholder" style="height: 380px;">
+                            <strong>IMAGE PLACEHOLDER</strong><br>
+                            <em>Birth of a Nation poster</em><br><br>
+                            <strong>Search:</strong> "Birth of a Nation 1915 poster"<br>
+                            <strong>Sources:</strong> Library of Congress
+                        </div>
+                    </div>
+                    <div class="column" style="text-align: left;">
+                        <p>D.W. Griffith's film was a cinematic revolution—and a moral catastrophe.</p>
+                        <ul style="font-size: 0.9em;">
+                            <li>The first blockbuster film</li>
+                            <li>Screened at the White House</li>
+                            <li>Glorified the KKK as "saviors of civilization"</li>
+                            <li>Portrayed Black men as dangerous predators</li>
+                        </ul>
+                        <p style="margin-top: 1em; color: var(--spicy-mustard);">After its release, the Klan experienced a <strong>massive revival</strong>.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section>
+                <div class="section-title-slide">
+                    <p class="section-number">Cultural Super-Spreader</p>
+                    <h2>Gone with the Wind</h2>
+                    <p class="section-subtitle">1939: Making the Lost Cause beautiful</p>
+                </div>
+            </section>
+            
+            <section>
+                <h2>Gone with the Wind (1939)</h2>
+                <div class="two-column">
+                    <div class="column" style="text-align: left;">
+                        <p><em>Gone with the Wind</em> is the definitive expression of Moonlight and Magnolias—and that's precisely why it's so dangerous.</p>
+                        <p style="margin-top: 1em;"><strong>The film doesn't argue that slavery was good.</strong></p>
+                        <p>It does something more effective: it renders slavery <span class="key-term">irrelevant</span> by drowning it in romance, manners, and loss.</p>
+                        <ul style="font-size: 0.9em; margin-top: 0.5em;">
+                            <li>Magnolias and ball gowns</li>
+                            <li>Gallant men and beautiful women</li>
+                            <li>A civilization destroyed by war</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <div class="img-placeholder" style="height: 380px;">
+                            <strong>IMAGE PLACEHOLDER</strong><br>
+                            <em>Gone with the Wind poster</em><br><br>
+                            <strong>Search:</strong> "Gone with the Wind 1939 poster"<br>
+                            <strong>Sources:</strong> Warner Bros. archives
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section>
+                <h2>The Emotional Substitution</h2>
+                
+                <p style="font-size: 1.2em; color: var(--desert-flower);">The viewer mourns Tara, not bondage.</p>
+                
+                <p style="margin-top: 1em;">This is the trick of Moonlight and Magnolias:</p>
+                <ul>
+                    <li>You weep for the burning of Atlanta</li>
+                    <li>You ache for Scarlett's lost world</li>
+                    <li>You feel the tragedy of Confederate defeat</li>
+                </ul>
+                
+                <p style="margin-top: 1em;">And in all that feeling, you never once mourn:</p>
+                <ul>
+                    <li>The four million people held in bondage</li>
+                    <li>The families torn apart by sale</li>
+                    <li>The violence that maintained the system</li>
+                </ul>
+                
+                <p style="margin-top: 1em; color: var(--spicy-mustard); font-size: 1.05em;">
+                    <strong>That emotional substitution is the work the aesthetic does.</strong>
+                </p>
+            </section>
+            
+            <section>
+                <h2>Memory Laundering</h2>
+                
+                <p><em>Gone with the Wind</em> performs what we might call <span class="popup-trigger" onclick="togglePopup('laundering-popup')"><strong>memory laundering</strong></span>:</p>
+                
+                <ul>
+                    <li><strong>Violence</strong> is stripped out</li>
+                    <li><strong>Hierarchy</strong> is aestheticized</li>
+                    <li><strong>Suffering</strong> is replaced with scenery</li>
+                </ul>
+                
+                <p style="margin-top: 1em;">The result: a version of history that feels true because it feels beautiful.</p>
+                
+                <p style="margin-top: 1em; font-size: 0.95em;">This is why defenders can say:</p>
+                <ul style="font-size: 0.9em;">
+                    <li>"It's not political—it's just a love story"</li>
+                    <li>"It's just culture"</li>
+                    <li>"It's just history-as-style"</li>
+                </ul>
+                
+                <p style="margin-top: 1em; color: var(--desert-flower); font-size: 1.05em;">
+                    That misreading is part of its success.
+                </p>
+                
+                <div id="laundering-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('laundering-popup')">×</span>
+                    <h3>Memory Laundering</h3>
+                    <p><strong>Definition:</strong> The process by which historical violence and injustice are cleaned, softened, or erased through aesthetic presentation, leaving only the pleasant surfaces.</p>
+                    <p><strong>How Gone with the Wind does it:</strong></p>
+                    <ul>
+                        <li>Slavery becomes backdrop, not subject</li>
+                        <li>Enslaved people become loyal servants who love their masters</li>
+                        <li>The war becomes tragedy for white Southerners, not liberation for Black Americans</li>
+                        <li>Reconstruction becomes chaos, not democracy</li>
+                    </ul>
+                    <p><strong>The result:</strong> Viewers absorb Lost Cause assumptions without ever feeling like they're being taught ideology. The beautiful cinematography, sweeping music, and romantic plot make the worldview feel natural rather than constructed.</p>
+                </div>
+            </section>
+            
+            <section>
+                <h2>Nationalizing the Myth</h2>
+                
+                <p style="font-size: 1.1em;">These films didn't just reflect Lost Cause mythology.</p>
+                <p style="font-size: 1.1em;">They <span class="key-term">nationalized</span> it.</p>
+                
+                <p style="margin-top: 1em;">They embedded Lost Cause imagery and Moonlight and Magnolias aesthetics into American popular culture so deeply that many people still carry them today without knowing where they came from.</p>
+                
+                <p style="margin-top: 1.5em; color: var(--spicy-mustard);">
+                    Millions of Americans absorbed these messages, often without realizing they were being taught a particular interpretation of history.
+                </p>
+            </section>
+            
+            <section>
+                <div class="section-title-slide">
+                    <p class="section-number">Political Technology</p>
+                    <h2>The Lost Cause and Jim Crow</h2>
+                    <p class="section-subtitle">Ideology as infrastructure for segregation</p>
+                </div>
+            </section>
+            
+            <section>
+                <h2>The Soft Power Partner</h2>
+                
+                <p style="font-size: 1.1em; margin-bottom: 1em;">The Lost Cause and Moonlight and Magnolias worked together to support Jim Crow—but they did different work.</p>
+                
+                <div class="two-column">
+                    <div class="column">
+                        <div class="claim-box">
+                            <h3>Lost Cause as Political Argument</h3>
+                            <ul style="font-size: 0.85em;">
+                                <li>Black freedom caused chaos</li>
+                                <li>Segregation restores order</li>
+                                <li>Disenfranchisement prevents "black rule"</li>
+                            </ul>
+                            <p style="margin-top: 0.5em; color: var(--spicy-mustard);"><strong>Work: Justification</strong></p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="claim-box" style="border-color: var(--desert-flower);">
+                            <h3 style="color: var(--desert-flower);">Moonlight and Magnolias as Cultural Mood</h3>
+                            <ul style="font-size: 0.85em;">
+                                <li>Things were better before</li>
+                                <li>Everyone knew their place</li>
+                                <li>Conflict began when that place was disturbed</li>
+                            </ul>
+                            <p style="margin-top: 0.5em; color: var(--spicy-mustard);"><strong>Work: Longing</strong></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <p style="margin-top: 1em; font-size: 1.1em; color: var(--desert-flower);">
+                    One convinces. The other makes resistance feel cruel.
+                </p>
+            </section>
+            
+            <section>
+                <h2>The Lost Cause as Political Technology</h2>
+                <p>The Lost Cause became <span class="popup-trigger" onclick="togglePopup('political-tech-popup')"><strong>political technology</strong></span>—ideas that provided ideological infrastructure for segregation.</p>
+                <p style="margin-top: 1em;"><strong>The pieces fit together:</strong></p>
+                <ul style="font-size: 0.9em;">
+                    <li>If emancipation was tragic error, segregation is a correction</li>
+                    <li>If Reconstruction was chaos, preventing Black participation restores order</li>
+                    <li>If Black people were happy under slavery, they don't need full citizenship</li>
+                    <li>If violence "redeemed" the South, violence to maintain segregation is justified</li>
+                </ul>
+                <div id="political-tech-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('political-tech-popup')">×</span>
+                    <h3>Political Technology</h3>
+                    <p>Ideas, narratives, or symbols that function as tools for achieving political goals.</p>
+                    <ul>
+                        <li>Provided moral justification for segregation</li>
+                        <li>Made Jim Crow seem like natural order, not oppression</li>
+                        <li>Created shared vocabulary for defending white supremacy</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- ASSESSMENT BREAK 4 -->
+            <section data-auto-animate>
+                <div class="assessment-section scrollable-slide">
+                    <h2>📝 Assessment Break 4</h2>
+                    <div class="fillable-form">
+                        <h4>Discussion Questions</h4>
+                        <label><span class="question-number">1.</span> Have you seen Gone with the Wind? How does understanding Moonlight and Magnolias as an aesthetic strategy change how you think about it?</label>
+                        <textarea placeholder="Type your response here..."></textarea>
+                        <label><span class="question-number">2.</span> The lecture argues that "the viewer mourns Tara, not bondage." What does this emotional substitution accomplish? Why is it more effective than explicit argument?</label>
+                        <textarea placeholder="Type your response here..."></textarea>
+                        <label><span class="question-number">3.</span> The lecture describes the Lost Cause as "political technology" and Moonlight and Magnolias as its "soft power partner." Explain the division of labor between them. How do justification and longing work together?</label>
+                        <textarea placeholder="Type your response here..."></textarea>
+                    </div>
+                    <div class="mc-quiz">
+                        <h4>Quick Check</h4>
+                        <div class="mc-question" data-correct="B">
+                            <p>1. The Birth of a Nation (1915) is significant because it:</p>
+                            <div class="mc-option" data-value="A">A) Documented accurate Civil War history</div>
+                            <div class="mc-option" data-value="B">B) Glorified the KKK and sparked its revival</div>
+                            <div class="mc-option" data-value="C">C) Challenged Southern interpretations</div>
+                            <div class="mc-option" data-value="D">D) Was banned for racist content</div>
+                            <div class="mc-feedback"></div>
+                        </div>
+                        <div class="mc-question" data-correct="C">
+                            <p>2. According to the lecture, Moonlight and Magnolias functions primarily as:</p>
+                            <div class="mc-option" data-value="A">A) A historical documentation of plantation life</div>
+                            <div class="mc-option" data-value="B">B) A political argument for states' rights</div>
+                            <div class="mc-option" data-value="C">C) A cultural aesthetic that makes Lost Cause ideology emotionally livable</div>
+                            <div class="mc-option" data-value="D">D) A Northern critique of Southern society</div>
+                            <div class="mc-feedback"></div>
+                        </div>
+                        <div class="mc-question" data-correct="B">
+                            <p>3. The Lost Cause served Jim Crow by:</p>
+                            <div class="mc-option" data-value="A">A) Advocating for Black political participation</div>
+                            <div class="mc-option" data-value="B">B) Providing a moral framework that made segregation seem natural</div>
+                            <div class="mc-option" data-value="C">C) Promoting economic equality</div>
+                            <div class="mc-option" data-value="D">D) Documenting Reconstruction successes</div>
+                            <div class="mc-feedback"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="fillable-form">
+                        <h4>Short Answer</h4>
+                        <label><span class="question-number">1.</span> In 3-4 sentences, explain what "memory laundering" means and how Gone with the Wind performs it.</label>
+                        <textarea placeholder="Type your response here..."></textarea>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SECTION V: PRESENT -->
+            <section>
+                <div class="section-title-slide">
+                    <p class="section-number">Section V</p>
+                    <h2>Massive Resistance, Counter-Memory, and the Present</h2>
+                    <p class="section-subtitle">The Lost Cause from civil rights to today</p>
+                </div>
+            </section>
+            
+            <section>
+                <h2>The Second Monument Wave</h2>
+                <p class="subtitle">Massive Resistance (1950s–1960s)</p>
+                <p>During the 1950s and 1960s—precisely during the civil rights movement—there was a renewed surge of Confederate symbols:</p>
+                <ul>
+                    <li>New monuments</li>
+                    <li>Confederate imagery added to state flags</li>
+                    <li>Schools and highways named after Confederate leaders</li>
+                </ul>
+                <p style="margin-top: 1em; color: var(--spicy-mustard);">This was explicitly about <span class="key-term">resisting desegregation</span>.</p>
+            </section>
+            
+            <section>
+                <h2>"Heritage, Not Hate"</h2>
+                <p>When you hear people today argue that Confederate monuments are about "heritage, not hate," remember:</p>
+                <ul>
+                    <li>Many monuments were built specifically to resist civil rights</li>
+                    <li>They are not about mourning the Civil War</li>
+                    <li>They are about resisting Black equality</li>
+                </ul>
+                <p style="margin-top: 1.5em; font-size: 1.1em; color: var(--spicy-mustard);">The "heritage" they celebrate is the heritage of resistance to equality.</p>
+            </section>
+            
+            <section>
+                <div class="section-title-slide">
+                    <p class="section-number">The Other Tradition</p>
+                    <h2>Black Counter-Memory and Resistance</h2>
+                    <p class="section-subtitle">Emancipationist memory from Juneteenth to Black Lives Matter</p>
+                </div>
+            </section>
+            
+            <section>
+                <h2>Emancipationist Memory</h2>
+                <p>The Lost Cause was never the only memory tradition. Alongside it ran a persistent African American counter-tradition.</p>
+                <p style="margin-top: 1em;">This <span class="popup-trigger" onclick="togglePopup('emancipationist-popup')"><strong>emancipationist memory</strong></span> celebrated freedom:</p>
+                <ul>
+                    <li><strong>Emancipation celebrations:</strong> most notably Juneteenth</li>
+                    <li><strong>Black veterans' memory:</strong> the 180,000 who fought for liberation</li>
+                    <li><strong>Reconstruction achievements:</strong> when Black men voted and held office</li>
+                    <li><strong>Civil rights commemorations:</strong> linking struggle to unfinished emancipation</li>
+                </ul>
+                <div id="emancipationist-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('emancipationist-popup')">×</span>
+                    <h3>Emancipationist Memory</h3>
+                    <p>A tradition centering freedom, Black agency, and the ongoing struggle for equality—rather than Confederate defeat or white Southern grievance.</p>
+                    <ul>
+                        <li>Celebrates emancipation as victory, not tragedy</li>
+                        <li>Honors Black soldiers who fought for freedom</li>
+                        <li>Remembers Reconstruction as achievement</li>
+                        <li>Connects past struggles to present movements</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>Race and Reunion</h2>
+                <div class="bio-card">
+                    <div class="img-placeholder" style="width: 300px; height: 380px; flex-shrink: 0;">
+                        <strong>IMAGE PLACEHOLDER</strong><br>
+                        <em>David Blight or book cover</em><br><br>
+                        <strong>Search:</strong> "David Blight Race and Reunion"<br>
+                        <strong>Sources:</strong> Yale University
+                    </div>
+                    <div class="bio-text">
+                        <h3>David Blight</h3>
+                        <p><em>Race and Reunion: The Civil War in American Memory</em> (2001)</p>
+                        <p style="margin-top: 1em;">Blight's Pulitzer Prize-winning book shows how national reconciliation depended on suppressing Black experience.</p>
+                        <ul style="font-size: 0.9em;">
+                            <li>North and South reunited by forgetting slavery's central role</li>
+                            <li>They ignored the violence of Reconstruction's overthrow</li>
+                            <li>The price of white unity was Black erasure</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <section>
+                <h2>The Present</h2>
+                <p>In the twenty-first century, monument debates and curriculum wars reveal the myth's continued political utility:</p>
+                <ul>
+                    <li>2015: Charleston church massacre</li>
+                    <li>2017: Charlottesville rally</li>
+                    <li>2020: Protests following George Floyd's murder</li>
+                </ul>
+                <p style="margin-top: 1em;">When someone argues that the Civil War wasn't about slavery, or that Confederate monuments are just about heritage—they're deploying Lost Cause claims, whether they know it or not.</p>
+            </section>
+            
+            <!-- ASSESSMENT BREAK 5 (FINAL) -->
+            <section data-auto-animate>
+                <div class="assessment-section scrollable-slide">
+                    <h2>📝 Assessment Break 5 (Final)</h2>
+                    <div class="fillable-form">
+                        <h4>Discussion Questions</h4>
+                        <label><span class="question-number">1.</span> The lecture describes two waves of Confederate monument construction (1890s-1920s and 1950s-1960s). What do these timings tell us about the monuments' purposes?</label>
+                        <textarea placeholder="Type your response here..."></textarea>
+                        <label><span class="question-number">2.</span> The lecture presents "emancipationist memory" as a counter-tradition. Why was it marginalized for so long, and what has changed?</label>
+                        <textarea placeholder="Type your response here..."></textarea>
+                        <label><span class="question-number">3.</span> Reflecting on both parts of this lecture, what is the most important thing for Americans to understand about the Lost Cause myth?</label>
+                        <textarea placeholder="Type your response here..."></textarea>
+                    </div>
+                    <div class="mc-quiz">
+                        <h4>Quick Check</h4>
+                        <div class="mc-question" data-correct="B">
+                            <p>1. The second wave of Confederate monument construction (1950s-1960s) was primarily a response to:</p>
+                            <div class="mc-option" data-value="A">A) The centennial of the Civil War</div>
+                            <div class="mc-option" data-value="B">B) The civil rights movement and school desegregation</div>
+                            <div class="mc-option" data-value="C">C) World War II veterans</div>
+                            <div class="mc-option" data-value="D">D) Academic historians</div>
+                            <div class="mc-feedback"></div>
+                        </div>
+                        <div class="mc-question" data-correct="B">
+                            <p>2. "Emancipationist memory" refers to:</p>
+                            <div class="mc-option" data-value="A">A) Lost Cause commemorations</div>
+                            <div class="mc-option" data-value="B">B) African American traditions celebrating freedom, Union service, and civil rights</div>
+                            <div class="mc-option" data-value="C">C) Dunning School interpretations</div>
+                            <div class="mc-option" data-value="D">D) UDC textbook campaigns</div>
+                            <div class="mc-feedback"></div>
+                        </div>
+                        <div class="mc-question" data-correct="B">
+                            <p>3. According to David Blight, national reconciliation was achieved by:</p>
+                            <div class="mc-option" data-value="A">A) Fully acknowledging slavery and Black contributions</div>
+                            <div class="mc-option" data-value="B">B) Suppressing Black experience and forgetting slavery's centrality</div>
+                            <div class="mc-option" data-value="C">C) Northern victory parades</div>
+                            <div class="mc-option" data-value="D">D) Integrated veterans' reunions</div>
+                            <div class="mc-feedback"></div>
+                        </div>
+                    </div>
+                    <div class="fillable-form">
+                        <h4>Short Answer</h4>
+                        <label><span class="question-number">1.</span> In 3-4 sentences, explain what makes the Lost Cause a "memory regime" rather than simply a set of mistaken beliefs.</label>
+                        <textarea placeholder="Type your response here..."></textarea>
+                        <label><span class="question-number">2.</span> Looking at the entire trajectory of the Lost Cause from 1861 to the present, what made it so durable? Identify at least two factors.</label>
+                        <textarea placeholder="Type your response here..."></textarea>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SUMMARY -->
+            <section>
+                <div class="section-title-slide">
+                    <p class="section-number">Summary</p>
+                    <h2>Key Takeaways</h2>
+                    <p class="section-subtitle">What we learned today</p>
+                </div>
+            </section>
+            
+            <section>
+                <h2>The Arc of the Lost Cause</h2>
+                <div style="text-align: left; max-width: 900px; margin: 0 auto; font-size: 0.85em;">
+                    <p style="margin: 0.6em 0;"><strong style="color: var(--desert-flower);">1861–1877:</strong> Origins as wartime coping and postwar apologetics (Part 1)</p>
+                    <p style="margin: 0.6em 0;"><strong style="color: var(--desert-flower);">1880s–1920s:</strong> Institutionalization through veterans, women's organizations, textbooks, monuments</p>
+                    <p style="margin: 0.6em 0;"><strong style="color: var(--desert-flower);">1890s–1930s:</strong> Academic legitimation (Dunning School) and cultural nationalization</p>
+                    <p style="margin: 0.6em 0;"><strong style="color: var(--desert-flower);">1950s–1960s:</strong> Second monument wave as civil rights resistance</p>
+                    <p style="margin: 0.6em 0;"><strong style="color: var(--desert-flower);">Present:</strong> Ongoing contestation: monument debates, curriculum wars, counter-memory</p>
+                </div>
+                <p style="margin-top: 1.5em; font-size: 1em; color: var(--spicy-mustard);">The Lost Cause isn't merely wrong. It's a <strong>memory regime</strong>—deliberately constructed, systematically defended.</p>
+            </section>
+            
+            <section>
+                <h2>Why Understanding This Matters</h2>
+                <p>When you hear arguments that:</p>
+                <ul>
+                    <li>The Civil War wasn't really about slavery</li>
+                    <li>Confederate monuments are just about heritage</li>
+                    <li>Reconstruction was a disaster</li>
+                    <li>Enslaved people were treated well</li>
+                </ul>
+                <p style="margin-top: 1em;">You're not hearing neutral historical claims.</p>
+                <p style="margin-top: 0.5em; color: var(--desert-flower); font-size: 1.1em;">You're hearing <strong>Lost Cause mythology</strong>—claims deliberately constructed to justify white supremacy.</p>
+            </section>
+            
+            <section>
+                <h2>A Final Thought</h2>
+                <div class="primary-source">"The past is never dead. It's not even past."<div class="attribution">William Faulkner, <em>Requiem for a Nun</em> (1951)</div></div>
+                <p style="margin-top: 1.5em; font-size: 1.1em;">The Lost Cause is not ancient history. It shapes debates happening right now.</p>
+                <p style="margin-top: 1em; color: var(--opera-mauve);">Now that you understand where it came from and how it works, you're better equipped to think critically about the stories we tell ourselves about who we are as a nation.</p>
+            </section>
+            
+        </div>
+    </div>
+    
+    <!-- Reveal.js Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/zoom/zoom.js"></script>
+    
+    <script>
+        Reveal.initialize({
+            width: 1920, height: 1080, margin: 0.08,
+            minScale: 0.2, maxScale: 2.0,
+            controls: true, progress: true, center: true, hash: true,
+            transition: 'slide', keyboard: true, overview: true, help: true,
+            plugins: [ RevealNotes, RevealHighlight, RevealZoom ]
+        });
+        
+        function toggleShortcuts() {
+            document.getElementById('shortcuts-popup').classList.toggle('active');
+        }
+        
+        function togglePopup(id) {
+            document.querySelectorAll('.popup').forEach(p => {
+                if (p.id !== id) p.classList.remove('active');
+            });
+            document.getElementById(id).classList.toggle('active');
+        }
+        
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.popup') && !e.target.closest('.popup-trigger') && !e.target.closest('.shortcuts-btn')) {
+                document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+            }
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+            }
+        });
+        
+        document.querySelectorAll('.mc-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const question = this.closest('.mc-question');
+                const correctAnswer = question.dataset.correct;
+                const selectedValue = this.dataset.value;
+                const feedback = question.querySelector('.mc-feedback');
+                
+                question.querySelectorAll('.mc-option').forEach(opt => {
+                    opt.classList.remove('selected', 'correct', 'incorrect');
+                });
+                
+                this.classList.add('selected');
+                
+                if (selectedValue === correctAnswer) {
+                    this.classList.add('correct');
+                    feedback.textContent = 'Correct!';
+                    feedback.className = 'mc-feedback show correct';
+                } else {
+                    this.classList.add('incorrect');
+                    question.querySelectorAll('.mc-option').forEach(opt => {
+                        if (opt.dataset.value === correctAnswer) opt.classList.add('correct');
+                    });
+                    feedback.textContent = 'Incorrect. The correct answer is highlighted.';
+                    feedback.className = 'mc-feedback show incorrect';
+                }
+            });
+        });
+        
+        Reveal.on('slidechanged', function(event) {
+            const shortcutsBtn = document.querySelector('.shortcuts-btn');
+            const shortcutsPopup = document.getElementById('shortcuts-popup');
+            if (event.indexh === 0) {
+                shortcutsBtn.style.display = 'block';
+            } else {
+                shortcutsBtn.style.display = 'none';
+                shortcutsPopup.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
