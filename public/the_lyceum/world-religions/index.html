@@ -14,6 +14,7 @@
             --accent: #6b7c4c;
             --accent-dark: #4a5635;
             --bronze: #8b7355;
+            --bronze-dark: #6b5a47;
             --ink: #2c2416;
             --ink-light: #4a3f2f;
             --marble: #e8e4dc;
@@ -34,11 +35,39 @@
             line-height: 1.6;
         }
 
+        /* Decorative background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(107, 124, 76, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(139, 115, 85, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
         header {
             background: linear-gradient(180deg, var(--ink) 0%, var(--ink-light) 100%);
             color: var(--parchment);
-            padding: 2rem;
+            padding: 2rem 2rem 2.5rem;
             text-align: center;
+            position: relative;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 15px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 15'%3E%3Cpath d='M0 15 Q25 0 50 15 Q75 0 100 15 L100 15 L0 15 Z' fill='%23f4e9d8'/%3E%3C/svg%3E");
+            background-size: 80px 15px;
+            background-repeat: repeat-x;
         }
 
         .breadcrumb {
@@ -50,10 +79,18 @@
         .breadcrumb a {
             color: var(--parchment);
             text-decoration: none;
+            transition: opacity 0.2s ease;
         }
 
         .breadcrumb a:hover {
             text-decoration: underline;
+            opacity: 1;
+        }
+
+        .header-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            display: block;
         }
 
         h1 {
@@ -67,71 +104,358 @@
             font-style: italic;
             margin-top: 0.5rem;
             opacity: 0.9;
+            font-size: 1.1rem;
         }
 
         main {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 3rem 2rem;
+            padding: 3rem 2rem 4rem;
         }
 
-        .placeholder {
+        .course-intro {
             text-align: center;
-            padding: 4rem 2rem;
-            background: var(--parchment-light);
-            border: 2px dashed var(--bronze);
-            border-radius: 8px;
-        }
-
-        .placeholder-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-
-        .placeholder h2 {
-            font-family: 'Cinzel', serif;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            font-size: 1.15rem;
             color: var(--ink-light);
-            margin-bottom: 1rem;
         }
 
-        .placeholder p {
-            color: var(--ink-light);
-            font-size: 1.1rem;
+        /* Unit Sections */
+        .unit-section {
+            margin-bottom: 3rem;
         }
 
-        .back-link {
-            display: inline-block;
-            margin-top: 2rem;
-            padding: 0.75rem 1.5rem;
-            background: var(--accent);
-            color: var(--parchment);
-            text-decoration: none;
+        .unit-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--marble);
+        }
+
+        .unit-icon {
+            font-size: 2rem;
+        }
+
+        .unit-header h2 {
             font-family: 'Cinzel', serif;
-            font-size: 0.9rem;
+            font-size: 1.4rem;
+            font-weight: 600;
             letter-spacing: 0.05em;
-            border-radius: 4px;
-            transition: background 0.3s ease;
+            color: var(--ink);
         }
 
-        .back-link:hover {
-            background: var(--accent-dark);
+        .unit-header .chapter-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9rem;
+            color: var(--bronze);
+            font-weight: 500;
+            margin-left: auto;
+        }
+
+        /* Lecture Grid */
+        .lectures-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .lecture-card {
+            background: var(--parchment-light);
+            border: 1px solid var(--marble);
+            border-radius: 6px;
+            padding: 1.25rem 1.5rem;
+            text-decoration: none;
+            color: var(--ink);
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px var(--shadow);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lecture-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 6px 6px 0 0;
+            transition: height 0.3s ease;
+        }
+
+        .lecture-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px var(--shadow);
+        }
+
+        .lecture-card:hover::before {
+            height: 6px;
+        }
+
+        /* Unit-specific accent colors */
+        .unit-foundations .lecture-card::before { background: var(--accent); }
+        .unit-hinduism .lecture-card::before { background: #c4783e; }
+        .unit-buddhism .lecture-card::before { background: #c4a03e; }
+        .unit-chinese .lecture-card::before { background: #9e3e3e; }
+
+        .lecture-day {
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--bronze);
+            margin-bottom: 0.5rem;
+        }
+
+        .lecture-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+            color: var(--ink);
+        }
+
+        .lecture-card p {
+            font-size: 0.95rem;
+            color: var(--ink-light);
+            line-height: 1.4;
+            flex-grow: 1;
+        }
+
+        .lecture-arrow {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            font-size: 1.2rem;
+            color: var(--bronze);
+            opacity: 0;
+            transform: translateX(-8px);
+            transition: all 0.3s ease;
+        }
+
+        .lecture-card:hover .lecture-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--ink);
+            color: var(--parchment);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .footer-quote {
+            font-style: italic;
+            font-size: 1.05rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .footer-attribution {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            opacity: 0.7;
+        }
+
+        /* Focus states */
+        .lecture-card:focus {
+            outline: 3px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 1.5rem 1rem 2rem;
+            }
+
+            main {
+                padding: 2rem 1rem 3rem;
+            }
+
+            .unit-header {
+                flex-wrap: wrap;
+            }
+
+            .unit-header .chapter-label {
+                margin-left: 0;
+                width: 100%;
+                margin-top: 0.25rem;
+            }
+
+            .lectures-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .lecture-card {
+                padding: 1rem 1.25rem;
+            }
+        }
+
+        /* Print */
+        @media print {
+            .lecture-card {
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+
+            .lecture-arrow {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
     <header>
         <p class="breadcrumb"><a href="../index.html">The Lyceum</a> / World Religions</p>
-        <h1>🕊️ World Religions</h1>
+        <span class="header-icon">🕊️</span>
+        <h1>World Religions</h1>
         <p class="subtitle">Comparative Studies in Faith and Practice</p>
     </header>
 
     <main>
-        <div class="placeholder">
-            <div class="placeholder-icon">📜</div>
-            <h2>Lectures Coming Soon</h2>
-            <p>This course is currently under development. Check back for lectures exploring Judaism, Christianity, Islam, and the Abrahamic traditions alongside indigenous and new religious movements from around the globe.</p>
-            <a href="../index.html" class="back-link">← Return to The Lyceum</a>
-        </div>
+        <p class="course-intro">
+            Exploring humanity's diverse answers to life's ultimate questions—from the nature of the divine to the meaning of existence. These lectures examine religious traditions through historical, philosophical, and comparative lenses.
+        </p>
+
+        <!-- Unit 1: Foundations -->
+        <section class="unit-section unit-foundations">
+            <div class="unit-header">
+                <span class="unit-icon">📜</span>
+                <h2>Foundations of Religious Studies</h2>
+                <span class="chapter-label">Chapter 1</span>
+            </div>
+            <div class="lectures-grid">
+                <a href="reveal_decks/PHIL210_Ch1_Day1_Foundations.html" class="lecture-card">
+                    <span class="lecture-day">Day 1</span>
+                    <h3>Foundations</h3>
+                    <p>Introduction to the academic study of religion—definitions, approaches, and key questions.</p>
+                    <span class="lecture-arrow">→</span>
+                </a>
+                <a href="reveal_decks/PHIL210_Ch1_Day2_building-blocks.html" class="lecture-card">
+                    <span class="lecture-day">Day 2</span>
+                    <h3>Building Blocks</h3>
+                    <p>Core concepts and vocabulary for analyzing religious traditions.</p>
+                    <span class="lecture-arrow">→</span>
+                </a>
+                <a href="reveal_decks/PHIL210_Ch1_Day3_theories-methods.html" class="lecture-card">
+                    <span class="lecture-day">Day 3</span>
+                    <h3>Theories &amp; Methods</h3>
+                    <p>Scholarly frameworks for understanding and comparing religions.</p>
+                    <span class="lecture-arrow">→</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Unit 2: Hinduism -->
+        <section class="unit-section unit-hinduism">
+            <div class="unit-header">
+                <span class="unit-icon">🕉️</span>
+                <h2>Hinduism</h2>
+                <span class="chapter-label">Chapter 3</span>
+            </div>
+            <div class="lectures-grid">
+                <a href="reveal_decks/PHIL210_Ch3_Day1_Hinduism.html" class="lecture-card">
+                    <span class="lecture-day">Day 1</span>
+                    <h3>Origins &amp; Sacred Texts</h3>
+                    <p>The Vedic tradition, the Upanishads, and the emergence of Hindu thought.</p>
+                    <span class="lecture-arrow">→</span>
+                </a>
+                <a href="reveal_decks/PHIL210_Ch3_Day2_Hindusim.html" class="lecture-card">
+                    <span class="lecture-day">Day 2</span>
+                    <h3>Philosophy &amp; Practice</h3>
+                    <p>Karma, dharma, moksha, and the paths to liberation.</p>
+                    <span class="lecture-arrow">→</span>
+                </a>
+                <a href="reveal_decks/PHIL210_Ch3_Day3_Hinduism.html" class="lecture-card">
+                    <span class="lecture-day">Day 3</span>
+                    <h3>Gods, Devotion &amp; Modern Hinduism</h3>
+                    <p>The pantheon, bhakti traditions, and Hinduism in the contemporary world.</p>
+                    <span class="lecture-arrow">→</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Unit 3: Buddhism -->
+        <section class="unit-section unit-buddhism">
+            <div class="unit-header">
+                <span class="unit-icon">☸️</span>
+                <h2>Buddhism</h2>
+                <span class="chapter-label">Chapter 5</span>
+            </div>
+            <div class="lectures-grid">
+                <a href="reveal_decks/PHIL210_Ch5_Day1_Buddhism.html" class="lecture-card">
+                    <span class="lecture-day">Day 1</span>
+                    <h3>The Buddha &amp; His Teachings</h3>
+                    <p>Siddhartha's journey, the Four Noble Truths, and the Eightfold Path.</p>
+                    <span class="lecture-arrow">→</span>
+                </a>
+                <a href="reveal_decks/PHIL210_Ch5_Day2_Buddhism.html" class="lecture-card">
+                    <span class="lecture-day">Day 2</span>
+                    <h3>Branches &amp; Traditions</h3>
+                    <p>Theravada, Mahayana, and Vajrayana—the great schools of Buddhist thought.</p>
+                    <span class="lecture-arrow">→</span>
+                </a>
+                <a href="reveal_decks/PHIL210_Ch5_Day3_Buddhism.html" class="lecture-card">
+                    <span class="lecture-day">Day 3</span>
+                    <h3>Buddhism Across Asia &amp; the World</h3>
+                    <p>Spread, adaptation, and Buddhism's encounter with modernity.</p>
+                    <span class="lecture-arrow">→</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Unit 4: Chinese Religions -->
+        <section class="unit-section unit-chinese">
+            <div class="unit-header">
+                <span class="unit-icon">☯️</span>
+                <h2>Chinese Religious Traditions</h2>
+                <span class="chapter-label">Chapter 7</span>
+            </div>
+            <div class="lectures-grid">
+                <a href="reveal_decks/PHIL210_Ch7_Day1_Confucianism.html" class="lecture-card">
+                    <span class="lecture-day">Day 1</span>
+                    <h3>Confucianism</h3>
+                    <p>Confucius, the Analects, and the ethics of social harmony.</p>
+                    <span class="lecture-arrow">→</span>
+                </a>
+                <a href="reveal_decks/PHIL210_Ch7_Day2_Daoism.html" class="lecture-card">
+                    <span class="lecture-day">Day 2</span>
+                    <h3>Daoism</h3>
+                    <p>The Dao De Jing, wu wei, and the pursuit of naturalness.</p>
+                    <span class="lecture-arrow">→</span>
+                </a>
+                <a href="reveal_decks/PHIL210_Ch7_Day3_Historical.html" class="lecture-card">
+                    <span class="lecture-day">Day 3</span>
+                    <h3>Historical Development</h3>
+                    <p>The interplay of Confucianism, Daoism, and Buddhism in Chinese history.</p>
+                    <span class="lecture-arrow">→</span>
+                </a>
+                <a href="reveal_decks/PHIL210_Ch7_Day4_Synthesis.html" class="lecture-card">
+                    <span class="lecture-day">Day 4</span>
+                    <h3>Synthesis &amp; Legacy</h3>
+                    <p>Neo-Confucianism, folk religion, and Chinese traditions today.</p>
+                    <span class="lecture-arrow">→</span>
+                </a>
+            </div>
+        </section>
     </main>
+
+    <footer>
+        <p class="footer-quote">"The study of religion is the study of humanity."</p>
+        <p class="footer-attribution">— Ninian Smart</p>
+    </footer>
 </body>
 </html>
