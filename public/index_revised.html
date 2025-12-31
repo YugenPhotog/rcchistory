@@ -9,23 +9,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Libre+Baskerville:wght@400;700&family=Lora:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;1,400;1,500&family=Inter:wght@400;500;600&family=Special+Elite&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
     
-    <!-- Desktop Folders Styles -->
+    <!-- Hanging Folders Styles -->
     <style>
         /* ============================================
-           PROFESSOR'S DESK - RESOURCE FOLDERS
+           HANGING FOLDERS COMPONENT
            ============================================ */
         
-        .desk-section {
-            padding: 2rem 0 3rem;
+        .resources-section {
+            padding: 3rem 0;
         }
 
-        .desk-container {
-            max-width: 1200px;
+        .filing-cabinet {
+            max-width: 900px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1rem;
         }
 
-        .desk-label {
+        .cabinet-label {
             font-family: 'Playfair Display', serif;
             color: #5a4a3a;
             font-size: 1.1rem;
@@ -35,313 +35,287 @@
             letter-spacing: 2px;
         }
 
-        .desk-label::before,
-        .desk-label::after {
+        .cabinet-label::before,
+        .cabinet-label::after {
             content: "—";
             margin: 0 0.75rem;
             color: #c9b896;
         }
 
-        /* The desk surface */
-        .desk-surface {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 1536 / 1024;
-            background-image: url('images/desktop.jpg');
-            background-size: cover;
-            background-position: center;
-            border-radius: 8px;
+        .folder-rail {
+            background: linear-gradient(180deg, #8b7355 0%, #6b5a47 50%, #5a4a3a 100%);
+            border-radius: 8px 8px 0 0;
+            padding: 15px 25px 0;
             box-shadow: 
-                0 4px 20px rgba(0,0,0,0.3),
-                0 8px 40px rgba(46, 24, 16, 0.2),
-                inset 0 0 100px rgba(0,0,0,0.1);
-            border: 3px solid #6b5a47;
-            overflow: visible;
+                inset 0 2px 4px rgba(255,255,255,0.15),
+                0 4px 20px rgba(0,0,0,0.2),
+                0 8px 40px rgba(90, 74, 58, 0.3);
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            border: 1px solid #4a3c30;
+            border-bottom: none;
         }
 
-        /* Individual folder on desk */
-        .desk-folder {
-            position: absolute;
-            width: 180px;
-            cursor: pointer;
-            transition: transform 0.3s ease, z-index 0s;
+        .hanging-folder {
+            position: relative;
+            width: 200px;
+            padding-bottom: 45px;
+        }
+
+        .folder-hooks {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            position: relative;
             z-index: 10;
         }
 
-        .desk-folder:hover,
-        .desk-folder.open {
-            z-index: 100;
-        }
-
-        .desk-folder:hover {
-            transform: translateY(-8px) rotate(0deg) scale(1.05);
-        }
-
-        .desk-folder.open {
-            transform: translateY(-15px) scale(1.1);
-        }
-
-        /* Folder positions - percentage based for responsiveness */
-        .desk-folder.folder-1 {
-            left: 5%;
-            bottom: 8%;
-            transform: rotate(-5deg);
-        }
-        .desk-folder.folder-1:hover,
-        .desk-folder.folder-1.open {
-            transform: translateY(-8px) rotate(-2deg) scale(1.05);
-        }
-
-        .desk-folder.folder-2 {
-            left: 38%;
-            bottom: 5%;
-            transform: rotate(3deg);
-        }
-        .desk-folder.folder-2:hover,
-        .desk-folder.folder-2.open {
-            transform: translateY(-8px) rotate(1deg) scale(1.05);
-        }
-
-        .desk-folder.folder-3 {
-            right: 8%;
-            bottom: 12%;
-            transform: rotate(-3deg);
-        }
-        .desk-folder.folder-3:hover,
-        .desk-folder.folder-3.open {
-            transform: translateY(-8px) rotate(-1deg) scale(1.05);
-        }
-
-        /* The manila folder graphic */
-        .folder-graphic {
-            position: relative;
-            width: 100%;
-            height: 130px;
-            background: linear-gradient(180deg, #e8d9a8 0%, #d4c48a 100%);
-            border-radius: 3px 12px 4px 4px;
-            box-shadow: 
-                0 4px 8px rgba(0,0,0,0.3),
-                0 2px 4px rgba(0,0,0,0.2),
-                inset 0 1px 0 rgba(255,255,255,0.4);
-            border: 1px solid #b8a870;
-        }
-
-        /* Folder tab */
-        .folder-graphic::before {
-            content: '';
-            position: absolute;
-            top: -15px;
-            right: 15px;
-            width: 50px;
+        .hook {
+            width: 10px;
             height: 18px;
-            background: linear-gradient(180deg, #f0e4bc 0%, #e8d9a8 100%);
+            background: linear-gradient(90deg, #a08060 0%, #d4c4a8 50%, #a08060 100%);
+            border-radius: 2px 2px 0 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .folder-body {
+            position: relative;
+            height: 160px;
+            margin-top: -2px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .hanging-folder:hover .folder-body {
+            transform: translateY(6px);
+        }
+
+        .hanging-folder.open .folder-body {
+            transform: translateY(12px);
+        }
+
+        .folder-back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 0 0 6px 6px;
+            box-shadow: inset 0 -3px 6px rgba(0,0,0,0.15);
+        }
+
+        /* Folder color variants */
+        .hanging-folder.sage .folder-back {
+            background: linear-gradient(180deg, #5a6b52 0%, #4a5a45 100%);
+        }
+        .hanging-folder.sage .folder-front {
+            background: linear-gradient(180deg, #7a8b6a 0%, #6a7b5a 100%);
+        }
+        .hanging-folder.sage .folder-tab {
+            background: linear-gradient(180deg, #8a9b7a 0%, #7a8b6a 100%);
+        }
+
+        .hanging-folder.burgundy .folder-back {
+            background: linear-gradient(180deg, #6b3a3a 0%, #5a2d2d 100%);
+        }
+        .hanging-folder.burgundy .folder-front {
+            background: linear-gradient(180deg, #8b4a4a 0%, #7a3d3d 100%);
+        }
+        .hanging-folder.burgundy .folder-tab {
+            background: linear-gradient(180deg, #9b5a5a 0%, #8b4a4a 100%);
+        }
+
+        .hanging-folder.navy .folder-back {
+            background: linear-gradient(180deg, #3a4a5a 0%, #2d3d4a 100%);
+        }
+        .hanging-folder.navy .folder-front {
+            background: linear-gradient(180deg, #4a5a6a 0%, #3d4d5d 100%);
+        }
+        .hanging-folder.navy .folder-tab {
+            background: linear-gradient(180deg, #5a6a7a 0%, #4a5a6a 100%);
+        }
+
+        .hanging-folder.ochre .folder-back {
+            background: linear-gradient(180deg, #8b7340 0%, #7a6335 100%);
+        }
+        .hanging-folder.ochre .folder-front {
+            background: linear-gradient(180deg, #a8924a 0%, #98823a 100%);
+        }
+        .hanging-folder.ochre .folder-tab {
+            background: linear-gradient(180deg, #b8a25a 0%, #a8924a 100%);
+        }
+
+        .folder-front {
+            position: absolute;
+            top: 12px;
+            left: 4px;
+            right: 4px;
+            bottom: 4px;
+            border-radius: 0 0 5px 5px;
+            box-shadow: 
+                0 2px 8px rgba(0,0,0,0.15),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+
+        .folder-tab {
+            position: absolute;
+            top: -16px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 110px;
+            height: 26px;
             border-radius: 4px 4px 0 0;
-            border: 1px solid #b8a870;
-            border-bottom: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
         }
 
-        /* Folder label */
-        .folder-label {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        .folder-tab span {
             font-family: 'Special Elite', 'Courier New', monospace;
-            font-size: 11px;
-            color: #5a4a3a;
+            font-size: 10px;
+            color: rgba(255,255,255,0.95);
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            text-align: center;
-            white-space: nowrap;
-            text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
         }
 
-        /* Paper edges peeking out */
-        .folder-papers {
+        .documents {
             position: absolute;
-            top: 5px;
-            left: 8px;
-            right: 8px;
-            height: 8px;
-            background: linear-gradient(180deg, #fff 0%, #f5f5f0 100%);
-            border-radius: 2px 2px 0 0;
-            box-shadow: 0 -1px 2px rgba(0,0,0,0.1);
-            opacity: 0.9;
+            top: 18px;
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
         }
 
-        /* Documents popup */
-        .folder-documents {
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%) translateY(20px);
-            background: #fdfbf7;
-            border-radius: 6px;
-            padding: 12px;
-            min-width: 200px;
-            box-shadow: 
-                0 8px 24px rgba(0,0,0,0.25),
-                0 4px 8px rgba(0,0,0,0.15);
-            border: 2px solid #c9b896;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 200;
-            margin-bottom: 10px;
-        }
-
-        .desk-folder.open .folder-documents {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        .folder-documents::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            border: 10px solid transparent;
-            border-top-color: #fdfbf7;
-            border-bottom: none;
-        }
-
-        .folder-documents::before {
-            content: '';
-            position: absolute;
-            bottom: -14px;
-            left: 50%;
-            transform: translateX(-50%);
-            border: 12px solid transparent;
-            border-top-color: #c9b896;
-            border-bottom: none;
-        }
-
-        .documents-title {
-            font-family: 'Libre Baskerville', serif;
-            font-size: 13px;
-            font-weight: 700;
-            color: #3a3020;
-            margin-bottom: 10px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #e5dcc8;
-        }
-
-        .document-link {
+        .document {
+            background: linear-gradient(180deg, #fdfbf7 0%, #f5f0e6 100%);
+            border-radius: 3px;
+            padding: 8px 10px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 8px 10px;
-            margin: 4px -4px;
-            border-radius: 4px;
+            gap: 8px;
+            transform: translateY(0);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
             text-decoration: none;
-            color: #3a3020;
-            transition: all 0.2s ease;
+            color: inherit;
+            box-shadow: 
+                0 1px 3px rgba(0,0,0,0.08),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
-        .document-link:hover {
-            background: #f0ebe0;
+        .hanging-folder:hover .document {
+            transform: translateY(-6px);
         }
 
-        .document-link .doc-icon {
-            font-size: 18px;
+        .hanging-folder:hover .document:nth-child(2) {
+            transform: translateY(-4px);
+            transition-delay: 0.03s;
+        }
+
+        .hanging-folder:hover .document:nth-child(3) {
+            transform: translateY(-2px);
+            transition-delay: 0.06s;
+        }
+
+        .hanging-folder.open .document {
+            transform: translateY(-50px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        }
+
+        .hanging-folder.open .document:nth-child(2) {
+            transform: translateY(-45px);
+            transition-delay: 0.03s;
+        }
+
+        .hanging-folder.open .document:nth-child(3) {
+            transform: translateY(-40px);
+            transition-delay: 0.06s;
+        }
+
+        .document:hover {
+            background: #fff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+            border-color: #c9b896;
+        }
+
+        .document-icon {
+            font-size: 16px;
             flex-shrink: 0;
         }
 
-        .document-link .doc-info {
+        .document-info {
             flex: 1;
             min-width: 0;
         }
 
-        .document-link .doc-title {
+        .document-title {
             font-family: 'Libre Baskerville', serif;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 400;
             color: #3a3020;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        .document-link .doc-meta {
+        .document-meta {
+            font-family: 'Inter', sans-serif;
+            font-size: 9px;
+            color: #8b7355;
+            margin-top: 1px;
+            letter-spacing: 0.3px;
+        }
+
+        .folder-count {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
             font-family: 'Inter', sans-serif;
             font-size: 10px;
-            color: #8b7355;
-            margin-top: 2px;
+            color: rgba(255,255,255,0.6);
         }
 
-        /* Click hint */
-        .folder-hint {
+        .click-hint {
             position: absolute;
-            bottom: -22px;
+            bottom: -28px;
             left: 50%;
             transform: translateX(-50%);
             font-family: 'EB Garamond', serif;
-            font-size: 10px;
+            font-size: 11px;
             font-style: italic;
-            color: rgba(255,255,255,0.9);
-            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+            color: #8b7355;
             opacity: 0;
             transition: opacity 0.3s ease;
             white-space: nowrap;
         }
 
-        .desk-folder:hover .folder-hint {
+        .hanging-folder:hover .click-hint {
             opacity: 1;
         }
 
-        .desk-folder.open .folder-hint {
+        .hanging-folder.open .click-hint {
             opacity: 0;
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 900px) {
-            .desk-folder {
-                width: 120px;
+        @media (max-width: 700px) {
+            .folder-rail {
+                flex-direction: column;
+                align-items: center;
+                padding: 15px 20px 0;
             }
-            .folder-graphic {
-                height: 85px;
-            }
-            .folder-label {
-                font-size: 9px;
-            }
-            .folder-documents {
-                min-width: 180px;
-                padding: 10px;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .desk-folder {
-                width: 90px;
-            }
-            .folder-graphic {
-                height: 65px;
-            }
-            .folder-graphic::before {
-                width: 35px;
-                height: 14px;
-                top: -12px;
-                right: 10px;
-            }
-            .folder-label {
-                font-size: 7px;
-            }
-            .folder-documents {
-                min-width: 160px;
-                padding: 8px;
-                position: fixed;
-                bottom: auto;
-                top: 50%;
-                left: 50% !important;
-                right: auto;
-                transform: translate(-50%, -50%) !important;
-            }
-            .desk-folder.open .folder-documents {
-                transform: translate(-50%, -50%) !important;
-            }
-            .folder-documents::before,
-            .folder-documents::after {
-                display: none;
+            
+            .hanging-folder {
+                width: 240px;
             }
         }
     </style>
@@ -382,7 +356,7 @@
             <div class="decorative-rule"></div>
         </section>
 
-      
+        
         <!-- Course Cards Section -->
         <section id="courses" class="courses-section">
             <h2 class="section-title">Course Offerings</h2>
@@ -481,89 +455,107 @@
             </div>
         </section>
 		
-		  <!-- Professor's Desk Section -->
-        <section class="desk-section">
-            <div class="desk-container">
-				<h2 div class="section-title">Professor's Desk</h2>
+		<!-- Hanging Folders Section -->
+        <section class="resources-section">
+            <div class="filing-cabinet">
+                <div class="cabinet-label">Course Resources</div>
                 
-                <div class="desk-surface">
+                <div class="folder-rail">
                     
-                    <!-- Folder 1: Extra Credit (bottom-left) -->
-                    <div class="desk-folder folder-1" data-folder="extra-credit">
-                        <div class="folder-graphic">
-                            <div class="folder-papers"></div>
-                            <span class="folder-label">Extra Credit</span>
+                    <!-- Extra Credit Folder -->
+                    <div class="hanging-folder sage" data-folder="extra-credit">
+                        <div class="folder-hooks">
+                            <div class="hook"></div>
+                            <div class="hook"></div>
                         </div>
-                        <div class="folder-documents">
-                            <div class="documents-title">📁 Extra Credit</div>
-                            <a href="resources/extra-credit-calculator.xlsx" class="document-link">
-                                <span class="doc-icon">📊</span>
-                                <div class="doc-info">
-                                    <div class="doc-title">Grade Calculator</div>
-                                    <div class="doc-meta">Excel Spreadsheet</div>
+                        <div class="folder-body">
+                            <div class="folder-back"></div>
+                            <div class="folder-front">
+                                <div class="folder-tab"><span>Extra Credit</span></div>
+                                <div class="documents">
+                                    <a href="resources/extra-credit-calculator.xlsx" class="document">
+                                        <span class="document-icon">📊</span>
+                                        <div class="document-info">
+                                            <div class="document-title">Grade Calculator</div>
+                                            <div class="document-meta">Excel Spreadsheet</div>
+                                        </div>
+                                    </a>
+                                    <a href="resources/extra-credit-options.pdf" class="document">
+                                        <span class="document-icon">📝</span>
+                                        <div class="document-info">
+                                            <div class="document-title">EC Opportunities</div>
+                                            <div class="document-meta">PDF Document</div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
-                            <a href="resources/extra-credit-options.pdf" class="document-link">
-                                <span class="doc-icon">📝</span>
-                                <div class="doc-info">
-                                    <div class="doc-title">EC Opportunities</div>
-                                    <div class="doc-meta">PDF Document</div>
-                                </div>
-                            </a>
+                                <div class="folder-count">2 files</div>
+                            </div>
                         </div>
-                        <span class="folder-hint">click to open</span>
+                        <div class="click-hint">click to open</div>
                     </div>
 
-                    <!-- Folder 2: Study Aids (bottom-center) -->
-                    <div class="desk-folder folder-2" data-folder="study-aids">
-                        <div class="folder-graphic">
-                            <div class="folder-papers"></div>
-                            <span class="folder-label">Study Aids</span>
+                    <!-- Study Aids Folder -->
+                    <div class="hanging-folder navy" data-folder="study">
+                        <div class="folder-hooks">
+                            <div class="hook"></div>
+                            <div class="hook"></div>
                         </div>
-                        <div class="folder-documents">
-                            <div class="documents-title">📁 Study Aids</div>
-                            <a href="resources/semester-timeline.pdf" class="document-link">
-                                <span class="doc-icon">🗓️</span>
-                                <div class="doc-info">
-                                    <div class="doc-title">Semester Timeline</div>
-                                    <div class="doc-meta">PDF Document</div>
+                        <div class="folder-body">
+                            <div class="folder-back"></div>
+                            <div class="folder-front">
+                                <div class="folder-tab"><span>Study Aids</span></div>
+                                <div class="documents">
+                                    <a href="resources/semester-timeline.pdf" class="document">
+                                        <span class="document-icon">🗓️</span>
+                                        <div class="document-info">
+                                            <div class="document-title">Semester Timeline</div>
+                                            <div class="document-meta">PDF Document</div>
+                                        </div>
+                                    </a>
+                                    <a href="resources/writing-tips.pdf" class="document">
+                                        <span class="document-icon">✍️</span>
+                                        <div class="document-info">
+                                            <div class="document-title">Writing Tips</div>
+                                            <div class="document-meta">PDF Document</div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
-                            <a href="resources/writing-tips.pdf" class="document-link">
-                                <span class="doc-icon">✍️</span>
-                                <div class="doc-info">
-                                    <div class="doc-title">Writing Tips</div>
-                                    <div class="doc-meta">PDF Document</div>
-                                </div>
-                            </a>
+                                <div class="folder-count">2 files</div>
+                            </div>
                         </div>
-                        <span class="folder-hint">click to open</span>
+                        <div class="click-hint">click to open</div>
                     </div>
 
-                    <!-- Folder 3: Templates (bottom-right) -->
-                    <div class="desk-folder folder-3" data-folder="templates">
-                        <div class="folder-graphic">
-                            <div class="folder-papers"></div>
-                            <span class="folder-label">Templates</span>
+                    <!-- Templates Folder -->
+                    <div class="hanging-folder burgundy" data-folder="templates">
+                        <div class="folder-hooks">
+                            <div class="hook"></div>
+                            <div class="hook"></div>
                         </div>
-                        <div class="folder-documents">
-                            <div class="documents-title">📁 Templates</div>
-                            <a href="resources/essay-template.docx" class="document-link">
-                                <span class="doc-icon">📄</span>
-                                <div class="doc-info">
-                                    <div class="doc-title">Essay Format</div>
-                                    <div class="doc-meta">Word Document</div>
+                        <div class="folder-body">
+                            <div class="folder-back"></div>
+                            <div class="folder-front">
+                                <div class="folder-tab"><span>Templates</span></div>
+                                <div class="documents">
+                                    <a href="resources/essay-template.docx" class="document">
+                                        <span class="document-icon">📄</span>
+                                        <div class="document-info">
+                                            <div class="document-title">Essay Format</div>
+                                            <div class="document-meta">Word Document</div>
+                                        </div>
+                                    </a>
+                                    <a href="resources/citation-guide.pdf" class="document">
+                                        <span class="document-icon">📋</span>
+                                        <div class="document-info">
+                                            <div class="document-title">Citation Guide</div>
+                                            <div class="document-meta">PDF Document</div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
-                            <a href="resources/citation-guide.pdf" class="document-link">
-                                <span class="doc-icon">📋</span>
-                                <div class="doc-info">
-                                    <div class="doc-title">Citation Guide</div>
-                                    <div class="doc-meta">PDF Document</div>
-                                </div>
-                            </a>
+                                <div class="folder-count">2 files</div>
+                            </div>
                         </div>
-                        <span class="folder-hint">click to open</span>
+                        <div class="click-hint">click to open</div>
                     </div>
 
                 </div>
@@ -668,16 +660,18 @@
         window.addEventListener('DOMContentLoaded', setRandomProfileImage);
     </script>
 
-    <!-- Desk Folders Script -->
+    <!-- Hanging Folders Script -->
     <script>
         // Folder open/close functionality
-        document.querySelectorAll('.desk-folder').forEach(folder => {
-            folder.addEventListener('click', (e) => {
+        document.querySelectorAll('.hanging-folder').forEach(folder => {
+            const body = folder.querySelector('.folder-body');
+            
+            body.addEventListener('click', (e) => {
                 // Don't toggle if clicking a document link
-                if (e.target.closest('.document-link')) return;
+                if (e.target.closest('.document')) return;
                 
                 // Close other folders
-                document.querySelectorAll('.desk-folder.open').forEach(openFolder => {
+                document.querySelectorAll('.hanging-folder.open').forEach(openFolder => {
                     if (openFolder !== folder) {
                         openFolder.classList.remove('open');
                     }
@@ -689,23 +683,23 @@
 
         // Close folder when clicking outside
         document.addEventListener('click', (e) => {
-            if (!e.target.closest('.desk-folder')) {
-                document.querySelectorAll('.desk-folder.open').forEach(folder => {
+            if (!e.target.closest('.hanging-folder')) {
+                document.querySelectorAll('.hanging-folder.open').forEach(folder => {
                     folder.classList.remove('open');
                 });
             }
         });
 
         // Keyboard accessibility
-        document.querySelectorAll('.desk-folder').forEach(folder => {
-            folder.setAttribute('tabindex', '0');
-            folder.setAttribute('role', 'button');
-            folder.setAttribute('aria-expanded', 'false');
+        document.querySelectorAll('.folder-body').forEach(body => {
+            body.setAttribute('tabindex', '0');
+            body.setAttribute('role', 'button');
+            body.setAttribute('aria-expanded', 'false');
             
-            folder.addEventListener('keydown', (e) => {
+            body.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
-                    folder.click();
+                    body.click();
                 }
             });
         });
@@ -715,12 +709,15 @@
             mutations.forEach((mutation) => {
                 if (mutation.attributeName === 'class') {
                     const folder = mutation.target;
-                    folder.setAttribute('aria-expanded', folder.classList.contains('open'));
+                    const body = folder.querySelector('.folder-body');
+                    if (body) {
+                        body.setAttribute('aria-expanded', folder.classList.contains('open'));
+                    }
                 }
             });
         });
 
-        document.querySelectorAll('.desk-folder').forEach(folder => {
+        document.querySelectorAll('.hanging-folder').forEach(folder => {
             observer.observe(folder, { attributes: true });
         });
     </script>
