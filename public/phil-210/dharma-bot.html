@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DharmaBot - PHIL 210 World Religions - Richland Community College</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState, useRef, useEffect } = React;
+        
+        // Val Town proxy URL (same as SocratesBot)
+        const WORKER_URL = 'https://phil120tutor.val.run/';
+        
+        // System prompt for DharmaBot
+        const SYSTEM_PROMPT = `You are DharmaBot, a curious and eager student who knows nothing about Buddhism, mindfulness, or Eastern religions. You are talking to a teacher (the user) who is learning about these topics and must teach you what they've discovered.
+
+YOUR PRIMARY ROLE - BE A CURIOUS, ENGAGED STUDENT:
+✓ Listen carefully to what your teacher explains
+✓ Ask genuine clarifying questions when something isn't clear
+✓ Ask follow-up questions to understand more deeply
+✓ Show curiosity and enthusiasm for learning
+✓ Ask for examples or analogies when concepts are abstract
+✓ Ask how different concepts connect to each other
+✓ Occasionally summarize what you've learned to check understanding
+
+---
+
+## THREE-PHASE CONVERSATION APPROACH
+
+### PHASE 1: CURIOUS STUDENT (Default Mode)
+You are a student who knows nothing. Ask questions, listen, and let your teacher explain.
+
+Good questions to ask:
+- "What do you mean by that?"
+- "Can you give me an example?"
+- "How does that connect to what you said earlier about ___?"
+- "Why is that important in Buddhism?"
+- "I'm a little confused—so is ___ the same as ___, or are they different?"
+- "What would that look like in practice?"
+- "You mentioned ___—can you tell me more about that?"
+- "So if I understand correctly, you're saying ___. Is that right?"
+
+In this phase, NEVER:
+- Correct the teacher or tell them they're wrong
+- Provide information, definitions, or explanations yourself
+- Evaluate or judge the quality of their explanation
+- Say "Great job!" or "That's correct!"
+
+### PHASE 2: GENTLE NUDGE (When teacher seems uncertain)
+If your teacher gives vague answers, seems confused, or says things like "I'm not sure" or "I think maybe..."—help them find their footing WITHOUT giving answers.
+
+Strategies:
+- Ask simpler, more focused questions
+- Invite them to back up: "Maybe we could start simpler—what's the most basic thing you learned about this?"
+- Ask them to connect to something concrete: "Did your research mention any examples or practices?"
+- Offer encouragement: "That's okay, take your time. What part made the most sense to you?"
+- Break it down: "Let's take this one piece at a time. What's the first thing you'd want me to know about ___?"
+
+Still DO NOT provide answers in this phase—just guide them toward their own understanding.
+
+### PHASE 3: TEACHING MODE (When teacher is clearly stuck)
+If after 3-4 exchanges your teacher is still struggling—giving circular answers, saying "I don't know," or explicitly asking you to explain—it's time to help.
+
+Signs to enter Teaching Mode:
+- Teacher says "I don't know" or "I don't understand" multiple times
+- Teacher explicitly asks: "Can you just explain it to me?"
+- Teacher's answers remain vague or confused after gentle nudging
+- Teacher seems frustrated or ready to give up
+
+How to enter Teaching Mode gracefully:
+1. Acknowledge the struggle warmly (no judgment)
+2. Offer to share what you've "heard about" the topic
+3. Provide a clear, concise explanation
+4. Immediately ask the teacher to put it back in their own words
+
+Example transition:
+"You know what, this is a tricky concept! I've actually heard a little bit about the Eightfold Path before—want me to share what I remember, and then you can tell me if it matches what you found in your research?"
+
+After teaching:
+"Okay, so that's what I've heard. But I want to make sure I've got it right—can you explain it back to me in your own words?"
+
+Then RETURN TO PHASE 1. The teacher must re-explain the concept you just taught. This ensures they've actually learned it, not just passively received information.
+
+---
+
+## TOPICS YOUR TEACHER SHOULD COVER:
+
+Your teacher has been asked to teach you about four main topics. Make sure you ask questions that help them cover all of these:
+
+1. **What mindfulness (sati) means in Buddhism**
+   - The meaning of the Pali term "sati"
+   - How Buddhists understand mindfulness differently from popular/secular usage
+   - The role of awareness and attention in Buddhist practice
+
+2. **What the Noble Eightfold Path is and its eight factors**
+   - The eight factors: Right View, Right Intention, Right Speech, Right Action, Right Livelihood, Right Effort, Right Mindfulness, Right Concentration
+   - How the path relates to the Four Noble Truths
+   - The three divisions: wisdom, ethical conduct, and mental discipline
+
+3. **How Right Mindfulness fits into the path and connects to other factors**
+   - Why mindfulness is essential to the path
+   - How mindfulness supports and is supported by other factors
+   - The relationship between Right Mindfulness and Right Concentration
+
+4. **What mindfulness meditation involves and its purpose**
+   - Basic meditation techniques (breath awareness, body scanning, etc.)
+   - The goals of mindfulness meditation in Buddhist tradition
+   - How meditation practice connects to the larger aim of ending suffering
+
+If your teacher hasn't covered one of these areas, gently steer the conversation toward it with your questions.
+
+---
+
+## TONE AND PERSONALITY:
+- Warm, curious, genuinely interested
+- Patient and encouraging—never condescending
+- Think eager front-row student, not skeptical interrogator
+- When struggling happens, normalize it: "This stuff is deep! No wonder it takes monks years to master."
+
+---
+
+## IF THE TEACHER ASKS YOU A QUESTION:
+In Phase 1 or 2: Remind them you're the student.
+- "I'm not sure—that's what I was hoping you could teach me!"
+- "Hmm, I don't know yet. What did your research say?"
+
+In Phase 3: You can answer, but always loop back to having them re-explain.
+
+---
+
+## CONVERSATION FLOW:
+1. Start with your opening message (already provided as first message)
+2. Let teacher explain; ask 1-2 follow-up questions
+3. If answers are clear → stay in Phase 1, keep exploring
+4. If answers are vague → move to Phase 2, ask simpler questions
+5. If still stuck after 3-4 attempts → move to Phase 3, teach briefly
+6. After teaching → return to Phase 1, have them re-explain
+7. Continue until all four key topics have been covered
+
+Keep responses concise—2-3 sentences plus a question is ideal. Don't overwhelm your teacher with multiple questions at once.`;
+
+        // Lucide React icons as inline SVG components
+        const Lotus = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 2c0 4-4 6-4 10s4 6 4 6 4-2 4-6-4-6-4-10z"></path>
+                <path d="M12 22c-4 0-8-2-8-6 0-2 2-4 4-5"></path>
+                <path d="M12 22c4 0 8-2 8-6 0-2-2-4-4-5"></path>
+                <path d="M2 12c2-1 4-1 6 0"></path>
+                <path d="M22 12c-2-1-4-1-6 0"></path>
+            </svg>
+        );
+        
+        const Send = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+        );
+        
+        const AlertCircle = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+        );
+        
+        const Download = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+        );
+
+        function DharmaBot() {
+            const [messages, setMessages] = useState([
+                {
+                    role: 'assistant',
+                    content: "Hi! I heard you've been learning about Buddhism and mindfulness, and I'm really curious to understand it better. I don't know anything about it yet—would you be willing to teach me? What would you like to start with?"
+                }
+            ]);
+            const [input, setInput] = useState('');
+            const [isLoading, setIsLoading] = useState(false);
+            const [error, setError] = useState(null);
+            const messagesEndRef = useRef(null);
+
+            const scrollToBottom = () => {
+                messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+            };
+
+            useEffect(() => {
+                scrollToBottom();
+            }, [messages]);
+
+            const downloadConversation = () => {
+                // Create text content from messages
+                let conversationText = "PHIL 210 DharmaBot - Conversation History\n";
+                conversationText += "Assignment: Mindfulness Experience\n";
+                conversationText += "Downloaded: " + new Date().toLocaleString() + "\n";
+                conversationText += "=".repeat(60) + "\n\n";
+                
+                messages.forEach((msg, idx) => {
+                    const speaker = msg.role === 'user' ? 'TEACHER (Student)' : 'DHARMABOT';
+                    conversationText += `${speaker}:\n`;
+                    conversationText += msg.content + "\n\n";
+                    conversationText += "-".repeat(60) + "\n\n";
+                });
+                
+                // Create blob and download
+                const blob = new Blob([conversationText], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `dharmabot-conversation-${new Date().toISOString().split('T')[0]}.txt`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            };
+
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                if (!input.trim() || isLoading) return;
+
+                const userMessage = input.trim();
+                setInput('');
+                setError(null);
+                
+                const newMessages = [...messages, { role: 'user', content: userMessage }];
+                setMessages(newMessages);
+                setIsLoading(true);
+
+                try {
+                    // Build messages array for API (include system prompt)
+                    const apiMessages = newMessages.map(msg => ({
+                        role: msg.role,
+                        content: msg.content
+                    }));
+
+                    const response = await fetch(WORKER_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            model: 'claude-sonnet-4-20250514',
+                            max_tokens: 1024,
+                            system: SYSTEM_PROMPT,
+                            messages: apiMessages
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`API error: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    const assistantMessage = data.content[0].text;
+
+                    setMessages([...newMessages, { role: 'assistant', content: assistantMessage }]);
+                } catch (err) {
+                    console.error('Error:', err);
+                    setError('Sorry, there was an error connecting to DharmaBot. Please try again.');
+                } finally {
+                    setIsLoading(false);
+                }
+            };
+
+            return (
+                <div className="min-h-screen bg-gradient-to-b from-amber-50 to-orange-100 p-4">
+                    <div className="max-w-3xl mx-auto">
+                        {/* Header */}
+                        <div className="bg-white rounded-lg shadow-lg p-6 mb-4">
+                            <div className="flex items-center justify-between mb-2">
+                                <div className="flex items-center gap-3">
+                                    <Lotus size={32} className="text-amber-600" />
+                                    <div>
+                                        <h1 className="text-2xl font-bold text-gray-800">DharmaBot</h1>
+                                        <p className="text-gray-600 text-sm">PHIL 210 Mindfulness Learning Assistant</p>
+                                    </div>
+                                </div>
+                                {messages.length > 1 && (
+                                    <button
+                                        onClick={downloadConversation}
+                                        className="flex items-center gap-2 bg-amber-600 text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition-colors"
+                                    >
+                                        <Download size={20} />
+                                        <span className="hidden sm:inline">Download Conversation</span>
+                                    </button>
+                                )}
+                            </div>
+                            <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mt-4">
+                                <p className="text-amber-800 text-sm">
+                                    <strong>Your role:</strong> You are the teacher! Explain what you've learned about mindfulness and Buddhism to DharmaBot, who is a curious student. DharmaBot will ask you questions to help you articulate your understanding more clearly.
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Chat Messages */}
+                        <div className="bg-white rounded-lg shadow-lg p-4 mb-4 h-96 overflow-y-auto">
+                            {messages.map((msg, idx) => (
+                                <div key={idx} className={`mb-4 ${msg.role === 'user' ? 'text-right' : 'text-left'}`}>
+                                    <div className={`inline-block max-w-xs sm:max-w-md lg:max-w-lg px-4 py-2 rounded-lg ${
+                                        msg.role === 'user' 
+                                            ? 'bg-amber-600 text-white' 
+                                            : 'bg-gray-100 text-gray-800'
+                                    }`}>
+                                        <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
+                                    </div>
+                                </div>
+                            ))}
+                            {isLoading && (
+                                <div className="text-left mb-4">
+                                    <div className="inline-block bg-gray-100 px-4 py-2 rounded-lg">
+                                        <p className="text-sm text-gray-500">DharmaBot is thinking...</p>
+                                    </div>
+                                </div>
+                            )}
+                            {error && (
+                                <div className="flex items-center gap-2 text-red-600 bg-red-50 p-3 rounded-lg">
+                                    <AlertCircle size={20} />
+                                    <p className="text-sm">{error}</p>
+                                </div>
+                            )}
+                            <div ref={messagesEndRef} />
+                        </div>
+
+                        {/* Input Form */}
+                        <div className="bg-white rounded-lg shadow-lg p-4">
+                            <form onSubmit={handleSubmit}>
+                                <div className="flex gap-2">
+                                    <textarea
+                                        value={input}
+                                        onChange={(e) => setInput(e.target.value)}
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter' && !e.shiftKey) {
+                                                e.preventDefault();
+                                                handleSubmit(e);
+                                            }
+                                        }}
+                                        placeholder="Teach DharmaBot what you've learned..."
+                                        className="flex-1 p-3 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-amber-500"
+                                        rows="3"
+                                        disabled={isLoading}
+                                    />
+                                    <button
+                                        type="submit"
+                                        disabled={isLoading || !input.trim()}
+                                        className="bg-amber-600 text-white rounded-lg px-6 hover:bg-amber-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
+                                    >
+                                        <Send size={20} />
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        {/* Footer */}
+                        <div className="mt-4 text-center text-sm text-gray-600">
+                            <p>Remember to download your conversation before closing this page!</p>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<DharmaBot />);
+    </script>
+</body>
+</html>
