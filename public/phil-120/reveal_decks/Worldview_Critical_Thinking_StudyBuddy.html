@@ -1,0 +1,1507 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worldview &amp; Critical Thinking: Study Buddy Edition</title>
+    
+    <!-- Reveal.js CSS from CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --desert-flower: #FF9B8A;
+            --cattleya-orchid: #A25FB0;
+            --opera-mauve: #D4A5C8;
+            --blue-curacao: #48C9C9;
+            --spicy-mustard: #D9A757;
+            --mocha-mousse: #A78674;
+            --arabesque: #C8826D;
+            --dark-bg: #1A1A1A;
+            --light-text: #FAFAFA;
+            --soft-white: #F0F0F0;
+        }
+
+        .reveal {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 28px;
+        }
+
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--desert-flower);
+            text-transform: none;
+        }
+
+        .reveal h1 { font-size: 2.8em; }
+        .reveal h2 { font-size: 2em; }
+        .reveal h3 { font-size: 1.4em; color: var(--blue-curacao); }
+
+        .reveal p, .reveal li {
+            line-height: 1.6;
+        }
+
+        .reveal a {
+            color: var(--blue-curacao);
+            text-decoration: underline;
+        }
+
+        /* Term pop-up styling (definitions) */
+        .term-trigger {
+            color: var(--cattleya-orchid);
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 2px dotted var(--cattleya-orchid);
+            transition: all 0.2s ease;
+        }
+
+        .term-trigger:hover {
+            color: var(--opera-mauve);
+            border-bottom-color: var(--opera-mauve);
+        }
+
+        .term-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+            color: var(--light-text);
+            padding: 2em;
+            border-radius: 15px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.6);
+            max-width: 500px;
+            z-index: 2000;
+            border: 3px solid var(--cattleya-orchid);
+        }
+
+        .term-popup.active { display: block; }
+
+        .term-popup h4 {
+            color: var(--cattleya-orchid);
+            margin-top: 0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3em;
+        }
+
+        .term-popup p {
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: var(--arabesque);
+            transition: color 0.2s;
+        }
+
+        .popup-close:hover {
+            color: var(--desert-flower);
+        }
+
+        /* Study Buddy sidebar */
+        .study-buddy {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 400px;
+            height: 100vh;
+            background: linear-gradient(180deg, #252525 0%, #1a1a1a 100%);
+            color: var(--light-text);
+            padding: 2em;
+            overflow-y: auto;
+            z-index: 1500;
+            border-left: 4px solid var(--spicy-mustard);
+            box-shadow: -5px 0 30px rgba(0,0,0,0.5);
+        }
+
+        .study-buddy.active { display: block; }
+
+        .study-buddy h3 {
+            color: var(--spicy-mustard);
+            margin-top: 0;
+            font-size: 1.4em;
+            border-bottom: 2px solid var(--spicy-mustard);
+            padding-bottom: 0.5em;
+        }
+
+        .study-buddy h4 {
+            color: var(--blue-curacao);
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            font-size: 1.1em;
+        }
+
+        .study-buddy p, .study-buddy li {
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .study-buddy .buddy-icon {
+            font-size: 1.2em;
+            margin-right: 0.3em;
+        }
+
+        .study-buddy .essay-ref {
+            background: rgba(72, 201, 201, 0.15);
+            border-left: 3px solid var(--blue-curacao);
+            padding: 0.8em;
+            margin: 1em 0;
+            font-size: 0.9em;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .study-buddy-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: var(--arabesque);
+        }
+
+        .study-buddy-close:hover {
+            color: var(--desert-flower);
+        }
+
+        /* Self-check styling */
+        .self-check {
+            background: rgba(217, 167, 87, 0.15);
+            border: 2px solid var(--spicy-mustard);
+            border-radius: 12px;
+            padding: 1.5em;
+            margin-top: 1.5em;
+            text-align: left;
+        }
+
+        .self-check h4 {
+            color: var(--spicy-mustard);
+            margin-top: 0;
+            font-size: 1.1em;
+        }
+
+        .self-check p {
+            margin-bottom: 0;
+            font-size: 0.95em;
+        }
+
+        /* Quote styling */
+        .philosopher-quote {
+            background: rgba(162, 95, 176, 0.15);
+            border-left: 5px solid var(--cattleya-orchid);
+            padding: 1em 1.5em;
+            margin: 1.5em 0;
+            font-style: italic;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .quote-attribution {
+            text-align: right;
+            font-style: normal;
+            color: var(--mocha-mousse);
+            font-size: 0.9em;
+            margin-top: 0.5em;
+        }
+
+        /* Key concept box */
+        .key-concept {
+            background: rgba(255, 155, 138, 0.15);
+            border: 2px solid var(--desert-flower);
+            border-radius: 12px;
+            padding: 1.5em;
+            margin: 1em 0;
+        }
+
+        .key-concept h4 {
+            color: var(--desert-flower);
+            margin-top: 0;
+        }
+
+        /* Comparison boxes */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5em;
+            margin-top: 1em;
+        }
+
+        .compare-box {
+            background: rgba(72, 201, 201, 0.1);
+            border: 2px solid var(--blue-curacao);
+            border-radius: 12px;
+            padding: 1.2em;
+        }
+
+        .compare-box.alt {
+            background: rgba(162, 95, 176, 0.1);
+            border-color: var(--cattleya-orchid);
+        }
+
+        .compare-box h4 {
+            margin-top: 0;
+            font-size: 1.1em;
+        }
+
+        /* Image placeholder */
+        .img-placeholder {
+            background: linear-gradient(135deg, var(--opera-mauve) 0%, var(--cattleya-orchid) 100%);
+            border-radius: 12px;
+            padding: 2em;
+            text-align: center;
+            color: var(--dark-bg);
+            font-style: italic;
+            margin: 1em auto;
+        }
+
+        .img-placeholder strong {
+            display: block;
+            margin-bottom: 0.5em;
+            font-size: 1.1em;
+        }
+
+        /* Keyboard shortcut display */
+        .keyboard-menu {
+            background: rgba(47, 47, 47, 0.9);
+            border: 1px solid var(--blue-curacao);
+            border-radius: 8px;
+            padding: 0.8em 1.2em;
+            max-width: 260px;
+            margin: 1em auto;
+            text-align: left;
+            font-size: 0.75em;
+        }
+
+        .keyboard-menu h4 {
+            color: var(--blue-curacao);
+            margin-top: 0;
+            text-align: center;
+            margin-bottom: 0.6em;
+            font-size: 1.1em;
+        }
+
+        .shortcut-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.25em 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .shortcut-row:last-child {
+            border-bottom: none;
+        }
+
+        .key-badge {
+            background: var(--cattleya-orchid);
+            color: white;
+            padding: 0.15em 0.5em;
+            border-radius: 4px;
+            font-family: monospace;
+            font-weight: bold;
+            font-size: 0.95em;
+        }
+
+        /* List styling within slides */
+        .reveal ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .reveal ul li {
+            position: relative;
+            padding-left: 1.5em;
+            margin-bottom: 0.8em;
+        }
+
+        .reveal ul li::before {
+            content: "▸";
+            color: var(--blue-curacao);
+            position: absolute;
+            left: 0;
+        }
+
+        /* Overlay for popups */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 1400;
+        }
+
+        .overlay.active { display: block; }
+
+        /* Progress indicator styling */
+        .reveal .progress {
+            background: rgba(255,255,255,0.1);
+            height: 5px;
+        }
+
+        .reveal .progress span {
+            background: var(--desert-flower);
+        }
+
+        /* Title slide special styling */
+        .title-slide h1 {
+            font-size: 2.5em;
+            margin-bottom: 0.2em;
+        }
+
+        .title-slide .subtitle {
+            color: var(--opera-mauve);
+            font-size: 1.3em;
+            margin-bottom: 2em;
+        }
+
+        .title-slide .study-badge {
+            display: inline-block;
+            background: var(--spicy-mustard);
+            color: var(--dark-bg);
+            padding: 0.5em 1.5em;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+
+        /* Vertical slide indicator */
+        .reveal .controls .navigate-down {
+            color: var(--blue-curacao);
+        }
+
+        /* Section header slides */
+        .section-header {
+            background: linear-gradient(135deg, rgba(162, 95, 176, 0.2) 0%, rgba(72, 201, 201, 0.2) 100%);
+            border-radius: 20px;
+            padding: 2em;
+        }
+
+        .section-header h2 {
+            font-size: 2.5em;
+            margin-bottom: 0.3em;
+        }
+
+        .section-header .section-num {
+            color: var(--spicy-mustard);
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Overlay for popups -->
+    <div class="overlay" id="overlay" onclick="closeAll()"></div>
+
+    <!-- All term definition popups -->
+    <div id="worldview-popup" class="term-popup">
+        <span class="popup-close" onclick="closeTerm('worldview-popup')">&times;</span>
+        <h4>Worldview (Weltanschauung)</h4>
+        <p>A comprehensive framework of beliefs, values, and assumptions—held consciously or unconsciously—that shapes how you understand reality and make judgments. It answers big questions like: What is real? What is a human being? What is right and wrong?</p>
+    </div>
+
+    <div id="critical-thinking-popup" class="term-popup">
+        <span class="popup-close" onclick="closeTerm('critical-thinking-popup')">&times;</span>
+        <h4>Critical Thinking</h4>
+        <p>A disciplined process of evaluating claims based on reason and evidence. It involves both skills (analysis, evaluation, inference) and dispositions (intellectual humility, courage, empathy). Essentially: the mental habit of asking "How do I know this is true?"</p>
+    </div>
+
+    <div id="confirmation-bias-popup" class="term-popup">
+        <span class="popup-close" onclick="closeTerm('confirmation-bias-popup')">&times;</span>
+        <h4>Confirmation Bias</h4>
+        <p>The tendency to seek out, favor, and remember information that confirms what you already believe, while discounting or ignoring contradictory evidence. Everyone has this—it's automatic and usually unconscious.</p>
+    </div>
+
+    <div id="motivated-reasoning-popup" class="term-popup">
+        <span class="popup-close" onclick="closeTerm('motivated-reasoning-popup')">&times;</span>
+        <h4>Motivated Reasoning</h4>
+        <p>Evaluating arguments based on whether you <em>want</em> the conclusion to be true, rather than on the actual strength of the evidence. Researcher Ziva Kunda showed we "access, construct, and evaluate arguments in a biased way to arrive at a preferred conclusion."</p>
+    </div>
+
+    <div id="intellectual-humility-popup" class="term-popup">
+        <span class="popup-close" onclick="closeTerm('intellectual-humility-popup')">&times;</span>
+        <h4>Intellectual Humility</h4>
+        <p>Recognizing the limits of your own knowledge and genuinely accepting that you might be wrong. Not false modesty—it's honestly acknowledging what you don't know and being open to learning.</p>
+    </div>
+
+    <div id="intellectual-courage-popup" class="term-popup">
+        <span class="popup-close" onclick="closeTerm('intellectual-courage-popup')">&times;</span>
+        <h4>Intellectual Courage</h4>
+        <p>Willingness to consider ideas that challenge your existing beliefs, even when it's uncomfortable. It means following evidence and arguments where they lead, even if you don't like where that is.</p>
+    </div>
+
+    <div id="intellectual-empathy-popup" class="term-popup">
+        <span class="popup-close" onclick="closeTerm('intellectual-empathy-popup')">&times;</span>
+        <h4>Intellectual Empathy</h4>
+        <p>The ability to imaginatively enter into perspectives different from your own—to genuinely understand <em>why</em> someone thinks what they think, not just <em>what</em> they think. Essential for understanding disagreement.</p>
+    </div>
+
+    <div id="elephant-rider-popup" class="term-popup">
+        <span class="popup-close" onclick="closeTerm('elephant-rider-popup')">&times;</span>
+        <h4>Elephant and Rider (Haidt)</h4>
+        <p>Psychologist Jonathan Haidt's metaphor: The elephant = your automatic intuitions, emotions, gut reactions. The rider = your conscious reasoning. The elephant is far more powerful; the rider often just explains where the elephant already went.</p>
+    </div>
+
+    <div id="consequentialism-popup" class="term-popup">
+        <span class="popup-close" onclick="closeTerm('consequentialism-popup')">&times;</span>
+        <h4>Consequentialism</h4>
+        <p>An ethical theory holding that the rightness or wrongness of actions depends solely on their consequences. Utilitarianism (maximize overall well-being) is the most famous version. "Did it produce good results?" is the key question.</p>
+    </div>
+
+    <div id="deontology-popup" class="term-popup">
+        <span class="popup-close" onclick="closeTerm('deontology-popup')">&times;</span>
+        <h4>Deontology</h4>
+        <p>An ethical theory holding that some actions are inherently right or wrong, regardless of consequences. Associated with Kant. "Did you do your duty? Did you treat people as ends, not just means?" are key questions.</p>
+    </div>
+
+    <div id="virtue-ethics-popup" class="term-popup">
+        <span class="popup-close" onclick="closeTerm('virtue-ethics-popup')">&times;</span>
+        <h4>Virtue Ethics</h4>
+        <p>An ethical theory focused on character rather than rules or consequences. Associated with Aristotle. "What would a person of good character do? What kind of person should I become?" are key questions.</p>
+    </div>
+
+    <div id="epistemology-popup" class="term-popup">
+        <span class="popup-close" onclick="closeTerm('epistemology-popup')">&times;</span>
+        <h4>Epistemology</h4>
+        <p>The branch of philosophy concerned with knowledge: What can we know? How do we know it? What counts as evidence? Different worldviews have different epistemologies—they trust different sources (reason, experience, revelation, tradition).</p>
+    </div>
+
+    <div id="meta-ethics-popup" class="term-popup">
+        <span class="popup-close" onclick="closeTerm('meta-ethics-popup')">&times;</span>
+        <h4>Meta-ethics</h4>
+        <p>The study of the nature of morality itself: Do moral facts exist? Are moral claims objective or subjective? What do moral words like "good" and "right" even mean? It's thinking about ethics rather than doing ethics.</p>
+    </div>
+
+    <div id="telos-popup" class="term-popup">
+        <span class="popup-close" onclick="closeTerm('telos-popup')">&times;</span>
+        <h4>Telos</h4>
+        <p>Greek word meaning "end," "goal," or "purpose." In virtue ethics, humans have a telos—a natural purpose or function. Flourishing (eudaimonia) happens when we fulfill that purpose well through virtuous character.</p>
+    </div>
+
+    <div id="social-intuitionist-popup" class="term-popup">
+        <span class="popup-close" onclick="closeTerm('social-intuitionist-popup')">&times;</span>
+        <h4>Social Intuitionist Model</h4>
+        <p>Jonathan Haidt's theory that moral judgments typically come from rapid, automatic intuitions—not careful reasoning. Reasoning usually comes <em>after</em> the judgment, to justify it. Your gut decides; your brain explains.</p>
+    </div>
+
+    <div id="strong-weak-ct-popup" class="term-popup">
+        <span class="popup-close" onclick="closeTerm('strong-weak-ct-popup')">&times;</span>
+        <h4>Strong vs. Weak Sense Critical Thinking</h4>
+        <p><strong>Weak sense:</strong> Using analytical skills selectively to defend what you already believe (the lawyer approach). <strong>Strong sense:</strong> Applying the same standards even-handedly to all positions, including your own. Only strong sense enables genuine worldview examination.</p>
+    </div>
+
+    <div id="normative-ethics-popup" class="term-popup">
+        <span class="popup-close" onclick="closeTerm('normative-ethics-popup')">&times;</span>
+        <h4>Normative Ethics</h4>
+        <p>The branch of ethics that develops theories about what makes actions right or wrong, what makes character traits virtuous or vicious. Unlike meta-ethics (which asks "what IS morality?"), normative ethics asks "what SHOULD we do?"</p>
+    </div>
+
+    <!-- Study Buddy Sidebars for each main section -->
+    <div id="buddy-intro" class="study-buddy">
+        <span class="study-buddy-close" onclick="closeBuddy('buddy-intro')">&times;</span>
+        <h3>📚 Study Buddy Notes</h3>
+        
+        <h4>💡 Why This Matters</h4>
+        <p>This isn't just throat-clearing before the "real" ethics content. Understanding worldview and critical thinking is <em>the</em> foundational skill for everything else in this course. Without it, you'll just be memorizing theories without understanding why people believe them.</p>
+        
+        <h4>🎯 Learning Goal</h4>
+        <p>By the end of this section, you should understand that you already have a worldview—even if you've never thought about it—and that examining it is the first step to thinking clearly about ethics.</p>
+        
+        <div class="essay-ref">
+            <strong>📖 Want More?</strong><br>
+            See the companion essay, Section I: "The Inescapability of Worldview in Ethical Reasoning" for the full philosophical argument.
+        </div>
+    </div>
+
+    <div id="buddy-worldview" class="study-buddy">
+        <span class="study-buddy-close" onclick="closeBuddy('buddy-worldview')">&times;</span>
+        <h3>📚 Study Buddy Notes</h3>
+        
+        <h4>💡 The Big Idea</h4>
+        <p>A worldview isn't something only philosophers have. You have one. Your roommate has one. Your parents have one. The question isn't <em>whether</em> you have a worldview, but whether you've ever <em>examined</em> it.</p>
+        
+        <h4>🤔 Common Confusion</h4>
+        <p>Students often think "worldview" means "religion" or "political views." It's bigger than that. Your worldview includes what you think counts as evidence, what you think humans fundamentally are, what you think makes something true. It's the operating system, not just one app.</p>
+        
+        <h4>🔑 Key Insight: The Heart Dimension</h4>
+        <p>This is crucial: worldviews aren't just intellectual. They're about what you <em>care</em> about, what you're <em>committed</em> to. That's why challenging someone's worldview feels personal—you're touching their identity, not just their opinions.</p>
+        
+        <div class="essay-ref">
+            <strong>📖 Want More?</strong><br>
+            See Section II (definitions) and Section III (anatomy of a worldview) in the essay for detailed treatment of metaphysical, epistemological, anthropological, and axiological components.
+        </div>
+    </div>
+
+    <div id="buddy-flashlight" class="study-buddy">
+        <span class="study-buddy-close" onclick="closeBuddy('buddy-flashlight')">&times;</span>
+        <h3>📚 Study Buddy Notes</h3>
+        
+        <h4>💡 Why Worldviews Are Hard to See</h4>
+        <p>Here's the tricky part: your worldview feels like "just how things are." It's invisible to you in the same way your accent is—you don't hear it because it's just how you talk. Other people's accents sound like accents. Yours sounds like normal speech.</p>
+        
+        <h4>🧠 The Psychology</h4>
+        <p>Confirmation bias and motivated reasoning aren't character flaws—they're how brains work. Evolution shaped us to be tribal and to defend our beliefs, not to be neutral truth-seekers. Knowing this is the first step to working around it.</p>
+        
+        <h4>⚠️ Watch Out For</h4>
+        <p>"I don't have a worldview, I just see things as they are." This is the surest sign that someone hasn't examined their worldview. Everyone has one. Claiming not to is like claiming not to have an accent.</p>
+        
+        <div class="essay-ref">
+            <strong>📖 Want More?</strong><br>
+            See Section IV: "How Worldviews Shape Moral Perception and Judgment" for Haidt's research on moral intuitions and cognitive bias research.
+        </div>
+    </div>
+
+    <div id="buddy-critical-thinking" class="study-buddy">
+        <span class="study-buddy-close" onclick="closeBuddy('buddy-critical-thinking')">&times;</span>
+        <h3>📚 Study Buddy Notes</h3>
+        
+        <h4>💡 What Critical Thinking ISN'T</h4>
+        <p>It's not being negative, skeptical about everything, or "poking holes" in things. That's just being annoying. Real critical thinking is constructive—it's about thinking <em>better</em>, not just thinking critically.</p>
+        
+        <h4>🎯 The Core Question</h4>
+        <p>Strip away all the academic jargon and critical thinking is just asking: "How do I know this is true?" and "What would change my mind?" If you can't answer those questions about your beliefs, you're not thinking critically about them.</p>
+        
+        <h4>🔑 Skills + Dispositions</h4>
+        <p>You can <em>know how</em> to think critically and still not do it. That's why dispositions matter as much as skills. Intellectual humility, courage, and empathy are habits you practice, not just concepts you learn.</p>
+        
+        <div class="essay-ref">
+            <strong>📖 Want More?</strong><br>
+            See Section V: "Critical Thinking: Tools for Examining Our Own Assumptions" for the Paul-Elder framework and Ennis's definitions.
+        </div>
+    </div>
+
+    <div id="buddy-elephant" class="study-buddy">
+        <span class="study-buddy-close" onclick="closeBuddy('buddy-elephant')">&times;</span>
+        <h3>📚 Study Buddy Notes</h3>
+        
+        <h4>💡 Why This Metaphor Matters</h4>
+        <p>The elephant/rider image explains something frustrating: why smart people believe things that seem obviously wrong to you. They're not stupid—their elephants were trained differently. If you want to understand (or change) beliefs, you have to understand elephants.</p>
+        
+        <h4>🎯 For Your Own Thinking</h4>
+        <p>When you have a strong reaction to an ethical claim ("That's obviously wrong!"), pause. That's your elephant talking. Ask yourself: Where did this intuition come from? What shaped my elephant? Is my rider just rationalizing what the elephant already decided?</p>
+        
+        <h4>⚠️ The Humbling Part</h4>
+        <p>You probably think you're the exception—that YOUR beliefs come from careful reasoning, even if other people's don't. Research says: probably not. We're all riding elephants. The question is whether we're honest about it.</p>
+        
+        <div class="essay-ref">
+            <strong>📖 Want More?</strong><br>
+            See Section IV and Haidt's book <em>The Righteous Mind</em> for full development of moral foundations theory and the social intuitionist model.
+        </div>
+    </div>
+
+    <div id="buddy-strong-weak" class="study-buddy">
+        <span class="study-buddy-close" onclick="closeBuddy('buddy-strong-weak')">&times;</span>
+        <h3>📚 Study Buddy Notes</h3>
+        
+        <h4>💡 The Lawyer vs. The Scientist</h4>
+        <p>Weak-sense critical thinking is like being a lawyer: you pick a side first, then find the best arguments for it. Strong-sense is like being a scientist: you follow evidence wherever it leads, even if you don't like the destination.</p>
+        
+        <h4>🎯 Self-Check</h4>
+        <p>Ask yourself: "Do I apply the same scrutiny to arguments I <em>agree</em> with as arguments I <em>disagree</em> with?" If you're honest, the answer is probably no. That's normal—and that's the problem strong-sense critical thinking addresses.</p>
+        
+        <h4>🔑 Why It's Hard</h4>
+        <p>Strong-sense critical thinking requires intellectual courage because you might discover you're wrong. Most people would rather feel right than be right. Choosing truth over comfort is a discipline.</p>
+        
+        <div class="essay-ref">
+            <strong>📖 Want More?</strong><br>
+            See Section V and Richard Paul's original 1982 paper "Teaching Critical Thinking in the 'Strong' Sense."
+        </div>
+    </div>
+
+    <div id="buddy-ethics" class="study-buddy">
+        <span class="study-buddy-close" onclick="closeBuddy('buddy-ethics')">&times;</span>
+        <h3>📚 Study Buddy Notes</h3>
+        
+        <h4>💡 Theories as Worldview Maps</h4>
+        <p>Each ethical theory we'll study this semester isn't just a set of rules—it's a whole way of seeing the moral world. They disagree about what questions to ask, what counts as relevant, and what good reasoning looks like.</p>
+        
+        <h4>🎯 Don't Rush to Pick One</h4>
+        <p>Students sometimes want to "figure out which theory is right" in week two. Slow down. First understand what each theory is actually claiming and what worldview assumptions it makes. Evaluation comes after understanding.</p>
+        
+        <h4>🤔 Try This</h4>
+        <p>When we cover each theory, ask: "What would someone have to already believe for this theory to seem obviously correct?" That tells you about the worldview assumptions built into it.</p>
+        
+        <div class="essay-ref">
+            <strong>📖 Want More?</strong><br>
+            See Section VI: "The Relationship Between Worldview and Moral Theory" for detailed analysis of how worldviews and ethical theories connect.
+        </div>
+    </div>
+
+    <div id="buddy-religious" class="study-buddy">
+        <span class="study-buddy-close" onclick="closeBuddy('buddy-religious')">&times;</span>
+        <h3>📚 Study Buddy Notes</h3>
+        
+        <h4>💡 Why This Section Exists</h4>
+        <p>Some philosophy classes treat religious worldviews as historical curiosities rather than live options. This class won't do that. Many of you hold religious beliefs, and many of the world's most careful moral thinkers have been religious. That deserves engagement, not dismissal.</p>
+        
+        <h4>🎯 For Religious Students</h4>
+        <p>You don't need to check your faith at the door. But you do need to be able to explain your reasoning in ways others can engage with, and to genuinely consider critiques. Strong-sense critical thinking applies to everyone.</p>
+        
+        <h4>🎯 For Secular Students</h4>
+        <p>Intellectual empathy means genuinely understanding why thoughtful people hold religious views—not just preparing counterarguments. Can you pass the "ideological Turing test"? Could you explain a religious position well enough that a believer would say "yes, that's what I think"?</p>
+        
+        <div class="essay-ref">
+            <strong>📖 Want More?</strong><br>
+            See Section VII: "The Case for Taking Religious Worldviews Seriously in Ethics" for the full argument, including Mavrodes on moral realism and Plantinga's Reformed epistemology.
+        </div>
+    </div>
+
+    <div id="buddy-practical" class="study-buddy">
+        <span class="study-buddy-close" onclick="closeBuddy('buddy-practical')">&times;</span>
+        <h3>📚 Study Buddy Notes</h3>
+        
+        <h4>💡 Actually Use These</h4>
+        <p>These six skills aren't just for the exam—they're for your actual life. Try them in your next disagreement with someone. Try them on your own beliefs. The point isn't to win arguments; it's to understand better.</p>
+        
+        <h4>🎯 Start Small</h4>
+        <p>You don't have to deconstruct your entire worldview this week. Start with one belief you feel strongly about and ask: "What are the assumptions behind this? What would count as evidence against it? What would a thoughtful person who disagrees with me say?"</p>
+        
+        <h4>⚠️ Don't Forget the Elephant</h4>
+        <p>Pure logic rarely changes minds—yours or anyone else's. Understanding where intuitions come from (the elephant) matters as much as evaluating arguments (the rider). Good ethical reasoning engages both.</p>
+        
+        <div class="essay-ref">
+            <strong>📖 Want More?</strong><br>
+            See Section VIII: "Applying Critical Thinking to Worldview Examination: A Framework" for the full six-step method with detailed explanations.
+        </div>
+    </div>
+
+    <div class="reveal">
+        <div class="slides">
+            <!-- TITLE SLIDE -->
+            <section class="title-slide">
+                <div class="study-badge">📖 STUDY BUDDY EDITION</div>
+                <h1>Worldview &amp; Critical Thinking</h1>
+                <p class="subtitle">The Foundation of Ethical Reasoning</p>
+                
+                <div class="keyboard-menu" style="max-width: 600px;">
+                    <h4>⌨️ How to Use This Deck</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5em 2em;">
+                        <div class="shortcut-row">
+                            <span>Open Study Buddy notes</span>
+                            <span class="key-badge">B</span>
+                        </div>
+                        <div class="shortcut-row">
+                            <span>Navigate slides</span>
+                            <span class="key-badge">← → ↑ ↓</span>
+                        </div>
+                        <div class="shortcut-row">
+                            <span>Overview mode</span>
+                            <span class="key-badge">O</span>
+                        </div>
+                        <div class="shortcut-row">
+                            <span>Fullscreen</span>
+                            <span class="key-badge">F</span>
+                        </div>
+                        <div class="shortcut-row">
+                            <span>Close popups</span>
+                            <span class="key-badge">ESC</span>
+                        </div>
+                        <div class="shortcut-row">
+                            <span>Click <span class="term-trigger" style="font-size: 1em;">purple terms</span></span>
+                            <span style="color: var(--opera-mauve);">= definitions</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 1: WHY START HERE -->
+            <section>
+                <section class="section-header">
+                    <p class="section-num">PART I</p>
+                    <h2>Why Start Here?</h2>
+                    <p style="color: var(--opera-mauve);">Before we can think about ethics, we need to understand how we think</p>
+                </section>
+
+                <section data-buddy="buddy-intro">
+                    <h2>The Invisible Framework</h2>
+                    <p>Human beings don't meet the world raw.</p>
+                    <p>We meet it already <em>filtered</em>.</p>
+                    <p style="margin-top: 1.5em;">Every opinion, every ethical instinct, every "that seems right" or "that seems wrong" sits inside a larger mental framework.</p>
+                    <p style="margin-top: 1em;">Philosophers call this a <span class="term-trigger" onclick="openTerm('worldview-popup')">worldview</span>.</p>
+                </section>
+
+               <section data-buddy="buddy-intro" style="font-size: 0.85em;">
+                    <h2>Fish Describing Water</h2>
+                    
+                    <img src="images/goldfish.webp" alt="Goldfish in bowl pondering water" style="max-width: 500px; border-radius: 12px;">
+                    
+                    <p style="margin-top: 1em;"><span class="term-trigger" onclick="openTerm('critical-thinking-popup')">Critical thinking</span> becomes possible only when you become aware that a worldview is operating.</p>
+                    <p>Otherwise we're like fish trying to describe water.</p>
+                </section>
+
+                <section data-buddy="buddy-intro">
+                    <h2>Today's Three Questions</h2>
+                    <ul>
+                        <li><strong>What is a worldview?</strong> And why it's not just intellectual, but rooted in the <em>heart</em></li>
+                        <li><strong>What is critical thinking?</strong> And why it requires <em>examining</em> your worldview, not just inhabiting it</li>
+                        <li><strong>Why does this matter for ethics?</strong> Why we can't skip this step if we want to think seriously about right and wrong</li>
+                    </ul>
+                    
+                    <div class="self-check">
+                        <h4>🤔 Self-Check</h4>
+                        <p>Before moving on: Can you think of a belief you hold that you've never really questioned—something that just seems "obviously true"? Hold that in mind as we continue.</p>
+                    </div>
+                </section>
+            </section>
+
+            <!-- SECTION 2: WHAT IS A WORLDVIEW? -->
+            <section>
+                <section class="section-header">
+                    <p class="section-num">PART II</p>
+                    <h2>What Is a Worldview?</h2>
+                    <p style="color: var(--opera-mauve);">The operating system of your mind</p>
+                </section>
+
+                <section data-buddy="buddy-worldview">
+                    <h2>The Operating System Analogy</h2>
+                    <p>Think of a worldview as the <strong>operating system</strong> of your mind.</p>
+                    <ul>
+                        <li>It boots up automatically when you wake</li>
+                        <li>It runs silently in the background</li>
+                        <li>It determines how you process <em>everything</em></li>
+                    </ul>
+                    <p style="margin-top: 1em; color: var(--opera-mauve);">The German word is <em>Weltanschauung</em>—a concept with roots in Kant's philosophy.</p>
+                    <p>But you don't need to know that history to feel its effects. <strong>You already have one.</strong></p>
+                </section>
+
+                <section data-buddy="buddy-worldview">
+                    <h2>Questions Every Worldview Answers</h2>
+                    <p style="font-size: 0.95em; margin-bottom: 1em;">Often subconsciously...</p>
+                    <ul style="font-size: 0.9em;">
+                        <li><strong>What is real?</strong> Is there a God? Is the universe just matter and energy?</li>
+                        <li><strong>What counts as evidence?</strong> Senses? Reason? Scripture? Tradition? Your gut?</li>
+                        <li><strong>What is a human being?</strong> A soul in flesh? A biological machine? Something else?</li>
+                        <li><strong>What gives life meaning?</strong> Achievement? Relationships? Service? Nothing inherent?</li>
+                        <li><strong>What is the source of right and wrong?</strong> Divine command? Human reason? Social agreement?</li>
+                    </ul>
+                    <p style="margin-top: 0.8em;">Your answers—whether chosen or absorbed—<strong>shape how you see everything.</strong></p>
+                </section>
+
+                <section data-buddy="buddy-worldview">
+                    <h2>The Heart Dimension</h2>
+                    <p>Here's something crucial that's easy to miss:</p>
+                    <p style="margin-top: 1em;">A worldview isn't just intellectual.<br>It's rooted in what philosophers call <strong>"the heart"</strong>—your fundamental orientation, your deepest commitments.</p>
+                    
+                    <div class="philosopher-quote">
+                        "A worldview is a commitment, a fundamental orientation of the heart, that can be expressed as a story or in a set of presuppositions... about the basic constitution of reality, and that provides the foundation on which we live and move and have our being."
+                        <div class="quote-attribution">— James Sire, <em>The Universe Next Door</em></div>
+                    </div>
+                </section>
+
+                <section data-buddy="buddy-worldview">
+                    <h2>Why Worldviews Feel Personal</h2>
+                    
+                    <div class="philosopher-quote">
+                        "The mystery of a Weltanschauung is the mystery of a heart."
+                        <div class="quote-attribution">— David Naugle, <em>Worldview: The History of a Concept</em></div>
+                    </div>
+                    
+                    <p style="margin-top: 1.5em;">Notice that word in Sire's definition: <strong>commitment</strong>.</p>
+                    <p>A worldview isn't just something you <em>think</em>; it's something you're <em>invested in</em>.</p>
+                    <p style="margin-top: 1em; color: var(--spicy-mustard);">This is why challenging someone's worldview feels personal. You're not just questioning an idea—you're touching something closer to their <strong>identity</strong>.</p>
+                </section>
+
+                <section data-buddy="buddy-worldview">
+                    <h2>Where Worldviews Come From</h2>
+                    <p>Students often assume they don't have a worldview because they've never written one down.</p>
+                    <p style="color: var(--desert-flower); margin: 1em 0;">But that's like assuming you have no accent because you don't hear yourself speak.</p>
+                    
+                    <p>A worldview is built from:</p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5em; font-size: 0.9em; margin-top: 0.8em;">
+                        <span>▸ Early childhood assumptions</span>
+                        <span>▸ Cultural stories</span>
+                        <span>▸ Religious or secular upbringing</span>
+                        <span>▸ Historical narratives</span>
+                        <span>▸ Political messaging</span>
+                        <span>▸ Personal experiences</span>
+                        <span>▸ Media habits</span>
+                        <span>▸ Countless absorbed ideas</span>
+                    </div>
+                    <p style="margin-top: 1em; font-weight: bold;">Most of it is inherited, not chosen.</p>
+                </section>
+
+                <section data-buddy="buddy-worldview">
+                    <h2>Example: Two People, Two Worldviews</h2>
+                    <div class="comparison-grid">
+                        <div class="compare-box">
+                            <h4 style="color: var(--blue-curacao);">Person A</h4>
+                            <p style="font-size: 0.85em;">Raised where moral truth is tightly linked to religious authority. "Right and wrong" are woven into sacred text and traditions.</p>
+                        </div>
+                        <div class="compare-box alt">
+                            <h4 style="color: var(--cattleya-orchid);">Person B</h4>
+                            <p style="font-size: 0.85em;">Raised in a secular household shaped by Enlightenment rationalism. Moral truth = whatever can be justified through reasoning about human well-being.</p>
+                        </div>
+                    </div>
+                    <p style="margin-top: 1.5em;">Both have worldviews. Neither is neutral.</p>
+                    <p><strong>Each thinks their view is "just common sense."</strong></p>
+                    <p style="color: var(--spicy-mustard); margin-top: 1em;">That's the power <em>and</em> the danger. Worldviews feel natural. They feel inevitable. But they're neither.</p>
+                </section>
+
+               <section data-buddy="buddy-flashlight">
+    <h2>The Flashlight Analogy</h2>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em; align-items: center;">
+        <img src="images/flashlight.webp" alt="Person with flashlight in dark room" style="max-width: 100%; border-radius: 12px;">
+        
+        <div style="text-align: left;">
+            <p>Walk into a dark room and pick up a flashlight.</p>
+            <p>The beam illuminates only a <em>slice</em> of the space.</p>
+            <p style="margin-top: 1em;">Everything outside that beam still exists, but <strong>your worldview determines what gets lit up and what stays invisible</strong>.</p>
+            <p style="color: var(--blue-curacao); margin-top: 1em;">Critical thinking is the ability to <strong>rotate the beam</strong>.</p>
+        </div>
+    </div>
+</section>
+
+                <section data-buddy="buddy-flashlight">
+                    <h2>The Self-Protection Instinct</h2>
+                    <p>Here's the catch: your worldview has a <strong>self-protection instinct</strong>.</p>
+                    <p>It <em>resists</em> information that threatens it.</p>
+                    
+                    <div class="key-concept" style="margin-top: 1.5em;">
+                        <h4><span class="term-trigger" onclick="openTerm('confirmation-bias-popup')">Confirmation Bias</span></h4>
+                        <p>We prefer evidence that fits what we already believe.</p>
+                        
+                        <h4 style="margin-top: 1em;"><span class="term-trigger" onclick="openTerm('motivated-reasoning-popup')">Motivated Reasoning</span></h4>
+                        <p>We evaluate arguments based on whether we <em>want</em> the conclusion to be true.</p>
+                    </div>
+                </section>
+
+              <section data-buddy="buddy-flashlight">
+    <h2>The Research</h2>
+    
+    <div class="philosopher-quote">
+        "People access, construct, and evaluate arguments and data in a biased way, in order to arrive at a preferred conclusion."
+        <div class="quote-attribution">— Ziva Kunda, psychologist</div>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em; margin-top: 1.5em; text-align: left;">
+        <div>
+            <p>Humans do this:</p>
+            <ul>
+                <li>Effortlessly</li>
+                <li>Automatically</li>
+                <li>With absolute confidence that they're being objective</li>
+            </ul>
+        </div>
+        
+        <div>
+            <p style="color: var(--opera-mauve);">You're not wrong for having a worldview. You'd be unusual if you didn't.</p>
+            <p><strong>The challenge is learning to see it clearly.</strong></p>
+        </div>
+    </div>
+</section>
+				<section data-buddy="buddy-flashlight">
+    <h2>🤔 Self-Check</h2>
+    
+    <div class="self-check" style="max-width: 700px; margin: 2em auto;">
+        <p style="font-size: 1.1em;">Think of an issue you feel strongly about.</p>
+        <p style="font-size: 1.1em; margin-top: 1em;">Can you identify information you might be filtering out because it doesn't fit your view?</p>
+    </div>
+</section>
+            </section>
+
+            <!-- SECTION 3: WHAT IS CRITICAL THINKING? -->
+            <section>
+                <section class="section-header">
+                    <p class="section-num">PART III</p>
+                    <h2>What Is Critical Thinking?</h2>
+                    <p style="color: var(--opera-mauve);">Not being negative—being careful</p>
+                </section>
+
+                <section data-buddy="buddy-critical-thinking">
+                    <h2>What Critical Thinking Is NOT</h2>
+                    <ul>
+                        <li>❌ Being negative</li>
+                        <li>❌ Doubting everything</li>
+                        <li>❌ "Poking holes" in arguments</li>
+                        <li>❌ Being a contrarian</li>
+                    </ul>
+                    <p style="margin-top: 1.5em; color: var(--blue-curacao);">✓ It IS a disciplined process of evaluating claims based on <strong>reason and evidence</strong>.</p>
+                </section>
+
+                <section data-buddy="buddy-critical-thinking">
+                    <h2>Definitions from the Experts</h2>
+                    
+                    <div class="philosopher-quote">
+                        "Reasonable and reflective thinking that is focused on deciding what to believe or do."
+                        <div class="quote-attribution">— Robert Ennis, pioneer in critical thinking education</div>
+                    </div>
+                    
+                    <div class="philosopher-quote" style="margin-top: 1.5em;">
+                        "That mode of thinking... in which the thinker improves the quality of his or her thinking by skillfully taking charge of the structures inherent in thinking and imposing intellectual standards upon them."
+                        <div class="quote-attribution">— Richard Paul &amp; Linda Elder</div>
+                    </div>
+                    
+                    <p style="margin-top: 1.5em; font-size: 1.1em; color: var(--spicy-mustard);">Strip away the academic language and it's essentially:<br><strong>"How do I know this is true?"</strong></p>
+                </section>
+
+                <section data-buddy="buddy-critical-thinking">
+                    <h2>Three Pillars of Critical Thinking</h2>
+                    
+                    <div class="key-concept">
+                        <h4>1. Clarifying the Claim</h4>
+                        <p style="font-size: 0.75em;">"What exactly are you saying?" Distinguishing conclusions from arguments, value judgments from factual claims.</p>
+                    </div>
+                    
+                    <div class="key-concept">
+                        <h4>2. Examining the Reasons</h4>
+                        <p style="font-size: 0.75em;">Are the reasons relevant? Are they true? Do they actually support the conclusion?</p>
+                    </div>
+                    
+                    <div class="key-concept">
+                        <h4>3. Considering Alternatives</h4>
+                        <p style="font-size: 0.75em;">Your first interpretation might not be the only possible one. This is what distinguishes <em>analysis</em> from <em>dogma</em>.</p>
+                    </div>
+                </section>
+
+                <section data-buddy="buddy-critical-thinking">
+                    <h2>Skills AND Dispositions</h2>
+                    <p>Critical thinking involves both <strong>skills</strong> and <strong>dispositions</strong>.</p>
+                    <p style="color: var(--opera-mauve);">Skills without the right dispositions are useless.</p>
+                    
+                    <div class="comparison-grid" style="margin-top: 1.5em;">
+                        <div class="compare-box">
+                            <h4 style="color: var(--blue-curacao);">Skills</h4>
+                            <p style="font-size: 0.85em;">Analysis, evaluation, inference, explanation, self-regulation</p>
+                        </div>
+                        <div class="compare-box alt">
+                            <h4 style="color: var(--cattleya-orchid);">Dispositions</h4>
+                            <p style="font-size: 0.85em;">Open-mindedness, humility, courage, perseverance, fair-mindedness</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section data-buddy="buddy-critical-thinking">
+                    <h2>The Dispositions That Matter Most</h2>
+                    <ul>
+                        <li><span class="term-trigger" onclick="openTerm('intellectual-humility-popup')">Intellectual Humility</span> — Recognizing the limits of your knowledge; accepting you might be wrong</li>
+                        <li><span class="term-trigger" onclick="openTerm('intellectual-courage-popup')">Intellectual Courage</span> — Willingness to consider uncomfortable challenges to your beliefs</li>
+                        <li><span class="term-trigger" onclick="openTerm('intellectual-empathy-popup')">Intellectual Empathy</span> — Ability to enter imaginatively into perspectives different from your own</li>
+                        <li><strong>Fair-mindedness</strong> — Giving serious consideration to alternatives rather than dismissing them reflexively</li>
+                    </ul>
+                    
+                    <p style="margin-top: 1.5em; color: var(--spicy-mustard); font-size: 1.1em;"><strong>Critical thinking is humility in action.</strong></p>
+                </section>
+            </section>
+
+            <!-- SECTION 4: HOW THEY INTERACT -->
+            <section>
+                <section class="section-header">
+                    <p class="section-num">PART IV</p>
+                    <h2>How Worldview &amp; Critical Thinking Interact</h2>
+                    <p style="color: var(--opera-mauve);">Bringing the two threads together</p>
+                </section>
+
+                <section data-buddy="buddy-elephant">
+                    <h2>The Elephant and the Rider</h2>
+                    <p>Psychologist Jonathan Haidt offers a powerful metaphor for why worldview examination is so difficult:</p>
+                    
+                    <img src="images/elephant_rider.webp" alt="Elephant and rider metaphor" style="max-width: 500px; border-radius: 12px;">
+                </section>
+
+                <section data-buddy="buddy-elephant">
+                    <h2>Understanding the Metaphor</h2>
+                    
+                    <div class="comparison-grid">
+                        <div class="compare-box">
+                            <h4 style="color: var(--blue-curacao);">🐘 The Elephant</h4>
+                            <p style="font-size: 0.9em;">Your automatic processes—intuitions, emotions, gut reactions, quick judgments that arise <em>before</em> conscious thought</p>
+                        </div>
+                        <div class="compare-box alt">
+                            <h4 style="color: var(--cattleya-orchid);">🧑 The Rider</h4>
+                            <p style="font-size: 0.9em;">Your conscious reasoning—the part that analyzes, plans, and justifies</p>
+                        </div>
+                    </div>
+                    
+                    <p style="margin-top: 1.5em; font-size: 1.1em;">Here's the uncomfortable truth:</p>
+                    <p style="color: var(--desert-flower); font-size: 1.2em;"><strong>The elephant is far more powerful than the rider.</strong></p>
+                </section>
+
+                <section data-buddy="buddy-elephant">
+                    <h2>The Rider's Real Job</h2>
+                    <p>The elephant usually determines where you go.</p>
+                    <p style="margin-top: 1em;">The rider's job, much of the time, is not to <em>steer</em> but to <strong>explain why the elephant went that direction</strong>—to provide post hoc rationalizations for decisions the elephant already made.</p>
+                    
+                    <div class="key-concept" style="margin-top: 1.5em;">
+                        <h4>Key Insight</h4>
+                        <p><strong>Your worldview shapes the elephant.</strong> It forms those automatic intuitions. When you encounter a moral situation, the elephant reacts instantly—"That's wrong!" or "That seems fine"—and only afterward does the rider construct reasons.</p>
+                    </div>
+                </section>
+
+                <section data-buddy="buddy-elephant">
+                    <h2>Why Smart People Disagree</h2>
+                    <p>Two intelligent people can look at the <em>same</em> ethical issue and reach <em>opposite</em> conclusions.</p>
+                    <p style="margin-top: 1em;">They're not necessarily being irrational.</p>
+                    <p style="margin-top: 1em; color: var(--spicy-mustard); font-size: 1.1em;"><strong>Their elephants were shaped by different worldviews.</strong></p>
+                    
+                    <p style="margin-top: 1.5em;">Critical thinking, then, is partly about training the rider to occasionally redirect the elephant—or at least to <em>honestly examine</em> where the elephant wants to go and <strong>why</strong>.</p>
+                    
+                    <div class="self-check">
+                        <h4>🤔 Self-Check</h4>
+                        <p>Think of a recent moral judgment you made quickly. Can you identify whether your "elephant" reacted first, and your "rider" explained afterward?</p>
+                    </div>
+                </section>
+
+                <section data-buddy="buddy-elephant">
+                    <h2>The House Metaphor</h2>
+                    <p>Imagine a house you've lived in since childhood.</p>
+                    <p>You know the furniture so well you can walk through it <em>in the dark</em>.</p>
+                    <p style="margin-top: 1em;">One day someone asks you to <strong>draw a floor plan</strong>.</p>
+                    <p style="margin-top: 1em;">You suddenly realize you've never looked at the house <em>from above</em>. You've moved through its rooms so automatically that you've never thought about their shape.</p>
+                    <p style="margin-top: 1.5em; color: var(--blue-curacao); font-size: 1.1em;"><strong>Critical thinking is that aerial view.</strong></p>
+                </section>
+
+              <section data-buddy="buddy-elephant">
+    <h2>What Becomes Possible</h2>
+    <p style="font-size: 0.9em;">Once you step outside your worldview—even temporarily, even partially—three things become possible:</p>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5em; margin-top: 1em;">
+        <div class="key-concept">
+            <h4>1. Awareness of Assumptions</h4>
+            <p style="font-size: 0.75em;">Maybe you assume every dispute has one right side. Maybe you assume morality is primarily about preventing harm. Seeing your assumptions lets you loosen their grip.</p>
+        </div>
+        
+        <div class="key-concept">
+            <h4>2. Understanding Other Worldviews</h4>
+            <p style="font-size: 0.75em;">Disagreement doesn't always mean the other person is irrational. Often they're rational—in the framework of a <em>different</em> worldview.</p>
+        </div>
+        
+        <div class="key-concept">
+            <h4>3. Improving Your Own Thinking</h4>
+            <p style="font-size: 0.75em;">A worldview isn't a prison; it's a starting point. Keep what helps you understand reality; revise what doesn't.</p>
+        </div>
+    </div>
+</section>
+
+                <section data-buddy="buddy-strong-weak">
+                    <h2>Strong vs. Weak Sense Critical Thinking</h2>
+                    <p>Richard Paul makes an important distinction:</p>
+                    
+                    <div class="comparison-grid" style="margin-top: 1.5em;">
+                        <div class="compare-box">
+                            <h4 style="color: var(--blue-curacao);"><span class="term-trigger" onclick="openTerm('strong-weak-ct-popup')">Weak Sense</span></h4>
+                            <p style="font-size: 0.85em;">Uses analytical skills <em>selectively</em>—to defend your existing beliefs while failing to apply the same scrutiny to your own assumptions.</p>
+                            <p style="font-size: 0.85em; color: var(--mocha-mousse);">This is the <strong>lawyer's approach</strong>: build the best case for what you already believe.</p>
+                        </div>
+                        <div class="compare-box alt">
+                            <h4 style="color: var(--cattleya-orchid);">Strong Sense</h4>
+                            <p style="font-size: 0.85em;">Applies the same standards <em>even-handedly</em> to all positions—<strong>including your own</strong>.</p>
+                            <p style="font-size: 0.85em; color: var(--mocha-mousse);">This is harder. It requires intellectual courage to discover you might be wrong.</p>
+                        </div>
+                    </div>
+                    
+                    <p style="margin-top: 1.5em; color: var(--spicy-mustard);"><strong>Only strong sense critical thinking is adequate for genuine worldview examination.</strong></p>
+                </section>
+            </section>
+
+            <!-- SECTION 5: WHY THIS MATTERS FOR ETHICS -->
+            <section>
+                <section class="section-header">
+                    <p class="section-num">PART V</p>
+                    <h2>Why This Matters for Ethics</h2>
+                    <p style="color: var(--opera-mauve);">Arguments don't float in a vacuum</p>
+                </section>
+
+                <section data-buddy="buddy-ethics">
+                    <h2>Ethics Sits on Worldview</h2>
+                    <p>Ethics is a discipline built on <strong>arguments</strong>.</p>
+                    <p>But arguments don't float in a vacuum.</p>
+                    <p style="margin-top: 1em;">They grow out of deeper <strong>worldview assumptions</strong>.</p>
+                    
+                    <div class="key-concept" style="margin-top: 1.5em;">
+                        <h4>Example: "Is morality universal or relative?"</h4>
+                        <p style="font-size: 0.9em;">This isn't just a logical puzzle. It's tied to worldview commitments about human nature, culture, reason, and authority.</p>
+                    </div>
+                    
+                    <p style="margin-top: 1.5em;">Students often try to jump into ethical disputes without understanding these deeper layers.</p>
+                    <p style="color: var(--desert-flower);">It's like trying to repair a building without checking the foundation.</p>
+                </section>
+
+                <section data-buddy="buddy-ethics">
+                    <h2>Ethical Theories as Worldview Maps</h2>
+                    <p>The ethical theories we'll study this semester are essentially attempts to build clear, systematic worldviews about what matters morally.</p>
+                    <p style="margin-top: 1em; color: var(--opera-mauve);">Each one makes certain <strong>worldview assumptions</strong>.</p>
+                </section>
+
+                <section data-buddy="buddy-ethics">
+                    <h2><span class="term-trigger" onclick="openTerm('consequentialism-popup')">Consequentialism</span></h2>
+                    <p style="font-size: 0.95em;">Including utilitarianism</p>
+                    
+                    <div class="key-concept">
+                        <h4>Key Question</h4>
+                        <p>"What produces the best overall consequences?"</p>
+                        
+                        <h4 style="margin-top: 1em;">Worldview Assumptions</h4>
+                        <ul style="font-size: 0.9em;">
+                            <li>Human well-being <em>can</em> be compared and aggregated</li>
+                            <li>Consequences determine rightness</li>
+                            <li>Impartiality is morally required</li>
+                        </ul>
+                    </div>
+                    <p style="margin-top: 1em; color: var(--mocha-mousse);">These aren't self-evident truths; they're <strong>worldview commitments</strong>.</p>
+                </section>
+
+                <section data-buddy="buddy-ethics">
+                    <h2><span class="term-trigger" onclick="openTerm('deontology-popup')">Deontology</span></h2>
+                    <p style="font-size: 0.95em;">Kantian ethics</p>
+                    
+                    <div class="key-concept">
+                        <h4>Key Question</h4>
+                        <p>"Am I treating people as ends in themselves, never merely as means?"</p>
+                        
+                        <h4 style="margin-top: 1em;">Worldview Assumptions</h4>
+                        <ul style="font-size: 0.9em;">
+                            <li>Human rationality is the basis of dignity</li>
+                            <li>Duty comes before desire</li>
+                            <li>Moral constraints can be identified through reason</li>
+                        </ul>
+                    </div>
+                    <p style="margin-top: 1em; color: var(--mocha-mousse);">Again—worldview commitments, not obvious facts.</p>
+                </section>
+
+                <section data-buddy="buddy-ethics">
+                    <h2><span class="term-trigger" onclick="openTerm('virtue-ethics-popup')">Virtue Ethics</span></h2>
+                    <p style="font-size: 0.95em;">Aristotelian tradition</p>
+                    
+                    <div class="key-concept">
+                        <h4>Key Question</h4>
+                        <p>"What would a person of good character do?"</p>
+                        
+                        <h4 style="margin-top: 1em;">Worldview Assumptions</h4>
+                        <ul style="font-size: 0.9em;">
+                            <li>Human beings have a natural purpose or <span class="term-trigger" onclick="openTerm('telos-popup')">telos</span></li>
+                            <li>Certain character traits constitute excellence in fulfilling that purpose</li>
+                            <li>Such excellence is achievable through practice and habituation</li>
+                        </ul>
+                    </div>
+                    <p style="margin-top: 1em; color: var(--mocha-mousse);">If you don't believe humans have a built-in purpose, Aristotelian virtue ethics will seem unmotivated.</p>
+                </section>
+
+                <section data-buddy="buddy-ethics">
+                    <h2>The Takeaway</h2>
+                    
+                    <img src="images/maps.webp" alt="Three different maps of same territory" style="max-width: 450px; border-radius: 12px;">
+                    
+                    <p style="margin-top: 1em;">These theories aren't just rule books—they're <strong>worldview maps</strong>.</p>
+                    <p>Understanding this will help you engage with them more honestly.</p>
+                </section>
+
+                <section data-buddy="buddy-religious">
+                    <h2>A Note on Religious Worldviews</h2>
+                    <p>Let me say something directly:</p>
+                    <p style="margin-top: 1em; color: var(--spicy-mustard); font-size: 1.1em;"><strong>This class will take religious worldviews seriously</strong> as genuine intellectual positions—not as relics to be studied from a distance or dismissed as pre-scientific.</p>
+                </section>
+
+                <section data-buddy="buddy-religious">
+                    <h2>Why Take Religious Worldviews Seriously?</h2>
+                    <ul>
+                        <li><strong>History:</strong> Religious worldviews have been the primary vehicles for moral reflection throughout most of human history. Judaism, Christianity, Islam, Hinduism, Buddhism, Confucianism—millennia of careful thinking.</li>
+                        <li style="margin-top: 0.8em;"><strong>Your classmates:</strong> Many of you hold religious worldviews. A good teacher engages what you actually believe.</li>
+                        <li style="margin-top: 0.8em;"><strong>Open questions:</strong> Some of the deepest questions in ethics—about moral grounding, human dignity, whether moral facts exist—remain genuinely contested in ways that don't clearly favor secular over religious answers.</li>
+                    </ul>
+                </section>
+
+                <section data-buddy="buddy-religious">
+                    <h2>The Point</h2>
+                    
+                    <div class="philosopher-quote">
+                        "Robust moral realism actually makes better sense within a theistic worldview than a naturalistic one."
+                        <div class="quote-attribution">— George Mavrodes, philosopher</div>
+                    </div>
+                    
+                    <p style="margin-top: 1.5em;">This doesn't mean religious worldviews are <em>true</em>.</p>
+                    <p style="margin-top: 0.5em;">It means they deserve <strong>engagement rather than dismissal</strong>.</p>
+                    <p style="margin-top: 1em;">The critical thinking dispositions—intellectual humility, empathy, fair-mindedness—require that we give serious consideration to perspectives different from our own.</p>
+                    <p style="color: var(--opera-mauve); margin-top: 1em;">Including religious perspectives when we are secular, and secular perspectives when we are religious.</p>
+                </section>
+            </section>
+
+            <!-- SECTION 6: PRACTICAL SKILLS -->
+            <section>
+                <section class="section-header">
+                    <p class="section-num">PART VI</p>
+                    <h2>Practical Skills</h2>
+                    <p style="color: var(--opera-mauve);">Tools you can start using today</p>
+                </section>
+
+                <section data-buddy="buddy-practical">
+                    <h2>Six Skills for Any Ethical Question</h2>
+                    <p>Before we close, here are practical tools you can bring to <em>any</em> ethical question:</p>
+                </section>
+
+                <section data-buddy="buddy-practical">
+                    <h2>1. Identify the Worldview Assumptions</h2>
+                    <p>Ask: <strong>What does this argument assume</strong> about people, truth, authority, or morality?</p>
+                    <p style="margin-top: 1em;">What does it assume about <span class="term-trigger" onclick="openTerm('epistemology-popup')">what counts as evidence</span>?</p>
+                    
+                    <div class="key-concept" style="margin-top: 1.5em;">
+                        <h4>Example</h4>
+                        <p style="font-size: 0.9em;">"If I say 'Scripture tells us X is wrong' and you don't accept Scripture as authoritative, we're not just disagreeing about X—we're operating from <strong>different epistemologies</strong> within our worldviews."</p>
+                    </div>
+                </section>
+
+                <section data-buddy="buddy-practical">
+                    <h2>2. Slow the Reasoning Down</h2>
+                    <p>Break the argument into steps:</p>
+                    <ul>
+                        <li>What is the <strong>conclusion</strong>?</li>
+                        <li>What are the <strong>reasons</strong>?</li>
+                        <li>Are the reasons actually <strong>connected</strong> to the conclusion?</li>
+                    </ul>
+                    <p style="margin-top: 1em; color: var(--opera-mauve);">Much ethical confusion comes from not knowing precisely what someone is claiming.</p>
+                </section>
+
+                <section data-buddy="buddy-practical">
+                    <h2>3. Check for Internal Consistency</h2>
+                    <p>Do your beliefs <strong>fit together</strong>?</p>
+                    
+                    <div class="key-concept" style="margin-top: 1.5em;">
+                        <h4>Example</h4>
+                        <p style="font-size: 0.9em;">You might believe humans are "just animals" <em>and</em> that humans have unique dignity. Those may be in tension.</p>
+                    </div>
+                    
+                    <p style="margin-top: 1.5em;">Internal consistency checking is crucial for worldview examination.</p>
+                </section>
+
+                <section data-buddy="buddy-practical">
+                    <h2>4. Consider Reasonable Alternatives</h2>
+                    <p>If only <em>one</em> explanation seems possible, the flashlight beam is probably too narrow.</p>
+                    <p style="margin-top: 1em; color: var(--blue-curacao);">Ask: <strong>What would someone with a different worldview say?</strong></p>
+                    <p style="margin-top: 1em;">This is where intellectual empathy becomes essential.</p>
+                </section>
+
+                <section data-buddy="buddy-practical">
+                    <h2>5. Be Willing to Revise</h2>
+                    <p>Thinking is <strong>not</strong> a courtroom where you must defend every belief to the death.</p>
+                    <p style="margin-top: 1em; color: var(--spicy-mustard); font-size: 1.1em;"><strong>Revision is evidence of growth, not failure.</strong></p>
+                    <p style="margin-top: 1em;">This requires intellectual humility and courage.</p>
+                </section>
+
+                <section data-buddy="buddy-practical">
+                    <h2>6. Talk to the Elephant, Not Just the Rider</h2>
+                    <p>Remember <span class="term-trigger" onclick="openTerm('elephant-rider-popup')">Haidt's insight</span>:</p>
+                    <p style="margin-top: 1em;">If you want to genuinely understand someone—or change their mind, or your own—you can't just argue with their reasoning.</p>
+                    <p style="color: var(--desert-flower); margin-top: 1em;"><strong>You have to understand what their intuitions are and where those intuitions came from.</strong></p>
+                    
+                    <div class="philosopher-quote" style="margin-top: 1.5em;">
+                        "If you ask people to believe something that violates their intuitions, they will devote their efforts to finding an escape hatch."
+                        <div class="quote-attribution">— Jonathan Haidt</div>
+                    </div>
+                </section>
+
+                <section data-buddy="buddy-practical">
+                    <h2>Summary: The Six Skills</h2>
+                    <ol style="font-size: 0.9em;">
+                        <li>Identify worldview assumptions (including epistemology)</li>
+                        <li>Slow the reasoning down</li>
+                        <li>Check for internal consistency</li>
+                        <li>Consider reasonable alternatives</li>
+                        <li>Be willing to revise</li>
+                        <li>Talk to the elephant, not just the rider</li>
+                    </ol>
+                    
+                    <div class="self-check" style="margin-top: 1.5em;">
+                        <h4>🤔 Self-Check</h4>
+                        <p>Pick a controversial ethical issue. Can you apply all six skills to your own position on that issue? What do you discover?</p>
+                    </div>
+                </section>
+            </section>
+
+            <!-- CLOSING -->
+            <section>
+                <section class="section-header">
+                    <p class="section-num">CLOSING</p>
+                    <h2>Putting It Together</h2>
+                </section>
+
+                <section>
+                    <h2>The Foundation</h2>
+                    <p>A <strong>worldview</strong> gives structure to your moral intuitions.</p>
+                    <p><strong>Critical thinking</strong> gives you the tools to examine that structure.</p>
+                    <p style="margin-top: 1.5em; color: var(--spicy-mustard); font-size: 1.2em;"><strong>Ethics is what happens when those two capacities work together.</strong></p>
+                </section>
+
+                <section>
+                    <h2>What We're Here to Learn</h2>
+                    <p>This course is not about memorizing theories—though you'll learn them.</p>
+                    <p style="margin-top: 1em;">It's about learning to <strong>see more clearly</strong>—yourself, others, and the world you share.</p>
+                    
+                    <div class="philosopher-quote" style="margin-top: 1.5em;">
+                        "The unexamined life is not worth living."
+                        <div class="quote-attribution">— Socrates</div>
+                    </div>
+                    
+                    <p style="margin-top: 1.5em;">That sounds harsh, but his point was <em>liberating</em>:</p>
+                    <p style="color: var(--blue-curacao);">The more aware you are of your worldview, the more <strong>freedom</strong> you have to think, rather than merely react.</p>
+                    <p>And the more skillfully you think, the more <strong>responsibly</strong> you can act.</p>
+                </section>
+
+                <section>
+                    <h2>Final Self-Check</h2>
+                    
+                    <div class="self-check">
+                        <h4>🎯 Can You...</h4>
+                        <p style="text-align: left;">
+                            ▸ Define "worldview" and explain why it includes a "heart" dimension?<br><br>
+                            ▸ Explain the flashlight metaphor and why worldviews are hard to see?<br><br>
+                            ▸ Describe the elephant and rider and what it means for moral reasoning?<br><br>
+                            ▸ Distinguish strong-sense from weak-sense critical thinking?<br><br>
+                            ▸ Identify one worldview assumption in each of the three ethical theories?<br><br>
+                            ▸ List at least three of the six practical skills?
+                        </p>
+                    </div>
+                    
+                    <p style="margin-top: 1.5em; color: var(--opera-mauve);">If you're unsure about any of these, use the <strong>B key</strong> to revisit the Study Buddy notes!</p>
+                </section>
+
+                <section>
+                    <h2>Sources &amp; Further Reading</h2>
+                    <p style="font-size: 0.85em; text-align: left; max-width: 800px; margin: 0 auto;">
+                        Ennis, Robert H. "A Taxonomy of Critical Thinking Dispositions and Abilities." 1987.<br><br>
+                        Haidt, Jonathan. <em>The Righteous Mind: Why Good People Are Divided by Politics and Religion.</em> 2012.<br><br>
+                        Kunda, Ziva. "The Case for Motivated Reasoning." <em>Psychological Bulletin</em>, 1990.<br><br>
+                        Mavrodes, George I. "Religion and the Queerness of Morality." 1986.<br><br>
+                        Naugle, David K. <em>Worldview: The History of a Concept.</em> 2002.<br><br>
+                        Paul, Richard, and Linda Elder. <em>Critical Thinking: Tools for Taking Charge.</em> 2014.<br><br>
+                        Sire, James W. <em>The Universe Next Door: A Basic Worldview Catalog.</em> 2009.<br><br>
+                        Vaughn, Lewis. <em>Doing Ethics.</em> [Course textbook]
+                    </p>
+                    <p style="margin-top: 1.5em; font-size: 0.9em; color: var(--mocha-mousse);">
+                        For the full scholarly treatment, see the companion essay:<br>
+                        "Worldview and Critical Thinking in Light of Ethics and Morality: A Survey Essay for Ethics Educators"
+                    </p>
+                </section>
+            </section>
+
+        </div>
+    </div>
+    
+    <!-- Reveal.js and plugins from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/zoom/zoom.js"></script>
+    
+    <script>
+        // Track current slide's buddy panel
+        let currentBuddy = null;
+
+        // Initialize Reveal.js
+        Reveal.initialize({
+            width: 1280,
+            height: 720,
+            margin: 0.1,
+            minScale: 0.2,
+            maxScale: 2.0,
+            controls: true,
+            progress: true,
+            center: true,
+            hash: true,
+            transition: 'slide',
+            plugins: [ RevealHighlight, RevealZoom ],
+            
+            // Keyboard bindings - using 'b' for buddy (not used by Reveal by default)
+            keyboard: {
+                66: function() { toggleCurrentBuddy(); } // 'b' key
+            }
+        });
+
+        // Update current buddy when slide changes
+        Reveal.on('slidechanged', event => {
+            // Close any open buddy panel when changing slides
+            closeAllBuddies();
+            
+            // Get the current slide's buddy ID
+            const slide = event.currentSlide;
+            currentBuddy = slide.getAttribute('data-buddy');
+        });
+
+        // Also handle vertical slides
+        Reveal.on('fragmentshown', event => {
+            const slide = Reveal.getCurrentSlide();
+            currentBuddy = slide.getAttribute('data-buddy');
+        });
+
+        // Toggle current slide's buddy panel
+        function toggleCurrentBuddy() {
+            if (currentBuddy) {
+                const buddyPanel = document.getElementById(currentBuddy);
+                if (buddyPanel) {
+                    const isActive = buddyPanel.classList.contains('active');
+                    closeAllBuddies();
+                    if (!isActive) {
+                        buddyPanel.classList.add('active');
+                        document.getElementById('overlay').classList.add('active');
+                    }
+                }
+            }
+        }
+
+        // Close all buddy panels
+        function closeAllBuddies() {
+            document.querySelectorAll('.study-buddy').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            document.getElementById('overlay').classList.remove('active');
+        }
+
+        // Close specific buddy
+        function closeBuddy(id) {
+            document.getElementById(id).classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        }
+
+        // Term popup functions
+        function openTerm(id) {
+            closeAllTerms();
+            document.getElementById(id).classList.add('active');
+            document.getElementById('overlay').classList.add('active');
+        }
+
+        function closeTerm(id) {
+            document.getElementById(id).classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        }
+
+        function closeAllTerms() {
+            document.querySelectorAll('.term-popup').forEach(popup => {
+                popup.classList.remove('active');
+            });
+        }
+
+        // Close everything when clicking overlay
+        function closeAll() {
+            closeAllBuddies();
+            closeAllTerms();
+            document.getElementById('overlay').classList.remove('active');
+        }
+
+        // ESC key closes popups (Reveal already uses ESC for overview, but we can still close our popups)
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeAll();
+            }
+        });
+
+        // Initialize current buddy for first slide
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstSlide = Reveal.getCurrentSlide();
+            if (firstSlide) {
+                currentBuddy = firstSlide.getAttribute('data-buddy');
+            }
+        });
+    </script>
+</body>
+</html>

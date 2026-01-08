@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHIL 120: Chapter 1 - Ethics and the Examined Life (Study Buddy Edition)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/white.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --cloud-dancer: #F0EEE9;
+            --pomegranate: #9F2436;
+            --mauve-mist: #96637B;
+            --deep-teal: #2A5C6A;
+            --olivine: #545439;
+            --charcoal: #3E3B32;
+            --soft-cream: #F5F1E8;
+            --warm-white: #FAFAFA;
+        }
+        
+        .reveal {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1.3em;
+            background-color: var(--cloud-dancer);
+            color: var(--charcoal);
+        }
+        
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-weight: 700;
+            color: var(--pomegranate);
+            text-transform: none;
+        }
+        
+        .reveal h1 { font-size: 2.8em; }
+        .reveal h2 { font-size: 2.2em; margin-bottom: 0.5em; }
+        .reveal h3 { font-size: 1.5em; color: var(--deep-teal); }
+        
+        .reveal ul { list-style: none; padding-left: 0; }
+        .reveal ul li { margin: 0.6em 0; padding-left: 1.5em; position: relative; }
+        .reveal ul li:before { content: "◆"; color: var(--mauve-mist); font-size: 0.7em; position: absolute; left: 0; top: 0.2em; }
+        
+        .quote-box {
+            background: rgba(150, 99, 123, 0.1);
+            border-left: 4px solid var(--mauve-mist);
+            padding: 1.2em 1.5em;
+            margin: 1em 0;
+            font-style: italic;
+        }
+        .quote-attribution { text-align: right; color: var(--olivine); font-style: normal; font-size: 0.9em; margin-top: 0.5em; }
+        
+        .popup-trigger {
+            color: var(--deep-teal);
+            border-bottom: 2px dotted var(--deep-teal);
+            cursor: pointer;
+        }
+        .popup-trigger:hover { color: var(--pomegranate); border-bottom-color: var(--pomegranate); }
+        
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--warm-white);
+            color: var(--charcoal);
+            padding: 2em 2.5em;
+            border-radius: 12px;
+            box-shadow: 0 8px 40px rgba(62, 59, 50, 0.3);
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            z-index: 1000;
+            border: 3px solid var(--mauve-mist);
+        }
+        .popup.active { display: block; }
+        .popup-close { position: absolute; top: 12px; right: 18px; font-size: 1.8em; cursor: pointer; color: var(--pomegranate); }
+        .popup-term { font-size: 1.4em; font-weight: 700; color: var(--pomegranate); margin-bottom: 0.5em; }
+        .popup-pronunciation { font-style: italic; color: var(--olivine); font-size: 0.95em; margin-bottom: 0.8em; }
+        .popup .example-box { background: var(--soft-cream); padding: 1em; border-radius: 8px; margin-top: 1em; border-left: 3px solid var(--deep-teal); }
+        
+        .key-term { color: var(--pomegranate); font-weight: 600; }
+        
+        .img-placeholder {
+            background: var(--soft-cream);
+            border: 2px dashed var(--mauve-mist);
+            padding: 1.5em;
+            border-radius: 10px;
+            text-align: center;
+            color: var(--olivine);
+            font-size: 0.85em;
+        }
+        
+        .slide-counter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--charcoal);
+            color: var(--cloud-dancer);
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.85em;
+            border: 2px solid var(--mauve-mist);
+            z-index: 100;
+        }
+        
+        .assessment-slide { background: linear-gradient(135deg, rgba(150, 99, 123, 0.15) 0%, rgba(42, 92, 106, 0.15) 100%) !important; }
+        .reflection-box { background: var(--warm-white); padding: 1.5em 2em; border-radius: 12px; border: 3px solid var(--pomegranate); }
+        
+        .study-note { background: rgba(84, 84, 57, 0.1); padding: 1em; border-radius: 8px; border-left: 4px solid var(--olivine); font-size: 0.9em; margin-top: 1em; }
+        
+        .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1em; margin-top: 1em; }
+        .comparison-box { background: var(--warm-white); padding: 1em; border-radius: 10px; border: 2px solid var(--mauve-mist); }
+        .comparison-box.teal { border-color: var(--deep-teal); }
+        
+        .warning-box { background: rgba(159, 36, 54, 0.1); border: 2px solid var(--pomegranate); padding: 1em; border-radius: 8px; margin: 1em 0; }
+        
+        .concept-card { background: var(--soft-cream); padding: 1.2em; border-radius: 10px; margin: 0.8em 0; border-left: 4px solid var(--deep-teal); }
+        .concept-name { color: var(--pomegranate); font-weight: 700; font-size: 1.1em; margin-bottom: 0.3em; }
+        
+        .philosopher-box { background: rgba(42, 92, 106, 0.1); padding: 1em; border-radius: 10px; border: 2px solid var(--deep-teal); margin: 1em 0; }
+        .philosopher-name { color: var(--deep-teal); font-weight: 700; font-size: 1.1em; }
+        .philosopher-dates { color: var(--olivine); font-size: 0.85em; }
+        
+        .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.8em; margin-top: 1em; }
+        .branch-card { background: var(--warm-white); padding: 1em; border-radius: 8px; border: 2px solid var(--mauve-mist); text-align: center; }
+        .branch-card h4 { color: var(--pomegranate); margin: 0 0 0.5em 0; font-size: 1em; }
+        .branch-card p { font-size: 0.8em; margin: 0; }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+            <!-- SLIDE 1: Title -->
+            <section>
+                <h1>Ethics and the Examined Life</h1>
+                <p style="font-size: 1.1em; color: var(--deep-teal);">Chapter 1 · Introduction to Ethics</p>
+                <p style="font-size: 0.9em; color: var(--mauve-mist);">📚 Study Buddy Edition</p>
+                
+                <p style="margin-top: 2em;"><span class="popup-trigger" data-popup="shortcuts-popup">⌨️ Keyboard Shortcuts</span></p>
+                
+                <div id="shortcuts-popup" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Keyboard Shortcuts</div>
+                    <p style="margin: 0.5em 0;">→ / Space: Next slide</p>
+                    <p style="margin: 0.5em 0;">← : Previous slide</p>
+                    <p style="margin: 0.5em 0;">S: Speaker notes</p>
+                    <p style="margin: 0.5em 0;">F: Fullscreen</p>
+                    <p style="margin: 0.5em 0;">O: Overview</p>
+                    <p style="margin: 0.5em 0;">ESC: Close pop-ups</p>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Welcome to Chapter 1!</h3>
+                    <p>This chapter introduces the field of ethics and explains why studying morality matters. You'll learn the basic concepts, the three branches of ethics, and why critical reasoning is essential to the moral life.</p>
+                    <p>Key question from Socrates: "How ought we to live?"</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 2: What Is Ethics? -->
+            <section>
+                <h2>What Is Ethics?</h2>
+                <p><span class="popup-trigger" data-popup="ethics-def">Ethics</span>, or <span class="popup-trigger" data-popup="moral-phil-def">moral philosophy</span>, is the philosophical study of morality.</p>
+                
+                <p style="margin-top: 1em;"><span class="popup-trigger" data-popup="morality-def">Morality</span> refers to beliefs concerning right and wrong, good and bad.</p>
+                
+                <ul style="margin-top: 1em;">
+                    <li>Judgments about actions and character</li>
+                    <li>Values, rules, principles, and theories</li>
+                    <li>Beliefs that guide our actions and define who we are</li>
+                </ul>
+                
+                <div id="ethics-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Ethics</div>
+                    <p>The philosophical study of morality. Also called <em>moral philosophy</em>. Ethics uses critical reasoning to systematically examine moral beliefs, principles, and theories.</p>
+                    <div class="example-box"><strong>Note:</strong> "Ethics" and "morality" are often used interchangeably in everyday speech. In philosophy, ethics is the STUDY of morality.</div>
+                </div>
+                
+                <div id="moral-phil-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Moral Philosophy</div>
+                    <p>Another name for ethics—the branch of philosophy that deals with questions of right and wrong, good and bad, duty and obligation.</p>
+                </div>
+                
+                <div id="morality-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Morality</div>
+                    <p>Beliefs concerning right and wrong, good and bad. These beliefs can include judgments, values, rules, principles, and theories.</p>
+                    <div class="example-box"><strong>Example:</strong> "Greek morality" or "Russell's morality" refers to the specific moral norms of a group or individual.</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Understanding This Slide</h3>
+                    <p>The key distinction: MORALITY is a set of beliefs about right/wrong. ETHICS is the philosophical STUDY of those beliefs.</p>
+                    <p>Think of it like: Religion is a set of beliefs; Religious Studies is the academic study of those beliefs.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 3: Why Ethics Matters -->
+            <section>
+                <h2>Why Does Ethics Matter?</h2>
+                
+                <div class="quote-box">
+                    "How ought we to live?"
+                    <p class="quote-attribution">— Socrates (c. 470–399 BCE)</p>
+                </div>
+                
+                <p>Ethics is <strong>inescapable</strong>. You cannot run away from:</p>
+                <ul>
+                    <li>Choices about right and wrong</li>
+                    <li>Judgments about character (yours and others')</li>
+                    <li>Questions about your moral outlook</li>
+                    <li>Conflicts when your values clash with others'</li>
+                </ul>
+                
+                <div class="study-note">
+                    <strong>💡 Key insight:</strong> Even claiming ethics doesn't matter IS a moral position—you're still doing ethics!
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 The Inescapability of Ethics</h3>
+                    <p>The textbook emphasizes that you cannot escape ethics. Every day you make moral judgments, embrace or reject moral principles, and assess character.</p>
+                    <p>Even if you try to avoid ethics by saying "morality doesn't matter," that's itself a moral claim that needs justification!</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 4: What's at Stake -->
+            <section>
+                <h2>What's at Stake?</h2>
+                <p>When we do ethics, we're dealing with <em>everything we hold dear</em>—specifically, <span class="popup-trigger" data-popup="moral-values-def">moral values</span>.</p>
+                
+                <p style="margin-top: 1em;">Through ethics we determine:</p>
+                <ul>
+                    <li>What is worth living for—and dying for</li>
+                    <li>What is the greatest good</li>
+                    <li>What goals we should pursue</li>
+                    <li>What virtues we should cultivate</li>
+                    <li>What duties we should fulfill</li>
+                    <li>What value we place on human life</li>
+                </ul>
+                
+                <div id="moral-values-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Moral Values</div>
+                    <p>The things we consider most important from a moral standpoint—what we believe matters most ethically. These include concepts like justice, rights, human dignity, and the common good.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 The Stakes Are High</h3>
+                    <p>Ethics isn't just abstract theorizing—it shapes how we live. The textbook lists profound questions: What is worth dying for? What value do we place on human life?</p>
+                    <p>These aren't idle questions. They affect real decisions about medicine, war, justice, and personal relationships.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 5: The Easy Road -->
+            <section>
+                <h2>The "Easy Road" in Ethics</h2>
+                <p>You can avoid deep ethical thinking—but there are <strong>serious drawbacks</strong>:</p>
+                
+                <div class="concept-card">
+                    <div class="concept-name">Drawback 1: Loss of Freedom</div>
+                    <p style="font-size: 0.9em;">If you never question inherited beliefs, those beliefs aren't really YOURS—they control you.</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-name">Drawback 2: Confusion & Contradiction</div>
+                    <p style="font-size: 0.9em;">Unexamined moral codes often conflict. Without critical tools, you can't resolve dilemmas.</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-name">Drawback 3: Moral Stagnation</div>
+                    <p style="font-size: 0.9em;">Without examination, personal moral growth becomes impossible.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Why We Can't Take the Easy Road</h3>
+                    <p>The textbook (via philosopher Paul Taylor) warns about "blindly embracing" inherited morality. Three problems emerge:</p>
+                    <p>1) Your beliefs aren't truly yours if you never chose them. 2) You'll be lost when rules conflict. 3) You'll never grow morally.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 6: The Ethical Landscape -->
+            <section>
+                <h2>The Ethical Landscape</h2>
+                <p>Ethics is a branch of <span class="popup-trigger" data-popup="philosophy-def">philosophy</span>—the systematic use of critical reasoning to answer fundamental questions.</p>
+                
+                <p style="margin-top: 1em;">Other branches of philosophy include:</p>
+                <ul style="font-size: 0.95em;">
+                    <li><span class="popup-trigger" data-popup="logic-def">Logic</span> — the study of correct reasoning</li>
+                    <li><span class="popup-trigger" data-popup="metaphysics-def">Metaphysics</span> — the study of reality's fundamental nature</li>
+                    <li><span class="popup-trigger" data-popup="epistemology-def">Epistemology</span> — the study of knowledge</li>
+                </ul>
+                
+                <div id="philosophy-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Philosophy</div>
+                    <p>The systematic use of critical reasoning to answer the most fundamental questions in life. Philosophy examines beliefs carefully and seeks answers supported by good reasons.</p>
+                </div>
+                
+                <div id="logic-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Logic</div>
+                    <p>The branch of philosophy that studies correct reasoning—how to evaluate arguments, identify fallacies, and reason validly.</p>
+                </div>
+                
+                <div id="metaphysics-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Metaphysics</div>
+                    <div class="popup-pronunciation">(met-uh-FIZ-iks)</div>
+                    <p>The branch of philosophy that studies the fundamental nature of reality—what exists, what things are made of, and how they relate.</p>
+                </div>
+                
+                <div id="epistemology-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Epistemology</div>
+                    <div class="popup-pronunciation">(eh-pis-teh-MOL-oh-jee)</div>
+                    <p>The branch of philosophy that studies knowledge—what it is, how we get it, and what we can know.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Ethics in Context</h3>
+                    <p>Ethics is one branch of philosophy alongside logic, metaphysics, and epistemology. All branches use critical reasoning to examine fundamental questions.</p>
+                    <p>Ethics specifically focuses on questions about right/wrong and good/bad.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 7: Three Divisions of Ethics -->
+            <section>
+                <h2>Three Divisions of Ethics</h2>
+                
+                <div class="three-col">
+                    <div class="branch-card">
+                        <h4><span class="popup-trigger" data-popup="normative-def">Normative Ethics</span></h4>
+                        <p>The study of principles that guide our actions and judgments</p>
+                        <p style="color: var(--olivine); margin-top: 0.5em;"><em>"What should I do?"</em></p>
+                    </div>
+                    <div class="branch-card">
+                        <h4><span class="popup-trigger" data-popup="metaethics-def">Metaethics</span></h4>
+                        <p>The study of the meaning and logic of moral beliefs</p>
+                        <p style="color: var(--olivine); margin-top: 0.5em;"><em>"What does 'good' mean?"</em></p>
+                    </div>
+                    <div class="branch-card">
+                        <h4><span class="popup-trigger" data-popup="applied-def">Applied Ethics</span></h4>
+                        <p>The application of moral norms to specific issues or cases</p>
+                        <p style="color: var(--olivine); margin-top: 0.5em;"><em>"Is this action right?"</em></p>
+                    </div>
+                </div>
+                
+                <div id="normative-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Normative Ethics</div>
+                    <p>The study of the principles, rules, or theories that guide our actions and judgments. "Normative" refers to norms or standards.</p>
+                    <div class="example-box"><strong>Questions it asks:</strong> Is this moral principle justified? Is utilitarianism a good moral theory? What makes an action right?</div>
+                </div>
+                
+                <div id="metaethics-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Metaethics</div>
+                    <div class="popup-pronunciation">(MET-uh-eth-iks)</div>
+                    <p>The study of the meaning and logical structure of moral beliefs. It "steps back" from asking what's right to ask what "right" even MEANS.</p>
+                    <div class="example-box"><strong>Questions it asks:</strong> What does it mean for something to be "good"? Is there such a thing as moral truth? Can moral claims be justified?</div>
+                </div>
+                
+                <div id="applied-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Applied Ethics</div>
+                    <p>The application of moral norms to specific moral issues or cases, particularly in professions like medicine or law.</p>
+                    <div class="example-box"><strong>Examples:</strong> Medical ethics, business ethics, journalistic ethics, environmental ethics. These fields apply moral principles to real-world situations.</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 The Three Branches</h3>
+                    <p>This course focuses mainly on NORMATIVE ethics—studying moral theories and principles. But it also touches on metaethics (Chapter 2) and applied ethics (Part 4).</p>
+                    <p>Think of it as: Normative = what's right; Metaethics = what "right" means; Applied = how to apply it.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 8: Science vs. Philosophy on Morality -->
+            <section>
+                <h2>Science vs. Philosophy on Morality</h2>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <h3 style="color: var(--pomegranate); font-size: 1.1em;"><span class="popup-trigger" data-popup="descriptive-def">Descriptive Ethics</span></h3>
+                        <p style="font-size: 0.9em;">The <em>scientific</em> study of moral beliefs and practices</p>
+                        <p style="font-size: 0.85em;">Describes what people <strong>actually</strong> believe and do</p>
+                        <p style="font-size: 0.85em; color: var(--olivine);"><em>Sociology, anthropology, psychology</em></p>
+                    </div>
+                    <div class="comparison-box teal">
+                        <h3 style="color: var(--deep-teal); font-size: 1.1em;">Normative Ethics</h3>
+                        <p style="font-size: 0.9em;">The <em>philosophical</em> study of moral principles</p>
+                        <p style="font-size: 0.85em;">Determines what people <strong>should</strong> believe and do</p>
+                        <p style="font-size: 0.85em; color: var(--olivine);"><em>Philosophy, moral reasoning</em></p>
+                    </div>
+                </div>
+                
+                <div class="study-note">
+                    <strong>💡 Key distinction:</strong> Science describes; philosophy prescribes. Science says what IS; ethics says what OUGHT to be.
+                </div>
+                
+                <div id="descriptive-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Descriptive Ethics</div>
+                    <p>The scientific study of moral beliefs and practices. Its aim is to describe and explain how people actually behave and think morally—not to judge whether they're right.</p>
+                    <div class="example-box"><strong>Example:</strong> A sociologist studying what percentage of Americans believe lying is wrong. This describes beliefs without evaluating them.</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Is vs. Ought</h3>
+                    <p>This is a crucial distinction. Descriptive ethics (science) tells us what people believe. Normative ethics (philosophy) tells us what they SHOULD believe.</p>
+                    <p>You can't get "ought" from "is"—knowing that many people believe X doesn't tell you whether X is actually right.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 9: Values and Obligations -->
+            <section>
+                <h2>Values and Obligations</h2>
+                <p>In ethics, we must distinguish between two types of concepts:</p>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <h3 style="color: var(--pomegranate); font-size: 1.1em;"><span class="popup-trigger" data-popup="value-def">Value</span></h3>
+                        <p style="font-size: 0.9em;">About what is morally <strong>good, bad, praiseworthy, blameworthy</strong></p>
+                        <p style="font-size: 0.85em;">Applies to: persons, character traits, motives, intentions</p>
+                        <p style="font-size: 0.85em; color: var(--olivine);"><em>"She is a good person"</em></p>
+                    </div>
+                    <div class="comparison-box teal">
+                        <h3 style="color: var(--deep-teal); font-size: 1.1em;"><span class="popup-trigger" data-popup="obligation-def">Obligation</span></h3>
+                        <p style="font-size: 0.9em;">About what is <strong>obligatory, a duty, right or wrong</strong></p>
+                        <p style="font-size: 0.85em;">Applies to: actions, what we should or shouldn't do</p>
+                        <p style="font-size: 0.85em; color: var(--olivine);"><em>"She has a duty to tell the truth"</em></p>
+                    </div>
+                </div>
+                
+                <div id="value-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Value (Moral)</div>
+                    <p>Concepts about what is morally good, bad, praiseworthy, or blameworthy. Value judgments typically apply to persons, character, motives, and intentions.</p>
+                    <div class="example-box"><strong>Examples:</strong> "He is a good person." "Her motives were blameworthy." "Courage is a virtue."</div>
+                </div>
+                
+                <div id="obligation-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Obligation</div>
+                    <p>Concepts about what is obligatory, a duty, or what we should or ought to do. Obligation judgments typically apply to actions.</p>
+                    <div class="example-box"><strong>Examples:</strong> "You ought to tell the truth." "Stealing is wrong." "We have a duty to help others."</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Two Types of Moral Concepts</h3>
+                    <p>This distinction matters because you can have a good PERSON do a wrong ACTION (good intentions, bad outcome) or a bad PERSON do the right ACTION (selfish motives, helpful result).</p>
+                    <p>Value = character/persons. Obligation = actions/duties.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 10: Assessment Break -->
+            <section class="assessment-slide">
+                <h2>🤔 Check Your Understanding</h2>
+                
+                <div class="reflection-box">
+                    <p style="color: var(--pomegranate); font-weight: 600;">Quick Quiz:</p>
+                    <p>"A sociologist studies what percentage of doctors believe euthanasia is acceptable."</p>
+                    <p style="margin-top: 1em;">This is an example of:</p>
+                    <p style="margin-left: 1em;">A) Normative ethics</p>
+                    <p style="margin-left: 1em;">B) Metaethics</p>
+                    <p style="margin-left: 1em;">C) Descriptive ethics</p>
+                    <p style="margin-left: 1em;">D) Applied ethics</p>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Answer: C) Descriptive Ethics</h3>
+                    <p>The sociologist is DESCRIBING what doctors believe—not evaluating whether those beliefs are correct. This is descriptive (scientific) ethics.</p>
+                    <p>If the question were "IS euthanasia morally acceptable?" that would be normative ethics. If applied to a specific case, it's applied ethics.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 11: Instrumental vs. Intrinsic Value -->
+            <section>
+                <h2>Two Types of Value</h2>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <h3 style="color: var(--pomegranate); font-size: 1.1em;"><span class="popup-trigger" data-popup="instrumental-def">Instrumentally Valuable</span></h3>
+                        <p style="font-size: 0.9em;">Valuable as a <strong>means</strong> to something else</p>
+                        <p style="font-size: 0.85em;">Also called "extrinsically valuable"</p>
+                        <p style="font-size: 0.85em; color: var(--olivine);"><em>Money, medicine, tools</em></p>
+                    </div>
+                    <div class="comparison-box teal">
+                        <h3 style="color: var(--deep-teal); font-size: 1.1em;"><span class="popup-trigger" data-popup="intrinsic-def">Intrinsically Valuable</span></h3>
+                        <p style="font-size: 0.9em;">Valuable <strong>in itself</strong>, for its own sake</p>
+                        <p style="font-size: 0.85em;">Valuable without being a means to anything</p>
+                        <p style="font-size: 0.85em; color: var(--olivine);"><em>Happiness, pleasure, virtue, beauty</em></p>
+                    </div>
+                </div>
+                
+                <div class="study-note">
+                    <strong>💡 Test:</strong> Ask "Why is X valuable?" If the answer is "because it leads to Y," X is instrumentally valuable. If "it just IS valuable," it's intrinsically valuable.
+                </div>
+                
+                <div id="instrumental-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Instrumentally Valuable</div>
+                    <div class="popup-pronunciation">(also: extrinsically valuable)</div>
+                    <p>Valuable as a means to something else. The value comes from what it can get you, not from what it is in itself.</p>
+                    <div class="example-box"><strong>Example:</strong> Money is instrumentally valuable—it's not valuable in itself, but because of what it can buy. A pen is valuable because it can write letters.</div>
+                </div>
+                
+                <div id="intrinsic-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Intrinsically Valuable</div>
+                    <p>Valuable in itself, for its own sake, without being a means to something else. The value is inherent in the thing itself.</p>
+                    <div class="example-box"><strong>Example:</strong> Happiness is often considered intrinsically valuable—we don't want happiness to get something else; we just want happiness for its own sake.</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Means vs. Ends</h3>
+                    <p>This distinction is fundamental in ethics. Instrumental value = means to an end. Intrinsic value = an end in itself.</p>
+                    <p>Different ethical theories disagree about what has intrinsic value: happiness? virtue? knowledge? human life?</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 12: Elements of Ethics - Reason -->
+            <section>
+                <h2>Elements of Ethics</h2>
+                <h3>The Preeminence of Reason</h3>
+                
+                <p>Ethics requires <span class="popup-trigger" data-popup="critical-reasoning-def">critical reasoning</span>—not just feelings.</p>
+                
+                <ul>
+                    <li>Feelings matter but are unreliable guides alone</li>
+                    <li>They may reflect prejudice, culture, or self-interest</li>
+                    <li>Moral judgments must be <strong>supported by good reasons</strong></li>
+                    <li>Careful reasoning helps us evaluate our feelings</li>
+                </ul>
+                
+                <div class="warning-box" style="font-size: 0.9em;">
+                    <strong>⚠️ Warning:</strong> "It feels right" is not a sufficient moral justification. We need to ask WHY it feels right and whether those reasons hold up.
+                </div>
+                
+                <div id="critical-reasoning-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Critical Reasoning</div>
+                    <p>The careful, systematic evaluation of statements, claims, or arguments. In ethics, it involves evaluating logical arguments and carefully analyzing moral concepts.</p>
+                    <div class="example-box"><strong>Key components:</strong> Evaluating logical arguments, analyzing concepts, identifying assumptions, testing claims against evidence and counterexamples.</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Reason Over Feeling</h3>
+                    <p>The textbook emphasizes that while feelings matter (they give us empathy and warn us of injustice), they're not enough alone.</p>
+                    <p>Feelings can be wrong—shaped by prejudice or ignorance. We need reasons to support moral judgments.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 13: The Universal Perspective -->
+            <section>
+                <h2>Elements of Ethics</h2>
+                <h3>The Universal Perspective</h3>
+                
+                <p>Moral norms and judgments follow the <span class="popup-trigger" data-popup="universalizability-def">principle of universalizability</span>:</p>
+                
+                <div class="quote-box">
+                    If an action is right (or wrong) for one person, it is right (or wrong) for <strong>everyone</strong> in relevantly similar situations.
+                </div>
+                
+                <ul style="margin-top: 1em;">
+                    <li>Moral judgments can't apply only to YOU</li>
+                    <li>If lying is wrong for me, it's wrong for you in similar circumstances</li>
+                    <li>Reasons must apply universally, not just to individuals</li>
+                </ul>
+                
+                <div id="universalizability-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Principle of Universalizability</div>
+                    <p>The idea that a moral statement (principle, rule, or judgment) that applies in one situation must apply in all other situations that are relevantly similar.</p>
+                    <div class="example-box"><strong>Example:</strong> If you say lying is wrong when YOUR friend lies to you, you must also say it's wrong when you lie to your friend—the situations are relevantly similar.</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Consistency in Moral Judgments</h3>
+                    <p>This is a fundamental principle of moral reasoning. You can't say "lying is wrong for others but okay for me" without a RELEVANT difference between the situations.</p>
+                    <p>This connects to Kant's categorical imperative, which you'll study later.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 14: The Principle of Impartiality -->
+            <section>
+                <h2>Elements of Ethics</h2>
+                <h3>The Principle of Impartiality</h3>
+                
+                <p>The <span class="popup-trigger" data-popup="impartiality-def">principle of impartiality</span>: All persons are considered equal and should be treated accordingly.</p>
+                
+                <ul>
+                    <li>Everyone's interests deserve equal weight</li>
+                    <li>No special treatment without morally relevant reasons</li>
+                    <li>Treat equals equally</li>
+                </ul>
+                
+                <div class="concept-card">
+                    <div class="concept-name">Example of Violation:</div>
+                    <p style="font-size: 0.9em;">"Everyone must refrain from stealing—except Mr. X, who may steal whenever he wants." This violates impartiality because there's no morally relevant reason for the exception.</p>
+                </div>
+                
+                <div id="impartiality-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Principle of Impartiality</div>
+                    <p>The idea that from the moral point of view, all persons are considered equal and should be treated accordingly. Each person's interests deserve equal consideration.</p>
+                    <div class="example-box"><strong>Key point:</strong> "Treat equals equally." If there's no morally relevant difference between people, they should be treated the same way.</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Moral Equality</h3>
+                    <p>This doesn't mean everyone is identical—it means everyone's interests count equally unless there's a relevant reason for difference.</p>
+                    <p>A rule that exempts someone arbitrarily (like by celebrity status) violates impartiality and isn't a genuine moral rule.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 15: The Dominance of Moral Norms -->
+            <section>
+                <h2>Elements of Ethics</h2>
+                <h3>The Dominance of Moral Norms</h3>
+                
+                <p>Not all norms are moral norms. There are also:</p>
+                <ul style="font-size: 0.95em;">
+                    <li><strong>Legal norms</strong> (laws, statutes)</li>
+                    <li><strong>Aesthetic norms</strong> (standards for art, beauty)</li>
+                    <li><strong>Prudential norms</strong> (practical self-interest)</li>
+                </ul>
+                
+                <p style="margin-top: 1em;">But <span class="popup-trigger" data-popup="moral-norms-def">moral norms</span> have a special status: they <strong>dominate</strong> other norms.</p>
+                
+                <div class="study-note">
+                    <strong>💡 Example:</strong> A prudential norm ("Never help strangers") must yield to a moral norm ("Help a stranger in an emergency if you can do so safely").
+                </div>
+                
+                <div id="moral-norms-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Moral Norms (Dominance of)</div>
+                    <p>Moral norms are considered weightier or more important than other types of norms. When moral principles conflict with other considerations (legal, aesthetic, prudential), moral considerations usually override.</p>
+                    <div class="example-box"><strong>Example:</strong> If a law conflicts with a moral principle, we judge the LAW to be bad—moral norms take precedence. This is the justification for civil disobedience.</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Morality Trumps Other Norms</h3>
+                    <p>When moral principles conflict with other norms, morality usually wins. A bad law is judged bad ON MORAL GROUNDS—showing that moral norms dominate legal ones.</p>
+                    <p>This is why we can say a law is "unjust"—we're applying moral standards to judge the law.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 16: Religion and Morality -->
+            <section>
+                <h2>Religion and Morality</h2>
+                <p>Many believe morality and religion are inseparable. But consider two questions:</p>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <h3 style="font-size: 1em; color: var(--pomegranate);">Q1: Religion & Ethics</h3>
+                        <p style="font-size: 0.85em;">What is the relationship between religion and the <em>study</em> of morality (ethics)?</p>
+                    </div>
+                    <div class="comparison-box teal">
+                        <h3 style="font-size: 1em; color: var(--deep-teal);">Q2: Religion & Morality</h3>
+                        <p style="font-size: 0.85em;">What is the relationship between religion and <em>moral beliefs</em> themselves?</p>
+                    </div>
+                </div>
+                
+                <p style="margin-top: 1em; font-size: 0.95em;"><strong>Key point:</strong> Whatever your religious views, an open-minded exploration of ethics using critical reasoning is valuable.</p>
+                
+                <aside class="notes">
+                    <h3>📖 Ethics for Everyone</h3>
+                    <p>The textbook argues that ethics (the philosophical study) is useful for believers and nonbelievers alike. Critical reasoning provides a common language for discussing moral issues across religious boundaries.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 17: Divine Command Theory -->
+            <section>
+                <h2>The Divine Command Theory</h2>
+                <p>The <span class="popup-trigger" data-popup="divine-command-def">divine command theory</span> says God is the source of morality: actions are right if and only if God commands them.</p>
+                
+                <div class="philosopher-box">
+                    <p class="philosopher-name">The Euthyphro Dilemma</p>
+                    <p class="philosopher-dates">Posed by Socrates in Plato's dialogue</p>
+                    <p style="margin-top: 0.5em; font-size: 0.9em;">Is an action right <strong>because</strong> God commands it, or does God command it <strong>because</strong> it is right?</p>
+                </div>
+                
+                <div class="comparison-grid" style="font-size: 0.85em;">
+                    <div class="comparison-box">
+                        <p><strong>Horn 1:</strong> Right because God commands it</p>
+                        <p>→ Morality becomes arbitrary (God could command anything)</p>
+                    </div>
+                    <div class="comparison-box teal">
+                        <p><strong>Horn 2:</strong> God commands it because it's right</p>
+                        <p>→ Rightness is independent of God's will</p>
+                    </div>
+                </div>
+                
+                <div id="divine-command-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Divine Command Theory</div>
+                    <p>The theory that right actions are right because God commands them, and wrong actions are wrong because God forbids them. God's will defines morality.</p>
+                    <div class="example-box"><strong>The Euthyphro Problem:</strong> If morality depends entirely on God's will, then morality seems arbitrary—God could make murder right by commanding it. But if God commands things because they're already right, then rightness is independent of God.</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 A Classic Dilemma</h3>
+                    <p>The Euthyphro dilemma has challenged divine command theory for 2,400 years. Both horns seem problematic for the theory.</p>
+                    <p>This doesn't prove God doesn't exist—just that morality may not depend entirely on God's commands.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 18: Why Philosophy Helps Believers -->
+            <section>
+                <h2>Why Believers Need Ethics</h2>
+                
+                <p>Even religious believers benefit from moral philosophy because:</p>
+                
+                <ul>
+                    <li><strong>Religious rules are general</strong> and need interpretation for specific cases</li>
+                    <li><strong>Commandments can conflict</strong>—which takes priority?</li>
+                    <li><strong>Believers disagree</strong> with each other on moral issues</li>
+                    <li><strong>Public discourse</strong> requires common ground across traditions</li>
+                </ul>
+                
+                <div class="study-note">
+                    <strong>💡 Key insight:</strong> Great religious thinkers—Aquinas, Leibniz, Maimonides, Kant—have used reason to examine morality. Faith and reason can work together.
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Faith and Reason Together</h3>
+                    <p>The textbook emphasizes that religious moral codes often need philosophical interpretation. "Love your neighbor"—but who counts as a neighbor? Religious texts don't always say.</p>
+                    <p>Philosophy provides tools for resolving these questions that religious traditions alone may not supply.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 19: Assessment Break -->
+            <section class="assessment-slide">
+                <h2>🤔 Check Your Understanding</h2>
+                
+                <div class="reflection-box">
+                    <p style="color: var(--pomegranate); font-weight: 600;">Apply the Concepts:</p>
+                    <p>Someone says: "Cheating on tests is wrong for other people, but it's okay when I do it because I really need good grades."</p>
+                    <p style="margin-top: 1em;">Which principle of ethics does this violate?</p>
+                    <p style="margin-left: 1em;">A) The dominance of moral norms</p>
+                    <p style="margin-left: 1em;">B) The principle of universalizability</p>
+                    <p style="margin-left: 1em;">C) The divine command theory</p>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Answer: B) The Principle of Universalizability</h3>
+                    <p>The person is saying the action (cheating) is wrong for others but okay for them—without a morally relevant difference. "I need good grades" isn't a morally relevant difference; everyone wants good grades.</p>
+                    <p>Moral rules must apply universally to all relevantly similar situations.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 20: Key Terms Review -->
+            <section>
+                <h2>Key Terms to Know</h2>
+                
+                <div class="comparison-grid" style="font-size: 0.75em;">
+                    <div>
+                        <p><span class="key-term">Ethics (moral philosophy)</span> — philosophical study of morality</p>
+                        <p><span class="key-term">Morality</span> — beliefs about right/wrong, good/bad</p>
+                        <p><span class="key-term">Descriptive ethics</span> — scientific study of moral beliefs</p>
+                        <p><span class="key-term">Normative ethics</span> — study of moral principles/theories</p>
+                        <p><span class="key-term">Metaethics</span> — study of meaning of moral terms</p>
+                        <p><span class="key-term">Applied ethics</span> — application to specific cases</p>
+                    </div>
+                    <div>
+                        <p><span class="key-term">Instrumentally valuable</span> — valuable as a means</p>
+                        <p><span class="key-term">Intrinsically valuable</span> — valuable in itself</p>
+                        <p><span class="key-term">Universalizability</span> — moral rules apply to all similar cases</p>
+                        <p><span class="key-term">Impartiality</span> — all persons deserve equal consideration</p>
+                        <p><span class="key-term">Divine command theory</span> — morality from God's commands</p>
+                    </div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Study Tip</h3>
+                    <p>Make sure you can define each term AND give an example of how it applies. These concepts form the foundation for the entire course!</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 21: Chapter Summary -->
+            <section>
+                <h2>Chapter Summary</h2>
+                
+                <ul style="font-size: 0.9em;">
+                    <li>Ethics is the philosophical study of morality—beliefs about right/wrong and good/bad</li>
+                    <li>Ethics is inescapable; even avoiding it is a moral stance</li>
+                    <li>Three divisions: normative ethics, metaethics, applied ethics</li>
+                    <li>Key elements: reason, universalizability, impartiality, dominance of moral norms</li>
+                    <li>The divine command theory faces the Euthyphro dilemma</li>
+                    <li>Ethics is valuable for believers and nonbelievers alike</li>
+                </ul>
+                
+                <div class="study-note">
+                    <strong>💡 The big takeaway:</strong> Ethics requires careful reasoning about morality. We must examine our beliefs critically and support them with good reasons.
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Looking Ahead</h3>
+                    <p>This chapter establishes the foundation. Chapter 2 will explore challenges to ethics like subjectivism and relativism. Later chapters examine specific moral theories.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 22: Final Reflection -->
+            <section class="assessment-slide">
+                <h2>🤔 Final Reflection</h2>
+                
+                <div class="reflection-box">
+                    <p style="color: var(--pomegranate); font-weight: 600;">Discussion Questions:</p>
+                    <p>1. Do you think you've absorbed moral beliefs without questioning them? Which ones?</p>
+                    <p>2. Can you think of something you consider intrinsically valuable (valuable for its own sake)?</p>
+                    <p>3. Do you believe morality ultimately depends on God? Why or why not?</p>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Personal Application</h3>
+                    <p>These questions encourage students to apply the chapter's concepts to their own moral lives.</p>
+                    <p>The goal isn't to change their beliefs but to get them thinking critically about those beliefs—which is exactly what ethics is!</p>
+                </aside>
+            </section>
+            
+        </div>
+    </div>
+    
+    <div class="slide-counter"></div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: false,
+            transition: 'slide',
+            plugins: [ RevealNotes ]
+        });
+        
+        // Slide counter
+        function updateSlideCounter() {
+            const current = Reveal.getState().indexh + 1;
+            const total = Reveal.getTotalSlides();
+            document.querySelector('.slide-counter').textContent = current + '/' + total;
+        }
+        Reveal.on('slidechanged', updateSlideCounter);
+        updateSlideCounter();
+        
+        // Pop-up functionality
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('popup-trigger')) {
+                const popupId = e.target.getAttribute('data-popup');
+                const popup = document.getElementById(popupId);
+                if (popup) popup.classList.add('active');
+            }
+            if (e.target.classList.contains('popup-close')) {
+                e.target.closest('.popup').classList.remove('active');
+            }
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+            }
+        });
+    </script>
+</body>
+</html>

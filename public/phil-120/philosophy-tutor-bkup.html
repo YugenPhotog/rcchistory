@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHIL 120 Socratic Tutor - Richland Community College</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState, useRef, useEffect } = React;
+        
+        // Val Town proxy URL
+        const WORKER_URL = 'https://phil120tutor.val.run/';
+        
+        // Lucide React icons as inline SVG components
+        const BookOpen = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+        );
+        
+        const Send = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+        );
+        
+        const AlertCircle = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+        );
+        
+        const Download = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+        );
+
+        function PhilosophyTutor() {
+            const [messages, setMessages] = useState([
+                {
+                    role: 'assistant',
+                    content: "Hello! I'm your Socratic tutor for PHIL 120 primary source evaluations.\n\nI'm here to help you think more deeply about the philosophical texts you're analyzing - works by Plato, Aristotle, Mill, Kant, Hobbes, and others.\n\n**What I will do:**\n• Ask questions to help you explore ideas more deeply\n• Point out logical gaps or faulty reasoning\n• Help you see what might be missing from your analysis\n• Provide background on the text and author\n\n**What I will NOT do:**\n• Rewrite your sentences or paragraphs\n• Provide thesis statements or conclusions\n• Tell you what evidence to use\n• Grade your work or tell you if it's \"good enough\"\n\nPaste your rough draft below and let's begin our conversation. Remember: I'm here to ask questions, not give answers. The thinking is up to you!"
+                }
+            ]);
+            const [input, setInput] = useState('');
+            const [isLoading, setIsLoading] = useState(false);
+            const messagesEndRef = useRef(null);
+
+            const scrollToBottom = () => {
+                messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+            };
+
+            useEffect(() => {
+                scrollToBottom();
+            }, [messages]);
+
+            const downloadConversation = () => {
+                // Create text content from messages
+                let conversationText = "PHIL 120 Socratic Tutor - Conversation History\n";
+                conversationText += "Downloaded: " + new Date().toLocaleString() + "\n";
+                conversationText += "=" .repeat(60) + "\n\n";
+                
+                messages.forEach((msg, idx) => {
+                    if (idx === 0) return; // Skip initial greeting
+                    
+                    const speaker = msg.role === 'user' ? 'STUDENT' : 'SOCRATESBOT';
+                    conversationText += `${speaker}:\n`;
+                    conversationText += msg.content + "\n\n";
+                    conversationText += "-".repeat(60) + "\n\n";
+                });
+                
+                // Create blob and download
+                const blob = new Blob([conversationText], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `socratesbot-conversation-${new Date().toISOString().split('T')[0]}.txt`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            };
+
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                if (!input.trim() || isLoading) return;
+
+                const userMessage = input.trim();
+                setInput('');
+                setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
+                setIsLoading(true);
+
+                try {
+                    // Call the Val Town proxy
+                    const response = await fetch(WORKER_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            model: 'claude-sonnet-4-20250514',
+                            max_tokens: 2000,
+                            messages: [
+                                {
+                                    role: 'user',
+                                    content: `You are a Socratic tutor for PHIL 120 (Introduction to Ethics) at a community college. Students are working on primary source evaluations analyzing philosophical texts from "Doing Ethics: Moral Reasoning, Theory, and Contemporary Issues" by Lewis Vaughn.
+
+PRIMARY SOURCES IN THIS COURSE:
+The following are the assigned primary source readings from "Doing Ethics: Moral Reasoning, Theory, and Contemporary Issues" by Lewis Vaughn. Students must analyze these specific passages.
+
+1. THE EUTHYPHRO by Plato (Textbook pages 16-19)
+Key dialogue exploring the nature of piety and holiness. Socrates questions Euthyphro about whether something is holy because the gods love it, or do the gods love it because it is holy. Central question: Is piety loved by the gods because it is pious, or is it pious because it is loved by the gods?
+
+ASSIGNED TEXT (pages 16-19):
+[Dialogue excerpt where Euthyphro defines piety as "that which is dear to the gods" and Socrates challenges this through questioning about whether the same things can be both loved and hated by the gods, leading to the famous Euthyphro dilemma about whether holy things are holy because they are loved by gods or loved because they are holy.]
+
+2. UTILITARIANISM by John Stuart Mill (Textbook pages 112-116, Chapter II: What Utilitarianism Is)
+Mill's defense of the Greatest Happiness Principle - actions are right in proportion as they tend to promote happiness (pleasure and absence of pain), wrong as they produce unhappiness. Includes his crucial distinction between higher and lower pleasures.
+
+ASSIGNED TEXT (pages 112-116):
+[Mill's exposition of the utilitarian principle, his response to the "Epicurean" criticism, his famous distinction between quality and quantity of pleasures ("It is better to be a human being dissatisfied than a pig satisfied"), and his argument that the test of quality comes from competent judges who have experience of both types of pleasures.]
+
+3. LEVIATHAN by Thomas Hobbes (Textbook pages 116-118)
+Hobbes' account of the state of nature as a war of all against all, and his derivation of natural laws including the right of nature and the fundamental laws that lead to the social contract.
+
+ASSIGNED TEXT (pages 116-118):
+[Hobbes describes the natural condition of mankind - equality leading to competition, diffidence, and glory-seeking. The famous passage about life being "solitary, poor, nasty, brutish, and short" in the state of nature. His derivation of the right of nature (jus naturale) as liberty to preserve one's life, and the first and second laws of nature regarding seeking peace and laying down rights through contracts.]
+
+4. FUNDAMENTAL PRINCIPLES OF THE METAPHYSICS OF MORALS by Immanuel Kant (Textbook pages 141-144)
+Kant's derivation of the categorical imperative as the supreme principle of morality - the imperative that commands actions as objectively necessary in themselves, not as means to another end.
+
+ASSIGNED TEXT (pages 141-144, beginning "Now all imperatives command..."):
+[Kant distinguishes hypothetical from categorical imperatives. He argues that the categorical imperative commands an action as objectively necessary without reference to any purpose. His formulation: "Act only on that maxim whereby thou canst at the same time will that it should become a universal law." His examples of the lying promise and refusing to help others, showing how these maxims cannot become universal laws without contradiction.]
+
+5. NICOMACHEAN ETHICS by Aristotle (Textbook pages 160-163, Book II sections 1-2 and 6)
+Aristotle's account of how virtue is acquired through habit and his doctrine of the mean as the defining characteristic of virtue.
+
+ASSIGNED TEXT (pages 160-163):
+[Aristotle explains that moral virtue comes about through habit - we become just by doing just acts, temperate by doing temperate acts. His crucial claim that "we are what we repeatedly do." Then his doctrine of the mean: virtue is a state of character concerned with choice, lying in a mean relative to us, determined by reason. He explains how virtue aims at the intermediate between excess and deficiency - courage between cowardice and rashness, temperance between self-indulgence and insensibility, etc.]
+
+IMPORTANT INSTRUCTIONS FOR SOCRATESBOT:
+- When students reference these texts, verify they are engaging with the ASSIGNED passages above
+- If a student makes a claim about what an author says, check if that claim appears in the assigned text
+- Ask questions that help students notice KEY PASSAGES they may have overlooked
+- Challenge interpretations that don't match the actual text
+- Reference specific page numbers when pointing to important sections
+- If students seem to be relying on outside summaries rather than the text itself, probe with specific textual questions
+
+ASSIGNMENT REQUIREMENTS:
+Students write a minimum five-paragraph essay that:
+1. Analyzes a selected passage or argument
+2. Identifies the author's central claim
+3. Explains its relevance to larger ethical issues in the unit
+4. Uses proper citations with page numbers from Vaughn textbook
+5. Demonstrates close reading and critical engagement
+
+YOUR ROLE - BE A GENTLE SOCRATIC GUIDE:
+✓ Provide brief background on the primary source when relevant
+✓ Ask probing questions that help students think more deeply
+✓ Point out logical inconsistencies or faulty reasoning
+✓ Encourage them to see what they might have overlooked
+✓ Challenge them to consider counterarguments or complications
+✓ Be friendly, patient, and encouraging - like Socrates come to life
+
+ABSOLUTE PROHIBITIONS - NEVER DO THESE:
+✗ Rewrite sentences, paragraphs, or any portion of their text
+✗ Provide thesis statements or topic sentences
+✗ Suggest specific evidence or quotes they should use
+✗ Tell them "this is good enough" or grade their work
+✗ Give them answers - only ask questions that lead them to answers
+✗ Provide improved versions of their writing
+✗ Tell them whether their draft is ready to submit
+
+TONE: Friendly, gentle prodding. Use Socratic questions. Many students are underprepared for college-level work, so be patient and encouraging while still pushing them to think critically.
+
+When students paste drafts, read carefully and then:
+1. Acknowledge one strong element
+2. Ask 2-4 questions about areas that need deeper thinking
+3. Point out any logical gaps without filling them in
+4. Encourage them to revise and return
+
+If a student asks you to rewrite something or "fix" their writing, gently redirect: "I can't rewrite this for you, but I can ask you questions to help you improve it yourself..."
+
+Remember: Your goal is to ENCOURAGE CRITICAL THINKING, not replace it.`
+                                },
+                                ...messages.map(msg => ({
+                                    role: msg.role,
+                                    content: msg.content
+                                })),
+                                {
+                                    role: 'user',
+                                    content: userMessage
+                                }
+                            ]
+                        })
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        console.error('API Error:', errorData);
+                        throw new Error(`API request failed: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    const assistantMessage = data.content[0].text;
+
+                    setMessages(prev => [...prev, { role: 'assistant', content: assistantMessage }]);
+                } catch (error) {
+                    console.error('Error:', error);
+                    setMessages(prev => [...prev, { 
+                        role: 'assistant', 
+                        content: 'I apologize, but I encountered an error. Please try again. If the problem persists, contact your instructor.'
+                    }]);
+                } finally {
+                    setIsLoading(false);
+                }
+            };
+
+            return (
+                <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-4">
+                    <div className="max-w-4xl mx-auto">
+                        {/* Header */}
+                        <div className="bg-white rounded-lg shadow-lg p-6 mb-4">
+                            <div className="flex items-center justify-between mb-2">
+                                <div className="flex items-center gap-3">
+                                    <BookOpen size={32} className="text-blue-600" />
+                                    <div>
+                                        <h1 className="text-2xl font-bold text-gray-800">PHIL 120 Socratic Tutor</h1>
+                                        <p className="text-gray-600 text-sm">Primary Source Evaluation Assistant</p>
+                                    </div>
+                                </div>
+                                {messages.length > 1 && (
+                                    <button
+                                        onClick={downloadConversation}
+                                        className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                                    >
+                                        <Download size={20} />
+                                        <span className="hidden sm:inline">Download Conversation</span>
+                                    </button>
+                                )}
+                            </div>
+                            
+                            <div className="mt-4 p-4 bg-amber-50 border-l-4 border-amber-400 rounded">
+                                <div className="flex items-start gap-2">
+                                    <AlertCircle size={20} className="text-amber-600 flex-shrink-0 mt-1" />
+                                    <div className="text-sm text-amber-900">
+                                        <p className="font-semibold mb-1">Important: Academic Integrity</p>
+                                        <p>This tutor asks questions to help you think—it will NOT write your essay for you. Your instructor will know if you've used AI to generate text instead of doing your own thinking.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Chat Container */}
+                        <div className="bg-white rounded-lg shadow-lg flex flex-col" style={{ height: '600px' }}>
+                            {/* Messages */}
+                            <div className="flex-1 overflow-y-auto p-6 space-y-4">
+                                {messages.map((msg, idx) => (
+                                    <div
+                                        key={idx}
+                                        className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                                    >
+                                        <div
+                                            className={`max-w-[80%] rounded-lg p-4 ${
+                                                msg.role === 'user'
+                                                    ? 'bg-blue-600 text-white'
+                                                    : 'bg-gray-100 text-gray-800'
+                                            }`}
+                                        >
+                                            <p className="whitespace-pre-wrap">{msg.content}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                                {isLoading && (
+                                    <div className="flex justify-start">
+                                        <div className="bg-gray-100 rounded-lg p-4">
+                                            <div className="flex gap-2">
+                                                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                                                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                                                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                                <div ref={messagesEndRef} />
+                            </div>
+
+                            {/* Input Form */}
+                            <form onSubmit={handleSubmit} className="border-t border-gray-200 p-4">
+                                <div className="flex gap-2">
+                                    <textarea
+                                        value={input}
+                                        onChange={(e) => setInput(e.target.value)}
+                                        placeholder="Paste your draft or ask a question..."
+                                        className="flex-1 resize-none border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        rows="3"
+                                        disabled={isLoading}
+                                    />
+                                    <button
+                                        type="submit"
+                                        disabled={isLoading || !input.trim()}
+                                        className="bg-blue-600 text-white rounded-lg px-6 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
+                                    >
+                                        <Send size={20} />
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        {/* Footer */}
+                        <div className="mt-4 text-center text-sm text-gray-600">
+                            <p>This is a practice tool. Always submit your final work to your instructor for grading.</p>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<PhilosophyTutor />);
+    </script>
+</body>
+</html>

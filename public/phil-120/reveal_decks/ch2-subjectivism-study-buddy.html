@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHIL 120: Chapter 2 - Subjectivism, Relativism, and Emotivism (Study Buddy Edition)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/white.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --cloud-dancer: #F0EEE9;
+            --pomegranate: #9F2436;
+            --mauve-mist: #96637B;
+            --deep-teal: #2A5C6A;
+            --olivine: #545439;
+            --charcoal: #3E3B32;
+            --soft-cream: #F5F1E8;
+            --warm-white: #FAFAFA;
+        }
+        
+        .reveal {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1.3em;
+            background-color: var(--cloud-dancer);
+            color: var(--charcoal);
+        }
+        
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-weight: 700;
+            color: var(--pomegranate);
+            text-transform: none;
+        }
+        
+        .reveal h1 { font-size: 2.8em; }
+        .reveal h2 { font-size: 2.2em; margin-bottom: 0.5em; }
+        .reveal h3 { font-size: 1.5em; color: var(--deep-teal); }
+        
+        .reveal ul { list-style: none; padding-left: 0; }
+        .reveal ul li { margin: 0.6em 0; padding-left: 1.5em; position: relative; }
+        .reveal ul li:before { content: "◆"; color: var(--mauve-mist); font-size: 0.7em; position: absolute; left: 0; top: 0.2em; }
+        
+        .quote-box {
+            background: rgba(150, 99, 123, 0.1);
+            border-left: 4px solid var(--mauve-mist);
+            padding: 1.2em 1.5em;
+            margin: 1em 0;
+            font-style: italic;
+        }
+        .quote-attribution { text-align: right; color: var(--olivine); font-style: normal; font-size: 0.9em; margin-top: 0.5em; }
+        
+        .popup-trigger {
+            color: var(--deep-teal);
+            border-bottom: 2px dotted var(--deep-teal);
+            cursor: pointer;
+        }
+        .popup-trigger:hover { color: var(--pomegranate); border-bottom-color: var(--pomegranate); }
+        
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--warm-white);
+            color: var(--charcoal);
+            padding: 2em 2.5em;
+            border-radius: 12px;
+            box-shadow: 0 8px 40px rgba(62, 59, 50, 0.3);
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            z-index: 1000;
+            border: 3px solid var(--mauve-mist);
+        }
+        .popup.active { display: block; }
+        .popup-close { position: absolute; top: 12px; right: 18px; font-size: 1.8em; cursor: pointer; color: var(--pomegranate); }
+        .popup-term { font-size: 1.4em; font-weight: 700; color: var(--pomegranate); margin-bottom: 0.5em; }
+        .popup-pronunciation { font-style: italic; color: var(--olivine); font-size: 0.95em; margin-bottom: 0.8em; }
+        .popup .example-box { background: var(--soft-cream); padding: 1em; border-radius: 8px; margin-top: 1em; border-left: 3px solid var(--deep-teal); }
+        
+        .key-term { color: var(--pomegranate); font-weight: 600; }
+        
+        .img-placeholder {
+            background: var(--soft-cream);
+            border: 2px dashed var(--mauve-mist);
+            padding: 1.5em;
+            border-radius: 10px;
+            text-align: center;
+            color: var(--olivine);
+            font-size: 0.85em;
+        }
+        
+        .slide-counter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--charcoal);
+            color: var(--cloud-dancer);
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.85em;
+            border: 2px solid var(--mauve-mist);
+            z-index: 100;
+        }
+        
+        .shortcuts-box {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            background: rgba(42, 92, 106, 0.1);
+            padding: 1em;
+            border-radius: 10px;
+            border: 2px solid var(--deep-teal);
+            font-size: 0.5em;
+            text-align: left;
+        }
+        .shortcuts-title { color: var(--pomegranate); font-weight: 700; margin-bottom: 0.5em; }
+        
+        .assessment-slide { background: linear-gradient(135deg, rgba(150, 99, 123, 0.15) 0%, rgba(42, 92, 106, 0.15) 100%) !important; }
+        .reflection-box { background: var(--warm-white); padding: 1.5em 2em; border-radius: 12px; border: 3px solid var(--pomegranate); }
+        
+        .study-note { background: rgba(84, 84, 57, 0.1); padding: 1em; border-radius: 8px; border-left: 4px solid var(--olivine); font-size: 0.9em; margin-top: 1em; }
+        
+        .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1em; margin-top: 1em; }
+        .comparison-box { background: var(--warm-white); padding: 1em; border-radius: 10px; border: 2px solid var(--mauve-mist); }
+        .comparison-box.teal { border-color: var(--deep-teal); }
+        
+        .warning-box { background: rgba(159, 36, 54, 0.1); border: 2px solid var(--pomegranate); padding: 1em; border-radius: 8px; margin: 1em 0; }
+        
+        .argument-box { background: var(--soft-cream); padding: 1.2em; border-radius: 10px; margin: 1em 0; }
+        .argument-box p { margin: 0.4em 0; }
+        .argument-conclusion { border-top: 2px solid var(--mauve-mist); padding-top: 0.5em; margin-top: 0.5em; }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+            <!-- SLIDE 1: Title -->
+            <section>
+                <h1>Subjectivism, Relativism, and Emotivism</h1>
+                <p style="font-size: 1.1em; color: var(--deep-teal);">Chapter 2 · Introduction to Ethics</p>
+                <p style="font-size: 0.9em; color: var(--mauve-mist);">📚 Study Buddy Edition</p>
+                
+                <div class="shortcuts-box">
+                    <p class="shortcuts-title">⌨️ Keyboard Shortcuts</p>
+                    <p style="margin: 0.2em 0;">→ / Space: Next slide</p>
+                    <p style="margin: 0.2em 0;">← : Previous slide</p>
+                    <p style="margin: 0.2em 0;">S: Speaker notes</p>
+                    <p style="margin: 0.2em 0;">F: Fullscreen</p>
+                    <p style="margin: 0.2em 0;">O: Overview</p>
+                    <p style="margin: 0.2em 0;">ESC: Close pop-ups</p>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Welcome to Chapter 2!</h3>
+                    <p>This chapter tackles one of philosophy's biggest questions: <strong>Is morality objective, or is it just a matter of opinion?</strong></p>
+                    <p>Click on underlined terms for pop-up definitions. Press ESC to close pop-ups.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 2: The Central Question -->
+            <section>
+                <h2>The Central Question</h2>
+                <p style="font-size: 1.15em;">When we say something is morally right or wrong, what exactly are we claiming?</p>
+                
+                <ul>
+                    <li>Are we stating a <span class="popup-trigger" data-popup="fact-def">fact</span> that's true for everyone?</li>
+                    <li>Are we expressing a personal <span class="popup-trigger" data-popup="opinion-def">opinion</span>?</li>
+                    <li>Are we just venting an <span class="popup-trigger" data-popup="emotion-def">emotion</span>?</li>
+                </ul>
+                
+                <div class="img-placeholder" style="max-width: 450px; margin: 1em auto;">
+                    📸 <strong>Image:</strong> "philosopher thinking question marks contemplation abstract"
+                    <br><small>Person deep in thought with question marks</small>
+                </div>
+                
+                <div id="fact-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Fact</div>
+                    <p>A statement describing how things actually are, independent of beliefs or feelings.</p>
+                    <div class="example-box"><strong>Example:</strong> "Water freezes at 32°F" is true whether you believe it or not.</div>
+                </div>
+                
+                <div id="opinion-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Opinion</div>
+                    <p>A personal judgment that may vary from person to person, often thought to be neither objectively true nor false.</p>
+                    <div class="example-box"><strong>Example:</strong> "Chocolate ice cream is the best" is based on personal preference.</div>
+                </div>
+                
+                <div id="emotion-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Emotion</div>
+                    <p>A feeling (like anger, disgust, approval) that influences reactions but isn't itself a claim about the world.</p>
+                    <div class="example-box"><strong>Example:</strong> Saying "Yuck!" expresses disgust—it doesn't claim anything is true or false.</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Understanding This Slide</h3>
+                    <p>This frames the entire chapter. Every theory we examine is a different answer to: <strong>What are we doing when we make moral judgments?</strong></p>
+                    <p>Think about when you say "Stealing is wrong." Are you stating a fact, sharing a preference, or venting a feeling?</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 3: Four Views Overview -->
+            <section>
+                <h2>Four Views on Morality</h2>
+                
+                <div class="comparison-grid" style="font-size: 0.85em;">
+                    <div class="comparison-box">
+                        <h3 style="color: var(--pomegranate); font-size: 1.2em;">Objectivism</h3>
+                        <p>Moral truths exist independently of opinions</p>
+                    </div>
+                    <div class="comparison-box teal">
+                        <h3 style="color: var(--deep-teal); font-size: 1.2em;">Subjective Relativism</h3>
+                        <p>Morality is relative to <strong>individuals</strong></p>
+                    </div>
+                    <div class="comparison-box">
+                        <h3 style="color: var(--pomegranate); font-size: 1.2em;">Cultural Relativism</h3>
+                        <p>Morality is relative to <strong>cultures</strong></p>
+                    </div>
+                    <div class="comparison-box teal">
+                        <h3 style="color: var(--deep-teal); font-size: 1.2em;">Emotivism</h3>
+                        <p>Moral claims express <strong>emotions</strong>, not facts</p>
+                    </div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 The Big Picture</h3>
+                    <p>These four theories give different answers to what makes things right or wrong, and whether we can be mistaken about morality.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 4: Moral Objectivism -->
+            <section>
+                <h2>Moral Objectivism</h2>
+                <p><span class="popup-trigger" data-popup="objectivism-def">Moral objectivism</span> says moral truths exist independently of what anyone thinks or feels.</p>
+                
+                <ul>
+                    <li>Moral facts exist—like mathematical or scientific facts</li>
+                    <li>These facts are true for <em>everyone</em>, regardless of culture</li>
+                    <li>People can be <strong>mistaken</strong> about morality</li>
+                </ul>
+                
+                <div class="study-note">
+                    <strong>💡 Study Buddy:</strong> Objectivism does NOT mean rules have no exceptions! It just means there are genuine moral truths to discover.
+                </div>
+                
+                <div id="objectivism-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Moral Objectivism</div>
+                    <div class="popup-pronunciation">(ob-JEK-ti-viz-um)</div>
+                    <p>The theory that moral truths exist independently of what individuals or societies think.</p>
+                    <div class="example-box"><strong>Example:</strong> "Torturing innocents for fun is wrong" is TRUE as a fact—even if everyone believed otherwise.</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Understanding Objectivism</h3>
+                    <p>This is the "common sense" view. When you say "murder is wrong," you probably think you're stating something TRUE.</p>
+                    <p><strong>Common misconception:</strong> Objectivism ≠ Absolutism. You can believe moral facts exist while also thinking rules have exceptions.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 5: Subjective Relativism -->
+            <section>
+                <h2>Subjective Relativism</h2>
+                <p><span class="popup-trigger" data-popup="subj-rel-def">Subjective relativism</span> says an action is morally right if the <em>individual</em> approves of it.</p>
+                
+                <ul>
+                    <li>Morality is <strong>relative to individuals</strong></li>
+                    <li>Your approval <em>makes</em> an action right (for you)</li>
+                    <li>No one can be objectively wrong about morality</li>
+                </ul>
+                
+                <div class="quote-box">
+                    "Morality becomes like taste in ice cream—you prefer chocolate, I prefer vanilla, and neither of us is <em>wrong</em>."
+                </div>
+                
+                <div id="subj-rel-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Subjective Relativism</div>
+                    <div class="popup-pronunciation">(sub-JEK-tiv REL-uh-ti-viz-um)</div>
+                    <p>The view that an action is morally right if one approves of it. Your approval makes it right <em>for you</em>.</p>
+                    <div class="example-box"><strong>Example:</strong> If Ann approves of X and Carlos disapproves, X is right for Ann but wrong for Carlos. Neither is mistaken.</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Key Distinction</h3>
+                    <p><strong>Objectivist:</strong> "I approve of honesty because it's right."</p>
+                    <p><strong>Subjective relativist:</strong> "Honesty is right (for me) because I approve of it."</p>
+                    <p>Notice how the direction of explanation flips!</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 6: Cultural Relativism -->
+            <section>
+                <h2>Cultural Relativism</h2>
+                <p><span class="popup-trigger" data-popup="cult-rel-def">Cultural relativism</span> says an action is morally right if one's <em>culture</em> approves of it.</p>
+                
+                <ul>
+                    <li>Morality is <strong>relative to cultures</strong>, not individuals</li>
+                    <li>What's right in one culture may be wrong in another</li>
+                    <li>No culture's morality is objectively superior</li>
+                </ul>
+                
+                <div class="img-placeholder" style="max-width: 450px; margin: 1em auto;">
+                    📸 <strong>Image:</strong> "world cultures diversity globe mosaic"
+                    <br><small>Diverse cultural symbols around a globe</small>
+                </div>
+                
+                <div id="cult-rel-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Cultural Relativism</div>
+                    <div class="popup-pronunciation">(KUL-chur-ul REL-uh-ti-viz-um)</div>
+                    <p>The view that an action is morally right if one's <strong>culture</strong> approves of it.</p>
+                    <div class="example-box"><strong>Example:</strong> If Culture A approves of practice X and Culture B disapproves, X is right in A and wrong in B.</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Key Difference from Subjective Relativism</h3>
+                    <p>It's not YOUR approval that matters—it's your CULTURE'S approval. If you disagree with your culture, you're the one who's wrong!</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 7: Emotivism -->
+            <section>
+                <h2>Emotivism</h2>
+                <p><span class="popup-trigger" data-popup="emotivism-def">Emotivism</span> says moral statements are neither true nor false—they're expressions of emotion.</p>
+                
+                <ul>
+                    <li>Moral utterances are like exclamations: "Boo!" or "Hooray!"</li>
+                    <li>Saying "Stealing is wrong" = "Stealing—boo!"</li>
+                    <li>There are no <span class="popup-trigger" data-popup="moral-facts-def">moral facts</span> to disagree about</li>
+                </ul>
+                
+                <div class="study-note">
+                    <strong>💡 Study Buddy:</strong> Emotivism is a type of <span class="popup-trigger" data-popup="noncog-def">noncognitivism</span>—moral statements don't express beliefs that can be true or false.
+                </div>
+                
+                <div id="emotivism-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Emotivism</div>
+                    <div class="popup-pronunciation">(ee-MOH-ti-viz-um)</div>
+                    <p>The view that moral utterances are neither true nor false but are expressions of emotions or attitudes.</p>
+                    <div class="example-box"><strong>Key philosopher:</strong> A.J. Ayer (1910-1989) argued moral statements "express no proposition which can be either true or false."</div>
+                </div>
+                
+                <div id="moral-facts-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Moral Facts</div>
+                    <p>Objective truths about what is morally right and wrong—facts that exist independently of beliefs or feelings.</p>
+                    <div class="example-box"><strong>Emotivists deny these exist.</strong> When we make moral claims, we're expressing attitudes, not describing facts.</div>
+                </div>
+                
+                <div id="noncog-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Noncognitivism</div>
+                    <div class="popup-pronunciation">(non-KOG-ni-ti-viz-um)</div>
+                    <p>The view that moral judgments do NOT express beliefs that can be true or false. Instead, they express attitudes, emotions, or commands.</p>
+                    <div class="example-box"><strong>Contrast with cognitivism:</strong> Cognitivists think "Murder is wrong" expresses a belief that CAN be true or false.</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 The Radical View</h3>
+                    <p>Emotivism is the most radical position. It says when we argue about ethics, we're not disagreeing about facts—just expressing different feelings.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 8: Problems with Subjective Relativism -->
+            <section>
+                <h2>Problems with Subjective Relativism</h2>
+                <p>If subjective relativism is true, troubling things follow:</p>
+                
+                <ul>
+                    <li><strong>Moral <span class="popup-trigger" data-popup="infallibility-def">infallibility</span>:</strong> You can never be mistaken</li>
+                    <li><strong>No genuine disagreement:</strong> When you and I disagree, we're both "right"</li>
+                    <li><strong>Extreme cases:</strong> If Hitler approved of genocide, it was right <em>for him</em></li>
+                </ul>
+                
+                <div class="warning-box">
+                    <strong>⚠️ Core problem:</strong> Our moral experience tells us we <em>can</em> be mistaken. We sometimes realize past beliefs were wrong.
+                </div>
+                
+                <div id="infallibility-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Moral Infallibility</div>
+                    <div class="popup-pronunciation">(in-FAL-ih-BIL-ih-tee)</div>
+                    <p>The condition of being incapable of making a moral mistake. Whatever you believe is right IS right.</p>
+                    <div class="example-box"><strong>The problem:</strong> Haven't you ever realized you were wrong about a moral issue? Subjective relativism says that's impossible.</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Why This Matters</h3>
+                    <p>These aren't "gotcha" arguments. They show subjective relativism conflicts with deep features of our moral experience.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 9: The Argument for Cultural Relativism -->
+            <section>
+                <h2>The Argument for Cultural Relativism</h2>
+                <p>Cultural relativism is often based on this argument:</p>
+                
+                <div class="argument-box">
+                    <p><strong>1.</strong> People's judgments about right and wrong differ from culture to culture.</p>
+                    <p><strong>2.</strong> If judgments differ, then right and wrong are relative to culture.</p>
+                    <p class="argument-conclusion"><strong>∴</strong> Therefore, right and wrong are relative to culture.</p>
+                </div>
+                
+                <p style="color: var(--olivine);">The argument is <span class="popup-trigger" data-popup="valid-def">valid</span>—but is it <span class="popup-trigger" data-popup="sound-def">sound</span>?</p>
+                
+                <div id="valid-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Valid Argument</div>
+                    <p>An argument where IF the premises are true, the conclusion MUST be true. Validity is about structure, not whether premises are actually true.</p>
+                    <div class="example-box"><strong>Valid but unsound:</strong> "All cats are purple. Fluffy is a cat. ∴ Fluffy is purple." (Valid structure, false premise!)</div>
+                </div>
+                
+                <div id="sound-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Sound Argument</div>
+                    <p>An argument that is (1) valid AND (2) has all true premises. A sound argument guarantees a true conclusion.</p>
+                    <div class="example-box"><strong>Key question:</strong> Is Premise 2 true? Does diversity of opinion PROVE morality is relative?</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 The Logical Flaw</h3>
+                    <p>People disagree about whether Earth is flat. Does this prove "the shape of Earth is relative"? Of course not! Disagreement doesn't prove there's no right answer.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 10: Assessment Break -->
+            <section class="assessment-slide">
+                <h2>🤔 Check Your Understanding</h2>
+                
+                <div class="reflection-box">
+                    <p style="color: var(--pomegranate); font-weight: 600;">Reflection Question:</p>
+                    <p style="font-style: italic;">"People disagree about morality. Therefore, morality is relative."</p>
+                    <p style="margin-top: 1em;">What's the logical problem with this argument? Can you think of a parallel example showing why disagreement doesn't prove relativism?</p>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Think About It</h3>
+                    <p>Parallel examples: People disagree about climate change—does that mean climate facts are relative? Ancient people thought Earth was flat—was it flat FOR THEM?</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 11: Problems - Cultural Infallibility -->
+            <section>
+                <h2>Problems with Cultural Relativism</h2>
+                <h3>Problem 1: Cultural Infallibility</h3>
+                
+                <p>If cultural relativism is true, <strong>cultures cannot be morally mistaken</strong>.</p>
+                
+                <ul>
+                    <li>If a culture approves of genocide, genocide is right in that culture</li>
+                    <li>Nazi Germany's approval made the Holocaust permissible (for them)</li>
+                    <li>We cannot legitimately criticize other cultures' practices</li>
+                </ul>
+                
+                <div class="quote-box">
+                    "Because they were approved by their respective societies, they were just as morally justified as the activities of Albert Schweitzer, Jonas Salk, or Florence Nightingale."
+                    <div class="quote-attribution">— Textbook, p. 27</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 The Holocaust Problem</h3>
+                    <p>Most people find this conclusion repugnant. But if you accept cultural relativism, you're committed to it.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 12: Problems - Social Reformers -->
+            <section>
+                <h2>Problems with Cultural Relativism</h2>
+                <h3>Problem 2: Social Reformers Are Always Wrong</h3>
+                
+                <p>Cultural relativism implies <span class="popup-trigger" data-popup="reformer-def">social reformers</span> who disagree with their culture are <strong>automatically immoral</strong>.</p>
+                
+                <ul>
+                    <li>Martin Luther King Jr. challenged segregation laws</li>
+                    <li>By cultural relativist logic, he was <em>morally wrong</em></li>
+                    <li>The culture's approval is the ultimate authority</li>
+                </ul>
+                
+                <div class="img-placeholder" style="max-width: 450px; margin: 1em auto;">
+                    📸 <strong>Image:</strong> "civil rights movement march MLK historical"
+                    <br><small>Civil rights protesters marching for equality</small>
+                </div>
+                
+                <div id="reformer-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Social Reformer</div>
+                    <p>A person who works to change social practices they believe are unjust—often against prevailing cultural views.</p>
+                    <div class="example-box"><strong>The paradox:</strong> We admire reformers as moral heroes. But cultural relativism says they were WRONG to challenge their cultures.</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Moral Progress Impossible</h3>
+                    <p>If cultural relativism is true, cultures can CHANGE their views but never IMPROVE them—there's no standard higher than the culture itself.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 13: Problems - Tolerance Contradiction -->
+            <section>
+                <h2>Problems with Cultural Relativism</h2>
+                <h3>Problem 3: The Tolerance Contradiction</h3>
+                
+                <p>Many accept cultural relativism because they value <span class="popup-trigger" data-popup="tolerance-def">tolerance</span>. But:</p>
+                
+                <div class="comparison-grid" style="font-size: 0.9em;">
+                    <div class="comparison-box">
+                        <h3 style="color: var(--pomegranate); font-size: 1.1em;">If tolerance is objectively good...</h3>
+                        <p>Then cultural relativism is FALSE (there's at least one objective value).</p>
+                    </div>
+                    <div class="comparison-box teal">
+                        <h3 style="color: var(--deep-teal); font-size: 1.1em;">If tolerance is NOT objectively good...</h3>
+                        <p>Then intolerant cultures are just as "right" as tolerant ones.</p>
+                    </div>
+                </div>
+                
+                <p style="margin-top: 1em;">Cultural relativists cannot consistently advocate tolerance.</p>
+                
+                <div id="tolerance-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Tolerance</div>
+                    <p>Willingness to accept practices or beliefs that differ from one's own.</p>
+                    <div class="example-box"><strong>The contradiction:</strong> To say "we SHOULD be tolerant" is an objective moral claim—but cultural relativism denies objective moral claims!</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 A Self-Undermining Theory</h3>
+                    <p>The very value (tolerance) that makes the theory appealing is incompatible with the theory itself!</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 14: Do Cultures Really Disagree? -->
+            <section>
+                <h2>Do Cultures Really Disagree?</h2>
+                <p>Diversity of moral <em>judgments</em> may not reflect diversity of moral <em>principles</em>.</p>
+                
+                <div class="argument-box">
+                    <p><strong>Example: Killing fathers at age 60</strong></p>
+                    <p style="font-size: 0.9em;">Some cultures practiced this. Different moral principles? Or different <em>factual beliefs</em>?</p>
+                </div>
+                
+                <ul>
+                    <li>They believed you enter heaven at death in your current condition</li>
+                    <li>They believed men peak physically/mentally at 60</li>
+                    <li>Given these beliefs, killing at 60 <em>expresses</em> care for father's well-being</li>
+                </ul>
+                
+                <p style="font-size: 0.95em;">The underlying principle—"care for your parents"—is the <strong>same</strong>.</p>
+                
+                <aside class="notes">
+                    <h3>📖 Key Insight</h3>
+                    <p>Many apparent moral disagreements are really FACTUAL disagreements. If cultures share basic principles, the argument for relativism loses force.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 15: Cross-Cultural Agreement -->
+            <section>
+                <h2>Cross-Cultural Moral Agreement</h2>
+                <p>Research suggests cultures share many <span class="popup-trigger" data-popup="universal-def">core moral principles</span>:</p>
+                
+                <ul>
+                    <li>Prohibitions against murder, lying, and incest</li>
+                    <li>Obligations of fairness and reciprocity</li>
+                    <li>Duties to care for children and parents</li>
+                    <li>Values of loyalty, courage, and generosity</li>
+                </ul>
+                
+                <div class="study-note">
+                    <strong>💡 Study Buddy:</strong> Philosopher Walter T. Stace notes anthropologists found "common moral elements" across extremely diverse cultures.
+                </div>
+                
+                <div id="universal-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Moral Universals</div>
+                    <p>Moral principles appearing across all or nearly all human cultures, suggesting they may reflect objective moral truths.</p>
+                    <div class="example-box"><strong>Examples:</strong> Nearly all cultures prohibit unprovoked murder, value care for children, and recognize fairness.</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Evidence Against Relativism</h3>
+                    <p>If there ARE shared moral principles across cultures, morality isn't simply relative. There may be common human morality expressed differently.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 16: Society-Identification Problem -->
+            <section>
+                <h2>The Society-Identification Problem</h2>
+                <p>Which society determines what's right <em>for you</em>?</p>
+                
+                <ul>
+                    <li>You belong to many groups: nation, religion, profession, neighborhood</li>
+                    <li>These groups may have conflicting moral views</li>
+                    <li>Which one is "your culture"?</li>
+                </ul>
+                
+                <div class="quote-box" style="font-size: 0.9em;">
+                    "What society do you belong to if you are an Italian American Buddhist living in Atlanta, who is a member of the National Organization for Women and a breast cancer support group?"
+                    <div class="quote-attribution">— Textbook, p. 28</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 A Practical Problem</h3>
+                    <p>Cultural relativism assumes simple, distinct cultures. But modern people have multiple overlapping memberships with conflicting values.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 17: A.J. Ayer on Emotivism -->
+            <section>
+                <h2>A.J. Ayer on Emotivism</h2>
+                
+                <div style="display: flex; gap: 1.5em; align-items: flex-start;">
+                    <div class="img-placeholder" style="width: 200px; flex-shrink: 0; padding: 1em;">
+                        📸 <strong>Image:</strong> "A.J. Ayer philosopher portrait"
+                        <br><small>A.J. Ayer (1910-1989)</small>
+                    </div>
+                    <div>
+                        <p><span class="popup-trigger" data-popup="ayer-def">A.J. Ayer</span> argued moral statements express no proposition that can be true or false.</p>
+                        
+                        <div class="quote-box" style="font-size: 0.9em;">
+                            "It is as if I had written 'Stealing money!!'—where the exclamation marks show that a special sort of moral disapproval is being expressed."
+                            <div class="quote-attribution">— A.J. Ayer</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="ayer-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">A.J. Ayer (1910-1989)</div>
+                    <p>British philosopher and proponent of <strong>logical positivism</strong>—meaningful statements must be logically true or empirically verifiable.</p>
+                    <p>Ayer argued ethical statements fail both tests, so they must be expressions of emotion, not factual claims.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 The Boo-Hooray Theory</h3>
+                    <p>Sometimes called the "Boo-Hooray theory" because it reduces moral claims to "Boo!" (disapproval) and "Hooray!" (approval).</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 18: Functions of Moral Language -->
+            <section>
+                <h2>Functions of Moral Language</h2>
+                <p>According to emotivism, moral utterances serve two functions:</p>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <h3 style="color: var(--pomegranate); font-size: 1.1em;">1. Express Emotions</h3>
+                        <p>Vent feelings of approval or disapproval</p>
+                        <p><em>"Violence is wrong" = expressing disgust</em></p>
+                    </div>
+                    <div class="comparison-box teal">
+                        <h3 style="color: var(--deep-teal); font-size: 1.1em;">2. Influence Others</h3>
+                        <p>Try to make others feel the same way</p>
+                        <p><em>"Violence is wrong" = persuading YOU to disapprove</em></p>
+                    </div>
+                </div>
+                
+                <p style="margin-top: 1em; font-size: 0.95em;">What moral statements do NOT do: state facts about the world.</p>
+                
+                <aside class="notes">
+                    <h3>📖 Radical Implications</h3>
+                    <p>If emotivism is true, moral arguments are really just sophisticated forms of manipulation—not genuine rational persuasion.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 19: Problems with Emotivism - Disagreement -->
+            <section>
+                <h2>Problems with Emotivism</h2>
+                <h3>Problem 1: Moral Disagreement</h3>
+                
+                <p>Emotivism implies genuine moral disagreements are <strong>impossible</strong>.</p>
+                
+                <ul>
+                    <li>Jane says "Abortion is right" (expressing approval)</li>
+                    <li>Ellen says "Abortion is wrong" (expressing disapproval)</li>
+                    <li>Are they disagreeing? Or just having different feelings?</li>
+                </ul>
+                
+                <div class="warning-box">
+                    <strong>⚠️ The problem:</strong> We think moral disagreements are REAL—like disagreeing about facts, not just having different tastes.
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Not Just Different Flavors</h3>
+                    <p>It's like "Yum, chocolate!" vs. "Yuck, chocolate!"—different preferences, but not really DISAGREEING about anything. But moral debates feel different.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 20: Assessment Break -->
+            <section class="assessment-slide">
+                <h2>🤔 Quick Quiz</h2>
+                
+                <div class="reflection-box">
+                    <p style="color: var(--pomegranate); font-weight: 600;">According to emotivism, when you say "Helping others is good," you are:</p>
+                    <p style="margin-left: 1em;">A) Stating a fact about helping</p>
+                    <p style="margin-left: 1em;">B) Expressing your culture's approval</p>
+                    <p style="margin-left: 1em;">C) Expressing approval (like saying "Hooray!")</p>
+                    <p style="margin-left: 1em;">D) Making a claim true relative to your values</p>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Answer: C</h3>
+                    <p>Emotivism says moral statements express emotions—not facts (A), not specifically cultural (B), and not "true" in any sense (D).</p>
+                    <p><strong>Confusion alert:</strong> Subjective relativism says the claim IS true (for you). Emotivism says it's neither true nor false.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 21: Problems - Moral Reasoning -->
+            <section>
+                <h2>Problems with Emotivism</h2>
+                <h3>Problem 2: The Role of Reasons</h3>
+                
+                <p>We normally think moral claims can be <strong>supported by reasons</strong>.</p>
+                
+                <div class="argument-box">
+                    <p>"Euthanasia is wrong."</p>
+                    <p>"Why?"</p>
+                    <p>"Because it violates the sanctity of life and could lead to abuse."</p>
+                </div>
+                
+                <p>Emotivism says these "reasons" don't logically support the claim—they just psychologically influence attitudes.</p>
+                
+                <aside class="notes">
+                    <h3>📖 Reasons vs. Manipulation</h3>
+                    <p>Emotivism blurs the line between rational persuasion (giving reasons) and manipulation (using rhetoric to change feelings). Most people think moral reasoning is more than manipulation.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 22: Problems - Nothing Good or Bad -->
+            <section>
+                <h2>Problems with Emotivism</h2>
+                <h3>Problem 3: Nothing Is Actually Good or Bad</h3>
+                
+                <p>Emotivism implies there are <strong>no properties of goodness or badness</strong> in the world.</p>
+                
+                <div class="quote-box" style="font-size: 0.9em;">
+                    "Suppose a six-year-old girl is living in Syria during the civil war. Assad's henchmen firebomb the village... the girl is burned from head to toe and endures excruciating pain for three days before she dies."
+                    <div class="quote-attribution">— Textbook, p. 30</div>
+                </div>
+                
+                <p>When we say "How horrible!"—are we just expressing feelings? Or recognizing something truly bad?</p>
+                
+                <aside class="notes">
+                    <h3>📖 The Deepest Problem</h3>
+                    <p>We don't just have feelings ABOUT suffering—we think suffering IS bad. Emotivism seems to deny this basic truth about the world.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 23: Chapter Conclusion -->
+            <section>
+                <h2>Evaluating the Theories</h2>
+                <p>The textbook concludes that <strong>some form of moral objectivism</strong> best explains our moral experience.</p>
+                
+                <ul>
+                    <li><strong>Subjective Relativism:</strong> Implies we're infallible—contradicts experience</li>
+                    <li><strong>Cultural Relativism:</strong> Implies cultures are infallible, reformers wrong</li>
+                    <li><strong>Emotivism:</strong> Denies moral facts, can't explain reasoning</li>
+                    <li><strong>Objectivism:</strong> Allows moral mistakes, progress, and reasoning</li>
+                </ul>
+                
+                <div class="study-note">
+                    <strong>💡 Key insight:</strong> The alternative theories can't adequately explain moral disagreement, progress, or the role of reasons in ethics.
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 The Bottom Line</h3>
+                    <p>Objectivism isn't proven—but it better fits how we actually experience morality than the alternatives.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 24: Key Terms Review -->
+            <section>
+                <h2>Key Terms to Know</h2>
+                
+                <div class="comparison-grid" style="font-size: 0.8em;">
+                    <div>
+                        <p><span class="key-term">Objectivism</span> — Moral truths exist independently</p>
+                        <p><span class="key-term">Subjective Relativism</span> — Right if individual approves</p>
+                        <p><span class="key-term">Cultural Relativism</span> — Right if culture approves</p>
+                    </div>
+                    <div>
+                        <p><span class="key-term">Emotivism</span> — Moral claims express emotions</p>
+                        <p><span class="key-term">Cognitivism</span> — Moral claims can be true/false</p>
+                        <p><span class="key-term">Noncognitivism</span> — Moral claims can't be true/false</p>
+                    </div>
+                </div>
+                
+                <p style="margin-top: 1em; font-size: 0.9em;"><span class="key-term">Moral Infallibility</span> — Being incapable of moral mistakes (implied by relativism)</p>
+                
+                <aside class="notes">
+                    <h3>📖 Study Tip</h3>
+                    <p>Practice explaining each term in one sentence, then explaining its main implication for ethics.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 25: Final Reflection -->
+            <section class="assessment-slide">
+                <h2>🤔 Final Reflection</h2>
+                
+                <div class="reflection-box">
+                    <p style="color: var(--pomegranate); font-weight: 600;">Discussion Questions:</p>
+                    <p>1. Which view do you find most plausible? Why?</p>
+                    <p>2. Can you think of a moral belief you once held that you now think was mistaken?</p>
+                    <p>3. What would it mean for society if emotivism were true?</p>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Thinking Deeper</h3>
+                    <p>These questions connect the abstract theories to your own moral experience. The chapter argues our experience of moral fallibility and genuine disagreement supports objectivism.</p>
+                </aside>
+            </section>
+            
+        </div>
+    </div>
+    
+    <div class="slide-counter"></div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: false,
+            transition: 'slide',
+            plugins: [ RevealNotes ]
+        });
+        
+        // Slide counter
+        function updateSlideCounter() {
+            const current = Reveal.getState().indexh + 1;
+            const total = Reveal.getTotalSlides();
+            document.querySelector('.slide-counter').textContent = current + '/' + total;
+        }
+        Reveal.on('slidechanged', updateSlideCounter);
+        updateSlideCounter();
+        
+        // Pop-up functionality
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('popup-trigger')) {
+                const popupId = e.target.getAttribute('data-popup');
+                const popup = document.getElementById(popupId);
+                if (popup) popup.classList.add('active');
+            }
+            if (e.target.classList.contains('popup-close')) {
+                e.target.closest('.popup').classList.remove('active');
+            }
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+            }
+        });
+    </script>
+</body>
+</html>
