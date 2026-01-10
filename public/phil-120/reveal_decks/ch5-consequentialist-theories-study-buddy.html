@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHIL 120: Chapter 5 - Consequentialist Theories (Study Buddy Edition)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/white.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --cloud-dancer: #F0EEE9;
+            --pomegranate: #9F2436;
+            --mauve-mist: #96637B;
+            --deep-teal: #2A5C6A;
+            --olivine: #545439;
+            --charcoal: #3E3B32;
+            --soft-cream: #F5F1E8;
+            --warm-white: #FAFAFA;
+        }
+        
+        .reveal {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1.3em;
+            background-color: var(--cloud-dancer);
+            color: var(--charcoal);
+        }
+        
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-weight: 700;
+            color: var(--pomegranate);
+            text-transform: none;
+        }
+        
+        .reveal h1 { font-size: 2.8em; }
+        .reveal h2 { font-size: 2.2em; margin-bottom: 0.5em; }
+        .reveal h3 { font-size: 1.5em; color: var(--deep-teal); }
+        
+        .reveal ul { list-style: none; padding-left: 0; }
+        .reveal ul li { margin: 0.6em 0; padding-left: 1.5em; position: relative; }
+        .reveal ul li:before { content: "◆"; color: var(--mauve-mist); font-size: 0.7em; position: absolute; left: 0; top: 0.2em; }
+        
+        .quote-box {
+            background: rgba(150, 99, 123, 0.1);
+            border-left: 4px solid var(--mauve-mist);
+            padding: 1.2em 1.5em;
+            margin: 1em 0;
+            font-style: italic;
+        }
+        .quote-attribution { text-align: right; color: var(--olivine); font-style: normal; font-size: 0.9em; margin-top: 0.5em; }
+        
+        .popup-trigger {
+            color: var(--deep-teal);
+            border-bottom: 2px dotted var(--deep-teal);
+            cursor: pointer;
+        }
+        .popup-trigger:hover { color: var(--pomegranate); border-bottom-color: var(--pomegranate); }
+        
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--warm-white);
+            color: var(--charcoal);
+            padding: 2em 2.5em;
+            border-radius: 12px;
+            box-shadow: 0 8px 40px rgba(62, 59, 50, 0.3);
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            z-index: 1000;
+            border: 3px solid var(--mauve-mist);
+        }
+        .popup.active { display: block; }
+        .popup-close { position: absolute; top: 12px; right: 18px; font-size: 1.8em; cursor: pointer; color: var(--pomegranate); }
+        .popup-term { font-size: 1.4em; font-weight: 700; color: var(--pomegranate); margin-bottom: 0.5em; }
+        .popup-pronunciation { font-style: italic; color: var(--olivine); font-size: 0.95em; margin-bottom: 0.8em; }
+        .popup .example-box { background: var(--soft-cream); padding: 1em; border-radius: 8px; margin-top: 1em; border-left: 3px solid var(--deep-teal); }
+        
+        .key-term { color: var(--pomegranate); font-weight: 600; }
+        
+        .img-placeholder {
+            background: var(--soft-cream);
+            border: 2px dashed var(--mauve-mist);
+            padding: 1.5em;
+            border-radius: 10px;
+            text-align: center;
+            color: var(--olivine);
+            font-size: 0.85em;
+        }
+        
+        .slide-counter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--charcoal);
+            color: var(--cloud-dancer);
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.85em;
+            border: 2px solid var(--mauve-mist);
+            z-index: 100;
+        }
+        
+        .assessment-slide { background: linear-gradient(135deg, rgba(150, 99, 123, 0.15) 0%, rgba(42, 92, 106, 0.15) 100%) !important; }
+        .reflection-box { background: var(--warm-white); padding: 1.5em 2em; border-radius: 12px; border: 3px solid var(--pomegranate); }
+        
+        .study-note { background: rgba(84, 84, 57, 0.1); padding: 1em; border-radius: 8px; border-left: 4px solid var(--olivine); font-size: 0.9em; margin-top: 1em; }
+        
+        .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1em; margin-top: 1em; }
+        .comparison-box { background: var(--warm-white); padding: 1em; border-radius: 10px; border: 2px solid var(--mauve-mist); }
+        .comparison-box.teal { border-color: var(--deep-teal); }
+        
+        .warning-box { background: rgba(159, 36, 54, 0.1); border: 2px solid var(--pomegranate); padding: 1em; border-radius: 8px; margin: 1em 0; }
+        
+        .theory-card { background: var(--soft-cream); padding: 1.2em; border-radius: 10px; margin: 0.8em 0; border-left: 4px solid var(--deep-teal); }
+        .theory-name { color: var(--pomegranate); font-weight: 700; font-size: 1.1em; margin-bottom: 0.3em; }
+        
+        .philosopher-box { background: rgba(42, 92, 106, 0.1); padding: 1em; border-radius: 10px; border: 2px solid var(--deep-teal); margin: 1em 0; }
+        .philosopher-name { color: var(--deep-teal); font-weight: 700; font-size: 1.1em; }
+        .philosopher-dates { color: var(--olivine); font-size: 0.85em; }
+        
+        .criteria-box { background: var(--warm-white); border: 2px solid var(--olivine); border-radius: 10px; padding: 1em; margin: 0.5em 0; }
+        .criteria-number { display: inline-block; background: var(--pomegranate); color: white; width: 1.5em; height: 1.5em; border-radius: 50%; text-align: center; line-height: 1.5em; margin-right: 0.5em; font-weight: 700; }
+        
+        .case-study { background: rgba(150, 99, 123, 0.08); border: 2px solid var(--mauve-mist); border-radius: 10px; padding: 1em; margin: 1em 0; }
+        .case-title { color: var(--pomegranate); font-weight: 700; margin-bottom: 0.5em; }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+            <!-- SLIDE 1: Title -->
+            <section>
+                <h1>Consequentialist Theories</h1>
+                <h3 style="color: var(--mauve-mist);">Maximize the Good</h3>
+                <p style="font-size: 1.1em; color: var(--deep-teal);">Chapter 5 · Introduction to Ethics</p>
+                <p style="font-size: 0.9em; color: var(--mauve-mist);">📚 Study Buddy Edition</p>
+                
+                <p style="margin-top: 2em;"><span class="popup-trigger" data-popup="shortcuts-popup">⌨️ Keyboard Shortcuts</span></p>
+                
+                <div id="shortcuts-popup" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Keyboard Shortcuts</div>
+                    <p style="margin: 0.5em 0;">→ / Space: Next slide</p>
+                    <p style="margin: 0.5em 0;">← : Previous slide</p>
+                    <p style="margin: 0.5em 0;">S: Speaker notes</p>
+                    <p style="margin: 0.5em 0;">F: Fullscreen</p>
+                    <p style="margin: 0.5em 0;">O: Overview</p>
+                    <p style="margin: 0.5em 0;">ESC: Close pop-ups</p>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Welcome to Chapter 5!</h3>
+                    <p>This chapter examines consequentialist moral theories—theories that judge actions by their outcomes. You'll learn about ethical egoism, utilitarianism (both act and rule versions), and social contract theory.</p>
+                    <p>Key question: Should we judge actions by their consequences, and if so, whose good should we maximize?</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 2: The Consequentialist Core -->
+            <section>
+                <h2>The Consequentialist Appeal</h2>
+                <p><span class="popup-trigger" data-popup="consequentialism-def">Consequentialist theories</span> share an attractive, commonsensical core:</p>
+                
+                <div class="quote-box">
+                    Right actions must produce the best balance of <strong>good</strong> over <strong>evil</strong>.
+                </div>
+                
+                <ul>
+                    <li>What matters most is the <em>results</em> of our actions</li>
+                    <li>We naturally judge actions by what they produce</li>
+                    <li>Moral choice becomes (seemingly) straightforward calculation</li>
+                </ul>
+                
+                <div id="consequentialism-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Consequentialist Theory</div>
+                    <p>A moral theory asserting that what makes an action right is its <strong>consequences</strong>. The rightness of an action depends on the amount of good it produces.</p>
+                    <div class="example-box"><strong>Core idea:</strong> Don't focus on what kind of action it is—focus on what results it brings about. Good consequences = right action.</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Why Consequentialism Appeals</h3>
+                    <p>Consequentialism matches our everyday moral intuitions in many cases. We often justify actions by pointing to their good results: "I lied to protect her feelings."</p>
+                    <p>It also seems to make moral decisions straightforward—just calculate which action produces the most good!</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 3: Ethical Egoism Introduction -->
+            <section>
+                <h2>Ethical Egoism</h2>
+                <p><span class="popup-trigger" data-popup="ethical-egoism-def">Ethical egoism</span> says the right action is the one that advances <strong>your own</strong> best interests.</p>
+                
+                <ul>
+                    <li>Your only moral duty: maximize good for <em>yourself</em></li>
+                    <li>Others' interests matter only if helping them benefits you</li>
+                    <li>Not the same as selfishness or recklessness</li>
+                </ul>
+                
+                <div class="study-note">
+                    <strong>💡 Important distinction:</strong> Ethical egoism ≠ doing whatever you want. A smart egoist considers long-term interests, cooperates with others, and avoids antagonizing society.
+                </div>
+                
+                <div id="ethical-egoism-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Ethical Egoism</div>
+                    <p>The theory that the right action is the one that advances one's own best interests. Each person's moral duty is to promote their own good.</p>
+                    <div class="example-box"><strong>Note:</strong> This is a NORMATIVE theory—it says what you SHOULD do, not just what you naturally DO. It claims self-interest is the proper basis for morality.</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Understanding Ethical Egoism</h3>
+                    <p>Ethical egoism is often misunderstood. It's not about being cruel or short-sighted. A wise egoist recognizes that cooperation, honesty, and relationships often serve their long-term interests.</p>
+                    <p>The theory forces us to ask: Why SHOULD I care about others' interests?</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 4: Act vs Rule Egoism -->
+            <section>
+                <h2>Two Versions of Ethical Egoism</h2>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <h3 style="color: var(--pomegranate); font-size: 1.1em;"><span class="popup-trigger" data-popup="act-egoism-def">Act-Egoism</span></h3>
+                        <p style="font-size: 0.9em;">Apply the egoistic principle to <strong>individual acts</strong></p>
+                        <p style="font-size: 0.85em;">Ask: "Does THIS action promote my self-interest?"</p>
+                        <p style="font-size: 0.85em; color: var(--olivine);"><em>Calculate each case separately</em></p>
+                    </div>
+                    <div class="comparison-box teal">
+                        <h3 style="color: var(--deep-teal); font-size: 1.1em;"><span class="popup-trigger" data-popup="rule-egoism-def">Rule-Egoism</span></h3>
+                        <p style="font-size: 0.9em;">Follow <strong>rules</strong> that maximize self-interest</p>
+                        <p style="font-size: 0.85em;">Ask: "Does following this rule promote my self-interest?"</p>
+                        <p style="font-size: 0.85em; color: var(--olivine);"><em>Follow the rule consistently</em></p>
+                    </div>
+                </div>
+                
+                <div id="act-egoism-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Act-Egoism</div>
+                    <p>The theory that to determine right action, you must apply the egoistic principle to individual acts. Act A is preferable to Act B because it promotes your self-interest better.</p>
+                </div>
+                
+                <div id="rule-egoism-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Rule-Egoism</div>
+                    <p>The theory that to determine right action, you must see if an act falls under a rule that, if consistently followed, would maximize your self-interest.</p>
+                    <div class="example-box"><strong>Example:</strong> "Be honest in business dealings" might be a rule-egoist's rule—because honesty builds trust that serves long-term self-interest.</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 The Same Split as Utilitarianism</h3>
+                    <p>Notice this mirrors the act/rule distinction in utilitarianism. Act-egoism calculates each case; rule-egoism follows rules that generally maximize self-interest.</p>
+                    <p>Rule-egoism might prohibit deception because, in the long run, being known as dishonest hurts your interests.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 5: Psychological Egoism -->
+            <section>
+                <h2>The Argument from Psychological Egoism</h2>
+                <p>The main argument FOR ethical egoism relies on <span class="popup-trigger" data-popup="psych-egoism-def">psychological egoism</span>:</p>
+                
+                <div class="theory-card">
+                    <p style="font-size: 0.95em;"><strong>1.</strong> We can only do what our self-interest motivates us to do (psychological egoism)</p>
+                    <p style="font-size: 0.95em;"><strong>2.</strong> We are not morally obligated to do what we cannot do</p>
+                    <p style="font-size: 0.95em;"><strong>3.</strong> Therefore, we are only obligated to do what our self-interest motivates us to do</p>
+                </div>
+                
+                <div class="warning-box" style="font-size: 0.9em;">
+                    <strong>⚠️ Problem:</strong> Even if psychological egoism is true, this only shows actions can't be right unless they serve self-interest. It doesn't prove self-interest is the ONLY criterion.
+                </div>
+                
+                <div id="psych-egoism-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Psychological Egoism</div>
+                    <p>The view that the motive for all our actions is self-interest. Whatever we do, we do because we want to promote our own welfare.</p>
+                    <div class="example-box"><strong>Key point:</strong> This is a DESCRIPTIVE claim about human psychology, not a normative claim about what we SHOULD do. It says we ARE selfish, not that we SHOULD be.</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Is Psychological Egoism True?</h3>
+                    <p>Critics point out that people sometimes do things against their self-interest: donate kidneys to strangers, risk their lives for others, develop self-destructive habits.</p>
+                    <p>The egoist might say these are REALLY self-interested (we get satisfaction), but this risks making the theory unfalsifiable.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 6: Problems with Psychological Egoism -->
+            <section>
+                <h2>Is Psychological Egoism True?</h2>
+                
+                <p>Critics argue psychological egoism rests on a <strong>conceptual confusion</strong>:</p>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <h3 style="font-size: 1em; color: var(--pomegranate);">The Egoist's Claim:</h3>
+                        <p style="font-size: 0.85em;">We perform "unselfish" acts because doing so gives us satisfaction.</p>
+                        <p style="font-size: 0.85em;">Therefore, all actions are really about getting satisfaction for ourselves.</p>
+                    </div>
+                    <div class="comparison-box teal">
+                        <h3 style="font-size: 1em; color: var(--deep-teal);">The Confusion:</h3>
+                        <p style="font-size: 0.85em;">We desire something <em>other than</em> satisfaction, and THEN experience satisfaction as a result of getting what we desired.</p>
+                        <p style="font-size: 0.85em;">Satisfaction is a BY-PRODUCT, not the goal.</p>
+                    </div>
+                </div>
+                
+                <div class="study-note">
+                    <strong>💡 Example:</strong> A parent saves their child from fire. They feel satisfaction—but only BECAUSE they desired to save the child. The desire was for the child's safety, not for their own satisfaction.
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 The Satisfaction Confusion</h3>
+                    <p>Philosopher Joel Feinberg makes this point brilliantly. If Jones only desires his own happiness, he'll never find it—because happiness comes from pursuing OTHER things.</p>
+                    <p>The person who truly pursues only their own happiness is "hopelessly unrealistic" and will never achieve it.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 7: Evaluating Ethical Egoism -->
+            <section>
+                <h2>Evaluating Ethical Egoism</h2>
+                
+                <p>Applying the moral criteria of adequacy:</p>
+                
+                <div class="criteria-box">
+                    <p><span class="criteria-number">1</span> <strong>Consistency with considered judgments?</strong></p>
+                    <p style="font-size: 0.9em; margin-left: 2em;">❌ Fails. Ethical egoism sanctions actions we regard as abominable (e.g., murdering your father for inheritance if you won't get caught).</p>
+                </div>
+                
+                <div class="criteria-box">
+                    <p><span class="criteria-number">2</span> <strong>Consistency with moral experience?</strong></p>
+                    <p style="font-size: 0.9em; margin-left: 2em;">❌ Fails. Violates impartiality—arbitrarily treats one person (oneself) as more important than others without morally relevant difference.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 The Impartiality Problem</h3>
+                    <p>This is probably the most serious objection. Ethical egoism says your interests matter more than everyone else's—but WHY? What's morally special about YOU?</p>
+                    <p>Treating equals unequally without good reason is the definition of discrimination.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 8: Utilitarianism Introduction -->
+            <section>
+                <h2>Utilitarianism</h2>
+                <p><span class="popup-trigger" data-popup="utilitarianism-def">Utilitarianism</span> is one of the most influential moral theories in history.</p>
+                
+                <div class="philosopher-box">
+                    <p class="philosopher-name">Jeremy Bentham</p>
+                    <p class="philosopher-dates">1748–1832 · English philosopher</p>
+                    <p style="font-size: 0.9em; margin-top: 0.5em;">First developed the theory systematically</p>
+                </div>
+                
+                <div class="philosopher-box">
+                    <p class="philosopher-name">John Stuart Mill</p>
+                    <p class="philosopher-dates">1806–1873 · English philosopher and economist</p>
+                    <p style="font-size: 0.9em; margin-top: 0.5em;">Refined and defended the theory</p>
+                </div>
+                
+                <div id="utilitarianism-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Utilitarianism</div>
+                    <p>The theory that the morally right action is the one that produces the most favorable balance of good over evil, <strong>everyone considered</strong>.</p>
+                    <div class="example-box"><strong>Key difference from egoism:</strong> Everyone's happiness counts equally. Your happiness matters no more than a stranger's.</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Historical Impact</h3>
+                    <p>Utilitarianism became a powerful instrument of social reform. Bentham and Mill advocated for women's rights, prison reform, animal welfare, and aid to the poor—all justified by maximizing overall happiness.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 9: The Principle of Utility -->
+            <section>
+                <h2>The Principle of Utility</h2>
+                <p>Bentham called the utilitarian principle the <span class="popup-trigger" data-popup="utility-def">principle of utility</span>:</p>
+                
+                <div class="quote-box">
+                    "By the principle of utility is meant that principle which approves or disapproves of every action whatsoever, according to the tendency which it appears to have to augment or diminish the happiness of the party whose interest is in question."
+                    <p class="quote-attribution">— Jeremy Bentham</p>
+                </div>
+                
+                <p style="margin-top: 1em;">Mill called it the <span class="popup-trigger" data-popup="greatest-happiness-def">greatest happiness principle</span>.</p>
+                
+                <div id="utility-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Principle of Utility</div>
+                    <p>Bentham's name for the foundational utilitarian principle: actions are right in proportion as they tend to promote happiness, wrong as they tend to produce unhappiness.</p>
+                </div>
+                
+                <div id="greatest-happiness-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Greatest Happiness Principle</div>
+                    <p>Mill's name for the utilitarian principle: actions are right in proportion as they tend to promote happiness, wrong as they tend to produce the reverse of happiness.</p>
+                    <div class="example-box"><strong>Mill's definition:</strong> "By happiness is intended pleasure, and the absence of pain; by unhappiness, pain, and the privation of pleasure."</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Happiness as the Standard</h3>
+                    <p>For both Bentham and Mill, happiness (pleasure) is the ONLY intrinsic good. Everything else is valuable only as a means to happiness.</p>
+                    <p>This makes utilitarianism a HEDONISTIC theory—pleasure is the ultimate good.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 10: Assessment Break -->
+            <section class="assessment-slide">
+                <h2>🤔 Check Your Understanding</h2>
+                
+                <div class="reflection-box">
+                    <p style="color: var(--pomegranate); font-weight: 600;">Quick Quiz:</p>
+                    <p>What is the key difference between ethical egoism and utilitarianism?</p>
+                    <p style="margin-left: 1em;">A) Egoism focuses on consequences; utilitarianism does not</p>
+                    <p style="margin-left: 1em;">B) Egoism maximizes good for oneself; utilitarianism maximizes good for everyone</p>
+                    <p style="margin-left: 1em;">C) Egoism is rule-based; utilitarianism is act-based</p>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Answer: B</h3>
+                    <p>Both theories are consequentialist (focus on consequences), but they differ on WHOSE good matters.</p>
+                    <p>Egoism: maximize YOUR good. Utilitarianism: maximize EVERYONE'S good equally.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 11: Act-Utilitarianism -->
+            <section>
+                <h2>Classic (Act) Utilitarianism</h2>
+                <p><span class="popup-trigger" data-popup="act-util-def">Act-utilitarianism</span> is the simplest form of the theory:</p>
+                
+                <div class="theory-card">
+                    <div class="theory-name">The Core Principle:</div>
+                    <p style="font-size: 0.95em;">The right action is the one that <strong>directly</strong> produces the greatest balance of happiness over unhappiness, everyone considered.</p>
+                </div>
+                
+                <ul style="margin-top: 1em;">
+                    <li>Each situation requires a fresh calculation</li>
+                    <li>No rules to follow—just maximize happiness</li>
+                    <li>Everyone's happiness counts equally</li>
+                </ul>
+                
+                <div id="act-util-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Act-Utilitarianism</div>
+                    <p>The utilitarian theory asserting that the right action is the one that directly produces the most favorable balance of good over evil, everyone considered.</p>
+                    <div class="example-box"><strong>Method:</strong> For each possible action, calculate the total happiness it would produce. Choose the action with the highest score.</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 The Calculation Method</h3>
+                    <p>Bentham developed the "hedonic calculus" to measure happiness: intensity, duration, certainty, nearness, fecundity (likelihood of more pleasure), purity, and extent (how many affected).</p>
+                    <p>The action with the best total score is the morally right one.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 12: Bentham vs Mill on Happiness -->
+            <section>
+                <h2>Bentham vs. Mill on Happiness</h2>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <h3 style="font-size: 1em; color: var(--pomegranate);">Bentham: Quantity</h3>
+                        <p style="font-size: 0.85em;">Happiness varies only in <strong>quantity</strong>—intensity, duration, etc.</p>
+                        <p style="font-size: 0.85em;">All pleasures are equal in kind.</p>
+                        <p style="font-size: 0.85em; color: var(--olivine);"><em>"Pushpin is as good as poetry" (if equal pleasure)</em></p>
+                    </div>
+                    <div class="comparison-box teal">
+                        <h3 style="font-size: 1em; color: var(--deep-teal);">Mill: Quality</h3>
+                        <p style="font-size: 0.85em;">Happiness varies in <strong>quality</strong> as well as quantity.</p>
+                        <p style="font-size: 0.85em;">Higher pleasures (intellectual) > lower pleasures (bodily).</p>
+                        <p style="font-size: 0.85em; color: var(--olivine);"><em>"Better to be Socrates dissatisfied than a fool satisfied"</em></p>
+                    </div>
+                </div>
+                
+                <div class="study-note">
+                    <strong>💡 Mill's test:</strong> Those who have experienced both higher and lower pleasures prefer the higher ones. The majority preference of the experienced determines quality.
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 The Quality Problem</h3>
+                    <p>Mill's distinction is intuitively appealing but philosophically problematic. How do we rank pleasures objectively? People disagree about which pleasures are "higher."</p>
+                    <p>Critics say Mill smuggles in non-utilitarian values (like intellectual virtue) that can't be justified purely by pleasure.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 13: The Dr. X Scenario -->
+            <section>
+                <h2>Testing Act-Utilitarianism</h2>
+                
+                <div class="case-study">
+                    <p class="case-title">The Case of Dr. X</p>
+                    <p style="font-size: 0.9em;">Dr. X is one step from curing all heart disease—but needs fresh heart tissue from a living person. She finds a homeless man with no family or friends. She kills him secretly, perfects the cure, and saves millions of lives. She feels no guilt.</p>
+                </div>
+                
+                <p style="margin-top: 1em;"><strong>Act-utilitarian verdict:</strong> Dr. X did the right thing—millions saved outweighs one death.</p>
+                
+                <div class="warning-box" style="font-size: 0.9em;">
+                    <strong>⚠️ The problem:</strong> This conflicts with our considered moral judgment that murdering an innocent person is wrong, regardless of the good consequences.
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 The Justice Problem</h3>
+                    <p>This is act-utilitarianism's most serious problem: it seems to sanction obviously unjust actions if they maximize overall happiness.</p>
+                    <p>Other examples: framing an innocent person to prevent riots, torturing one child to make millions happy.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 14: More Problems with Act-Utilitarianism -->
+            <section>
+                <h2>Critiques of Act-Utilitarianism</h2>
+                
+                <div class="criteria-box">
+                    <p><span class="criteria-number">1</span> <strong>Conflicts with justice</strong></p>
+                    <p style="font-size: 0.9em; margin-left: 2em;">May require harming innocents for the greater good</p>
+                </div>
+                
+                <div class="criteria-box">
+                    <p><span class="criteria-number">2</span> <strong>Conflicts with rights</strong></p>
+                    <p style="font-size: 0.9em; margin-left: 2em;">Rights can be violated if doing so maximizes happiness</p>
+                </div>
+                
+                <div class="criteria-box">
+                    <p><span class="criteria-number">3</span> <strong>Conflicts with obligations</strong></p>
+                    <p style="font-size: 0.9em; margin-left: 2em;">Promise-keeping, truth-telling can be overridden by tiny gains in utility</p>
+                </div>
+                
+                <div class="criteria-box">
+                    <p><span class="criteria-number">4</span> <strong>The "no-rest" problem</strong></p>
+                    <p style="font-size: 0.9em; margin-left: 2em;">We should always be maximizing utility—watching TV is wrong if we could be helping others</p>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Demanding Too Much?</h3>
+                    <p>The "no-rest" problem: act-utilitarianism seems impossibly demanding. Right now you could donate your TV money to charity, volunteer at a shelter, etc. Are you doing wrong by relaxing?</p>
+                    <p>Some utilitarians bite this bullet; others modify the theory.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 15: Rule-Utilitarianism -->
+            <section>
+                <h2>Rule-Utilitarianism</h2>
+                <p><span class="popup-trigger" data-popup="rule-util-def">Rule-utilitarianism</span> was developed partly to address act-utilitarianism's problems:</p>
+                
+                <div class="theory-card">
+                    <div class="theory-name">The Core Principle:</div>
+                    <p style="font-size: 0.95em;">The right action is the one covered by a <strong>rule</strong> that, if generally followed, would produce the most favorable balance of good over evil, everyone considered.</p>
+                </div>
+                
+                <ul style="margin-top: 1em;">
+                    <li>Focus on rules, not individual acts</li>
+                    <li>Ask: "What if everyone followed this rule?"</li>
+                    <li>Follow the rule even when breaking it might help this time</li>
+                </ul>
+                
+                <div id="rule-util-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Rule-Utilitarianism</div>
+                    <p>The utilitarian theory asserting that the right action is the one covered by a rule that, if generally followed, would produce the most favorable balance of good over evil, everyone considered.</p>
+                    <div class="example-box"><strong>Key difference:</strong> We evaluate RULES by their consequences, then follow the best rules—even in cases where breaking them would produce more happiness this one time.</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Why Rules Help</h3>
+                    <p>Rule-utilitarianism can explain why we shouldn't murder innocents even for good consequences: a rule allowing such murders would produce terrible long-term effects (fear, distrust, etc.).</p>
+                    <p>Rules provide stability and predictability that act-by-act calculation cannot.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 16: Rule-Util and the Terrorist Case -->
+            <section>
+                <h2>Applying Rule-Utilitarianism</h2>
+                
+                <div class="case-study">
+                    <p class="case-title">The Terrorist Scenario</p>
+                    <p style="font-size: 0.9em;">A terrorist is killing hundreds. The only way to stop him is to kill his innocent wife and children. An act-utilitarian might say: do it—save more lives. What does a rule-utilitarian say?</p>
+                </div>
+                
+                <p style="margin-top: 1em;"><strong>Rule-utilitarian analysis:</strong></p>
+                <ul style="font-size: 0.9em;">
+                    <li><strong>Rule 1:</strong> "Don't kill innocent people" → if followed, prevents chaos and fear</li>
+                    <li><strong>Rule 2:</strong> "Kill innocents to stop terrorists" → if followed, leads to abuse, fear, breakdown of trust</li>
+                </ul>
+                
+                <p style="margin-top: 0.5em; font-size: 0.95em;"><strong>Verdict:</strong> Following Rule 1 produces more long-term happiness. Don't kill the innocents.</p>
+                
+                <aside class="notes">
+                    <h3>📖 Rules Protect Against Short-Sightedness</h3>
+                    <p>Rule-utilitarianism captures the insight that consistent rule-following produces better outcomes than case-by-case calculation, which is prone to bias and error.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 17: Problems with Rule-Utilitarianism -->
+            <section>
+                <h2>Critiques of Rule-Utilitarianism</h2>
+                
+                <div class="warning-box">
+                    <strong>The Collapse Problem:</strong> Critics argue rule-utilitarianism collapses into act-utilitarianism.
+                </div>
+                
+                <p style="margin-top: 1em; font-size: 0.95em;">The argument:</p>
+                <ul style="font-size: 0.9em;">
+                    <li>Rules with exceptions maximize utility better than absolute rules</li>
+                    <li>"Don't steal except when..." is better than "Don't steal"</li>
+                    <li>As we add exceptions, rules become specific to situations</li>
+                    <li>Eventually, rules just say "Do what maximizes utility in this case"</li>
+                    <li>That's act-utilitarianism!</li>
+                </ul>
+                
+                <div class="study-note">
+                    <strong>💡 The dilemma:</strong> Either rules have exceptions (collapse into act-util) or they don't (sometimes require non-utility-maximizing actions).
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 The Rule Specificity Problem</h3>
+                    <p>Rule-utilitarians respond by insisting on rules of appropriate generality—specific enough to be useful, general enough to maintain the benefits of predictability.</p>
+                    <p>But critics say any stopping point is arbitrary.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 18: Learning from Utilitarianism -->
+            <section>
+                <h2>Learning from Utilitarianism</h2>
+                
+                <p>Despite criticisms, utilitarianism embodies important moral truths:</p>
+                
+                <div class="theory-card">
+                    <div class="theory-name">1. Consequences Matter</div>
+                    <p style="font-size: 0.9em;">The effects of our actions on people's welfare are morally relevant.</p>
+                </div>
+                
+                <div class="theory-card">
+                    <div class="theory-name">2. Impartiality</div>
+                    <p style="font-size: 0.9em;">Everyone's interests count equally—no one is inherently more important.</p>
+                </div>
+                
+                <div class="theory-card">
+                    <div class="theory-name">3. Beneficence</div>
+                    <p style="font-size: 0.9em;">We should promote human welfare—morality aims at making things better.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Keeping the Baby</h3>
+                    <p>Even if we reject utilitarianism as a complete moral theory, we should preserve its core insights. Consequences DO matter. Impartiality IS important. Beneficence IS a virtue.</p>
+                    <p>Most plausible moral theories incorporate these utilitarian elements.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 19: Social Contract Theory -->
+            <section>
+                <h2>Social Contract Theory</h2>
+                <p><span class="popup-trigger" data-popup="social-contract-def">Social contract theory</span> offers another consequentialist approach:</p>
+                
+                <div class="theory-card">
+                    <div class="theory-name">Core Idea:</div>
+                    <p style="font-size: 0.95em;">Morality arises from a social contract that self-interested, rational people would agree to in order to secure peace, prosperity, and safety.</p>
+                </div>
+                
+                <p style="margin-top: 1em;">Without such an agreement, life would be (in Hobbes's words) "solitary, poor, nasty, brutish, and short."</p>
+                
+                <div id="social-contract-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Social Contract Theory</div>
+                    <p>The doctrine that morality arises from a social contract that self-interested and rational people would abide by in order to secure a degree of peace, prosperity, and safety.</p>
+                    <div class="example-box"><strong>Key insight:</strong> Moral rules are those that benefit everyone when everyone follows them. We agree to restrain ourselves in exchange for others restraining themselves.</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Morality from Self-Interest</h3>
+                    <p>Social contract theory tries to derive morality from rational self-interest. Even egoists should accept moral constraints because everyone benefits from cooperation.</p>
+                    <p>The rules we all follow are the rules that make social life possible and beneficial.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 20: Assessment Break -->
+            <section class="assessment-slide">
+                <h2>🤔 Check Your Understanding</h2>
+                
+                <div class="reflection-box">
+                    <p style="color: var(--pomegranate); font-weight: 600;">Apply the Theory:</p>
+                    <p>A surgeon has five patients dying from organ failure. A healthy visitor comes in for a check-up. The surgeon could kill the visitor and use their organs to save all five patients.</p>
+                    <p style="margin-top: 1em;">What would an act-utilitarian say? What's the problem with this answer?</p>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Answer</h3>
+                    <p>Act-utilitarian answer: Kill the visitor—5 lives saved > 1 life lost = more happiness.</p>
+                    <p>The problem: This grossly violates our considered moral judgment that murdering an innocent person is wrong. It also violates the victim's rights and the principle of justice.</p>
+                    <p>This is why many reject act-utilitarianism—it can sanction obviously immoral actions.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 21: Hobbes's Theory -->
+            <section>
+                <h2>Hobbes's Social Contract</h2>
+                
+                <div class="philosopher-box">
+                    <p class="philosopher-name">Thomas Hobbes</p>
+                    <p class="philosopher-dates">1588–1679 · English philosopher</p>
+                    <p style="font-size: 0.9em; margin-top: 0.5em;">Author of <em>Leviathan</em></p>
+                </div>
+                
+                <p style="margin-top: 1em;">Hobbes's pessimistic view of human nature:</p>
+                <ul style="font-size: 0.95em;">
+                    <li>Without society, life is a "war of every man against every man"</li>
+                    <li>No morality exists in the <span class="popup-trigger" data-popup="state-of-nature-def">state of nature</span></li>
+                    <li>Morality requires a powerful sovereign (the "Leviathan") to enforce rules</li>
+                    <li>We obey moral rules to avoid punishment and chaos</li>
+                </ul>
+                
+                <div id="state-of-nature-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">State of Nature</div>
+                    <p>Hobbes's term for the condition of humanity without civil government. In this state, there is no law, no morality, no property—only a constant struggle for survival.</p>
+                    <div class="example-box"><strong>Hobbes's famous line:</strong> Life in the state of nature is "solitary, poor, nasty, brutish, and short."</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Hobbes's Argument</h3>
+                    <p>Hobbes argues that rational self-interest leads us to accept a social contract. Even though we lose some freedom, we gain security and the possibility of peaceful cooperation.</p>
+                    <p>Morality is essentially the set of rules that make social life beneficial for everyone.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 22: Evaluating Social Contract Theory -->
+            <section>
+                <h2>Evaluating Social Contract Theory</h2>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <h3 style="font-size: 1em; color: var(--pomegranate);">Strengths</h3>
+                        <p style="font-size: 0.85em;">✓ Explains why morality is objective (based on rational agreement)</p>
+                        <p style="font-size: 0.85em;">✓ High on usefulness (clear guidance on right/wrong)</p>
+                        <p style="font-size: 0.85em;">✓ Doesn't require God or mysterious moral facts</p>
+                    </div>
+                    <div class="comparison-box teal">
+                        <h3 style="font-size: 1em; color: var(--deep-teal);">Weaknesses</h3>
+                        <p style="font-size: 0.85em;">✗ Did anyone actually consent to this contract?</p>
+                        <p style="font-size: 0.85em;">✗ What about those who can't participate (infants, disabled)?</p>
+                        <p style="font-size: 0.85em;">✗ Why be moral when you can get away with cheating?</p>
+                    </div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 The Consent Problem</h3>
+                    <p>The biggest challenge: no one actually signed a social contract. Some say we give "implicit consent" by enjoying society's benefits—but is that enough to be bound?</p>
+                    <p>John Rawls later developed a more sophisticated version using a "veil of ignorance."</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 23: Key Terms Review -->
+            <section>
+                <h2>Key Terms to Know</h2>
+                
+                <div class="comparison-grid" style="font-size: 0.75em;">
+                    <div>
+                        <p><span class="key-term">Ethical egoism</span> — maximize good for oneself</p>
+                        <p><span class="key-term">Act-egoism</span> — apply egoism to individual acts</p>
+                        <p><span class="key-term">Rule-egoism</span> — follow rules that maximize self-interest</p>
+                        <p><span class="key-term">Psychological egoism</span> — all actions motivated by self-interest</p>
+                        <p><span class="key-term">Utilitarianism</span> — maximize good for everyone</p>
+                    </div>
+                    <div>
+                        <p><span class="key-term">Act-utilitarianism</span> — each act should maximize utility</p>
+                        <p><span class="key-term">Rule-utilitarianism</span> — follow rules that maximize utility</p>
+                        <p><span class="key-term">Principle of utility</span> — Bentham's foundational principle</p>
+                        <p><span class="key-term">Greatest happiness principle</span> — Mill's name for utility</p>
+                        <p><span class="key-term">Social contract theory</span> — morality from rational agreement</p>
+                    </div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Study Tip</h3>
+                    <p>Make sure you can distinguish act vs. rule versions of both egoism and utilitarianism. Also be able to explain the difference between psychological egoism (descriptive) and ethical egoism (normative).</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 24: Chapter Summary -->
+            <section>
+                <h2>Chapter Summary</h2>
+                
+                <ul style="font-size: 0.9em;">
+                    <li>Consequentialist theories judge actions by their results</li>
+                    <li>Ethical egoism: maximize YOUR good (fails impartiality)</li>
+                    <li>Utilitarianism: maximize EVERYONE'S good equally</li>
+                    <li>Act-utilitarianism: calculate each case (can sanction injustice)</li>
+                    <li>Rule-utilitarianism: follow best rules (may collapse into act-util)</li>
+                    <li>Social contract theory: morality from rational self-interested agreement</li>
+                    <li>All consequentialist theories face the problem of conflicts with justice and rights</li>
+                </ul>
+                
+                <aside class="notes">
+                    <h3>📖 Looking Ahead</h3>
+                    <p>Chapter 6 examines NONCONSEQUENTIALIST theories—which say rightness depends on something other than consequences. Kant's ethics and natural law theory offer alternatives that prioritize duty and rights over outcomes.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 25: Final Reflection -->
+            <section class="assessment-slide">
+                <h2>🤔 Final Reflection</h2>
+                
+                <div class="reflection-box">
+                    <p style="color: var(--pomegranate); font-weight: 600;">Discussion Questions:</p>
+                    <p>1. Do you find yourself more drawn to act-utilitarianism or rule-utilitarianism? Why?</p>
+                    <p>2. Is there anything you believe is wrong regardless of the consequences?</p>
+                    <p>3. Should everyone's happiness count equally in moral calculations, or do we have special obligations to family and friends?</p>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Personal Application</h3>
+                    <p>These questions encourage students to examine their own moral intuitions. Most people have BOTH consequentialist and nonconsequentialist intuitions—which explains why the debate continues.</p>
+                </aside>
+            </section>
+            
+        </div>
+    </div>
+    
+    <div class="slide-counter"></div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: false,
+            transition: 'slide',
+            plugins: [ RevealNotes ]
+        });
+        
+        function updateSlideCounter() {
+            const current = Reveal.getState().indexh + 1;
+            const total = Reveal.getTotalSlides();
+            document.querySelector('.slide-counter').textContent = current + '/' + total;
+        }
+        Reveal.on('slidechanged', updateSlideCounter);
+        updateSlideCounter();
+        
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('popup-trigger')) {
+                const popupId = e.target.getAttribute('data-popup');
+                const popup = document.getElementById(popupId);
+                if (popup) popup.classList.add('active');
+            }
+            if (e.target.classList.contains('popup-close')) {
+                e.target.closest('.popup').classList.remove('active');
+            }
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+            }
+        });
+    </script>
+</body>
+</html>

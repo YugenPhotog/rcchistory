@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 9: A Framework for Moral Decision-Making | PHIL 120 Study Buddy Edition</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/white.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cloud-dancer: #F0EEE9;
+            --pomegranate: #9F2436;
+            --mauve-mist: #96637B;
+            --deep-teal: #2A5C6A;
+            --olivine: #545439;
+            --charcoal: #3E3B32;
+            --soft-cream: #F5F1E8;
+            --warm-white: #FAFAFA;
+        }
+
+        .reveal { font-family: 'EB Garamond', Georgia, serif; font-size: 1.3em; color: var(--charcoal); background: var(--cloud-dancer); }
+        .reveal h1 { font-size: 2.5em; color: var(--pomegranate); font-weight: 700; text-transform: none; line-height: 1.1; }
+        .reveal h2 { font-size: 2.1em; color: var(--pomegranate); font-weight: 700; text-transform: none; margin-bottom: 0.5em; }
+        .reveal h3 { font-size: 1.5em; color: var(--deep-teal); font-weight: 700; text-transform: none; }
+
+        .reveal ul { list-style: none; padding-left: 0; }
+        .reveal ul li { margin: 0.6em 0; padding-left: 1.5em; position: relative; }
+        .reveal ul li:before { content: "◆"; color: var(--mauve-mist); font-size: 0.7em; position: absolute; left: 0; top: 0.2em; }
+
+        .subtitle { color: var(--mauve-mist) !important; font-size: 1.3em !important; font-weight: 600; }
+        .chapter-label { color: var(--olivine); font-size: 0.9em; margin-top: 1em; }
+        .study-badge { background: var(--deep-teal); color: white; padding: 0.3em 0.8em; border-radius: 20px; font-size: 0.7em; display: inline-block; margin-top: 1em; }
+
+        .popup-trigger { color: var(--deep-teal); border-bottom: 2px dotted var(--deep-teal); cursor: pointer; transition: all 0.2s ease; }
+        .popup-trigger:hover { color: var(--pomegranate); border-bottom-color: var(--pomegranate); }
+
+        .popup { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--warm-white); color: var(--charcoal); padding: 2em 2.5em; border-radius: 12px; box-shadow: 0 8px 40px rgba(62, 59, 50, 0.3); max-width: 600px; max-height: 80vh; overflow-y: auto; z-index: 1000; border: 3px solid var(--mauve-mist); text-align: left; font-size: 0.85em; }
+        .popup.active { display: block; }
+        .popup-close { position: absolute; top: 10px; right: 15px; font-size: 1.8em; cursor: pointer; color: var(--mauve-mist); }
+        .popup-close:hover { color: var(--pomegranate); }
+        .popup-term { font-size: 1.4em; font-weight: 700; color: var(--pomegranate); margin-bottom: 0.2em; }
+        .popup-pronunciation { font-style: italic; color: var(--olivine); font-size: 0.95em; margin-bottom: 0.8em; }
+        .popup .example-box { background: var(--soft-cream); padding: 1em; border-radius: 8px; margin-top: 1em; border-left: 3px solid var(--deep-teal); }
+
+        .slide-counter { position: fixed; bottom: 20px; right: 20px; background: var(--charcoal); color: var(--cloud-dancer); padding: 8px 15px; border-radius: 8px; font-weight: 600; font-size: 0.85em; border: 2px solid var(--mauve-mist); z-index: 100; }
+
+        .quote-box { background: rgba(150, 99, 123, 0.1); border-left: 4px solid var(--mauve-mist); padding: 1.2em 1.5em; margin: 1em 0; font-style: italic; text-align: left; }
+        .quote-attribution { text-align: right; color: var(--olivine); font-style: normal; font-size: 0.9em; margin-top: 0.5em; }
+
+        .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1em; margin-top: 1em; }
+        .comparison-box { background: var(--warm-white); padding: 1em; border-radius: 10px; border: 2px solid var(--mauve-mist); text-align: left; }
+        .comparison-box.teal { border-color: var(--deep-teal); }
+        .comparison-box h4 { color: var(--pomegranate); margin: 0 0 0.5em 0; font-size: 1.1em; }
+
+        .theory-card { background: var(--soft-cream); padding: 1.2em; border-radius: 10px; margin: 0.8em 0; border-left: 4px solid var(--deep-teal); text-align: left; }
+        .theory-name { color: var(--pomegranate); font-weight: 700; font-size: 1.1em; margin-bottom: 0.3em; }
+
+        .philosopher-box { background: rgba(42, 92, 106, 0.1); padding: 1em; border-radius: 10px; border: 2px solid var(--deep-teal); margin: 1em 0; text-align: left; }
+        .philosopher-name { color: var(--deep-teal); font-weight: 700; font-size: 1.1em; }
+        .philosopher-dates { color: var(--olivine); font-size: 0.85em; }
+
+        .case-study { background: rgba(150, 99, 123, 0.08); border: 2px solid var(--mauve-mist); border-radius: 10px; padding: 1em; margin: 1em 0; text-align: left; }
+        .case-title { color: var(--pomegranate); font-weight: 700; margin-bottom: 0.5em; }
+
+        .warning-box { background: rgba(159, 36, 54, 0.1); border: 2px solid var(--pomegranate); padding: 1em; border-radius: 8px; margin: 1em 0; text-align: left; }
+
+        .study-note { background: rgba(84, 84, 57, 0.1); padding: 1em; border-radius: 8px; border-left: 4px solid var(--olivine); font-size: 0.9em; margin-top: 1em; text-align: left; }
+
+        .assessment-slide { background: linear-gradient(135deg, rgba(150, 99, 123, 0.15) 0%, rgba(42, 92, 106, 0.15) 100%) !important; }
+        .reflection-box { background: var(--warm-white); padding: 1.5em 2em; border-radius: 12px; border: 3px solid var(--pomegranate); text-align: left; }
+
+        .terms-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1em; margin-top: 1em; }
+        .term-item { background: var(--soft-cream); padding: 0.8em; border-radius: 8px; border-left: 3px solid var(--pomegranate); text-align: left; }
+        .term-item strong { color: var(--pomegranate); }
+
+        .shortcuts-box { background: var(--soft-cream); padding: 1em; border-radius: 8px; font-size: 0.8em; margin-top: 1em; }
+        .shortcuts-box kbd { background: var(--charcoal); color: white; padding: 0.2em 0.5em; border-radius: 4px; font-family: monospace; }
+
+        .popup-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; }
+        .popup-overlay.active { display: block; }
+
+        .step-box { background: var(--warm-white); padding: 1.2em; border-radius: 10px; margin: 0.5em 0; border: 2px solid var(--deep-teal); text-align: left; }
+        .step-number { display: inline-block; background: var(--pomegranate); color: white; width: 1.8em; height: 1.8em; border-radius: 50%; text-align: center; line-height: 1.8em; font-weight: 700; margin-right: 0.5em; }
+
+        .principle-card { background: var(--soft-cream); padding: 1em; border-radius: 10px; margin: 0.5em 0; border-left: 4px solid var(--pomegranate); text-align: left; }
+        .principle-name { color: var(--pomegranate); font-weight: 700; font-size: 1.1em; }
+
+        .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.8em; margin-top: 1em; }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <!-- Slide 1: Title -->
+            <section>
+                <h1>A Framework for Moral Decision-Making</h1>
+                <h3 class="subtitle">Putting Theory into Practice</h3>
+                <p class="chapter-label">Chapter 9 | PHIL 120: Introduction to Ethics</p>
+                <p class="study-badge">📚 Study Buddy Edition</p>
+                <div class="shortcuts-box">
+                    <p><kbd>S</kbd> Speaker Notes | <kbd>ESC</kbd> Close Popups | <kbd>→</kbd> Next Slide</p>
+                    <p>Click <span style="border-bottom: 2px dotted var(--deep-teal); color: var(--deep-teal);">dotted terms</span> for definitions</p>
+                </div>
+                <aside class="notes">
+                    <h3>📖 Welcome to Chapter 9</h3>
+                    <p>This chapter is different from the previous ones. Instead of introducing a new moral theory, it synthesizes what we've learned and provides a practical framework for making moral decisions.</p>
+                    <p>Think of this as your "ethics toolkit"—a systematic approach you can apply to real moral dilemmas you'll face in life.</p>
+                </aside>
+            </section>
+
+            <!-- Slide 2: Why We Need a Framework -->
+            <section>
+                <h2>Why We Need a Framework</h2>
+                <ul>
+                    <li>The theories we've studied—utilitarianism, Kant, natural law, virtue ethics—each offer <strong>invaluable moral insights</strong></li>
+                    <li>But each theory also <strong>overlooks</strong> at least one important feature of morality</li>
+                    <li>No single theory has proven entirely adequate for providing moral guidance</li>
+                </ul>
+                <div class="warning-box">
+                    <strong>The Problem:</strong> Our best theories have been "found wanting" because they conflict with our considered moral judgments in some way.
+                </div>
+                <aside class="notes">
+                    <h3>📖 The Limits of Single Theories</h3>
+                    <p>After studying several major moral theories, you might be wondering: "Which one is right?" The honest answer is that none of them is perfect.</p>
+                    <p>Utilitarianism sometimes leads to conclusions that violate our sense of justice. Kant's theory can produce rigid results in hard cases. Virtue ethics doesn't always tell us what to do. Each theory captures something important but misses something else.</p>
+                    <p>This chapter offers a different approach: instead of committing to one theory, we'll develop a framework that draws on the strengths of multiple approaches.</p>
+                </aside>
+            </section>
+
+            <!-- Slide 3: Moral Common Sense -->
+            <section>
+                <h2>The Role of <span class="popup-trigger" data-popup="considered-judgment">Considered Moral Judgments</span></h2>
+                <ul>
+                    <li>Assessments about moral dilemmas made after <strong>careful reflection</strong></li>
+                    <li>As clear and unbiased as possible—what some call "moral common sense"</li>
+                    <li>Fallible and revisable, but they constitute credible evidence for moral principles</li>
+                </ul>
+                <div class="theory-card">
+                    <div class="theory-name">Examples of Considered Judgments</div>
+                    <p>Wantonly killing people is wrong. Slavery is a moral abomination. Equals must be treated equally. Respecting innocent people's rights is morally required. Inflicting undeserved suffering is evil.</p>
+                </div>
+                <aside class="notes">
+                    <h3>📖 Starting with What We Know</h3>
+                    <p>Considered moral judgments are our starting point. These are strong moral convictions we hold after careful reflection—not knee-jerk reactions or prejudices, but thoughtful conclusions about clear cases.</p>
+                    <p>When a moral theory conflicts with these judgments, we have good reason to question the theory. If a theory told us slavery was morally acceptable, we'd reject the theory rather than accept slavery.</p>
+                    <p>This doesn't mean our judgments are infallible—they can be revised. But they serve as important data that any adequate moral theory must explain.</p>
+                </aside>
+            </section>
+
+            <!-- Slide 4: Theory and Judgment -->
+            <section>
+                <h2>Theory Shapes Judgment, Judgment Tests Theory</h2>
+                <ul>
+                    <li>Moral common sense is the <strong>starting point</strong> of our theorizing and the <strong>corroboration</strong> of what we learn</li>
+                    <li>When a theory conflicts with common sense, we may revise either the theory OR our judgment</li>
+                    <li>The goal: achieve the <strong>closest possible agreement</strong> between theory and considered judgment</li>
+                </ul>
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <h4>Theory → Judgment</h4>
+                        <p>A good theory can show us our judgment should be revised</p>
+                    </div>
+                    <div class="comparison-box teal">
+                        <h4>Judgment → Theory</h4>
+                        <p>Strong judgments can show a theory is flawed</p>
+                    </div>
+                </div>
+                <aside class="notes">
+                    <h3>📖 A Two-Way Street</h3>
+                    <p>Moral reasoning is a dialogue between principles and judgments. Sometimes a good argument shows us we should change our minds about a particular case. Other times, our strong intuitions about a case show us something is wrong with a principle.</p>
+                    <p>For example: utilitarianism might convince us that our judgment about a particular case was wrong because we weren't considering everyone's welfare equally. But our firm judgment that torturing innocents is wrong might show us that pure utilitarianism needs modification.</p>
+                    <p>The philosopher John Rawls called this process "reflective equilibrium"—moving back and forth until our principles and judgments cohere.</p>
+                </aside>
+            </section>
+
+            <!-- Slide 5: Absolute vs. Prima Facie -->
+            <section>
+                <h2>Absolute vs. <span class="popup-trigger" data-popup="prima-facie">Prima Facie</span> Principles</h2>
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <h4>Absolute Principles</h4>
+                        <p>Rules that must <em>always</em> be followed with no exceptions</p>
+                        <p><em>Problem:</em> Can lead to terrible outcomes in unusual cases</p>
+                    </div>
+                    <div class="comparison-box teal">
+                        <h4>Prima Facie Principles</h4>
+                        <p>Principles that apply unless overridden by a weightier duty</p>
+                        <p><em>Advantage:</em> Allows flexibility while maintaining moral structure</p>
+                    </div>
+                </div>
+                <div class="study-note">
+                    <strong>Key Insight:</strong> Our moral common sense tells us that duties can be overridden by weightier ones, and that prima facie duties remain important even when overridden.
+                </div>
+                <aside class="notes">
+                    <h3>📖 Why Prima Facie Works Better</h3>
+                    <p>Remember Kant's example from Chapter 6: if you must tell the truth even when a murderer asks where your friend is hiding, that seems too rigid. Our considered judgment says saving a life can override the duty not to lie.</p>
+                    <p>Prima facie (Latin for "at first appearance") principles give us the best of both worlds. They're strong guidelines that apply in most situations, but they can be overridden when a more important duty conflicts with them.</p>
+                    <p>Importantly, when a prima facie duty is overridden, it doesn't disappear. You might still feel regret or owe an explanation, because the duty was real even though it was outweighed.</p>
+                </aside>
+            </section>
+
+            <!-- Slide 6: The Principlist Approach -->
+            <section>
+                <h2><span class="popup-trigger" data-popup="principlism">Principlism</span></h2>
+                <ul>
+                    <li>A moral theory consisting of <strong>multiple prima facie principles</strong></li>
+                    <li>Principles must be weighed and balanced against each other</li>
+                    <li>Based on our considered moral judgments</li>
+                    <li>Avoids the rigidity of absolute rules while maintaining moral structure</li>
+                </ul>
+                <div class="theory-card">
+                    <div class="theory-name">The Three Core Principles</div>
+                    <p>This chapter proposes three fundamental prima facie principles that can cover most moral duties: <strong>Respect</strong>, <strong>Justice</strong>, and <strong>Beneficence</strong>.</p>
+                </div>
+                <aside class="notes">
+                    <h3>📖 A Workable Framework</h3>
+                    <p>Principlism offers a practical middle ground. It acknowledges that morality is complex and can't be reduced to a single rule, but it still provides structure through a small set of fundamental principles.</p>
+                    <p>The philosopher W.D. Ross (1877–1967) first developed the idea of prima facie duties, arguing there were at least seven. More recent philosophers have argued we can work with fewer, more general principles.</p>
+                    <p>This chapter focuses on three: respect for persons, justice, and beneficence. These three can accommodate most of the moral concerns we've discussed throughout the course.</p>
+                </aside>
+            </section>
+
+            <!-- Slide 7: The Principle of Respect -->
+            <section>
+                <h2>Principle 1: <span class="popup-trigger" data-popup="respect">Respect</span></h2>
+                <ul>
+                    <li>The guiding value of Kant's theory and other nonconsequentialist approaches</li>
+                    <li>Respect is owed to all persons because they have <strong>intrinsic worth and dignity</strong></li>
+                    <li>Persons must be treated as <strong>ends in themselves</strong>, never merely as means</li>
+                </ul>
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <h4><span class="popup-trigger" data-popup="negative-right">Negative Rights</span></h4>
+                        <p>Rights that obligate others <em>not to interfere</em></p>
+                    </div>
+                    <div class="comparison-box teal">
+                        <h4><span class="popup-trigger" data-popup="positive-right">Positive Rights</span></h4>
+                        <p>Rights that obligate others <em>to help us obtain</em> something</p>
+                    </div>
+                </div>
+                <aside class="notes">
+                    <h3>📖 The Foundation of Rights</h3>
+                    <p>The principle of respect captures what Kant was getting at: people aren't just instruments to be used for others' purposes. Every person has inherent dignity and deserves to be treated accordingly.</p>
+                    <p>This principle generates rights—both negative (don't interfere with my autonomy, don't lie to me, don't coerce me) and positive (help me when I'm in dire need). In this chapter, positive rights fall under beneficence.</p>
+                    <p>The principle of respect prohibits lying, cheating, coercing, harassing, falsely imprisoning, and manipulating people—all violations of their dignity as persons.</p>
+                </aside>
+            </section>
+
+            <!-- Slide 8: The Principle of Justice -->
+            <section>
+                <h2>Principle 2: <span class="popup-trigger" data-popup="justice">Justice</span></h2>
+                <ul>
+                    <li>Requires that persons be <strong>treated fairly</strong> and given what they are due</li>
+                    <li>Reflects a central fact about moral life: <strong>morality requires impartiality</strong></li>
+                    <li>Equals must be treated equally in relevantly similar situations</li>
+                </ul>
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <h4><span class="popup-trigger" data-popup="retributive">Retributive Justice</span></h4>
+                        <p>Fair use of punishment for wrongdoing</p>
+                    </div>
+                    <div class="comparison-box teal">
+                        <h4><span class="popup-trigger" data-popup="distributive">Distributive Justice</span></h4>
+                        <p>Fair distribution of benefits and burdens in society</p>
+                    </div>
+                </div>
+                <div class="study-note">
+                    <strong>Why Justice Matters:</strong> Racial discrimination is wrong precisely because it treats one group differently without morally relevant reasons.
+                </div>
+                <aside class="notes">
+                    <h3>📖 Fairness and Equal Treatment</h3>
+                    <p>The principle of justice captures our strong intuitions about fairness. It's wrong to treat people differently based on morally irrelevant factors like race, gender, or social class.</p>
+                    <p>Justice is connected to respect but distinct from it. Respect focuses on treating people as ends; justice focuses on treating similar cases similarly. Both can override concerns about consequences.</p>
+                    <p>This is one of the strongest criticisms of pure utilitarianism: it might permit gross injustice if the overall utility is positive. The principle of justice reminds us that how benefits and burdens are distributed matters, not just their total amount.</p>
+                </aside>
+            </section>
+
+            <!-- Slide 9: The Principle of Beneficence -->
+            <section>
+                <h2>Principle 3: <span class="popup-trigger" data-popup="beneficence">Beneficence</span></h2>
+                <p>The proper way to account for <strong>consequences</strong> in moral decision-making.</p>
+                <div class="theory-card">
+                    <div class="theory-name">Three Dimensions of Beneficence</div>
+                </div>
+                <div class="three-col">
+                    <div class="principle-card">
+                        <p class="principle-name">1. Nonmaleficence</p>
+                        <p>Do not deliberately harm others (kill, disable, rob, terrorize)</p>
+                    </div>
+                    <div class="principle-card">
+                        <p class="principle-name">2. Prevent/Remove Harm</p>
+                        <p>Act to prevent harm, remove evil, and promote good</p>
+                    </div>
+                    <div class="principle-card">
+                        <p class="principle-name">3. Maximize Good</p>
+                        <p>Strive for the most favorable balance of good over evil</p>
+                    </div>
+                </div>
+                <aside class="notes">
+                    <h3>📖 Taking Consequences Seriously</h3>
+                    <p>Beneficence is where consequentialist considerations enter the framework. We do have duties related to outcomes—duties not to harm, duties to help, and (in some cases) duties to maximize good.</p>
+                    <p>But notice these are THREE separate elements, not one unified principle. The duty not to harm (nonmaleficence) is usually stronger than the duty to help. And we're not always required to maximize good—that would be too demanding.</p>
+                    <p>This nuanced approach captures what's right about utilitarianism (consequences matter) while avoiding its excesses (we're not required to sacrifice everything for maximum utility).</p>
+                </aside>
+            </section>
+
+            <!-- Slide 10: Assessment Break 1 -->
+            <section class="assessment-slide">
+                <h2>🤔 Check Your Understanding</h2>
+                <div class="reflection-box">
+                    <p style="color: var(--pomegranate); font-weight: 600;">Apply the Framework:</p>
+                    <p>A company discovers that one of its products has a small defect that <em>might</em> cause injury to some users. Fixing the defect would be expensive and reduce profits significantly.</p>
+                    <p style="margin-top: 1em;">Which principles are in potential conflict here?</p>
+                    <p>A) Only respect</p>
+                    <p>B) Justice and respect</p>
+                    <p>C) Beneficence (preventing harm) and the company's interests</p>
+                    <p>D) All three principles conflict with each other</p>
+                </div>
+                <aside class="notes">
+                    <h3>📖 Answer: C</h3>
+                    <p><strong>C) Beneficence (preventing harm) and the company's interests</strong></p>
+                    <p>The key conflict here is between the duty to prevent harm to customers (beneficence—specifically the duty not to harm and to prevent harm) and the company's financial interests.</p>
+                    <p>There's also an element of respect—using customers as mere means to profit while knowingly exposing them to risk. And justice—if only some customers are harmed, they bear an unfair burden.</p>
+                    <p>But the core conflict is beneficence vs. self-interest. The principlist framework would generally say that the duty to prevent serious harm outweighs profit considerations, especially when the company created the risk.</p>
+                </aside>
+            </section>
+
+            <!-- Slide 11: Weighing Principles -->
+            <section>
+                <h2>When Principles Conflict</h2>
+                <ul>
+                    <li>In the toughest moral cases, principles <strong>will conflict</strong></li>
+                    <li>There is no stable formula for assigning weights to principles</li>
+                    <li>We have only <strong>generalizations</strong> to guide us</li>
+                </ul>
+                <div class="theory-card">
+                    <div class="theory-name">Key Generalization</div>
+                    <p>We usually have a <strong>stronger duty not to violate rights</strong> (harm people) than we do to bring them benefit. Your duty not to steal from your brother is stronger than your duty to help him with homework.</p>
+                </div>
+                <div class="study-note">
+                    <strong>Remember:</strong> Merely "having a feeling" that one principle overrides another is not a reliable basis for moral decisions. Weighting should be grounded in <em>reason</em> and revealed by considered moral judgments.
+                </div>
+                <aside class="notes">
+                    <h3>📖 The Hard Work of Ethics</h3>
+                    <p>This is where ethics gets difficult. When principles conflict, there's no algorithm that automatically produces the right answer. We have to think carefully, consider the specific circumstances, and make a judgment.</p>
+                    <p>But we're not completely without guidance. Some generalizations hold across most cases: duties not to harm are usually stronger than duties to benefit. Duties to those we have special relationships with (family, promises) are usually stronger than duties to strangers. And the more serious the harm or benefit, the more weight that consideration carries.</p>
+                    <p>The key is to be able to give REASONS for thinking one principle outweighs another in a particular case.</p>
+                </aside>
+            </section>
+
+            <!-- Slide 12: Supererogatory Acts -->
+            <section>
+                <h2>Duties and Supererogation</h2>
+                <ul>
+                    <li>Our duty to benefit others does <strong>not</strong> demand that we help <em>all</em> persons</li>
+                    <li>We have stronger duties to family, friends, and those close to us</li>
+                    <li>We are not obligated to make <strong>extreme sacrifices</strong> for strangers</li>
+                </ul>
+                <div class="case-study">
+                    <p class="case-title">The Duty of Rescue</p>
+                    <p>We may have a duty to save a drowning stranger <em>if</em> we can do so without extreme risk or cost to ourselves. But beneficence doesn't require you to risk your own life for a stranger.</p>
+                </div>
+                <div class="theory-card">
+                    <div class="theory-name">Supererogatory Acts</div>
+                    <p>Actions that go <em>above and beyond</em> the call of duty. Heroic self-sacrifice is admirable, but not morally required.</p>
+                </div>
+                <aside class="notes">
+                    <h3>📖 The Limits of Duty</h3>
+                    <p>This is an important corrective to some versions of utilitarianism. We're not morally required to devote every waking moment to maximizing good in the world. We have lives of our own, relationships that matter, personal projects we're entitled to pursue.</p>
+                    <p>A "supererogatory" act is one that's morally praiseworthy but not required. Running into a burning building to save a stranger is heroic, but we wouldn't say someone was immoral for not doing it.</p>
+                    <p>This connects to the ethics of care: we DO have stronger duties to those we have relationships with. You're not wrong to prioritize your own children over strangers, even if utilitarian calculus might suggest otherwise.</p>
+                </aside>
+            </section>
+
+            <!-- Slide 13: The Three-Step Framework -->
+            <section>
+                <h2>A Framework for Moral Decision-Making</h2>
+                <div class="step-box">
+                    <p><span class="step-number">1</span><strong>Determine What Principles Apply</strong></p>
+                    <p>Is this about justice, respect, avoiding harm, providing benefit? Which norms are relevant, and are they in conflict?</p>
+                </div>
+                <div class="step-box">
+                    <p><span class="step-number">2</span><strong>Weigh and Balance the Principles</strong></p>
+                    <p>Assess relative importance by assigning weights with good reasons. Consider considered moral judgments as a guide.</p>
+                </div>
+                <div class="step-box">
+                    <p><span class="step-number">3</span><strong>Choose the Right Action</strong></p>
+                    <p>Determine which duty holds the most weight, then decide <em>how</em> to implement that action morally and practically.</p>
+                </div>
+                <aside class="notes">
+                    <h3>📖 Your Ethical Toolkit</h3>
+                    <p>This three-step process gives you a systematic approach to moral dilemmas. Let's walk through it:</p>
+                    <p><strong>Step 1:</strong> First, analyze the situation. What's at stake? Whose rights or interests are involved? Which of our three principles (respect, justice, beneficence) are relevant? Often multiple principles apply, and they may point in different directions.</p>
+                    <p><strong>Step 2:</strong> This is the hardest step. When principles conflict, you need to weigh them against each other. Use generalizations (harm avoidance usually trumps benefit provision) and your considered moral judgments about similar cases.</p>
+                    <p><strong>Step 3:</strong> Once you've identified the weightiest duty, you still need to figure out how to fulfill it. Sometimes there are further questions about the best way to act.</p>
+                </aside>
+            </section>
+
+            <!-- Slide 14: Step 1 in Detail -->
+            <section>
+                <h2>Step 1: Determine What Principles Apply</h2>
+                <ul>
+                    <li>Ask: Is this decision about <strong>doing justice</strong>, <strong>respecting persons</strong>, <strong>avoiding harm</strong>, or <strong>providing benefit</strong>?</li>
+                    <li>Often <strong>multiple principles</strong> are relevant</li>
+                    <li>Identify if the principles are in <strong>conflict</strong></li>
+                </ul>
+                <div class="case-study">
+                    <p class="case-title">Example: Loyalty vs. Justice</p>
+                    <p>Your friend is on trial and you must testify under oath about what you know—which will incriminate them.</p>
+                    <p><strong>Principles at play:</strong> Duty of fidelity to friend vs. duty of justice (honesty, respecting legal process)</p>
+                </div>
+                <aside class="notes">
+                    <h3>📖 Identifying the Moral Landscape</h3>
+                    <p>The first step is diagnosis: what kind of moral situation is this? Sometimes it's straightforward—a question purely about fairness, or purely about preventing harm. But often multiple principles intersect.</p>
+                    <p>In the testimony example, you face a conflict between your loyalty to your friend (a duty of special relationship) and your duty to be honest and support the justice system. Neither principle simply disappears because the other exists.</p>
+                    <p>Being explicit about what principles are in play prevents you from overlooking important moral considerations.</p>
+                </aside>
+            </section>
+
+            <!-- Slide 15: Step 2 in Detail -->
+            <section>
+                <h2>Step 2: Weigh and Balance the Principles</h2>
+                <ul>
+                    <li>Assess the <strong>relative importance</strong> of conflicting principles</li>
+                    <li>Assign weights and <strong>justify those assignments</strong> with good reasons</li>
+                    <li>Use considered moral judgments as your guide</li>
+                </ul>
+                <div class="case-study">
+                    <p class="case-title">Example: Alicia and the Grandfather</p>
+                    <p>Alicia promised to take her wheelchair-bound grandfather to a movie, but her boss asks her to work late on a critical project.</p>
+                    <p><strong>Weighing:</strong> How serious is grandfather's disappointment vs. job/company consequences? Is this a pattern of broken promises? What are the stakes on each side?</p>
+                </div>
+                <aside class="notes">
+                    <h3>📖 The Art of Moral Weighing</h3>
+                    <p>This step requires careful thinking about the specific circumstances. Moral principles are general, but real situations have particulars that matter.</p>
+                    <p>In Alicia's case, relevant factors include: How important is this project? How often has she broken promises to her grandfather? How much will he be hurt? Does she have alternatives (reschedule the movie, delegate the work)?</p>
+                    <p>There's no formula, but there are relevant considerations. The goal is to give reasons that others could recognize as legitimate, not just assert that one duty "feels" more important.</p>
+                </aside>
+            </section>
+
+            <!-- Slide 16: Step 3 in Detail -->
+            <section>
+                <h2>Step 3: Choose the Right Action</h2>
+                <ul>
+                    <li>Determine which moral duty holds the <strong>most weight</strong></li>
+                    <li>Even after choosing, questions remain about <strong>how</strong> to implement the action</li>
+                    <li>Implementation may involve further moral considerations</li>
+                </ul>
+                <div class="case-study">
+                    <p class="case-title">Example: The Lottery Winner</p>
+                    <p>You win $500,000 and decide to donate it to a homeless shelter. But:</p>
+                    <ul style="list-style: disc; padding-left: 1.5em;">
+                        <li>Which shelter will use the funds most effectively?</li>
+                        <li>Lump sum or installments?</li>
+                        <li>Is it fair to give nothing to your own needy family?</li>
+                    </ul>
+                </div>
+                <aside class="notes">
+                    <h3>📖 From Decision to Action</h3>
+                    <p>Even after you've identified the right general course of action, there may be further questions about how to do it well. These implementation questions can themselves involve moral considerations.</p>
+                    <p>In the lottery example, once you've decided to donate, you still face questions about HOW to donate effectively and fairly. These aren't trivial—a poorly implemented good intention can produce less good (or even harm).</p>
+                    <p>This reminds us that moral decision-making is often an ongoing process, not a single choice.</p>
+                </aside>
+            </section>
+
+            <!-- Slide 17: Self-Evident Principles -->
+            <section>
+                <h2><span class="popup-trigger" data-popup="self-evident">Self-Evident</span> Moral Truths</h2>
+                <ul>
+                    <li>Some argue our basic moral principles are <strong>self-evident</strong>—justified merely by understanding them</li>
+                    <li>Like "Whatever has a shape has a size" or "No bachelors are married"</li>
+                    <li>We know them through reason and reflection, not empirical investigation</li>
+                </ul>
+                <div class="quote-box">
+                    <p>Examples of self-evident moral beliefs:</p>
+                    <ul style="list-style: disc; padding-left: 1.5em; font-style: normal;">
+                        <li>Equals should be treated equally</li>
+                        <li>It is wrong to punish the innocent</li>
+                        <li>It is wrong to inflict unnecessary suffering</li>
+                        <li>It is wrong to torture people for fun</li>
+                    </ul>
+                </div>
+                <aside class="notes">
+                    <h3>📖 Are Some Moral Truths Obvious?</h3>
+                    <p>This addresses a deep question: where do moral principles come from? Some philosophers argue that at least some moral truths are self-evident—once you understand what they mean, you can see they're true.</p>
+                    <p>"It is wrong to torture innocent people for fun" seems to be like this. You don't need to run experiments or gather evidence. If someone claims not to see that it's wrong, we suspect they don't fully understand what torture, innocence, or wrongness mean.</p>
+                    <p>This gives our basic moral principles a firm foundation. We're not just making them up or following arbitrary conventions—we're recognizing truths about how persons ought to be treated.</p>
+                </aside>
+            </section>
+
+            <!-- Slide 18: Case Study 1 -->
+            <section>
+                <h2>Sample Case 1: Confidentiality vs. Duty to Warn</h2>
+                <div class="case-study">
+                    <p class="case-title">Dr. Samsara's Dilemma</p>
+                    <p>Dr. Samsara is a psychologist bound by professional confidentiality. Her patient Eric confides that he intends to kill a student named Alicia who ended their relationship. Dr. Samsara believes the threat is serious.</p>
+                    <p><strong>What should she do?</strong></p>
+                </div>
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <h4>Duty of Respect</h4>
+                        <p>Patients have a right to confidentiality</p>
+                    </div>
+                    <div class="comparison-box teal">
+                        <h4>Duty of Beneficence</h4>
+                        <p>Prevent serious harm to others when possible</p>
+                    </div>
+                </div>
+                <aside class="notes">
+                    <h3>📖 Applying the Framework</h3>
+                    <p><strong>Step 1:</strong> Two principles conflict—respect (confidentiality) vs. beneficence (preventing serious harm).</p>
+                    <p><strong>Step 2:</strong> The duty to prevent serious harm (murder) is weightier than the duty of confidentiality. While confidentiality is important, it's not absolute—especially when breaking it could save a life.</p>
+                    <p><strong>Step 3:</strong> Dr. Samsara should warn Alicia and possibly authorities. The case is based on the real Tarasoff case, which established that therapists have a "duty to warn" potential victims.</p>
+                    <p>Dr. Samsara in the example chose confidentiality, Alicia died, and we judge her choice as wrong—showing how considered moral judgments inform our framework.</p>
+                </aside>
+            </section>
+
+            <!-- Slide 19: Case Study 2 -->
+            <section>
+                <h2>Sample Case 2: Making Money While Hurting People</h2>
+                <div class="case-study">
+                    <p class="case-title">OncoSystem's Price Hike</p>
+                    <p>OncoSystem develops ProChem, the only effective treatment for a rare leukemia. The drug costs $20/tablet. New CEO Harold Morgan raises the price to $500—a 2,500% increase. Most patients can no longer afford it.</p>
+                    <p><strong>What principles apply?</strong></p>
+                </div>
+                <ul>
+                    <li><strong>Fidelity to investors:</strong> Morgan has a duty to maximize shareholder returns</li>
+                    <li><strong>Beneficence:</strong> Duty not to harm those who need the drug</li>
+                    <li><strong>Respect:</strong> Not to use patients merely as means to profit</li>
+                </ul>
+                <aside class="notes">
+                    <h3>📖 Analysis</h3>
+                    <p>This case involves multiple principles. Morgan has legitimate duties to investors. But he also has duties not to harm vulnerable people and not to exploit their desperate situation.</p>
+                    <p>The price gouging violates beneficence: he's causing suffering and potentially death by making a life-saving drug unaffordable. It also violates respect: he's treating sick people merely as means to profit.</p>
+                    <p>Whatever loyalty Morgan owes investors is outweighed by the stronger duties not to harm people and not to exploit them. A reasonable profit is one thing; extreme exploitation of the vulnerable is another.</p>
+                </aside>
+            </section>
+
+            <!-- Slide 20: Assessment Break 2 -->
+            <section class="assessment-slide">
+                <h2>🤔 Check Your Understanding</h2>
+                <div class="reflection-box">
+                    <p style="color: var(--pomegranate); font-weight: 600;">Case Analysis:</p>
+                    <p>Kenisha's coworker Marcela has been drinking on the job. Twice, Marcela's impairment led to workplace accidents. Kenisha knows Marcela is a single mother who would be fired if reported.</p>
+                    <p style="margin-top: 1em;">Using the three-step framework, what should Kenisha do first?</p>
+                    <p>A) Report Marcela immediately to protect others</p>
+                    <p>B) Do nothing to preserve the friendship</p>
+                    <p>C) Identify which principles are in conflict</p>
+                    <p>D) Calculate which option maximizes utility</p>
+                </div>
+                <aside class="notes">
+                    <h3>📖 Answer: C</h3>
+                    <p><strong>C) Identify which principles are in conflict</strong></p>
+                    <p>The first step in the principlist framework is to determine what principles apply. Here we have:</p>
+                    <ul>
+                        <li><strong>Fidelity/Friendship:</strong> Duty to be loyal to a friend</li>
+                        <li><strong>Beneficence:</strong> Duty to prevent harm to coworkers, customers, and even Marcela herself</li>
+                        <li><strong>Respect:</strong> Respecting Marcela might mean talking to her first</li>
+                    </ul>
+                    <p>Only after identifying the principles can Kenisha weigh them (Step 2) and decide on action (Step 3). The text suggests talking to Marcela first, then escalating if necessary.</p>
+                </aside>
+            </section>
+
+            <!-- Slide 21: Case Study 3 -->
+            <section>
+                <h2>Sample Case 3: Loyalty vs. Harm</h2>
+                <div class="case-study">
+                    <p class="case-title">Kenisha's Dilemma</p>
+                    <p>Kenisha must decide whether to report her friend Marcela's drinking. She considers:</p>
+                    <ul style="list-style: disc; padding-left: 1.5em;">
+                        <li>Duty of <strong>fidelity</strong> to her friend</li>
+                        <li>Duty of <strong>beneficence</strong> to team, company, customers</li>
+                        <li>Marcela's own wellbeing (drinking may get worse)</li>
+                        <li>Marcela's children who depend on her job</li>
+                    </ul>
+                </div>
+                <div class="theory-card">
+                    <div class="theory-name">Recommended Approach</div>
+                    <p>Talk to Marcela first, expressing concern. If behavior doesn't change and harm continues, beneficence eventually outweighs fidelity—she must report.</p>
+                </div>
+                <aside class="notes">
+                    <h3>📖 Working Through the Case</h3>
+                    <p>This case shows how the framework handles a nuanced situation. Reporting immediately might not be the only option; there may be steps that honor BOTH duties at least partially.</p>
+                    <p>Step 1: Fidelity to friend vs. beneficence to others (and perhaps to Marcela herself—helping her address the problem).</p>
+                    <p>Step 2: Initially, trying a conversation might satisfy both duties. But if Marcela doesn't change and accidents continue, the duty to prevent harm grows weightier.</p>
+                    <p>Step 3: The action might be staged—first conversation, then escalation if needed. This shows that moral decision-making isn't always all-or-nothing.</p>
+                </aside>
+            </section>
+
+            <!-- Slide 22: The Messiness of Ethics -->
+            <section>
+                <h2>The Inherent Messiness of Moral Life</h2>
+                <ul>
+                    <li>There is no avoiding the <strong>inherent messiness</strong> of moral decision-making</li>
+                    <li>The principlist framework is not perfect—no theory is</li>
+                    <li>But it offers a <strong>reliable method</strong> for minimizing arbitrariness and taking essential moral principles into account</li>
+                </ul>
+                <div class="quote-box">
+                    <p>"The hard truth about moral theorizing is that it never seems to result in a widely accepted, complete, or unblemished theory. The proposed framework presented here is no exception to the rule, but it does have the advantage of incorporating what seem to be the most manifest and least questionable elements of the moral life."</p>
+                </div>
+                <aside class="notes">
+                    <h3>📖 Embracing Complexity</h3>
+                    <p>This is an honest assessment. Ethics doesn't give us an algorithm that automatically produces right answers. Real moral dilemmas are hard precisely because they involve genuine conflicts between legitimate values.</p>
+                    <p>But having a framework is still better than having nothing. It helps us think systematically, ensures we don't overlook important considerations, and gives us a way to explain and justify our decisions.</p>
+                    <p>The goal isn't moral certainty—it's thoughtful, well-reasoned moral judgment.</p>
+                </aside>
+            </section>
+
+            <!-- Slide 23: Key Terms -->
+            <section>
+                <h2>Key Terms</h2>
+                <div class="terms-grid">
+                    <div class="term-item">
+                        <strong>Considered Moral Judgment</strong><br>
+                        Assessments made after careful reflection, as clear and unbiased as possible
+                    </div>
+                    <div class="term-item">
+                        <strong>Prima Facie Principle</strong><br>
+                        Principles that apply unless exceptions are justified; can be overridden
+                    </div>
+                    <div class="term-item">
+                        <strong>Principlism</strong><br>
+                        A moral theory of multiple prima facie principles weighed against each other
+                    </div>
+                    <div class="term-item">
+                        <strong>Negative Right</strong><br>
+                        A right that obligates others not to interfere
+                    </div>
+                    <div class="term-item">
+                        <strong>Positive Right</strong><br>
+                        A right that obligates others to help us obtain something
+                    </div>
+                    <div class="term-item">
+                        <strong>Distributive Justice</strong><br>
+                        Fair distribution of benefits and costs in society
+                    </div>
+                    <div class="term-item">
+                        <strong>Retributive Justice</strong><br>
+                        Fair use of punishment for wrongdoing
+                    </div>
+                    <div class="term-item">
+                        <strong>Self-Evident Statement</strong><br>
+                        A statement justified merely by understanding it
+                    </div>
+                </div>
+                <aside class="notes">
+                    <h3>📖 Terms to Know</h3>
+                    <p>Be sure you can define each term and explain how it fits into the principlist framework. These concepts will be important for applying the framework to new cases.</p>
+                </aside>
+            </section>
+
+            <!-- Slide 24: Summary -->
+            <section>
+                <h2>Chapter Summary</h2>
+                <ul>
+                    <li>No single moral theory has proven entirely adequate; each overlooks something important</li>
+                    <li>Considered moral judgments are our starting point and test for theories</li>
+                    <li>Prima facie principles are more flexible than absolute rules while maintaining structure</li>
+                    <li>Principlism rests on three core principles: <strong>Respect</strong>, <strong>Justice</strong>, and <strong>Beneficence</strong></li>
+                    <li>The three-step framework: (1) Determine principles, (2) Weigh and balance, (3) Choose action</li>
+                    <li>Principles of respect and justice generally (but not always) override concerns about consequences</li>
+                    <li>Moral decision-making is inherently messy, but systematic thinking helps</li>
+                </ul>
+                <aside class="notes">
+                    <h3>📖 Key Takeaways</h3>
+                    <p>This chapter gives you practical tools for moral reasoning. Remember the three principles (respect, justice, beneficence) and the three-step process. Practice applying them to cases.</p>
+                </aside>
+            </section>
+
+            <!-- Slide 25: Final Reflection -->
+            <section class="assessment-slide">
+                <h2>🤔 Final Reflection</h2>
+                <div class="reflection-box">
+                    <p style="color: var(--pomegranate); font-weight: 600;">Discussion Questions:</p>
+                    <ol style="text-align: left; margin-top: 1em;">
+                        <li style="margin-bottom: 0.8em;">Think of a moral dilemma you've actually faced. Can you identify which of the three principles (respect, justice, beneficence) were in tension?</li>
+                        <li style="margin-bottom: 0.8em;">Do you agree that some moral truths are "self-evident"? What would you say to someone who denies that "it's wrong to torture innocents for fun"?</li>
+                        <li style="margin-bottom: 0.8em;">Is it possible to weigh competing moral principles without simply falling back on subjective feelings? What makes a weighing "reasonable" versus "arbitrary"?</li>
+                    </ol>
+                </div>
+                <aside class="notes">
+                    <h3>📖 Deeper Thinking</h3>
+                    <p>These questions push you to apply the framework to your own life and think critically about its foundations.</p>
+                    <p>For the first question, try to actually use the three-step process on a real dilemma from your experience.</p>
+                    <p>For the second, consider whether moral skepticism is even coherent—can someone really not see that torture for fun is wrong?</p>
+                    <p>For the third, think about what distinguishes good moral reasoning from mere rationalization. This is a deep question in ethics.</p>
+                </aside>
+            </section>
+        </div>
+    </div>
+
+    <!-- Slide Counter -->
+    <div class="slide-counter">1/25</div>
+
+    <!-- Popup Overlay -->
+    <div class="popup-overlay"></div>
+
+    <!-- Pop-ups -->
+    <div id="considered-judgment" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="popup-term">Considered Moral Judgment</div>
+        <div class="popup-pronunciation">(kun-SID-erd MOR-ul JUJ-ment)</div>
+        <p>Assessments about cases and principles made after careful reflection that is as clear and unbiased as possible. Sometimes called "moral common sense." These judgments are fallible and revisable but constitute credible evidence for or against moral principles and theories.</p>
+        <div class="example-box">
+            <strong>Examples:</strong> "Slavery is wrong." "Equals should be treated equally." "Torturing innocents is evil." We trust these judgments enough to question any theory that contradicts them.
+        </div>
+    </div>
+
+    <div id="prima-facie" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="popup-term">Prima Facie Principle</div>
+        <div class="popup-pronunciation">(PRY-muh FAY-shee) | Latin: "at first appearance"</div>
+        <p>A moral principle that applies in a situation unless exceptions are justified. Unlike absolute principles, prima facie principles can be overridden when they conflict with weightier duties. The overridden duty doesn't disappear—it remains morally relevant.</p>
+        <div class="example-box">
+            <strong>Example:</strong> The duty to keep promises is prima facie. If you promised to meet a friend but see someone drowning, the duty to rescue overrides the promise—but you still owe your friend an apology and explanation.
+        </div>
+    </div>
+
+    <div id="principlism" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="popup-term">Principlism</div>
+        <div class="popup-pronunciation">(PRIN-sih-pliz-um)</div>
+        <p>A moral theory consisting of multiple prima facie principles that must be weighed and balanced against one another to determine right actions. Unlike theories with one supreme principle (like utilitarianism), principlism acknowledges irreducible moral complexity.</p>
+        <div class="example-box">
+            <strong>Core Principles:</strong> Respect for persons, justice, and beneficence. These three can accommodate most moral concerns from various traditions.
+        </div>
+    </div>
+
+    <div id="respect" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="popup-term">Principle of Respect</div>
+        <p>The guiding value from Kantian ethics: all persons have intrinsic worth and dignity due to their autonomy—their capacity for rational decision-making. Persons must be treated as ends in themselves, never merely as means to others' purposes.</p>
+        <div class="example-box">
+            <strong>Prohibits:</strong> Lying, cheating, coercing, harassing, falsely imprisoning, manipulating—all violations of persons' dignity and autonomous choice.
+        </div>
+    </div>
+
+    <div id="negative-right" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="popup-term">Negative Right</div>
+        <p>A right that obligates others NOT to interfere with our obtaining something morally important. Negative rights require others to refrain from certain actions.</p>
+        <div class="example-box">
+            <strong>Examples:</strong> Right not to be killed, right not to be lied to, right not to have property stolen, right not to be coerced. Others fulfill these rights by NOT doing things to us.
+        </div>
+    </div>
+
+    <div id="positive-right" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="popup-term">Positive Right</div>
+        <p>A right that obligates others TO HELP us obtain something. Positive rights require others to take action. In this chapter's framework, positive rights fall under the principle of beneficence.</p>
+        <div class="example-box">
+            <strong>Examples:</strong> Right to education (requires others to provide schools), right to healthcare (requires others to provide treatment), right to be rescued from danger.
+        </div>
+    </div>
+
+    <div id="justice" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="popup-term">Principle of Justice</div>
+        <p>Requires that persons be treated fairly and given what they are due. The essence is that equals must be treated equally. Justice reflects the impartial nature of morality—morally irrelevant factors (race, gender, etc.) should not determine treatment.</p>
+        <div class="example-box">
+            <strong>Application:</strong> Racial discrimination is wrong because it treats people differently based on a morally irrelevant characteristic.
+        </div>
+    </div>
+
+    <div id="retributive" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="popup-term">Retributive Justice</div>
+        <div class="popup-pronunciation">(rih-TRIB-yoo-tiv)</div>
+        <p>Justice concerning the fair use of punishment for wrongdoing. Focuses on giving wrongdoers what they deserve in response to their actions.</p>
+        <div class="example-box">
+            <strong>Questions it addresses:</strong> What punishment fits the crime? Should punishment be proportional to harm caused? Is it just to punish the innocent?
+        </div>
+    </div>
+
+    <div id="distributive" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="popup-term">Distributive Justice</div>
+        <div class="popup-pronunciation">(dis-TRIB-yoo-tiv)</div>
+        <p>Justice concerning the fair distribution of benefits and costs, especially those associated with being members of a society (income, privileges, taxes, healthcare, jobs, public services).</p>
+        <div class="example-box">
+            <strong>Questions it addresses:</strong> How should wealth be distributed? Who should pay more taxes? How do we allocate scarce medical resources fairly?
+        </div>
+    </div>
+
+    <div id="beneficence" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="popup-term">Principle of Beneficence</div>
+        <div class="popup-pronunciation">(buh-NEF-ih-sense)</div>
+        <p>The principle that relates to the good and bad effects of actions—both what we do and what we don't do. Has three dimensions: (1) don't deliberately harm, (2) prevent/remove harm and promote good, (3) strive for the best balance of good over evil.</p>
+        <div class="example-box">
+            <strong>Key Point:</strong> The duty NOT to harm is usually stronger than the duty TO help. You must not steal from your brother, but helping with homework is optional (though good).
+        </div>
+    </div>
+
+    <div id="self-evident" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="popup-term">Self-Evident Statement</div>
+        <p>A statement that we are justified in believing merely by understanding it. We don't need empirical evidence or complex arguments—grasping the meaning is sufficient for knowing it's true.</p>
+        <div class="example-box">
+            <strong>Examples:</strong> "No bachelors are married." "Whatever has shape has size." Moral examples: "Equals should be treated equally." "It is wrong to torture for fun."
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+    <script>
+        Reveal.initialize({ hash: true, slideNumber: false, transition: 'slide', plugins: [ RevealNotes ] });
+
+        function updateSlideCounter() {
+            const current = Reveal.getState().indexh + 1;
+            const total = Reveal.getTotalSlides();
+            document.querySelector('.slide-counter').textContent = current + '/' + total;
+        }
+        Reveal.on('slidechanged', updateSlideCounter);
+        updateSlideCounter();
+
+        const overlay = document.querySelector('.popup-overlay');
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('popup-trigger')) {
+                e.preventDefault();
+                e.stopPropagation();
+                const popupId = e.target.getAttribute('data-popup');
+                const popup = document.getElementById(popupId);
+                if (popup) { popup.classList.add('active'); overlay.classList.add('active'); }
+            }
+            if (e.target.classList.contains('popup-close') || e.target.classList.contains('popup-overlay')) {
+                document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+                overlay.classList.remove('active');
+            }
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+                overlay.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

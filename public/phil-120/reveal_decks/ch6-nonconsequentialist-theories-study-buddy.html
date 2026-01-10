@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHIL 120: Chapter 6 - Nonconsequentialist Theories (Study Buddy Edition)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/white.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --cloud-dancer: #F0EEE9;
+            --pomegranate: #9F2436;
+            --mauve-mist: #96637B;
+            --deep-teal: #2A5C6A;
+            --olivine: #545439;
+            --charcoal: #3E3B32;
+            --soft-cream: #F5F1E8;
+            --warm-white: #FAFAFA;
+        }
+        
+        .reveal {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1.3em;
+            background-color: var(--cloud-dancer);
+            color: var(--charcoal);
+        }
+        
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-weight: 700;
+            color: var(--pomegranate);
+            text-transform: none;
+        }
+        
+        .reveal h1 { font-size: 2.8em; }
+        .reveal h2 { font-size: 2.2em; margin-bottom: 0.5em; }
+        .reveal h3 { font-size: 1.5em; color: var(--deep-teal); }
+        
+        .reveal ul { list-style: none; padding-left: 0; }
+        .reveal ul li { margin: 0.6em 0; padding-left: 1.5em; position: relative; }
+        .reveal ul li:before { content: "◆"; color: var(--mauve-mist); font-size: 0.7em; position: absolute; left: 0; top: 0.2em; }
+        
+        .quote-box {
+            background: rgba(150, 99, 123, 0.1);
+            border-left: 4px solid var(--mauve-mist);
+            padding: 1.2em 1.5em;
+            margin: 1em 0;
+            font-style: italic;
+        }
+        .quote-attribution { text-align: right; color: var(--olivine); font-style: normal; font-size: 0.9em; margin-top: 0.5em; }
+        
+        .popup-trigger {
+            color: var(--deep-teal);
+            border-bottom: 2px dotted var(--deep-teal);
+            cursor: pointer;
+        }
+        .popup-trigger:hover { color: var(--pomegranate); border-bottom-color: var(--pomegranate); }
+        
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--warm-white);
+            color: var(--charcoal);
+            padding: 2em 2.5em;
+            border-radius: 12px;
+            box-shadow: 0 8px 40px rgba(62, 59, 50, 0.3);
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            z-index: 1000;
+            border: 3px solid var(--mauve-mist);
+        }
+        .popup.active { display: block; }
+        .popup-close { position: absolute; top: 12px; right: 18px; font-size: 1.8em; cursor: pointer; color: var(--pomegranate); }
+        .popup-term { font-size: 1.4em; font-weight: 700; color: var(--pomegranate); margin-bottom: 0.5em; }
+        .popup-pronunciation { font-style: italic; color: var(--olivine); font-size: 0.95em; margin-bottom: 0.8em; }
+        .popup .example-box { background: var(--soft-cream); padding: 1em; border-radius: 8px; margin-top: 1em; border-left: 3px solid var(--deep-teal); }
+        
+        .key-term { color: var(--pomegranate); font-weight: 600; }
+        
+        .slide-counter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--charcoal);
+            color: var(--cloud-dancer);
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.85em;
+            border: 2px solid var(--mauve-mist);
+            z-index: 100;
+        }
+        
+        .assessment-slide { background: linear-gradient(135deg, rgba(150, 99, 123, 0.15) 0%, rgba(42, 92, 106, 0.15) 100%) !important; }
+        .reflection-box { background: var(--warm-white); padding: 1.5em 2em; border-radius: 12px; border: 3px solid var(--pomegranate); }
+        
+        .study-note { background: rgba(84, 84, 57, 0.1); padding: 1em; border-radius: 8px; border-left: 4px solid var(--olivine); font-size: 0.9em; margin-top: 1em; }
+        
+        .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1em; margin-top: 1em; }
+        .comparison-box { background: var(--warm-white); padding: 1em; border-radius: 10px; border: 2px solid var(--mauve-mist); }
+        .comparison-box.teal { border-color: var(--deep-teal); }
+        
+        .warning-box { background: rgba(159, 36, 54, 0.1); border: 2px solid var(--pomegranate); padding: 1em; border-radius: 8px; margin: 1em 0; }
+        
+        .theory-card { background: var(--soft-cream); padding: 1.2em; border-radius: 10px; margin: 0.8em 0; border-left: 4px solid var(--deep-teal); }
+        .theory-name { color: var(--pomegranate); font-weight: 700; font-size: 1.1em; margin-bottom: 0.3em; }
+        
+        .philosopher-box { background: rgba(42, 92, 106, 0.1); padding: 1em; border-radius: 10px; border: 2px solid var(--deep-teal); margin: 1em 0; }
+        .philosopher-name { color: var(--deep-teal); font-weight: 700; font-size: 1.1em; }
+        .philosopher-dates { color: var(--olivine); font-size: 0.85em; }
+        
+        .case-study { background: rgba(150, 99, 123, 0.08); border: 2px solid var(--mauve-mist); border-radius: 10px; padding: 1em; margin: 1em 0; }
+        .case-title { color: var(--pomegranate); font-weight: 700; margin-bottom: 0.5em; }
+        
+        .four-conditions { background: var(--soft-cream); border-radius: 10px; padding: 1em; margin: 0.5em 0; }
+        .condition-num { display: inline-block; background: var(--deep-teal); color: white; width: 1.3em; height: 1.3em; border-radius: 50%; text-align: center; line-height: 1.3em; margin-right: 0.5em; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+            <!-- SLIDE 1: Title -->
+            <section>
+                <h1>Nonconsequentialist Theories</h1>
+                <h3 style="color: var(--mauve-mist);">Do Your Duty</h3>
+                <p style="font-size: 1.1em; color: var(--deep-teal);">Chapter 6 · Introduction to Ethics</p>
+                <p style="font-size: 0.9em; color: var(--mauve-mist);">📚 Study Buddy Edition</p>
+                
+                <p style="margin-top: 2em;"><span class="popup-trigger" data-popup="shortcuts-popup">⌨️ Keyboard Shortcuts</span></p>
+                
+                <div id="shortcuts-popup" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Keyboard Shortcuts</div>
+                    <p style="margin: 0.5em 0;">→ / Space: Next slide</p>
+                    <p style="margin: 0.5em 0;">← : Previous slide</p>
+                    <p style="margin: 0.5em 0;">S: Speaker notes</p>
+                    <p style="margin: 0.5em 0;">F: Fullscreen</p>
+                    <p style="margin: 0.5em 0;">O: Overview</p>
+                    <p style="margin: 0.5em 0;">ESC: Close pop-ups</p>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Welcome to Chapter 6!</h3>
+                    <p>This chapter examines nonconsequentialist (deontological) theories—theories that say rightness depends on the NATURE of the action, not just its consequences.</p>
+                    <p>You'll study Kant's ethics and natural law theory—both argue that some actions are wrong regardless of outcomes.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 2: The Nonconsequentialist View -->
+            <section>
+                <h2>The Nonconsequentialist View</h2>
+                <p>For <span class="popup-trigger" data-popup="nonconseq-def">nonconsequentialists</span> (also called <span class="popup-trigger" data-popup="deontologist-def">deontologists</span>):</p>
+                
+                <div class="quote-box">
+                    The rightness of an action derives not from its consequences but from its <strong>nature</strong>, its right-making characteristics.
+                </div>
+                
+                <ul>
+                    <li>An action is right because of <em>what it is</em>, not what it produces</li>
+                    <li>Some actions are inherently wrong, regardless of consequences</li>
+                    <li>Consequences may matter, but they're not the whole story</li>
+                </ul>
+                
+                <div id="nonconseq-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Nonconsequentialist Theory</div>
+                    <p>A moral theory asserting that the rightness of an action does NOT depend entirely on its consequences. The nature of the action itself matters morally.</p>
+                    <div class="example-box"><strong>Core idea:</strong> Some actions are wrong IN THEMSELVES—like lying or killing innocents—even if they produce good outcomes.</div>
+                </div>
+                
+                <div id="deontologist-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Deontologist</div>
+                    <div class="popup-pronunciation">(dee-on-TOL-oh-jist) — from Greek <em>deon</em>, meaning "duty"</div>
+                    <p>Another name for a nonconsequentialist. A deontologist focuses on duties, rules, and the intrinsic nature of actions rather than consequences.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 The Key Contrast</h3>
+                    <p>Consequentialists: "The ends justify the means." Nonconsequentialists: "Some means are never justified, no matter the ends."</p>
+                    <p>Think about lying to save a life, or torturing one person to save many. Nonconsequentialists say these might still be wrong.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 3: Kant Introduction -->
+            <section>
+                <h2>Kant's Ethics</h2>
+                
+                <div class="philosopher-box">
+                    <p class="philosopher-name">Immanuel Kant</p>
+                    <p class="philosopher-dates">1724–1804 · German philosopher</p>
+                    <p style="font-size: 0.9em; margin-top: 0.5em;">Perhaps the greatest moral philosopher of the modern era</p>
+                </div>
+                
+                <p style="margin-top: 1em;">Kant's revolutionary claim:</p>
+                <ul>
+                    <li><strong>Reason alone</strong> reveals the moral law</li>
+                    <li>No appeal to utility, tradition, religion, or authority needed</li>
+                    <li>The moral law is universal, necessary, and knowable by all rational beings</li>
+                </ul>
+                
+                <aside class="notes">
+                    <h3>📖 Kant's Enlightenment Project</h3>
+                    <p>Kant sought to ground morality in pure reason—not in feelings, consequences, or divine commands. He believed every rational person can discover the moral law through careful thinking.</p>
+                    <p>This makes morality objective and universal, not dependent on culture or personal preference.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 4: The Good Will -->
+            <section>
+                <h2>The Good Will</h2>
+                <p>For Kant, the only thing good <em>without qualification</em> is a <span class="popup-trigger" data-popup="good-will-def">good will</span>.</p>
+                
+                <div class="quote-box">
+                    "Nothing can possibly be conceived in the world, or even out of it, which can be called good without qualification, except a <strong>good will</strong>."
+                    <p class="quote-attribution">— Immanuel Kant</p>
+                </div>
+                
+                <ul>
+                    <li>Intelligence, courage, wealth—all can be used for evil</li>
+                    <li>Only the will to do one's duty FOR DUTY'S SAKE is unconditionally good</li>
+                    <li>Consequences don't determine moral worth</li>
+                </ul>
+                
+                <div id="good-will-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Good Will</div>
+                    <p>The will to do your duty simply BECAUSE it is your duty—out of pure reverence for the moral law, not for reward, satisfaction, or good consequences.</p>
+                    <div class="example-box"><strong>Key point:</strong> An action has moral worth only if done from duty. Helping others because it feels good or benefits you has no moral worth—only helping because it's RIGHT does.</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Duty for Duty's Sake</h3>
+                    <p>This is a radical claim. Kant says if you help someone because you enjoy it, your action has no moral worth! Only acting from duty counts morally.</p>
+                    <p>Many find this counterintuitive—shouldn't we praise people who ENJOY being kind?</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 5: Hypothetical vs Categorical Imperatives -->
+            <section>
+                <h2>Two Types of Imperatives</h2>
+                <p>Kant distinguishes two types of commands (imperatives):</p>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <h3 style="color: var(--pomegranate); font-size: 1.1em;"><span class="popup-trigger" data-popup="hypothetical-def">Hypothetical Imperatives</span></h3>
+                        <p style="font-size: 0.9em;">Tell us what to do <strong>IF</strong> we have certain desires</p>
+                        <p style="font-size: 0.85em;">"If you want X, do Y"</p>
+                        <p style="font-size: 0.85em; color: var(--olivine);"><em>"If you want money, get a job"</em></p>
+                    </div>
+                    <div class="comparison-box teal">
+                        <h3 style="color: var(--deep-teal); font-size: 1.1em;"><span class="popup-trigger" data-popup="categorical-def">Categorical Imperatives</span></h3>
+                        <p style="font-size: 0.9em;">Tell us what to do <strong>regardless</strong> of our desires</p>
+                        <p style="font-size: 0.85em;">"Do Y, period."</p>
+                        <p style="font-size: 0.85em; color: var(--olivine);"><em>"Do not lie"</em></p>
+                    </div>
+                </div>
+                
+                <p style="margin-top: 1em; font-size: 0.95em;"><strong>Moral duties are categorical</strong>—they apply to everyone regardless of their desires.</p>
+                
+                <div id="hypothetical-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Hypothetical Imperative</div>
+                    <p>An imperative that tells us what we should do IF we have certain desires. It's conditional on what we want.</p>
+                    <div class="example-box"><strong>Example:</strong> "If you want to pass the exam, study hard." This only applies if you want to pass. If you don't care about passing, the imperative doesn't bind you.</div>
+                </div>
+                
+                <div id="categorical-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Categorical Imperative</div>
+                    <p>An imperative that tells us what we should do regardless of our particular wants and needs. It applies universally and unconditionally to all rational beings.</p>
+                    <div class="example-box"><strong>Example:</strong> "Do not murder." This applies whether or not you want to murder someone, whether or not murder would benefit you. No exceptions.</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Why This Matters</h3>
+                    <p>Kant argues that morality must be categorical—it can't depend on what you happen to want. "Don't murder" doesn't become optional just because murdering would be convenient for you.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 6: The Categorical Imperative - First Formulation -->
+            <section>
+                <h2>The Categorical Imperative: Version 1</h2>
+                <p>Kant's first formulation of the categorical imperative:</p>
+                
+                <div class="quote-box">
+                    "Act only according to that maxim through which you can at the same time will that it should become a <strong>universal law</strong>."
+                    <p class="quote-attribution">— Immanuel Kant</p>
+                </div>
+                
+                <p style="margin-top: 1em;"><strong>The test:</strong></p>
+                <ul style="font-size: 0.95em;">
+                    <li>Identify the "maxim" (principle) of your action</li>
+                    <li>Ask: Could this maxim become a universal law?</li>
+                    <li>If universalizing leads to contradiction → action is wrong</li>
+                </ul>
+                
+                <aside class="notes">
+                    <h3>📖 The Universalizability Test</h3>
+                    <p>This captures a deep moral intuition: don't make exceptions for yourself. If an action would be wrong for everyone to do, it's wrong for you to do.</p>
+                    <p>Kant thinks this is built into the very logic of morality.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 7: Applying the First Formulation -->
+            <section>
+                <h2>Applying Version 1: Lying Promise</h2>
+                
+                <div class="case-study">
+                    <p class="case-title">The Case of the Lying Promise</p>
+                    <p style="font-size: 0.9em;">You need money and want to borrow it by promising to repay—knowing you won't. Is this permissible?</p>
+                </div>
+                
+                <p style="margin-top: 1em;"><strong>Kant's analysis:</strong></p>
+                <ul style="font-size: 0.9em;">
+                    <li><strong>Maxim:</strong> "When I need money, I'll make a lying promise to repay"</li>
+                    <li><strong>Universalized:</strong> Everyone makes lying promises when convenient</li>
+                    <li><strong>Result:</strong> Promises become meaningless—no one believes them</li>
+                    <li><strong>Contradiction:</strong> The very concept of a "promise" is destroyed</li>
+                </ul>
+                
+                <p style="margin-top: 0.5em;"><strong>Verdict:</strong> Lying promises are <em>self-defeating</em> when universalized → morally wrong.</p>
+                
+                <aside class="notes">
+                    <h3>📖 The Self-Defeating Test</h3>
+                    <p>Kant's genius: some immoral actions are wrong because they're parasitic on others following the rules. Lying only "works" because most people tell the truth. If everyone lied, lying would be pointless.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 8: The Categorical Imperative - Second Formulation -->
+            <section>
+                <h2>The Categorical Imperative: Version 2</h2>
+                <p>Kant's second formulation—the <span class="popup-trigger" data-popup="means-ends-def">means-ends principle</span>:</p>
+                
+                <div class="quote-box">
+                    "So act as to treat humanity, whether in thine own person or in that of any other, in every case as an <strong>end</strong> withal, never as <strong>means only</strong>."
+                    <p class="quote-attribution">— Immanuel Kant</p>
+                </div>
+                
+                <ul style="margin-top: 1em;">
+                    <li>Persons have <strong>intrinsic worth</strong> and dignity</li>
+                    <li>Never treat people MERELY as tools for your purposes</li>
+                    <li>Respect their autonomy, freedom, and rational agency</li>
+                </ul>
+                
+                <div id="means-ends-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Means-Ends Principle</div>
+                    <p>The rule that we must always treat people (including ourselves) as ends in themselves, never merely as means to our own ends.</p>
+                    <div class="example-box"><strong>Key distinction:</strong> You CAN treat someone as a means (hiring a mechanic). You can NOT treat them MERELY as a means (deceiving them, coercing them, ignoring their interests entirely).</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Human Dignity</h3>
+                    <p>This captures the idea of human dignity. People aren't tools to be used—they're rational agents with their own goals and worth. Respecting persons means respecting their autonomy.</p>
+                    <p>This is why lying is wrong—it manipulates people, treating them as mere means to our ends.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 9: Perfect and Imperfect Duties -->
+            <section>
+                <h2>Perfect and Imperfect Duties</h2>
+                <p>Kant distinguishes two types of duties:</p>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <h3 style="color: var(--pomegranate); font-size: 1.1em;"><span class="popup-trigger" data-popup="perfect-def">Perfect Duties</span></h3>
+                        <p style="font-size: 0.9em;">Duties that must be <strong>always</strong> followed</p>
+                        <p style="font-size: 0.85em;">No exceptions permitted</p>
+                        <p style="font-size: 0.85em; color: var(--olivine);"><em>Don't lie, don't murder, don't break promises</em></p>
+                    </div>
+                    <div class="comparison-box teal">
+                        <h3 style="color: var(--deep-teal); font-size: 1.1em;"><span class="popup-trigger" data-popup="imperfect-def">Imperfect Duties</span></h3>
+                        <p style="font-size: 0.9em;">Duties that allow <strong>some discretion</strong></p>
+                        <p style="font-size: 0.85em;">Must be fulfilled, but when/how is flexible</p>
+                        <p style="font-size: 0.85em; color: var(--olivine);"><em>Help others, develop your talents</em></p>
+                    </div>
+                </div>
+                
+                <div id="perfect-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Perfect Duty</div>
+                    <p>A duty that has no exceptions—it must be followed absolutely. Perfect duties are typically negative (prohibitions): don't lie, don't kill, don't break promises.</p>
+                </div>
+                
+                <div id="imperfect-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Imperfect Duty</div>
+                    <p>A duty that must be fulfilled but allows latitude in how and when. Imperfect duties are typically positive (commands): help others in need, develop your abilities.</p>
+                    <div class="example-box"><strong>Example:</strong> You have a duty to help others, but you don't have to help EVERY person in need ALL the time. You have discretion about when and how to fulfill this duty.</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 The Duty Distinction</h3>
+                    <p>Perfect duties are absolute—no situation justifies lying. Imperfect duties are required but flexible—you must be charitable sometimes, but you decide when and to whom.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 10: Assessment Break -->
+            <section class="assessment-slide">
+                <h2>🤔 Check Your Understanding</h2>
+                
+                <div class="reflection-box">
+                    <p style="color: var(--pomegranate); font-weight: 600;">Apply Kant's Test:</p>
+                    <p>You're considering cheating on an exam. Apply the categorical imperative (first version).</p>
+                    <p style="margin-top: 0.5em;">1. What is the maxim of your action?</p>
+                    <p>2. What happens if everyone acts on this maxim?</p>
+                    <p>3. Is there a contradiction?</p>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Answer</h3>
+                    <p>1. Maxim: "When I want to pass without studying, I'll cheat."</p>
+                    <p>2. If everyone cheated, exams would become meaningless—grades wouldn't indicate knowledge.</p>
+                    <p>3. Contradiction: The purpose of exams (to certify knowledge) would be destroyed. Cheating is parasitic on others not cheating.</p>
+                    <p>Verdict: Cheating fails the universalizability test → morally wrong.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 11: Evaluating Kant's Theory -->
+            <section>
+                <h2>Evaluating Kant's Theory</h2>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <h3 style="font-size: 1em; color: var(--pomegranate);">Strengths</h3>
+                        <p style="font-size: 0.85em;">✓ Respects human dignity and rights</p>
+                        <p style="font-size: 0.85em;">✓ Emphasizes universality and impartiality</p>
+                        <p style="font-size: 0.85em;">✓ Explains why some acts are inherently wrong</p>
+                        <p style="font-size: 0.85em;">✓ Coherent and internally consistent</p>
+                    </div>
+                    <div class="comparison-box teal">
+                        <h3 style="font-size: 1em; color: var(--deep-teal);">Weaknesses</h3>
+                        <p style="font-size: 0.85em;">✗ Absolutism leads to counterintuitive results</p>
+                        <p style="font-size: 0.85em;">✗ What do we do when duties conflict?</p>
+                        <p style="font-size: 0.85em;">✗ The universalizability test may be too flexible</p>
+                        <p style="font-size: 0.85em;">✗ Seems to ignore consequences entirely</p>
+                    </div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 The Absolutism Problem</h3>
+                    <p>Kant's biggest challenge: his absolutism. He famously argued you shouldn't lie even to a murderer asking where your friend is hiding. Most people find this deeply counterintuitive.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 12: The Murderer at the Door -->
+            <section>
+                <h2>The Problem of Absolutism</h2>
+                
+                <div class="case-study">
+                    <p class="case-title">The Murderer at the Door</p>
+                    <p style="font-size: 0.9em;">A murderer asks where your friend is hiding. You know the truth will lead to your friend's death. Should you lie?</p>
+                </div>
+                
+                <p style="margin-top: 1em;"><strong>Kant's answer:</strong> You must tell the truth.</p>
+                
+                <ul style="font-size: 0.9em;">
+                    <li>The duty not to lie is a <em>perfect duty</em>—no exceptions</li>
+                    <li>You cannot control the consequences—only your own actions</li>
+                    <li>The murderer is responsible for what he does with the information</li>
+                </ul>
+                
+                <div class="warning-box" style="font-size: 0.9em;">
+                    <strong>⚠️ The problem:</strong> This seems to violate our considered moral judgment. Surely protecting an innocent life justifies a lie?
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Biting the Bullet</h3>
+                    <p>Kant bites this bullet—he truly believes lying is always wrong. Most philosophers find this too extreme and see it as a serious flaw in his theory.</p>
+                    <p>But defenders argue: What if you lie and the friend escapes, only to be found by the murderer going in the "wrong" direction?</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 13: Natural Law Theory Introduction -->
+            <section>
+                <h2>Natural Law Theory</h2>
+                <p><span class="popup-trigger" data-popup="natural-law-def">Natural law theory</span> is another major nonconsequentialist approach:</p>
+                
+                <div class="philosopher-box">
+                    <p class="philosopher-name">Thomas Aquinas</p>
+                    <p class="philosopher-dates">1225–1274 · Medieval theologian and philosopher</p>
+                    <p style="font-size: 0.9em; margin-top: 0.5em;">Gave natural law its most influential form</p>
+                </div>
+                
+                <p style="margin-top: 1em;"><strong>Core idea:</strong> Right actions are those that accord with the natural law—the moral principles embedded in nature itself.</p>
+                
+                <div id="natural-law-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Natural Law Theory</div>
+                    <p>The theory that right actions are those that accord with natural law—the moral principles that we can discover through reason by examining nature and human nature.</p>
+                    <div class="example-box"><strong>Key idea:</strong> Nature is rationally ordered with purposes. By understanding what humans are naturally inclined toward, we can discover how we SHOULD live.</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 From Nature to Morality</h3>
+                    <p>Natural law theory claims we can "read" moral values from nature. Nature reveals what is good for humans—and we should pursue those goods.</p>
+                    <p>This theory remains influential today, especially in Catholic moral teaching.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 14: The Natural Law Framework -->
+            <section>
+                <h2>How Natural Law Works</h2>
+                
+                <p>According to Aquinas:</p>
+                <ul>
+                    <li>Nature is rationally ordered and <strong>teleological</strong> (goal-directed)</li>
+                    <li>Everything has a natural <strong>purpose</strong> or function</li>
+                    <li>Humans can use <strong>reason</strong> to discover natural purposes</li>
+                    <li>The good = fulfilling our natural purposes</li>
+                </ul>
+                
+                <div class="theory-card">
+                    <div class="theory-name">Human Natural Inclinations (Aquinas):</div>
+                    <p style="font-size: 0.9em;">Preservation of life, procreation, education of offspring, living in society, pursuit of truth, avoidance of harm</p>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 The Teleological View</h3>
+                    <p>Aquinas believed nature has purposes built into it by God. An acorn's purpose is to become an oak. Human nature has purposes too—and morality is about fulfilling those purposes.</p>
+                    <p>The natural law is both objective (built into nature) and knowable (discoverable by reason).</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 15: Natural Law as Absolutist -->
+            <section>
+                <h2>Natural Law: Absolutist Rules</h2>
+                
+                <p>Like Kant's theory, traditional natural law is <strong>absolutist</strong>:</p>
+                
+                <ul>
+                    <li>Some actions are <em>always</em> wrong, regardless of consequences</li>
+                    <li>Directly killing the innocent is always wrong</li>
+                    <li>Lying is always wrong</li>
+                    <li>Actions that interfere with procreation are always wrong</li>
+                </ul>
+                
+                <div class="study-note">
+                    <strong>💡 Note:</strong> This absolutism creates similar problems as Kant's theory—what about killing in self-defense? What about lying to the murderer?
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 The Absolutism Issue Again</h3>
+                    <p>Natural law's absolutism has the same problem as Kant's: it can require actions that seem clearly wrong (letting many die rather than directly killing one).</p>
+                    <p>To handle conflicts, natural law developed the doctrine of double effect.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 16: Doctrine of Double Effect -->
+            <section>
+                <h2>The Doctrine of Double Effect</h2>
+                <p>The <span class="popup-trigger" data-popup="double-effect-def">doctrine of double effect</span> handles cases where actions have both good and bad effects:</p>
+                
+                <p style="margin-top: 1em;"><strong>An action with bad effects may be permissible if:</strong></p>
+                
+                <div class="four-conditions">
+                    <p><span class="condition-num">1</span> The action itself is morally good or neutral</p>
+                </div>
+                <div class="four-conditions">
+                    <p><span class="condition-num">2</span> The bad effect is not used to produce the good effect</p>
+                </div>
+                <div class="four-conditions">
+                    <p><span class="condition-num">3</span> The intention is to bring about the good effect</p>
+                </div>
+                <div class="four-conditions">
+                    <p><span class="condition-num">4</span> The good effect is at least as important as the bad effect</p>
+                </div>
+                
+                <div id="double-effect-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="popup-term">Doctrine of Double Effect</div>
+                    <p>The principle that performing a good action may be permissible even if it has bad effects, but performing a bad action for the purpose of achieving good effects is never permissible.</p>
+                    <div class="example-box"><strong>Key distinction:</strong> INTENDING harm vs. FORESEEING harm. You may foresee that your action will cause harm, but you must not INTEND the harm as your means or end.</div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Intended vs. Foreseen</h3>
+                    <p>The key is intention. You can foresee bad effects without intending them. A doctor giving pain medication knows it might hasten death—but intends only pain relief.</p>
+                    <p>This is different from intentionally killing to end suffering.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 17: Applying Double Effect -->
+            <section>
+                <h2>Applying Double Effect</h2>
+                
+                <div class="case-study">
+                    <p class="case-title">Chemotherapy During Pregnancy</p>
+                    <p style="font-size: 0.9em;">A pregnant woman has cancer. Chemotherapy will save her life but kill the fetus. Is the treatment permissible?</p>
+                </div>
+                
+                <p style="margin-top: 1em;"><strong>Double effect analysis:</strong></p>
+                <ul style="font-size: 0.9em;">
+                    <li><span class="condition-num">1</span> The action (treating cancer) is morally good ✓</li>
+                    <li><span class="condition-num">2</span> The fetus's death is not used to save the mother ✓</li>
+                    <li><span class="condition-num">3</span> The intention is to cure cancer, not kill the fetus ✓</li>
+                    <li><span class="condition-num">4</span> A life saved ≈ a life lost (proportionate) ✓</li>
+                </ul>
+                
+                <p style="margin-top: 0.5em;"><strong>Verdict:</strong> Treatment is permissible—fetal death is foreseen but not intended.</p>
+                
+                <aside class="notes">
+                    <h3>📖 The Intention Matters</h3>
+                    <p>Compare this to directly aborting to save the mother. That would fail condition 2—the fetus's death would BE the means to saving the mother.</p>
+                    <p>Double effect allows the first but not the second, even though both result in fetal death.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 18: The Trolley Problem -->
+            <section>
+                <h2>The Trolley Problem</h2>
+                
+                <div class="case-study">
+                    <p class="case-title">The Classic Thought Experiment</p>
+                    <p style="font-size: 0.9em;">A runaway trolley will kill five workers. You can divert it to another track where it will kill one worker. Should you?</p>
+                </div>
+                
+                <p style="margin-top: 1em;"><strong>Double effect analysis:</strong></p>
+                <ul style="font-size: 0.9em;">
+                    <li>Action: Turning the trolley (neutral) ✓</li>
+                    <li>Bad effect not used for good: One death is a side effect, not a means ✓</li>
+                    <li>Intention: Save five, not kill one ✓</li>
+                    <li>Proportionality: Five saved > one lost ✓</li>
+                </ul>
+                
+                <p style="margin-top: 0.5em;"><strong>Verdict:</strong> Turning is permissible.</p>
+                
+                <div class="study-note">
+                    <strong>💡 But compare:</strong> Pushing a fat man onto the track to stop the trolley FAILS condition 2—his death IS the means to saving the five. This is impermissible.
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 The Deep Distinction</h3>
+                    <p>Most people's intuitions match double effect here: turning is okay, pushing is not. Double effect captures why—even though both result in one death to save five.</p>
+                    <p>Judith Jarvis Thomson and Philippa Foot made this famous.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 19: Evaluating Natural Law Theory -->
+            <section>
+                <h2>Evaluating Natural Law</h2>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <h3 style="font-size: 1em; color: var(--pomegranate);">Strengths</h3>
+                        <p style="font-size: 0.85em;">✓ Provides objective moral standards</p>
+                        <p style="font-size: 0.85em;">✓ Emphasizes reason, not just faith</p>
+                        <p style="font-size: 0.85em;">✓ Respects human life and dignity</p>
+                        <p style="font-size: 0.85em;">✓ Double effect handles hard cases</p>
+                    </div>
+                    <div class="comparison-box teal">
+                        <h3 style="font-size: 1em; color: var(--deep-teal);">Weaknesses</h3>
+                        <p style="font-size: 0.85em;">✗ Is nature really teleological?</p>
+                        <p style="font-size: 0.85em;">✗ Can we derive "ought" from "is"?</p>
+                        <p style="font-size: 0.85em;">✗ Absolutism conflicts with common sense</p>
+                        <p style="font-size: 0.85em;">✗ Different views of "natural" human inclinations</p>
+                    </div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 The Is-Ought Problem</h3>
+                    <p>Critics argue you can't derive moral conclusions from facts about nature. Just because humans ARE inclined to do X doesn't mean they SHOULD. (Hume's guillotine)</p>
+                    <p>Also: modern science sees nature as purposeless—no teleology. This undermines the theory's foundation.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 20: Assessment Break -->
+            <section class="assessment-slide">
+                <h2>🤔 Check Your Understanding</h2>
+                
+                <div class="reflection-box">
+                    <p style="color: var(--pomegranate); font-weight: 600;">Apply Double Effect:</p>
+                    <p>A terrorist will kill 100 hostages unless police kill 1 innocent bystander. Can police kill the bystander?</p>
+                    <p style="margin-top: 0.5em;">Test against all four conditions.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Answer</h3>
+                    <p>1. The action (killing an innocent) is NOT morally good or neutral. ✗ FAILS</p>
+                    <p>2. The bystander's death IS used to produce the good effect (saving hostages). ✗ FAILS</p>
+                    <p>Since conditions 1 and 2 fail, the action is not permissible—even to save 100 lives.</p>
+                    <p>Compare to: accidentally killing a bystander while shooting at the terrorist (might be permissible under double effect).</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 21: Learning from Both Theories -->
+            <section>
+                <h2>Learning from Kant and Natural Law</h2>
+                
+                <p>Despite criticisms, these theories embody important moral truths:</p>
+                
+                <div class="theory-card">
+                    <div class="theory-name">1. Universality and Impartiality</div>
+                    <p style="font-size: 0.9em;">Moral rules apply equally to everyone in similar situations.</p>
+                </div>
+                
+                <div class="theory-card">
+                    <div class="theory-name">2. Respect for Persons</div>
+                    <p style="font-size: 0.9em;">People have inherent dignity and must never be used as mere means.</p>
+                </div>
+                
+                <div class="theory-card">
+                    <div class="theory-name">3. Intention Matters</div>
+                    <p style="font-size: 0.9em;">What we intend to do is morally significant, not just what we cause.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Core Insights</h3>
+                    <p>Even utilitarians accept many of these insights. The means-ends principle underlies our concept of human rights. The intention distinction explains why accidents differ from deliberate harm.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 22: Comparing the Theories -->
+            <section>
+                <h2>Consequentialist vs. Nonconsequentialist</h2>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <h3 style="font-size: 1em; color: var(--pomegranate);">Consequentialist</h3>
+                        <p style="font-size: 0.85em;">Rightness = best consequences</p>
+                        <p style="font-size: 0.85em;">Ends can justify means</p>
+                        <p style="font-size: 0.85em;">No action inherently wrong</p>
+                        <p style="font-size: 0.85em;">Focus: outcomes/welfare</p>
+                    </div>
+                    <div class="comparison-box teal">
+                        <h3 style="font-size: 1em; color: var(--deep-teal);">Nonconsequentialist</h3>
+                        <p style="font-size: 0.85em;">Rightness = nature of act</p>
+                        <p style="font-size: 0.85em;">Some means never justified</p>
+                        <p style="font-size: 0.85em;">Some acts inherently wrong</p>
+                        <p style="font-size: 0.85em;">Focus: duties/rights</p>
+                    </div>
+                </div>
+                
+                <div class="study-note">
+                    <strong>💡 The deep question:</strong> Can good ends justify bad means? Consequentialists say yes (sometimes). Nonconsequentialists say no (or at least: not always).
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 The Fundamental Divide</h3>
+                    <p>This is THE central debate in ethics. Most people have both consequentialist and nonconsequentialist intuitions—we care about outcomes AND about how we achieve them.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 23: Key Terms Review -->
+            <section>
+                <h2>Key Terms to Know</h2>
+                
+                <div class="comparison-grid" style="font-size: 0.75em;">
+                    <div>
+                        <p><span class="key-term">Nonconsequentialism</span> — rightness from nature of act</p>
+                        <p><span class="key-term">Deontology</span> — duty-based ethics</p>
+                        <p><span class="key-term">Good will</span> — will to do duty for duty's sake</p>
+                        <p><span class="key-term">Hypothetical imperative</span> — conditional command</p>
+                        <p><span class="key-term">Categorical imperative</span> — unconditional command</p>
+                        <p><span class="key-term">Perfect duty</span> — exceptionless obligation</p>
+                    </div>
+                    <div>
+                        <p><span class="key-term">Imperfect duty</span> — flexible obligation</p>
+                        <p><span class="key-term">Means-ends principle</span> — treat persons as ends</p>
+                        <p><span class="key-term">Natural law theory</span> — morality from nature</p>
+                        <p><span class="key-term">Doctrine of double effect</span> — foreseen vs. intended harm</p>
+                        <p><span class="key-term">Teleological</span> — goal-directed/purposive</p>
+                    </div>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Study Tip</h3>
+                    <p>Be able to state both versions of the categorical imperative and give examples. Know the four conditions of double effect. Understand why lying is wrong for Kant.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 24: Chapter Summary -->
+            <section>
+                <h2>Chapter Summary</h2>
+                
+                <ul style="font-size: 0.9em;">
+                    <li>Nonconsequentialist theories: rightness depends on the action's nature, not just consequences</li>
+                    <li>Kant: only a good will (acting from duty) has moral worth</li>
+                    <li>Categorical imperative (v1): act only on universalizable maxims</li>
+                    <li>Categorical imperative (v2): treat persons as ends, never merely as means</li>
+                    <li>Natural law: right actions accord with human nature's purposes</li>
+                    <li>Doctrine of double effect: foreseen harm ≠ intended harm</li>
+                    <li>Both theories are absolutist, which creates problems with hard cases</li>
+                </ul>
+                
+                <aside class="notes">
+                    <h3>📖 The Big Picture</h3>
+                    <p>Nonconsequentialist theories capture important moral truths: respect for persons, the importance of rights and duties, limits on what we may do even for good ends.</p>
+                    <p>But their absolutism is a serious problem—most people think lying to save a life is permissible.</p>
+                </aside>
+            </section>
+            
+            <!-- SLIDE 25: Final Reflection -->
+            <section class="assessment-slide">
+                <h2>🤔 Final Reflection</h2>
+                
+                <div class="reflection-box">
+                    <p style="color: var(--pomegranate); font-weight: 600;">Discussion Questions:</p>
+                    <p>1. Do you think some actions are wrong regardless of their consequences? Which ones?</p>
+                    <p>2. Would you lie to the murderer at the door? What does this say about Kant's theory?</p>
+                    <p>3. Does the distinction between intending and foreseeing harm make moral sense to you?</p>
+                </div>
+                
+                <aside class="notes">
+                    <h3>📖 Personal Application</h3>
+                    <p>These questions help students identify their own moral intuitions. Most people ARE nonconsequentialists about some things (torture of innocents) but consequentialists about others (lying to save lives).</p>
+                    <p>The challenge is finding a coherent theory that captures all our considered judgments.</p>
+                </aside>
+            </section>
+            
+        </div>
+    </div>
+    
+    <div class="slide-counter"></div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: false,
+            transition: 'slide',
+            plugins: [ RevealNotes ]
+        });
+        
+        function updateSlideCounter() {
+            const current = Reveal.getState().indexh + 1;
+            const total = Reveal.getTotalSlides();
+            document.querySelector('.slide-counter').textContent = current + '/' + total;
+        }
+        Reveal.on('slidechanged', updateSlideCounter);
+        updateSlideCounter();
+        
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('popup-trigger')) {
+                const popupId = e.target.getAttribute('data-popup');
+                const popup = document.getElementById(popupId);
+                if (popup) popup.classList.add('active');
+            }
+            if (e.target.classList.contains('popup-close')) {
+                e.target.closest('.popup').classList.remove('active');
+            }
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+            }
+        });
+    </script>
+</body>
+</html>
