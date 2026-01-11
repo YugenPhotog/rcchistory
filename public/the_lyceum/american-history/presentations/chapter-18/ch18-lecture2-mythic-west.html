@@ -1,0 +1,961 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 18: The Mythic West - HIST 102</title>
+    
+    <!-- Reveal.js CSS from CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Pantone 2026 Atmospheric Palette */
+            --cloud-dancer: #F0EEE9;
+            --pale-sunlight: #E8DFB8;
+            --atmospheric-slate: #2A3540;
+            --misty-sky: #B8C5D0;
+            --sterling-blue: #6B8FAD;
+            --quiet-wave: #5D8A8C;
+            --aventurine: #4A7C72;
+            --morning-mist: #C5C0B8;
+            --deep-current: #2D4A4A;
+        }
+
+        .reveal {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 32px;
+            background-color: var(--atmospheric-slate);
+        }
+
+        .reveal .slides section {
+            color: var(--cloud-dancer);
+        }
+
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--cloud-dancer);
+            text-transform: none;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .reveal h1 { font-size: 2.8em; }
+        .reveal h2 { font-size: 1.9em; color: var(--pale-sunlight); }
+        .reveal h3 { font-size: 1.4em; color: var(--misty-sky); }
+
+        .reveal p, .reveal li {
+            color: var(--cloud-dancer);
+            line-height: 1.5;
+        }
+
+        .reveal ul { list-style-type: none; padding-left: 0; }
+        .reveal ul li { margin: 0.6em 0; padding-left: 1.5em; position: relative; }
+        .reveal ul li::before {
+            content: "▸";
+            color: var(--sterling-blue);
+            position: absolute;
+            left: 0;
+        }
+
+        .reveal a {
+            color: var(--sterling-blue);
+            text-decoration: underline;
+        }
+
+        .reveal a:hover {
+            color: var(--pale-sunlight);
+        }
+
+        /* Pop-up/Modal styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--deep-current);
+            color: var(--cloud-dancer);
+            padding: 2em;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            max-width: 70%;
+            max-height: 70%;
+            overflow-y: auto;
+            z-index: 1000;
+            border: 3px solid var(--quiet-wave);
+        }
+
+        .popup.active { display: block; }
+
+        .popup h3 {
+            color: var(--pale-sunlight);
+            margin-top: 0;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 2em;
+            cursor: pointer;
+            color: var(--misty-sky);
+        }
+
+        .popup-close:hover {
+            color: var(--cloud-dancer);
+        }
+
+        .popup-trigger {
+            color: var(--sterling-blue);
+            text-decoration: underline dotted;
+            cursor: pointer;
+            border-bottom: 2px dotted var(--sterling-blue);
+        }
+
+        .popup-trigger:hover {
+            color: var(--pale-sunlight);
+            border-bottom-color: var(--pale-sunlight);
+        }
+
+        /* Image placeholder styling */
+        .img-placeholder {
+            background: var(--deep-current);
+            border: 3px dashed var(--quiet-wave);
+            padding: 2em;
+            text-align: center;
+            color: var(--misty-sky);
+            font-style: italic;
+            border-radius: 10px;
+        }
+
+        /* Key term styling */
+        .key-term {
+            color: var(--aventurine);
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        /* Primary source styling */
+        .primary-source {
+            background: rgba(232, 223, 184, 0.15);
+            border-left: 5px solid var(--pale-sunlight);
+            padding: 1em;
+            margin: 1em 0;
+            font-style: italic;
+            color: var(--cloud-dancer);
+        }
+
+        .primary-source-attribution {
+            text-align: right;
+            font-size: 0.9em;
+            color: var(--morning-mist);
+            margin-top: 0.5em;
+            font-style: normal;
+        }
+
+        /* Timeline styling */
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 0.8em 0;
+            padding: 0.5em;
+            border-left: 4px solid var(--sterling-blue);
+            background: rgba(107, 143, 173, 0.1);
+        }
+
+        .timeline-date {
+            color: var(--pale-sunlight);
+            font-weight: bold;
+            min-width: 120px;
+        }
+
+        /* Comparison boxes */
+        .comparison-box {
+            border: 3px solid var(--quiet-wave);
+            padding: 1.5em;
+            border-radius: 10px;
+            background: rgba(93, 138, 140, 0.1);
+        }
+
+        .comparison-box.alt {
+            border-color: var(--sterling-blue);
+            background: rgba(107, 143, 173, 0.1);
+        }
+
+        /* Section divider styling */
+        .section-divider {
+            background: linear-gradient(135deg, var(--deep-current) 0%, var(--atmospheric-slate) 100%);
+        }
+
+        .section-divider h2 {
+            color: var(--cloud-dancer);
+            font-size: 2.5em;
+        }
+
+        /* Assessment/quiz styling */
+        .assessment-box {
+            background: var(--deep-current);
+            border: 2px solid var(--aventurine);
+            border-radius: 10px;
+            padding: 1.5em;
+            margin: 1em 0;
+        }
+
+        .assessment-box h3 {
+            color: var(--aventurine);
+            margin-top: 0;
+        }
+
+        /* Emphasis/callout box */
+        .callout {
+            background: rgba(232, 223, 184, 0.1);
+            border: 2px solid var(--pale-sunlight);
+            border-radius: 8px;
+            padding: 1em;
+            margin: 1em 0;
+        }
+
+        .callout-title {
+            color: var(--pale-sunlight);
+            font-weight: bold;
+            margin-bottom: 0.5em;
+        }
+
+        /* Progress/slide counter styling */
+        .reveal .progress {
+            background: var(--deep-current);
+        }
+
+        .reveal .progress span {
+            background: var(--sterling-blue);
+        }
+
+        /* Slide counter */
+        .slide-counter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 0.8em;
+            color: var(--morning-mist);
+            z-index: 100;
+        }
+
+        /* Guiding question box */
+        .guiding-question {
+            background: rgba(107, 143, 173, 0.2);
+            border: 2px solid var(--sterling-blue);
+            border-radius: 10px;
+            padding: 1em;
+            font-size: 1.1em;
+            font-style: italic;
+        }
+
+        /* Course info styling */
+        .course-info {
+            font-size: 0.9em;
+            color: var(--misty-sky);
+            margin-top: 1em;
+        }
+
+        /* Concept diagram */
+        .concept-arrow {
+            font-size: 1.5em;
+            color: var(--sterling-blue);
+            margin: 0 0.5em;
+        }
+
+        /* Quote highlight */
+        .quote-highlight {
+            background: rgba(232, 223, 184, 0.2);
+            border-left: 4px solid var(--pale-sunlight);
+            padding: 0.8em 1em;
+            margin: 1em 0;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+            <!-- SLIDE 1: Title -->
+            <section>
+                <h1>The Mythic West</h1>
+                <h2 style="color: var(--misty-sky); font-size: 1.3em;">Spectacle, Photography, and the National Imagination</h2>
+                <p class="course-info">HIST 102 — United States History Since 1877<br>Chapter 18, Lecture 2</p>
+                <p style="margin-top: 2em;"><span class="popup-trigger" onclick="togglePopup('keyboard-popup')">⌨️ Keyboard Shortcuts</span></p>
+                
+                <div id="keyboard-popup" class="popup" style="max-width: 500px;">
+                    <span class="popup-close" onclick="togglePopup('keyboard-popup')">&times;</span>
+                    <h3>Keyboard Shortcuts</h3>
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 1em;">
+                        <tr style="border-bottom: 1px solid var(--quiet-wave);">
+                            <td style="padding: 0.5em; color: var(--pale-sunlight); font-weight: bold;">→ or Space</td>
+                            <td style="padding: 0.5em;">Next slide</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--quiet-wave);">
+                            <td style="padding: 0.5em; color: var(--pale-sunlight); font-weight: bold;">←</td>
+                            <td style="padding: 0.5em;">Previous slide</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--quiet-wave);">
+                            <td style="padding: 0.5em; color: var(--pale-sunlight); font-weight: bold;">S</td>
+                            <td style="padding: 0.5em;">Speaker notes view</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--quiet-wave);">
+                            <td style="padding: 0.5em; color: var(--pale-sunlight); font-weight: bold;">O or Esc</td>
+                            <td style="padding: 0.5em;">Slide overview</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--quiet-wave);">
+                            <td style="padding: 0.5em; color: var(--pale-sunlight); font-weight: bold;">F</td>
+                            <td style="padding: 0.5em;">Fullscreen</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--quiet-wave);">
+                            <td style="padding: 0.5em; color: var(--pale-sunlight); font-weight: bold;">B or .</td>
+                            <td style="padding: 0.5em;">Pause/black screen</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--quiet-wave);">
+                            <td style="padding: 0.5em; color: var(--pale-sunlight); font-weight: bold;">Alt + Click</td>
+                            <td style="padding: 0.5em;">Zoom in</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.5em; color: var(--pale-sunlight); font-weight: bold;">Esc</td>
+                            <td style="padding: 0.5em;">Close popups</td>
+                        </tr>
+                    </table>
+                    <p style="margin-top: 1em; font-size: 0.85em; color: var(--morning-mist);">Click dotted underlined terms to open definition popups.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This lecture explains how Americans transformed conquest and dispossession into reassuring national memory through mass entertainment and visual culture. We're asking: How do nations REMEMBER violence?</p>
+                    
+                    <h4>💭 Context & Connections</h4>
+                    <p>This follows directly from Lecture 1 on conquest. Having examined how conquest WORKED, we now examine how it was REMEMBERED. This connection matters because the myths created in the 1880s-1890s shaped American identity for generations.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 2: What is Myth? -->
+            <section>
+                <h2>Why Myth Matters</h2>
+                <div class="callout" style="margin-bottom: 1.5em;">
+                    <div class="callout-title">🔑 Key Concept</div>
+                    <p><span class="popup-trigger" onclick="togglePopup('myth-popup')">Myth</span> is not the opposite of history.<br>
+                    Myth is how societies <strong>organize meaning</strong> after upheaval and violence.</p>
+                </div>
+                <p>By the 1880s–1890s, the West was <em>not</em> distant history:</p>
+                <ul>
+                    <li>Dispossession, coercion, and violence were recent</li>
+                    <li>Americans needed narratives that made this past feel:
+                        <span style="color: var(--aventurine);"> heroic, orderly, meaningful</span></li>
+                </ul>
+                
+                <div id="myth-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('myth-popup')">&times;</span>
+                    <h3>Myth in Historical Analysis</h3>
+                    <p>In scholarly usage, "myth" doesn't mean "false story." It means a <strong>narrative structure</strong> that gives meaning to events and identity to communities.</p>
+                    <p>Myths are:</p>
+                    <ul>
+                        <li><strong>Selective:</strong> They include some facts, exclude others</li>
+                        <li><strong>Purposeful:</strong> They serve present needs</li>
+                        <li><strong>Powerful:</strong> They shape how people understand themselves</li>
+                    </ul>
+                    <p>The "Mythic West" isn't lies about the West—it's a carefully constructed narrative that organized violence into a usable national story.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>Students often think "myth = false." Clarify that historians use "myth" to mean a meaning-making narrative. The Wild West myth isn't simply lies—it's a selective story that organized real events into a particular pattern.</p>
+                    
+                    <h4>🎓 Senior Historians' Corner</h4>
+                    <p><strong>Richard Slotkin</strong> in his trilogy (especially <em>Gunfighter Nation</em>) traces how frontier mythology became central to American national identity—not as escapist fantasy but as ideological framework.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 3: Guiding Question -->
+            <section>
+                <h2>Guiding Question</h2>
+                <div class="guiding-question">
+                    How do nations remember events that are too recent, too violent, or too unsettling to leave unexplained?
+                </div>
+                <p style="margin-top: 2em; color: var(--misty-sky);">The West wasn't ancient history in the 1880s—it was <em>yesterday</em>.</p>
+                <p>The people who made the myths lived through the events.</p>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This question should guide your thinking. We're not asking "was the myth true or false?" We're asking "what cultural WORK did the myth perform?" and "why did Americans NEED this story?"</p>
+                    
+                    <h4>🤔 Discussion Prompts</h4>
+                    <ul>
+                        <li>Can you think of modern examples where events are mythologized while people who experienced them are still alive?</li>
+                        <li>What happens when a nation can't create a comfortable narrative about its past?</li>
+                    </ul>
+                </aside>
+            </section>
+
+            <!-- SLIDE 4: Timing -->
+            <section>
+                <h2>Timing the Mythic West</h2>
+                <div class="timeline-item">
+                    <span class="timeline-date">1890</span>
+                    <span>Armed Indigenous resistance largely crushed</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">1890</span>
+                    <span>Wounded Knee Massacre</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">1890</span>
+                    <span>Census declares frontier "closed"</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">1883–1913</span>
+                    <span>Buffalo Bill's Wild West tours nationally and internationally</span>
+                </div>
+                <div class="callout" style="margin-top: 1em;">
+                    <div class="callout-title">🔑 Key Insight</div>
+                    <p><strong>Myth follows conquest; it does not precede it.</strong><br>
+                    Myth emerges when explanation becomes necessary.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>The timing is crucial! The mythology of the "Wild West" explodes at the EXACT moment the actual frontier conflicts end. This is not nostalgia for a distant past—it's ACTIVE MEMORY-MAKING IN REAL TIME.</p>
+                    
+                    <h4>💭 Context & Connections</h4>
+                    <p>Frederick Jackson Turner delivers his "Frontier Thesis" in 1893—arguing that the frontier shaped American democracy. He's mythologizing the frontier at the moment it "closes."</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 5: Section Divider - Buffalo Bill -->
+            <section class="section-divider" data-background="linear-gradient(135deg, #2D4A4A 0%, #2A3540 100%)">
+                <h2>Part I</h2>
+                <h3 style="color: var(--misty-sky);">Buffalo Bill's Wild West</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">The Performance of the West</p>
+            </section>
+
+            <!-- SLIDE 6: Buffalo Bill Introduction -->
+            <section>
+                <h2>Buffalo Bill Cody</h2>
+                <div style="display: flex; gap: 2em; align-items: start;">
+                    <div class="img-placeholder" style="width: 400px; height: 500px; flex-shrink: 0;">
+                        <strong>IMAGE PLACEHOLDER</strong><br>
+                        <em>400x500px</em><br><br>
+                        <strong>Search:</strong> "Buffalo Bill Cody portrait" or "William Cody Wild West poster"<br><br>
+                        <strong>Sources:</strong> Library of Congress, Buffalo Bill Center of the West
+                    </div>
+                    <div style="text-align: left;">
+                        <p><strong style="color: var(--pale-sunlight);">William Frederick Cody (1846–1917)</strong></p>
+                        <ul style="font-size: 0.95em;">
+                            <li>Army scout, buffalo hunter, showman</li>
+                            <li>Created <span class="popup-trigger" onclick="togglePopup('wildwest-popup')">Buffalo Bill's Wild West</span> in 1883</li>
+                            <li>Toured for 30 years across U.S. and Europe</li>
+                            <li>Performed for millions</li>
+                        </ul>
+                        <p style="margin-top: 1em; color: var(--aventurine);">Not fringe entertainment—<br><strong>mass culture phenomenon</strong></p>
+                    </div>
+                </div>
+                
+                <div id="wildwest-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('wildwest-popup')">&times;</span>
+                    <h3>Buffalo Bill's Wild West</h3>
+                    <p>Not a "circus"—Cody insisted it was an <strong>educational exhibition</strong> depicting "actual scenes" from frontier life.</p>
+                    <p><strong>Featured acts included:</strong></p>
+                    <ul>
+                        <li>Reenactments of "Indian attacks" on settlers</li>
+                        <li>Sharpshooting demonstrations (Annie Oakley)</li>
+                        <li>Stagecoach robberies</li>
+                        <li>Pony Express riders</li>
+                        <li>Cavalry charges</li>
+                    </ul>
+                    <p>At its peak, the show employed 500+ performers and traveled by train with hundreds of horses.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>Buffalo Bill wasn't a marginal figure—he was one of the most famous Americans of his era, known internationally. His show shaped how MILLIONS understood the American West. Queen Victoria attended; European heads of state visited.</p>
+                    
+                    <h4>🎓 Senior Historians' Corner</h4>
+                    <p><strong>Louis S. Warren</strong>, <em>Buffalo Bill's America</em> (2005) is the definitive biography. Warren shows how Cody's show both reflected and shaped American understanding of the West.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 7: What Shows Accomplished -->
+            <section>
+                <h2>What the Shows Accomplished</h2>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5em; margin-top: 1em;">
+                    <div class="comparison-box" style="text-align: center;">
+                        <h3 style="color: var(--pale-sunlight);">Violence → Adventure</h3>
+                        <p style="font-size: 0.9em;">Brutal conquest recast as thrilling drama</p>
+                    </div>
+                    <div class="comparison-box" style="text-align: center;">
+                        <h3 style="color: var(--pale-sunlight);">Conquest → Drama</h3>
+                        <p style="font-size: 0.9em;">Policy and warfare become entertainment</p>
+                    </div>
+                    <div class="comparison-box" style="text-align: center;">
+                        <h3 style="color: var(--pale-sunlight);">Frontier → Complete</h3>
+                        <p style="font-size: 0.9em;">Presented as resolved, finished, safe</p>
+                    </div>
+                </div>
+                <div class="callout" style="margin-top: 1.5em;">
+                    <div class="callout-title">Analytical Point</div>
+                    <p>This is not <em>fabrication</em>—it is <span class="key-term">selective narrative construction</span>.<br>
+                    Real people and events reorganized into a usable national story.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>The show's genius was making conquest feel SAFE and ENTERTAINING. Audiences could watch "Indian attacks" and cavalry charges without confronting the moral complexity of actual dispossession. Violence became spectacle; conquest became adventure.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 8: Critical Tension -->
+            <section>
+                <h2>The Critical Tension</h2>
+                <div style="display: flex; gap: 2em; align-items: start;">
+                    <div class="img-placeholder" style="width: 400px; height: 350px; flex-shrink: 0;">
+                        <strong>IMAGE PLACEHOLDER</strong><br>
+                        <em>400x350px</em><br><br>
+                        <strong>Search:</strong> "Sitting Bull Buffalo Bill" or "Sitting Bull Wild West show"<br><br>
+                        <strong>Sources:</strong> Library of Congress, Smithsonian
+                    </div>
+                    <div style="text-align: left;">
+                        <p><strong style="color: var(--pale-sunlight);">Native performers appeared on stage...</strong></p>
+                        <ul style="font-size: 0.95em;">
+                            <li>But only within a script they did not control</li>
+                            <li>Including figures like <span class="popup-trigger" onclick="togglePopup('sitting-bull-popup')">Sitting Bull</span></li>
+                            <li>Playing "the Indian" for paying audiences</li>
+                        </ul>
+                        <p style="margin-top: 1em; color: var(--misty-sky);">Presence without power.<br>Visibility without voice.</p>
+                    </div>
+                </div>
+                
+                <div id="sitting-bull-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('sitting-bull-popup')">&times;</span>
+                    <h3>Sitting Bull (Tȟatȟáŋka Íyotake)</h3>
+                    <p><strong>c. 1831–1890</strong> — Hunkpapa Lakota leader who led resistance to U.S. expansion.</p>
+                    <p><strong>Military leader:</strong> At Little Bighorn (1876), Sitting Bull was the spiritual leader whose vision predicted victory over Custer.</p>
+                    <p><strong>Wild West performer:</strong> In 1885, Sitting Bull toured with Buffalo Bill for one season. He reportedly earned $50/week plus bonuses. He gave much of his earnings to homeless children he encountered in cities.</p>
+                    <p><strong>Death:</strong> Killed by Indian agency police in 1890, just weeks before Wounded Knee, during the Ghost Dance crisis.</p>
+                    <p>His participation in the Wild West show represents the complex, constrained choices available to Native leaders after military defeat.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This is where the analysis gets complex. Native people participated in Wild West shows—sometimes for money, sometimes for mobility, sometimes for complex reasons we can't fully know. But they participated in scripts written by others, playing roles that reinforced stereotypes.</p>
+                    
+                    <h4>🎓 Senior Historians' Corner</h4>
+                    <p><strong>Philip Deloria</strong>, <em>Playing Indian</em> (1998) explores the long history of white Americans performing "Indianness" and Native people navigating expectations of what "real Indians" should look like.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 9: Section Divider - Photography -->
+            <section class="section-divider" data-background="linear-gradient(135deg, #2D4A4A 0%, #2A3540 100%)">
+                <h2>Part II</h2>
+                <h3 style="color: var(--misty-sky);">Photography and the Authority of "Truth"</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">The Camera as Evidence</p>
+            </section>
+
+            <!-- SLIDE 10: Photography's Power -->
+            <section>
+                <h2>Photography's Power</h2>
+                <p style="margin-bottom: 1em;">If Buffalo Bill offers <strong>spectacle</strong>, photography offers <strong>evidence</strong>.</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em;">
+                    <div class="comparison-box">
+                        <h3>Why Photography Matters</h3>
+                        <ul style="font-size: 0.9em;">
+                            <li>Claims objectivity</li>
+                            <li>Appears scientific</li>
+                            <li>Seems documentary</li>
+                            <li>Carries cultural authority</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-box alt">
+                        <h3>Dominant Forms</h3>
+                        <ul style="font-size: 0.9em;">
+                            <li>Expeditionary photography</li>
+                            <li>Ethnographic documentation</li>
+                            <li>Studio "authenticity"</li>
+                            <li>Landscape surveys</li>
+                        </ul>
+                    </div>
+                </div>
+                <p style="margin-top: 1.5em; color: var(--aventurine); font-weight: 600;">The camera doesn't just record—it <em>constructs</em>.</p>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>In the late 1800s, photography was new and carried tremendous authority. People believed "the camera doesn't lie." But photographers made choices: what to photograph, how to frame it, what to include or exclude. Photography SEEMED objective but was always selective.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 11: Edward Curtis -->
+            <section>
+                <h2>Edward S. Curtis</h2>
+                <div style="display: flex; gap: 2em; align-items: start;">
+                    <div class="img-placeholder" style="width: 450px; height: 400px; flex-shrink: 0;">
+                        <strong>IMAGE PLACEHOLDER</strong><br>
+                        <em>450x400px</em><br><br>
+                        <strong>Search:</strong> "Edward Curtis photograph Native American" or "Edward Curtis Vanishing Race"<br><br>
+                        <strong>Sources:</strong> Library of Congress, Northwestern University Digital Collections
+                    </div>
+                    <div style="text-align: left;">
+                        <p><strong style="color: var(--pale-sunlight);">Edward Sheriff Curtis (1868–1952)</strong></p>
+                        <p>Massive project: <em>The North American Indian</em> (1907–1930)</p>
+                        <ul style="font-size: 0.9em;">
+                            <li>20 volumes of photographs</li>
+                            <li>Over 40,000 images</li>
+                            <li>Documented 80+ tribes</li>
+                        </ul>
+                        <p style="margin-top: 1em;">Central thesis: <span class="popup-trigger" onclick="togglePopup('vanishing-popup')">The "Vanishing Indian"</span></p>
+                    </div>
+                </div>
+                
+                <div id="vanishing-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('vanishing-popup')">&times;</span>
+                    <h3>The "Vanishing Indian" Thesis</h3>
+                    <p>Curtis explicitly stated his goal was to document Native peoples before they "vanished." His introduction claimed:</p>
+                    <p class="quote-highlight">"The information that is to be gathered... respecting the mode of life of one of the great races of mankind, must be collected at once or the opportunity will be lost."</p>
+                    <p><strong>The assumption:</strong> Native cultures were dying and would soon be gone entirely. Curtis saw himself as a salvage operation, preserving what would otherwise disappear.</p>
+                    <p><strong>The problem:</strong> Native peoples weren't actually vanishing—they were adapting, surviving, and changing. Curtis's framing treated living people as already part of the past.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>Curtis is a complex figure. He spent decades documenting Native cultures, often with cooperation from Indigenous communities. His photographs are beautiful and historically valuable. But his FRAMEWORK—that he was documenting a dying race—shaped everything about how he worked.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 12: Curtis's Methods -->
+            <section>
+                <h2>Curtis's Constructed "Authenticity"</h2>
+                <ul>
+                    <li>Staged scenes in controlled settings</li>
+                    <li><span class="key-term">Removed</span> modern clothing, tools, and environments</li>
+                    <li>Provided "traditional" costumes and props</li>
+                    <li>Presented Native life as <strong>timeless</strong> and <strong>already past</strong></li>
+                </ul>
+                <div class="callout" style="margin-top: 1.5em;">
+                    <div class="callout-title">🔑 Critical Distinction</div>
+                    <p>Curtis is not simply <em>documenting</em> disappearance.<br>
+                    He is <span class="key-term">aestheticizing</span> it.</p>
+                </div>
+                <p style="margin-top: 1em; color: var(--misty-sky);">Photography does not merely record reality. It structures how reality is understood.</p>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>Curtis sometimes removed alarm clocks, modern clothing, or other "inauthentic" elements from photos. He provided traditional costumes. He wanted to photograph what he imagined as the "real" Indian—which meant erasing evidence that Native people were living in the present.</p>
+                    
+                    <h4>🎓 Senior Historians' Corner</h4>
+                    <p><strong>Mick Gidley</strong>, <em>Edward S. Curtis and the North American Indian</em> provides the most thorough scholarly analysis of Curtis's methods and their implications.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 13: Assessment Break -->
+            <section>
+                <h2>📝 Check Your Understanding</h2>
+                <div class="assessment-box">
+                    <h3>Quick Question</h3>
+                    <p>When Edward Curtis removed modern clothing and provided "traditional" costumes for his photographs, he was:</p>
+                    <ol style="list-style-type: upper-alpha; padding-left: 2em;">
+                        <li>Simply documenting historical accuracy</li>
+                        <li>Constructing a particular vision of "authentic" Native identity</li>
+                        <li>Following standard scientific photography practices</li>
+                        <li>Respecting the wishes of his subjects</li>
+                    </ol>
+                </div>
+                
+                <aside class="notes">
+                    <p><strong>Answer: B</strong> — Curtis was CONSTRUCTING authenticity according to his own vision of what "real Indians" should look like. By removing evidence of modern life, he placed Native peoples in a timeless past—even as they were living, adapting people in the present.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 14: Section Divider - Shared Assumptions -->
+            <section class="section-divider" data-background="linear-gradient(135deg, #2D4A4A 0%, #2A3540 100%)">
+                <h2>Part III</h2>
+                <h3 style="color: var(--misty-sky);">Shared Assumptions</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">The Logic of Preservation and Assimilation</p>
+            </section>
+
+            <!-- SLIDE 15: Two Expressions -->
+            <section>
+                <h2>Late-19th-Century Reform Logic</h2>
+                <p style="margin-bottom: 1em;">Reformers broadly believed:</p>
+                <ul>
+                    <li>Native cultures were <strong>disappearing</strong></li>
+                    <li>That disappearance was <strong>inevitable</strong></li>
+                </ul>
+                <p style="margin-top: 1.5em; color: var(--pale-sunlight);">The perceived moral task was therefore twofold:</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em; margin-top: 1em;">
+                    <div class="comparison-box">
+                        <h3 style="color: var(--aventurine);">Preserve the Past</h3>
+                        <p style="font-size: 0.9em;">Photography, museums, ethnographic records</p>
+                        <p style="font-size: 0.85em; color: var(--morning-mist); margin-top: 0.5em;"><em>Salvage ethnography</em></p>
+                    </div>
+                    <div class="comparison-box alt">
+                        <h3 style="color: var(--aventurine);">Reshape the Future</h3>
+                        <p style="font-size: 0.9em;">Boarding schools, allotment, assimilation</p>
+                        <p style="font-size: 0.85em; color: var(--morning-mist); margin-top: 0.5em;"><em>Assimilation policy</em></p>
+                    </div>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This is a conceptual slide connecting photography to policy. Curtis photographing "vanishing" cultures and Pratt running boarding schools shared the SAME ASSUMPTION: authentic "Indianness" belonged to the past. One tried to record it; the other tried to eliminate it.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 16: Shared Assumption -->
+            <section>
+                <h2>The Shared Assumption</h2>
+                <div class="quote-highlight" style="font-size: 1.2em; text-align: center; margin: 1.5em 0;">
+                    "Authentic 'Indianness' belongs to the past, not the present."
+                </div>
+                <p><strong>Key distinction to maintain:</strong></p>
+                <ul>
+                    <li>Curtis is not advocating boarding schools</li>
+                    <li>Boarding schools are not using Curtis directly</li>
+                </ul>
+                <p style="margin-top: 1em; color: var(--aventurine); font-weight: 600;">This connection is <em>ideological and temporal</em>, not causal.</p>
+                <p style="color: var(--misty-sky);">They share a worldview, not a conspiracy.</p>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>We're not claiming Curtis caused boarding schools or vice versa. We're identifying a SHARED ASSUMPTION across different institutions and practices: the belief that Native cultures were dying and that "real" Indian identity was already in the past.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 17: Section Divider - Landscape -->
+            <section class="section-divider" data-background="linear-gradient(135deg, #2D4A4A 0%, #2A3540 100%)">
+                <h2>Part IV</h2>
+                <h3 style="color: var(--misty-sky);">Manifest Destiny Through the Lens</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">Landscape Photography and Empty Land</p>
+            </section>
+
+            <!-- SLIDE 18: Landscape Photography -->
+            <section>
+                <h2>Landscape Photography</h2>
+                <div style="display: flex; gap: 2em; align-items: start;">
+                    <div class="img-placeholder" style="width: 500px; height: 350px; flex-shrink: 0;">
+                        <strong>IMAGE PLACEHOLDER</strong><br>
+                        <em>500x350px</em><br><br>
+                        <strong>Search:</strong> "Carleton Watkins Yosemite" or "Timothy O'Sullivan survey photograph" or "William Henry Jackson Yellowstone"<br><br>
+                        <strong>Sources:</strong> Library of Congress, National Archives
+                    </div>
+                    <div style="text-align: left;">
+                        <p><strong>Emphasis on:</strong></p>
+                        <ul style="font-size: 0.95em;">
+                            <li>Scale and grandeur</li>
+                            <li><span class="key-term">Emptiness</span></li>
+                            <li>Land without visible history</li>
+                            <li>Absence as argument</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>Photographers like Carleton Watkins, Timothy O'Sullivan, and William Henry Jackson accompanied survey expeditions and created iconic images of the American West. These images emphasized vast, empty landscapes—even though those lands were Indigenous homelands.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 19: Implicit Messages -->
+            <section>
+                <h2>The Camera's Implicit Messages</h2>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5em; margin-top: 1em;">
+                    <div class="comparison-box" style="text-align: center;">
+                        <p style="font-size: 1.1em; color: var(--pale-sunlight); font-weight: 600;">"The land is unused"</p>
+                    </div>
+                    <div class="comparison-box" style="text-align: center;">
+                        <p style="font-size: 1.1em; color: var(--pale-sunlight); font-weight: 600;">"Indigenous presence is past"</p>
+                    </div>
+                    <div class="comparison-box" style="text-align: center;">
+                        <p style="font-size: 1.1em; color: var(--pale-sunlight); font-weight: 600;">"Expansion is natural"</p>
+                    </div>
+                </div>
+                <div class="callout" style="margin-top: 1.5em;">
+                    <div class="callout-title">🔑 Key Insight</div>
+                    <p>The camera makes conquest look <strong>peaceful</strong>.<br>
+                    Disappearance appears <strong>organic</strong> rather than coerced.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>By photographing "empty" landscapes, these images supported the ideology of Manifest Destiny. If the land appears uninhabited, then American expansion seems natural rather than violent. The absence of Native peoples in the frame erases the conquest that made that "emptiness."</p>
+                    
+                    <h4>🎓 Senior Historians' Corner</h4>
+                    <p><strong>Martha Sandweiss</strong>, <em>Print the Legend</em> explores how photography shaped American understanding of the West, including the ideological work of landscape images.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 20: Section Divider - Synthesis -->
+            <section class="section-divider" data-background="linear-gradient(135deg, #2D4A4A 0%, #2A3540 100%)">
+                <h2>Part V</h2>
+                <h3 style="color: var(--misty-sky);">Spectacle + Photography = National Memory</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">Synthesis</p>
+            </section>
+
+            <!-- SLIDE 21: Synthesis -->
+            <section>
+                <h2>Two Tools, One Function</h2>
+                <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 1em; align-items: center; margin-top: 1em;">
+                    <div class="comparison-box" style="text-align: center;">
+                        <h3>Buffalo Bill</h3>
+                        <p style="font-size: 0.9em;">Entertainment<br>Spectacle<br>Drama</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <span class="concept-arrow">+</span>
+                    </div>
+                    <div class="comparison-box alt" style="text-align: center;">
+                        <h3>Photography</h3>
+                        <p style="font-size: 0.9em;">Evidence<br>Documentation<br>"Truth"</p>
+                    </div>
+                </div>
+                <p style="margin-top: 1.5em; text-align: center; font-size: 1.1em;">Together they:</p>
+                <ul style="margin-top: 0.5em;">
+                    <li>Translate <strong>violence into culture</strong></li>
+                    <li>Transform <strong>conquest into identity</strong></li>
+                    <li>Replace <strong>moral uncertainty with narrative closure</strong></li>
+                </ul>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This is the synthesis: Wild West shows and photography performed the SAME cultural work through different means. One offered thrilling entertainment; the other offered objective evidence. Together they created a complete narrative that felt both exciting AND true.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 22: Myth is Structure -->
+            <section>
+                <h2>Myth Is Structure</h2>
+                <div class="quote-highlight" style="font-size: 1.3em; text-align: center; margin: 1.5em 0;">
+                    Myth is not falsehood.<br>
+                    <strong>Myth is structure.</strong>
+                </div>
+                <p>The Mythic West provided:</p>
+                <ul>
+                    <li>A way to organize confusing, violent events</li>
+                    <li>Heroes and villains in clear roles</li>
+                    <li>A sense of resolution and completion</li>
+                    <li>A usable past for national identity</li>
+                </ul>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This is the core analytical point. Myth doesn't mean "false"—it means a STRUCTURE for organizing meaning. The Mythic West gave Americans a way to understand what had happened that avoided confronting the full moral weight of conquest.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 23: Conclusion -->
+            <section>
+                <h2>Conclusion: Memory, Not Explanation</h2>
+                <p>By the 1890s, Americans possessed:</p>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8em; margin: 1em 0;">
+                    <div style="background: rgba(107, 143, 173, 0.2); padding: 0.8em; border-radius: 8px; text-align: center;">
+                        <span style="color: var(--pale-sunlight); font-weight: 600;">Stories</span>
+                    </div>
+                    <div style="background: rgba(107, 143, 173, 0.2); padding: 0.8em; border-radius: 8px; text-align: center;">
+                        <span style="color: var(--pale-sunlight); font-weight: 600;">Images</span>
+                    </div>
+                    <div style="background: rgba(107, 143, 173, 0.2); padding: 0.8em; border-radius: 8px; text-align: center;">
+                        <span style="color: var(--pale-sunlight); font-weight: 600;">Heroes</span>
+                    </div>
+                    <div style="background: rgba(107, 143, 173, 0.2); padding: 0.8em; border-radius: 8px; text-align: center;">
+                        <span style="color: var(--pale-sunlight); font-weight: 600;">Visual Proof</span>
+                    </div>
+                </div>
+                <p>What they constructed was not analysis, but <span class="key-term">memory</span>:</p>
+                <ul>
+                    <li>Selective</li>
+                    <li>Comforting</li>
+                    <li>Durable</li>
+                </ul>
+                <div class="callout" style="margin-top: 1em;">
+                    <p>The West becomes not a site of conflict, but an <strong>origin story</strong>.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>The Mythic West created MEMORY rather than ANALYSIS. Americans could feel good about the West without really examining what had happened. This memory proved remarkably durable—Western mythology shaped American culture well into the 20th century and beyond.</p>
+                    
+                    <h4>💭 Context & Connections</h4>
+                    <p>Think about how Hollywood Westerns continued this tradition. The mythology created in the 1880s-1890s became the template for movies, TV shows, and popular culture for the next century.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 24: Looking Forward -->
+            <section>
+                <h2>Looking Forward</h2>
+                <div class="guiding-question" style="margin-top: 1em;">
+                    The myths created in the 1880s–1890s shaped American identity for generations—through dime novels, Wild West shows, Hollywood films, and beyond.
+                </div>
+                <p style="margin-top: 2em; color: var(--misty-sky);">Next: The Industrial Transformation of America</p>
+                <p style="font-size: 0.9em;">How the same decades that mythologized the frontier also created modern industrial capitalism.</p>
+                
+                <aside class="notes">
+                    <h4>💭 Context & Connections</h4>
+                    <p>The Gilded Age was simultaneously creating frontier mythology AND building industrial America. These aren't separate stories—they're connected. The same railroads that destroyed the buffalo also carried Buffalo Bill's show. The same capitalism that transformed the economy also commodified the West as entertainment.</p>
+                </aside>
+            </section>
+
+        </div>
+    </div>
+    
+    <!-- Slide counter -->
+    <div class="slide-counter"></div>
+    
+    <!-- Reveal.js and plugins from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/zoom/zoom.js"></script>
+    
+    <script>
+        // Toggle popup function
+        function togglePopup(id) {
+            document.getElementById(id).classList.toggle('active');
+        }
+        
+        // Close popup when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('popup')) {
+                e.target.classList.remove('active');
+            }
+        });
+        
+        // Close popup with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.popup.active').forEach(p => p.classList.remove('active'));
+            }
+        });
+        
+        // Initialize Reveal.js
+        Reveal.initialize({
+            width: 1920,
+            height: 1080,
+            margin: 0.1,
+            minScale: 0.2,
+            maxScale: 2.0,
+            controls: true,
+            progress: true,
+            center: true,
+            hash: true,
+            transition: 'slide',
+            plugins: [ RevealNotes, RevealHighlight, RevealZoom ]
+        });
+        
+        // Update slide counter
+        function updateSlideCounter() {
+            const current = Reveal.getIndices().h + 1;
+            const total = Reveal.getTotalSlides();
+            document.querySelector('.slide-counter').textContent = current + ' / ' + total;
+        }
+        
+        Reveal.on('slidechanged', updateSlideCounter);
+        Reveal.on('ready', updateSlideCounter);
+    </script>
+</body>
+</html>

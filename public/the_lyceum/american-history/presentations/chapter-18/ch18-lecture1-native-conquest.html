@@ -1,0 +1,921 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 18: Conquest and Resistance - HIST 102</title>
+    
+    <!-- Reveal.js CSS from CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Pantone 2026 Atmospheric Palette */
+            --cloud-dancer: #F0EEE9;
+            --pale-sunlight: #E8DFB8;
+            --atmospheric-slate: #2A3540;
+            --misty-sky: #B8C5D0;
+            --sterling-blue: #6B8FAD;
+            --quiet-wave: #5D8A8C;
+            --aventurine: #4A7C72;
+            --morning-mist: #C5C0B8;
+            --deep-current: #2D4A4A;
+        }
+
+        .reveal {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 32px;
+            background-color: var(--atmospheric-slate);
+        }
+
+        .reveal .slides section {
+            color: var(--cloud-dancer);
+        }
+
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--cloud-dancer);
+            text-transform: none;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .reveal h1 { font-size: 2.8em; }
+        .reveal h2 { font-size: 1.9em; color: var(--pale-sunlight); }
+        .reveal h3 { font-size: 1.4em; color: var(--misty-sky); }
+
+        .reveal p, .reveal li {
+            color: var(--cloud-dancer);
+            line-height: 1.5;
+        }
+
+        .reveal ul { list-style-type: none; padding-left: 0; }
+        .reveal ul li { margin: 0.6em 0; padding-left: 1.5em; position: relative; }
+        .reveal ul li::before {
+            content: "▸";
+            color: var(--sterling-blue);
+            position: absolute;
+            left: 0;
+        }
+
+        .reveal a {
+            color: var(--sterling-blue);
+            text-decoration: underline;
+        }
+
+        .reveal a:hover {
+            color: var(--pale-sunlight);
+        }
+
+        /* Pop-up/Modal styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--deep-current);
+            color: var(--cloud-dancer);
+            padding: 2em;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            max-width: 70%;
+            max-height: 70%;
+            overflow-y: auto;
+            z-index: 1000;
+            border: 3px solid var(--quiet-wave);
+        }
+
+        .popup.active { display: block; }
+
+        .popup h3 {
+            color: var(--pale-sunlight);
+            margin-top: 0;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 2em;
+            cursor: pointer;
+            color: var(--misty-sky);
+        }
+
+        .popup-close:hover {
+            color: var(--cloud-dancer);
+        }
+
+        .popup-trigger {
+            color: var(--sterling-blue);
+            text-decoration: underline dotted;
+            cursor: pointer;
+            border-bottom: 2px dotted var(--sterling-blue);
+        }
+
+        .popup-trigger:hover {
+            color: var(--pale-sunlight);
+            border-bottom-color: var(--pale-sunlight);
+        }
+
+        /* Image placeholder styling */
+        .img-placeholder {
+            background: var(--deep-current);
+            border: 3px dashed var(--quiet-wave);
+            padding: 2em;
+            text-align: center;
+            color: var(--misty-sky);
+            font-style: italic;
+            border-radius: 10px;
+        }
+
+        /* Key term styling */
+        .key-term {
+            color: var(--aventurine);
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        /* Primary source styling */
+        .primary-source {
+            background: rgba(232, 223, 184, 0.15);
+            border-left: 5px solid var(--pale-sunlight);
+            padding: 1em;
+            margin: 1em 0;
+            font-style: italic;
+            color: var(--cloud-dancer);
+        }
+
+        .primary-source-attribution {
+            text-align: right;
+            font-size: 0.9em;
+            color: var(--morning-mist);
+            margin-top: 0.5em;
+            font-style: normal;
+        }
+
+        /* Timeline styling */
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 0.8em 0;
+            padding: 0.5em;
+            border-left: 4px solid var(--sterling-blue);
+            background: rgba(107, 143, 173, 0.1);
+        }
+
+        .timeline-date {
+            color: var(--pale-sunlight);
+            font-weight: bold;
+            min-width: 120px;
+        }
+
+        /* Comparison boxes */
+        .comparison-box {
+            border: 3px solid var(--quiet-wave);
+            padding: 1.5em;
+            border-radius: 10px;
+            background: rgba(93, 138, 140, 0.1);
+        }
+
+        .comparison-box.alt {
+            border-color: var(--sterling-blue);
+            background: rgba(107, 143, 173, 0.1);
+        }
+
+        /* Section divider styling */
+        .section-divider {
+            background: linear-gradient(135deg, var(--deep-current) 0%, var(--atmospheric-slate) 100%);
+        }
+
+        .section-divider h2 {
+            color: var(--cloud-dancer);
+            font-size: 2.5em;
+        }
+
+        /* Assessment/quiz styling */
+        .assessment-box {
+            background: var(--deep-current);
+            border: 2px solid var(--aventurine);
+            border-radius: 10px;
+            padding: 1.5em;
+            margin: 1em 0;
+        }
+
+        .assessment-box h3 {
+            color: var(--aventurine);
+            margin-top: 0;
+        }
+
+        /* Emphasis/callout box */
+        .callout {
+            background: rgba(232, 223, 184, 0.1);
+            border: 2px solid var(--pale-sunlight);
+            border-radius: 8px;
+            padding: 1em;
+            margin: 1em 0;
+        }
+
+        .callout-title {
+            color: var(--pale-sunlight);
+            font-weight: bold;
+            margin-bottom: 0.5em;
+        }
+
+        /* Progress/slide counter styling */
+        .reveal .progress {
+            background: var(--deep-current);
+        }
+
+        .reveal .progress span {
+            background: var(--sterling-blue);
+        }
+
+        /* Slide counter */
+        .slide-counter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 0.8em;
+            color: var(--morning-mist);
+            z-index: 100;
+        }
+
+        /* Guiding question box */
+        .guiding-question {
+            background: rgba(107, 143, 173, 0.2);
+            border: 2px solid var(--sterling-blue);
+            border-radius: 10px;
+            padding: 1em;
+            font-size: 1.1em;
+            font-style: italic;
+        }
+
+        /* Course info styling */
+        .course-info {
+            font-size: 0.9em;
+            color: var(--misty-sky);
+            margin-top: 1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+            <!-- SLIDE 1: Title -->
+            <section>
+                <h1>Conquest and Resistance</h1>
+                <h2 style="color: var(--misty-sky); font-size: 1.4em;">Native Nations, Allotment, and Survival</h2>
+                <p class="course-info">HIST 102 — United States History Since 1877<br>Chapter 18, Lecture 1</p>
+                <p style="margin-top: 2em;"><span class="popup-trigger" onclick="togglePopup('keyboard-popup')">⌨️ Keyboard Shortcuts</span></p>
+                
+                <div id="keyboard-popup" class="popup" style="max-width: 500px;">
+                    <span class="popup-close" onclick="togglePopup('keyboard-popup')">&times;</span>
+                    <h3>Keyboard Shortcuts</h3>
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 1em;">
+                        <tr style="border-bottom: 1px solid var(--quiet-wave);">
+                            <td style="padding: 0.5em; color: var(--pale-sunlight); font-weight: bold;">→ or Space</td>
+                            <td style="padding: 0.5em;">Next slide</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--quiet-wave);">
+                            <td style="padding: 0.5em; color: var(--pale-sunlight); font-weight: bold;">←</td>
+                            <td style="padding: 0.5em;">Previous slide</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--quiet-wave);">
+                            <td style="padding: 0.5em; color: var(--pale-sunlight); font-weight: bold;">S</td>
+                            <td style="padding: 0.5em;">Speaker notes view</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--quiet-wave);">
+                            <td style="padding: 0.5em; color: var(--pale-sunlight); font-weight: bold;">O or Esc</td>
+                            <td style="padding: 0.5em;">Slide overview</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--quiet-wave);">
+                            <td style="padding: 0.5em; color: var(--pale-sunlight); font-weight: bold;">F</td>
+                            <td style="padding: 0.5em;">Fullscreen</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--quiet-wave);">
+                            <td style="padding: 0.5em; color: var(--pale-sunlight); font-weight: bold;">B or .</td>
+                            <td style="padding: 0.5em;">Pause/black screen</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--quiet-wave);">
+                            <td style="padding: 0.5em; color: var(--pale-sunlight); font-weight: bold;">Alt + Click</td>
+                            <td style="padding: 0.5em;">Zoom in</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.5em; color: var(--pale-sunlight); font-weight: bold;">Esc</td>
+                            <td style="padding: 0.5em;">Close popups</td>
+                        </tr>
+                    </table>
+                    <p style="margin-top: 1em; font-size: 0.85em; color: var(--morning-mist);">Click dotted underlined terms to open definition popups.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This lecture establishes the historical realities of western conquest by centering Native nations as political, economic, and social societies. We're examining the multiple mechanisms through which U.S. expansion dismantled Indigenous autonomy.</p>
+                    
+                    <h4>💭 Context & Connections</h4>
+                    <p>This material connects to Reconstruction's end (1877) and sets up understanding of the Gilded Age West. The conquest of Native peoples happened alongside industrialization, urbanization, and the transformation of American capitalism.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 2: Framing - What This Is NOT -->
+            <section>
+                <h2>What This Lecture Is NOT</h2>
+                <ul>
+                    <li>A battle-by-battle history of the "Indian Wars"</li>
+                    <li>A story of inevitable progress</li>
+                    <li>Frontier romance or mythology</li>
+                </ul>
+                <p style="margin-top: 1.5em; color: var(--aventurine); font-weight: 600;">What it IS: An analysis of how conquest <em>functioned</em> in practice</p>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>We're deliberately stepping away from the traditional "cowboys and Indians" narrative you may have absorbed from movies and TV. Instead, we're asking: What were the ACTUAL mechanisms of conquest?</p>
+                    
+                    <h4>💭 Context & Connections</h4>
+                    <p>This analytical approach mirrors how we examined slavery—not just as a moral evil, but as a system with economic, political, and social structures. Conquest similarly operated through multiple mechanisms.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 3: Guiding Question -->
+            <section>
+                <h2>Guiding Question</h2>
+                <div class="guiding-question">
+                    What does conquest look like when the goal is not merely territorial control, but the transformation—or elimination—of entire ways of life?
+                </div>
+                <div style="margin-top: 2em;">
+                    <p><span class="key-term">Key premise:</span> Battles matter as moments that reveal larger strategies—but policy, environment, law, and culture ultimately proved more decisive.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This question should guide your thinking throughout the lecture. We're not just asking "what happened?" but "HOW did it work?" The conquest wasn't just military—it was environmental, legal, cultural, and administrative.</p>
+                    
+                    <h4>🤔 Discussion Prompts</h4>
+                    <ul>
+                        <li>Can you think of modern examples where transformation of culture is as important as physical control?</li>
+                        <li>Why might the U.S. government want to change how people LIVE, not just where they live?</li>
+                    </ul>
+                </aside>
+            </section>
+
+            <!-- SLIDE 4: Section Divider - Native Nations -->
+            <section class="section-divider" data-background="linear-gradient(135deg, #2D4A4A 0%, #2A3540 100%)">
+                <h2>Part I</h2>
+                <h3 style="color: var(--misty-sky);">Native Nations Before Conquest</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">Political, Social, and Economic Systems</p>
+            </section>
+
+            <!-- SLIDE 5: Political Organization -->
+            <section>
+                <h2>Political Organization</h2>
+                <ul>
+                    <li>Plains nations functioned as <span class="popup-trigger" onclick="togglePopup('sovereign-popup')">sovereign political communities</span></li>
+                    <li>Authority rested in councils and recognized chiefs/headmen</li>
+                    <li>Decision-making emphasized <span class="key-term">consensus</span> over coercion</li>
+                    <li>Effective for mobile societies—but vulnerable to centralized nation-states</li>
+                </ul>
+                
+                <div id="sovereign-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('sovereign-popup')">&times;</span>
+                    <h3>Sovereign Political Communities</h3>
+                    <p>Native nations governed themselves independently with their own laws, leadership structures, and diplomatic relations. They made treaties as equals with European powers and the U.S. government—evidence that even the U.S. recognized their political legitimacy.</p>
+                    <p><strong>Key point:</strong> U.S. officials often misread decentralized authority as political weakness rather than structural difference.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>Plains nations had sophisticated political systems—they just looked different from European models. Instead of a single ruler with absolute power, they used councils and consensus. This wasn't "primitive"—it was a deliberate choice suited to their mobile lifestyle.</p>
+                    
+                    <h4>🎓 Senior Historians' Corner</h4>
+                    <p><strong>Pekka Hämäläinen</strong> in <em>The Comanche Empire</em> shows how the Comanches built a genuine empire that dominated the Southern Plains and dictated terms to European colonial powers for over a century.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 6: Economic Systems -->
+            <section>
+                <h2>Economic Systems</h2>
+                <p>Plains economies organized around:</p>
+                <ul>
+                    <li><span class="popup-trigger" onclick="togglePopup('buffalo-popup')">Buffalo hunting</span> as the economic foundation</li>
+                    <li>Seasonal migration following resources</li>
+                    <li>Regional trade networks spanning thousands of miles</li>
+                </ul>
+                <div class="callout" style="margin-top: 1em;">
+                    <div class="callout-title">🔑 Key Difference</div>
+                    <p>Wealth and status tied to <em>kinship, mobility, and animals</em>—NOT land ownership</p>
+                </div>
+                
+                <div id="buffalo-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('buffalo-popup')">&times;</span>
+                    <h3>The Buffalo Economy</h3>
+                    <p>The buffalo provided virtually everything Plains peoples needed:</p>
+                    <ul>
+                        <li><strong>Food:</strong> Meat, both fresh and preserved as pemmican</li>
+                        <li><strong>Shelter:</strong> Hides for tipis</li>
+                        <li><strong>Clothing:</strong> Leather, fur, and wool</li>
+                        <li><strong>Tools:</strong> Bones, sinew, horns</li>
+                        <li><strong>Spiritual meaning:</strong> Central to religious ceremonies</li>
+                    </ul>
+                    <p>This is why destroying the buffalo was such an effective weapon of conquest.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This is crucial for understanding WHY the conquest took the form it did. These weren't societies that could simply be "defeated" militarily and then absorbed. Their entire way of life depended on movement, buffalo, and communal organization. To conquer them, the U.S. had to destroy these foundations.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 7: Gender Roles and Power -->
+            <section>
+                <h2>Gender Roles and Power</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em;">
+                    <div class="comparison-box">
+                        <h3>Men's Roles</h3>
+                        <ul style="font-size: 0.9em;">
+                            <li>Hunting</li>
+                            <li>Warfare</li>
+                            <li>Diplomacy</li>
+                            <li>Political/military authority</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-box alt">
+                        <h3>Women's Roles</h3>
+                        <ul style="font-size: 0.9em;">
+                            <li>Food processing</li>
+                            <li>Shelter construction</li>
+                            <li>Clothing production</li>
+                            <li>Control of household resources</li>
+                        </ul>
+                    </div>
+                </div>
+                <p style="margin-top: 1em; font-size: 0.95em;">Women exercised substantial influence through kinship networks and marriage alliances</p>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>These societies were neither egalitarian utopias nor rigid patriarchies. They operated according to internally coherent norms that don't map neatly onto European or modern categories.</p>
+                    
+                    <h4>💭 Context & Connections</h4>
+                    <p>When the U.S. imposed allotment and assimilation policies, they specifically targeted these gender systems—giving land titles to men, teaching women domestic skills, and restructuring families along Euro-American lines.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 8: Transition -->
+            <section>
+                <h2>The Challenge for Conquest</h2>
+                <div class="callout">
+                    <div class="callout-title">🔑 Why This Matters</div>
+                    <p>To dismantle these societies, the United States did not simply need military victory—it needed to undermine the <em>ecological, economic, and social foundations</em> of Native autonomy.</p>
+                </div>
+                <p style="margin-top: 1.5em; color: var(--misty-sky);">This explains why conquest took so many forms beyond battlefield combat.</p>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This is the analytical key to the entire lecture. Military force alone couldn't "conquer" peoples whose power didn't rest in fixed capitals or territorial boundaries. The U.S. had to attack the buffalo, attack mobility, attack communal land ownership, attack family structures, attack language and religion.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 9: Section Divider - Violence -->
+            <section class="section-divider" data-background="linear-gradient(135deg, #2D4A4A 0%, #2A3540 100%)">
+                <h2>Part II</h2>
+                <h3 style="color: var(--misty-sky);">Violence and Conquest</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">When Battles Matter—and When They Don't</p>
+            </section>
+
+            <!-- SLIDE 10: Why Battles Aren't the Center -->
+            <section>
+                <h2>Why Battles Aren't the Center</h2>
+                <ul>
+                    <li>Hundreds of armed conflicts occurred across the West</li>
+                    <li>Focusing on tactics obscures:
+                        <ul style="font-size: 0.9em; margin-top: 0.5em;">
+                            <li>Structural power imbalances</li>
+                            <li>Demographic pressure</li>
+                            <li>Industrial capacity</li>
+                            <li>Long-term policy outcomes</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p style="margin-top: 1em; color: var(--aventurine);">Native resistance failed not due to lack of courage—but due to asymmetries in logistics, population, and environmental control.</p>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This is a historiographical point: older histories focused heavily on battles and military campaigns. Modern historians emphasize that the "Indian Wars" were won less on battlefields than through systematic destruction of buffalo, railroad expansion, and reservation policies.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 11: Two Symbolic Battles -->
+            <section>
+                <h2>Two Battles That Matter Symbolically</h2>
+                <div class="timeline-item">
+                    <span class="timeline-date">1876</span>
+                    <span><strong>Little Bighorn</strong> — Rare Indigenous military victory; showed limits of U.S. control</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">1890</span>
+                    <span><strong><span class="popup-trigger" onclick="togglePopup('wounded-knee-popup')">Wounded Knee</span></strong> — A massacre, not a battle; symbolic end of armed resistance</span>
+                </div>
+                <div class="callout" style="margin-top: 1.5em;">
+                    <div class="callout-title">Key Takeaway</div>
+                    <p>Battles punctuate the story, but <strong>policy finishes it</strong>.</p>
+                </div>
+                
+                <div id="wounded-knee-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('wounded-knee-popup')">&times;</span>
+                    <h3>Wounded Knee Massacre (1890)</h3>
+                    <p>On December 29, 1890, U.S. soldiers massacred approximately 250-300 Lakota men, women, and children at Wounded Knee Creek, South Dakota.</p>
+                    <p>The Lakota were being disarmed after practicing the <strong>Ghost Dance</strong>—a spiritual movement promising renewal. The military interpreted religious practice as military threat.</p>
+                    <p><strong>Historical significance:</strong> Marks the violent end of organized armed resistance on the Plains and coincides with intensified assimilation efforts.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p><strong>Little Bighorn:</strong> Custer's defeat shocked the nation but actually ACCELERATED conquest—the government responded with more troops and harsher policies.</p>
+                    <p><strong>Wounded Knee:</strong> Not a battle at all—unarmed people being massacred. Twenty soldiers received Medals of Honor for this massacre.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 12: Section Divider - Buffalo -->
+            <section class="section-divider" data-background="linear-gradient(135deg, #2D4A4A 0%, #2A3540 100%)">
+                <h2>Part III</h2>
+                <h3 style="color: var(--misty-sky);">Buffalo Destruction</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">Economic and Ecological Warfare</p>
+            </section>
+
+            <!-- SLIDE 13: Buffalo Destruction -->
+            <section>
+                <h2>Buffalo Destruction</h2>
+                <div style="display: flex; gap: 2em; align-items: start;">
+                    <div class="img-placeholder" style="width: 400px; height: 350px; flex-shrink: 0;">
+                        <strong>IMAGE PLACEHOLDER</strong><br>
+                        <em>400x350px</em><br><br>
+                        <strong>Search:</strong> "pile of buffalo skulls 1870s" or "buffalo bone pile railroad"<br><br>
+                        <strong>Sources:</strong> Library of Congress, National Archives
+                    </div>
+                    <div style="text-align: left;">
+                        <p><strong>Destruction driven by:</strong></p>
+                        <ul style="font-size: 0.95em;">
+                            <li>Railroad expansion</li>
+                            <li>Commercial hide markets</li>
+                            <li>Deliberate military strategy</li>
+                        </ul>
+                        <p style="margin-top: 1em; color: var(--aventurine); font-weight: 600;">The acknowledged logic:</p>
+                        <p>Destroy the buffalo → Force dependence → Eliminate autonomy</p>
+                    </div>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>An estimated 30-60 million buffalo existed in 1800. By 1889, fewer than 1,000 remained. This wasn't accidental—it was policy. Army generals and politicians openly stated that destroying the buffalo would force Native peoples onto reservations.</p>
+                    
+                    <h4>🎓 Senior Historians' Corner</h4>
+                    <p>General Philip Sheridan reportedly said hunters "have done more to settle the vexed Indian question than the entire regular army." Whether this exact quote is authentic, the LOGIC was openly expressed by many officials.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 14: Buffalo as Warfare -->
+            <section>
+                <h2>Three Forms of Warfare</h2>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5em; margin-top: 1em;">
+                    <div class="comparison-box" style="text-align: center;">
+                        <h3 style="color: var(--pale-sunlight);">Economic</h3>
+                        <p style="font-size: 0.9em;">Destroyed the foundation of Plains economies</p>
+                    </div>
+                    <div class="comparison-box" style="text-align: center;">
+                        <h3 style="color: var(--pale-sunlight);">Ecological</h3>
+                        <p style="font-size: 0.9em;">Transformed the Great Plains environment</p>
+                    </div>
+                    <div class="comparison-box" style="text-align: center;">
+                        <h3 style="color: var(--pale-sunlight);">Cultural</h3>
+                        <p style="font-size: 0.9em;">Eliminated sacred and ceremonial center of life</p>
+                    </div>
+                </div>
+                <div class="callout" style="margin-top: 1.5em;">
+                    <div class="callout-title">🔑 Analytical Point</div>
+                    <p>Where military conquest proved costly or incomplete, <strong>environmental destruction succeeded</strong>.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This is what scholars mean by "ecological imperialism"—conquest through environmental transformation. You can't maintain a mobile hunting society when there's nothing to hunt. This forced reservation dependency without requiring military victory in every engagement.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 15: California -->
+            <section>
+                <h2>Regional Variation: California</h2>
+                <h3 style="font-size: 1.2em;">The Logic of Elimination</h3>
+                <ul>
+                    <li>Gold Rush (1849) created immediate settler pressure</li>
+                    <li>Minimal treaty-making or reservation planning</li>
+                    <li>Native peoples viewed as <em>obstacles</em>, not populations to manage</li>
+                </ul>
+                <div style="margin-top: 1em; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5em;">
+                    <div class="comparison-box">
+                        <h3>Forms of Violence</h3>
+                        <ul style="font-size: 0.85em;">
+                            <li>Vigilante campaigns</li>
+                            <li>State-funded killing</li>
+                            <li>Federal inaction</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-box alt">
+                        <h3>Interpretation</h3>
+                        <p style="font-size: 0.85em;">Many historians describe this as <span class="popup-trigger" onclick="togglePopup('genocide-popup')">genocide</span></p>
+                    </div>
+                </div>
+                
+                <div id="genocide-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('genocide-popup')">&times;</span>
+                    <h3>Genocide in California</h3>
+                    <p>Historian <strong>Benjamin Madley</strong> documents that California's Indigenous population fell from approximately 150,000 in 1846 to 30,000 by 1873—an 80% decline in less than 30 years.</p>
+                    <p>This included:</p>
+                    <ul>
+                        <li>State-funded militia campaigns</li>
+                        <li>Bounties for Native scalps and heads</li>
+                        <li>Enslavement under indenture laws</li>
+                        <li>Deliberate starvation</li>
+                    </ul>
+                    <p>Madley's book is titled <em>An American Genocide</em> (2016)—the scholarly consensus increasingly supports this characterization.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p><strong>Comparative insight:</strong> On the Plains, the federal government sought to CONTROL Native populations. In California, settlers frequently sought to ELIMINATE them entirely. These represent different logics of conquest operating simultaneously.</p>
+                    
+                    <h4>🎓 Senior Historians' Corner</h4>
+                    <p>Benjamin Madley's <em>An American Genocide</em> (2016) is the definitive scholarly account. He documents state appropriations for militia campaigns and traces the chain of command from local violence to state and federal tolerance.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 16: Assessment Break -->
+            <section>
+                <h2>📝 Check Your Understanding</h2>
+                <div class="assessment-box">
+                    <h3>Quick Question</h3>
+                    <p>Why did U.S. officials and commercial interests systematically destroy the buffalo herds?</p>
+                    <ol style="list-style-type: upper-alpha; padding-left: 2em;">
+                        <li>To clear land for railroad construction</li>
+                        <li>To force Native peoples into dependency on reservations</li>
+                        <li>To supply the commercial hide market</li>
+                        <li>All of the above</li>
+                    </ol>
+                </div>
+                
+                <aside class="notes">
+                    <p><strong>Answer: D</strong> - All of the above. The buffalo destruction served multiple purposes simultaneously: commercial profit, transportation infrastructure, and deliberate policy to undermine Native autonomy. This is why we call it "ecological warfare"—it achieved military/political objectives through environmental destruction.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 17: Section Divider - Reservation -->
+            <section class="section-divider" data-background="linear-gradient(135deg, #2D4A4A 0%, #2A3540 100%)">
+                <h2>Part IV</h2>
+                <h3 style="color: var(--misty-sky);">The Reservation System</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">Containment and Dependency</p>
+            </section>
+
+            <!-- SLIDE 18: Reservation System -->
+            <section>
+                <h2>The Reservation System</h2>
+                <ul>
+                    <li>Reservations as tools of <span class="key-term">spatial and political control</span></li>
+                    <li>Fixing mobile peoples in place enabled:
+                        <ul style="font-size: 0.9em; margin-top: 0.5em;">
+                            <li>Surveillance</li>
+                            <li>Ration-based coercion</li>
+                            <li>Administrative oversight</li>
+                        </ul>
+                    </li>
+                    <li>Traditional authority eroded under federal agents</li>
+                </ul>
+                <div class="callout" style="margin-top: 1em;">
+                    <div class="callout-title">🔑 Key Point</div>
+                    <p>Dependency was not an accident but a <strong>structural feature</strong>. Reservations were designed to <em>manage</em> Native peoples, not preserve Native cultures.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>Think of reservations as combining elements of both prisons and welfare systems. Residents couldn't leave without permission, depended on government rations, and lived under federal agents who controlled daily life. This was conquest through administration.</p>
+                    
+                    <h4>💭 Context & Connections</h4>
+                    <p>This connects to our earlier discussions of "civil society" and institutions. The reservation system was a deliberate institutional design to transform independent peoples into dependent subjects.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 19: Dawes Act -->
+            <section>
+                <h2>Allotment: The Dawes Act (1887)</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em;">
+                    <div>
+                        <h3 style="color: var(--misty-sky);">What It Did</h3>
+                        <ul style="font-size: 0.95em;">
+                            <li>Broke up communal landholding</li>
+                            <li>Assigned individual plots (160 acres)</li>
+                            <li>Declared "surplus" land open to whites</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--misty-sky);">Underlying Goals</h3>
+                        <ul style="font-size: 0.95em;">
+                            <li>Dismantle communal sovereignty</li>
+                            <li>Impose private property norms</li>
+                            <li>Restructure family/gender relations</li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="margin-top: 1.5em; background: rgba(232, 223, 184, 0.1); padding: 1em; border-radius: 8px;">
+                    <p><strong>Results:</strong> Native land holdings fell from <span class="key-term">138 million acres</span> in 1887 to <span class="key-term">48 million acres</span> by 1934</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>The Dawes Act was "reform" that accomplished conquest. Reformers genuinely believed private property would "civilize" Native peoples—but the result was massive land theft. The "surplus" lands opened to white settlement were the real goal.</p>
+                    
+                    <h4>📖 Key Definitions</h4>
+                    <ul>
+                        <li><strong>Allotment:</strong> Breaking communal tribal lands into individual private plots</li>
+                        <li><strong>Assimilation:</strong> Policy of forcing Native peoples to adopt Euro-American culture, language, and lifeways</li>
+                    </ul>
+                    
+                    <h4>Critical framing</h4>
+                    <p>Allotment followed military defeat and containment; it was conquest continued by legal means.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 20: Boarding Schools -->
+            <section>
+                <h2>Boarding Schools</h2>
+                <h3 style="font-size: 1.1em; color: var(--misty-sky);">Conquest Across Generations</h3>
+                <div style="display: flex; gap: 2em; align-items: start; margin-top: 1em;">
+                    <div class="img-placeholder" style="width: 450px; height: 300px; flex-shrink: 0;">
+                        <strong>IMAGE PLACEHOLDER</strong><br>
+                        <em>450x300px</em><br><br>
+                        <strong>Search:</strong> "Carlisle Indian School before after" or "Native American boarding school children"<br><br>
+                        <strong>Sources:</strong> National Archives, Carlisle Indian School Digital Resource Center
+                    </div>
+                    <div style="text-align: left;">
+                        <ul style="font-size: 0.95em;">
+                            <li>Forced removal from families</li>
+                            <li>Suppression of language and religion</li>
+                            <li>Renaming, uniforms, discipline</li>
+                            <li>Cultural erasure as explicit goal</li>
+                        </ul>
+                        <p style="margin-top: 1em; color: var(--aventurine); font-weight: 600;">"Kill the Indian, save the man"</p>
+                        <p style="font-size: 0.85em; color: var(--morning-mist);">— Capt. Richard Henry Pratt, founder of Carlisle</p>
+                    </div>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This was conquest aimed at the FUTURE, not just the present. If you can't defeat a people militarily, you can try to ensure their children don't know their own language, religion, or traditions. The trauma of boarding schools continues to affect Native communities today.</p>
+                    
+                    <h4>🎓 Senior Historians' Corner</h4>
+                    <p><strong>David Wallace Adams</strong>, <em>Education for Extinction</em> (1995) is the standard scholarly account. Adams shows how boarding schools were explicitly designed to destroy Native identity across generations.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 21: Ghost Dance -->
+            <section>
+                <h2>Resistance and Survival</h2>
+                <h3 style="color: var(--misty-sky);">Ghost Dance and Wounded Knee</h3>
+                <ul>
+                    <li>The <span class="popup-trigger" onclick="togglePopup('ghost-dance-popup')">Ghost Dance</span>: spiritual movement emphasizing renewal and hope</li>
+                    <li>Not inherently violent—rooted in belief and meaning-making</li>
+                    <li>U.S. officials interpreted religious practice as military threat</li>
+                </ul>
+                <div class="primary-source" style="margin-top: 1em;">
+                    The Ghost Dance promised that faithful practice would restore the buffalo, bring back the ancestors, and renew the earth—a response to unimaginable loss.
+                </div>
+                
+                <div id="ghost-dance-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('ghost-dance-popup')">&times;</span>
+                    <h3>The Ghost Dance Movement</h3>
+                    <p>Founded by the Paiute prophet <strong>Wovoka</strong> around 1889, the Ghost Dance spread rapidly among Plains peoples experiencing devastation from conquest.</p>
+                    <p><strong>Core beliefs:</strong></p>
+                    <ul>
+                        <li>Faithful dancing and moral behavior would bring renewal</li>
+                        <li>Ancestors would return</li>
+                        <li>The buffalo would come back</li>
+                        <li>White settlers would disappear or leave</li>
+                    </ul>
+                    <p>This was a peaceful religious movement—the violence came entirely from the U.S. military's response.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>The Ghost Dance shows both the depth of despair (people hoping for supernatural intervention because earthly resistance seemed impossible) and the persistence of cultural identity (maintaining spiritual practices despite suppression). The massacre at Wounded Knee happened because officials feared what was actually a peaceful religious movement.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 22: Conclusion -->
+            <section>
+                <h2>Conclusion: Mechanisms of Conquest</h2>
+                <p style="margin-bottom: 1em;">Conquest operated through <strong>multiple mechanisms</strong>:</p>
+                <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.8em;">
+                    <div style="background: rgba(107, 143, 173, 0.2); padding: 0.8em; border-radius: 8px; text-align: center;">
+                        <span style="color: var(--pale-sunlight); font-weight: 600;">Military</span>
+                    </div>
+                    <div style="background: rgba(107, 143, 173, 0.2); padding: 0.8em; border-radius: 8px; text-align: center;">
+                        <span style="color: var(--pale-sunlight); font-weight: 600;">Ecological</span>
+                    </div>
+                    <div style="background: rgba(107, 143, 173, 0.2); padding: 0.8em; border-radius: 8px; text-align: center;">
+                        <span style="color: var(--pale-sunlight); font-weight: 600;">Administrative</span>
+                    </div>
+                    <div style="background: rgba(107, 143, 173, 0.2); padding: 0.8em; border-radius: 8px; text-align: center;">
+                        <span style="color: var(--pale-sunlight); font-weight: 600;">Legal</span>
+                    </div>
+                    <div style="background: rgba(107, 143, 173, 0.2); padding: 0.8em; border-radius: 8px; text-align: center;">
+                        <span style="color: var(--pale-sunlight); font-weight: 600;">Cultural</span>
+                    </div>
+                </div>
+                <ul style="margin-top: 1.5em;">
+                    <li>U.S. Indian policy was <em>adaptive</em>, not uniform</li>
+                    <li>Native survival occurred under conditions of extreme coercion</li>
+                </ul>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This lecture gives you the analytical framework for understanding the conquest of the West. We've seen that conquest wasn't just about winning battles—it involved destroying economic foundations (buffalo), imposing administrative control (reservations), legal transformation (allotment), and cultural assault (boarding schools).</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 23: Bridge to Next Lecture -->
+            <section>
+                <h2>Coming Next: The Mythic West</h2>
+                <div class="guiding-question" style="margin-top: 1em;">
+                    As conquest solidified, Americans faced a new problem—<br>
+                    <strong>how to remember what they had done</strong>,<br>
+                    and how to transform violence into national memory.
+                </div>
+                <p style="margin-top: 2em; color: var(--misty-sky);">Lecture 2 examines how the "Wild West" became American mythology.</p>
+                
+                <aside class="notes">
+                    <h4>💭 Context & Connections</h4>
+                    <p>The next lecture will examine how Buffalo Bill's Wild West show, dime novels, and later Hollywood created a romanticized version of conquest that erased or justified the violence we've examined today. Memory and mythology become tools for managing the moral implications of empire.</p>
+                </aside>
+            </section>
+
+        </div>
+    </div>
+    
+    <!-- Slide counter -->
+    <div class="slide-counter"></div>
+    
+    <!-- Reveal.js and plugins from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/zoom/zoom.js"></script>
+    
+    <script>
+        // Toggle popup function
+        function togglePopup(id) {
+            document.getElementById(id).classList.toggle('active');
+        }
+        
+        // Close popup when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('popup')) {
+                e.target.classList.remove('active');
+            }
+        });
+        
+        // Close popup with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.popup.active').forEach(p => p.classList.remove('active'));
+            }
+        });
+        
+        // Initialize Reveal.js
+        Reveal.initialize({
+            width: 1920,
+            height: 1080,
+            margin: 0.1,
+            minScale: 0.2,
+            maxScale: 2.0,
+            controls: true,
+            progress: true,
+            center: true,
+            hash: true,
+            transition: 'slide',
+            plugins: [ RevealNotes, RevealHighlight, RevealZoom ]
+        });
+        
+        // Update slide counter
+        function updateSlideCounter() {
+            const current = Reveal.getIndices().h + 1;
+            const total = Reveal.getTotalSlides();
+            document.querySelector('.slide-counter').textContent = current + ' / ' + total;
+        }
+        
+        Reveal.on('slidechanged', updateSlideCounter);
+        Reveal.on('ready', updateSlideCounter);
+    </script>
+</body>
+</html>

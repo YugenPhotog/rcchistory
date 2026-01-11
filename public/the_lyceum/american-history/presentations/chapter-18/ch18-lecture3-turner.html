@@ -1,0 +1,1014 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 18: Explaining the West - HIST 102</title>
+    
+    <!-- Reveal.js CSS from CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Pantone 2026 Atmospheric Palette */
+            --cloud-dancer: #F0EEE9;
+            --pale-sunlight: #E8DFB8;
+            --atmospheric-slate: #2A3540;
+            --misty-sky: #B8C5D0;
+            --sterling-blue: #6B8FAD;
+            --quiet-wave: #5D8A8C;
+            --aventurine: #4A7C72;
+            --morning-mist: #C5C0B8;
+            --deep-current: #2D4A4A;
+        }
+
+        .reveal {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 32px;
+            background-color: var(--atmospheric-slate);
+        }
+
+        .reveal .slides section {
+            color: var(--cloud-dancer);
+        }
+
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--cloud-dancer);
+            text-transform: none;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .reveal h1 { font-size: 2.8em; }
+        .reveal h2 { font-size: 1.9em; color: var(--pale-sunlight); }
+        .reveal h3 { font-size: 1.4em; color: var(--misty-sky); }
+
+        .reveal p, .reveal li {
+            color: var(--cloud-dancer);
+            line-height: 1.5;
+        }
+
+        .reveal ul { list-style-type: none; padding-left: 0; }
+        .reveal ul li { margin: 0.6em 0; padding-left: 1.5em; position: relative; }
+        .reveal ul li::before {
+            content: "▸";
+            color: var(--sterling-blue);
+            position: absolute;
+            left: 0;
+        }
+
+        .reveal a {
+            color: var(--sterling-blue);
+            text-decoration: underline;
+        }
+
+        .reveal a:hover {
+            color: var(--pale-sunlight);
+        }
+
+        /* Pop-up/Modal styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--deep-current);
+            color: var(--cloud-dancer);
+            padding: 2em;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            max-width: 70%;
+            max-height: 70%;
+            overflow-y: auto;
+            z-index: 1000;
+            border: 3px solid var(--quiet-wave);
+        }
+
+        .popup.active { display: block; }
+
+        .popup h3 {
+            color: var(--pale-sunlight);
+            margin-top: 0;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 2em;
+            cursor: pointer;
+            color: var(--misty-sky);
+        }
+
+        .popup-close:hover {
+            color: var(--cloud-dancer);
+        }
+
+        .popup-trigger {
+            color: var(--sterling-blue);
+            text-decoration: underline dotted;
+            cursor: pointer;
+            border-bottom: 2px dotted var(--sterling-blue);
+        }
+
+        .popup-trigger:hover {
+            color: var(--pale-sunlight);
+            border-bottom-color: var(--pale-sunlight);
+        }
+
+        /* Image placeholder styling */
+        .img-placeholder {
+            background: var(--deep-current);
+            border: 3px dashed var(--quiet-wave);
+            padding: 2em;
+            text-align: center;
+            color: var(--misty-sky);
+            font-style: italic;
+            border-radius: 10px;
+        }
+
+        /* Key term styling */
+        .key-term {
+            color: var(--aventurine);
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        /* Primary source styling */
+        .primary-source {
+            background: rgba(232, 223, 184, 0.15);
+            border-left: 5px solid var(--pale-sunlight);
+            padding: 1em;
+            margin: 1em 0;
+            font-style: italic;
+            color: var(--cloud-dancer);
+        }
+
+        .primary-source-attribution {
+            text-align: right;
+            font-size: 0.9em;
+            color: var(--morning-mist);
+            margin-top: 0.5em;
+            font-style: normal;
+        }
+
+        /* Timeline styling */
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 0.8em 0;
+            padding: 0.5em;
+            border-left: 4px solid var(--sterling-blue);
+            background: rgba(107, 143, 173, 0.1);
+        }
+
+        .timeline-date {
+            color: var(--pale-sunlight);
+            font-weight: bold;
+            min-width: 120px;
+        }
+
+        /* Comparison boxes */
+        .comparison-box {
+            border: 3px solid var(--quiet-wave);
+            padding: 1.5em;
+            border-radius: 10px;
+            background: rgba(93, 138, 140, 0.1);
+        }
+
+        .comparison-box.alt {
+            border-color: var(--sterling-blue);
+            background: rgba(107, 143, 173, 0.1);
+        }
+
+        /* Section divider styling */
+        .section-divider {
+            background: linear-gradient(135deg, var(--deep-current) 0%, var(--atmospheric-slate) 100%);
+        }
+
+        .section-divider h2 {
+            color: var(--cloud-dancer);
+            font-size: 2.5em;
+        }
+
+        /* Assessment/quiz styling */
+        .assessment-box {
+            background: var(--deep-current);
+            border: 2px solid var(--aventurine);
+            border-radius: 10px;
+            padding: 1.5em;
+            margin: 1em 0;
+        }
+
+        .assessment-box h3 {
+            color: var(--aventurine);
+            margin-top: 0;
+        }
+
+        /* Emphasis/callout box */
+        .callout {
+            background: rgba(232, 223, 184, 0.1);
+            border: 2px solid var(--pale-sunlight);
+            border-radius: 8px;
+            padding: 1em;
+            margin: 1em 0;
+        }
+
+        .callout-title {
+            color: var(--pale-sunlight);
+            font-weight: bold;
+            margin-bottom: 0.5em;
+        }
+
+        /* Progress/slide counter styling */
+        .reveal .progress {
+            background: var(--deep-current);
+        }
+
+        .reveal .progress span {
+            background: var(--sterling-blue);
+        }
+
+        /* Slide counter */
+        .slide-counter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 0.8em;
+            color: var(--morning-mist);
+            z-index: 100;
+        }
+
+        /* Guiding question box */
+        .guiding-question {
+            background: rgba(107, 143, 173, 0.2);
+            border: 2px solid var(--sterling-blue);
+            border-radius: 10px;
+            padding: 1em;
+            font-size: 1.1em;
+            font-style: italic;
+        }
+
+        /* Course info styling */
+        .course-info {
+            font-size: 0.9em;
+            color: var(--misty-sky);
+            margin-top: 1em;
+        }
+
+        /* Concept diagram */
+        .concept-arrow {
+            font-size: 1.5em;
+            color: var(--sterling-blue);
+            margin: 0 0.5em;
+        }
+
+        /* Quote highlight */
+        .quote-highlight {
+            background: rgba(232, 223, 184, 0.2);
+            border-left: 4px solid var(--pale-sunlight);
+            padding: 0.8em 1em;
+            margin: 1em 0;
+            font-style: italic;
+        }
+
+        /* Transformation arrow */
+        .transform-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0.5em 0;
+            font-size: 1.1em;
+        }
+
+        .transform-arrow {
+            color: var(--sterling-blue);
+            margin: 0 1em;
+            font-size: 1.3em;
+        }
+
+        .transform-before {
+            color: var(--morning-mist);
+            text-decoration: line-through;
+            text-decoration-color: var(--quiet-wave);
+        }
+
+        .transform-after {
+            color: var(--aventurine);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+            <!-- SLIDE 1: Title -->
+            <section>
+                <h1>Explaining the West</h1>
+                <h2 style="color: var(--misty-sky); font-size: 1.3em;">Historiography, Turner, and American Exceptionalism</h2>
+                <p class="course-info">HIST 102 — United States History Since 1877<br>Chapter 18, Lecture 3</p>
+                <p style="margin-top: 2em;"><span class="popup-trigger" onclick="togglePopup('keyboard-popup')">⌨️ Keyboard Shortcuts</span></p>
+                
+                <div id="keyboard-popup" class="popup" style="max-width: 500px;">
+                    <span class="popup-close" onclick="togglePopup('keyboard-popup')">&times;</span>
+                    <h3>Keyboard Shortcuts</h3>
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 1em;">
+                        <tr style="border-bottom: 1px solid var(--quiet-wave);">
+                            <td style="padding: 0.5em; color: var(--pale-sunlight); font-weight: bold;">→ or Space</td>
+                            <td style="padding: 0.5em;">Next slide</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--quiet-wave);">
+                            <td style="padding: 0.5em; color: var(--pale-sunlight); font-weight: bold;">←</td>
+                            <td style="padding: 0.5em;">Previous slide</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--quiet-wave);">
+                            <td style="padding: 0.5em; color: var(--pale-sunlight); font-weight: bold;">S</td>
+                            <td style="padding: 0.5em;">Speaker notes view</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--quiet-wave);">
+                            <td style="padding: 0.5em; color: var(--pale-sunlight); font-weight: bold;">O or Esc</td>
+                            <td style="padding: 0.5em;">Slide overview</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--quiet-wave);">
+                            <td style="padding: 0.5em; color: var(--pale-sunlight); font-weight: bold;">F</td>
+                            <td style="padding: 0.5em;">Fullscreen</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--quiet-wave);">
+                            <td style="padding: 0.5em; color: var(--pale-sunlight); font-weight: bold;">B or .</td>
+                            <td style="padding: 0.5em;">Pause/black screen</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--quiet-wave);">
+                            <td style="padding: 0.5em; color: var(--pale-sunlight); font-weight: bold;">Alt + Click</td>
+                            <td style="padding: 0.5em;">Zoom in</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.5em; color: var(--pale-sunlight); font-weight: bold;">Esc</td>
+                            <td style="padding: 0.5em;">Close popups</td>
+                        </tr>
+                    </table>
+                    <p style="margin-top: 1em; font-size: 0.85em; color: var(--morning-mist);">Click dotted underlined terms to open definition popups.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This lecture introduces historiography by examining how Frederick Jackson Turner transformed the West from a site of conquest into an explanation for American identity. We're asking: How do historians shape how we understand the past?</p>
+                    
+                    <h4>💭 Context & Connections</h4>
+                    <p>This completes our three-lecture arc on the West: Lecture 1 = how it was CONQUERED, Lecture 2 = how it was REMEMBERED, Lecture 3 = how it was EXPLAINED. Turner provides the academic/intellectual version of the mythmaking we saw in Buffalo Bill and photography.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 2: What is Historiography? -->
+            <section>
+                <h2>What Is Historiography?</h2>
+                <p style="margin-bottom: 1em;">History is not only about <em>what happened</em>.<br>
+                History is about <em>how we interpret</em> what happened.</p>
+                <div class="callout">
+                    <div class="callout-title">📖 Definition</div>
+                    <p><span class="popup-trigger" onclick="togglePopup('historiography-popup')">Historiography</span> refers to:</p>
+                    <ul style="font-size: 0.95em;">
+                        <li>The study of historical interpretation</li>
+                        <li>How historians frame questions</li>
+                        <li>What they emphasize, explain, or ignore</li>
+                        <li>How those choices shape historical meaning</li>
+                    </ul>
+                </div>
+                
+                <div id="historiography-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('historiography-popup')">&times;</span>
+                    <h3>Historiography</h3>
+                    <p>Literally "the writing of history"—but in scholarly usage, it means <strong>the study of how history gets written</strong>.</p>
+                    <p>Historiography asks questions like:</p>
+                    <ul>
+                        <li>Why did historians in a particular era emphasize certain topics?</li>
+                        <li>What assumptions shaped their interpretations?</li>
+                        <li>How have interpretations changed over time?</li>
+                        <li>Whose perspectives were included or excluded?</li>
+                    </ul>
+                    <p>When you study historiography, you're not just learning WHAT historians said—you're analyzing WHY they said it and what that reveals about their own time and assumptions.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This is a meta-level concept: we're studying how history itself gets made. Students often think history = "what happened." Historiography shows that history = "interpretations of what happened" that change over time and reflect the concerns of the historians writing it.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 3: Key Distinction -->
+            <section>
+                <h2>The Historian's Role</h2>
+                <div class="quote-highlight" style="font-size: 1.2em; text-align: center; margin: 1.5em 0;">
+                    Facts do not speak for themselves.<br>
+                    <strong>Historians organize facts into arguments.</strong>
+                </div>
+                <div class="guiding-question" style="margin-top: 1.5em;">
+                    <strong>Guiding question:</strong><br>
+                    What happens when a historian turns a violent, unequal past into a single national explanation?
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This is the core insight of historiographical thinking. The "facts" about westward expansion are the same whether Turner writes about them or a modern historian does—but the MEANING changes dramatically based on what questions are asked, what's emphasized, and what's left out.</p>
+                    
+                    <h4>🤔 Discussion Prompts</h4>
+                    <ul>
+                        <li>Think of a historical event you learned about differently at different times (elementary school vs. now). What changed?</li>
+                        <li>Why might different eras produce different interpretations of the same events?</li>
+                    </ul>
+                </aside>
+            </section>
+
+            <!-- SLIDE 4: Section Divider - Historical Moment -->
+            <section class="section-divider" data-background="linear-gradient(135deg, #2D4A4A 0%, #2A3540 100%)">
+                <h2>Part I</h2>
+                <h3 style="color: var(--misty-sky);">The Historical Moment</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">Why Turner Writes When He Does</p>
+            </section>
+
+            <!-- SLIDE 5: Context -->
+            <section>
+                <h2>The Moment of Writing: 1893</h2>
+                <div class="timeline-item">
+                    <span class="timeline-date">1890</span>
+                    <span>Census declares the frontier "closed"</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">1890</span>
+                    <span>Armed Indigenous resistance largely crushed</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">1887–</span>
+                    <span>Reservation and assimilation systems entrenched</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">1890s</span>
+                    <span>Western land increasingly settled, fenced, commodified</span>
+                </div>
+                <p style="margin-top: 1.5em; color: var(--aventurine); font-weight: 600;">The interpretive problem:</p>
+                <p>If the frontier is <em>over</em>, what role did it play? What does its end mean?</p>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>Turner delivers his famous essay at the 1893 World's Columbian Exposition in Chicago—the same fair that celebrated American progress and included exhibits of "primitive" peoples. The timing is crucial: Turner is explaining something that has JUST ended.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 6: Key Insight -->
+            <section>
+                <h2>From Policy to History</h2>
+                <div class="callout">
+                    <div class="callout-title">🔑 Key Insight</div>
+                    <p>Turner writes at the moment the frontier becomes <strong>history</strong> rather than <strong>policy</strong>.</p>
+                </div>
+                <p style="margin-top: 1.5em;">When something is ongoing → we debate what to <em>do</em></p>
+                <p>When something is "over" → we ask what it <em>meant</em></p>
+                <p style="margin-top: 1.5em; color: var(--misty-sky); font-style: italic;">Explanation replaces action.</p>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This is why TIMING matters in historiography. Turner isn't writing while the frontier is contested—he's writing when it's declared "closed." That shift from policy debate to historical explanation changes what kind of questions get asked.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 7: Section Divider - Turner -->
+            <section class="section-divider" data-background="linear-gradient(135deg, #2D4A4A 0%, #2A3540 100%)">
+                <h2>Part II</h2>
+                <h3 style="color: var(--misty-sky);">The Frontier Thesis</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">Frederick Jackson Turner's Argument</p>
+            </section>
+
+            <!-- SLIDE 8: Turner Introduction -->
+            <section>
+                <h2>Frederick Jackson Turner</h2>
+                <div style="display: flex; gap: 2em; align-items: start;">
+                    <div class="img-placeholder" style="width: 350px; height: 450px; flex-shrink: 0;">
+                        <strong>IMAGE PLACEHOLDER</strong><br>
+                        <em>350x450px</em><br><br>
+                        <strong>Search:</strong> "Frederick Jackson Turner portrait" or "Frederick Jackson Turner historian"<br><br>
+                        <strong>Sources:</strong> Wisconsin Historical Society, Library of Congress
+                    </div>
+                    <div style="text-align: left;">
+                        <p><strong style="color: var(--pale-sunlight);">Frederick Jackson Turner (1861–1932)</strong></p>
+                        <ul style="font-size: 0.95em;">
+                            <li>University of Wisconsin historian</li>
+                            <li>Later Harvard professor</li>
+                            <li>Delivered <span class="popup-trigger" onclick="togglePopup('frontier-thesis-popup')">"The Significance of the Frontier in American History"</span> in 1893</li>
+                        </ul>
+                        <p style="margin-top: 1em; color: var(--aventurine);">One of the most influential essays in American historical writing</p>
+                    </div>
+                </div>
+                
+                <div id="frontier-thesis-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('frontier-thesis-popup')">&times;</span>
+                    <h3>"The Significance of the Frontier in American History" (1893)</h3>
+                    <p>Turner delivered this paper at the American Historical Association meeting during the World's Columbian Exposition in Chicago.</p>
+                    <p><strong>The context:</strong> The 1890 Census had announced that a continuous frontier line no longer existed—the West was now "settled." Turner asked: What did the frontier MEAN for American development?</p>
+                    <p><strong>The impact:</strong> This short essay became the most influential interpretation of American history for the next half-century. It shaped textbooks, public memory, and how Americans understood their national character.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>Turner was a young professor (32) when he delivered this paper. It didn't immediately become famous, but over the following decades it became THE dominant interpretation of American history. Understanding WHY it became so influential is as important as understanding its content.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 9: Central Claim -->
+            <section>
+                <h2>Turner's Central Claim</h2>
+                <div class="primary-source" style="font-size: 1.15em;">
+                    "The existence of an area of free land, its continuous recession, and the advance of American settlement westward, <strong>explain American development</strong>."
+                    <div class="primary-source-attribution">— Frederick Jackson Turner, 1893</div>
+                </div>
+                <p style="margin-top: 1.5em;">Notice the word: <span class="key-term">explain</span></p>
+                <p>Turner isn't just describing the frontier—he's claiming it <em>explains</em> what makes America different.</p>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>Pay attention to that word "explain." Turner is making a CAUSAL claim: the frontier didn't just happen alongside American development—it CAUSED American distinctiveness. This is a bold argument that shapes everything else in his thesis.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 10: Key Ideas -->
+            <section>
+                <h2>What the Frontier Produced</h2>
+                <p>According to Turner, repeated westward movement created:</p>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5em; margin-top: 1em;">
+                    <div class="comparison-box" style="text-align: center;">
+                        <h3 style="color: var(--pale-sunlight);">Individualism</h3>
+                        <p style="font-size: 0.9em;">Self-reliance forged in frontier conditions</p>
+                    </div>
+                    <div class="comparison-box" style="text-align: center;">
+                        <h3 style="color: var(--pale-sunlight);">Egalitarianism</h3>
+                        <p style="font-size: 0.9em;">Social leveling in new communities</p>
+                    </div>
+                    <div class="comparison-box" style="text-align: center;">
+                        <h3 style="color: var(--pale-sunlight);">Innovation</h3>
+                        <p style="font-size: 0.9em;">Necessity breeding new solutions</p>
+                    </div>
+                </div>
+                <div class="callout" style="margin-top: 1.5em;">
+                    <div class="callout-title">The "Safety Valve" Thesis</div>
+                    <p>The frontier provided an outlet for social and economic tension—if you were poor or dissatisfied in the East, you could go West.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>These are the characteristics Turner claims the frontier produced. Notice they're all POSITIVE traits that Americans like to claim for themselves. Turner is essentially saying: "The frontier made us who we are—and who we are is good."</p>
+                    
+                    <h4>📖 Key Definitions</h4>
+                    <ul>
+                        <li><strong>Safety Valve:</strong> The idea that western land prevented class conflict by giving workers an escape from industrial wage labor</li>
+                    </ul>
+                </aside>
+            </section>
+
+            <!-- SLIDE 11: Americanization -->
+            <section>
+                <h2>The Frontier as Transformation</h2>
+                <div class="primary-source" style="font-size: 1.15em;">
+                    "The frontier is the line of most rapid and effective <strong>Americanization</strong>."
+                    <div class="primary-source-attribution">— Frederick Jackson Turner, 1893</div>
+                </div>
+                <p style="margin-top: 1.5em;"><strong>Crucial framing:</strong></p>
+                <ul>
+                    <li>Turner is not writing primarily about Native peoples, cowboys, or railroads</li>
+                    <li>He is explaining <span class="key-term">Americans becoming Americans</span></li>
+                </ul>
+                <p style="margin-top: 1em;">The West functions as:</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5em; margin-top: 0.5em;">
+                    <div style="background: rgba(107, 143, 173, 0.2); padding: 0.8em; border-radius: 8px; text-align: center;">
+                        A <strong>process</strong>, not a place
+                    </div>
+                    <div style="background: rgba(107, 143, 173, 0.2); padding: 0.8em; border-radius: 8px; text-align: center;">
+                        An <strong>engine</strong>, not a subject
+                    </div>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This is the key to understanding Turner: he's not really interested in the West as a PLACE with people and events. He's interested in the West as a PROCESS that transformed Europeans into Americans. The frontier is a machine for making American identity.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 12: Section Divider - Exceptionalism -->
+            <section class="section-divider" data-background="linear-gradient(135deg, #2D4A4A 0%, #2A3540 100%)">
+                <h2>Part III</h2>
+                <h3 style="color: var(--misty-sky);">American Exceptionalism</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">The Frontier as National Explanation</p>
+            </section>
+
+            <!-- SLIDE 13: Exceptionalism Defined -->
+            <section>
+                <h2>American Exceptionalism</h2>
+                <div class="callout">
+                    <div class="callout-title">📖 Definition</div>
+                    <p><span class="popup-trigger" onclick="togglePopup('exceptionalism-popup')">American exceptionalism</span>: the belief that the United States developed <strong>differently</strong> from other nations—that its democracy and institutions are uniquely American, shaped by geography and experience rather than inheritance.</p>
+                </div>
+                <p style="margin-top: 1.5em;"><strong>Turner's role:</strong> He provides a <em>historical mechanism</em> for exceptionalism</p>
+                <ul>
+                    <li>Explains democracy without monarchy</li>
+                    <li>Explains opportunity without revolution</li>
+                    <li>Explains unity without empire (rhetorically)</li>
+                </ul>
+                
+                <div id="exceptionalism-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('exceptionalism-popup')">&times;</span>
+                    <h3>American Exceptionalism</h3>
+                    <p>The idea that America is fundamentally different from Europe and other "Old World" societies.</p>
+                    <p><strong>Common claims of exceptionalism:</strong></p>
+                    <ul>
+                        <li>No feudal past, no aristocracy</li>
+                        <li>Born in revolution for liberty</li>
+                        <li>Classless or socially mobile</li>
+                        <li>Uniquely democratic</li>
+                        <li>A "city on a hill" with special mission</li>
+                    </ul>
+                    <p><strong>Turner's contribution:</strong> He gave exceptionalism a GEOGRAPHIC explanation. America wasn't different because of ideas alone—it was different because of the frontier EXPERIENCE.</p>
+                    <p><strong>Critical note:</strong> Most historians today are skeptical of exceptionalism claims, seeing them as ideology rather than analysis.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>Before Turner, exceptionalism was often explained through Puritan origins or the Declaration of Independence. Turner gave it a geographic/environmental explanation: the frontier PROCESS made Americans different. This was enormously appealing because it seemed scientific and inevitable.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 14: What Turner Makes Possible -->
+            <section>
+                <h2>What Turner's Thesis Allows</h2>
+                <p>The frontier lets Americans imagine their history as:</p>
+                <ul>
+                    <li><span class="key-term">Natural</span> — shaped by geography, not choice</li>
+                    <li><span class="key-term">Progressive</span> — moving forward, improving</li>
+                    <li><span class="key-term">Self-generated</span> — American character made by Americans</li>
+                </ul>
+                <div style="margin-top: 1.5em;">
+                    <p style="color: var(--pale-sunlight); font-weight: 600; margin-bottom: 0.5em;">The transformations:</p>
+                    <div class="transform-row">
+                        <span class="transform-before">Conquest</span>
+                        <span class="transform-arrow">→</span>
+                        <span class="transform-after">Development</span>
+                    </div>
+                    <div class="transform-row">
+                        <span class="transform-before">Violence</span>
+                        <span class="transform-arrow">→</span>
+                        <span class="transform-after">Adaptation</span>
+                    </div>
+                    <div class="transform-row">
+                        <span class="transform-before">Empire</span>
+                        <span class="transform-arrow">→</span>
+                        <span class="transform-after">Settlement</span>
+                    </div>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This is the ideological WORK that Turner's thesis performs. Notice how each transformation softens or sanitizes what actually happened. "Conquest" sounds violent and chosen; "development" sounds natural and inevitable. The words matter because they shape moral evaluation.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 15: Section Divider - What's Missing -->
+            <section class="section-divider" data-background="linear-gradient(135deg, #2D4A4A 0%, #2A3540 100%)">
+                <h2>Part IV</h2>
+                <h3 style="color: var(--misty-sky);">What Turner Leaves Out</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">The Analytical Center of the Lecture</p>
+            </section>
+
+            <!-- SLIDE 16: Major Absences -->
+            <section>
+                <h2>What's Missing from Turner</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5em;">
+                    <div class="comparison-box">
+                        <h3 style="color: var(--pale-sunlight);">Native Nations</h3>
+                        <p style="font-size: 0.9em;">Appear primarily as obstacles, not societies</p>
+                    </div>
+                    <div class="comparison-box">
+                        <h3 style="color: var(--pale-sunlight);">Conquest</h3>
+                        <p style="font-size: 0.9em;">Abstracted into "advance"</p>
+                    </div>
+                    <div class="comparison-box">
+                        <h3 style="color: var(--pale-sunlight);">Federal Power</h3>
+                        <p style="font-size: 0.9em;">Government role fades from view</p>
+                    </div>
+                    <div class="comparison-box">
+                        <h3 style="color: var(--pale-sunlight);">Capitalism</h3>
+                        <p style="font-size: 0.9em;">Economic forces underdeveloped</p>
+                    </div>
+                    <div class="comparison-box">
+                        <h3 style="color: var(--pale-sunlight);">Race</h3>
+                        <p style="font-size: 0.9em;">Largely invisible in the analysis</p>
+                    </div>
+                    <div class="comparison-box">
+                        <h3 style="color: var(--pale-sunlight);">Violence</h3>
+                        <p style="font-size: 0.9em;">Transformed into "process"</p>
+                    </div>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This is the critical analysis. Turner's thesis is SILENT on almost everything we examined in Lecture 1. Native peoples? Barely there. Federal policy? Invisible. Violence? Abstracted away. Railroad corporations? Not central. This isn't accidental—it's what makes the thesis WORK as national mythology.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 17: Why the Absences? -->
+            <section>
+                <h2>Why These Absences?</h2>
+                <div class="callout">
+                    <div class="callout-title">🔑 Analytical Point</div>
+                    <p>Turner <strong>explains outcomes</strong> while <strong>obscuring mechanisms</strong>.</p>
+                </div>
+                <p style="margin-top: 1.5em;">This is not accidental. It reflects:</p>
+                <ul>
+                    <li>The priorities of late-19th-century professional history</li>
+                    <li>The needs of a nation seeking coherence</li>
+                    <li>The appeal of <span class="key-term">synthesis over conflict</span></li>
+                </ul>
+                <p style="margin-top: 1em; color: var(--misty-sky);">Turner gives Americans a story that feels complete without confronting what completion cost.</p>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>We're not saying Turner was deliberately lying or evil. We're saying his framework REQUIRED certain absences to work. You can't claim the frontier created democracy if you center the dispossession of sovereign nations. The coherence of the thesis depends on what it doesn't say.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 18: Assessment Break -->
+            <section>
+                <h2>📝 Check Your Understanding</h2>
+                <div class="assessment-box">
+                    <h3>Quick Question</h3>
+                    <p>When we say Turner "explains outcomes while obscuring mechanisms," we mean:</p>
+                    <ol style="list-style-type: upper-alpha; padding-left: 2em;">
+                        <li>Turner didn't know about Native peoples or violence</li>
+                        <li>Turner focuses on what the frontier PRODUCED while minimizing HOW it was achieved</li>
+                        <li>Turner's sources were incomplete</li>
+                        <li>Turner was writing propaganda, not history</li>
+                    </ol>
+                </div>
+                
+                <aside class="notes">
+                    <p><strong>Answer: B</strong> — Turner knew about conquest and violence, but his framework emphasizes the RESULTS (democracy, individualism, American character) while abstracting away the PROCESSES (dispossession, federal power, capitalism, racial violence). This is a choice about emphasis and framing, not simple ignorance.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 19: Section Divider - Cultural Work -->
+            <section class="section-divider" data-background="linear-gradient(135deg, #2D4A4A 0%, #2A3540 100%)">
+                <h2>Part V</h2>
+                <h3 style="color: var(--misty-sky);">Turner as Cultural Work</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">Academic History as National Mythology</p>
+            </section>
+
+            <!-- SLIDE 20: Cultural Work -->
+            <section>
+                <h2>Turner's National Work</h2>
+                <p>Turner is not just doing academic history.<br>
+                He is doing <span class="key-term">national work</span>.</p>
+                <p style="margin-top: 1em;">What the frontier thesis accomplishes:</p>
+                <ul>
+                    <li>Converts <strong>conquest into character formation</strong></li>
+                    <li>Makes dispossession <strong>productive</strong> rather than troubling</li>
+                    <li>Resolves moral tension <strong>without confronting it</strong></li>
+                    <li>Offers <strong>unity</strong> at a moment of political and social anxiety</li>
+                </ul>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>Remember, this is the 1890s: massive immigration, labor conflict, economic depression, anxiety about the future. Turner offers a reassuring story: America's identity was forged in the frontier, and that identity will persist even though the frontier is "closed."</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 21: Three Forms of Mythmaking -->
+            <section>
+                <h2>Three Forms of Mythmaking</h2>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5em; margin-top: 1em;">
+                    <div class="comparison-box" style="text-align: center;">
+                        <h3 style="color: var(--pale-sunlight);">Buffalo Bill</h3>
+                        <p style="font-size: 0.9em;">Turned conquest into <strong>spectacle</strong></p>
+                    </div>
+                    <div class="comparison-box" style="text-align: center;">
+                        <h3 style="color: var(--pale-sunlight);">Photography</h3>
+                        <p style="font-size: 0.9em;">Turned conquest into <strong>evidence</strong></p>
+                    </div>
+                    <div class="comparison-box" style="text-align: center;">
+                        <h3 style="color: var(--pale-sunlight);">Turner</h3>
+                        <p style="font-size: 0.9em;">Turned conquest into <strong>explanation</strong></p>
+                    </div>
+                </div>
+                <div class="callout" style="margin-top: 1.5em;">
+                    <p>All three:</p>
+                    <ul style="font-size: 0.95em;">
+                        <li>Stabilize meaning</li>
+                        <li>Reduce moral discomfort</li>
+                        <li>Transform history into identity</li>
+                    </ul>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This is the synthesis across all three lectures. Buffalo Bill, Curtis, and Turner are doing the SAME cultural work through different mediums: entertainment, photography, and academic scholarship. All three make the West usable as national mythology.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 22: Section Divider - After Turner -->
+            <section class="section-divider" data-background="linear-gradient(135deg, #2D4A4A 0%, #2A3540 100%)">
+                <h2>Part VI</h2>
+                <h3 style="color: var(--misty-sky);">After Turner</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">Why He Persists</p>
+            </section>
+
+            <!-- SLIDE 23: Turner's Influence -->
+            <section>
+                <h2>Turner's Lasting Influence</h2>
+                <p>Turner's thesis:</p>
+                <ul>
+                    <li>Dominated much of 20th-century U.S. historiography</li>
+                    <li>Shaped textbooks, curricula, and public memory</li>
+                    <li>Reinforced narratives of American exceptionalism</li>
+                </ul>
+                <p style="margin-top: 1.5em;">Later historians—especially the <span class="popup-trigger" onclick="togglePopup('new-western-popup')">New Western History</span>—challenged:</p>
+                <ul>
+                    <li>Triumphalism</li>
+                    <li>Exceptionalism</li>
+                    <li>The omission of conquest and continuity</li>
+                </ul>
+                
+                <div id="new-western-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('new-western-popup')">&times;</span>
+                    <h3>The New Western History</h3>
+                    <p>A movement beginning in the 1980s that challenged Turner's frontier thesis and offered alternative frameworks for understanding the American West.</p>
+                    <p><strong>Key figures:</strong></p>
+                    <ul>
+                        <li><strong>Patricia Limerick</strong> — <em>The Legacy of Conquest</em> (1987): Argues we should speak of "conquest" not "frontier"</li>
+                        <li><strong>Richard White</strong> — <em>It's Your Misfortune and None of My Own</em> (1991): Comprehensive reinterpretation centering federal power and capitalism</li>
+                        <li><strong>Donald Worster</strong> — Environmental history of the West</li>
+                    </ul>
+                    <p><strong>Key arguments:</strong> The West involved conquest, not just settlement. Federal government was central. The story didn't end in 1890. Race, gender, and environment matter.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>Turner's thesis was challenged seriously starting in the 1980s by historians who centered what Turner marginalized: Native peoples, federal power, capitalism, race, environment, and CONTINUITY (the West didn't "end" in 1890). Patricia Limerick's book title says it all: <em>The Legacy of Conquest</em>.</p>
+                    
+                    <h4>🎓 Senior Historians' Corner</h4>
+                    <p><strong>Patricia Limerick</strong> famously argued that we should replace the word "frontier" with "conquest" because it more accurately describes what happened. The frontier thesis, she argued, turned a story of winners and losers into a story of American character.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 24: Why Turner Persists -->
+            <section>
+                <h2>Why Turner Persists</h2>
+                <p>Despite decades of critique, Turner's framework remains influential.</p>
+                <p style="margin-top: 1em;">Why?</p>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5em; margin-top: 1em;">
+                    <div class="comparison-box" style="text-align: center;">
+                        <h3 style="color: var(--pale-sunlight);">Elegant</h3>
+                        <p style="font-size: 0.9em;">Simple, powerful explanation</p>
+                    </div>
+                    <div class="comparison-box" style="text-align: center;">
+                        <h3 style="color: var(--pale-sunlight);">Optimistic</h3>
+                        <p style="font-size: 0.9em;">Flattering to American identity</p>
+                    </div>
+                    <div class="comparison-box" style="text-align: center;">
+                        <h3 style="color: var(--pale-sunlight);">Teachable</h3>
+                        <p style="font-size: 0.9em;">Easy to summarize and transmit</p>
+                    </div>
+                </div>
+                <p style="margin-top: 1.5em; color: var(--misty-sky);">Good stories are hard to replace—especially stories that make us feel good about ourselves.</p>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This is a point about how historical narratives work. Turner persists not because historians still accept his thesis, but because it's such a GOOD STORY—elegant, optimistic, easy to teach. Replacing it requires not just better evidence but a better story. Complexity is hard to teach.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 25: Conclusion -->
+            <section>
+                <h2>Conclusion: Across Chapter 18</h2>
+                <p>Synthesis across the chapter:</p>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1em; margin: 1em 0;">
+                    <div style="background: rgba(107, 143, 173, 0.2); padding: 1em; border-radius: 8px; text-align: center;">
+                        <strong style="color: var(--pale-sunlight);">Lecture 1</strong><br>
+                        How the West was <span class="key-term">conquered</span>
+                    </div>
+                    <div style="background: rgba(107, 143, 173, 0.2); padding: 1em; border-radius: 8px; text-align: center;">
+                        <strong style="color: var(--pale-sunlight);">Lecture 2</strong><br>
+                        How it was <span class="key-term">remembered</span>
+                    </div>
+                    <div style="background: rgba(107, 143, 173, 0.2); padding: 1em; border-radius: 8px; text-align: center;">
+                        <strong style="color: var(--pale-sunlight);">Lecture 3</strong><br>
+                        How it was <span class="key-term">explained</span>
+                    </div>
+                </div>
+                <div class="callout" style="margin-top: 1em;">
+                    <div class="callout-title">Final Takeaway</div>
+                    <p>Turner matters not because he was <em>correct</em>, but because he was <em>convincing</em>.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This completes our three-part examination of the West. We've moved from mechanisms (conquest) to memory (mythology) to explanation (historiography). Each level shapes how Americans understand their past and their identity.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 26: Final Thought -->
+            <section>
+                <h2>The Cost of Explanation</h2>
+                <div class="quote-highlight" style="font-size: 1.15em; text-align: center; margin: 1.5em 0;">
+                    Historiography is not about choosing the "right" story.<br><br>
+                    It is about understanding <strong>why certain stories become powerful</strong>—<br>
+                    and <strong>what they require us to forget</strong>.
+                </div>
+                <p style="margin-top: 1.5em; text-align: center; color: var(--aventurine); font-size: 1.1em;">This is the cost of explanation.</p>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This is the core takeaway about historiography. Every explanation—including the ones we've offered in this class—involves choices about what to emphasize and what to leave out. Understanding history means understanding those choices, not just accepting the resulting narratives.</p>
+                    
+                    <h4>🤔 Discussion Prompts</h4>
+                    <ul>
+                        <li>What stories about America do you think are "powerful" today? What might they require us to forget?</li>
+                        <li>Is it possible to tell a historical story without leaving something out?</li>
+                    </ul>
+                </aside>
+            </section>
+
+            <!-- SLIDE 27: Looking Forward -->
+            <section>
+                <h2>Looking Forward</h2>
+                <div class="guiding-question" style="margin-top: 1em;">
+                    The same decades that mythologized the frontier also created modern industrial America—with all its conflicts, inequalities, and transformations.
+                </div>
+                <p style="margin-top: 2em; color: var(--misty-sky);">Next: The Gilded Age and Industrial Transformation</p>
+                <p style="font-size: 0.9em;">From conquered land to industrial capital—the other face of the 1880s–1890s.</p>
+                
+                <aside class="notes">
+                    <h4>💭 Context & Connections</h4>
+                    <p>The Gilded Age chapters will show that while Americans were mythologizing the frontier, they were also confronting labor conflict, urbanization, immigration, and corporate power. These aren't separate stories—they're happening simultaneously, and they're connected. The same railroads that enabled conquest enabled industrialization.</p>
+                </aside>
+            </section>
+
+        </div>
+    </div>
+    
+    <!-- Slide counter -->
+    <div class="slide-counter"></div>
+    
+    <!-- Reveal.js and plugins from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/zoom/zoom.js"></script>
+    
+    <script>
+        // Toggle popup function
+        function togglePopup(id) {
+            document.getElementById(id).classList.toggle('active');
+        }
+        
+        // Close popup when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('popup')) {
+                e.target.classList.remove('active');
+            }
+        });
+        
+        // Close popup with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.popup.active').forEach(p => p.classList.remove('active'));
+            }
+        });
+        
+        // Initialize Reveal.js
+        Reveal.initialize({
+            width: 1920,
+            height: 1080,
+            margin: 0.1,
+            minScale: 0.2,
+            maxScale: 2.0,
+            controls: true,
+            progress: true,
+            center: true,
+            hash: true,
+            transition: 'slide',
+            plugins: [ RevealNotes, RevealHighlight, RevealZoom ]
+        });
+        
+        // Update slide counter
+        function updateSlideCounter() {
+            const current = Reveal.getIndices().h + 1;
+            const total = Reveal.getTotalSlides();
+            document.querySelector('.slide-counter').textContent = current + ' / ' + total;
+        }
+        
+        Reveal.on('slidechanged', updateSlideCounter);
+        Reveal.on('ready', updateSlideCounter);
+    </script>
+</body>
+</html>
