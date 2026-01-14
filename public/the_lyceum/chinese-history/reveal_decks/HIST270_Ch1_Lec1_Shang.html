@@ -16,6 +16,7 @@
             --vermillion: #c8102e;
             --jade-green: #3eb489;
             --imperial-gold: #d4af37;
+            --dark-green: #2d5016;
             --quote-bg: #fdfaf3;
         }
 
@@ -28,45 +29,53 @@
             text-align: left;
         }
 
+        .reveal .slides section {
+            padding: 20px 40px;
+            box-sizing: border-box;
+        }
+
         .reveal h1 {
             font-family: 'Noto Serif SC', serif;
             color: var(--vermillion);
-            font-size: 4rem;
+            font-size: 3.2rem;
             font-weight: bold;
             border-bottom: 3px solid var(--vermillion);
-            padding-bottom: 0.3em;
-            margin-bottom: 0.8em;
+            padding-bottom: 0.2em;
+            margin: 0 0 0.5em 0;
         }
 
         .reveal h2 {
             font-family: 'Noto Serif SC', serif;
             color: var(--vermillion);
-            font-size: 3.5rem;
+            font-size: 2.6rem;
             font-weight: bold;
             border-bottom: 3px solid var(--vermillion);
-            padding-bottom: 0.3em;
-            margin-bottom: 0.8em;
+            padding-bottom: 0.2em;
+            margin: 0 0 0.4em 0;
         }
 
         .reveal h3 {
             color: var(--ink-black);
-            font-size: 2.8rem;
-            margin-top: 1em;
-            margin-bottom: 0.5em;
+            font-size: 2.2rem;
+            margin: 0.5em 0 0.3em 0;
         }
 
-        .reveal p, .reveal li {
+        .reveal p {
             color: var(--ink-black);
-            font-size: 2.4rem;
-            line-height: 1.6;
-        }
-
-        .reveal ul, .reveal ol {
-            margin-left: 1.5em;
+            font-size: 1.9rem;
+            line-height: 1.4;
+            margin: 0 0 0.5em 0;
         }
 
         .reveal li {
-            margin-bottom: 0.6em;
+            color: var(--ink-black);
+            font-size: 1.9rem;
+            line-height: 1.4;
+            margin-bottom: 0.4em;
+        }
+
+        .reveal ul, .reveal ol {
+            margin: 0 0 0 1.2em;
         }
 
         .key-term {
@@ -75,11 +84,11 @@
         }
 
         .popup-trigger {
-            color: #2d5016;
+            color: var(--dark-green);
             font-weight: bold;
             font-family: 'Noto Serif SC', serif;
             cursor: pointer;
-            border-bottom: 2px dotted #2d5016;
+            border-bottom: 2px dotted var(--dark-green);
         }
 
         .popup-trigger:hover {
@@ -100,14 +109,15 @@
             transform: translate(-50%, -50%);
             background: white;
             color: var(--ink-black);
-            padding: 2em;
+            padding: 1.5em;
             border-radius: 15px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            max-width: 70%;
-            max-height: 70%;
+            max-width: 60%;
+            max-height: 60%;
             overflow-y: auto;
             z-index: 1000;
             border: 3px solid var(--jade-green);
+            font-size: 1.6rem;
         }
 
         .popup.active { display: block; }
@@ -115,27 +125,37 @@
         .popup-close {
             position: absolute;
             top: 10px;
-            right: 20px;
-            font-size: 2em;
+            right: 15px;
+            font-size: 1.8em;
             cursor: pointer;
             color: var(--vermillion);
         }
 
-        .img-placeholder {
-            background: #e8dcc8;
-            border: 3px dashed var(--jade-green);
-            padding: 2em;
-            text-align: center;
-            color: var(--ink-black);
+        .popup h3 {
+            color: var(--vermillion);
+            margin-top: 0;
+        }
+
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5em;
+            margin-top: 0.5em;
+        }
+
+        .quote-box {
+            background-color: var(--quote-bg);
+            border-left: 5px solid var(--vermillion);
+            padding: 1em;
+            margin: 0.8em 0;
             font-style: italic;
-            border-radius: 10px;
-            font-size: 1.8rem;
+            font-size: 1.9rem;
         }
 
         .pause-break {
             background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
             border: 4px solid var(--imperial-gold);
-            padding: 2em;
+            padding: 1.5em;
             text-align: center;
             border-radius: 15px;
         }
@@ -148,39 +168,23 @@
         .slide-number {
             color: var(--jade-green) !important;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
 
-        .video-container {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%;
-            margin: 1em 0;
+        /* Fix for consistent slide layout */
+        .reveal .slides section > * {
+            max-width: 100%;
         }
 
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 10px;
+        /* Force top alignment for all slides */
+        .reveal .slides section {
+            top: 0 !important;
+            vertical-align: top;
         }
 
-        .two-columns {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2em;
-            margin-top: 1em;
-        }
-
-        .quote-box {
-            background-color: var(--quote-bg);
-            border-left: 5px solid var(--vermillion);
-            padding: 1.5em;
-            margin: 1.5em 0;
-            font-style: italic;
-            font-size: 2.2rem;
+        /* Title slide specific styling */
+        .reveal .slides section.title-slide {
+            padding: 0;
         }
     </style>
 </head>
@@ -188,192 +192,126 @@
     <div class="reveal">
         <div class="slides">
 
-          <!-- Title Slide (Image-only, keyboard shortcut menu retained) -->
-<section
-  style="
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background: url('https://i.imgur.com/rA6Y8NT.jpeg') center center / cover no-repeat;
-  "
-  aria-label="Title slide image"
->
-  <!-- Optional: subtle readability layer for the shortcut trigger (remove if you want it perfectly clean) -->
-  <div
-    style="
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 140px;
-      background: linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0));
-      pointer-events: none;
-    "
-  ></div>
+            <!-- SLIDE 1: Title Slide -->
+            <section class="title-slide" data-background-image="https://i.imgur.com/rA6Y8NT.jpeg" data-background-size="cover" data-background-position="center">
+                
+                <p style="position: fixed; left: 50%; bottom: 25px; transform: translateX(-50%); margin: 0; font-size: 1.4rem; text-align: center; z-index: 5;">
+                    <span class="key-term" onclick="togglePopup('shortcuts-popup')" style="cursor: pointer; padding: 8px 14px; border-radius: 8px; background: rgba(255,255,255,0.85); color: #111; box-shadow: 0 4px 12px rgba(0,0,0,0.25); display: inline-block;">⌨️ Keyboard Shortcuts</span>
+                </p>
+                
+                <div id="shortcuts-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('shortcuts-popup')">&times;</span>
+                    <h3 style="margin-bottom: 0.8em;">Reveal.js Keyboard Shortcuts</h3>
+                    <div style="display: grid; grid-template-columns: auto 1fr; gap: 0.4em 1.5em; font-size: 1.3rem;">
+                        <strong>→ / ←</strong> <span>Next / Previous slide</span>
+                        <strong>Space</strong> <span>Next slide</span>
+                        <strong>Home / End</strong> <span>First / Last slide</span>
+                        <strong>S</strong> <span>Speaker notes view</span>
+                        <strong>F</strong> <span>Fullscreen mode</span>
+                        <strong>Esc</strong> <span>Slide overview mode</span>
+                        <strong>B / .</strong> <span>Pause / Blackout screen</span>
+                        <strong>?</strong> <span>Show help overlay</span>
+                        <strong>Alt+Click</strong> <span>Zoom into slide element</span>
+                    </div>
+                    <p style="margin-top: 1em; font-size: 1.1rem; color: #666; font-style: italic;">
+                        Tip: Press <strong>S</strong> to open speaker notes with detailed teaching guidance!
+                    </p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 Welcome to HIST 270!</h4>
+                    <p>Today we're starting at the beginning—China's first historically verified dynasty, the Shang. This lecture answers a fundamental question: How do we KNOW about ancient China? The answer involves a dramatic discovery story and two types of evidence working together.</p>
+                    
+                    <h4>🎯 Learning Goals for Today</h4>
+                    <ul>
+                        <li>Understand how archaeology + inscriptions = verified history (not myth)</li>
+                        <li>See how Shang kings used ritual and divination to maintain power</li>
+                        <li>Connect ritual objects (oracle bones, bronze vessels) to political authority</li>
+                    </ul>
+                    
+                    <h4>💡 Big Picture</h4>
+                    <p>The Shang weren't just making cool bronze art—they were creating a religious-political system where the king controlled access to the spirit world. This pattern (ruler as intermediary between humans and gods) will keep appearing in Chinese history.</p>
+                </aside>
+            </section>
 
-  <!-- Keyboard Shortcuts trigger (retained) -->
-  <p
-    style="
-      position: absolute;
-      left: 50%;
-      bottom: 32px;
-      transform: translateX(-50%);
-      margin: 0;
-      font-size: 1.6rem;
-      text-align: center;
-      z-index: 5;
-    "
-  >
-    <span
-      class="key-term"
-      onclick="togglePopup('shortcuts-popup')"
-      style="
-        cursor: pointer;
-        padding: 10px 16px;
-        border-radius: 10px;
-        background: rgba(255,255,255,0.85);
-        color: #111;
-        box-shadow: 0 6px 18px rgba(0,0,0,0.25);
-        display: inline-block;
-      "
-      >⌨️ Keyboard Shortcuts</span
-    >
-  </p>
-
-  <!-- Keyboard Shortcuts popup (retained) -->
-  <div id="shortcuts-popup" class="popup">
-    <span class="popup-close" onclick="togglePopup('shortcuts-popup')">&times;</span>
-    <h3 style="color: var(--vermillion); margin-bottom: 1em;">Reveal.js Keyboard Shortcuts</h3>
-    <div style="display: grid; grid-template-columns: auto 1fr; gap: 0.5em 2em; font-size: 1.4rem;">
-      <strong>→ / ←</strong> <span>Next / Previous slide</span>
-      <strong>Space</strong> <span>Next slide</span>
-      <strong>Home / End</strong> <span>First / Last slide</span>
-      <strong>S</strong> <span>Speaker notes view</span>
-      <strong>F</strong> <span>Fullscreen mode</span>
-      <strong>Esc</strong> <span>Slide overview mode</span>
-      <strong>B / .</strong> <span>Pause / Blackout screen</span>
-      <strong>?</strong> <span>Show help overlay</span>
-      <strong>Alt+Click</strong> <span>Zoom into slide element</span>
-    </div>
-    <p style="margin-top: 1.5em; font-size: 1.2rem; color: #666; font-style: italic;">
-      Tip: Press <strong>S</strong> to open speaker notes with detailed teaching guidance!
-    </p>
-  </div>
-
-  <!-- Speaker notes retained (not visible on slide) -->
-  <aside class="notes">
-    <h4>📚 Welcome to HIST 270!</h4>
-    <p>
-      Today we're starting at the beginning—China's first historically verified dynasty, the Shang. This lecture answers a
-      fundamental question: How do we KNOW about ancient China? The answer involves a dramatic discovery story and two
-      types of evidence working together.
-    </p>
-
-    <h4>🎯 Learning Goals for Today</h4>
-    <ul>
-      <li>Understand how archaeology + inscriptions = verified history (not myth)</li>
-      <li>See how Shang kings used ritual and divination to maintain power</li>
-      <li>Connect ritual objects (oracle bones, bronze vessels) to political authority</li>
-    </ul>
-
-    <h4>💡 Big Picture</h4>
-    <p>
-      The Shang weren't just making cool bronze art—they were creating a religious-political system where the king
-      controlled access to the spirit world. This pattern (ruler as intermediary between humans and gods) will keep
-      appearing in Chinese history.
-    </p>
-  </aside>
-</section>
-
-            <!-- Hook: Oracle Bone Discovery -->
+            <!-- SLIDE 2: 1899 Discovery -->
             <section>
-  <h2>1899: A Startling Discovery</h2>
-  <p>A scholar named <span class="important-date">Wang Yirong</span> was sick. His doctor prescribed traditional medicine: powdered "dragon bones."</p>
-  <p style="margin-top: 0.6em;">Wang noticed something strange on the bone fragments...</p>
+                <h2><span class="important-date">1899</span>: A Startling Discovery</h2>
+                <div class="two-columns">
+                    <div>
+                        <p><span class="popup-trigger" onclick="togglePopup('wang-popup')">Wang Yirong</span> was sick.</p>
+                        <p>His doctor prescribed traditional medicine: powdered <span class="popup-trigger" onclick="togglePopup('dragon-popup')">"dragon bones."</span></p>
+                        <p>Wang noticed something strange on the bone fragments...</p>
+                    </div>
+                    <div>
+                        <img src="images/dragon_bones.jpg" alt="Oracle bone fragments with ancient inscriptions" style="width: 100%; max-height: 450px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+                    </div>
+                </div>
+                
+                <div id="wang-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('wang-popup')">&times;</span>
+                    <h3>Wang Yirong (1845–1900)</h3>
+                    <p>A prominent Qing dynasty scholar and antiquarian who served as Chancellor of the Imperial Academy. His expertise in ancient Chinese bronze inscriptions enabled him to recognize that the markings on his medicine were not random scratches but ancient writing.</p>
+                </div>
+                
+                <div id="dragon-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('dragon-popup')">&times;</span>
+                    <h3>Dragon Bones (龍骨)</h3>
+                    <p>For centuries, Chinese apothecaries sold fossilized animal bones as medicine, believing them to be the remains of dragons. These "dragon bones" were ground into powder to treat various ailments. Unknown to practitioners, many were actually <span class="key-term">oracle bones</span>—turtle plastrons and ox scapulae used for divination during the Shang Dynasty.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 The Accidental Discovery</h4>
+                    <p>This slide sets up one of archaeology's most remarkable stories—how a sick scholar's trip to the pharmacy led to the rediscovery of China's oldest verified writing system.</p>
+                    
+                    <h4>🎯 Key Points to Emphasize</h4>
+                    <ul>
+                        <li>Wang Yirong wasn't just any patient—he was a trained epigrapher (expert in ancient inscriptions)</li>
+                        <li>The irony: ancient artifacts were being literally consumed as medicine for centuries</li>
+                        <li>Traditional Chinese pharmacies had unknowingly destroyed countless oracle bones over time</li>
+                    </ul>
+                    
+                    <h4>💡 Why This Matters</h4>
+                    <p>This discovery fundamentally changed our understanding of early Chinese civilization. Before 1899, the Shang Dynasty was considered semi-legendary. The oracle bones provided direct, material evidence of Shang society, religion, and—crucially—the earliest form of Chinese writing.</p>
+                    
+                    <h4>🎓 Teaching Strategy</h4>
+                    <p>Build suspense here! Don't reveal what he saw yet. Let students wonder: what could possibly be written on old bones from a pharmacy?</p>
+                </aside>
+            </section>
 
-  <img
-    src="https://i.imgur.com/lOYrGXw.jpeg"
-    alt="Oracle bone inscription (jiaguwen) close-up showing carved Shang Dynasty characters"
-    style="
-      width: 88%;
-      max-width: 900px;
-      height: auto;
-      max-height: 55vh;
-      object-fit: contain;
-      display: block;
-      margin: 1em auto 0 auto;
-      border-radius: 12px;
-      box-shadow: 0 10px 24px rgba(0,0,0,0.22);
-    "
-  >
+            <!-- SLIDE 3: YouTube Video -->
+            <section>
+                <h2>Oracle Bones Explained</h2>
+                <div style="width: 90%; max-width: 1000px; margin: 0 auto;">
+                    <iframe src="https://www.youtube.com/embed/3XI584IgaLg" title="Oracle Bones Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width: 100%; height: 500px; border-radius: 10px;"></iframe>
+                </div>
+                <p style="font-size: 1.5rem; text-align: center; margin-top: 0.5em; color: #666;">Watch this 3-minute introduction to oracle bone divination</p>
+                
+                <aside class="notes">
+                    <h4>🎥 Video Summary</h4>
+                    <p>This video explains how Shang kings used oracle bones for divination. Key points students should catch:</p>
+                    <ul>
+                        <li>Bones came from oxen or turtle shells (turtle plastrons)</li>
+                        <li>Diviners carved questions, then heated the bones until they cracked</li>
+                        <li>The pattern of cracks was "read" as the ancestors' answer</li>
+                        <li>Questions covered warfare, harvests, sacrifices, weather, childbirth</li>
+                    </ul>
+                    
+                    <h4>🔗 Connection to Power</h4>
+                    <p>Only the king could perform these divinations—this gave him a monopoly on communicating with the spirit world. If you want to know if your harvest will succeed or if you should go to war, you NEED the king's help.</p>
+                </aside>
+            </section>
 
-  <aside class="notes">
-    <h4>📖 The Hook</h4>
-    <p>This is a widely repeated modern account of how oracle bones were "discovered" by scholars. Wang Yirong (1845-1900) was a high-ranking Qing official and antiquarian. The story goes that he recognized ancient writing on "dragon bones" being sold as medicine in Beijing pharmacies.</p>
-
-    <h4>🔍 Historical Context</h4>
-    <p>Dragon bones (龙骨, lóng gǔ) were fossils and ancient animal bones ground into powder for traditional Chinese medicine. Pharmacies had been selling them for centuries without anyone realizing some had ancient writing!</p>
-
-    <h4>💭 Why This Matters</h4>
-    <p>This discovery opened a window into China's past. Before 1899, the Shang Dynasty was considered semi-legendary, like King Arthur in England. The oracle bones proved the Shang were REAL and gave us their actual words.</p>
-  </aside>
-</section>
-
-
-
-            <!-- YouTube Video -->
-           <section>
-  <h2>Oracle Bones Explained</h2>
-
-  <div style="
-      width: 92%;
-      max-width: 1100px;
-      margin: 0.8em auto 0 auto;
-  ">
-    <iframe
-      src="https://www.youtube.com/embed/3XI584IgaLg"
-      title="Oracle Bones Video"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen
-      style="
-        width: 100%;
-        height: 60vh;
-        border-radius: 10px;
-      "
-    ></iframe>
-  </div>
-
-  <p style="font-size: 1.7rem; text-align: center; margin-top: 0.6em; color: #666;">
-    Watch this 3-minute introduction to oracle bone divination
-  </p>
-
-  <aside class="notes">
-    <h4>🎥 Video Summary</h4>
-    <p>This video explains how Shang kings used oracle bones for divination. Key points students should catch:</p>
-    <ul>
-      <li>Bones came from oxen or turtle shells (turtle plastrons)</li>
-      <li>Diviners carved questions, then heated the bones until they cracked</li>
-      <li>The pattern of cracks was "read" as the ancestors' answer</li>
-      <li>Questions covered warfare, harvests, sacrifices, weather, childbirth</li>
-    </ul>
-
-    <h4>🔗 Connection to Power</h4>
-    <p>Only the king could perform these divinations—this gave him a monopoly on communicating with the spirit world. If you want to know if your harvest will succeed or if you should go to war, you NEED the king's help.</p>
-  </aside>
-</section>
-
-
-            <!-- Date Fuzz Note -->
+            <!-- SLIDE 4: Note on Dates -->
             <section>
                 <h2>A Note on Dates</h2>
-                <p style="font-size: 2.6rem;">Before we go further, an important caveat:</p>
+                <p style="font-size: 2.2rem;">Before we go further, an important caveat:</p>
                 <div class="quote-box">
                     The <strong>beginnings</strong> of Shang and Western Zhou are <span class="important-date">approximate</span> (ca. 1500 BCE, ca. 1045 BCE).
                     <br><br>
                     The <strong>end dates</strong> are <span class="key-term">firmer</span> because they're recorded in later texts.
                 </div>
-                <p style="margin-top: 1em;">We're doing the best we can with archaeological + textual evidence!</p>
+                <p style="margin-top: 0.8em;">We're doing the best we can with archaeological + textual evidence!</p>
                 
                 <aside class="notes">
                     <h4>📅 Why Dates Are Fuzzy</h4>
@@ -389,37 +327,33 @@
                 </aside>
             </section>
 
-            <!-- Geography Introduction -->
+            <!-- SLIDE 5: Geography -->
             <section>
-    <h2>Geography of the Chinese Subcontinent</h2>
-    <p>To understand WHERE the Shang developed, we need to see the big picture:</p>
-    
-    <img src="https://i.imgur.com/a3GTYVI.jpeg"
-         alt="Physical geography map of China and East Asia showing mountains, deserts, major rivers, and the Pacific Ocean"
-         style="width: 900px; height: 600px; object-fit: cover; display: block; margin: 1.5em auto; border-radius: 12px; box-shadow: 0 10px 24px rgba(0,0,0,0.22);">
+                <h2>Geography of the Chinese Subcontinent</h2>
+                <p>To understand WHERE the Shang developed, we need to see the big picture:</p>
+                <img src="https://i.imgur.com/a3GTYVI.jpeg" alt="Physical geography map of China and East Asia" style="width: 850px; height: 520px; object-fit: cover; display: block; margin: 0.8em auto; border-radius: 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.2);">
+                
+                <aside class="notes">
+                    <h4>🗺️ The Big Picture</h4>
+                    <p>China is sometimes called a "subcontinent" (like India) because it's partially isolated by natural barriers. This affected how Chinese civilization developed—with less contact with other ancient civilizations compared to, say, the Mediterranean world.</p>
+                    
+                    <h4>🏔️ Natural Barriers</h4>
+                    <ul>
+                        <li><strong>Himalayas & Kunlun Mountains (west/southwest):</strong> World's highest mountains, extremely hard to cross</li>
+                        <li><strong>Gobi & Taklamakan Deserts (north/northwest):</strong> Harsh, dry, dangerous to cross</li>
+                        <li><strong>Pacific Ocean (east):</strong> Until much later, no major seafaring neighbors</li>
+                    </ul>
+                    
+                    <h4>💡 Why This Matters</h4>
+                    <p>These barriers meant Chinese civilization developed somewhat independently. Unlike Egypt, Mesopotamia, Greece, and Rome (which constantly interacted), early China had fewer external influences. We'll see later that technologies like chariots and bronze-working probably came from the west, but the pace of exchange was slower.</p>
+                </aside>
+            </section>
 
-    <aside class="notes">
-        <h4>🗺️ The Big Picture</h4>
-        <p>China is sometimes called a "subcontinent" (like India) because it's partially isolated by natural barriers. This affected how Chinese civilization developed—with less contact with other ancient civilizations compared to, say, the Mediterranean world.</p>
-        
-        <h4>🏔️ Natural Barriers</h4>
-        <ul>
-            <li><strong>Himalayas & Kunlun Mountains (west/southwest):</strong> World's highest mountains, extremely hard to cross</li>
-            <li><strong>Gobi & Taklamakan Deserts (north/northwest):</strong> Harsh, dry, dangerous to cross</li>
-            <li><strong>Pacific Ocean (east):</strong> Until much later, no major seafaring neighbors</li>
-        </ul>
-        
-        <h4>💡 Why This Matters</h4>
-        <p>These barriers meant Chinese civilization developed somewhat independently. Unlike Egypt, Mesopotamia, Greece, and Rome (which constantly interacted), early China had fewer external influences. We'll see later that technologies like chariots and bronze-working probably came from the west, but the pace of exchange was slower.</p>
-    </aside>
-</section>
-
-
-            <!-- River Systems -->
+            <!-- SLIDE 6: River Systems -->
             <section>
                 <h2>Two Great River Systems</h2>
                 <div class="two-columns">
-                    <div style="border: 3px solid var(--vermillion); padding: 1.5em; border-radius: 10px;">
+                    <div style="border: 3px solid var(--vermillion); padding: 1em; border-radius: 10px;">
                         <h3>Yellow River (North)</h3>
                         <ul>
                             <li><span class="popup-trigger" onclick="togglePopup('loess-popup')">Loess soil</span> — fertile, easy to work</li>
@@ -427,7 +361,7 @@
                             <li>This is where <span class="important-date">Shang</span> developed!</li>
                         </ul>
                     </div>
-                    <div style="border: 3px solid var(--jade-green); padding: 1.5em; border-radius: 10px;">
+                    <div style="border: 3px solid var(--jade-green); padding: 1em; border-radius: 10px;">
                         <h3>Yangtze River (South)</h3>
                         <ul>
                             <li>Wetter, warmer climate</li>
@@ -461,14 +395,14 @@
                 </aside>
             </section>
 
-            <!-- PAUSE & PROCESS #1 -->
+            <!-- SLIDE 7: Pause & Process #1 -->
             <section>
                 <div class="pause-break">
                     <h2>⏸ Pause & Process</h2>
-                    <h3 style="color: var(--ink-black); margin-top: 1em;">Geography Check & Refocus</h3>
-                    <p style="font-size: 2.2rem; margin-top: 1.5em;"><strong>Partner Activity (60 seconds):</strong></p>
-                    <p style="font-size: 2rem;">Turn to a neighbor and explain why the Yellow River valley became the Shang heartland. Use at least <span class="key-term">two geographic factors</span> we just discussed.</p>
-                    <p style="font-size: 1.8rem; margin-top: 1.5em; color: #666;"><em>I'll call on someone in a moment to share!</em></p>
+                    <h3 style="color: var(--ink-black); margin-top: 0.8em;">Geography Check & Refocus</h3>
+                    <p style="font-size: 2rem; margin-top: 1em;"><strong>Partner Activity (60 seconds):</strong></p>
+                    <p style="font-size: 1.8rem;">Turn to a neighbor and explain why the Yellow River valley became the Shang heartland. Use at least <span class="key-term">two geographic factors</span> we just discussed.</p>
+                    <p style="font-size: 1.5rem; margin-top: 1em; color: #666;"><em>I'll call on someone in a moment to share!</em></p>
                 </div>
                 
                 <aside class="notes">
@@ -489,17 +423,17 @@
                 </aside>
             </section>
 
-            <!-- How We Know Checkpoint -->
+            <!-- SLIDE 8: How We Know Checkpoint -->
             <section>
                 <h2>"How We Know" Checkpoint</h2>
-                <p style="font-size: 2.8rem; color: var(--vermillion); font-weight: bold; margin-bottom: 1em;">The Shang is China's first <span class="key-term">historically verified</span> dynasty.</p>
-                <p style="margin-top: 1.5em;">What does "historically verified" mean?</p>
-                <div class="two-columns" style="margin-top: 1.5em;">
-                    <div style="background: #ffe8cc; padding: 1.5em; border-radius: 10px;">
+                <p style="font-size: 2.2rem; color: var(--vermillion); font-weight: bold; margin-bottom: 0.8em;">The Shang is China's first <span class="key-term">historically verified</span> dynasty.</p>
+                <p>What does "historically verified" mean?</p>
+                <div class="two-columns" style="margin-top: 0.8em;">
+                    <div style="background: #ffe8cc; padding: 1em; border-radius: 10px;">
                         <h3>Before Shang: Legendary</h3>
                         <p><strong>Xia Dynasty</strong> — mentioned in later texts, but no archaeological proof (yet!)</p>
                     </div>
-                    <div style="background: #d4f1d4; padding: 1.5em; border-radius: 10px;">
+                    <div style="background: #d4f1d4; padding: 1em; border-radius: 10px;">
                         <h3>Shang: Verified!</h3>
                         <p><strong>Archaeology</strong> (Anyang ruins) <br>+ <br><strong>Inscriptions</strong> (oracle bones) <br>= <br><span class="key-term">Real history</span></p>
                     </div>
@@ -530,268 +464,220 @@
                 </aside>
             </section>
 
-            <!-- Shang Kingship: Spirit World -->
+            <!-- SLIDE 9: Shang Kings and Spirit World -->
             <section>
-    <h2>Shang Kings and the Spirit World</h2>
+                <h2>Shang Kings and the Spirit World</h2>
+                <div class="two-columns">
+                    <div>
+                        <p>The Shang king wasn't just a political leader—he was a <span class="key-term">religious specialist</span>:</p>
+                        <ul>
+                            <li>Only the king could perform <span class="key-term">oracle bone divination</span></li>
+                            <li>He communicated with <span class="important-date">Di</span> (high god) and <span class="key-term">royal ancestors</span></li>
+                            <li>The king = <strong>intermediary between humans and spirits</strong></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <img src="https://i.imgur.com/j6Wnhih.jpeg" alt="Shang Dynasty oracle bone divination ritual" style="width: 100%; height: 420px; object-fit: cover; border-radius: 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.2);">
+                    </div>
+                </div>
+                
+                <aside class="notes">
+                    <h4>👑 Religious Monopoly = Political Power</h4>
+                    <p>Think about how clever this system is. If you're a Shang noble or farmer and you want to know:</p>
+                    <ul>
+                        <li>Will my army win this battle?</li>
+                        <li>Will the harvest be good?</li>
+                        <li>Will my wife survive childbirth?</li>
+                        <li>Should I offer sacrifices?</li>
+                    </ul>
+                    <p>You NEED the king. He's the only one who can ask the ancestors and interpret their answers. This gives him enormous power—not just military or economic, but spiritual authority.</p>
+                    
+                    <h4>🔮 Oracle Bone Questions</h4>
+                    <p>Actual oracle bone inscriptions show questions like:</p>
+                    <ul>
+                        <li>"If we attack the Qiang people, will we receive assistance?"</li>
+                        <li>"Will there be disaster this year?"</li>
+                        <li>"Should the king perform a rain sacrifice?"</li>
+                        <li>"Lady Hao is giving birth—will it go well?" (Spoiler: it did! Lady Hao was a famous Shang queen/general)</li>
+                    </ul>
+                    
+                    <h4>💭 Comparison</h4>
+                    <p>This is similar to how Egyptian pharaohs claimed to be gods or sons of gods. But Shang kings didn't claim to BE divine—they claimed to have a special RELATIONSHIP with the divine. Subtle but important difference.</p>
+                </aside>
+            </section>
 
-    <div style="display: flex; gap: 2em; align-items: flex-start; margin-top: 1em;">
-        
-        <!-- LEFT COLUMN: TEXT -->
-        <div style="flex: 1; min-width: 320px;">
-            <p>The Shang king wasn't just a political leader—he was a <span class="key-term">religious specialist</span>:</p>
-            <ul>
-                <li>Only the king could perform <span class="key-term">oracle bone divination</span></li>
-                <li>He communicated with <span class="important-date">Di</span> (high god) and <span class="key-term">royal ancestors</span></li>
-                <li>The king = <strong>intermediary between humans and spirits</strong></li>
-            </ul>
-        </div>
-
-        <!-- RIGHT COLUMN: IMAGE -->
-        <div style="flex: 1; min-width: 320px;">
-            <img src="https://i.imgur.com/j6Wnhih.jpeg"
-                 alt="Illustration of Shang Dynasty oracle bone divination ritual with king, diviners, and heated oracle bones"
-                 style="width: 100%; max-width: 800px; height: 500px; object-fit: cover; display: block; margin: 0 auto; border-radius: 12px; box-shadow: 0 10px 24px rgba(0,0,0,0.22);">
-        </div>
-
-    </div>
-
-    <aside class="notes">
-        <h4>👑 Religious Monopoly = Political Power</h4>
-        <p>Think about how clever this system is. If you're a Shang noble or farmer and you want to know:</p>
-        <ul>
-            <li>Will my army win this battle?</li>
-            <li>Will the harvest be good?</li>
-            <li>Will my wife survive childbirth?</li>
-            <li>Should I offer sacrifices?</li>
-        </ul>
-        <p>You NEED the king. He's the only one who can ask the ancestors and interpret their answers. This gives him enormous power—not just military or economic, but spiritual authority.</p>
-        
-        <h4>🔮 Oracle Bone Questions</h4>
-        <p>Actual oracle bone inscriptions show questions like:</p>
-        <ul>
-            <li>"If we attack the Qiang people, will we receive assistance?"</li>
-            <li>"Will there be disaster this year?"</li>
-            <li>"Should the king perform a rain sacrifice?"</li>
-            <li>"Lady Hao is giving birth—will it go well?" (Spoiler: it did! Lady Hao was a famous Shang queen/general)</li>
-        </ul>
-        
-        <h4>💭 Comparison</h4>
-        <p>This is similar to how Egyptian pharaohs claimed to be gods or sons of gods. But Shang kings didn't claim to BE divine—they claimed to have a special RELATIONSHIP with the divine. Subtle but important difference.</p>
-    </aside>
-</section>
-
-
-            <!-- Bronze Vessels as Ritual Technology -->
+            <!-- SLIDE 10: Bronze Vessels -->
             <section>
-    <h2>Bronze Vessels: Ritual Technology</h2>
+                <h2>Bronze Vessels: Ritual Technology</h2>
+                <div class="two-columns">
+                    <div>
+                        <p>Bronze wasn't just for making weapons—it was <span class="key-term">ritual technology</span>:</p>
+                        <ul>
+                            <li>Used in <span class="important-date">ancestor worship ceremonies</span></li>
+                            <li>Held food and wine offerings to deceased ancestors</li>
+                            <li>Displayed wealth and power of the elite</li>
+                            <li>Required <strong>skilled craftsmen</strong> (bronze workers, designers)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <img src="https://i.imgur.com/Qpo6y7g.jpeg" alt="Shang Dynasty bronze ritual vessels" style="width: 100%; height: 420px; object-fit: cover; border-radius: 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.2);">
+                    </div>
+                </div>
+                
+                <aside class="notes">
+                    <h4>🏺 What Are Bronze Ritual Vessels?</h4>
+                    <p>The Shang made elaborate bronze containers in various shapes, each with a specific ritual purpose:</p>
+                    <ul>
+                        <li><strong>Ding:</strong> Three-legged cauldrons for cooking meat offerings</li>
+                        <li><strong>Jue:</strong> Tripod cups for heating and pouring wine</li>
+                        <li><strong>Gu:</strong> Tall beakers for drinking ritual wine</li>
+                        <li><strong>Zun:</strong> Wide vessels for serving wine</li>
+                    </ul>
+                    
+                    <h4>⚒️ Technological Marvel</h4>
+                    <p>Making these required incredible skill:</p>
+                    <ul>
+                        <li>Mining copper and tin ore</li>
+                        <li>Smelting at very high temperatures</li>
+                        <li>Mixing exact ratios (usually 90% copper, 10% tin)</li>
+                        <li>Creating clay molds with intricate designs</li>
+                        <li>Casting (pouring molten bronze into molds)</li>
+                        <li>Finishing and polishing</li>
+                    </ul>
+                    
+                    <h4>💰 Status Symbols</h4>
+                    <p>The number and size of bronze vessels you owned showed your status. A king might have hundreds. A minor noble might have a few. Commoners had none—they used pottery. When you died, your bronzes were buried with you to continue ancestor worship in the afterlife.</p>
+                    
+                    <h4>🔗 Connection to Power</h4>
+                    <p>Control over bronze production = control over ritual = control over spiritual power. The king controlled the bronze workshops, so he controlled who got access to ritual objects. It's all connected!</p>
+                </aside>
+            </section>
 
-    <div style="display: flex; gap: 2em; align-items: flex-start; margin-top: 1em;">
-        
-        <!-- LEFT COLUMN: TEXT -->
-        <div style="flex: 1; min-width: 320px;">
-            <p>Bronze wasn't just for making weapons—it was <span class="key-term">ritual technology</span>:</p>
-            <ul>
-                <li>Used in <span class="important-date">ancestor worship ceremonies</span></li>
-                <li>Held food and wine offerings to deceased ancestors</li>
-                <li>Displayed wealth and power of the elite</li>
-                <li>Required <strong>skilled craftsmen</strong> (bronze workers, designers)</li>
-            </ul>
-        </div>
-
-        <!-- RIGHT COLUMN: IMAGE -->
-        <div style="flex: 1; min-width: 320px;">
-            <img src="https://i.imgur.com/Qpo6y7g.jpeg"
-                 alt="Shang Dynasty bronze ritual vessels (ding and other ceremonial bronzes), richly decorated"
-                 style="width: 100%; max-width: 700px; height: 600px; object-fit: cover; display: block; margin: 0 auto; border-radius: 12px; box-shadow: 0 10px 24px rgba(0,0,0,0.22);">
-        </div>
-
-    </div>
-
-    <aside class="notes">
-        <h4>🏺 What Are Bronze Ritual Vessels?</h4>
-        <p>The Shang made elaborate bronze containers in various shapes, each with a specific ritual purpose:</p>
-        <ul>
-            <li><strong>Ding:</strong> Three-legged cauldrons for cooking meat offerings</li>
-            <li><strong>Jue:</strong> Tripod cups for heating and pouring wine</li>
-            <li><strong>Gu:</strong> Tall beakers for drinking ritual wine</li>
-            <li><strong>Zun:</strong> Wide vessels for serving wine</li>
-        </ul>
-        
-        <h4>⚒️ Technological Marvel</h4>
-        <p>Making these required incredible skill:</p>
-        <ul>
-            <li>Mining copper and tin ore</li>
-            <li>Smelting at very high temperatures</li>
-            <li>Mixing exact ratios (usually 90% copper, 10% tin)</li>
-            <li>Creating clay molds with intricate designs</li>
-            <li>Casting (pouring molten bronze into molds)</li>
-            <li>Finishing and polishing</li>
-        </ul>
-        
-        <h4>💰 Status Symbols</h4>
-        <p>The number and size of bronze vessels you owned showed your status. A king might have hundreds. A minor noble might have a few. Commoners had none—they used pottery. When you died, your bronzes were buried with you to continue ancestor worship in the afterlife.</p>
-        
-        <h4>🔗 Connection to Power</h4>
-        <p>Control over bronze production = control over ritual = control over spiritual power. The king controlled the bronze workshops, so he controlled who got access to ritual objects. It's all connected!</p>
-    </aside>
-</section>
-
-
-            <!-- Shang Society: Anyang Evidence -->
+            <!-- SLIDE 11: Evidence from Anyang -->
             <section>
-    <h2>Evidence from Anyang</h2>
-    <p>Archaeological excavations at <span class="important-date">Anyang</span> (last Shang capital) revealed:</p>
-    
-    <img src="https://i.imgur.com/4CXY5HK.jpeg"
-         alt="Anyang (Yinxu) Shang Dynasty archaeological excavation site overview showing foundations and ruins"
-         style="width: 900px; height: 500px; object-fit: cover; display: block; margin: 1.5em auto; border-radius: 12px; box-shadow: 0 10px 24px rgba(0,0,0,0.22);">
-    
-    <aside class="notes">
-        <h4>🏛️ Anyang (Yinxu)</h4>
-        <p>Anyang was the last Shang capital (ca. 1300-1046 BCE). The archaeological site is called Yinxu ("Ruins of Yin"—Yin was the Shang's name for their capital). Excavations began in 1928 and continue today.</p>
-        
-        <h4>🔍 What Archaeologists Found</h4>
-        <ul>
-            <li><strong>Palace foundations:</strong> Massive rammed-earth platforms (some 300+ feet long)</li>
-            <li><strong>Royal tombs:</strong> Cross-shaped underground chambers with elaborate grave goods</li>
-            <li><strong>Oracle bone pits:</strong> Tens of thousands of inscribed bones and shells</li>
-            <li><strong>Bronze workshops:</strong> Evidence of large-scale craft production</li>
-            <li><strong>Human sacrifices:</strong> Thousands of skeletons in sacrificial pits</li>
-        </ul>
-        
-        <h4>💀 The Dark Side: Human Sacrifice</h4>
-        <p>This is hard to talk about, but it's historically important. Shang elites practiced human sacrifice on a large scale:</p>
-        <ul>
-            <li>Retainers buried alive with deceased kings (to serve them in afterlife)</li>
-            <li>War captives sacrificed to ancestors</li>
-            <li>Foundation sacrifices (people buried under buildings for spiritual protection)</li>
-        </ul>
-        <p>This tells us about extreme social hierarchy—some lives were considered expendable to serve the elite.</p>
-    </aside>
-</section>
+                <h2>Evidence from Anyang</h2>
+                <p>Archaeological excavations at <span class="important-date">Anyang</span> (last Shang capital) revealed:</p>
+                <img src="https://i.imgur.com/4CXY5HK.jpeg" alt="Anyang archaeological excavation site" style="width: 850px; height: 480px; object-fit: cover; display: block; margin: 0.6em auto; border-radius: 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.2);">
+                
+                <aside class="notes">
+                    <h4>🏛️ Anyang (Yinxu)</h4>
+                    <p>Anyang was the last Shang capital (ca. 1300-1046 BCE). The archaeological site is called Yinxu ("Ruins of Yin"—Yin was the Shang's name for their capital). Excavations began in 1928 and continue today.</p>
+                    
+                    <h4>🔍 What Archaeologists Found</h4>
+                    <ul>
+                        <li><strong>Palace foundations:</strong> Massive rammed-earth platforms (some 300+ feet long)</li>
+                        <li><strong>Royal tombs:</strong> Cross-shaped underground chambers with elaborate grave goods</li>
+                        <li><strong>Oracle bone pits:</strong> Tens of thousands of inscribed bones and shells</li>
+                        <li><strong>Bronze workshops:</strong> Evidence of large-scale craft production</li>
+                        <li><strong>Human sacrifices:</strong> Thousands of skeletons in sacrificial pits</li>
+                    </ul>
+                    
+                    <h4>💀 The Dark Side: Human Sacrifice</h4>
+                    <p>This is hard to talk about, but it's historically important. Shang elites practiced human sacrifice on a large scale:</p>
+                    <ul>
+                        <li>Retainers buried alive with deceased kings (to serve them in afterlife)</li>
+                        <li>War captives sacrificed to ancestors</li>
+                        <li>Foundation sacrifices (people buried under buildings for spiritual protection)</li>
+                    </ul>
+                    <p>This tells us about extreme social hierarchy—some lives were considered expendable to serve the elite.</p>
+                </aside>
+            </section>
 
-
-            <!-- Royal Tombs and Social Hierarchy -->
-           <section>
-    <h2>Royal Tombs: A Window into Hierarchy</h2>
-
-    <div style="display: flex; gap: 2em; align-items: flex-start; margin-top: 1em;">
-        
-        <!-- LEFT COLUMN: TEXT -->
-        <div style="flex: 1; min-width: 340px;">
-            <p>Shang royal tombs contained:</p>
-            <ul>
-                <li><span class="key-term">Bronze ritual vessels</span> (hundreds in some tombs)</li>
-                <li>Jade ornaments and weapons</li>
-                <li>Chariots with horses</li>
-                <li><span class="important-date">Human sacrifices</span> — retainers, war captives</li>
-                <li>Evidence of elaborate burial rituals</li>
-            </ul>
-            <p style="margin-top: 1em;">This reveals <strong>extreme social stratification</strong> — life and death determined by birth status.</p>
-        </div>
-
-        <!-- RIGHT COLUMN: IMAGES (STACKED x3) -->
-        <div style="flex: 1; min-width: 340px;">
-            
-            <img src="https://i.imgur.com/Qpo6y7g.jpeg"
-                 alt="Shang Dynasty bronze ritual vessels associated with elite tomb burials"
-                 style="width: 100%; max-width: 520px; height: 200px; object-fit: cover; display: block; margin: 0 auto 1em auto; border-radius: 12px; box-shadow: 0 10px 24px rgba(0,0,0,0.22);">
-
-            <img src="https://i.imgur.com/4gPsa1j.jpeg"
-                 alt="Shang Dynasty royal tomb excavation or grave goods associated with elite hierarchy"
-                 style="width: 100%; max-width: 520px; height: 200px; object-fit: cover; display: block; margin: 0 auto 1em auto; border-radius: 12px; box-shadow: 0 10px 24px rgba(0,0,0,0.22);">
-
-            <img src="https://i.imgur.com/kWaoeCx.jpeg"
-                 alt="Shang Dynasty royal tomb burial context showing elite hierarchy and funerary practice"
-                 style="width: 100%; max-width: 520px; height: 200px; object-fit: cover; display: block; margin: 0 auto; border-radius: 12px; box-shadow: 0 10px 24px rgba(0,0,0,0.22);">
-
-        </div>
-
-    </div>
-</section>
-
-    <aside class="notes">
-        <h4>👸 Case Study: Tomb of Fu Hao (Lady Hao)</h4>
-        <p>One of the best-preserved Shang tombs belongs to Fu Hao, a consort of King Wu Ding (ca. 1200 BCE). Her tomb was discovered INTACT in 1976—a rare find!</p>
-        
-        <h4>🏺 What Was in Fu Hao's Tomb?</h4>
-        <ul>
-            <li>Over 460 bronze objects (ritual vessels, weapons, tools)</li>
-            <li>750+ jade objects</li>
-            <li>Nearly 7,000 cowrie shells (used as currency)</li>
-            <li>16 human sacrifices</li>
-            <li>6 dogs</li>
-        </ul>
-        
-        <h4>⚔️ Fu Hao Was Remarkable</h4>
-        <p>Oracle bone inscriptions reveal Fu Hao wasn't just a queen—she was a GENERAL who led armies of 13,000 soldiers! This shows that Shang gender roles weren't identical to later Chinese dynasties. Elite women could hold significant power.</p>
-        
-        <h4>💡 What This Tells Us</h4>
-        <p>The wealth in these tombs is staggering. It required:</p>
-        <ul>
-            <li>Extraction of surplus wealth from farmers</li>
-            <li>Specialized craftsmen (bronze workers, jade carvers)</li>
-            <li>Complex social organization</li>
-            <li>Belief system justifying this inequality (ancestor worship, divine kingship)</li>
-        </ul>
-    </aside>
-</section>
-
-            <!-- Chariot Warfare -->
+            <!-- SLIDE 12: Royal Tombs -->
             <section>
-    <h2>Chariot Warfare and Military Aristocracy</h2>
+                <h2>Royal Tombs: A Window into Hierarchy</h2>
+                <div class="two-columns">
+                    <div>
+                        <p>Shang royal tombs contained:</p>
+                        <ul>
+                            <li><span class="key-term">Bronze ritual vessels</span> (hundreds in some tombs)</li>
+                            <li>Jade ornaments and weapons</li>
+                            <li>Chariots with horses</li>
+                            <li><span class="important-date">Human sacrifices</span> — retainers, war captives</li>
+                            <li>Evidence of elaborate burial rituals</li>
+                        </ul>
+                        <p style="margin-top: 0.8em;">This reveals <strong>extreme social stratification</strong> — life and death determined by birth status.</p>
+                    </div>
+                    <div>
+                        <img src="https://i.imgur.com/Qpo6y7g.jpeg" alt="Bronze vessels from Shang tombs" style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; box-shadow: 0 6px 15px rgba(0,0,0,0.2); margin-bottom: 0.6em;">
+                        <img src="https://i.imgur.com/4gPsa1j.jpeg" alt="Shang royal tomb excavation" style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; box-shadow: 0 6px 15px rgba(0,0,0,0.2);">
+                    </div>
+                </div>
+                
+                <aside class="notes">
+                    <h4>👸 Case Study: Tomb of Fu Hao (Lady Hao)</h4>
+                    <p>One of the best-preserved Shang tombs belongs to Fu Hao, a consort of King Wu Ding (ca. 1200 BCE). Her tomb was discovered INTACT in 1976—a rare find!</p>
+                    
+                    <h4>🏺 What Was in Fu Hao's Tomb?</h4>
+                    <ul>
+                        <li>Over 460 bronze objects (ritual vessels, weapons, tools)</li>
+                        <li>750+ jade objects</li>
+                        <li>Nearly 7,000 cowrie shells (used as currency)</li>
+                        <li>16 human sacrifices</li>
+                        <li>6 dogs</li>
+                    </ul>
+                    
+                    <h4>⚔️ Fu Hao Was Remarkable</h4>
+                    <p>Oracle bone inscriptions reveal Fu Hao wasn't just a queen—she was a GENERAL who led armies of 13,000 soldiers! This shows that Shang gender roles weren't identical to later Chinese dynasties. Elite women could hold significant power.</p>
+                    
+                    <h4>💡 What This Tells Us</h4>
+                    <p>The wealth in these tombs is staggering. It required:</p>
+                    <ul>
+                        <li>Extraction of surplus wealth from farmers</li>
+                        <li>Specialized craftsmen (bronze workers, jade carvers)</li>
+                        <li>Complex social organization</li>
+                        <li>Belief system justifying this inequality (ancestor worship, divine kingship)</li>
+                    </ul>
+                </aside>
+            </section>
 
-    <div style="display: flex; gap: 2em; align-items: flex-start; margin-top: 1em;">
-        
-        <!-- LEFT COLUMN: IMAGE -->
-        <div style="flex: 1; min-width: 340px;">
-            <img src="https://i.imgur.com/E81e8Y2.jpeg"
-                 alt="Artistic reconstruction of Shang Dynasty chariot warfare showing warrior, driver, and horses"
-                 style="width: 100%; max-width: 800px; height: 500px; object-fit: cover; display: block; margin: 0 auto; border-radius: 12px; box-shadow: 0 10px 24px rgba(0,0,0,0.22);">
-        </div>
+            <!-- SLIDE 13: Chariot Warfare -->
+            <section>
+                <h2>Chariot Warfare and Military Aristocracy</h2>
+                <div class="two-columns">
+                    <div>
+                        <img src="https://i.imgur.com/E81e8Y2.jpeg" alt="Shang Dynasty chariot warfare reconstruction" style="width: 100%; height: 420px; object-fit: cover; border-radius: 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.2);">
+                    </div>
+                    <div>
+                        <p><span class="key-term">Chariots</span> were a game-changing military technology:</p>
+                        <ul>
+                            <li>Mobile platforms for archers</li>
+                            <li>Psychological weapon (speed, noise, intimidation)</li>
+                            <li>Expensive — only elites could afford them</li>
+                            <li><strong>Note:</strong> Chariot technology <span class="important-date">likely transmitted from Central Asia/steppe</span></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <aside class="notes">
+                    <h4>🐴 Chariot Technology</h4>
+                    <p>Shang chariots were sophisticated war machines:</p>
+                    <ul>
+                        <li>Two-wheeled vehicles pulled by two horses</li>
+                        <li>Crew of 3: driver, archer, and defender (with shield/spear)</li>
+                        <li>Bronze fittings and decorations</li>
+                        <li>Spoked wheels (engineering marvel for the time)</li>
+                    </ul>
+                    
+                    <h4>🌍 Where Did Chariots Come From?</h4>
+                    <p>This is a scholarly debate! The chariot appears across Eurasia around the same time (2000-1500 BCE)—in the Near East, Central Asia, and China. Most scholars think the technology spread from west to east via the steppes, possibly through trade or migration. But we don't have a clear "chain of transmission," so it remains a plausible hypothesis rather than proven fact.</p>
+                    
+                    <h4>⚔️ Chariots = Elite Warfare</h4>
+                    <p>Chariots were EXPENSIVE:</p>
+                    <ul>
+                        <li>Breeding and training war horses</li>
+                        <li>Building the chariot (skilled woodworkers, bronze smiths)</li>
+                        <li>Training the crew (years of practice)</li>
+                        <li>Maintaining equipment</li>
+                    </ul>
+                    <p>This created a military aristocracy—only nobles could afford chariot warfare. They dominated the battlefield and used this to maintain social power.</p>
+                    
+                    <h4>🔗 Big Picture Connection</h4>
+                    <p>Chariot technology is one of the few clear examples of Shang China interacting with the broader Eurasian world. Most Shang culture developed indigenously, but they weren't completely isolated.</p>
+                </aside>
+            </section>
 
-        <!-- RIGHT COLUMN: TEXT -->
-        <div style="flex: 1; min-width: 340px;">
-            <p><span class="key-term">Chariots</span> were a game-changing military technology:</p>
-            <ul>
-                <li>Mobile platforms for archers</li>
-                <li>Psychological weapon (speed, noise, intimidation)</li>
-                <li>Expensive — only elites could afford them</li>
-                <li><strong>Note:</strong> Chariot technology <span class="important-date">likely transmitted from Central Asia/steppe</span> (scholarly hypothesis, not proven pipeline)</li>
-            </ul>
-        </div>
-
-    </div>
-
-    <aside class="notes">
-        <h4>🐴 Chariot Technology</h4>
-        <p>Shang chariots were sophisticated war machines:</p>
-        <ul>
-            <li>Two-wheeled vehicles pulled by two horses</li>
-            <li>Crew of 3: driver, archer, and defender (with shield/spear)</li>
-            <li>Bronze fittings and decorations</li>
-            <li>Spoked wheels (engineering marvel for the time)</li>
-        </ul>
-        
-        <h4>🌍 Where Did Chariots Come From?</h4>
-        <p>This is a scholarly debate! The chariot appears across Eurasia around the same time (2000-1500 BCE)—in the Near East, Central Asia, and China. Most scholars think the technology spread from west to east via the steppes, possibly through trade or migration. But we don't have a clear "chain of transmission," so it remains a plausible hypothesis rather than proven fact.</p>
-        
-        <h4>⚔️ Chariots = Elite Warfare</h4>
-        <p>Chariots were EXPENSIVE:</p>
-        <ul>
-            <li>Breeding and training war horses</li>
-            <li>Building the chariot (skilled woodworkers, bronze smiths)</li>
-            <li>Training the crew (years of practice)</li>
-            <li>Maintaining equipment</li>
-        </ul>
-        <p>This created a military aristocracy—only nobles could afford chariot warfare. They dominated the battlefield and used this to maintain social power.</p>
-        
-        <h4>🔗 Big Picture Connection</h4>
-        <p>Chariot technology is one of the few clear examples of Shang China interacting with the broader Eurasian world. Most Shang culture developed indigenously, but they weren't completely isolated.</p>
-    </aside>
-</section>
-
-            <!-- Craft Specialization -->
+            <!-- SLIDE 14: Complex State Organization -->
             <section>
                 <h2>Complex State Organization</h2>
                 <p>Archaeological evidence reveals sophisticated <span class="key-term">craft specialization</span>:</p>
@@ -846,15 +732,15 @@
                 </aside>
             </section>
 
-            <!-- PAUSE & PROCESS #2 -->
+            <!-- SLIDE 15: Pause & Process #2 -->
             <section>
                 <div class="pause-break">
                     <h2>⏸ Pause & Process</h2>
-                    <h3 style="color: var(--ink-black); margin-top: 1em;">Comprehension Check & Stretch</h3>
-                    <p style="font-size: 2.2rem; margin-top: 1.5em;"><strong>Quick Write (90 seconds):</strong></p>
-                    <p style="font-size: 2rem;">On a piece of paper: List <span class="key-term">three pieces of evidence</span> that tell us the Shang had a complex, hierarchical society.</p>
-                    <p style="font-size: 1.8rem; margin-top: 1.5em; color: #666;"><em>(This won't be collected—just for your own thinking!)</em></p>
-                    <p style="font-size: 2rem; margin-top: 1.5em;">Then: <strong>Stand up and stretch for 15 seconds!</strong></p>
+                    <h3 style="color: var(--ink-black); margin-top: 0.8em;">Comprehension Check & Stretch</h3>
+                    <p style="font-size: 2rem; margin-top: 1em;"><strong>Quick Write (90 seconds):</strong></p>
+                    <p style="font-size: 1.8rem;">On a piece of paper: List <span class="key-term">three pieces of evidence</span> that tell us the Shang had a complex, hierarchical society.</p>
+                    <p style="font-size: 1.5rem; margin-top: 0.8em; color: #666;"><em>(This won't be collected—just for your own thinking!)</em></p>
+                    <p style="font-size: 1.8rem; margin-top: 1em;">Then: <strong>Stand up and stretch for 15 seconds!</strong></p>
                 </div>
                 
                 <aside class="notes">
@@ -876,11 +762,11 @@
                 </aside>
             </section>
 
-            <!-- Why Did Shang Fall? -->
+            <!-- SLIDE 16: Why Did Shang Fall? -->
             <section>
                 <h2>Why Did the Shang Fall?</h2>
-                <p style="font-size: 2.6rem; margin-bottom: 1.5em;">The Shang Dynasty ended around <span class="important-date">1045 BCE</span> when the Zhou conquered them.</p>
-                <div style="background: #ffe8cc; padding: 1.5em; border-radius: 10px; margin-bottom: 1em;">
+                <p style="font-size: 2.2rem; margin-bottom: 0.8em;">The Shang Dynasty ended around <span class="important-date">1045 BCE</span> when the Zhou conquered them.</p>
+                <div style="background: #ffe8cc; padding: 1em; border-radius: 10px;">
                     <h3>Traditional Account (Zhou Version)</h3>
                     <p>The last Shang king, <span class="important-date">Di Xin</span>, was a cruel tyrant:</p>
                     <ul>
@@ -907,11 +793,11 @@
                 </aside>
             </section>
 
-            <!-- Alternative Explanations -->
+            <!-- SLIDE 17: Alternative Explanations -->
             <section>
                 <h2>Alternative Explanations</h2>
                 <p>Historians propose other factors beyond "bad last king":</p>
-                <ul style="font-size: 2.2rem;">
+                <ul style="font-size: 1.9rem;">
                     <li><strong>Coalition politics:</strong> Zhou allied with <span class="key-term">disaffected Shang nobles</span> who had grievances against the royal house</li>
                     <li><strong>Military pressure from multiple fronts:</strong> Shang faced threats from various directions, not just the Zhou</li>
                     <li><strong>Zhou strategic positioning over generations:</strong> The Zhou built power in the Wei River valley, forming alliances and waiting for the right moment</li>
@@ -939,16 +825,16 @@
                 </aside>
             </section>
 
-            <!-- Transition to Next Lecture -->
+            <!-- SLIDE 18: Transition to Next Lecture -->
             <section>
                 <h2>The Zhou's Big Problem</h2>
-                <p style="font-size: 2.8rem;">The Zhou conquered the Shang around <span class="important-date">1045 BCE</span>.</p>
-                <p style="font-size: 2.6rem; margin-top: 1.5em;">But now they faced a <span class="key-term">legitimacy crisis</span>:</p>
-                <div class="quote-box" style="margin-top: 1.5em;">
+                <p style="font-size: 2.4rem;">The Zhou conquered the Shang around <span class="important-date">1045 BCE</span>.</p>
+                <p style="font-size: 2.2rem; margin-top: 0.8em;">But now they faced a <span class="key-term">legitimacy crisis</span>:</p>
+                <div class="quote-box" style="margin-top: 0.8em;">
                     "How do you convince everyone you deserve to rule when you just violently overthrew a dynasty that claimed gods approved their kingship?"
                 </div>
-                <p style="font-size: 2.4rem; margin-top: 1.5em; color: var(--vermillion); font-weight: bold;">The Zhou's solution: The <span class="important-date">Mandate of Heaven</span></p>
-                <p style="font-size: 2rem; margin-top: 1em; color: #666;"><em>We'll explore this revolutionary concept in our next lecture...</em></p>
+                <p style="font-size: 2rem; margin-top: 0.8em; color: var(--vermillion); font-weight: bold;">The Zhou's solution: The <span class="important-date">Mandate of Heaven</span></p>
+                <p style="font-size: 1.6rem; margin-top: 0.6em; color: #666;"><em>We'll explore this revolutionary concept in our next lecture...</em></p>
                 
                 <aside class="notes">
                     <h4>🎯 Setting Up Next Lecture</h4>
@@ -962,13 +848,13 @@
                 </aside>
             </section>
 
-            <!-- Summary Slide -->
+            <!-- SLIDE 19: Summary -->
             <section>
                 <h2>Summary: The Shang Dynasty</h2>
                 <div class="two-columns">
                     <div>
                         <h3>Key Takeaways</h3>
-                        <ul style="font-size: 2rem;">
+                        <ul style="font-size: 1.7rem;">
                             <li><span class="key-term">Historically verified</span> through archaeology + inscriptions</li>
                             <li>King = religious intermediary</li>
                             <li>Oracle bones + bronze vessels = ritual technology</li>
@@ -979,7 +865,7 @@
                     </div>
                     <div>
                         <h3>Big Questions</h3>
-                        <ul style="font-size: 2rem;">
+                        <ul style="font-size: 1.7rem;">
                             <li>How do we KNOW about the past?</li>
                             <li>How does ritual create political power?</li>
                             <li>What makes a state "complex"?</li>
@@ -987,7 +873,7 @@
                         </ul>
                     </div>
                 </div>
-                <p style="font-size: 2rem; margin-top: 1.5em; text-align: center; color: #666;"><strong>Next time:</strong> The Zhou Dynasty and the Mandate of Heaven</p>
+                <p style="font-size: 1.6rem; margin-top: 1em; text-align: center; color: #666;"><strong>Next time:</strong> The Zhou Dynasty and the Mandate of Heaven</p>
                 
                 <aside class="notes">
                     <h4>🎓 Wrapping Up</h4>
@@ -1014,7 +900,6 @@
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/zoom/zoom.js"></script>
 
     <script>
-        // Global popup toggle function
         function togglePopup(id) {
             document.getElementById(id).classList.toggle('active');
         }
