@@ -1,0 +1,965 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reform, Social Science, and the Making of the Pluralistic City - HIST 102</title>
+
+    <!-- Reveal.js CSS from CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Pantone 2026 Atmospheric Palette */
+            --cloud-dancer: #F0EEE9;
+            --pale-sunlight: #E8DFB8;
+            --atmospheric-slate: #2A3540;
+            --misty-sky: #B8C5D0;
+            --sterling-blue: #6B8FAD;
+            --quiet-wave: #5D8A8C;
+            --aventurine: #4A7C72;
+            --morning-mist: #C5C0B8;
+            --deep-current: #2D4A4A;
+        }
+
+        .reveal {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 32px;
+            background-color: var(--atmospheric-slate);
+        }
+
+        .reveal .slides section {
+            color: var(--cloud-dancer);
+        }
+
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--cloud-dancer);
+            text-transform: none;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .reveal h1 { font-size: 3em; }
+        .reveal h2 { font-size: 2em; color: var(--pale-sunlight); }
+        .reveal h3 { font-size: 1.5em; color: var(--misty-sky); }
+
+        .reveal p, .reveal li {
+            color: var(--cloud-dancer);
+        }
+
+        .reveal a {
+            color: var(--sterling-blue);
+            text-decoration: underline;
+        }
+
+        .reveal a:hover {
+            color: var(--pale-sunlight);
+        }
+
+        /* Pop-up/Modal styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--deep-current);
+            color: var(--cloud-dancer);
+            padding: 2em;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            max-width: 70%;
+            max-height: 70%;
+            overflow-y: auto;
+            z-index: 1000;
+            border: 3px solid var(--quiet-wave);
+        }
+
+        .popup.active { display: block; }
+
+        .popup h3 {
+            color: var(--pale-sunlight);
+            margin-top: 0;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 2em;
+            cursor: pointer;
+            color: var(--misty-sky);
+        }
+
+        .popup-close:hover {
+            color: var(--cloud-dancer);
+        }
+
+        .popup-trigger {
+            color: var(--sterling-blue);
+            text-decoration: underline dotted;
+            cursor: pointer;
+            border-bottom: 2px dotted var(--sterling-blue);
+        }
+
+        .popup-trigger:hover {
+            color: var(--pale-sunlight);
+            border-bottom-color: var(--pale-sunlight);
+        }
+
+        /* Image placeholder styling */
+        .img-placeholder {
+            background: var(--deep-current);
+            border: 3px dashed var(--quiet-wave);
+            padding: 3em;
+            text-align: center;
+            color: var(--misty-sky);
+            font-style: italic;
+            border-radius: 10px;
+        }
+
+        /* Key term styling */
+        .key-term {
+            color: var(--aventurine);
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        /* Primary source styling */
+        .primary-source {
+            background: rgba(232, 223, 184, 0.15);
+            border-left: 5px solid var(--pale-sunlight);
+            padding: 1em;
+            margin: 1em 0;
+            font-style: italic;
+            color: var(--cloud-dancer);
+        }
+
+        .primary-source-attribution {
+            text-align: right;
+            font-size: 0.9em;
+            color: var(--morning-mist);
+            margin-top: 0.5em;
+            font-style: normal;
+        }
+
+        /* Comparison boxes */
+        .comparison-box {
+            border: 3px solid var(--quiet-wave);
+            padding: 1.5em;
+            border-radius: 10px;
+            background: rgba(93, 138, 140, 0.1);
+        }
+
+        .comparison-box.alt {
+            border-color: var(--sterling-blue);
+            background: rgba(107, 143, 173, 0.1);
+        }
+
+        /* Section divider styling */
+        .section-divider {
+            background: linear-gradient(135deg, var(--deep-current) 0%, var(--atmospheric-slate) 100%);
+        }
+
+        .section-divider h2 {
+            color: var(--cloud-dancer);
+            font-size: 2.5em;
+        }
+
+        /* Emphasis/callout box */
+        .callout {
+            background: rgba(232, 223, 184, 0.1);
+            border: 2px solid var(--pale-sunlight);
+            border-radius: 8px;
+            padding: 1em;
+            margin: 1em 0;
+        }
+
+        .callout-title {
+            color: var(--pale-sunlight);
+            font-weight: bold;
+            margin-bottom: 0.5em;
+        }
+
+        /* Progress/slide counter styling */
+        .reveal .progress {
+            background: var(--deep-current);
+        }
+
+        .reveal .progress span {
+            background: var(--sterling-blue);
+        }
+
+        /* Additional utility classes */
+        .text-left { text-align: left; }
+        .subtitle {
+            color: var(--misty-sky);
+            font-style: italic;
+            margin-top: 0.5em;
+        }
+
+        /* Historian quote styling */
+        .historian-quote {
+            border-left: 5px solid var(--quiet-wave);
+            padding-left: 1.5em;
+            font-style: italic;
+            color: var(--misty-sky);
+        }
+
+        .historian-attribution {
+            text-align: right;
+            font-size: 0.9em;
+            color: var(--morning-mist);
+            margin-top: 0.5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Title Slide -->
+            <section>
+                <h1>Chapter 20: Urbanization</h1>
+                <h2>Reform, Social Science, and the Making of the Pluralistic City</h2>
+                <p class="subtitle">How Americans attempted to understand, manage, and reform the modern city</p>
+                <aside class="notes">
+                    <h4>📚 Lecture Overview</h4>
+                    <p>This is lecture 4 (or 5 by the outline's numbering) in the Chapter 20 series on urbanization. Today we're exploring how Americans responded to urban crisis through reform movements, social science, and new forms of expertise—laying the intellectual groundwork for Progressivism.</p>
+
+                    <h4>💭 The Big Picture</h4>
+                    <p>We've seen how cities created problems: inequality, disease, pollution, poverty. Now we look at solutions. But these weren't just charitable responses—they represented a fundamental shift in how Americans thought about society, government, and knowledge.</p>
+
+                    <h4>🎯 Learning Objectives</h4>
+                    <ul>
+                        <li>Understand why private charity failed to address urban poverty</li>
+                        <li>Analyze the rise of social science as a tool for understanding cities</li>
+                        <li>Examine settlement houses as laboratories of reform</li>
+                        <li>Recognize women's expanding public roles through urban reform</li>
+                        <li>Explain the Social Gospel movement and its political implications</li>
+                        <li>Understand pluralism as the lived reality of American cities by 1920</li>
+                    </ul>
+                </aside>
+            </section>
+
+            <!-- Big Framing Idea -->
+            <section>
+                <h2>Society as a Problem to Be Solved</h2>
+                <div class="callout">
+                    <div class="callout-title">🔑 Key Concept</div>
+                    <p>Reform did not emerge simply from compassion. It emerged from a growing belief that <span class="key-term">industrial society could be studied, diagnosed, and improved</span>.</p>
+                </div>
+                <p style="margin-top: 1.5em; font-style: italic;">Urban reform marks the moment when Americans begin treating society itself as a <span class="key-term">problem to be solved scientifically</span>.</p>
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This lecture is about a new way of thinking. Before this era, Americans generally believed that poverty was a personal moral failing and that charity should be individual and voluntary. Urban reform introduced a radically different idea: society has structures, systems, and patterns that can be studied and changed.</p>
+
+                    <h4>💭 The Intellectual Revolution</h4>
+                    <p>Urban reformers borrowed methods from natural science—observation, data collection, hypothesis testing—and applied them to social problems. This was the birth of social science and the beginning of the idea that experts, armed with knowledge, could improve society.</p>
+
+                    <h4>🔑 Why This Matters</h4>
+                    <p>This intellectual shift led directly to Progressivism and the modern regulatory state. It justified government intervention, professionalized social work, and created the assumption that society should be managed by experts.</p>
+                </aside>
+            </section>
+
+            <!-- Section I Divider -->
+            <section class="section-divider">
+                <h2>Part I</h2>
+                <h3 style="color: var(--misty-sky);">Crisis and the Limits of Private Charity</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">Begin with failure</p>
+            </section>
+
+            <!-- Private Charity Fails -->
+            <section>
+                <h2>The Scale of Urban Poverty Overwhelms Charity</h2>
+                <ul>
+                    <li>Churches and private charities cannot keep pace with need</li>
+                    <li>The <span class="popup-trigger" onclick="togglePopup('depression-1893-popup')">Depression of 1893</span> exposes the insufficiency of voluntarism</li>
+                    <li>Thousands unemployed, homeless, starving</li>
+                    <li>Charitable organizations run out of funds</li>
+                </ul>
+
+                <div id="depression-1893-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('depression-1893-popup')">&times;</span>
+                    <h3>The Depression of 1893</h3>
+                    <p>One of the worst economic crises in American history until the Great Depression.</p>
+
+                    <h4>Causes:</h4>
+                    <ul>
+                        <li>Railroad overbuilding and speculation</li>
+                        <li>Bank failures and credit collapse</li>
+                        <li>Agricultural depression</li>
+                        <li>Gold standard constraints</li>
+                    </ul>
+
+                    <h4>Impact:</h4>
+                    <ul>
+                        <li><strong>Unemployment</strong>: 20-25% in industrial cities</li>
+                        <li><strong>Homelessness</strong>: Thousands evicted, living in streets</li>
+                        <li><strong>Starvation</strong>: Bread lines stretched for blocks</li>
+                        <li><strong>Labor unrest</strong>: Strikes, protests (Pullman Strike 1894)</li>
+                    </ul>
+
+                    <h4>Why It Changed Reform Thinking:</h4>
+                    <p>The scale of suffering was so massive that private charity couldn't cope. Churches ran out of food to distribute. Settlement houses were overwhelmed. This crisis convinced many reformers that systemic problems required systemic (government) solutions.</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 The Crisis of Charity</h4>
+                    <p>Throughout the 1800s, Americans believed that poverty could be addressed through private charity—churches, benevolent societies, individual giving. But urban industrial poverty was too massive, too structural, for this approach.</p>
+
+                    <h4>📖 What Changed</h4>
+                    <p>The Depression of 1893 was a turning point. Unemployment hit 20%+ in cities. Thousands were evicted, homeless, starving. Churches and charities ran out of resources. It became clear that individual charity wasn't sufficient.</p>
+
+                    <h4>💭 The Ideological Shift</h4>
+                    <p>This forced Americans to reconsider fundamental assumptions. If poverty wasn't just individual moral failing, if it was structural and systemic, then solutions had to be structural too—government action, regulation, social programs.</p>
+                </aside>
+            </section>
+
+            <!-- Old vs New Assumptions -->
+            <section>
+                <h2>Old Assumptions vs. New Realization</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5em;">
+                    <div class="comparison-box">
+                        <h3>Old Assumptions:</h3>
+                        <ul>
+                            <li>Poverty as <span class="key-term">moral failure</span></li>
+                            <li>Charity as individual benevolence</li>
+                            <li>Self-help and personal virtue</li>
+                            <li>Government intervention inappropriate</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-box alt">
+                        <h3>New Realization:</h3>
+                        <ul>
+                            <li>Poverty is <span class="key-term">systemic</span></li>
+                            <li>Individual solutions are inadequate</li>
+                            <li>Structural causes require structural solutions</li>
+                            <li>Collective action necessary</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="callout" style="margin-top: 1.5em;">
+                    <div class="callout-title">🔑 Important Shift</div>
+                    <p>Urban reform grows from <span class="key-term">structural crisis</span>, not moral awakening alone.</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>🔑 The Paradigm Shift</h4>
+                    <p>This slide captures the fundamental intellectual transformation of the Progressive Era. Americans stopped seeing poverty as a personal failure and started seeing it as a social condition created by economic structures.</p>
+
+                    <h4>💭 Why This Matters</h4>
+                    <p>Once you accept that poverty is systemic, you accept that government has a role in addressing it. This opens the door to regulation, social programs, and the welfare state.</p>
+                </aside>
+            </section>
+
+            <!-- Section II Divider -->
+            <section class="section-divider">
+                <h2>Part II</h2>
+                <h3 style="color: var(--misty-sky);">The Rise of Social Science and "Knowing the City"</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">Cities become laboratories</p>
+            </section>
+
+            <!-- Social Science Emerges -->
+            <section>
+                <h2>Reformers Adopt Tools from Science</h2>
+                <p>Cities become objects of systematic study:</p>
+                <ul>
+                    <li><span class="popup-trigger" onclick="togglePopup('social-science-popup')">Sociology, economics, statistics, anthropology</span></li>
+                    <li>Neighborhood surveys and mapping</li>
+                    <li>Data collection on poverty, housing, health</li>
+                    <li>Poverty reframed as a <span class="key-term">social condition</span>, not a personal defect</li>
+                </ul>
+
+                <div id="social-science-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('social-science-popup')">&times;</span>
+                    <h3>The Rise of Social Science</h3>
+                    <p>In the late 1800s, Americans began applying scientific methods to social problems.</p>
+
+                    <h4>Key Disciplines:</h4>
+                    <ul>
+                        <li><strong>Sociology</strong>: Study of social structures, institutions, and behaviors</li>
+                        <li><strong>Economics</strong>: Analysis of production, distribution, and inequality</li>
+                        <li><strong>Statistics</strong>: Quantifying social conditions—poverty rates, mortality, housing density</li>
+                        <li><strong>Anthropology</strong>: Understanding cultural practices and immigrant communities</li>
+                    </ul>
+
+                    <h4>Methods:</h4>
+                    <ul>
+                        <li>Surveys and questionnaires</li>
+                        <li>Statistical analysis</li>
+                        <li>Mapping and spatial analysis</li>
+                        <li>Ethnographic observation</li>
+                    </ul>
+
+                    <h4>Why This Mattered:</h4>
+                    <p>Social science provided "objective" data to justify reform. Instead of moral appeals, reformers could present statistics, maps, and reports showing the extent of urban problems. This made reform seem rational, scientific, and inevitable.</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 The Scientific Turn</h4>
+                    <p>Before this era, reform was mostly religious and moral—preaching, charity, temperance. The new reformers were educated, often university-trained, and believed in systematic investigation and data-driven solutions.</p>
+
+                    <h4>📖 How It Worked</h4>
+                    <p>Reformers would conduct surveys of tenement districts, interviewing families about income, housing, health. They'd create maps showing disease rates, poverty levels, housing conditions. They'd publish reports with statistics and recommendations.</p>
+
+                    <h4>💭 The Politics of Expertise</h4>
+                    <p>This created a new kind of political authority based on expertise rather than wealth, birth, or moral standing. Reformers claimed authority because they had STUDIED the problem scientifically.</p>
+                </aside>
+            </section>
+
+            <!-- Key Thinkers -->
+            <section>
+                <h2>Key Thinkers and Ideas</h2>
+                <ul>
+                    <li><span class="popup-trigger" onclick="togglePopup('ely-popup')">Richard T. Ely</span> — "Younger Economics" and government intervention</li>
+                    <li><span class="popup-trigger" onclick="togglePopup('veblen-popup')">Thorstein Veblen</span> — Critique of conspicuous consumption</li>
+                    <li><span class="popup-trigger" onclick="togglePopup('george-popup')">Henry George</span> — Land, inequality, and <em>Progress and Poverty</em></li>
+                </ul>
+
+                <div id="ely-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('ely-popup')">&times;</span>
+                    <h3>Richard T. Ely (1854-1943)</h3>
+                    <p>Founder of the American Economic Association and advocate for government intervention in the economy.</p>
+                    <p><strong>Key Ideas:</strong></p>
+                    <ul>
+                        <li>Rejected laissez-faire economics</li>
+                        <li>Argued that government should regulate business and protect workers</li>
+                        <li>Supported labor unions and social legislation</li>
+                        <li>Influenced Progressive Era policy</li>
+                    </ul>
+                    <p>Ely represented the "new economics" that challenged classical liberal assumptions about free markets and individual responsibility.</p>
+                </div>
+
+                <div id="veblen-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('veblen-popup')">&times;</span>
+                    <h3>Thorstein Veblen (1857-1929)</h3>
+                    <p>Economist and sociologist famous for <em>The Theory of the Leisure Class</em> (1899).</p>
+                    <p><strong>Key Concept: Conspicuous Consumption</strong></p>
+                    <p>Veblen argued that the wealthy consumed luxury goods not for utility but to display status—"conspicuous consumption." This was wasteful and socially harmful.</p>
+                    <p><strong>Critique of Industrial Society:</strong></p>
+                    <ul>
+                        <li>Inequality was structural, not natural</li>
+                        <li>The "leisure class" extracted wealth without producing value</li>
+                        <li>Industrial capitalism created artificial scarcity and waste</li>
+                    </ul>
+                    <p>Veblen's critique influenced Progressive reformers and later socialist thinkers.</p>
+                </div>
+
+                <div id="george-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('george-popup')">&times;</span>
+                    <h3>Henry George (1839-1897)</h3>
+                    <p>Journalist and economist who wrote <em>Progress and Poverty</em> (1879), one of the best-selling books of the era.</p>
+                    <p><strong>Central Argument:</strong></p>
+                    <p>Economic progress created poverty because land values increased with development, enriching landowners while impoverishing workers. Solution: a "single tax" on land values to capture unearned wealth and redistribute it.</p>
+                    <p><strong>Influence:</strong></p>
+                    <ul>
+                        <li>Inspired labor activists, socialists, and reformers</li>
+                        <li>Influenced Progressive Era taxation debates</li>
+                        <li>Provided intellectual foundation for critiquing inequality</li>
+                    </ul>
+                    <p><em>Progress and Poverty</em> sold millions of copies and shaped reform thinking across the political spectrum.</p>
+                </div>
+
+                <div class="callout" style="margin-top: 1.5em;">
+                    <div class="callout-title">🔑 Core Idea</div>
+                    <p>To govern the city, reformers believe they must <span class="key-term">first understand it</span>.</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 The Intellectual Framework</h4>
+                    <p>These thinkers provided the ideas that justified Progressive reform. They argued that inequality wasn't natural or inevitable—it was produced by specific economic and social structures that could be changed.</p>
+
+                    <h4>🎓 Why These Names Matter</h4>
+                    <ul>
+                        <li><strong>Ely</strong>: Legitimized government intervention in economy</li>
+                        <li><strong>Veblen</strong>: Critiqued wealth inequality as socially wasteful</li>
+                        <li><strong>George</strong>: Provided a popular, accessible critique of capitalism</li>
+                    </ul>
+                </aside>
+            </section>
+
+            <!-- Section III Divider -->
+            <section class="section-divider">
+                <h2>Part III</h2>
+                <h3 style="color: var(--misty-sky);">Settlement Houses as Laboratories of Reform</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">Not charities—experiments</p>
+            </section>
+
+            <!-- Settlement Houses Introduction -->
+            <section>
+                <h2>Settlement Houses as Experiments</h2>
+                <p>Settlement houses were <span class="key-term">not charities—they were experiments</span> in urban reform and social research.</p>
+
+                <p style="margin-top: 1.5em;">Key institutions:</p>
+                <ul>
+                    <li><span class="popup-trigger" onclick="togglePopup('hull-house-popup')">Hull House</span> (Jane Addams, Chicago)</li>
+                    <li>Henry Street Settlement (Lillian Wald, New York)</li>
+                    <li>South End House (Boston)</li>
+                </ul>
+
+                <div id="hull-house-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('hull-house-popup')">&times;</span>
+                    <h3>Hull House (1889-2012)</h3>
+                    <p>Founded by Jane Addams and Ellen Gates Starr in Chicago, Hull House became the most famous settlement house in America.</p>
+
+                    <h4>What Was It?</h4>
+                    <p>A community center located in a poor immigrant neighborhood (primarily Italian and Eastern European Jewish). Educated, middle-class reformers lived at Hull House ("settlement" = settling in the neighborhood) and worked with residents.</p>
+
+                    <h4>Activities:</h4>
+                    <ul>
+                        <li><strong>Education</strong>: English classes, citizenship training, kindergarten</li>
+                        <li><strong>Arts & Culture</strong>: Theater, music, art studios</li>
+                        <li><strong>Social Services</strong>: Day care, health clinic, employment bureau</li>
+                        <li><strong>Research</strong>: Surveys of neighborhood conditions, published as <em>Hull House Maps and Papers</em> (1895)</li>
+                        <li><strong>Advocacy</strong>: Lobbying for labor laws, housing reform, child labor restrictions</li>
+                    </ul>
+
+                    <h4>Significance:</h4>
+                    <p>Hull House combined service, research, and political activism. It trained a generation of social workers and reformers who went on to shape Progressive policy at city, state, and federal levels.</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 What Made Settlement Houses New</h4>
+                    <p>Unlike traditional charities that gave handouts from a distance, settlement workers LIVED in immigrant neighborhoods. They didn't just help—they studied, documented, and advocated for structural change.</p>
+
+                    <h4>📖 The Settlement Idea</h4>
+                    <p>The settlement movement originated in England (Toynbee Hall, 1884) and came to America in the 1890s. The idea: educated middle-class people should "settle" in poor neighborhoods to bridge class divides and work for reform.</p>
+                </aside>
+            </section>
+
+            <!-- What Made Them New -->
+            <section>
+                <h2>What Made Settlement Houses New</h2>
+                <ul>
+                    <li>Located <span class="key-term">inside</span> immigrant neighborhoods</li>
+                    <li>Staffed largely by <span class="popup-trigger" onclick="togglePopup('women-reformers-popup')">educated women</span></li>
+                    <li>Combined:
+                        <ul>
+                            <li>Education</li>
+                            <li>Social research</li>
+                            <li>Political advocacy</li>
+                            <li>Cultural exchange</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <div id="women-reformers-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('women-reformers-popup')">&times;</span>
+                    <h3>Women and Settlement Work</h3>
+                    <p>Settlement houses were dominated by women reformers—educated, often college-trained women who couldn't access traditional careers (law, medicine, business) because of gender discrimination.</p>
+
+                    <h4>Why Women?</h4>
+                    <ul>
+                        <li>Women's colleges (Vassar, Smith, Bryn Mawr, Wellesley) produced educated graduates with few career options</li>
+                        <li>Settlement work was seen as "appropriate" for women (caring, nurturing, domestic sphere extended to community)</li>
+                        <li>Settlement houses offered meaningful work and autonomy</li>
+                    </ul>
+
+                    <h4>Key Figures:</h4>
+                    <ul>
+                        <li><strong>Jane Addams</strong> (Hull House): Nobel Peace Prize winner, social theorist</li>
+                        <li><strong>Lillian Wald</strong> (Henry Street Settlement): Founded public health nursing</li>
+                        <li><strong>Florence Kelley</strong> (Hull House resident): Led fight against child labor, became chief factory inspector for Illinois</li>
+                    </ul>
+
+                    <h4>Impact:</h4>
+                    <p>Settlement work became a pathway for women into public life, expertise, and political influence despite exclusion from formal politics.</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 The Innovation</h4>
+                    <p>Settlement houses didn't just provide services—they gathered data, published research, and lobbied for policy change. They were research institutes, advocacy organizations, and community centers all at once.</p>
+
+                    <h4>💭 The Gender Angle</h4>
+                    <p>Settlement work was one of the few professional paths open to educated women. This created a generation of women reformers who gained expertise, authority, and eventually political power.</p>
+                </aside>
+            </section>
+
+            <!-- Crucial Reframing -->
+            <section>
+                <h2>Crucial Reframing</h2>
+                <div class="callout">
+                    <div class="callout-title">🔑 Important Distinction</div>
+                    <p>Settlement workers did not aim to erase immigrant culture—they aimed to <span class="key-term">mediate between old worlds and new systems</span>.</p>
+                </div>
+
+                <p style="margin-top: 1em;">This was different from "Americanization" that demanded total assimilation.</p>
+
+                <aside class="notes">
+                    <h4>🔑 Cultural Pluralism</h4>
+                    <p>Settlement workers generally respected immigrant cultures and languages. They offered English classes and citizenship training, but also celebrated ethnic traditions, arts, and music. This was a more pluralistic vision than the aggressive "Americanization" campaigns of the 1910s-1920s.</p>
+
+                    <h4>💭 The Complexity</h4>
+                    <p>That said, settlement workers were still middle-class reformers with their own biases. They sometimes imposed their values (temperance, Victorian morality) on working-class immigrants. This was paternalistic even when well-intentioned.</p>
+                </aside>
+            </section>
+
+            <!-- Hull House Image -->
+            <section>
+                <h2>Hull House</h2>
+                <div class="img-placeholder" style="width: 1000px; height: 650px; margin: 1em auto;">
+                    <strong>IMAGE PLACEHOLDER</strong><br>
+                    <em>Dimensions: 1000x650px</em><br><br>
+                    <strong>Search terms:</strong><br>
+                    "Hull House Chicago historical photograph"<br>
+                    "Jane Addams Hull House interior"<br>
+                    "Hull House children's activities"<br>
+                    "Hull House courtyard 1900s"<br><br>
+                    <strong>Suggested sources:</strong> University of Illinois Chicago Library, Library of Congress
+                </div>
+                <aside class="notes">
+                    <h4>📚 Visual Context</h4>
+                    <p>Images of Hull House show classrooms, kindergarten, theater productions, art studios—evidence of the wide range of activities. They also show the architectural beauty of the building, which was intentional (reformers believed beautiful spaces uplifted people).</p>
+                </aside>
+            </section>
+
+            <!-- Section IV Divider -->
+            <section class="section-divider">
+                <h2>Part IV</h2>
+                <h3 style="color: var(--misty-sky);">Women, Reform, and Public Authority</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">Reform as a pathway to political power</p>
+            </section>
+
+            <!-- Women and Reform -->
+            <section>
+                <h2>Urban Reform Expands Women's Public Roles</h2>
+                <ul>
+                    <li>Women excluded from formal politics (couldn't vote in most states until 1920)</li>
+                    <li>Reform offers alternative pathways to authority</li>
+                    <li><span class="popup-trigger" onclick="togglePopup('maternalist-popup')">Maternalist language</span> justifies women's activism:
+                        <ul>
+                            <li>Protection of children</li>
+                            <li>Public health</li>
+                            <li>Education</li>
+                            <li>Moral uplift</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <div id="maternalist-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('maternalist-popup')">&times;</span>
+                    <h3>Maternalism as Political Strategy</h3>
+                    <p>"Maternalism" was a rhetorical strategy that justified women's public activism by extending traditional gender roles.</p>
+
+                    <h4>The Logic:</h4>
+                    <p>Women were naturally suited to protect children, care for the sick, and maintain moral standards. Therefore, women should have authority over public policy related to:</p>
+                    <ul>
+                        <li>Child welfare and labor laws</li>
+                        <li>Public health and sanitation</li>
+                        <li>Education and playgrounds</li>
+                        <li>Housing and food safety</li>
+                        <li>Temperance and moral reform</li>
+                    </ul>
+
+                    <h4>The Strategy:</h4>
+                    <p>By framing their activism as an extension of motherhood rather than a challenge to gender roles, women reformers could claim authority without directly threatening male political power.</p>
+
+                    <h4>The Outcome:</h4>
+                    <p>Maternalist rhetoric opened doors for women into public health, social work, education policy, and eventually electoral politics. But it also reinforced gender stereotypes and limited women's political vision.</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 The Gender Politics</h4>
+                    <p>Women couldn't vote in most states until 1920 (with exceptions: Wyoming 1869, Colorado 1893, several Western states). But they could organize, advocate, investigate, and lobby—especially on issues framed as extensions of women's "natural" roles as mothers and moral guardians.</p>
+
+                    <h4>📖 The Strategy</h4>
+                    <p>Women reformers used maternalist rhetoric strategically. They said: "We're not challenging male authority—we're just protecting children and maintaining morality." This allowed them to build public authority while appearing non-threatening.</p>
+
+                    <h4>💭 The Irony</h4>
+                    <p>Maternalist language was both empowering and limiting. It opened doors but also reinforced stereotypes that women belonged in domestic/caring roles rather than full political citizenship.</p>
+                </aside>
+            </section>
+
+            <!-- Examples of Women's Reform -->
+            <section>
+                <h2>Examples of Women's Reform Work</h2>
+                <ul>
+                    <li><span class="popup-trigger" onclick="togglePopup('playground-popup')">Playground movement</span></li>
+                    <li>Child labor reform</li>
+                    <li>Housing codes and tenement regulation</li>
+                    <li>Public health advocacy (visiting nurses, milk stations)</li>
+                    <li>Pure food and drug laws</li>
+                </ul>
+
+                <div id="playground-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('playground-popup')">&times;</span>
+                    <h3>The Playground Movement</h3>
+                    <p>Women reformers led campaigns to create public playgrounds in urban neighborhoods.</p>
+
+                    <h4>The Problem:</h4>
+                    <p>Children in tenement districts played in dangerous streets, alleys, and industrial areas. High rates of injury and death.</p>
+
+                    <h4>The Solution:</h4>
+                    <p>Reformers argued that cities should provide safe, supervised play spaces. This would:</p>
+                    <ul>
+                        <li>Reduce child injuries</li>
+                        <li>Keep children off streets</li>
+                        <li>Provide exercise and recreation</li>
+                        <li>"Americanize" immigrant children through play</li>
+                    </ul>
+
+                    <h4>The Result:</h4>
+                    <p>By 1920, most American cities had public playground systems. This was an early example of government providing recreational services—an idea that seemed radical at the time.</p>
+                </div>
+
+                <div class="callout" style="margin-top: 1.5em;">
+                    <div class="callout-title">🔑 Key Insight</div>
+                    <p>Urban reform becomes a <span class="key-term">back door into political power</span> for women.</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 Women's Political Power</h4>
+                    <p>Through reform work, women built expertise, networks, and authority that eventually translated into formal political power. Many women who led Progressive reforms in the 1890s-1910s became government officials, elected representatives, or policy advisors after winning the vote in 1920.</p>
+
+                    <h4>🔑 The Long-Term Impact</h4>
+                    <p>The infrastructure of women's reform organizations (settlement houses, women's clubs, reform leagues) became the foundation for women's political mobilization in the 20th century.</p>
+                </aside>
+            </section>
+
+            <!-- Section V Divider -->
+            <section class="section-divider">
+                <h2>Part V</h2>
+                <h3 style="color: var(--misty-sky);">The Social Gospel and Moral Reform</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">Religion adapts to the industrial city</p>
+            </section>
+
+            <!-- Social Gospel -->
+            <section>
+                <h2>The Social Gospel Movement</h2>
+                <p><span class="popup-trigger" onclick="togglePopup('social-gospel-popup')">The Social Gospel</span> reinterpreted Christianity for the industrial age:</p>
+                <ul>
+                    <li>Sin located in <span class="key-term">systems</span>, not just souls</li>
+                    <li>Christianity applied to labor, housing, and poverty</li>
+                    <li>Focus shifts from individual salvation to social justice</li>
+                    <li>Ministers preach environmental causation and collective responsibility</li>
+                </ul>
+
+                <div id="social-gospel-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('social-gospel-popup')">&times;</span>
+                    <h3>The Social Gospel Movement</h3>
+                    <p>A Protestant movement (roughly 1880s-1920s) that reinterpreted Christian theology to address industrial capitalism's social problems.</p>
+
+                    <h4>Core Beliefs:</h4>
+                    <ul>
+                        <li><strong>Kingdom of God on Earth</strong>: Christians should build a just society here and now, not just prepare souls for heaven</li>
+                        <li><strong>Structural Sin</strong>: Evil exists in social systems (poverty, inequality), not just individual hearts</li>
+                        <li><strong>Social Salvation</strong>: Saving souls requires reforming society</li>
+                    </ul>
+
+                    <h4>Key Figures:</h4>
+                    <ul>
+                        <li><strong>Walter Rauschenbusch</strong>: Baptist minister who wrote <em>Christianity and the Social Crisis</em> (1907), arguing that Jesus's message was fundamentally about social justice</li>
+                        <li><strong>Washington Gladden</strong>: Congregationalist minister who supported labor unions and criticized corporate power</li>
+                    </ul>
+
+                    <h4>Impact:</h4>
+                    <p>The Social Gospel provided moral legitimacy for Progressive reform, labor rights, and eventually the New Deal. It linked religious authority to social justice, making reform seem morally necessary.</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 Religion Meets Reform</h4>
+                    <p>The Social Gospel transformed American Protestantism from a focus on individual salvation and personal morality to a focus on social justice and structural reform.</p>
+
+                    <h4>📖 The Theological Shift</h4>
+                    <p>Traditional Christianity said: "Save your soul, pray, live morally." Social Gospel said: "Build a just society, fight oppression, create the Kingdom of God on earth." This was a radical reinterpretation.</p>
+
+                    <h4>💭 Why It Mattered</h4>
+                    <p>The Social Gospel gave religious legitimacy to Progressive reform. It said that fighting poverty and inequality wasn't just political—it was Christian duty.</p>
+                </aside>
+            </section>
+
+            <!-- Social Gospel Impact -->
+            <section>
+                <h2>The Political Implications</h2>
+                <div class="callout">
+                    <div class="callout-title">🔑 Important Connection</div>
+                    <p>The Social Gospel links <span class="key-term">moral authority</span> to <span class="key-term">state action</span>.</p>
+                </div>
+
+                <p style="margin-top: 1.5em;">Religion shifts from salvation to social justice, providing moral foundation for government intervention.</p>
+
+                <aside class="notes">
+                    <h4>🔑 Why This Connection Matters</h4>
+                    <p>The Social Gospel made Progressive reform seem morally necessary rather than politically radical. If building a just society was Christian duty, then government action to achieve that was legitimate and moral.</p>
+
+                    <h4>💭 The Coalition</h4>
+                    <p>Social Gospel ministers formed alliances with settlement workers, labor organizers, and Progressive politicians. This coalition pushed for labor laws, housing reform, and social programs.</p>
+                </aside>
+            </section>
+
+            <!-- Section VI Divider -->
+            <section class="section-divider">
+                <h2>Part VI</h2>
+                <h3 style="color: var(--misty-sky);">Toward a Pluralistic Urban Society</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">Living with difference</p>
+            </section>
+
+            <!-- Pluralism as Reality -->
+            <section>
+                <h2>By 1920, the City Has Changed American Identity</h2>
+                <ul>
+                    <li>Immigrants, reformers, laborers, and elites coexist <span class="key-term">uneasily</span></li>
+                    <li>No single cultural norm dominates</li>
+                    <li><span class="popup-trigger" onclick="togglePopup('pluralism-popup')">Pluralism</span> replaces assimilation as lived reality</li>
+                </ul>
+
+                <div id="pluralism-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('pluralism-popup')">&times;</span>
+                    <h3>Cultural Pluralism</h3>
+                    <p>The idea that multiple cultures, languages, and traditions can coexist within one society rather than being forced to assimilate to a single dominant culture.</p>
+
+                    <h4>In Cities by 1920:</h4>
+                    <ul>
+                        <li>Ethnic neighborhoods with distinct cultures (Little Italy, Polish district, Jewish Lower East Side)</li>
+                        <li>Multiple languages spoken in streets, shops, churches</li>
+                        <li>Ethnic associations, newspapers, theaters</li>
+                        <li>No single "American" culture but a patchwork of communities</li>
+                    </ul>
+
+                    <h4>The Tension:</h4>
+                    <p>Some Americans celebrated pluralism as enriching. Others demanded "100% Americanism" and aggressive assimilation (especially during WWI). This tension continues throughout the 20th century.</p>
+
+                    <h4>Key Thinker:</h4>
+                    <p><strong>Horace Kallen</strong> (1915) coined "cultural pluralism" as an alternative to the "melting pot" metaphor. He argued America should be like an orchestra—different instruments (cultures) creating harmony while maintaining distinctiveness.</p>
+                </div>
+
+                <div class="callout" style="margin-top: 1.5em;">
+                    <div class="callout-title">🔑 Key Tension</div>
+                    <p>Pluralism does not mean equality—but it does mean <span class="key-term">permanence</span>.</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 Pluralism as Fact</h4>
+                    <p>By 1920, it was clear that immigrant cultures weren't disappearing. Cities were permanently multiethnic, multilingual, and culturally diverse. The question became: how do you govern a society with no single shared culture?</p>
+
+                    <h4>📖 The Tensions</h4>
+                    <p>Pluralism was contested. Some saw it as America's strength. Others saw it as a threat requiring forced "Americanization"—especially during WWI when immigrants were suspected of disloyalty.</p>
+
+                    <h4>🔑 The Inequality</h4>
+                    <p>Pluralism meant cultural diversity, but NOT equality. Racial hierarchies persisted. Asian exclusion continued. African Americans faced segregation. Southern and Eastern Europeans were seen as inferior to Northern Europeans.</p>
+                </aside>
+            </section>
+
+            <!-- Closing Synthesis Divider -->
+            <section class="section-divider">
+                <h2>Closing Synthesis</h2>
+                <h3 style="color: var(--misty-sky);">A Turning Point in American Thought</h3>
+            </section>
+
+            <!-- Synthesis -->
+            <section>
+                <h2>Urban Reform as a Turning Point</h2>
+                <ul>
+                    <li>Society becomes an <span class="key-term">object of study</span></li>
+                    <li>Government intervention becomes <span class="key-term">legitimate</span></li>
+                    <li>Expertise begins to matter</li>
+                    <li>The foundations of <span class="key-term">Progressivism</span> are laid</li>
+                </ul>
+
+                <aside class="notes">
+                    <h4>📚 Pulling It Together</h4>
+                    <p>This lecture has traced how Americans responded to urban crisis by developing new tools (social science), new institutions (settlement houses), new justifications (Social Gospel), and new political actors (women reformers).</p>
+
+                    <h4>🔑 The Legacy</h4>
+                    <p>These urban experiments became the foundation for Progressive Era reform at the national level: labor laws, food safety, antitrust regulation, women's suffrage, and eventually the New Deal.</p>
+                </aside>
+            </section>
+
+            <!-- Bridge Backward and Forward -->
+            <section>
+                <h2>Bridge Backward and Forward</h2>
+                <p><strong>Backward:</strong> Urban crisis made reform unavoidable</p>
+                <p style="margin-top: 1em;"><strong>Forward:</strong> Progressive Era reform builds directly on these urban experiments</p>
+
+                <aside class="notes">
+                    <h4>🔜 Looking Forward</h4>
+                    <p>The Progressive Era (roughly 1890s-1920) takes these urban reform ideas and scales them up to the national level. Settlement house investigations become federal labor commissions. Public health boards become the FDA. Urban reform becomes national policy.</p>
+                </aside>
+            </section>
+
+            <!-- Final Takeaway -->
+            <section>
+                <h2>Key Takeaway</h2>
+                <div class="callout">
+                    <div class="callout-title">🔑 Remember This</div>
+                    <p>Urban reform did not "fix" the city—but it permanently changed how Americans thought about <span class="key-term">responsibility, governance, and social life</span>.</p>
+                </div>
+
+                <p style="margin-top: 1em; font-style: italic;">Society became something that could be studied, understood, and improved.</p>
+
+                <aside class="notes">
+                    <h4>📚 Final Thought</h4>
+                    <p>The most important legacy of urban reform wasn't solving poverty or disease (though progress was made). It was establishing the idea that social problems have social solutions, that government has a responsibility to act, and that expertise matters. This was the intellectual foundation of 20th-century American liberalism.</p>
+                </aside>
+            </section>
+
+            <!-- Reading List -->
+            <section>
+                <h2>Lecture Prep Reading List</h2>
+                <p style="font-size: 0.9em; color: var(--misty-sky);">(Instructor Reference)</p>
+                <ul style="font-size: 0.85em;">
+                    <li><strong>Henry George</strong> — <em>Progress and Poverty</em><br>
+                        <span style="color: var(--morning-mist); font-style: italic;">Foundational critique of inequality and land-based wealth</span></li>
+                    <li><strong>Jane Addams</strong> — <em>Democracy and Social Ethics</em><br>
+                        <span style="color: var(--morning-mist); font-style: italic;">Essential for understanding settlement houses as moral and democratic experiments</span></li>
+                    <li><strong>Thorstein Veblen</strong> — <em>The Theory of the Leisure Class</em><br>
+                        <span style="color: var(--morning-mist); font-style: italic;">Sharp cultural critique of consumption and status in industrial society</span></li>
+                    <li><strong>Lillian Wald</strong> — <em>Saving the City</em><br>
+                        <span style="color: var(--morning-mist); font-style: italic;">Window into public health, settlement work, and women's reform activism</span></li>
+                    <li><strong>Christopher H. Evans</strong> — <em>The Social Gospel in America</em><br>
+                        <span style="color: var(--morning-mist); font-style: italic;">Useful synthesis of religion's role in urban reform and Progressive politics</span></li>
+                </ul>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Reveal.js and plugins from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/zoom/zoom.js"></script>
+
+    <script>
+        Reveal.initialize({
+            width: 1920,
+            height: 1080,
+            margin: 0.1,
+            minScale: 0.2,
+            maxScale: 2.0,
+            controls: true,
+            progress: true,
+            center: true,
+            hash: true,
+            transition: 'slide',
+            plugins: [ RevealNotes, RevealHighlight, RevealZoom ]
+        });
+
+        // Pop-up functionality
+        function togglePopup(id) {
+            document.getElementById(id).classList.toggle('active');
+        }
+
+        // Close popup when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('popup')) {
+                e.target.classList.remove('active');
+            }
+        });
+
+        // Close popup with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.popup.active').forEach(p => p.classList.remove('active'));
+            }
+        });
+    </script>
+</body>
+</html>

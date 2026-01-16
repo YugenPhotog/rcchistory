@@ -1,0 +1,1117 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Race, Exclusion, and the Architecture of Belonging - HIST 102</title>
+
+    <!-- Reveal.js CSS from CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Pantone 2026 Atmospheric Palette */
+            --cloud-dancer: #F0EEE9;
+            --pale-sunlight: #E8DFB8;
+            --atmospheric-slate: #2A3540;
+            --misty-sky: #B8C5D0;
+            --sterling-blue: #6B8FAD;
+            --quiet-wave: #5D8A8C;
+            --aventurine: #4A7C72;
+            --morning-mist: #C5C0B8;
+            --deep-current: #2D4A4A;
+        }
+
+        .reveal {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 32px;
+            background-color: var(--atmospheric-slate);
+        }
+
+        .reveal .slides section {
+            color: var(--cloud-dancer);
+        }
+
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--cloud-dancer);
+            text-transform: none;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .reveal h1 { font-size: 3em; }
+        .reveal h2 { font-size: 2em; color: var(--pale-sunlight); }
+        .reveal h3 { font-size: 1.5em; color: var(--misty-sky); }
+
+        .reveal p, .reveal li {
+            color: var(--cloud-dancer);
+        }
+
+        .reveal a {
+            color: var(--sterling-blue);
+            text-decoration: underline;
+        }
+
+        .reveal a:hover {
+            color: var(--pale-sunlight);
+        }
+
+        /* Pop-up/Modal styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--deep-current);
+            color: var(--cloud-dancer);
+            padding: 2em;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            max-width: 70%;
+            max-height: 70%;
+            overflow-y: auto;
+            z-index: 1000;
+            border: 3px solid var(--quiet-wave);
+        }
+
+        .popup.active { display: block; }
+
+        .popup h3 {
+            color: var(--pale-sunlight);
+            margin-top: 0;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 2em;
+            cursor: pointer;
+            color: var(--misty-sky);
+        }
+
+        .popup-close:hover {
+            color: var(--cloud-dancer);
+        }
+
+        .popup-trigger {
+            color: var(--sterling-blue);
+            text-decoration: underline dotted;
+            cursor: pointer;
+            border-bottom: 2px dotted var(--sterling-blue);
+        }
+
+        .popup-trigger:hover {
+            color: var(--pale-sunlight);
+            border-bottom-color: var(--pale-sunlight);
+        }
+
+        /* Image placeholder styling */
+        .img-placeholder {
+            background: var(--deep-current);
+            border: 3px dashed var(--quiet-wave);
+            padding: 3em;
+            text-align: center;
+            color: var(--misty-sky);
+            font-style: italic;
+            border-radius: 10px;
+        }
+
+        /* Key term styling */
+        .key-term {
+            color: var(--aventurine);
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        /* Primary source styling */
+        .primary-source {
+            background: rgba(232, 223, 184, 0.15);
+            border-left: 5px solid var(--pale-sunlight);
+            padding: 1em;
+            margin: 1em 0;
+            font-style: italic;
+            color: var(--cloud-dancer);
+        }
+
+        .primary-source-attribution {
+            text-align: right;
+            font-size: 0.9em;
+            color: var(--morning-mist);
+            margin-top: 0.5em;
+            font-style: normal;
+        }
+
+        /* Timeline styling */
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 0.8em 0;
+            padding: 0.5em;
+            border-left: 4px solid var(--sterling-blue);
+            background: rgba(107, 143, 173, 0.1);
+        }
+
+        .timeline-date {
+            color: var(--pale-sunlight);
+            font-weight: bold;
+            min-width: 120px;
+        }
+
+        /* Historian quote styling */
+        .historian-quote {
+            border-left: 5px solid var(--quiet-wave);
+            padding-left: 1.5em;
+            font-style: italic;
+            color: var(--misty-sky);
+        }
+
+        .historian-attribution {
+            text-align: right;
+            font-size: 0.9em;
+            color: var(--morning-mist);
+            margin-top: 0.5em;
+        }
+
+        /* Comparison boxes */
+        .comparison-box {
+            border: 3px solid var(--quiet-wave);
+            padding: 1.5em;
+            border-radius: 10px;
+            background: rgba(93, 138, 140, 0.1);
+        }
+
+        .comparison-box.alt {
+            border-color: var(--sterling-blue);
+            background: rgba(107, 143, 173, 0.1);
+        }
+
+        /* Section divider styling */
+        .section-divider {
+            background: linear-gradient(135deg, var(--deep-current) 0%, var(--atmospheric-slate) 100%);
+        }
+
+        .section-divider h2 {
+            color: var(--cloud-dancer);
+            font-size: 2.5em;
+        }
+
+        /* Assessment/quiz styling */
+        .assessment-box {
+            background: var(--deep-current);
+            border: 2px solid var(--aventurine);
+            border-radius: 10px;
+            padding: 1.5em;
+            margin: 1em 0;
+        }
+
+        .assessment-box h3 {
+            color: var(--aventurine);
+            margin-top: 0;
+        }
+
+        /* Emphasis/callout box */
+        .callout {
+            background: rgba(232, 223, 184, 0.1);
+            border: 2px solid var(--pale-sunlight);
+            border-radius: 8px;
+            padding: 1em;
+            margin: 1em 0;
+        }
+
+        .callout-title {
+            color: var(--pale-sunlight);
+            font-weight: bold;
+            margin-bottom: 0.5em;
+        }
+
+        /* Progress/slide counter styling */
+        .reveal .progress {
+            background: var(--deep-current);
+        }
+
+        .reveal .progress span {
+            background: var(--sterling-blue);
+        }
+
+        /* Additional utility classes */
+        .text-left { text-align: left; }
+        .subtitle {
+            color: var(--misty-sky);
+            font-style: italic;
+            margin-top: 0.5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Title Slide -->
+            <section>
+                <h1>Chapter 20: Urbanization</h1>
+                <h2>Race, Exclusion, and the Architecture of Belonging</h2>
+                <p class="subtitle">How race, law, and culture structured who could belong in American cities</p>
+                <aside class="notes">
+                    <h4>📚 Lecture Overview</h4>
+                    <p>This is lecture 2 in the Chapter 20 series on urbanization. Today we're exploring how American cities became sites of both diversity AND exclusion—specifically focusing on Asian migration and the legal/cultural systems that racialized belonging.</p>
+
+                    <h4>💭 The Big Picture</h4>
+                    <p>When cities grew rapidly in the late 1800s, Americans had to decide: who gets to be part of this new urban society? The answer was determined by race more than anything else. While European immigrants eventually became "white" and gained access to citizenship, Asian migrants faced systematic exclusion through law, labor discrimination, and popular culture.</p>
+
+                    <h4>🎯 Learning Objectives</h4>
+                    <ul>
+                        <li>Understand Asian migration as part of global labor circulation</li>
+                        <li>Analyze how "coolie labor" became racialized</li>
+                        <li>Trace the legal construction of racial exclusion (1875-1924)</li>
+                        <li>Examine "Yellow Peril" discourse and its cultural impact</li>
+                        <li>Recognize Asian American resistance and survival strategies</li>
+                    </ul>
+                </aside>
+            </section>
+
+            <!-- Big Framing Idea -->
+            <section>
+                <h2>The Central Paradox</h2>
+                <div class="callout">
+                    <div class="callout-title">🔑 Key Concept</div>
+                    <p>Urbanization did not produce openness by default.</p>
+                    <p>It produced <span class="key-term">boundaries</span>.</p>
+                </div>
+                <p style="margin-top: 1.5em;">As cities filled with newcomers, the United States increasingly defined itself not just by citizenship, but by <span class="key-term">race</span>.</p>
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>It's tempting to think that when lots of different people move to cities, society becomes more open and accepting. But that's NOT what happened in late 1800s America. Instead, diversity created anxiety, and Americans responded by drawing harder lines about who belonged.</p>
+
+                    <h4>💭 Why This Matters</h4>
+                    <p>This lecture challenges the "melting pot" myth. Cities didn't automatically blend everyone together. Instead, immigration law, labor systems, and popular culture worked together to decide who could enter, stay, work, and belong. And those decisions were based on race.</p>
+
+                    <h4>🔑 The Thesis</h4>
+                    <p><strong>Pluralism expanded—but selectively. Race set hard limits on inclusion.</strong></p>
+                    <p>Some immigrant groups (European) could eventually become "American." Others (Asian) were legally barred from citizenship and socially marked as permanent foreigners.</p>
+                </aside>
+            </section>
+
+            <!-- Section I Divider -->
+            <section class="section-divider">
+                <h2>Part I</h2>
+                <h3 style="color: var(--misty-sky);">Asian Migration in Global Context</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">Understanding the transnational flow of labor</p>
+                <aside class="notes">
+                    <h4>📖 Section Overview</h4>
+                    <p>Before we talk about what happened to Asian migrants IN America, we need to understand WHERE they came from and WHY they moved. This wasn't a U.S.-specific story—it was global.</p>
+                </aside>
+            </section>
+
+            <!-- Asian Migration Context -->
+            <section>
+                <h2>Decentering the United States</h2>
+                <p>Asian migration was part of <span class="popup-trigger" onclick="togglePopup('global-labor-popup')">global labor circulation</span>, not a U.S.-specific phenomenon.</p>
+                <ul>
+                    <li>Chinese emigration surged during the <span class="popup-trigger" onclick="togglePopup('century-revolution-popup')">"Century of Revolution"</span> (c. 1850–1949)</li>
+                    <li>Migrants moved to: Southeast Asia, Hawaii, Latin America, Western United States</li>
+                    <li>Driven by political instability, economic opportunity, and imperial expansion</li>
+                </ul>
+
+                <!-- Pop-ups -->
+                <div id="global-labor-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('global-labor-popup')">&times;</span>
+                    <h3>Global Labor Circulation</h3>
+                    <p>In the late 1800s, capitalism and empire created massive flows of workers across continents. People moved:</p>
+                    <ul>
+                        <li><strong>From</strong> rural areas <strong>to</strong> mines, plantations, railroads, and cities</li>
+                        <li><strong>From</strong> colonized regions <strong>to</strong> imperial centers and frontier zones</li>
+                        <li><strong>From</strong> areas of political upheaval <strong>to</strong> places with labor demand</li>
+                    </ul>
+                    <p>This was a <em>global</em> system. Chinese workers went to Peru, Cuba, Southeast Asia, Australia, and North America. Indian workers went to East Africa, the Caribbean, and Fiji. This movement was structured by capitalism (need for cheap labor) and empire (ability to move subjects across borders).</p>
+                </div>
+
+                <div id="century-revolution-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('century-revolution-popup')">&times;</span>
+                    <h3>China's Century of Revolution (1850-1949)</h3>
+                    <p>This period saw massive upheaval in China:</p>
+                    <ul>
+                        <li><strong>Taiping Rebellion (1850-1864)</strong>: Devastating civil war, ~20-30 million dead</li>
+                        <li><strong>Opium Wars</strong>: British and European imperialism forced open Chinese ports</li>
+                        <li><strong>Economic disruption</strong>: Traditional agriculture and trade collapsed in many regions</li>
+                        <li><strong>Qing Dynasty decline</strong>: Weakening central government couldn't maintain order</li>
+                        <li><strong>Republican Revolution (1911)</strong>: Overthrow of imperial system</li>
+                    </ul>
+                    <p>These crises pushed millions of Chinese to emigrate, seeking economic survival and safety.</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>Chinese migration to the U.S. wasn't unique—it was part of a worldwide pattern. Millions of Chinese people left home during the 1800s because of war, economic collapse, and political instability.</p>
+
+                    <h4>📖 Key Context: Why Did They Leave?</h4>
+                    <p>The Taiping Rebellion (1850-1864) was one of the deadliest wars in human history—possibly 20-30 million people died. Imagine the American Civil War, but 10 times worse. Entire regions of southern China were devastated. At the same time, European powers (especially Britain) forced China to open its ports for trade, disrupting traditional economies. People left to survive.</p>
+
+                    <h4>💭 Important Distinction</h4>
+                    <p>Most Chinese migrants weren't "refugees" in the modern sense (fleeing direct persecution), and they weren't "immigrants" planning to stay permanently. They were <strong>sojourners</strong>—workers who intended to earn money abroad and return home. Many maintained strong ties to their home villages, sent money back (remittances), and hoped to retire in China.</p>
+
+                    <h4>🌍 Where Did They Go?</h4>
+                    <ul>
+                        <li><strong>Southeast Asia</strong>: Largest destination—millions went to Malaya, Singapore, Indonesia, Thailand</li>
+                        <li><strong>Americas</strong>: Peru, Cuba, California, British Columbia</li>
+                        <li><strong>Pacific</strong>: Hawaii, Australia, New Zealand</li>
+                    </ul>
+                </aside>
+            </section>
+
+            <!-- Sojourner Pattern -->
+            <section>
+                <h2>Sojourners, Not Settlers</h2>
+                <div class="callout">
+                    <div class="callout-title">🔑 Key Concept: Sojourning</div>
+                    <p>Chinese migrants were not refugees. Many were <span class="key-term">sojourners</span>:</p>
+                    <ul>
+                        <li>Intended to work temporarily and return home</li>
+                        <li>Maintained strong homeland ties (remittances, kinship)</li>
+                        <li>Viewed migration as a temporary economic strategy</li>
+                    </ul>
+                </div>
+                <p style="margin-top: 1.5em;"><em>Asian migration was transnational, circular, and deeply shaped by empire and capitalism.</em></p>
+                <aside class="notes">
+                    <h4>📚 Why "Sojourner" Matters</h4>
+                    <p>The term "sojourner" is crucial for understanding how Chinese migrants saw themselves AND how white Americans saw them. A sojourner is someone who lives somewhere temporarily, intending to return home.</p>
+
+                    <h4>💭 What This Meant in Practice</h4>
+                    <ul>
+                        <li><strong>Economic strategy</strong>: Work hard for a few years, save money, return wealthy</li>
+                        <li><strong>Family connections</strong>: Many left wives and children in China, sent money home regularly</li>
+                        <li><strong>Cultural maintenance</strong>: Didn't try to "become American" because they planned to go back</li>
+                        <li><strong>Circular migration</strong>: Some made multiple trips back and forth</li>
+                    </ul>
+
+                    <h4>🤔 The Paradox</h4>
+                    <p>White Americans complained that Chinese migrants "refused to assimilate"—but U.S. law made assimilation IMPOSSIBLE by barring them from citizenship. And many Chinese didn't want to assimilate anyway because they planned to return home. This created a vicious cycle: exclusion reinforced sojourning, which reinforced stereotypes of "unassimilable aliens," which justified further exclusion.</p>
+
+                    <h4>🎓 Historian's Perspective</h4>
+                    <p><strong>Sucheng Chan</strong> (historian of Asian American history) emphasizes that sojourning was a rational economic strategy, not a cultural flaw. <strong>Madeline Hsu</strong> has shown how transnational networks sustained Chinese communities across the Pacific.</p>
+                </aside>
+            </section>
+
+            <!-- Section II Divider -->
+            <section class="section-divider">
+                <h2>Part II</h2>
+                <h3 style="color: var(--misty-sky);">Labor, Race, and the Racialization of Work</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">How Asian labor became a racial category</p>
+            </section>
+
+            <!-- Burlingame Treaty -->
+            <section>
+                <h2>Welcome—Then Rejection</h2>
+                <div class="timeline-item">
+                    <span class="timeline-date">1868</span>
+                    <span><span class="popup-trigger" onclick="togglePopup('burlingame-popup')">Burlingame Treaty</span> encourages Chinese labor migration</span>
+                </div>
+                <p style="margin-top: 1.5em;">Chinese workers were recruited for:</p>
+                <ul>
+                    <li>Mining (California gold rush, Nevada silver)</li>
+                    <li>Railroad construction (Central Pacific, transcontinental lines)</li>
+                    <li>Agriculture (farms, orchards, land reclamation)</li>
+                    <li>Urban service trades (laundries, restaurants, domestic work)</li>
+                </ul>
+
+                <div id="burlingame-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('burlingame-popup')">&times;</span>
+                    <h3>Burlingame Treaty (1868)</h3>
+                    <p>A diplomatic agreement between the United States and China that:</p>
+                    <ul>
+                        <li><strong>Encouraged free migration</strong>: Recognized the right of Chinese to emigrate to the U.S.</li>
+                        <li><strong>Protected mutual trade</strong>: Opened economic relations</li>
+                        <li><strong>Promised equal treatment</strong>: Chinese in the U.S. would get "most favored nation" status</li>
+                    </ul>
+                    <p><strong>Context</strong>: The U.S. wanted Chinese labor for railroad construction and Western development. China wanted to protect its emigrants and maintain trade.</p>
+                    <p><strong>Irony</strong>: Just 14 years later, the U.S. passed the Chinese Exclusion Act (1882), directly violating the spirit of this treaty.</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 The Economic Reality</h4>
+                    <p>Here's the central contradiction: American businesses WANTED Chinese workers. They were reliable, skilled, and worked for lower wages than white workers demanded. Railroad companies, mine owners, and farmers actively recruited Chinese labor.</p>
+
+                    <h4>📖 The Transcontinental Railroad</h4>
+                    <p>The Central Pacific Railroad (building eastward from California) employed about 12,000 Chinese workers—roughly 90% of their workforce. They did the most dangerous work: blasting tunnels through the Sierra Nevada, laying track in extreme conditions, handling explosives. Many died. Without Chinese labor, the transcontinental railroad probably wouldn't have been completed when it was (1869).</p>
+
+                    <h4>💭 The Contradiction</h4>
+                    <p>So if businesses wanted Chinese workers, why did exclusion happen? Because WHITE WORKERS saw Chinese labor as a threat. This created a split in American capitalism: employers wanted cheap labor, but white workers demanded racial exclusion to protect their jobs and wages.</p>
+
+                    <h4>🔑 Key Point</h4>
+                    <p>The Burlingame Treaty (1868) officially welcomed Chinese migration. But by 1882—just 14 years later—the U.S. banned it completely. What changed? White working-class politics and the racialization of labor.</p>
+                </aside>
+            </section>
+
+            <!-- Coolie Labor -->
+            <section>
+                <h2>The "Coolie Labor" Framework</h2>
+                <p><span class="popup-trigger" onclick="togglePopup('coolie-popup')">"Coolie labor"</span> was framed as:</p>
+                <ul>
+                    <li><span class="key-term">Unfree</span> — compared to slavery, contract labor</li>
+                    <li><span class="key-term">Degrading</span> — undermining white workers' dignity</li>
+                    <li><span class="key-term">Racially distinct</span> — biologically different, unassimilable</li>
+                </ul>
+
+                <div class="callout" style="margin-top: 1.5em;">
+                    <div class="callout-title">🔑 Critical Insight</div>
+                    <p>Hostility was not just economic—it was <span class="key-term">racial and cultural</span>, rooted in ideas of civilization and whiteness.</p>
+                </div>
+
+                <div id="coolie-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('coolie-popup')">&times;</span>
+                    <h3>"Coolie Labor" — A Racialized Category</h3>
+                    <p>The term "coolie" originally referred to low-wage Asian laborers, but it quickly became a racist slur implying:</p>
+                    <ul>
+                        <li><strong>Unfreedom</strong>: Coolies were portrayed as semi-enslaved, bound by exploitative contracts</li>
+                        <li><strong>Degradation</strong>: Working alongside "coolies" was seen as lowering white workers to an inferior status</li>
+                        <li><strong>Racial otherness</strong>: Coolies weren't just poor workers—they were racially unfit for American society</li>
+                    </ul>
+                    <p><strong>Reality vs. Stereotype</strong>: While some Chinese workers did come under exploitative labor contracts, most were free migrants seeking economic opportunity, just like European immigrants. But the "coolie" label stuck, making ALL Chinese workers seem like a threat to "free labor."</p>
+                    <p><strong>Key Scholar</strong>: <em>Moon-Ho Jung</em> in <em>Coolies and Cane</em> shows how "coolie labor" was invented as a racial category to justify exclusion.</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>The term "coolie" became a weapon. It didn't just mean "cheap labor"—it meant racially inferior, degrading, un-American labor.</p>
+
+                    <h4>📖 The Three Arguments Against Chinese Labor</h4>
+                    <ol>
+                        <li><strong>Economic</strong>: "They take our jobs and lower wages"</li>
+                        <li><strong>Moral</strong>: "They live in degrading conditions and have immoral habits"</li>
+                        <li><strong>Racial</strong>: "They can never become true Americans because they're racially different"</li>
+                    </ol>
+                    <p>Notice how these arguments blend together. It's not just about economics—it's about RACE.</p>
+
+                    <h4>💭 Why This Framework Mattered</h4>
+                    <p>By framing Chinese labor as "coolie labor," white Americans could claim they were defending "free labor"—the American ideal that workers should be independent, dignified, and upwardly mobile. Chinese workers, they argued, could never fit this ideal because they were racially suited only for degrading work.</p>
+
+                    <h4>🎓 Senior Historians' Corner</h4>
+                    <p><strong>Moon-Ho Jung</strong> argues in <em>Coolies and Cane</em> that "coolie labor" was constructed as the opposite of "free labor." It wasn't a real category—it was a racial ideology designed to exclude Asians while appearing to defend American values.</p>
+
+                    <p><strong>Mae Ngai</strong> points out that this racialization had lasting effects: it made Asians "unassimilable aliens" in law and culture, a status that persisted until 1965.</p>
+                </aside>
+            </section>
+
+            <!-- Section III Divider -->
+            <section class="section-divider">
+                <h2>Part III</h2>
+                <h3 style="color: var(--misty-sky);">Gender, Family, and the Logic of Exclusion</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">Preventing family formation as a strategy of exclusion</p>
+            </section>
+
+            <!-- Gender and Exclusion -->
+            <section>
+                <h2>Targeting Reproduction</h2>
+                <p>Exclusion targeted <span class="key-term">family formation</span>, not just labor.</p>
+                <ul>
+                    <li>Early Chinese migration was overwhelmingly male (95%+)</li>
+                    <li>White Americans framed Chinese communities as:
+                        <ul>
+                            <li>Immoral (opium dens, gambling, prostitution)</li>
+                            <li>Diseased (tuberculosis, smallpox, venereal disease)</li>
+                            <li>Socially dangerous (bachelor societies, vice districts)</li>
+                        </ul>
+                    </li>
+                </ul>
+                <aside class="notes">
+                    <h4>📚 Why Gender Matters in This Story</h4>
+                    <p>If you want to permanently exclude a group, you don't just ban workers—you prevent them from forming families. That's what the U.S. did to Chinese migrants.</p>
+
+                    <h4>📖 The Demographics</h4>
+                    <p>In 1890 California, there were roughly 27 Chinese men for every 1 Chinese woman. Why? Partly because Chinese men came as sojourners planning to return home (so they left wives behind). But also because U.S. law actively prevented Chinese women from entering.</p>
+
+                    <h4>💭 The Moral Panic</h4>
+                    <p>White Americans portrayed Chinese communities as morally degenerate "bachelor societies." Newspapers claimed Chinatowns were full of opium dens, gambling houses, and prostitution. While some of this existed (as it did in white communities too), it was massively exaggerated to justify exclusion.</p>
+
+                    <h4>🔑 The Logic</h4>
+                    <p>No families = no permanent settlement = no claims to belonging. By preventing family formation, the U.S. ensured Chinese migrants remained "temporary" and "foreign" even if they lived here for decades.</p>
+                </aside>
+            </section>
+
+            <!-- Page Law -->
+            <section>
+                <h2>The Page Law (1875)</h2>
+                <div class="callout">
+                    <div class="callout-title">🔑 Key Legal Moment</div>
+                    <p>The <span class="popup-trigger" onclick="togglePopup('page-law-popup')">Page Law (1875)</span> effectively barred Chinese women by labeling them <span class="key-term">presumed prostitutes</span>.</p>
+                </div>
+
+                <p style="margin-top: 1.5em;"><strong>Consequences:</strong></p>
+                <ul>
+                    <li>Prevented family formation</li>
+                    <li>Reinforced the "permanent foreigner" stereotype</li>
+                    <li>Made assimilation structurally impossible</li>
+                </ul>
+
+                <div id="page-law-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('page-law-popup')">&times;</span>
+                    <h3>Page Law (1875)</h3>
+                    <p>The first federal immigration law to restrict entry based on race and gender.</p>
+                    <p><strong>Official Purpose</strong>: Ban the importation of "immoral" women (prostitutes)</p>
+                    <p><strong>Actual Effect</strong>: Created bureaucratic barriers that prevented virtually ALL Chinese women from immigrating</p>
+
+                    <h4>How It Worked:</h4>
+                    <ul>
+                        <li>Required women to undergo invasive interrogations in China and San Francisco</li>
+                        <li>Assumed ALL Chinese women were prostitutes unless proven otherwise</li>
+                        <li>Placed burden of proof on women to demonstrate "moral character"</li>
+                        <li>Created long delays and denials</li>
+                    </ul>
+
+                    <h4>Impact:</h4>
+                    <p>Between 1875-1882, Chinese female immigration dropped by 70%. Even wives of legal residents were denied entry.</p>
+
+                    <p><strong>Historical Significance</strong>: This was the FIRST federal law restricting immigration—7 years BEFORE the more famous Chinese Exclusion Act. It targeted women specifically to prevent Chinese families from forming in the U.S.</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>The Page Law (1875) is less famous than the Chinese Exclusion Act (1882), but it was actually the FIRST federal law restricting immigration. And it targeted women.</p>
+
+                    <h4>📖 How It Worked</h4>
+                    <p>The law claimed to ban "immoral women" (prostitutes) from entering the U.S. But immigration officials assumed ALL Chinese women were prostitutes unless they could prove otherwise. This was nearly impossible. Women had to undergo humiliating interrogations, provide extensive documentation, and wait months or years—only to be rejected anyway.</p>
+
+                    <h4>💭 The Strategy</h4>
+                    <p>This was brilliant (in an evil way): By targeting women, the law prevented Chinese families from forming WITHOUT openly banning all Chinese migration (that came later in 1882). It looked like a "moral" law against prostitution, but it was really a racial law against Chinese settlement.</p>
+
+                    <h4>🔑 Why This Matters</h4>
+                    <p>Exclusion worked by disrupting REPRODUCTION, not just entry. Without families, Chinese communities couldn't grow naturally. Children couldn't be born as U.S. citizens. The community remained foreign, temporary, and vulnerable.</p>
+
+                    <h4>🎓 Historian's Perspective</h4>
+                    <p><strong>George Peffer</strong> and <strong>Eithne Luibhéid</strong> have shown how immigration law has long used gender and sexuality to control racial boundaries. The Page Law wasn't about morality—it was about race.</p>
+                </aside>
+            </section>
+
+            <!-- Insight on Reproduction -->
+            <section>
+                <h2>Key Insight</h2>
+                <div class="callout">
+                    <div class="callout-title">🔑 Analytical Takeaway</div>
+                    <p>Exclusion worked by <span class="key-term">disrupting reproduction</span>, not just entry.</p>
+                    <p style="margin-top: 1em;">This strategy made assimilation structurally impossible and reinforced the "permanent foreigner" status of Asian Americans.</p>
+                </div>
+                <aside class="notes">
+                    <h4>🤔 Think About This</h4>
+                    <p>If you want to understand American racism, you have to understand how it operated at multiple levels:</p>
+                    <ul>
+                        <li><strong>Economic</strong>: Exclude from jobs</li>
+                        <li><strong>Legal</strong>: Exclude from citizenship</li>
+                        <li><strong>Social</strong>: Exclude from belonging</li>
+                        <li><strong>Biological</strong>: Exclude from reproduction</li>
+                    </ul>
+
+                    <h4>💡 Modern Relevance</h4>
+                    <p>This strategy of preventing family formation has been used repeatedly in U.S. history: against enslaved people (family separation), against Asian immigrants (Page Law), against Mexican farmworkers (bracero program discouraged families), and in modern immigration enforcement (family separation at the border). It's a consistent tool of racial control.</p>
+                </aside>
+            </section>
+
+            <!-- Section IV Divider -->
+            <section class="section-divider">
+                <h2>Part IV</h2>
+                <h3 style="color: var(--misty-sky);">Law as a Tool of Racial Boundary-Making</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">How immigration policy redefined American identity</p>
+            </section>
+
+            <!-- Legal Timeline -->
+            <section>
+                <h2>The Legal Architecture of Exclusion</h2>
+                <p style="color: var(--misty-sky); font-style: italic;">This is where race hardens into policy.</p>
+
+                <div class="timeline-item">
+                    <span class="timeline-date">1790/1870</span>
+                    <span>Naturalization limited to "white persons" and persons of African descent</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">1875</span>
+                    <span><span class="popup-trigger" onclick="togglePopup('page-law-timeline-popup')">Page Law</span> — Bars Chinese women</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">1882</span>
+                    <span><span class="popup-trigger" onclick="togglePopup('exclusion-act-popup')">Chinese Exclusion Act</span> — First federal law banning immigration by race</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">1917</span>
+                    <span><span class="popup-trigger" onclick="togglePopup('asiatic-zone-popup')">Asiatic Barred Zone</span> — Expands exclusion to most of Asia</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">1924</span>
+                    <span><span class="popup-trigger" onclick="togglePopup('national-origins-popup')">National Origins Act</span> — Comprehensive racial restrictions</span>
+                </div>
+
+                <!-- Popups for each law -->
+                <div id="page-law-timeline-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('page-law-timeline-popup')">&times;</span>
+                    <h3>Page Law (1875)</h3>
+                    <p>See earlier slide for full details. This was the first federal immigration restriction, targeting Chinese women by presuming them to be prostitutes.</p>
+                </div>
+
+                <div id="exclusion-act-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('exclusion-act-popup')">&times;</span>
+                    <h3>Chinese Exclusion Act (1882)</h3>
+                    <p>The first federal law to ban immigration based explicitly on race/nationality.</p>
+                    <ul>
+                        <li><strong>Banned</strong>: Chinese laborers from entering the U.S. for 10 years</li>
+                        <li><strong>Allowed</strong>: Only merchants, diplomats, students, and travelers (with strict documentation)</li>
+                        <li><strong>Barred</strong>: Chinese from naturalization (becoming citizens)</li>
+                        <li><strong>Extended</strong>: Renewed multiple times, made permanent in 1902, not repealed until 1943</li>
+                    </ul>
+                    <p><strong>Significance</strong>: This fundamentally changed American immigration policy from open to restrictive, from economic to racial. It established the principle that the U.S. could exclude people based on race.</p>
+                </div>
+
+                <div id="asiatic-zone-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('asiatic-zone-popup')">&times;</span>
+                    <h3>Asiatic Barred Zone (1917)</h3>
+                    <p>Part of the Immigration Act of 1917, this law expanded exclusion from just Chinese to most of Asia.</p>
+                    <p><strong>The "Zone"</strong>: Banned immigration from a geographic region including:</p>
+                    <ul>
+                        <li>India and South Asia</li>
+                        <li>Southeast Asia (Burma, Siam, Malay Peninsula)</li>
+                        <li>Parts of the Middle East (Arabia, Afghanistan)</li>
+                        <li>Pacific Islands</li>
+                    </ul>
+                    <p>Japan and the Philippines were excluded from the zone (Japan due to diplomatic pressure, Philippines because it was a U.S. colony).</p>
+                    <p><strong>Impact</strong>: Effectively banned almost all Asian immigration except from Japan and the Philippines.</p>
+                </div>
+
+                <div id="national-origins-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('national-origins-popup')">&times;</span>
+                    <h3>National Origins Act (1924)</h3>
+                    <p>Also called the Johnson-Reed Act, this created a comprehensive system of racial quotas.</p>
+                    <ul>
+                        <li><strong>Quota system</strong>: Limited immigration from each country to 2% of that nationality present in the 1890 census</li>
+                        <li><strong>Why 1890?</strong> To favor Northern/Western Europeans and restrict Southern/Eastern Europeans</li>
+                        <li><strong>Asian exclusion</strong>: Banned ALL Asians (including Japanese) by creating category of "aliens ineligible for citizenship"</li>
+                        <li><strong>No quotas for Americas</strong>: Latin American and Canadian immigration remained unrestricted (but still subject to bureaucratic barriers)</li>
+                    </ul>
+                    <p><strong>Effect</strong>: This remained the foundation of U.S. immigration law until 1965. It enshrined racial preferences: Northern Europeans favored, Southern/Eastern Europeans restricted, Asians banned, Africans nearly banned.</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 Why This Section Is Critical</h4>
+                    <p>This is where abstract racism becomes concrete law. These aren't just policies—they're the legal architecture that DEFINED who could be American for nearly a century.</p>
+
+                    <h4>📖 The Pattern</h4>
+                    <p>Notice the progression: 1875 (target women) → 1882 (ban Chinese workers) → 1917 (ban most Asians) → 1924 (ban ALL Asians + restrict Europeans). Each law built on the previous one, expanding and tightening racial boundaries.</p>
+
+                    <h4>🔑 The Critical Shift</h4>
+                    <p>Before 1875, U.S. immigration was basically open (except for convicts and paupers). After 1882, immigration became about RACIAL ENGINEERING—deciding who was racially fit to be American.</p>
+
+                    <h4>💭 What This Meant</h4>
+                    <p>These laws didn't respond to Chinese migration—they REDEFINED AMERICAN IDENTITY. They said: being American means being white (or Black, post-Civil War). Asians can never be American because they're racially ineligible.</p>
+
+                    <h4>🎓 Senior Historians' Corner</h4>
+                    <p><strong>Mae Ngai</strong> (<em>Impossible Subjects</em>) argues these laws created a new category: the "illegal alien." Before this, people might be deportable for specific crimes, but they weren't "illegal" for existing. After 1882, racial identity itself could make you illegal.</p>
+
+                    <p><strong>Erika Lee</strong> (<em>The Chinese Exclusion Act</em>) shows how exclusion emerged from local violence and labor conflict, then became federal policy, then became the template for all future immigration restrictions.</p>
+                </aside>
+            </section>
+
+            <!-- Critical Shift -->
+            <section>
+                <h2>The Transformation of Immigration Policy</h2>
+                <div class="callout">
+                    <div class="callout-title">🔑 Critical Shift</div>
+                    <p>Immigration policy moves from <span class="key-term">economic regulation</span> to <span class="key-term">racial engineering</span>.</p>
+                </div>
+
+                <p style="margin-top: 1.5em; font-style: italic;">These laws do not respond to Chinese migration—they <span class="key-term">redefine American identity</span>.</p>
+
+                <aside class="notes">
+                    <h4>📚 Understanding the Big Picture</h4>
+                    <p>Before the 1880s, the U.S. had almost no federal immigration restrictions. The Constitution left immigration to states. Anyone could come (except enslaved people, convicts, and paupers). This was partly ideological (America as a refuge) but mostly practical (the country needed workers and settlers).</p>
+
+                    <h4>💭 What Changed?</h4>
+                    <p>Race-based exclusion introduced a new principle: the federal government could decide who was fit to be American based on race and national origin. This wasn't about security or economics—it was about identity. Who gets to be "us"?</p>
+
+                    <h4>🔑 Long-Term Impact</h4>
+                    <p>These laws shaped American society for nearly a century (1882-1965). They:</p>
+                    <ul>
+                        <li>Kept Asian American communities small and vulnerable</li>
+                        <li>Favored European immigration (which reinforced whiteness)</li>
+                        <li>Created the enforcement apparatus (border patrol, deportation system) we still have today</li>
+                        <li>Established the legal principle that immigration is about racial composition, not just labor needs</li>
+                    </ul>
+                </aside>
+            </section>
+
+            <!-- Section V Divider -->
+            <section class="section-divider">
+                <h2>Part V</h2>
+                <h3 style="color: var(--misty-sky);">"Yellow Peril": Race, Fear, and Popular Culture</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">How culture prepared the ground for exclusion</p>
+            </section>
+
+            <!-- Yellow Peril Introduction -->
+            <section>
+                <h2>Law Does Not Operate Alone</h2>
+                <p>Culture prepares the ground.</p>
+
+                <div class="callout" style="margin-top: 1.5em;">
+                    <div class="callout-title">🔑 Key Concept</div>
+                    <p><span class="popup-trigger" onclick="togglePopup('yellow-peril-popup')">"Yellow Peril"</span> was a system of discourse that portrayed Asians as:</p>
+                    <ul>
+                        <li>Inscrutable</li>
+                        <li>Unassimilable</li>
+                        <li>Dangerous</li>
+                        <li>Civilization-threatening</li>
+                    </ul>
+                </div>
+
+                <div id="yellow-peril-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('yellow-peril-popup')">&times;</span>
+                    <h3>"Yellow Peril" Discourse</h3>
+                    <p><strong>Definition</strong>: A body of ideas, images, and narratives that portrayed Asians (especially Chinese and later Japanese) as a racial threat to Western civilization.</p>
+
+                    <h4>Core Themes:</h4>
+                    <ul>
+                        <li><strong>Inscrutability</strong>: "You can never know what they're thinking" — portrayed as mysterious, devious, unreadable</li>
+                        <li><strong>Unassimilability</strong>: "They will never become American" — culturally and racially incapable of adopting Western values</li>
+                        <li><strong>Danger</strong>: Economic threat (job competition), moral threat (vice and disease), military threat (invasion)</li>
+                        <li><strong>Mass</strong>: "The yellow horde" — overwhelming numbers that could swamp white civilization</li>
+                    </ul>
+
+                    <h4>Origins:</h4>
+                    <p>The term "Yellow Peril" (German: <em>Gelbe Gefahr</em>) gained prominence in the 1890s, popularized by Kaiser Wilhelm II of Germany who feared rising Asian (especially Japanese) power. It reflected anxieties about:</p>
+                    <ul>
+                        <li>Japan's military modernization (defeated China 1895, Russia 1905)</li>
+                        <li>China's population size</li>
+                        <li>Competition for empire and markets in Asia</li>
+                        <li>Racial theories about "civilization" and "barbarism"</li>
+                    </ul>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>"Yellow Peril" was more than racism—it was an entire worldview that framed Asians as fundamentally threatening to white Western civilization.</p>
+
+                    <h4>📖 Key Point About Discourse</h4>
+                    <p>The word "discourse" might seem academic, but it's important. A discourse is a system of meaning—a way of talking, thinking, and seeing that shapes what counts as "true." Yellow Peril discourse didn't describe reality; it CREATED a reality by making people see Asians as threatening even when they weren't.</p>
+
+                    <h4>💭 How It Worked</h4>
+                    <p>Yellow Peril imagery was everywhere: newspapers, political cartoons, novels, plays, movies, postcards. It seeped into everyday conversation. People who had never met an Asian person "knew" they were dangerous because the culture told them so repeatedly.</p>
+
+                    <h4>🔑 Why This Matters</h4>
+                    <p>Laws like the Chinese Exclusion Act didn't come out of nowhere. They were passed because millions of Americans believed Asians were a threat. And they believed that because popular culture had taught them to believe it.</p>
+                </aside>
+            </section>
+
+            <!-- Yellow Peril Sources -->
+            <section>
+                <h2>Sources of Yellow Peril Discourse</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5em;">
+                    <div class="comparison-box">
+                        <h3>Fueled By:</h3>
+                        <ul>
+                            <li>Pseudoscience (racial biology)</li>
+                            <li>Imperial anxiety (competition for Asia)</li>
+                            <li>Global power shifts (Japan's rise)</li>
+                            <li>Labor conflict (white workers' fears)</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-box alt">
+                        <h3>Examples:</h3>
+                        <ul>
+                            <li>Political cartoons</li>
+                            <li>Kaiser Wilhelm's <em>Gelbe Gefahr</em></li>
+                            <li>Pulp fiction (Fu Manchu)</li>
+                            <li>Newspapers, postcards</li>
+                        </ul>
+                    </div>
+                </div>
+                <aside class="notes">
+                    <h4>📚 The Sources of Fear</h4>
+                    <p>Yellow Peril wasn't just prejudice—it was a multi-layered ideology with several sources:</p>
+
+                    <h4>1. Pseudoscience</h4>
+                    <p>Late 1800s racial science claimed that races were biologically distinct and unequal. "Mongolian" races were supposedly less evolved than "Caucasian" races. This gave scientific veneer to racism.</p>
+
+                    <h4>2. Imperial Anxiety</h4>
+                    <p>Western powers (U.S., Britain, Germany, France) competed to colonize and exploit Asia. Japan's military victories (over China 1895, Russia 1905) shocked Europeans who believed they were racially superior. If Japan could modernize and defeat white powers, what did that mean for white supremacy?</p>
+
+                    <h4>3. Labor Conflict</h4>
+                    <p>White workers genuinely feared economic competition. In California, Chinese workers did compete for jobs. But instead of forming multiracial unions, white workers organized on racial lines to exclude Chinese workers entirely.</p>
+
+                    <h4>4. Cultural Production</h4>
+                    <p>Mass media (newspapers, magazines, novels, theater, early films) constantly depicted Asians as villains. The most famous example: Fu Manchu, the evil genius criminal mastermind created by British author Sax Rohmer in 1913. Fu Manchu became the archetype of the inscrutable, dangerous Asian villain.</p>
+                </aside>
+            </section>
+
+            <!-- Image Placeholder: Political Cartoon -->
+            <section>
+                <h2>Visual Evidence: Political Cartoons</h2>
+                <div class="img-placeholder" style="width: 1000px; height: 700px; margin: 1em auto;">
+                    <strong>IMAGE PLACEHOLDER</strong><br>
+                    <em>Dimensions: 1000x700px</em><br><br>
+                    <strong>Search terms:</strong><br>
+                    "Yellow Peril political cartoon 1880s"<br>
+                    "Chinese exclusion anti-Chinese cartoon"<br>
+                    "The Coming Man John Bull Uncle Sam"<br>
+                    "George Frederick Keller Wasp magazine"<br><br>
+                    <strong>Suggested sources:</strong> Library of Congress, Bancroft Library, Harpweek
+                </div>
+                <aside class="notes">
+                    <h4>📚 Visual Sources</h4>
+                    <p>Political cartoons are crucial primary sources for understanding how Yellow Peril discourse worked. They condensed complex anxieties into simple, powerful images.</p>
+
+                    <h4>🔍 What to Look For:</h4>
+                    <ul>
+                        <li><strong>Racial caricature</strong>: Exaggerated "Asian" features (slanted eyes, yellow skin, queues/braids)</li>
+                        <li><strong>Size/scale</strong>: Often depicted as either a threatening mass or a sneaking infiltrator</li>
+                        <li><strong>Symbols</strong>: Opium pipes, rats, dragons, queues</li>
+                        <li><strong>Contrast</strong>: "Civilized" whites vs. "barbaric" Asians</li>
+                        <li><strong>Gender</strong>: Chinese men often feminized (wearing robes, long hair) to suggest they weren't "real men"</li>
+                    </ul>
+
+                    <h4>💡 Famous Example</h4>
+                    <p><em>The Wasp</em>, a San Francisco magazine, published some of the most vicious anti-Chinese cartoons, drawn by George Frederick Keller. These weren't fringe publications—they were mainstream.</p>
+                </aside>
+            </section>
+
+            <!-- Analytical Key -->
+            <section>
+                <h2>Analytical Insight</h2>
+                <div class="callout">
+                    <div class="callout-title">🔑 Critical Thinking</div>
+                    <p>This is <span class="key-term">discourse</span>, not description—a system of meaning that produces fear as "truth."</p>
+                    <p style="margin-top: 1em;">Yellow Peril wasn't a response to real threats. It was a cultural construction that made people BELIEVE Asians were threatening.</p>
+                </div>
+                <aside class="notes">
+                    <h4>🤔 Think Critically</h4>
+                    <p>When you see Yellow Peril images and rhetoric, ask yourself: What actual threat did Chinese laundrymen or Japanese farmers pose to American civilization? None. The "threat" was invented.</p>
+
+                    <h4>💡 Why This Matters Today</h4>
+                    <p>Understanding how Yellow Peril discourse worked helps you recognize similar patterns today: how fear is manufactured, how "threats" are constructed, how racism gets dressed up as legitimate concern. The mechanisms are the same.</p>
+                </aside>
+            </section>
+
+            <!-- Section VI Divider -->
+            <section class="section-divider">
+                <h2>Part VI</h2>
+                <h3 style="color: var(--misty-sky);">Survival, Adaptation, and Enclave Formation</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">Despite exclusion, Asian communities endured</p>
+            </section>
+
+            <!-- Survival Strategies -->
+            <section>
+                <h2>Resistance and Resilience</h2>
+                <p>Despite exclusion, Asian communities endured through:</p>
+                <ul>
+                    <li><span class="popup-trigger" onclick="togglePopup('enclaves-popup')">Ethnic enclaves</span> (Chinatowns, fishing villages, labor camps)</li>
+                    <li>Self-employment (laundries, restaurants, small shops)</li>
+                    <li>Mutual-aid societies (tongs, family associations, benevolent organizations)</li>
+                    <li>Informal migration strategies (e.g., <span class="popup-trigger" onclick="togglePopup('paper-sons-popup')">"paper sons"</span>)</li>
+                </ul>
+
+                <div id="enclaves-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('enclaves-popup')">&times;</span>
+                    <h3>Ethnic Enclaves</h3>
+                    <p>Concentrated communities where immigrants lived, worked, and built institutions.</p>
+                    <p><strong>Chinatowns</strong> emerged in San Francisco, New York, Los Angeles, and other cities as spaces where:</p>
+                    <ul>
+                        <li>Chinese could find housing (often denied elsewhere)</li>
+                        <li>Chinese businesses could operate</li>
+                        <li>Cultural practices could be maintained</li>
+                        <li>Mutual support networks functioned</li>
+                    </ul>
+                    <p><strong>Not by choice</strong>: Enclaves were often responses to segregation and exclusion, not voluntary isolation. Chinese wanted to live in Chinatowns because they were unwelcome elsewhere.</p>
+                </div>
+
+                <div id="paper-sons-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('paper-sons-popup')">&times;</span>
+                    <h3>"Paper Sons"</h3>
+                    <p>A strategy Chinese immigrants used to circumvent exclusion laws.</p>
+
+                    <h4>How It Worked:</h4>
+                    <p>The 1906 San Francisco earthquake destroyed birth records. Chinese men in the U.S. (especially those with citizenship) could claim that children were born to them in China. They would sell these "slots" to young Chinese men who wanted to immigrate.</p>
+                    <p>The young men would memorize detailed information about their "paper father's" village, family, and life story. When they arrived at Angel Island (the West Coast immigration station), they were interrogated extensively. If their stories matched their "father's," they were admitted as citizens' sons—even though they weren't actually related.</p>
+
+                    <h4>Significance:</h4>
+                    <ul>
+                        <li>Showed Chinese determination to reunite families despite exclusion</li>
+                        <li>Demonstrated sophisticated resistance to unjust laws</li>
+                        <li>Created complex "paper families" that lasted generations</li>
+                    </ul>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This section is crucial because it shows AGENCY. Asian Americans weren't just victims—they were active agents who found creative ways to survive and resist.</p>
+
+                    <h4>📖 Strategies of Survival</h4>
+                    <ol>
+                        <li><strong>Enclaves</strong>: Built communities where they could support each other</li>
+                        <li><strong>Niche economies</strong>: Found work whites didn't want (laundries, restaurants) or couldn't compete with</li>
+                        <li><strong>Institutions</strong>: Created mutual-aid societies, family associations, temples, newspapers</li>
+                        <li><strong>Legal resistance</strong>: Sued for rights (e.g., Yick Wo v. Hopkins 1886, Wong Kim Ark 1898)</li>
+                        <li><strong>Informal strategies</strong>: "Paper sons" and other ways to evade exclusion laws</li>
+                    </ol>
+
+                    <h4>💭 Reframing Enclaves</h4>
+                    <p>White Americans criticized Chinatowns as proof that Chinese "refused to assimilate." But enclaves existed because Chinese were EXCLUDED from white neighborhoods, jobs, and institutions. They weren't choosing isolation—they were surviving segregation.</p>
+
+                    <h4>🎓 Historian's Perspective</h4>
+                    <p><strong>Yong Chen</strong> (<em>Chinese San Francisco</em>) shows how Chinatown was both a refuge and a trap—it protected Chinese from violence but also reinforced their segregation. <strong>Erika Lee</strong> documents how Chinese immigrants used every legal and informal tool available to resist exclusion.</p>
+                </aside>
+            </section>
+
+            <!-- Reframing Enclaves -->
+            <section>
+                <h2>Important Reframing</h2>
+                <div class="callout">
+                    <div class="callout-title">🔑 Analytical Point</div>
+                    <p>Enclaves are not signs of isolation—they are <span class="key-term">responses to enforced exclusion</span>.</p>
+                </div>
+
+                <p style="margin-top: 1.5em; font-style: italic;">When people couldn't live, work, or belong elsewhere, they built their own institutions and communities.</p>
+
+                <aside class="notes">
+                    <h4>💭 Challenge the Narrative</h4>
+                    <p>The dominant American narrative says: "Immigrants should assimilate into American culture." But what if American culture actively rejected you? What if you were legally barred from citizenship, residentially segregated, and violently attacked?</p>
+
+                    <h4>🔑 The Reality</h4>
+                    <p>Enclaves were survival strategies, not cultural choices. They were necessary because exclusion was real. This is true for Asian American communities, African American communities, and other groups who faced systematic racism.</p>
+                </aside>
+            </section>
+
+            <!-- Closing Synthesis Divider -->
+            <section class="section-divider">
+                <h2>Closing Synthesis</h2>
+                <h3 style="color: var(--misty-sky);">What Asian Exclusion Reveals</h3>
+            </section>
+
+            <!-- Synthesis -->
+            <section>
+                <h2>The Limits of American Pluralism</h2>
+                <p>Asian exclusion reveals:</p>
+                <ul>
+                    <li>Cities became diverse—but <span class="key-term">not equally inclusive</span></li>
+                    <li>Law, labor, and culture worked together to <span class="key-term">racialize belonging</span></li>
+                    <li>Urbanization intensified debates over:
+                        <ul>
+                            <li>Citizenship</li>
+                            <li>Race</li>
+                            <li>Nationhood</li>
+                        </ul>
+                    </li>
+                </ul>
+                <aside class="notes">
+                    <h4>📚 Pulling It All Together</h4>
+                    <p>This lecture has shown how American cities in the late 1800s became sites of both incredible diversity AND systematic exclusion. These weren't contradictory—they were two sides of the same process.</p>
+
+                    <h4>🔑 The Key Points</h4>
+                    <ol>
+                        <li><strong>Global context</strong>: Asian migration was transnational, driven by empire and capitalism</li>
+                        <li><strong>Labor racialization</strong>: "Coolie labor" became a racial category used to justify exclusion</li>
+                        <li><strong>Gender strategy</strong>: Preventing family formation made permanent settlement impossible</li>
+                        <li><strong>Legal architecture</strong>: From 1875-1924, laws systematically excluded Asians from entry and citizenship</li>
+                        <li><strong>Cultural discourse</strong>: "Yellow Peril" produced Asians as threatening, preparing ground for legal exclusion</li>
+                        <li><strong>Survival and resistance</strong>: Despite everything, Asian American communities endured and resisted</li>
+                    </ol>
+                </aside>
+            </section>
+
+            <!-- Bridge Forward -->
+            <section>
+                <h2>Bridge to Next Lecture</h2>
+                <p>The next lecture turns inward—to the <span class="key-term">urban environment itself</span>.</p>
+
+                <p style="margin-top: 1.5em;">We'll examine how density, disease, and infrastructure forced cities to confront the biological consequences of mass migration.</p>
+
+                <p style="margin-top: 1.5em; color: var(--misty-sky); font-style: italic;">From the politics of exclusion to the politics of sanitation and public health.</p>
+                <aside class="notes">
+                    <h4>🔜 What's Next</h4>
+                    <p>Today we talked about WHO could belong in cities. Next lecture asks: what happened INSIDE cities as millions of people crowded together?</p>
+                    <p>Topics include: disease, sanitation, tenement housing, public health movements, and Progressive Era urban reform.</p>
+                </aside>
+            </section>
+
+            <!-- Final Takeaway -->
+            <section>
+                <h2>Key Takeaway</h2>
+                <div class="callout">
+                    <div class="callout-title">🔑 Remember This</div>
+                    <p>Urban America was built through inclusion <span class="key-term">and</span> exclusion.</p>
+                    <p style="margin-top: 1em;">Race determined not just who entered the city, but <span class="key-term">who could belong, reproduce, and claim the future</span>.</p>
+                </div>
+                <aside class="notes">
+                    <h4>📚 Final Thoughts</h4>
+                    <p>If you remember one thing from this lecture, remember this: diversity does not automatically mean inclusion. American cities became diverse through migration, but they remained deeply unequal because race set hard limits on who could truly belong.</p>
+
+                    <h4>💭 Modern Relevance</h4>
+                    <p>The questions raised in this lecture—who belongs? who is "really" American? how do we define citizenship?—remain urgent today. Understanding the history of Asian exclusion helps us think critically about contemporary debates over immigration, citizenship, and national identity.</p>
+                </aside>
+            </section>
+
+            <!-- Reading List -->
+            <section>
+                <h2>Lecture Prep Reading List</h2>
+                <p style="font-size: 0.9em; color: var(--misty-sky);">(Instructor Reference)</p>
+                <ul style="font-size: 0.85em;">
+                    <li><strong>Mae Ngai</strong> — <em>Impossible Subjects</em><br>
+                        <span style="color: var(--morning-mist); font-style: italic;">How restriction created the "illegal alien" and fused race, law, and national identity</span></li>
+                    <li><strong>Erika Lee</strong> — <em>The Chinese Exclusion Act</em><br>
+                        <span style="color: var(--morning-mist); font-style: italic;">How exclusion emerged from labor conflict, racial ideology, and local violence</span></li>
+                    <li><strong>Sucheng Chan</strong> — <em>Asian American History</em><br>
+                        <span style="color: var(--morning-mist); font-style: italic;">Transnational migration and sojourner culture</span></li>
+                    <li><strong>Moon-Ho Jung</strong> — <em>Coolies and Cane</em><br>
+                        <span style="color: var(--morning-mist); font-style: italic;">How "coolie labor" was racialized and stigmatized</span></li>
+                    <li><strong>John Kuo Wei Tchen</strong> — <em>Yellow Peril!</em><br>
+                        <span style="color: var(--morning-mist); font-style: italic;">How fear was produced through popular culture and visual media</span></li>
+                </ul>
+                <aside class="notes">
+                    <h4>📚 For Instructors</h4>
+                    <p>These are the key scholarly sources that informed this lecture. If you want to go deeper on any topic, start here.</p>
+                </aside>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Reveal.js and plugins from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/zoom/zoom.js"></script>
+
+    <script>
+        Reveal.initialize({
+            width: 1920,
+            height: 1080,
+            margin: 0.1,
+            minScale: 0.2,
+            maxScale: 2.0,
+            controls: true,
+            progress: true,
+            center: true,
+            hash: true,
+            transition: 'slide',
+            plugins: [ RevealNotes, RevealHighlight, RevealZoom ]
+        });
+
+        // Pop-up functionality
+        function togglePopup(id) {
+            document.getElementById(id).classList.toggle('active');
+        }
+
+        // Close popup when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('popup')) {
+                e.target.classList.remove('active');
+            }
+        });
+
+        // Close popup with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.popup.active').forEach(p => p.classList.remove('active'));
+            }
+        });
+    </script>
+</body>
+</html>
