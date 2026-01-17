@@ -1,0 +1,913 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Jungle and Progressive Disgust - HIST 102</title>
+
+    <!-- Reveal.js CSS from CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght=400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Pantone 2026 Atmospheric Palette */
+            --cloud-dancer: #F0EEE9;
+            --pale-sunlight: #E8DFB8;
+            --atmospheric-slate: #2A3540;
+            --misty-sky: #B8C5D0;
+            --sterling-blue: #6B8FAD;
+            --quiet-wave: #5D8A8C;
+            --aventurine: #4A7C72;
+            --morning-mist: #C5C0B8;
+            --deep-current: #2D4A4A;
+        }
+
+        .reveal {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 32px;
+            background-color: var(--atmospheric-slate);
+        }
+
+        .reveal .slides section {
+            color: var(--cloud-dancer);
+        }
+
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--cloud-dancer);
+            text-transform: none;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .reveal h1 { font-size: 3em; }
+        .reveal h2 { font-size: 2em; color: var(--pale-sunlight); }
+        .reveal h3 { font-size: 1.5em; color: var(--misty-sky); }
+
+        .reveal p, .reveal li {
+            color: var(--cloud-dancer);
+        }
+
+        .reveal a {
+            color: var(--sterling-blue);
+            text-decoration: underline;
+        }
+
+        .reveal a:hover {
+            color: var(--pale-sunlight);
+        }
+
+        /* Pop-up/Modal styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--deep-current);
+            color: var(--cloud-dancer);
+            padding: 2em;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            max-width: 70%;
+            max-height: 70%;
+            overflow-y: auto;
+            z-index: 1000;
+            border: 3px solid var(--quiet-wave);
+        }
+
+        .popup.active { display: block; }
+
+        .popup h3 {
+            color: var(--pale-sunlight);
+            margin-top: 0;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 2em;
+            cursor: pointer;
+            color: var(--misty-sky);
+        }
+
+        .popup-close:hover {
+            color: var(--cloud-dancer);
+        }
+
+        .popup-trigger {
+            color: var(--sterling-blue);
+            text-decoration: underline dotted;
+            cursor: pointer;
+            border-bottom: 2px dotted var(--sterling-blue);
+        }
+
+        .popup-trigger:hover {
+            color: var(--pale-sunlight);
+            border-bottom-color: var(--pale-sunlight);
+        }
+
+        /* Image placeholder styling */
+        .img-placeholder {
+            background: var(--deep-current);
+            border: 3px dashed var(--quiet-wave);
+            padding: 3em;
+            text-align: center;
+            color: var(--misty-sky);
+            font-style: italic;
+            border-radius: 10px;
+        }
+
+        /* Key term styling */
+        .key-term {
+            color: var(--aventurine);
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        /* Primary source styling */
+        .primary-source {
+            background: rgba(232, 223, 184, 0.15);
+            border-left: 5px solid var(--pale-sunlight);
+            padding: 1em;
+            margin: 1em 0;
+            font-style: italic;
+            color: var(--cloud-dancer);
+        }
+
+        .primary-source-attribution {
+            text-align: right;
+            font-size: 0.9em;
+            color: var(--morning-mist);
+            margin-top: 0.5em;
+            font-style: normal;
+        }
+
+        /* Section divider styling */
+        .section-divider {
+            background: linear-gradient(135deg, var(--deep-current) 0%, var(--atmospheric-slate) 100%);
+        }
+
+        .section-divider h2 {
+            color: var(--cloud-dancer);
+            font-size: 2.5em;
+        }
+
+        /* Emphasis/callout box */
+        .callout {
+            background: rgba(232, 223, 184, 0.1);
+            border: 2px solid var(--pale-sunlight);
+            border-radius: 8px;
+            padding: 1em;
+            margin: 1em 0;
+        }
+
+        .callout-title {
+            color: var(--pale-sunlight);
+            font-weight: bold;
+            margin-bottom: 0.5em;
+        }
+
+        /* Progress/slide counter styling */
+        .reveal .progress {
+            background: var(--deep-current);
+        }
+
+        .reveal .progress span {
+            background: var(--sterling-blue);
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Title Slide -->
+            <section>
+                <h1>The Jungle and Progressive Disgust</h1>
+                <h3>Reform by Revelation</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">Chapter 21, Lecture 1</p>
+                <aside class="notes">
+                    <h4>📚 Welcome to Chapter 21</h4>
+                    <p>This lecture begins our exploration of the Progressive Era (roughly 1890-1920) by examining how emotions—particularly disgust—became tools of political reform. We'll use Upton Sinclair's <em>The Jungle</em> as a case study to understand how Progressives used exposure and shock to mobilize public opinion and expand government power.</p>
+
+                    <h4>🎯 Learning Objectives</h4>
+                    <ul>
+                        <li>Understand Progressivism as a response to modern industrial problems</li>
+                        <li>Analyze how emotion and sensory shock drove reform</li>
+                        <li>Examine why consumer protection succeeded while labor reforms lagged</li>
+                        <li>Consider the limits and contradictions of Progressive reform</li>
+                    </ul>
+                </aside>
+            </section>
+
+            <!-- Opening Frame -->
+            <section>
+                <h2>What Was Progressivism?</h2>
+                <p>A loose, overlapping set of ideas and practices (roughly 1890–1920) grounded in three shared assumptions:</p>
+                <aside class="notes">
+                    <h4>📖 Key Definition</h4>
+                    <p><strong>Progressivism</strong>: Not a single political party or ideology, but a broad reform movement that believed modern industrial society required new forms of expertise and government intervention. Think of it as the response to all the problems created by the rapid industrialization you learned about in previous chapters.</p>
+
+                    <h4>💭 Context & Connections</h4>
+                    <p>This movement emerged after decades of industrialization, urbanization, and immigration had transformed American society. Remember the Gilded Age? Progressives were responding to the problems that era created: monopolies, urban poverty, corruption, unsafe working conditions, etc.</p>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Three Core Assumptions</h2>
+                <ul>
+                    <li>Modern industrial society created <span class="key-term">new problems</span> that older political and moral systems couldn't manage</li>
+                    <li><span class="popup-trigger" onclick="togglePopup('expertise-popup')">Expertise</span>—especially science, professional knowledge, and investigation—was essential</li>
+                    <li>The <span class="key-term">state</span> had both authority and responsibility to intervene for the public good</li>
+                </ul>
+
+                <div id="expertise-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('expertise-popup')">&times;</span>
+                    <h3>Progressive Expertise</h3>
+                    <p>Progressives believed that trained professionals—engineers, social scientists, doctors, economists, journalists—could study social problems scientifically and design rational solutions.</p>
+                    <p><strong>Examples of Progressive experts:</strong></p>
+                    <ul>
+                        <li><strong>Muckraking journalists</strong> who investigated corruption</li>
+                        <li><strong>Social workers</strong> who studied urban poverty</li>
+                        <li><strong>Efficiency experts</strong> who redesigned factories</li>
+                        <li><strong>Public health officials</strong> who tracked disease</li>
+                        <li><strong>Economists</strong> who analyzed monopolies</li>
+                    </ul>
+                    <p>This represented a major shift: solutions to social problems would come from trained professionals, not just politicians or religious leaders.</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>These three assumptions unified diverse reformers who disagreed about many things. Some Progressives wanted to break up big business; others wanted to regulate it. Some supported women's rights; others didn't. What they shared was a belief that modern problems required modern, scientific solutions implemented by the government.</p>
+
+                    <h4>🔑 Why This Matters</h4>
+                    <p>This belief in expertise and government intervention laid the foundation for the modern American state. When you think about government agencies like the FDA, EPA, or OSHA—those are Progressive Era creations based on these assumptions.</p>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Critical Point</h2>
+                <div class="callout">
+                    <div class="callout-title">🔑 Key Insight</div>
+                    <p>Progressivism was not only rational and technocratic. It was also <span class="key-term">deeply emotional</span>.</p>
+                    <p>Reform often began with crisis, fear, outrage, and <span class="key-term">disgust</span>—not calm policy design.</p>
+                </div>
+                <aside class="notes">
+                    <h4>💭 Why This Matters</h4>
+                    <p>Most textbooks emphasize Progressive rationality: surveys, statistics, commissions, regulations. That's all true, but this lecture shows how EMOTION was often what got reforms started. People had to be shocked, disgusted, or frightened before they'd support government intervention.</p>
+
+                    <h4>🤔 Think About It</h4>
+                    <p>How do modern reform movements use emotion? Think about viral videos of police violence, exposés of factory farming, or images of environmental disasters. The Progressive Era pioneered these tactics.</p>
+                </aside>
+            </section>
+
+            <!-- Section Divider -->
+            <section class="section-divider">
+                <h2>Why Start with a Novel?</h2>
+                <p style="color: var(--morning-mist); font-style: italic;">How fiction became political fact</p>
+                <aside class="notes">
+                    <h4>📚 Transition</h4>
+                    <p>Now we're moving from defining Progressivism to examining a specific case: Upton Sinclair's <em>The Jungle</em> (1906). This novel about immigrant meatpackers in Chicago became one of the most influential reform documents of the era—but not for the reasons Sinclair intended.</p>
+                </aside>
+            </section>
+
+            <section>
+                <h2>The Rational Reform Story</h2>
+                <p>Progressivism is often taught as rational reform:</p>
+                <ul>
+                    <li>Commissions investigating problems</li>
+                    <li>Data collection and surveys</li>
+                    <li>Legislation based on evidence</li>
+                    <li>Experts and administrators implementing solutions</li>
+                </ul>
+                <p style="margin-top: 1em; color: var(--misty-sky);">But <em>The Jungle</em> reveals another dynamic...</p>
+                <aside class="notes">
+                    <h4>📖 Context</h4>
+                    <p>All of these things DID happen during the Progressive Era. The government did form commissions, collect data, and hire experts. But that's only part of the story. Rational analysis often came AFTER emotional outrage created the political will for reform.</p>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Framing Claim</h2>
+                <div class="callout">
+                    <div class="callout-title">🔑 Central Argument</div>
+                    <p>Reform was frequently driven by <span class="key-term">visceral reaction</span> rather than abstract reasoning.</p>
+                    <p>Progressivism grew not only out of analysis, but out of <span class="key-term">emotional confrontation</span> with the hidden costs of modern life.</p>
+                </div>
+                <aside class="notes">
+                    <h4>💭 Why This Matters</h4>
+                    <p>This lecture treats <em>The Jungle</em> as a case study in how modern politics learned to "mobilize the senses"—to use physical disgust and bodily threat as tools of political persuasion. This is still how reform happens today: think about how food safety scares, environmental disasters, or public health crises create sudden political momentum.</p>
+                </aside>
+            </section>
+
+            <!-- Part II -->
+            <section class="section-divider">
+                <h2>Part II</h2>
+                <h3 style="color: var(--misty-sky);">The Progressive Faith in Exposure</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">Revelation as reform strategy</p>
+            </section>
+
+            <section>
+                <h2>Progressive Faith in Exposure</h2>
+                <p>Progressives believed:</p>
+                <ul>
+                    <li>Social problems were <span class="key-term">concealed</span> beneath everyday normalcy</li>
+                    <li><span class="key-term">Exposure</span> would force recognition</li>
+                    <li>Recognition would <span class="key-term">compel reform</span></li>
+                </ul>
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p><strong>The Logic of Exposure:</strong> Progressives believed that if they could just SHOW people the truth—make hidden problems visible—the public would demand change. This explains why investigation and journalism were so central to Progressive reform.</p>
+
+                    <h4>🔑 Key Assumption</h4>
+                    <p>Notice the assumption here: Progressives thought moral consensus already existed. The problem wasn't that people disagreed about right and wrong—it was that they didn't KNOW what was happening. Once they knew, they'd naturally demand reform.</p>
+
+                    <h4>🤔 Discussion Question</h4>
+                    <p>Do you think this assumption was correct? Does just showing people injustice automatically create demand for change? Think about modern examples where exposure did or didn't lead to reform.</p>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Tools of Exposure</h2>
+                <p>This belief animated:</p>
+                <ul>
+                    <li><span class="popup-trigger" onclick="togglePopup('muckraking-popup')">Investigative journalism</span> ("muckraking")</li>
+                    <li>Social surveys and reports</li>
+                    <li>Documentary photography</li>
+                    <li>Factory inspections</li>
+                    <li>Public commissions</li>
+                </ul>
+
+                <div id="muckraking-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('muckraking-popup')">&times;</span>
+                    <h3>Muckraking Journalism</h3>
+                    <p><strong>"Muckrakers"</strong> were investigative journalists who exposed corruption, abuse, and injustice. The term came from Theodore Roosevelt, who compared them to a character in <em>Pilgrim's Progress</em> who raked muck (filth) rather than looking up at higher things.</p>
+
+                    <p><strong>Famous muckrakers included:</strong></p>
+                    <ul>
+                        <li><strong>Ida Tarbell</strong>: Exposed Standard Oil's monopolistic practices</li>
+                        <li><strong>Lincoln Steffens</strong>: Investigated urban political corruption in <em>The Shame of the Cities</em></li>
+                        <li><strong>Jacob Riis</strong>: Photographed tenement poverty in <em>How the Other Half Lives</em></li>
+                        <li><strong>Upton Sinclair</strong>: Revealed meatpacking conditions in <em>The Jungle</em></li>
+                    </ul>
+
+                    <p><strong>Key magazines:</strong> McClure's, Collier's, Cosmopolitan, American Magazine</p>
+
+                    <p>These journalists combined sensational writing with careful investigation to shock middle-class readers into supporting reform.</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>📖 Examples to Remember</h4>
+                    <ul>
+                        <li><strong>Jacob Riis</strong>: Used flash photography to document tenement slums in NYC</li>
+                        <li><strong>Lewis Hine</strong>: Photographed child labor in factories</li>
+                        <li><strong>Ida Tarbell</strong>: Wrote detailed exposés of Standard Oil</li>
+                        <li><strong>Lincoln Steffens</strong>: Investigated city political machines</li>
+                    </ul>
+
+                    <h4>💭 Context</h4>
+                    <p>The rise of mass-circulation magazines made this possible. New printing technology and growing literacy meant millions of middle-class Americans could read these exposés. The investigations often took months or years and were extremely detailed.</p>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Exposure as Revelation</h2>
+                <div class="callout">
+                    <div class="callout-title">🔑 Interpretive Emphasis</div>
+                    <p>Exposure was not <span class="key-term">persuasion</span>—it was <span class="key-term">revelation</span>.</p>
+                    <p>Progressives assumed moral consensus already existed. The problem was <span class="key-term">ignorance</span>, not disagreement.</p>
+                </div>
+                <aside class="notes">
+                    <h4>💭 Think About It</h4>
+                    <p>This is a crucial distinction. Persuasion means changing someone's values or beliefs. Revelation means uncovering facts they'll automatically oppose once they know them. Progressives believed in revelation—they thought showing people meatpacking conditions would automatically generate support for regulation.</p>
+
+                    <h4>🤔 Critical Question</h4>
+                    <p>Was this assumption justified? Did everyone share the same moral values, or did Progressives assume their own middle-class values were universal? This question becomes important when we think about who benefited from Progressive reforms and who didn't.</p>
+                </aside>
+            </section>
+
+            <!-- Part III -->
+            <section class="section-divider">
+                <h2>Part III</h2>
+                <h3 style="color: var(--misty-sky);">Upton Sinclair's Project</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">Literature as social investigation</p>
+            </section>
+
+            <section>
+                <h2>Upton Sinclair</h2>
+                <div style="display: flex; gap: 2em; align-items: start;">
+                    <div class="img-placeholder" style="width: 400px; height: 500px; flex-shrink: 0;">
+                        <strong>IMAGE PLACEHOLDER</strong><br>
+                        <em>400x500px portrait</em><br><br>
+                        <strong>Search:</strong> "Upton Sinclair portrait 1906"<br>
+                        "Upton Sinclair author photograph"<br><br>
+                        <strong>Source:</strong> Library of Congress
+                    </div>
+                    <div style="text-align: left;">
+                        <p><strong style="color: var(--pale-sunlight);">Born:</strong> 1878, Baltimore, Maryland</p>
+                        <p><strong style="color: var(--pale-sunlight);">Background:</strong> Socialist writer, spent 7 weeks investigating Chicago meatpacking plants</p>
+                        <p><strong style="color: var(--pale-sunlight);">Goal:</strong> Expose immigrant exploitation and industrial violence</p>
+                        <p><strong style="color: var(--pale-sunlight);">Published:</strong> <em>The Jungle</em> (1906)</p>
+                        <p class="key-term" style="margin-top: 1em;">"I aimed at the public's heart, and by accident I hit it in the stomach."</p>
+                    </div>
+                </div>
+                <aside class="notes">
+                    <h4>📚 Who Was Upton Sinclair?</h4>
+                    <p>Sinclair was a socialist writer who wanted to expose capitalism's exploitation of workers. He spent seven weeks undercover in Chicago's meatpacking plants, interviewing workers and documenting conditions. He wrote <em>The Jungle</em> as a novel rather than a journalistic report because he wanted to create emotional identification with immigrant workers.</p>
+
+                    <h4>💭 Important Context</h4>
+                    <p>Sinclair was NOT primarily concerned with food safety. He wanted to generate sympathy for workers and support for socialism. The famous quote captures his frustration: he tried to make readers care about workers' suffering, but instead they only cared about whether their meat was safe to eat.</p>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Sinclair's Actual Goals</h2>
+                <p>Sinclair did <strong>not</strong> primarily aim to reform food safety.</p>
+                <p>He sought to expose:</p>
+                <ul>
+                    <li><span class="key-term">Immigrant exploitation</span></li>
+                    <li><span class="key-term">Industrial violence</span></li>
+                    <li>The <span class="popup-trigger" onclick="togglePopup('disposability-popup')">disposability of labor</span> under capitalism</li>
+                </ul>
+
+                <div id="disposability-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('disposability-popup')">&times;</span>
+                    <h3>The "Disposability" of Labor</h3>
+                    <p>Sinclair argued that industrial capitalism treated workers as expendable—when one was used up (injured, sick, or exhausted), there were always more immigrants arriving to replace them.</p>
+
+                    <p><strong>Examples from <em>The Jungle</em>:</strong></p>
+                    <ul>
+                        <li>Workers with missing fingers from machinery accidents</li>
+                        <li>People forced to work while sick or injured</li>
+                        <li>No compensation for workplace injuries</li>
+                        <li>Workers fired when they became too weak to keep pace</li>
+                        <li>Constant speed-up pressures and longer hours</li>
+                    </ul>
+
+                    <p>The meatpacking companies calculated that it was cheaper to replace workers than to make workplaces safe or pay decent wages. This is what Sinclair meant by "disposability"—workers were treated as raw material, not human beings.</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>🔑 Key Point</h4>
+                    <p>Remember this throughout the lecture: Sinclair wrote <em>The Jungle</em> to create support for socialism and workers' rights. He wanted readers to identify with the protagonist, Jurgis Rudkus, and be outraged by how capitalism destroyed his family. The food safety stuff was just part of showing how the whole system was corrupt.</p>
+
+                    <h4>💭 The Central Irony</h4>
+                    <p>The book's impact was almost the opposite of what Sinclair wanted. Readers were horrified by contaminated meat, but most didn't become socialists or demand workers' rights. They demanded government food inspection. This tells us something important about who had political power and what kinds of reforms were possible.</p>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Fiction as Investigation</h2>
+                <div class="callout">
+                    <div class="callout-title">🔑 Interpretive Emphasis</div>
+                    <p>Sinclair treated fiction as a form of <span class="key-term">investigation</span>.</p>
+                    <p>Narrative immersion was meant to generate knowledge through <span class="key-term">experience</span> rather than data.</p>
+                </div>
+                <aside class="notes">
+                    <h4>📚 Why Fiction?</h4>
+                    <p>Sinclair chose to write a novel because he wanted readers to FEEL what workers experienced, not just read statistics about it. By following Jurgis's story—his hopes, his struggles, his losses—readers would understand the human cost of industrial capitalism in a way that no government report could convey.</p>
+
+                    <h4>🎓 Literary Strategy</h4>
+                    <p>This was actually a common Progressive strategy: use narrative and emotion to create identification. Jacob Riis did it with photographs, Lewis Hine with images of child laborers, and reform novels like <em>Ten Nights in a Bar-Room</em> did it for temperance. The idea was that making problems VIVID and PERSONAL would motivate reform.</p>
+                </aside>
+            </section>
+
+            <section>
+                <h2>The Central Irony</h2>
+                <div class="primary-source">
+                    "I aimed at the public's heart, and by accident I hit it in the stomach."
+                    <div class="primary-source-attribution">
+                        — Upton Sinclair, reflecting on <em>The Jungle</em>
+                    </div>
+                </div>
+                <p style="margin-top: 1em;">He aimed to provoke <span class="key-term">class consciousness</span>.</p>
+                <p>He instead provoked <span class="key-term">consumer panic</span>.</p>
+                <aside class="notes">
+                    <h4>💭 What Happened?</h4>
+                    <p>When <em>The Jungle</em> was published, readers were absolutely horrified—but not by what Sinclair expected. They skimmed over the parts about workers' suffering and focused obsessively on chapters describing contaminated meat: rats ground into sausage, diseased cattle processed for beef, workers falling into rendering vats.</p>
+
+                    <h4>🔑 Why This Matters</h4>
+                    <p>This response tells us something crucial about Progressive reform: middle-class Americans were most concerned about threats to THEMSELVES. They could more easily ignore workers' suffering, but they couldn't ignore the possibility that their own food was poisoned. This pattern—responding to personal threat rather than others' injustice—repeats throughout Progressive history.</p>
+
+                    <h4>🤔 Think About It</h4>
+                    <p>Is this still true? Do reform movements succeed most when they can show how problems affect "people like us" rather than distant others?</p>
+                </aside>
+            </section>
+
+            <section>
+                <h2>What This Reveals</h2>
+                <p>This disconnect reflects the priorities of <span class="key-term">Progressive reform culture</span> itself.</p>
+                <p style="margin-top: 1em; color: var(--misty-sky);">Certain kinds of suffering were politically actionable. Others were not.</p>
+                <aside class="notes">
+                    <h4>🔑 Critical Interpretation</h4>
+                    <p>The public response to <em>The Jungle</em> reveals which problems Progressive Americans cared about and which they didn't. They cared about: consumer safety, public health, protecting middle-class bodies. They cared less about: workers' rights, immigrant welfare, economic justice.</p>
+
+                    <h4>💭 Foreshadowing</h4>
+                    <p>Keep this in mind for later in the lecture when we discuss what reforms actually passed. The pattern holds: reforms that protected consumers and the middle class moved quickly. Reforms that would have redistributed power or wealth moved much more slowly—or not at all.</p>
+                </aside>
+            </section>
+
+            <!-- Part IV -->
+            <section class="section-divider">
+                <h2>Part IV</h2>
+                <h3 style="color: var(--misty-sky);">Disgust as a Political Emotion</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">The analytical center of the lecture</p>
+            </section>
+
+            <section>
+                <h2>How Disgust Works</h2>
+                <p>Disgust operates differently from <span class="popup-trigger" onclick="togglePopup('sympathy-popup')">sympathy</span>:</p>
+                <ul>
+                    <li><span class="key-term">Sympathy</span> asks for identification with others</li>
+                    <li><span class="key-term">Disgust</span> demands distance, cleansing, and control</li>
+                </ul>
+
+                <div id="sympathy-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('sympathy-popup')">&times;</span>
+                    <h3>Sympathy vs. Disgust in Reform</h3>
+                    <p><strong>Sympathy</strong> is an emotion of identification and connection. When you feel sympathy, you imagine yourself in someone else's position and want to help them. This requires seeing them as fundamentally like you.</p>
+
+                    <p><strong>Disgust</strong> is an emotion of revulsion and self-protection. When you feel disgust, you want to create DISTANCE between yourself and the contaminating thing. You want it cleaned up, controlled, removed.</p>
+
+                    <h4>Why This Matters for Reform:</h4>
+                    <ul>
+                        <li><strong>Sympathy-based reform:</strong> Help the poor, protect workers, provide welfare—because they're human beings like us who deserve better</li>
+                        <li><strong>Disgust-based reform:</strong> Regulate meat, inspect factories, control disease—because contamination threatens US</li>
+                    </ul>
+
+                    <p>Sinclair tried to use sympathy (feel for Jurgis), but readers responded with disgust (protect me from bad meat). Disgust-based reforms passed quickly; sympathy-based reforms did not.</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>🔑 This is the Analytical Heart of the Lecture</h4>
+                    <p>Understanding the difference between sympathy and disgust helps explain why certain Progressive reforms succeeded while others failed. Disgust is a more powerful political emotion because it's about self-protection, not altruism. People will act quickly to remove a threat to themselves; they'll act more slowly (or not at all) to help distant others.</p>
+
+                    <h4>🎓 Senior Historians' Corner</h4>
+                    <p>Historians debate whether Progressive reformers were genuinely humanitarian or primarily self-interested. This lecture suggests it's not either/or—many reformers had mixed motives, and disgust/fear for themselves often motivated action more effectively than sympathy for others.</p>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Disgust in <em>The Jungle</em></h2>
+                <p>In the public response to <em>The Jungle</em>:</p>
+                <ul>
+                    <li><span class="key-term">Bodily contamination</span> replaced moral argument</li>
+                    <li><span class="key-term">Spoiled meat</span> overshadowed injured workers</li>
+                    <li>Danger became <span class="key-term">universal and intimate</span> ("this could poison YOU")</li>
+                </ul>
+                <aside class="notes">
+                    <h4>📚 Examples from the Book</h4>
+                    <p>Readers focused obsessively on scenes like:</p>
+                    <ul>
+                        <li>Rats poisoned by the thousands, then swept into sausage grinders along with the poisoned bread they'd eaten</li>
+                        <li>Diseased cattle so sick they couldn't walk, being dragged into the slaughterhouse</li>
+                        <li>Workers with tuberculosis spitting into meat</li>
+                        <li>Men falling into rendering vats and being processed into lard</li>
+                    </ul>
+
+                    <h4>💭 Why These Images Were So Powerful</h4>
+                    <p>These weren't abstract statistics. They were visceral, intimate threats to readers' own bodies. Every time you ate meat, you might be eating THAT. This made the threat immediate and personal in a way that workers' suffering was not.</p>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Key Interpretive Claim</h2>
+                <div class="callout">
+                    <div class="callout-title">🔑 Central Argument</div>
+                    <p>Progressive reform was often most effective when injustice was reframed as <span class="key-term">personal physical threat</span>.</p>
+                </div>
+                <aside class="notes">
+                    <h4>🔑 Why This Matters</h4>
+                    <p>This pattern explains A LOT about which Progressive reforms succeeded and which didn't:</p>
+                    <ul>
+                        <li><strong>Quick success:</strong> Food regulation, public health, consumer protection—things that threatened middle-class bodies</li>
+                        <li><strong>Slow or no success:</strong> Workers' rights, labor protections, economic redistribution—things that would have cost middle-class consumers money or convenience</li>
+                    </ul>
+
+                    <h4>🤔 Modern Parallels</h4>
+                    <p>Think about how modern reforms work: Environmental regulations gain support when pollution threatens suburban water supplies. Food safety laws pass after E. coli outbreaks hit middle-class restaurants. Public health measures succeed when diseases might spread to "respectable" neighborhoods. The pattern Sinclair discovered is still with us.</p>
+                </aside>
+            </section>
+
+            <section>
+                <h2>This Helps Explain...</h2>
+                <ul>
+                    <li>Rapid passage of <span class="key-term">food regulation</span></li>
+                    <li>Slower progress on <span class="key-term">labor rights</span></li>
+                    <li>The rise of <span class="key-term">consumer protection</span> as a political priority</li>
+                </ul>
+                <aside class="notes">
+                    <h4>📖 Specific Examples</h4>
+                    <ul>
+                        <li><strong>Fast:</strong> Pure Food and Drug Act (1906) and Meat Inspection Act (1906) passed within months of <em>The Jungle</em>'s publication</li>
+                        <li><strong>Slow:</strong> Federal child labor laws were struck down by the Supreme Court in 1918 and 1922; weren't permanently established until the 1930s</li>
+                        <li><strong>Slow:</strong> Maximum hour laws for workers faced constant legal challenges and applied unevenly</li>
+                        <li><strong>Slow:</strong> Workplace safety regulations remained minimal until mid-20th century</li>
+                    </ul>
+
+                    <h4>💭 What This Tells Us</h4>
+                    <p>The difference in timing wasn't because meatpacking was more dangerous than child labor or sweatshops. It was because contaminated meat threatened middle-class consumers directly, while child labor and dangerous working conditions affected "other people's" children and bodies.</p>
+                </aside>
+            </section>
+
+            <!-- Part V -->
+            <section class="section-divider">
+                <h2>Part V</h2>
+                <h3 style="color: var(--misty-sky);">From Outrage to Authority</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">The state responds</p>
+            </section>
+
+            <section>
+                <h2>The State Responds</h2>
+                <p>Public outrage created legitimacy for:</p>
+                <ul>
+                    <li>Federal <span class="popup-trigger" onclick="togglePopup('investigation-popup')">investigation</span></li>
+                    <li><span class="key-term">Inspection regimes</span></li>
+                    <li>Permanent <span class="key-term">regulatory institutions</span></li>
+                </ul>
+
+                <div id="investigation-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('investigation-popup')">&times;</span>
+                    <h3>Federal Response to <em>The Jungle</em></h3>
+                    <p>Within months of <em>The Jungle</em>'s publication, Congress acted decisively:</p>
+
+                    <h4>Pure Food and Drug Act (1906)</h4>
+                    <ul>
+                        <li>Prohibited interstate commerce in adulterated or misbranded food and drugs</li>
+                        <li>Required accurate labeling of ingredients</li>
+                        <li>Created federal oversight of food and medicine</li>
+                    </ul>
+
+                    <h4>Meat Inspection Act (1906)</h4>
+                    <ul>
+                        <li>Mandated federal inspection of meat processing plants</li>
+                        <li>Required sanitary conditions in slaughterhouses</li>
+                        <li>Prohibited sale of adulterated meat</li>
+                        <li>Established the Bureau of Chemistry (later the FDA)</li>
+                    </ul>
+
+                    <h4>Presidential Investigation</h4>
+                    <p>President Theodore Roosevelt sent investigators to Chicago packinghouses. Their confidential report confirmed Sinclair's allegations, which helped overcome industry opposition to regulation.</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 What Changed?</h4>
+                    <p>Before <em>The Jungle</em>, the federal government had almost no role in regulating food safety. States had some laws, but interstate commerce in food was basically unregulated. After <em>The Jungle</em>, the federal government claimed the authority to inspect, regulate, and control the food industry.</p>
+
+                    <h4>🔑 Why This Was Revolutionary</h4>
+                    <p>This represented a huge expansion of federal power. The Constitution doesn't say anything about food safety—the government used the Commerce Clause (regulating interstate trade) to justify intervention. This became the legal basis for many other Progressive reforms.</p>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Why the State Acted</h2>
+                <div class="callout">
+                    <div class="callout-title">🔑 Interpretive Emphasis</div>
+                    <p>The state did not act simply because conditions were immoral.</p>
+                    <p>It acted because <span class="key-term">public trust</span> in invisible systems collapsed.</p>
+                </div>
+                <aside class="notes">
+                    <h4>💭 Think About It</h4>
+                    <p>The conditions Sinclair described had existed for years. Meatpacking had been dangerous and unsanitary since the 1880s. Workers had been exploited the whole time. So why did reform happen in 1906?</p>
+
+                    <h4>🔑 Answer: Trust Collapsed</h4>
+                    <p>Before <em>The Jungle</em>, middle-class consumers trusted that their food was safe. They didn't think about where it came from or how it was made—they just bought it and ate it. <em>The Jungle</em> destroyed that trust. Suddenly, every can of meat, every sausage, every piece of beef might be contaminated. People NEEDED to trust their food supply, and the government stepped in to restore that trust.</p>
+
+                    <h4>🎓 This is a Pattern</h4>
+                    <p>The government expands power when complex systems fail and people demand someone take responsibility. Financial crashes, public health crises, environmental disasters—these create moments when people accept (or demand) government intervention.</p>
+                </aside>
+            </section>
+
+            <section>
+                <h2>A Shift in Governance</h2>
+                <p>This marks a shift in how government worked:</p>
+                <ul>
+                    <li>Legitimacy increasingly rested on <span class="key-term">expert oversight</span></li>
+                    <li>Complex industrial systems demanded <span class="key-term">surveillance</span></li>
+                    <li>The state positioned itself as <span class="key-term">guardian of everyday life</span></li>
+                </ul>
+                <aside class="notes">
+                    <h4>📖 What This Means</h4>
+                    <p><strong>Before:</strong> Government was mostly about maintaining order, enforcing property rights, and delivering mail. It didn't regulate private businesses much or oversee daily life.</p>
+
+                    <p><strong>After:</strong> Government claimed responsibility for protecting citizens from invisible threats in complex systems. You couldn't personally inspect every meatpacking plant, so government inspectors did it for you. You couldn't test every drug, so government labs did it for you.</p>
+
+                    <h4>🔑 The Modern State Emerges</h4>
+                    <p>This is how the modern administrative state was born. Today we take it for granted that the FDA tests drugs, the USDA inspects meat, OSHA regulates workplace safety, the EPA monitors pollution. All of these agencies descend from the Progressive Era belief that complex modern society requires expert government oversight.</p>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Key Synthesis Point</h2>
+                <div class="callout">
+                    <div class="callout-title">🔑 Major Takeaway</div>
+                    <p>The Progressive state expanded through <span class="key-term">crisis management</span>, not ideological consensus.</p>
+                </div>
+                <aside class="notes">
+                    <h4>💭 What This Means</h4>
+                    <p>The expansion of government power didn't happen because everyone agreed on political philosophy or because voters carefully debated the proper role of the state. It happened because crises (real or perceived) created moments when people demanded government action.</p>
+
+                    <h4>🤔 Think About Modern Parallels</h4>
+                    <ul>
+                        <li>9/11 led to massive expansion of security agencies</li>
+                        <li>2008 financial crisis led to new financial regulations</li>
+                        <li>COVID-19 led to public health interventions</li>
+                    </ul>
+                    <p>Crisis creates political opportunities for expanding state power—sometimes temporarily, sometimes permanently.</p>
+                </aside>
+            </section>
+
+            <!-- Part VI -->
+            <section class="section-divider">
+                <h2>Part VI</h2>
+                <h3 style="color: var(--misty-sky);">The Limits of Reform</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">What <em>The Jungle</em> did not change</p>
+            </section>
+
+            <section>
+                <h2>Sinclair's Disappointment</h2>
+                <p>Despite reform:</p>
+                <ul>
+                    <li>Labor conditions remained harsh</li>
+                    <li>Immigrant vulnerability persisted</li>
+                    <li>Structural inequality endured</li>
+                </ul>
+                <aside class="notes">
+                    <h4>📚 What Didn't Change</h4>
+                    <p>After 1906, the government inspected meatpacking plants to ensure the meat was safe. But:</p>
+                    <ul>
+                        <li>Workers still faced dangerous conditions</li>
+                        <li>Wages remained low</li>
+                        <li>Hours remained long</li>
+                        <li>Job security was nonexistent</li>
+                        <li>Workers had little power to negotiate</li>
+                        <li>Unions faced violent opposition</li>
+                    </ul>
+
+                    <h4>💭 Why?</h4>
+                    <p>Because the reforms addressed what middle-class consumers cared about (safe food), not what workers needed (decent jobs). The inspection regime made meat safer without changing the fundamental power imbalance between capital and labor.</p>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Critical Question</h2>
+                <div class="callout">
+                    <div class="callout-title">🤔 Question to Consider</div>
+                    <p>Why were some forms of suffering politically <span class="key-term">actionable</span> while others were not?</p>
+                </div>
+                <aside class="notes">
+                    <h4>🤔 Discussion Prompt</h4>
+                    <p>This is the key question for understanding Progressive reform. Why did food safety regulation pass immediately while labor protections took decades? Some possible answers:</p>
+
+                    <ul>
+                        <li><strong>Class power:</strong> Middle-class consumers had more political influence than working-class laborers</li>
+                        <li><strong>Economic interest:</strong> Food regulation didn't threaten capitalism; labor reform did</li>
+                        <li><strong>Personal threat:</strong> Contaminated food threatened everyone; exploitation threatened "others"</li>
+                        <li><strong>Ease of solution:</strong> Inspection was simpler than restructuring labor relations</li>
+                    </ul>
+
+                    <h4>💭 No Single Answer</h4>
+                    <p>Different historians emphasize different factors, but all agree that Progressive reform was selective—it addressed some problems while leaving others untouched.</p>
+                </aside>
+            </section>
+
+            <section>
+                <h2>A Recurring Progressive Pattern</h2>
+                <p>This reveals a broader tendency:</p>
+                <ul>
+                    <li>Reform <span class="key-term">stabilized capitalism</span> more often than it transformed it</li>
+                    <li><span class="key-term">Order and safety</span> took precedence over redistribution</li>
+                    <li>Reform addressed <span class="key-term">symptoms</span> more readily than structures</li>
+                </ul>
+                <aside class="notes">
+                    <h4>🔑 This is the Critical Interpretation</h4>
+                    <p>Food safety regulation made capitalism SAFER and more LEGITIMATE. By addressing the most outrageous abuses, it removed pressure for more radical change. Workers might have organized for socialism (as Sinclair hoped), but once their meat was safe, middle-class consumers lost interest in deeper reforms.</p>
+
+                    <h4>🎓 Historians Debate This</h4>
+                    <ul>
+                        <li><strong>Some historians</strong> see Progressivism as genuine reform that improved ordinary people's lives</li>
+                        <li><strong>Other historians</strong> see Progressivism as a way of preserving capitalism by making just enough changes to prevent revolution</li>
+                        <li><strong>Most historians</strong> see elements of both—Progressivism was neither purely altruistic nor purely self-serving</li>
+                    </ul>
+
+                    <h4>🤔 What Do You Think?</h4>
+                    <p>Were the Progressive reforms a success because they improved food safety and public health? Or a failure because they left deeper inequalities intact? Or is that a false choice?</p>
+                </aside>
+            </section>
+
+            <!-- Conclusion -->
+            <section class="section-divider">
+                <h2>Concluding Insights</h2>
+                <p style="color: var(--morning-mist); font-style: italic;">Making sense of Progressive reform</p>
+            </section>
+
+            <section>
+                <h2>Resist a Celebratory Narrative</h2>
+                <p>Progressivism was:</p>
+                <ul>
+                    <li><span class="key-term">Innovative</span></li>
+                    <li><span class="key-term">Emotionally powerful</span></li>
+                    <li><span class="key-term">Institutionally transformative</span></li>
+                    <li><span class="key-term">Morally uneven</span></li>
+                </ul>
+                <aside class="notes">
+                    <h4>🔑 Balanced Interpretation</h4>
+                    <p>Don't dismiss Progressivism as hypocritical or celebrate it as heroic. It was both genuinely reformist AND deeply limited. Progressives expanded democracy while also expanding control. They empowered government to protect people while also empowering it to regulate and police them.</p>
+
+                    <h4>💭 Why This Matters</h4>
+                    <p>Understanding Progressivism's contradictions helps us think more clearly about reform today. Good intentions don't guarantee good results. Expanding government power can both protect and control. Reform movements often benefit some groups more than others.</p>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Final Insight</h2>
+                <div class="callout">
+                    <div class="callout-title">🔑 Key Takeaway</div>
+                    <p>Progressive reforms protected the public while also redefining who needed protection—and who needed <span class="key-term">control</span>.</p>
+                </div>
+                <aside class="notes">
+                    <h4>🔑 Looking Forward</h4>
+                    <p>This theme—protection vs. control—runs through all four lectures in Chapter 21. The next lectures examine how Progressive reformers used similar tactics (exposure, expertise, government intervention) to regulate sexuality, gender, immigration, and reproduction. Each time, ask: Who was being protected? Who was being controlled?</p>
+
+                    <h4>📚 Prepare for Next Time</h4>
+                    <p>The next lecture examines the "white-slave panic" and moral policing of urban vice. We'll see how fear (rather than disgust) mobilized reform—and how sexuality became a target of Progressive intervention.</p>
+                </aside>
+            </section>
+
+            <!-- Closing Slide -->
+            <section>
+                <h2>End of Lecture 1</h2>
+                <h3 style="color: var(--misty-sky);">Next: Vice, Panic, and Policing Desire</h3>
+                <p style="margin-top: 2em; color: var(--morning-mist); font-style: italic;">Questions?</p>
+                <aside class="notes">
+                    <h4>📚 Review What We Covered</h4>
+                    <ul>
+                        <li>Defined Progressivism as belief in expertise and government intervention</li>
+                        <li>Explained Progressive faith in exposure and revelation</li>
+                        <li>Analyzed how Upton Sinclair used <em>The Jungle</em> to expose meatpacking</li>
+                        <li>Examined why disgust (not sympathy) drove food safety reform</li>
+                        <li>Showed how crisis expanded federal regulatory power</li>
+                        <li>Explored the limits of Progressive reform</li>
+                    </ul>
+
+                    <h4>🎓 Key Themes to Remember</h4>
+                    <ul>
+                        <li>Emotion often drove Progressive reform more than rationality</li>
+                        <li>Reforms succeeded when they addressed middle-class concerns</li>
+                        <li>The Progressive state expanded through crisis management</li>
+                        <li>Reform stabilized capitalism rather than transforming it</li>
+                    </ul>
+                </aside>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Reveal.js and plugins from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/zoom/zoom.js"></script>
+
+    <script>
+        Reveal.initialize({
+            width: 1920,
+            height: 1080,
+            margin: 0.1,
+            minScale: 0.2,
+            maxScale: 2.0,
+            controls: true,
+            progress: true,
+            center: true,
+            hash: true,
+            transition: 'slide',
+            plugins: [ RevealNotes, RevealHighlight, RevealZoom ]
+        });
+
+        // Pop-up functionality
+        function togglePopup(id) {
+            document.getElementById(id).classList.toggle('active');
+        }
+
+        // Close popup when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('popup')) {
+                e.target.classList.remove('active');
+            }
+        });
+
+        // Close popup with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.popup.active').forEach(p => p.classList.remove('active'));
+            }
+        });
+    </script>
+</body>
+</html>
