@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Myth of the Lost Cause, Part 2 - HIST 102</title>
+<!-- Reveal.js CSS from CDN -->
+<link href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&amp;family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --desert-flower: #FF9B8A;
+            --cattleya-orchid: #A25FB0;
+            --opera-mauve: #D4A5C8;
+            --blue-curacao: #48C9C9;
+            --spicy-mustard: #D9A757;
+            --mocha-mousse: #A78674;
+            --arabesque: #C8826D;
+            --dark-bg: #1A1A1A;
+            --light-text: #FAFAFA;
+            --popup-bg: #FAFAFA;
+            --popup-text: #1A1A1A;
+        }
+        
+        .reveal {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 28px;
+            background: var(--dark-bg);
+        }
+        
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--desert-flower);
+            text-transform: none;
+            line-height: 1.2;
+        }
+        
+        .reveal h1 { font-size: 2.8em; }
+        .reveal h2 { font-size: 2em; }
+        .reveal h3 { font-size: 1.5em; color: var(--opera-mauve); }
+        
+        .reveal p, .reveal li {
+            color: var(--light-text);
+            line-height: 1.5;
+        }
+        
+        .reveal a {
+            color: var(--blue-curacao);
+            text-decoration: underline;
+        }
+        
+        /* Section Title Slide */
+        .section-title-slide {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        
+        .section-title-slide h2 {
+            font-size: 2.5em;
+            color: var(--desert-flower);
+            border-bottom: 4px solid var(--cattleya-orchid);
+            padding-bottom: 0.3em;
+            margin-bottom: 0.5em;
+        }
+        
+        .section-title-slide .section-number {
+            font-size: 1.2em;
+            color: var(--blue-curacao);
+            margin-bottom: 0.5em;
+            font-weight: 600;
+        }
+        
+        .section-title-slide .section-subtitle {
+            font-size: 1.1em;
+            color: var(--opera-mauve);
+            font-style: italic;
+        }
+        
+        /* Keyboard Shortcuts Menu */
+        .shortcuts-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(72, 201, 201, 0.2);
+            border: 2px solid var(--blue-curacao);
+            color: var(--blue-curacao);
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.7em;
+            z-index: 100;
+            font-family: 'Open Sans', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .shortcuts-btn:hover {
+            background: rgba(72, 201, 201, 0.4);
+        }
+        
+        .shortcuts-popup {
+            display: none;
+            position: fixed;
+            bottom: 70px;
+            left: 20px;
+            background: var(--popup-bg);
+            color: var(--popup-text);
+            padding: 1.2em;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            z-index: 1000;
+            font-size: 0.65em;
+            max-width: 320px;
+            border: 3px solid var(--cattleya-orchid);
+        }
+        
+        .shortcuts-popup.active { display: block; }
+        
+        .shortcuts-popup h4 {
+            margin: 0 0 0.8em 0;
+            color: var(--cattleya-orchid);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1em;
+        }
+        
+        .shortcuts-popup table {
+            width: 100%;
+            border-collapse: collapse;
+            color: var(--popup-text);
+        }
+        
+        .shortcuts-popup td {
+            padding: 4px 8px;
+            border-bottom: 1px solid #ddd;
+            color: var(--popup-text);
+        }
+        
+        .shortcuts-popup kbd {
+            background: var(--dark-bg);
+            color: var(--desert-flower);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.95em;
+        }
+        
+        .shortcuts-close {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            cursor: pointer;
+            color: var(--arabesque);
+            font-size: 1.3em;
+        }
+        
+        /* Pop-up/Modal styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--popup-bg);
+            color: var(--popup-text);
+            padding: 2em;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            max-width: 65%;
+            max-height: 70%;
+            overflow-y: auto;
+            z-index: 1000;
+            border: 4px solid var(--cattleya-orchid);
+            font-size: 0.85em;
+        }
+        
+        .popup.active { display: block; }
+        
+        .popup h3 {
+            color: var(--cattleya-orchid);
+            margin-top: 0;
+        }
+        
+        .popup p, .popup li {
+            color: var(--popup-text);
+        }
+        
+        .popup ul {
+            padding-left: 1.5em;
+        }
+        
+        .popup li {
+            margin-bottom: 0.5em;
+        }
+        
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 2em;
+            cursor: pointer;
+            color: var(--arabesque);
+        }
+        
+        .popup-trigger {
+            color: var(--blue-curacao);
+            text-decoration: underline dotted;
+            cursor: pointer;
+            border-bottom: 2px dotted var(--blue-curacao);
+        }
+        
+        .popup-trigger:hover {
+            color: var(--cattleya-orchid);
+            border-bottom-color: var(--cattleya-orchid);
+        }
+        
+        /* Image placeholder styling */
+        .img-placeholder {
+            background: linear-gradient(135deg, var(--opera-mauve) 0%, var(--arabesque) 100%);
+            border: 3px dashed var(--cattleya-orchid);
+            padding: 2em;
+            text-align: center;
+            color: var(--dark-bg);
+            font-style: italic;
+            border-radius: 12px;
+            margin: 1em auto;
+        }
+        
+        .img-placeholder strong {
+            display: block;
+            font-size: 1.1em;
+            margin-bottom: 0.5em;
+        }
+        
+        /* Key term styling */
+        .key-term {
+            color: var(--cattleya-orchid);
+            font-weight: 600;
+        }
+        
+        /* Primary source styling */
+        .primary-source {
+            background: rgba(217, 167, 87, 0.15);
+            border-left: 5px solid var(--spicy-mustard);
+            padding: 1em 1.5em;
+            margin: 1em 0;
+            font-style: italic;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .primary-source .attribution {
+            text-align: right;
+            font-size: 0.85em;
+            color: var(--mocha-mousse);
+            margin-top: 0.8em;
+            font-style: normal;
+        }
+        
+        /* Claim box styling */
+        .claim-box {
+            background: rgba(162, 95, 176, 0.15);
+            border: 3px solid var(--cattleya-orchid);
+            padding: 1.2em;
+            border-radius: 12px;
+            margin: 1em 0;
+        }
+        
+        .claim-box h3 {
+            color: var(--cattleya-orchid);
+            margin-top: 0;
+            font-size: 1.3em;
+        }
+        
+        /* Timeline styling */
+        .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            margin: 0.8em 0;
+            padding: 0.5em;
+            border-left: 4px solid var(--blue-curacao);
+            padding-left: 1em;
+        }
+        
+        .timeline-date {
+            color: var(--spicy-mustard);
+            font-weight: bold;
+            min-width: 120px;
+            font-size: 1.1em;
+        }
+        
+        /* Assessment Section Styling */
+        .assessment-section {
+            background: linear-gradient(135deg, rgba(162, 95, 176, 0.1) 0%, rgba(72, 201, 201, 0.1) 100%);
+            border: 3px solid var(--cattleya-orchid);
+            border-radius: 15px;
+            padding: 1.5em;
+            text-align: left;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        
+        .assessment-section h2 {
+            text-align: center;
+            margin-bottom: 0.8em;
+        }
+        
+        /* Fillable Form Styling */
+        .fillable-form {
+            background: white;
+            color: var(--popup-text);
+            padding: 1.5em;
+            border-radius: 10px;
+            margin: 1em 0;
+            page-break-inside: avoid;
+        }
+        
+        .fillable-form h4 {
+            color: var(--cattleya-orchid);
+            margin-top: 0;
+            font-family: 'Montserrat', sans-serif;
+            border-bottom: 2px solid var(--cattleya-orchid);
+            padding-bottom: 0.3em;
+        }
+        
+        .fillable-form label {
+            display: block;
+            margin: 1em 0 0.3em 0;
+            font-weight: 600;
+            color: var(--popup-text);
+        }
+        
+        .fillable-form textarea {
+            width: 100%;
+            min-height: 80px;
+            padding: 10px;
+            border: 2px solid var(--mocha-mousse);
+            border-radius: 8px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.9em;
+            resize: vertical;
+            box-sizing: border-box;
+            color: var(--popup-text);
+            background: #fff;
+        }
+        
+        .fillable-form textarea:focus {
+            outline: none;
+            border-color: var(--blue-curacao);
+            box-shadow: 0 0 5px rgba(72, 201, 201, 0.5);
+        }
+        
+        .fillable-form .question-number {
+            color: var(--cattleya-orchid);
+            font-weight: bold;
+        }
+        
+        /* Multiple Choice Quiz Styling */
+        .mc-quiz {
+            background: white;
+            color: var(--popup-text);
+            padding: 1.5em;
+            border-radius: 10px;
+            margin: 1em 0;
+            text-align: left;
+        }
+        
+        .mc-quiz h4 {
+            color: var(--cattleya-orchid);
+            margin-top: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .mc-question {
+            margin-bottom: 1.5em;
+            padding-bottom: 1em;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .mc-question:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .mc-question p {
+            color: var(--popup-text);
+            font-weight: 600;
+            margin-bottom: 0.8em;
+        }
+        
+        .mc-option {
+            display: block;
+            padding: 0.6em 1em;
+            margin: 0.4em 0;
+            background: #f5f5f5;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--popup-text);
+        }
+        
+        .mc-option:hover {
+            background: #e8e8e8;
+            border-color: var(--blue-curacao);
+        }
+        
+        .mc-option.selected {
+            border-color: var(--blue-curacao);
+            background: rgba(72, 201, 201, 0.15);
+        }
+        
+        .mc-option.correct {
+            border-color: #27ae60;
+            background: rgba(39, 174, 96, 0.2);
+        }
+        
+        .mc-option.incorrect {
+            border-color: #c0392b;
+            background: rgba(192, 57, 43, 0.15);
+        }
+        
+        .mc-feedback {
+            display: none;
+            padding: 0.8em;
+            border-radius: 8px;
+            margin-top: 0.5em;
+            font-weight: 600;
+        }
+        
+        .mc-feedback.show { display: block; }
+        
+        .mc-feedback.correct {
+            background: rgba(39, 174, 96, 0.2);
+            color: #27ae60;
+        }
+        
+        .mc-feedback.incorrect {
+            background: rgba(192, 57, 43, 0.15);
+            color: #c0392b;
+        }
+        
+        /* Print Styles */
+        @media print {
+            .reveal { background: white !important; }
+            .fillable-form { border: 2px solid #333; page-break-inside: avoid; }
+            .fillable-form textarea { border: 1px solid #333; min-height: 100px; }
+            .shortcuts-btn, .shortcuts-popup { display: none !important; }
+            .mc-quiz { border: 2px solid #333; }
+        }
+        
+        .subtitle { color: var(--opera-mauve); font-style: italic; font-size: 0.9em; }
+        
+        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 2em; text-align: left; }
+        .column { padding: 1em; }
+        
+        .reveal ul { list-style-type: none; padding-left: 0; }
+        .reveal ul li { padding-left: 1.5em; position: relative; margin-bottom: 0.6em; }
+        .reveal ul li::before { content: "•"; color: var(--desert-flower); position: absolute; left: 0; font-size: 1.2em; }
+        
+        .scrollable-slide { height: 90vh; overflow-y: auto; padding-right: 20px; }
+        
+        .bio-card { display: flex; gap: 2em; align-items: flex-start; text-align: left; }
+        .bio-card .bio-text { flex: 1; }
+        .bio-card .bio-text h3 { margin-top: 0; }
+    </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<!-- TITLE SLIDE -->
+
+<!-- INTRODUCTION SECTION -->
+
+
+
+<!-- SECTION I: VETERANS AND WOMEN -->
+
+
+
+<!-- UDC SUBSECTION -->
+
+
+<!-- section>
+                <h2>Dixie's Daughters</h2>
+                <div class="bio-card">
+                    <div class="img-placeholder" style="width: 300px; height: 380px; flex-shrink: 0;">
+                        <strong>IMAGE PLACEHOLDER</strong><br>
+                        <em>Book cover</em><br><br>
+                        <strong>Search:</strong> "Karen Cox Dixie's Daughters book cover"<br>
+                        <strong>Sources:</strong> Publisher website
+                    </div>
+                    <div class="bio-text">
+                        <h3>Karen L. Cox's Essential Study</h3>
+                        <p><em>Dixie's Daughters: The United Daughters of the Confederacy and the Preservation of Confederate Culture</em> (2003)</p>
+                        <p style="margin-top: 1em;">Cox documents how UDC members saw themselves as <strong>warriors for truth</strong>—even though the "truth" they defended was historically false.</p>
+                        <p style="margin-top: 1em; color: var(--spicy-mustard);">
+                            <strong>Key insight:</strong> If you want to shape how a society thinks, you <span class="key-term">control what children learn in school</span>.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- ASSESSMENT BREAK 1 -->
+
+<!-- SECTION II: EDUCATIONAL CONTROL -->
+
+
+
+<!-- MONUMENTS SUBSECTION -->
+
+
+
+<!-- ASSESSMENT BREAK 2 -->
+
+<!-- END OF CLASS SLIDE -->
+
+<!-- SECTION III: ACADEMIC AND CIVIL RELIGION -->
+
+
+
+<!-- Title Slide -->
+
+<!-- Slide 1: Core Narrative -->
+
+<!-- Slide 2: Moral Diagnosis -->
+
+<!-- Slide 3: The Central Premise -->
+
+<!-- Slide 4: How It Entered Textbooks -->
+
+<!-- Assessment Break -->
+
+<!-- Slide 5: Critique & Revision -->
+
+<!-- Slide 6: Who Overturned Dunning -->
+
+<!-- Conclusion Slide -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ASSESSMENT BREAK 3 -->
+
+<!-- SECTION IV: POPULAR CULTURE -->
+
+<!-- MOONLIGHT AND MAGNOLIAS SUBSECTION -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ASSESSMENT BREAK 4 -->
+
+
+
+
+<section>
+<h2>The United Confederate Veterans</h2>
+<div class="two-column">
+<div class="column">
+<div class="img-placeholder" style="height: 320px;">
+<strong>IMAGE PLACEHOLDER</strong><br/>
+<em>UCV reunion photograph</em><br/><br/>
+<strong>Search:</strong> "United Confederate Veterans reunion"<br/>
+<strong>Sources:</strong> Library of Congress
+                        </div>
+</div>
+<div class="column" style="text-align: left;">
+<p><strong>Founded:</strong> 1889</p>
+<p style="margin-top: 0.5em;">These weren't just social clubs for aging soldiers. They were political organizations dedicated to shaping how the war would be remembered.</p>
+<ul style="font-size: 0.9em;">
+<li>Veterans' reunions featured speeches reinforcing honor and sacrifice</li>
+<li>Gatherings brought together thousands</li>
+<li>Created shared identity around Lost Cause principles</li>
+</ul>
+</div>
+</div>
+</section><section>
+<h2>Veterans' Print Culture</h2>
+<div class="two-column">
+<div class="column" style="text-align: left;">
+<p>Periodicals like <em>Confederate Veteran</em> magazine circulated standardized interpretations of the war.</p>
+<p style="margin-top: 1em;">These publications <span class="popup-trigger" onclick="togglePopup('policing-popup')"><strong>policed acceptable memory</strong></span>:</p>
+<ul style="font-size: 0.9em;">
+<li>Elevated favored leaders like Lee and Jackson</li>
+<li>Marginalized or demonized figures who didn't fit</li>
+<li>Created an "authorized version" of Civil War memory</li>
+</ul>
+</div>
+<div class="column">
+<div class="img-placeholder" style="height: 350px;">
+<strong>IMAGE PLACEHOLDER</strong><br/>
+<em>Confederate Veteran magazine cover</em><br/><br/>
+<strong>Search:</strong> "Confederate Veteran magazine cover"<br/>
+<strong>Sources:</strong> HathiTrust, Internet Archive
+                        </div>
+</div>
+</div>
+<div class="popup" id="policing-popup">
+<span class="popup-close" onclick="togglePopup('policing-popup')">×</span>
+<h3>Policing Acceptable Memory</h3>
+<p>These publications actively enforced what could and couldn't be said about the Civil War:</p>
+<ul>
+<li>Published attacks on anyone who deviated from the approved narrative</li>
+<li>Elevated some figures while demonizing others</li>
+<li>Created social pressure to conform</li>
+<li>Established which memories were "authentic"</li>
+</ul>
+</div>
+</section><section>
+<div class="section-title-slide">
+<p class="section-number">The Real Power</p>
+<h2>The United Daughters of the Confederacy</h2>
+<p class="section-subtitle">Women as warriors for memory</p>
+</div>
+</section><section>
+<h2>The United Daughters of the Confederacy</h2>
+<div class="two-column">
+<div class="column">
+<div class="img-placeholder" style="height: 350px;">
+<strong>IMAGE PLACEHOLDER</strong><br/>
+<em>UDC members at monument dedication</em><br/><br/>
+<strong>Search:</strong> "United Daughters Confederacy monument"<br/>
+<strong>Sources:</strong> Library of Congress
+                        </div>
+</div>
+<div class="column" style="text-align: left;">
+<p><strong>Founded:</strong> 1894</p>
+<p style="margin-top: 0.5em;">While men aged and died, women extended the myth into:</p>
+<ul style="font-size: 0.9em;">
+<li>Schools</li>
+<li>Churches</li>
+<li>Homes</li>
+<li>Public spaces</li>
+</ul>
+</div>
+</div>
+</section><section>
+<div class="section-title-slide">
+<p class="section-number">Section II</p>
+<h2>The UDC and Educational Control</h2>
+<p class="section-subtitle">Shaping what children learned about the war</p>
+</div>
+</section><section>
+<h2>Textbook Regulation</h2>
+<p>UDC pressure ensured that textbooks conformed to Lost Cause narratives.</p>
+<p style="margin-top: 1em;"><strong>Conforming textbooks portrayed:</strong></p>
+<ul style="font-size: 0.9em;">
+<li><strong>Slavery:</strong> As benevolent, a civilizing institution</li>
+<li><strong>Enslaved people:</strong> As loyal and content</li>
+<li><strong>Abolitionists:</strong> As fanatics who provoked unnecessary war</li>
+<li><strong>Reconstruction:</strong> As catastrophe and "black rule"</li>
+<li><strong>The Confederacy:</strong> As honorable, fighting for principle</li>
+</ul>
+</section><section>
+<h2>Children's Catechisms</h2>
+<p>Beyond textbooks, the UDC created <span class="popup-trigger" onclick="togglePopup('catechism-popup')"><strong>children's catechisms</strong></span>—question-and-answer manuals that taught Lost Cause doctrine as moral truth.</p>
+<div class="primary-source" style="margin-top: 1em;">
+<p><strong>Q:</strong> What caused the war between the states?</p>
+<p><strong>A:</strong> [memorized Lost Cause answer]</p>
+<div class="attribution">Format borrowed from religious instruction</div>
+</div>
+<div class="popup" id="catechism-popup">
+<span class="popup-close" onclick="togglePopup('catechism-popup')">×</span>
+<h3>Children's Catechisms</h3>
+<p><strong>What is a catechism?</strong> A summary of religious doctrine in question-and-answer format for teaching children.</p>
+<p><strong>Why use this format for history?</strong></p>
+<ul>
+<li>Made historical claims feel as certain as religious truth</li>
+<li>Required children to memorize "correct" answers</li>
+<li>Presented interpretation as established fact</li>
+<li>Made questioning feel like heresy</li>
+</ul>
+</div>
+</section><section>
+<div class="section-title-slide">
+<p class="section-number">The First Monument Wave</p>
+<h2>Confederate Monuments and Jim Crow</h2>
+<p class="section-subtitle">1890s–1920s</p>
+</div>
+</section><section>
+<h2>The First Monument Wave</h2>
+<p style="font-size: 1.1em; color: var(--spicy-mustard);"><strong>Most Confederate monuments were not built immediately after the Civil War.</strong></p>
+<p style="margin-top: 1em;">The first major wave occurred from the <strong>1890s through the 1920s</strong>—a full generation after the war.</p>
+<p style="margin-top: 1em;"><strong>What else was happening during this period?</strong></p>
+<ul>
+<li>Systematic disenfranchisement of Black voters</li>
+<li>Creation of segregation laws</li>
+<li>Rise of racial terror, including thousands of lynchings</li>
+</ul>
+</section><section>
+<h2>Aligning Memory with Power</h2>
+<div class="two-column">
+<div class="column">
+<div class="img-placeholder" style="height: 350px;">
+<strong>IMAGE PLACEHOLDER</strong><br/>
+<em>Confederate monument at courthouse</em><br/><br/>
+<strong>Search:</strong> "Confederate monument courthouse square"<br/>
+<strong>Sources:</strong> SPLC, state archives
+                        </div>
+</div>
+<div class="column" style="text-align: left;">
+<p>These monuments weren't simply about mourning the dead.</p>
+<p style="margin-top: 1em;">They were about <span class="key-term">aligning memory with power</span>.</p>
+<p style="margin-top: 1em;">A Confederate statue in front of a courthouse where Black citizens couldn't serve on juries sent a very clear message about who belonged in public life and who didn't.</p>
+</div>
+</div>
+</section><section>
+<div class="section-title-slide">
+<h2>That's All for Today</h2>
+<p class="section-subtitle">Next time: How the Lost Cause went from regional memory to national "truth" — the Dunning School, <em>Birth of a Nation</em>, <em>Gone with the Wind</em>, and the ongoing battle over how we remember.</p>
+</div>
+<aside class="notes">
+<h4>📚 Instructor Note</h4>
+<p>This marks the end of in-class content for Part 2A. Part 2B covers academic legitimation, popular culture, Jim Crow as political technology, the second monument wave, and counter-memory traditions.</p>
+</aside>
+</section></div>
+</div>
+<!-- Reveal.js Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/zoom/zoom.js"></script>
+<script>
+        Reveal.initialize({
+            width: 1920, height: 1080, margin: 0.08,
+            minScale: 0.2, maxScale: 2.0,
+            controls: true, progress: true, center: true, hash: true,
+            transition: 'slide', keyboard: true, overview: true, help: true,
+            plugins: [ RevealNotes, RevealHighlight, RevealZoom ]
+        });
+        
+        function toggleShortcuts() {
+            document.getElementById('shortcuts-popup').classList.toggle('active');
+        }
+        
+        function togglePopup(id) {
+            document.querySelectorAll('.popup').forEach(p => {
+                if (p.id !== id) p.classList.remove('active');
+            });
+            document.getElementById(id).classList.toggle('active');
+        }
+        
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.popup') && !e.target.closest('.popup-trigger') && !e.target.closest('.shortcuts-btn')) {
+                document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+            }
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+            }
+        });
+        
+        document.querySelectorAll('.mc-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const question = this.closest('.mc-question');
+                const correctAnswer = question.dataset.correct;
+                const selectedValue = this.dataset.value;
+                const feedback = question.querySelector('.mc-feedback');
+                
+                question.querySelectorAll('.mc-option').forEach(opt => {
+                    opt.classList.remove('selected', 'correct', 'incorrect');
+                });
+                
+                this.classList.add('selected');
+                
+                if (selectedValue === correctAnswer) {
+                    this.classList.add('correct');
+                    feedback.textContent = 'Correct!';
+                    feedback.className = 'mc-feedback show correct';
+                } else {
+                    this.classList.add('incorrect');
+                    question.querySelectorAll('.mc-option').forEach(opt => {
+                        if (opt.dataset.value === correctAnswer) opt.classList.add('correct');
+                    });
+                    feedback.textContent = 'Incorrect. The correct answer is highlighted.';
+                    feedback.className = 'mc-feedback show incorrect';
+                }
+            });
+        });
+        
+        Reveal.on('slidechanged', function(event) {
+            const shortcutsBtn = document.querySelector('.shortcuts-btn');
+            const shortcutsPopup = document.getElementById('shortcuts-popup');
+            if (event.indexh === 0) {
+                shortcutsBtn.style.display = 'block';
+            } else {
+                shortcutsBtn.style.display = 'none';
+                shortcutsPopup.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

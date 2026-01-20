@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Myth of the Lost Cause | HIST 101</title>
+    <title>The Myth of the Lost Cause | HIST 101 & 102</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,8 +41,124 @@
             overflow-x: hidden;
         }
         
-        /* Decorative background pattern */
-        body::before {
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('images/lost_cause_collage.jpg');
+            background-size: cover;
+            background-position: center top;
+            z-index: 1;
+        }
+        
+        /* Dark overlay with gradient for text readability */
+        .hero-background::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(26, 26, 26, 0.5) 0%,
+                rgba(26, 26, 26, 0.7) 50%,
+                rgba(26, 26, 26, 0.85) 100%
+            );
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 4rem 2rem;
+            max-width: 900px;
+        }
+        
+        .hero .course-code {
+            font-size: 0.9rem;
+            letter-spacing: 0.2em;
+            color: var(--desert-flower);
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            color: white;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        }
+        
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: var(--opera-mauve);
+            font-style: italic;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero .intro-text {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 720px;
+            margin: 0 auto;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            color: var(--desert-flower);
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0.8;
+            animation: bounce 2s infinite;
+        }
+        
+        .scroll-indicator::after {
+            content: '↓';
+            font-size: 1.25rem;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-8px); }
+            60% { transform: translateX(-50%) translateY(-4px); }
+        }
+        
+        /* Decorative background pattern for main content */
+        main::before {
             content: '';
             position: fixed;
             top: 0;
@@ -57,30 +173,7 @@
             z-index: -1;
         }
         
-        /* Header */
-        header {
-            padding: 4rem 2rem 3rem;
-            text-align: center;
-            position: relative;
-        }
-        
-        header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height: 3px;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                var(--cattleya-orchid) 20%, 
-                var(--desert-flower) 50%,
-                var(--cattleya-orchid) 80%, 
-                transparent 100%
-            );
-        }
-        
+        /* Legacy header styles (kept for potential reuse) */
         .course-code {
             font-size: 0.875rem;
             letter-spacing: 0.15em;
@@ -125,6 +218,15 @@
             padding: 4rem 2rem;
         }
         
+        /* Three-column grid for lectures */
+        .lecture-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        /* Two-column grid for assignments */
         .content-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
@@ -190,85 +292,93 @@
             transform: scaleX(1);
         }
         
-        .content-card:nth-child(2)::before {
+        /* Lecture card color variations */
+        .lecture-grid .content-card:nth-child(1)::before {
+            background: linear-gradient(90deg, var(--desert-flower), var(--cattleya-orchid));
+        }
+        
+        .lecture-grid .content-card:nth-child(2)::before {
             background: linear-gradient(90deg, var(--blue-curacao), var(--opera-mauve));
         }
         
-        .content-card:nth-child(3)::before {
+        .lecture-grid .content-card:nth-child(3)::before {
             background: linear-gradient(90deg, var(--spicy-mustard), var(--arabesque));
         }
         
-        .content-card:nth-child(4)::before {
+        /* Assignment card color variations */
+        .content-grid .content-card:nth-child(1)::before {
             background: linear-gradient(90deg, var(--opera-mauve), var(--mocha-mousse));
         }
         
+        .content-grid .content-card:nth-child(2)::before {
+            background: linear-gradient(90deg, var(--arabesque), var(--spicy-mustard));
+        }
+        
         .card-header {
-            padding: 2.5rem 2rem 0;
+            padding: 2rem 1.5rem 0;
         }
         
         .part-number {
             display: inline-block;
             font-family: 'Playfair Display', serif;
-            font-size: 0.875rem;
+            font-size: 0.75rem;
             font-weight: 700;
             letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--cattleya-orchid);
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
         }
         
-        .content-card:nth-child(2) .part-number {
+        .lecture-grid .content-card:nth-child(2) .part-number {
             color: var(--blue-curacao);
         }
         
-        .content-card:nth-child(3) .part-number {
+        .lecture-grid .content-card:nth-child(3) .part-number {
             color: var(--spicy-mustard);
-        }
-        
-        .content-card:nth-child(4) .part-number {
-            color: var(--opera-mauve);
         }
         
         .card-title {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--dark-charcoal);
             line-height: 1.2;
-            margin-bottom: 1rem;
+            margin-bottom: 0.25rem;
         }
         
         .card-period {
-            font-size: 1rem;
+            font-size: 0.875rem;
             color: var(--mocha-mousse);
             font-style: italic;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0;
         }
         
         .card-content {
-            padding: 0 2rem 2.5rem;
+            padding: 1.25rem 1.5rem;
         }
         
         .card-description {
             font-size: 1rem;
-            line-height: 1.7;
             color: var(--dark-charcoal);
-            opacity: 0.8;
-            margin-bottom: 2rem;
+            opacity: 0.85;
+            margin-bottom: 1rem;
+            line-height: 1.6;
         }
         
         .topics-list {
             list-style: none;
-            margin-bottom: 2rem;
+            padding: 0;
+            margin: 0;
         }
         
         .topics-list li {
-            position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.75rem;
-            font-size: 0.9375rem;
+            font-size: 0.9rem;
             color: var(--dark-charcoal);
             opacity: 0.75;
+            padding-left: 1.25rem;
+            position: relative;
+            margin-bottom: 0.4rem;
+            line-height: 1.4;
         }
         
         .topics-list li::before {
@@ -276,33 +386,46 @@
             position: absolute;
             left: 0;
             color: var(--desert-flower);
-            font-weight: bold;
         }
         
-        .content-card:nth-child(2) .topics-list li::before {
+        .lecture-grid .content-card:nth-child(2) .topics-list li::before {
             color: var(--blue-curacao);
         }
         
-        .content-card:nth-child(3) .topics-list li::before {
+        .lecture-grid .content-card:nth-child(3) .topics-list li::before {
             color: var(--spicy-mustard);
         }
         
-        .content-card:nth-child(4) .topics-list li::before {
-            color: var(--opera-mauve);
+        .card-footer {
+            padding: 1.25rem 1.5rem 1.5rem;
+            border-top: 1px solid var(--soft-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
-        .card-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1.5rem 2rem;
-            background: var(--soft-gray);
-            border-top: 1px solid rgba(26, 26, 26, 0.06);
+        .course-badge {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: white;
+            background: var(--mocha-mousse);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+        }
+        
+        .course-badge.hist101 {
+            background: var(--cattleya-orchid);
+        }
+        
+        .course-badge.hist102 {
+            background: var(--blue-curacao);
         }
         
         .view-link {
             font-family: 'Playfair Display', serif;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 600;
             color: var(--dark-charcoal);
             display: flex;
@@ -325,6 +448,32 @@
             transform: translateX(4px);
         }
         
+        /* Arc Overview Box */
+        .arc-overview {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 
+                0 4px 6px rgba(26, 26, 26, 0.04),
+                0 12px 24px rgba(26, 26, 26, 0.08);
+            border-left: 5px solid var(--cattleya-orchid);
+        }
+        
+        .arc-overview h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            color: var(--dark-charcoal);
+            margin-bottom: 1rem;
+        }
+        
+        .arc-overview p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--dark-charcoal);
+            opacity: 0.85;
+        }
+        
         /* Footer */
         footer {
             text-align: center;
@@ -345,7 +494,58 @@
         }
         
         /* Responsive */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.25rem;
+            }
+            
+            .lecture-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .card-header {
+                padding: 2.5rem 2rem 0;
+            }
+            
+            .card-content {
+                padding: 1.5rem 2rem;
+            }
+            
+            .card-footer {
+                padding: 1.5rem 2rem 2rem;
+            }
+            
+            .card-title {
+                font-size: 2rem;
+            }
+        }
+        
         @media (max-width: 768px) {
+            .hero {
+                min-height: 60vh;
+            }
+            
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.125rem;
+            }
+            
+            .hero .intro-text {
+                font-size: 1rem;
+            }
+            
+            .hero-content {
+                padding: 3rem 1.5rem;
+            }
+            
             h1 {
                 font-size: 2.5rem;
             }
@@ -366,6 +566,10 @@
             .section-header h2 {
                 font-size: 2rem;
             }
+            
+            .scroll-indicator {
+                display: none;
+            }
         }
         
         /* Animation on load */
@@ -384,83 +588,123 @@
             animation: fadeInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) backwards;
         }
         
-        .content-card:nth-child(1) {
+        .lecture-grid .content-card:nth-child(1) {
             animation-delay: 0.1s;
         }
         
-        .content-card:nth-child(2) {
+        .lecture-grid .content-card:nth-child(2) {
             animation-delay: 0.2s;
         }
         
-        .content-card:nth-child(3) {
+        .lecture-grid .content-card:nth-child(3) {
             animation-delay: 0.3s;
         }
         
-        .content-card:nth-child(4) {
+        .content-grid .content-card:nth-child(1) {
             animation-delay: 0.4s;
+        }
+        
+        .content-grid .content-card:nth-child(2) {
+            animation-delay: 0.5s;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="course-code">HIST 101 • US History to 1877</div>
-        <h1>The Myth of the Lost Cause</h1>
-        <p class="subtitle">How the South Won the War of Memory</p>
-        <p class="intro-text">
-            This module examines how white Southerners constructed a mythological narrative about the Civil War—one that transformed military defeat into moral victory, erased slavery's centrality, and shaped American memory for over a century.
-        </p>
-    </header>
+    <!-- Hero Section with Background Image -->
+    <section class="hero">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <div class="course-code">HIST 101 & 102 • US History Survey</div>
+            <h1>The Myth of the Lost Cause</h1>
+            <p class="subtitle">How the South Won the War of Memory</p>
+            <p class="intro-text">
+                This three-lecture arc examines how white Southerners constructed a mythological narrative about the Civil War—one that transformed military defeat into moral victory, erased slavery's centrality, and eventually captured American culture for over a century.
+            </p>
+        </div>
+        <div class="scroll-indicator">Explore</div>
+    </section>
     
     <main>
         <!-- Lectures Section -->
         <div class="section-header">
-            <h2>Lectures</h2>
-            <p>Understanding the origins and legacy of the Lost Cause myth</p>
+            <h2>Lecture Arc</h2>
+            <p>From Confederate defeat to American culture</p>
         </div>
         
-        <div class="content-grid">
+        <div class="arc-overview">
+            <h3>The Three-Lecture Journey</h3>
+            <p>This series traces the Lost Cause from its origins as a Confederate coping mechanism during the war itself, through its institutionalization via monuments, textbooks, and veterans' organizations in the Gilded Age, to its final transformation into mainstream American culture through academic scholarship and Hollywood film. By the mid-twentieth century, Lost Cause mythology had become so deeply embedded in American consciousness that many assumed it was simply "history."</p>
+        </div>
+        
+        <div class="lecture-grid">
             <!-- Part 1 Card -->
-            <a href="Lost_Cause_Part1_Reveal_v5.html" class="content-card">
+            <a href="Lost_Cause_Part1_Birth.html" class="content-card">
                 <div class="card-header">
                     <div class="part-number">Part One</div>
-                    <h2 class="card-title">Origins of the Myth</h2>
+                    <h2 class="card-title">Birth of the Myth</h2>
                     <p class="card-period">1861–1877</p>
                 </div>
                 <div class="card-content">
                     <p class="card-description">
-                        How did the Lost Cause emerge during and immediately after the Civil War? We trace the myth from its origins as a wartime coping mechanism through its crystallization into five core claims by 1877.
+                        How did the Lost Cause emerge during and immediately after the Civil War?
                     </p>
                     <ul class="topics-list">
-                        <li>The psychology of defeat and the need for meaning</li>
-                        <li>The five core claims: states' rights, loyal slaves, saintly leaders, harmonious society, and fanatical abolitionists</li>
-                        <li>Key architects: Edward Pollard and Jubal Early</li>
+                        <li>Psychology of defeat and the need for meaning</li>
+                        <li>The five core claims: states' rights, loyal slaves, saintly leaders</li>
+                        <li>Key architects: Pollard and Early</li>
                         <li>Transformation into civil religion by 1877</li>
                     </ul>
                 </div>
                 <div class="card-footer">
+                    <span class="course-badge hist101">HIST 101</span>
                     <span class="view-link">View Lecture</span>
                 </div>
             </a>
             
             <!-- Part 2 Card -->
-            <a href="Lost_Cause_Part2_Reveal_v2.html" class="content-card">
+            <a href="Lost_Cause_Part2_Institutionalization.html" class="content-card">
                 <div class="card-header">
                     <div class="part-number">Part Two</div>
-                    <h2 class="card-title">Institutionalization & Legacy</h2>
-                    <p class="card-period">1877–Present</p>
+                    <h2 class="card-title">Institutionalization</h2>
+                    <p class="card-period">1880s–1920s</p>
                 </div>
                 <div class="card-content">
                     <p class="card-description">
-                        How did a regional coping mechanism become a national memory regime? We examine how the Lost Cause was institutionalized through education, monuments, popular culture, and political technology.
+                        How did a regional coping mechanism become embedded in American institutions?
                     </p>
                     <ul class="topics-list">
-                        <li>United Daughters of the Confederacy and monument campaigns</li>
-                        <li>The Dunning School and academic legitimation</li>
-                        <li><em>Birth of a Nation</em> and <em>Gone with the Wind</em></li>
-                        <li>Confederate symbols during Civil Rights and today</li>
+                        <li>United Daughters of the Confederacy</li>
+                        <li>Monument campaigns and public memory</li>
+                        <li>Textbook control and educational capture</li>
+                        <li>Blue-Gray reconciliation and its costs</li>
                     </ul>
                 </div>
                 <div class="card-footer">
+                    <span class="course-badge hist102">HIST 102</span>
+                    <span class="view-link">View Lecture</span>
+                </div>
+            </a>
+            
+            <!-- Part 3 Card -->
+            <a href="Lost_Cause_Part3_Nationalization.html" class="content-card">
+                <div class="card-header">
+                    <div class="part-number">Part Three</div>
+                    <h2 class="card-title">Nationalization</h2>
+                    <p class="card-period">1890s–1940s</p>
+                </div>
+                <div class="card-content">
+                    <p class="card-description">
+                        How did Lost Cause mythology become mainstream American culture?
+                    </p>
+                    <ul class="topics-list">
+                        <li>The Dunning School and academic legitimation</li>
+                        <li><em>Birth of a Nation</em> (1915)</li>
+                        <li><em>Gone with the Wind</em> (1936/1939)</li>
+                        <li>Lost Cause as American aesthetic</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <span class="course-badge hist102">HIST 102</span>
                     <span class="view-link">View Lecture</span>
                 </div>
             </a>
@@ -492,6 +736,7 @@
                     </ul>
                 </div>
                 <div class="card-footer">
+                    <span class="course-badge">Assignment</span>
                     <span class="view-link">Open Bibliography Form</span>
                 </div>
             </a>
@@ -515,6 +760,7 @@
                     </ul>
                 </div>
                 <div class="card-footer">
+                    <span class="course-badge">Assignment</span>
                     <span class="view-link">Open Essay Builder</span>
                 </div>
             </a>
@@ -523,7 +769,7 @@
     
     <footer>
         <p>Richland Community College • Fall 2025<br>
-        <a href="../index.html">Return to HIST 101</a></p>
+        <a href="../index.html">Return to Course Home</a></p>
     </footer>
 </body>
 </html>

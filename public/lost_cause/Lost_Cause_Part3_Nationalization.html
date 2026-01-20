@@ -1,0 +1,1358 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Myth of the Lost Cause, Part 1 - HIST 101</title>
+    
+    <!-- Reveal.js CSS from CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --desert-flower: #FF9B8A;
+            --cattleya-orchid: #A25FB0;
+            --opera-mauve: #D4A5C8;
+            --blue-curacao: #48C9C9;
+            --spicy-mustard: #D9A757;
+            --mocha-mousse: #A78674;
+            --arabesque: #C8826D;
+            --dark-bg: #1A1A1A;
+            --light-text: #FAFAFA;
+            --popup-bg: #FAFAFA;
+            --popup-text: #1A1A1A;
+        }
+        
+        .reveal {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 28px;
+            background: var(--dark-bg);
+        }
+        
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--desert-flower);
+            text-transform: none;
+            line-height: 1.2;
+        }
+        
+        .reveal h1 { font-size: 2.8em; }
+        .reveal h2 { font-size: 2em; }
+        .reveal h3 { font-size: 1.5em; color: var(--opera-mauve); }
+        
+        .reveal p, .reveal li {
+            color: var(--light-text);
+            line-height: 1.5;
+        }
+        
+        .reveal a {
+            color: var(--blue-curacao);
+            text-decoration: underline;
+        }
+        
+        /* Section Title Slide */
+        .section-title-slide {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        
+        .section-title-slide h2 {
+            font-size: 2.5em;
+            color: var(--desert-flower);
+            border-bottom: 4px solid var(--cattleya-orchid);
+            padding-bottom: 0.3em;
+            margin-bottom: 0.5em;
+        }
+        
+        .section-title-slide .section-number {
+            font-size: 1.2em;
+            color: var(--blue-curacao);
+            margin-bottom: 0.5em;
+            font-weight: 600;
+        }
+        
+        .section-title-slide .section-subtitle {
+            font-size: 1.1em;
+            color: var(--opera-mauve);
+            font-style: italic;
+        }
+        
+        /* Keyboard Shortcuts Menu */
+        .shortcuts-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(72, 201, 201, 0.2);
+            border: 2px solid var(--blue-curacao);
+            color: var(--blue-curacao);
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.7em;
+            z-index: 100;
+            font-family: 'Open Sans', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .shortcuts-btn:hover {
+            background: rgba(72, 201, 201, 0.4);
+        }
+        
+        .shortcuts-popup {
+            display: none;
+            position: fixed;
+            bottom: 70px;
+            left: 20px;
+            background: var(--popup-bg);
+            color: var(--popup-text);
+            padding: 1.2em;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            z-index: 1000;
+            font-size: 0.65em;
+            max-width: 320px;
+            border: 3px solid var(--cattleya-orchid);
+        }
+        
+        .shortcuts-popup.active { display: block; }
+        
+        .shortcuts-popup h4 {
+            margin: 0 0 0.8em 0;
+            color: var(--cattleya-orchid);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1em;
+        }
+        
+        .shortcuts-popup table {
+            width: 100%;
+            border-collapse: collapse;
+            color: var(--popup-text);
+        }
+        
+        .shortcuts-popup td {
+            padding: 4px 8px;
+            border-bottom: 1px solid #ddd;
+            color: var(--popup-text);
+        }
+        
+        .shortcuts-popup kbd {
+            background: var(--dark-bg);
+            color: var(--desert-flower);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.95em;
+        }
+        
+        .shortcuts-close {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            cursor: pointer;
+            color: var(--arabesque);
+            font-size: 1.3em;
+        }
+        
+        /* Pop-up/Modal styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--popup-bg);
+            color: var(--popup-text);
+            padding: 2em;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            max-width: 65%;
+            max-height: 70%;
+            overflow-y: auto;
+            z-index: 1000;
+            border: 4px solid var(--cattleya-orchid);
+            font-size: 0.85em;
+        }
+        
+        .popup.active { display: block; }
+        
+        .popup h3 {
+            color: var(--cattleya-orchid);
+            margin-top: 0;
+        }
+        
+        .popup p, .popup li {
+            color: var(--popup-text);
+        }
+        
+        .popup ul {
+            padding-left: 1.5em;
+        }
+        
+        .popup li {
+            margin-bottom: 0.5em;
+        }
+        
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 2em;
+            cursor: pointer;
+            color: var(--arabesque);
+        }
+        
+        .popup-trigger {
+            color: var(--blue-curacao);
+            text-decoration: underline dotted;
+            cursor: pointer;
+            border-bottom: 2px dotted var(--blue-curacao);
+        }
+        
+        .popup-trigger:hover {
+            color: var(--cattleya-orchid);
+            border-bottom-color: var(--cattleya-orchid);
+        }
+        
+        /* Image placeholder styling */
+        .img-placeholder {
+            background: linear-gradient(135deg, var(--opera-mauve) 0%, var(--arabesque) 100%);
+            border: 3px dashed var(--cattleya-orchid);
+            padding: 2em;
+            text-align: center;
+            color: var(--dark-bg);
+            font-style: italic;
+            border-radius: 12px;
+            margin: 1em auto;
+        }
+        
+        .img-placeholder strong {
+            display: block;
+            font-size: 1.1em;
+            margin-bottom: 0.5em;
+        }
+        
+        /* Key term styling */
+        .key-term {
+            color: var(--cattleya-orchid);
+            font-weight: 600;
+        }
+        
+        /* Primary source styling */
+        .primary-source {
+            background: rgba(217, 167, 87, 0.15);
+            border-left: 5px solid var(--spicy-mustard);
+            padding: 1em 1.5em;
+            margin: 1em 0;
+            font-style: italic;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .primary-source .attribution {
+            text-align: right;
+            font-size: 0.85em;
+            color: var(--mocha-mousse);
+            margin-top: 0.8em;
+            font-style: normal;
+        }
+        
+        /* Claim box styling */
+        .claim-box {
+            background: rgba(162, 95, 176, 0.15);
+            border: 3px solid var(--cattleya-orchid);
+            padding: 1.2em;
+            border-radius: 12px;
+            margin: 1em 0;
+        }
+        
+        .claim-box h3 {
+            color: var(--cattleya-orchid);
+            margin-top: 0;
+            font-size: 1.3em;
+        }
+        
+        /* Timeline styling */
+        .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            margin: 0.8em 0;
+            padding: 0.5em;
+            border-left: 4px solid var(--blue-curacao);
+            padding-left: 1em;
+        }
+        
+        .timeline-date {
+            color: var(--spicy-mustard);
+            font-weight: bold;
+            min-width: 100px;
+            font-size: 1.1em;
+        }
+        
+        /* Assessment Section Styling - WITH SCROLLING */
+        .assessment-slide {
+            height: 100%;
+            overflow-y: auto !important;
+        }
+        
+        .assessment-section {
+            background: linear-gradient(135deg, rgba(162, 95, 176, 0.1) 0%, rgba(72, 201, 201, 0.1) 100%);
+            border: 3px solid var(--cattleya-orchid);
+            border-radius: 15px;
+            padding: 1.5em;
+            text-align: left;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        
+        .assessment-section h2 {
+            text-align: center;
+            margin-bottom: 0.8em;
+        }
+        
+        /* Fillable Form Styling */
+        .fillable-form {
+            background: white;
+            color: var(--popup-text);
+            padding: 1.5em;
+            border-radius: 10px;
+            margin: 1em 0;
+            page-break-inside: avoid;
+        }
+        
+        .fillable-form h4 {
+            color: var(--cattleya-orchid);
+            margin-top: 0;
+            font-family: 'Montserrat', sans-serif;
+            border-bottom: 2px solid var(--cattleya-orchid);
+            padding-bottom: 0.3em;
+        }
+        
+        .fillable-form label {
+            display: block;
+            margin: 1em 0 0.3em 0;
+            font-weight: 600;
+            color: var(--popup-text);
+        }
+        
+        .fillable-form textarea {
+            width: 100%;
+            min-height: 80px;
+            padding: 10px;
+            border: 2px solid var(--mocha-mousse);
+            border-radius: 8px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.9em;
+            resize: vertical;
+            box-sizing: border-box;
+            color: var(--popup-text);
+            background: #fff;
+        }
+        
+        .fillable-form textarea:focus {
+            outline: none;
+            border-color: var(--blue-curacao);
+            box-shadow: 0 0 5px rgba(72, 201, 201, 0.5);
+        }
+        
+        .fillable-form .question-number {
+            color: var(--cattleya-orchid);
+            font-weight: bold;
+        }
+        
+        /* Multiple Choice Quiz Styling */
+        .mc-quiz {
+            background: white;
+            color: var(--popup-text);
+            padding: 1.5em;
+            border-radius: 10px;
+            margin: 1em 0;
+            text-align: left;
+        }
+        
+        .mc-quiz h4 {
+            color: var(--cattleya-orchid);
+            margin-top: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .mc-question {
+            margin-bottom: 1.5em;
+            padding-bottom: 1em;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .mc-question:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .mc-question p {
+            color: var(--popup-text);
+            font-weight: 600;
+            margin-bottom: 0.8em;
+        }
+        
+        .mc-option {
+            display: block;
+            padding: 0.6em 1em;
+            margin: 0.4em 0;
+            background: #f5f5f5;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--popup-text);
+        }
+        
+        .mc-option:hover {
+            background: #e8e8e8;
+            border-color: var(--blue-curacao);
+        }
+        
+        .mc-option.selected {
+            border-color: var(--blue-curacao);
+            background: rgba(72, 201, 201, 0.15);
+        }
+        
+        .mc-option.correct {
+            border-color: #27ae60;
+            background: rgba(39, 174, 96, 0.2);
+        }
+        
+        .mc-option.incorrect {
+            border-color: #c0392b;
+            background: rgba(192, 57, 43, 0.15);
+        }
+        
+        .mc-feedback {
+            display: none;
+            padding: 0.8em;
+            border-radius: 8px;
+            margin-top: 0.5em;
+            font-weight: 600;
+        }
+        
+        .mc-feedback.show { display: block; }
+        
+        .mc-feedback.correct {
+            background: rgba(39, 174, 96, 0.2);
+            color: #27ae60;
+        }
+        
+        .mc-feedback.incorrect {
+            background: rgba(192, 57, 43, 0.15);
+            color: #c0392b;
+        }
+        
+        /* Print Styles */
+        @media print {
+            .reveal {
+                background: white !important;
+                font-size: 12pt !important;
+            }
+
+            .reveal .slides {
+                transform: none !important;
+                width: 100% !important;
+                height: auto !important;
+                left: 0 !important;
+                top: 0 !important;
+                position: relative !important;
+            }
+
+            /* Hide all slides (covers horizontal + vertical stacks) */
+            .reveal .slides > section,
+            .reveal .slides > section > section {
+                display: none !important;
+            }
+
+            /* Show ONLY the consolidated assessment slide */
+            .reveal .slides > section#consolidated-assessment-slide,
+            .reveal .slides > section > section#consolidated-assessment-slide {
+                display: block !important;
+                position: relative !important;
+                width: 100% !important;
+                height: auto !important;
+                transform: none !important;
+                padding: 20px !important;
+            }
+
+            /* Ensure printable layout inside the assessment */
+            .assessment-section,
+            .scrollable-slide {
+                max-height: none !important;
+                height: auto !important;
+                overflow: visible !important;
+                background: white !important;
+            }
+
+            .fillable-form {
+                border: 2px solid #333 !important;
+                page-break-inside: avoid;
+            }
+
+            .fillable-form textarea {
+                border: 1px solid #333 !important;
+                min-height: 100px !important;
+            }
+
+            .mc-quiz {
+                border: 2px solid #333 !important;
+                page-break-inside: avoid;
+            }
+
+            /* Hide UI / controls in print */
+            button,
+            .shortcuts-btn,
+            .shortcuts-popup,
+            .reveal .controls,
+            .reveal .progress,
+            .reveal .slide-number {
+                display: none !important;
+            }
+        }
+        
+        /* Subtitle styling */
+        .subtitle {
+            color: var(--opera-mauve);
+            font-style: italic;
+            font-size: 0.9em;
+        }
+        
+        /* Two-column layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2em;
+            text-align: left;
+        }
+        
+        .column {
+            padding: 1em;
+        }
+        
+        /* List styling */
+        .reveal ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .reveal ul li {
+            padding-left: 1.5em;
+            position: relative;
+            margin-bottom: 0.6em;
+        }
+        
+        .reveal ul li::before {
+            content: "•";
+            color: var(--desert-flower);
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+        }
+        
+        /* Scrollable slide content */
+        .scrollable-slide {
+            height: 90vh;
+            overflow-y: auto;
+            padding-right: 20px;
+        }
+        
+        /* Biography card */
+        .bio-card {
+            display: flex;
+            gap: 2em;
+            align-items: flex-start;
+            text-align: left;
+        }
+        
+        .bio-card .bio-text {
+            flex: 1;
+        }
+        
+        .bio-card .bio-text h3 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+            <!-- ==================== SLIDE 1: TITLE ==================== -->
+<section data-background-image="images/lost_cause_collage.jpg" data-background-size="cover" data-background-opacity="0.3">
+   <h1>The Myth of the Lost Cause</h1>
+                <h2>Part 3: Nationalization & Cultural Production</h2>
+                <p style="color: var(--misty-sky); margin-top: 2em; font-size: 1.1em;">How the Lost Cause Became Mainstream American Culture (1890s-1940s)</p>
+                <p style="color: var(--morning-mist); font-size: 0.9em; margin-top: 1.5em;">HIST 102: U.S. History Since 1877</p>
+    
+    <!-- Keyboard Shortcuts Button (Title Slide Only) -->
+    <button class="shortcuts-btn" onclick="toggleShortcuts()">⌨️ Shortcuts</button>
+    
+    <div id="shortcuts-popup" class="shortcuts-popup">
+        <span class="shortcuts-close" onclick="toggleShortcuts()">×</span>
+        <h4>⌨️ Keyboard Shortcuts</h4>
+        <table>
+            <tr><td><kbd>→</kbd> / <kbd>←</kbd></td><td>Next / Previous slide</td></tr>
+            <tr><td><kbd>F</kbd></td><td>Fullscreen mode</td></tr>
+            <tr><td><kbd>S</kbd></td><td>Speaker notes view</td></tr>
+            <tr><td><kbd>O</kbd> / <kbd>Esc</kbd></td><td>Overview mode</td></tr>
+            <tr><td><kbd>B</kbd> / <kbd>.</kbd></td><td>Blackout screen</td></tr>
+            <tr><td><kbd>?</kbd></td><td>Show all shortcuts</td></tr>
+        </table>
+        <p style="margin-top: 0.8em; font-size: 0.85em; color: #666;">
+            <em>Tip: Press <kbd>S</kbd> on a second monitor for presenter view with notes.</em>
+        </p>
+    </div>
+    
+   <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>Last lecture covered how Lost Cause mythology became institutionalized through organizations, monuments, and textbooks. Today we examine how it became <em>culture</em>—how academic legitimation and cultural production (especially film) made Lost Cause mythology feel natural, beautiful, and American.</p>
+                    
+                    <h4>📖 Today's Big Question</h4>
+                    <p>How does regional mythology become national culture? We'll trace the mechanisms that transformed Southern Lost Cause ideology into mainstream American assumptions about the Civil War and race.</p>
+                    
+                    <h4>💭 The Shift</h4>
+                    <p>Infrastructure (monuments, textbooks) makes Lost Cause mythology <em>present</em>. But culture makes it <em>feel true</em>. Academia provides intellectual legitimacy; film provides emotional power; aesthetics make it beautiful and livable.</p>
+                </aside>
+</section>
+
+            
+            
+            
+            <!-- RECAP -->
+            <section>
+                <h2>Recap: What We've Covered</h2>
+                <div style="text-align: left; max-width: 900px; margin: 0 auto; font-size: 0.9em;">
+                    <p style="margin: 0.8em 0;"><strong style="color: var(--aventurine);">Part 1 (Origins):</strong> Lost Cause emerged 1861-1877 as wartime coping and postwar apologetics</p>
+                    <p style="margin: 0.8em 0;"><strong style="color: var(--aventurine);">Part 2 (Institutionalization):</strong> 1880s-1920s built infrastructure through veterans orgs, monuments, textbooks, reconciliation</p>
+                    <p style="margin: 0.8em 0;"><strong style="color: var(--aventurine);">Part 3 (Today):</strong> 1890s-1940s—how Lost Cause became <em>American culture</em> through academia, film, and aesthetics</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📖 The Arc</h4>
+                    <p>We've been building toward this: Lost Cause started as Confederate apologetics, became institutionalized through organized campaigns, and now becomes <em>culture</em>—something that feels natural, obvious, and American rather than explicitly political.</p>
+                </aside>
+            </section>
+            
+            <!-- SECTION DIVIDER: ACADEMIC LEGITIMATION -->
+            <section class="section-divider" data-background="linear-gradient(135deg, #2D4A4A 0%, #2A3540 100%)">
+                <h2>Part I</h2>
+                <h3 style="color: var(--misty-sky);">Academic Legitimation</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">How universities laundered Lost Cause mythology into scholarly consensus</p>
+            </section>
+            
+            <!-- THE DUNNING SCHOOL -->
+<section>
+        <img src="images/Portrait_Archibald_Dunning.png" alt="Portrait of William Archibald Dunning"
+           style="max-width: 100%; height: auto; border-radius: 14px;">
+  
+
+  
+    
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>The "Dunning School" refers to William Archibald Dunning and his PhD students at Columbia University who, from the 1890s-1930s, produced scholarship portraying Reconstruction as a disaster of Black incompetence, Northern corruption, and Southern white victimization.</p>
+                    
+                    <h4>📖 Why Academic Legitimation Mattered</h4>
+                    <p>Anyone can make claims. But when <em>professors at elite universities</em> make those claims using scholarly methods and publish them with university presses, those claims gain enormous authority. Dunning transformed Lost Cause from "what Confederates say" to "what historians have proven."</p>
+                    
+                    <h4>💭 Columbia's Prestige</h4>
+                    <p>Columbia University in the early 20th century was one of America's most prestigious institutions. When Columbia historians said Reconstruction failed because of Black incapacity, that wasn't regional propaganda—that was <em>Science</em>.</p>
+                    
+                    <h4>🎓 The PhD Pipeline</h4>
+                    <p>Dunning trained a generation of historians who went on to teach at major universities and write influential textbooks. His students included scholars who taught at Johns Hopkins, Yale, and other elite schools, spreading Dunning School interpretations nationally.</p>
+                </aside>
+            </section>
+            
+            <!-- DUNNING SCHOOL CLAIMS -->
+            <section>
+                <h2>Dunning School Claims</h2>
+                <div style="text-align: left; max-width: 900px; margin: 0 auto; font-size: 0.9em;">
+                    <p style="margin: 1em 0;"><span class="key-term">1. Reconstruction was a "Tragic Era"</span><br>
+                    <span style="font-size: 0.95em; color: var(--misty-sky);">Northern military rule and radical policies traumatized the South</span></p>
+                    
+                    <p style="margin: 1em 0;"><span class="key-term">2. Black Political Participation Was Disastrous</span><br>
+                    <span style="font-size: 0.95em; color: var(--misty-sky);">Freedpeople were "ignorant" and "incapable of self-government"</span></p>
+                    
+                    <p style="margin: 1em 0;"><span class="key-term">3. Carpetbaggers and Scalawags Were Corrupt</span><br>
+                    <span style="font-size: 0.95em; color: var(--misty-sky);">Northerners exploited the South; white Southern Republicans were traitors</span></p>
+                    
+                    <p style="margin: 1em 0;"><span class="key-term">4. "Redemption" Was Heroic</span><br>
+                    <span style="font-size: 0.95em; color: var(--misty-sky);">White Southerners nobly "redeemed" their states from corrupt Reconstruction governments</span></p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📖 These Were Not Fringe Views</h4>
+                    <p>These claims became the <em>scholarly consensus</em> for decades. Textbooks, encyclopedias, and history courses taught Dunning School interpretations as established fact from the 1900s through the 1950s-1960s.</p>
+                    
+                    <h4>💭 The Language Matters</h4>
+                    <p>Notice the loaded terms: "Tragic Era," "Redemption," "carpetbagger," "scalawag." This language assumes white Southern grievance is legitimate and Black political participation is inherently problematic.</p>
+                    
+                    <h4>🎓 What Was Erased</h4>
+                    <ul>
+                        <li>Black political leadership and achievements</li>
+                        <li>Public schools, hospitals, infrastructure built during Reconstruction</li>
+                        <li>White Southern terrorism (KKK violence)</li>
+                        <li>Economic gains for freedpeople</li>
+                        <li>The moral imperative of extending citizenship rights</li>
+                    </ul>
+                    
+                    <h4>📚 Your Homework Assignment</h4>
+                    <p>You'll be refuting these claims using evidence from our readings on Reconstruction. Focus on demonstrating: (1) Black political competence and achievements, (2) actual Reconstruction policies and outcomes, (3) the role of white terrorism in ending Reconstruction.</p>
+                </aside>
+            </section>
+            
+            <!-- DUNNING'S FOUNDATIONAL ASSUMPTION -->
+            <section>
+                <h2>The Dunning School rested on one core belief:</h2>
+                
+                <div class="callout" style="margin-top: 1.5em;">
+                    <div class="callout-title">The Assumption of "Negro Incapacity"</div>
+                    <p style="font-size: 1.05em; color: var(--cloud-dancer);">Black people were inherently incapable of self-government, citizenship, and political participation.</p>
+                </div>
+                
+                <p style="margin-top: 1.5em; font-size: 0.95em;">Once you accept this assumption, <em>everything else follows</em>:</p>
+                <ul style="font-size: 0.9em; margin-top: 1em;">
+                    <li>If Black people are incapable → Reconstruction <em>had</em> to fail</li>
+                    <li>If Black people are incapable → Black political participation <em>was</em> disastrous</li>
+                    <li>If Black people are incapable → "Redemption" <em>was</em> necessary and heroic</li>
+                    <li>If Black people are incapable → Jim Crow segregation is <em>natural</em> and protective</li>
+                </ul>
+                
+                <p style="margin-top: 1.5em; font-size: 1.05em; color: var(--pale-sunlight);">The entire scholarly edifice was built on <span class="key-term">white supremacist pseudoscience</span>.</p>
+                
+                <aside class="notes">
+                    <h4>📚 Eric Foner's Analysis</h4>
+                    <p>Eric Foner is the preeminent historian of Reconstruction. In his landmark work <em>Reconstruction: America's Unfinished Revolution, 1863-1877</em> (1988), Foner dismantled Dunning School historiography by showing how it rested entirely on the racist assumption that Black people were biologically and culturally incapable of citizenship.</p>
+                    
+                    <h4>📖 Why This Matters</h4>
+                    <p>The Dunning School wasn't just "getting the facts wrong"—it was building scholarship on a fundamentally racist premise. Once you assume Black incapacity, you don't need to actually examine evidence about Reconstruction governments, Black politicians' achievements, or the role of white terrorism. The conclusion is predetermined by the racist assumption.</p>
+                    
+                    <h4>💭 The Logic Chain</h4>
+                    <p>Here's how the assumption works through Dunning School claims:</p>
+                    <ul>
+                        <li><strong>Premise:</strong> Black people are incapable of self-government</li>
+                        <li><strong>Therefore:</strong> Any government including Black participation will be corrupt/incompetent</li>
+                        <li><strong>Therefore:</strong> Reconstruction governments (which included Black officials) were disasters</li>
+                        <li><strong>Therefore:</strong> White Southerners were justified in overthrowing them</li>
+                        <li><strong>Therefore:</strong> Jim Crow segregation protects both races from "unnatural" integration</li>
+                    </ul>
+                    
+                    <h4>🎓 Pseudoscientific Racism</h4>
+                    <p>The Dunning School emerged alongside "scientific racism"—the use of evolutionary biology, craniology, intelligence testing, and social Darwinism to "prove" racial hierarchies. Dunning School historians treated Black incapacity as a scientific fact, not a racist assumption.</p>
+                    
+                    <h4>🔑 Your Homework Task</h4>
+                    <p>When you refute Dunning School claims, you're not just correcting facts—you're exposing the racist premise that makes those "facts" seem plausible. Show that Reconstruction governments achieved significant things (public schools, infrastructure, civil rights protections) and that Black politicians were competent leaders. This demolishes the foundational assumption.</p>
+                </aside>
+            </section>
+            
+            <!-- DUNNING'S REACH -->
+            <section>
+                <h2>The Dunning School's Reach</h2>
+                <p style="font-size: 0.95em;">Dunning's influence spread through:</p>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em; margin-top: 1.5em; text-align: left;">
+                    <div class="comparison-box">
+                        <h3>PhD Students</h3>
+                        <ul style="font-size: 0.9em;">
+                            <li>Trained at Columbia</li>
+                            <li>Hired at major universities</li>
+                            <li>Taught next generation of historians</li>
+                            <li>Wrote influential monographs</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-box alt">
+                        <h3>Textbooks</h3>
+                        <ul style="font-size: 0.9em;">
+                            <li>Dunning students wrote widely-used texts</li>
+                            <li>Interpretations taught in schools nationwide</li>
+                            <li>Shaped public understanding for generations</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <p style="margin-top: 1.5em; font-size: 1.05em; color: var(--pale-sunlight);">Academic prestige <span class="key-term">laundered</span> Lost Cause mythology into scholarly consensus.</p>
+                
+                <aside class="notes">
+                    <h4>📖 The PhD Pipeline</h4>
+                    <p>This is how academic influence works: Dunning trains students at Columbia → those students get jobs at Yale, Johns Hopkins, University of North Carolina → they train <em>their</em> students → those students write textbooks → entire generations learn Dunning School history as "what scholars agree on."</p>
+                    
+                    <h4>💭 Why "Laundering"?</h4>
+                    <p>Lost Cause mythology started as Confederate apologetics—obviously partisan and self-serving. Dunning School scholarship <em>laundered</em> those claims by running them through academic processes (research, peer review, university presses), making them seem objective and scientific.</p>
+                    
+                    <h4>🎓 Long-Term Impact</h4>
+                    <p>Dunning School interpretations dominated American history until the 1960s-1970s, when the Civil Rights Movement created space for revisionist scholars (especially Black historians like John Hope Franklin and W.E.B. Du Bois earlier) to challenge these narratives.</p>
+                </aside>
+            </section>
+            
+            <!-- SECTION DIVIDER: VISUAL CULTURE -->
+            <section class="section-divider" data-background="linear-gradient(135deg, #2D4A4A 0%, #2A3540 100%)">
+                <h2>Part II</h2>
+                <h3 style="color: var(--misty-sky);">Visual Culture & Cinema</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">How film made Lost Cause mythology emotionally real</p>
+            </section>
+            
+            <!-- BIRTH OF A NATION -->
+           <section>
+  <div class="two-column" style="align-items: center; gap: 2em;">
+
+    <!-- LEFT: IMAGE -->
+    <div style="text-align: center;">
+      <img src="images/birth_of_nation.jpg"
+           alt="The Birth of a Nation (1915) promotional image / film still"
+           style="width: 720px; max-width: 100%; height: auto; border-radius: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.25);">
+    </div>
+
+    <!-- RIGHT: TEXT -->
+    <div>
+      <h2>The Birth of a Nation (1915)</h2>
+
+      <p style="font-size: 1.05em; line-height: 1.4;">
+        <strong style="color: var(--aventurine);">Director:</strong> D.W. Griffith<br>
+        <strong style="color: var(--aventurine);">Based on:</strong> <em>The Clansman</em> by Thomas Dixon
+        <span style="opacity: 0.95;">(Dunning School-influenced)</span>
+      </p>
+
+      <div class="callout" style="margin-top: 1.4em;">
+        <div class="callout-title">🎥 Why This Matters</div>
+        <p style="margin: 0;">
+          The film didn’t just reflect racist Reconstruction mythology—it <em>broadcast it</em> at mass scale,
+          normalizing Dunning-style narratives and helping revive the Ku Klux Klan in popular imagination.
+        </p>
+      </div>
+    </div>
+
+  </div>
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p><em>The Birth of a Nation</em> (1915) was a landmark film—technically innovative, commercially successful, and ideologically devastating. It brought Lost Cause mythology to mass audiences through cinema's emotional power.</p>
+                    
+                    <h4>📖 The Plot (Simplified)</h4>
+                    <p>The film follows two families (Northern and Southern) through the Civil War and Reconstruction. It portrays:</p>
+                    <ul>
+                        <li>The antebellum South as idyllic and harmonious</li>
+                        <li>Reconstruction as Black tyranny over helpless whites</li>
+                        <li>The KKK as heroic saviors restoring order</li>
+                        <li>The final "redemption" of the South through white violence</li>
+                    </ul>
+                    
+                    <h4>💭 Why It Mattered</h4>
+                    <p>This was one of the first feature-length films and a massive commercial success. It played to audiences of millions—far more people than would ever read Dunning School scholarship. Cinema's emotional impact made Lost Cause mythology <em>feel true</em> in ways academic texts never could.</p>
+                </aside>
+            </section>
+            
+            <!-- BIRTH OF A NATION IMPACT -->
+            <section>
+                <h2>The Film's Devastating Impact</h2>
+                <ul style="font-size: 0.95em;">
+                    <li><strong style="color: var(--aventurine);">White House screening:</strong> President Woodrow Wilson reportedly said, <span class="popup-trigger" onclick="togglePopup('wilson-quote')">"It is like writing history with lightning"</span></li>
+                    <li><strong style="color: var(--aventurine);">KKK revival:</strong> Directly inspired the <span class="popup-trigger" onclick="togglePopup('second-klan')">Second Ku Klux Klan</span> (1915-1940s)</li>
+                    <li><strong style="color: var(--aventurine);">Commercial success:</strong> Highest-grossing film until <em>Gone with the Wind</em> (1939)</li>
+                    <li><strong style="color: var(--aventurine);">Cultural reach:</strong> Seen by millions; shaped national perceptions of Reconstruction</li>
+                </ul>
+                
+                <p style="margin-top: 1.5em; font-size: 1.05em; color: var(--pale-sunlight);">Cinema's visual power made Lost Cause mythology <span class="key-term">emotionally real</span> in ways scholarship alone never could.</p>
+                
+                <aside class="notes">
+                    <h4>📖 Woodrow Wilson's Role</h4>
+                    <p>Wilson (President 1913-1921) was a former Princeton history professor and a Dunning School sympathizer. His screening of the film at the White House gave it enormous prestige. The "writing history with lightning" quote (if he actually said it) suggests he saw the film as historically accurate.</p>
+                    
+                    <h4>💭 The Second KKK</h4>
+                    <p>The original KKK (1860s-1870s) had mostly faded by the 1870s. <em>Birth of a Nation</em> directly inspired the Second Klan, which launched in 1915 at Stone Mountain, Georgia. This new KKK was a mass movement (millions of members by the 1920s) and expanded beyond the South to target Catholics, Jews, and immigrants alongside Black Americans.</p>
+                    
+                    <h4>🎓 Why Cinema Was Different</h4>
+                    <p>Academic texts appeal to reason; cinema appeals to emotion. When you <em>see</em> sympathetic white characters terrorized by Black "villains," when you <em>watch</em> the KKK ride to rescue them with heroic music swelling, you're not just learning a narrative—you're <em>feeling</em> it as true.</p>
+                </aside>
+            </section>
+            
+            <!-- WILSON QUOTE POPUP -->
+            <div id="wilson-quote" class="popup">
+                <span class="popup-close" onclick="togglePopup('wilson-quote')">&times;</span>
+                <h3>Woodrow Wilson and Birth of a Nation</h3>
+                <p><strong>Context:</strong> Woodrow Wilson was a Princeton professor before becoming president, and his scholarship reflected Dunning School assumptions about Reconstruction.</p>
+                
+                <p style="margin-top: 1em;"><strong>The Quote:</strong> Wilson allegedly said the film was "like writing history with lightning" and "my only regret is that it is all so terribly true."</p>
+                
+                <p style="margin-top: 1em;"><strong>Historical Note:</strong> The exact wording is disputed, but Wilson definitely screened the film at the White House in 1915, giving it enormous prestige.</p>
+                
+                <p style="margin-top: 1em; color: var(--pale-sunlight);">Presidential endorsement transformed a film into historical validation.</p>
+            </div>
+            
+            <!-- SECOND KKK POPUP -->
+            <div id="second-klan" class="popup">
+                <span class="popup-close" onclick="togglePopup('second-klan')">&times;</span>
+                <h3>The Second Ku Klux Klan (1915-1940s)</h3>
+                <p><strong>Founded:</strong> November 1915, Stone Mountain, Georgia<br>
+                <strong>Inspired by:</strong> <em>The Birth of a Nation</em></p>
+                
+                <p style="margin-top: 1em;"><strong>Differences from First KKK:</strong></p>
+                <ul>
+                    <li><strong>Geography:</strong> National movement, not just Southern (strong in Midwest, West)</li>
+                    <li><strong>Targets:</strong> Black Americans, Catholics, Jews, immigrants, "moral vice"</li>
+                    <li><strong>Scale:</strong> 2-5 million members by mid-1920s</li>
+                    <li><strong>Style:</strong> Public parades, political organizing, mass rallies (not just night terror)</li>
+                </ul>
+                
+                <p style="margin-top: 1em; color: var(--aventurine);">The film's heroic portrayal of the KKK directly sparked a mass white supremacist movement.</p>
+            </div>
+            
+            <!-- SECTION DIVIDER: MOONLIGHT & MAGNOLIAS -->
+            <section class="section-divider" data-background="linear-gradient(135deg, #2D4A4A 0%, #2A3540 100%)">
+				<img src="images/moonlight_section_title.jpg"</img>
+            </section>
+            
+            <!-- MOONLIGHT & MAGNOLIAS INTRO -->
+            <section>
+  <h2>What Is "Moonlight &amp; Magnolias"?</h2>
+  <p>
+    An <span class="key-term">aesthetic strategy</span>—a cultural style that romanticizes the antebellum South.
+  </p>
+
+  <div class="two-column" style="align-items: center; gap: 2em; margin-top: 1.5em;">
+    
+    <!-- LEFT: IMAGE -->
+    <div style="text-align: center;">
+      <img
+        src="images/moonlight_magnolia_aesthetic.jpg"
+        alt="Moonlight & Magnolias aesthetic: white-columned mansion, magnolias, Spanish moss, moonlit evening"
+        style="width: 100%; max-width: 620px; height: auto; border-radius: 18px; box-shadow: 0 14px 38px rgba(0,0,0,0.45);"
+      >
+    </div>
+
+    <!-- RIGHT: TEXT -->
+    <div class="callout" style="margin-top: 0;">
+      <div class="callout-title">The Aesthetic Elements</div>
+      <ul style="font-size: 0.95em;">
+        <li><strong>Visual:</strong> White-columned mansions, Spanish moss, magnolia blossoms, moonlit evenings</li>
+        <li><strong>Social:</strong> Genteel aristocrats, gracious hospitality, chivalric honor</li>
+        <li><strong>Emotional:</strong> Nostalgia, longing, elegiac beauty, lost world</li>
+        <li><strong>Narrative:</strong> Tragic destruction of a superior civilization</li>
+      </ul>
+    </div>
+
+  </div>
+                
+                <p style="margin-top: 1.5em; font-size: 1.05em; color: var(--pale-sunlight);">What's <em>absent</em>? Slavery, violence, exploitation, human suffering.</p>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>"Moonlight and Magnolias" is shorthand for the romanticized vision of the antebellum South that pervades American culture—beautiful plantations, gracious living, tragic loss. It's the <em>aesthetic</em> partner to Lost Cause <em>political</em> mythology.</p>
+                    
+                    <h4>📖 Why "Aesthetic Strategy" Matters</h4>
+                    <p>Lost Cause provided political justification ("the war was about states' rights"). Moonlight & Magnolias provides <em>emotional justification</em>—it makes you <em>feel</em> that something beautiful was lost, independent of whether you intellectually accept Lost Cause claims.</p>
+                    
+                    <h4>💭 The Substitution</h4>
+                    <p>This aesthetic substitutes <em>longing for a lost world</em> for <em>mourning slavery</em>. You're invited to mourn beautiful Tara, gracious plantation life, chivalric honor—not the system of human bondage that made it possible. The aesthetic does the work of justification without making explicit arguments.</p>
+                    
+                    <h4>🎓 Cultural Power</h4>
+                    <p>Moonlight & Magnolias shows up everywhere: films, novels, tourist plantations, wedding venues, Southern branding. It makes Lost Cause mythology <em>livable</em> and <em>pleasurable</em> by making it <em>beautiful</em>.</p>
+                </aside>
+            </section>
+            
+            <!-- GONE WITH THE WIND -->
+            <section>
+  <h2>Gone with the Wind (1939)</h2>
+
+  <div class="two-column" style="align-items: center; gap: 2em; margin-top: 1.2em;">
+
+    <!-- LEFT: IMAGE -->
+    <div style="text-align: center;">
+      <img
+        src="images/gone_with_wind.jpg"
+        alt="Gone with the Wind (1939) promotional image / Tara plantation aesthetic"
+        style="width: 100%; max-width: 760px; height: auto; border-radius: 18px; box-shadow: 0 14px 38px rgba(0,0,0,0.45);"
+      >
+    </div>
+
+    <!-- RIGHT: TEXT -->
+    <div>
+      <p style="font-size: 1.05em; line-height: 1.35;">
+        <strong style="color: var(--aventurine);">Novel:</strong> Margaret Mitchell (1936)<br>
+        <strong style="color: var(--aventurine);">Film:</strong> Directed by Victor Fleming (1939)
+      </p>
+
+      <div class="callout" style="margin-top: 1.2em;">
+        <div class="callout-title">Why It Matters</div>
+        <ul style="font-size: 0.95em;">
+          <li><strong>The apex</strong> of the Moonlight &amp; Magnolias myth in popular culture</li>
+          <li>Turns the antebellum plantation world into a <strong>tragic romance</strong></li>
+          <li>Frames slavery and secession as <strong>background scenery</strong> rather than central violence</li>
+          <li>Normalizes Lost Cause themes as <strong>national nostalgia</strong></li>
+        </ul>
+      </div>
+
+      <p style="margin-top: 1em; font-size: 1.05em; color: var(--pale-sunlight);">
+        The apex of Moonlight &amp; Magnolias—and the most successful film in American history (inflation-adjusted).
+      </p>
+    </div>
+
+  </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p><em>Gone with the Wind</em> is the most successful film in American history (when adjusted for inflation) and the most complete expression of Moonlight & Magnolias aesthetics. Unlike <em>Birth of a Nation</em>, which is explicitly about politics and the KKK, GWTW focuses on <em>feeling</em>—the tragedy of lost beauty.</p>
+                    
+                    <h4>📖 The Story (Brief Summary)</h4>
+                    <p>Scarlett O'Hara, daughter of a plantation owner, lives through the Civil War and Reconstruction. The film opens with an idyllic antebellum Georgia, shows the war's devastation, and ends with Scarlett vowing to rebuild her beloved plantation, Tara.</p>
+                    
+                    <h4>💭 What Makes It Different from Birth of a Nation</h4>
+                    <p>GWTW is less overtly political than <em>Birth of a Nation</em>. It doesn't glorify the KKK or show explicitly racist violence. Instead, it works through <em>aesthetics</em> and <em>nostalgia</em>—inviting you to love Tara, to feel Scarlett's loss, to long for the "gracious" world that's gone.</p>
+                    
+                    <h4>🎓 Cultural Saturation</h4>
+                    <p>The film premiered in Atlanta in 1939 with a parade and three-day celebration. It won 10 Academy Awards. It played continuously in theaters for <em>years</em>. Generations of Americans grew up watching it as a cultural touchstone.</p>
+                </aside>
+            </section>
+            
+            <!-- GWTW AESTHETIC STRATEGY -->
+            <section>
+                <h2>How Gone with the Wind Works</h2>
+                <div style="text-align: left; max-width: 900px; margin: 0 auto; font-size: 0.9em;">
+                    <p style="margin: 1em 0;"><span class="key-term">1. Visual Splendor</span><br>
+                    <span style="font-size: 0.95em; color: var(--misty-sky);">Tara is gorgeous—white columns, sweeping staircases, golden sunsets. You <em>want</em> to be there.</span></p>
+                    
+                    <p style="margin: 1em 0;"><span class="key-term">2. Sympathetic Characters</span><br>
+                    <span style="font-size: 0.95em; color: var(--misty-sky);">Scarlett is strong, resourceful, compelling. You <em>identify</em> with her struggle to save Tara.</span></p>
+                    
+                    <p style="margin: 1em 0;"><span class="key-term">3. Emotional Substitution</span><br>
+                    <span style="font-size: 0.95em; color: var(--misty-sky);">You mourn <em>Tara</em>, not slavery. The loss you feel is aesthetic/nostalgic, not moral.</span></p>
+                    
+                    <p style="margin: 1em 0;"><span class="key-term">4. Enslaved People as Scenery</span><br>
+                    <span style="font-size: 0.95em; color: var(--misty-sky);">Mammy and Prissy are loyal servants, not people with their own desires. Slavery is backdrop, not subject.</span></p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📖 The Aesthetic Substitution</h4>
+                    <p>This is the key move: The film invites you to mourn <em>Tara</em>—the beautiful plantation, the gracious lifestyle, the "world we have lost"—rather than confronting what made Tara possible (slavery) or what was actually lost in the war (human bondage).</p>
+                    
+                    <h4>💭 Why This Works</h4>
+                    <p>Beauty is powerful. When something looks gorgeous and feels emotionally true, it's hard to interrogate its politics. GWTW makes you <em>feel</em> Scarlett's loss so strongly that you don't ask: What about the enslaved people? What did <em>they</em> lose or gain?</p>
+                    
+                    <h4>🎓 The "Moonlight" Effect</h4>
+                    <p>This is why it's called "Moonlight & Magnolias"—the aesthetic is soft, romantic, elegiac. Moonlight softens harsh edges; magnolias smell sweet. The aesthetic <em>launders</em> the brutal reality of slavery into something you can long for.</p>
+                </aside>
+            </section>
+            
+            <!-- MEMORY LAUNDERING -->
+           <section>
+    <h2>"Memory Laundering"</h2>
+    
+    <div style="background: rgba(167, 134, 116, 0.25); border-left: 4px solid var(--mocha-mousse); padding: 0.8em 1.2em; border-radius: 0 10px 10px 0; margin-bottom: 1.2em; max-width: 800px; margin-left: auto; margin-right: auto;">
+        <strong style="color: var(--mocha-mousse); font-size: 1.1em;">memory laundering</strong> <span style="color: var(--opera-mauve); font-style: italic; font-size: 0.9em;">(n.)</span><br>
+        <span style="font-size: 0.95em;">The process of taking something morally indefensible and making it aesthetically appealing, emotionally satisfying, and culturally prestigious.</span>
+    </div>
+    
+    <p style="font-size: 0.95em;">Moonlight & Magnolias <span class="key-term">"launders"</span> the memory of slavery by:</p>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8em; max-width: 850px; margin: 1em auto;">
+        <div style="background: rgba(72, 201, 201, 0.15); border: 2px solid var(--blue-curacao); border-radius: 10px; padding: 0.8em 1em;">
+            <strong style="color: var(--blue-curacao);">1. Extracting slavery from the aesthetic</strong><br>
+            <span style="font-size: 0.85em;">Show the beauty, hide the violence</span>
+        </div>
+        <div style="background: rgba(162, 95, 176, 0.15); border: 2px solid var(--cattleya-orchid); border-radius: 10px; padding: 0.8em 1em;">
+            <strong style="color: var(--cattleya-orchid);">2. Substituting longing for justification</strong><br>
+            <span style="font-size: 0.85em;">Don't defend slavery; just make people miss "that world"</span>
+        </div>
+        <div style="background: rgba(217, 167, 87, 0.15); border: 2px solid var(--spicy-mustard); border-radius: 10px; padding: 0.8em 1em;">
+            <strong style="color: var(--spicy-mustard);">3. Marketing the aesthetic</strong><br>
+            <span style="font-size: 0.85em;">Weddings at plantations, tours of "gracious estates," "Southern charm"</span>
+        </div>
+        <div style="background: rgba(255, 155, 138, 0.15); border: 2px solid var(--desert-flower); border-radius: 10px; padding: 0.8em 1em;">
+            <strong style="color: var(--desert-flower);">4. Making it pleasurable</strong><br>
+            <span style="font-size: 0.85em;">Enjoying the aesthetic doesn't <em>feel</em> racist; it feels sophisticated</span>
+        </div>
+    </div>
+                <aside class="notes">
+                    <h4>📖 What "Laundering" Means</h4>
+                    <p>"Laundering" means taking something dirty (morally compromised) and making it clean (respectable, appealing). Money laundering takes illegal cash and makes it look legitimate. Memory laundering takes the brutality of slavery and makes it look beautiful.</p>
+                    
+                    <h4>💭 Why This Is Powerful</h4>
+                    <p>You can't explicitly defend slavery in 1939 or today—it's too morally indefensible. But you <em>can</em> celebrate "Southern elegance," visit "historic plantations," have weddings under Spanish moss. The aesthetic makes Lost Cause mythology <em>livable</em> without requiring explicit political commitments.</p>
+                    
+                    <h4>🎓 Modern Persistence</h4>
+                    <p>Moonlight & Magnolias persists today: plantation weddings, "Southern belle" branding, tours of "antebellum architecture." The aesthetic continues to launder slavery's memory into something marketable and pleasurable.</p>
+                </aside>
+            </section>
+            
+            <!-- POLITICAL TECHNOLOGY AND SOFT POWER -->
+<section>
+    <h2>Lost Cause as Political Technology and Soft Power</h2>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5em; margin: 1em auto; max-width: 900px;">
+        <div style="background: rgba(167, 134, 116, 0.25); border-left: 4px solid var(--mocha-mousse); padding: 0.8em 1.2em; border-radius: 0 10px 10px 0;">
+            <strong style="color: var(--mocha-mousse); font-size: 1.05em;">political technology</strong> <span style="color: var(--opera-mauve); font-style: italic; font-size: 0.85em;">(n.)</span><br>
+            <span style="font-size: 0.9em;">A system of ideas, arguments, and institutions designed to achieve and maintain political power.</span>
+        </div>
+        <div style="background: rgba(167, 134, 116, 0.25); border-left: 4px solid var(--mocha-mousse); padding: 0.8em 1.2em; border-radius: 0 10px 10px 0;">
+            <strong style="color: var(--mocha-mousse); font-size: 1.05em;">soft power</strong> <span style="color: var(--opera-mauve); font-style: italic; font-size: 0.85em;">(n.)</span><br>
+            <span style="font-size: 0.9em;">The ability to shape preferences through appeal and attraction rather than coercion or force.</span>
+        </div>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em; margin-top: 1.2em; text-align: left;">
+        <div class="comparison-box">
+            <h3>Lost Cause (Political Technology)</h3>
+            <ul style="font-size: 0.9em;">
+                <li><strong>Function:</strong> Justification</li>
+                <li><strong>Method:</strong> Arguments, claims, evidence</li>
+                <li><strong>Goal:</strong> Legitimize Confederacy, enable Jim Crow</li>
+                <li><strong>Tone:</strong> Defensive, assertive</li>
+            </ul>
+        </div>
+        <div class="comparison-box alt">
+            <h3>Moonlight & Magnolias (Soft Power)</h3>
+            <ul style="font-size: 0.9em;">
+                <li><strong>Function:</strong> Aestheticization</li>
+                <li><strong>Method:</strong> Beauty, nostalgia, longing</li>
+                <li><strong>Goal:</strong> Make Lost Cause emotionally livable</li>
+                <li><strong>Tone:</strong> Elegiac, romantic</li>
+            </ul>
+        </div>
+    </div>
+    
+    <p style="margin-top: 1.5em; font-size: 1.05em; color: var(--pale-sunlight);">Together, they make white supremacy <span class="key-term">defensible</span> (Lost Cause) <em>and</em> <span class="key-term">beautiful</span> (Moonlight & Magnolias).</p>    
+                <aside class="notes">
+                    <h4>📖 Division of Labor</h4>
+                    <p>Lost Cause and Moonlight & Magnolias work together:</p>
+                    <ul>
+                        <li><strong>Lost Cause</strong> provides intellectual/political justification: "The war wasn't about slavery; it was about states' rights."</li>
+                        <li><strong>Moonlight & Magnolias</strong> provides emotional/aesthetic justification: "Regardless of the politics, something beautiful was lost."</li>
+                    </ul>
+                    
+                    <h4>💭 Why Both Are Necessary</h4>
+                    <p>Political arguments alone feel defensive and contested. Aesthetics alone don't provide enough legitimacy. Together, they create a complete cultural system: intellectual respectability + emotional appeal + visual beauty.</p>
+                    
+                    <h4>🎓 The Result</h4>
+                    <p>White supremacy becomes not just politically defensible but culturally <em>livable</em>—something you can enjoy, celebrate, market, and pass down to children without feeling like a villain.</p>
+                </aside>
+            </section>
+            
+            <!-- JIM CROW CONNECTIONS -->
+<section>
+  <div class="two-column" style="align-items: center; gap: 2em;">
+
+    <!-- LEFT: IMAGE -->
+    <div style="text-align: center;">
+      <img src="images/legitimizing_jim_crow.jpg"
+           alt="Visual representing the legitimization of Jim Crow segregation"
+           style="width: 720px; max-width: 100%; height: auto; border-radius: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.25);">
+    </div>
+
+    <!-- RIGHT: TEXT -->
+    <div>
+      <h2>Connecting to Jim Crow</h2>
+
+      <p style="font-size: 1.05em; line-height: 1.4;">
+        All of this cultural production—Dunning School, <em>Birth of a Nation</em>, <em>Gone with the Wind</em>—served to
+        legitimize <span class="key-term">Jim Crow segregation</span>.
+      </p>
+
+      <div class="callout" style="margin-top: 1.5em;">
+        <div class="callout-title">How Lost Cause Enabled Jim Crow</div>
+        <ul style="font-size: 0.95em;">
+          <li><strong>Delegitimized Black political participation:</strong> "Reconstruction proved they can't govern"</li>
+          <li><strong>Justified segregation as natural:</strong> "Separate societies are just the Southern way"</li>
+          <li><strong>Excused violence as defensive:</strong> "Redemption" narratives made white terror seem heroic</li>
+          <li><strong>Blocked federal intervention:</strong> National Lost Cause acceptance meant Northern acquiescence</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+                <aside class="notes">
+                    <h4>📚 The Payoff</h4>
+                    <p>This is what all the infrastructure, academia, and culture were <em>for</em>: making Jim Crow segregation seem natural, inevitable, and morally acceptable. Lost Cause mythology provided the ideological cover for systemic racial oppression.</p>
+                    
+                    <h4>📖 Concrete Connections</h4>
+                    <ul>
+                        <li><strong>Disenfranchisement:</strong> "Reconstruction showed Blacks can't handle the vote"</li>
+                        <li><strong>Segregation:</strong> "The races prefer to be separate; it's the natural Southern way"</li>
+                        <li><strong>Violence:</strong> "When whites 'redeemed' the South in the 1870s, they were heroes; we're just defending our heritage"</li>
+                        <li><strong>Economic exploitation:</strong> "Slavery was benevolent; sharecropping and convict leasing are just business"</li>
+                    </ul>
+                    
+                    <h4>💭 National Complicity</h4>
+                    <p>By the 1890s-1940s, Lost Cause mythology was <em>national</em>, not just Southern. When Northern whites accepted these narratives, they abandoned Black Southerners to Jim Crow. Reconciliation meant white unity at the expense of racial justice.</p>
+                </aside>
+            </section>
+            
+            <!-- WHY UNDERSTANDING THIS MATTERS -->
+            <section>
+                <h2>Why Understanding This Matters</h2>
+                <p>When you hear arguments that:</p>
+                <ul style="font-size: 0.95em;">
+                    <li>The Civil War wasn't really about slavery</li>
+                    <li>Confederate monuments are just about heritage</li>
+                    <li>Reconstruction was a disaster</li>
+                    <li>Enslaved people were treated well</li>
+                </ul>
+                <p style="margin-top: 1.5em;">You're not hearing neutral historical claims.</p>
+                <p style="margin-top: 0.8em; color: var(--pale-sunlight); font-size: 1.1em;">You're hearing <strong>Lost Cause mythology</strong> which reframes slavery, the Confederacy, and Reconstruction in ways that excuse racial hierarchy.</p>
+                
+                <aside class="notes">
+                    <h4>📚 Present-Day Relevance</h4>
+                    <p>Lost Cause mythology isn't ancient history. These same narratives still shape:</p>
+                    <ul>
+                        <li>Debates over Confederate monuments</li>
+                        <li>What gets taught in history classes</li>
+                        <li>How Americans understand race and national identity</li>
+                        <li>Whose stories get told and whose get erased</li>
+                    </ul>
+                    
+                    <h4>📖 Critical Thinking Tools</h4>
+                    <p>Understanding Lost Cause mythology gives you tools to evaluate claims about American history critically. When someone makes a claim about the Civil War, Reconstruction, or race, you can ask:</p>
+                    <ul>
+                        <li>Does this narrative center white Southern grievance?</li>
+                        <li>Does it minimize or erase slavery?</li>
+                        <li>Does it portray Black political participation as problematic?</li>
+                        <li>Does it use Lost Cause keywords ("states' rights," "heritage," "War of Northern Aggression")?</li>
+                    </ul>
+                </aside>
+            </section>
+            
+            <!-- FINAL THOUGHT -->
+            <section>
+                <h2>A Final Thought</h2>
+                <div class="primary-source">
+                    "The past is never dead. It's not even past."
+                    <div class="primary-source-attribution">
+                        — William Faulkner, <em>Requiem for a Nun</em> (1951)
+                    </div>
+                </div>
+                
+                <p style="margin-top: 1.5em; font-size: 1.05em;">The Lost Cause is not ancient history.</p>
+                <p style="margin-top: 1em;">It shapes debates happening <em>right now</em>.</p>
+                
+                <p style="margin-top: 1.5em; color: var(--pale-sunlight);">Now that you understand where it came from and how it works, you're better equipped to think critically about the stories we tell ourselves about who we are as a nation.</p>
+                
+                <aside class="notes">
+                    <h4>📚 Closing Thought</h4>
+                    <p>Faulkner's quote captures the central truth: These aren't just old arguments. The Lost Cause continues to shape American culture, politics, and identity today. Understanding its construction helps you recognize its persistence.</p>
+                    
+                    <h4>📖 What You've Learned</h4>
+                    <p>Over these three lectures, you've traced how Lost Cause mythology:</p>
+                    <ul>
+                        <li><strong>Emerged</strong> as Confederate apologetics (1861-1877)</li>
+                        <li><strong>Institutionalized</strong> through organizations, monuments, textbooks (1880s-1920s)</li>
+                        <li><strong>Nationalized</strong> through academia, film, and aesthetics (1890s-1940s)</li>
+                    </ul>
+                    
+                    <h4>💭 Your Responsibility</h4>
+                    <p>As educated citizens, you now have the responsibility to recognize Lost Cause mythology when you encounter it—and to insist on more accurate, complete histories that center the experiences of all Americans, not just white elites.</p>
+                </aside>
+            </section>
+            
+        </div>
+    </div>
+    
+   <!-- Reveal.js and plugins from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/zoom/zoom.js"></script>
+    
+    <script>
+        // Initialize Reveal.js
+        Reveal.initialize({
+            width: 1920,
+            height: 1080,
+            margin: 0.08,
+            minScale: 0.2,
+            maxScale: 2.0,
+            controls: true,
+            progress: true,
+            center: true,
+            hash: true,
+            transition: 'slide',
+            transitionSpeed: 'default',
+            backgroundTransition: 'fade',
+            keyboard: true,
+            overview: true,
+            help: true,
+            plugins: [ RevealNotes, RevealHighlight, RevealZoom ]
+        });
+        
+        // Keyboard shortcuts popup toggle
+        function toggleShortcuts() {
+            document.getElementById('shortcuts-popup').classList.toggle('active');
+        }
+        
+        // Generic popup toggle
+        function togglePopup(id) {
+            // Close all popups first
+            document.querySelectorAll('.popup').forEach(p => {
+                if (p.id !== id) p.classList.remove('active');
+            });
+            document.getElementById(id).classList.toggle('active');
+        }
+        
+        // Close popups when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.popup') && !e.target.closest('.popup-trigger') && !e.target.closest('.shortcuts-btn')) {
+                document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+            }
+        });
+        
+        // Close popups on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+            }
+        });
+        
+        // Multiple Choice Quiz Functionality
+        document.querySelectorAll('.mc-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const question = this.closest('.mc-question');
+                const correctAnswer = question.dataset.correct;
+                const selectedValue = this.dataset.value;
+                const feedback = question.querySelector('.mc-feedback');
+                
+                // Remove previous selections
+                question.querySelectorAll('.mc-option').forEach(opt => {
+                    opt.classList.remove('selected', 'correct', 'incorrect');
+                });
+                
+                // Mark selection
+                this.classList.add('selected');
+                
+                // Check answer
+                if (selectedValue === correctAnswer) {
+                    this.classList.add('correct');
+                    feedback.textContent = 'Correct!';
+                    feedback.className = 'mc-feedback show correct';
+                } else {
+                    this.classList.add('incorrect');
+                    // Highlight correct answer
+                    question.querySelectorAll('.mc-option').forEach(opt => {
+                        if (opt.dataset.value === correctAnswer) {
+                            opt.classList.add('correct');
+                        }
+                    });
+                    feedback.textContent = 'Incorrect. The correct answer is highlighted.';
+                    feedback.className = 'mc-feedback show incorrect';
+                }
+            });
+        });
+        
+        // Hide shortcuts button on slides other than title
+        Reveal.on('slidechanged', function(event) {
+            const shortcutsBtn = document.querySelector('.shortcuts-btn');
+            const shortcutsPopup = document.getElementById('shortcuts-popup');
+            if (event.indexh === 0) {
+                shortcutsBtn.style.display = 'block';
+            } else {
+                shortcutsBtn.style.display = 'none';
+                shortcutsPopup.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

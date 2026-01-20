@@ -1,0 +1,1299 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Myth of the Lost Cause, Part 1 - HIST 101</title>
+    
+    <!-- Reveal.js CSS from CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --desert-flower: #FF9B8A;
+            --cattleya-orchid: #A25FB0;
+            --opera-mauve: #D4A5C8;
+            --blue-curacao: #48C9C9;
+            --spicy-mustard: #D9A757;
+            --mocha-mousse: #A78674;
+            --arabesque: #C8826D;
+            --dark-bg: #1A1A1A;
+            --light-text: #FAFAFA;
+            --popup-bg: #FAFAFA;
+            --popup-text: #1A1A1A;
+        }
+        
+        .reveal {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 28px;
+            background: var(--dark-bg);
+        }
+        
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--desert-flower);
+            text-transform: none;
+            line-height: 1.2;
+        }
+        
+        .reveal h1 { font-size: 2.8em; }
+        .reveal h2 { font-size: 2em; }
+        .reveal h3 { font-size: 1.5em; color: var(--opera-mauve); }
+        
+        .reveal p, .reveal li {
+            color: var(--light-text);
+            line-height: 1.5;
+        }
+        
+        .reveal a {
+            color: var(--blue-curacao);
+            text-decoration: underline;
+        }
+        
+        /* Section Title Slide */
+        .section-title-slide {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        
+        .section-title-slide h2 {
+            font-size: 2.5em;
+            color: var(--desert-flower);
+            border-bottom: 4px solid var(--cattleya-orchid);
+            padding-bottom: 0.3em;
+            margin-bottom: 0.5em;
+        }
+        
+        .section-title-slide .section-number {
+            font-size: 1.2em;
+            color: var(--blue-curacao);
+            margin-bottom: 0.5em;
+            font-weight: 600;
+        }
+        
+        .section-title-slide .section-subtitle {
+            font-size: 1.1em;
+            color: var(--opera-mauve);
+            font-style: italic;
+        }
+        
+        /* Keyboard Shortcuts Menu */
+        .shortcuts-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(72, 201, 201, 0.2);
+            border: 2px solid var(--blue-curacao);
+            color: var(--blue-curacao);
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.7em;
+            z-index: 100;
+            font-family: 'Open Sans', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .shortcuts-btn:hover {
+            background: rgba(72, 201, 201, 0.4);
+        }
+        
+        .shortcuts-popup {
+            display: none;
+            position: fixed;
+            bottom: 70px;
+            left: 20px;
+            background: var(--popup-bg);
+            color: var(--popup-text);
+            padding: 1.2em;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            z-index: 1000;
+            font-size: 0.65em;
+            max-width: 320px;
+            border: 3px solid var(--cattleya-orchid);
+        }
+        
+        .shortcuts-popup.active { display: block; }
+        
+        .shortcuts-popup h4 {
+            margin: 0 0 0.8em 0;
+            color: var(--cattleya-orchid);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1em;
+        }
+        
+        .shortcuts-popup table {
+            width: 100%;
+            border-collapse: collapse;
+            color: var(--popup-text);
+        }
+        
+        .shortcuts-popup td {
+            padding: 4px 8px;
+            border-bottom: 1px solid #ddd;
+            color: var(--popup-text);
+        }
+        
+        .shortcuts-popup kbd {
+            background: var(--dark-bg);
+            color: var(--desert-flower);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.95em;
+        }
+        
+        .shortcuts-close {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            cursor: pointer;
+            color: var(--arabesque);
+            font-size: 1.3em;
+        }
+        
+        /* Pop-up/Modal styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--popup-bg);
+            color: var(--popup-text);
+            padding: 2em;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            max-width: 65%;
+            max-height: 70%;
+            overflow-y: auto;
+            z-index: 1000;
+            border: 4px solid var(--cattleya-orchid);
+            font-size: 0.85em;
+        }
+        
+        .popup.active { display: block; }
+        
+        .popup h3 {
+            color: var(--cattleya-orchid);
+            margin-top: 0;
+        }
+        
+        .popup p, .popup li {
+            color: var(--popup-text);
+        }
+        
+        .popup ul {
+            padding-left: 1.5em;
+        }
+        
+        .popup li {
+            margin-bottom: 0.5em;
+        }
+        
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 2em;
+            cursor: pointer;
+            color: var(--arabesque);
+        }
+        
+        .popup-trigger {
+            color: var(--blue-curacao);
+            text-decoration: underline dotted;
+            cursor: pointer;
+            border-bottom: 2px dotted var(--blue-curacao);
+        }
+        
+        .popup-trigger:hover {
+            color: var(--cattleya-orchid);
+            border-bottom-color: var(--cattleya-orchid);
+        }
+        
+        /* Image placeholder styling */
+        .img-placeholder {
+            background: linear-gradient(135deg, var(--opera-mauve) 0%, var(--arabesque) 100%);
+            border: 3px dashed var(--cattleya-orchid);
+            padding: 2em;
+            text-align: center;
+            color: var(--dark-bg);
+            font-style: italic;
+            border-radius: 12px;
+            margin: 1em auto;
+        }
+        
+        .img-placeholder strong {
+            display: block;
+            font-size: 1.1em;
+            margin-bottom: 0.5em;
+        }
+        
+        /* Key term styling */
+        .key-term {
+            color: var(--cattleya-orchid);
+            font-weight: 600;
+        }
+        
+        /* Primary source styling */
+        .primary-source {
+            background: rgba(217, 167, 87, 0.15);
+            border-left: 5px solid var(--spicy-mustard);
+            padding: 1em 1.5em;
+            margin: 1em 0;
+            font-style: italic;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .primary-source .attribution {
+            text-align: right;
+            font-size: 0.85em;
+            color: var(--mocha-mousse);
+            margin-top: 0.8em;
+            font-style: normal;
+        }
+        
+        /* Claim box styling */
+        .claim-box {
+            background: rgba(162, 95, 176, 0.15);
+            border: 3px solid var(--cattleya-orchid);
+            padding: 1.2em;
+            border-radius: 12px;
+            margin: 1em 0;
+        }
+        
+        .claim-box h3 {
+            color: var(--cattleya-orchid);
+            margin-top: 0;
+            font-size: 1.3em;
+        }
+        
+        /* Timeline styling */
+        .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            margin: 0.8em 0;
+            padding: 0.5em;
+            border-left: 4px solid var(--blue-curacao);
+            padding-left: 1em;
+        }
+        
+        .timeline-date {
+            color: var(--spicy-mustard);
+            font-weight: bold;
+            min-width: 100px;
+            font-size: 1.1em;
+        }
+        
+        /* Assessment Section Styling - WITH SCROLLING */
+        .assessment-slide {
+            height: 100%;
+            overflow-y: auto !important;
+        }
+        
+        .assessment-section {
+            background: linear-gradient(135deg, rgba(162, 95, 176, 0.1) 0%, rgba(72, 201, 201, 0.1) 100%);
+            border: 3px solid var(--cattleya-orchid);
+            border-radius: 15px;
+            padding: 1.5em;
+            text-align: left;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        
+        .assessment-section h2 {
+            text-align: center;
+            margin-bottom: 0.8em;
+        }
+        
+        /* Fillable Form Styling */
+        .fillable-form {
+            background: white;
+            color: var(--popup-text);
+            padding: 1.5em;
+            border-radius: 10px;
+            margin: 1em 0;
+            page-break-inside: avoid;
+        }
+        
+        .fillable-form h4 {
+            color: var(--cattleya-orchid);
+            margin-top: 0;
+            font-family: 'Montserrat', sans-serif;
+            border-bottom: 2px solid var(--cattleya-orchid);
+            padding-bottom: 0.3em;
+        }
+        
+        .fillable-form label {
+            display: block;
+            margin: 1em 0 0.3em 0;
+            font-weight: 600;
+            color: var(--popup-text);
+        }
+        
+        .fillable-form textarea {
+            width: 100%;
+            min-height: 80px;
+            padding: 10px;
+            border: 2px solid var(--mocha-mousse);
+            border-radius: 8px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.9em;
+            resize: vertical;
+            box-sizing: border-box;
+            color: var(--popup-text);
+            background: #fff;
+        }
+        
+        .fillable-form textarea:focus {
+            outline: none;
+            border-color: var(--blue-curacao);
+            box-shadow: 0 0 5px rgba(72, 201, 201, 0.5);
+        }
+        
+        .fillable-form .question-number {
+            color: var(--cattleya-orchid);
+            font-weight: bold;
+        }
+        
+        /* Multiple Choice Quiz Styling */
+        .mc-quiz {
+            background: white;
+            color: var(--popup-text);
+            padding: 1.5em;
+            border-radius: 10px;
+            margin: 1em 0;
+            text-align: left;
+        }
+        
+        .mc-quiz h4 {
+            color: var(--cattleya-orchid);
+            margin-top: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .mc-question {
+            margin-bottom: 1.5em;
+            padding-bottom: 1em;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .mc-question:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .mc-question p {
+            color: var(--popup-text);
+            font-weight: 600;
+            margin-bottom: 0.8em;
+        }
+        
+        .mc-option {
+            display: block;
+            padding: 0.6em 1em;
+            margin: 0.4em 0;
+            background: #f5f5f5;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--popup-text);
+        }
+        
+        .mc-option:hover {
+            background: #e8e8e8;
+            border-color: var(--blue-curacao);
+        }
+        
+        .mc-option.selected {
+            border-color: var(--blue-curacao);
+            background: rgba(72, 201, 201, 0.15);
+        }
+        
+        .mc-option.correct {
+            border-color: #27ae60;
+            background: rgba(39, 174, 96, 0.2);
+        }
+        
+        .mc-option.incorrect {
+            border-color: #c0392b;
+            background: rgba(192, 57, 43, 0.15);
+        }
+        
+        .mc-feedback {
+            display: none;
+            padding: 0.8em;
+            border-radius: 8px;
+            margin-top: 0.5em;
+            font-weight: 600;
+        }
+        
+        .mc-feedback.show { display: block; }
+        
+        .mc-feedback.correct {
+            background: rgba(39, 174, 96, 0.2);
+            color: #27ae60;
+        }
+        
+        .mc-feedback.incorrect {
+            background: rgba(192, 57, 43, 0.15);
+            color: #c0392b;
+        }
+        
+        /* Print Styles */
+        @media print {
+            .reveal {
+                background: white !important;
+                font-size: 12pt !important;
+            }
+
+            .reveal .slides {
+                transform: none !important;
+                width: 100% !important;
+                height: auto !important;
+                left: 0 !important;
+                top: 0 !important;
+                position: relative !important;
+            }
+
+            /* Hide all slides (covers horizontal + vertical stacks) */
+            .reveal .slides > section,
+            .reveal .slides > section > section {
+                display: none !important;
+            }
+
+            /* Show ONLY the consolidated assessment slide */
+            .reveal .slides > section#consolidated-assessment-slide,
+            .reveal .slides > section > section#consolidated-assessment-slide {
+                display: block !important;
+                position: relative !important;
+                width: 100% !important;
+                height: auto !important;
+                transform: none !important;
+                padding: 20px !important;
+            }
+
+            /* Ensure printable layout inside the assessment */
+            .assessment-section,
+            .scrollable-slide {
+                max-height: none !important;
+                height: auto !important;
+                overflow: visible !important;
+                background: white !important;
+            }
+
+            .fillable-form {
+                border: 2px solid #333 !important;
+                page-break-inside: avoid;
+            }
+
+            .fillable-form textarea {
+                border: 1px solid #333 !important;
+                min-height: 100px !important;
+            }
+
+            .mc-quiz {
+                border: 2px solid #333 !important;
+                page-break-inside: avoid;
+            }
+
+            /* Hide UI / controls in print */
+            button,
+            .shortcuts-btn,
+            .shortcuts-popup,
+            .reveal .controls,
+            .reveal .progress,
+            .reveal .slide-number {
+                display: none !important;
+            }
+        }
+        
+        /* Subtitle styling */
+        .subtitle {
+            color: var(--opera-mauve);
+            font-style: italic;
+            font-size: 0.9em;
+        }
+        
+        /* Two-column layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2em;
+            text-align: left;
+        }
+        
+        .column {
+            padding: 1em;
+        }
+        
+        /* List styling */
+        .reveal ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .reveal ul li {
+            padding-left: 1.5em;
+            position: relative;
+            margin-bottom: 0.6em;
+        }
+        
+        .reveal ul li::before {
+            content: "•";
+            color: var(--desert-flower);
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+        }
+        
+        /* Scrollable slide content */
+        .scrollable-slide {
+            height: 90vh;
+            overflow-y: auto;
+            padding-right: 20px;
+        }
+        
+        /* Biography card */
+        .bio-card {
+            display: flex;
+            gap: 2em;
+            align-items: flex-start;
+            text-align: left;
+        }
+        
+        .bio-card .bio-text {
+            flex: 1;
+        }
+        
+        .bio-card .bio-text h3 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+
+	<body>
+    <div class="reveal">
+        <div class="slides">
+            
+            <!-- ==================== SLIDE 1: TITLE ==================== -->
+<section data-background-image="images/lost_cause_collage.jpg" data-background-size="cover" data-background-opacity="0.3">
+                <h1>The Myth of the Lost Cause</h1>
+                <h2>Part 2: Institutionalization & Growth</h2>
+                <p style="color: var(--misty-sky); margin-top: 2em; font-size: 1.1em;">How the Lost Cause Became Embedded in American Society (1880s-1920s)</p>
+                <p style="color: var(--morning-mist); font-size: 0.9em; margin-top: 1.5em;">HIST 102: U.S. History Since 1877</p>
+                
+               
+
+    
+    <!-- Keyboard Shortcuts Button (Title Slide Only) -->
+    <button class="shortcuts-btn" onclick="toggleShortcuts()">⌨️ Shortcuts</button>
+    
+    <div id="shortcuts-popup" class="shortcuts-popup">
+        <span class="shortcuts-close" onclick="toggleShortcuts()">×</span>
+        <h4>⌨️ Keyboard Shortcuts</h4>
+        <table>
+            <tr><td><kbd>→</kbd> / <kbd>←</kbd></td><td>Next / Previous slide</td></tr>
+            <tr><td><kbd>F</kbd></td><td>Fullscreen mode</td></tr>
+            <tr><td><kbd>S</kbd></td><td>Speaker notes view</td></tr>
+            <tr><td><kbd>O</kbd> / <kbd>Esc</kbd></td><td>Overview mode</td></tr>
+            <tr><td><kbd>B</kbd> / <kbd>.</kbd></td><td>Blackout screen</td></tr>
+            <tr><td><kbd>?</kbd></td><td>Show all shortcuts</td></tr>
+        </table>
+        <p style="margin-top: 0.8em; font-size: 0.85em; color: #666;">
+            <em>Tip: Press <kbd>S</kbd> on a second monitor for presenter view with notes.</em>
+        </p>
+    </div>
+    
+     <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This lecture examines how the Lost Cause mythology transitioned from Confederate veterans' private grievances into a powerful public institution. Between the 1880s and 1920s, organized groups transformed Lost Cause memory into monuments, textbooks, and national reconciliation narratives.</p>
+                    
+                    <h4>📖 Today's Big Question</h4>
+                    <p>How does private memory become public authority? We'll trace the infrastructure that made Lost Cause mythology seem inevitable and natural.</p>
+                    
+                    <h4>💭 Context</h4>
+                    <p>Last lecture covered the origins of Lost Cause mythology (1861-1877). Today we examine its institutionalization. Next lecture covers cultural nationalization through film and aesthetics.</p>
+                </aside>
+</section>
+			           
+            <!-- INTRODUCTION SECTION -->
+            <section>
+                <div class="section-title-slide">
+                    <p class="section-number">Introduction</p>
+                    <h2>From Regional Coping to National Memory</h2>
+                    <p class="section-subtitle">The transformation of the Lost Cause after 1877</p>
+                </div>
+            </section>
+            
+            <section>
+                <h2>Where We Left Off</h2>
+                <p>In Part 1, we traced how the Lost Cause emerged:</p>
+                <ul>
+                    <li>First as a <strong>wartime coping mechanism</strong></li>
+                    <li>Then as a <strong>postwar apologetic project</strong></li>
+                </ul>
+                <p style="margin-top: 1em;">We examined its core claims:</p>
+                <ul style="font-size: 0.9em;">
+                    <li>The war wasn't about slavery</li>
+                    <li>Enslaved people were loyal and content</li>
+                    <li>Confederate leaders were saints</li>
+                    <li>Southern society was harmonious and superior</li>
+                    <li>Fanatical abolitionists caused the war</li>
+                </ul>
+                <p style="margin-top: 1em; color: var(--spicy-mustard);">Today: how these claims became a <span class="key-term">national memory regime</span>.</p>
+            </section>
+            
+            
+            <section>
+                <h2>Understanding the Lost Cause as a Memory Regime</h2>
+                <p style="font-size: 1.1em; margin-bottom: 1em;">The Lost Cause isn't merely <em>wrong</em>.</p>
+                <div class="claim-box">
+                    <h3>It is a <span class="popup-trigger" onclick="togglePopup('memory-regime-popup')">Memory Regime</span></h3>
+                    <ul>
+                        <li>Intentionally constructed</li>
+                        <li>Deliberately institutionalized</li>
+                        <li>Carefully ritualized</li>
+                        <li>Fiercely defended</li>
+                    </ul>
+                </div>
+                <div id="memory-regime-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('memory-regime-popup')">×</span>
+                    <h3>Memory Regime</h3>
+                    <p><strong>Definition:</strong> A system of organized, institutionalized memory that shapes how a society understands its past.</p>
+                    <ul>
+                        <li><strong>Constructed:</strong> Deliberately created by specific actors with specific goals</li>
+                        <li><strong>Institutionalized:</strong> Embedded in organizations, schools, laws, and public spaces</li>
+                        <li><strong>Ritualized:</strong> Maintained through regular ceremonies, commemorations, and practices</li>
+                        <li><strong>Defended:</strong> Protected against challenges through social pressure, political power, or violence</li>
+                    </ul>
+                </div>
+            </section>
+
+                                  
+            <!-- SECTION DIVIDER: ORGANIZATIONAL INFRASTRUCTURE -->
+            <section class="section-divider" data-background="linear-gradient(135deg, #2D4A4A 0%, #2A3540 100%)">
+                <h2>Part I</h2>
+                <h3 style="color: var(--misty-sky);">Organizational Infrastructure</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">How veterans and women built the institutional muscle</p>
+            </section>
+            
+           <!-- VETERANS ORGANIZATIONS -->
+<section>
+    <h2>United Confederate Veterans (UCV)</h2>
+    <p><strong style="color: var(--aventurine);">Founded 1889</strong> | Peak membership: 160,000+</p>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em; margin-top: 1.5em; text-align: left;">
+        <div>
+            <h3 style="font-size: 1.2em;">Structure</h3>
+            <ul style="font-size: 0.9em;">
+                <li>Local camps organized into state divisions under national organization</li>
+                <li>Annual reunions drew between 10,000 and 80,000 attendees</li>
+                <li>Confederate Veteran magazine reached circulation of 20,000</li>
+            </ul>
+        </div>
+        <div>
+            <h3 style="font-size: 1.2em;">Functions</h3>
+            <ul style="font-size: 0.9em;">
+                <li><span class="popup-trigger" onclick="togglePopup('ritual')">Established ritual authority for Confederate commemorations</span></li>
+                <li><span class="popup-trigger" onclick="togglePopup('textbook-approval')">Vetted and approved history textbooks</span></li>
+                <li>Presided over monument dedications</li>
+                <li>Organized and sanctioned public commemorations</li>
+            </ul>
+        </div>
+    </div>
+
+    <div style="margin-top: 2em;">
+        <img src="images/ucv-reunion-1895.jpg" alt="United Confederate Veterans reunion gathering, showing large assembly of elderly veterans in Confederate gray uniforms" style="max-width: 80%; height: auto; border: 2px solid var(--aventurine);">
+        <p style="font-size: 0.8em; font-style: italic; margin-top: 0.5em;">UCV reunion, demonstrating the scale and organization of Confederate veteran gatherings</p>
+    </div>
+     
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>The United Confederate Veterans transformed individual veterans' stories into organized institutional power. Think of them as the infrastructure that gave Lost Cause mythology its authority and reach.</p>
+                    
+                    <h4>📖 Key Point: Legitimacy Through Organization</h4>
+                    <p><strong>Why organization mattered:</strong> A single veteran telling stories at the general store is just one old man's opinion. 160,000 veterans organized into a national structure with magazines, reunions, and official positions? That's an institution with authority.</p>
+                    
+                    <h4>🎓 The Power of Ritual</h4>
+                    <p>The UCV created <em>performative authority</em>. When veterans in uniform marched in parades, dedicated monuments, and presided over Memorial Days, they embodied living proof of the Lost Cause narrative. Who's going to contradict the actual veterans?</p>
+                    
+                    <h4>💭 Numbers Context</h4>
+                    <p>160,000 members may not sound huge, but remember: These are men with social capital, political connections, and the moral authority of having "been there." They're also predominantly the elite who could afford membership dues and travel to reunions.</p>
+                </aside>
+            </section>
+            
+            <!-- UCV RITUAL AUTHORITY POPUP -->
+            <div id="ritual" class="popup">
+                <span class="popup-close" onclick="togglePopup('ritual')">&times;</span>
+                <h3>Ritual Authority</h3>
+                <p>The UCV wielded enormous symbolic power through public ceremony:</p>
+                <ul>
+                    <li><strong>Monument dedications:</strong> Veterans unveiled statues, giving them "eyewitness" legitimacy</li>
+                    <li><strong>Memorial Days:</strong> Controlled the narrative at Confederate grave decorations</li>
+                    <li><strong>Reunions:</strong> Massive public spectacles (New Orleans 1903: 80,000 attendees)</li>
+                    <li><strong>Uniform appearances:</strong> Visual reminder of Confederate service</li>
+                </ul>
+                <p style="margin-top: 1em; color: var(--pale-sunlight);">These rituals transformed Lost Cause claims into <em>performed truth</em>. Hard to argue with men who "were there."</p>
+            </div>
+            
+            <!-- UCV TEXTBOOK APPROVAL POPUP -->
+            <div id="textbook-approval" class="popup">
+                <span class="popup-close" onclick="togglePopup('textbook-approval')">&times;</span>
+                <h3>Textbook Vetting</h3>
+                <p>The UCV created <strong>Historical Committees</strong> to approve or condemn school textbooks:</p>
+                <ul>
+                    <li><strong>Process:</strong> Committees reviewed textbooks for "fairness to the South"</li>
+                    <li><strong>Criteria:</strong> Books must not call Confederates "traitors" or emphasize slavery as the war's cause</li>
+                    <li><strong>Enforcement:</strong> Condemned books faced boycotts; approved books gained veteran endorsement</li>
+                    <li><strong>Impact:</strong> Publishers self-censored to access Southern markets</li>
+                </ul>
+                <p style="margin-top: 1em; color: var(--pale-sunlight);">Veterans used moral authority ("we fought the war") to control how the <em>next generation</em> learned about it.</p>
+            </div>
+            
+          <!-- UNITED DAUGHTERS OF THE CONFEDERACY -->
+<section>
+    <h2>United Daughters of the Confederacy (UDC)</h2>
+    <p><strong style="color: var(--aventurine);">Founded 1894</strong> | Peak membership: 100,000+ (by 1920s)</p>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em; margin-top: 1.5em; align-items: center;">
+        <div>
+            <img src="images/udc-monument-dedication-1913.jpg" alt="United Daughters of the Confederacy members at a monument dedication ceremony, women in period dress surrounding a Confederate memorial" style="width: 100%; height: auto; border: 2px solid var(--aventurine);">
+            <p style="font-size: 0.8em; font-style: italic; margin-top: 0.5em;">UDC monument dedication ceremony</p>
+        </div>
+        
+        <div class="callout">
+            <div class="callout-title">🔑 Why Women's Organizations Mattered</div>
+            <p>While men had veteran status, women did the <em>work</em>. The UDC was the institutional engine that transformed Lost Cause memory from talk into monuments, textbooks, and ritual.</p>
+        </div>
+    </div>      
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>The UDC was arguably more important than the UCV in spreading Lost Cause mythology. Veterans had moral authority, but women had time, energy, fundraising skills, and access to education systems.</p>
+                    
+                    <h4>📖 Gendered Division of Labor</h4>
+                    <p><strong>Men (UCV):</strong> Provided legitimacy, presided over rituals, approved textbooks<br>
+                    <strong>Women (UDC):</strong> Raised funds, commissioned monuments, lobbied school boards, pressured publishers, taught children</p>
+                    
+                    <h4>💭 Why Women Were Effective</h4>
+                    <p>In the late 19th/early 20th century, women were seen as moral guardians of the home and natural educators of children. This gave UDC women access to school boards, textbook decisions, and Memorial Day programming in ways that felt "nonpolitical" even as they were deeply political.</p>
+                    
+                    <h4>🎓 Class Dimension</h4>
+                    <p>UDC membership was predominantly elite white women—those with leisure time, money to donate, and social connections. This wasn't a grassroots movement; it was elite women using their class position to shape public memory.</p>
+                </aside>
+            </section>
+            
+            <!-- UDC ACTIVITIES -->
+            <section>
+                <h2>UDC Activities</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em; margin-top: 1em; text-align: left;">
+                    <div class="comparison-box">
+                        <h3>Monument Work</h3>
+                        <ul style="font-size: 0.9em;">
+                            <li>Raised funds (bake sales, bazaars, donations)</li>
+                            <li>Commissioned sculptors</li>
+                            <li>Selected courthouse square locations</li>
+                            <li>Organized dedication ceremonies</li>
+                        </ul>
+                        <p style="margin-top: 1em; font-size: 0.85em; color: var(--misty-sky);"><strong>Result:</strong> Over 700 Confederate monuments by 1930s</p>
+                    </div>
+                    <div class="comparison-box alt">
+                        <h3>Educational Campaigns</h3>
+                        <ul style="font-size: 0.9em;">
+                            <li>Lobbied school boards for "correct" textbooks</li>
+                            <li>Sponsored essay contests on Confederate heroes</li>
+                            <li>Donated books to school libraries</li>
+                            <li>Created "Children of the Confederacy" youth chapters</li>
+                        </ul>
+                        <p style="margin-top: 1em; font-size: 0.85em; color: var(--misty-sky);"><strong>Goal:</strong> Generational transmission of Lost Cause memory</p>
+                    </div>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📖 Monument Strategy</h4>
+                    <p>UDC women understood that monuments weren't just art—they were <em>landscape control</em>. By placing Confederate soldiers in courthouse squares (the civic center of Southern towns), they made Lost Cause memory literally unavoidable. Every trial, every wedding, every public gathering occurred under the gaze of the Confederate soldier.</p>
+                    
+                    <h4>📚 Educational Strategy</h4>
+                    <p>The UDC knew that if they could control what children learned in schools, they'd win the long game. Textbook campaigns, essay contests, and youth chapters meant that each new generation would inherit Lost Cause mythology as "just the way things are."</p>
+                    
+                    <h4>💭 Fundraising Power</h4>
+                    <p>A typical Confederate monument cost $3,000-$10,000 (equivalent to $100,000-$300,000 today). UDC women raised this through small donations, bake sales, and elite patronage—showing both grassroots organization and elite backing.</p>
+                </aside>
+            </section>
+            
+            <!-- SECTION DIVIDER: LANDSCAPE & EDUCATION -->
+            <section class="section-divider" data-background="linear-gradient(135deg, #2D4A4A 0%, #2A3540 100%)">
+                <h2>Part II</h2>
+                <h3 style="color: var(--misty-sky);">Landscape & Education</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">Making Lost Cause memory physically and pedagogically inevitable</p>
+            </section>
+            
+            <!-- MONUMENT CAMPAIGNS -->
+<section>
+    <h2>The Monument Campaign</h2>
+    <div class="two-column">
+        <div class="column-left">
+            <img src="images/confederate-monument-unveiling.jpg" alt="Confederate monument unveiling ceremony with crowds gathered" style="max-height: 450px; border: 3px solid var(--aged-lace);">
+            <p style="font-size: 0.7em; color: var(--pale-sunlight); margin-top: 0.5em;">Monument unveiling ceremony, early 20th century</p>
+        </div>
+        <div class="column-right">
+            <p style="font-size: 0.9em;">Confederate monuments peaked in two waves:</p>
+            <div style="text-align: left; font-size: 0.85em; margin-top: 1em;">
+                <div class="timeline-item">
+                    <span class="timeline-date">1890s–1920s</span>
+                    <span><strong>First Wave:</strong> Lost Cause institutionalization (UDC-led)</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">1950s–1960s</span>
+                    <span><strong>Second Wave:</strong> Massive resistance to civil rights</span>
+                </div>
+            </div>
+            
+            <div class="callout" style="margin-top: 1.2em; font-size: 0.85em;">
+                <div class="callout-title">🔑 Critical Insight</div>
+                <p>These monuments weren't erected immediately after the war when Southerners were mourning. They were built <em>decades later</em>, during Jim Crow—when white supremacy needed public reinforcement.</p>
+            </div>
+        </div>
+    </div>
+    
+    <aside class="notes">
+        <h4>📚 What You Need to Know</h4>
+        <p>The timing of Confederate monument construction reveals their true purpose. If these were really about mourning the dead, you'd expect them right after the war. Instead, they peaked during two periods of active racial conflict: Jim Crow implementation (1890s-1920s) and civil rights resistance (1950s-1960s).</p>
+        
+        <h4>📖 Monuments as Political Statement</h4>
+        <p>Confederate monuments served multiple functions:</p>
+        <ul>
+            <li><strong>Legitimation:</strong> Made Confederate cause seem honorable and worthy</li>
+            <li><strong>Intimidation:</strong> Reminded Black Southerners of white power</li>
+            <li><strong>Landscape control:</strong> Claimed public space for white supremacist memory</li>
+            <li><strong>Generational transmission:</strong> Taught children that Confederacy was noble</li>
+        </ul>
+        
+        <h4>💭 Context: Jim Crow Era</h4>
+        <p>The 1890s-1920s was the period of harshest Jim Crow implementation: segregation laws, disenfranchisement, lynching, convict leasing. The monuments went up as Black Southerners were being systematically stripped of rights.</p>
+        
+        <h4>🖼️ Image</h4>
+        <p><strong>Filename:</strong> confederate-monument-unveiling.jpg</p>
+        <p><strong>Search:</strong> "Confederate monument unveiling ceremony crowd early 1900s" OR "UDC monument dedication ceremony"</p>
+    </aside>
+</section>
+
+<!-- MONUMENT DEDICATIONS -->
+<section>
+    <h2>Monument Dedications as Ritual</h2>
+    <div class="two-column">
+        <div class="column-left">
+            <img src="images/monument-dedication-parade.jpg" alt="Confederate veterans and children in parade during monument dedication" style="max-height: 450px; border: 3px solid var(--aged-lace);">
+            <p style="font-size: 0.7em; color: var(--pale-sunlight); margin-top: 0.5em;">Veterans and schoolchildren at monument dedication</p>
+        </div>
+        <div class="column-right">
+            <p style="font-size: 0.9em;">Dedications weren't quiet ceremonies. They were <span class="key-term">massive public spectacles</span>:</p>
+            <ul style="margin-top: 0.8em; font-size: 0.85em;">
+                <li>Parades of veterans in uniform</li>
+                <li>School children in Confederate-themed pageants</li>
+                <li>Speeches by governors, senators, veterans</li>
+                <li>Crowds of 5,000–20,000+ in small Southern towns</li>
+            </ul>
+            
+            <p style="margin-top: 1.2em; font-size: 0.95em; color: var(--pale-sunlight);">The dedication <em>ritual</em> mattered as much as the monument itself—transforming Lost Cause claims into <strong>performed civic religion</strong>.</p>
+        </div>
+    </div>
+    
+    <aside class="notes">
+        <h4>📖 Why Ritual Mattered</h4>
+        <p>Monument dedications were performances of white solidarity and Lost Cause mythology. When an entire town turned out—veterans, children, politicians, churches—the ritual created the <em>feeling</em> of consensus and legitimacy.</p>
+        
+        <h4>💭 Performative Power</h4>
+        <p>Think about what these dedications accomplished:</p>
+        <ul>
+            <li>Children absorbed Lost Cause mythology as community event</li>
+            <li>Veterans provided "eyewitness" authority to the narrative</li>
+            <li>Politicians aligned themselves with Confederate memory</li>
+            <li>Black residents were forced to witness (or avoid) celebrations of their ancestors' enslavement</li>
+        </ul>
+        
+        <h4>🎓 Scholar's Note</h4>
+        <p><strong>W. Fitzhugh Brundage</strong> (historian of Southern memory) argues that these dedications functioned as civic religion—rituals that bound white Southerners together through shared commemoration of a sacred (Lost) Cause.</p>
+        
+        <h4>🖼️ Image</h4>
+        <p><strong>Filename:</strong> monument-dedication-parade.jpg</p>
+        <p><strong>Search:</strong> "Confederate monument dedication parade veterans children" OR "Confederate memorial day parade 1910s"</p>
+    </aside>
+</section>
+          <!-- TEXTBOOK WARS -->
+<section>
+    <h2>The Textbook Wars</h2>
+    <p>Control the textbooks, control the future.</p>
+    
+    <div style="display: flex; justify-content: center; gap: 2em; margin: 1.5em auto;">
+        <div style="text-align: center;">
+            <img src="images/lee_school_history.jpg" alt="Susan Pendleton Lee's A School History of the United States textbook cover" style="max-height: 475px; border: 3px solid var(--aged-lace);">
+            <p style="font-size: 0.7em; color: var(--pale-sunlight); margin-top: 0.5em;">Lee's <em>School History</em> (1895)</p>
+        </div>
+        <div style="text-align: center;">
+            <img src="images/kkk_invisible_empire.jpg" alt="Laura Martin Rose's The Ku Klux Klan or Invisible Empire textbook cover" style="max-height: 475px; border: 3px solid var(--aged-lace);">
+            <p style="font-size: 0.7em; color: var(--pale-sunlight); margin-top: 0.5em;">Rose's <em>Invisible Empire</em> (1914)</p>
+        </div>
+    </div>
+    
+    <aside class="notes">
+        <h4>📚 What You Need to Know</h4>
+        <p>The UDC and UCV understood that monuments controlled public space, but textbooks controlled minds. If they could dictate what children learned about the Civil War in schools, they'd win the memory war for generations.</p>
+        
+        <h4>📖 The Stakes</h4>
+        <p>This wasn't just about Southern schools. Because the South was a major textbook market, publishers created Southern-friendly editions or self-censored national editions to avoid boycotts. The UDC's textbook campaigns shaped what <em>all American children</em> learned about the Civil War.</p>
+        
+        <h4>📖 About These Textbooks</h4>
+        <p><strong>Susan Pendleton Lee's <em>A School History of the United States</em></strong> romanticized slavery, decried emancipation, and lionized Confederate leaders. Used almost exclusively in South Carolina and Virginia schools for years.</p>
+        <p><strong>Laura Martin Rose's <em>The Ku Klux Klan, or Invisible Empire</em> (1914)</strong> was dedicated to Southern youth to "inspire them with respect and admiration for the Confederate soldiers, who were the real Ku Klux." Unanimously endorsed by the UDC at their 1913 convention and pushed into schools across the South.</p>
+    </aside>
+</section>
+            
+            <!-- MILDRED RUTHERFORD -->
+            <section>
+    <h2>Mildred Rutherford: Historian General of the UDC</h2>
+    <div style="display: flex; gap: 2em; align-items: start;">
+        <div style="flex: 0 0 auto; text-align: center;">
+            <img src="images/measuring_rod_mildred_rutherford.jpg" alt="Mildred Rutherford and her publication A Measuring Rod to Test Text Books" style="max-height: 475px; border: 3px solid var(--aged-lace);">
+            <p style="font-size: 0.7em; color: var(--pale-sunlight); margin-top: 0.5em;">Rutherford's <em>Measuring Rod</em> (1919)</p>
+        </div>
+        <div style="flex: 1; text-align: left; font-size: 0.9em;">
+            <p><strong style="color: var(--aventurine);">Title:</strong> "Historian General" (1911-1916)</p>
+            <p style="margin-top: 0.8em;"><strong style="color: var(--aventurine);">Mission:</strong> Ensure "truthful history" taught in Southern schools</p>
+            <p style="margin-top: 1em;"><strong style="color: var(--aventurine);">Strategy:</strong></p>
+            <ul style="font-size: 0.95em; margin-top: 0.5em;">
+                <li>Created <span class="popup-trigger" onclick="togglePopup('measuring-rod')">A Measuring Rod to Test Text Books</span></li>
+                <li>Lobbied state legislatures</li>
+                <li>Organized textbook boycotts</li>
+                <li>Pressured publishers directly</li>
+            </ul>
+            <p style="margin-top: 1em; font-size: 0.95em; color: var(--pale-sunlight);"><strong>Impact:</strong> By 1920s, most Southern states required "fair" treatment of Confederacy in textbooks</p>
+        </div>
+    </div>
+                <aside class="notes">
+                    <h4>📚 Who Was Mildred Rutherford?</h4>
+                    <p>Rutherford was a Georgia educator who served as the UDC's "Historian General"—essentially the chief enforcer of Lost Cause orthodoxy in education. She created systematic guidelines for evaluating whether textbooks were "fair to the South."</p>
+                    
+                    <h4>📖 The "Measuring Rod"</h4>
+                    <p>Her pamphlet <em>A Measuring Rod to Test Text Books</em> (1919) provided specific criteria:</p>
+                    <ul>
+                        <li>REJECT books that call secession "rebellion" or Confederates "traitors"</li>
+                        <li>REJECT books that say slavery caused the war</li>
+                        <li>ACCEPT books that emphasize states' rights, tariffs, constitutional differences</li>
+                        <li>ACCEPT books that portray enslaved people as content</li>
+                    </ul>
+                    
+                    <h4>💭 How It Worked</h4>
+                    <p>UDC chapters would evaluate local school textbooks using Rutherford's criteria. "Offensive" books faced organized boycotts and letter-writing campaigns to publishers and school boards. Publishers, wanting to access the Southern market, often capitulated.</p>
+                    
+                    <h4>🎓 Long-Term Impact</h4>
+                    <p>Rutherford's campaign was wildly successful. By the 1920s-1930s, even national textbooks downplayed slavery, emphasized "sectional differences," and portrayed Reconstruction as corrupt. These narratives persisted in American textbooks through the 1960s.</p>
+                </aside>
+            </section>
+            
+            <!-- MEASURING ROD POPUP -->
+            <div id="measuring-rod" class="popup">
+                <span class="popup-close" onclick="togglePopup('measuring-rod')">&times;</span>
+                <h3>A Measuring Rod to Test Text Books (1919)</h3>
+                <p><strong>Purpose:</strong> Provide UDC chapters with specific criteria to evaluate school textbooks</p>
+                
+                <p style="margin-top: 1em;"><strong style="color: var(--pale-sunlight);">REJECT a book that:</strong></p>
+                <ul>
+                    <li>Calls the Confederate movement a "rebellion"</li>
+                    <li>Says the South fought to preserve slavery</li>
+                    <li>Speaks of the Constitution "as practically obsolete"</li>
+                    <li>Admits that the North was right in its course</li>
+                </ul>
+                
+                <p style="margin-top: 1em;"><strong style="color: var(--pale-sunlight);">ACCEPT a book that:</strong></p>
+                <ul>
+                    <li>Refers to "The War Between the States" (not "Civil War")</li>
+                    <li>Emphasizes states' rights and constitutional issues</li>
+                    <li>Portrays enslaved people as loyal and content</li>
+                    <li>Describes Reconstruction as a disaster</li>
+                </ul>
+                
+                <p style="margin-top: 1em; color: var(--aventurine);">This was institutional censorship disguised as quality control.</p>
+            </div>
+            
+            <!-- SECTION DIVIDER: NATIONAL RECONCILIATION -->
+            <section class="section-divider" data-background="linear-gradient(135deg, #2D4A4A 0%, #2A3540 100%)">
+                <h2>Part III</h2>
+                <h3 style="color: var(--misty-sky);">National Reconciliation</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">How the North became complicit in Lost Cause mythology</p>
+            </section>
+            
+            <!-- BLUE-GRAY REUNIONS -->
+<section>
+    <h2>Blue-Gray Reunions</h2>
+    <p>By the 1880s-1910s, Union and Confederate veterans began holding joint reunions.</p>
+    
+    <div style="display: flex; gap: 1.5em; margin: 1.5em auto; justify-content: center; align-items: flex-start;">
+        <div style="flex: 0 0 auto; text-align: center;">
+            <img src="images/blue_grey_reunion.webp" alt="Union and Confederate veterans shaking hands at Blue-Gray reunion" style="max-height: 320px; border: 3px solid var(--aged-lace);">
+        </div>
+        <div style="flex: 1; text-align: left;">
+            <div class="callout">
+                <div class="callout-title">The Narrative</div>
+                <p style="font-size: 0.9em;">"Both sides fought bravely for what they believed. Let's honor all veterans and heal the sectional wound."</p>
+            </div>
+            
+            <p style="margin-top: 1em; font-size: 0.9em;"><strong style="color: var(--pale-sunlight);">What this narrative erased:</strong></p>
+            <ul style="font-size: 0.85em;">
+                <li>Slavery as the war's cause</li>
+                <li>Emancipation as the war's meaning</li>
+                <li>Black veterans and their sacrifices</li>
+                <li>The moral difference between fighting for union/freedom vs. fighting for slavery</li>
+            </ul>
+        </div>
+        <div style="flex: 0 0 auto; text-align: center;">
+            <img src="images/blue_grey_reunion2.jpg" alt="Blue and Gray veterans reunited at battlefield commemoration" style="max-height: 320px; border: 3px solid var(--aged-lace);">
+        </div>
+    </div>
+                
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>Blue-Gray reunions were powerful symbols of sectional healing—Union and Confederate veterans shaking hands at Gettysburg, sharing campfire stories, emphasizing shared whiteness and martial valor.</p>
+                    
+                    <h4>📖 The Problem: Reconciliation Without Justice</h4>
+                    <p>These reunions achieved <em>white</em> reconciliation by erasing the war's moral stakes. By focusing on soldiers' bravery and sacrifice, they avoided discussing <em>what</em> those soldiers were fighting for.</p>
+                    
+                    <h4>💭 Who Was Excluded?</h4>
+                    <p>Black veterans—180,000 of whom fought for the Union—were systematically excluded from or marginalized in these reunions. The reunions were about white men forgiving white men, not about racial justice or acknowledging emancipation.</p>
+                    
+                    <h4>🎓 Scholar's Perspective</h4>
+                    <p><strong>David Blight</strong> (historian) calls this "reconciliationist memory"—white Americans agreed to remember the war as a tragic brothers' conflict and forget that it was about slavery and Black freedom. This made Lost Cause mythology palatable to Northerners.</p>
+                    
+                    <h4>🔑 Why Northerners Accepted This</h4>
+                    <p>By the 1880s-1890s, many white Northerners were exhausted by Reconstruction, skeptical of Black political participation, and eager to move on. Reconciliation without justice was easier than sustained commitment to racial equality.</p>
+                </aside>
+            </section>
+			<!-- SPANISH–AMERICAN WAR (REVISED w/ your preferred language + sharper causal framing) -->
+<section>
+  <h2>The Spanish–American War (1898)</h2>
+
+  <p>
+    A war that helped the nation “re-unite”—not by resolving Civil War conflicts, but by
+    <span class="key-term">redirecting attention outward</span>.
+  </p>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:2em; margin-top:1.5em; text-align:left;">
+    <div class="comparison-box">
+      <h3>What United Them</h3>
+      <ul style="font-size:0.9em;">
+  <li><strong>Common external enemy</strong> (Spain) redirected energy away from sectional conflict</li>
+  <li><strong>Shared military service</strong> (including ex-Confederates) helped restore Southern honor and national unity</li>
+  <li>Parades, medals, and hero stories turned reunion into <strong>popular culture</strong></li>
+  <li>The war fueled the <span class="key-term">Reconciliation</span> narrative: <em>“once divided, now Americans together”</em></li>
+  <li>Imperial ambition + racialized “civilizing” views of <strong>Cubans and Filipinos</strong></li>
+</ul>
+
+    </div>
+
+    <div class="claim-box">
+ <p style="margin-top:1.5em; font-size:1.05em; color:var(--pale-sunlight);">
+  Post-1898 reconciliation worked because many white Northerners increasingly accepted:
+</p>
+
+<ul style="margin-top:0.6em; font-size:1.05em; color:var(--pale-sunlight);">
+  <li>
+    <strong>Southern white control of the South</strong>
+    (Jim Crow segregation and disfranchisement)
+  </li>
+  <li>
+    A national identity centered on <strong>white solidarity</strong>,
+    often at the expense of Black Americans
+  </li>
+</ul>
+	</div>
+   
+  <aside class="notes">
+    <h4>📚 What You Need to Know</h4>
+    <p>
+      By the 1890s, reconciliation was already growing, but 1898 acts like gasoline on the fire.
+      A shared foreign war creates a new story of national purpose and national pride.
+    </p>
+
+    <h4>🧠 Key Dynamic</h4>
+    <p>
+      The Spanish–American War helps explain how the U.S. “moved past” the Civil War without actually settling
+      the Civil War’s deepest moral and political issues. The conflict shifts from internal justice
+      to external expansion.
+    </p>
+
+    <h4>🎖 Reunion as Ritual</h4>
+    <p>
+      This matters because wars are not just military—they are symbolic machines.
+      Shared military service + public celebrations + heroic narratives generate emotional unity.
+      It’s hard to keep calling someone a traitor when you’re pinning medals on his chest.
+    </p>
+
+    <h4>⚠️ The Dark Tradeoff</h4>
+    <p>
+      Reunion in 1898 is disproportionately a reunion among white Americans.
+      In practice it encourages the nation to stop fighting over Reconstruction
+      and to let the South handle its “race problem” internally—meaning the entrenchment of Jim Crow.
+    </p>
+
+    <h4>🌎 Empire + Racial Hierarchy</h4>
+    <p>
+      The war also fed a shared belief in “civilizing missions” and racial hierarchy toward Cubans,
+      Filipinos, and other colonized peoples—another axis along which white Northerners and Southerners
+      found common ideological ground.
+    </p>
+
+    <h4>🎓 Black Soldiers’ Perspective</h4>
+    <p>
+      Black soldiers served—and many recognized the bitter irony: fighting for freedom abroad while being denied it at home.
+      Some even sympathized with Filipinos resisting U.S. occupation.
+    </p>
+  </aside>
+</section>
+
+            
+          
+            
+            <!-- CONCLUSION SLIDE -->
+            <section>
+                <h2>What We've Covered Today</h2>
+                <p style="font-size: 0.95em;">The Lost Cause didn't just <em>happen</em>—it was <strong>built</strong>:</p>
+                
+                <div style="text-align: left; max-width: 900px; margin: 1.5em auto; font-size: 0.9em;">
+                    <p style="margin: 0.8em 0;"><span class="key-term">Organizations:</span> UCV and UDC provided institutional muscle</p>
+                    <p style="margin: 0.8em 0;"><span class="key-term">Monuments:</span> Claimed public landscape for Confederate memory</p>
+                    <p style="margin: 0.8em 0;"><span class="key-term">Textbooks:</span> Captured educational systems for generational transmission</p>
+                    <p style="margin: 0.8em 0;"><span class="key-term">Reconciliation:</span> Northern complicity enabled Southern victory in memory war</p>
+                </div>
+                
+                <p style="margin-top: 1.5em; font-size: 1.05em; color: var(--pale-sunlight);"><strong>Next time:</strong> How Lost Cause mythology became <em>American culture</em> through academia, film, and aesthetics.</p>
+                
+                <aside class="notes">
+                    <h4>📚 What Students Should Take Away</h4>
+                    <p>The Lost Cause required deliberate infrastructure-building: organizations, monuments, textbooks, and national reconciliation narratives. This wasn't organic memory; it was engineered to preserve white supremacy after military defeat.</p>
+                    
+                    <h4>📖 Preview of Next Lecture</h4>
+                    <p>Today we saw how Lost Cause became institutionalized in the South and accepted in the North. Next lecture examines how it became <em>culture</em>—how academic legitimation (Dunning School) and cultural production (Birth of a Nation, Gone with the Wind) made Lost Cause mythology feel natural, beautiful, and American.</p>
+                    
+                    <h4>🔑 Connection to Jim Crow</h4>
+                    <p>All of this infrastructure—monuments, textbooks, reconciliation—served Jim Crow segregation. By making Lost Cause mythology seem honorable and inevitable, these institutions provided moral cover for stripping Black Southerners of rights.</p>
+                </aside>
+            </section>
+            
+        </div>
+    </div>
+    
+    <!-- Reveal.js and plugins from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/zoom/zoom.js"></script>
+    
+    <script>
+        // Initialize Reveal.js
+        Reveal.initialize({
+            width: 1920,
+            height: 1080,
+            margin: 0.08,
+            minScale: 0.2,
+            maxScale: 2.0,
+            controls: true,
+            progress: true,
+            center: true,
+            hash: true,
+            transition: 'slide',
+            transitionSpeed: 'default',
+            backgroundTransition: 'fade',
+            keyboard: true,
+            overview: true,
+            help: true,
+            plugins: [ RevealNotes, RevealHighlight, RevealZoom ]
+        });
+        
+        // Keyboard shortcuts popup toggle
+        function toggleShortcuts() {
+            document.getElementById('shortcuts-popup').classList.toggle('active');
+        }
+        
+        // Generic popup toggle
+        function togglePopup(id) {
+            // Close all popups first
+            document.querySelectorAll('.popup').forEach(p => {
+                if (p.id !== id) p.classList.remove('active');
+            });
+            document.getElementById(id).classList.toggle('active');
+        }
+        
+        // Close popups when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.popup') && !e.target.closest('.popup-trigger') && !e.target.closest('.shortcuts-btn')) {
+                document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+            }
+        });
+        
+        // Close popups on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+            }
+        });
+        
+        // Multiple Choice Quiz Functionality
+        document.querySelectorAll('.mc-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const question = this.closest('.mc-question');
+                const correctAnswer = question.dataset.correct;
+                const selectedValue = this.dataset.value;
+                const feedback = question.querySelector('.mc-feedback');
+                
+                // Remove previous selections
+                question.querySelectorAll('.mc-option').forEach(opt => {
+                    opt.classList.remove('selected', 'correct', 'incorrect');
+                });
+                
+                // Mark selection
+                this.classList.add('selected');
+                
+                // Check answer
+                if (selectedValue === correctAnswer) {
+                    this.classList.add('correct');
+                    feedback.textContent = 'Correct!';
+                    feedback.className = 'mc-feedback show correct';
+                } else {
+                    this.classList.add('incorrect');
+                    // Highlight correct answer
+                    question.querySelectorAll('.mc-option').forEach(opt => {
+                        if (opt.dataset.value === correctAnswer) {
+                            opt.classList.add('correct');
+                        }
+                    });
+                    feedback.textContent = 'Incorrect. The correct answer is highlighted.';
+                    feedback.className = 'mc-feedback show incorrect';
+                }
+            });
+        });
+        
+        // Hide shortcuts button on slides other than title
+        Reveal.on('slidechanged', function(event) {
+            const shortcutsBtn = document.querySelector('.shortcuts-btn');
+            const shortcutsPopup = document.getElementById('shortcuts-popup');
+            if (event.indexh === 0) {
+                shortcutsBtn.style.display = 'block';
+            } else {
+                shortcutsBtn.style.display = 'none';
+                shortcutsPopup.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
