@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refuting Dunning Essay Builder</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #2d3748;
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+        }
+
+        .instructions {
+            background: #f7fafc;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+            line-height: 1.6;
+            color: #2d3748;
+        }
+
+        .section {
+            background: #ffffff;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .paragraph-block {
+            background: #f8f9fa;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .paragraph-block h3 {
+            color: #4a5568;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 1em;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+            line-height: 1.6;
+        }
+
+        .word-count {
+            text-align: right;
+            font-size: 0.85em;
+            color: #718096;
+            margin-top: 5px;
+        }
+
+        .feedback-container {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 6px;
+            display: none;
+        }
+
+        .feedback-container.show {
+            display: block;
+        }
+
+        .feedback-quick {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .feedback-deep {
+            background: #dbeafe;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .feedback-error {
+            background: #fee2e2;
+            border-left: 4px solid #ef4444;
+        }
+
+        .feedback-container h4 {
+            margin-bottom: 10px;
+            color: #1f2937;
+        }
+
+        .feedback-content {
+            color: #374151;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .section-feedback-area {
+            background: #f8f9fa;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .section-feedback-area h3 {
+            color: #4a5568;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 0.95em;
+            font-weight: 600;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-quick {
+            background: #fbbf24;
+            color: #78350f;
+        }
+
+        .btn-quick:hover:not(:disabled) {
+            background: #f59e0b;
+            transform: translateY(-2px);
+        }
+
+        .btn-deep {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .btn-deep:hover:not(:disabled) {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        .btn-export {
+            background: #667eea;
+            color: white;
+            padding: 12px 30px;
+        }
+
+        .btn-export:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+
+        .btn-clear {
+            background: #e53e3e;
+            color: white;
+        }
+
+        .btn-clear:hover {
+            background: #c53030;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .loading {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            color: #667eea;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .loading.show {
+            display: flex;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid #e2e8f0;
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .checks-remaining {
+            font-size: 0.85em;
+            color: #718096;
+            margin-top: 5px;
+        }
+
+        .save-indicator {
+            text-align: center;
+            color: #48bb78;
+            font-size: 0.9em;
+            margin-top: 10px;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .save-indicator.show {
+            opacity: 1;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .warning-box {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .warning-box strong {
+            color: #92400e;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+            
+            .button-container,
+            .button-group,
+            .save-indicator,
+            .feedback-container,
+            .checks-remaining,
+            .loading,
+            .section-feedback-area {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Refuting Dunning Essay Builder</h1>
+        
+        <div class="instructions">
+            <strong>Instructions:</strong> Use this form to build your essay refuting the Dunning School claim. For each of your three core elements, you'll write body paragraphs that integrate your primary sources and explain how they refute Dunning School claims. Use the feedback buttons to get help improving your writing.
+        </div>
+
+        <div class="warning-box">
+            <strong>⚠️ Academic Integrity Notice:</strong> The AI feedback is designed to help you improve YOUR writing. Do not copy AI suggestions verbatim. The deep check will flag AI-generated text, including content generated by this tool if used improperly.
+        </div>
+
+        <form id="essayForm">
+            <!-- Thesis Section -->
+            <div class="section">
+                <h2>Thesis Statement</h2>
+                <div class="form-group">
+                    <label for="thesis">Your thesis should identify all three core elements you're addressing and your overall argument:</label>
+                    <textarea id="thesis" name="thesis" placeholder="Write your thesis statement here..."></textarea>
+                    <div class="word-count" id="thesis-count">0 words</div>
+                </div>
+            </div>
+
+            <!-- Core Element 1 -->
+            <div class="section">
+                <h2>Assigned Claim 1</h2>
+                <div class="form-group">
+                    <label for="element1">Assigned Dunning School claim (do not change):</label>
+                    <input type="text" id="element1" name="element1" class="core-element-input" value="Claim 1: Reconstruction was a tragic era of corruption and “Negro misrule” (incompetent, illegitimate government)." readonly>
+                </div>
+                <div class="form-group">
+                    <label for="element1_sources">Your sources for this element (paste from bibliography form):</label>
+                    <textarea id="element1_sources" name="element1_sources" rows="4" placeholder="List your 4 sources here for AI reference..."></textarea>
+                </div>
+
+                <!-- Paragraphs for Element 1 -->
+                <div class="paragraph-block">
+                    <h3>Body Paragraph 1</h3>
+                    <div class="form-group">
+                        <label for="e1p1">Paragraph text:</label>
+                        <textarea id="e1p1" name="e1p1" placeholder="Start with a topic sentence that states your claim. Then integrate evidence from your primary sources. Finally, analyze how this evidence refutes the Dunning School claim. Remember: explain HOW and WHY, not just WHAT."></textarea>
+                        <div class="word-count" id="e1p1-count">0 words</div>
+                    </div>
+                    <div class="button-group">
+                        <button type="button" class="btn-quick" onclick="quickCheck('e1p1')">Quick Check</button>
+                    </div>
+                    <div class="feedback-container" id="e1p1-feedback"></div>
+                </div>
+
+                <div class="paragraph-block">
+                    <h3>Body Paragraph 2</h3>
+                    <div class="form-group">
+                        <label for="e1p2">Paragraph text:</label>
+                        <textarea id="e1p2" name="e1p2" placeholder="Continue building your argument with additional evidence..."></textarea>
+                        <div class="word-count" id="e1p2-count">0 words</div>
+                    </div>
+                    <div class="button-group">
+                        <button type="button" class="btn-quick" onclick="quickCheck('e1p2')">Quick Check</button>
+                    </div>
+                    <div class="feedback-container" id="e1p2-feedback"></div>
+                </div>
+
+                <!-- Section-level Deep Check -->
+                <div class="section-feedback-area">
+                    <h3>Deep Feedback for Core Element 1</h3>
+                    <p style="color: #4a5568; margin-bottom: 15px;">Get comprehensive AI feedback on both paragraphs together to see how well they work as a cohesive argument.</p>
+                    <div class="button-group">
+                        <button type="button" class="btn-deep" onclick="deepCheckSection('element1', ['e1p1', 'e1p2'], 'element1_sources')">Deep Feedback for Core Element 1</button>
+                    </div>
+                    <div class="checks-remaining" id="element1-checks">Deep checks used: 0/3</div>
+                    <div class="loading" id="element1-loading">
+                        <div class="spinner"></div>
+                        <span>Analyzing your writing...</span>
+                    </div>
+                    <div class="feedback-container" id="element1-feedback"></div>
+                </div>
+            </div>
+
+            <!-- Core Element 2 -->
+            <div class="section">
+                <h2>Assigned Claim 2</h2>
+                <div class="form-group">
+                    <label for="element2">Assigned Dunning School claim (do not change):</label>
+                    <input type="text" id="element2" name="element2" class="core-element-input" value="Claim 2: Black citizenship and voting rights were premature; freedpeople were unfit for political participation." readonly>
+                </div>
+                <div class="form-group">
+                    <label for="element2_sources">Your sources for this element:</label>
+                    <textarea id="element2_sources" name="element2_sources" rows="4" placeholder="List your 4 sources here for AI reference..."></textarea>
+                </div>
+
+                <div class="paragraph-block">
+                    <h3>Body Paragraph 3</h3>
+                    <div class="form-group">
+                        <label for="e2p1">Paragraph text:</label>
+                        <textarea id="e2p1" name="e2p1" placeholder="Start with a topic sentence that states your claim..."></textarea>
+                        <div class="word-count" id="e2p1-count">0 words</div>
+                    </div>
+                    <div class="button-group">
+                        <button type="button" class="btn-quick" onclick="quickCheck('e2p1')">Quick Check</button>
+                    </div>
+                    <div class="feedback-container" id="e2p1-feedback"></div>
+                </div>
+
+                <div class="paragraph-block">
+                    <h3>Body Paragraph 4</h3>
+                    <div class="form-group">
+                        <label for="e2p2">Paragraph text:</label>
+                        <textarea id="e2p2" name="e2p2" placeholder="Continue building your argument with additional evidence..."></textarea>
+                        <div class="word-count" id="e2p2-count">0 words</div>
+                    </div>
+                    <div class="button-group">
+                        <button type="button" class="btn-quick" onclick="quickCheck('e2p2')">Quick Check</button>
+                    </div>
+                    <div class="feedback-container" id="e2p2-feedback"></div>
+                </div>
+
+                <!-- Section-level Deep Check -->
+                <div class="section-feedback-area">
+                    <h3>Deep Feedback for Core Element 2</h3>
+                    <p style="color: #4a5568; margin-bottom: 15px;">Get comprehensive AI feedback on both paragraphs together to see how well they work as a cohesive argument.</p>
+                    <div class="button-group">
+                        <button type="button" class="btn-deep" onclick="deepCheckSection('element2', ['e2p1', 'e2p2'], 'element2_sources')">Deep Feedback for Core Element 2</button>
+                    </div>
+                    <div class="checks-remaining" id="element2-checks">Deep checks used: 0/3</div>
+                    <div class="loading" id="element2-loading">
+                        <div class="spinner"></div>
+                        <span>Analyzing your writing...</span>
+                    </div>
+                    <div class="feedback-container" id="element2-feedback"></div>
+                </div>
+            </div>
+
+            <!-- Core Element 3 -->
+            <div class="section">
+                <h2>Assigned Claim 3</h2>
+                <div class="form-group">
+                    <label for="element3">Assigned Dunning School claim (do not change):</label>
+                    <input type="text" id="element3" name="element3" class="core-element-input" value="Claim 3: The Ku Klux Klan and “Redemption” violence were defensive/necessary responses, not organized white supremacist terrorism." readonly>
+                </div>
+                <div class="form-group">
+                    <label for="element3_sources">Your sources for this element:</label>
+                    <textarea id="element3_sources" name="element3_sources" rows="4" placeholder="List your 4 sources here for AI reference..."></textarea>
+                </div>
+
+                <div class="paragraph-block">
+                    <h3>Body Paragraph 5</h3>
+                    <div class="form-group">
+                        <label for="e3p1">Paragraph text:</label>
+                        <textarea id="e3p1" name="e3p1" placeholder="Start with a topic sentence that states your claim..."></textarea>
+                        <div class="word-count" id="e3p1-count">0 words</div>
+                    </div>
+                    <div class="button-group">
+                        <button type="button" class="btn-quick" onclick="quickCheck('e3p1')">Quick Check</button>
+                    </div>
+                    <div class="feedback-container" id="e3p1-feedback"></div>
+                </div>
+
+                <div class="paragraph-block">
+                    <h3>Body Paragraph 6</h3>
+                    <div class="form-group">
+                        <label for="e3p2">Paragraph text:</label>
+                        <textarea id="e3p2" name="e3p2" placeholder="Continue building your argument with additional evidence..."></textarea>
+                        <div class="word-count" id="e3p2-count">0 words</div>
+                    </div>
+                    <div class="button-group">
+                        <button type="button" class="btn-quick" onclick="quickCheck('e3p2')">Quick Check</button>
+                    </div>
+                    <div class="feedback-container" id="e3p2-feedback"></div>
+                </div>
+
+                <!-- Section-level Deep Check -->
+                <div class="section-feedback-area">
+                    <h3>Deep Feedback for Core Element 3</h3>
+                    <p style="color: #4a5568; margin-bottom: 15px;">Get comprehensive AI feedback on both paragraphs together to see how well they work as a cohesive argument.</p>
+                    <div class="button-group">
+                        <button type="button" class="btn-deep" onclick="deepCheckSection('element3', ['e3p1', 'e3p2'], 'element3_sources')">Deep Feedback for Core Element 3</button>
+                    </div>
+                    <div class="checks-remaining" id="element3-checks">Deep checks used: 0/3</div>
+                    <div class="loading" id="element3-loading">
+                        <div class="spinner"></div>
+                        <span>Analyzing your writing...</span>
+                    </div>
+                    <div class="feedback-container" id="element3-feedback"></div>
+                </div>
+            </div>
+
+            <!-- Conclusion -->
+            <div class="section">
+                <h2>Conclusion</h2>
+                <div class="form-group">
+                    <label for="conclusion">Conclusion paragraph (synthesize your arguments and explain the significance):</label>
+                    <textarea id="conclusion" name="conclusion" placeholder="Restate your thesis in new words, summarize how your evidence refutes the Dunning School myths, and explain why this historical accuracy matters today..."></textarea>
+                    <div class="word-count" id="conclusion-count">0 words</div>
+                </div>
+
+                <!-- Conclusion Deep Check -->
+                <div class="section-feedback-area">
+                    <h3>Feedback for Conclusion</h3>
+                    <div class="button-group">
+                        <button type="button" class="btn-quick" onclick="quickCheck('conclusion')">Quick Check</button>
+                        <button type="button" class="btn-deep" onclick="deepCheckConclusion()">Deep Feedback for Conclusion</button>
+                    </div>
+                    <div class="checks-remaining" id="conclusion-checks">Deep checks used: 0/3</div>
+                    <div class="loading" id="conclusion-loading">
+                        <div class="spinner"></div>
+                        <span>Analyzing your conclusion...</span>
+                    </div>
+                    <div class="feedback-container" id="conclusion-feedback"></div>
+                </div>
+            </div>
+        </form>
+
+        <div class="button-container">
+            <button type="button" class="btn-export" onclick="exportToPDF()">Export to PDF</button>
+            <button type="button" class="btn-clear" onclick="clearForm()">Clear All</button>
+        </div>
+        
+        <div class="save-indicator" id="saveIndicator">✓ Autosaved</div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        // Configuration
+        const VAL_TOWN_URL = 'https://kleio--f1f4d0c2e0e411f08d2f42dde27851f2.web.val.run';
+        const MAX_DEEP_CHECKS = 3;
+
+        // Track deep check usage per section
+        const deepCheckCounts = {};
+
+        // Autosave functionality
+        const form = document.getElementById('essayForm');
+        const saveIndicator = document.getElementById('saveIndicator');
+        let saveTimeout;
+
+        // Load saved data on page load
+        window.addEventListener('load', function() {
+            loadFormData();
+            setupWordCounters();
+            loadDeepCheckCounts();
+        });
+
+        // Autosave on input
+        form.addEventListener('input', function() {
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(function() {
+                saveFormData();
+                showSaveIndicator();
+            }, 1000);
+        });
+
+        function setupWordCounters() {
+            const textareas = document.querySelectorAll('textarea');
+            textareas.forEach(textarea => {
+                const countId = textarea.id + '-count';
+                const countElement = document.getElementById(countId);
+                if (countElement) {
+                    textarea.addEventListener('input', function() {
+                        updateWordCount(textarea.id);
+                    });
+                    updateWordCount(textarea.id);
+                }
+            });
+        }
+
+        function updateWordCount(textareaId) {
+            const textarea = document.getElementById(textareaId);
+            const countElement = document.getElementById(textareaId + '-count');
+            if (textarea && countElement) {
+                const text = textarea.value.trim();
+                const wordCount = text ? text.split(/\s+/).length : 0;
+                countElement.textContent = `${wordCount} words`;
+            }
+        }
+
+        function saveFormData() {
+            const formData = new FormData(form);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+            localStorage.setItem('essayFormData', JSON.stringify(data));
+        }
+
+        function loadFormData() {
+            const savedData = localStorage.getItem('essayFormData');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                for (let key in data) {
+                    // Do NOT overwrite the assigned claims (these are fixed for all students)
+                    if (['element1','element2','element3'].includes(key)) continue;
+
+                    const element = document.getElementById(key);
+                    if (element) {
+                        element.value = data[key];
+                    }
+                }
+            }
+        }
+
+        function saveDeepCheckCounts() {
+            localStorage.setItem('deepCheckCounts', JSON.stringify(deepCheckCounts));
+        }
+
+        function loadDeepCheckCounts() {
+            const saved = localStorage.getItem('deepCheckCounts');
+            if (saved) {
+                const counts = JSON.parse(saved);
+                Object.assign(deepCheckCounts, counts);
+                // Update UI
+                for (let id in counts) {
+                    updateDeepCheckDisplay(id);
+                }
+            }
+        }
+
+        function updateDeepCheckDisplay(sectionId) {
+            const count = deepCheckCounts[sectionId] || 0;
+            const display = document.getElementById(sectionId + '-checks');
+            if (display) {
+                display.textContent = `Deep checks used: ${count}/${MAX_DEEP_CHECKS}`;
+                if (count >= MAX_DEEP_CHECKS) {
+                    display.style.color = '#e53e3e';
+                }
+            }
+        }
+
+        function showSaveIndicator() {
+            saveIndicator.classList.add('show');
+            setTimeout(() => {
+                saveIndicator.classList.remove('show');
+            }, 2000);
+        }
+
+        function clearForm() {
+            if (confirm('Are you sure you want to clear all form data? This cannot be undone.')) {
+                form.reset();
+                localStorage.removeItem('essayFormData');
+                localStorage.removeItem('deepCheckCounts');
+                Object.keys(deepCheckCounts).forEach(key => delete deepCheckCounts[key]);
+                document.querySelectorAll('.checks-remaining').forEach(el => {
+                    const id = el.id.replace('-checks', '');
+                    updateDeepCheckDisplay(id);
+                });
+                alert('Form cleared successfully.');
+            }
+        }
+
+        // Quick check (built-in rules, no API)
+        function quickCheck(paragraphId) {
+            const text = document.getElementById(paragraphId).value.trim();
+            const feedbackContainer = document.getElementById(paragraphId + '-feedback');
+            
+            if (!text) {
+                showFeedback(paragraphId, 'Please write something first!', 'error');
+                return;
+            }
+
+            const issues = [];
+            const wordCount = text.split(/\s+/).length;
+
+            // Check for weak verbs
+            const weakVerbPattern = /\b(is|was|are|were|says|said|shows|showed)\b/gi;
+            const weakVerbMatches = text.match(weakVerbPattern);
+            if (weakVerbMatches && weakVerbMatches.length > 3) {
+                issues.push(`⚠️ Found ${weakVerbMatches.length} weak verbs (is/was/says/shows). Try stronger verbs like "demonstrates," "reveals," "proves."`);
+            }
+
+            // Check for citations
+            const hasCitation = /\(.*?\d{4}.*?\)|according to|states that|writes that/i.test(text);
+            if (!hasCitation && wordCount > 50) {
+                issues.push('❓ Missing citation - make sure to reference your primary sources.');
+            }
+
+            // Check for quotations
+            const quoteCount = (text.match(/[""].*?[""]|".*?"/g) || []).length;
+            if (quoteCount > 2) {
+                issues.push(`⚠️ ${quoteCount} quotes detected. Consider paraphrasing more - you need analysis, not just quotations.`);
+            }
+
+            // Check for analysis indicators
+            const analysisWords = ['reveals', 'demonstrates', 'proves', 'contradicts', 'undermines', 'refutes', 'challenges'];
+            const hasAnalysis = analysisWords.some(word => text.toLowerCase().includes(word));
+            if (!hasAnalysis && wordCount > 50) {
+                issues.push('💡 Missing analysis words. Use terms like "reveals," "demonstrates," "contradicts" to show HOW evidence refutes the myth.');
+            }
+
+            // Check for vague language
+            const vagueWords = ['things', 'stuff', 'very', 'really', 'somewhat'];
+            vagueWords.forEach(word => {
+                if (text.toLowerCase().includes(word)) {
+                    issues.push(`⚠️ Avoid vague language like "${word}" - be specific.`);
+                }
+            });
+
+            // Word count guidance
+            if (wordCount < 100) {
+                issues.push(`📏 Paragraph is short (${wordCount} words). Aim for 150-250 words with clear topic sentence, evidence, and analysis.`);
+            }
+
+            const feedback = issues.length > 0 
+                ? issues.join('\n\n')
+                : '✅ Looking good! No obvious issues detected. Consider getting Deep Feedback for more thorough analysis.';
+
+            showFeedback(paragraphId, feedback, 'quick');
+        }
+
+        // Deep check for a section (both paragraphs together)
+        async function deepCheckSection(elementId, paragraphIds, sourcesId) {
+            const element = document.getElementById(elementId).value.trim();
+            const sources = document.getElementById(sourcesId).value.trim();
+            
+            // Gather both paragraphs
+            const paragraphs = paragraphIds.map(id => {
+                const text = document.getElementById(id).value.trim();
+                return text;
+            });
+
+            // Check if both paragraphs have content
+            if (!paragraphs[0] || !paragraphs[1]) {
+                showFeedback(elementId, 'Please complete both paragraphs before requesting deep feedback.', 'error');
+                return;
+            }
+
+            if (!element) {
+                showFeedback(elementId, 'Please fill in the Core Element field first!', 'error');
+                return;
+            }
+
+            // Check deep check limit
+            const currentCount = deepCheckCounts[elementId] || 0;
+            if (currentCount >= MAX_DEEP_CHECKS) {
+                showFeedback(elementId, `You've used all ${MAX_DEEP_CHECKS} deep checks for this section. Use Quick Check on individual paragraphs for additional feedback.`, 'error');
+                return;
+            }
+
+            // Show loading
+            const loadingElement = document.getElementById(elementId + '-loading');
+            const deepButton = event.target;
+            deepButton.disabled = true;
+            loadingElement.classList.add('show');
+
+            const combinedText = `PARAGRAPH 1:\n${paragraphs[0]}\n\nPARAGRAPH 2:\n${paragraphs[1]}`;
+
+            try {
+                const response = await fetch(VAL_TOWN_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        paragraphText: combinedText,
+                        coreElement: element,
+                        sources: sources || 'No sources listed',
+                        checkType: 'deep_section'
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showFeedback(elementId, data.feedback, 'deep');
+                    
+                    // Increment deep check count
+                    deepCheckCounts[elementId] = currentCount + 1;
+                    updateDeepCheckDisplay(elementId);
+                    saveDeepCheckCounts();
+                } else {
+                    showFeedback(elementId, `Error: ${data.error}`, 'error');
+                }
+
+            } catch (error) {
+                showFeedback(elementId, `Error connecting to AI service: ${error.message}`, 'error');
+            } finally {
+                loadingElement.classList.remove('show');
+                deepButton.disabled = false;
+            }
+        }
+
+        // Deep check for conclusion
+        async function deepCheckConclusion() {
+            const conclusionText = document.getElementById('conclusion').value.trim();
+            const thesis = document.getElementById('thesis').value.trim();
+            
+            if (!conclusionText) {
+                showFeedback('conclusion', 'Please write your conclusion first!', 'error');
+                return;
+            }
+
+            // Check deep check limit
+            const currentCount = deepCheckCounts['conclusion'] || 0;
+            if (currentCount >= MAX_DEEP_CHECKS) {
+                showFeedback('conclusion', `You've used all ${MAX_DEEP_CHECKS} deep checks for the conclusion. Use Quick Check for additional feedback.`, 'error');
+                return;
+            }
+
+            // Show loading
+            const loadingElement = document.getElementById('conclusion-loading');
+            const deepButton = event.target;
+            deepButton.disabled = true;
+            loadingElement.classList.add('show');
+
+            try {
+                const response = await fetch(VAL_TOWN_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        paragraphText: conclusionText,
+                        coreElement: 'Conclusion',
+                        sources: `Thesis: ${thesis}`,
+                        checkType: 'deep_conclusion'
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showFeedback('conclusion', data.feedback, 'deep');
+                    
+                    // Increment deep check count
+                    deepCheckCounts['conclusion'] = currentCount + 1;
+                    updateDeepCheckDisplay('conclusion');
+                    saveDeepCheckCounts();
+                } else {
+                    showFeedback('conclusion', `Error: ${data.error}`, 'error');
+                }
+
+            } catch (error) {
+                showFeedback('conclusion', `Error connecting to AI service: ${error.message}`, 'error');
+            } finally {
+                loadingElement.classList.remove('show');
+                deepButton.disabled = false;
+            }
+        }
+
+        function showFeedback(containerId, feedback, type) {
+            const feedbackContainer = document.getElementById(containerId + '-feedback');
+            feedbackContainer.className = 'feedback-container show feedback-' + type;
+            
+            let title = '';
+            if (type === 'quick') title = '⚡ Quick Check Results';
+            else if (type === 'deep') title = '🎓 Deep Feedback from Professor Claude';
+            else if (type === 'error') title = '❌ Error';
+            
+            feedbackContainer.innerHTML = `
+                <h4>${title}</h4>
+                <div class="feedback-content">${feedback}</div>
+            `;
+        }
+
+        function exportToPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const margin = 20;
+            const contentWidth = pageWidth - (margin * 2);
+            let yPosition = 20;
+
+            // Title
+            doc.setFontSize(16);
+            doc.setFont(undefined, 'bold');
+            doc.text('Refuting the Dunning School: An Essay', pageWidth / 2, yPosition, { align: 'center' });
+            yPosition += 15;
+
+            // Helper function to add text with page breaks
+            function addText(text, fontSize = 11, fontStyle = 'normal', indent = 0) {
+                if (!text) return;
+                
+                doc.setFontSize(fontSize);
+                doc.setFont(undefined, fontStyle);
+                
+                const lines = doc.splitTextToSize(text, contentWidth - indent);
+                
+                lines.forEach(line => {
+                    if (yPosition > 270) {
+                        doc.addPage();
+                        yPosition = 20;
+                    }
+                    doc.text(line, margin + indent, yPosition);
+                    yPosition += fontSize * 0.5;
+                });
+                
+                yPosition += 5;
+            }
+
+            // Thesis
+            const thesis = document.getElementById('thesis').value;
+            if (thesis) {
+                addText('Thesis Statement', 12, 'bold');
+                addText(thesis, 11, 'normal', 5);
+                yPosition += 5;
+            }
+
+            // Body paragraphs
+            const paragraphs = [
+                { element: 'element1', paras: ['e1p1', 'e1p2'] },
+                { element: 'element2', paras: ['e2p1', 'e2p2'] },
+                { element: 'element3', paras: ['e3p1', 'e3p2'] }
+            ];
+
+            paragraphs.forEach((section, index) => {
+                const elementText = document.getElementById(section.element).value;
+                if (elementText) {
+                    if (yPosition > 250) {
+                        doc.addPage();
+                        yPosition = 20;
+                    }
+                    addText(`Core Element ${index + 1}: ${elementText}`, 12, 'bold');
+                }
+
+                section.paras.forEach(paraId => {
+                    const paraText = document.getElementById(paraId).value;
+                    if (paraText) {
+                        addText(paraText, 11, 'normal', 10);
+                    }
+                });
+
+                yPosition += 5;
+            });
+
+            // Conclusion
+            const conclusion = document.getElementById('conclusion').value;
+            if (conclusion) {
+                if (yPosition > 250) {
+                    doc.addPage();
+                    yPosition = 20;
+                }
+                addText('Conclusion', 12, 'bold');
+                addText(conclusion, 11, 'normal', 5);
+            }
+
+            doc.save('Lost_Cause_Essay.pdf');
+        }
+    </script>
+</body>
+</html>

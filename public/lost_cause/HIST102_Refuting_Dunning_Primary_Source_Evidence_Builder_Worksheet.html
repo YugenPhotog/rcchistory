@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refuting Dunning with Primary Sources</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #2d3748;
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+        }
+
+        .instructions {
+            background: #f7fafc;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+            line-height: 1.6;
+            color: #2d3748;
+        }
+
+        .instructions strong {
+            color: #667eea;
+        }
+
+        .element-block {
+            background: #ffffff;
+            border: 3px solid #667eea;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .element-block:hover {
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+        }
+
+        .element-block h2 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+            text-align: center;
+        }
+
+        .core-element-field {
+            background: #fff9e6;
+            border: 2px solid #fbbf24;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .core-element-field label {
+            color: #92400e;
+            font-size: 1.05em;
+        }
+
+        .source-subsection {
+            background: #f8f9fa;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .source-subsection h3 {
+            color: #4a5568;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #cbd5e0;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        label.notes-label {
+            color: #c53030;
+        }
+
+        .notes-instructions {
+            font-size: 0.85em;
+            color: #c53030;
+            font-weight: 500;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 1em;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        .core-element-input {
+            border: 2px solid #fbbf24;
+            background: #fffbeb;
+        }
+
+        .core-element-input:focus {
+            outline: none;
+            border-color: #f59e0b;
+            box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.2);
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+            line-height: 1.5;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 1em;
+            font-weight: 600;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .export-btn {
+            background: #667eea;
+            color: white;
+        }
+
+        .export-btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .clear-btn {
+            background: #e53e3e;
+            color: white;
+        }
+
+        .clear-btn:hover {
+            background: #c53030;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(229, 62, 62, 0.3);
+        }
+
+        .save-indicator {
+            text-align: center;
+            color: #48bb78;
+            font-size: 0.9em;
+            margin-top: 10px;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .save-indicator.show {
+            opacity: 1;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+            
+            .button-container,
+            .save-indicator {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Refuting Dunning with Primary Sources</h1>
+        
+        <div class="instructions">
+            <strong>Instructions:</strong> You are assigned the Big Three Dunning School claims below (Claims 1–3). Do not change the claim text. Using the course module materials and lecture notes as a starting point, locate primary sources that refute each claim.<br><br>
+            For each core element, research and select 3 - 4 primary sources that refute the core element.  You may use sources mentioned in the course materials as leads, but you will need to locate the primary sources via the web or library databases.  Complete all required fields and briefly explain, in your own words, how the evidence shows the Dunning School claim to be inaccurate. When finished, export your work as a PDF and submit it to Canvas.  Do not use AI for this assignment!
+        </div>
+
+        <form id="lostCauseForm">
+            <!-- Core Element 1 -->
+            <div class="element-block">
+                <h2>Assigned Claim 1</h2>
+                
+                <div class="core-element-field">
+                    <div class="form-group">
+                        <label for="element1">Assigned Dunning School claim (do not change):</label>
+                        <input type="text" id="element1" name="element1" class="core-element-input" value="Claim 1: Reconstruction was a tragic era of corruption and “Negro misrule” (incompetent, illegitimate government)." readonly>
+                    </div>
+                </div>
+
+                <div class="source-subsection">
+                    <h3>Primary Source #1</h3>
+                    <div class="form-group">
+                        <label for="e1s1_name">Name:</label>
+                        <input type="text" id="e1s1_name" name="e1s1_name" placeholder="Name of author or speaker">
+                    </div>
+                    <div class="form-group">
+                        <label for="e1s1_title">Title:</label>
+                        <input type="text" id="e1s1_title" name="e1s1_title" placeholder="Title of document or speech">
+                    </div>
+                    <div class="form-group">
+                        <label for="e1s1_description">Description:</label>
+                        <input type="text" id="e1s1_description" name="e1s1_description" placeholder="e.g., Freedmen’s Bureau report, Klan hearing testimony, petition, state constitution">
+                    </div>
+                    <div class="form-group">
+                        <label for="e1s1_location">Location:</label>
+                        <input type="text" id="e1s1_location" name="e1s1_location" placeholder="URL or bibliographic citation">
+                    </div>
+                    <div class="form-group">
+                        <label for="e1s1_notes" class="notes-label">Notes (How this refutes the Dunning School claim):</label>
+                        <div class="notes-instructions">You may NOT use AI for this description. State in your own words and demonstrate you read and understand your source.</div>
+                        <textarea id="e1s1_notes" name="e1s1_notes" placeholder="In your own words, explain how this evidence shows the Dunning School claim to be inaccurate..."></textarea>
+                    </div>
+                </div>
+
+                <div class="source-subsection">
+                    <h3>Primary Source #2</h3>
+                    <div class="form-group">
+                        <label for="e1s2_name">Name:</label>
+                        <input type="text" id="e1s2_name" name="e1s2_name" placeholder="Name of author or speaker">
+                    </div>
+                    <div class="form-group">
+                        <label for="e1s2_title">Title:</label>
+                        <input type="text" id="e1s2_title" name="e1s2_title" placeholder="Title of document or speech">
+                    </div>
+                    <div class="form-group">
+                        <label for="e1s2_description">Description:</label>
+                        <input type="text" id="e1s2_description" name="e1s2_description" placeholder="e.g., Freedmen’s Bureau report, Klan hearing testimony, petition, state constitution">
+                    </div>
+                    <div class="form-group">
+                        <label for="e1s2_location">Location:</label>
+                        <input type="text" id="e1s2_location" name="e1s2_location" placeholder="URL or bibliographic citation">
+                    </div>
+                    <div class="form-group">
+                        <label for="e1s2_notes" class="notes-label">Notes (How this refutes the Dunning School claim):</label>
+                        <div class="notes-instructions">You may NOT use AI for this description. State in your own words and demonstrate you read and understand your source.</div>
+                        <textarea id="e1s2_notes" name="e1s2_notes" placeholder="In your own words, explain how this evidence shows the Dunning School claim to be inaccurate..."></textarea>
+                    </div>
+                </div>
+
+                <div class="source-subsection">
+                    <h3>Primary Source #3</h3>
+                    <div class="form-group">
+                        <label for="e1s3_name">Name:</label>
+                        <input type="text" id="e1s3_name" name="e1s3_name" placeholder="Name of author or speaker">
+                    </div>
+                    <div class="form-group">
+                        <label for="e1s3_title">Title:</label>
+                        <input type="text" id="e1s3_title" name="e1s3_title" placeholder="Title of document or speech">
+                    </div>
+                    <div class="form-group">
+                        <label for="e1s3_description">Description:</label>
+                        <input type="text" id="e1s3_description" name="e1s3_description" placeholder="e.g., Freedmen’s Bureau report, Klan hearing testimony, petition, state constitution">
+                    </div>
+                    <div class="form-group">
+                        <label for="e1s3_location">Location:</label>
+                        <input type="text" id="e1s3_location" name="e1s3_location" placeholder="URL or bibliographic citation">
+                    </div>
+                    <div class="form-group">
+                        <label for="e1s3_notes" class="notes-label">Notes (How this refutes the Dunning School claim):</label>
+                        <div class="notes-instructions">You may NOT use AI for this description. State in your own words and demonstrate you read and understand your source.</div>
+                        <textarea id="e1s3_notes" name="e1s3_notes" placeholder="In your own words, explain how this evidence shows the Dunning School claim to be inaccurate..."></textarea>
+                    </div>
+                </div>
+
+                <div class="source-subsection">
+                    <h3>Primary Source #4</h3>
+                    <div class="form-group">
+                        <label for="e1s4_name">Name:</label>
+                        <input type="text" id="e1s4_name" name="e1s4_name" placeholder="Name of author or speaker">
+                    </div>
+                    <div class="form-group">
+                        <label for="e1s4_title">Title:</label>
+                        <input type="text" id="e1s4_title" name="e1s4_title" placeholder="Title of document or speech">
+                    </div>
+                    <div class="form-group">
+                        <label for="e1s4_description">Description:</label>
+                        <input type="text" id="e1s4_description" name="e1s4_description" placeholder="e.g., Freedmen’s Bureau report, Klan hearing testimony, petition, state constitution">
+                    </div>
+                    <div class="form-group">
+                        <label for="e1s4_location">Location:</label>
+                        <input type="text" id="e1s4_location" name="e1s4_location" placeholder="URL or bibliographic citation">
+                    </div>
+                    <div class="form-group">
+                        <label for="e1s4_notes" class="notes-label">Notes (How this refutes the Dunning School claim):</label>
+                        <div class="notes-instructions">You may NOT use AI for this description. State in your own words and demonstrate you read and understand your source.</div>
+                        <textarea id="e1s4_notes" name="e1s4_notes" placeholder="In your own words, explain how this evidence shows the Dunning School claim to be inaccurate..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Core Element 2 -->
+            <div class="element-block">
+                <h2>Assigned Claim 2</h2>
+                
+                <div class="core-element-field">
+                    <div class="form-group">
+                        <label for="element2">Assigned Dunning School claim (do not change):</label>
+                        <input type="text" id="element2" name="element2" class="core-element-input" value="Claim 2: Black citizenship and voting rights were premature; freedpeople were unfit for political participation." readonly>
+                    </div>
+                </div>
+
+                <div class="source-subsection">
+                    <h3>Primary Source #1</h3>
+                    <div class="form-group">
+                        <label for="e2s1_name">Name:</label>
+                        <input type="text" id="e2s1_name" name="e2s1_name" placeholder="Name of author or speaker">
+                    </div>
+                    <div class="form-group">
+                        <label for="e2s1_title">Title:</label>
+                        <input type="text" id="e2s1_title" name="e2s1_title" placeholder="Title of document or speech">
+                    </div>
+                    <div class="form-group">
+                        <label for="e2s1_description">Description:</label>
+                        <input type="text" id="e2s1_description" name="e2s1_description" placeholder="e.g., Freedmen’s Bureau report, Klan hearing testimony, petition, state constitution">
+                    </div>
+                    <div class="form-group">
+                        <label for="e2s1_location">Location:</label>
+                        <input type="text" id="e2s1_location" name="e2s1_location" placeholder="URL or bibliographic citation">
+                    </div>
+                    <div class="form-group">
+                        <label for="e2s1_notes" class="notes-label">Notes (How this refutes the Dunning School claim):</label>
+                        <div class="notes-instructions">You may NOT use AI for this description. State in your own words and demonstrate you read and understand your source.</div>
+                        <textarea id="e2s1_notes" name="e2s1_notes" placeholder="In your own words, explain how this evidence shows the Dunning School claim to be inaccurate..."></textarea>
+                    </div>
+                </div>
+
+                <div class="source-subsection">
+                    <h3>Primary Source #2</h3>
+                    <div class="form-group">
+                        <label for="e2s2_name">Name:</label>
+                        <input type="text" id="e2s2_name" name="e2s2_name" placeholder="Name of author or speaker">
+                    </div>
+                    <div class="form-group">
+                        <label for="e2s2_title">Title:</label>
+                        <input type="text" id="e2s2_title" name="e2s2_title" placeholder="Title of document or speech">
+                    </div>
+                    <div class="form-group">
+                        <label for="e2s2_description">Description:</label>
+                        <input type="text" id="e2s2_description" name="e2s2_description" placeholder="e.g., Freedmen’s Bureau report, Klan hearing testimony, petition, state constitution">
+                    </div>
+                    <div class="form-group">
+                        <label for="e2s2_location">Location:</label>
+                        <input type="text" id="e2s2_location" name="e2s2_location" placeholder="URL or bibliographic citation">
+                    </div>
+                    <div class="form-group">
+                        <label for="e2s2_notes" class="notes-label">Notes (How this refutes the Dunning School claim):</label>
+                        <div class="notes-instructions">You may NOT use AI for this description. State in your own words and demonstrate you read and understand your source.</div>
+                        <textarea id="e2s2_notes" name="e2s2_notes" placeholder="In your own words, explain how this evidence shows the Dunning School claim to be inaccurate..."></textarea>
+                    </div>
+                </div>
+
+                <div class="source-subsection">
+                    <h3>Primary Source #3</h3>
+                    <div class="form-group">
+                        <label for="e2s3_name">Name:</label>
+                        <input type="text" id="e2s3_name" name="e2s3_name" placeholder="Name of author or speaker">
+                    </div>
+                    <div class="form-group">
+                        <label for="e2s3_title">Title:</label>
+                        <input type="text" id="e2s3_title" name="e2s3_title" placeholder="Title of document or speech">
+                    </div>
+                    <div class="form-group">
+                        <label for="e2s3_description">Description:</label>
+                        <input type="text" id="e2s3_description" name="e2s3_description" placeholder="e.g., Freedmen’s Bureau report, Klan hearing testimony, petition, state constitution">
+                    </div>
+                    <div class="form-group">
+                        <label for="e2s3_location">Location:</label>
+                        <input type="text" id="e2s3_location" name="e2s3_location" placeholder="URL or bibliographic citation">
+                    </div>
+                    <div class="form-group">
+                        <label for="e2s3_notes" class="notes-label">Notes (How this refutes the Dunning School claim):</label>
+                        <div class="notes-instructions">You may NOT use AI for this description. State in your own words and demonstrate you read and understand your source.</div>
+                        <textarea id="e2s3_notes" name="e2s3_notes" placeholder="In your own words, explain how this evidence shows the Dunning School claim to be inaccurate..."></textarea>
+                    </div>
+                </div>
+
+                <div class="source-subsection">
+                    <h3>Primary Source #4</h3>
+                    <div class="form-group">
+                        <label for="e2s4_name">Name:</label>
+                        <input type="text" id="e2s4_name" name="e2s4_name" placeholder="Name of author or speaker">
+                    </div>
+                    <div class="form-group">
+                        <label for="e2s4_title">Title:</label>
+                        <input type="text" id="e2s4_title" name="e2s4_title" placeholder="Title of document or speech">
+                    </div>
+                    <div class="form-group">
+                        <label for="e2s4_description">Description:</label>
+                        <input type="text" id="e2s4_description" name="e2s4_description" placeholder="e.g., Freedmen’s Bureau report, Klan hearing testimony, petition, state constitution">
+                    </div>
+                    <div class="form-group">
+                        <label for="e2s4_location">Location:</label>
+                        <input type="text" id="e2s4_location" name="e2s4_location" placeholder="URL or bibliographic citation">
+                    </div>
+                    <div class="form-group">
+                        <label for="e2s4_notes" class="notes-label">Notes (How this refutes the Dunning School claim):</label>
+                        <div class="notes-instructions">You may NOT use AI for this description. State in your own words and demonstrate you read and understand your source.</div>
+                        <textarea id="e2s4_notes" name="e2s4_notes" placeholder="In your own words, explain how this evidence shows the Dunning School claim to be inaccurate..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Core Element 3 -->
+            <div class="element-block">
+                <h2>Assigned Claim 3</h2>
+                
+                <div class="core-element-field">
+                    <div class="form-group">
+                        <label for="element3">Assigned Dunning School claim (do not change):</label>
+                        <input type="text" id="element3" name="element3" class="core-element-input" value="Claim 3: The Ku Klux Klan and “Redemption” violence were defensive/necessary responses, not organized white supremacist terrorism." readonly>
+                    </div>
+                </div>
+
+                <div class="source-subsection">
+                    <h3>Primary Source #1</h3>
+                    <div class="form-group">
+                        <label for="e3s1_name">Name:</label>
+                        <input type="text" id="e3s1_name" name="e3s1_name" placeholder="Name of author or speaker">
+                    </div>
+                    <div class="form-group">
+                        <label for="e3s1_title">Title:</label>
+                        <input type="text" id="e3s1_title" name="e3s1_title" placeholder="Title of document or speech">
+                    </div>
+                    <div class="form-group">
+                        <label for="e3s1_description">Description:</label>
+                        <input type="text" id="e3s1_description" name="e3s1_description" placeholder="e.g., Freedmen’s Bureau report, Klan hearing testimony, petition, state constitution">
+                    </div>
+                    <div class="form-group">
+                        <label for="e3s1_location">Location:</label>
+                        <input type="text" id="e3s1_location" name="e3s1_location" placeholder="URL or bibliographic citation">
+                    </div>
+                    <div class="form-group">
+                        <label for="e3s1_notes" class="notes-label">Notes (How this refutes the Dunning School claim):</label>
+                        <div class="notes-instructions">You may NOT use AI for this description. State in your own words and demonstrate you read and understand your source.</div>
+                        <textarea id="e3s1_notes" name="e3s1_notes" placeholder="In your own words, explain how this evidence shows the Dunning School claim to be inaccurate..."></textarea>
+                    </div>
+                </div>
+
+                <div class="source-subsection">
+                    <h3>Primary Source #2</h3>
+                    <div class="form-group">
+                        <label for="e3s2_name">Name:</label>
+                        <input type="text" id="e3s2_name" name="e3s2_name" placeholder="Name of author or speaker">
+                    </div>
+                    <div class="form-group">
+                        <label for="e3s2_title">Title:</label>
+                        <input type="text" id="e3s2_title" name="e3s2_title" placeholder="Title of document or speech">
+                    </div>
+                    <div class="form-group">
+                        <label for="e3s2_description">Description:</label>
+                        <input type="text" id="e3s2_description" name="e3s2_description" placeholder="e.g., Freedmen’s Bureau report, Klan hearing testimony, petition, state constitution">
+                    </div>
+                    <div class="form-group">
+                        <label for="e3s2_location">Location:</label>
+                        <input type="text" id="e3s2_location" name="e3s2_location" placeholder="URL or bibliographic citation">
+                    </div>
+                    <div class="form-group">
+                        <label for="e3s2_notes" class="notes-label">Notes (How this refutes the Dunning School claim):</label>
+                        <div class="notes-instructions">You may NOT use AI for this description. State in your own words and demonstrate you read and understand your source.</div>
+                        <textarea id="e3s2_notes" name="e3s2_notes" placeholder="In your own words, explain how this evidence shows the Dunning School claim to be inaccurate..."></textarea>
+                    </div>
+                </div>
+
+                <div class="source-subsection">
+                    <h3>Primary Source #3</h3>
+                    <div class="form-group">
+                        <label for="e3s3_name">Name:</label>
+                        <input type="text" id="e3s3_name" name="e3s3_name" placeholder="Name of author or speaker">
+                    </div>
+                    <div class="form-group">
+                        <label for="e3s3_title">Title:</label>
+                        <input type="text" id="e3s3_title" name="e3s3_title" placeholder="Title of document or speech">
+                    </div>
+                    <div class="form-group">
+                        <label for="e3s3_description">Description:</label>
+                        <input type="text" id="e3s3_description" name="e3s3_description" placeholder="e.g., Freedmen’s Bureau report, Klan hearing testimony, petition, state constitution">
+                    </div>
+                    <div class="form-group">
+                        <label for="e3s3_location">Location:</label>
+                        <input type="text" id="e3s3_location" name="e3s3_location" placeholder="URL or bibliographic citation">
+                    </div>
+                    <div class="form-group">
+                        <label for="e3s3_notes" class="notes-label">Notes (How this refutes the Dunning School claim):</label>
+                        <div class="notes-instructions">You may NOT use AI for this description. State in your own words and demonstrate you read and understand your source.</div>
+                        <textarea id="e3s3_notes" name="e3s3_notes" placeholder="In your own words, explain how this evidence shows the Dunning School claim to be inaccurate..."></textarea>
+                    </div>
+                </div>
+
+                <div class="source-subsection">
+                    <h3>Primary Source #4</h3>
+                    <div class="form-group">
+                        <label for="e3s4_name">Name:</label>
+                        <input type="text" id="e3s4_name" name="e3s4_name" placeholder="Name of author or speaker">
+                    </div>
+                    <div class="form-group">
+                        <label for="e3s4_title">Title:</label>
+                        <input type="text" id="e3s4_title" name="e3s4_title" placeholder="Title of document or speech">
+                    </div>
+                    <div class="form-group">
+                        <label for="e3s4_description">Description:</label>
+                        <input type="text" id="e3s4_description" name="e3s4_description" placeholder="e.g., Freedmen’s Bureau report, Klan hearing testimony, petition, state constitution">
+                    </div>
+                    <div class="form-group">
+                        <label for="e3s4_location">Location:</label>
+                        <input type="text" id="e3s4_location" name="e3s4_location" placeholder="URL or bibliographic citation">
+                    </div>
+                    <div class="form-group">
+                        <label for="e3s4_notes" class="notes-label">Notes (How this refutes the Dunning School claim):</label>
+                        <div class="notes-instructions">You may NOT use AI for this description. State in your own words and demonstrate you read and understand your source.</div>
+                        <textarea id="e3s4_notes" name="e3s4_notes" placeholder="In your own words, explain how this evidence shows the Dunning School claim to be inaccurate..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="button-container">
+            <button type="button" class="export-btn" onclick="exportToPDF()">Export to PDF</button>
+            <button type="button" class="clear-btn" onclick="clearForm()">Clear Form</button>
+        </div>
+        
+        <div class="save-indicator" id="saveIndicator">✓ Autosaved</div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        // Autosave functionality
+        const form = document.getElementById('lostCauseForm');
+        const saveIndicator = document.getElementById('saveIndicator');
+        let saveTimeout;
+
+        // Load saved data on page load
+        window.addEventListener('load', function() {
+            loadFormData();
+        });
+
+        // Autosave on input
+        form.addEventListener('input', function() {
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(function() {
+                saveFormData();
+                showSaveIndicator();
+            }, 1000);
+        });
+
+        function saveFormData() {
+            const formData = new FormData(form);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+            localStorage.setItem('lostCauseFormData', JSON.stringify(data));
+        }
+
+        function loadFormData() {
+            const savedData = localStorage.getItem('lostCauseFormData');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                for (let key in data) {
+                    // Do NOT overwrite the assigned claims (these are fixed for all students)
+                    if (['element1','element2','element3'].includes(key)) continue;
+
+                    const element = document.getElementById(key);
+                    if (element) {
+                        element.value = data[key];
+                    }
+                }
+            }
+        }
+
+        function showSaveIndicator() {
+            saveIndicator.classList.add('show');
+            setTimeout(() => {
+                saveIndicator.classList.remove('show');
+            }, 2000);
+        }
+
+        function clearForm() {
+            if (confirm('Are you sure you want to clear all form data? This cannot be undone.')) {
+                form.reset();
+                localStorage.removeItem('lostCauseFormData');
+                alert('Form cleared successfully.');
+            }
+        }
+
+        function exportToPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const margin = 20;
+            const contentWidth = pageWidth - (margin * 2);
+            let yPosition = 20;
+
+            // Title
+            doc.setFontSize(16);
+            doc.setFont(undefined, 'bold');
+            doc.text('Refuting Dunning with Primary Sources', pageWidth / 2, yPosition, { align: 'center' });
+            yPosition += 12;
+
+            // Instructions
+            doc.setFontSize(9);
+            doc.setFont(undefined, 'normal');
+            const instructionsText = 'Instructions: Select three core elements of the Dunning School claim identified in the previous module. Using the course module materials and lecture notes as a starting point, locate primary sources that refute each element. Sources may include Reconstruction-era government documents (state and federal), Freedmen’s Bureau records, Congressional investigations (including Klan hearings), court records, petitions, speeches, and Black newspapers. Refer to the full project instructions for a complete list of acceptable sources.\n\nFor each source, complete all required fields and briefly explain, in your own words, how the evidence shows the Dunning School claim to be inaccurate. When finished, export your work as a PDF and submit it to Canvas.';
+            const splitInstructions = doc.splitTextToSize(instructionsText, contentWidth);
+            doc.text(splitInstructions, margin, yPosition);
+            yPosition += (splitInstructions.length * 4) + 8;
+
+            // Process each core element
+            for (let e = 1; e <= 3; e++) {
+                if (yPosition > 250) {
+                    doc.addPage();
+                    yPosition = 20;
+                }
+
+                doc.setFontSize(13);
+                doc.setFont(undefined, 'bold');
+                doc.text(`Core Element ${e}`, margin, yPosition);
+                yPosition += 7;
+
+                // Add the Core Element identification
+                const elementValue = document.getElementById(`element${e}`).value || '[Not filled]';
+                doc.setFontSize(10);
+                doc.setFont(undefined, 'bold');
+                doc.text('Dunning School claim Being Addressed:', margin + 5, yPosition);
+                yPosition += 5;
+                doc.setFont(undefined, 'normal');
+                const splitElement = doc.splitTextToSize(elementValue, contentWidth - 10);
+                doc.text(splitElement, margin + 10, yPosition);
+                yPosition += (splitElement.length * 4) + 5;
+
+                // Process each source within the element
+                for (let s = 1; s <= 4; s++) {
+                    if (yPosition > 250) {
+                        doc.addPage();
+                        yPosition = 20;
+                    }
+
+                    doc.setFontSize(11);
+                    doc.setFont(undefined, 'bold');
+                    doc.text(`Primary Source #${s}`, margin + 5, yPosition);
+                    yPosition += 7;
+
+                    const fields = [
+                        { label: 'Name:', id: `e${e}s${s}_name` },
+                        { label: 'Title:', id: `e${e}s${s}_title` },
+                        { label: 'Description:', id: `e${e}s${s}_description` },
+                        { label: 'Location:', id: `e${e}s${s}_location` },
+                        { label: 'Notes:', id: `e${e}s${s}_notes` }
+                    ];
+
+                    doc.setFontSize(9);
+                    fields.forEach(field => {
+                        const element = document.getElementById(field.id);
+                        const value = element ? (element.value || '[Not filled]') : '[Not filled]';
+                        
+                        doc.setFont(undefined, 'bold');
+                        doc.text(field.label, margin + 10, yPosition);
+                        yPosition += 4;
+                        
+                        doc.setFont(undefined, 'normal');
+                        const splitText = doc.splitTextToSize(value, contentWidth - 15);
+                        doc.text(splitText, margin + 15, yPosition);
+                        yPosition += (splitText.length * 4) + 2;
+
+                        if (yPosition > 270) {
+                            doc.addPage();
+                            yPosition = 20;
+                        }
+                    });
+
+                    yPosition += 3;
+                }
+
+                yPosition += 5;
+            }
+
+            doc.save('Lost_Cause_Refutation.pdf');
+        }
+    </script>
+</body>
+</html>
