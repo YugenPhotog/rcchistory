@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zhuangzi - PHIL 210</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --antique-gold: #D4AF37;
+            --deep-teal: #2C7873;
+            --rich-purple: #6B4C9A;
+            --ruby-crimson: #9B2C2C;
+            --dark-charcoal: #1A1A1A;
+            --pure-white: #FAFAFA;
+            --soft-cream: #F5F1E8;
+            --bronze-accent: #8B6F47;
+        }
+        
+        .reveal {
+            font-family: 'Lora', serif;
+            font-size: 1.4em;
+            color: var(--pure-white);
+            background: var(--dark-charcoal);
+        }
+        
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Crimson Pro', serif;
+            font-weight: 700;
+            color: var(--antique-gold);
+            text-transform: none;
+        }
+        
+        .reveal h1 { font-size: 3.5em; }
+        .reveal h2 { font-size: 2.5em; margin-bottom: 0.5em; }
+        .reveal h3 { font-size: 1.8em; }
+        
+        .reveal ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .reveal ul li:before {
+            content: "◆ ";
+            color: var(--deep-teal);
+            font-weight: bold;
+            margin-right: 0.5em;
+        }
+        
+        .reveal .sacred-text {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 4px solid var(--antique-gold);
+            padding: 1.5em;
+            margin: 1.5em 0;
+            font-style: italic;
+            font-size: 1.2em;
+        }
+        
+        .popup-trigger {
+            color: var(--deep-teal);
+            border-bottom: 2px dotted var(--deep-teal);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .popup-trigger:hover {
+            color: var(--antique-gold);
+        }
+        
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--soft-cream);
+            color: var(--dark-charcoal);
+            padding: 2em;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            max-width: 600px;
+            z-index: 1000;
+            border: 3px solid var(--bronze-accent);
+        }
+        
+        .popup.active {
+            display: block;
+        }
+        
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 2em;
+            cursor: pointer;
+            color: var(--ruby-crimson);
+        }
+        
+        .definition-term {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--rich-purple);
+            margin-bottom: 0.5em;
+            font-family: 'Crimson Pro', serif;
+        }
+        
+        .key-term {
+            color: var(--rich-purple);
+            font-weight: 600;
+        }
+        
+        .img-placeholder {
+            background: rgba(44, 120, 115, 0.2);
+            border: 2px dashed var(--deep-teal);
+            padding: 2em;
+            border-radius: 10px;
+            text-align: center;
+            color: var(--deep-teal);
+        }
+        
+        .slide-counter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(26, 26, 26, 0.9);
+            color: var(--antique-gold);
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-family: 'Crimson Pro', serif;
+            font-weight: 600;
+            font-size: 0.9em;
+            border: 2px solid var(--deep-teal);
+            z-index: 100;
+        }
+        
+        .assessment-slide {
+            background: var(--rich-purple) !important;
+        }
+        
+        .assessment-prompt {
+            background: rgba(255,255,255,0.1);
+            padding: 2em;
+            border-radius: 15px;
+            border: 3px solid var(--antique-gold);
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+            <!-- TITLE SLIDE -->
+            <section>
+                <h1>Zhuangzi</h1>
+                <p style="font-size: 1.2em; color: var(--deep-teal); margin-top: 1em;">
+                    PHIL 210: World Religions
+                </p>
+                <p style="font-size: 0.9em; color: var(--bronze-accent); margin-top: 2em;">
+                    Philosophical Daoism and the Art of Spontaneity
+                </p>
+                
+                <div style="position: absolute; bottom: 40px; right: 40px; 
+                            background: rgba(44, 120, 115, 0.2); 
+                            padding: 1em; border-radius: 10px; 
+                            border: 2px solid var(--deep-teal);
+                            font-size: 0.6em; text-align: left;">
+                    <p style="color: var(--antique-gold); font-weight: 600; margin-bottom: 0.5em;">
+                        ⌨️ Keyboard Shortcuts
+                    </p>
+                    <p style="margin: 0.3em 0;">→ / Space: Next slide</p>
+                    <p style="margin: 0.3em 0;">← : Previous slide</p>
+                    <p style="margin: 0.3em 0;">S: Speaker notes</p>
+                    <p style="margin: 0.3em 0;">F: Fullscreen</p>
+                    <p style="margin: 0.3em 0;">O: Overview</p>
+                    <p style="margin: 0.3em 0;">ESC: Exit/Close</p>
+                </div>
+                
+                <aside class="notes">
+                    Welcome to our lecture on Zhuangzi, one of the foundational texts of Daoist philosophy. This lecture explores how Zhuangzi develops and extends Laozi's ideas while introducing his unique perspective on spontaneity, transformation, and the limits of human knowledge.
+                    
+                    Today we'll cover five main themes: (1) the Dao as natural order, (2) spontaneity and wu-wei, (3) transformation of things, (4) kinds of knowledge, and (5) the argument from perspectives.
+                    
+                    Encourage students to use keyboard shortcuts for navigation, especially "S" to view speaker notes if they're following along on their own devices.
+                </aside>
+            </section>
+
+            <!-- SLIDE 1: Dao as Natural Order -->
+            <section>
+                <h2>Dao as the Natural Order</h2>
+                <p style="margin-bottom: 1em;">The Dao represents the fundamental pattern of the universe:</p>
+                <ul>
+                    <li>Underlying principle governing all phenomena</li>
+                    <li>Ineffable—transcends human comprehension</li>
+                    <li>Total spontaneity of nature</li>
+                    <li>Incessant transforming activity of things</li>
+                    <li>Underlying unity of all existence</li>
+                </ul>
+                
+                <div class="img-placeholder" style="margin-top: 1.5em;">
+                    📸 <strong>Image needed:</strong> "swirling cosmic energy natural patterns dao"
+                    <br>
+                    <small><em>Suggested caption:</em> The Dao as cosmic order—fluid, ever-changing, and interconnected</small>
+                </div>
+                
+                <aside class="notes">
+                    UNDERLYING PRINCIPLE: Both Laozi and Zhuangzi agree on the concept of the Dao (道) as the ultimate, underlying force that governs everything in the universe. However, they interpret it slightly differently. Laozi often presents Dao as a guiding principle, a cosmic order that can be harmonized with. Zhuangzi, on the other hand, emphasizes the Dao as something more fluid and less structured, suggesting that it operates without conscious intention or purpose.
+                    
+                    KEY DISTINCTION: Laozi advocates aligning oneself with the Dao to live harmoniously, while Zhuangzi promotes radical freedom, suggesting that all beings follow the Dao naturally, without effort.
+                    
+                    INEFFABLE: Both philosophers assert that the Dao is ineffable—beyond words and human understanding. Laozi opens the Tao Te Ching with the idea that "The Dao that can be spoken is not the eternal Dao," highlighting its mysterious and elusive nature. Zhuangzi expands this notion by illustrating how human logic and language fall short of grasping the Dao, which is too vast and boundless to be constrained by human categories or rational thought.
+                    
+                    While Laozi suggests reverence and simplicity as ways to approach the Dao's mystery, Zhuangzi often presents humor, paradox, and stories to show the futility of trying to control or understand the Dao intellectually.
+                </aside>
+            </section>
+
+            <!-- SLIDE 2: Total Spontaneity -->
+            <section>
+                <h2>Total Spontaneity of Nature</h2>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em;">
+                    <div>
+                        <h3 style="color: var(--deep-teal);">Laozi's Approach</h3>
+                        <ul>
+                            <li><span class="popup-trigger" data-popup="wuwei-def">Wu wei</span> (無為): Action without force</li>
+                            <li>Act in harmony with nature's flow</li>
+                            <li>Mindful non-action to stay aligned</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--rich-purple);">Zhuangzi's Vision</h3>
+                        <ul>
+                            <li><span class="popup-trigger" data-popup="ziran-def">Ziran</span> (自然): Complete spontaneity</li>
+                            <li>Even "non-action" should be transcended</li>
+                            <li>Embrace spontaneity without judgment</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div id="wuwei-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="definition-term">Wu Wei (無為)</div>
+                    <p>Often translated as "non-action" or "effortless action." The practice of acting in harmony with the natural flow of things rather than imposing one's will through force or excessive effort.</p>
+                </div>
+                
+                <div id="ziran-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="definition-term">Ziran (自然)</div>
+                    <p>Literally "self-so" or "spontaneity." The natural, unforced way things occur when left to their own devices. Zhuangzi celebrates this complete naturalness as the highest expression of the Dao.</p>
+                </div>
+                
+                <aside class="notes">
+                    TOTAL SPONTANEITY: Laozi advocates for wu wei (無為), or action without force, which suggests that we should act in harmony with nature's flow rather than trying to impose our will. Zhuangzi takes this a step further by celebrating complete spontaneity (ziran, 自然). He emphasizes that everything happens naturally and that human distinctions (like good and bad, success and failure) are artificial constructs that disrupt this natural spontaneity.
+                    
+                    KEY DISTINCTION: Laozi encourages mindful non-action to remain aligned with nature. Zhuangzi, however, suggests that even the notion of 'non-action' should be transcended, embracing the Dao's spontaneity in all its forms without judgment or conscious effort.
+                    
+                    Discussion prompt: Ask students to think about times when they tried too hard to control an outcome versus times when they "went with the flow." What were the differences in results and emotional experience?
+                </aside>
+            </section>
+
+            <!-- SLIDE 3: Transformation of Things -->
+            <section>
+                <h2>Incessant Transformation</h2>
+                
+                <p style="margin-bottom: 1em;">Both thinkers recognize constant change, but with different emphases:</p>
+                
+                <ul>
+                    <li><strong>Zhuangzi:</strong> Fluid, endless transformation—life and death as natural flow</li>
+                    <li><strong>Laozi:</strong> Cyclical nature—opposites generating each other (yin and yang)</li>
+                    <li>Detachment from fixed perspectives</li>
+                    <li>Acceptance of change without resistance</li>
+                </ul>
+                
+                <div class="img-placeholder" style="margin-top: 1.5em;">
+                    📸 <strong>Image needed:</strong> "butterfly metamorphosis transformation change"
+                    <br>
+                    <small><em>Suggested caption:</em> The famous butterfly dream—Zhuangzi's meditation on transformation and identity</small>
+                </div>
+                
+                <aside class="notes">
+                    INCESSANT TRANSFORMING ACTIVITY: Zhuangzi particularly highlights the constant transformation of all things as a key feature of the Dao. Life and death, day and night, success and failure are seen as part of an endless process of change. Zhuangzi embraces this flux, advocating for detachment from fixed perspectives. Laozi also touches on this idea, but with more focus on the cyclical nature of things (e.g., opposites generating each other, as in yin and yang).
+                    
+                    KEY DISTINCTION: Zhuangzi's vision of transformation is more fluid and accepting of change without resistance. Laozi's cyclical vision tends to emphasize balance and harmony in these transformations, while Zhuangzi stresses the acceptance of change as a natural, uncontrollable process.
+                    
+                    The famous "Butterfly Dream" story illustrates this: Zhuangzi dreams he is a butterfly, then wakes and wonders whether he is a man who dreamed of being a butterfly, or a butterfly now dreaming he is a man. This shows the fluidity of identity and the seamless transformation between states of being.
+                </aside>
+            </section>
+
+            <!-- SLIDE 4: Underlying Unity -->
+            <section>
+                <h2>Underlying Unity of All Existence</h2>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em;">
+                    <div>
+                        <h3 style="color: var(--deep-teal);">Laozi's Unity</h3>
+                        <ul>
+                            <li>Harmony between opposites</li>
+                            <li>Yin and yang as complementary</li>
+                            <li>Understanding opposites as unified whole</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--rich-purple);">Zhuangzi's Unity</h3>
+                        <ul>
+                            <li>Dissolves conventional boundaries</li>
+                            <li>Distinctions are arbitrary and illusory</li>
+                            <li>Freedom through transcending distinctions</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="sacred-text" style="margin-top: 1.5em;">
+                    <p>"Heaven and earth were born together with me, and the ten thousand things are one with me."</p>
+                    <p style="text-align: right; color: #D4AF37; margin-top: 0.8em;">
+                        — Zhuangzi, Chapter 2
+                    </p>
+                </div>
+                
+                <aside class="notes">
+                    UNDERLYING UNITY: Both philosophers propose that everything in the universe is connected through the Dao, but Zhuangzi explores this interconnectedness in a way that dissolves conventional boundaries. For him, distinctions between self and other, life and death, and right and wrong are arbitrary. Laozi also speaks to this unity but tends to emphasize harmony between opposites rather than complete dissolution.
+                    
+                    KEY DISTINCTION: Laozi promotes harmony by understanding opposites as part of a unified whole (yin and yang). Zhuangzi, however, takes it further, suggesting that distinctions themselves are illusory, and ultimate freedom comes from transcending them entirely.
+                    
+                    The famous story of Zhuangzi's wife's death illustrates this: When she died, Zhuangzi was found singing and drumming on a bowl. He explained that life and death are just transformations in the great cosmic process—mourning her death would show he didn't understand the Dao.
+                    
+                    Teaching tip: This can be a sensitive topic. Acknowledge that this philosophical perspective doesn't mean we shouldn't feel grief—it's offering a framework for understanding change and impermanence.
+                </aside>
+            </section>
+
+            <!-- ASSESSMENT BREAK 1 -->
+            <section class="assessment-slide">
+                <h2 style="color: var(--pure-white);">Pause & Process</h2>
+                <div class="assessment-prompt">
+                    <p style="font-size: 1.1em; margin-bottom: 1em;">
+                        Before we continue, take a moment to reflect:
+                    </p>
+                    <p style="font-size: 1em; margin: 0.8em 0;">
+                        How does Zhuangzi's view of transformation challenge Western ideas about identity and permanence?
+                    </p>
+                    <p style="font-size: 1em; margin: 0.8em 0;">
+                        Can you think of a time when letting go of distinctions (like success/failure) changed your perspective?
+                    </p>
+                </div>
+                
+                <aside class="notes">
+                    This is a good place to pause and check for understanding. Ask a few students to share their thoughts. Common discussion points:
+                    
+                    - Western philosophy tends to emphasize stable identity and essence
+                    - Zhuangzi challenges the idea that we have a fixed "self"
+                    - This perspective can be liberating (reducing anxiety about change) or unsettling (loss of stable ground)
+                    
+                    If students struggle, offer examples: Think about how we label experiences as "good" or "bad," but sometimes what seems like failure leads to unexpected opportunities.
+                </aside>
+            </section>
+
+            <!-- SLIDE 5: Spontaneity and Wu Wei -->
+            <section>
+                <h2>Spontaneity and Wu Wei</h2>
+                
+                <p style="margin-bottom: 1em;">Three key principles of <span class="key-term">effortless action</span>:</p>
+                
+                <ul>
+                    <li>Acting in harmony with natural order</li>
+                    <li>Spontaneity is key to achieving wu-wei</li>
+                    <li>Allows individuals to align with natural rhythms of the universe</li>
+                </ul>
+                
+                <div class="img-placeholder" style="margin-top: 1.5em;">
+                    📸 <strong>Image needed:</strong> "person meditating by stream natural harmony"
+                    <br>
+                    <small><em>Suggested caption:</em> Wu wei in practice—flowing with nature's rhythms rather than against them</small>
+                </div>
+                
+                <aside class="notes">
+                    ACTING IN HARMONY WITH NATURAL ORDER: In Daoist philosophy, both Laozi and Zhuangzi emphasize the importance of aligning oneself with the natural flow of the universe. Laozi, in the Tao Te Ching, describes how acting in harmony with the Dao means moving with the natural order rather than against it. This harmonious action results in effortless success because it flows with the universe's inherent patterns.
+                    
+                    KEY INSIGHT: The idea of "acting in harmony" doesn't mean no action at all, but rather appropriate, natural action that arises without force or overthinking.
+                    
+                    SPONTANEITY IS KEY: Spontaneity, or ziran (自然), is essential in Daoism because it is through spontaneous and natural actions that one can achieve wu-wei (無為), the principle of effortless action or non-doing. Laozi and Zhuangzi both highlight that trying to impose control or rigid plans on life leads to resistance and struggle. By being spontaneous and adaptable, an individual can flow with the Dao and act in accordance with nature's rhythms.
+                    
+                    Laozi's concept of wu-wei suggests doing things in such a way that they seem effortless, while Zhuangzi encourages an even deeper spontaneity, where actions arise naturally without concern for rules or conventions.
+                </aside>
+            </section>
+
+            <!-- SLIDE 6: Alignment with Natural Rhythms -->
+            <section>
+                <h2>Aligning with Natural Rhythms</h2>
+                
+                <p style="margin-bottom: 1em;">When we embrace spontaneity and practice wu-wei:</p>
+                
+                <ul>
+                    <li>We become attuned to the underlying rhythms of the cosmos</li>
+                    <li>Distinctions between self and world dissolve</li>
+                    <li>Movement becomes effortless within life's flow</li>
+                    <li>Life achieves balance and peace</li>
+                </ul>
+                
+                <div class="sacred-text" style="margin-top: 1.5em;">
+                    <p>"The perfect man uses his mind like a mirror—going after nothing, welcoming nothing, responding but not storing."</p>
+                    <p style="text-align: right; color: #D4AF37; margin-top: 0.8em;">
+                        — Zhuangzi, Chapter 7
+                    </p>
+                </div>
+                
+                <aside class="notes">
+                    ALIGNMENT WITH NATURAL RHYTHMS: When individuals embrace spontaneity and practice wu-wei, they become attuned to the underlying rhythms of the cosmos. In doing so, they act in perfect sync with the Dao. Zhuangzi describes this state as one where the distinctions between the self and the world disappear, allowing individuals to move effortlessly within the flow of life. By not forcing actions or overthinking outcomes, people find that they are better able to achieve their goals because they are working with, rather than against, the universe.
+                    
+                    KEY INSIGHT: This alignment leads to a life of balance and peace, as one no longer struggles to control outcomes but instead trusts the process of nature.
+                    
+                    The mirror metaphor is powerful: A mirror reflects things as they are, without judgment or attachment. It doesn't hold onto images after they pass. This is the ideal state of mind for the sage—responsive to the present moment without clinging to past or future.
+                    
+                    Modern application: This isn't about being passive or directionless. Think of skilled athletes in "the zone"—they're not overthinking their movements, they're flowing with the situation, responding naturally to what unfolds.
+                </aside>
+            </section>
+
+            <!-- SLIDE 7: Transformation of Things -->
+            <section>
+                <h2>The Transformation of Things</h2>
+                
+                <p style="margin-bottom: 1em;">Zhuangzi's view of constant change:</p>
+                
+                <ul>
+                    <li>Dao is the totality of all <span class="key-term">self-transforming processes</span></li>
+                    <li>Like a <span class="popup-trigger" data-popup="horse-metaphor">galloping horse</span>—transformed with each movement</li>
+                    <li>We must learn to "just let things transform by themselves"</li>
+                </ul>
+                
+                <div id="horse-metaphor" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="definition-term">The Galloping Horse Metaphor</div>
+                    <p>Zhuangzi uses the image of a galloping horse to illustrate constant transformation. Just as each stride changes the horse's position and momentum, the universe continuously transforms moment by moment. Nothing is static—all is flux.</p>
+                </div>
+                
+                <div class="img-placeholder" style="margin-top: 1.5em;">
+                    📸 <strong>Image needed:</strong> "galloping horse motion blur transformation"
+                    <br>
+                    <small><em>Suggested caption:</em> The galloping horse—Zhuangzi's metaphor for the universe's constant transformation</small>
+                </div>
+                
+                <aside class="notes">
+                    DAO AS TOTALITY OF SELF-TRANSFORMING PROCESSES: In Daoist philosophy, the Dao (道) is not a static entity or force but the constant flow and transformation of all things in the universe. Both Laozi and Zhuangzi highlight the idea that the universe is in perpetual change, with all phenomena being part of a greater, ongoing process of transformation. Zhuangzi especially emphasizes that the Dao encompasses all changes and transformations, which happen naturally and spontaneously.
+                    
+                    KEY INSIGHT: Rather than resisting or trying to control this ongoing transformation, Daoism teaches us to accept and embrace the fact that everything is constantly in flux.
+                    
+                    THE GALLOPING HORSE: Zhuangzi often uses vivid imagery to illustrate his philosophical points, and here he likens the Dao's constant transformation to a galloping horse. Just as a horse's movement changes with each stride, the world is continuously transforming, moment by moment. This metaphor captures the dynamic, fluid nature of the universe and the interconnectedness of all things.
+                    
+                    The galloping horse shows that transformation is inevitable and continuous, and just as a horse doesn't stop moving, the universe doesn't pause in its flow of change.
+                </aside>
+            </section>
+
+            <!-- SLIDE 8: Let Things Transform -->
+            <section>
+                <h2>"Let Things Transform by Themselves"</h2>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em;">
+                    <div>
+                        <h3 style="color: var(--deep-teal);">The Problem</h3>
+                        <ul>
+                            <li>Resisting change is futile</li>
+                            <li>Control attempts are counterproductive</li>
+                            <li>Leads to stress and disharmony</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--rich-purple);">The Solution</h3>
+                        <ul>
+                            <li>Allow natural transformation</li>
+                            <li>Practice non-interference</li>
+                            <li>Adapt easily to life's changes</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="sacred-text" style="margin-top: 1.5em;">
+                    <p>"Do not struggle. Go with the flow of things, and you will find yourself at one with the mysterious unity of the Universe."</p>
+                    <p style="text-align: right; color: #D4AF37; margin-top: 0.8em;">
+                        — Zhuangzi, Chapter 6
+                    </p>
+                </div>
+                
+                <aside class="notes">
+                    LET THINGS TRANSFORM: Zhuangzi teaches that resisting or attempting to control the constant changes in life is futile and counterproductive. Instead, he advocates for allowing things to transform on their own without interference. This aligns with the Daoist principle of wu-wei (無為), or non-action, where we do not force things but instead flow with the natural changes around us.
+                    
+                    KEY INSIGHT: By letting things transform on their own, we can live more peacefully, harmoniously, and with less stress. This passive acceptance of change allows us to adapt easily to life's inevitable transformations.
+                    
+                    Important distinction: This isn't nihilism or fatalism. It's not saying "nothing matters" or "don't do anything." It's about recognizing what we can and cannot control, and not wasting energy fighting against natural processes.
+                    
+                    Discussion prompt: Ask students about trying to force outcomes versus allowing things to unfold. Examples might include relationships, career paths, creative projects. When have they found that "letting go" paradoxically led to better results?
+                </aside>
+            </section>
+
+            <!-- ASSESSMENT BREAK 2 -->
+            <section class="assessment-slide">
+                <h2 style="color: var(--pure-white);">Pause & Process</h2>
+                <div class="assessment-prompt">
+                    <p style="font-size: 1.1em; margin-bottom: 1em;">
+                        Consider these questions:
+                    </p>
+                    <p style="font-size: 1em; margin: 0.8em 0;">
+                        What's the difference between "letting things transform" and being passive or irresponsible?
+                    </p>
+                    <p style="font-size: 1em; margin: 0.8em 0;">
+                        Can wu-wei be practiced in modern life? What would that look like?
+                    </p>
+                </div>
+                
+                <aside class="notes">
+                    This is a common student concern—they worry that Daoist philosophy encourages passivity or irresponsibility. Address this directly:
+                    
+                    Wu-wei is not about doing nothing. It's about acting appropriately and naturally without force or excess. A skilled craftsperson practices wu-wei—they work with the grain of the wood, not against it. A good teacher practices wu-wei—they facilitate learning rather than forcing information into students' heads.
+                    
+                    Modern applications:
+                    - Not forcing conversations when someone isn't ready to talk
+                    - Working with your natural energy rhythms instead of against them
+                    - Responding to situations as they arise rather than rigidly following plans that no longer fit
+                    
+                    The key is skillful responsiveness, not passivity.
+                </aside>
+            </section>
+
+            <!-- SLIDE 9: Kinds of Knowledge -->
+            <section>
+                <h2>Two Kinds of Knowledge</h2>
+                
+                <p style="margin-bottom: 1em;">Zhuangzi differentiates between two types of knowing:</p>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em; margin-top: 1em;">
+                    <div>
+                        <h3 style="color: var(--deep-teal);">Ordinary Knowledge</h3>
+                        <ul>
+                            <li>Useful for daily life</li>
+                            <li>Preliminary and provisional</li>
+                            <li>Based on distinctions and perspectives</li>
+                            <li>Can be misleading or false</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--rich-purple);">Knowledge of the Dao</h3>
+                        <ul>
+                            <li>Transcends categories</li>
+                            <li>Sees interconnectedness</li>
+                            <li>Non-discriminatory understanding</li>
+                            <li>Ultimate wisdom</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <aside class="notes">
+                    ZHUANGZI'S EPISTEMOLOGY: In Zhuangzi's philosophy, there are two distinct types of knowledge: ordinary or conventional knowledge, which pertains to everyday understanding, and the higher, more profound knowledge of the Dao. Ordinary knowledge involves knowing through distinctions and dualities (like right/wrong, true/false), while knowledge of the Dao transcends these categories, representing a deeper understanding of the universe's interconnectedness and flux.
+                    
+                    KEY INSIGHT: Ordinary knowledge is useful for navigating daily life, but Zhuangzi argues that true wisdom comes from seeing beyond these surface-level distinctions and tapping into the Dao's boundless, non-discriminatory nature.
+                    
+                    This doesn't mean ordinary knowledge is worthless. Zhuangzi acknowledges that conventional knowledge is necessary to function in society. It helps us understand our relationships and interactions with the world and others. However, this knowledge is limited and only provisional; it does not capture the full truth of existence. It is bounded by human concepts and language, making it partial and incomplete.
+                    
+                    While we rely on conventional knowledge for practical purposes, Zhuangzi encourages us not to mistake it for the highest form of wisdom, which lies in grasping the Dao's mysteries beyond intellectual comprehension.
+                </aside>
+            </section>
+
+            <!-- SLIDE 10: Limits of Ordinary Knowledge -->
+            <section>
+                <h2>The Limitations of Perspective</h2>
+                
+                <p style="margin-bottom: 1em;"><span class="key-term">Ordinary knowledge</span> is shaped by our perspective:</p>
+                
+                <ul>
+                    <li>Always knows something from a <span class="popup-trigger" data-popup="perspective-def">particular perspective</span></li>
+                    <li>Allows us to categorize and differentiate things</li>
+                    <li>Depends on dualities created by the mind</li>
+                    <li>Subjective and relative, not absolute</li>
+                    <li>Can be misleading or even false</li>
+                </ul>
+                
+                <div id="perspective-def" class="popup">
+                    <span class="popup-close">&times;</span>
+                    <div class="definition-term">Perspectival Knowledge</div>
+                    <p>Knowledge that is shaped by one's standpoint, context, and conceptual framework. What appears true from one perspective may appear false from another. Zhuangzi argues this reveals the limitations of all conventional knowing.</p>
+                </div>
+                
+                <aside class="notes">
+                    ORDINARY KNOWLEDGE AND PERSPECTIVES: Ordinary knowledge is shaped by subjective perspectives, and as a result, it allows us to categorize and differentiate between things (for example, right and wrong, beautiful and ugly). This type of knowledge is inherently limited because it depends on dualities and distinctions created by the human mind.
+                    
+                    KEY INSIGHT: Zhuangzi stresses that all conventional knowledge is shaped by individual perspectives, which means that what we think we know is often subjective and relative rather than absolute.
+                    
+                    CAN BE MISLEADING: Zhuangzi cautions that ordinary knowledge can sometimes be misleading or completely false because it is based on limited perspectives. We can get caught up in illusions, thinking we understand the world based on distinctions that are, in reality, arbitrary or culturally imposed. This partial understanding can prevent us from perceiving the deeper, more fluid reality of the Dao.
+                    
+                    KEY MESSAGE: While ordinary knowledge is necessary, we must recognize its limitations and not be misled by the false certainties it presents. The truest understanding lies in embracing the Dao, which transcends conventional knowledge.
+                    
+                    Teaching tip: This is a good place to introduce cultural relativism as an analogy. Just as different cultures have different norms and values (none absolutely "right"), different perspectives reveal different aspects of reality.
+                </aside>
+            </section>
+
+            <!-- SLIDE 11: The Elephant and the Blind Men -->
+            <section>
+                <h2>The Parable of the Blind Men and the Elephant</h2>
+                
+                <p style="margin-bottom: 1em;">A classic illustration of <span class="key-term">perspectival knowledge</span>:</p>
+                
+                <div class="img-placeholder">
+                    📸 <strong>Image needed:</strong> "blind men elephant parable perspective"
+                    <br>
+                    <small><em>Suggested caption:</em> Each blind man touches a different part—one feels the trunk and says it's a snake, another the leg and says it's a tree, another the ear and says it's a fan</small>
+                </div>
+                
+                <p style="margin-top: 1.5em; font-size: 0.9em; font-style: italic;">
+                    Six blind men encounter an elephant. Each touches a different part and concludes something different about what an elephant is—like a wall, a spear, a snake, a tree, a fan, a rope. Each is partly right, yet all are wrong about the whole.
+                </p>
+                
+                <aside class="notes">
+                    THE PARABLE: This is a traditional Indian story that has been retold in many versions. The most famous version was written by British poet John Godfrey Saxe in the 19th century. Here's the story:
+                    
+                    Six blind men encounter an elephant. The first feels the broad side and says it's like a wall. The second feels the tusk and says it's like a spear. The third grabs the trunk and says it's like a snake. The fourth feels the knee and says it's like a tree. The fifth touches the ear and says it's like a fan. The sixth grabs the tail and says it's like a rope.
+                    
+                    The poem concludes: "And so these men of Indostan / Disputed loud and long, / Each in his own opinion / Exceeding stiff and strong, / Though each was partly in the right, / And all were in the wrong!"
+                    
+                    CONNECTION TO ZHUANGZI: This perfectly illustrates Zhuangzi's point about perspectival knowledge. Each man has genuine knowledge based on his actual experience, but that knowledge is limited by his particular perspective. None of them can grasp the whole elephant from their individual standpoints.
+                    
+                    The lesson: We should hold our knowledge lightly, recognizing that our perspective, while valid, is necessarily partial and incomplete.
+                    
+                    Discussion prompt: What are some modern examples where people "see different parts of the elephant"? (Political debates, religious disagreements, interpretations of historical events, etc.)
+                </aside>
+            </section>
+
+            <!-- SLIDE 12: The Dao Point of View -->
+            <section>
+                <h2>Taking the Dao Point of View</h2>
+                
+                <p style="margin-bottom: 1em;">The "pivot" that transcends limited perspectives:</p>
+                
+                <ul>
+                    <li>Recognizing that our knowledge is constituted by our perspectives</li>
+                    <li>Realizing a larger perspective that is less limiting</li>
+                    <li>The sage looks at all aspects in "the light of nature"</li>
+                    <li>Seeing things as they really are</li>
+                </ul>
+                
+                <div class="sacred-text" style="margin-top: 1.5em;">
+                    <p>"The sage is not limited to looking merely at the this or the that aspect [from the finite point of view] but looks at all the aspects of the thing in the light of nature."</p>
+                    <p style="text-align: right; color: #D4AF37; margin-top: 0.8em;">
+                        — Zhuangzi
+                    </p>
+                </div>
+                
+                <aside class="notes">
+                    THE PIVOT: Zhuangzi introduces the concept of the "pivot" (shu 樞) as a way to transcend the limitations of ordinary, perspectival knowledge. The pivot represents a standpoint from which one can see all perspectives simultaneously without being trapped in any single one.
+                    
+                    Only by recognizing that our knowledge is constituted by our perspectives can we begin to realize a larger perspective that is less limiting. Zhuangzi emphasizes the need to go beyond the limitations of ordinary knowledge through the "pivot of taking the Dao point of view."
+                    
+                    THE SAGE'S KNOWLEDGE: The sage learns to let go of instrumental thinking and preconceived categories to see things as they really are. This doesn't mean the sage has no perspective—that's impossible for any embodied being. Rather, the sage is aware of the perspectival nature of knowledge and can shift flexibly between viewpoints, seeing how different perspectives illuminate different aspects of reality.
+                    
+                    "In the light of nature" (tian 天) means seeing things according to their natural way of being, without imposing human categories, judgments, or distinctions on them.
+                    
+                    Modern application: Think of systems thinking or interdisciplinary approaches that try to see problems from multiple angles rather than being locked into one disciplinary perspective.
+                </aside>
+            </section>
+
+            <!-- SLIDE 13: Argument from Perspectives -->
+            <section>
+                <h2>The Argument from Perspectives</h2>
+                
+                <p style="margin-bottom: 1em;">Key points about perception and reality:</p>
+                
+                <ul>
+                    <li>Our perception of reality is <span class="key-term">relative and limited</span> by our perspective</li>
+                    <li>The same thing can have many appearances depending on the observer</li>
+                    <li>No single correct or "true" appearance</li>
+                    <li>Each thing exists independently of how it appears to different observers</li>
+                </ul>
+                
+                <aside class="notes">
+                    THE RELATIVITY OF PERCEPTION: Zhuangzi argues that our perception of reality is relative and limited by our own perspective. The same thing can have many appearances, depending on the observer's perspective.
+                    
+                    EXAMPLE: Consider a mountain. From its base, it appears massive and towering. From an airplane or far away, it appears small and insignificant. Which view is "correct"? Zhuangzi would say neither and both—there is no single correct or true appearance. Each thing exists independently of how it appears to different observers.
+                    
+                    This is sometimes called the "argument from perspectives" or perspectivism. It's not quite the same as relativism (which says all views are equally valid) or skepticism (which doubts we can know anything). Instead, it's a recognition that all knowledge is perspectival—shaped by the standpoint from which we know.
+                    
+                    Teaching tip: You can use the mountain example, or bird's eye view vs. street view of a city, or looking at something under a microscope vs. with the naked eye. Neither is more accurate—they reveal different aspects of the same reality.
+                </aside>
+            </section>
+
+            <!-- SLIDE 14: Self-Sufficient Totality -->
+            <section>
+                <h2>Self-Sufficient Totality</h2>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em;">
+                    <div>
+                        <h3 style="color: var(--deep-teal);">The Principle</h3>
+                        <ul>
+                            <li>Everything has its own unique perspective and function</li>
+                            <li>Viewing from different perspectives can distort true nature</li>
+                            <li>Bird's eye view vs. street view—neither more accurate, just different</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--rich-purple);">Application to Knowledge</h3>
+                        <ul>
+                            <li>Applies to the limits of human knowledge</li>
+                            <li>We must recognize our perspective is partial</li>
+                            <li>Striving for larger perspective</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="img-placeholder" style="margin-top: 1.5em;">
+                    📸 <strong>Image needed:</strong> "bird eye view street level comparison perspective"
+                    <br>
+                    <small><em>Suggested caption:</em> Different perspectives reveal different aspects of the same reality—none is "more true" than another</small>
+                </div>
+                
+                <aside class="notes">
+                    SELF-SUFFICIENT TOTALITY: This is Zhuangzi's way of saying that everything has its own unique perspective and function. Viewing it from a different perspective can distort its true nature. This applies directly to the limits of human knowledge.
+                    
+                    The bird's eye view vs. street view example: From above, you can see patterns, layouts, how things connect—but you miss details of individual buildings, people, textures. From street level, you experience rich detail and immediate reality, but you can't see the larger patterns or connections. Neither is more accurate—they're just different ways of perceiving the same reality.
+                    
+                    IMPLICATIONS FOR KNOWLEDGE: Zhuangzi argues that conventional knowledge is limited and insufficient for understanding the Dao. Individuals should strive for a larger perspective that transcends these limitations.
+                    
+                    The sage learns to let go of instrumental thinking and preconceived categories to see things as they really are. This doesn't mean having no perspective (impossible) but being aware of the perspectival nature of all knowing and remaining flexible rather than rigidly attached to any single viewpoint.
+                    
+                    Discussion prompt: How might this apply to disagreements between people? If we recognized that everyone has a partial perspective on truth, how might that change how we engage in dialogue?
+                </aside>
+            </section>
+
+            <!-- FINAL ASSESSMENT -->
+            <section class="assessment-slide">
+                <h2 style="color: var(--pure-white);">Synthesis & Reflection</h2>
+                <div class="assessment-prompt">
+                    <p style="font-size: 1.1em; margin-bottom: 1em;">
+                        Bringing it all together:
+                    </p>
+                    <p style="font-size: 1em; margin: 0.8em 0;">
+                        How does Zhuangzi's philosophy challenge conventional Western assumptions about knowledge, identity, and control?
+                    </p>
+                    <p style="font-size: 1em; margin: 0.8em 0;">
+                        What practical value might these ideas have for contemporary life?
+                    </p>
+                    <p style="font-size: 1em; margin: 0.8em 0;">
+                        Where do you see tensions between Zhuangzi's philosophy and modern values?
+                    </p>
+                </div>
+                
+                <aside class="notes">
+                    This is your opportunity to facilitate a larger discussion synthesizing the material. Key themes to draw out:
+                    
+                    CHALLENGES TO WESTERN THOUGHT:
+                    - Rejects fixed identity/essence (challenges Platonic/Aristotelian tradition)
+                    - Questions possibility of objective knowledge (challenges Enlightenment rationalism)
+                    - Emphasizes acceptance over control (challenges modern instrumentalism)
+                    
+                    PRACTICAL CONTEMPORARY VALUE:
+                    - Managing stress and anxiety through accepting what we cannot control
+                    - Developing psychological flexibility and adaptability
+                    - Recognizing cognitive biases and limitations of perspective
+                    - Cultivating spontaneity and flow states
+                    - Environmental ethics (working with nature rather than dominating it)
+                    
+                    TENSIONS WITH MODERN VALUES:
+                    - Emphasis on achievement vs. wu-wei
+                    - Value of planning/goal-setting vs. spontaneity
+                    - Rights-based ethics vs. Daoist naturalism
+                    - Individualism vs. dissolution of self/other boundaries
+                    
+                    Encourage students to sit with these tensions rather than trying to resolve them immediately. The point is not to convince them to become Daoists but to use Daoist thought to question and examine their own assumptions.
+                </aside>
+            </section>
+
+            <!-- CONCLUSION SLIDE -->
+            <section>
+                <h2>Key Takeaways: Zhuangzi</h2>
+                
+                <ul>
+                    <li>The Dao as natural order—spontaneous, transforming, unifying all things</li>
+                    <li>Wu-wei and ziran—effortless action through complete spontaneity</li>
+                    <li>Constant transformation—accepting change rather than resisting it</li>
+                    <li>Two kinds of knowledge—ordinary (limited, perspectival) and knowledge of the Dao (transcendent)</li>
+                    <li>The argument from perspectives—all knowledge is relative to standpoint</li>
+                    <li>The Dao point of view—seeing all aspects in "the light of nature"</li>
+                </ul>
+                
+                <p style="margin-top: 1.5em; font-size: 0.9em; color: var(--bronze-accent);">
+                    Next class: We'll explore how these Daoist ideas influenced Chan/Zen Buddhism
+                </p>
+                
+                <aside class="notes">
+                    SUMMARY: We've covered five major themes in Zhuangzi's philosophy:
+                    
+                    1. The Dao as the natural order of the universe—emphasizing spontaneity, transformation, and unity
+                    2. Wu-wei and ziran—moving from Laozi's "action without force" to Zhuangzi's complete spontaneity
+                    3. The transformation of things—accepting constant change as the nature of reality
+                    4. Two kinds of knowledge—the limitations of ordinary perspectival knowledge vs. the transcendent knowledge of the Dao
+                    5. The argument from perspectives—recognizing that all perception is relative to one's standpoint
+                    
+                    CONNECTIONS TO NEXT CLASS: When we study Chan/Zen Buddhism next, we'll see how these Daoist concepts influenced Chinese interpretations of Buddhism. The emphasis on spontaneity, non-dualistic thinking, and direct experience rather than conceptual knowledge all show strong Daoist influence.
+                    
+                    HOMEWORK REMINDER: Read the assigned passages from the Zhuangzi for next class. Pay special attention to the famous stories—the butterfly dream, the fish trap, and Cook Ding cutting up the ox. These stories embody Zhuangzi's philosophical insights better than abstract arguments.
+                    
+                    Thank students for their engagement and remind them they can review these slides in their own time using the keyboard shortcuts we introduced at the beginning.
+                </aside>
+            </section>
+
+        </div>
+    </div>
+    
+    <div class="slide-counter"></div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: false,
+            transition: 'slide',
+            plugins: [ RevealNotes ]
+        });
+        
+        // Slide counter
+        function updateSlideCounter() {
+            const current = Reveal.getState().indexh + 1;
+            const total = Reveal.getTotalSlides();
+            document.querySelector('.slide-counter').textContent = `${current}/${total}`;
+        }
+        Reveal.on('slidechanged', updateSlideCounter);
+        updateSlideCounter();
+        
+        // Pop-up functionality
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('popup-trigger')) {
+                const popupId = e.target.getAttribute('data-popup');
+                document.getElementById(popupId).classList.add('active');
+            }
+            if (e.target.classList.contains('popup-close') || e.target.classList.contains('popup')) {
+                document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+            }
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+            }
+        });
+    </script>
+</body>
+</html>
