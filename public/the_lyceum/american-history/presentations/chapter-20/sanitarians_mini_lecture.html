@@ -1,0 +1,758 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Sanitarians - HIST 102</title>
+    
+    <!-- Reveal.js CSS from CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Pantone 2026 Atmospheric Palette */
+            --cloud-dancer: #F0EEE9;
+            --pale-sunlight: #E8DFB8;
+            --atmospheric-slate: #2A3540;
+            --misty-sky: #B8C5D0;
+            --sterling-blue: #6B8FAD;
+            --quiet-wave: #5D8A8C;
+            --aventurine: #4A7C72;
+            --morning-mist: #C5C0B8;
+            --deep-current: #2D4A4A;
+        }
+
+        .reveal {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 32px;
+            background-color: var(--atmospheric-slate);
+        }
+
+        .reveal .slides section {
+            color: var(--cloud-dancer);
+            text-align: left;
+            padding: 2em;
+        }
+
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--cloud-dancer);
+            text-transform: none;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .reveal h1 { font-size: 3em; text-align: center; }
+        .reveal h2 { font-size: 2em; color: var(--pale-sunlight); margin-bottom: 0.5em; }
+        .reveal h3 { font-size: 1.5em; color: var(--misty-sky); }
+
+        .reveal p, .reveal li {
+            color: var(--cloud-dancer);
+            line-height: 1.5;
+            margin: 0.5em 0;
+        }
+
+        .reveal ul, .reveal ol {
+            margin: 1em 0 1em 1.5em;
+        }
+
+        .reveal a {
+            color: var(--sterling-blue);
+            text-decoration: underline;
+        }
+
+        .reveal a:hover {
+            color: var(--pale-sunlight);
+        }
+
+        /* Key terms */
+        .key-term {
+            color: var(--aventurine);
+            font-weight: 600;
+        }
+
+        /* Pop-up/Modal styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--deep-current);
+            color: var(--cloud-dancer);
+            padding: 2em;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            max-width: 70%;
+            max-height: 70%;
+            overflow-y: auto;
+            z-index: 1000;
+            border: 3px solid var(--quiet-wave);
+        }
+
+        .popup.active { display: block; }
+
+        .popup h3 {
+            color: var(--pale-sunlight);
+            margin-top: 0;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 2em;
+            cursor: pointer;
+            color: var(--misty-sky);
+        }
+
+        .popup-close:hover {
+            color: var(--cloud-dancer);
+        }
+
+        .popup-trigger {
+            color: var(--sterling-blue);
+            cursor: pointer;
+            border-bottom: 2px dotted var(--sterling-blue);
+        }
+
+        .popup-trigger:hover {
+            color: var(--pale-sunlight);
+            border-bottom-color: var(--pale-sunlight);
+        }
+
+        /* Callout boxes */
+        .callout {
+            background: linear-gradient(135deg, var(--deep-current) 0%, rgba(45, 74, 74, 0.7) 100%);
+            border-left: 5px solid var(--aventurine);
+            padding: 1.5em;
+            margin: 1.5em 0;
+            border-radius: 8px;
+        }
+
+        .callout-title {
+            color: var(--pale-sunlight);
+            font-weight: 700;
+            font-size: 1.2em;
+            margin-bottom: 0.5em;
+        }
+
+        /* Timeline items */
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 1.5em;
+            margin: 1em 0;
+            padding: 1em;
+            background: rgba(45, 74, 74, 0.3);
+            border-left: 4px solid var(--quiet-wave);
+            border-radius: 5px;
+        }
+
+        .timeline-date {
+            color: var(--pale-sunlight);
+            font-weight: 700;
+            font-size: 1.3em;
+        }
+
+        /* Comparison boxes */
+        .comparison-box {
+            background: var(--deep-current);
+            padding: 1.5em;
+            border-radius: 10px;
+            border: 2px solid var(--quiet-wave);
+        }
+
+        .comparison-box.alt {
+            border-color: var(--aventurine);
+        }
+
+        .comparison-box h3 {
+            color: var(--pale-sunlight);
+            margin-top: 0;
+        }
+
+        /* Primary source boxes */
+        .primary-source {
+            background: linear-gradient(135deg, rgba(45, 74, 74, 0.5) 0%, rgba(42, 53, 64, 0.5) 100%);
+            padding: 2em;
+            border-left: 5px solid var(--pale-sunlight);
+            font-style: italic;
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin: 1.5em 0;
+        }
+
+        .primary-source-attribution {
+            text-align: right;
+            font-style: normal;
+            color: var(--morning-mist);
+            margin-top: 1em;
+            font-size: 0.9em;
+        }
+
+        /* Image placeholders */
+        .img-placeholder {
+            background: linear-gradient(135deg, var(--deep-current) 0%, var(--atmospheric-slate) 100%);
+            border: 3px dashed var(--quiet-wave);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--misty-sky);
+            text-align: center;
+            padding: 2em;
+            border-radius: 10px;
+        }
+
+        /* Section divider */
+        .section-divider {
+            text-align: center !important;
+        }
+
+        /* Slide counter */
+        .slide-number {
+            color: var(--morning-mist) !important;
+            font-size: 0.8em !important;
+        }
+    </style>
+    
+    <script>
+        function togglePopup(id) {
+            const popup = document.getElementById(id);
+            popup.classList.toggle('active');
+        }
+        
+        // Close popup when clicking outside
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('popup')) {
+                event.target.classList.remove('active');
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+            <!-- Title Slide -->
+            <section>
+                <h1>The Sanitarians</h1>
+                <h3 style="color: var(--misty-sky); text-align: center;">Public Health, Sewers, and the Fight Against Urban Disease</h3>
+                <p style="text-align: center; color: var(--morning-mist); font-style: italic;">How reformers learned disease could be prevented, not just cured</p>
+                
+                <aside class="notes">
+                    <h4>📚 Mini-Lecture Overview</h4>
+                    <p>This section bridges from cholera epidemics to the sanitation reform movement that emerged in response. We're looking at roughly 1840-1880, a period when American cities adopted English ideas about public health infrastructure.</p>
+                    
+                    <h4>🎯 Learning Goals</h4>
+                    <ul>
+                        <li>Understand how Edwin Chadwick and the "sanitary idea" transformed thinking about disease</li>
+                        <li>Explain John Snow's breakthrough with cholera and the Broad Street Pump</li>
+                        <li>Describe the shift from miasma theory to germ theory</li>
+                        <li>Connect sanitation reform to the growth of government power</li>
+                    </ul>
+                    
+                    <h4>💭 Big Picture</h4>
+                    <p>Before sanitarians, people thought disease was either God's punishment or bad air from filth. The sanitarians got half of it right—they connected disease to environmental conditions, even though they misunderstood the mechanism. This partial truth was enough to justify massive government projects: sewers, waterworks, street cleaning. These infrastructure projects saved millions of lives.</p>
+                </aside>
+            </section>
+
+            <!-- The Sanitary Idea -->
+            <section>
+                <h2>The "Sanitary Idea"</h2>
+                <p>A revolutionary concept emerged in mid-19th century Britain:</p>
+                <p class="key-term" style="font-size: 1.3em; margin: 1em 0;">Disease depends upon sanitation.</p>
+                
+                <ul style="margin-top: 1.5em;">
+                    <li>The physical environment profoundly influences health</li>
+                    <li>Pure water supply is a <span class="key-term">necessity</span>, not just a convenience</li>
+                    <li>Sewage removal is essential to public health</li>
+                    <li>Government must intervene to protect citizens</li>
+                </ul>
+                
+                <aside class="notes">
+                    <h4>📚 The Core Insight</h4>
+                    <p>The "sanitary idea" was simple but transformative: your health depends on your environment. Before this, most people thought disease came from moral failings, God's will, or personal constitution. The sanitarians said: No, disease comes from filthy water, rotting garbage, overflowing cesspools, and lack of drainage.</p>
+                    
+                    <h4>📖 Why This Mattered</h4>
+                    <p>This idea justified unprecedented government action. If disease is environmental, then government must control the environment. This meant building sewers, regulating housing, supplying clean water, removing garbage—all at public expense. This was radical in the era of laissez-faire economics.</p>
+                    
+                    <h4>💭 Historical Context</h4>
+                    <p>Mid-19th century = height of laissez-faire ideology. Most people believed government should stay out of private affairs. Water supply, waste disposal, housing—these were private matters. The sanitary idea challenged this directly: these are PUBLIC health matters requiring PUBLIC action.</p>
+                    
+                    <h4>🔑 Looking Ahead</h4>
+                    <p>This concept reshaped thinking about water delivery, sewage removal, and refuse collection. It created the blueprint for modern public health infrastructure. By the 1880s, American cities would adopt this wholesale.</p>
+                </aside>
+            </section>
+
+            <!-- Edwin Chadwick -->
+            <section>
+                <h2>Edwin Chadwick: The Great Reformer</h2>
+                
+                <div style="display: flex; gap: 2em; align-items: start;">
+                    <div class="img-placeholder" style="width: 400px; height: 500px; flex-shrink: 0;">
+                        <strong>IMAGE PLACEHOLDER</strong><br>
+                        <em>400x500px portrait</em><br><br>
+                        <strong>Search:</strong> "Edwin Chadwick portrait 19th century"<br>
+                        "Edwin Chadwick sanitary reformer"
+                    </div>
+                    <div style="text-align: left;">
+                        <p><strong style="color: var(--pale-sunlight);">Role:</strong> British lawyer, social reformer, architect of modern public health</p>
+                        <p><strong style="color: var(--pale-sunlight);">Influenced by:</strong> Jeremy Bentham, John Stuart Mill (utilitarian philosophy)</p>
+                        <p><strong style="color: var(--pale-sunlight);">Key belief:</strong> Activist central government can solve social problems</p>
+                        <div class="callout" style="margin-top: 1em;">
+                            <p><span class="popup-trigger" onclick="togglePopup('chadwick-report')">His 1842 Report</span> transformed public health forever.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pop-up for Chadwick's Report -->
+                <div id="chadwick-report" class="popup">
+                    <span class="popup-close" onclick="togglePopup('chadwick-report')">&times;</span>
+                    <h3>The Sanitary Condition of the Labouring Population (1842)</h3>
+                    
+                    <h4>What the Report Did:</h4>
+                    <ul>
+                        <li>Documented appalling health conditions in industrial slums</li>
+                        <li>Linked disease to environmental causes, not moral failings</li>
+                        <li>Argued ill health CAUSES poverty (disease → inability to work → destitution)</li>
+                        <li>Called for government-funded infrastructure: sewers, waterworks, drainage</li>
+                    </ul>
+                    
+                    <h4>Three Revolutionary Claims:</h4>
+                    <ol>
+                        <li><strong>Economic argument:</strong> Public health saves money (less poor relief, more workers)</li>
+                        <li><strong>Environmental argument:</strong> Unsanitary conditions cause disease</li>
+                        <li><strong>Moral argument:</strong> Filth leads to moral degradation and crime</li>
+                    </ol>
+                    
+                    <h4>His Proposed System:</h4>
+                    <p>A comprehensive <strong>hydraulic system</strong>: pipe clean water INTO homes equipped with water closets, then carry sewage OUT through public sewers to be disposed as "liquid manure" on agricultural fields.</p>
+                    
+                    <h4>What Actually Happened:</h4>
+                    <p>The British government didn't act immediately. It took until 1875 for a comprehensive Public Health Act. But Chadwick had set the agenda. His ideas spread throughout the industrializing world—including the United States.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 Who Was Edwin Chadwick?</h4>
+                    <p>Chadwick was a lawyer, not a doctor. He was influenced by utilitarian philosophers like Jeremy Bentham who believed government should act to produce "the greatest good for the greatest number." Chadwick applied this to public health: government should intervene to reduce disease and suffering.</p>
+                    
+                    <h4>📖 The 1842 Report's Impact</h4>
+                    <p>Chadwick's report to the Poor Law Commission investigated whether spending money on sanitation would save money on poor relief. His conclusion: Yes! Healthy workers don't need relief. But the report went much further—it made a moral, economic, and political case for massive government intervention in sanitation.</p>
+                    
+                    <h4>💭 Why It Took So Long</h4>
+                    <p>The British government resisted for decades. Why? Laissez-faire ideology, fear of taxation, property rights concerns, vested interests in private water companies. It took repeated cholera epidemics (1831-32, 1848-49, 1854, 1867) to overcome this resistance. Death finally convinced politicians to act.</p>
+                    
+                    <h4>🔑 The American Connection</h4>
+                    <p>American reformers read Chadwick's report and brought his ideas across the Atlantic in the 1840s-1850s. During this period, American cities experienced their "first major sanitary awakening"—they began building the infrastructure that would define modern urban life.</p>
+                </aside>
+            </section>
+
+            <!-- John Snow Case Study -->
+            <section>
+                <h2>John Snow and the Broad Street Pump</h2>
+                <p>The most famous epidemiological detective story in history.</p>
+                
+                <div class="timeline-item">
+                    <span class="timeline-date">1831</span>
+                    <span>Snow witnesses cholera in coal mines as medical apprentice</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">1849</span>
+                    <span>Snow publishes theory: cholera spreads through contaminated water</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">Aug-Sept 1854</span>
+                    <span>Soho outbreak: 616 dead in days. Snow maps cases, identifies pump.</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">Sept 8, 1854</span>
+                    <span>Pump handle removed. Outbreak ends.</span>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 The Story</h4>
+                    <p>On August 28, 1854, a baby girl at 40 Broad Street in London's Soho district came down with cholera. Her mother, Sarah Lewis, soaked the soiled diapers in water and dumped the water into the cesspool at the front of the house—which leaked into the Broad Street pump's water supply.</p>
+                    
+                    <p>Within three days, 127 people on or near Broad Street died. Within a week, three-quarters of residents had fled. By September 10, 500 were dead. The final death toll: 616 people.</p>
+                    
+                    <h4>📖 Snow's Investigation</h4>
+                    <p>John Snow was a physician living in Soho. He'd been an apprentice during the 1831 epidemic and had seen cholera ravage coal miners forced to eat and defecate in the same dark caverns. He suspected cholera was rooted in sanitary conditions.</p>
+                    
+                    <p>During the 1854 outbreak, Snow went door to door. He mapped every death. He discovered the correlation: people who drank from the Broad Street pump died. People who drank from other sources didn't. (Even the workhouse and brewery nearby—which had their own water supplies—had almost no cases.)</p>
+                    
+                    <h4>💭 The Breakthrough</h4>
+                    <p>Snow's map showed cholera clustering around ONE water source. This challenged miasma theory (which said disease came from bad air). Snow argued: cholera spreads through contaminated water. He convinced local officials to remove the Broad Street pump handle on September 8. The outbreak subsided.</p>
+                    
+                    <h4>🔑 Why It Matters</h4>
+                    <p>This is considered the founding moment of modern epidemiology—using statistics and mapping to track disease. Snow didn't understand germ theory yet (that came later), but he correctly identified the transmission route. By 1866, American physicians widely accepted that cholera was waterborne.</p>
+                </aside>
+            </section>
+
+            <!-- Snow's Map -->
+            <section>
+                <h2>The Ghost Map</h2>
+                <div class="img-placeholder" style="width: 1400px; height: 800px; margin: 1em auto;">
+                    <strong>IMAGE PLACEHOLDER</strong><br>
+                    <em>Dimensions: 1400x800px</em><br><br>
+                    <strong>Search terms:</strong> "John Snow cholera map 1854 original"<br>
+                    "Broad Street pump cholera map"<br>
+                    "John Snow Ghost Map original"<br><br>
+                    <strong>Suggested sources:</strong> UCLA John Snow archive, Wellcome Collection, Library of Congress
+                </div>
+                <p style="text-align: center; color: var(--morning-mist); font-style: italic;">Snow's famous map showed cholera deaths clustered around the Broad Street pump—early evidence of modern epidemiological methods.</p>
+                
+                <aside class="notes">
+                    <h4>📚 Visual Evidence</h4>
+                    <p>Snow's map was revolutionary. He used black bars to show deaths at each address. The clustering around the Broad Street pump was visually obvious—this was DATA showing disease transmission patterns.</p>
+                    
+                    <h4>📖 Methodology</h4>
+                    <p>This was one of the first statistical surveys of disease. Snow didn't just observe—he COUNTED, MAPPED, and ANALYZED. This became the foundation of epidemiology: using data to understand disease patterns.</p>
+                    
+                    <h4>💭 The Irony</h4>
+                    <p>The outbreak had already peaked when Snow removed the pump handle—deaths were declining naturally. But his investigation convinced many physicians that cholera was waterborne, not airborne. This shifted thinking even though he couldn't prove the mechanism (bacteria weren't discovered yet).</p>
+                </aside>
+            </section>
+
+            <!-- Section Divider -->
+            <section class="section-divider" data-background="linear-gradient(135deg, #2D4A4A 0%, #2A3540 100%)">
+                <h2>From Theory to Practice</h2>
+                <h3 style="color: var(--misty-sky);">Building the Infrastructure</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">How the sanitary idea became sewers, waterworks, and public health boards</p>
+            </section>
+
+            <!-- Miasma vs. Reality -->
+            <section>
+                <h2>The Miasma Paradox</h2>
+                <p>Sanitarians believed in <span class="popup-trigger" onclick="togglePopup('miasma-popup')">miasma theory</span>—and they were WRONG about the mechanism.</p>
+                
+                <div class="callout" style="margin-top: 1.5em;">
+                    <div class="callout-title">🔑 But Here's the Paradox</div>
+                    <p>Being wrong about <em>why</em> didn't stop them from doing the <em>right</em> things: cleaning streets, removing garbage, building sewers, supplying clean water.</p>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em; margin-top: 2em;">
+                    <div class="comparison-box">
+                        <h3>What They Believed</h3>
+                        <ul>
+                            <li>Disease from "bad air"</li>
+                            <li>Organic decay produces poisonous vapors</li>
+                            <li>Smell = danger</li>
+                            <li>Ventilation prevents disease</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-box alt">
+                        <h3>What They Did Right</h3>
+                        <ul>
+                            <li>Removed sewage from streets</li>
+                            <li>Built water systems</li>
+                            <li>Cleaned up garbage</li>
+                            <li>Improved drainage</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Pop-up for Miasma Theory -->
+                <div id="miasma-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('miasma-popup')">&times;</span>
+                    <h3>Miasma Theory: The "Filth Theory" of Disease</h3>
+                    
+                    <h4>Core Beliefs:</h4>
+                    <ul>
+                        <li>Disease arises from putrefying organic waste</li>
+                        <li>"Bad smells" and "sewer gases" cause illness</li>
+                        <li>Disease is NOT transmitted person-to-person (anti-contagionist view)</li>
+                        <li>Night air is especially dangerous (vapors settle at night)</li>
+                        <li>Swamps, marshes, and stagnant water breed disease</li>
+                    </ul>
+                    
+                    <h4>Why Sanitarians Believed It:</h4>
+                    <p>They observed a clear correlation: filthy environments = high disease rates. They just misunderstood the mechanism. They didn't know about bacteria and viruses yet—those discoveries came in the 1870s-1890s with Pasteur and Koch.</p>
+                    
+                    <h4>Why It Worked Anyway:</h4>
+                    <p>Even though the theory was wrong, the prescriptions were often right! Removing sewage, cleaning water, improving drainage, disposing of garbage—all of these reduced disease, not because they eliminated "bad air" but because they eliminated bacteria and contamination.</p>
+                    
+                    <h4>The Transition to Germ Theory:</h4>
+                    <p>It wasn't until the 1880s-1890s that germ theory replaced miasma theory. By then, the infrastructure was already being built. The sanitarians had won the policy battle even before science proved them right about the importance of sanitation (if not the mechanism).</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 Wrong But Useful</h4>
+                    <p>This is a crucial point for students to understand: you can have the wrong THEORY but still do the right ACTIONS. Sanitarians thought disease came from bad air. They were wrong—it comes from bacteria and viruses. But their solutions (clean water, sewers, garbage removal) worked because those solutions reduced bacterial contamination.</p>
+                    
+                    <h4>📖 Miasmatic Theory in Practice</h4>
+                    <p>The filth theory dominated sanitarian thinking until the late 19th century. Based on the apparent relation between filth and disease, the theory implied that organic decomposition per se caused disease. Solution: remove the filth, improve ventilation, drain the swamps.</p>
+                    
+                    <h4>💭 Why They Believed It</h4>
+                    <p>The correlation was obvious: slums with overflowing cesspools, rotting garbage, and no drainage had sky-high death rates. Wealthy neighborhoods with clean streets and good drainage were healthier. They concluded: filth causes disease. They were right about the correlation but wrong about causation.</p>
+                    
+                    <h4>🔑 The Paradigm Shift</h4>
+                    <p>It took Louis Pasteur (1860s), Robert Koch (1870s-1880s), and the development of bacteriology to prove germ theory. By then, the public health infrastructure was already being built on miasmatic assumptions. The transition from miasma to germ theory is one of the great paradigm shifts in medical history.</p>
+                </aside>
+            </section>
+
+            <!-- Building Infrastructure -->
+            <section>
+                <h2>Sewers and Waterworks: 1840-1880</h2>
+                <p>American cities began their <span class="key-term">"sanitary awakening"</span> in the mid-19th century.</p>
+                
+                <ul style="margin-top: 1.5em;">
+                    <li><strong style="color: var(--pale-sunlight);">Chicago (1856):</strong> E.S. Chesbrough designs first comprehensive combined sewer system</li>
+                    <li><strong style="color: var(--pale-sunlight);">Brooklyn (1857):</strong> J.W. Adams builds separate sanitary sewers</li>
+                    <li><strong style="color: var(--pale-sunlight);">Central waterworks:</strong> Increase dramatically between 1840-1870</li>
+                    <li><strong style="color: var(--pale-sunlight);">Problem:</strong> Most not intended for domestic consumption initially</li>
+                </ul>
+                
+                <div class="callout" style="margin-top: 1.5em;">
+                    <div class="callout-title">⚠️ The Unintended Consequence</div>
+                    <p>Indoor plumbing WITHOUT adequate sewers created NEW problems: overflowing cesspits, contaminated wells, sewer gas leaks.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 Infrastructure Revolution</h4>
+                    <p>Between 1840 and 1880, American cities underwent the fastest urbanization in the nation's history (552% growth to 6.2 million urban dwellers). This rapid growth made sanitation infrastructure absolutely essential—the old system of privy vaults and cesspits couldn't handle the scale.</p>
+                    
+                    <h4>📖 Two Approaches to Sewers</h4>
+                    <p><strong>Combined Sewer Systems (CSS):</strong> One pipe carries BOTH storm water and sewage. Pioneered in Hamburg, adopted in Chicago and many American cities. Advantage: cheaper. Disadvantage: during heavy rains, sewers overflow, dumping raw sewage into rivers.</p>
+                    
+                    <p><strong>Separate Sewer Systems (SSS):</strong> Two pipes—one for storm water, one for sewage. Advocated by Edwin Chadwick and John Phillips in England, but more expensive to build. Some American cities adopted this approach.</p>
+                    
+                    <h4>💭 The Water-Sewer Connection</h4>
+                    <p>Piping water INTO homes created enormous pressure to pipe sewage OUT. Before water systems, people used small amounts of water (from wells or cisterns) and cesspits could handle the waste. But once you have running water, people use 10x more water—and cesspits overflow. You NEED sewers to handle the increased volume.</p>
+                    
+                    <h4>🔑 Centralization vs. Privatization</h4>
+                    <p>Early sanitation was PRIVATE—individual cesspits, private wells, private plumbers. The sanitarians argued this was inadequate at urban scale. They pushed for CENTRALIZED, GOVERNMENT-RUN infrastructure. This was controversial! It meant taxation, regulation, and government control of what had been private matters.</p>
+                </aside>
+            </section>
+
+            <!-- Metropolitan Board of Health -->
+            <section>
+                <h2>The Metropolitan Board of Health (1866)</h2>
+                <p>New York City creates America's first coordinated response to epidemic disease.</p>
+                
+                <div class="timeline-item">
+                    <span class="timeline-date">1866</span>
+                    <span>Board organized as cholera threatens</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">Actions</span>
+                    <span>Forced contractors to clean streets, removed 160,000 tons of manure, disinfected 6,500 privies</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">Result</span>
+                    <span>First formal American effort at epidemic prevention</span>
+                </div>
+                
+                <div class="callout" style="margin-top: 1.5em;">
+                    <div class="callout-title">🔑 The Paradigm Shift</div>
+                    <p>Disease might not be <em>curable</em>, but it could be <span class="key-term">prevented</span> through organized community effort.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 The 1866 Cholera Threat</h4>
+                    <p>By 1866, John Snow's ideas about waterborne cholera transmission were widely accepted among American physicians. When cholera threatened New York that year, the city didn't wait for the epidemic to strike—they organized PROACTIVELY.</p>
+                    
+                    <h4>📖 What the Board Did</h4>
+                    <p>The Metropolitan Board of Health had real power: they could force property owners and contractors to act. They cleaned streets (removing 160,000 tons of horse manure!), disinfected thousands of privy vaults, and improved drainage. This was unprecedented government intervention in sanitation.</p>
+                    
+                    <h4>💭 Why This Matters</h4>
+                    <p>This was the FIRST TIME an American community formally organized to combat epidemic disease BEFORE it struck. Previous responses had been reactive—wait for cholera, then panic. The 1866 Board was proactive—prevent cholera by improving sanitation NOW.</p>
+                    
+                    <h4>🔑 The New Public Health</h4>
+                    <p>The Board's success led other cities to create similar institutions. By the 1870s, municipal health boards were spreading across America. These boards had regulatory power: they could inspect housing, condemn buildings, require plumbing improvements, and enforce sanitary codes. This was a massive expansion of government authority.</p>
+                </aside>
+            </section>
+
+            <!-- George Waring -->
+            <section>
+                <h2>George Waring: Sanitation Engineer</h2>
+                
+                <div style="display: flex; gap: 2em; align-items: start;">
+                    <div class="img-placeholder" style="width: 400px; height: 500px; flex-shrink: 0;">
+                        <strong>IMAGE PLACEHOLDER</strong><br>
+                        <em>400x500px portrait</em><br><br>
+                        <strong>Search:</strong> "George Waring sanitation engineer"<br>
+                        "George Waring street cleaning New York"
+                    </div>
+                    <div style="text-align: left;">
+                        <p><strong style="color: var(--pale-sunlight);">Role:</strong> Sanitation engineer, reformer, NYC Street Cleaning Commissioner (1895-98)</p>
+                        <p><strong style="color: var(--pale-sunlight);">Innovations:</strong></p>
+                        <ul>
+                            <li>Separate sewer systems design</li>
+                            <li>Professional street cleaning (not political patronage)</li>
+                            <li>White uniforms for sanitation workers (dignity)</li>
+                            <li>Systematic refuse collection</li>
+                        </ul>
+                        <p class="key-term" style="margin-top: 1em;">"Cleanliness is a civic responsibility."</p>
+                    </div>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 Who Was George Waring?</h4>
+                    <p>George Waring was one of the most prominent sanitation engineers of the late 19th century. He designed sewer systems, advocated for separate sewers (not combined), and later became famous as NYC's Street Cleaning Commissioner.</p>
+                    
+                    <h4>📖 The Street Cleaning Revolution</h4>
+                    <p>Before Waring, street cleaning was a SINECURE—a political patronage job given as reward for loyalty. Workers didn't actually clean streets; they just collected paychecks. Streets stayed filthy.</p>
+                    
+                    <p>Waring PROFESSIONALIZED street cleaning. He hired workers based on merit, not politics. He gave them white uniforms (to inspire pride and visibility). He created systematic routes and schedules. Result: NYC streets became dramatically cleaner within months.</p>
+                    
+                    <h4>💭 Why It Worked</h4>
+                    <p>Waring understood that sanitation required ORGANIZATION and PROFESSIONALISM, not just good intentions. You need trained workers, proper equipment, systematic methods, and accountability. This seems obvious now, but it was revolutionary in the 1890s.</p>
+                    
+                    <h4>🔑 Separate vs. Combined Sewers</h4>
+                    <p>Waring advocated for SEPARATE sewer systems (following Chadwick's original vision). Most American cities had adopted COMBINED sewers (cheaper to build), but Waring argued separate systems were more sanitary and easier to maintain. This debate continued into the 20th century.</p>
+                </aside>
+            </section>
+
+            <!-- The Gospel of Public Health -->
+            <section>
+                <h2>The "Gospel of Public Health"</h2>
+                <p>By the 1870s-1880s, a profound shift in American thinking had occurred.</p>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em; margin-top: 2em;">
+                    <div class="comparison-box">
+                        <h3>Old Thinking</h3>
+                        <ul>
+                            <li>Disease is God's punishment</li>
+                            <li>Moral failings cause illness</li>
+                            <li>Individual responsibility</li>
+                            <li>Private solutions</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-box alt">
+                        <h3>New Thinking</h3>
+                        <ul>
+                            <li>Disease is environmental</li>
+                            <li>Sanitary conditions determine health</li>
+                            <li>Community responsibility</li>
+                            <li>Government intervention required</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="callout" style="margin-top: 1.5em;">
+                    <div class="callout-title">🔑 Linked to Social Gospel Movement</div>
+                    <p>Clergy increasingly focused on <span class="key-term">environmental causes of suffering</span>, not just individual sin.</p>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 A Revolution in Thinking</h4>
+                    <p>Between 1832 and 1880, a fundamental transformation occurred in how Americans thought about disease. Charles Rosenberg puts it this way: "Disease had become a consequence of man's interaction with his environment; it was no longer an incident in a drama of moral choice and spiritual salvation."</p>
+                    
+                    <h4>📖 The Social Gospel Connection</h4>
+                    <p>The Social Gospel movement (1870s-1920s) argued that Christians should address social problems—poverty, slums, disease—not just focus on individual salvation. Many Social Gospel clergy embraced sanitation reform: clean water and sewers were moral imperatives, not just engineering projects.</p>
+                    
+                    <h4>💭 From Sin to Sanitation</h4>
+                    <p>During the 1832 cholera epidemic, many preachers said cholera was God's judgment on sinners (especially immigrants and the poor). By the 1870s, reformers said: No, cholera is caused by contaminated water—and we can FIX that with sewers and waterworks. This shift is enormous.</p>
+                    
+                    <h4>🔑 Public Health as Civic Duty</h4>
+                    <p>The "Gospel of Public Health" meant: preventing disease is a community responsibility. You can't just pray for good health—you have to BUILD infrastructure, REGULATE housing, ENFORCE sanitary codes. This justified the growth of government power in the Progressive Era.</p>
+                </aside>
+            </section>
+
+            <!-- Paradigm Shift -->
+            <section>
+                <h2>Paradigm Shift: Miasma → Germ Theory</h2>
+                
+                <div class="callout" style="margin-bottom: 1.5em;">
+                    <div class="callout-title">📚 Definition</div>
+                    <p><span class="key-term">Paradigm:</span> A worldview underlying the theories and methods of a scientific field.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <span class="timeline-date">1860s</span>
+                    <span><strong>Louis Pasteur</strong> demonstrates microorganisms cause fermentation and disease</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">1870s-80s</span>
+                    <span><strong>Robert Koch</strong> identifies specific bacteria causing TB, cholera, anthrax</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">1890s</span>
+                    <span>Germ theory becomes dominant; water filtration and chlorination begin</span>
+                </div>
+                
+                <aside class="notes">
+                    <h4>📚 What's a Paradigm Shift?</h4>
+                    <p>Thomas Kuhn's concept: science doesn't just accumulate knowledge gradually—it undergoes revolutionary shifts where entire worldviews change. The miasma → germ theory transition is one of the clearest examples in medical history.</p>
+                    
+                    <h4>📖 The Discoveries</h4>
+                    <p><strong>Louis Pasteur (1860s):</strong> Proved that microorganisms cause fermentation and disease, not "spontaneous generation" from decaying matter. This was the death blow to miasma theory's core claim.</p>
+                    
+                    <p><strong>Robert Koch (1870s-1880s):</strong> Identified the specific bacteria causing tuberculosis (1882), cholera (1883), and anthrax. Koch's postulates established the scientific method for linking specific microbes to specific diseases.</p>
+                    
+                    <h4>💭 Why the Shift Took Time</h4>
+                    <p>Even after Pasteur and Koch's discoveries, many physicians clung to miasma theory. Why? (1) It had seemed to work—sanitation efforts did reduce disease. (2) Bacteria were invisible—you needed microscopes to see them. (3) People resist paradigm shifts—it's hard to abandon beliefs you've held your whole career.</p>
+                    
+                    <h4>🔑 Impact on Infrastructure</h4>
+                    <p>Germ theory led to NEW interventions: water filtration (1890s), chlorination (1900s), pasteurization of milk (1900s), and eventually antibiotics (1940s). But it also VALIDATED the infrastructure sanitarians had already built—sewers, waterworks, and garbage collection really did reduce disease by eliminating bacterial contamination.</p>
+                </aside>
+            </section>
+
+            <!-- Conclusion -->
+            <section>
+                <h2>From Cholera to Modern Public Health</h2>
+                <p>How epidemic disease transformed American government and cities.</p>
+                
+                <div class="callout" style="margin-top: 1.5em;">
+                    <div class="callout-title">🔑 The Sanitarians' Legacy</div>
+                    <ul style="margin-top: 0.5em;">
+                        <li>Established connection between environment and health</li>
+                        <li>Built infrastructure (sewers, waterworks) that saved millions of lives</li>
+                        <li>Created public health institutions (boards of health, sanitary engineers)</li>
+                        <li>Justified government intervention in formerly private matters</li>
+                        <li>Laid foundation for Progressive Era reforms</li>
+                    </ul>
+                </div>
+                
+                <p style="margin-top: 1.5em; color: var(--pale-sunlight); font-style: italic;">The sanitarians got the mechanism wrong (miasma vs. germs) but the solutions right (clean water, sewers, sanitation). Their work reshaped American cities and government.</p>
+                
+                <aside class="notes">
+                    <h4>📚 The Big Picture</h4>
+                    <p>Cholera epidemics in the 1830s-1860s served as the catalyst for America's sanitation revolution. The sanitarians—inspired by Edwin Chadwick in Britain—argued that disease was environmental and could be prevented through infrastructure. They were right, even though their theory (miasma) was wrong.</p>
+                    
+                    <h4>📖 What Changed</h4>
+                    <p>1830: American cities had no sewers, contaminated water supplies, streets full of garbage and manure, overflowing privies, and endemic disease. Government did almost nothing about sanitation—it was considered a private matter.</p>
+                    
+                    <p>1880: American cities were building comprehensive sewer systems, piping clean water to homes, creating professional street cleaning departments, and establishing boards of health with regulatory power. This represented an enormous expansion of government responsibility.</p>
+                    
+                    <h4>💭 Connections Forward</h4>
+                    <p>The sanitation movement connects directly to Progressive Era reforms (1890s-1920s): housing regulation, workplace safety, food inspection, milk pasteurization. The principle is the same: government must intervene to protect public health.</p>
+                    
+                    <h4>🔑 Modern Relevance</h4>
+                    <p>The sanitarians' work is why life expectancy in developed countries doubled between 1850 and 1950. Clean water and sewers saved more lives than all medical innovations combined. This is public health's greatest triumph—and it started with reformers who didn't even understand germ theory yet.</p>
+                </aside>
+            </section>
+
+        </div>
+    </div>
+    
+    <!-- Reveal.js and plugins from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/zoom/zoom.js"></script>
+    
+    <script>
+        Reveal.initialize({
+            width: 1920,
+            height: 1080,
+            margin: 0.1,
+            minScale: 0.2,
+            maxScale: 2.0,
+            controls: true,
+            progress: true,
+            center: true,
+            hash: true,
+            transition: 'slide',
+            slideNumber: 'c/t',
+            plugins: [ RevealNotes, RevealHighlight, RevealZoom ]
+        });
+    </script>
+</body>
+</html>

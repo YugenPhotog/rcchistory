@@ -1,0 +1,1057 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progressive Urban Reform - HIST 102</title>
+
+    <!-- Reveal.js CSS from CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Pantone 2026 Atmospheric Palette */
+            --cloud-dancer: #F0EEE9;
+            --pale-sunlight: #E8DFB8;
+            --atmospheric-slate: #2A3540;
+            --misty-sky: #B8C5D0;
+            --sterling-blue: #6B8FAD;
+            --quiet-wave: #5D8A8C;
+            --aventurine: #4A7C72;
+            --morning-mist: #C5C0B8;
+            --deep-current: #2D4A4A;
+        }
+
+        .reveal {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 32px;
+            background-color: var(--atmospheric-slate);
+        }
+
+        .reveal .slides section {
+            color: var(--cloud-dancer);
+        }
+
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--cloud-dancer);
+            text-transform: none;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .reveal h1 { font-size: 3em; }
+        .reveal h2 { font-size: 2em; color: var(--pale-sunlight); }
+        .reveal h3 { font-size: 1.5em; color: var(--misty-sky); }
+
+        .reveal p, .reveal li {
+            color: var(--cloud-dancer);
+        }
+
+        .reveal a {
+            color: var(--sterling-blue);
+            text-decoration: underline;
+        }
+
+        .reveal a:hover {
+            color: var(--pale-sunlight);
+        }
+
+        /* Pop-up/Modal styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--deep-current);
+            color: var(--cloud-dancer);
+            padding: 2em;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            max-width: 70%;
+            max-height: 70%;
+            overflow-y: auto;
+            z-index: 1000;
+            border: 3px solid var(--quiet-wave);
+        }
+
+        .popup.active { display: block; }
+
+        .popup h3 {
+            color: var(--pale-sunlight);
+            margin-top: 0;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 2em;
+            cursor: pointer;
+            color: var(--misty-sky);
+        }
+
+        .popup-close:hover {
+            color: var(--cloud-dancer);
+        }
+
+        .popup-trigger {
+            color: var(--sterling-blue);
+            text-decoration: underline dotted;
+            cursor: pointer;
+            border-bottom: 2px dotted var(--sterling-blue);
+        }
+
+        .popup-trigger:hover {
+            color: var(--pale-sunlight);
+            border-bottom-color: var(--pale-sunlight);
+        }
+
+        /* Image placeholder styling */
+        .img-placeholder {
+            background: var(--deep-current);
+            border: 3px dashed var(--quiet-wave);
+            padding: 3em;
+            text-align: center;
+            color: var(--misty-sky);
+            font-style: italic;
+            border-radius: 10px;
+        }
+
+        /* Key term styling */
+        .key-term {
+            color: var(--aventurine);
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        /* Primary source styling */
+        .primary-source {
+            background: rgba(232, 223, 184, 0.15);
+            border-left: 5px solid var(--pale-sunlight);
+            padding: 1em;
+            margin: 1em 0;
+            font-style: italic;
+            color: var(--cloud-dancer);
+        }
+
+        .primary-source-attribution {
+            text-align: right;
+            font-size: 0.9em;
+            color: var(--morning-mist);
+            margin-top: 0.5em;
+            font-style: normal;
+        }
+
+        /* Comparison boxes */
+        .comparison-box {
+            border: 3px solid var(--quiet-wave);
+            padding: 1.5em;
+            border-radius: 10px;
+            background: rgba(93, 138, 140, 0.1);
+        }
+
+        .comparison-box.alt {
+            border-color: var(--sterling-blue);
+            background: rgba(107, 143, 173, 0.1);
+        }
+
+        /* Section divider styling */
+        .section-divider {
+            background: linear-gradient(135deg, var(--deep-current) 0%, var(--atmospheric-slate) 100%);
+        }
+
+        .section-divider h2 {
+            color: var(--cloud-dancer);
+            font-size: 2.5em;
+        }
+
+        /* Emphasis/callout box */
+        .callout {
+            background: rgba(232, 223, 184, 0.1);
+            border: 2px solid var(--pale-sunlight);
+            border-radius: 8px;
+            padding: 1em;
+            margin: 1em 0;
+        }
+
+        .callout-title {
+            color: var(--pale-sunlight);
+            font-weight: bold;
+            margin-bottom: 0.5em;
+        }
+
+        /* Progress/slide counter styling */
+        .reveal .progress {
+            background: var(--deep-current);
+        }
+
+        .reveal .progress span {
+            background: var(--sterling-blue);
+        }
+
+        /* Additional utility classes */
+        .text-left { text-align: left; }
+        .subtitle {
+            color: var(--misty-sky);
+            font-style: italic;
+            margin-top: 0.5em;
+        }
+
+        /* Historian quote styling */
+        .historian-quote {
+            border-left: 5px solid var(--quiet-wave);
+            padding-left: 1.5em;
+            font-style: italic;
+            color: var(--misty-sky);
+        }
+
+        .historian-attribution {
+            text-align: right;
+            font-size: 0.9em;
+            color: var(--morning-mist);
+            margin-top: 0.5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Title Slide -->
+            <section>
+                <h1>Chapter 21: The Progressive Era</h1>
+                <h2>Lecture 1: Urban Reform and the Progressive Impulse</h2>
+                <p class="subtitle">How cities became laboratories for Progressive reform</p>
+                <aside class="notes">
+                    <h4>📚 Welcome to Chapter 21</h4>
+                    <p>This lecture launches our exploration of the Progressive Era (roughly 1890-1920) by examining where Progressive ideas came from: the urban reform movements that turned cities into laboratories for new approaches to social problems. We'll see how exposure, expertise, and emotion drove reform—and how these urban experiments scaled up to national policy.</p>
+
+                    <h4>🎯 Learning Objectives</h4>
+                    <ul>
+                        <li>Define Progressivism as a movement based on expertise and government intervention</li>
+                        <li>Understand how exposure and disgust mobilized reform</li>
+                        <li>Analyze settlement houses as laboratories of social science</li>
+                        <li>Recognize women's expanding public roles through urban reform</li>
+                        <li>Explain the Social Gospel movement and its political implications</li>
+                        <li>Understand cultural pluralism as the lived reality by 1920</li>
+                    </ul>
+                </aside>
+            </section>
+			
+			<section>
+    <h2>From Last Time: Sanitary Reform as Proto-Progressivism</h2>
+    <div class="callout">
+        <div class="callout-title">🔗 Connecting the Dots</div>
+        <p>Remember how sanitary reformers responded to cholera and typhoid?</p>
+        <ul style="font-size: 0.9em;">
+            <li>They <span class="key-term">mapped disease patterns</span> to find causes</li>
+            <li>They demanded <span class="key-term">expert authority</span> for public health officials</li>
+            <li>They justified <span class="key-term">government intervention</span> in private property</li>
+        </ul>
+    </div>
+    <p style="margin-top: 1em;">Today: How these methods expanded beyond sanitation to become <span class="key-term">Progressivism</span></p>
+</section>
+
+            <section>
+    <h2>What Was Progressivism?</h2>
+    <p style="font-style: italic; margin-bottom: 1em;">Think back to sanitary reform: investigating cholera patterns, hiring health inspectors, quarantining infected buildings...</p>
+    <p>Now imagine applying that same approach to <span class="key-term">every urban problem</span>:</p>
+    <ul>
+        <li>Child labor → factory inspectors</li>
+        <li>Contaminated food → meat inspection</li>
+        <li>Political corruption → civil service reform</li>
+        <li>Poverty → social surveys and welfare programs</li>
+    </ul>
+    <p style="margin-top: 1em;">That's Progressivism: <span class="key-term">investigation, expertise, government intervention</span> applied systematically.</p>
+</section>
+			
+			<section>
+    <h2>Sanitary Reform Was the Blueprint</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em;">
+        <div class="comparison-box">
+            <h3 style="color: var(--pale-sunlight);">Sanitary Reform (1870s-90s)</h3>
+            <ul style="font-size: 0.85em;">
+                <li>Problem: Cholera, typhoid</li>
+                <li>Method: Map diseases, investigate water</li>
+                <li>Solution: Public health boards, quarantine</li>
+                <li>Scope: <span class="key-term">Urban sanitation only</span></li>
+            </ul>
+        </div>
+        <div class="comparison-box alt">
+            <h3 style="color: var(--pale-sunlight);">Progressivism (1890s-1920s)</h3>
+            <ul style="font-size: 0.85em;">
+                <li>Problem: All industrial problems</li>
+                <li>Method: Social surveys, muckraking, photography</li>
+                <li>Solution: Regulatory agencies, labor laws</li>
+                <li>Scope: <span class="key-term">Entire society</span></li>
+            </ul>
+        </div>
+    </div>
+    <p style="margin-top: 1em; font-style: italic;">Progressivism took sanitary reform's playbook and scaled it up.</p>
+</section>
+
+            <!-- Progressive Methods -->
+            <section>
+                <h2>Progressive Faith in Exposure</h2>
+                <div class="callout">
+                    <div class="callout-title">🔑 Key Insight</div>
+                    <p>Progressives believed in <span class="key-term">revelation</span>, not persuasion.</p>
+                    <p>If people could just <span class="key-term">see</span> the problem clearly, they would demand change.</p>
+                </div>
+                <p style="margin-top: 1em;">Methods of exposure:</p>
+                <ul>
+                    <li><span class="popup-trigger" onclick="togglePopup('muckraking-popup')">Muckraking journalism</span> (Ida Tarbell, Lincoln Steffens, Upton Sinclair)</li>
+                    <li>Documentary photography (Jacob Riis, Lewis Hine)</li>
+                    <li>Social surveys and investigations</li>
+                    <li>Public health statistics</li>
+                </ul>
+
+                <div id="muckraking-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('muckraking-popup')">&times;</span>
+                    <h3>Muckraking and <em>The Jungle</em></h3>
+                    <p><strong>"Muckrakers"</strong> were investigative journalists who exposed corruption and abuse through sensational, detailed reporting. The term came from Theodore Roosevelt comparing them to a character who raked muck (filth) in <em>Pilgrim's Progress</em>.</p>
+                    
+                    <h4>Key Examples:</h4>
+                    <ul>
+                        <li><strong>Ida Tarbell</strong>: Exposed Standard Oil's monopolistic practices</li>
+                        <li><strong>Lincoln Steffens</strong>: Investigated urban political corruption</li>
+                        <li><strong>Jacob Riis</strong>: Photographed tenement poverty in <em>How the Other Half Lives</em></li>
+                        <li><strong>Upton Sinclair</strong>: Revealed meatpacking conditions in <em>The Jungle</em></li>
+                    </ul>
+                    
+                    <h4>The Most Famous Example: <em>The Jungle</em> (1906)</h4>
+                    <p>Upton Sinclair, a socialist writer, spent seven weeks investigating Chicago meatpacking plants. He wrote a novel exposing immigrant exploitation—but readers focused on food contamination instead.</p>
+                    
+                    <p class="primary-source" style="margin: 1em 0;">"There would be meat stored in great piles in rooms; and the water from leaky roofs would drip over it, and thousands of rats would race about on it... A man could run his hand over these piles of meat and sweep off handfuls of the dried dung of rats."</p>
+                    
+                    <h4>The Result:</h4>
+                    <p>Public <strong>disgust</strong> forced Congress to pass the <strong>Pure Food and Drug Act</strong> and <strong>Meat Inspection Act</strong> (both 1906) within months. President Theodore Roosevelt investigated personally and confirmed Sinclair's findings.</p>
+                    
+                    <h4>Sinclair's Frustration:</h4>
+                    <p>"I aimed at the public's heart, and by accident I hit it in the stomach." He wanted labor reform; he got food safety regulation instead.</p>
+                    
+                    <h4>The Pattern This Reveals:</h4>
+                    <p>Reforms succeeded when they addressed <strong>middle-class concerns</strong> (safe food) rather than working-class exploitation (dangerous jobs, low wages, long hours). Food safety regulation made capitalism safer and more legitimate—but left labor conditions largely unchanged.</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 The Pattern</h4>
+                    <p>Progressive reform often began with emotional shock—disgust at contaminated food, horror at child labor photos, outrage at tenement conditions. Rational policy came afterward. This wasn't cynical manipulation; Progressives genuinely believed that exposing hidden problems would automatically generate moral consensus for reform.</p>
+
+                    <h4>💭 Critical Question</h4>
+                    <p>But whose problems got exposed? And whose suffering generated reform? Notice that food safety (a middle-class concern) passed immediately, while labor protections (a working-class need) took decades longer. This selectivity is a key theme in understanding Progressive limits.</p>
+                    
+                    <h4>🔑 Key Takeaway from The Jungle</h4>
+                    <p>The success of food safety reform but failure of labor reform shows how Progressive reforms often <strong>stabilized capitalism rather than transforming it</strong>. By addressing the most outrageous abuses (contaminated food), reformers removed pressure for more radical changes (workers' control, socialism). This pattern—reform that protects order more than it redistributes power—repeats throughout the Progressive Era.</p>
+                </aside>
+            </section>
+			
+			<section>
+                    <h2>Upton Sinclair</h2>
+    <div style="display: flex; align-items: flex-start; gap: 20px;">
+        <div style="flex: 1;">
+            <img src="images/jungle_collage.jpg" alt="Collage representing The Jungle and meatpacking conditions" style="width: 100%; height: auto; border: 1px solid #ccc;">
+        </div>
+
+        <div style="flex: 1; text-align: left;">
+            <p><strong style="color: var(--pale-sunlight, #f1d592);">Born:</strong> 1878, Baltimore, Maryland</p>
+            <p><strong style="color: var(--pale-sunlight, #f1d592);">Background:</strong> Socialist writer, spent 7 weeks investigating Chicago meatpacking plants</p>
+            <p><strong style="color: var(--pale-sunlight, #f1d592);">Goal:</strong> Expose immigrant exploitation and industrial violence</p>
+            <p><strong style="color: var(--pale-sunlight, #f1d592);">Published:</strong> <em>The Jungle</em> (1906)</p>
+            <p class="key-term" style="margin-top: 1em; font-style: italic; border-left: 3px solid #f1d592; padding-left: 10px;">
+                "I aimed at the public's heart, and by accident I hit it in the stomach."
+            </p>
+        </div>
+    </div>
+
+                    <aside class="notes">
+                    <h4>📚 Who Was Upton Sinclair?</h4>
+                    <p>Sinclair was a socialist writer who wanted to expose capitalism's exploitation of workers. He spent seven weeks undercover in Chicago's meatpacking plants, interviewing workers and documenting conditions. He wrote <em>The Jungle</em> as a novel rather than a journalistic report because he wanted to create emotional identification with immigrant workers.</p>
+
+                    <h4>💭 Important Context</h4>
+                    <p>Sinclair was NOT primarily concerned with food safety. He wanted to generate sympathy for workers and support for socialism. The famous quote captures his frustration: he tried to make readers care about workers' suffering, but instead they only cared about whether their meat was safe to eat.</p>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Sinclair's Actual Goals</h2>
+                <p>Sinclair did <strong>not</strong> primarily aim to reform food safety.</p>
+                <p>He sought to expose:</p>
+                <ul>
+                    <li><span class="key-term">Immigrant exploitation</span></li>
+                    <li><span class="key-term">Industrial violence</span></li>
+                    <li>The <span class="popup-trigger" onclick="togglePopup('disposability-popup')">disposability of labor</span> under capitalism</li>
+                </ul>
+
+                <div id="disposability-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('disposability-popup')">&times;</span>
+                    <h3>The "Disposability" of Labor</h3>
+                    <p>Sinclair argued that industrial capitalism treated workers as expendable—when one was used up (injured, sick, or exhausted), there were always more immigrants arriving to replace them.</p>
+
+                    <p><strong>Examples from <em>The Jungle</em>:</strong></p>
+                    <ul>
+                        <li>Workers with missing fingers from machinery accidents</li>
+                        <li>People forced to work while sick or injured</li>
+                        <li>No compensation for workplace injuries</li>
+                        <li>Workers fired when they became too weak to keep pace</li>
+                        <li>Constant speed-up pressures and longer hours</li>
+                    </ul>
+
+                    <p>The meatpacking companies calculated that it was cheaper to replace workers than to make workplaces safe or pay decent wages. This is what Sinclair meant by "disposability"—workers were treated as raw material, not human beings.</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>🔑 Key Point</h4>
+                    <p>Remember this throughout the lecture: Sinclair wrote <em>The Jungle</em> to create support for socialism and workers' rights. He wanted readers to identify with the protagonist, Jurgis Rudkus, and be outraged by how capitalism destroyed his family. The food safety stuff was just part of showing how the whole system was corrupt.</p>
+
+                    <h4>💭 The Central Irony</h4>
+                    <p>The book's impact was almost the opposite of what Sinclair wanted. Readers were horrified by contaminated meat, but most didn't become socialists or demand workers' rights. They demanded government food inspection. This tells us something important about who had political power and what kinds of reforms were possible.</p>
+                </aside>
+            </section>
+
+			<section>
+                <h2>The Central Irony</h2>
+                <div class="primary-source">
+                    "I aimed at the public's heart, and by accident I hit it in the stomach."
+                    <div class="primary-source-attribution">
+                        — Upton Sinclair, reflecting on <em>The Jungle</em>
+                    </div>
+                </div>
+                <p style="margin-top: 1em;">He aimed to provoke <span class="key-term">class consciousness</span>.</p>
+                <p>He instead provoked <span class="key-term">consumer panic</span>.</p>
+                <aside class="notes">
+                    <h4>💭 What Happened?</h4>
+                    <p>When <em>The Jungle</em> was published, readers were absolutely horrified—but not by what Sinclair expected. They skimmed over the parts about workers' suffering and focused obsessively on chapters describing contaminated meat: rats ground into sausage, diseased cattle processed for beef, workers falling into rendering vats.</p>
+
+                    <h4>🔑 Why This Matters</h4>
+                    <p>This response tells us something crucial about Progressive reform: middle-class Americans were most concerned about threats to THEMSELVES. They could more easily ignore workers' suffering, but they couldn't ignore the possibility that their own food was poisoned. This pattern—responding to personal threat rather than others' injustice—repeats throughout Progressive history.</p>
+
+                    <h4>🤔 Think About It</h4>
+                    <p>Is this still true? Do reform movements succeed most when they can show how problems affect "people like us" rather than distant others?</p>
+                </aside>
+            </section>
+			
+			<section>
+                <h2>Disgust in <em>The Jungle</em></h2>
+                <p>In the public response to <em>The Jungle</em>:</p>
+                <ul>
+                    <li><span class="key-term">Bodily contamination</span> replaced moral argument</li>
+                    <li><span class="key-term">Spoiled meat</span> overshadowed injured workers</li>
+                    <li>Danger became <span class="key-term">universal and intimate</span> ("this could poison YOU")</li>
+                </ul>
+                <aside class="notes">
+                    <h4>📚 Examples from the Book</h4>
+                    <p>Readers focused obsessively on scenes like:</p>
+                    <ul>
+                        <li>Rats poisoned by the thousands, then swept into sausage grinders along with the poisoned bread they'd eaten</li>
+                        <li>Diseased cattle so sick they couldn't walk, being dragged into the slaughterhouse</li>
+                        <li>Workers with tuberculosis spitting into meat</li>
+                        <li>Men falling into rendering vats and being processed into lard</li>
+                    </ul>
+
+                    <h4>💭 Why These Images Were So Powerful</h4>
+                    <p>These weren't abstract statistics. They were visceral, intimate threats to readers' own bodies. Every time you ate meat, you might be eating THAT. This made the threat immediate and personal in a way that workers' suffering was not.</p>
+                </aside>
+            </section>
+			
+			<section>
+                <h2>This Helps Explain...</h2>
+                <ul>
+                    <li>Rapid passage of <span class="key-term">food regulation</span></li>
+                    <li>Slower progress on <span class="key-term">labor rights</span></li>
+                    <li>The rise of <span class="key-term">consumer protection</span> as a political priority</li>
+                </ul>
+                <aside class="notes">
+                    <h4>📖 Specific Examples</h4>
+                    <ul>
+                        <li><strong>Fast:</strong> Pure Food and Drug Act (1906) and Meat Inspection Act (1906) passed within months of <em>The Jungle</em>'s publication</li>
+                        <li><strong>Slow:</strong> Federal child labor laws were struck down by the Supreme Court in 1918 and 1922; weren't permanently established until the 1930s</li>
+                        <li><strong>Slow:</strong> Maximum hour laws for workers faced constant legal challenges and applied unevenly</li>
+                        <li><strong>Slow:</strong> Workplace safety regulations remained minimal until mid-20th century</li>
+                    </ul>
+
+                    <h4>💭 What This Tells Us</h4>
+                    <p>The difference in timing wasn't because meatpacking was more dangerous than child labor or sweatshops. It was because contaminated meat threatened middle-class consumers directly, while child labor and dangerous working conditions affected "other people's" children and bodies.</p>
+                </aside>
+            </section>
+
+            <!-- Part V -->
+            <section class="section-divider">
+                <h2>Part V</h2>
+                <h3 style="color: var(--misty-sky);">From Outrage to Authority</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">The state responds</p>
+            </section>
+
+            <section>
+                <h2>The State Responds</h2>
+                <p>Public outrage created legitimacy for:</p>
+                <ul>
+                    <li>Federal <span class="popup-trigger" onclick="togglePopup('investigation-popup')">investigation</span></li>
+                    <li><span class="key-term">Inspection regimes</span></li>
+                    <li>Permanent <span class="key-term">regulatory institutions</span></li>
+                </ul>
+
+                <div id="investigation-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('investigation-popup')">&times;</span>
+                    <h3>Federal Response to <em>The Jungle</em></h3>
+                    <p>Within months of <em>The Jungle</em>'s publication, Congress acted decisively:</p>
+
+                    <h4>Pure Food and Drug Act (1906)</h4>
+                    <ul>
+                        <li>Prohibited interstate commerce in adulterated or misbranded food and drugs</li>
+                        <li>Required accurate labeling of ingredients</li>
+                        <li>Created federal oversight of food and medicine</li>
+                    </ul>
+
+                    <h4>Meat Inspection Act (1906)</h4>
+                    <ul>
+                        <li>Mandated federal inspection of meat processing plants</li>
+                        <li>Required sanitary conditions in slaughterhouses</li>
+                        <li>Prohibited sale of adulterated meat</li>
+                        <li>Established the Bureau of Chemistry (later the FDA)</li>
+                    </ul>
+
+                    <h4>Presidential Investigation</h4>
+                    <p>President Theodore Roosevelt sent investigators to Chicago packinghouses. Their confidential report confirmed Sinclair's allegations, which helped overcome industry opposition to regulation.</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 What Changed?</h4>
+                    <p>Before <em>The Jungle</em>, the federal government had almost no role in regulating food safety. States had some laws, but interstate commerce in food was basically unregulated. After <em>The Jungle</em>, the federal government claimed the authority to inspect, regulate, and control the food industry.</p>
+
+                    <h4>🔑 Why This Was Revolutionary</h4>
+                    <p>This represented a huge expansion of federal power. The Constitution doesn't say anything about food safety—the government used the Commerce Clause (regulating interstate trade) to justify intervention. This became the legal basis for many other Progressive reforms.</p>
+                </aside>
+            </section>
+
+
+            <!-- Transition to Urban Foundations -->
+            <section>
+                <h2>Where Did These Ideas Come From?</h2>
+                <p style="font-style: italic; margin-bottom: 1em;">Progressive methods didn't emerge from nowhere—they were developed and tested in American cities.</p>
+                <p>The rest of this lecture examines the <span class="key-term">urban laboratories</span> where Progressive ideas took shape:</p>
+                <ul>
+                    <li>Social science investigations</li>
+                    <li>Settlement houses</li>
+                    <li>Women's reform networks</li>
+                    <li>Social Gospel activism</li>
+                </ul>
+                <aside class="notes">
+                    <h4>📚 Structure Ahead</h4>
+                    <p>Now we shift from defining Progressivism to tracing its origins. We're going to see how specific urban reform experiments in the 1890s-1900s created the methods, institutions, and intellectual frameworks that later scaled up to national Progressive policy in the 1910s-1920s.</p>
+                </aside>
+            </section>
+
+            <!-- Section I Divider -->
+            <section class="section-divider">
+                <h2>Part I</h2>
+                <h3 style="color: var(--misty-sky);">The Birth of Social Science</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">Treating society as an object of investigation</p>
+            </section>
+
+            <!-- Why Private Charity Failed -->
+            <section>
+                <h2>The Failure of Private Charity</h2>
+                <ul>
+                    <li>Traditional charity assumed poverty was <span class="key-term">individual moral failure</span></li>
+                    <li>But urban poverty was <span class="key-term">structural</span>—caused by low wages, housing shortages, industrial accidents</li>
+                    <li>Private charity couldn't address these systemic causes</li>
+                </ul>
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>Before the Progressive Era, most Americans believed poverty resulted from personal moral failings (laziness, drunkenness, improvidence). Charity was supposed to help the "deserving poor" while avoiding encouraging dependency. But urban poverty overwhelmed this model—too many people were poor because of structural economic problems, not personal failures.</p>
+
+                    <h4>💭 The Shift in Thinking</h4>
+                    <p>The key intellectual breakthrough was recognizing that social problems have social causes. This seems obvious now, but it was revolutionary in the 1890s. It meant poverty wasn't just about individual character—it was about wages, working conditions, housing markets, and economic systems.</p>
+                </aside>
+            </section>
+
+            <!-- Rise of Social Science -->
+            <section>
+                <h2>Enter Social Science</h2>
+                <p>A new generation of reformers began studying cities <span class="key-term">scientifically</span>:</p>
+                <ul>
+                    <li>Mapping disease patterns</li>
+                    <li>Surveying housing conditions</li>
+                    <li>Calculating living wages</li>
+                    <li>Documenting workplace injuries</li>
+                </ul>
+                <p style="margin-top: 1.5em; font-style: italic;">Society became something that could be <span class="key-term">measured, analyzed, and improved</span>.</p>
+                <aside class="notes">
+                    <h4>🔑 Why This Matters</h4>
+                    <p>This is the birth of modern social science—sociology, urban studies, public health, labor economics. These fields didn't exist as academic disciplines before the 1890s. They emerged from Progressive Era reform work.</p>
+
+                    <h4>📖 Examples</h4>
+                    <ul>
+                        <li><strong>Robert Hunter</strong>'s <em>Poverty</em> (1904): Calculated how many Americans lived below subsistence level</li>
+                        <li><strong>W.E.B. Du Bois</strong>'s <em>The Philadelphia Negro</em> (1899): First scientific sociological study of an urban Black community</li>
+                        <li><strong>Crystal Eastman</strong>'s <em>Work-Accidents and the Law</em> (1910): Documented industrial injury patterns in Pittsburgh</li>
+                    </ul>
+                </aside>
+            </section>
+
+            <!-- Specific Example: Hull House Maps -->
+            <section>
+                <h2>Example: The Hull House Maps and Papers (1895)</h2>
+                <p>Reformers at Hull House (Chicago settlement house) created detailed maps showing:</p>
+                <ul>
+                    <li>Wages and <span class="key-term">poverty levels</span> by block</li>
+                    <li><span class="popup-trigger" onclick="togglePopup('ethnicity-popup')">Ethnic composition</span> of neighborhoods</li>
+                    <li>Working conditions in local industries</li>
+                </ul>
+
+                <div id="ethnicity-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('ethnicity-popup')">&times;</span>
+                    <h3>Ethnicity Mapping and Its Limits</h3>
+                    <p>Progressive reformers mapped ethnic composition of neighborhoods to understand immigrant communities. This had both useful and problematic aspects:</p>
+
+                    <h4>Useful Purposes:</h4>
+                    <ul>
+                        <li>Identifying which groups needed language assistance</li>
+                        <li>Understanding cultural practices affecting health and labor</li>
+                        <li>Documenting discrimination in housing and employment</li>
+                    </ul>
+
+                    <h4>Problematic Aspects:</h4>
+                    <ul>
+                        <li>Reinforced essentialist ideas about ethnic groups</li>
+                        <li>Sometimes used to justify immigration restriction</li>
+                        <li>Created hierarchies of "desirable" vs. "undesirable" immigrants</li>
+                    </ul>
+
+                    <h4>Key Point:</h4>
+                    <p>Progressive social science was a tool that could be used for both humanitarian reform AND for social control. The same data that justified public health interventions could also justify discriminatory policies.</p>
+                </div>
+
+                <p style="margin-top: 1.5em; font-style: italic;">This was <span class="key-term">radical</span>: poverty was now something you could visualize, measure, and explain.</p>
+                <aside class="notes">
+                    <h4>📚 The Hull House Maps</h4>
+                    <p>These maps used color-coding to show where different ethnic groups lived and how much they earned. They made visible patterns that had been invisible—like how certain ethnic groups were concentrated in the lowest-paying industries, or how disease clustered in areas with the worst housing.</p>
+
+                    <h4>🔑 Why This Was Revolutionary</h4>
+                    <p>Before this, people might have known there was poverty in cities, but they didn't have systematic data showing its extent, causes, and patterns. The Hull House Maps transformed poverty from a vague moral problem into a specific social fact that could be studied and addressed through policy.</p>
+                </aside>
+            </section>
+
+            <!-- Section II Divider -->
+            <section class="section-divider">
+                <h2>Part II</h2>
+                <h3 style="color: var(--misty-sky);">Settlement Houses as Reform Laboratories</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">Where middle-class reformers met working-class reality</p>
+            </section>
+
+            <!-- What Was a Settlement House? -->
+            <section>
+                <h2>What Was a Settlement House?</h2>
+                <p>Middle-class, college-educated reformers (mostly women) <span class="key-term">"settled"</span> in poor urban neighborhoods to:</p>
+                <ul>
+                    <li>Investigate local conditions</li>
+                    <li>Provide education and services</li>
+                    <li>Build cross-class relationships</li>
+                    <li>Advocate for reform</li>
+                </ul>
+                <p style="margin-top: 1.5em; font-style: italic;">They lived in the neighborhoods they studied—settlement work required <span class="key-term">immersion</span>.</p>
+                <aside class="notes">
+                    <h4>📖 The Settlement House Model</h4>
+                    <p>The settlement house movement began in England and came to the U.S. in the 1880s-1890s. The idea was that educated reformers would "settle" among the poor to understand their lives directly. This was different from traditional charity, which maintained strict class distance.</p>
+
+                    <h4>💭 The Philosophy</h4>
+                    <p>Settlement workers believed that cross-class contact would benefit both groups: middle-class reformers would gain authentic knowledge of urban problems, while working-class immigrants would gain access to education, cultural resources, and political advocacy.</p>
+                </aside>
+            </section>
+
+            <!-- Hull House Example -->
+            <section>
+                <h2>Hull House (Chicago, 1889)</h2>
+                <div style="display: flex; gap: 2em;">
+                    <div style="flex: 1;">
+                        <div class="img-placeholder">
+                            <p>🔍 Image Search Needed</p>
+                            <p style="font-size: 0.8em;">Search: "Hull House Chicago 1900s exterior"</p>
+                        </div>
+                    </div>
+                    <div style="flex: 1; text-align: left;">
+                        <p><strong>Founded by:</strong> <span class="popup-trigger" onclick="togglePopup('addams-popup')">Jane Addams</span> and Ellen Gates Starr</p>
+                        <p><strong>Location:</strong> Chicago's immigrant West Side</p>
+                        <p><strong>Offered:</strong></p>
+                        <ul style="font-size: 0.9em;">
+                            <li>English classes</li>
+                            <li>Kindergarten and daycare</li>
+                            <li>Labor organizing support</li>
+                            <li>Art and music programs</li>
+                            <li>Public health investigations</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="addams-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('addams-popup')">&times;</span>
+                    <h3>Jane Addams (1860-1935)</h3>
+                    <p>The most influential settlement house leader in America. Addams was a college-educated reformer who believed democracy required cross-class understanding and solidarity.</p>
+
+                    <h4>Key Contributions:</h4>
+                    <ul>
+                        <li>Co-founded Hull House (1889), which became a model for settlement work nationwide</li>
+                        <li>Pioneered social investigation through Hull House Maps and Papers</li>
+                        <li>Championed labor reform, child labor laws, and women's suffrage</li>
+                        <li>Won Nobel Peace Prize (1931) for international peace work</li>
+                    </ul>
+
+                    <h4>Philosophy:</h4>
+                    <p>Addams argued in <em>Democracy and Social Ethics</em> (1902) that democracy wasn't just about voting—it required understanding across class lines. Settlement houses were experiments in democratic living.</p>
+
+                    <h4>Her Influence:</h4>
+                    <p>Addams trained a generation of Progressive reformers. Many state factory inspectors, labor commissioners, and social welfare administrators started their careers at Hull House.</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 Hull House as Model</h4>
+                    <p>Hull House became the most famous settlement house in America, though there were eventually hundreds nationwide. It provided direct services (kindergarten, English classes, art programs) while also conducting investigations and lobbying for labor laws, factory regulation, and public health reform.</p>
+
+                    <h4>🔑 The Key Innovation</h4>
+                    <p>Settlement houses combined direct service with political advocacy. They didn't just help individuals—they investigated systemic problems and pushed for policy changes. This made them crucial incubators of Progressive reform ideas.</p>
+                </aside>
+            </section>
+
+            <!-- What Settlement Houses Accomplished -->
+            <section>
+                <h2>What Settlement Houses Accomplished</h2>
+                <ul>
+                    <li>Produced detailed studies of urban conditions</li>
+                    <li>Trained a generation of <span class="key-term">Progressive reformers</span></li>
+                    <li>Created alliances between reformers and labor unions</li>
+                    <li>Pushed for legislation on child labor, factory safety, and public health</li>
+                </ul>
+                <div class="callout" style="margin-top: 1.5em;">
+                    <div class="callout-title">🔑 Key Point</div>
+                    <p>Settlement houses were <span class="key-term">laboratories</span> where Progressive methods were invented and tested before being applied nationally.</p>
+                </div>
+                <aside class="notes">
+                    <h4>🎓 The Long-Term Impact</h4>
+                    <p>Many Progressive Era reforms originated in settlement house investigations:</p>
+                    <ul>
+                        <li>Factory inspection laws</li>
+                        <li>Child labor restrictions</li>
+                        <li>Public health regulations</li>
+                        <li>Workplace safety standards</li>
+                        <li>Compulsory education laws</li>
+                    </ul>
+
+                    <h4>💭 The Network Effect</h4>
+                    <p>Settlement workers formed networks that became the Progressive reform infrastructure. Florence Kelley (factory inspector), Julia Lathrop (Children's Bureau director), Grace Abbott (immigration reformer)—all started at Hull House and went on to shape national policy.</p>
+                </aside>
+            </section>
+
+            <!-- Section III Divider -->
+            <section class="section-divider">
+                <h2>Part III</h2>
+                <h3 style="color: var(--misty-sky);">Women Reformers and the Expansion of "Home"</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">From domestic sphere to public reform</p>
+            </section>
+
+            <!-- Women's Reform Logic -->
+            <section>
+                <h2>Why Were So Many Reformers Women?</h2>
+                <p>Women reformers used <span class="popup-trigger" onclick="togglePopup('domesticity-popup')">"domestic ideology"</span> strategically:</p>
+                <ul>
+                    <li>If women were naturally suited to care for <span class="key-term">children and homes</span>...</li>
+                    <li>Then cities needed women's expertise in <span class="key-term">public health, education, and child welfare</span></li>
+                    <li>This justified women's entry into public life <span class="key-term">before they could vote</span></li>
+                </ul>
+
+                <div id="domesticity-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('domesticity-popup')">&times;</span>
+                    <h3>"Municipal Housekeeping"</h3>
+                    <p>Women reformers used the ideology of "separate spheres" (women = domestic/private, men = political/public) to justify expanding women's public roles.</p>
+
+                    <h4>The Argument:</h4>
+                    <p>If women were naturally suited to maintain clean, healthy homes and raise moral children, then cities needed women's expertise to address urban health, education, sanitation, and child welfare. This made women's public activism seem like an <strong>extension</strong> of their domestic duties rather than a challenge to gender norms.</p>
+
+                    <h4>Examples:</h4>
+                    <ul>
+                        <li>Public health (clean food, safe water) = urban housekeeping</li>
+                        <li>Child labor reform = protecting children (women's duty)</li>
+                        <li>School reform = ensuring proper education (mothers' concern)</li>
+                        <li>Settlement houses = extending "home" to the neighborhood</li>
+                    </ul>
+
+                    <h4>The Strategic Genius:</h4>
+                    <p>This rhetoric allowed women to enter public life and gain political influence BEFORE they won the vote (1920). It turned conservative gender ideology into a tool for progressive reform.</p>
+
+                    <h4>The Limitation:</h4>
+                    <p>It reinforced essentialist ideas about women's "natural" roles and didn't challenge fundamental gender hierarchies. Women gained influence in "maternal" areas (health, education, welfare) but less in "masculine" areas (finance, defense, foreign policy).</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>🔑 Why This Strategy Worked</h4>
+                    <p>This was brilliant political rhetoric. Women couldn't vote yet (until 1920), but they could claim expertise on issues related to home and family. By redefining cities as needing "housekeeping," women created a justification for their political involvement that even conservatives could accept.</p>
+
+                    <h4>💭 The Double-Edged Sword</h4>
+                    <p>This strategy empowered women but also constrained them. It allowed women into public life but primarily in "feminine" areas (health, education, child welfare). It didn't fundamentally challenge the idea that women and men had different "natural" roles—it just expanded the definition of women's role.</p>
+                </aside>
+            </section>
+
+            <!-- Key Women Reformers -->
+            <section>
+                <h2>Leading Women Reformers</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1em; font-size: 0.85em;">
+                    <div class="comparison-box">
+                        <h3>Florence Kelley</h3>
+                        <p><strong>Role:</strong> Factory inspector, consumer activist</p>
+                        <p><strong>Achievement:</strong> Led investigations of child labor and sweatshops; helped pass Illinois factory laws</p>
+                    </div>
+                    <div class="comparison-box alt">
+                        <h3>Lillian Wald</h3>
+                        <p><strong>Role:</strong> Public health pioneer</p>
+                        <p><strong>Achievement:</strong> Founded Henry Street Settlement (NYC); created visiting nurse programs</p>
+                    </div>
+                    <div class="comparison-box">
+                        <h3>Julia Lathrop</h3>
+                        <p><strong>Role:</strong> Child welfare advocate</p>
+                        <p><strong>Achievement:</strong> First director of U.S. Children's Bureau (1912)</p>
+                    </div>
+                    <div class="comparison-box alt">
+                        <h3>Mother Jones</h3>
+                        <p><strong>Role:</strong> Labor organizer</p>
+                        <p><strong>Achievement:</strong> Organized miners and textile workers; championed child labor reform</p>
+                    </div>
+                </div>
+                <aside class="notes">
+                    <h4>📚 These Women Shaped Policy</h4>
+                    <p>These weren't just activists—they became government officials and national leaders. Florence Kelley led the National Consumers' League. Julia Lathrop headed a federal agency. Lillian Wald's nursing model spread nationwide. Their work directly shaped Progressive Era legislation.</p>
+                </aside>
+            </section>
+
+            <!-- Section IV Divider -->
+            <section class="section-divider">
+                <h2>Part IV</h2>
+                <h3 style="color: var(--misty-sky);">The Social Gospel Movement</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">Making reform a Christian duty</p>
+            </section>
+
+            <!-- What Was the Social Gospel? -->
+            <section>
+                <h2>The Social Gospel</h2>
+                <p>Liberal Protestant ministers argued that Christianity required addressing <span class="key-term">social sin</span>, not just individual sin:</p>
+                <ul>
+                    <li>Poverty was not primarily a personal moral failing</li>
+                    <li>Christians had a duty to reform <span class="key-term">unjust social structures</span></li>
+                    <li>Building the Kingdom of God meant creating a <span class="key-term">just society</span> on Earth</li>
+                </ul>
+                <aside class="notes">
+                    <h4>📖 The Theological Shift</h4>
+                    <p>Traditional evangelical Protestantism focused on individual salvation—saving souls from sin. Social Gospel ministers argued this wasn't enough. If social structures (low wages, unsafe housing, exploitative labor) caused suffering, then Christians had a duty to reform those structures.</p>
+
+                    <h4>💭 Key Figures</h4>
+                    <ul>
+                        <li><strong>Walter Rauschenbusch</strong>: Baptist minister whose <em>Christianity and the Social Crisis</em> (1907) became the movement's manifesto</li>
+                        <li><strong>Washington Gladden</strong>: Congregational minister who championed labor rights</li>
+                        <li><strong>Josiah Strong</strong>: Argued for Christian social reform (though his views were often tied to problematic ideas about Anglo-Saxon superiority)</li>
+                    </ul>
+                </aside>
+            </section>
+
+            <!-- Social Gospel Impact -->
+            <section>
+                <h2>Why the Social Gospel Mattered</h2>
+                <ul>
+                    <li>Made reform <span class="key-term">morally urgent</span>, not just politically practical</li>
+                    <li>Mobilized <span class="popup-trigger" onclick="togglePopup('churches-popup')">churches</span> as reform institutions</li>
+                    <li>Provided religious legitimacy for government intervention</li>
+                </ul>
+
+                <div id="churches-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('churches-popup')">&times;</span>
+                    <h3>Churches as Progressive Institutions</h3>
+                    <p>Social Gospel churches didn't just preach reform—they practiced it:</p>
+
+                    <h4>What They Did:</h4>
+                    <ul>
+                        <li>Ran settlement houses and community centers</li>
+                        <li>Supported labor strikes and boycotts</li>
+                        <li>Lobbied for labor laws and housing reform</li>
+                        <li>Provided social services (daycare, health clinics, employment assistance)</li>
+                    </ul>
+
+                    <h4>The Political Impact:</h4>
+                    <p>The Social Gospel made Progressive reform seem like Christian duty rather than radical politics. This was crucial for building middle-class support. If helping the poor and regulating business was what Jesus commanded, then government intervention became morally legitimate—even conservative.</p>
+
+                    <h4>Limits:</h4>
+                    <p>The Social Gospel was primarily a white, Protestant movement. Catholic social teaching developed parallel ideas (notably through papal encyclicals like <em>Rerum Novarum</em>, 1891), but interfaith cooperation was limited. African American churches also embraced social reform but faced racial exclusion from white Progressive networks.</p>
+                </div>
+
+                <div class="callout" style="margin-top: 1.5em;">
+                    <div class="callout-title">🔑 Key Impact</div>
+                    <p>The Social Gospel made Progressive reform seem morally necessary rather than politically radical. If building a just society was Christian duty, then government action to achieve that was legitimate and moral.</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>💭 The Coalition</h4>
+                    <p>Social Gospel ministers formed alliances with settlement workers, labor organizers, and Progressive politicians. This coalition pushed for labor laws, housing reform, and social programs.</p>
+                </aside>
+            </section>
+
+            <!-- Section V Divider -->
+            <section class="section-divider">
+                <h2>Part V</h2>
+                <h3 style="color: var(--misty-sky);">Toward a Pluralistic Urban Society</h3>
+                <p style="color: var(--morning-mist); font-style: italic;">Living with difference</p>
+            </section>
+
+            <!-- Pluralism as Reality -->
+            <section>
+                <h2>By 1920, the City Has Changed American Identity</h2>
+                <ul>
+                    <li>Immigrants, reformers, laborers, and elites coexist <span class="key-term">uneasily</span></li>
+                    <li>No single cultural norm dominates</li>
+                    <li><span class="popup-trigger" onclick="togglePopup('pluralism-popup')">Pluralism</span> replaces assimilation as lived reality</li>
+                </ul>
+
+                <div id="pluralism-popup" class="popup">
+                    <span class="popup-close" onclick="togglePopup('pluralism-popup')">&times;</span>
+                    <h3>Cultural Pluralism</h3>
+                    <p>The idea that multiple cultures, languages, and traditions can coexist within one society rather than being forced to assimilate to a single dominant culture.</p>
+
+                    <h4>In Cities by 1920:</h4>
+                    <ul>
+                        <li>Ethnic neighborhoods with distinct cultures (Little Italy, Polish district, Jewish Lower East Side)</li>
+                        <li>Multiple languages spoken in streets, shops, churches</li>
+                        <li>Ethnic associations, newspapers, theaters</li>
+                        <li>No single "American" culture but a patchwork of communities</li>
+                    </ul>
+
+                    <h4>The Tension:</h4>
+                    <p>Some Americans celebrated pluralism as enriching. Others demanded "100% Americanism" and aggressive assimilation (especially during WWI). This tension continues throughout the 20th century.</p>
+
+                    <h4>Key Thinker:</h4>
+                    <p><strong>Horace Kallen</strong> (1915) coined "cultural pluralism" as an alternative to the "melting pot" metaphor. He argued America should be like an orchestra—different instruments (cultures) creating harmony while maintaining distinctiveness.</p>
+                </div>
+
+                <div class="callout" style="margin-top: 1.5em;">
+                    <div class="callout-title">🔑 Key Tension</div>
+                    <p>Pluralism does not mean equality—but it does mean <span class="key-term">permanence</span>.</p>
+                </div>
+
+                <aside class="notes">
+                    <h4>📚 Pluralism as Fact</h4>
+                    <p>By 1920, it was clear that immigrant cultures weren't disappearing. Cities were permanently multiethnic, multilingual, and culturally diverse. The question became: how do you govern a society with no single shared culture?</p>
+
+                    <h4>📖 The Tensions</h4>
+                    <p>Pluralism was contested. Some saw it as America's strength. Others saw it as a threat requiring forced "Americanization"—especially during WWI when immigrants were suspected of disloyalty.</p>
+
+                    <h4>🔑 The Inequality</h4>
+                    <p>Pluralism meant cultural diversity, but NOT equality. Racial hierarchies persisted. Asian exclusion continued. African Americans faced segregation. Southern and Eastern Europeans were seen as inferior to Northern Europeans.</p>
+                </aside>
+            </section>
+
+            <!-- Closing Synthesis Divider -->
+            <section class="section-divider">
+                <h2>Closing Synthesis</h2>
+                <h3 style="color: var(--misty-sky);">From Urban Experiments to National Reform</h3>
+            </section>
+
+            <!-- Synthesis -->
+            <section>
+                <h2>Urban Reform as Foundation for Progressivism</h2>
+                <ul>
+                    <li>Society became an <span class="key-term">object of study</span></li>
+                    <li>Government intervention became <span class="key-term">legitimate</span></li>
+                    <li>Expertise began to matter</li>
+                    <li>Reform through <span class="key-term">exposure and emotion</span> proved effective</li>
+                </ul>
+
+                <aside class="notes">
+                    <h4>📚 Pulling It Together</h4>
+                    <p>This lecture traced how Americans responded to urban crisis by developing new tools (social science), new institutions (settlement houses), new justifications (Social Gospel), and new political actors (women reformers). These weren't just local experiments—they became the blueprint for Progressive Era reform at the national level.</p>
+
+                    <h4>🔑 The Legacy</h4>
+                    <p>Urban reform experiments became national policy: settlement house investigations became federal labor commissions; public health boards became the FDA; Hull House Maps became Census Bureau studies; municipal housekeeping became federal welfare programs.</p>
+                </aside>
+            </section>
+
+            <!-- Bridge Forward -->
+            <section>
+                <h2>Looking Forward: National Progressivism</h2>
+                <p><strong>What we've seen:</strong> How urban reformers invented Progressive methods (1890s-1900s)</p>
+                <p style="margin-top: 1em;"><strong>What comes next:</strong> How these methods scaled up to national policy (1900s-1920s)</p>
+                <ul style="margin-top: 1em; font-size: 0.9em;">
+                    <li>Theodore Roosevelt's trust-busting and conservation</li>
+                    <li>Woodrow Wilson's New Freedom reforms</li>
+                    <li>Constitutional amendments (income tax, direct election of senators, Prohibition, women's suffrage)</li>
+                    <li>The limits of Progressive reform (racial exclusion, immigration restriction)</li>
+                </ul>
+
+                <aside class="notes">
+                    <h4>🔜 Next Lectures</h4>
+                    <p>Future lectures will examine specific Progressive campaigns: labor reform, moral regulation, immigration restriction, women's suffrage, and the contradictions within Progressivism (democratic expansion alongside social control).</p>
+                </aside>
+            </section>
+
+            <!-- Final Takeaway -->
+            <section>
+                <h2>Key Takeaway</h2>
+                <div class="callout">
+                    <div class="callout-title">🔑 Remember This</div>
+                    <p>Progressive reform emerged from urban crisis and combined <span class="key-term">scientific investigation</span> with <span class="key-term">emotional appeals</span>.</p>
+                    <p style="margin-top: 0.5em;">It permanently changed how Americans thought about <span class="key-term">responsibility, governance, and social life</span>—but it was selective about whose problems it addressed.</p>
+                </div>
+
+                <p style="margin-top: 1em; font-style: italic;">Society became something that could be studied, understood, and improved—but reforms often stabilized capitalism rather than transforming it.</p>
+
+                <aside class="notes">
+                    <h4>📚 Final Thought</h4>
+                    <p>The most important legacy wasn't solving specific problems (though real progress was made). It was establishing the idea that social problems have social solutions, that government has a responsibility to act, and that expertise matters. This was the intellectual foundation of 20th-century American liberalism—and remains contested today.</p>
+                </aside>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Reveal.js and plugins from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/zoom/zoom.js"></script>
+
+    <script>
+        Reveal.initialize({
+            width: 1920,
+            height: 1080,
+            margin: 0.1,
+            minScale: 0.2,
+            maxScale: 2.0,
+            controls: true,
+            progress: true,
+            center: true,
+            hash: true,
+            transition: 'slide',
+            plugins: [ RevealNotes, RevealHighlight, RevealZoom ]
+        });
+
+        // Pop-up functionality
+        function togglePopup(id) {
+            document.getElementById(id).classList.toggle('active');
+        }
+
+        // Close popup when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('popup')) {
+                e.target.classList.remove('active');
+            }
+        });
+
+        // Close popup with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.popup.active').forEach(p => p.classList.remove('active'));
+            }
+        });
+    </script>
+</body>
+</html>
