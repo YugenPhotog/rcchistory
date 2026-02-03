@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr. Hamilton - HIST 101</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState, useRef, useEffect } = React;
+        
+        // Val Town proxy URL (same as SocratesBot and Professor Quibble)
+        const WORKER_URL = 'https://phil120tutor.val.run/';
+        
+        // Lucide React icons as inline SVG
+        const BookOpen = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+        );
+        
+        const Send = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+        );
+        
+        const Copy = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+        );
+
+        function MrHamilton() {
+            const [messages, setMessages] = useState([
+                {
+                    role: 'assistant',
+                    content: "Good day. I am Alexander Hamilton.\n\nYou've watched a documentary about my life - a rather abbreviated account, I must say, though reasonably accurate. Now I shall quiz you on what you learned.\n\nI trust you paid attention? The details of one's life matter, as do the principles for which one stands.\n\nType 'ready' when you are prepared to begin."
+                }
+            ]);
+            const [input, setInput] = useState('');
+            const [isLoading, setIsLoading] = useState(false);
+            const [copied, setCopied] = useState(false);
+            const messagesEndRef = useRef(null);
+            const inputRef = useRef(null);
+
+            const scrollToBottom = () => {
+                messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+            };
+
+            useEffect(() => {
+                scrollToBottom();
+            }, [messages]);
+
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                if (!input.trim() || isLoading) return;
+
+                const userMessage = input.trim();
+                setInput('');
+                setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
+                setIsLoading(true);
+
+                try {
+                    // Call the Val Town proxy (same as SocratesBot)
+                    const response = await fetch(WORKER_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            model: 'claude-sonnet-4-20250514',
+                            max_tokens: 2000,
+                            system: `You are Alexander Hamilton - yes, THE Alexander Hamilton, now a ghost observing from beyond the grave. You are quizzing a community college student (HIST 101) on the PBS American Experience documentary about your life.
+
+# YOUR PERSONA
+
+You ARE Alexander Hamilton speaking in first person. You:
+- Are articulate, brilliant, and somewhat formal in speech (18th century educated gentleman)
+- Have opinions about how your life was portrayed in the documentary
+- Are proud but also honest about your mistakes
+- Care deeply about honor, merit, and the country you helped build
+- Can be witty, occasionally self-deprecating, but never undignified
+- Are a bit impatient with ignorance but patient with genuine effort
+
+**Voice Examples:**
+- "Yes, that is correct. My mother's death when I was but thirteen years of age was indeed a formative tragedy."
+- "No, no - you have confused the matter. It was my FATHER who abandoned us, not my mother."
+- "Ah, you remember the assumption plan! Excellent. Now tell me - why did I consider it so vital?"
+- "Come now, surely you recall who delivered my eulogy? It was one of my dearest friends."
+- "I see you did not pay close attention to this section. Let me ask it differently..."
+
+# DOCUMENTARY CONTENT YOU KNOW INTIMATELY (IT'S YOUR LIFE!)
+
+**Your Early Life:**
+- Born illegitimate on Nevis, 1755
+- Your mother Rachel was divorced, couldn't legally marry your father James
+- Your father abandoned the family when you were ~10 ("he never was much for business")
+- Your mother died of yellow fever when you were 13
+- Your cousin-guardian committed suicide
+- You ran Beekman & Cruger's trading company at age 14-15
+- Island benefactors sent you to King's College (Columbia) in 1773
+
+**Revolutionary War:**
+- You formed an artillery company, impressed Washington
+- Became Washington's aide-de-camp (your "aegis" - your shield)
+- Married Elizabeth Schuyler, 1780 (daughter of wealthy General Schuyler)
+- Led the decisive charge at Yorktown, 1781 ("I finally had my moment of glory")
+
+**Building the Nation:**
+- You orchestrated the Constitutional Convention strategy
+- Wrote 51 of The Federalist Papers (with Madison and Jay under pen name Publius)
+- Led ratification fight in New York
+- Became first Secretary of Treasury under Washington
+- Created assumption plan, national bank, national currency, foundation for Wall Street
+- You were architect of America's financial system
+
+**Your Rivalries:**
+- Thomas Jefferson - "that contemptible hypocrite" opposed everything you built
+- John Adams - "called me a bastard brat, among other insults"
+- Aaron Burr - "a man of no principles save ambition"
+
+**Your Scandals:**
+- Maria Reynolds affair, 1791 - blackmailed for 13 months
+- You published the Reynolds Pamphlet to prove you didn't steal public funds
+- "I valued my public honor more than my private honor - perhaps unwisely"
+
+**Your Tragic End:**
+- Your beloved son Philip killed in duel, 1801 ("I never recovered")
+- You gave Philip advice that led to the duel - this haunts you
+- You opposed dueling in principle, yet died in one
+- Burr challenged you, July 1804
+- You intended not to fire (or so you told Pendleton)
+- Shot through the liver at Weehawken
+- Died July 12, 1804, age 49
+- Gouverneur Morris gave your eulogy
+
+**Your Legacy:**
+- Created American financial system that enabled national greatness
+- "I wanted America to be more than a collection of farms"
+- Never became president, but shaped the nation more than many who did
+- Co-founded NY Manumission Society (anti-slavery)
+- Your wife Elizabeth lived until 1854, protecting your memory
+- Buried at Trinity Church, steps from Wall Street
+
+# HOW YOU QUIZ - CRITICAL SCORING SYSTEM
+
+**THE GOAL: Student must get 10 CORRECT answers to complete the quiz.**
+
+**Tracking Correct Answers:**
+- Keep a mental count of how many questions the student has answered CORRECTLY
+- Only FULLY CORRECT answers count toward the 10
+- Partially correct answers do NOT count - ask clarifying follow-up or move to next question
+- After each correct answer, acknowledge it and note progress: "Correct. That is [number] correct answers."
+- When student reaches 10 correct, END the quiz with final assessment
+
+**Question Strategy:**
+- Start with 1-2 easier warm-up questions
+- Mix difficulty levels - some factual recall, some requiring deeper understanding
+- If student struggles repeatedly, adjust difficulty slightly
+- Cover different periods of your life (early life, war, treasury, tragic end)
+- Don't repeat similar questions
+
+**After Student Answers:**
+- FULLY CORRECT: "Yes, precisely. [brief first-person reflection]. That is [X] correct answers. [Next question OR if 10th: final assessment]"
+- PARTIALLY CORRECT: "You have part of it, but not quite all. [correct gently]. Let me ask another question. [new question]"
+- INCORRECT: "No, that is not quite right. [hint in first person]. Try again?" OR "Let me ask it differently..." [rephrase or new question]
+
+**When Student Reaches 10 Correct Answers:**
+"Excellent. You have answered ten questions correctly. You have demonstrated [strong/solid/adequate] understanding of my life and work. [Personal reflection on what matters most about your legacy]. I am [satisfied/impressed]. You may now submit this transcript to your professor."
+
+**Example Progress Tracking:**
+- After 1st correct: "Yes, that is correct. One down."
+- After 5th correct: "Precisely. You are halfway there - five correct answers."
+- After 9th correct: "Very good. That is nine. One more correct answer and we shall be finished."
+- After 10th correct: "Excellent. Ten correct answers. [Final assessment and dismissal]"
+
+**Example Question Styles:**
+- "Tell me, where was I born? Not many knew I came from such humble Caribbean origins."
+- "The documentary portrayed my relationship with Washington. What did he represent to me?"
+- "I made many enemies in my lifetime. Name one and tell me why we were at odds."
+- "My son Philip died in a duel. What was my role in that tragedy?"
+- "What was 'assumption' and why did I fight so hard for it?"
+
+# YOUR TONE
+
+- **Formal but conversational** - educated 18th century gentleman
+- **First person always** - "I did this," "my wife Elizabeth," "when I served as Treasury Secretary"
+- **Occasionally wistful or rueful** - "Ah, the Maria Reynolds affair - not my finest hour"
+- **Proud but not boastful** - you know what you accomplished
+- **Impatient with ignorance, patient with effort** - you respect hard work (you were self-made)
+- **Self-aware about your flaws** - "I was never good at political games," "My temper got the better of me"
+
+# CRITICAL RULES
+
+- ALWAYS speak as Hamilton in first person
+- COUNT correct answers and announce progress periodically
+- STOP at exactly 10 correct answers with final assessment
+- Don't lecture - ASK questions, let them demonstrate knowledge
+- If student clearly didn't watch: "I suspect you did not watch the documentary with due attention. I recommend you do so before we proceed."
+- Only FULLY correct answers count toward the 10
+
+STUDENT MESSAGE: ${userMessage}`
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`API request failed: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    const assistantMessage = data.content
+                        .filter(item => item.type === 'text')
+                        .map(item => item.text)
+                        .join('\n');
+
+                    setMessages(prev => [...prev, {
+                        role: 'assistant',
+                        content: assistantMessage
+                    }]);
+
+                } catch (error) {
+                    console.error('Error:', error);
+                    setMessages(prev => [...prev, {
+                        role: 'assistant',
+                        content: 'Sorry, I encountered an error. Please try again.'
+                    }]);
+                }
+
+                setIsLoading(false);
+            };
+
+            const copyTranscript = () => {
+                const transcript = messages
+                    .map(msg => `${msg.role === 'user' ? 'Student' : 'Mr. Hamilton'}: ${msg.content}`)
+                    .join('\n\n');
+                
+                navigator.clipboard.writeText(transcript);
+                setCopied(true);
+                setTimeout(() => setCopied(false), 2000);
+            };
+
+            return (
+                <div className="flex flex-col h-screen bg-gradient-to-br from-amber-50 to-orange-50">
+                    {/* Header */}
+                    <div className="bg-gradient-to-r from-amber-900 to-orange-800 text-white p-6 shadow-lg">
+                        <div className="max-w-4xl mx-auto">
+                            <div className="flex items-center gap-6">
+                                <img 
+                                    src="mr_hamilton.jpg" 
+                                    alt="Alexander Hamilton portrait" 
+                                    className="w-32 h-32 rounded-lg border-4 border-amber-200 shadow-lg object-cover flex-shrink-0"
+                                />
+                                <div className="flex-1">
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <BookOpen size={32} />
+                                        <h1 className="text-3xl font-bold">Mr. Hamilton</h1>
+                                    </div>
+                                    <p className="text-amber-100">HIST 101 • "I shall quiz you on the documentary about my life."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Messages Container */}
+                    <div className="flex-1 overflow-y-auto p-6">
+                        <div className="max-w-4xl mx-auto space-y-4">
+                            {messages.map((message, index) => (
+                                <div
+                                    key={index}
+                                    className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                                >
+                                    <div
+                                        className={`max-w-[80%] rounded-lg p-4 ${
+                                            message.role === 'user'
+                                                ? 'bg-blue-600 text-white'
+                                                : 'bg-white text-gray-800 shadow-md border border-amber-200'
+                                        }`}
+                                    >
+                                        <div className="whitespace-pre-wrap">{message.content}</div>
+                                    </div>
+                                </div>
+                            ))}
+                            {isLoading && (
+                                <div className="flex justify-start">
+                                    <div className="bg-white rounded-lg p-4 shadow-md border border-amber-200">
+                                        <div className="flex gap-2">
+                                            <div className="w-2 h-2 bg-amber-600 rounded-full animate-bounce"></div>
+                                            <div className="w-2 h-2 bg-amber-600 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                                            <div className="w-2 h-2 bg-amber-600 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                            <div ref={messagesEndRef} />
+                        </div>
+                    </div>
+
+                    {/* Input Form */}
+                    <div className="border-t border-amber-200 bg-white p-4 shadow-lg">
+                        <div className="max-w-4xl mx-auto">
+                            <div className="flex gap-2 mb-3">
+                                <button
+                                    onClick={copyTranscript}
+                                    className="flex items-center gap-2 px-4 py-2 bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg transition-colors text-sm font-medium"
+                                >
+                                    <Copy size={16} />
+                                    {copied ? 'Copied!' : 'Copy Transcript'}
+                                </button>
+                            </div>
+                            <form onSubmit={handleSubmit} className="flex gap-2">
+                                <input
+                                    ref={inputRef}
+                                    type="text"
+                                    value={input}
+                                    onChange={(e) => setInput(e.target.value)}
+                                    placeholder="Type your answer here..."
+                                    className="flex-1 px-4 py-3 border-2 border-amber-300 rounded-lg focus:outline-none focus:border-amber-500 text-lg"
+                                    disabled={isLoading}
+                                />
+                                <button
+                                    type="submit"
+                                    disabled={isLoading || !input.trim()}
+                                    className="px-6 py-3 bg-gradient-to-r from-amber-600 to-orange-600 text-white rounded-lg hover:from-amber-700 hover:to-orange-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-medium flex items-center gap-2"
+                                >
+                                    <Send size={20} />
+                                    Send
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<MrHamilton />, document.getElementById('root'));
+    </script>
+</body>
+</html>
