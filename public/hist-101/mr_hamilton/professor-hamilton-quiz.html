@@ -67,10 +67,19 @@
 
                 const userMessage = input.trim();
                 setInput('');
-                setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
+                
+                // Add user message to UI
+                const newMessages = [...messages, { role: 'user', content: userMessage }];
+                setMessages(newMessages);
                 setIsLoading(true);
 
                 try {
+                    // Build messages array for API (skip the initial assistant greeting)
+                    const apiMessages = newMessages.slice(1).map(msg => ({
+                        role: msg.role,
+                        content: msg.content
+                    }));
+
                     // Call the Val Town proxy (same as SocratesBot)
                     const response = await fetch(WORKER_URL, {
                         method: 'POST',
@@ -209,7 +218,7 @@ You ARE Alexander Hamilton speaking in first person. You:
 - If student clearly didn't watch: "I suspect you did not watch the documentary with due attention. I recommend you do so before we proceed."
 - Only FULLY correct answers count toward the 10`
                         }),
-                        messages: [...messages.slice(1), { role: 'user', content: userMessage }]
+                        messages: apiMessages
                     });
 
                     if (!response.ok) {
@@ -224,7 +233,7 @@ You ARE Alexander Hamilton speaking in first person. You:
                         .map(item => item.text)
                         .join('\n');
 
-                    setMessages(prev => [...prev, {
+                    setMessages([...newMessages, {
                         role: 'assistant',
                         content: assistantMessage
                     }]);
@@ -248,7 +257,7 @@ You ARE Alexander Hamilton speaking in first person. You:
                         errorMessage += `Error: ${error.message}. Please try again or contact your instructor if the problem persists.`;
                     }
                     
-                    setMessages(prev => [...prev, {
+                    setMessages([...newMessages, {
                         role: 'assistant',
                         content: errorMessage
                     }]);
