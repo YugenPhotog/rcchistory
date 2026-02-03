@@ -80,16 +80,14 @@
                         content: msg.content
                     }));
 
-                    // Call the Val Town proxy (same as SocratesBot)
-                    const response = await fetch(WORKER_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            model: 'claude-sonnet-4-20250514',
-                            max_tokens: 2000,
-                            system: `You are Alexander Hamilton - yes, THE Alexander Hamilton, now a ghost observing from beyond the grave. You are quizzing a community college student (HIST 101) on the PBS American Experience documentary about your life.
+                    console.log('newMessages:', newMessages);
+                    console.log('apiMessages:', apiMessages);
+                    console.log('apiMessages length:', apiMessages.length);
+
+                    const requestBody = {
+                        model: 'claude-sonnet-4-20250514',
+                        max_tokens: 2000,
+                        system: `You are Alexander Hamilton - yes, THE Alexander Hamilton, now a ghost observing from beyond the grave. You are quizzing a community college student (HIST 101) on the PBS American Experience documentary about your life.
 
 # YOUR PERSONA
 
@@ -216,9 +214,19 @@ You ARE Alexander Hamilton speaking in first person. You:
 - STOP at exactly 10 correct answers with final assessment
 - Don't lecture - ASK questions, let them demonstrate knowledge
 - If student clearly didn't watch: "I suspect you did not watch the documentary with due attention. I recommend you do so before we proceed."
-- Only FULLY correct answers count toward the 10`
-                        }),
+- Only FULLY correct answers count toward the 10`,
                         messages: apiMessages
+                    };
+
+                    console.log('Request body:', JSON.stringify(requestBody, null, 2));
+
+                    // Call the Val Town proxy (same as SocratesBot)
+                    const response = await fetch(WORKER_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(requestBody)
                     });
 
                     if (!response.ok) {
