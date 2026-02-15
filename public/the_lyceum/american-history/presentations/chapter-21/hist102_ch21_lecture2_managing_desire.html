@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 2: "Managing Desire" — Vice, Morality, and the Progressive Body</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --antique-gold: #D4AF37;
+            --deep-teal: #2C7873;
+            --rich-purple: #6B4C9A;
+            --ruby-crimson: #9B2C2C;
+            --dark-charcoal: #1A1A1A;
+            --pure-white: #FAFAFA;
+            --soft-cream: #F5F1E8;
+            --bronze-accent: #8B6F47;
+        }
+
+        .reveal {
+            font-family: 'Lora', serif;
+            font-size: 1.3em;
+            background-color: var(--dark-charcoal);
+            color: var(--pure-white);
+        }
+
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Crimson Pro', serif;
+            font-weight: 700;
+            color: var(--antique-gold);
+            text-transform: none;
+        }
+
+        .reveal h1 { font-size: 3.2em; }
+        .reveal h2 { font-size: 2.2em; margin-bottom: 0.5em; }
+        .reveal h3 { font-size: 1.6em; }
+
+        .reveal ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .reveal ul li {
+            margin-bottom: 0.4em;
+            font-size: 0.95em;
+        }
+
+        .reveal ul li:before {
+            content: "◆ ";
+            color: var(--deep-teal);
+            font-weight: bold;
+            margin-right: 0.5em;
+        }
+
+        .popup-trigger {
+            color: var(--deep-teal);
+            border-bottom: 2px dotted var(--deep-teal);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .popup-trigger:hover {
+            color: var(--antique-gold);
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--soft-cream);
+            color: var(--dark-charcoal);
+            padding: 2em;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            max-width: 600px;
+            max-height: 70%;
+            overflow-y: auto;
+            z-index: 1000;
+            border: 3px solid var(--bronze-accent);
+        }
+
+        .popup.active {
+            display: block;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 2em;
+            cursor: pointer;
+            color: var(--ruby-crimson);
+        }
+
+        .definition-term {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--rich-purple);
+            margin-bottom: 0.5em;
+            font-family: 'Crimson Pro', serif;
+        }
+
+        .key-term {
+            color: var(--rich-purple);
+            font-weight: 600;
+        }
+
+        .img-placeholder {
+            background: rgba(44, 120, 115, 0.2);
+            border: 2px dashed var(--deep-teal);
+            padding: 1.5em;
+            border-radius: 10px;
+            text-align: center;
+            color: var(--deep-teal);
+            font-size: 0.9em;
+        }
+
+        .slide-counter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(26, 26, 26, 0.9);
+            color: var(--antique-gold);
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-family: 'Crimson Pro', serif;
+            font-weight: 600;
+            font-size: 0.9em;
+            border: 2px solid var(--deep-teal);
+            z-index: 100;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            color: var(--deep-teal);
+            margin-top: 0.5em;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2em;
+            align-items: start;
+        }
+
+        .three-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5em;
+            align-items: start;
+        }
+
+        .column-header {
+            font-weight: 700;
+            color: var(--antique-gold);
+            font-size: 1.1em;
+            margin-bottom: 0.5em;
+            font-family: 'Crimson Pro', serif;
+        }
+
+        .bottom-text {
+            margin-top: 1.2em;
+            font-style: italic;
+            color: var(--deep-teal);
+            font-size: 0.9em;
+        }
+
+        .bottom-text-bold {
+            margin-top: 1.2em;
+            font-weight: 700;
+            color: var(--antique-gold);
+            font-size: 0.95em;
+        }
+
+        .callout {
+            background: rgba(212, 175, 55, 0.15);
+            border-left: 5px solid var(--antique-gold);
+            padding: 1.2em;
+            margin: 1em 0;
+            font-size: 0.9em;
+        }
+
+        .timeline-item {
+            margin-bottom: 0.6em;
+        }
+
+        .timeline-year {
+            color: var(--antique-gold);
+            font-weight: 700;
+        }
+
+        .centered-list {
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        .centered-list li {
+            margin-bottom: 0.7em;
+        }
+
+        .large-text {
+            font-size: 1.3em;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        strong {
+            color: var(--antique-gold);
+        }
+
+        em {
+            color: var(--deep-teal);
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- SLIDE 1: Title -->
+            <section>
+                <h1>Managing Desire</h1>
+                <p class="subtitle">Vice, Morality, and the Progressive Body</p>
+                <div class="img-placeholder">
+                    <img src="moral_hygiene_poster.jpg" alt="AI prompt: 1910s social purity propaganda poster, dramatic warning about vice and moral danger" style="max-width: 100%; max-height: 400px;">
+                </div>
+            </section>
+
+            <!-- SLIDE 2: Two-Column Comparison -->
+            <section>
+                <h2>The Same Impulse, A Different Target</h2>
+                <div class="two-column">
+                    <div>
+                        <div class="column-header">Progressive Reform of Systems</div>
+                        <ul>
+                            <li>Meatpacking regulation</li>
+                            <li>Workplace safety laws</li>
+                            <li>Pure Food and Drug Act</li>
+                            <li>Municipal ownership</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="column-header">Progressive Reform of Bodies</div>
+                        <ul>
+                            <li>Anti-prostitution campaigns</li>
+                            <li>Birth control debates</li>
+                            <li>Temperance enforcement</li>
+                            <li>Sexual purity laws</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="img-placeholder" style="margin-top: 1em;">
+                    <img src="split_reform.jpg" alt="Search: Progressive Era factory workers + Progressive Era social hygiene poster" style="max-width: 100%; max-height: 300px;">
+                </div>
+            </section>
+
+            <!-- SLIDE 3: The Turn Inward -->
+            <section>
+                <h2>Who Became the Target?</h2>
+                <div class="centered-list">
+                    <ul>
+                        <li>Scientific expertise applied to human behavior</li>
+                        <li>The state as protector of public morals</li>
+                        <li>The body becomes a site of intervention</li>
+                        <li>Targets: women, immigrants, the poor, people of color</li>
+                    </ul>
+                </div>
+                <div class="img-placeholder" style="margin-top: 1em;">
+                    <img src="settlement_worker.jpg" alt="Search: Progressive Era settlement house worker immigrant neighborhood" style="max-width: 100%; max-height: 300px;">
+                </div>
+            </section>
+
+            <!-- SLIDE 4: Anthony Comstock -->
+            <section>
+                <h2>Anthony Comstock: Pioneering Federal Control Over Sexuality</h2>
+                <div class="two-column">
+                    <div>
+                        <div class="column-header">The Man and His Mission</div>
+                        <ul>
+                            <li>U.S. Postal Inspector, 1873-1915</li>
+                            <li>Founded NY Society for the Suppression of Vice (1873)</li>
+                            <li>Self-appointed guardian of American morality</li>
+                            <li>Died 1915, but laws remained</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="column-header">The Comstock Act (1873)</div>
+                        <ul>
+                            <li>Banned "obscene" materials from U.S. mail</li>
+                            <li>Defined contraception info as obscene</li>
+                            <li>Defined abortion info as obscene</li>
+                            <li>Gave federal power over sexual knowledge</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="img-placeholder" style="margin-top: 1em;">
+                    <img src="comstock_portrait.jpg" alt="Search: Anthony Comstock portrait postal inspector" style="max-width: 100%; max-height: 250px;">
+                </div>
+            </section>
+
+            <!-- SLIDE 5: Comstock's Legacy -->
+            <section>
+                <h2>A Crusade of Enforcement</h2>
+                <div class="large-text">
+                    <p><strong>3,600+</strong> arrests personally made by Comstock</p>
+                    <p><strong>160+ tons</strong> of "obscene" literature destroyed</p>
+                    <p><strong>Thousands</strong> of items confiscated from mail</p>
+                    <p>Laws remained in effect until <strong>1970s</strong></p>
+                </div>
+                <div class="bottom-text-bold">
+                    Federal moral regulation didn't start with progressives—but they inherited and expanded Comstock's toolkit
+                </div>
+                <div class="img-placeholder" style="margin-top: 1em;">
+                    <img src="comstock_confiscated.jpg" alt="AI prompt: 1880s moral crusader destroying books and pamphlets, engraving style" style="max-width: 100%; max-height: 200px;">
+                </div>
+            </section>
+
+            <!-- SLIDE 6: White Slave Panic -->
+            <section>
+                <h2>The White Slave Scare: Panic Over Prostitution</h2>
+                <div class="two-column">
+                    <div>
+                        <div class="column-header">The Story They Told</div>
+                        <ul>
+                            <li>Young white women "kidnapped" into prostitution</li>
+                            <li>Immigrant men as predators</li>
+                            <li>Vice districts as sites of moral contagion</li>
+                            <li>National panic by 1910</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="column-header">The Reality They Ignored</div>
+                        <ul>
+                            <li>Poverty, not kidnapping</li>
+                            <li>Women's economic desperation</li>
+                            <li>Immigrant communities scapegoated</li>
+                            <li>Prostitutes arrested; clients walked free</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="img-placeholder" style="margin-top: 1em;">
+                    <img src="white_slavery_poster.jpg" alt="AI prompt: Lurid 1910 poster warning white slavery danger, dramatic typography" style="max-width: 100%; max-height: 250px;">
+                </div>
+            </section>
+
+            <!-- SLIDE 7: Turner -->
+            <section>
+                <h2>Turner's Moral Panic Goes National</h2>
+                <ul>
+                    <li>McClure's Magazine, 1909: "The Daughters of the Poor"</li>
+                    <li>Turner exposes Chicago's vice districts in shocking detail</li>
+                    <li>But frames prostitution as <em>moral</em> threat, not <em>economic</em> problem</li>
+                    <li>By 1916: over 100 cities investigating prostitution</li>
+                </ul>
+                <div class="img-placeholder" style="margin-top: 1em;">
+                    <img src="mcclures_turner.jpg" alt="Search: George Kibbe Turner McClure's magazine 1909" style="max-width: 100%; max-height: 300px;">
+                </div>
+            </section>
+
+            <!-- SLIDE 8: Mann Act -->
+            <section>
+                <h2>The White-Slave Traffic Act</h2>
+                <div class="centered-list">
+                    <ul>
+                        <li><strong>Official Purpose:</strong> Prohibit transporting women across state lines "for immoral purposes"</li>
+                        <li><strong>Stated Target:</strong> Commercial vice and forced prostitution</li>
+                        <li><strong>Actual Use:</strong> Policing consensual relationships, especially interracial ones</li>
+                        <li><strong>Result:</strong> Morality legislation becomes tool of racial and sexual surveillance</li>
+                    </ul>
+                </div>
+                <div class="img-placeholder" style="margin-top: 1em;">
+                    <img src="mann_act_headline.jpg" alt="Search: Mann Act 1910 newspaper headline" style="max-width: 100%; max-height: 250px;">
+                </div>
+            </section>
+
+            <!-- SLIDE 9: Jack Johnson -->
+            <section>
+                <h2>Who Did the Law Actually Target?</h2>
+                <div class="two-column">
+                    <div>
+                        <div class="column-header">Jack Johnson, 1910</div>
+                        <ul>
+                            <li>First Black heavyweight champion</li>
+                            <li>Married white women</li>
+                            <li>Defied racial boundaries</li>
+                            <li>FBI investigation, 1912</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="column-header">The Pattern</div>
+                        <ul>
+                            <li>Law written to stop "white slavery"</li>
+                            <li>Used against interracial couples</li>
+                            <li>Prosecutions target Black men</li>
+                            <li>Women's "protection" = women's control</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="img-placeholder" style="margin-top: 1em;">
+                    <img src="jack_johnson.jpg" alt="Search: Jack Johnson heavyweight champion portrait 1910s" style="max-width: 100%; max-height: 250px;">
+                </div>
+            </section>
+
+            <!-- SLIDE 10: Washingtonians -->
+            <section>
+                <h2>Temperance Begins as Self-Help</h2>
+                <div class="two-column">
+                    <div>
+                        <div class="column-header">The Washingtonian Movement, 1840s</div>
+                        <ul>
+                            <li>Founded 1840, Baltimore</li>
+                            <li>Six reformed drinkers (working-class artisans)</li>
+                            <li>Peer support through public testimony</li>
+                            <li>No moral condemnation—mutual aid</li>
+                            <li>Voluntary abstinence, not legislation</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="column-header">Why It Worked (and Failed)</div>
+                        <ul>
+                            <li>Explosive growth in early 1840s</li>
+                            <li>Working-class men helping each other</li>
+                            <li>Collapsed by late 1840s (no infrastructure)</li>
+                            <li><strong>Key principle:</strong> "We help each other stay sober"</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bottom-text">
+                    This was temperance <em>before</em> progressives got hold of it
+                </div>
+                <div class="img-placeholder" style="margin-top: 0.8em;">
+                    <img src="washingtonians.jpg" alt="AI prompt: 1840s working-class men at mutual aid temperance meeting, wood engraving style" style="max-width: 100%; max-height: 200px;">
+                </div>
+            </section>
+
+            <!-- SLIDE 11: The Shift -->
+            <section>
+                <h2>How Temperance Changed</h2>
+                <div class="three-column">
+                    <div>
+                        <div class="column-header">1840s: Washingtonians</div>
+                        <ul style="font-size: 0.9em;">
+                            <li>Peer support</li>
+                            <li>Working-class</li>
+                            <li>Voluntary</li>
+                            <li>"Help me stop"</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="column-header">1874: WCTU</div>
+                        <ul style="font-size: 0.9em;">
+                            <li>Moral reform</li>
+                            <li>Middle-class women</li>
+                            <li>"Home protection"</li>
+                            <li>"Make them stop"</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="column-header">1893: Anti-Saloon League</div>
+                        <ul style="font-size: 0.9em;">
+                            <li>Political lobbying</li>
+                            <li>Professional org</li>
+                            <li>Legislative pressure</li>
+                            <li>"Force them to stop"</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="img-placeholder" style="margin-top: 1em;">
+                    <img src="temperance_evolution.jpg" alt="AI prompt: Three-panel progression showing 1840s mutual aid meeting, 1880s WCTU women protesters, 1910s prohibition agents, historical illustration style" style="max-width: 100%; max-height: 250px;">
+                </div>
+            </section>
+
+            <!-- SLIDE 12: Road to Prohibition -->
+            <section>
+                <h2>From Voluntary Abstinence to Federal Coercion</h2>
+                <ul style="font-size: 0.9em;">
+                    <li class="timeline-item"><span class="timeline-year">1840:</span> Washingtonians—"We choose not to drink"</li>
+                    <li class="timeline-item"><span class="timeline-year">1874:</span> WCTU founded—"Protect homes from drunken men"</li>
+                    <li class="timeline-item"><span class="timeline-year">1893:</span> Anti-Saloon League—"Lobby for dry laws"</li>
+                    <li class="timeline-item"><span class="timeline-year">1917:</span> Wartime prohibition—"National emergency justifies control"</li>
+                    <li class="timeline-item"><span class="timeline-year">1919:</span> 18th Amendment ratified—"Constitutional prohibition"</li>
+                    <li class="timeline-item"><span class="timeline-year">1919:</span> Volstead Act—"Federal enforcement machinery"</li>
+                    <li class="timeline-item"><span class="timeline-year">1920:</span> Prohibition begins—"The state decides what you drink"</li>
+                </ul>
+                <div class="img-placeholder" style="margin-top: 1em;">
+                    <img src="prohibition_agents.jpg" alt="Search: Prohibition agents destroying alcohol 1920s" style="max-width: 100%; max-height: 200px;">
+                </div>
+            </section>
+
+            <!-- SLIDE 13: Pattern Expands -->
+            <section>
+                <h2>Progressive Bodily Control, Multiple Fronts</h2>
+                <div class="three-column">
+                    <div>
+                        <div class="column-header">Sexual Information</div>
+                        <ul style="font-size: 0.85em;">
+                            <li>Comstock Laws (1873)</li>
+                            <li>Federal censorship</li>
+                            <li>"Obscene" = contraception</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="column-header">Sexual Behavior</div>
+                        <ul style="font-size: 0.85em;">
+                            <li>Mann Act (1910)</li>
+                            <li>Vice prosecutions</li>
+                            <li>Interracial relationships targeted</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="column-header">Personal Consumption</div>
+                        <ul style="font-size: 0.85em;">
+                            <li>Prohibition (1920)</li>
+                            <li>Constitutional amendment</li>
+                            <li>Federal agents in your home</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bottom-text-bold" style="margin-top: 1.5em;">
+                    By 1920: The federal government controlled what you could read, who you could sleep with, and what you could drink—all in the name of protection
+                </div>
+                <div class="img-placeholder" style="margin-top: 0.8em;">
+                    <img src="federal_enforcement.jpg" alt="AI prompt: 1920s federal prohibition agents, postal inspectors, vice squad, composite showing state enforcement power, documentary photo style" style="max-width: 100%; max-height: 200px;">
+                </div>
+            </section>
+
+            <!-- SLIDE 14: The New Experts -->
+            <section>
+                <h2>From Ministers to Professionals</h2>
+                <div class="two-column">
+                    <div>
+                        <div class="column-header">Old Authority</div>
+                        <ul>
+                            <li>Religious doctrine</li>
+                            <li>Community standards</li>
+                            <li>Family control</li>
+                            <li>Private morality</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="column-header">New Authority</div>
+                        <ul>
+                            <li>Medical science</li>
+                            <li>Statistical surveys</li>
+                            <li>Professional credentials</li>
+                            <li>Public health policy</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bottom-text">
+                    Progressives didn't just want to ban vice—they wanted to <em>manage</em> sexuality through expertise
+                </div>
+                <div class="img-placeholder" style="margin-top: 1em;">
+                    <img src="public_health_nurse.jpg" alt="Search: Progressive Era public health nurse consultation" style="max-width: 100%; max-height: 250px;">
+                </div>
+            </section>
+
+            <!-- SLIDE 15: Sanger - The Radical -->
+            <section>
+                <h2>Margaret Sanger and Bodily Autonomy</h2>
+                <ul>
+                    <li>Nurse in immigrant tenements, witnessed desperate women</li>
+                    <li><em>The Woman Rebel</em> (1914): "No Gods, No Masters"</li>
+                    <li>Brownsville Clinic (1916): first U.S. birth control clinic</li>
+                    <li>Arrested under Comstock Laws for distributing "obscene" materials</li>
+                    <li>Served jail time rather than stop advocating</li>
+                </ul>
+                <div class="bottom-text-bold">
+                    Birth control = women's freedom from constant pregnancy, economic independence, sexual autonomy
+                </div>
+                <div class="img-placeholder" style="margin-top: 1em;">
+                    <img src="sanger_arrest.jpg" alt="Search: Margaret Sanger arrest photo 1917" style="max-width: 100%; max-height: 250px;">
+                </div>
+            </section>
+
+            <!-- SLIDE 16: The Eugenic Turn -->
+            <section>
+                <h2>Autonomy for Whom?</h2>
+                <div class="two-column">
+                    <div>
+                        <div class="column-header">Liberation</div>
+                        <ul>
+                            <li>Educated women: choice</li>
+                            <li>Middle-class women: autonomy</li>
+                            <li>Control over fertility = freedom</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="column-header">Control</div>
+                        <ul>
+                            <li>"Unfit" women should limit reproduction</li>
+                            <li>Poor, disabled, immigrant women targeted</li>
+                            <li>Birth control as "race betterment"</li>
+                            <li>Same tool, different meanings</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bottom-text">
+                    Sanger wasn't a hero or a villain—she was a progressive. And progressives believed some people shouldn't reproduce.
+                </div>
+                <div class="img-placeholder" style="margin-top: 0.8em;">
+                    <img src="birth_control_league.jpg" alt="Search: American Birth Control League 1920s OR eugenics propaganda poster fitter families" style="max-width: 100%; max-height: 200px;">
+                </div>
+            </section>
+
+            <!-- SLIDE 17: The Formula -->
+            <section>
+                <h2>How It Worked, Every Time</h2>
+                <div class="large-text">
+                    <p><strong>1.</strong> Identify a bodily "problem"</p>
+                    <p style="font-size: 0.85em; margin-top: 0.3em;">(vice, fertility, consumption, heredity)</p>
+                    <p style="margin-top: 0.8em;"><strong>2.</strong> Claim scientific expertise</p>
+                    <p style="font-size: 0.85em; margin-top: 0.3em;">(doctors, social workers, statisticians replace ministers)</p>
+                    <p style="margin-top: 0.8em;"><strong>3.</strong> Legislate control</p>
+                    <p style="font-size: 0.85em; margin-top: 0.3em;">(Comstock Act, Mann Act, Prohibition, sterilization laws)</p>
+                    <p style="margin-top: 0.8em;"><strong>4.</strong> The vulnerable pay the price</p>
+                    <p style="font-size: 0.85em; margin-top: 0.3em;">(women, immigrants, the poor, people of color)</p>
+                </div>
+                <div class="img-placeholder" style="margin-top: 1em;">
+                    <img src="clinical_control.jpg" alt="AI prompt: Progressive Era clinical setting, scientific instruments measuring human bodies, suggesting social control, black and white photograph style" style="max-width: 100%; max-height: 180px;">
+                </div>
+            </section>
+
+            <!-- SLIDE 18: Bridge -->
+            <section>
+                <h2>From Managing Behavior to Eliminating Biology</h2>
+                <div class="large-text">
+                    <p><strong>Today:</strong> Progressives managed <em>desire</em></p>
+                    <p style="font-size: 0.85em;">(sex, alcohol, information)</p>
+                    <p style="margin-top: 1em;"><strong>Next time:</strong> Progressives manage <em>heredity</em></p>
+                    <p style="font-size: 0.85em;">(who should exist?)</p>
+                    <p style="margin-top: 1em;"><strong>The question shifts:</strong></p>
+                    <p style="font-size: 0.85em;">From "What should people do?" to "Who should be born?"</p>
+                </div>
+                <div class="img-placeholder" style="margin-top: 1em;">
+                    <img src="eugenic_chart.jpg" alt="Search: eugenics family tree chart 1920s OR fitter families contest Better Babies" style="max-width: 100%; max-height: 200px;">
+                </div>
+            </section>
+
+            <!-- SLIDE 19: Cliffhanger -->
+            <section>
+                <div class="large-text" style="margin-top: 2em;">
+                    <p style="font-size: 1.5em; line-height: 1.8;">Why just <em>manage</em> the unfit?</p>
+                    <p style="font-size: 1.5em; margin-top: 0.8em;">Why not prevent them from being born in the first place?</p>
+                    <p style="margin-top: 1.5em; color: var(--ruby-crimson); font-weight: 700;">Next time:</p>
+                    <p style="font-size: 1.2em; margin-top: 0.5em;">32 states, 60,000 Americans, forced sterilization.</p>
+                </div>
+                <div class="img-placeholder" style="margin-top: 1.5em;">
+                    <img src="sterilization_map.jpg" alt="Search: eugenics sterilization law map United States" style="max-width: 100%; max-height: 200px;">
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- GLOBAL UI (outside Reveal transforms) -->
+    <div id="keyboard-trigger" class="popup-trigger" data-popup="keyboard-popup" style="position: fixed; top: 20px; right: 20px; font-size: 2em; cursor: pointer; z-index: 100;">⌨️</div>
+
+    <div id="keyboard-popup" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">Keyboard Shortcuts</div>
+        <p>→ / Space: Next slide</p>
+        <p>← : Previous slide</p>
+        <p>S: Speaker notes</p>
+        <p>F: Fullscreen</p>
+        <p>O: Overview</p>
+        <p>ESC: Exit/Close</p>
+    </div>
+
+    <div class="slide-counter"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: false,
+            transition: 'slide',
+            plugins: [ RevealNotes ]
+        });
+
+        // Slide counter
+        function updateSlideCounter() {
+            const current = Reveal.getState().indexh + 1;
+            const total = Reveal.getTotalSlides();
+            document.querySelector('.slide-counter').textContent = `${current}/${total}`;
+        }
+        Reveal.on('slidechanged', updateSlideCounter);
+        updateSlideCounter();
+
+        // Pop-up functionality
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('popup-trigger')) {
+                const popupId = e.target.getAttribute('data-popup');
+                const el = document.getElementById(popupId);
+                if (el) el.classList.add('active');
+            }
+            if (e.target.classList.contains('popup-close') || e.target.classList.contains('popup')) {
+                document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+            }
+        });
+    </script>
+</body>
+</html>
