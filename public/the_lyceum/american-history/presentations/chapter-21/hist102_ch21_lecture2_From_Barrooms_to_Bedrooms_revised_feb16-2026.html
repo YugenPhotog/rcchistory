@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From Barrooms to Bedrooms: The Progressive War on Vice</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --antique-gold: #D4AF37;
+            --deep-teal: #2C7873;
+            --rich-purple: #6B4C9A;
+            --ruby-crimson: #9B2C2C;
+            --dark-charcoal: #1A1A1A;
+            --pure-white: #FAFAFA;
+            --soft-cream: #F5F1E8;
+            --bronze-accent: #8B6F47;
+        }
+
+        .reveal {
+            font-family: 'Lora', serif;
+            font-size: 1.3em;
+            background-color: var(--dark-charcoal);
+            color: var(--pure-white);
+        }
+
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Crimson Pro', serif;
+            font-weight: 700;
+            color: var(--antique-gold);
+            text-transform: none;
+        }
+
+        .reveal h1 { font-size: 3.2em; }
+        .reveal h2 { font-size: 2.2em; margin-bottom: 0.5em; }
+        .reveal h3 { font-size: 1.6em; }
+
+        .reveal ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .reveal ul li {
+            margin-bottom: 0.4em;
+            font-size: 0.95em;
+        }
+
+        .reveal ul li:before {
+            content: "◆ ";
+            color: var(--deep-teal);
+            font-weight: bold;
+            margin-right: 0.5em;
+        }
+
+        .popup-trigger {
+            color: var(--deep-teal);
+            border-bottom: 2px dotted var(--deep-teal);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .popup-trigger:hover {
+            color: var(--antique-gold);
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--soft-cream);
+            color: var(--dark-charcoal);
+            padding: 2em;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            max-width: 600px;
+            max-height: 70%;
+            overflow-y: auto;
+            z-index: 1000;
+            border: 3px solid var(--bronze-accent);
+        }
+
+        .popup.active {
+            display: block;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 2em;
+            cursor: pointer;
+            color: var(--ruby-crimson);
+        }
+
+        .definition-term {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--rich-purple);
+            margin-bottom: 0.5em;
+            font-family: 'Crimson Pro', serif;
+        }
+
+        .key-term {
+            color: var(--rich-purple);
+            font-weight: 600;
+        }
+
+        .slide-counter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(26, 26, 26, 0.9);
+            color: var(--antique-gold);
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-family: 'Crimson Pro', serif;
+            font-weight: 600;
+            font-size: 0.9em;
+            border: 2px solid var(--deep-teal);
+            z-index: 100;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            color: var(--deep-teal);
+            margin-top: 0.5em;
+        }
+
+        /* === LAYOUT CLASSES === */
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2em;
+            align-items: start;
+        }
+
+        .three-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5em;
+            align-items: start;
+        }
+
+        /* Text content on left, image on right */
+        .content-image-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2em;
+            align-items: center;
+        }
+
+        .content-image-layout .content-side {
+            text-align: left;
+        }
+
+        .content-image-layout .image-side {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .content-image-layout .image-side img {
+            max-width: 100%;
+            max-height: 560px;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+
+        .column-header {
+            font-weight: 700;
+            color: var(--antique-gold);
+            font-size: 1.1em;
+            margin-bottom: 0.5em;
+            font-family: 'Crimson Pro', serif;
+        }
+
+        .bottom-text {
+            margin-top: 1.2em;
+            font-style: italic;
+            color: var(--deep-teal);
+            font-size: 0.9em;
+        }
+
+        .bottom-text-bold {
+            margin-top: 1.2em;
+            font-weight: 700;
+            color: var(--antique-gold);
+            font-size: 0.95em;
+        }
+
+        .callout {
+            background: rgba(212, 175, 55, 0.15);
+            border-left: 5px solid var(--antique-gold);
+            padding: 1.2em;
+            margin: 1em 0;
+            font-size: 0.9em;
+        }
+
+        .timeline-item {
+            margin-bottom: 0.6em;
+        }
+
+        .timeline-year {
+            color: var(--antique-gold);
+            font-weight: 700;
+        }
+
+        .centered-list {
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        .centered-list li {
+            margin-bottom: 0.7em;
+        }
+
+        .large-text {
+            font-size: 1.3em;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        strong {
+            color: var(--antique-gold);
+        }
+
+        em {
+            color: var(--deep-teal);
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- SLIDE 1: Title -->
+            <section data-background="images/ch21_lecture2_title_slide.png"
+         data-background-size="cover"
+         data-background-position="center"
+         data-background-repeat="no-repeat">
+</section>
+
+
+            <!-- SLIDE 2: Two-Column Comparison + Image -->
+            <section>
+                <h2 style="font-size: 5.0em;">The Same Impulse, A Different Target</h2>
+                <div class="content-image-layout">
+                    <div class="content-side">
+                        <div class="column-header" style="font-size: 2.5em;">Progressive Reform of Systems</div>
+                        <ul style="font-size: 2.0em;">
+                            <li>Meatpacking regulation</li>
+                            <li>Workplace safety laws</li>
+                            <li><span class="popup-trigger" data-popup="popup-purefood">Pure Food and Drug Act</span></li>
+                            <li>Municipal ownership</li>
+                        </ul>
+                        <div class="column-header" style="margin-top: 0.8em; font-size: 2.5em;">Progressive Reform of Bodies</div>
+                        <ul style="font-size: 2.0em;">
+                            <li>Anti-prostitution campaigns</li>
+                            <li>Birth control debates</li>
+                            <li>Temperance enforcement</li>
+                            <li>Sexual purity laws</li>
+                        </ul>
+                    </div>
+                    <div class="image-side">
+                        <img src="images/ch21_lecture2_slide2.png" alt="Progressive Era factory workers and social hygiene poster">
+                    </div>
+                </div>
+
+                <aside class="notes">
+                <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">
+                This slide establishes the central argument of the entire lecture: the same progressive impulse that reformed factories and food also targeted human behavior. Think of it as progressivism turning its gaze from the assembly line to the bedroom. The tools were the same — investigation, legislation, enforcement — but the target shifted from industries to individuals.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+                <p style="margin-bottom: 1em;">
+                <strong>Reform of Systems</strong> refers to the kind of progressivism you studied in Lecture 1 — regulating meatpacking plants, demanding workplace safety, passing the Pure Food and Drug Act, and pushing for public ownership of utilities. These reforms targeted <em>industries and institutions</em>.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>Reform of Bodies</strong> is this lecture's focus. Here, progressives applied the same logic — expert investigation, moral outrage, legislative action — to <em>human behavior</em>. Anti-prostitution campaigns, temperance enforcement, birth control debates, and sexual purity laws all represent the state asserting authority over what individuals did with their own bodies.
+                </p>
+                <p style="margin-bottom: 1em;">
+                The crucial point: these aren't separate movements. They flow from the same progressive conviction that science, expertise, and government power could and should fix what was "wrong" with American society.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+                <p style="margin-bottom: 1em;">
+                This lecture traces a logical escalation: if the government can tell you what's in your food, can it also tell you what to do with your body? That question drives everything that follows — from Comstock's postal censorship to Prohibition to Margaret Sanger's birth control crusade and its troubling eugenic dimensions.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">🎓 Historians Weigh In</h3>
+                <h4 style="margin-top: 1em;">Robert Wiebe – <em>The Search for Order, 1877–1920</em></h4>
+                <p style="margin-bottom: 1em;">
+                Wiebe argues that Progressivism was fundamentally about replacing chaotic, informal local authority with organized, professional, bureaucratic systems. This slide illustrates his point perfectly: the "reform of systems" column shows bureaucratic regulation of industries, while the "reform of bodies" column shows that same bureaucratic impulse applied to human behavior. For Wiebe, the key is the <em>method</em>, not the target — both columns represent the triumph of expert-managed order over individual autonomy.
+                </p>
+
+                </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 3: The Turn Inward -->
+            <section>
+                <h2 style="font-size: 5.0em;">Who Became the Target?</h2>
+                <div class="content-image-layout">
+                    <div class="content-side">
+                        <ul style="font-size: 2.0em;">
+                            <li>Scientific expertise applied to human behavior</li>
+                            <li>The state as protector of public morals</li>
+                            <li>The body becomes a <span class="popup-trigger" data-popup="popup-intervention">site of intervention</span></li>
+                            <li>Targets: women, immigrants, the poor</li>
+                        </ul>
+                    </div>
+                    <div class="image-side">
+                        <img src="images/ch21_lecture2_slide3.png" alt="Progressive Era settlement house worker immigrant neighborhood">
+                    </div>
+                </div>
+
+                <aside class="notes">
+                <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">
+                This slide previews the lecture's core theme: progressives shifted from fixing environments (slums, factories) to fixing people (their behavior, morality, and eventually their biology). The body itself became something the government claimed a right — even a duty — to regulate.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+                <p style="margin-bottom: 1em;">
+                <strong>"Scientific expertise applied to human behavior"</strong>: Progressives believed that the same scientific methods used to study disease or engineering could be applied to social problems like prostitution, alcoholism, and poverty. This sounds reasonable — until you realize it meant "experts" deciding how other people should live.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>"The state as protector of public morals"</strong>: This is a huge conceptual shift. Before this era, morality was primarily the domain of churches, families, and communities. Progressives argued that the <em>government</em> had a responsibility to protect citizens from moral danger — which opened the door to regulating everything from what you could read to what you could drink.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>"Targets: women, immigrants, the poor"</strong>: Here's the critical pattern you'll see throughout this lecture. Progressive bodily reform almost always fell hardest on people with the least political power. Immigrant communities were accused of spreading vice, poor women were arrested for prostitution while their clients went free, and working-class families' drinking habits were criminalized while elite clubs served alcohol freely.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+                <p style="margin-bottom: 1em;">
+                This is the lecture's thesis in miniature: progressive reform that claimed to help vulnerable people often ended up <em>controlling</em> them. Remember how Sinclair's <em>The Jungle</em> was meant to expose labor exploitation but instead triggered food safety laws? The same misdirection of good intentions appears here — but with far more invasive consequences.
+                </p>
+
+                </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 4: Anthony Comstock -->
+            <section>
+                <h2 style="font-size: 4.5em;">Anthony Comstock: Pioneering Federal Control Over Sexuality</h2>
+                <div class="content-image-layout">
+                    <div class="content-side">
+                        <div class="column-header" style="font-size: 2.5em;">The Man and His Mission</div>
+                        <ul style="font-size: 2.0em;">
+                            <li><span class="popup-trigger" data-popup="popup-postalinspector">U.S. Postal Inspector</span>, 1873-1915</li>
+                            <li>Founded NY Society for the Suppression of Vice (1873)</li>
+                            <li>Self-appointed guardian of American morality</li>
+                            <li>Died 1915, but laws remained</li>
+                        </ul>
+                        <div class="column-header" style="margin-top: 0.6em; font-size: 2.5em;">The <span class="popup-trigger" data-popup="popup-comstockact">Comstock Act</span> (1873)</div>
+                        <ul style="font-size: 2.0em;">
+                            <li>Banned "obscene" materials from U.S. mail</li>
+                            <li>Defined contraception info as obscene</li>
+                            <li>Gave federal power over sexual knowledge</li>
+                        </ul>
+                    </div>
+                    <div class="image-side">
+                        <img src="images/ch21_lecture2_slide4.png" alt="Anthony Comstock portrait postal inspector">
+                    </div>
+                </div>
+
+                <aside class="notes">
+                <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">
+                Anthony Comstock is one of the most consequential Americans you've probably never heard of. He essentially created federal censorship of sexual and reproductive information — and his laws lasted nearly a century. Understanding Comstock is essential for understanding everything else in this lecture, because the legal infrastructure he built became the toolkit that progressives inherited.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+                <p style="margin-bottom: 1em;">
+                <strong>The Man</strong>: Comstock was a Civil War veteran and devout Protestant who became convinced that "obscene" literature was corrupting American morals. In 1873, he convinced Congress to pass what became known as the <a href="https://en.wikipedia.org/wiki/Comstock_laws" target="_blank">Comstock Act</a>, then got himself appointed as a special agent of the U.S. Post Office to enforce it — personally. He held this position for over 40 years.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>The Act</strong>: The Comstock Act didn't just ban pornography. It classified <em>medical information about contraception</em> as "obscene." This meant doctors couldn't mail pamphlets about birth control, pharmacists couldn't advertise contraceptive devices, and women couldn't access basic reproductive health information through the postal system — which was the primary communication network of the era. Imagine if the government today classified birth control information as illegal to send by email or text.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>NY Society for the Suppression of Vice</strong>: Comstock founded this private organization in 1873, backed by wealthy Protestant businessmen like J.P. Morgan. It functioned as a quasi-governmental enforcement agency — Comstock used it to investigate, entrap, and prosecute people selling or distributing materials he considered obscene.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>Timeline Note</strong>: The Comstock Act was passed in 1873 — well <em>before</em> the Progressive Era (roughly 1890–1920). Comstock himself was a Victorian moralist, not a progressive. But progressives didn't dismantle his system — they inherited it and expanded the logic: the government should protect citizens from moral danger, even if that means controlling what information people can access.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+                <p style="margin-bottom: 1em;">
+                Comstock created the legal precedent that the federal government could regulate private morality through the postal system. When Margaret Sanger was later arrested for distributing birth control information, she was arrested under Comstock's laws. The entire birth control movement of the 1910s–1960s was essentially a fight against Comstock's legal legacy.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">🎓 Historians Weigh In</h3>
+                <h4 style="margin-top: 1em;">Nicola Beisel – <em>Imperiled Innocents: Anthony Comstock and Family Reproduction in Victorian America</em></h4>
+                <p style="margin-bottom: 1em;">
+                Beisel argues that Comstock's crusade wasn't simply about prudishness — it reflected deep anxieties among the Protestant middle class about maintaining social control during a period of massive immigration and urbanization. Comstock and his backers feared that "obscene" materials would corrupt their own children, undermining the reproduction of middle-class Protestant values. The censorship campaign was ultimately about who got to define — and enforce — "normal" American morality.
+                </p>
+
+                </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 5: Comstock's Legacy -->
+            <section>
+                <h2 style="font-size: 5.0em;">A Crusade of Enforcement</h2>
+                <div class="content-image-layout">
+                    <div class="content-side">
+                        <p style="font-size: 2.0em;"><strong>3,600+</strong> arrests personally made by Comstock</p>
+                        <p style="font-size: 2.0em;"><strong>160+ tons</strong> of "obscene" literature destroyed</p>
+                        <p style="font-size: 2.0em;"><strong>Thousands</strong> of items confiscated from mail</p>
+                        <p style="font-size: 2.0em;">Laws remained in effect until <strong>1970s</strong></p>
+                        <div class="bottom-text-bold" style="font-size: 1.8em;">
+                            Federal moral regulation didn't start with progressives—but they inherited and expanded Comstock's toolkit
+                        </div>
+                    </div>
+                    <div class="image-side">
+                        <img src="images/ch21_lecture2_slide5.png" alt="1880s moral crusader destroying books and pamphlets, engraving style">
+                    </div>
+                </div>
+
+                <aside class="notes">
+                <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">
+                The numbers on this slide are meant to convey scale. Comstock wasn't a symbolic figurehead — he personally conducted thousands of arrests over a 40-year career. One man's moral judgment shaped what millions of Americans could read, learn, and access about their own bodies.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+                <p style="margin-bottom: 1em;">
+                <strong>3,600+ arrests</strong>: Comstock personally made these arrests, often through sting operations. He would write to publishers or distributors under false names requesting "obscene" materials, then arrest them when they complied. This entrapment approach was controversial even in his own time.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>160+ tons of literature destroyed</strong>: Think about what "160 tons" actually means. That's not just pornography — it includes medical textbooks, anatomy guides, contraception pamphlets, and any material Comstock personally deemed "obscene." There was no judicial review of what counted as obscene; Comstock himself made the determination.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>Laws remained until the 1970s</strong>: This is the most important fact on the slide. The Comstock laws weren't fully dismantled until the 1960s–70s, through landmark Supreme Court decisions. <a href="https://en.wikipedia.org/wiki/Griswold_v._Connecticut" target="_blank"><em>Griswold v. Connecticut</em></a> (1965) established a constitutional right to contraception for married couples. <a href="https://en.wikipedia.org/wiki/Eisenstadt_v._Baird" target="_blank"><em>Eisenstadt v. Baird</em></a> (1972) extended that right to unmarried individuals. Laws written in 1873 governed American reproductive rights for nearly a century.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+                <p style="margin-bottom: 1em;">
+                The bottom line on this slide is worth memorizing: Progressives didn't invent federal moral regulation — Comstock did. But they took his model (government controls private behavior to protect public morality) and applied it to alcohol, prostitution, and eventually reproduction. Comstock built the engine; progressives drove it in new directions.
+                </p>
+
+                </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 6: White Slave Panic -->
+            <section>
+                <h2 style="font-size: 4.5em;">The White Slave Scare: Panic Over Prostitution</h2>
+                <div class="content-image-layout">
+                    <div class="content-side">
+                        <div class="column-header" style="font-size: 2.5em;">The Story They Told</div>
+                        <ul style="font-size: 2.0em;">
+                            <li>Young white women "kidnapped" into prostitution</li>
+                            <li>Immigrant men as predators</li>
+                            <li><span class="popup-trigger" data-popup="popup-vicedistrict">Vice districts</span> as sites of moral contagion</li>
+                            <li>National panic by 1910</li>
+                        </ul>
+                        <div class="column-header" style="margin-top: 0.6em; font-size: 2.5em;">The Reality They Ignored</div>
+                        <ul style="font-size: 2.0em;">
+                            <li>Poverty, not kidnapping</li>
+                            <li>Women's economic desperation</li>
+                            <li>Immigrant communities scapegoated</li>
+                            <li>Prostitutes arrested; clients walked free</li>
+                        </ul>
+                    </div>
+                    <div class="image-side">
+                        <img src="images/ch21_lecture2_slide6.png" alt="Lurid 1910 poster warning white slavery danger, dramatic typography">
+                    </div>
+                </div>
+
+                <aside class="notes">
+                <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">
+                The "white slave" panic of the 1900s–1910s is a textbook example of a <strong>moral panic</strong> — a situation where public fear vastly exceeds the actual threat, and the response causes more harm than the problem it claims to solve. This slide is structured as "story vs. reality" deliberately, to teach you how to read historical claims with a critical eye.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+                <p style="margin-bottom: 1em;">
+                <strong>The Story They Told</strong>: Newspapers, magazines, and reformers spun a terrifying narrative: innocent young white women were being kidnapped off city streets by foreign-born men and forced into prostitution. The narrative was racialized from the start — the "victims" were always white, and the "villains" were always immigrants (especially Jewish, Italian, and Chinese men). The term "white slavery" itself reveals the racial logic: it borrowed the language of slavery to generate outrage about white women specifically.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>The Reality They Ignored</strong>: Most women who entered prostitution did so because of economic desperation, not kidnapping. In an era with very few employment options for women — domestic service, factory work, or teaching, mostly — sex work was sometimes the only way to survive. Reformers who claimed to "rescue" these women rarely addressed the underlying poverty. Instead, the women were arrested and the immigrant men were deported.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>The Prosecutorial Edge</strong>: Notice the pattern on the "Reality" side: "Prostitutes arrested; clients walked free." The people supposedly being "protected" were the ones who got punished. The men who created the demand — often native-born, middle-class clients — almost never faced consequences. This is the progressive reform paradox you'll see throughout the lecture: "protection" often meant <em>punishment</em> for the most vulnerable.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+                <p style="margin-bottom: 1em;">
+                The white slave panic directly produced the Mann Act (next slide), which became one of the most abused federal laws of the twentieth century. More broadly, this episode shows how moral panics work: a real but limited problem (some coerced prostitution existed) gets inflated into a national crisis, producing legislation that targets vulnerable communities far more than the original problem. You can see similar dynamics in later American panics over drug use, immigration, and crime.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">🎓 Historians Weigh In</h3>
+                <h4 style="margin-top: 1em;">Ruth Rosen – <em>The Lost Sisterhood: Prostitution in America, 1900–1918</em></h4>
+                <p style="margin-bottom: 1em;">
+                Rosen demonstrates that the "white slavery" narrative obscured the economic realities of prostitution. Most women who entered sex work did so as a rational response to severely limited economic options — not because they were kidnapped. Rosen shows that progressive reformers' refusal to address women's poverty and workplace exploitation meant their "rescue" campaigns did little to help and much to harm the women they targeted.
+                </p>
+
+                </div>
+                </aside>
+            </section>
+
+			<!-- SLIDE 7: Who Was Turner? -->
+            <section>
+                <h2 style="font-size: 5.0em;">George Kibbe Turner, Muckraker of Vice</h2>
+                <ul style="font-size: 2.0em;">
+                    <li>Journalist in the <span class="popup-trigger" data-popup="popup-mcclures">McClure's Magazine</span> muckraking circle</li>
+                    <li>"The City of Chicago" (1907): exposed links between machine politics, saloons, and organized prostitution</li>
+                    <li>Blamed immigrant men—especially Jewish and Italian—for running vice networks</li>
+                    <li>Mixed genuine investigative journalism with <span class="popup-trigger" data-popup="popup-nativism">nativist</span> scapegoating</li>
+                    <li>Gave progressive reformers a villain: the foreign-born vice lord corrupting American women</li>
+                </ul>
+
+                <aside class="notes">
+                <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">
+                George Kibbe Turner is a less famous muckraker than Upton Sinclair or Ida Tarbell, but his work had enormous political consequences. His articles in <em>McClure's Magazine</em> directly fueled the white slave panic and helped create the political pressure that produced the Mann Act.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+                <p style="margin-bottom: 1em;">
+                <strong>The Muckraking Circle</strong>: Turner belonged to the same group of investigative journalists at <em>McClure's</em> that included Ida Tarbell (Standard Oil exposé) and Lincoln Steffens (urban political corruption). These journalists pioneered long-form investigative reporting backed by months of research — a genuinely important contribution to American democracy.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>The Paradox</strong>: Turner's journalism is a mix of genuine investigation and ethnic scapegoating. He really did uncover connections between corrupt city politicians, saloon owners, and organized prostitution in Chicago. Those connections were real. But he framed the story in ways that blamed immigrant communities — particularly Jewish and Italian men — rather than examining the economic systems that created vice districts in the first place.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>For Your Historical Thinking</strong>: Turner is a useful example of a source that is simultaneously valuable and deeply flawed. The facts about political corruption were largely accurate, but his interpretation — that the problem was immigrant moral character rather than poverty and political structure — reflects the nativist prejudices of the era. Remember from Lecture 1 how Riis's photographs were "simultaneously genuine evidence AND carefully constructed advocacy"? Turner's journalism works the same way — real reporting filtered through a biased lens.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+                <p style="margin-bottom: 1em;">
+                Turner gave progressive reformers exactly what they needed: a compelling villain. The "foreign-born vice lord corrupting American women" was a powerful narrative that justified aggressive government intervention — intervention that ultimately targeted immigrants and women of color far more than it helped anyone.
+                </p>
+
+                </div>
+                </aside>
+            </section>
+			
+            <!-- SLIDE 7: Turner -->
+            <section>
+                <h2 style="font-size: 5.0em;">Turner's Moral Panic Goes National</h2>
+                <ul style="font-size: 2.0em;">
+                    <li>McClure's Magazine, 1909: "The Daughters of the Poor"</li>
+                    <li>Turner exposes Chicago's vice districts in shocking detail</li>
+                    <li>But frames prostitution as <em>moral</em> threat, not <em>economic</em> problem</li>
+                    <li>By 1916: over 100 cities investigating prostitution</li>
+                </ul>
+
+                <aside class="notes">
+                <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">
+                This slide shows how investigative journalism became political action. Turner's 1909 article was a media sensation that triggered a nationwide wave of anti-prostitution investigations — demonstrating how quickly a well-placed story could generate government action.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+                <p style="margin-bottom: 1em;">
+                <strong>"The Daughters of the Poor" (1909)</strong>: This article described Chicago's vice districts in graphic detail, focusing on how young women from immigrant families were drawn into prostitution. The title itself is revealing — "daughters of the poor" — framing these women as passive victims rather than as people making difficult economic choices in a system that offered them few alternatives.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>Moral vs. Economic Framing</strong>: This is the critical distinction on this slide. Turner presented prostitution as a <em>moral</em> crisis — innocent women corrupted by evil men. A more accurate framing would have been <em>economic</em>: women driven into sex work by poverty, limited employment options, and lack of legal protections. Why does the framing matter? Because it shaped the solutions. Moral framing → moral solutions (arrests, vice raids, deportation). Economic framing → economic solutions (better wages, job training, labor protections for women). Progressives overwhelmingly chose the moral frame.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>100+ Cities by 1916</strong>: Over 100 American cities formed <strong>vice commissions</strong> to investigate prostitution. These commissions sent investigators into red-light districts, published sensational reports, and recommended crackdowns. The pattern is remarkably similar to Lecture 1's coverage of muckraking journalism triggering legislative reform — except now the "reform" targeted women's bodies rather than meatpacking plants.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+                <p style="margin-bottom: 1em;">
+                The framing question is directly testable: if asked about Turner, focus on the tension between his genuine findings and his nativist framing. The question isn't whether vice districts existed (they did), but how framing prostitution as a moral rather than economic problem shaped the reform response — and who ended up paying the price.
+                </p>
+
+                </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 8: Mann Act -->
+            <section>
+                <h2 style="font-size: 5.0em;">The White-Slave Traffic Act</h2>
+                <div class="content-image-layout">
+                    <div class="content-side">
+                        <ul style="font-size: 2.0em;">
+                            <li><strong>Official Purpose:</strong> Prohibit transporting women across state lines "for immoral purposes"</li>
+                            <li><strong>Stated Target:</strong> Commercial vice and forced prostitution</li>
+                            <li><strong>Actual Use:</strong> Policing consensual relationships, especially <span class="popup-trigger" data-popup="popup-mannact">interracial ones</span></li>
+                            <li><strong>Result:</strong> Morality legislation becomes tool of racial and sexual surveillance</li>
+                        </ul>
+                    </div>
+                    <div class="image-side">
+                        <img src="images/ch21_lecture2_slide7.png" alt="Mann Act 1910 newspaper headline">
+                    </div>
+                </div>
+
+                <aside class="notes">
+                <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">
+                The Mann Act (officially the White-Slave Traffic Act of 1910) is one of the most important examples in this lecture of how progressive legislation could be weaponized against the people it claimed to protect. The gap between its stated purpose and actual use is the entire point.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+                <p style="margin-bottom: 1em;">
+                <strong>Official Purpose vs. Actual Use</strong>: On paper, the <a href="https://en.wikipedia.org/wiki/Mann_Act" target="_blank">Mann Act</a> prohibited transporting women across state lines "for the purpose of prostitution or debauchery, or for any other immoral purpose." That last phrase — "any other immoral purpose" — was deliberately vague, and it became a blank check for federal authorities to police any sexual relationship they disapproved of.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>The Racial Dimension</strong>: In practice, the Mann Act was disproportionately used against Black men in relationships with white women, and against interracial couples generally. It gave the federal government enormous power to intervene in private relationships under the guise of "protecting" women — while actually enforcing racial boundaries.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>The Progressive Formula at Work</strong>: Notice the pattern: (1) Identify a real problem (some forced prostitution existed). (2) Pass a law that sounds protective. (3) The law gets used to control people who weren't the original target — especially people of color, immigrants, and the poor. You'll see this exact formula repeated across every topic in this lecture.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+                <p style="margin-bottom: 1em;">
+                The Mann Act remained on the books for decades and was used selectively against politically inconvenient people well into the mid-twentieth century. The next slide (Jack Johnson) shows the most famous case. For exam purposes, know both the official purpose AND the actual use — questions will ask you to analyze the gap between stated intent and real-world application.
+                </p>
+
+                </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 9: Jack Johnson -->
+            <section>
+                <h2 style="font-size: 5.0em;">Who Did the Law Actually Target?</h2>
+                <div class="content-image-layout">
+                    <div class="content-side">
+                        <div class="column-header" style="font-size: 2.5em;"><span class="popup-trigger" data-popup="popup-jackjohnson">Jack Johnson</span>, 1910</div>
+                        <ul style="font-size: 2.0em;">
+                            <li>First Black heavyweight champion</li>
+                            <li>Married white women</li>
+                            <li>Defied racial boundaries</li>
+                            <li>FBI investigation, 1912</li>
+                        </ul>
+                        <div class="column-header" style="margin-top: 0.6em; font-size: 2.5em;">The Pattern</div>
+                        <ul style="font-size: 2.0em;">
+                            <li>Law written to stop "white slavery"</li>
+                            <li>Became a broad morality weapon against consensual relationships</li>
+                        </ul>
+                    </div>
+                    <div class="image-side">
+                        <img src="images/ch21_lecture2_slide8.png" alt="Jack Johnson heavyweight champion portrait 1910s">
+                    </div>
+                </div>
+
+                <aside class="notes">
+                <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">
+                Jack Johnson's prosecution is the single most powerful example of how the Mann Act functioned as a tool of racial control rather than anti-trafficking legislation. His case turns the Mann Act from an abstract legal discussion into a vivid, concrete story of injustice.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+                <p style="margin-bottom: 1em;">
+                <strong>Who Was Jack Johnson?</strong> Johnson became the first Black <a href="https://en.wikipedia.org/wiki/Jack_Johnson_(boxer)" target="_blank">heavyweight boxing champion</a> in 1908 by defeating Tommy Burns in Australia. In 1910, he defeated Jim Jeffries — the so-called "Great White Hope" pulled out of retirement specifically to reclaim the title for white America — triggering race riots across the country. Johnson was flamboyant, wealthy, and openly dated and married white women, all of which made him a target of white supremacist fury.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>The Mann Act Prosecution</strong>: In 1912, the Bureau of Investigation (predecessor to the FBI) charged Johnson under the Mann Act for transporting a white woman — his girlfriend, later his wife — across state lines. The relationship was entirely consensual. Johnson was convicted in 1913 by an all-white jury, sentenced to a year in prison, and fled the country. He lived in exile for seven years before returning to serve his sentence.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>"The Pattern"</strong>: The bottom section of the slide connects Johnson's case to the lecture's larger argument. A law written to stop "white slavery" (forced prostitution) became a weapon against a Black man in a consensual relationship. The law "protected" white women by criminalizing their own choices about whom to love.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>Historical Note</strong>: Johnson was posthumously pardoned by President Trump in 2018, more than a century after his conviction.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+                <p style="margin-bottom: 1em;">
+                Johnson's case proves that the Mann Act was never just about forced prostitution. It was a flexible instrument that allowed the federal government to prosecute anyone whose sexual behavior — especially across racial lines — offended white moral sensibilities. This is a high-probability exam topic: be prepared to explain how his case demonstrates the gap between progressive legislation's stated purpose and its actual enforcement.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">🎓 Historians Weigh In</h3>
+                <h4 style="margin-top: 1em;">Geoffrey Ward – <em>Unforgivable Blackness: The Rise and Fall of Jack Johnson</em></h4>
+                <p style="margin-bottom: 1em;">
+                Ward argues that Johnson's real "crime" was his refusal to perform the racial deference that white America demanded of Black men. His wealth, his confidence, and especially his relationships with white women represented an intolerable challenge to the racial hierarchy. The Mann Act prosecution wasn't about protecting women — it was about punishing a Black man who refused to know his "place."
+                </p>
+
+                </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 10: Washingtonians -->
+            <section>
+                <h2 style="font-size: 5.0em;">Temperance Begins as Self-Help</h2>
+                <div class="two-column">
+                    <div>
+                        <div class="column-header" style="font-size: 2.5em;">The <span class="popup-trigger" data-popup="popup-washingtonians">Washingtonian Movement</span>, 1840s</div>
+                        <ul style="font-size: 2.0em;">
+                            <li>Founded 1840, Baltimore</li>
+                            <li>Six reformed drinkers (working-class artisans)</li>
+                            <li>Peer support through public testimony</li>
+                            <li>No moral condemnation—mutual aid</li>
+                            <li>Voluntary abstinence, not legislation</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="column-header" style="font-size: 2.5em;">Why It Worked (and Failed)</div>
+                        <ul style="font-size: 2.0em;">
+                            <li>Explosive growth in early 1840s</li>
+                            <li>Working-class men helping each other</li>
+                            <li>Collapsed by late 1840s (no infrastructure)</li>
+                            <li><strong>Key principle:</strong> "We help each other stay sober"</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bottom-text" style="font-size: 1.8em;">
+                    This was temperance <em>before</em> progressives got hold of it
+                </div>
+
+                <aside class="notes">
+                <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">
+                The Washingtonians are included to establish a critical contrast: temperance didn't always mean prohibition. Before progressives turned alcohol into a political crusade, there was a genuinely grassroots, voluntary approach to sobriety. Understanding what temperance looked like <em>before</em> progressives got hold of it helps you see how dramatically they changed it.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+                <p style="margin-bottom: 1em;">
+                <strong>The Founders</strong>: The <a href="https://en.wikipedia.org/wiki/Washingtonian_movement" target="_blank">Washingtonian Movement</a> was founded by six working-class drinkers in a Baltimore tavern in 1840. They weren't preachers, politicians, or reformers — they were men who drank too much and decided to help each other stop. That origin matters enormously for the contrast that follows.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>The Method</strong>: Their approach was public testimony — standing up at meetings and sharing personal stories of how alcohol had harmed their lives. There was no moral condemnation of drinkers, no legal enforcement, and no political agenda. Just peer support and personal accountability. If this sounds familiar, it should — Alcoholics Anonymous (founded 1935) adopted many of the same principles.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>Why It Failed</strong>: The Washingtonians grew explosively in the early 1840s but collapsed by the end of the decade. They had no organizational infrastructure — no permanent meeting places, no paid staff, no publications. They were a movement without an institution, and movements without institutions rarely survive.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+                <p style="margin-bottom: 1em;">
+                The Washingtonians represent "bottom-up" temperance: working-class people helping themselves, voluntarily. Compare this to what comes next — the WCTU and Anti-Saloon League, which represent "top-down" approaches: middle-class reformers imposing sobriety on others through legislation. The shift from voluntary to coercive temperance mirrors the broader progressive shift from helping people to controlling them. That parallel is the whole reason this slide is in the lecture.
+                </p>
+
+                </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 11: The Shift -->
+            <section>
+                <h2 style="font-size: 5.0em;">How Temperance Changed</h2>
+                <div class="three-column">
+                    <div>
+                        <div class="column-header" style="font-size: 2.5em;">1840s: Washingtonians</div>
+                        <ul style="font-size: 2.0em;">
+                            <li>Peer support</li>
+                            <li>Working-class</li>
+                            <li>Voluntary</li>
+                            <li>"Help me stop"</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="column-header" style="font-size: 2.5em;">1874: <span class="popup-trigger" data-popup="popup-wctu">WCTU</span></div>
+                        <ul style="font-size: 2.0em;">
+                            <li>Moral reform</li>
+                            <li>Middle-class women</li>
+                            <li>"Home protection"</li>
+                            <li>"Make them stop"</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="column-header" style="font-size: 2.5em;">1893: <span class="popup-trigger" data-popup="popup-asl">Anti-Saloon League</span></div>
+                        <ul style="font-size: 2.0em;">
+                            <li>Political lobbying</li>
+                            <li>Professional org</li>
+                            <li>Legislative pressure</li>
+                            <li>"Force them to stop"</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">
+                This three-column comparison is one of the most important slides in the lecture. It tracks a transformation that mirrors the entire story of Progressivism: from voluntary self-improvement → moral persuasion → state coercion. Read across the columns and you'll see who changed, what changed, and how the relationship between individual and state evolved.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+                <p style="margin-bottom: 1em;">
+                <strong>Read the Quotations</strong>: The phrases at the bottom of each column — "Help me stop" → "Make them stop" → "Force them to stop" — tell the entire story in miniature. Each stage involves a different class of people, a different method, and a fundamentally different relationship between the individual and the state.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>The Class Dimension</strong>: Notice who drives each phase. The Washingtonians were working-class men addressing their own problem. The <strong>WCTU</strong> (Woman's Christian Temperance Union) was middle-class women trying to protect their homes from men's drinking. The <strong>Anti-Saloon League</strong> was a professional political organization using legislative power. As temperance "professionalized," it moved further from the people it claimed to help.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>The Gender Dimension</strong>: The WCTU framed temperance as "home protection" — the idea that women and children suffered from male drunkenness. This was genuinely true (domestic violence fueled by alcohol was a real and serious problem in this era). But framing temperance as home protection also reinforced Victorian gender roles: women as moral guardians, the domestic sphere as women's domain.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+                <p style="margin-bottom: 1em;">
+                This three-stage evolution (voluntary → moral → legislative) is a high-probability exam question. Be ready to name each phase, its approximate dates, its class and gender base, and its method. The progression also perfectly illustrates the lecture's broader argument about how progressive reform escalated from self-help to state control.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">🎓 Historians Weigh In</h3>
+                <h4 style="margin-top: 1em;">Jack Blocker – <em>American Temperance Movements: Cycles of Reform</em></h4>
+                <p style="margin-bottom: 1em;">
+                Blocker traces temperance through recurring "cycles" in American history, arguing that each wave reflected the anxieties of the class leading it. The Washingtonians addressed working-class men's real struggles with alcohol. The WCTU channeled middle-class women's frustration with their limited public roles. The Anti-Saloon League represented the professionalization of reform into a bureaucratic lobbying machine. Each cycle moved further from personal experience and closer to political coercion.
+                </p>
+
+                </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 12: Road to Prohibition -->
+            <section>
+                <h2 style="font-size: 4.5em;">From Voluntary Abstinence to Federal Coercion</h2>
+                <ul style="font-size: 2.0em;">
+                    <li class="timeline-item"><span class="timeline-year">1840:</span> Washingtonians—"We choose not to drink"</li>
+                    <li class="timeline-item"><span class="timeline-year">1874:</span> WCTU founded—"Protect homes from drunken men"</li>
+                    <li class="timeline-item"><span class="timeline-year">1893:</span> Anti-Saloon League—"Lobby for dry laws"</li>
+                    <li class="timeline-item"><span class="timeline-year">1917:</span> Wartime prohibition—"National emergency justifies control"</li>
+                    <li class="timeline-item"><span class="timeline-year">1919:</span> <span class="popup-trigger" data-popup="popup-18th">18th Amendment</span> ratified—"Constitutional prohibition"</li>
+                    <li class="timeline-item"><span class="timeline-year">1919:</span> <span class="popup-trigger" data-popup="popup-volstead">Volstead Act</span>—"Federal enforcement machinery"</li>
+                    <li class="timeline-item"><span class="timeline-year">1920:</span> Prohibition begins—"The state decides what you drink"</li>
+                </ul>
+
+                <aside class="notes">
+                <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">
+                This timeline condenses 80 years of temperance history into seven key dates. Read the quotations in order and you'll hear the voice of authority shifting: "We choose" → "Protect" → "Lobby" → "Emergency" → "Constitution" → "Enforcement" → "The state decides." Each step represents an escalation of government power over personal behavior.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+                <p style="margin-bottom: 1em;">
+                <strong>1917 — Wartime Prohibition</strong>: This entry is often overlooked but it was the breakthrough moment. World War I gave prohibitionists a practical argument: conserving grain for the war effort. It also gave them a patriotic argument: many major American breweries were German-owned (Anheuser-Busch, Pabst, Schlitz), and anti-German sentiment made the brewing industry easy to demonize. The war made prohibition seem patriotic rather than puritanical.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>18th Amendment vs. Volstead Act</strong>: Students often confuse these, so here's the distinction. The <a href="https://en.wikipedia.org/wiki/Eighteenth_Amendment_to_the_United_States_Constitution" target="_blank">18th Amendment</a> (ratified January 1919, effective January 1920) made the manufacture, sale, and transportation of "intoxicating liquors" unconstitutional. It said <em>what</em> was banned. The <a href="https://en.wikipedia.org/wiki/Volstead_Act" target="_blank">Volstead Act</a> (October 1919) was the enforcement legislation — it defined "intoxicating" as anything above 0.5% alcohol and created the federal enforcement apparatus. It said <em>how</em> the ban would be enforced. The amendment was the law; the Volstead Act was the machinery.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+                <p style="margin-bottom: 1em;">
+                This timeline demonstrates that Prohibition wasn't a sudden event — it was the culmination of 80 years of escalation. Each stage built on the previous one, each expanded the scope of government authority, and each moved further from the original spirit of voluntary self-improvement. The trajectory from "We choose not to drink" to "The state decides what you drink" is the story of progressive reform in miniature. The 18th Amendment and Volstead Act distinction is a common exam question — know both.
+                </p>
+
+                </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 13: Pattern Expands -->
+            <section>
+                <h2 style="font-size: 4.5em;">Progressive Bodily Control, Multiple Fronts</h2>
+                <div class="content-image-layout">
+                    <div class="content-side">
+                        <div class="column-header" style="font-size: 2.5em;">Sexual Information</div>
+                        <ul style="font-size: 1.8em;">
+                            <li>Comstock Laws (1873)</li>
+                            <li>Federal censorship</li>
+                            <li>"Obscene" = contraception</li>
+                        </ul>
+                        <div class="column-header" style="margin-top: 0.5em; font-size: 2.5em;">Sexual Behavior</div>
+                        <ul style="font-size: 1.8em;">
+                            <li>Mann Act (1910)</li>
+                            <li>Vice prosecutions</li>
+                            <li>Interracial relationships targeted</li>
+                        </ul>
+                        <div class="column-header" style="margin-top: 0.5em; font-size: 2.5em;">Personal Consumption</div>
+                        <ul style="font-size: 1.8em;">
+                            <li>Prohibition (1920)</li>
+                            <li>Constitutional amendment</li>
+                            <li>Federal agents in your home</li>
+                        </ul>
+                    </div>
+                    <div class="image-side">
+                        <img src="images/ch21_lecture2_slide_state_enforcement.png" alt="1920s federal prohibition agents, postal inspectors, vice squad, composite showing state enforcement power, documentary photo style">
+                    </div>
+                </div>
+                <div class="bottom-text-bold" style="margin-top: 0.8em; text-align: center; font-size: 1.8em;">
+                    By 1920: The federal government controlled what you could read, who you could sleep with, and what you could drink—all in the name of protection
+                </div>
+
+                <aside class="notes">
+                <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">
+                This is a synthesis slide — it pulls together everything covered so far and shows the cumulative effect. By 1920, progressive-era reforms had given the federal government control over three distinct areas of personal life. Seeing them side by side reveals the scope of what happened.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+                <p style="margin-bottom: 1em;">
+                <strong>Sexual Information (Comstock Laws)</strong>: The government controlled what you could <em>know</em> about your own body and reproduction. Medical information about contraception was classified as obscene.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>Sexual Behavior (Mann Act)</strong>: The government controlled who you could have sexual relationships with, especially across racial lines. A law designed to stop forced prostitution was used to police consensual relationships.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>Personal Consumption (Prohibition)</strong>: The government controlled what you could put into your own body. A constitutional amendment — the highest form of law in the American system — was used to ban a beverage.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>The Connecting Thread</strong>: All three were justified as "protection" — protecting women from obscenity, protecting women from trafficking, protecting families from alcohol. But in each case, the people supposedly being protected ended up being the ones most harmed by enforcement. Women were arrested for seeking contraception. Consensual interracial couples were prosecuted. Working-class communities bore the brunt of Prohibition enforcement while wealthy Americans drank freely in private clubs.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+                <p style="margin-bottom: 1em;">
+                The bold text at the bottom of this slide is the lecture's thesis condensed into one sentence: "By 1920, the federal government controlled what you could read, who you could sleep with, and what you could drink — all in the name of protection." This is worth writing down verbatim. If you understand this sentence, you understand the entire lecture.
+                </p>
+
+                </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 14: The New Experts -->
+            <section>
+                <h2 style="font-size: 5.0em;">From Ministers to Professionals</h2>
+                <div class="two-column">
+                    <div>
+                        <div class="column-header" style="font-size: 2.5em;">Old Authority</div>
+                        <ul style="font-size: 2.0em;">
+                            <li>Religious doctrine</li>
+                            <li>Community standards</li>
+                            <li>Family control</li>
+                            <li>Private morality</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="column-header" style="font-size: 2.5em;">New Authority</div>
+                        <ul style="font-size: 2.0em;">
+                            <li>Medical science</li>
+                            <li>Statistical surveys</li>
+                            <li>Professional credentials</li>
+                            <li>Public health policy</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bottom-text" style="font-size: 1.8em;">
+                    Progressives didn't just want to ban vice—they wanted to <em>manage</em> sexuality through expertise
+                </div>
+
+                <aside class="notes">
+                <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">
+                This slide captures one of the most important shifts of the Progressive Era: who Americans trusted to tell them how to live. Authority over moral and social behavior moved from the pulpit to the clinic, from the minister to the medical doctor. This wasn't just a personnel change — it was a revolution in how moral claims were justified.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+                <p style="margin-bottom: 1em;">
+                <strong>Old Authority</strong>: Before the Progressive Era, moral guidance came from religion, community norms, family patriarchs, and personal conscience. If you drank too much, your pastor might talk to you. If a neighbor's behavior was scandalous, the community responded through social pressure. There was no government agency involved.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>New Authority</strong>: Progressives replaced religious authority with <strong>scientific authority</strong>. Doctors, social workers, statisticians, and public health officials became the new moral arbiters. The crucial difference: religious authority could only persuade; scientific authority could <em>legislate</em>. When a minister said drinking was sinful, you could ignore him. When a doctor said drinking was a public health crisis, the government could ban alcohol.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>The Bottom Text</strong>: "Progressives didn't just want to ban vice — they wanted to <em>manage</em> sexuality through expertise." This captures the professionalization of morality. The goal wasn't just to prohibit bad behavior, but to create a system of expert-managed control over human behavior — which sets the stage for the eugenic thinking in the next slides.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+                <p style="margin-bottom: 1em;">
+                This shift from moral to scientific authority is foundational for understanding Lecture 3 on eugenics. Once you accept that scientific experts should manage human behavior, it's a short step to the idea that scientific experts should manage human <em>reproduction</em>. The authority shift described on this slide is what made eugenics possible.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">🎓 Historians Weigh In</h3>
+                <h4 style="margin-top: 1em;">Robert Crunden – <em>Ministers of Reform</em></h4>
+                <p style="margin-bottom: 1em;">
+                Crunden argues that progressive reformers didn't actually abandon religious motivation — they <em>secularized</em> it. Many leading reformers grew up in devout Protestant homes and were expected to become ministers. Instead, they redirected that moral energy into social reform, replacing the language of sin with the language of science but keeping the underlying conviction that society could and must be perfected. The "new authority" column on this slide, Crunden would say, is really the old authority in a lab coat.
+                </p>
+
+                </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 15: Sanger - The Radical -->
+            <section>
+                <h2 style="font-size: 5.0em;">Margaret Sanger and Bodily Autonomy</h2>
+                <div class="content-image-layout">
+                    <div class="content-side">
+                       <ul style="font-size: 2.0em;">
+    <li>Nurse in immigrant tenements, witnessed desperate women</li>
+    <li><span class="popup-trigger" data-popup="popup-womanrebel"><em>The Woman Rebel</em></span> (1914): "No Gods, No Masters"</li>
+    <li>Indicted under Comstock Laws—fled to England; husband arrested in her absence</li>
+    <li>Returned 1916, opened <span class="popup-trigger" data-popup="popup-brownsville">Brownsville Clinic</span>: first U.S. birth control clinic</li>
+    <li>Arrested again, served 30 days in workhouse (1917)</li>
+</ul>
+                       
+                        <div class="bottom-text-bold" style="font-size: 1.8em;">
+                            Birth control = women's freedom from constant pregnancy, economic independence, sexual autonomy
+                        </div>
+                    </div>
+                    <div class="image-side">
+                        <img src="images/ch21_lecture2_slide_sanger.png" alt="Margaret Sanger arrest photo 1917">
+                    </div>
+                </div>
+
+                <aside class="notes">
+                <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">
+                Margaret Sanger is one of the most complex and controversial figures in American history. This slide presents her radical phase — the young nurse-turned-activist who risked imprisonment to give women access to birth control. The next slides will complicate this story significantly, but first you need to understand why she became a hero to millions.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+                <p style="margin-bottom: 1em;">
+                <strong>Nurse in Immigrant Tenements</strong>: Sanger worked as a visiting nurse on the Lower East Side of New York, where she witnessed women who were physically broken by endless pregnancies. She later described watching a woman named Sadie Sachs die from a self-induced abortion — an experience she said transformed her life. Whether or not this specific story is precisely true, it captures a real and widespread tragedy: without contraception, poor women had no way to control their fertility, and many died from the consequences.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong><em>The Woman Rebel</em> (1914)</strong>: Sanger published this radical feminist newsletter with the masthead slogan "No Gods, No Masters" — borrowed from the anarchist and labor movements. The newsletter was immediately suppressed under the Comstock Laws (notice the connection to Slide 4). Sanger was indicted for distributing "obscene" material, and she fled to England to avoid prosecution. While she was gone, her husband William Sanger was arrested for distributing one of her pamphlets.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>Brownsville Clinic (1916)</strong>: After returning from exile, <a href="https://en.wikipedia.org/wiki/Margaret_Sanger" target="_blank">Sanger</a> opened the first birth control clinic in the United States in the Brownsville neighborhood of Brooklyn — a working-class immigrant community. The clinic was open for just 10 days before police shut it down. Sanger was arrested, tried, and served 30 days in a workhouse in 1917.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>The Bottom Line</strong>: For Sanger in this phase, birth control meant three things: freedom from the physical toll of constant pregnancy, economic independence (women who could control their fertility could work and plan their lives), and sexual autonomy (women could have intimate relationships without fear of unwanted pregnancy).
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+                <p style="margin-bottom: 1em;">
+                This slide establishes Sanger as a genuine radical willing to face imprisonment for women's reproductive freedom. You need to understand this phase before the lecture complicates her story with the eugenic turn. Sanger's trajectory — from radical activist to eugenics advocate — mirrors the broader progressive trajectory this lecture traces.
+                </p>
+
+                </div>
+                </aside>
+            </section>
+			
+			<!-- SLIDE 15B: The Diaphragm - Why It Mattered -->
+            <section>
+                <h2 style="font-size: 4.5em;">Why the Diaphragm Changed Everything</h2>
+                <div class="two-column">
+                    <div>
+                        <div class="column-header" style="font-size: 2.5em;">The Condom (Known but Stigmatized)</div>
+                        <ul style="font-size: 2.0em;">
+                            <li>Available since 18th century</li>
+                            <li>Associated with prostitution and venereal disease</li>
+                            <li>Symbolized male promiscuity, not family planning</li>
+                            <li>Required male cooperation—or willingness</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="column-header" style="font-size: 2.5em;">The Diaphragm (Sanger's Revolution)</div>
+                        <ul style="font-size: 2.0em;">
+                            <li>Learned from Dutch clinics during exile (1914–15)</li>
+                            <li>Fitted by medical professionals—required expertise</li>
+                            <li>Woman-controlled: no male knowledge or consent needed</li>
+                            <li>Reframed contraception as healthcare, not vice</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bottom-text-bold" style="font-size: 1.8em;">
+                    The diaphragm didn't just prevent pregnancy—it moved reproductive decisions from men's pockets to women's bodies
+                </div>
+
+                <aside class="notes">
+                <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">
+                This slide explains something students often overlook: <em>which</em> contraceptive technology mattered was just as important as <em>whether</em> contraception was available. The diaphragm wasn't just a better device — it represented a fundamental shift in who controlled reproductive decisions.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+                <p style="margin-bottom: 1em;">
+                <strong>The Condom's Problem</strong>: Condoms had been available since the 18th century, but they carried enormous social stigma. They were associated with prostitution and venereal disease prevention — not with family planning. More critically, condoms required male cooperation. A woman had no independent way to prevent pregnancy if her partner refused to use one. In an era when marital rape was legal and women had limited legal rights, this was not a small issue.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>The Diaphragm's Revolution</strong>: Sanger learned about the <a href="https://en.wikipedia.org/wiki/Diaphragm_(birth_control)" target="_blank">diaphragm</a> from Dutch birth control clinics during her exile in Europe (1914–15). The diaphragm was different in three crucial ways. First, it was <em>woman-controlled</em>: a woman could use it without her partner's knowledge or consent. Second, it required medical fitting, which reframed contraception as <em>healthcare</em> rather than vice. Third, by medicalizing birth control, it gave the movement professional legitimacy that Comstock-era censors had difficulty attacking.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>The Bottom Line</strong>: "The diaphragm didn't just prevent pregnancy — it moved reproductive decisions from men's pockets to women's bodies." This captures the slide's argument in one sentence. The technology mattered because it changed the <em>power dynamics</em> of reproduction.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+                <p style="margin-bottom: 1em;">
+                Understanding the diaphragm's significance helps explain why Sanger's movement eventually allied with the medical establishment — a strategic choice that gained legitimacy but also opened the door to medicalized control of reproduction. When birth control became a medical matter, doctors became the gatekeepers, which later made it easier to restrict access to "undesirable" populations. The technology that liberated women also created new mechanisms for controlling them.
+                </p>
+
+                </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 16: The Eugenic Turn -->
+            <section>
+                <h2 style="font-size: 5.0em;">Autonomy for Whom?</h2>
+                <div class="content-image-layout">
+                    <div class="content-side">
+                        <div class="column-header" style="font-size: 2.5em;">Liberation</div>
+                        <ul style="font-size: 2.0em;">
+                            <li>Educated women: choice</li>
+                            <li>Middle-class women: autonomy</li>
+                            <li>Control over fertility = freedom</li>
+                        </ul>
+                        <div class="column-header" style="margin-top: 0.6em; font-size: 2.5em;">Control</div>
+                        <ul style="font-size: 2.0em;">
+                            <li>"Unfit" women should limit reproduction</li>
+                            <li>Poor, disabled, immigrant women targeted</li>
+							<li><span class="popup-trigger" data-popup="popup-negroproject">Negro Project</span> (1939): birth control programs targeting Black communities in the South</li>
+                            <li>Birth control as <span class="popup-trigger" data-popup="popup-racebetterment">"race betterment"</span></li>
+                            
+                        </ul>
+                        <div class="bottom-text" style="font-size: 1.8em;">
+                            Sanger wasn't a hero or a villain—she was a progressive. And progressives believed some people shouldn't reproduce.
+                        </div>
+                    </div>
+                    <div class="image-side">
+                        <img src="images/ch21_lecture2_slide_eugenics.png" alt="American Birth Control League 1920s OR eugenics propaganda poster fitter families">
+                    </div>
+                </div>
+
+                <aside class="notes">
+                <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">
+                This is the pivot slide of the entire lecture. It forces you to hold two uncomfortable truths at the same time: birth control was genuinely liberating for many women AND the birth control movement was deeply entangled with eugenics. The title — "Autonomy for Whom?" — is the question that should stick with you.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+                <p style="margin-bottom: 1em;">
+                <strong>The Liberation Column</strong>: For educated, middle-class women, birth control genuinely meant freedom. Control over fertility allowed women to pursue education, careers, and relationships on their own terms. This was revolutionary and should not be minimized.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>The Control Column</strong>: At the same time, Sanger and many of her allies believed that certain people — the "unfit" — should be discouraged or prevented from reproducing. This wasn't a fringe position; it was mainstream progressive thought. The targets were predictable: poor women, disabled women, immigrant women, and Black women.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>The Negro Project (1939)</strong>: This was a program organized by Sanger's <a href="https://en.wikipedia.org/wiki/American_Birth_Control_League" target="_blank">Birth Control Federation of America</a> to establish birth control clinics in Black communities across the South. The project is historically controversial. Defenders note that Black community leaders, including prominent Black doctors and clergy, participated voluntarily and that Black women wanted access to contraception. Critics point out that the program was designed within a framework of <strong>eugenic population control</strong> targeting communities that white reformers considered "unfit." Both things can be true simultaneously — and that complexity is exactly the point of this slide.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>"Race Betterment"</strong>: This was a common euphemism in the eugenics movement. It meant improving the genetic quality of the population by encouraging reproduction among the "fit" (educated, white, middle-class) and discouraging it among the "unfit" (poor, disabled, non-white, immigrant). Birth control, in this framework, was a tool not of liberation but of selective population management.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+                <p style="margin-bottom: 1em;">
+                The bottom text on this slide is carefully worded: "Sanger wasn't a hero or a villain — she was a progressive." This means she was both genuinely committed to women's freedom and genuinely committed to eugenic thinking about who should reproduce. The lecture doesn't ask you to judge her — it asks you to see how the progressive mindset made both liberation and control seem like the same project. This sets up Lecture 3 on eugenics directly.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">🎓 Historians Weigh In</h3>
+                <h4 style="margin-top: 1em;">Dorothy Roberts – <em>Killing the Black Body: Race, Reproduction, and the Meaning of Liberty</em></h4>
+                <p style="margin-bottom: 1em;">
+                Roberts argues that the birth control movement's eugenic dimensions were not incidental — they were structural. From its inception, the movement distinguished between women who <em>deserved</em> reproductive choice (educated, white, middle-class) and women who <em>needed</em> reproductive control (poor, Black, immigrant). Roberts shows that this distinction continued to shape American reproductive policy well into the late twentieth century, including coerced sterilization of Black women and Puerto Rican women.
+                </p>
+
+                </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 17: The Formula -->
+            <section>
+                <h2 style="font-size: 5.0em;">How It Worked, Every Time</h2>
+                <div class="large-text" style="font-size: 2.0em;">
+                    <p><strong>1.</strong> Identify a bodily "problem"</p>
+                    <p style="font-size: 0.85em; margin-top: 0.3em;">(vice, fertility, consumption, heredity)</p>
+                    <p style="margin-top: 0.8em;"><strong>2.</strong> Claim scientific expertise</p>
+                    <p style="font-size: 0.85em; margin-top: 0.3em;">(doctors, social workers, statisticians replace ministers)</p>
+                    <p style="margin-top: 0.8em;"><strong>3.</strong> Legislate control</p>
+                    <p style="font-size: 0.85em; margin-top: 0.3em;">(Comstock Act, Mann Act, Prohibition, sterilization laws)</p>
+                    <p style="margin-top: 0.8em;"><strong>4.</strong> The vulnerable pay the price</p>
+                    <p style="font-size: 0.85em; margin-top: 0.3em;">(women, immigrants, the poor, people of color)</p>
+                </div>
+
+                <aside class="notes">
+                <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">
+                This slide distills the entire lecture into a four-step formula. If you understand this pattern, you can apply it to every topic we've covered — and to Lecture 3 on eugenics. Think of it as the progressive reform algorithm: the same code running with different inputs every time.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+                <p style="margin-bottom: 1em;">
+                <strong>Step 1 — Identify a bodily "problem"</strong>: Progressives didn't invent vice, alcoholism, or unwanted pregnancy. These were real issues causing real suffering. The key word here is "bodily" — the problem is always located in or on people's bodies, not in economic structures or political systems.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>Step 2 — Claim scientific expertise</strong>: This is where the authority shift from Slide 14 becomes operational. Ministers gave way to doctors, social workers, and statisticians. Scientific language gave moral claims the appearance of objective truth and — critically — justified government action.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>Step 3 — Legislate control</strong>: The parenthetical examples are important: Comstock Act (information control), Mann Act (behavior control), Prohibition (consumption control), sterilization laws (reproductive control, coming in Lecture 3). Each represents an escalation — from censoring mail to amending the Constitution to surgically altering people's bodies.
+                </p>
+                <p style="margin-bottom: 1em;">
+                <strong>Step 4 — The vulnerable pay the price</strong>: This is the prosecutorial conclusion: women, immigrants, the poor, and people of color consistently bore the costs of reforms designed by educated white professionals. The people with the least power to resist were the ones most subject to state intervention.
+                </p>
+
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+                <p style="margin-bottom: 1em;">
+                This four-step formula is your analytical framework for the exam. You should be able to take any specific topic from this lecture — Comstock, the Mann Act, Prohibition, Sanger — and map it onto these four steps. The formula also previews Lecture 3: eugenics follows the same pattern, but Step 3 escalates from legislation to forced sterilization.
+                </p>
+
+                </div>
+                </aside>
+            </section>
+
+            <!-- SLIDE 18: Bridge -->
+            <section>
+                <h2 style="font-size: 4.5em;">From Managing Behavior to Eliminating Biology</h2>
+                <div class="large-text" style="font-size: 2.0em;">
+                    <p><strong>Today:</strong> Progressives managed <em>desire</em></p>
+                    <p style="font-size: 0.85em;">(sex, alcohol, information)</p>
+                    <p style="margin-top: 1em;"><strong>Next time:</strong> Progressives manage <em>heredity</em></p>
+                    <p style="font-size: 0.85em;">(who should exist?)</p>
+                    <p style="margin-top: 1em;"><strong>The question shifts:</strong></p>
+                    <p style="font-size: 0.85em;">From "What should people do?" to "Who should be born?"</p>
+                </div>
+            </section>
+
+            <!-- SLIDE 19: Cliffhanger -->
+            <section>
+                <div class="large-text" style="margin-top: 2em; font-size: 2.0em;">
+                    <p style="font-size: 1.5em; line-height: 1.8;">Why just <em>manage</em> the unfit?</p>
+                    <p style="font-size: 1.5em; margin-top: 0.8em;">Why not prevent them from being born in the first place?</p>
+                    <p style="margin-top: 1.5em; color: var(--ruby-crimson); font-weight: 700;">Next time:</p>
+                    <p style="font-size: 1.2em; margin-top: 0.5em;">32 states, 60,000 Americans, forced sterilization.</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+
+    <!-- ========== POPUP DEFINITIONS ========== -->
+
+    <div id="popup-purefood" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">Pure Food and Drug Act (1906)</div>
+        <p>Federal law that prohibited the manufacture, sale, or transportation of adulterated, misbranded, or poisonous foods, drugs, medicines, and liquors. Passed the same year as the Meat Inspection Act, largely in response to the public outcry generated by Upton Sinclair's <em>The Jungle</em> and the investigative work of Harvey Wiley, chief chemist of the USDA.</p>
+        <p style="margin-top: 0.8em;">This is a classic example of "reform of systems" — regulating industries rather than individual behavior.</p>
+    </div>
+
+    <div id="popup-intervention" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">Site of Intervention</div>
+        <p>A concept meaning that the human body itself became something the government claimed a right to regulate. In the Progressive Era, this meant the state asserted authority over what people drank, who they slept with, what reproductive information they could access, and eventually who could reproduce at all.</p>
+        <p style="margin-top: 0.8em;">This is different from regulating factories or food supplies — it means applying government power directly to individual bodies and personal choices.</p>
+    </div>
+
+    <div id="popup-postalinspector" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">U.S. Postal Inspector</div>
+        <p>Federal law enforcement agents responsible for investigating crimes involving the U.S. mail. In the 19th century, the postal system was the primary communication network in America — equivalent to the internet today. Control over the mail meant control over the flow of information.</p>
+        <p style="margin-top: 0.8em;">Comstock's position as a Postal Inspector gave him extraordinary power: he could intercept mail, identify senders and recipients of "obscene" material, and arrest them using federal authority. A single government agent could effectively censor information reaching millions of Americans.</p>
+    </div>
+
+    <div id="popup-comstockact" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">The Comstock Act (1873)</div>
+        <p>Formally the "Act for the Suppression of Trade in, and Circulation of, Obscene Literature and Articles of Immoral Use." This federal law banned sending "obscene, lewd, or lascivious" materials through the U.S. mail, including contraceptive devices and information about birth control or abortion.</p>
+        <p style="margin-top: 0.8em;"><strong>Why it matters:</strong> The law treated medical information about reproduction as equivalent to pornography. It remained partially in effect until the 1960s–70s and was the legal basis for prosecuting Margaret Sanger and other birth control advocates.</p>
+        <p style="margin-top: 0.8em;">24 states passed their own versions, called "little Comstock laws," extending censorship beyond the mail to local distribution of contraceptive information.</p>
+    </div>
+
+    <div id="popup-vicedistrict" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">Vice Districts</div>
+        <p>Designated or informally recognized areas of cities where prostitution, gambling, and saloons were concentrated — often tolerated by local police in exchange for bribes or political cooperation. Major examples include Chicago's Levee District, New Orleans' Storyville, and New York's Tenderloin.</p>
+        <p style="margin-top: 0.8em;">Progressive reformers viewed these districts as sources of "moral contagion" — the idea that vice could spread like a disease from these areas into "respectable" neighborhoods. This medical metaphor (contagion, infection, quarantine) was central to how progressives justified government intervention into sexual behavior.</p>
+    </div>
+
+    <div id="popup-mcclures" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">McClure's Magazine</div>
+        <p>A leading American monthly magazine (1893–1929) that became the flagship publication of the <strong>muckraking</strong> movement. Its editor, S.S. McClure, assembled the most talented investigative journalists of the era, including Ida Tarbell (who exposed Standard Oil's monopoly practices), Lincoln Steffens (who investigated urban political corruption), and Ray Stannard Baker (who covered racial injustice).</p>
+        <p style="margin-top: 0.8em;"><strong>Muckraking</strong> was investigative journalism that exposed corruption, injustice, and dangerous conditions in American business and politics. The term was coined by Theodore Roosevelt (who meant it as an insult) but became a badge of honor. These journalists helped build public support for progressive legislation.</p>
+    </div>
+
+    <div id="popup-nativism" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">Nativism</div>
+        <p>Political hostility toward immigrants, based on the belief that native-born Americans are culturally, morally, or racially superior to newcomers. In the Progressive Era, nativism was particularly directed at Southern and Eastern European immigrants (Italians, Jews, Poles, Greeks) and Asian immigrants (Chinese, Japanese).</p>
+        <p style="margin-top: 0.8em;">Nativism wasn't just prejudice — it became policy. Progressive-era nativism helped produce the Immigration Act of 1924, which established national-origin quotas designed to restrict immigration from Southern and Eastern Europe while favoring immigrants from Northern and Western Europe.</p>
+        <p style="margin-top: 0.8em;"><strong>Key distinction:</strong> Nativism is not the same as racism, though they often overlap. Nativism specifically targets foreign-born people or people perceived as "foreign."</p>
+    </div>
+
+    <div id="popup-mannact" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">The Mann Act and Interracial Relationships</div>
+        <p>The Mann Act's deliberately vague language — "for any other immoral purpose" — gave federal prosecutors enormous discretion. In practice, this meant the law was disproportionately enforced against Black men in relationships with white women, interracial couples traveling together, and politically inconvenient figures. The most famous case was the prosecution of boxer Jack Johnson in 1912–13.</p>
+        <p style="margin-top: 0.8em;">The law remained a tool of selective prosecution for decades. Musician Chuck Berry was convicted under the Mann Act in 1962 for traveling with a 14-year-old girl. The law was finally amended in 1986 to remove the "immoral purpose" language and focus specifically on commercial sex trafficking and minors.</p>
+    </div>
+
+    <div id="popup-jackjohnson" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">Jack Johnson (1878–1946)</div>
+        <p>The first African American world heavyweight boxing champion (1908–1915). Johnson's dominance in the ring, his lavish lifestyle, and his open relationships with white women made him the most controversial athlete in America. After defeating the "Great White Hope" Jim Jeffries in 1910, race riots broke out in at least 25 cities.</p>
+        <p style="margin-top: 0.8em;">Johnson was prosecuted under the Mann Act in 1912 for traveling with his white girlfriend (later wife) Lucille Cameron. Convicted by an all-white jury in 1913, he fled the country and lived in exile for seven years before returning to serve his sentence. His conviction was widely recognized as racially motivated — he was pardoned posthumously in 2018.</p>
+    </div>
+
+    <div id="popup-washingtonians" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">The Washingtonian Movement</div>
+        <p>A mutual-aid temperance movement founded in 1840 by six working-class drinkers in a Baltimore tavern. Named after George Washington (not the city), the Washingtonians pioneered peer-support sobriety through public testimony meetings where reformed drinkers shared their experiences.</p>
+        <p style="margin-top: 0.8em;"><strong>What made them unique:</strong> Unlike later temperance organizations, the Washingtonians were working-class, non-judgmental, voluntary, and entirely non-political. They didn't call for legislation or condemn drinkers as sinful — they simply helped each other stay sober. They grew rapidly (claiming 600,000 members by 1843) but collapsed by the late 1840s due to lack of organizational infrastructure.</p>
+        <p style="margin-top: 0.8em;"><strong>Legacy:</strong> Alcoholics Anonymous (founded 1935) adopted many Washingtonian principles: peer support, personal testimony, voluntary participation, and freedom from political advocacy.</p>
+    </div>
+
+    <div id="popup-wctu" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">WCTU — Woman's Christian Temperance Union</div>
+        <p>Founded in 1874 in Cleveland, Ohio, the WCTU became the largest women's organization in the United States by the 1890s. Under the leadership of Frances Willard (president 1879–1898), the WCTU expanded its mission from temperance to a broad "home protection" agenda that included women's suffrage, labor reform, prison reform, and public health.</p>
+        <p style="margin-top: 0.8em;"><strong>The "home protection" argument:</strong> The WCTU framed temperance as a women's issue by pointing to the real devastation of alcohol-fueled domestic violence. In an era when women had limited legal recourse against abusive husbands, temperance seemed like a practical solution to a genuine crisis.</p>
+        <p style="margin-top: 0.8em;"><strong>Class dimension:</strong> The WCTU was overwhelmingly middle-class and Protestant. Its temperance campaign targeted saloon culture, which was primarily working-class, immigrant, and Catholic — revealing the class tensions embedded in the movement.</p>
+    </div>
+
+    <div id="popup-asl" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">Anti-Saloon League (ASL)</div>
+        <p>Founded in 1893 in Oberlin, Ohio, the ASL was arguably the most effective single-issue lobbying organization in American history. Unlike the WCTU, which pursued a broad reform agenda, the ASL had one goal: the legal prohibition of alcohol.</p>
+        <p style="margin-top: 0.8em;"><strong>What made the ASL effective:</strong> It was organized like a modern political action committee — professionally staffed, strategically focused, and willing to support any politician of any party who voted "dry." It used a precinct-by-precinct strategy, flipping local elections dry, then county elections, then state elections, and finally achieving a constitutional amendment.</p>
+        <p style="margin-top: 0.8em;"><strong>The key shift:</strong> The ASL represents the professionalization and politicization of temperance. Where the Washingtonians said "help me stop" and the WCTU said "make them stop," the ASL said "force them to stop" — through the power of law.</p>
+    </div>
+
+    <div id="popup-18th" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">18th Amendment (1919)</div>
+        <p>The constitutional amendment that prohibited the "manufacture, sale, or transportation of intoxicating liquors" within the United States. Ratified on January 16, 1919, and effective January 17, 1920. It was the first and only constitutional amendment to restrict personal behavior rather than define government structure or protect individual rights.</p>
+        <p style="margin-top: 0.8em;"><strong>Key distinction:</strong> The 18th Amendment said <em>what</em> was banned but didn't define "intoxicating" or create enforcement mechanisms — that was the job of the Volstead Act. The 18th Amendment was repealed by the 21st Amendment in 1933, making it the only constitutional amendment ever to be fully repealed.</p>
+    </div>
+
+    <div id="popup-volstead" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">Volstead Act (1919)</div>
+        <p>The National Prohibition Act, commonly called the Volstead Act after its sponsor, Congressman Andrew Volstead of Minnesota. Passed in October 1919 to provide the enforcement framework for the 18th Amendment.</p>
+        <p style="margin-top: 0.8em;"><strong>What it did:</strong> Defined "intoxicating liquor" as any beverage containing more than 0.5% alcohol (a stricter definition than many expected), established penalties for manufacturing and selling alcohol, and created the federal enforcement apparatus (the Prohibition Bureau). However, it did not criminalize the <em>purchase</em> or <em>consumption</em> of alcohol — only its manufacture, sale, and transport.</p>
+        <p style="margin-top: 0.8em;"><strong>Exam tip:</strong> The 18th Amendment = the constitutional ban. The Volstead Act = the enforcement machinery. Know both and how they differ.</p>
+    </div>
+
+    <div id="popup-womanrebel" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term"><em>The Woman Rebel</em> (1914)</div>
+        <p>A radical feminist newsletter published by Margaret Sanger in 1914 with the masthead slogan "No Gods, No Masters" — a phrase borrowed from the anarchist and labor movements. The newsletter advocated for women's reproductive autonomy, challenged the Comstock Laws, and first coined the term "birth control."</p>
+        <p style="margin-top: 0.8em;">The Post Office banned it from the mail after just seven issues. Sanger was indicted under the Comstock Act, and rather than stand trial, she fled to England — where she studied contraceptive methods at Dutch clinics that would later shape her activism when she returned.</p>
+    </div>
+
+    <div id="popup-brownsville" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">Brownsville Clinic (1916)</div>
+        <p>The first birth control clinic in the United States, opened by Margaret Sanger, her sister Ethel Byrne, and Fania Mindell on October 16, 1916, in the Brownsville neighborhood of Brooklyn, New York — a working-class, predominantly Jewish and Italian immigrant community.</p>
+        <p style="margin-top: 0.8em;">The clinic distributed contraceptive information and diaphragms to women, many of whom had never had access to birth control. After just 10 days and nearly 500 women served, police shut it down. All three women were arrested. Sanger served 30 days in a workhouse in 1917.</p>
+        <p style="margin-top: 0.8em;"><strong>Why it matters:</strong> The Brownsville Clinic established the model — a medical facility providing contraception under professional supervision — that eventually evolved into Planned Parenthood (founded by Sanger in 1921 as the American Birth Control League).</p>
+    </div>
+
+    <div id="popup-negroproject" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">The Negro Project (1939)</div>
+        <p>A program organized by Sanger's Birth Control Federation of America to establish birth control clinics in Black communities across the rural South. The project hired Black doctors, nurses, and ministers to staff the clinics and recruited prominent Black leaders, including W.E.B. Du Bois and Mary McLeod Bethune, to its advisory board.</p>
+        <p style="margin-top: 0.8em;"><strong>The debate:</strong> Historians disagree about how to interpret this project. Defenders point out that Black community leaders participated willingly and that Black women desperately wanted access to contraception. Critics argue the program operated within a eugenic framework of reducing births among populations white reformers considered "unfit."</p>
+        <p style="margin-top: 0.8em;"><strong>The nuanced view:</strong> Both things can be true. Black women genuinely wanted birth control, and the program provided a real service. But the institutional framework that funded and organized the project was shaped by eugenic assumptions about which populations should reproduce less. The lecture asks you to hold both truths simultaneously.</p>
+    </div>
+
+    <div id="popup-racebetterment" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">"Race Betterment"</div>
+        <p>A common euphemism in the eugenics movement referring to the idea of improving the genetic quality of the human population through selective reproduction. "Race" in this context often meant the human race generally, but in practice, "race betterment" programs overwhelmingly targeted poor people, disabled people, immigrants, and people of color.</p>
+        <p style="margin-top: 0.8em;">The Race Betterment Foundation, established in 1906 by cereal magnate John Harvey Kellogg, held national conferences promoting eugenics, "better baby" contests, and sterilization of the "unfit." The language of "betterment" made profoundly coercive programs sound benevolent — a pattern you'll see intensify in Lecture 3 on eugenics.</p>
+    </div>
+
+    <!-- GLOBAL UI (outside Reveal transforms) -->
+    <div id="keyboard-trigger" class="popup-trigger" data-popup="keyboard-popup" style="position: fixed; top: 20px; right: 20px; font-size: 2em; cursor: pointer; z-index: 100;">⌨️</div>
+
+    <div id="keyboard-popup" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">Keyboard Shortcuts</div>
+        <p>→ / Space: Next slide</p>
+        <p>← : Previous slide</p>
+        <p>S: Speaker notes</p>
+        <p>F: Fullscreen</p>
+        <p>O: Overview</p>
+        <p>ESC: Exit/Close</p>
+    </div>
+
+    <div class="slide-counter"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+
+    <script>
+        Reveal.initialize({
+            width: 1920,
+            height: 1080,
+            margin: 0.08,
+            minScale: 0.2,
+            maxScale: 2.0,
+            hash: true,
+            slideNumber: false,
+            transition: 'slide',
+            plugins: [ RevealNotes ]
+        });
+
+        // Slide counter
+        function updateSlideCounter() {
+            const current = Reveal.getState().indexh + 1;
+            const total = Reveal.getTotalSlides();
+            document.querySelector('.slide-counter').textContent = `${current}/${total}`;
+        }
+        Reveal.on('slidechanged', updateSlideCounter);
+        updateSlideCounter();
+
+        // Pop-up functionality
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('popup-trigger')) {
+                const popupId = e.target.getAttribute('data-popup');
+                const el = document.getElementById(popupId);
+                if (el) el.classList.add('active');
+            }
+            if (e.target.classList.contains('popup-close') || e.target.classList.contains('popup')) {
+                document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+            }
+        });
+    </script>
+</body>
+</html>
