@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Rise and Destruction of the Eunuchs - HIST 270</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --antique-gold: #D4AF37;
+            --deep-teal: #2C7873;
+            --rich-purple: #6B4C9A;
+            --ruby-crimson: #9B2C2C;
+            --dark-charcoal: #1A1A1A;
+            --pure-white: #FAFAFA;
+            --soft-cream: #F5F1E8;
+            --bronze-accent: #8B6F47;
+        }
+
+        .reveal {
+            font-family: 'Lora', serif;
+            font-size: 1.3em;
+            background-color: var(--dark-charcoal);
+            color: var(--pure-white);
+        }
+
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Crimson Pro', serif;
+            font-weight: 700;
+            color: var(--antique-gold);
+            text-transform: none;
+        }
+
+        .reveal h1 { font-size: 3.2em; }
+        .reveal h2 { font-size: 2.2em; margin-bottom: 0.5em; }
+        .reveal h3 { font-size: 1.6em; }
+
+        .reveal ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .reveal ul li {
+            margin-bottom: 0.4em;
+            font-size: 0.95em;
+        }
+
+        .reveal ul li:before {
+            content: "◆ ";
+            color: var(--deep-teal);
+            font-weight: bold;
+            margin-right: 0.5em;
+        }
+
+        strong {
+            color: var(--antique-gold);
+        }
+
+        em {
+            color: var(--deep-teal);
+            font-style: italic;
+        }
+
+        /* === POP-UP SYSTEM === */
+        .popup-trigger {
+            color: var(--deep-teal);
+            border-bottom: 2px dotted var(--deep-teal);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .popup-trigger:hover {
+            color: var(--antique-gold);
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--soft-cream);
+            color: var(--dark-charcoal);
+            padding: 2em;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            max-width: 600px;
+            max-height: 70%;
+            overflow-y: auto;
+            z-index: 1000;
+            border: 3px solid var(--bronze-accent);
+        }
+
+        .popup.active {
+            display: block;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 2em;
+            cursor: pointer;
+            color: var(--ruby-crimson);
+        }
+
+        .definition-term {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--rich-purple);
+            margin-bottom: 0.5em;
+            font-family: 'Crimson Pro', serif;
+        }
+
+        .key-term {
+            color: var(--rich-purple);
+            font-weight: 600;
+        }
+
+        /* === SLIDE COUNTER === */
+        .slide-counter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(26, 26, 26, 0.9);
+            color: var(--antique-gold);
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-family: 'Crimson Pro', serif;
+            font-weight: 600;
+            font-size: 0.9em;
+            border: 2px solid var(--deep-teal);
+            z-index: 100;
+        }
+
+        /* === LAYOUT CLASSES === */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2em;
+            align-items: start;
+        }
+
+        .three-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5em;
+            align-items: start;
+        }
+
+        .content-image-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2em;
+            align-items: center;
+        }
+
+        .content-image-layout .content-side {
+            text-align: left;
+        }
+
+        .content-image-layout .image-side {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .content-image-layout .image-side img {
+            max-width: 100%;
+            max-height: 560px;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+
+        .column-header {
+            font-weight: 700;
+            color: var(--antique-gold);
+            font-size: 1.1em;
+            margin-bottom: 0.5em;
+            font-family: 'Crimson Pro', serif;
+        }
+
+        .bottom-text {
+            margin-top: 1.2em;
+            font-style: italic;
+            color: var(--deep-teal);
+            font-size: 0.9em;
+        }
+
+        .bottom-text-bold {
+            margin-top: 1.2em;
+            font-weight: 700;
+            color: var(--antique-gold);
+            font-size: 0.95em;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            color: var(--deep-teal);
+            margin-top: 0.5em;
+        }
+
+        .large-text {
+            font-size: 1.3em;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        /* === CONTENT BOXES === */
+        .callout {
+            background: rgba(212, 175, 55, 0.15);
+            border-left: 5px solid var(--antique-gold);
+            padding: 1.2em;
+            margin: 1em 0;
+            font-size: 0.9em;
+        }
+
+        .primary-source {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 5px solid var(--antique-gold);
+            padding: 1em;
+            margin: 1em 0;
+            font-style: italic;
+            color: var(--pure-white);
+        }
+
+        .primary-source-attribution {
+            text-align: right;
+            font-size: 0.9em;
+            color: var(--bronze-accent);
+            margin-top: 0.5em;
+            font-style: normal;
+        }
+
+        .timeline-item {
+            margin-bottom: 0.6em;
+        }
+
+        .timeline-year {
+            color: var(--antique-gold);
+            font-weight: 700;
+        }
+
+        .assessment-box {
+            background: rgba(44, 120, 115, 0.15);
+            border: 2px solid var(--deep-teal);
+            border-radius: 10px;
+            padding: 1.5em;
+            margin: 1em 0;
+        }
+
+        .assessment-box h3 {
+            color: var(--deep-teal);
+            margin-top: 0;
+        }
+
+        .img-placeholder {
+            background: rgba(139, 111, 71, 0.2);
+            border: 3px dashed var(--bronze-accent);
+            padding: 3em;
+            text-align: center;
+            color: var(--bronze-accent);
+            font-style: italic;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- SLIDE 1: Title -->
+            <section>
+                <h1 style="font-size: 6.0em;">The Rise and Destruction of the Eunuchs</h1>
+                <div class="subtitle" style="font-size: 2.5em;">HIST 270 — Late Eastern Han, c. 150–220 CE</div>
+                <p style="font-size: 1.8em; margin-top: 1em; color: var(--pure-white);">How the struggle for palace access destroyed a dynasty</p>
+            </section>
+
+            <!-- SLIDE 2: The Big Idea -->
+            <section>
+                <h2 style="font-size: 5.0em;">The Central Insight</h2>
+                <div class="large-text" style="font-size: 2.0em;">
+                    <p>Power doesn't always belong to the person on the throne.</p>
+                    <p style="margin-top: 0.8em;">It belongs to the people who <strong>control access</strong> to the throne.</p>
+                </div>
+                <div class="bottom-text-bold" style="font-size: 1.8em;">
+                    Control of access = control of the state
+                </div>
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This is the thesis of the entire lecture. Everything that follows — the eunuchs' rise, the Confucian backlash, the massacre of 189 CE — flows from this single structural insight. Power isn't about titles. It's about who stands between the ruler and everyone else.</p>
+                    <h4>💭 Context & Connections</h4>
+                    <p>Think about modern parallels: chiefs of staff, gatekeepers, social media algorithms that control what information reaches decision-makers. The mechanism is the same.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 3: Why Eunuchs Became Powerful -->
+            <section>
+                <h2 style="font-size: 5.0em;">Why Eunuchs Became Powerful</h2>
+                <div class="content-image-layout">
+                    <div class="content-side">
+                        <div class="column-header" style="font-size: 2.5em;">The Pattern</div>
+                        <ul style="font-size: 2.0em;">
+                            <li>Emperors often died young</li>
+                            <li>Successors were <strong>children</strong></li>
+                            <li>Real power fell to whoever managed the young ruler</li>
+                        </ul>
+                        <div class="column-header" style="margin-top: 0.6em; font-size: 2.5em;">The Eunuch Advantage</div>
+                        <ul style="font-size: 2.0em;">
+                            <li>Constant physical proximity to the emperor</li>
+                            <li>Control over documents, audiences, and information</li>
+                            <li>No families or heirs — no rival dynasties</li>
+                        </ul>
+                    </div>
+                    <div class="image-side">
+                        <img src="https://cdn.theworldofchinese.com/media/images/VCG11449396821.2e16d0ba.format-webp.fill-2560x1200.webp" alt="Han dynasty palace eunuch court scene illustration">
+                    </div>
+                </div>
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>The Eastern Han had a structural problem: short-lived emperors. When a child sits on the throne, somebody else actually governs. Two groups competed for that role: the empress's family (imperial in-laws) and the palace eunuchs who lived alongside the emperor every day.</p>
+                    <h4>📖 Key Definitions</h4>
+                    <ul>
+                        <li><strong>Eunuch (宦官, huànguān)</strong>: A castrated male who served in the imperial palace. Castration was required to serve near the emperor's wives and concubines. Over time, eunuchs became political power brokers.</li>
+                        <li><strong>Eastern Han</strong>: The later period of the Han dynasty (25–220 CE), with its capital at Luoyang.</li>
+                    </ul>
+                    <h4>🎓 Senior Historians' Corner</h4>
+                    <p>Rafe de Crespigny's work on the Later Han emphasizes that eunuch power was not accidental — it was a structural consequence of the palace system itself. The physical architecture of the court determined who had access, and access determined power.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 4: Two Competing Factions -->
+            <section>
+                <h2 style="font-size: 5.0em;">Two Groups, One Throne</h2>
+                <div class="two-column">
+                    <div>
+                        <div class="column-header" style="font-size: 2.5em;">Imperial Relatives</div>
+                        <ul style="font-size: 2.0em;">
+                            <li>Empress's family (consort clan)</li>
+                            <li>Military connections</li>
+                            <li>Political networks outside the palace</li>
+                            <li>Power base: <em>the court</em></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="column-header" style="font-size: 2.5em;">Palace Eunuchs</div>
+                        <ul style="font-size: 2.0em;">
+                            <li>Lived inside the palace walls</li>
+                            <li>Controlled daily life around the emperor</li>
+                            <li>Managed documents and audiences</li>
+                            <li>Power base: <em>the inner court</em></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bottom-text" style="font-size: 1.8em;">
+                    If you decide who gets to speak to the emperor, you effectively govern the empire
+                </div>
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This is a classic insider vs. outsider dynamic. The imperial relatives had connections in the broader political world — generals, provincial governors, wealthy families. The eunuchs had something more valuable: they were physically present, every day, controlling the flow of information to the throne.</p>
+                    <h4>💭 Context & Connections</h4>
+                    <p>Think of this as an information bottleneck. Whoever controls the bottleneck controls the system. This is true of palace eunuchs in 150 CE and social media platforms in the 21st century.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 5: The Ten Attendants -->
+            <section>
+                <h2 style="font-size: 4.5em;">The <span class="popup-trigger" data-popup="ten-attendants-popup">Ten Attendants</span>: Eunuch Power at Its Peak</h2>
+                <div class="content-image-layout">
+                    <div class="content-side">
+                        <ul style="font-size: 2.0em;">
+                            <li>Group of powerful eunuchs dominating court by mid-2nd century</li>
+                            <li>Controlled access to Emperor Ling (r. 168–189)</li>
+                            <li>Sold government offices for profit</li>
+                            <li>Emperor reportedly said: "The Ten Attendants are my parents"</li>
+                        </ul>
+                        <div class="bottom-text-bold" style="font-size: 1.8em;">
+                            The emperor trusted his gatekeepers more than his own officials
+                        </div>
+                    </div>
+                    <div class="image-side">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/%E6%96%B0%E5%88%8A%E6%A0%A1%E6%AD%A3%E5%8F%A4%E6%9C%AC%E5%A4%A7%E5%AD%97%E9%9F%B3%E9%87%8A%E4%B8%89%E5%9B%BD%E5%BF%97%E9%80%9A%E4%BF%97%E6%BC%94%E4%B9%89_%E6%98%8E%E4%B8%87%E5%8E%86%E5%8D%81%E4%B9%9D%E5%B9%B4%E4%B9%A6%E6%9E%97%E5%91%A8%E6%9B%B0%E6%A0%A1%E5%88%8A%E6%9C%AC_006.jpg" alt="Romance of the Three Kingdoms Ming dynasty woodblock print court scene">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ten Attendants Pop-up -->
+            <div id="ten-attendants-popup" class="popup">
+                <span class="popup-close">&times;</span>
+                <div class="definition-term">Ten Attendants (十常侍, Shí Chángshì)</div>
+                <p>A group of twelve powerful eunuchs (despite the name "ten") who dominated the court of Emperor Ling in the late Eastern Han. They controlled access to the emperor, sold government positions, and amassed enormous personal wealth. Their influence became the focal point of Confucian outrage against eunuch power.</p>
+            </div>
+
+            <!-- SLIDE 6: The Confucian Backlash -->
+            <section>
+                <h2 style="font-size: 5.0em;">The Confucian Backlash</h2>
+                <div class="content-image-layout">
+                    <div class="content-side">
+                        <div class="column-header" style="font-size: 2.5em;">The Scholar-Official Worldview</div>
+                        <ul style="font-size: 2.0em;">
+                            <li>Government should be run by <em>educated moral gentlemen</em></li>
+                            <li>Selected for virtue and learning</li>
+                            <li>Not palace servants</li>
+                        </ul>
+                        <div class="column-header" style="margin-top: 0.6em; font-size: 2.5em;">Their Accusations</div>
+                        <ul style="font-size: 2.0em;">
+                            <li>Corruption and selling offices</li>
+                            <li>Manipulating imperial decisions</li>
+                            <li>Blocking qualified officials from power</li>
+                        </ul>
+                    </div>
+                    <div class="image-side">
+                        <img src="https://www.worldhistory.org/img/c/p/1600x900/6907.jpg" alt="Han dynasty Confucian scholars officials illustration">
+                    </div>
+                </div>
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>The Confucian officials weren't just personally offended — the eunuchs violated their entire theory of government. Confucian political philosophy held that legitimate authority flows from moral cultivation and education, not from proximity to power. Eunuchs represented everything the bureaucratic ideal rejected: unqualified men wielding authority through personal connections rather than merit.</p>
+                    <h4>📖 Key Definitions</h4>
+                    <ul>
+                        <li><strong>Scholar-official (士大夫, shì dàfū)</strong>: The educated elite who staffed the imperial bureaucracy. They saw themselves as the legitimate governing class, trained in Confucian classics and selected through recommendation and examination.</li>
+                    </ul>
+                </aside>
+            </section>
+
+            <!-- SLIDE 7: The Partisan Prohibitions -->
+            <section>
+                <h2 style="font-size: 4.5em;">The <span class="popup-trigger" data-popup="partisan-popup">Partisan Prohibitions</span> (166–169 CE)</h2>
+                <div class="two-column">
+                    <div>
+                        <div class="column-header" style="font-size: 2.5em;">What Happened</div>
+                        <ul style="font-size: 2.0em;">
+                            <li>Officials publicly accused eunuchs</li>
+                            <li>Eunuchs framed critics as conspirators</li>
+                            <li>Hundreds of officials arrested or executed</li>
+                            <li>Thousands banned from government service</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="column-header" style="font-size: 2.5em;">The Result</div>
+                        <ul style="font-size: 2.0em;">
+                            <li>Reform networks crushed</li>
+                            <li>Two hostile camps hardened</li>
+                            <li>No middle ground left</li>
+                            <li>The Han court became a political pressure cooker</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bottom-text-bold" style="font-size: 1.8em;">
+                    Instead of solving the problem, the conflict destroyed the possibility of compromise
+                </div>
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>The Partisan Prohibitions are the point of no return. Once the eunuchs used imperial authority to criminalize their opponents, the conflict moved beyond political disagreement into existential warfare. Both sides now believed the other had to be completely destroyed. This is what made the massacre of 189 CE possible — and inevitable.</p>
+                </aside>
+            </section>
+
+            <!-- Partisan Prohibitions Pop-up -->
+            <div id="partisan-popup" class="popup">
+                <span class="popup-close">&times;</span>
+                <div class="definition-term">Partisan Prohibitions (党锢之祸, Dǎnggù zhī Huò)</div>
+                <p>Two waves of political persecution (166 and 169 CE) in which the eunuch faction convinced the emperor that reform-minded officials were forming illegal political factions. Hundreds were arrested, executed, or permanently banned from office. The purge eliminated moderate voices and polarized the court into irreconcilable camps.</p>
+            </div>
+
+            <!-- SLIDE 8: Section Divider — The Crisis -->
+            <section data-background="linear-gradient(135deg, #2C7873 0%, #1A1A1A 100%)">
+                <h2 style="font-size: 5.0em;">The Crisis of 189 CE</h2>
+                <div class="subtitle" style="font-size: 2.5em;">When the Pressure Cooker Exploded</div>
+            </section>
+
+            <!-- SLIDE 9: He Jin's Plan -->
+            <section>
+                <h2 style="font-size: 5.0em;">He Jin's Gamble</h2>
+                <div class="content-image-layout">
+                    <div class="content-side">
+                        <div class="column-header" style="font-size: 2.5em;">The Setup</div>
+                        <ul style="font-size: 2.0em;">
+                            <li><span class="popup-trigger" data-popup="emperor-ling-popup">Emperor Ling</span> dies in 189 CE</li>
+                            <li>General <span class="popup-trigger" data-popup="he-jin-popup">He Jin</span> — brother of the empress — takes power</li>
+                            <li>Plans to eliminate the eunuchs once and for all</li>
+                        </ul>
+                        <div class="column-header" style="margin-top: 0.6em; font-size: 2.5em;">The Problem</div>
+                        <ul style="font-size: 2.0em;">
+                            <li>Court politics stalled the plan</li>
+                            <li>He Jin hesitated</li>
+                            <li>The eunuchs struck first</li>
+                        </ul>
+                    </div>
+                    <div class="image-side">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/He_Jin_Qing_illustration.jpg" alt="He Jin Qing dynasty illustration general Eastern Han">
+                    </div>
+                </div>
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>He Jin was in an incredibly dangerous position. He had the military power to crush the eunuchs, but he needed political cover from within the court. While he waited for that cover, the eunuchs — who knew exactly what was coming — acted decisively. In palace politics, hesitation kills.</p>
+                </aside>
+            </section>
+
+            <!-- He Jin Pop-up -->
+            <div id="he-jin-popup" class="popup">
+                <span class="popup-close">&times;</span>
+                <div class="definition-term">He Jin (何進, d. 189 CE)</div>
+                <p>Half-brother of Empress He and General-in-Chief of the Han military. After Emperor Ling's death, He Jin became the most powerful figure at court and plotted to destroy the eunuch faction. He was lured into the palace and assassinated before he could carry out his plan, triggering the catastrophic military intervention that followed.</p>
+            </div>
+
+            <!-- Emperor Ling Pop-up -->
+            <div id="emperor-ling-popup" class="popup">
+                <span class="popup-close">&times;</span>
+                <div class="definition-term">Emperor Ling (漢靈帝, r. 168–189 CE)</div>
+                <p>One of the last effective Han emperors — though "effective" is generous. He was deeply dependent on the Ten Attendants and reportedly sold government offices to fund his personal luxuries. His death in 189 CE triggered the succession crisis that destroyed the dynasty.</p>
+            </div>
+
+            <!-- SLIDE 10: The Massacre -->
+            <section>
+                <h2 style="font-size: 5.0em;">The Massacre</h2>
+                <div class="content-image-layout">
+                    <div class="content-side">
+                        <div class="column-header" style="font-size: 2.5em;">The Eunuchs' Fatal Mistake</div>
+                        <ul style="font-size: 2.0em;">
+                            <li>Lured He Jin into the palace</li>
+                            <li><strong>Assassinated him</strong></li>
+                        </ul>
+                        <div class="column-header" style="margin-top: 0.6em; font-size: 2.5em;">The Response</div>
+                        <ul style="font-size: 2.0em;">
+                            <li>He Jin's allies — military commanders — marched into <strong>Luoyang</strong></li>
+                            <li>Thousands of eunuchs killed</li>
+                            <li>Many hunted through the streets</li>
+                            <li>Some committed suicide to avoid capture</li>
+                        </ul>
+                        <div class="bottom-text" style="font-size: 1.8em;">
+                            The eunuch faction was destroyed. But the cure was worse than the disease.
+                        </div>
+                    </div>
+                    <div class="image-side">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/58/Eastern_Han_Dynasty_tomb_fresco_of_chariots%2C_horses%2C_and_men%2C_Luoyang_2.jpg" alt="Eastern Han dynasty tomb fresco chariots horses soldiers Luoyang">
+                    </div>
+                </div>
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>The eunuchs killed He Jin thinking it would save them. Instead, it gave his military allies the justification to do what they'd always wanted — march an army into the capital. The massacre that followed was thorough and indiscriminate. The eunuch faction ceased to exist. But the soldiers who carried it out had no intention of leaving.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 11: The Unintended Consequence -->
+            <section>
+                <h2 style="font-size: 4.5em;">The Unintended Consequence</h2>
+                <div class="content-image-layout">
+                    <div class="content-side">
+                        <ul style="font-size: 2.0em;">
+                            <li>The generals who entered the capital <strong>did not leave</strong></li>
+                            <li><span class="popup-trigger" data-popup="dong-zhuo-popup">Dong Zhuo</span> seized the emperor, ruled as a warlord</li>
+                            <li>Central authority collapsed</li>
+                            <li>Regional commanders acted independently</li>
+                        </ul>
+                        <div class="bottom-text-bold" style="font-size: 1.8em;">
+                            Within a generation: the Han dynasty ended (220 CE) and China fragmented into the Three Kingdoms
+                        </div>
+                    </div>
+                    <div class="image-side">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/47/Dong_Zhuo_Qing_Dynasty_Illustration.jpg" alt="Dong Zhuo Qing dynasty illustration warlord">
+                    </div>
+                </div>
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This is the tragic irony of the story. The Confucian officials wanted to purify the government. They got what they wanted — the eunuchs were gone. But the military force required to achieve that purge brought something far worse: warlordism, civil war, and the end of the dynasty itself.</p>
+                    <h4>📖 Key Definitions</h4>
+                    <ul>
+                        <li><strong>Three Kingdoms (三國, Sānguó)</strong>: The period of division (220–280 CE) following the Han collapse, when China split into three competing states: Wei, Shu, and Wu.</li>
+                    </ul>
+                </aside>
+            </section>
+
+            <!-- Dong Zhuo Pop-up -->
+            <div id="dong-zhuo-popup" class="popup">
+                <span class="popup-close">&times;</span>
+                <div class="definition-term">Dong Zhuo (董卓, d. 192 CE)</div>
+                <p>A frontier military commander who seized control of the Han court after the massacre of the eunuchs in 189 CE. He deposed one emperor, installed another as a puppet, and ruled through terror. His brutality united other warlords against him, but the damage was done — central authority never recovered.</p>
+            </div>
+
+            <!-- SLIDE 12: The Larger Pattern -->
+            <section>
+                <h2 style="font-size: 5.0em;">The Larger Pattern</h2>
+                <div class="large-text" style="font-size: 2.0em;">
+                    <p>The late Han system depended on <strong>competing power centers</strong>:</p>
+                    <p style="font-size: 0.85em; margin-top: 0.5em;">Eunuchs (palace access) · Imperial relatives (court politics) · Scholar-officials (bureaucracy) · Military commanders (force)</p>
+                    <p style="margin-top: 1.0em;">When reformers eliminated one group entirely,</p>
+                    <p>they didn't purify the system.</p>
+                    <p style="margin-top: 0.5em; color: var(--ruby-crimson); font-weight: 700;">They destabilized it.</p>
+                </div>
+                <div class="bottom-text-bold" style="font-size: 1.8em;">
+                    Corruption weakens institutions. Factional purges can destroy them.
+                </div>
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This is the systems-level takeaway. The Han government was a balance of competing factions — messy, corrupt, but functional. When one faction was violently removed, the remaining factions didn't settle into harmony. The strongest faction (the military) simply took over. The lesson: in complex political systems, balance matters more than purity.</p>
+                    <h4>🤔 Discussion Prompts</h4>
+                    <ul>
+                        <li>Can you think of modern examples where eliminating one power center destabilized a whole system?</li>
+                        <li>Is political corruption ever "functional" — and what does it mean to ask that question?</li>
+                    </ul>
+                </aside>
+            </section>
+
+            <!-- SLIDE 13: Why This Matters -->
+            <section>
+                <h2 style="font-size: 5.0em;">Why This Matters</h2>
+                <div class="three-column">
+                    <div>
+                        <div class="column-header" style="font-size: 2.5em;">The Recurring Structure</div>
+                        <ul style="font-size: 2.0em;">
+                            <li>Child rulers</li>
+                            <li>Court factions</li>
+                            <li>Information control</li>
+                            <li>Moral reform → political warfare</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="column-header" style="font-size: 2.5em;">Later Dynasties</div>
+                        <ul style="font-size: 2.0em;">
+                            <li><strong>Tang</strong>: Eunuch generals control armies</li>
+                            <li><strong>Ming</strong>: Eunuch secret police (Eastern Depot)</li>
+                            <li>Same structural problem, different century</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="column-header" style="font-size: 2.5em;">The Insight</div>
+                        <ul style="font-size: 2.0em;">
+                            <li>The personalities change</li>
+                            <li>The structure repeats</li>
+                            <li>Access = Power</li>
+                            <li>Purges ≠ Solutions</li>
+                        </ul>
+                    </div>
+                </div>
+                <aside class="notes">
+                    <h4>📚 What You Need to Know</h4>
+                    <p>This lecture isn't really about eunuchs — it's about a structural vulnerability in imperial government that persisted for over a thousand years. The Tang dynasty (618–907) and Ming dynasty (1368–1644) both saw eunuch factions gain enormous power through the same mechanism: control of access to the emperor. The specific people changed. The architecture of power didn't.</p>
+                    <h4>🎓 Senior Historians' Corner</h4>
+                    <p>This pattern connects to broader debates about whether Chinese imperial history is "cyclical." It's not that dynasties repeat in some mystical way — it's that the structural incentives of palace-centered government produce similar factional dynamics across centuries.</p>
+                </aside>
+            </section>
+
+            <!-- SLIDE 14: Closing -->
+            <section>
+                <div class="large-text" style="margin-top: 2em; font-size: 2.0em;">
+                    <p style="font-size: 1.3em;">History sometimes behaves like a Möbius strip:</p>
+                    <p style="font-size: 1.1em; margin-top: 0.8em;">what looks like a fight between two sides</p>
+                    <p style="font-size: 1.1em;">turns out to be one continuous loop</p>
+                    <p style="font-size: 1.1em;">of power, reaction, and collapse.</p>
+                    <p style="margin-top: 1.5em; font-size: 1.0em;">The Han fell not because the state was weak,</p>
+                    <p style="font-size: 1.0em;">but because its guardians tried to <strong>purify it by force</strong>.</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- GLOBAL UI (outside Reveal transforms) -->
+    <div id="keyboard-trigger" class="popup-trigger" data-popup="keyboard-popup" style="position: fixed; top: 20px; right: 20px; font-size: 2em; cursor: pointer; z-index: 100;">⌨️</div>
+
+    <div id="keyboard-popup" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">Keyboard Shortcuts</div>
+        <p>→ / Space: Next slide</p>
+        <p>← : Previous slide</p>
+        <p>S: Speaker notes</p>
+        <p>F: Fullscreen</p>
+        <p>O: Overview</p>
+        <p>ESC: Exit/Close</p>
+    </div>
+
+    <div class="slide-counter"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+
+    <script>
+        Reveal.initialize({
+            width: 1920,
+            height: 1080,
+            margin: 0.08,
+            minScale: 0.2,
+            maxScale: 2.0,
+            hash: true,
+            slideNumber: false,
+            transition: 'slide',
+            plugins: [ RevealNotes ]
+        });
+
+        // Slide counter
+        function updateSlideCounter() {
+            const current = Reveal.getState().indexh + 1;
+            const total = Reveal.getTotalSlides();
+            document.querySelector('.slide-counter').textContent = `${current}/${total}`;
+        }
+        Reveal.on('slidechanged', updateSlideCounter);
+        updateSlideCounter();
+
+        // Pop-up functionality (delegated events)
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('popup-trigger')) {
+                const popupId = e.target.getAttribute('data-popup');
+                const el = document.getElementById(popupId);
+                if (el) el.classList.add('active');
+            }
+            if (e.target.classList.contains('popup-close') || e.target.classList.contains('popup')) {
+                document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+            }
+        });
+    </script>
+</body>
+</html>
