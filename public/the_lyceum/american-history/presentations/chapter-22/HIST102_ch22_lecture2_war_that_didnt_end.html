@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The War That Didn't End — HIST 102</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --antique-gold:#D4AF37; --deep-teal:#2C7873; --rich-purple:#6B4C9A;
+            --ruby-crimson:#9B2C2C; --dark-charcoal:#1A1A1A; --pure-white:#FAFAFA;
+            --soft-cream:#F5F1E8; --bronze-accent:#8B6F47; --forest-green:#1B4332;
+        }
+        .reveal { font-family:'Lora',serif; font-size:1.3em; background-color:var(--dark-charcoal); color:var(--pure-white); }
+        .reveal h1,.reveal h2,.reveal h3 { font-family:'Crimson Pro',serif; font-weight:700; color:var(--antique-gold); text-transform:none; }
+        .reveal h1 { font-size:6.0em; } .reveal h2 { font-size:4.5em; margin-bottom:0.5em; } .reveal h3 { font-size:2.5em; }
+        .reveal ul { list-style:none; padding-left:0; }
+        .reveal ul li { margin-bottom:0.4em; }
+        .reveal ul li:before { content:"◆ "; color:var(--deep-teal); font-weight:bold; margin-right:0.5em; }
+        strong { color:var(--antique-gold); }
+        em { color:var(--deep-teal); font-style:italic; }
+        .popup-trigger { color:var(--deep-teal); border-bottom:2px dotted var(--deep-teal); cursor:pointer; transition:color 0.3s; }
+        .popup-trigger:hover { color:var(--antique-gold); }
+        .popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+            background:var(--soft-cream); color:var(--dark-charcoal); padding:2em; border-radius:15px;
+            box-shadow:0 8px 32px rgba(0,0,0,0.5); max-width:640px; max-height:75%; overflow-y:auto;
+            z-index:1000; border:3px solid var(--bronze-accent); }
+        .popup.active { display:block; }
+        .popup-close { position:absolute; top:10px; right:15px; font-size:2em; cursor:pointer; color:var(--ruby-crimson); }
+        .definition-term { font-size:1.5em; font-weight:700; color:var(--rich-purple); margin-bottom:0.5em; font-family:'Crimson Pro',serif; }
+        .key-term { color:var(--rich-purple); font-weight:600; }
+        .slide-counter { position:fixed; bottom:20px; right:20px; background:rgba(26,26,26,0.9);
+            color:var(--antique-gold); padding:8px 15px; border-radius:8px; font-family:'Crimson Pro',serif;
+            font-weight:600; font-size:0.9em; border:2px solid var(--deep-teal); z-index:100; }
+        .two-column { display:grid; grid-template-columns:1fr 1fr; gap:2em; align-items:start; }
+        .three-column { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.5em; align-items:start; }
+        .content-image-layout { display:grid; grid-template-columns:1fr 1fr; gap:2em; align-items:center; }
+        .content-image-layout .content-side { text-align:left; }
+        .content-image-layout .image-side { display:flex; flex-direction:column; align-items:center; }
+        .content-image-layout .image-side img { max-width:100%; max-height:560px; object-fit:contain; border-radius:6px; }
+        .column-header { font-weight:700; color:var(--antique-gold); font-size:2.5em; margin-bottom:0.5em; font-family:'Crimson Pro',serif; }
+        .bottom-text { margin-top:1.2em; font-style:italic; color:var(--deep-teal); font-size:1.8em; }
+        .bottom-text-bold { margin-top:1.2em; font-weight:700; color:var(--antique-gold); font-size:1.8em; }
+        .subtitle { font-size:2.5em; color:var(--deep-teal); margin-top:0.5em; }
+        .large-text { font-size:2.0em; text-align:center; line-height:1.6; }
+        .callout { background:rgba(212,175,55,0.15); border-left:5px solid var(--antique-gold); padding:1.2em; margin:1em 0; font-size:2.0em; line-height:1.5; }
+        .primary-source { background:rgba(212,175,55,0.1); border-left:5px solid var(--antique-gold); padding:1em; margin:1em 0; font-style:italic; color:var(--pure-white); font-size:1.8em; line-height:1.5; }
+        .primary-source-attribution { text-align:right; font-size:0.85em; color:var(--bronze-accent); margin-top:0.5em; font-style:normal; }
+        .timeline-item { margin-bottom:0.6em; }
+        .timeline-year { color:var(--antique-gold); font-weight:700; }
+        .assessment-box { background:rgba(44,120,115,0.15); border:2px solid var(--deep-teal); border-radius:10px; padding:1.5em; margin:1em 0; }
+        .img-placeholder { background:rgba(139,111,71,0.2); border:3px dashed var(--bronze-accent); padding:2em; text-align:center; color:var(--bronze-accent); font-style:italic; border-radius:10px; display:none; }
+        .img-caption { font-size:1.4em; color:var(--bronze-accent); font-style:italic; text-align:center; margin-top:0.4em; }
+        .danger-box { background:rgba(155,44,44,0.15); border-left:5px solid var(--ruby-crimson); padding:1.2em; margin:1em 0; font-size:2.0em; line-height:1.5; }
+        .number-stat { font-family:'Crimson Pro',serif; font-size:3.5em; font-weight:700; color:var(--antique-gold); text-align:center; margin-bottom:0.1em; }
+        .number-label { font-size:1.8em; color:var(--pure-white); text-align:center; margin-bottom:0.6em; }
+        .stats-grid { display:grid; grid-template-columns:1fr 1fr; gap:2em; margin-top:0.5em; }
+        .stat-box { text-align:center; padding:1em; background:rgba(255,255,255,0.05); border-radius:10px; border:1px solid rgba(212,175,55,0.3); }
+        .gap-bridge { display:flex; align-items:center; justify-content:center; gap:1em; font-size:2.2em; margin:1em 0; }
+        .gap-left { color:var(--ruby-crimson); font-weight:700; }
+        .gap-right { color:var(--deep-teal); font-style:italic; }
+        .gap-arrow { color:var(--antique-gold); font-size:1.2em; }
+    </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ============================================================ -->
+<!-- TITLE SLIDE -->
+<!-- ============================================================ -->
+<section>
+    <h2 style="font-size:3.8em; line-height:1.1;">The War That Didn't End</h2>
+    <div class="subtitle" style="font-size:2.2em;">Roosevelt and the Moral Mechanics of Occupation</div>
+    <p style="color:var(--bronze-accent); font-style:italic; font-size:1.8em; margin-top:1.5em;">HIST 102 · Chapter 22 · Lecture 2</p>
+    <aside class="notes">
+        <p>📚 <strong>Before class:</strong> Project a split image — left: American celebrations after the Treaty of Paris, December 1898. Right: a photograph of Filipino fighters or a burned Philippine village, c. 1901. No caption. Let students sit with the contrast. The visual juxtaposition is the opening argument: what the U.S. thought it won vs. what it actually produced.</p>
+        <p>💭 <strong>Bridge from Lecture 1:</strong> "Last lecture we talked about war as spectacle — how the media made the Spanish-American War emotionally irresistible. Today we're looking at what the cameras didn't follow. What happened after the front pages moved on."</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- LEARNING OBJECTIVES -->
+<!-- ============================================================ -->
+<section>
+    <h2 style="font-size:4.5em;">Today's Questions</h2>
+    <ul style="font-size:2.0em;">
+        <li>What did Filipinos expect from American arrival — and why?</li>
+        <li>What tactics did the U.S. use in the Philippines, and what was their human cost?</li>
+        <li>How did Americans <em>justify</em> sustained colonial violence — and believe it?</li>
+        <li>Who said <strong>no</strong> — and what was their argument?</li>
+    </ul>
+    <aside class="notes">
+        <p>📚 <strong>Frame these as live questions.</strong> Today's lecture is heavier than Lecture 1. The subject matter requires directness. Students need to understand that what follows is documented history — not editorial, not polemic — and that the point of studying it is analytical, not merely moral.</p>
+        <p>🤔 <strong>Opening prompt for the projected images:</strong> "What does winning feel like? What do you expect to happen after you win?"</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- OPENING: THE MORNING AFTER -->
+<!-- ============================================================ -->
+<section>
+    <h2 style="font-size:4.5em;">The Morning After</h2>
+    <div class="two-column">
+        <div>
+            <div class="column-header" style="font-size:2.2em;">What Americans Expected</div>
+            <ul style="font-size:2.0em;">
+                <li>Celebration</li>
+                <li>Peace</li>
+                <li>Going home</li>
+                <li>Stability without effort</li>
+            </ul>
+        </div>
+        <div>
+            <div class="column-header" style="font-size:2.2em;">What Victory Produced</div>
+            <ul style="font-size:2.0em;">
+                <li>An empire — unplanned</li>
+                <li>8 million subjects who were not consulted</li>
+                <li>A new war by February 1899</li>
+                <li>Questions no one was ready to answer</li>
+            </ul>
+        </div>
+    </div>
+    <div class="bottom-text-bold" style="font-size:1.8em;">Wars do not end when treaties are signed. They end when questions of sovereignty, legitimacy, and consent are resolved.</div>
+    <aside class="notes">
+        <p>📚 <strong>What You Need to Know:</strong> The Treaty of Paris (December 1898) transferred the Philippines, Puerto Rico, and Guam to the United States for $20 million. Spain was paid. Filipinos were not asked. The war Americans thought they were fighting — for Cuban liberation — produced an empire Americans hadn't planned for.</p>
+        <p>💭 <strong>Key question to plant:</strong> "Who governs? On what authority? For how long?" These three questions drive the entire lecture.</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION I DIVIDER -->
+<!-- ============================================================ -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">Section I</h2>
+    <div class="subtitle" style="font-size:2.5em;">The Philippines Before the United States</div>
+    <p style="color:var(--bronze-accent); font-style:italic; font-size:2.0em;">The Philippines did not enter history in 1898.</p>
+    <aside class="notes">
+        <p>📚 <strong>Transition:</strong> This section establishes Filipino agency and political sophistication before American arrival. The goal is to make the Philippine-American War impossible to understand as a civilizing mission — because the civilization was already there.</p>
+    </aside>
+</section>
+
+<!-- SLIDE: Filipino Prior History -->
+<section>
+    <h2 style="font-size:4.5em;">An Independence Movement in Progress</h2>
+    <div class="content-image-layout">
+        <div class="content-side">
+            <ul style="font-size:2.0em;">
+                <li><span class="popup-trigger" data-popup="katipunan-popup">The Katipunan</span> launched armed revolt against Spain in <strong>1896</strong> — two years before any American arrived</li>
+                <li>Not primitive insurgency — organized movement with political leadership, newspapers, ideology</li>
+                <li>June 1898: Aguinaldo declared Philippine independence</li>
+                <li>January 1899: Philippines ratified a <span class="popup-trigger" data-popup="malolos-popup">constitution</span> — the <em>Malolos Republic</em></li>
+            </ul>
+            <div class="bottom-text-bold" style="font-size:1.8em;">The people the U.S. was about to govern had not been consulted.</div>
+        </div>
+        <div class="image-side">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/Emilio_Aguinaldo_(ca._1898).jpg"
+                 alt="Emilio Aguinaldo portrait photograph circa 1898 Philippine independence leader"
+                 style="max-width:100%;max-height:520px;object-fit:contain;border-radius:6px;"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+            <div class="img-placeholder" style="width:100%;height:300px;">📸 Emilio Aguinaldo · c. 1898 · Public Domain</div>
+            <p class="img-caption">Emilio Aguinaldo · c. 1898 · Public Domain · Wikimedia Commons</p>
+        </div>
+    </div>
+    <aside class="notes">
+        <p>📚 <strong>What You Need to Know:</strong> The Ten Years' War (1868–1878) and the 1896 Katipunan revolt are both prior to American involvement. Filipino independence was not a reaction to American promises — it was already in motion. Aguinaldo coordinated with U.S. naval officers (including Commodore Dewey) against Spain, and understood those contacts as implying American support for self-rule.</p>
+        <p>📖 <strong>Key Definition:</strong> See popups: Katipunan, Malolos Republic.</p>
+        <p>🎓 <strong>Senior Historians' Corner:</strong> Louis A. Pérez Jr. has argued that American historiography systematically erases Filipino agency from the 1898 story — a pattern that began with press coverage and continued through official policy.</p>
+    </aside>
+</section>
+
+<!-- SLIDE: Aguinaldo's Argument -->
+<section>
+    <h2 style="font-size:4.5em;">Aguinaldo's Argument</h2>
+    <div class="primary-source" style="font-size:2.0em;">
+        "My government cannot remain indifferent in view of such a violent and aggressive seizure of a portion of its territory by a nation which has arrogated to itself the title of champion of oppressed nations... We are not savages ignorant of how to govern ourselves."
+        <div class="primary-source-attribution">— Emilio Aguinaldo, Proclamation, January 1899</div>
+    </div>
+    <ul style="font-size:2.0em; margin-top:0.8em;">
+        <li>This is a <strong>precise political argument</strong> — not a confused response</li>
+        <li>He was right that the U.S. was replacing one colonial power with another</li>
+        <li>He was right that Filipinos had the capacity for self-governance</li>
+        <li>He lost the war anyway</li>
+    </ul>
+    <aside class="notes">
+        <p>📚 <strong>The blunt framing is intentional:</strong> "He was right. He lost the war anyway." Historical outcomes are not determined by who is correct. This is a hard lesson and students need to hear it plainly. The Philippine-American War is not a story of misunderstanding — it is a story of power overriding a correct argument.</p>
+        <p>🤔 <strong>Discussion Prompt:</strong> "What would it have taken for American officials to engage Aguinaldo's argument rather than dismiss it?"</p>
+    </aside>
+</section>
+
+<!-- SLIDE: Incompatible Assumptions -->
+<section>
+    <h2 style="font-size:4.5em;">Incompatible Assumptions</h2>
+    <div class="two-column">
+        <div>
+            <div class="column-header" style="font-size:2.2em;">American Assumption</div>
+            <ul style="font-size:2.0em;">
+                <li>Filipinos <em>not ready</em> for self-rule</li>
+                <li>U.S. control would be <strong>temporary and benevolent</strong></li>
+                <li>Independence to follow — eventually</li>
+                <li>Resistance = ingratitude</li>
+            </ul>
+        </div>
+        <div>
+            <div class="column-header" style="font-size:2.2em;">Filipino Assumption</div>
+            <ul style="font-size:2.0em;">
+                <li>Independence would follow Spain's defeat</li>
+                <li>American officers had implied support</li>
+                <li>Republic already established</li>
+                <li>Resistance = <strong>self-determination</strong></li>
+            </ul>
+        </div>
+    </div>
+    <div class="bottom-text-bold" style="font-size:1.8em;">Both sides understood the disagreement perfectly. One side had the power to impose its assumptions.</div>
+    <aside class="notes">
+        <p>📚 <strong>What You Need to Know:</strong> This is not a misunderstanding — it is a collision. The word "misunderstanding" lets the United States off the hook by implying no one was responsible. Aguinaldo's January 1899 proclamation is proof that the Filipino position was clearly stated and clearly understood. Americans chose not to engage it.</p>
+    </aside>
+</section>
+
+<!-- PAUSE & REFLECT — Section I -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">⏸ Pause &amp; Reflect</h2>
+    <div class="large-text" style="font-size:2.2em; margin-top:0.8em;">
+        <p style="color:var(--pure-white);">By January 1899, the Philippines had a constitution, a president, and a functioning government.</p>
+        <p style="font-size:0.85em; color:var(--deep-teal); margin-top:0.6em;">On what grounds did the United States claim the authority to govern them anyway?</p>
+    </div>
+    <aside class="notes">
+        <p>Take 2–3 responses. Students will arrive at: purchase from Spain, military victory, "civilizational" arguments. Don't resolve the question — let it hang. The lecture's job is to show what those justifications actually produced on the ground.</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION II DIVIDER -->
+<!-- ============================================================ -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">Section II</h2>
+    <div class="subtitle" style="font-size:2.5em;">From Ally to Enemy</div>
+    <p style="color:var(--bronze-accent); font-style:italic; font-size:2.0em;">The Philippine-American War begins with incompatible visions of freedom.</p>
+</section>
+
+<!-- SLIDE: February 4, 1899 -->
+<section>
+    <h2 style="font-size:4.5em;">February 4, 1899</h2>
+    <ul style="font-size:2.0em;">
+        <li>American sentries shoot two Filipino soldiers near Manila — fighting erupts within hours</li>
+        <li>U.S. government refuses to call it a war — officially: a <em>"pacification campaign"</em> against <em>"insurgents"</em></li>
+        <li>Initial Filipino strategy: <strong>conventional warfare</strong> — set-piece battles</li>
+        <li>Result: decisive American victories — industrial firepower overwhelms conventional resistance by mid-1899</li>
+        <li>Filipino response: shift to <strong>guerrilla warfare</strong></li>
+    </ul>
+    <div class="bottom-text" style="font-size:1.8em;">The language matters. "Insurgents" are criminals. Soldiers are combatants. The word choice determined how violence was permitted to proceed.</div>
+    <aside class="notes">
+        <p>📚 <strong>What You Need to Know:</strong> The refusal to call this a war had legal consequences. Filipino fighters were not accorded the protections of the laws of war — they were treated as criminals, not soldiers. This framing directly enabled the atrocity patterns that follow. The language question connects directly to the "pacification" language analysis in Section IV.</p>
+    </aside>
+</section>
+
+<!-- SLIDE: Guerrilla Logic -->
+<section>
+    <h2 style="font-size:4.0em;">The Logic of Counterinsurgency</h2>
+    <div class="callout" style="font-size:2.0em;">
+        <strong>The problem:</strong> When conventional resistance fails, guerrilla fighters rely on civilian support — food, shelter, intelligence.
+    </div>
+    <ul style="font-size:2.0em; margin-top:0.8em;">
+        <li>You cannot defeat guerrillas without <strong>separating them from the civilian population</strong></li>
+        <li>That separation requires controlling civilians</li>
+        <li>Controlling civilians at scale requires coercion</li>
+        <li>This logic is <em>militarily rational</em></li>
+        <li>It is also <em>humanly catastrophic</em></li>
+    </ul>
+    <div class="bottom-text-bold" style="font-size:1.8em;">The tactics that follow are not aberrations. They are the conclusions of this logic.</div>
+    <aside class="notes">
+        <p>📚 <strong>Teaching note:</strong> Before naming the tactics, the lecture script calls for asking students to reason toward them: "If you were commanding an army trying to suppress a guerrilla insurgency with civilian support, what would your options be?" Do this before the next slide. Students who arrive at population control and food denial themselves will receive what follows with much greater impact.</p>
+    </aside>
+</section>
+
+<!-- PAUSE & REFLECT: Guerrilla Logic discussion prompt -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">⏸ Think First</h2>
+    <div class="large-text" style="font-size:2.2em; margin-top:0.8em;">
+        <p style="color:var(--pure-white);">Before the next slide —</p>
+        <p style="font-size:0.9em; color:var(--pure-white); margin-top:0.5em;">If you were commanding an army fighting guerrillas supported by the civilian population, what options do you have?</p>
+        <p style="font-size:0.75em; color:var(--deep-teal); margin-top:0.6em;">What would actually <em>separating fighters from civilians</em> require?</p>
+    </div>
+    <aside class="notes">
+        <p>90 seconds — individual thinking, then 2–3 responses. Don't affirm or correct — just collect. The goal is that students reason toward population relocation and food denial on their own, so the next section lands as confirmation rather than revelation. "You've all basically just described what the U.S. Army did. Here's what it looked like."</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION III DIVIDER -->
+<!-- ============================================================ -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">Section III</h2>
+    <div class="subtitle" style="font-size:2.5em;">What the War Actually Was</div>
+    <p style="color:var(--bronze-accent); font-style:italic; font-size:2.0em;">The documented record — tactics, scale, consequences.</p>
+    <aside class="notes">
+        <p>📚 <strong>Instructor note:</strong> This section requires directness. Do not soften the water cure description. Do not summarize the Smith order — quote it. The moral weight of "minimal consequences" only registers if students know what was being done.</p>
+    </aside>
+</section>
+
+<!-- SLIDE: The Scale -->
+<section>
+    <h2 style="font-size:4.5em;">The Scale — Don't Let It Slide Past</h2>
+    <div class="stats-grid" style="margin-top:0.8em;">
+        <div class="stat-box">
+            <div class="number-stat" style="color:var(--ruby-crimson);">200,000–700,000</div>
+            <div class="number-label">Estimated Filipino <strong>civilian deaths</strong></div>
+            <p style="font-size:1.6em; color:var(--bronze-accent); text-align:center;">Majority from famine &amp; disease — caused deliberately by U.S. military strategy</p>
+        </div>
+        <div class="stat-box">
+            <div class="number-stat">~4,200</div>
+            <div class="number-label">American military deaths</div>
+            <p style="font-size:1.6em; color:var(--bronze-accent); text-align:center;">Battlefield combat</p>
+        </div>
+    </div>
+    <div class="bottom-text-bold" style="font-size:1.8em; margin-top:1em;">This asymmetry is not incidental. It reflects the difference between an occupying army and a civilian population caught in between.</div>
+    <aside class="notes">
+        <p>📚 <strong>What You Need to Know:</strong> State the numbers and let them sit. First-year students have no frame of reference for this war. The wide range in Filipino deaths (200,000–700,000) reflects genuine methodological dispute, not minimization — even the low end is catastrophic. The majority died not from bullets but from famine and disease — caused by food denial, crop destruction, and forced relocation. That is the intended mechanism, not collateral damage.</p>
+        <p>💭 <strong>Pause here.</strong> Let the asymmetry register before moving on.</p>
+    </aside>
+</section>
+
+<!-- SLIDE: The Tactics -->
+<section>
+    <h2 style="font-size:4.5em;">U.S. Counterinsurgency Tactics</h2>
+    <ul style="font-size:2.0em;">
+        <li>Village burning</li>
+        <li>Population relocation into <strong>reconcentration zones</strong></li>
+        <li>Destruction of food supplies and livestock</li>
+        <li>Water cure torture</li>
+    </ul>
+    <div class="danger-box" style="font-size:2.0em; margin-top:1em;">
+        Reconcentration zones — the same tactic Americans had called <strong>Spain's greatest atrocity in Cuba</strong> just two years earlier. Same word. Same practice. <strong>Two years later.</strong>
+    </div>
+    <aside class="notes">
+        <p>📚 <strong>The Cuba-Philippines comparison is one of the most teachable moments in the entire lecture.</strong> The hypocrisy is exact, documented, and close enough in time (1899 vs. 1897–98) that students cannot explain it away as historical drift. American newspapers called General Weyler a "butcher" for reconcentration in Cuba. By 1901, U.S. forces were using it in the Philippines. Don't let students miss this. Give it its own beat.</p>
+        <p>📖 <strong>Key Definition:</strong> See popup: Reconcentration zones.</p>
+    </aside>
+</section>
+
+<!-- SLIDE: Water Cure -->
+<section>
+    <h2 style="font-size:4.5em;">The Water Cure — What It Actually Was</h2>
+    <div class="danger-box" style="font-size:2.0em;">
+        Interrogators forced water — sometimes contaminated — into a prisoner's mouth and stomach through repeated pouring until the abdomen visibly distended. Then they beat or compressed the abdomen to expel it. Then repeated — until the prisoner talked or lost consciousness.
+    </div>
+    <ul style="font-size:2.0em; margin-top:0.8em;">
+        <li>Not a rogue practice — widespread enough to generate <strong>Senate hearings</strong>, press coverage, official investigations</li>
+        <li>Soldiers testified matter-of-factly — some <em>defended it as effective</em></li>
+        <li>Officers who ordered it: <strong>minimal consequences</strong></li>
+    </ul>
+    <aside class="notes">
+        <p>📚 <strong>Do not leave this as a bureaucratic phrase.</strong> Students cannot evaluate "minimal consequences for officers" without knowing what was being ordered. The description is pedagogically necessary, not gratuitous. Deliver it plainly, without theatrical emphasis — the facts are sufficient.</p>
+        <p>📖 <strong>Key Definition:</strong> See popup: Water cure.</p>
+        <p>💭 <strong>After reading the description:</strong> Let it sit a moment before the Senate testimony slide.</p>
+    </aside>
+</section>
+
+<!-- SLIDE: Senate Testimony -->
+<section>
+    <h2 style="font-size:4.5em;">In the Public Record</h2>
+    <div class="primary-source" style="font-size:2.0em;">
+        "Senator: 'Describe the water cure as it was administered.' Witness: 'The men would be laid on their backs and water would be poured down their throats until their stomachs were full. Then pressure would be applied...'"
+        <div class="primary-source-attribution">— U.S. Senate Hearings on the Philippines, 1902</div>
+    </div>
+    <div class="callout" style="font-size:2.0em; margin-top:0.8em;">
+        That testimony is in the public record. It was heard by United States senators. <strong>The war continued.</strong>
+    </div>
+    <aside class="notes">
+        <p>📚 <strong>The Senate hearing context is essential.</strong> This was not hidden — it was public, documented, and debated. The decision not to prosecute systematically was made with full knowledge of what had occurred. That is what "institutional tolerance" means.</p>
+        <p>🎓 <strong>Senior Historians' Corner:</strong> Stuart Creighton Miller, Benevolent Assimilation (1982) — the standard account of American atrocities and press suppression, essential reading for Samar and the water cure.</p>
+    </aside>
+</section>
+
+<!-- SLIDE: Samar -->
+<section>
+    <h2 style="font-size:4.5em;">Samar, 1901 — A Specific Anchor</h2>
+    <div class="content-image-layout">
+        <div class="content-side">
+            <ul style="font-size:1.9em;">
+                <li><strong>September 28, 1901:</strong> Filipino fighters kill 48 American soldiers at Balangiga — surprise attack at breakfast</li>
+                <li>Deadliest Filipino attack of the war</li>
+                <li>U.S. response — General Jacob Smith's orders:</li>
+            </ul>
+            <div class="primary-source" style="font-size:1.8em; margin-top:0.6em;">
+                "I want no prisoners. I wish you to kill and burn. The more you kill and burn, the better you will please me."
+                <div class="primary-source-attribution">— General Jacob Smith, October 1901</div>
+            </div>
+            <p style="font-size:1.8em; margin-top:0.5em; color:var(--pure-white);">Defined "capable of bearing arms" as: <strong style="color:var(--ruby-crimson);">males over ten years old.</strong></p>
+        </div>
+        <div class="image-side">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Morning_after_the_Battle_of_Calamba_LCCN2011660330.jpg"
+                 alt="Morning after the Battle of Calamba Philippines 1899 U.S. troops photograph"
+                 style="max-width:100%;max-height:520px;object-fit:contain;border-radius:6px;"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+            <div class="img-placeholder" style="width:100%;height:300px;">📸 Morning after Battle of Calamba · 1899 · LOC · Public Domain</div>
+            <p class="img-caption">Morning after Battle of Calamba · 1899 · Library of Congress · Public Domain</p>
+        </div>
+    </div>
+    <aside class="notes">
+        <p>📚 <strong>What You Need to Know:</strong> Smith's orders are not alleged — they are documented in the court-martial record. "Kill and burn" and "howling wilderness" were his words, recorded. He specified males over ten years old when asked to define who could bear arms. The interior of Samar was systematically devastated.</p>
+        <p>📖 <strong>Key Definition:</strong> See popup: Balangiga massacre.</p>
+    </aside>
+</section>
+
+<!-- SLIDE: The Gap -->
+<section>
+    <h2 style="font-size:4.5em;">The Gap Between Offense and Punishment</h2>
+    <div class="gap-bridge">
+        <div class="gap-left">"Kill everyone over ten"<br><span style="font-size:0.7em;">+ systematic devastation of Samar</span></div>
+        <div class="gap-arrow">→</div>
+        <div class="gap-right">Mild reprimand<br><span style="font-size:0.7em;">Retired with full honors</span></div>
+    </div>
+    <div class="callout" style="font-size:2.0em; margin-top:1em;">
+        That gap <em>is itself evidence.</em> The system that produced Smith did not treat what he did as a fundamental violation. It treated it as an <strong>excess of zeal.</strong>
+    </div>
+    <ul style="font-size:2.0em; margin-top:0.8em;">
+        <li>Institutional tolerance for colonial violence was <strong>structural</strong>, not incidental</li>
+        <li>The punishment tells you where the lines actually were</li>
+    </ul>
+    <aside class="notes">
+        <p>📚 <strong>This is a critical analytical point.</strong> Smith was court-martialed — so the system "worked." But the sentence reveals what the system considered acceptable. A mild reprimand and full retirement honors for ordering the killing of children signals institutional permission for the underlying conduct. Students who want to argue the system self-corrected need to explain the punishment.</p>
+        <p>🤔 <strong>Discussion Prompt:</strong> "What sentence would have been required to signal that this was genuinely unacceptable?"</p>
+    </aside>
+</section>
+
+<!-- SLIDE: Filipino Atrocities — Include Them -->
+<section>
+    <h2 style="font-size:4.5em;">Filipino Atrocities — Include Them</h2>
+    <ul style="font-size:2.0em;">
+        <li>Filipino forces committed documented atrocities against American prisoners — torture, mutilation, execution of captives</li>
+        <li>These should not be erased from the historical record</li>
+    </ul>
+    <div class="callout" style="font-size:2.0em; margin-top:0.8em;">
+        <strong>The analytical frame:</strong> Colonial wars brutalize everyone they touch — occupiers and occupied alike. Understanding <em>why</em> atrocities occurred on both sides requires understanding the war's structure — not just cataloging individual acts.
+    </div>
+    <div class="bottom-text" style="font-size:1.8em;">Understanding context is not the same as excusing. It's the same move we made with yellow journalism: you can't explain a phenomenon without understanding its conditions.</div>
+    <aside class="notes">
+        <p>📚 <strong>What You Need to Know:</strong> The racial dehumanization built into American military culture, the official policy that treated Filipino fighters as criminals rather than soldiers, and the scale of American violence against civilian populations — these are the conditions in which Filipino atrocities occurred. Scale and institutional context differ between the two sides, even if individual acts of violence occurred on both.</p>
+    </aside>
+</section>
+
+<!-- PAUSE & REFLECT — Section III -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">⏸ Pause &amp; Reflect</h2>
+    <div class="large-text" style="font-size:2.2em; margin-top:0.8em;">
+        <p style="color:var(--pure-white);">The U.S. condemned Spain for reconcentration in Cuba in 1898 — then used it in the Philippines in 1901.</p>
+        <p style="font-size:0.85em; color:var(--deep-teal); margin-top:0.6em;">What does this tell us about how imperial powers understand their own actions?</p>
+    </div>
+    <aside class="notes">
+        <p>Keep this tight — 2 minutes. The point is the hypocrisy is exact and documented. Push students to articulate the mechanism: the dehumanizing logic that makes the same tactic "atrocity" when applied by the enemy and "military necessity" when applied by us.</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION IV DIVIDER -->
+<!-- ============================================================ -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">Section IV</h2>
+    <div class="subtitle" style="font-size:2.5em;">The Language of Empire</div>
+    <p style="color:var(--bronze-accent); font-style:italic; font-size:2.0em;">Making violence sound reasonable — and believing it.</p>
+</section>
+
+<!-- SLIDE: Pacification -->
+<section>
+    <h2 style="font-size:4.5em;">The Same Event, Two Descriptions</h2>
+    <div class="two-column">
+        <div>
+            <div class="column-header" style="font-size:2.2em;">Senate Testimony</div>
+            <div class="primary-source" style="font-size:1.9em;">
+                "Senator: 'What happened to the village?' Soldier: 'We burned it.'"
+            </div>
+        </div>
+        <div>
+            <div class="column-header" style="font-size:2.2em;">Official Army Report</div>
+            <div class="primary-source" style="font-size:1.9em;">
+                "Pacification operations completed in the district of Batangas."
+            </div>
+        </div>
+    </div>
+    <div class="callout" style="font-size:2.0em; margin-top:1em;">
+        When a government can describe the destruction of a civilian population as <strong>"pacification,"</strong> language itself has become a tool of power.
+    </div>
+    <aside class="notes">
+        <p>📚 <strong>What You Need to Know:</strong> The word "pacification" does real political work. It makes violence invisible, makes coercion sound benevolent, and places the burden of explanation on anyone who objects. Students should be able to identify this mechanism and apply it to other historical contexts — and to their own moment.</p>
+    </aside>
+</section>
+
+<!-- SLIDE: Beveridge and Racial Hierarchy -->
+<section>
+    <h2 style="font-size:4.0em;">Race, Civilization, and <em>Genuine</em> Belief</h2>
+    <div class="content-image-layout">
+        <div class="content-side">
+            <div class="primary-source" style="font-size:1.8em;">
+                "The Philippines are ours forever... We will not renounce our part in the mission of our race, trustee, under God, of the civilization of the world."
+                <div class="primary-source-attribution">— Senator Albert Beveridge, Senate floor, January 1900</div>
+            </div>
+            <ul style="font-size:1.9em; margin-top:0.8em;">
+                <li>Beveridge believed in <em>both</em> democracy and civilizational hierarchy — simultaneously</li>
+                <li>Empire was not cynical cover — it was <strong>genuine moral conviction</strong></li>
+                <li>Many American Progressives agreed</li>
+            </ul>
+        </div>
+        <div class="image-side">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/School_Begins_(Puck_Magazine_1-25-1899).jpg"
+                 alt="School Begins Puck Magazine January 1899 political cartoon Uncle Sam Philippines Hawaii Cuba Puerto Rico"
+                 style="max-width:100%;max-height:520px;object-fit:contain;border-radius:6px;"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+            <div class="img-placeholder" style="width:100%;height:300px;">📸 "School Begins" · Puck Magazine · January 1899 · Public Domain</div>
+            <p class="img-caption">"School Begins" · Puck Magazine, Jan. 25, 1899 · Public Domain · LOC</p>
+        </div>
+    </div>
+    <aside class="notes">
+        <p>📚 <strong>Critical teaching point:</strong> Students often find it easier to explain imperial violence through cynicism — bad people doing things they knew were wrong for money or power. That is not the primary explanation. Many supporters of the Philippine War were genuine reformers at home. They believed in democracy AND in civilizational hierarchy simultaneously. That is more disturbing than cynicism, because it cannot be addressed by simply exposing hypocrisy. True believers require a different kind of challenge.</p>
+        <p>📖 <strong>The cartoon:</strong> "School Begins" depicts Uncle Sam as a schoolmaster teaching the Philippines, Hawaii, Puerto Rico, and Cuba — seated as children at desks. At the back, Black and Native American students are present but marginalized. The domestic and imperial racial logics are literally in the same image.</p>
+    </aside>
+</section>
+
+<!-- SLIDE: The Connected Color Lines -->
+<section>
+    <h2 style="font-size:4.0em;">The Connected Color Lines</h2>
+    <div class="callout" style="font-size:2.0em;">
+        The racial language used to describe Filipinos — "children," "not ready for self-government," requiring firm guidance — was borrowed directly from the domestic language used to justify <strong>Jim Crow.</strong>
+    </div>
+    <ul style="font-size:2.0em; margin-top:0.8em;">
+        <li>The overseas color line and the domestic color line were <em>not separate systems</em></li>
+        <li>They were <strong>the same system</strong>, deployed in two different places</li>
+        <li>Racial hierarchy lowered thresholds for acceptable violence — different rules for "not fully civilized" peoples</li>
+    </ul>
+    <aside class="notes">
+        <p>📚 <strong>What You Need to Know:</strong> This connection between imperial and domestic racial logic is one of the lecture's most important analytical claims. Paul A. Kramer's The Blood of Government develops this systematically. The Puck cartoon makes the connection visually — domestic racial subordination and imperial racial subordination are depicted in the same image.</p>
+    </aside>
+</section>
+
+<!-- SLIDE: Roosevelt's Liberal Imperialism -->
+<section>
+    <h2 style="font-size:4.0em;">Roosevelt's Position: <span class="popup-trigger" data-popup="libimperialism-popup">"Liberal Imperialism"</span></h2>
+    <ul style="font-size:2.0em;">
+        <li>Liberty <em>requires</em> order</li>
+        <li>Order <em>requires</em> force</li>
+        <li>Force in service of freedom: <strong>regrettable but necessary</strong></li>
+        <li>Resistance to benevolent rule = <em>criminal</em>, not political</li>
+    </ul>
+    <div class="danger-box" style="font-size:2.0em; margin-top:0.8em;">
+        The problem with this logic: it has <strong>no limiting principle.</strong><br>
+        The timeline can always be extended. "Not yet" can last forever.
+    </div>
+    <div class="bottom-text-bold" style="font-size:1.8em;">The Canal Zone ran from 1903 to 1999.</div>
+    <aside class="notes">
+        <p>📚 <strong>What You Need to Know:</strong> "Liberal imperialism" is the argument that coercion in the short term serves freedom in the long term — with the imperial power alone deciding when the long term arrives. This is the ideological framework that underlies not just 1899 but multiple 20th-century U.S. foreign policy interventions. The Canal Zone example makes the "temporary" argument visceral: 96 years.</p>
+        <p>📖 <strong>Key Definition:</strong> See popup: Liberal Imperialism.</p>
+    </aside>
+</section>
+
+<!-- PAUSE & REFLECT — Section IV -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">⏸ Pause &amp; Reflect</h2>
+    <div class="assessment-box" style="font-size:2.0em; background:rgba(255,255,255,0.08); border-color:var(--antique-gold);">
+        <p style="color:var(--pure-white);">Which is more dangerous to democracy?</p>
+        <ol style="list-style-type:upper-alpha; color:var(--pure-white);">
+            <li>Cynics who do wrong while knowing it's wrong</li>
+            <li>True believers who do wrong while convinced they're right</li>
+            <li>Institutions that normalize both</li>
+            <li>Citizens who don't ask</li>
+        </ol>
+    </div>
+    <aside class="notes">
+        <p><strong>Answer: D — or C — are most defensible at the systemic level, but push students to choose and defend.</strong> The pedagogical goal: get them to articulate why genuine conviction is not a defense, and why institutional normalization is more durable than individual bad actors. This question bridges Beveridge/Roosevelt to the anti-imperialist section.</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION V DIVIDER -->
+<!-- ============================================================ -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">Section V</h2>
+    <div class="subtitle" style="font-size:2.5em;">The Anti-Imperialist Challenge</div>
+    <p style="color:var(--bronze-accent); font-style:italic; font-size:2.0em;">Empire was contested at home — seriously, publicly, by people whose names you know.</p>
+</section>
+
+<!-- SLIDE: Anti-Imperialist League -->
+<section>
+    <h2 style="font-size:4.0em;">The Anti-Imperialist League</h2>
+    <div class="content-image-layout">
+        <div class="content-side">
+            <div class="column-header" style="font-size:2.2em;">The Members</div>
+            <ul style="font-size:1.9em;">
+                <li>Mark Twain</li>
+                <li>Andrew Carnegie</li>
+                <li>Former President Grover Cleveland</li>
+                <li>Booker T. Washington</li>
+                <li>Ida B. Wells</li>
+            </ul>
+            <div class="column-header" style="font-size:2.2em; margin-top:0.8em;">The Core Argument</div>
+            <ul style="font-size:1.9em;">
+                <li>Empire violates republican principles</li>
+                <li>Governing without consent corrupts the democracy doing it</li>
+                <li>The act of empire endangers liberty <strong>at home</strong></li>
+            </ul>
+        </div>
+        <div class="image-side">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/25/Mark_Twain,_Brady-Handy_photo_portrait,_Feb_7,_1871,_cropped.jpg"
+                 alt="Mark Twain portrait photograph 1871 Brady-Handy anti-imperialist writer"
+                 style="max-width:100%;max-height:500px;object-fit:contain;border-radius:6px;"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+            <div class="img-placeholder" style="width:100%;height:300px;">📸 Mark Twain · 1871 · Brady-Handy · Public Domain</div>
+            <p class="img-caption">Mark Twain · 1871 · Brady-Handy Collection · Public Domain</p>
+        </div>
+    </div>
+    <aside class="notes">
+        <p>📚 <strong>What You Need to Know:</strong> The anti-imperialist coalition was ideologically diverse — liberal industrialists (Carnegie), former presidents (Cleveland), radical journalists (Twain), Black civil rights leaders (Wells, Washington). This diversity is analytically significant: empire was not opposed only by radicals or partisans, but by a broad coalition that shared the conviction that overseas coercion was incompatible with republican governance.</p>
+    </aside>
+</section>
+
+<!-- SLIDE: The Black Critics' Argument -->
+<section>
+    <h2 style="font-size:4.0em;">The Black Critics' Specific Argument</h2>
+    <div class="content-image-layout">
+        <div class="content-side">
+            <ul style="font-size:2.0em;">
+                <li>The racial logic used to justify ruling Filipinos was the <em>same logic</em> used to justify Jim Crow</li>
+                <li>Black soldiers in the Philippines — 9th and 10th Cavalry — were not blind to the parallel</li>
+                <li><strong>David Fagen</strong> — Black corporal — crossed over, fought with Aguinaldo's forces for nearly two years</li>
+            </ul>
+            <div class="callout" style="font-size:1.9em; margin-top:0.8em;">
+                "You cannot deploy racial hierarchy abroad while claiming to dismantle it at home. The two projects are incompatible."
+                <div style="text-align:right; color:var(--bronze-accent); font-size:0.85em; margin-top:0.4em;">— paraphrase of Ida B. Wells' argument</div>
+            </div>
+        </div>
+        <div class="image-side">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Ida_B._Wells,_1920.jpg"
+                 alt="Ida B. Wells portrait photograph 1920 journalist civil rights anti-imperialist"
+                 style="max-width:100%;max-height:500px;object-fit:contain;border-radius:6px;"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+            <div class="img-placeholder" style="width:100%;height:300px;">📸 Ida B. Wells · c. 1920 · Public Domain</div>
+            <p class="img-caption">Ida B. Wells · c. 1920 · Public Domain · Wikimedia Commons</p>
+        </div>
+    </div>
+    <aside class="notes">
+        <p>📚 <strong>What You Need to Know:</strong> The Black critics' argument is the sharpest version of the anti-imperialist case because it identifies the structural connection — not just the moral inconsistency. The overseas empire and the domestic racial state were feeding each other. Willard Gatewood's "Smoked Yankees" (1971) compiles Black soldiers' letters from the Philippines — some of the most powerful primary sources available for this topic. David Fagen's defection is documented and contested: he may have been killed, or may have disappeared into the Philippine interior. He is a figure worth more attention than he gets in standard U.S. history courses.</p>
+    </aside>
+</section>
+
+<!-- SLIDE: Twain's Satire -->
+<section>
+    <h2 style="font-size:4.5em;">Twain's Satire: Taking It at Its Word</h2>
+    <div class="primary-source" style="font-size:1.9em;">
+        "We have pacified some thousands of the islanders and buried them; destroyed their fields; burned their villages, and turned their widows and orphans out of doors; furnished heartbreak by exile to some dozens of disagreeable patriots; subjugated the remaining ten millions by Benevolent Assimilation..."
+        <div class="primary-source-attribution">— Mark Twain, "To the Person Sitting in Darkness," 1901</div>
+    </div>
+    <div class="callout" style="font-size:2.0em; margin-top:0.8em;">
+        Twain is not exaggerating for effect. He is <strong>summarizing the record.</strong> That is what makes it devastating.
+    </div>
+    <aside class="notes">
+        <p>📚 <strong>Teaching note on sequencing:</strong> The satire lands harder because students have already heard the Senate testimony. Twain's catalog of "pacification" matches the documented record. Students who know the facts read the satire as accurate summary, not hyperbole. This is why the order of operations in this lecture matters — facts first, then satire.</p>
+    </aside>
+</section>
+
+<!-- PAUSE & REFLECT — Section V -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">⏸ Pause &amp; Reflect</h2>
+    <div class="large-text" style="font-size:2.2em; margin-top:0.8em;">
+        <p style="color:var(--pure-white);">The anti-imperialists argued that governing without consent corrupts the democracy doing the governing — not just the people being governed.</p>
+        <p style="font-size:0.85em; color:var(--deep-teal); margin-top:0.6em;">Do you think they were right? What evidence from this lecture would support or challenge that claim?</p>
+    </div>
+    <aside class="notes">
+        <p>2–3 responses. The goal is to get students applying the lecture's evidence to the anti-imperialists' claim — not just summarizing what the anti-imperialists believed. Bridge forward: "Next we close with the question they were really asking — and that the United States never fully answered."</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- CLOSING: ORDER VS. LIBERTY STRESS TEST -->
+<!-- ============================================================ -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">Section VI</h2>
+    <div class="subtitle" style="font-size:2.5em;">The "Order vs. Liberty" Stress Test</div>
+    <p style="color:var(--bronze-accent); font-style:italic; font-size:2.0em;">This is synthesis — not optional.</p>
+</section>
+
+<!-- SLIDE: The Four Questions -->
+<section>
+    <h2 style="font-size:4.5em;">Four Questions — No Easy Answers</h2>
+    <ul style="font-size:1.9em;">
+        <li>Can liberty be <strong>postponed</strong>? If so, who has the authority to postpone it?</li>
+        <li>Who decides when order is <em>sufficient</em> for freedom to begin?</li>
+        <li>How long does <strong>"temporary"</strong> rule usually last?</li>
+        <li>When soldiers commit atrocities within a system that <em>institutionally tolerates</em> them — where does individual moral responsibility end and structural responsibility begin?</li>
+    </ul>
+    <div class="bottom-text-bold" style="font-size:1.8em;">These are the actual political and moral questions the United States faced in 1899 and never fully resolved.</div>
+    <aside class="notes">
+        <p>📚 <strong>Deliver these as live questions — not rhetorical flourishes.</strong> Give students 90 seconds of individual thinking, then take 2–3 responses on whichever question resonates. Do not try to resolve them. The point is that they don't resolve — and that the United States governing apparatus in 1899 didn't resolve them either. The Canal Zone ran until 1999. Feel the weight of "temporary."</p>
+    </aside>
+</section>
+
+<!-- SLIDE: Synthesis -->
+<section>
+    <h2 style="font-size:4.5em;">What Occupation Reveals About Empire</h2>
+    <ul style="font-size:2.0em;">
+        <li>Empire requires <strong>sustained coercion at scale</strong></li>
+        <li>Moral language does not eliminate violence — it makes violence <em>administratively normal</em></li>
+        <li>Democratic states can practice colonial rule while <strong>genuinely believing</strong> they are doing good</li>
+        <li>Colonial wars brutalize all participants — because brutalization is <em>structural</em>, not merely individual</li>
+        <li>Wars for liberation can become wars for <strong>control</strong> without anyone formally deciding to change course</li>
+    </ul>
+    <aside class="notes">
+        <p>📚 <strong>Return to the opening images.</strong> "That's what's in the two photographs I put up before class. The left image — celebration. The right image — what the celebration required to sustain itself. Not the enemy's atrocities. Ours." Let this land. Then bridge to Lecture 3.</p>
+    </aside>
+</section>
+
+<!-- SLIDE: Bridge to Lecture 3 -->
+<section>
+    <h2 style="font-size:4.5em;">Looking Ahead: Lecture 3</h2>
+    <div class="callout" style="font-size:2.0em;">
+        If this lecture asked what empire <em>costs</em> — the next asks what it <strong>produces.</strong>
+    </div>
+    <ul style="font-size:2.0em; margin-top:0.8em;">
+        <li>Roosevelt the president — spectacle meets governing philosophy</li>
+        <li>The regulatory state, conservation, the Panama Canal, the Roosevelt Corollary</li>
+        <li>If empire was the laboratory — <em>domestic Progressivism was the experiment running simultaneously</em></li>
+        <li>What's the connection between the man who ordered the Philippines pacified and the man who busted the trusts?</li>
+    </ul>
+    <aside class="notes">
+        <p>📚 <strong>Closing line:</strong> "Once empire is accepted as necessary, the next question is how to make it permanent — and how to build systems durable enough to outlast the arguments that created them. That's Lecture 3."</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- OPTIONAL EXTENSION -->
+<!-- ============================================================ -->
+<section data-background="#1B4332">
+    <h2 style="font-size:4.5em; color:var(--antique-gold);">📝 Optional Extension</h2>
+    <div class="large-text" style="font-size:2.0em; margin-top:0.8em;">
+        <p style="color:var(--pure-white);">Primary Source Comparison — same operations, two descriptions:</p>
+        <p style="font-size:0.85em; color:var(--deep-teal); margin-top:0.5em;">An official Army report on Batangas vs. Senate testimony from the same operations.</p>
+        <p style="font-size:0.85em; color:var(--pure-white); margin-top:0.6em;"><strong>Question:</strong> If you were an American senator in 1902 reading both documents, what would you need to believe to vote against investigating further?</p>
+    </div>
+    <aside class="notes">
+        <p>Use if time allows, or assign as homework. Goal: students produce a specific vocabulary of concealment by identifying the exact word choices that make violence invisible in official language. The follow-up question forces them to think about motivated reasoning — what beliefs are necessary to sustain inaction in the face of evidence.</p>
+    </aside>
+</section>
+
+</div><!-- /slides -->
+</div><!-- /reveal -->
+
+<!-- GLOBAL UI -->
+<div id="keyboard-trigger" class="popup-trigger" data-popup="keyboard-popup"
+     style="position:fixed;top:20px;right:20px;font-size:2em;cursor:pointer;z-index:100;">⌨️</div>
+
+<!-- ============================================================ -->
+<!-- POP-UPS -->
+<!-- ============================================================ -->
+<div id="keyboard-popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Keyboard Shortcuts</div>
+    <p>→ / Space: Next &nbsp;|&nbsp; ←: Previous &nbsp;|&nbsp; S: Notes &nbsp;|&nbsp; F: Fullscreen &nbsp;|&nbsp; O: Overview &nbsp;|&nbsp; ESC: Close popups</p>
+</div>
+
+<div id="katipunan-popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Katipunan (1892)</div>
+    <p>Kataastaasang, Kagalanggalangang Katipunan ng mga Anak ng Bayan — "Supreme and Venerable Society of the Children of the Nation." A secret Filipino revolutionary organization founded in Manila in 1892 that launched armed revolt against Spanish colonial rule in 1896. Led by Andrés Bonifacio and later associated with Emilio Aguinaldo, the Katipunan represented the organizational backbone of the Philippine independence movement and predated any American involvement by years. Its existence refutes any argument that Filipinos required American guidance to pursue political self-determination.</p>
+</div>
+
+<div id="malolos-popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Malolos Republic / Malolos Constitution (1899)</div>
+    <p>The First Philippine Republic, established under the Malolos Constitution ratified in January 1899. The constitution provided for a unicameral legislature, separation of church and state, and civil liberties. Emilio Aguinaldo served as president. The republic had functioning governmental institutions before the Philippine-American War began. Its existence is historically significant because it demonstrates that the American argument — that Filipinos were "not ready for self-government" — was refuted by events before the war started. The republic was fighting for survival, not aspiring toward some future capacity.</p>
+</div>
+
+<div id="reconcamp-popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Reconcentration Zones (Philippines, 1901–1902)</div>
+    <p>A counterinsurgency tactic used by U.S. forces in the Philippines — particularly in Batangas and Samar — in which the civilian population of a region was forcibly relocated into controlled zones, leaving the surrounding area subject to systematic destruction. Food supplies, crops, and livestock outside the zones were destroyed to deny resources to guerrilla fighters. The tactic caused massive civilian deaths from disease and starvation in the camps. The United States had used Spanish General Weyler's identical reconcentration policy in Cuba as a major justification for the Spanish-American War in 1898 — branding it the work of a "butcher." The American use of reconcentration in the Philippines just three years later is one of the clearest documented examples of the gap between imperial rhetoric and imperial practice.</p>
+</div>
+
+<div id="watercure-popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Water Cure</div>
+    <p>A torture technique used by U.S. forces during the Philippine-American War to extract information from prisoners. The procedure involved forcing large quantities of water — sometimes contaminated — into a restrained prisoner's mouth and throat until the abdomen distended, then applying compression or beating to expel the water, and repeating the process. It was not a rogue practice: it was widespread enough to generate Senate hearings in 1902, extensive press coverage, and official military investigations. Soldiers who testified about it in Senate hearings described it matter-of-factly, and some defended it as effective. The officers who ordered it generally received minimal or no punishment. The Senate hearings produced a public record but resulted in no systematic accountability.</p>
+</div>
+
+<div id="balangiga-popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Balangiga Massacre / The Samar Campaign (1901)</div>
+    <p>On September 28, 1901, Filipino fighters launched a coordinated surprise attack on Company C of the U.S. 9th Infantry at Balangiga on the island of Samar, killing 48 American soldiers — the deadliest Filipino attack of the war. The American response, ordered by General Jacob Smith, was the systematic devastation of Samar's interior. Smith's documented orders specified killing all males over age ten, leaving no prisoners, and turning Samar into a "howling wilderness." The campaign killed an undetermined number of civilians through direct violence, displacement, and starvation. Smith was court-martialed, received a mild reprimand, and was allowed to retire with full honors. The three church bells from Balangiga were taken as war trophies and held by the U.S. Army for over a century; they were returned to the Philippines in 2018 after decades of Filipino requests.</p>
+</div>
+
+<div id="libimperialism-popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Liberal Imperialism</div>
+    <p>A framework for justifying colonial rule that argues coercion in the short term serves freedom in the long term — with the imperial power alone deciding when conditions are sufficient for self-governance to begin. Associated with Roosevelt's public defense of Philippine occupation: liberty requires order; order requires force; force in service of eventual freedom is regrettable but necessary. Critics identified the framework's fatal flaw immediately: it has no internal limiting principle. The timeline for "eventual freedom" can always be extended; the threshold for "readiness" can always be raised. In practice, "temporary" imperial rule routinely became permanent. The U.S. administered the Panama Canal Zone from 1903 to 1999 — 96 years — under frameworks descended from this logic.</p>
+</div>
+
+<div class="slide-counter"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+<script>
+    Reveal.initialize({
+        width: 1920, height: 1080, margin: 0.08,
+        minScale: 0.2, maxScale: 2.0,
+        hash: true, slideNumber: false,
+        transition: 'slide',
+        plugins: [RevealNotes]
+    });
+    function updateSlideCounter() {
+        const c = Reveal.getState().indexh + 1;
+        const t = Reveal.getTotalSlides();
+        document.querySelector('.slide-counter').textContent = `${c}/${t}`;
+    }
+    Reveal.on('slidechanged', updateSlideCounter);
+    updateSlideCounter();
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('popup-trigger')) {
+            const el = document.getElementById(e.target.getAttribute('data-popup'));
+            if (el) el.classList.add('active');
+        }
+        if (e.target.classList.contains('popup-close') || e.target.classList.contains('popup')) {
+            document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+        }
+    });
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+    });
+</script>
+</body>
+</html>

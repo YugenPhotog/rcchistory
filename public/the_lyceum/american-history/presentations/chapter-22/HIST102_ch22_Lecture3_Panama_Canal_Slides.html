@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Engineering of Empire — HIST 102, Lecture 3</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --antique-gold:#D4AF37; --deep-teal:#2C7873; --rich-purple:#6B4C9A;
+            --ruby-crimson:#9B2C2C; --dark-charcoal:#1A1A1A; --pure-white:#FAFAFA;
+            --soft-cream:#F5F1E8; --bronze-accent:#8B6F47; --forest-green:#1B4332;
+        }
+        .reveal { font-family:'Lora',serif; font-size:1.3em; background-color:var(--dark-charcoal); color:var(--pure-white); }
+        .reveal h1,.reveal h2,.reveal h3 { font-family:'Crimson Pro',serif; font-weight:700; color:var(--antique-gold); text-transform:none; }
+        .reveal h1 { font-size:6.0em; }
+        .reveal h2 { font-size:4.5em; margin-bottom:0.5em; }
+        .reveal h3 { font-size:2.5em; }
+        .reveal ul { list-style:none; padding-left:0; }
+        .reveal ul li { margin-bottom:0.4em; font-size:1.0em; }
+        .reveal ul li:before { content:"◆ "; color:var(--deep-teal); font-weight:bold; margin-right:0.5em; }
+        strong { color:var(--antique-gold); }
+        em { color:var(--deep-teal); font-style:italic; }
+        .popup-trigger { color:var(--deep-teal); border-bottom:2px dotted var(--deep-teal); cursor:pointer; transition:color 0.3s; }
+        .popup-trigger:hover { color:var(--antique-gold); }
+        .popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+            background:var(--soft-cream); color:var(--dark-charcoal); padding:2em; border-radius:15px;
+            box-shadow:0 8px 32px rgba(0,0,0,0.5); max-width:620px; max-height:72%; overflow-y:auto;
+            z-index:1000; border:3px solid var(--bronze-accent); }
+        .popup.active { display:block; }
+        .popup-close { position:absolute; top:10px; right:15px; font-size:2em; cursor:pointer; color:var(--ruby-crimson); }
+        .definition-term { font-size:1.5em; font-weight:700; color:var(--rich-purple); margin-bottom:0.5em; font-family:'Crimson Pro',serif; }
+        .key-term { color:var(--rich-purple); font-weight:600; }
+        .slide-counter { position:fixed; bottom:20px; right:20px; background:rgba(26,26,26,0.9);
+            color:var(--antique-gold); padding:8px 15px; border-radius:8px; font-family:'Crimson Pro',serif;
+            font-weight:600; font-size:0.9em; border:2px solid var(--deep-teal); z-index:100; }
+        .two-column { display:grid; grid-template-columns:1fr 1fr; gap:2em; align-items:start; }
+        .three-column { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.5em; align-items:start; }
+        .content-image-layout { display:grid; grid-template-columns:1fr 1fr; gap:2em; align-items:center; }
+        .content-image-layout .content-side { text-align:left; }
+        .content-image-layout .image-side { display:flex; flex-direction:column; align-items:center; justify-content:center; }
+        .content-image-layout .image-side img { max-width:100%; max-height:520px; object-fit:contain; border-radius:6px; }
+        .column-header { font-weight:700; color:var(--antique-gold); font-size:2.5em; margin-bottom:0.5em; font-family:'Crimson Pro',serif; }
+        .bottom-text { margin-top:1.2em; font-style:italic; color:var(--deep-teal); font-size:1.8em; }
+        .bottom-text-bold { margin-top:1.2em; font-weight:700; color:var(--antique-gold); font-size:1.8em; }
+        .subtitle { font-size:2.5em; color:var(--deep-teal); margin-top:0.5em; }
+        .large-text { font-size:2.0em; text-align:center; line-height:1.6; }
+        .callout { background:rgba(212,175,55,0.15); border-left:5px solid var(--antique-gold); padding:1.2em; margin:1em 0; font-size:2.0em; }
+        .primary-source { background:rgba(212,175,55,0.1); border-left:5px solid var(--antique-gold); padding:1em; margin:1em 0; font-style:italic; color:var(--pure-white); font-size:1.8em; line-height:1.5; }
+        .primary-source-attribution { text-align:right; font-size:0.85em; color:var(--bronze-accent); margin-top:0.6em; font-style:normal; }
+        .timeline-item { margin-bottom:0.7em; }
+        .timeline-year { color:var(--antique-gold); font-weight:700; }
+        .assessment-box { background:rgba(44,120,115,0.15); border:2px solid var(--deep-teal); border-radius:10px; padding:1.5em; margin:1em 0; }
+        .assessment-box h3 { color:var(--deep-teal); margin-top:0; }
+        .img-placeholder { background:rgba(139,111,71,0.2); border:3px dashed var(--bronze-accent); padding:2em; text-align:center; color:var(--bronze-accent); font-style:italic; border-radius:10px; display:none; }
+        .img-caption { font-size:1.3em; color:var(--bronze-accent); font-style:italic; text-align:center; margin-top:0.4em; }
+        .stat-number { font-family:'Crimson Pro',serif; font-size:3.5em; font-weight:700; color:var(--antique-gold); line-height:1.1; }
+        .stat-label { font-size:1.6em; color:var(--pure-white); margin-top:0.2em; }
+        .stat-box { text-align:center; padding:0.8em; }
+        .gap-bridge { display:grid; grid-template-columns:1fr auto 1fr; gap:1em; align-items:center; }
+        .gap-arrow { font-size:3em; color:var(--deep-teal); text-align:center; }
+        .vocab-list { font-size:1.8em; }
+        .vocab-list li { margin-bottom:0.5em; }
+        .vocab-term { color:var(--rich-purple); font-weight:700; }
+    </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ============================================================ -->
+<!-- SLIDE 1: TITLE -->
+<!-- ============================================================ -->
+<section>
+    <h2 style="font-size:3.8em; line-height:1.1;">The Engineering<br>of Empire</h2>
+    <div class="subtitle" style="font-size:2.2em;">Theodore Roosevelt, the Panama Canal,<br>and the Architecture of Permanent Power</div>
+    <p style="color:var(--bronze-accent); font-style:italic; font-size:1.8em; margin-top:1.2em;">HIST 102 · Chapter 22 · Lecture 3 of 3</p>
+    <aside class="notes">
+        <p>📚 <strong>Before class:</strong> Project the Culebra Cut excavation photograph — no caption. The scale of human figures against the earthwork communicates something statistics cannot. Alternatively, a split map showing Atlantic/Pacific fleet separation pre-canal vs. the canal as hinge point in 1914. Both work; choose based on whether you want to open with human labor or strategic geography.</p>
+        <p>💭 <strong>Arc:</strong> Lecture 1 = spectacle. Lecture 2 = coercion. Lecture 3 = systems. Frame this to students explicitly during the opening.</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 2: LEARNING OBJECTIVES -->
+<!-- ============================================================ -->
+<section>
+    <h2 style="font-size:4.5em;">Today's Questions</h2>
+    <ul style="font-size:1.9em;">
+        <li>Why did the canal matter <strong>strategically</strong> — not just commercially?</li>
+        <li>How did the U.S. get the land — and what does <strong>that story</strong> reveal?</li>
+        <li>Who <strong>built</strong> the canal, under what rules, at what cost?</li>
+        <li>When does improvised empire become <strong>official doctrine</strong>?</li>
+        <li>How long does <strong>"temporary"</strong> actually last?</li>
+    </ul>
+    <aside class="notes">
+        <p>📚 <strong>What You Need to Know:</strong> These five questions map directly to the five lecture segments. Return to this slide at the closing to show students what they've answered.</p>
+        <p>🤔 <strong>Discussion Prompt:</strong> Ask students what they already know about the Panama Canal before beginning. Most will know it exists; very few will know anything about who built it or how the U.S. obtained it.</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 3: OPENING — THE FRENCH FAILURE -->
+<!-- ============================================================ -->
+<section>
+    <h2 style="font-size:4.5em;">The Biggest Thing<br>the Country Ever Did</h2>
+    <div class="two-column">
+        <div>
+            <div class="column-header" style="font-size:2.2em;">French Attempt (1881–1889)</div>
+            <ul style="font-size:1.9em;">
+                <li><strong>11 years</strong> of effort</li>
+                <li><strong>20,000–30,000</strong> workers dead</li>
+                <li>Cause: yellow fever &amp; malaria</li>
+                <li>Death toll <em>suppressed</em> to protect investors</li>
+                <li>Result: a half-dug ditch</li>
+            </ul>
+        </div>
+        <div>
+            <div class="column-header" style="font-size:2.2em;">Roosevelt's Reading (1903)</div>
+            <ul style="font-size:1.9em;">
+                <li>France had money, tech, ambition</li>
+                <li>Failed to <em>control the disease environment</em></li>
+                <li>Roosevelt saw: <strong>not a cautionary tale</strong></li>
+                <li>Roosevelt saw: <strong>an opportunity</strong></li>
+                <li>"The U.S. will do what France couldn't"</li>
+            </ul>
+        </div>
+    </div>
+    <div class="bottom-text-bold" style="font-size:1.8em;">The question isn't whether the U.S. could finish it. The question is: what did finishing it require?</div>
+    <aside class="notes">
+        <p>📚 <strong>What You Need to Know:</strong> The French failure was not a minor engineering setback — it was a humanitarian catastrophe whose scale was deliberately hidden from shareholders. Ferdinand de Lesseps, who had built the Suez Canal, led the French effort. His prestige made him impossible to contradict even as workers died in enormous numbers. When the company finally collapsed in 1889, it became one of the great financial scandals of the 19th century.</p>
+        <p>💭 <strong>Context:</strong> 20,000–30,000 dead is more than the total American military deaths in the Spanish-American War and the early Philippine-American War combined. Frame this number explicitly.</p>
+        <p>🤔 <strong>Discussion Prompt:</strong> When death tolls are hidden to protect investor confidence, who bears the moral responsibility — the engineers, the executives, or the investors?</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION I DIVIDER -->
+<!-- ============================================================ -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">Section I</h2>
+    <div class="subtitle" style="font-size:2.5em;">The Strategic Revolution</div>
+    <p style="color:var(--bronze-accent); font-style:italic; font-size:2.0em;">Why did controlling a canal matter more than winning battles?</p>
+    <aside class="notes"><p>Transition: From opening hook (French failure) into the strategic logic. Students need to understand Mahan before Panama 1903 makes sense.</p></aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 4: THE TWO-OCEAN PROBLEM -->
+<!-- ============================================================ -->
+<section>
+    <h2 style="font-size:4.5em;">The Two-Ocean Problem</h2>
+    <div class="content-image-layout">
+        <div class="content-side">
+            <ul style="font-size:2.0em;">
+                <li>Two coastlines = <em>strategic weakness</em> without a canal</li>
+                <li>Atlantic &amp; Pacific fleets: <strong>effectively separate</strong></li>
+                <li>Moving a battleship east → west: <strong>8,000 extra miles</strong></li>
+                <li>Only option: sail around Cape Horn (~2 months)</li>
+            </ul>
+        </div>
+        <div class="image-side">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/USS_Oregon_(battleship)_(c._1898).jpg"
+                 alt="USS Oregon battleship circa 1898"
+                 style="max-width:100%;max-height:520px;object-fit:contain;border-radius:6px;"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+            <div class="img-placeholder">📸 USS Oregon Battleship<br><em>Search: "USS Oregon battleship 1898 Wikimedia"</em></div>
+            <p class="img-caption">USS Oregon, c. 1898 · Public Domain · Wikimedia Commons</p>
+        </div>
+    </div>
+    <aside class="notes">
+        <p>📚 <strong>What You Need to Know:</strong> The two-ocean problem was not abstract. The U.S. had acquired colonies in the Pacific (Philippines, Guam) and the Caribbean (Cuba, Puerto Rico) after 1898. Defending both required moving warships between oceans rapidly — which was impossible without a canal.</p>
+        <p>💭 <strong>Context:</strong> Two months is two months of vulnerability. Ask students: what could change in two months during a military crisis? This makes the problem visceral.</p>
+        <p>🤔 <strong>Discussion Prompt:</strong> Is having two coastlines inherently an advantage or disadvantage for a naval power?</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 5: USS OREGON — THE PROOF -->
+<!-- ============================================================ -->
+<section>
+    <h2 style="font-size:4.5em;">The Oregon's Race</h2>
+    <div class="large-text" style="font-size:2.0em;">
+        <p><strong>April 1898:</strong> War declared. USS Oregon in San Francisco — needs Cuba.</p>
+        <p style="font-size:0.85em; margin-top:0.4em; color:var(--deep-teal);">Problem: 14,000 miles of ocean between them.</p>
+        <p style="margin-top:0.8em;"><strong>68 days</strong> around Cape Horn. Arrived <em>barely in time</em> for the Battle of Santiago.</p>
+        <p style="font-size:0.85em; margin-top:0.4em; color:var(--deep-teal);">The whole country watched the clock. Roosevelt watched too.</p>
+        <p style="margin-top:0.8em;" class="bottom-text-bold">His conclusion: A genuine two-ocean power requires a canal. Full stop.</p>
+    </div>
+    <aside class="notes">
+        <p>📚 <strong>What You Need to Know:</strong> The Oregon's voyage was front-page news for weeks. Newspapers ran daily updates on her position. The public anxiety generated by her slow progress became a major argument for canal construction. Roosevelt, as Assistant Secretary of the Navy in 1898, was deeply attentive to the strategic lesson.</p>
+        <p>💭 <strong>Context:</strong> "Barely in time" is not hyperbole — the Oregon arrived just two days before the decisive Battle of Santiago, July 3, 1898. She fired 17 thirteen-inch shells in the engagement. Her presence mattered. But the 68-day delay demonstrated the vulnerability clearly.</p>
+        <p>🤔 <strong>Discussion Prompt:</strong> What would it have cost if the Oregon had arrived after the battle instead of before?</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 6: THE COMMERCIAL DIMENSION -->
+<!-- ============================================================ -->
+<section>
+    <h2 style="font-size:4.0em;">The Commercial Twin</h2>
+    <div class="two-column">
+        <div>
+            <div class="column-header" style="font-size:2.2em;">The Economic Argument</div>
+            <ul style="font-size:1.9em;">
+                <li>American exports booming in 1890s–1900s</li>
+                <li>Pacific trade with Asia: <strong>rapidly growing</strong></li>
+                <li>Canal = dramatic reduction in shipping distances</li>
+                <li>Cuts costs for American exporters · integrates U.S. into global markets</li>
+            </ul>
+        </div>
+        <div>
+            <div class="column-header" style="font-size:2.2em;">Who Understood This</div>
+            <ul style="font-size:1.9em;">
+                <li><strong>J.P. Morgan</strong> — saw the commercial opportunity</li>
+                <li><strong>Railroad interests</strong> — saw it with dread</li>
+                <li>Canal shipping would undercut cross-continental freight rates</li>
+                <li>Strategic logic and <em>commercial logic aligned perfectly</em></li>
+            </ul>
+        </div>
+    </div>
+    <div class="bottom-text-bold" style="font-size:1.85em;">The canal was not built for idealism. It was built because military power and economic power both required it.</div>
+    <aside class="notes">
+        <p>📚 <strong>What You Need to Know:</strong> The military and commercial arguments for the canal reinforced each other completely. This is why the project attracted such broad elite support — it was simultaneously a strategic necessity and a commercial opportunity. The railroads were the only major interest opposed, and their opposition was itself evidence of how significant the commercial stakes were.</p>
+        <p>💭 <strong>Connect forward:</strong> The alignment of military and commercial interest is a recurring pattern in American imperial expansion. Cuba (sugar), Philippines (Pacific trade routes), Panama (canal tolls and shipping cost reduction). This is not a coincidence; it is the structure of how 19th-century American empire operated.</p>
+        <p>🤔 <strong>Discussion Prompt:</strong> When military necessity and commercial interest point in the same direction, what happens to the moral arguments that might complicate the decision?</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 7: MAHAN AND CHOKEPOINT LOGIC -->
+<!-- ============================================================ -->
+<section>
+    <h2 style="font-size:4.5em;">Alfred Thayer <span class="popup-trigger" data-popup="mahan-popup">Mahan</span></h2>
+    <div class="two-column">
+        <div>
+            <div class="column-header" style="font-size:2.2em;">Mahan's Argument (1890)</div>
+            <ul style="font-size:1.9em;">
+                <li>Great powers win through <strong>sea lane control</strong>, not army size</li>
+                <li>Commerce follows trade routes</li>
+                <li>Routes run through <em>chokepoints</em></li>
+                <li>Control chokepoints → project power <strong>without owning territory</strong></li>
+            </ul>
+        </div>
+        <div>
+            <div class="column-header" style="font-size:2.2em;">The Key Chokepoints</div>
+            <ul style="font-size:1.9em;">
+                <li>Gibraltar · Suez</li>
+                <li>Strait of Malacca</li>
+                <li>Cape Horn</li>
+                <li><strong>Panama</strong> — the missing link</li>
+            </ul>
+        </div>
+    </div>
+    <div class="bottom-text-bold" style="font-size:1.9em;">Roosevelt devoured Mahan. The canal was the Mahan thesis made concrete.</div>
+    <aside class="notes">
+        <p>📚 <strong>What You Need to Know:</strong> Alfred Thayer Mahan published <em>The Influence of Sea Power Upon History</em> in 1890. It became one of the most influential strategic texts of the late 19th century — read by naval officers and politicians in the U.S., Britain, Germany, and Japan. Roosevelt had read it before becoming Assistant Secretary of the Navy and corresponded personally with Mahan.</p>
+        <p>🎓 <strong>Senior Historians' Corner:</strong> Walter LaFeber argues in <em>The New Empire</em> (1963) that Mahan's ideas were the intellectual infrastructure for American expansion in the 1890s. The canal was not an improvisation — it was a logical application of a developed strategic theory.</p>
+        <p>🤔 <strong>Discussion Prompt:</strong> If you can project power through chokepoints without owning territory, what are the advantages and disadvantages compared to traditional colonial annexation?</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 8: CONCEPTUAL PAYOFF — SECTION I -->
+<!-- ============================================================ -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">⏸ Pause &amp; Reflect</h2>
+    <div class="callout" style="font-size:2.2em; background:rgba(212,175,55,0.12); text-align:center; border-left:none; border:2px solid var(--antique-gold); border-radius:10px; margin-top:0.5em;">
+        <strong>Controlling movement can matter more than controlling territory.</strong><br>
+        <span style="font-size:0.85em; color:var(--pure-white);">Empire through chokepoints, not annexation. This template recurs across the 20th century.</span>
+    </div>
+    <p style="color:var(--deep-teal); font-style:italic; font-size:1.9em; margin-top:0.8em;">Where else in the 20th century did the United States control a strategic corridor without formally annexing the surrounding territory?</p>
+    <aside class="notes">
+        <p>🤔 Students who engage with this prompt will think of: Guantánamo Bay, the Panama Canal Zone itself, the network of Cold War military bases (Okinawa, Diego Garcia, Ramstein). That's the point — by articulating the logic here in 1903, students will recognize the template when they encounter it later. Don't answer the question. Let it float.</p>
+        <p>💭 <strong>Timing:</strong> 90 seconds of individual thinking, then 2–3 responses. Move on — the full payoff comes in the closing.</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION II DIVIDER -->
+<!-- ============================================================ -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">Section II</h2>
+    <div class="subtitle" style="font-size:2.5em;">Getting the Land</div>
+    <p style="color:var(--bronze-accent); font-style:italic; font-size:2.0em;">Panama 1903 — the mechanics of imperial acquisition</p>
+    <aside class="notes"><p>Transition: Now we know why the canal was strategically necessary. This section explains how the U.S. obtained the right to build it — and what that story reveals about how empire actually operates.</p></aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 9: THE COLOMBIA PROBLEM -->
+<!-- ============================================================ -->
+<section>
+    <h2 style="font-size:4.5em;">The Colombia Problem</h2>
+    <ul style="font-size:2.0em;">
+        <li><strong>1903:</strong> Panama was a province of Colombia — not an independent country</li>
+        <li><strong>Jan 1903:</strong> <span class="popup-trigger" data-popup="herrán-popup">Hay-Herrán Treaty</span> — 99-year lease, $10M + $250K/yr</li>
+        <li><strong>Aug 1903:</strong> Colombian senate rejected it <em>unanimously</em></li>
+        <li>Colombia wanted more money, more sovereignty protection</li>
+        <li>This was a <strong>reasonable position</strong> for a sovereign government</li>
+    </ul>
+    <div class="bottom-text" style="font-size:1.8em;">Roosevelt's private response: "contemptible little creatures," "foolish and homicidal corruptionists"</div>
+    <aside class="notes">
+        <p>📚 <strong>What You Need to Know:</strong> The Colombian senate's rejection was not irrational. They wanted either more money or more sovereignty protections — both legitimate negotiating positions. The U.S. offered the same terms to Colombia that it would later offer to Panama. The difference was that Colombia had the institutional capacity to say no. Panama, as a newly independent nation three weeks old, did not.</p>
+        <p>💭 <strong>Key contrast:</strong> Roosevelt's private language vs. his public "reluctant" Corollary language. The gap between these two registers is analytically important — deliver the private quotes plainly, without theatricality.</p>
+        <p>🤔 <strong>Discussion Prompt:</strong> If Colombia's position was reasonable, what options did the U.S. government have other than the one Roosevelt chose?</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 9: THE MANUFACTURED REVOLUTION -->
+<!-- ============================================================ -->
+<section>
+    <h2 style="font-size:4.0em;">A Revolution in Three Days</h2>
+    <div class="content-image-layout">
+        <div class="content-side">
+            <ul style="font-size:1.85em;">
+                <li><strong>Nov 2, 1903:</strong> USS Nashville arrives at Colón, Panama</li>
+                <li>Colombian troops arrive <em>the same day</em></li>
+                <li>Nashville's presence: Colombia cannot move troops across the isthmus</li>
+                <li><strong>Nov 3:</strong> Panamanian revolution — <em>zero combat</em></li>
+                <li><strong>Nov 6:</strong> U.S. recognizes Panama — fastest recognition in American history</li>
+                <li>Cost of the revolution: <strong>approximately one mule</strong></li>
+            </ul>
+        </div>
+        <div class="image-side">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Bunau-Varilla_photograph.jpg"
+                 alt="Philippe Bunau-Varilla French engineer Panama Canal"
+                 style="max-width:100%;max-height:500px;object-fit:contain;border-radius:6px;"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+            <div class="img-placeholder">📸 Philippe Bunau-Varilla<br><em>Search: "Bunau-Varilla photograph Wikimedia"</em></div>
+            <p class="img-caption">Philippe Bunau-Varilla, French engineer &amp; Panama's "representative" · Public Domain</p>
+        </div>
+    </div>
+    <aside class="notes">
+        <p>📚 <strong>What You Need to Know:</strong> Philippe Bunau-Varilla was a French engineer who had invested heavily in the old French canal company. He stood to profit enormously if the U.S. purchased the French canal assets. He coordinated with Panamanian independence leaders AND with Roosevelt administration officials. He had advance knowledge that U.S. ships would be positioned to block Colombian troop movements.</p>
+        <p>💭 <strong>The mule:</strong> A stray Colombian artillery shell killed one mule. That was the total violence of the "revolution." The detail lands well because it makes the manufactured quality of the event concrete and slightly absurd. Deliver it with a straight face.</p>
+        <p>🤔 <strong>Discussion Prompt:</strong> If a revolution succeeds without a single battle, what actually produced the outcome?</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 10: THE TREATY THAT MATTERED -->
+<!-- ============================================================ -->
+<section>
+    <h2 style="font-size:4.0em;">The <span class="popup-trigger" data-popup="treaty-popup">Hay-Bunau-Varilla Treaty</span></h2>
+    <div class="large-text" style="font-size:1.9em; text-align:left;">
+        <p>Bunau-Varilla — <em>the French engineer, not a Panamanian</em> — was appointed Panama's negotiator.</p>
+        <p style="margin-top:0.7em;">Panamanian diplomats raced to Washington. <strong>They didn't make it in time.</strong></p>
+        <p style="margin-top:0.7em;">He signed before they arrived:</p>
+        <ul style="font-size:0.9em; margin-top:0.4em;">
+            <li>U.S. gets <strong>sovereign authority</strong> over a 10-mile strip — <em>in perpetuity</em></li>
+            <li>Price: $10M + $250K/yr — <strong>same terms Colombia had rejected</strong></li>
+        </ul>
+        <p style="margin-top:0.7em; color:var(--deep-teal); font-style:italic;">The three-week-old nation's territory was signed away by a Frenchman.</p>
+    </div>
+    <aside class="notes">
+        <p>📚 <strong>What You Need to Know:</strong> The Hay-Bunau-Varilla Treaty is remarkable for what it reveals about the power dynamics at work. The Panamanian government objected strenuously — they had expected better terms. But they were a new nation of three weeks, dependent on U.S. military protection for their survival. They ratified the treaty despite their objections.</p>
+        <p>💭 <strong>Key analytical point:</strong> "In perpetuity" becomes the pivot for the closing section — the canal zone ran 1903–1999, 96 years. Plant that word now.</p>
+        <p>🤔 <strong>Discussion Prompt for the Active Learning slide coming next.</strong></p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 11: ACTIVE LEARNING — THINK PAIR SHARE -->
+<!-- ============================================================ -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">⏸ Think · Pair · Share</h2>
+    <div class="assessment-box" style="font-size:2.0em; background:rgba(255,255,255,0.08); border-color:var(--antique-gold);">
+        <p style="color:var(--pure-white);">The United States didn't formally conquer Panama.<br>It didn't annex it. <strong>What did it actually do?</strong></p>
+        <p style="color:var(--deep-teal); margin-top:0.7em; font-style:italic;">Talk to the person next to you — 90 seconds.<br>Then: does the distinction between formal conquest and what happened here <em>matter</em>?</p>
+    </div>
+    <aside class="notes">
+        <p>🤔 <strong>Key insight to draw out:</strong> The U.S. achieved sovereign control through diplomatic pressure + military positioning + financial incentives + support for a revolution it didn't officially start — without a declaration of war, formal annexation, or a treaty the Panamanian government could meaningfully negotiate. This is empire through mechanism. Note it explicitly: students need this framework for Korea, Vietnam, and the Cold War base network.</p>
+        <p>The conceptual payoff: "Control a corridor, not a country. Achieve sovereignty through mechanism, not annexation." Don't say it yet — let it come from them.</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 12: SECTION II PAYOFF -->
+<!-- ============================================================ -->
+<section>
+    <h2 style="font-size:4.5em;">The Template</h2>
+    <div class="callout" style="font-size:2.0em;">
+        Control a corridor, not a country.<br>
+        Achieve sovereignty through mechanism, not annexation.<br>
+        Create a client state that lacks the capacity to renegotiate.
+    </div>
+    <div class="bottom-text-bold" style="font-size:1.9em;">This pattern recurs across American foreign policy for the rest of the 20th century.</div>
+    <aside class="notes">
+        <p>💭 <strong>Connect forward:</strong> Korea (U.S. bases under SOFA agreements), Vietnam (client government), Guantánamo (lease "in perpetuity"), Diego Garcia (leased from UK, population expelled). The template is not unique to Panama — it's the model. Making this explicit now means students will recognize it when they encounter it later without being told.</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION III DIVIDER -->
+<!-- ============================================================ -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">Section III</h2>
+    <div class="subtitle" style="font-size:2.5em;">Engineering Empire</div>
+    <p style="color:var(--bronze-accent); font-style:italic; font-size:2.0em;">Labor, disease, and the racial architecture of construction</p>
+    <aside class="notes"><p>Transition: Most students know the canal exists. Almost none know who built it, under what conditions, or how the workforce was organized. This section connects directly to Lecture 2's analysis of Jim Crow applied to the Philippines — the same framework, exported again.</p></aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 13: GORGAS AND DISEASE CONTROL -->
+<!-- ============================================================ -->
+<section>
+    <h2 style="font-size:4.5em;">Solving the French Problem</h2>
+    <div class="content-image-layout">
+        <div class="content-side">
+            <div class="column-header" style="font-size:2.2em;">Why the French died</div>
+            <ul style="font-size:1.85em;">
+                <li>Engineers, not doctors, ran the effort</li>
+                <li>Hospital flower pots = mosquito nurseries</li>
+                <li>Better patient care = <em>faster disease spread</em></li>
+                <li>Death toll suppressed to protect investors</li>
+            </ul>
+            <div class="column-header" style="font-size:2.2em; margin-top:0.7em;">Dr. <span class="popup-trigger" data-popup="gorgas-popup">William Gorgas</span>, 1904</div>
+            <ul style="font-size:1.85em;">
+                <li>Physician in charge <em>before</em> first shovel</li>
+                <li>Yellow fever eliminated by 1906</li>
+                <li>Systematic mosquito eradication</li>
+            </ul>
+        </div>
+        <div class="image-side">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/William_Crawford_Gorgas.jpg"
+                 alt="Dr. William Crawford Gorgas U.S. Army surgeon Panama Canal sanitation"
+                 style="max-width:100%;max-height:500px;object-fit:contain;border-radius:6px;"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+            <div class="img-placeholder">📸 Dr. William Crawford Gorgas<br><em>Search: "William Crawford Gorgas Wikimedia Commons"</em></div>
+            <p class="img-caption">Dr. William Crawford Gorgas, U.S. Army Surgeon · Public Domain</p>
+        </div>
+    </div>
+    <aside class="notes">
+        <p>📚 <strong>What You Need to Know:</strong> Gorgas had previously demonstrated in Havana (1901) that systematic mosquito control could eliminate yellow fever entirely. His Panama campaign was even more ambitious: draining swamps, oiling standing water, screening buildings, fumigating houses systematically. By 1906, yellow fever had been virtually eliminated. Malaria was never fully eliminated but rates dropped dramatically.</p>
+        <p>⚠️ <strong>Critical analytical point coming on the next slide:</strong> The sanitation success is real, but it was operational, not humanitarian. Set up the analytical reversal.</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 14: DISEASE CONTROL — THE ANALYTICAL REVERSAL -->
+<!-- ============================================================ -->
+<section>
+    <h2 style="font-size:4.0em;">Sanitation as a Tool of Empire</h2>
+    <div class="primary-source" style="font-size:1.9em;">
+        "The public health campaign was not humanitarian.<br>
+        It was <strong>operational</strong>. The goal was not to improve Panamanian health broadly.<br>
+        The goal was to keep the <strong>workforce alive long enough to finish the canal.</strong>"
+    </div>
+    <ul style="font-size:1.9em; margin-top:0.5em;">
+        <li>Medical resources allocated <em>along the same hierarchical lines</em> as everything else</li>
+        <li>American engineers/supervisors: <strong>highest standard of care</strong></li>
+        <li>West Indian laborers: <strong>progressively less</strong></li>
+        <li>Empire organizes human life according to its own <em>priorities</em></li>
+    </ul>
+    <aside class="notes">
+        <p>📚 <strong>What You Need to Know:</strong> This analytical reversal is the most important move in Segment 3. Students tend to receive the Gorgas story as a straightforward triumph — smart American doctors saved lives. The reversal makes visible that whose lives were saved, how much care they received, and what the campaign was actually designed to accomplish were all structured by the same racial hierarchy that organized everything else in the Zone. Don't soften this. The sanitation was brilliant AND it was imperial. Both are true simultaneously.</p>
+        <p>🎓 <strong>Senior Historians' Corner:</strong> Julie Greene, <em>The Canal Builders</em> (2009), documents that in some years the official death statistics for West Indian workers were so undercounted as to be nearly meaningless — deaths were recorded differently depending on racial classification.</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 15: GOLD ROLL vs. SILVER ROLL -->
+<!-- ============================================================ -->
+<section>
+    <h2 style="font-size:4.0em;">The <span class="popup-trigger" data-popup="gold-silver-popup">Gold Roll &amp; Silver Roll</span></h2>
+    <div class="two-column">
+        <div>
+            <div class="column-header" style="font-size:2.2em; color:var(--antique-gold);">Gold Roll</div>
+            <ul style="font-size:1.85em;">
+                <li>White Americans + some Europeans</li>
+                <li>Paid in <strong>gold dollars</strong></li>
+                <li>Better housing, cafeterias, facilities</li>
+                <li>Superior medical care</li>
+            </ul>
+        </div>
+        <div>
+            <div class="column-header" style="font-size:2.2em; color:var(--deep-teal);">Silver Roll</div>
+            <ul style="font-size:1.85em;">
+                <li>Black workers from Caribbean (esp. Barbados)</li>
+                <li>Paid in <em>Panamanian silver</em> — lower rates</li>
+                <li>Separate, inferior housing &amp; facilities</li>
+                <li>Lower levels of medical attention</li>
+            </ul>
+        </div>
+    </div>
+    <div class="bottom-text-bold" style="font-size:1.85em;">This was not informal workplace custom. It was <strong>official U.S. government policy</strong>, written into the Canal Zone's administrative structure from the beginning.</div>
+    <aside class="notes">
+        <p>📚 <strong>What You Need to Know:</strong> Approximately 20,000 West Indian workers, predominantly Barbadian, built the canal. They did the most dangerous work: drilling, dynamiting, removing spoil from the Culebra Cut. Landslides were constant and lethal — workers had seconds, not minutes, when a slide came.</p>
+        <p>💭 <strong>Connect to Lecture 2:</strong> The same Jim Crow racial classification system that organized Philippine occupation organized the Canal Zone. This is the pattern Paul Kramer calls "the blood of government" — the racial hierarchy wasn't regional custom, it was federal administrative policy deployed across imperial contexts. Make this connection explicit.</p>
+        <p>🤔 <strong>Discussion Prompt:</strong> If Jim Crow could be deployed in Panama as easily as in Alabama, what does that tell us about what Jim Crow actually was — a regional custom or something more systemic?</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 16: CULEBRA CUT — THE HUMAN COST -->
+<!-- ============================================================ -->
+<section>
+    <h2 style="font-size:4.5em;">The Culebra Cut</h2>
+    <div class="content-image-layout">
+        <div class="content-side">
+            <ul style="font-size:1.9em;">
+                <li>9-mile excavation through the <strong>Continental Divide</strong></li>
+                <li>The most dangerous construction environment of its era</li>
+                <li>Landslides: <em>constant, unpredictable, lethal</em></li>
+                <li>Workers in a slide's path had <strong>seconds, not minutes</strong></li>
+                <li>Silver Roll casualties: <em>dramatically higher</em> than Gold Roll</li>
+                <li>Deaths: <strong>recorded differently</strong> by racial category — some not recorded at all</li>
+            </ul>
+        </div>
+        <div class="image-side">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Central_America,_Panama,_Culebra_Cut_LCCN99403558.jpg"
+                 alt="Culebra Cut Panama Canal construction excavation workers steam shovels 1907"
+                 style="max-width:100%;max-height:520px;object-fit:contain;border-radius:6px;"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+            <div class="img-placeholder">📸 Culebra Cut Excavation<br><em>Search: "Culebra Cut Panama Canal construction workers Library of Congress"</em></div>
+            <p class="img-caption">Culebra Cut, Panama Canal construction · c. 1907 · Library of Congress · Public Domain</p>
+        </div>
+    </div>
+    <aside class="notes">
+        <p>📚 <strong>What You Need to Know:</strong> The photograph is the lesson here — show it before saying anything. The workers are tiny against the scale of the earthwork. Tell students: "When you read accounts of the Canal's construction that give you a single death toll, ask which workers are being counted." The Silver Roll workers' deaths were systematically undercounted in official statistics.</p>
+        <p>💭 <strong>Greene quote:</strong> Julie Greene describes the Canal Zone as a "laboratory of empire" — a place where American officials could experiment with managing a multi-racial, multinational workforce under conditions of extraordinary control. The lessons fed back into American thinking about colonial administration in the Philippines, Puerto Rico, and beyond.</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 17: EMPIRE WITHOUT ANNEXATION — PAYOFF -->
+<!-- ============================================================ -->
+<section>
+    <h2 style="font-size:3.8em;">Empire Without Annexation</h2>
+    <div class="two-column" style="margin-top:0.3em;">
+        <div>
+            <div class="column-header" style="font-size:2.0em;">The Canal Zone</div>
+            <ul style="font-size:1.8em;">
+                <li>American courts, laws, currency</li>
+                <li>Segregated schools, company stores</li>
+                <li>Panamanians inside: <em>limited rights, subject to U.S. jurisdiction</em></li>
+                <li><strong>Inside their own country</strong></li>
+            </ul>
+        </div>
+        <div>
+            <div class="column-header" style="font-size:2.0em;">Julie Greene's Insight</div>
+            <div class="primary-source" style="font-size:1.65em; margin-top:0.3em;">
+                "A laboratory of empire — where officials experimented with managing a multi-racial workforce under conditions of extraordinary control. The lessons fed back into the Philippines, Puerto Rico, and beyond."
+                <div class="primary-source-attribution">— Julie Greene, <em>The Canal Builders</em>, 2009</div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-text-bold" style="font-size:1.8em;">Control the canal. Don't police the whole country. <strong>More efficient. More durable.</strong></div>
+    <aside class="notes">
+        <p>💭 <strong>Conceptual payoff for Section III:</strong> Empire classifies bodies, manages labor, organizes space, and controls movement. Full territorial annexation is one method. Corridor control is another — and often more durable. Greene's "laboratory of empire" concept is the key analytical frame: the Canal Zone was not just a construction project, it was a rehearsal for a form of imperial administration that the U.S. would use throughout the 20th century.</p>
+        <p>🎓 <strong>Senior Historians' Corner:</strong> Greene's <em>The Canal Builders</em> (2009) is the essential source here — it reconstructs daily life in the Zone from company records, personal correspondence, and official reports. Her analysis of the Gold and Silver Roll as formal federal administrative policy rather than informal custom is indispensable.</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 18: PAUSE & REFLECT — SECTION III -->
+<!-- ============================================================ -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">⏸ Pause &amp; Reflect</h2>
+    <div class="large-text" style="font-size:2.1em; margin-top:0.8em;">
+        <p style="color:var(--pure-white);">Lecture 2: Jim Crow applied to the Philippines.</p>
+        <p style="color:var(--pure-white); margin-top:0.5em;">Lecture 3: Jim Crow applied in Panama.</p>
+        <p style="color:var(--antique-gold); font-weight:700; margin-top:0.7em;">Same vocabulary. Same administrative logic. Same federal authority.</p>
+        <p style="color:var(--deep-teal); font-style:italic; margin-top:0.7em;">What does it tell us that this framework moved so fluidly across contexts — domestic, Asian, Latin American?</p>
+    </div>
+    <aside class="notes">
+        <p>🤔 <strong>Key insight to draw out:</strong> Jim Crow was not a Southern regional custom. It was a nationally administered racial classification system that the federal government deployed across imperial contexts. The Canal Zone is evidence. The Philippines are evidence. They are not exceptions; they are expressions of the same underlying logic. Paul Kramer's <em>The Blood of Government</em> makes this argument at length.</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION IV DIVIDER -->
+<!-- ============================================================ -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">Section IV</h2>
+    <div class="subtitle" style="font-size:2.5em;">Improvisation Becomes Doctrine</div>
+    <p style="color:var(--bronze-accent); font-style:italic; font-size:2.0em;">The Roosevelt Corollary, 1904</p>
+    <aside class="notes"><p>Transition: By 1904, Roosevelt has spent six years improvising empire. Cuba, the Philippines, Panama — each justified after the fact with the same vocabulary. Here he names it, formalizes it, and gives it hemispheric scope.</p></aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 19: FROM HABIT TO POLICY -->
+<!-- ============================================================ -->
+<section>
+    <h2 style="font-size:4.5em;">Six Years of Improvisation</h2>
+    <ul style="font-size:2.0em;">
+        <li><strong>Cuba, 1898:</strong> "Liberate the oppressed"</li>
+        <li><strong>Philippines, 1899–1902:</strong> "Temporary stewardship" · "Order before liberty"</li>
+        <li><strong>Panama, 1903:</strong> "Civilization requires it" · "However reluctantly"</li>
+    </ul>
+    <div class="callout" style="font-size:1.9em; margin-top:0.8em;">
+        Each intervention produced the same argument:<br>
+        <em>This nation cannot govern itself. We must step in. This will be temporary.</em><br>
+        <strong>December 1904: Roosevelt writes it into doctrine.</strong>
+    </div>
+    <aside class="notes">
+        <p>📚 <strong>What You Need to Know:</strong> Roosevelt is not inventing new ideas in 1904. He is naming what the United States has already been doing and extending it to hemispheric scale. This is the analytical point students must feel: the Corollary is descriptive before it becomes prescriptive — it describes the logic that produced Cuba, the Philippines, and Panama.</p>
+        <p>💭 <strong>Framing:</strong> Ask students to identify the recurring phrases across all three interventions before you show the Corollary text. They should be able to supply "order," "civilization," "temporary," "reluctantly" themselves.</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 20: THE ROOSEVELT COROLLARY — PRIMARY SOURCE -->
+<!-- ============================================================ -->
+<section>
+    <h2 style="font-size:4.2em;">The <span class="popup-trigger" data-popup="corollary-popup">Roosevelt Corollary</span> (1904)</h2>
+    <div class="primary-source" style="font-size:1.85em;">
+        "Chronic wrongdoing, or an impotence which results in a general loosening of the ties of civilized society, may in America, as elsewhere, ultimately require intervention by some civilized nation, and in the Western Hemisphere the adherence of the United States to the Monroe Doctrine may force the United States, <em>however reluctantly</em>, to the exercise of an international police power."
+        <div class="primary-source-attribution">— Theodore Roosevelt, Annual Message to Congress, December 6, 1904</div>
+    </div>
+    <aside class="notes">
+        <p>📚 <strong>READ THIS SLOWLY. Do not rush.</strong> After reading, pause. Then ask students to identify the specific words:</p>
+        <p>"Chronic wrongdoing." "Impotence." "General loosening of the ties of civilized society." "Civilized nation." "International police power." "However reluctantly."</p>
+        <p>Then ask: <em>Where have you heard this language before?</em> They should recognize it immediately — it's the language from Lecture 2: "pacification," "order," "civilization," "they are not ready for self-rule."</p>
+        <p>🎓 <strong>The analytical point:</strong> Roosevelt didn't invent new ideas in 1904. He named what the United States had already been doing and gave it hemispheric scope.</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 21: THE LANGUAGE COMPARISON -->
+<!-- ============================================================ -->
+<section>
+    <h2 style="font-size:4.0em;">The Same Vocabulary, Twice</h2>
+    <div class="two-column">
+        <div>
+            <div class="column-header" style="font-size:2.2em;">Philippines, 1899</div>
+            <ul style="font-size:1.85em;">
+                <li>"Pacification"</li>
+                <li>"Order"</li>
+                <li>"Civilization"</li>
+                <li>"Not yet ready for self-rule"</li>
+                <li>"Temporary"</li>
+            </ul>
+        </div>
+        <div>
+            <div class="column-header" style="font-size:2.2em;">Roosevelt Corollary, 1904</div>
+            <ul style="font-size:1.85em;">
+                <li>"Chronic wrongdoing"</li>
+                <li>"Order" (implied)</li>
+                <li>"Civilized nation"</li>
+                <li>"International police power"</li>
+                <li>"However reluctantly"</li>
+            </ul>
+        </div>
+    </div>
+    <div class="bottom-text-bold" style="font-size:1.85em;">Five years apart. Different continents. <strong>Nearly identical vocabulary.</strong> The doctrine outlasted the individual who wrote it.</div>
+    <aside class="notes">
+        <p>💭 <strong>The stability of the vocabulary is itself evidence:</strong> The language of intervention is remarkably consistent across very different historical contexts and very different presidents. Once students see this pattern, they start to see it everywhere: Korea, Vietnam, Guatemala, Iran. The template predates Roosevelt — but he formalized it.</p>
+        <p>🤔 <strong>Discussion Prompt:</strong> If the same vocabulary appears across Republican and Democratic administrations, across different continents and different crises, what does that tell us about where the language comes from?</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 22: THE TRIGGER — DOMINICAN REPUBLIC -->
+<!-- ============================================================ -->
+<section>
+    <h2 style="font-size:4.0em;">The Corollary in Action</h2>
+    <div class="two-column">
+        <div>
+            <div class="column-header" style="font-size:2.2em;">Dominican Republic, 1905</div>
+            <ul style="font-size:1.9em;">
+                <li>Debt crisis: European creditors threaten warships</li>
+                <li>Roosevelt alarmed: European ships near <em>his</em> canal</li>
+                <li>U.S. takes over Dominican <strong>customs collection</strong></li>
+                <li>Pays creditors directly → removes European justification</li>
+            </ul>
+        </div>
+        <div>
+            <div class="column-header" style="font-size:2.2em;">What This Looked Like</div>
+            <ul style="font-size:1.9em;">
+                <li>American officials supervising Dominican finances</li>
+                <li>American ships in Dominican harbors</li>
+                <li>No annexation · no war declaration</li>
+                <li>Just: <em>executive action justified by the Corollary</em></li>
+                <li>Duration: <strong>1905 to 1941</strong> — 36 years, "reluctantly"</li>
+            </ul>
+        </div>
+    </div>
+    <aside class="notes">
+        <p>📚 <strong>What You Need to Know:</strong> The Dominican Republic case shows exactly how the Corollary worked in practice. The U.S. doesn't need to conquer — it just needs to control the revenue streams. The Dominican customs receivership lasted in various forms until 1941. The pattern repeats: Nicaragua (1909, 1912, 1926), Haiti (1915–1934), Dominican Republic again (1916–1924).</p>
+        <p>💭 <strong>Key word:</strong> "However reluctantly." 36 years of reluctance. Students should feel the weight of that word every time they encounter it.</p>
+        <p>🤔 <strong>Discussion Prompt:</strong> If the same doctrine is invoked by both Republican and Democratic presidents, in multiple countries, across four decades, at what point does "reluctant" stop being a meaningful description?</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 23: PAUSE & REFLECT — SECTION IV -->
+<!-- ============================================================ -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">⏸ Pause &amp; Reflect</h2>
+    <div class="assessment-box" style="font-size:1.95em; background:rgba(255,255,255,0.08); border-color:var(--antique-gold);">
+        <p style="color:var(--pure-white);">Which is most dangerous to democracy in the long run?</p>
+        <ol style="list-style-type:upper-alpha; color:var(--pure-white); margin-top:0.5em;">
+            <li>Leaders who openly pursue empire</li>
+            <li>Leaders who pursue empire while insisting they are reluctant</li>
+            <li>Doctrines that survive the leaders who write them</li>
+            <li>Infrastructure that generates its own logic for maintenance</li>
+        </ol>
+    </div>
+    <aside class="notes">
+        <p>🤔 <strong>No wrong answer — all four are defensible.</strong> The discussion is the point. Push students toward D as they consider it: once the infrastructure exists, once the doctrine is written, subsequent decisions are shaped by what already exists. The canal doesn't make intervention inevitable — but it makes certain responses feel "rational" in ways that pre-canal responses didn't.</p>
+        <p>💭 <strong>Timing:</strong> 2 minutes of small-group discussion, then 3–4 responses. This is the setup for the closing section's central question.</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION V DIVIDER -->
+<!-- ============================================================ -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">Section V</h2>
+    <div class="subtitle" style="font-size:2.5em;">How Long Does "Temporary" Last?</div>
+    <p style="color:var(--bronze-accent); font-style:italic; font-size:2.0em;">The Canal Zone from 1903 to 1999</p>
+    <aside class="notes"><p>Transition: We've seen how the Canal Zone was acquired and how it operated. Now: how long did "in perpetuity" actually last? And why did it end when it did?</p></aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 24: THE TIMELINE -->
+<!-- ============================================================ -->
+<section>
+    <h2 style="font-size:4.5em;">96 Years of "Perpetuity"</h2>
+    <ul style="font-size:1.85em;">
+        <li class="timeline-item"><span class="timeline-year">1903:</span> Hay-Bunau-Varilla Treaty — U.S. control "in perpetuity"</li>
+        <li class="timeline-item"><span class="timeline-year">1964:</span> <span class="popup-trigger" data-popup="riots-popup">Panamanian riots</span> — 20+ killed; Panama breaks diplomatic relations</li>
+        <li class="timeline-item"><span class="timeline-year">1977:</span> <span class="popup-trigger" data-popup="torrijos-popup">Torrijos-Carter Treaties</span> — signed under sustained pressure; transfer timeline established</li>
+        <li class="timeline-item"><span class="timeline-year">1979:</span> Canal Zone abolished; joint administration begins</li>
+        <li class="timeline-item"><span class="timeline-year">1999:</span> Full control transferred to Panama — December 31</li>
+    </ul>
+    <div class="bottom-text-bold" style="font-size:1.9em;">A student born when the treaty was signed might not have seen the transfer completed in their lifetime.</div>
+    <aside class="notes">
+        <p>📚 <strong>What You Need to Know:</strong> The 1964 riots are the pivot. American students raised the U.S. flag in the Canal Zone in defiance of an agreement to fly both flags. Panamanian students tried to raise their flag. American forces — and civilian crowds — attacked them. More than 20 Panamanians were killed. Panama broke diplomatic relations with the U.S. The riots made the Zone's political arrangement untenable — but it still took 13 more years to sign a treaty.</p>
+        <p>💭 <strong>Key analytical point:</strong> The 1977 negotiations happened because the 1964 riots happened. Empire was not dismantled from the top. It was pressured from below, at cost. The transfer of the canal is not a story of American magnanimity. It is a story of sustained resistance producing a negotiated result over half a century.</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 25: INFRASTRUCTURE OUTLASTS EVERYTHING -->
+<!-- ============================================================ -->
+<section>
+    <h2 style="font-size:4.0em;">Infrastructure Outlasts Everything</h2>
+    <div class="three-column">
+        <div class="stat-box">
+            <div class="stat-number">96</div>
+            <div class="stat-label">years the Canal Zone operated</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number">5%</div>
+            <div class="stat-label">of global maritime trade through the canal today</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number">2016</div>
+            <div class="stat-label">year the canal was expanded — decisions of 1903 still shaping commerce</div>
+        </div>
+    </div>
+    <div class="bottom-text-bold" style="font-size:1.85em; margin-top:0.8em;">Treaties fade. Speeches fade. Administrations end. Wars end.<br><strong>Infrastructure endures.</strong></div>
+    <aside class="notes">
+        <p>💭 <strong>Connect forward:</strong> The base-network and corridor-control logic of the Canal Zone became the template for American strategic thinking through the Cold War. Guantánamo, Okinawa, Diego Garcia, Ramstein. The language is the same: order, stability, we will leave when conditions allow. The logic is the same. The timeline, once the infrastructure exists, tends to stretch.</p>
+        <p>📚 <strong>Walter LaFeber,</strong> <em>The Panama Canal: The Crisis in Historical Perspective</em> (1979), is the essential source for this section. His argument: the canal was not given back — it was reclaimed through sustained pressure over decades.</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 26: PAUSE & REFLECT — SECTION V -->
+<!-- ============================================================ -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">⏸ Pause &amp; Reflect</h2>
+    <div class="large-text" style="font-size:2.1em; margin-top:0.8em;">
+        <p style="color:var(--pure-white);">The canal was transferred in 1999 —<br>not because the U.S. decided it was the right thing to do,</p>
+        <p style="color:var(--antique-gold); font-weight:700; margin-top:0.5em;">but because Panamanians had been demanding it for decades.</p>
+        <p style="color:var(--deep-teal); font-style:italic; margin-top:0.7em;">Empire is not dismantled from the top.<br>It is pressured from below, at cost.</p>
+    </div>
+    <aside class="notes">
+        <p>🤔 <strong>Discussion Prompt:</strong> What does the 1964 riots → 1977 treaty → 1999 transfer arc tell us about how imperial arrangements end? Does the mechanism matter — negotiated vs. military defeat vs. economic withdrawal? How does the Canal Zone compare to British decolonization in India or Southeast Asia?</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 27: CLOSING — THREE-LECTURE ARC -->
+<!-- ============================================================ -->
+<section>
+    <h2 style="font-size:4.5em;">The Three-Lecture Arc</h2>
+    <div class="three-column">
+        <div>
+            <div class="column-header" style="font-size:2.0em;">Lecture 1</div>
+            <p style="font-size:1.75em; color:var(--pure-white);">Empire as <strong>spectacle</strong></p>
+            <p style="font-size:1.5em; color:var(--deep-teal);">Mass media, emotional mobilization, Roosevelt manufactures himself as hero</p>
+        </div>
+        <div>
+            <div class="column-header" style="font-size:2.0em;">Lecture 2</div>
+            <p style="font-size:1.75em; color:var(--pure-white);">Empire as <strong>coercion</strong></p>
+            <p style="font-size:1.5em; color:var(--deep-teal);">Occupation, atrocity, the gap between what war promises and what empire requires</p>
+        </div>
+        <div>
+            <div class="column-header" style="font-size:2.0em;">Lecture 3</div>
+            <p style="font-size:1.75em; color:var(--pure-white);">Empire as <strong>systems</strong></p>
+            <p style="font-size:1.5em; color:var(--deep-teal);">Infrastructure, doctrine, the argument that outlasted Roosevelt by a century</p>
+        </div>
+    </div>
+    <div class="bottom-text-bold" style="font-size:1.85em; margin-top:0.7em;">Systems are much harder to dismantle than decisions.</div>
+    <aside class="notes">
+        <p>💭 <strong>Close the arc explicitly.</strong> Students should feel the full weight of the three-lecture progression. In 1898, Roosevelt was improvising. By 1904, he was systematizing. The difference between a decision (which can be reversed) and a system (which reproduces itself) is the central intellectual claim of this lecture. State it plainly.</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 28: FINAL QUESTION — UNANSWERED -->
+<!-- ============================================================ -->
+<section>
+    <h2 style="font-size:4.0em;">The Question That Follows You</h2>
+    <div class="primary-source" style="font-size:1.95em;">
+        Is the pattern of American intervention across the 20th century the result of <strong>individual decisions</strong> made by individual presidents?
+        <br><br>
+        Or does the <strong>infrastructure itself generate the logic</strong> that justifies maintaining it?
+        <br><br>
+        <em>Once you've built the canal, written the Corollary, established the base network — do you still have a choice? Or does the infrastructure make the choice for you?</em>
+    </div>
+    <aside class="notes">
+        <p>⚠️ <strong>Do NOT answer this question.</strong> It is not rhetorical. It is the analytical frame for the rest of the course. Every major American foreign policy decision of the 20th century takes place in the shadow of the infrastructure and doctrine built between 1898 and 1904.</p>
+        <p>💭 <strong>Final line:</strong> "Roosevelt spent six years building an empire. He also built the argument for keeping it. That argument outlasted him by a century."</p>
+        <p>Then: silence. Let it land.</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 29: BRIDGE TO NEXT UNIT -->
+<!-- ============================================================ -->
+<section>
+    <h2 style="font-size:4.5em;">Coming Up Next</h2>
+    <div class="large-text" style="font-size:2.0em; text-align:left;">
+        <p><strong>The same Roosevelt</strong> who built the canal also built the regulatory state at home.</p>
+        <p style="margin-top:0.7em; color:var(--deep-teal);">The Square Deal · Trust-busting · Conservation · Progressive reform</p>
+        <p style="margin-top:0.7em;"><strong>The question:</strong> Are overseas empire and domestic Progressivism <em>contradictions</em> — or expressions of the same worldview?</p>
+    </div>
+    <p style="color:var(--bronze-accent); font-style:italic; font-size:1.8em; margin-top:1em;">Chapter 22 continues — The Progressive Era</p>
+    <aside class="notes">
+        <p>💭 <strong>Bridge framing:</strong> Students often assume empire and reform are opposites. The historical argument is that they come from the same source: a belief in the state's capacity to manage — whether that means regulating trusts at home or managing "uncivilized" nations abroad. Roosevelt held both beliefs simultaneously. That's the intellectual connection to explore in the next unit.</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 31: OPTIONAL DISCUSSION -->
+<!-- ============================================================ -->
+<section data-background="#1B4332">
+    <h2 style="font-size:4.5em; color:var(--antique-gold);">Optional Discussion</h2>
+    <div class="large-text" style="font-size:2.0em; text-align:left; margin-top:0.5em;">
+        <p style="color:var(--pure-white);">If the same justifications appear across very different interventions, very different presidents — Republican and Democratic — across radically different historical contexts...</p>
+        <p style="color:var(--antique-gold); font-weight:700; margin-top:0.7em;">What does that tell us about the relationship between infrastructure, power, and political reasoning?</p>
+        <p style="color:var(--deep-teal); font-style:italic; margin-top:0.7em;"><strong>Is the pattern a choice — or a system?</strong></p>
+    </div>
+    <div class="bottom-text" style="font-size:1.7em;">Follow-up: What would it take to dismantle a <em>system</em>, as opposed to reversing a <em>decision</em>?</div>
+    <aside class="notes">
+        <p>🤔 <strong>Key distinction to develop:</strong> An individual decision can be reversed by another individual decision. A systemic logic reproduces itself because the infrastructure makes certain actions feel rational and certain alternatives feel costly. The canal doesn't make intervention inevitable — but it makes intervention available in ways that shape what counts as a "reasonable" response to crisis. Once the infrastructure is there, the burden of proof shifts.</p>
+        <p>💭 Use as next-class opener if the lecture runs to time. Students who have been sitting with the final question overnight often come in with sharper responses than they would have given in the moment.</p>
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 32: SUGGESTED READINGS -->
+<!-- ============================================================ -->
+<section>
+    <h2 style="font-size:4.0em;">Where to Go Next</h2>
+    <div class="two-column">
+        <div>
+            <div class="column-header" style="font-size:2.0em;">Essential Books</div>
+            <ul style="font-size:1.65em;">
+                <li><strong>Julie Greene</strong> — <em>The Canal Builders</em> (2009) · Labor history; Gold/Silver Roll as racial architecture</li>
+                <li><strong>David McCullough</strong> — <em>The Path Between the Seas</em> (1977) · Standard narrative; engineering &amp; political story</li>
+                <li><strong>Walter LaFeber</strong> — <em>The Panama Canal</em> (1979) · Panamanian resistance; transfer politics</li>
+                <li><strong>Paul Kramer</strong> — <em>The Blood of Government</em> (2006) · Bridges Lectures 2 &amp; 3; Jim Crow as imperial system</li>
+            </ul>
+        </div>
+        <div>
+            <div class="column-header" style="font-size:2.0em;">Primary Source + Articles</div>
+            <ul style="font-size:1.65em;">
+                <li><strong>Alfred Thayer Mahan</strong> — <em>The Influence of Sea Power</em> (1890) · Read what Roosevelt read</li>
+                <li><strong>Michael Conniff</strong> — "Panama Since 1903," <em>Cambridge History of Latin America</em> · Panamanian perspective</li>
+                <li><strong>Marixa Lasso</strong> — "Race and Ethnicity in the Construction of the Panama Canal," <em>JLAS</em> · Silver Roll workers' lived experience</li>
+            </ul>
+        </div>
+    </div>
+    <aside class="notes">
+        <p>📚 <strong>For instructor preparation:</strong> If you read only one book for this lecture, read Greene. If you read two, add LaFeber for the long arc through 1999. Kramer is essential for the connection between Lectures 2 and 3 — his argument that Jim Crow and imperial racial hierarchy were expressions of the same underlying system, not analogies, is the analytical claim that makes the three-lecture arc feel inevitable rather than coincidental.</p>
+        <p>💭 Mahan is worth 2–3 chapters — reading what Roosevelt actually read changes how you teach the canal's strategic logic.</p>
+    </aside>
+</section>
+
+</div><!-- /slides -->
+</div><!-- /reveal -->
+
+<!-- ============================================================ -->
+<!-- GLOBAL UI — POPUPS -->
+<!-- ============================================================ -->
+<div id="keyboard-trigger" class="popup-trigger" data-popup="keyboard-popup"
+     style="position:fixed;top:20px;right:20px;font-size:2em;cursor:pointer;z-index:100;">⌨️</div>
+
+<div id="keyboard-popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Keyboard Shortcuts</div>
+    <p>→ / Space: Next &nbsp;|&nbsp; ←: Previous &nbsp;|&nbsp; S: Presenter Notes &nbsp;|&nbsp; F: Fullscreen &nbsp;|&nbsp; O: Overview &nbsp;|&nbsp; ESC: Close popups</p>
+</div>
+
+<div id="mahan-popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Alfred Thayer Mahan (1840–1914)</div>
+    <p>American naval officer and historian whose 1890 work <em>The Influence of Sea Power Upon History</em> became one of the most influential strategic texts of the era. Mahan argued that national greatness depended on controlling the sea lanes, and that control came through chokepoints — strategic narrows, straits, and canals. His ideas were read and acted upon by Roosevelt, Kaiser Wilhelm II, and naval planners across the major powers. The Panama Canal is the direct application of his thesis.</p>
+</div>
+
+<div id="herrán-popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Hay-Herrán Treaty (January 1903)</div>
+    <p>A treaty between the United States and Colombia negotiated by Secretary of State John Hay and Colombian diplomat Tomás Herrán. It would have granted the U.S. a 99-year lease on a six-mile-wide canal zone across the Colombian province of Panama in exchange for $10 million upfront and $250,000 annually. The Colombian senate rejected it unanimously in August 1903, wanting better terms. Roosevelt responded by supporting the Panamanian independence movement rather than renegotiating.</p>
+</div>
+
+<div id="treaty-popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Hay-Bunau-Varilla Treaty (November 18, 1903)</div>
+    <p>The treaty that gave the United States permanent sovereign control over the Canal Zone. Named after U.S. Secretary of State John Hay and Philippe Bunau-Varilla — the French engineer who acted as Panama's representative despite not being Panamanian. Bunau-Varilla signed before the Panamanian government's own diplomats could arrive in Washington. The treaty granted the U.S. a ten-mile-wide strip "in perpetuity" for the same financial terms Colombia had rejected. The Panamanian government protested but ratified under pressure. The Zone ran until December 31, 1999.</p>
+</div>
+
+<div id="gorgas-popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Dr. William Crawford Gorgas (1854–1920)</div>
+    <p>U.S. Army surgeon who had previously eliminated yellow fever from Havana, Cuba (1901) by proving it was transmitted by the <em>Aedes aegypti</em> mosquito. Roosevelt placed him in charge of the Canal Zone's sanitation program in 1904 — before construction began. His teams systematically drained swamps, oiled standing water, screened buildings, and fumigated houses. Yellow fever was eliminated from the Zone by 1906, making the construction project viable where the French had failed. He later served as Surgeon General of the Army (1914–1918).</p>
+</div>
+
+<div id="gold-silver-popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Gold Roll and Silver Roll</div>
+    <p>The official two-tier pay and status system of the Panama Canal Zone, written into U.S. government administrative policy from the project's beginning. <strong>Gold Roll</strong> workers — almost exclusively white Americans and some European skilled workers — were paid in U.S. gold currency and received better housing, food, medical care, and facilities. <strong>Silver Roll</strong> workers — almost exclusively Black Caribbean laborers (primarily from Barbados) and some Latin American workers — were paid in Panamanian silver currency at lower rates and received separate, inferior accommodations and medical attention. The system was not informal workplace custom; it was federal administrative policy that exported Jim Crow racial classification into an imperial context. Historian Julie Greene documents the system in detail in <em>The Canal Builders</em> (2009).</p>
+</div>
+
+<div id="corollary-popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Roosevelt Corollary to the Monroe Doctrine (1904)</div>
+    <p>An addition to the Monroe Doctrine announced by President Theodore Roosevelt in his Annual Message to Congress, December 6, 1904. The original Monroe Doctrine (1823) had declared that European powers should not colonize or intervene in the Americas. The Roosevelt Corollary added: if Latin American nations could not maintain order or meet their international obligations, the United States reserved the right to intervene as an "international police power." It was first applied to the Dominican Republic in 1905 and subsequently invoked to justify interventions in Nicaragua (1909, 1912, 1926), Haiti (1915–1934), and the Dominican Republic again (1916–1924). The Corollary was officially repudiated by the Franklin Roosevelt administration in 1934 as part of the "Good Neighbor Policy."</p>
+</div>
+
+<div id="riots-popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Panamanian Flag Riots (January 9, 1964)</div>
+    <p>A pivotal confrontation in the Canal Zone. American high school students raised a U.S. flag in the Zone in defiance of an agreement to fly both the American and Panamanian flags at civilian sites. Panamanian students attempted to raise their flag; fighting broke out. American forces and civilian crowds attacked Panamanian students and the violence spread. More than 20 Panamanians and 4 Americans were killed. Panama temporarily broke diplomatic relations with the United States and brought charges before the Organization of American States. The riots made the Zone's political arrangements untenable and began the process that eventually led to the 1977 Torrijos-Carter Treaties. January 9 is now commemorated in Panama as "Martyrs' Day."</p>
+</div>
+
+<div id="torrijos-popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Torrijos-Carter Treaties (1977)</div>
+    <p>Two treaties signed September 7, 1977 between the United States and Panama, negotiated by President Jimmy Carter and Panamanian leader General Omar Torrijos. The first treaty ended U.S. claims to permanent sovereignty over the Canal Zone and established a joint administration with a transfer timeline. The second guaranteed permanent neutrality of the canal. The treaties were deeply controversial in the United States and required a difficult Senate ratification fight. They were the result of more than a decade of Panamanian pressure — including the 1964 riots — and significant diplomatic pressure from other Latin American nations. Full control was transferred to Panama on December 31, 1999.</p>
+</div>
+
+<div class="slide-counter"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+<script>
+    Reveal.initialize({
+        width: 1920, height: 1080, margin: 0.08, minScale: 0.2, maxScale: 2.0,
+        hash: true, slideNumber: false, transition: 'slide', plugins: [RevealNotes]
+    });
+    function updateSlideCounter() {
+        const c = Reveal.getState().indexh + 1, t = Reveal.getTotalSlides();
+        document.querySelector('.slide-counter').textContent = `${c} / ${t}`;
+    }
+    Reveal.on('slidechanged', updateSlideCounter);
+    updateSlideCounter();
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('popup-trigger')) {
+            const el = document.getElementById(e.target.getAttribute('data-popup'));
+            if (el) el.classList.add('active');
+        }
+        if (e.target.classList.contains('popup-close') || e.target.classList.contains('popup'))
+            document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+    });
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+    });
+</script>
+</body>
+</html>
