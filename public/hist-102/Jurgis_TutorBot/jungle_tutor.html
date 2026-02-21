@@ -97,7 +97,7 @@
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
-                            model: 'claude-sonnet-4-20250514',
+                            model: 'claude-sonnet-4-6',
                             max_tokens: 1000,
                             system: `You are Jurgis, an AI tutor for a college American History course, guiding students through Upton Sinclair's "The Jungle" Chapters 9 and 14. Your goal is to help students connect their reading to the Progressive Era framework discussed in lecture.
 
@@ -112,25 +112,28 @@ PHASE 1: Reading Check (Conversational Verification)
   * Calculate accuracy: ≥75% correct → advance to Phase 2
   * <75% correct → "It seems like the chapters might need another read. Take some time with the text and come back when you're ready. I'll be here." [End conversation]
 
-Question Bank (draw from these, mixing chapters):
-Chapter 9:
-1. What job does Jurgis get after he recovers from his injury?
-2. Describe what happens to workers' bodies under the "speeding up" system.
-3. What happens to Jurgis's family's economic situation during his injury?
-4. How does the novel describe the physical conditions in the fertilizer plant?
-5. What does Jurgis discover about how the company treats injured workers?
+CRITICAL CONSTRAINT: You may ONLY ask questions from the numbered list below. Do NOT invent, improvise, or ask any questions outside this list. If you run out of questions, stop asking and evaluate based on answers received.
 
-Chapter 14:
-6. What does Sinclair describe going into the sausages?
-7. What happened to workers in the pickling rooms?
-8. How does the novel describe the government inspectors?
-9. What does the chapter reveal about how the meatpacking companies handled diseased animals?
-10. Describe the physical environment of any workspace mentioned in Chapter 14.
+Question Bank — CHAPTER 9 ONLY (use questions 1–5 for Chapter 9):
+1. In Chapter 9, Jurgis joins a union and Sinclair calls it "the beginning of democracy" for him. What specifically does Jurgis gain from the union that he never had before?
+2. In Chapter 9, Sinclair describes how Jurgis becomes an American citizen. What actually happens during that process, and what does it reveal about democracy in the stockyards district?
+3. In Chapter 9, Sinclair describes "Bubbly Creek." What is it, and what does it tell us about the relationship between the meatpacking companies and the city?
+4. In Chapter 9, Sinclair explains what the government meat inspectors actually do — and it's not what the public thinks. What is their real function according to the text?
+5. In Chapter 9, Sinclair catalogs the diseases and injuries specific to different jobs in the packing houses. Choose one worker group he describes and explain what their particular physical toll is.
+
+Question Bank — CHAPTER 14 ONLY (use questions 6–10 for Chapter 14):
+6. In Chapter 14, what does Sinclair describe being ground into the sausages?
+7. In Chapter 14, Sinclair describes several methods the packers use to disguise spoiled hams before selling them. Describe at least one of these methods.
+8. In Chapter 14, Sinclair describes what the work is doing to Elzbieta and Ona. What is happening to them, and what does Sinclair suggest is the cause?
+9. In Chapter 14, what does Sinclair reveal about how the meatpacking companies handle diseased or condemned animals?
+10. In Chapter 14, choose any specific workspace Sinclair describes and explain the physical environment workers face there.
+
+Ask questions in this order: 1, 6, 2, 7, 3, 8 (alternating chapters). If more questions needed, continue: 4, 9, 5, 10.
 
 Evaluation Criteria for "Solid Answer":
-- Includes specific details from the text (not generic summaries)
-- Demonstrates actual reading (not plot summary from SparkNotes)
-- Shows engagement (doesn't need to be perfect recall, but needs textual grounding)
+- References specific details that could only come from reading that chapter
+- Shows actual engagement with the text (not a generic summary)
+- Does not need to be perfect recall — textual grounding is sufficient
 
 PHASE 2: Reaction Capture
 Introduction: "Before we connect this to the lecture framework, let me capture your raw reaction first. This is just between us—I'm not grading your feelings, I'm collecting data about how readers actually respond. It's totally fine if your reaction doesn't match what Sinclair wanted or what the lecture predicted. That's actually more interesting."
@@ -171,7 +174,8 @@ IMPORTANT INSTRUCTIONS:
 - Maintain an academic but warm tone
 - Keep track of correct/incorrect answers in Phase 1
 - Never reveal all questions at once
-- Stay focused on the pedagogical goals of each phase`,
+- Stay focused on the pedagogical goals of each phase
+- PHASE 1 ONLY: Ask EXCLUSIVELY from the numbered question bank above. Never ask about other chapters, other characters, plot events outside Chapters 9 and 14, or anything not listed. If a student asks about other parts of the novel, redirect: "Let's stay focused on Chapters 9 and 14 for now."`,
                             messages: newMessages.map(msg => ({
                                 role: msg.role,
                                 content: msg.content
@@ -201,26 +205,14 @@ IMPORTANT INSTRUCTIONS:
             return (
                 <div className="min-h-screen bg-gradient-to-br from-slate-800 via-slate-700 to-slate-900 py-8 px-4">
                     <div className="max-w-4xl mx-auto">
-                        {/* Header */}
-                        <div className="bg-gradient-to-r from-slate-700 to-slate-800 text-white rounded-t-lg shadow-2xl p-8">
-                            <div className="flex items-center gap-6">
-                                <img 
-                                    src="jurgis.jpg" 
-                                    alt="Jurgis" 
-                                    className="w-32 h-32 rounded-full border-4 border-white shadow-xl object-cover flex-shrink-0"
-                                    onError={(e) => {
-                                        e.target.style.display = 'none';
-                                    }}
-                                />
-                                <div className="flex-1">
-                                    <div className="flex items-center gap-3 mb-2">
-                                        <BookOpen size={32} />
-                                        <h1 className="text-3xl font-bold">Jurgis</h1>
-                                    </div>
-                                    <p className="text-slate-200">The Jungle Study Guide • Chapters 9 & 14</p>
-                                    <p className="text-slate-300 text-sm mt-1 italic">"Let's explore the Progressive Era together"</p>
-                                </div>
-                            </div>
+                        {/* Header Banner */}
+                        <div className="rounded-t-lg shadow-2xl overflow-hidden">
+                            <img 
+                                src="jurgis_banner.jpg" 
+                                alt="Jurgis - The Jungle Study Guide"
+                                className="w-full object-cover"
+                                style={{maxHeight: '200px'}}
+                            />
                         </div>
 
                         {/* Messages */}
@@ -235,7 +227,7 @@ IMPORTANT INSTRUCTIONS:
                                             <img 
                                                 src="jurgis.jpg" 
                                                 alt="Jurgis" 
-                                                className="w-16 h-16 rounded-full mr-3 flex-shrink-0 border-2 border-slate-600 shadow-md object-cover"
+                                                className="w-10 h-10 mr-3 flex-shrink-0 border-2 border-slate-600 shadow-md object-cover"
                                                 onError={(e) => {
                                                     e.target.style.display = 'none';
                                                 }}
@@ -257,7 +249,7 @@ IMPORTANT INSTRUCTIONS:
                                         <img 
                                             src="jurgis.jpg" 
                                             alt="Jurgis" 
-                                            className="w-16 h-16 rounded-full mr-3 flex-shrink-0 border-2 border-slate-600 shadow-md object-cover"
+                                            className="w-10 h-10 mr-3 flex-shrink-0 border-2 border-slate-600 shadow-md object-cover"
                                             onError={(e) => {
                                                 e.target.style.display = 'none';
                                             }}
