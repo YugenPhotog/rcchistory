@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Picturing Manifest Destiny — HIST 101</title>
+
+    <!-- Reveal.js CSS — cdnjs -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --antique-gold: #D4AF37;
+            --deep-teal:    #2C7873;
+            --rich-purple:  #6B4C9A;
+            --ruby-crimson: #9B2C2C;
+            --dark-charcoal:#1A1A1A;
+            --pure-white:   #FAFAFA;
+            --soft-cream:   #F5F1E8;
+            --bronze-accent:#8B6F47;
+            --forest-green: #1B4332;
+        }
+
+        .reveal {
+            font-family: 'Lora', serif;
+            font-size: 1.3em;
+            background-color: var(--dark-charcoal);
+            color: var(--pure-white);
+        }
+
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Crimson Pro', serif;
+            font-weight: 700;
+            color: var(--antique-gold);
+            text-transform: none;
+        }
+        .reveal h1 { font-size: 6.0em; }
+        .reveal h2 { font-size: 4.5em; margin-bottom: 0.5em; }
+        .reveal h3 { font-size: 2.5em; }
+
+        .reveal ul { list-style: none; padding-left: 0; }
+        .reveal ul li { margin-bottom: 0.4em; font-size: 1.0em; }
+        .reveal ul li:before { content: "◆ "; color: var(--deep-teal); font-weight: bold; margin-right: 0.5em; }
+
+        /* suppress bullets on nested lists */
+        .reveal ul ul li:before { content: ""; margin-right: 0; }
+        .reveal ul ul { list-style: disc; padding-left: 1.5em; }
+        .reveal ul ul li { font-size: 0.9em; }
+
+        strong { color: var(--antique-gold); }
+        em     { color: var(--deep-teal); font-style: italic; }
+
+        /* Pop-ups */
+        .popup-trigger { color: var(--deep-teal); border-bottom: 2px dotted var(--deep-teal); cursor: pointer; transition: color 0.3s; }
+        .popup-trigger:hover { color: var(--antique-gold); }
+        .popup {
+            display: none; position: fixed; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--soft-cream); color: var(--dark-charcoal);
+            padding: 2em; border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            max-width: 600px; max-height: 70%; overflow-y: auto;
+            z-index: 1000; border: 3px solid var(--bronze-accent);
+        }
+        .popup.active { display: block; }
+        .popup-close { position: absolute; top: 10px; right: 15px; font-size: 2em; cursor: pointer; color: var(--ruby-crimson); }
+        .definition-term { font-size: 1.5em; font-weight: 700; color: var(--rich-purple); margin-bottom: 0.5em; font-family: 'Crimson Pro', serif; }
+        .key-term { color: var(--rich-purple); font-weight: 600; }
+
+        /* Slide counter */
+        .slide-counter {
+            position: fixed; bottom: 20px; right: 20px;
+            background: rgba(26,26,26,0.9);
+            color: var(--antique-gold); padding: 8px 15px;
+            border-radius: 8px; font-family: 'Crimson Pro', serif;
+            font-weight: 600; font-size: 0.9em;
+            border: 2px solid var(--deep-teal); z-index: 100;
+        }
+
+        /* Layouts */
+        .two-column   { display: grid; grid-template-columns: 1fr 1fr; gap: 2em; align-items: start; }
+        .three-column { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5em; align-items: start; }
+        .content-image-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2em; align-items: center; }
+        .content-image-layout .content-side { text-align: left; }
+        .content-image-layout .image-side   { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .content-image-layout .image-side img { max-width: 100%; max-height: 560px; object-fit: contain; border-radius: 6px; }
+
+        .column-header { font-weight: 700; color: var(--antique-gold); font-size: 2.5em; margin-bottom: 0.5em; font-family: 'Crimson Pro', serif; }
+        .bottom-text      { margin-top: 1.2em; font-style: italic; color: var(--deep-teal); font-size: 1.8em; }
+        .bottom-text-bold { margin-top: 1.2em; font-weight: 700; color: var(--antique-gold); font-size: 1.8em; }
+        .subtitle         { font-size: 2.5em; color: var(--deep-teal); margin-top: 0.5em; }
+        .large-text       { font-size: 2.0em; text-align: center; line-height: 1.6; }
+        .callout {
+            background: rgba(212,175,55,0.15);
+            border-left: 5px solid var(--antique-gold);
+            padding: 1.2em; margin: 1em 0; font-size: 2.0em;
+        }
+        .primary-source {
+            background: rgba(212,175,55,0.1);
+            border-left: 5px solid var(--antique-gold);
+            padding: 1em; margin: 1em 0;
+            font-style: italic; color: var(--pure-white); font-size: 1.8em;
+        }
+        .primary-source-attribution { text-align: right; font-size: 1.6em; color: var(--bronze-accent); margin-top: 0.5em; font-style: normal; }
+        .timeline-item { margin-bottom: 0.6em; }
+        .timeline-year { color: var(--antique-gold); font-weight: 700; }
+        .assessment-box { background: rgba(44,120,115,0.15); border: 2px solid var(--deep-teal); border-radius: 10px; padding: 1.5em; margin: 1em 0; }
+        .assessment-box h3 { color: var(--deep-teal); margin-top: 0; }
+        .img-placeholder { background: rgba(139,111,71,0.2); border: 3px dashed var(--bronze-accent); padding: 3em; text-align: center; color: var(--bronze-accent); font-style: italic; border-radius: 10px; }
+        .img-caption { font-size: 1.4em; color: var(--bronze-accent); font-style: italic; text-align: center; margin-top: 0.4em; }
+        .centered-list { text-align: center; font-size: 2.0em; }
+        .centered-list li { margin-bottom: 0.7em; }
+
+        /* Image slides — full bleed */
+        .image-slide-full {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            height: 100%;
+        }
+        .image-slide-full img {
+            max-width: 100%; max-height: 880px; object-fit: contain;
+            border-radius: 4px;
+        }
+
+        /* Section dividers (forest green) handled via data-background on each section */
+    </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- TITLE SLIDE                                                 -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section data-transition="fade" style="text-align:center;">
+    <h1 style="font-size:5.0em;">Picturing Manifest Destiny</h1>
+    <p class="subtitle" style="font-size:2.5em;">Art, Photography, and the Myth of the Vanishing Indian, 1840–1910</p>
+    <p style="font-size:1.8em; color:var(--bronze-accent); margin-top:1em;">HIST 101 · Richland Community College</p>
+    <aside class="notes">
+        <p>Welcome. Tonight we're looking at how Americans learned to see the West — not through experience, but through images. Between 1840 and 1910, landscape paintings, portrait photography, and staged scenes taught millions of Americans what the West looked like, who belonged there, and what westward expansion meant. This isn't a story about accurate representation. It's about how images created a mythology so powerful that it shaped policy, justified violence, and still influences how we see the American West today.</p>
+        <p>We'll trace this visual tradition chronologically, watching a pattern emerge: landscapes painted as empty, Indigenous peoples portrayed as disappearing, white settlers framed as the future — and one illustrator who carried that entire visual grammar into the age of empire. By the end, we'll see how Edward Curtis crystallized it all into one phrase: "The Vanishing Race."</p>
+    </aside>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SECTION I: LANDSCAPES                                       -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">Part I</h2>
+    <div class="subtitle" style="font-size:2.5em;">Landscapes: Nature as National Destiny</div>
+    <p style="color:var(--bronze-accent); font-style:italic; font-size:2.0em; margin-top:0.8em;">What do these paintings want you to believe about the land?</p>
+    <aside class="notes">
+        <p>Let's begin with landscapes. Think of Thomas Cole, Frederic Church, Jasper Cropsey — giants of the Hudson River School. They're not just painting scenery; they're painting promise. Nature becomes a kind of scripture. The scale is vast, the land is pristine, and the brushwork suggests a world waiting patiently for human purpose. Notice what they minimize: human presence. If anyone appears at all, they're small enough to be mistaken for a misplaced brushstroke.</p>
+    </aside>
+</section>
+
+<!-- Thomas Cole: The Oxbow -->
+<section>
+    <div class="image-slide-full">
+        <img src="images/1590px-Cole_Thomas_The_Oxbow_(The_Connecticut_River_near_Northampton_1836).jpg"
+             alt="Thomas Cole, The Oxbow, Connecticut River Valley, 1836"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="img-placeholder" style="display:none;">📸 Thomas Cole · The Oxbow · 1836</div>
+        <p class="img-caption">Thomas Cole, <em>The Oxbow (Connecticut River near Northampton)</em>, 1836</p>
+    </div>
+    <aside class="notes">
+        <p>Wild nature on the left, cultivated farmland on the right. This is visual rhetoric about civilization's progress. The tiny figure painting in the center is Cole himself — the artist-observer witnessing the transformation of wilderness into civilization. The painting suggests this is natural, inevitable, divinely ordained. But where are the Algonquian peoples who lived here for millennia?</p>
+    </aside>
+</section>
+
+<!-- Frederic Church: Twilight in the Wilderness -->
+<section>
+    <div class="image-slide-full">
+        <img src="images/1734px-Twilight_in_the_Wilderness_by_Frederic_Edwin_Church_(3).jpg"
+             alt="Frederic Church, Twilight in the Wilderness, 1860"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="img-placeholder" style="display:none;">📸 Frederic Church · Twilight in the Wilderness · 1860</div>
+        <p class="img-caption">Frederic Church, <em>Twilight in the Wilderness</em>, 1860</p>
+    </div>
+    <aside class="notes">
+        <p>Church's paintings were theatrical events — displayed with curtains and special lighting, viewers paid admission to see them. This visual vocabulary — pristine wilderness, divine light, human insignificance — would be applied to North American landscapes, erasing Indigenous presence and suggesting land waiting to be claimed.</p>
+    </aside>
+</section>
+
+<!-- Albert Bierstadt: Rocky Mountains -->
+<section>
+    <div class="image-slide-full">
+        <img src="images/1803px-Albert_Bierstadt_-_The_Rocky_Mountains,_Lander's_Peak.jpg"
+             alt="Albert Bierstadt, The Rocky Mountains, Lander's Peak, 1863"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="img-placeholder" style="display:none;">📸 Albert Bierstadt · Rocky Mountains, Lander's Peak · 1863</div>
+        <p class="img-caption">Albert Bierstadt, <em>The Rocky Mountains, Lander's Peak</em>, 1863</p>
+    </div>
+    <aside class="notes">
+        <p>Bierstadt includes a Shoshone encampment in the foreground, but they're tiny, picturesque elements in a vast landscape — decorative rather than political. Completed during the Civil War, exhibited in New York: Americans who had never seen the West were learning to imagine it as empty, available, magnificent. The light is theatrical, almost supernatural. This isn't documentary; it's mythmaking.</p>
+    </aside>
+</section>
+
+<!-- Jasper Cropsey: Autumn on the Hudson -->
+<section>
+    <div class="image-slide-full">
+        <img src="images/autumn_-_on_the_hudson_river_1963.9.1.jpg"
+             alt="Jasper Cropsey, Autumn on the Hudson River, 1860"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="img-placeholder" style="display:none;">📸 Jasper Cropsey · Autumn on the Hudson River · 1860</div>
+        <p class="img-caption">Jasper Francis Cropsey, <em>Autumn on the Hudson River</em>, 1860</p>
+    </div>
+    <aside class="notes">
+        <p>Another vision of the American landscape as sublime, empty, and available. The Hudson River School painters created a visual argument that the land was a promised gift — not a place already occupied by complex nations with histories, governments, and trade networks spanning centuries.</p>
+    </aside>
+</section>
+
+<!-- Pause & Reflect I -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">⏸ Pause & Reflect</h2>
+    <div class="large-text" style="font-size:2.2em; margin-top:0.8em;">
+        <p style="color:var(--pure-white);">These paintings show the American landscape as vast, pristine, and empty. What does that visual choice <em>argue</em> about who the land belongs to?</p>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SECTION II: INDIGENOUS PORTRAITURE                         -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">Part II</h2>
+    <div class="subtitle" style="font-size:2.5em;">Indigenous Portraiture: Noble Figures From a "Distant" World</div>
+    <p style="color:var(--bronze-accent); font-style:italic; font-size:2.0em; margin-top:0.8em;">These are living diplomats. Why do they look like relics?</p>
+    <aside class="notes">
+        <p>Shift to George Catlin, Charles Bird King, and Alfred Jacob Miller. Their portraits present individuals in isolation, adorned in ceremonial attire, paused in timeless dignity. What's missing isn't people — it's contemporaneity. These artists weren't interested in Native political life, diplomacy, trade, or everyday texture of Indigenous societies. They chose to portray their subjects as though they belonged to some earlier epoch.</p>
+    </aside>
+</section>
+
+<!-- Charles Bird King Introduction -->
+<section>
+    <h2 style="font-size:4.5em;">Charles Bird King</h2>
+    <ul style="font-size:2.0em;">
+        <li>Worked in Washington, D.C. — painted Native delegations who came to <strong>negotiate treaties</strong> and defend their nations</li>
+        <li>His portraits formed the government's <em>"Indian Gallery,"</em> displayed in the War Department — the same place coordinating removal policy</li>
+        <li>Presents sitters against neutral backgrounds, emphasizing "traditional" clothing and dignified stillness</li>
+        <li>The effect: <strong>freezes living political leaders</strong> as if they belonged to an earlier, disappearing world</li>
+    </ul>
+    <aside class="notes">
+        <p>Stress that these sitters were active diplomats in Washington, not timeless "types." Highlight the irony: their portraits hanging in the War Department during a period of forced removal. King's visual choices promote a sense of disappearance rather than political continuity.</p>
+    </aside>
+</section>
+
+<!-- King: Monchousia -->
+<section>
+    <div class="image-slide-full">
+        <img src="images/charles_bird_king/Monchousia_King.jpg"
+             alt="Charles Bird King, Monchousia, 1820s"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="img-placeholder" style="display:none;">📸 Charles Bird King · Monchousia · 1820s</div>
+        <p class="img-caption">Charles Bird King, <em>Monchousia</em>, 1820s</p>
+    </div>
+    <aside class="notes">
+        <p>Formal pose, careful attention to regalia, neutral background. This is a diplomatic portrait framed to emphasize exotic difference rather than political negotiation. The subject becomes a specimen, a type, rather than a specific leader with specific concerns.</p>
+    </aside>
+</section>
+
+<!-- King: Petalesharro -->
+<section>
+    <div class="image-slide-full">
+        <img src="images/charles_bird_king/Petalesharro_Pawnee_King.jpg"
+             alt="Charles Bird King, Petalesharro (Generous Chief), Pawnee, 1820s"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="img-placeholder" style="display:none;">📸 Charles Bird King · Petalesharro · 1820s</div>
+        <p class="img-caption">Charles Bird King, <em>Petalesharro (Generous Chief)</em>, Pawnee, 1820s</p>
+    </div>
+    <aside class="notes">
+        <p>Petalesharro was a Pawnee leader who came to Washington for treaty negotiations. King's portrait captures his dignity but removes the political context of his visit entirely.</p>
+    </aside>
+</section>
+
+<!-- King: Hayne Hudjihini -->
+<section>
+    <div class="image-slide-full">
+        <img src="images/charles_bird_king/Hayne_Hudjihini_King.jpg"
+             alt="Charles Bird King, Hayne Hudjihini (Eagle of Delight), Oto, 1820s"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="img-placeholder" style="display:none;">📸 Charles Bird King · Hayne Hudjihini · 1820s</div>
+        <p class="img-caption">Charles Bird King, <em>Hayne Hudjihini (Eagle of Delight)</em>, Oto, 1820s</p>
+    </div>
+</section>
+
+<!-- George Catlin Introduction -->
+<section>
+    <h2 style="font-size:4.5em;">George Catlin</h2>
+    <ul style="font-size:2.0em;">
+        <li>Spent the 1830s painting Mandan, Hidatsa, Blackfeet, Crow, and other Plains nations</li>
+        <li>Described his mission as <em>"rescuing from oblivion"</em> the looks and customs of a <strong>"vanishing" race</strong></li>
+        <li>Staged sitters in ceremonial dress — emphasizing the exotic and timeless over everyday life</li>
+        <li>Deep contradiction: preserved invaluable visual records while <strong>framing them as inevitable disappearance</strong></li>
+    </ul>
+    <aside class="notes">
+        <p>Catlin is crucial to understanding how the "vanishing race" narrative developed. In the 1830s, the Plains tribes he painted — Mandans, Hidatsas, Blackfeet, Crows — were still largely living their traditional lifeways. The ceremonial regalia was genuinely part of their active cultures. But Catlin framed everything through his "vanishing race" narrative, claiming he was creating a last record before inevitable disappearance. This ignored Native agency, adaptation, and survival.</p>
+    </aside>
+</section>
+
+<!-- Catlin: Authentic or Staged? -->
+<section>
+    <h2 style="font-size:4.0em;">Catlin's Portraits: Authentic or Staged?</h2>
+    <ul style="font-size:1.9em;">
+        <li><strong>What he actually painted (1830s):</strong> Living cultures — ceremonial regalia, buffalo-skin lodges, traditional dress were genuinely active, not reconstructions</li>
+        <li><strong>The staging element:</strong> Asked subjects to wear finest ceremonial clothing — like a formal portrait versus work clothes</li>
+        <li><strong>The real problem:</strong> The "vanishing race" narrative — claiming Native peoples were inevitably disappearing, ignoring agency and adaptation</li>
+        <li><strong>Bottom line:</strong> Catlin documented living cultures through a selective, romanticizing lens that served white expectations</li>
+    </ul>
+    <aside class="notes">
+        <p>Important nuance: Catlin wasn't completely fabricating what he painted. In the 1830s, these were living cultures. But his selection of what to paint, how to frame it, and especially his "vanishing race" language, created a distorted picture that served white American expectations and justified dispossession.</p>
+    </aside>
+</section>
+
+<!-- Catlin: White Cloud -->
+<section>
+    <div class="image-slide-full">
+        <img src="images/george_catlin/George-Catlin_White_Cloud.jpg"
+             alt="George Catlin, White Cloud, Head Chief of the Iowas, 1844-45"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="img-placeholder" style="display:none;">📸 George Catlin · White Cloud · 1844</div>
+        <p class="img-caption">George Catlin, <em>White Cloud, Head Chief of the Iowas</em>, 1844–45</p>
+    </div>
+    <aside class="notes">
+        <p>Catlin's twilight backgrounds and romantic lighting remove the subject from contemporary context. This is a living person in the 1830s, but the visual treatment suggests someone from a different time. The "vanishing race" narrative is built into the aesthetic choices.</p>
+    </aside>
+</section>
+
+<!-- Catlin: Buffalo Bull's Back Fat -->
+<section>
+    <div class="image-slide-full">
+        <img src="images/george_catlin/George-Catlin_Buffalo-Bull-Back-Fat.jpg"
+             alt="George Catlin, Buffalo Bull's Back Fat, Head Chief, Blood Tribe, 1832"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="img-placeholder" style="display:none;">📸 George Catlin · Buffalo Bull's Back Fat · 1832</div>
+        <p class="img-caption">George Catlin, <em>Buffalo Bull's Back Fat, Head Chief, Blood Tribe</em>, 1832</p>
+    </div>
+</section>
+
+<!-- Catlin: Sha-có-pay -->
+<section>
+    <div class="image-slide-full">
+        <img src="images/george_catlin/960px-George_Catlin_-_Sha-có-pay,_The_Six,_Chief_of_the_Plains_Ojibwa_-_Google_Art_Project.jpg"
+             alt="George Catlin, Sha-có-pay (The Six), Chief of the Plains Ojibwa, 1832"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="img-placeholder" style="display:none;">📸 George Catlin · Sha-có-pay · 1832</div>
+        <p class="img-caption">George Catlin, <em>Sha-có-pay (The Six)</em>, Chief of the Plains Ojibwa, 1832</p>
+    </div>
+</section>
+
+<!-- Catlin: Buffalo Chase -->
+<section>
+    <div class="image-slide-full">
+        <img src="images/george_catlin/George-Catlin_Buffalo_Chase.jpg"
+             alt="George Catlin, Buffalo Chase, A Single Death, 1832-33"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="img-placeholder" style="display:none;">📸 George Catlin · Buffalo Chase · 1832</div>
+        <p class="img-caption">George Catlin, <em>Buffalo Chase, A Single Death</em>, 1832–33</p>
+    </div>
+    <aside class="notes">
+        <p>Catlin's action scenes romanticize traditional hunting practices, presenting them as exotic spectacles rather than contemporary economic activities.</p>
+    </aside>
+</section>
+
+<!-- Pause & Reflect II -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">⏸ Pause & Reflect</h2>
+    <div class="large-text" style="font-size:2.2em; margin-top:0.8em;">
+        <p style="color:var(--pure-white);">Catlin was painting living leaders — diplomats in Washington, chiefs negotiating treaties. Why did he frame them as if they were already gone?</p>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SECTION III: DAGUERREOTYPES                                 -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">Part III</h2>
+    <div class="subtitle" style="font-size:2.5em;">Daguerreotypes: Photography's "Truth"</div>
+    <p style="color:var(--bronze-accent); font-style:italic; font-size:2.0em; margin-top:0.8em;">The camera cannot lie — or can it?</p>
+    <aside class="notes">
+        <p>The daguerreotype — popular in the 1840s and 1850s — was widely believed to be an unfiltered truth machine. "The camera cannot lie," people said. Of course, the camera lies all the time. Think about daguerreotypes of Native diplomats made in Washington, D.C. The subjects sit stiffly, often wearing clothing chosen not by themselves but by the studio. A chief negotiating a treaty is shown instead as an anonymous figure of "Indianness" — timeless and abstract.</p>
+    </aside>
+</section>
+
+<!-- Photography's "Objective" Lie -->
+<section>
+    <h2 style="font-size:4.5em;">Photography's "Objective" Lie</h2>
+    <ul style="font-size:2.0em;">
+        <li><strong>The myth:</strong> Photography captures reality without bias — "the camera cannot lie"</li>
+        <li><strong>The reality:</strong> Every photograph involves choices — framing, timing, subject, what to include and <em>what to exclude</em></li>
+        <li><strong>The danger:</strong> Photography claimed authority without accountability — viewers believed they were seeing truth when they were seeing the photographer's vision</li>
+        <li><strong>The paradox:</strong> Photography feels factual, but it erases history — stripping away politics, modernity, and context</li>
+    </ul>
+    <aside class="notes">
+        <p>The belief in photographic objectivity made photographic lies more powerful than painted ones. When Catlin painted romantic portraits, viewers understood those were artistic interpretations. But when photographers created the same romantic, decontextualized images, viewers believed they were seeing unmediated truth. Every photograph is an argument.</p>
+    </aside>
+</section>
+
+<!-- Daguerreotype examples -->
+<section>
+    <div class="image-slide-full">
+        <img src="images/Native_American_Daguerreotype/NMAH-JN2016-00719.jpg"
+             alt="Native American leader, daguerreotype, 1850s, Washington D.C. studio"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="img-placeholder" style="display:none;">📸 Native American daguerreotype · 1850s</div>
+        <p class="img-caption">Native American daguerreotype, 1850s · Smithsonian National Museum of American History</p>
+    </div>
+    <aside class="notes">
+        <p>Studio daguerreotype with neutral backdrop. The subject's identity as a political leader, diplomat, or negotiator is erased. They become a type, a specimen, an example of "Indianness" rather than a specific person with specific concerns.</p>
+    </aside>
+</section>
+
+<section>
+    <div class="image-slide-full">
+        <img src="images/keokuk-mhm-12b76c.jpg"
+             alt="Keokuk, Sauk leader, daguerreotype 1847"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="img-placeholder" style="display:none;">📸 Keokuk · Sauk leader · daguerreotype 1847</div>
+        <p class="img-caption">Keokuk, Sauk leader, daguerreotype, 1847</p>
+    </div>
+    <aside class="notes">
+        <p>Keokuk was a significant Sauk leader who negotiated with the U.S. government. But in this daguerreotype, that political context disappears. The photograph emphasizes exotic regalia rather than diplomatic strategy.</p>
+    </aside>
+</section>
+
+<section>
+    <div class="image-slide-full">
+        <img src="images/Native_American_Daguerreotype/carter_p1991-25_o2_20.jpg"
+             alt="Native American leader, daguerreotype, Carter collection"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="img-placeholder" style="display:none;">📸 Native American daguerreotype · Carter collection</div>
+        <p class="img-caption">Native American daguerreotype · Carter collection, mid-19th century</p>
+    </div>
+</section>
+
+<section>
+    <div class="image-slide-full">
+        <img src="images/Native_American_Daguerreotype/NMAH-JN2016-00717.jpg"
+             alt="Native American leader, daguerreotype, 1850s"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="img-placeholder" style="display:none;">📸 Native American daguerreotype · 1850s</div>
+        <p class="img-caption">Native American daguerreotype, 1850s</p>
+    </div>
+</section>
+
+<!-- Photography's Cultural Power -->
+<section>
+    <h2 style="font-size:4.5em;">Photography's Cultural Power</h2>
+    <ul style="font-size:2.0em;">
+        <li>By the 1860s–1870s, Brady, Southworth &amp; Hawes, and O'Sullivan taught Americans that photographs were <strong>windows onto reality</strong></li>
+        <li>Photographs became data, evidence, <em>proof</em></li>
+        <li>What the camera framed became what people believed</li>
+        <li>This conviction set the stage for Curtis's enormous cultural impact — photographic "evidence" of the vanishing race became accepted as fact</li>
+    </ul>
+    <aside class="notes">
+        <p>Before we move to Curtis, we need this tool on the table: the cultural authority of photography. The belief in photographic objectivity made staged images of Native peoples as timeless and disappearing feel like documentary truth rather than ideological argument.</p>
+    </aside>
+</section>
+
+<!-- Pause & Reflect III -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">⏸ Pause & Reflect</h2>
+    <div class="assessment-box" style="font-size:2.0em; background:rgba(255,255,255,0.08); border-color:var(--antique-gold);">
+        <p style="color:var(--pure-white);">Why would photographic images of Native peoples as "timeless" be more powerful than painted images making the same argument?</p>
+        <ol style="list-style-type:upper-alpha; color:var(--pure-white);">
+            <li>Photography was cheaper to produce and distribute</li>
+            <li>Photography claimed objectivity that painting did not</li>
+            <li>Photography was more emotionally moving than painting</li>
+            <li>Photography reached a wider audience through newspapers</li>
+        </ol>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SECTION IV: FRONTIERSMEN                                    -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">Part IV</h2>
+    <div class="subtitle" style="font-size:2.5em;">Frontiersmen: The West Has New Protagonists</div>
+    <p style="color:var(--bronze-accent); font-style:italic; font-size:2.0em; margin-top:0.8em;">Where does the settler fit in the visual story?</p>
+    <aside class="notes">
+        <p>Time to introduce new characters: white settlers. Bingham's "Daniel Boone Escorting Settlers," Ranney's trail scenes, Christensen's homesteading idylls. These images transform the West into a stage where the main actors are determined families, rugged individuals, wagon trains rolling calmly toward the horizon. The land welcomes them. The atmosphere feels ordained. There is almost never a sense of conflict.</p>
+    </aside>
+</section>
+
+<!-- Frontiersmen: The Pattern Complete -->
+<section>
+    <h2 style="font-size:4.5em;">The Pattern Now Complete</h2>
+    <div class="two-column" style="margin-top:0.5em;">
+        <div>
+            <p class="column-header" style="font-size:2.2em;">Then: Indigenous Peoples</p>
+            <ul style="font-size:1.9em;">
+                <li>Isolated, elegiac, <em>frozen in time</em></li>
+                <li>Subjects of romantic tragedy</li>
+                <li>Static — no future, no motion</li>
+                <li>Backgrounds of their own land</li>
+            </ul>
+        </div>
+        <div>
+            <p class="column-header" style="font-size:2.2em;">Now: White Settlers</p>
+            <ul style="font-size:1.9em;">
+                <li>Dynamic — movement, narrative, <em>destiny</em></li>
+                <li>Purposeful, modern, future-facing</li>
+                <li>The land welcomes them</li>
+                <li>Protagonists of the national story</li>
+            </ul>
+        </div>
+    </div>
+    <p class="bottom-text-bold" style="font-size:1.8em;">The land looks empty. Indigenous people look frozen. Settlers look like the rightful heirs.</p>
+    <aside class="notes">
+        <p>By this point, the contrast is almost too sharp to ignore. The visual narrative is complete before Curtis or Remington even enter the scene. Everything that follows is escalation and export of a grammar already established.</p>
+    </aside>
+</section>
+
+<!-- Leutze: Westward the Course of Empire -->
+<section>
+    <div class="image-slide-full">
+        <img src="images/1072px-Emanuel_Leutze_-_Westward_the_Course_of_Empire_Takes_Its_Way_-_Capitol.jpg"
+             alt="Emanuel Leutze, Westward the Course of Empire Takes Its Way, 1861, U.S. Capitol"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="img-placeholder" style="display:none;">📸 Emanuel Leutze · Westward the Course of Empire · 1861</div>
+        <p class="img-caption">Emanuel Leutze, <em>Westward the Course of Empire Takes Its Way</em>, 1861 · U.S. Capitol</p>
+    </div>
+    <aside class="notes">
+        <p>Commissioned by Congress as the Civil War began. Settlers moving westward with divine guidance — ordained movement, orderly procession, determined faces. No conflict, minimal Indigenous presence, just manifest destiny visualized and hung in the seat of government.</p>
+    </aside>
+</section>
+
+<!-- Cropsey: Autumn on Hudson (frontier context) -->
+<section>
+    <div class="image-slide-full">
+        <img src="images/autumn_-_on_the_hudson_river_1963.9.1.jpg"
+             alt="Jasper Francis Cropsey, Autumn on the Hudson River, 1860"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="img-placeholder" style="display:none;">📸 Jasper Cropsey · Autumn on the Hudson River · 1860</div>
+        <p class="img-caption">Jasper Francis Cropsey, <em>Autumn on the Hudson River</em>, 1860</p>
+    </div>
+</section>
+
+<!-- Pause & Reflect IV -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">⏸ Pause & Reflect</h2>
+    <div class="large-text" style="font-size:2.2em; margin-top:0.8em;">
+        <p style="color:var(--pure-white);">Settler paintings show almost no conflict with Indigenous peoples. What does that visual choice tell viewers about whether conquest was violent or inevitable?</p>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SECTION V: FREDERIC REMINGTON                              -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">Part V</h2>
+    <div class="subtitle" style="font-size:2.5em;">Frederic Remington: From Frontier Myth to Imperial Image</div>
+    <p style="color:var(--bronze-accent); font-style:italic; font-size:2.0em; margin-top:0.8em;">What happens when frontier mythology needs a new frontier?</p>
+    <aside class="notes">
+        <p>We've watched landscapes erase Indigenous presence, portraits freeze Native peoples in timeless stasis, and settler paintings give white Americans a sense of ordained destiny. Now meet the artist who tied all of that together and exported it. Frederic Remington is the bridge between frontier mythology and American empire — his visual logic is the same logic, applied to new geography.</p>
+    </aside>
+</section>
+
+<!-- Remington: Who Was He? -->
+<section>
+    <h2 style="font-size:4.5em;">Frederic Remington: Who Was He?</h2>
+    <ul style="font-size:2.0em;">
+        <li><strong>America's most famous illustrator</strong> — cowboys, cavalry, Native warriors on the Plains</li>
+        <li>His images defined what the <em>mythic West</em> looked like for millions of Americans who never went there</li>
+        <li>By the 1890s, his visual grammar — <strong>masculine, violent, heroic</strong> — was the dominant image of frontier America</li>
+        <li>Deep friendship with Theodore Roosevelt — illustrated Roosevelt's own writings on the West</li>
+    </ul>
+    <p class="bottom-text" style="font-size:1.8em;">He didn't document the frontier — he <strong>invented</strong> it for mass consumption</p>
+    <aside class="notes">
+        <p>Remington studied briefly at Yale School of Art before heading west on sketching trips in the 1880s. He became the visual chronicler of the cavalry, the cowboy, and the Native warrior — always from a white, Eastern perspective that romanticized violence and framed conquest as heroism. His work appeared in Harper's Weekly and Collier's, making him a household name. Roosevelt and Remington shared the same ideology: the West as crucible of American manhood, the frontier as proving ground.</p>
+    </aside>
+</section>
+
+<!-- Remington: A Dash for the Timber -->
+<section>
+    <div class="image-slide-full">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Frederic_Remington_-_A_Dash_for_the_Timber_-_1989.21_-_Amon_Carter_Museum_of_American_Art.jpg"
+             alt="A Dash for the Timber, Frederic Remington, 1889, cowboys fleeing Native pursuers, Amon Carter Museum"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="img-placeholder" style="display:none;">📸 Frederic Remington · A Dash for the Timber · 1889 · Amon Carter Museum</div>
+        <p class="img-caption">Frederic Remington, <em>A Dash for the Timber</em>, 1889 · Amon Carter Museum of American Art</p>
+    </div>
+    <aside class="notes">
+        <p>Remington at the height of his frontier period. Cowboys fleeing Native pursuers — chaos, speed, masculine urgency. The composition is cinematic before cinema existed. Notice: the cowboys are individualized, expressive, fully human. The Native pursuers are a mass, faceless, threatening. This is the same visual logic as Curtis — one group has interiority, the other is background. Remington's frontier is always a stage for white heroism.</p>
+    </aside>
+</section>
+
+<!-- Remington: The Fall of the Cowboy -->
+<section>
+    <div class="image-slide-full">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/47/The_Fall_of_the_Cowboy,_1895,_by_Frederic_S._Remington.jpg"
+             alt="The Fall of the Cowboy, Frederic Remington, 1895, cowboy at fence gate mourning frontier's end"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="img-placeholder" style="display:none;">📸 Frederic Remington · The Fall of the Cowboy · 1895</div>
+        <p class="img-caption">Frederic Remington, <em>The Fall of the Cowboy</em>, 1895</p>
+    </div>
+    <aside class="notes">
+        <p>This painting appeared in 1895 — the same year Turner's Frontier Thesis was circulating widely. The cowboy dismounts at a fence line, the open range behind him, the closed gate ahead. Remington is mourning the end of the frontier world he had mythologized. The irony: the frontier he mourned was already a myth. The open range of his paintings was never as empty or as free as he painted it. But the mourning was real, and it would drive Remington toward a new canvas — Cuba.</p>
+    </aside>
+</section>
+
+<!-- Remington: Fired On -->
+<section>
+    <div class="image-slide-full">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Frederic_Remington_-_Fired_On_-_Google_Art_Project.jpg"
+             alt="Fired On, Frederic Remington, cavalry soldiers under ambush, Smithsonian American Art Museum"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="img-placeholder" style="display:none;">📸 Frederic Remington · Fired On · Smithsonian American Art Museum</div>
+        <p class="img-caption">Frederic Remington, <em>Fired On</em>, c. 1907 · Smithsonian American Art Museum</p>
+    </div>
+    <aside class="notes">
+        <p>Cavalry soldiers under ambush. Remington returns again and again to this moment — the white soldier in danger, surrounded, tested. The visual argument is always the same: American manhood proven through conflict with non-white adversaries. This painting comes after the Spanish-American War, but the logic is identical to his 1880s frontier work. The enemy has changed; the visual grammar hasn't.</p>
+    </aside>
+</section>
+
+<!-- Remington: The Pivot to Empire -->
+<section>
+    <h2 style="font-size:4.5em;">Remington's Pivot: Frontier to Empire</h2>
+    <ul style="font-size:2.0em;">
+        <li><strong>1897:</strong> William Randolph Hearst sends Remington to Cuba — not a reporter, <em>America's most famous illustrator</em></li>
+        <li>His job: <strong>construct</strong> the visual reality of Spanish oppression for mass audiences</li>
+        <li>The same visual grammar — masculine heroes, threatening others, ordained violence — migrated from Wyoming to Havana</li>
+        <li><strong>The frontier myth became imperial justification:</strong> If Americans had a destiny to tame the West, they had a destiny to rescue Cuba</li>
+    </ul>
+    <p class="bottom-text" style="font-size:1.8em;">The visual tradition you've been tracing all lecture <strong>had an imperial destination</strong></p>
+    <aside class="notes">
+        <p>Remington didn't change when he went to Cuba — he applied the same visual logic to a new geography. Hearst understood exactly what he was purchasing: not documentation, but mythology. The same machinery that made Americans believe the West was empty and available made them believe Cuba was helpless and waiting. The famous (possibly apocryphal) Hearst telegram — "You furnish the pictures, I'll furnish the war" — captures the attitude whether or not the words were actually spoken.</p>
+    </aside>
+</section>
+
+<!-- Remington: Charge of the Rough Riders -->
+<section>
+    <div class="image-slide-full">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Charge_of_the_Rough_Riders_at_San_Juan_Hill.JPG"
+             alt="Charge of the Rough Riders at San Juan Hill, Frederic Remington, 1898, Theodore Roosevelt, Cuba, Spanish-American War"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="img-placeholder" style="display:none;">📸 Frederic Remington · Charge of the Rough Riders at San Juan Hill · 1898</div>
+        <p class="img-caption">Frederic Remington, <em>Charge of the Rough Riders at San Juan Hill</em>, 1898</p>
+    </div>
+    <aside class="notes">
+        <p>The circle closes. The same man who painted cavalry charges on the Plains painted Roosevelt's Rough Riders charging up San Juan Hill. The composition is nearly identical — heroic figures, forward momentum, ordained triumph. The West had been won. Cuba was next. The visual grammar traveled with the empire.</p>
+    </aside>
+</section>
+
+<!-- Pause & Reflect V -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">⏸ Pause & Reflect</h2>
+    <div class="large-text" style="font-size:2.2em; margin-top:0.8em;">
+        <p style="color:var(--pure-white);">Remington's frontier paintings and his Cuba illustrations use identical visual grammar. What does that tell us about how Americans understood the Spanish-American War?</p>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SECTION VI: EDWARD CURTIS                                   -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">Part VI</h2>
+    <div class="subtitle" style="font-size:2.5em;">Edward Curtis and the Invention of Disappearance</div>
+    <p style="color:var(--bronze-accent); font-style:italic; font-size:2.0em; margin-top:0.8em;">Seventy years of visual rhetoric crystallized into one phrase</p>
+    <aside class="notes">
+        <p>Now we stop withholding. Curtis enters around 1890–1910 and gathers the visual habits Americans had absorbed over seventy years. He stages scenes using older clothing, removes signs of modern life, edits out clocks, wagons, fences, sewing machines, and metal tools. He even retouches photographs to erase evidence of Native modernity. Then he names his most famous image "The Vanishing Race." This is the moment students realize: everything they've been noticing had a cultural destination.</p>
+    </aside>
+</section>
+
+<!-- Curtis: Methods -->
+<section>
+    <h2 style="font-size:4.5em;">Edward Curtis: The Invention of Disappearance</h2>
+    <ul style="font-size:2.0em;">
+        <li><strong>Curtis enters (1890s–1910s):</strong> Gathered the visual habits Americans had absorbed over seventy years</li>
+        <li><strong>His methods:</strong> Staged scenes in older clothing; removed clocks, wagons, fences, metal tools; retouched photographs to erase Native modernity</li>
+        <li><strong>His most famous image:</strong> <em>The Vanishing Race</em> — the crystallization of a century of visual argument</li>
+        <li><strong>Curtis didn't invent this idea;</strong> he aestheticized it, marketed it, and sold it in <strong>twenty volumes</strong></li>
+    </ul>
+    <p class="bottom-text-bold" style="font-size:1.8em;">Historians call the entire tradition: the <span class="popup-trigger" data-popup="vanishing-popup">Myth of the Vanishing Indian</span></p>
+    <aside class="notes">
+        <p>Today historians call this entire tradition the Myth of the Vanishing Indian. That is the conceptual payoff. Students finally have vocabulary for what they felt throughout the lecture.</p>
+    </aside>
+</section>
+
+<!-- Curtis Gallery Link -->
+<section>
+    <h2 style="font-size:4.5em;">Edward Curtis Gallery</h2>
+    <div class="large-text" style="font-size:2.2em; margin-top:1em;">
+        <p><a href="https://en.wikipedia.org/wiki/Edward_S._Curtis" style="color:var(--deep-teal);" target="_blank">→ Edward S. Curtis · Wikipedia Gallery</a></p>
+        <p style="font-size:0.8em; margin-top:1em; color:var(--bronze-accent); font-style:italic;">Look for signs of modernity that might have been edited out. Think about who these images were made for — and what they were designed to communicate.</p>
+    </div>
+</section>
+
+<!-- Curtis: The Vanishing Race -->
+<section>
+    <div class="image-slide-full">
+        <img src="images/The_Vanishing_Race_-_Navaho_(2838786563).jpg"
+             alt="Edward S. Curtis, The Vanishing Race, Navaho riders disappearing into shadow, 1904"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="img-placeholder" style="display:none;">📸 Edward S. Curtis · The Vanishing Race · 1904</div>
+        <p class="img-caption">Edward S. Curtis, <em>The Vanishing Race</em>, 1904</p>
+    </div>
+    <aside class="notes">
+        <p>Native riders disappearing into shadow, literally titled "The Vanishing Race." This is the crystallization of seventy years of visual rhetoric. The image is beautiful, haunting, and fundamentally dishonest. Indigenous peoples weren't vanishing — they were being systematically dispossessed, confined to reservations, and subjected to assimilation policies. But Curtis frames it as natural, inevitable, elegiac.</p>
+    </aside>
+</section>
+
+<!-- Curtis: Staged portraiture -->
+<section>
+    <div class="image-slide-full">
+        <img src="images/curtis_staging_portraits.png"
+             alt="Edward S. Curtis example of staged portraiture with traditional props and costume"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="img-placeholder" style="display:none;">📸 Edward S. Curtis · staged portraiture example</div>
+        <p class="img-caption">Edward S. Curtis, example of staged portraiture</p>
+    </div>
+    <aside class="notes">
+        <p>Curtis traveled with trunks of "traditional" clothing and props, staging scenes that fit his preconceived narrative. He literally edited modernity out of his photographs — retouching images to remove clocks, modern clothing, anything that suggested contemporary life.</p>
+    </aside>
+</section>
+
+<!-- Curtis: Chief Joseph -->
+<section>
+    <div class="image-slide-full">
+        <img src="images/960px-Chief_Joseph_by_Edward_Sheriff_Curtis.jpg"
+             alt="Edward S. Curtis, Chief Joseph, Nez Perce, 1903"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="img-placeholder" style="display:none;">📸 Edward S. Curtis · Chief Joseph · Nez Perce · 1903</div>
+        <p class="img-caption">Edward S. Curtis, <em>Chief Joseph</em> — Nez Perce, 1903</p>
+    </div>
+    <aside class="notes">
+        <p>Chief Joseph was a brilliant military strategist and diplomat who fought a sophisticated campaign against U.S. forces in 1877. But Curtis photographs him decades later in traditional regalia, removed from political context, suggesting timelessness rather than contemporary resistance and ongoing struggle for justice.</p>
+    </aside>
+</section>
+
+<!-- What Curtis Refused to Photograph -->
+<section>
+    <h2 style="font-size:4.5em;">What Curtis Refused to Photograph</h2>
+    <div class="two-column" style="margin-top:0.5em;">
+        <div>
+            <p class="column-header" style="font-size:2.2em;">What He Showed</p>
+            <ul style="font-size:1.9em;">
+                <li>Ceremonial regalia, traditional dress</li>
+                <li>Timeless, elegiac landscapes</li>
+                <li>Figures disappearing into shadow</li>
+                <li>"The Vanishing Race"</li>
+            </ul>
+        </div>
+        <div>
+            <p class="column-header" style="font-size:2.2em;">What He Hid</p>
+            <ul style="font-size:1.9em;">
+                <li>Political organizing, tribal newspapers</li>
+                <li>Court battles for sovereignty</li>
+                <li>Reservation poverty and resistance</li>
+                <li>Modern, adaptive Indigenous life</li>
+            </ul>
+        </div>
+    </div>
+    <p class="bottom-text" style="font-size:1.8em;">Curtis's world is not a record of Indigenous society — it is a record of <strong>his own imagination</strong></p>
+    <aside class="notes">
+        <p>Curtis had a camera. He could have photographed reservation poverty, political organizing, adaptation to modern life. Instead, he traveled with trunks of "traditional" clothing and props. He literally edited modernity out of his photographs. The erasure was deliberate and systematic.</p>
+    </aside>
+</section>
+
+<!-- The Vanishing Race Never Vanished -->
+<section>
+    <h2 style="font-size:4.5em;">The "Vanishing Race" Never Vanished</h2>
+    <ul style="font-size:2.0em;">
+        <li><strong>Today:</strong> 574 federally recognized tribes in the U.S. — millions of Indigenous people, languages and cultures ongoing, sovereignty exercised</li>
+        <li><strong>What actually vanished:</strong> Not Indigenous nations — but the ability of many Americans to imagine them as modern, political, creative peoples</li>
+        <li><strong>The lesson:</strong> Images don't just reflect reality — they <em>shape what people become capable of believing</em></li>
+    </ul>
+    <aside class="notes">
+        <p>The "vanishing race" never vanished. This was always a lie designed to make genocide acceptable. Indigenous peoples didn't survive by remaining frozen in some imagined traditional past. They survived by adapting, being strategic, holding onto what mattered while changing what needed to change — through incredible resistance, resilience, and creativity in the face of systematic attempts at cultural and physical genocide.</p>
+    </aside>
+</section>
+
+<!-- Pause & Reflect VI -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">⏸ Pause & Reflect</h2>
+    <div class="large-text" style="font-size:2.2em; margin-top:0.8em;">
+        <p style="color:var(--pure-white);">Curtis photographed real people and real places. Why does that make his images <em>more</em> dangerous than Catlin's paintings, not less?</p>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- CONCLUSION                                                  -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section>
+    <h2 style="font-size:4.5em;">Conclusion: Seeing the West Again</h2>
+    <ul style="font-size:2.0em;">
+        <li>Landscapes made the continent look <em>empty</em></li>
+        <li>Portraits made Native people look <em>timeless — outside of history</em></li>
+        <li>Settler paintings made white Americans look like the <em>rightful heirs</em></li>
+        <li>Remington exported the same grammar <em>from Wyoming to Cuba</em></li>
+        <li>Curtis gave the entire system a name: <strong>The Vanishing Race</strong></li>
+    </ul>
+    <p class="bottom-text-bold" style="font-size:1.8em;">Images shape imagination — and imagination shapes history</p>
+    <aside class="notes">
+        <p>This is where the lecture closes, and the next discussion opens: How do images shape what a nation becomes capable of believing? What visual arguments are we absorbing right now that we're not yet able to see clearly?</p>
+    </aside>
+</section>
+
+<!-- Final Discussion -->
+<section data-background="#1B4332">
+    <h2 style="font-size:5.0em; color:var(--antique-gold);">The Closing Question</h2>
+    <div class="large-text" style="font-size:2.4em; margin-top:0.8em; line-height:1.5;">
+        <p style="color:var(--pure-white);">How do images shape what a nation becomes <em>capable of believing</em>?</p>
+        <p style="font-size:0.75em; color:var(--bronze-accent); margin-top:1em; font-style:italic;">And what visual arguments are we absorbing right now that we can't yet see clearly?</p>
+    </div>
+</section>
+
+</div><!-- /slides -->
+</div><!-- /reveal -->
+
+<!-- ── Global UI (outside Reveal transforms) ───────────────── -->
+
+<!-- Keyboard overlay trigger -->
+<div id="keyboard-trigger" class="popup-trigger" data-popup="keyboard-popup"
+     style="position:fixed;top:20px;right:20px;font-size:2em;cursor:pointer;z-index:200;">⌨️</div>
+
+<!-- Keyboard popup -->
+<div id="keyboard-popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Keyboard Shortcuts</div>
+    <p>→ / Space: Next &nbsp;|&nbsp; ←: Previous &nbsp;|&nbsp; S: Speaker Notes &nbsp;|&nbsp; F: Fullscreen &nbsp;|&nbsp; O: Overview &nbsp;|&nbsp; ESC: Close popup</p>
+</div>
+
+<!-- Vanishing Indian popup -->
+<div id="vanishing-popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Myth of the Vanishing Indian</div>
+    <p>A pervasive 19th-century ideology — expressed through art, photography, and popular culture — that portrayed Indigenous peoples as a "dying race" inevitably disappearing before the advance of white civilization. The myth served an ideological function: if Native peoples were naturally vanishing, then dispossession, forced removal, and cultural genocide required no moral justification. They were simply the tide of history. Historians including Phillip Deloria (<em>Playing Indian</em>, 1998) and Shepard Krech III (<em>The Ecological Indian</em>, 1999) have analyzed how this myth shaped American policy and persists in popular culture today.</p>
+</div>
+
+<!-- Slide counter -->
+<div class="slide-counter"></div>
+
+<!-- Reveal.js scripts — cdnjs -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+
+<script>
+    Reveal.initialize({
+        width: 1920, height: 1080, margin: 0.08,
+        minScale: 0.2, maxScale: 2.0,
+        hash: true, slideNumber: false,
+        transition: 'slide',
+        plugins: [RevealNotes]
+    });
+
+    // Slide counter
+    function updateSlideCounter() {
+        const c = Reveal.getState().indexh + 1;
+        const t = Reveal.getTotalSlides();
+        document.querySelector('.slide-counter').textContent = c + '/' + t;
+    }
+    Reveal.on('slidechanged', updateSlideCounter);
+    updateSlideCounter();
+
+    // Pop-up logic
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('popup-trigger')) {
+            const id = e.target.getAttribute('data-popup');
+            const el = document.getElementById(id);
+            if (el) el.classList.add('active');
+        }
+        if (e.target.classList.contains('popup-close') || e.target.classList.contains('popup')) {
+            document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+        }
+    });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+        }
+    });
+</script>
+</body>
+</html>
