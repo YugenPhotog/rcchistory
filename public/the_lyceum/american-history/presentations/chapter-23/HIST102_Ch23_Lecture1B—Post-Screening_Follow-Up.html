@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HIST 102 — Post-Screening Follow-Up: Shell Shock</title>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ── Root palette — matches pre-screening worksheet ── */
+    :root {
+      --sepia:       #6B4A2A;
+      --dark-sepia:  #3E2A14;
+      --cream:       #F5EDD8;
+      --khaki:       #C9A96E;
+      --light-khaki: #E8D5B0;
+      --text-main:   #2C1F0E;
+      --quote-back:  #EDE0C4;
+      --shell-gray:  #A89880;
+      --charcoal:    #1A1A1A;
+      --teal:        #2C7873;
+      --teal-light:  rgba(44,120,115,0.12);
+      --gold:        #D4AF37;
+      --gold-light:  rgba(212,175,55,0.12);
+      --purple:      #6B4C9A;
+      --ruby:        #9B2C2C;
+      --ruby-light:  rgba(155,44,44,0.12);
+      --bronze:      #8B6F47;
+      --white:       #FAFAFA;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Lora', Georgia, serif;
+      background: var(--cream);
+      color: var(--text-main);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* ── Page wrapper ── */
+    .wrap { max-width: 960px; margin: 0 auto; padding: 24px 20px 48px; }
+
+    /* ── Masthead ── */
+    .masthead {
+      text-align: center;
+      border-bottom: 3px solid var(--khaki);
+      padding-bottom: 1.2em;
+      margin-bottom: 1.6em;
+    }
+    .masthead .college {
+      font-family: 'Crimson Pro', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--shell-gray);
+      margin-bottom: 0.3em;
+    }
+    .masthead h1 {
+      font-family: 'Crimson Pro', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--sepia);
+      margin: 0.1em 0 0.2em;
+    }
+    .masthead .doc-title {
+      font-style: italic;
+      color: var(--dark-sepia);
+      font-size: 1.0rem;
+      margin-bottom: 0.4em;
+    }
+    .masthead .theme {
+      font-style: italic;
+      color: var(--teal);
+      font-size: 0.95rem;
+    }
+
+    /* ── Notice box ── */
+    .notice {
+      background: var(--gold-light);
+      border: 2px solid var(--gold);
+      border-radius: 10px;
+      padding: 0.9em 1.2em;
+      font-size: 0.92rem;
+      margin-bottom: 1.6em;
+      color: var(--dark-sepia);
+    }
+    .notice strong { color: var(--sepia); }
+
+    /* ── Section cards ── */
+    .card {
+      background: white;
+      border: 2px solid var(--light-khaki);
+      border-radius: 12px;
+      padding: 1.4em 1.6em;
+      margin-bottom: 1.4em;
+      box-shadow: 0 2px 8px rgba(107,74,42,0.08);
+    }
+    .card-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.7em;
+      border-bottom: 2px solid var(--light-khaki);
+      padding-bottom: 0.5em;
+      margin-bottom: 1em;
+    }
+    .section-num {
+      font-family: 'Crimson Pro', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--khaki);
+      min-width: 1.8em;
+    }
+    .card h2 {
+      font-family: 'Crimson Pro', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--sepia);
+      margin: 0;
+    }
+    .card-sub {
+      font-size: 0.88rem;
+      color: var(--shell-gray);
+      font-style: italic;
+      margin: -0.4em 0 1em;
+    }
+
+    /* ── Labels and inputs ── */
+    label.field-label {
+      display: block;
+      font-weight: 600;
+      color: var(--dark-sepia);
+      margin: 1em 0 0.3em;
+      font-size: 0.95rem;
+    }
+    label.field-label .q-num {
+      font-family: 'Crimson Pro', serif;
+      color: var(--sepia);
+      font-size: 1.05em;
+      font-weight: 700;
+      margin-right: 0.3em;
+    }
+    textarea, input[type="text"] {
+      width: 100%;
+      border: 2px solid var(--light-khaki);
+      border-radius: 8px;
+      padding: 0.7em 0.9em;
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.93rem;
+      color: var(--text-main);
+      background: var(--cream);
+      resize: vertical;
+      transition: border-color 0.2s;
+    }
+    textarea:focus, input[type="text"]:focus {
+      outline: none;
+      border-color: var(--teal);
+      background: #fffdf7;
+    }
+    textarea { min-height: 100px; }
+    textarea.short { min-height: 68px; }
+    textarea.tall { min-height: 140px; }
+
+    /* ── Two-column grid ── */
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1em; }
+    @media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+
+    /* ── MC questions ── */
+    .mc-block {
+      border: 2px solid var(--light-khaki);
+      border-radius: 10px;
+      padding: 1em 1.2em;
+      margin-bottom: 1em;
+      background: #fffdf8;
+    }
+    .mc-block h3 {
+      font-family: 'Crimson Pro', serif;
+      font-size: 1.05rem;
+      color: var(--dark-sepia);
+      margin: 0 0 0.6em;
+    }
+    .mc-block h3 .q-badge {
+      background: var(--sepia);
+      color: white;
+      font-size: 0.8em;
+      padding: 0.1em 0.5em;
+      border-radius: 4px;
+      margin-right: 0.5em;
+      font-weight: 700;
+    }
+    .choices label {
+      display: flex;
+      gap: 0.6em;
+      align-items: flex-start;
+      padding: 0.55em 0.8em;
+      border: 1.5px solid var(--light-khaki);
+      border-radius: 8px;
+      margin-bottom: 0.4em;
+      cursor: pointer;
+      font-size: 0.93rem;
+      background: white;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .choices label:hover { border-color: var(--khaki); background: var(--cream); }
+    .choices input[type="radio"] { margin-top: 3px; accent-color: var(--teal); flex-shrink: 0; }
+
+    .mc-actions { display: flex; gap: 0.6em; margin-top: 0.7em; }
+    .btn-check {
+      background: var(--teal);
+      color: white;
+      border: none;
+      border-radius: 7px;
+      padding: 0.4em 1.1em;
+      font-family: 'Crimson Pro', serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-check:hover { background: var(--dark-sepia); }
+    .btn-reset {
+      background: white;
+      color: var(--shell-gray);
+      border: 1.5px solid var(--light-khaki);
+      border-radius: 7px;
+      padding: 0.4em 0.9em;
+      font-family: 'Lora', serif;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    .mc-status {
+      margin-top: 0.6em;
+      padding: 0.6em 0.9em;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      border: 1.5px solid transparent;
+      min-height: 0;
+    }
+    .mc-status.correct {
+      background: rgba(44,120,115,0.1);
+      border-color: var(--teal);
+      color: var(--dark-sepia);
+    }
+    .mc-status.incorrect {
+      background: var(--ruby-light);
+      border-color: var(--ruby);
+      color: var(--dark-sepia);
+    }
+    .mc-status.empty {
+      background: var(--gold-light);
+      border-color: var(--gold);
+      color: var(--dark-sepia);
+    }
+
+    /* ── Primary source quote block ── */
+    .source-block {
+      background: var(--quote-back);
+      border-left: 5px solid var(--khaki);
+      border-radius: 0 8px 8px 0;
+      padding: 0.8em 1.1em;
+      margin: 0.8em 0;
+      font-style: italic;
+      font-size: 0.93rem;
+      color: var(--dark-sepia);
+    }
+    .source-block .attribution {
+      text-align: right;
+      font-style: normal;
+      font-size: 0.85rem;
+      color: var(--bronze);
+      margin-top: 0.4em;
+    }
+
+    /* ── Hint / Study Buddy tip ── */
+    .hint {
+      background: var(--teal-light);
+      border: 1.5px solid var(--teal);
+      border-radius: 8px;
+      padding: 0.7em 1em;
+      font-size: 0.88rem;
+      color: var(--dark-sepia);
+      margin: 0.8em 0;
+    }
+    .hint strong { color: var(--teal); }
+
+    /* ── Prediction review block ── */
+    .predict-block {
+      background: var(--cream);
+      border: 2px solid var(--khaki);
+      border-radius: 10px;
+      padding: 0.9em 1.1em;
+      margin-bottom: 0.8em;
+    }
+    .predict-block .original-q {
+      font-size: 0.88rem;
+      color: var(--shell-gray);
+      font-style: italic;
+      margin-bottom: 0.4em;
+    }
+    .predict-block .original-q strong { color: var(--sepia); }
+
+    /* ── Lens prompt label ── */
+    .lens-tag {
+      display: inline-block;
+      background: var(--purple);
+      color: white;
+      font-family: 'Crimson Pro', serif;
+      font-weight: 700;
+      font-size: 0.8em;
+      padding: 0.1em 0.45em;
+      border-radius: 4px;
+      margin-right: 0.35em;
+    }
+
+    /* ── Section divider ── */
+    .section-rule {
+      border: none;
+      border-top: 2px solid var(--light-khaki);
+      margin: 1.2em 0;
+    }
+
+    /* ── Exit ticket ── */
+    .exit-card {
+      background: var(--dark-sepia);
+      border-radius: 12px;
+      padding: 1.4em 1.6em;
+      margin-bottom: 1.4em;
+    }
+    .exit-card h2 {
+      font-family: 'Crimson Pro', serif;
+      color: var(--gold);
+      font-size: 1.35rem;
+      margin: 0 0 0.3em;
+    }
+    .exit-card .exit-sub {
+      color: var(--khaki);
+      font-style: italic;
+      font-size: 0.9rem;
+      margin-bottom: 0.9em;
+    }
+    .exit-card label.field-label { color: var(--cream); }
+    .exit-card textarea {
+      background: rgba(255,255,255,0.08);
+      border-color: var(--khaki);
+      color: var(--cream);
+      min-height: 160px;
+    }
+    .exit-card textarea:focus {
+      border-color: var(--gold);
+      background: rgba(255,255,255,0.12);
+    }
+
+    /* ── Action buttons ── */
+    .action-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7em;
+      margin-top: 1em;
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--charcoal);
+      border: none;
+      border-radius: 8px;
+      padding: 0.5em 1.4em;
+      font-family: 'Crimson Pro', serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      cursor: pointer;
+      border: 2px solid var(--bronze);
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--khaki); }
+    .btn-secondary {
+      background: white;
+      color: var(--sepia);
+      border: 2px solid var(--khaki);
+      border-radius: 8px;
+      padding: 0.5em 1.1em;
+      font-family: 'Lora', serif;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+    .btn-danger {
+      background: white;
+      color: var(--ruby);
+      border: 2px solid rgba(155,44,44,0.4);
+      border-radius: 8px;
+      padding: 0.5em 1.1em;
+      font-family: 'Lora', serif;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--shell-gray);
+      padding-top: 1em;
+      border-top: 2px solid var(--light-khaki);
+      font-style: italic;
+    }
+
+    /* ── Toast ── */
+    #toast {
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+      background: var(--dark-sepia); color: var(--cream);
+      padding: 0.6em 1.4em; border-radius: 8px;
+      font-family: 'Crimson Pro', serif; font-size: 1rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      z-index: 9999; display: none;
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ── MASTHEAD ── -->
+  <div class="masthead">
+    <div class="college">Richland Community College &nbsp;·&nbsp; HIST 102 — United States History Since 1877</div>
+    <h1>Post-Screening Follow-Up</h1>
+    <div class="doc-title">Documentary: <em>The Century: America's Time</em> — 1914–1919: "Shell Shock"</div>
+    <div class="theme">Theme: What happens to democracy during total war?</div>
+  </div>
+
+  <!-- ── NOTICE ── -->
+  <div class="notice">
+    <strong>How to use this guide:</strong> This is the third step — you completed the pre-screening worksheet, watched the documentary, and now you connect them. Work through all five sections. Your answers save automatically in your browser. When finished, click <strong>Export</strong> to download a text file and upload it to Canvas.
+    <br><br>
+    <strong>Not collected? Still matters.</strong> This guide builds the analytical vocabulary and evidence base that <strong>Exam 2 will test directly.</strong>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       SECTION 1 — CHECK YOUR PREDICTIONS
+  ════════════════════════════════════════════ -->
+  <div class="card">
+    <div class="card-header">
+      <span class="section-num">I</span>
+      <h2>Check Your Predictions</h2>
+    </div>
+    <p class="card-sub">On the pre-screening worksheet, you made three predictions before watching. Now check them against what you saw.</p>
+
+    <div class="predict-block">
+      <div class="original-q"><strong>Worksheet Q9 asked:</strong> How might dissenters — people who publicly oppose the war — be treated under these laws?</div>
+      <label class="field-label"><span class="q-num">1.</span> What did the documentary actually show about dissent, loyalty pressure, or punishment? Was your prediction accurate, partially accurate, or off — and why?</label>
+      <textarea class="short" id="pred1" placeholder="The film showed… / My prediction was… because…"></textarea>
+    </div>
+
+    <div class="predict-block">
+      <div class="original-q"><strong>Worksheet Q10 asked:</strong> How might immigrants or political radicals be viewed during wartime?</div>
+      <label class="field-label"><span class="q-num">2.</span> Did the documentary address how "outsiders" were treated or perceived? What evidence — direct or indirect — did you observe?</label>
+      <textarea class="short" id="pred2" placeholder="The film suggested… / I noticed…"></textarea>
+    </div>
+
+    <div class="predict-block">
+      <div class="original-q"><strong>Worksheet Q11 asked:</strong> If the Versailles peace failed, what does that suggest about the wartime sacrifices to democracy?</div>
+      <label class="field-label"><span class="q-num">3.</span> The documentary ends at Versailles. How did it portray the peace settlement? Does Wilson's failure there change how you evaluate the wartime restrictions on speech and dissent?</label>
+      <textarea id="pred3" placeholder="Versailles was portrayed as… / This changes / confirms my view because…"></textarea>
+    </div>
+
+    <div class="hint">
+      <strong>Study Buddy:</strong> Checking your own predictions is one of the most powerful learning moves in history. A prediction that was wrong isn't a failure — it's evidence that your thinking developed. Explain <em>why</em> you were right or wrong; that reasoning is what Exam 2 rewards.
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       SECTION 2 — EVIDENCE FROM THE FILM
+  ════════════════════════════════════════════ -->
+  <div class="card">
+    <div class="card-header">
+      <span class="section-num">II</span>
+      <h2>Evidence from the Film</h2>
+    </div>
+    <p class="card-sub">Your Part IV lens prompts asked you to watch for five patterns. Now fill them in with specific scenes, moments, or testimony from the documentary.</p>
+
+    <div class="grid2">
+      <div>
+        <label class="field-label"><span class="lens-tag">1</span> Expanded government power — what did you see?</label>
+        <textarea class="short" id="ev1" placeholder="Example: Wilson's war address, mobilization, troop deployment…"></textarea>
+      </div>
+      <div>
+        <label class="field-label"><span class="lens-tag">2</span> Pressure to conform or display loyalty — what did you see?</label>
+        <textarea class="short" id="ev2" placeholder="Example: crowd reactions, enthusiasm at enlistment, social pressure…"></textarea>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div>
+        <label class="field-label"><span class="lens-tag">3</span> Emotional appeals for unity or sacrifice — what did you see?</label>
+        <textarea class="short" id="ev3" placeholder="Example: propaganda films, 'make the world safe for democracy,' war posters…"></textarea>
+      </div>
+      <div>
+        <label class="field-label"><span class="lens-tag">4</span> Moments when dissent appeared dangerous or costly — what did you see?</label>
+        <textarea class="short" id="ev4" placeholder="Example: anyone in the film who questioned the war, or the cost of being different…"></textarea>
+      </div>
+    </div>
+
+    <label class="field-label"><span class="lens-tag">5</span> How ordinary people experienced the war — what testimony or scene stood out most?</label>
+    <textarea class="short" id="ev5" placeholder="Example: the veteran at the end, the Lusitania survivors, the young German diary writer…"></textarea>
+
+    <div class="hint">
+      <strong>Study Buddy:</strong> The documentary doesn't mention the Espionage Act, Sedition Act, or Schenck by name — but the <em>conditions</em> that produced those laws are visible throughout. Your job is to connect what you saw to the legal framework you studied before watching.
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       SECTION 3 — INTERACTIVE KNOWLEDGE CHECK
+  ════════════════════════════════════════════ -->
+  <div class="card">
+    <div class="card-header">
+      <span class="section-num">III</span>
+      <h2>Interactive Knowledge Check</h2>
+    </div>
+    <p class="card-sub">These questions connect what you watched to the laws on your worksheet. Choose the best answer, then check your reasoning.</p>
+
+    <!-- Q1 -->
+    <div class="mc-block" id="mc-q1">
+      <h3><span class="q-badge">Q1</span> The documentary opens with the sinking of the Lusitania (1915). At that point, the U.S. was officially neutral. Why does the film begin here rather than with America's entry in 1917?</h3>
+      <div class="choices">
+        <label><input type="radio" name="q1" value="a"> To show that American neutrality was always a myth — the U.S. secretly wanted war from the start.</label>
+        <label><input type="radio" name="q1" value="b"> To show how public opinion was gradually shaped before the government acted — the emotional foundation that made the Espionage Act and propaganda possible.</label>
+        <label><input type="radio" name="q1" value="c"> Because the Lusitania sinking was the direct cause of U.S. entry into the war.</label>
+      </div>
+      <div class="mc-actions">
+        <button class="btn-check" onclick="grade('q1','b')">Check Answer</button>
+        <button class="btn-reset" onclick="resetQ('q1')">Reset</button>
+      </div>
+      <div class="mc-status" id="q1_status"></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="mc-block" id="mc-q2">
+      <h3><span class="q-badge">Q2</span> The film shows that Americans in 1914–1916 were enthusiastic about making money from the war while staying neutral. What does this suggest about the propaganda challenge Wilson faced when he asked for a declaration of war in 1917?</h3>
+      <div class="choices">
+        <label><input type="radio" name="q2" value="a"> Wilson had no challenge — Americans were already eager to fight and needed no persuasion.</label>
+        <label><input type="radio" name="q2" value="b"> Wilson needed to shift public opinion from comfortable neutrality and economic benefit to active sacrifice — which is exactly what the Committee on Public Information was created to do.</label>
+        <label><input type="radio" name="q2" value="c"> The propaganda challenge was purely military — convincing generals, not the public.</label>
+      </div>
+      <div class="mc-actions">
+        <button class="btn-check" onclick="grade('q2','b')">Check Answer</button>
+        <button class="btn-reset" onclick="resetQ('q2')">Reset</button>
+      </div>
+      <div class="mc-status" id="q2_status"></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="mc-block" id="mc-q3">
+      <h3><span class="q-badge">Q3</span> The film describes "new weapons of war so ferocious that French casualties alone approached a million in the first year." How does this scale of death relate to the Sedition Act's prohibition on "disloyal or abusive language" about the war?</h3>
+      <div class="choices">
+        <label><input type="radio" name="q3" value="a"> They are unrelated — military casualties are a battlefield issue; the Sedition Act is a home-front issue.</label>
+        <label><input type="radio" name="q3" value="b"> Massive casualties made honest public debate about the war more urgent — and the Sedition Act more dangerous, since it criminalized exactly that debate.</label>
+        <label><input type="radio" name="q3" value="c"> High casualties justified the Sedition Act — the more people dying, the more important it was to silence critics.</label>
+      </div>
+      <div class="mc-actions">
+        <button class="btn-check" onclick="grade('q3','b')">Check Answer</button>
+        <button class="btn-reset" onclick="resetQ('q3')">Reset</button>
+      </div>
+      <div class="mc-status" id="q3_status"></div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="mc-block" id="mc-q4">
+      <h3><span class="q-badge">Q4</span> A veteran at the film's end says: <em>"Nobody wins in a war. They lost. We didn't win."</em> — speaking as someone on the winning side. Under the Sedition Act of 1918, which was still in effect when veterans returned, could this statement have been prosecuted?</h3>
+      <div class="choices">
+        <label><input type="radio" name="q4" value="a"> No — veterans were exempt from the Sedition Act because of their service.</label>
+        <label><input type="radio" name="q4" value="b"> No — the statement is about personal loss, not about the government or the flag.</label>
+        <label><input type="radio" name="q4" value="c"> Possibly — "abusive language" about the war effort or military was broadly defined, and such a statement could be read as undermining morale or disparaging the military's mission.</label>
+      </div>
+      <div class="mc-actions">
+        <button class="btn-check" onclick="grade('q4','c')">Check Answer</button>
+        <button class="btn-reset" onclick="resetQ('q4')">Reset</button>
+      </div>
+      <div class="mc-status" id="q4_status"></div>
+    </div>
+
+    <hr class="section-rule">
+
+    <!-- Scenario -->
+    <h3 style="font-family:'Crimson Pro',serif;color:var(--dark-sepia);font-size:1.05rem;margin-bottom:0.5em;">Mini-Scenario: Wilson's Promise vs. Versailles</h3>
+    <div class="source-block">
+      "The people of Britain and France greeted Wilson ecstatically for he represented the hope of democracy. But the British and French governments were interested in revenge. The peace treaty was the politics of hatred."
+      <div class="attribution">— <em>Shell Shock</em>, narration at Versailles sequence</div>
+    </div>
+    <label class="field-label"><span class="q-num">5.</span> Wilson justified wartime restrictions on civil liberties by arguing the war would "make the world safe for democracy." In 5–7 sentences, use the Versailles outcome shown in the documentary to evaluate that justification. Did the end result validate the means?</label>
+    <textarea class="tall" id="scenario_wilson" placeholder="Wilson claimed… / The documentary showed Versailles as… / This means the wartime restrictions were / were not justified because…"></textarea>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       SECTION 4 — CONNECTING THE LAWS TO THE FILM
+  ════════════════════════════════════════════ -->
+  <div class="card">
+    <div class="card-header">
+      <span class="section-num">IV</span>
+      <h2>Connecting the Laws to the Film</h2>
+    </div>
+    <p class="card-sub">The Espionage Act, Sedition Act, Schenck, and CPI don't appear in the documentary — but the human conditions that produced them do. Make the connection explicit.</p>
+
+    <label class="field-label"><span class="q-num">6.</span> The documentary shows propaganda films being used to shape American opinion before the U.S. entered the war. How does this connect to the Committee on Public Information's methods described on your worksheet?</label>
+    <textarea id="conn1" placeholder="The documentary showed… / The CPI later institutionalized this by…"></textarea>
+
+    <label class="field-label"><span class="q-num">7.</span> The worksheet asked you whether Holmes was "protecting speech or restricting it" in Schenck. After watching the film — seeing how wartime enthusiasm turned to pressure to conform — does your answer change? Explain.</label>
+    <textarea id="conn2" placeholder="Before watching I thought… / After watching I think… because the film showed…"></textarea>
+
+    <label class="field-label"><span class="q-num">8.</span> Who in the documentary would have been most vulnerable under the Espionage and Sedition Acts? Identify a specific person or group shown in the film and explain why their situation would have been legally precarious.</label>
+    <textarea id="conn3" placeholder="The person/group most at risk would have been… because…"></textarea>
+
+    <div class="hint">
+      <strong>Study Buddy:</strong> This is the analytical core of Exam 2. The exam won't ask you to memorize dates — it will ask you to connect legal mechanisms to human consequences. Practice doing that here.
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       SECTION 5 — BRIDGE FORWARD
+  ════════════════════════════════════════════ -->
+  <div class="card">
+    <div class="card-header">
+      <span class="section-num">V</span>
+      <h2>Bridge Forward</h2>
+    </div>
+    <p class="card-sub">The next lectures cover the 1918 influenza pandemic and the postwar Red Scare / Sacco–Vanzetti. This section seeds that work.</p>
+
+    <label class="field-label"><span class="q-num">9.</span> <strong>Bridge to the Influenza Pandemic:</strong> The war mobilized millions of bodies — troops, trains, camps, factories, crowded ports. In 5–7 sentences, explain how the wartime mobilization infrastructure shown in the documentary might have made a pandemic dramatically worse.</label>
+    <textarea class="tall" id="bridge_flu" placeholder="The documentary showed mobilization as… / This matters for the pandemic because… / Specifically, things like troop transport and crowded conditions would…"></textarea>
+
+    <label class="field-label" style="margin-top:1.2em;"><span class="q-num">10.</span> <strong>Bridge to the Red Scare:</strong> The film ends with disillusionment — "a few medals don't make up for that." In 5–7 sentences, explain why a society traumatized by total war might become more suspicious of immigrants, socialists, and political "outsiders" in the years that follow. Connect to the wartime psychology shown in the documentary.</label>
+    <textarea class="tall" id="bridge_red" placeholder="The documentary showed wartime fear and loyalty pressure as… / After the war, that psychology would turn toward… because…"></textarea>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       EXIT TICKET
+  ════════════════════════════════════════════ -->
+  <div class="exit-card">
+    <h2>Exit Ticket</h2>
+    <div class="exit-sub">Answer once, carefully. This is the synthesis you export and submit on Canvas.</div>
+
+    <div class="source-block" style="background:rgba(245,237,216,0.1);border-left-color:var(--gold);color:var(--cream);">
+      "The war had shown technology's dark side. But dark or bright, technology was here to stay."
+      <div class="attribution" style="color:var(--khaki);">— <em>Shell Shock</em>, closing narration</div>
+    </div>
+
+    <label class="field-label"><span class="q-num">11.</span> In 8–12 sentences: Did World War I strengthen American democracy or strain it? Use at least two specific pieces of evidence from the documentary and at least one reference to the laws covered on your worksheet (Espionage Act, Sedition Act, Schenck, or CPI). Make a clear claim, support it with evidence, and explain how the evidence connects to your argument.</label>
+    <textarea class="tall" id="exit" style="min-height:200px;" placeholder="My argument is that WWI [strengthened / strained] American democracy because… / Evidence from the film includes… / This connects to [law] because… / Therefore…"></textarea>
+
+    <div class="action-bar">
+      <button class="btn-primary" onclick="exportTxt()">📥 Export Answers (.txt)</button>
+      <button class="btn-secondary" onclick="saveAll()">💾 Save Now</button>
+      <button class="btn-danger" onclick="clearAll()">🗑 Clear All</button>
+    </div>
+    <p style="font-size:0.85rem;color:var(--khaki);margin-top:0.6em;font-style:italic;">
+      Answers auto-save locally on this device. Export creates a .txt file — upload that file to Canvas.
+    </p>
+  </div>
+
+  <div class="footer">
+    Post-Screening Follow-Up &nbsp;·&nbsp; HIST 102 &nbsp;·&nbsp; <em>Shell Shock</em> &nbsp;·&nbsp; Richland Community College
+  </div>
+
+</div><!-- /wrap -->
+
+<div id="toast"></div>
+
+<script>
+  // ── Field registry ──
+  const TEXT_FIELDS = [
+    "pred1","pred2","pred3",
+    "ev1","ev2","ev3","ev4","ev5",
+    "scenario_wilson",
+    "conn1","conn2","conn3",
+    "bridge_flu","bridge_red",
+    "exit"
+  ];
+  const MC_IDS = ["q1","q2","q3","q4"];
+
+  const CORRECT = { q1:"b", q2:"b", q3:"b", q4:"c" };
+
+  const FEEDBACK = {
+    q1: {
+      correct: "Exactly right. The Lusitania sequence establishes how public emotion was being primed well before any law was passed. The CPI and Espionage Act didn't create wartime conformity from nothing — they institutionalized a pressure that was already building.",
+      wrong:   "Look again. The U.S. didn't enter until 1917 — two years after the Lusitania. The film opens there to show the emotional groundwork being laid, not to claim it caused entry. Think about what propaganda needs before it can work."
+    },
+    q2: {
+      correct: "Correct. The film shows Americans prospering from the war while Europe bled. Wilson had to convert that comfortable distance into willingness to sacrifice — which is precisely why the CPI's scale (75,000 speakers, millions of pamphlets) was necessary.",
+      wrong:   "Reconsider. The film shows Americans going about their business, making money, playing baseball in the street. Wilson was not pushing against eagerness — he was pushing against comfortable neutrality. What would it take to change that?"
+    },
+    q3: {
+      correct: "Well reasoned. When casualties are catastrophic, honest public debate becomes more urgent — and also more threatening to those in power. The Sedition Act didn't respond to casual criticism; it responded to the possibility that the public, if allowed to speak freely, might conclude the war wasn't worth the cost.",
+      wrong:   "Think about the relationship more carefully. Option C argues casualties justify silencing critics — but that's the government's rationale, not a historical analysis. Option B asks: if the costs are this high, why would you criminalize the debate about whether those costs are worth it?"
+    },
+    q4: {
+      correct: "This is the sharp edge of the Sedition Act. 'Abusive language' about the military's mission was broadly defined — and prosecutors had significant discretion. A veteran saying the war produced only loss could easily be read as disparaging the military effort. Eugene Debs received ten years for less specific criticism. The fact that someone served didn't shield them.",
+      wrong:   "Reconsider the Sedition Act's scope. It didn't exempt veterans, and 'abusive language' wasn't limited to attacking the flag directly. The law gave prosecutors wide discretion. Think about Eugene Debs — what did he actually say compared to this veteran's statement?"
+    }
+  };
+
+  function key(id) { return "hist102_post_" + id; }
+
+  // ── Load saved state ──
+  function loadAll() {
+    TEXT_FIELDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const v = localStorage.getItem(key(id));
+      if (v !== null) el.value = v;
+    });
+    MC_IDS.forEach(qid => {
+      const saved = localStorage.getItem(key(qid));
+      if (!saved) return;
+      const r = document.querySelector(`input[name="${qid}"][value="${saved}"]`);
+      if (r) r.checked = true;
+      const savedFb = localStorage.getItem(key(qid + "_fb"));
+      const savedCls = localStorage.getItem(key(qid + "_cls"));
+      if (savedFb) {
+        const box = document.getElementById(qid + "_status");
+        box.innerHTML = savedFb;
+        box.className = "mc-status " + (savedCls || "");
+      }
+    });
+  }
+
+  // ── Save all ──
+  function saveAll() {
+    TEXT_FIELDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) localStorage.setItem(key(id), el.value);
+    });
+    MC_IDS.forEach(qid => {
+      const checked = document.querySelector(`input[name="${qid}"]:checked`);
+      if (checked) localStorage.setItem(key(qid), checked.value);
+    });
+    toast("Saved.");
+  }
+
+  // ── Autosave on input ──
+  function attachAutosave() {
+    TEXT_FIELDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener("input", () => localStorage.setItem(key(id), el.value));
+    });
+    MC_IDS.forEach(qid => {
+      document.querySelectorAll(`input[name="${qid}"]`).forEach(r => {
+        r.addEventListener("change", () => localStorage.setItem(key(qid), r.value));
+      });
+    });
+  }
+
+  // ── Grade MC ──
+  function grade(qid, correct) {
+    const checked = document.querySelector(`input[name="${qid}"]:checked`);
+    const box = document.getElementById(qid + "_status");
+    if (!checked) {
+      box.className = "mc-status empty";
+      box.innerHTML = "Please select an answer first.";
+      return;
+    }
+    const isCorrect = checked.value === correct;
+    box.className = "mc-status " + (isCorrect ? "correct" : "incorrect");
+    box.innerHTML = "<strong>" + (isCorrect ? "✓ Correct." : "✗ Not quite.") + "</strong> " +
+      (isCorrect ? FEEDBACK[qid].correct : FEEDBACK[qid].wrong);
+    localStorage.setItem(key(qid + "_fb"), box.innerHTML);
+    localStorage.setItem(key(qid + "_cls"), isCorrect ? "correct" : "incorrect");
+  }
+
+  function resetQ(qid) {
+    document.querySelectorAll(`input[name="${qid}"]`).forEach(r => r.checked = false);
+    const box = document.getElementById(qid + "_status");
+    box.className = "mc-status";
+    box.innerHTML = "";
+    localStorage.removeItem(key(qid));
+    localStorage.removeItem(key(qid + "_fb"));
+    localStorage.removeItem(key(qid + "_cls"));
+  }
+
+  // ── Export ──
+  function exportTxt() {
+    saveAll();
+    const lines = [];
+    lines.push("HIST 102 — Post-Screening Follow-Up: Shell Shock");
+    lines.push("Documentary: The Century: America's Time — 1914–1919");
+    lines.push("=".repeat(60) + "\n");
+
+    function add(id, label) {
+      const el = document.getElementById(id);
+      lines.push(label + "\n" + (el ? (el.value.trim() || "[no response]") : "[not found]") + "\n");
+    }
+
+    lines.push("SECTION I — CHECK YOUR PREDICTIONS\n");
+    add("pred1", "1. Dissent/loyalty — prediction check:");
+    add("pred2", "2. Immigrants/outsiders — prediction check:");
+    add("pred3", "3. Versailles — prediction check:");
+
+    lines.push("\nSECTION II — EVIDENCE FROM THE FILM\n");
+    add("ev1", "Lens 1 — Expanded government power:");
+    add("ev2", "Lens 2 — Pressure to conform:");
+    add("ev3", "Lens 3 — Emotional appeals:");
+    add("ev4", "Lens 4 — Dissent as dangerous:");
+    add("ev5", "Lens 5 — Ordinary people's experience:");
+
+    lines.push("\nSECTION III — KNOWLEDGE CHECK\n");
+    MC_IDS.forEach(qid => {
+      const checked = document.querySelector(`input[name="${qid}"]:checked`);
+      lines.push(`${qid.toUpperCase()}: ` + (checked ? checked.value.toUpperCase() : "[no answer]") + "\n");
+    });
+    add("scenario_wilson", "Wilson / Versailles scenario (Q5):");
+
+    lines.push("\nSECTION IV — CONNECTING LAWS TO THE FILM\n");
+    add("conn1", "6. Propaganda / CPI connection:");
+    add("conn2", "7. Holmes / Schenck — revised view:");
+    add("conn3", "8. Most vulnerable person or group:");
+
+    lines.push("\nSECTION V — BRIDGE FORWARD\n");
+    add("bridge_flu", "9. Bridge to influenza pandemic:");
+    add("bridge_red", "10. Bridge to Red Scare:");
+
+    lines.push("\nEXIT TICKET\n");
+    add("exit", "11. Did WWI strengthen or strain American democracy?");
+
+    const blob = new Blob([lines.join("\n")], { type: "text/plain;charset=utf-8" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "HIST102_PostScreening_ShellShock_" + new Date().toISOString().slice(0,10) + ".txt";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    toast("Exported. Upload the .txt file to Canvas.");
+  }
+
+  // ── Clear ──
+  function clearAll() {
+    if (!confirm("Clear all saved answers on this device? This cannot be undone.")) return;
+    TEXT_FIELDS.forEach(id => localStorage.removeItem(key(id)));
+    MC_IDS.forEach(qid => {
+      ["", "_fb", "_cls"].forEach(s => localStorage.removeItem(key(qid + s)));
+    });
+    location.reload();
+  }
+
+  // ── Toast ──
+  function toast(msg) {
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.style.display = "block";
+    setTimeout(() => { t.style.display = "none"; }, 1600);
+  }
+
+  // ── Init ──
+  loadAll();
+  attachAutosave();
+</script>
+</body>
+</html>

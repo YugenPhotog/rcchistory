@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shell Shock — HIST 102 Documentary Screening</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --antique-gold:#D4AF37; --deep-teal:#2C7873; --rich-purple:#6B4C9A;
+            --ruby-crimson:#9B2C2C; --dark-charcoal:#1A1A1A; --pure-white:#FAFAFA;
+            --soft-cream:#F5F1E8; --bronze-accent:#8B6F47; --forest-green:#1B4332;
+            --sepia-warm:#6B4A2A; --parchment:#F5EDD8; --khaki:#C9A96E;
+        }
+        .reveal { font-family:'Lora',serif; font-size:1.3em; background-color:var(--dark-charcoal); color:var(--pure-white); }
+        .reveal h1,.reveal h2,.reveal h3 { font-family:'Crimson Pro',serif; font-weight:700; color:var(--antique-gold); text-transform:none; }
+        .reveal h1 { font-size:6.0em; }
+        .reveal h2 { font-size:4.5em; margin-bottom:0.5em; }
+        .reveal h3 { font-size:2.5em; }
+        .reveal ul { list-style:none; padding-left:0; }
+        .reveal ul li { margin-bottom:0.4em; font-size:1.0em; }
+        .reveal ul li:before { content:"◆ "; color:var(--deep-teal); font-weight:bold; margin-right:0.5em; }
+        strong { color:var(--antique-gold); }
+        em { color:var(--deep-teal); font-style:italic; }
+
+        /* Pop-ups */
+        .popup-trigger { color:var(--deep-teal); border-bottom:2px dotted var(--deep-teal); cursor:pointer; transition:color 0.3s; }
+        .popup-trigger:hover { color:var(--antique-gold); }
+        .popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+            background:var(--soft-cream); color:var(--dark-charcoal); padding:2em; border-radius:15px;
+            box-shadow:0 8px 32px rgba(0,0,0,0.5); max-width:700px; width:90%; max-height:75%; overflow-y:auto;
+            z-index:1000; border:3px solid var(--bronze-accent); }
+        .popup.active { display:block; }
+        .popup-close { position:absolute; top:10px; right:15px; font-size:2em; cursor:pointer; color:var(--ruby-crimson); font-weight:bold; }
+        .definition-term { font-size:1.5em; font-weight:700; color:var(--rich-purple); margin-bottom:0.5em; font-family:'Crimson Pro',serif; }
+        .key-term { color:var(--rich-purple); font-weight:600; }
+        .popup p { font-size:1.1em; line-height:1.6; margin-bottom:0.8em; color:#2C1F0E; }
+        .popup ul { list-style: disc; padding-left:1.5em; }
+        .popup ul li::before { content:none; }
+        .popup ul li { font-size:1.05em; color:#2C1F0E; margin-bottom:0.4em; }
+
+        /* Slide counter */
+        .slide-counter { position:fixed; bottom:20px; right:20px; background:rgba(26,26,26,0.9);
+            color:var(--antique-gold); padding:8px 15px; border-radius:8px; font-family:'Crimson Pro',serif;
+            font-weight:600; font-size:0.9em; border:2px solid var(--deep-teal); z-index:100; }
+
+        /* Layout grids */
+        .two-column { display:grid; grid-template-columns:1fr 1fr; gap:2em; align-items:start; }
+        .three-column { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.5em; align-items:start; }
+        .column-header { font-weight:700; color:var(--antique-gold); font-size:2.5em; margin-bottom:0.5em; font-family:'Crimson Pro',serif; }
+
+        /* Text helpers */
+        .subtitle { font-size:2.5em; color:var(--deep-teal); margin-top:0.5em; }
+        .large-text { font-size:2.0em; text-align:center; line-height:1.6; }
+        .bottom-text { margin-top:1.2em; font-style:italic; color:var(--deep-teal); font-size:1.8em; }
+        .bottom-text-bold { margin-top:1.2em; font-weight:700; color:var(--antique-gold); font-size:1.8em; }
+
+        /* Content blocks */
+        .callout { background:rgba(212,175,55,0.15); border-left:5px solid var(--antique-gold); padding:1.2em; margin:1em 0; font-size:2.0em; }
+        .primary-source { background:rgba(212,175,55,0.1); border-left:5px solid var(--antique-gold); padding:1em; margin:1em 0; font-style:italic; color:var(--pure-white); font-size:1.8em; }
+        .primary-source-attribution { text-align:right; font-size:1.6em; color:var(--bronze-accent); margin-top:0.5em; font-style:normal; }
+        .assessment-box { background:rgba(44,120,115,0.15); border:2px solid var(--deep-teal); border-radius:10px; padding:1.5em; margin:1em 0; }
+        .assessment-box h3 { color:var(--deep-teal); margin-top:0; }
+
+        /* Worksheet embed */
+        .worksheet-frame { background:rgba(245,237,216,0.08); border:3px solid var(--khaki);
+            border-radius:12px; padding:1.6em 2em; margin:0.5em 0; }
+        .worksheet-q { font-size:1.85em; color:var(--pure-white); margin-bottom:0.5em; line-height:1.5; }
+        .worksheet-label { font-size:1.5em; color:var(--bronze-accent); font-style:italic; margin-bottom:0.3em; }
+        .worksheet-rule { border:none; border-bottom:1px solid rgba(201,169,110,0.4); margin:0.6em 0 0.9em 0; }
+
+        /* Parchment info box */
+        .parchment-box { background:rgba(245,237,216,0.12); border:2px solid var(--khaki);
+            border-radius:10px; padding:1.4em 1.8em; font-size:2.0em; line-height:1.6; }
+        .parchment-box p { margin:0 0 0.5em 0; }
+
+        /* Exam alert */
+        .exam-alert { background:rgba(155,44,44,0.2); border:3px solid var(--ruby-crimson);
+            border-radius:12px; padding:1.4em 2em; font-size:2.1em; text-align:center; }
+        .exam-alert strong { color:var(--ruby-crimson); font-size:1.1em; }
+
+        /* Law card */
+        .law-card { background:rgba(107,76,42,0.2); border-left:6px solid var(--khaki);
+            border-radius:6px; padding:1em 1.4em; margin-bottom:0.8em; }
+        .law-card .law-name { font-family:'Crimson Pro',serif; font-weight:700; color:var(--antique-gold); font-size:2.0em; }
+        .law-card .law-desc { font-size:1.75em; color:var(--pure-white); margin-top:0.2em; }
+
+        /* Timeline */
+        .timeline-item { margin-bottom:0.6em; }
+        .timeline-year { color:var(--antique-gold); font-weight:700; }
+
+        /* Image */
+        .img-placeholder { background:rgba(139,111,71,0.2); border:3px dashed var(--bronze-accent);
+            padding:3em; text-align:center; color:var(--bronze-accent); font-style:italic; border-radius:10px; }
+        .img-caption { font-size:1.4em; color:var(--bronze-accent); font-style:italic; text-align:center; margin-top:0.4em; }
+
+        /* Post-viewing action box */
+        .action-box { background:rgba(44,120,115,0.2); border:3px solid var(--deep-teal);
+            border-radius:14px; padding:1.5em 2em; text-align:center; }
+        .action-box .action-title { font-family:'Crimson Pro',serif; font-weight:700; color:var(--deep-teal); font-size:3.0em; margin-bottom:0.3em; }
+        .action-box .action-desc { font-size:2.0em; color:var(--pure-white); line-height:1.5; }
+
+        /* Lens badge */
+        .lens-badge { display:inline-block; background:rgba(107,76,154,0.3); border:2px solid var(--rich-purple);
+            border-radius:8px; padding:0.15em 0.5em; color:var(--rich-purple); font-weight:700;
+            font-size:0.85em; margin-right:0.4em; font-family:'Crimson Pro',serif; }
+    </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+    <!-- ═══════════════════════════════════════════════
+         SLIDE 1 — TITLE
+    ═══════════════════════════════════════════════ -->
+    <section data-background="#1A1A1A">
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;padding:2em;">
+            <div style="font-family:'Crimson Pro',serif;font-size:1.8em;color:var(--bronze-accent);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.4em;">
+                HIST 102 — United States History Since 1877
+            </div>
+            <div style="font-family:'Crimson Pro',serif;font-size:1.4em;color:var(--khaki);letter-spacing:0.08em;margin-bottom:1.2em;">
+                Richland Community College &nbsp;·&nbsp; Chapter 22
+            </div>
+            <h1 style="font-size:5.5em;color:var(--antique-gold);margin:0 0 0.2em 0;line-height:1.1;">Shell Shock</h1>
+            <div style="font-size:2.4em;color:var(--deep-teal);font-style:italic;margin-bottom:1em;">
+                The Century: America's Time — 1914–1919
+            </div>
+            <div style="font-size:2.0em;color:var(--pure-white);max-width:1200px;line-height:1.6;border-top:2px solid rgba(212,175,55,0.3);padding-top:0.8em;">
+                <em>What happens to democracy during total war?</em>
+            </div>
+            <div style="margin-top:1.2em;font-size:1.6em;color:var(--bronze-accent);font-style:italic;">
+                ⚠️ &nbsp;Lecture Replacement — This material will appear on Exam 2
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SLIDE 2 — IMPORTANT NOTICE
+    ═══════════════════════════════════════════════ -->
+    <section data-background="#1A1A1A">
+        <h2 style="font-size:4.5em;">Before We Begin</h2>
+        <div class="exam-alert" style="margin-bottom:1em;">
+            <strong>📋 Lecture Replacement Notice</strong><br>
+            <span style="font-size:0.85em;color:var(--pure-white);">Today's documentary screening replaces the Chapter 22 lecture.<br>
+            You do <em style="color:var(--ruby-crimson);">not</em> turn in the worksheet — but this material <strong>will be covered on Exam 2.</strong></span>
+        </div>
+        <div class="parchment-box">
+            <p><strong>Today's plan in four steps:</strong></p>
+            <ul style="font-size:0.85em;">
+                <li><strong>Step 1 — Scaffolding:</strong> Build context before the video starts</li>
+                <li><strong>Step 2 — Worksheet:</strong> Complete the pre-screening questions</li>
+                <li><strong>Step 3 — Screening:</strong> Watch <em>Shell Shock</em> with a critical lens</li>
+                <li><strong>Step 4 — Post-Viewing:</strong> Complete the <a href="HIST102_Ch23_Lecture1B—Post-Screening_Follow-Up.html" target="_blank" rel="noopener" onclick="event.stopPropagation();" style="color:var(--antique-gold);text-decoration:underline;font-weight:700;">Interactive Follow-Up Guide</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION I — SCAFFOLDING DIVIDER
+    ═══════════════════════════════════════════════ -->
+    <section data-background="#1B4332">
+        <h2 style="font-size:5.0em;color:var(--antique-gold);">Section I</h2>
+        <div class="subtitle" style="font-size:2.5em;">Scaffolding: Context Before You Watch</div>
+        <p style="color:var(--bronze-accent);font-style:italic;font-size:2.0em;">
+            History doesn't explain itself — let's build the framework first.
+        </p>
+    </section>
+
+    <!-- SLIDE 4 — The World in 1914 -->
+    <section>
+        <h2 style="font-size:4.5em;">The World in 1914</h2>
+        <div class="two-column">
+            <div>
+                <ul style="font-size:2.0em;">
+                    <li>Europe dominated by <strong>rival empires</strong> — Britain, France, Germany, Austria-Hungary, Russia</li>
+                    <li>A tangle of <strong>alliances</strong> meant one spark could ignite all of them</li>
+                    <li>June 1914: Archduke Franz Ferdinand assassinated in Sarajevo — the spark arrives</li>
+                    <li>U.S. officially <strong>neutral</strong> — most Americans assume it will stay that way</li>
+                </ul>
+            </div>
+            <div>
+                <div class="img-placeholder" style="min-height:320px;display:flex;align-items:center;justify-content:center;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Map_Europe_alliances_1914-en.svg/800px-Map_Europe_alliances_1914-en.svg.png"
+                         alt="Map of European alliance systems in 1914 showing Triple Entente and Triple Alliance"
+                         style="max-width:100%;max-height:380px;border-radius:8px;border:2px solid var(--bronze-accent);"
+                         onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                    <div style="display:none;padding:2em;color:var(--bronze-accent);font-style:italic;">Europe's Alliance Networks, 1914</div>
+                </div>
+                <div class="img-caption">Europe's rival alliance systems, 1914</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 5 — Total War: A New Kind of Violence -->
+    <section>
+        <h2 style="font-size:4.0em;">Total War: A New Kind of Violence</h2>
+        <div class="two-column">
+            <div>
+                <ul style="font-size:2.0em;">
+                    <li>Industrial technology turned war into <strong>mass slaughter</strong> — artillery, machine guns, poison gas</li>
+                    <li>Trench warfare meant armies could advance <em>yards</em> at the cost of <strong>tens of thousands</strong> of lives</li>
+                    <li>By end of 1914: French casualties alone approached <strong>one million</strong></li>
+                    <li>The romantic notion of war — heroic charge, quick victory — <em>shattered within weeks</em></li>
+                </ul>
+            </div>
+            <div>
+                <div style="background:rgba(155,44,44,0.15);border:2px solid var(--ruby-crimson);border-radius:10px;padding:1.4em;font-size:1.9em;text-align:center;">
+                    <div style="color:var(--ruby-crimson);font-family:'Crimson Pro',serif;font-size:1.3em;font-weight:700;margin-bottom:0.4em;">17 Million</div>
+                    <div style="color:var(--pure-white);">Total deaths — military &amp; civilian</div>
+                    <hr style="border-color:rgba(155,44,44,0.4);margin:0.8em 0;">
+                    <div style="color:var(--ruby-crimson);font-family:'Crimson Pro',serif;font-size:1.3em;font-weight:700;margin-bottom:0.4em;">20 Million</div>
+                    <div style="color:var(--pure-white);">Wounded — many permanently disabled</div>
+                    <hr style="border-color:rgba(155,44,44,0.4);margin:0.8em 0;">
+                    <div style="color:var(--khaki);font-size:0.85em;font-style:italic;">World War I, 1914–1918</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 6 — What Is Shell Shock? -->
+    <section>
+        <h2 style="font-size:4.5em;">What Is <span class="popup-trigger" data-popup="popup-shellshock">Shell Shock?</span></h2>
+        <div class="two-column">
+            <div>
+                <ul style="font-size:2.0em;">
+                    <li>A cluster of symptoms in soldiers: <em>tremors, paralysis, nightmares, memory loss, inability to speak</em></li>
+                    <li>First widespread recognition that <strong>psychological trauma</strong> is a real wound of war</li>
+                    <li>Doctors debated the cause — was it physical (concussion from shells) or mental weakness?</li>
+                    <li>Today we call it <span class="popup-trigger" data-popup="popup-ptsd"><strong>PTSD</strong></span> — but in 1917, there was no framework, no treatment, and little sympathy</li>
+                </ul>
+            </div>
+            <div>
+                <div class="callout" style="font-size:1.9em;text-align:center;">
+                    <div style="color:var(--antique-gold);font-family:'Crimson Pro',serif;font-size:1.2em;font-weight:700;margin-bottom:0.4em;">"Shell shock" as metaphor</div>
+                    The documentary uses this title not just literally — it asks what <em>total war</em> does to a democratic society.<br><br>
+                    <strong>Individual trauma mirrors collective trauma.</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 7 — America's Road to War -->
+    <section>
+        <h2 style="font-size:4.0em;">America's Road to War, 1914–1917</h2>
+        <ul style="font-size:2.0em;">
+            <li class="timeline-item"><span class="timeline-year">1915 —</span> German U-boat sinks the <em>Lusitania</em>; <strong>1,198 dead</strong> including 128 Americans — public outrage grows</li>
+            <li class="timeline-item"><span class="timeline-year">1916 —</span> Wilson wins reelection on the slogan <em>"He kept us out of war"</em></li>
+            <li class="timeline-item"><span class="timeline-year">Feb 1917 —</span> Germany resumes unrestricted submarine warfare; <span class="popup-trigger" data-popup="popup-zimmermann">Zimmermann Telegram</span> exposed</li>
+            <li class="timeline-item"><span class="timeline-year">Apr 1917 —</span> Wilson asks Congress for a declaration of war — <em>"to make the world safe for democracy"</em></li>
+        </ul>
+        <div class="bottom-text" style="font-size:1.8em;">Notice Wilson's framing: this is a war <em>for</em> democracy. Keep that in mind as you watch.</div>
+    </section>
+
+    <!-- SLIDE 8 — Democracy Under Pressure -->
+    <section>
+        <h2 style="font-size:4.0em;">Democracy Under Pressure</h2>
+        <p style="font-size:2.0em;color:var(--pure-white);margin-bottom:0.5em;">When a democracy goes to war, it faces a fundamental tension:</p>
+        <div class="two-column" style="margin-top:0.5em;">
+            <div class="law-card" style="border-color:var(--antique-gold);padding:1.4em;">
+                <div class="law-name" style="font-size:2.2em;">Democracy Requires</div>
+                <div class="law-desc" style="font-size:1.8em;">
+                    Free speech &amp; press<br>
+                    Right to dissent<br>
+                    Open debate on policy<br>
+                    Protection of minorities
+                </div>
+            </div>
+            <div class="law-card" style="border-color:var(--ruby-crimson);padding:1.4em;">
+                <div class="law-name" style="color:var(--ruby-crimson);font-size:2.2em;">Total War Demands</div>
+                <div class="law-desc" style="font-size:1.8em;">
+                    Unified public opinion<br>
+                    Suppression of "disloyalty"<br>
+                    Government control of information<br>
+                    Conformity &amp; sacrifice
+                </div>
+            </div>
+        </div>
+        <div class="bottom-text-bold" style="font-size:1.9em;text-align:center;">These two columns are in direct conflict. The laws in your worksheet are where that conflict played out.</div>
+    </section>
+
+    <!-- SLIDE 9 — The Legal Architecture of Control -->
+    <section>
+        <h2 style="font-size:3.8em;">The Legal Architecture of Control</h2>
+        <div style="margin-top:0.3em;">
+            <div class="law-card">
+                <div class="law-name">Espionage Act (1917)</div>
+                <div class="law-desc">Criminalized interference with military operations or recruiting — broad enough to prosecute <span class="popup-trigger" data-popup="popup-debs">anti-war speech</span></div>
+            </div>
+            <div class="law-card">
+                <div class="law-name">Sedition Act (1918)</div>
+                <div class="law-desc">Extended the Espionage Act to punish any "disloyal, profane, scurrilous, or abusive language" about the U.S. government, flag, or military</div>
+            </div>
+            <div class="law-card">
+                <div class="law-name"><span class="popup-trigger" data-popup="popup-cpi">Committee on Public Information</span> (1917)</div>
+                <div class="law-desc">George Creel's government propaganda agency — posters, pamphlets, films, and 75,000 "Four Minute Men" speakers nationwide</div>
+            </div>
+        </div>
+        <div class="bottom-text" style="font-size:1.7em;">These laws won't appear in the documentary — but they are the invisible architecture around everything you'll watch.</div>
+    </section>
+
+    <!-- SLIDE 10 — Schenck: The Supreme Court Weighs In -->
+    <section>
+        <h2 style="font-size:3.8em;">Schenck v. United States (1919)</h2>
+        <div class="primary-source" style="font-size:1.9em;">
+            "The most stringent protection of free speech would not protect a man in falsely shouting fire in a theatre and causing a panic… The question is whether the words used… create a <strong>clear and present danger.</strong>"
+            <div class="primary-source-attribution">— Justice Oliver Wendell Holmes, writing for a unanimous Court</div>
+        </div>
+        <div class="parchment-box" style="font-size:1.9em;margin-top:0.8em;">
+            <p><strong>The Court upheld the conviction unanimously.</strong> Charles Schenck had mailed anti-draft pamphlets to men called up for service.</p>
+            <p>Holmes's "fire in a theatre" analogy became famous — but notice: <em>who decides what speech creates danger?</em> The wartime government does.</p>
+        </div>
+    </section>
+
+    <!-- PAUSE & REFLECT I -->
+    <section data-background="#1B4332">
+        <h2 style="font-size:5.0em;color:var(--antique-gold);">⏸ Pause &amp; Reflect</h2>
+        <div class="large-text" style="font-size:2.2em;margin-top:0.8em;">
+            <p style="color:var(--pure-white);">Wilson said America entered the war <em>"to make the world safe for democracy."</em></p>
+            <p style="margin-top:0.8em;color:var(--khaki);font-size:0.9em;">Based on what you've just seen — does the Espionage Act, Sedition Act, and Schenck decision support or contradict that claim?</p>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION II — WORKSHEET DIVIDER
+    ═══════════════════════════════════════════════ -->
+    <section data-background="#1B4332">
+        <h2 style="font-size:5.0em;color:var(--antique-gold);">Section II</h2>
+        <div class="subtitle" style="font-size:2.5em;">Pre-Screening Worksheet</div>
+        <p style="color:var(--bronze-accent);font-style:italic;font-size:2.0em;">
+            You should have this printed and in hand. If not — download it now.
+        </p>
+    </section>
+
+    <!-- SLIDE 12 — Worksheet Download -->
+    <section>
+        <h2 style="font-size:4.0em;margin-bottom:0.3em;">Get Your Worksheet</h2>
+        <div style="max-width:1100px;margin:0.4em auto 0 auto;">
+            <div style="font-size:2.0em;color:var(--pure-white);line-height:1.5;margin-bottom:0.8em;">
+                <strong>Print before class.</strong> If you don't have it,
+                download it now or grab a copy from the front.
+            </div>
+
+            <a href="shell_shock_worksheet.pdf" download="shell_shock_worksheet.pdf"
+               target="_blank" rel="noopener"
+               onclick="event.stopPropagation();"
+               style="display:inline-block;background:var(--antique-gold);color:#1A1A1A;
+                      font-family:'Crimson Pro',serif;font-weight:700;font-size:2.4em;
+                      padding:0.4em 1.4em;border-radius:8px;text-decoration:none;
+                      border:3px solid #8B6F47;cursor:pointer;letter-spacing:0.02em;
+                      margin-bottom:0.8em;">
+                📥 &nbsp;Download Worksheet PDF
+            </a>
+
+            <div style="font-size:1.75em;color:var(--bronze-accent);font-style:italic;margin-bottom:1em;">
+                Also on Canvas → Chapter 22 → Shell Shock
+            </div>
+
+            <div style="background:rgba(155,44,44,0.2);border:2px solid var(--ruby-crimson);
+                        border-radius:8px;padding:0.6em 1.2em;font-size:1.9em;display:inline-block;">
+                <strong style="color:var(--ruby-crimson);">⚠ Exam 2</strong>
+                <span style="color:var(--pure-white);"> — not collected, but <strong>will be tested</strong></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 13 — Worksheet Overview (read-along, no writing lines) -->
+    <section>
+        <h2 style="font-size:4.0em;">Worksheet — What You're Doing</h2>
+        <div class="two-column">
+            <div>
+                <div class="column-header" style="font-size:2.2em;">Four Parts</div>
+                <ul style="font-size:1.9em;">
+                    <li><strong>Part I</strong> — War and Power <span style="color:var(--bronze-accent);font-size:0.85em;">(2 questions)</span></li>
+                    <li><strong>Part II</strong> — Wartime Laws &amp; Primary Sources <span style="color:var(--bronze-accent);font-size:0.85em;">(6 questions)</span></li>
+                    <li><strong>Part III</strong> — Prediction <span style="color:var(--bronze-accent);font-size:0.85em;">(3 questions)</span></li>
+                    <li><strong>Part IV</strong> — Watching with a Lens <span style="color:var(--bronze-accent);font-size:0.85em;">(5 observation prompts — fill in <em>during</em> the film)</span></li>
+                </ul>
+            </div>
+            <div>
+                <div class="column-header" style="font-size:2.2em;">Laws on the Worksheet</div>
+                <ul style="font-size:1.9em;">
+                    <li>Espionage Act (1917)</li>
+                    <li>Sedition Act (1918)</li>
+                    <li>Schenck v. United States (1919)</li>
+                    <li>Committee on Public Information</li>
+                </ul>
+                <div class="bottom-text" style="font-size:1.65em;">None of these appear in the documentary — that is intentional. You carry the legal context <em>into</em> the screening.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 14 — Walk-Through: Parts I & II -->
+    <section>
+        <h2 style="font-size:3.8em;">Walk-Through — Parts I &amp; II</h2>
+        <p style="font-size:1.85em;color:var(--pure-white);margin-bottom:0.6em;font-style:italic;">Complete these on your printed worksheet now, before the film starts.</p>
+        <div class="two-column">
+            <div>
+                <div class="law-card" style="border-color:var(--antique-gold);">
+                    <div class="law-name" style="font-size:1.9em;">Part I — War and Power</div>
+                    <div class="law-desc" style="font-size:1.7em;">
+                        <strong>Q1.</strong> Should government have more power in wartime? (3–4 sentences)<br><br>
+                        <strong>Q2.</strong> What freedoms are at risk during a national emergency?
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="law-card">
+                    <div class="law-name" style="font-size:1.9em;">Part II — The Laws</div>
+                    <div class="law-desc" style="font-size:1.7em;">
+                        <strong>Q3.</strong> Espionage Act — what speech/actions does it cover?<br>
+                        <strong>Q4–5.</strong> Sedition Act — what does it prohibit? How broad?<br>
+                        <strong>Q6–7.</strong> Schenck — what is "clear and present danger"? Who decides?<br>
+                        <strong>Q8.</strong> CPI — why would a democracy use propaganda?
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-text" style="font-size:1.7em;">💡 No single right answer on Part I — your <em>reasoning</em> is what Exam 2 will test.</div>
+    </section>
+
+    <!-- SLIDE 15 — Walk-Through: Parts III & IV -->
+    <section>
+        <h2 style="font-size:3.8em;">Walk-Through — Parts III &amp; IV</h2>
+        <div class="two-column">
+            <div>
+                <div class="law-card" style="border-color:var(--deep-teal);">
+                    <div class="law-name" style="font-size:1.9em;color:var(--deep-teal);">Part III — Prediction</div>
+                    <div class="law-desc" style="font-size:1.7em;">
+                        Complete <em>before</em> the film starts.<br><br>
+                        <strong>Q9.</strong> How might dissenters be treated?<br>
+                        <strong>Q10.</strong> How might immigrants or radicals be viewed?<br>
+                        <strong>Q11.</strong> If Versailles failed — what does that suggest about wartime sacrifices to democracy?
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="law-card" style="border-color:var(--rich-purple);">
+                    <div class="law-name" style="font-size:1.9em;color:var(--rich-purple);">Part IV — Watching With a Lens</div>
+                    <div class="law-desc" style="font-size:1.7em;">
+                        Complete <em>during</em> the film — jot notes as you watch.<br><br>
+                        <span class="lens-badge">1</span> Expanded government power<br>
+                        <span class="lens-badge">2</span> Pressure to conform / display loyalty<br>
+                        <span class="lens-badge">3</span> Emotional appeals for unity<br>
+                        <span class="lens-badge">4</span> Moments when dissent appears dangerous<br>
+                        <span class="lens-badge">5</span> How ordinary people experienced the war
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-text-bold" style="font-size:1.75em;text-align:center;">Your Part IV notes are the raw material for the <a href="HIST102_Ch23_Lecture1B—Post-Screening_Follow-Up.html" target="_blank" rel="noopener" onclick="event.stopPropagation();" style="color:var(--antique-gold);text-decoration:underline;">post-viewing interactive guide</a>.</div>
+    </section>
+
+    <!-- PAUSE & REFLECT II -->
+    <section data-background="#1B4332">
+        <h2 style="font-size:5.0em;color:var(--antique-gold);">⏸ Pause &amp; Reflect</h2>
+        <div class="assessment-box" style="font-size:2.0em;background:rgba(255,255,255,0.08);border-color:var(--antique-gold);">
+            <p style="color:var(--pure-white);">According to <em>Schenck v. United States</em>, which of the following could legally be suppressed during wartime?</p>
+            <ol style="list-style-type:upper-alpha;color:var(--pure-white);">
+                <li>A newspaper criticizing the design of military uniforms</li>
+                <li>A pamphlet urging young men to resist the draft</li>
+                <li>A speech calling the president a poor leader</li>
+                <li>A cartoon mocking the German Kaiser</li>
+            </ol>
+        </div>
+        <div style="font-size:1.6em;color:var(--bronze-accent);font-style:italic;margin-top:0.8em;">Answer: B — directly interferes with military recruitment, meeting Holmes's "clear and present danger" test.</div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION III — DOCUMENTARY SCREENING DIVIDER
+    ═══════════════════════════════════════════════ -->
+    <section data-background="#1A1A1A">
+        <div style="text-align:center;padding:1em;">
+            <h2 style="font-size:5.0em;color:var(--antique-gold);">Section III</h2>
+            <div class="subtitle" style="font-size:2.8em;">Documentary Screening</div>
+            <div style="font-size:2.4em;color:var(--pure-white);margin:0.8em 0;font-style:italic;">
+                The Century: America's Time — "Shell Shock"
+            </div>
+            <div style="font-size:2.0em;color:var(--bronze-accent);margin-bottom:1.2em;">
+                Running time: approx. 44 minutes
+            </div>
+            <div class="parchment-box" style="font-size:1.85em;max-width:900px;margin:0 auto;text-align:left;">
+                <p><strong>While you watch:</strong></p>
+                <p>Keep your Part IV lens prompts visible. Record specific examples — names, scenes, moments — that you can reference in the <a href="HIST102_Ch23_Lecture1B—Post-Screening_Follow-Up.html" target="_blank" rel="noopener" onclick="event.stopPropagation();" style="color:var(--antique-gold);text-decoration:underline;">post-viewing guide</a>.</p>
+                <p>The documentary moves chronologically from 1914 through Versailles (1919). The arc matters: <em>pay attention to how tone shifts from enthusiasm to disillusionment.</em></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 19 — What to Watch For: Roadmap -->
+    <section>
+        <h2 style="font-size:4.0em;">Documentary Roadmap</h2>
+        <p style="font-size:1.9em;color:var(--pure-white);margin-bottom:0.6em;">The film moves through five phases — each connects to your worksheet:</p>
+        <ul style="font-size:1.95em;">
+            <li class="timeline-item"><span class="timeline-year">1914–1915 ·</span> <strong>Enthusiasm</strong> — young men across Europe rush to enlist; the Lusitania sinking shocks America</li>
+            <li class="timeline-item"><span class="timeline-year">1915–1916 ·</span> <strong>Industrial Slaughter</strong> — trench warfare, mass casualties, the romantic vision of war destroyed</li>
+            <li class="timeline-item"><span class="timeline-year">1917 ·</span> <strong>America Enters</strong> — Pershing's AEF; propaganda; the home front mobilizes</li>
+            <li class="timeline-item"><span class="timeline-year">1918 ·</span> <strong>The Breaking Point</strong> — Argonne offensive; epidemic; the cost of victory</li>
+            <li class="timeline-item"><span class="timeline-year">1919 ·</span> <strong>Versailles</strong> — Wilson's 14 Points vs. allied revenge; seeds of WWII planted</li>
+        </ul>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION IV — POST-VIEWING DIVIDER
+    ═══════════════════════════════════════════════ -->
+    <section data-background="#1B4332">
+        <h2 style="font-size:5.0em;color:var(--antique-gold);">Section IV</h2>
+        <div class="subtitle" style="font-size:2.5em;">Post-Viewing Interactive Guide</div>
+        <p style="color:var(--bronze-accent);font-style:italic;font-size:2.0em;">
+            What did the documentary teach you that the worksheet couldn't?
+        </p>
+    </section>
+
+    <!-- SLIDE 21 — Post-Viewing Instructions -->
+    <section>
+        <h2 style="font-size:3.8em;">Post-Viewing Guide — Instructions</h2>
+
+        <!-- BIG LINK BOX -->
+        <div style="background:rgba(44,120,115,0.2);border:4px solid var(--deep-teal);border-radius:16px;padding:1.4em 2em;text-align:center;margin-bottom:1em;">
+            <div style="font-family:'Crimson Pro',serif;font-weight:700;color:var(--deep-teal);font-size:2.8em;margin-bottom:0.3em;">
+                Complete the Interactive Post-Viewing Guide
+            </div>
+            <a href="HIST102_Ch23_Lecture1B—Post-Screening_Follow-Up.html"
+               target="_blank" rel="noopener"
+               onclick="event.stopPropagation();"
+               style="display:inline-block;background:var(--deep-teal);color:white;
+                      font-family:'Crimson Pro',serif;font-weight:700;font-size:2.2em;
+                      padding:0.4em 1.4em;border-radius:10px;text-decoration:none;
+                      border:3px solid var(--antique-gold);cursor:pointer;margin-top:0.4em;
+                      letter-spacing:0.02em;">
+                🖊 &nbsp;Open Follow-Up Guide
+            </a>
+            <div style="font-size:1.7em;color:var(--bronze-accent);font-style:italic;margin-top:0.6em;">
+                Complete before your next class session
+            </div>
+        </div>
+
+        <div class="parchment-box" style="font-size:1.85em;">
+            <p>The guide connects what you <em>watched</em> to what you <em>read</em> on your worksheet.</p>
+            <p>You'll need your Part IV lens notes — specific scenes, names, moments from the film.</p>
+            <p><strong>Not a quiz.</strong> Structured reflection — but the analytical skills it builds are exactly what <strong>Exam 2</strong> will test.</p>
+        </div>
+    </section>
+
+    <!-- SLIDE 22 — Post-Viewing: Connect the Dots -->
+    <section>
+        <h2 style="font-size:3.8em;">Post-Viewing Guide — What It Covers</h2>
+        <div class="two-column">
+            <div>
+                <div class="column-header" style="font-size:2.2em;">From the Film</div>
+                <ul style="font-size:1.85em;">
+                    <li>How did <em>actual people</em> in the documentary experience the tension between loyalty and conscience?</li>
+                    <li>Where did you see emotional manipulation — and did it work on you?</li>
+                    <li>What did Versailles reveal about Wilson's wartime promises?</li>
+                    <li>What would "shell shock" look like applied to democracy itself?</li>
+                </ul>
+            </div>
+            <div>
+                <div class="column-header" style="font-size:2.2em;">Connecting to the Laws</div>
+                <ul style="font-size:1.85em;">
+                    <li>Did anything in the documentary make the Espionage/Sedition Acts feel more or less justified?</li>
+                    <li>Who in the film would have been most <em>vulnerable</em> under these laws?</li>
+                    <li>Did Wilson's "make the world safe for democracy" hold up — or collapse — by 1919?</li>
+                    <li>What surprised you most?</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAUSE & REFLECT III — Post-viewing wrap -->
+    <section data-background="#1B4332">
+        <h2 style="font-size:5.0em;color:var(--antique-gold);">⏸ Pause &amp; Reflect</h2>
+        <div class="large-text" style="font-size:2.2em;margin-top:0.8em;">
+            <p style="color:var(--pure-white);">A veteran in the documentary says: <em>"Nobody wins in a war. They lost. We didn't win."</em></p>
+            <p style="margin-top:1em;color:var(--khaki);font-size:0.9em;">
+                He fought on the winning side. What does this mean — and what does it suggest about the costs that the laws on your worksheet were supposed to protect?
+            </p>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SLIDE 25 — EXAM 2 PREVIEW
+    ═══════════════════════════════════════════════ -->
+    <section>
+        <h2 style="font-size:4.0em;">What This Means for Exam 2</h2>
+        <div class="exam-alert" style="margin-bottom:0.8em;">
+            <strong>⚠️ Exam 2 Coverage — WWI and Democracy</strong>
+        </div>
+        <div class="two-column">
+            <div>
+                <div class="column-header" style="font-size:2.2em;">Know These</div>
+                <ul style="font-size:1.85em;">
+                    <li>Espionage Act &amp; Sedition Act — what they did and why</li>
+                    <li>Schenck v. United States — the "clear and present danger" test</li>
+                    <li>Committee on Public Information — purpose, methods</li>
+                    <li>Wilson's <span class="popup-trigger" data-popup="popup-14pts">14 Points</span> and Versailles</li>
+                </ul>
+            </div>
+            <div>
+                <div class="column-header" style="font-size:2.2em;">Analyze This</div>
+                <ul style="font-size:1.85em;">
+                    <li>The tension between wartime security and civil liberties</li>
+                    <li>How propaganda functions in a democracy</li>
+                    <li>Why Versailles is considered a <em>failed peace</em></li>
+                    <li>The human cost of industrial warfare — beyond the numbers</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         FINAL SLIDE
+    ═══════════════════════════════════════════════ -->
+    <section data-background="#1A1A1A">
+        <div style="text-align:center;padding:1.5em;">
+            <h2 style="font-size:5.0em;color:var(--antique-gold);margin-bottom:0.3em;">Your Next Steps</h2>
+            <div style="font-size:2.3em;color:var(--pure-white);margin-bottom:1.2em;line-height:1.8;">
+                <span style="color:var(--deep-teal);">①</span>&ensp;Review your worksheet answers<br>
+                <span style="color:var(--deep-teal);">②</span>&ensp;Complete the <a href="HIST102_Ch23_Lecture1B—Post-Screening_Follow-Up.html" target="_blank" rel="noopener" onclick="event.stopPropagation();" style="color:var(--antique-gold);text-decoration:underline;font-weight:700;">Post-Viewing Interactive Guide</a><br>
+                <span style="color:var(--deep-teal);">③</span>&ensp;Review Espionage Act · Sedition Act · Schenck · CPI for Exam 2<br>
+                <span style="color:var(--deep-teal);">④</span>&ensp;Office hours: bring questions — this material has real depth
+            </div>
+            <div style="border-top:2px solid rgba(212,175,55,0.3);padding-top:1em;">
+                <div style="font-size:1.9em;color:var(--bronze-accent);font-style:italic;max-width:1000px;margin:0 auto;">
+                    "I lost all my youth. I lost the best years of my life… a few medals don't make up for that, you know."
+                </div>
+                <div style="font-size:1.5em;color:var(--khaki);margin-top:0.4em;">
+                    — WWI veteran, interviewed in <em>Shell Shock</em>, The Century: America's Time
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div><!-- /slides -->
+</div><!-- /reveal -->
+
+<!-- ═══════════════════════════════════════════════
+     GLOBAL UI — outside Reveal transforms
+═══════════════════════════════════════════════ -->
+<div id="keyboard-trigger" class="popup-trigger" data-popup="keyboard-popup"
+     style="position:fixed;top:20px;right:20px;font-size:2em;cursor:pointer;z-index:200;">⌨️</div>
+
+<!-- Keyboard popup -->
+<div id="keyboard-popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Keyboard Shortcuts</div>
+    <p>→ / Space: Next &nbsp;|&nbsp; ←: Previous &nbsp;|&nbsp; S: Speaker Notes &nbsp;|&nbsp; F: Fullscreen &nbsp;|&nbsp; O: Overview &nbsp;|&nbsp; ESC: Close pop-up</p>
+</div>
+
+<!-- Shell Shock definition -->
+<div id="popup-shellshock" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Shell Shock</div>
+    <p>A term coined during World War I to describe the psychological and neurological symptoms suffered by soldiers exposed to prolonged artillery bombardment and the horrors of trench warfare.</p>
+    <p>Symptoms included: uncontrollable trembling, paralysis, mutism (inability to speak), nightmares, amnesia, and emotional collapse. Soldiers were often accused of cowardice or malingering.</p>
+    <p>British Army alone diagnosed over 80,000 cases. The condition challenged prevailing ideas about masculinity, bravery, and the nature of military service.</p>
+    <p>We now recognize it as a form of PTSD — Post-Traumatic Stress Disorder.</p>
+</div>
+
+<!-- PTSD popup -->
+<div id="popup-ptsd" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">PTSD — Post-Traumatic Stress Disorder</div>
+    <p>A mental health condition triggered by experiencing or witnessing a terrifying event. Symptoms include flashbacks, nightmares, severe anxiety, and uncontrollable thoughts about the event.</p>
+    <p>The term did not exist in World War I — sufferers were often labeled as cowards or weaklings, sometimes court-martialed or even shot for desertion.</p>
+    <p>It was only formally recognized as a medical diagnosis in 1980, largely due to advocacy following the Vietnam War.</p>
+</div>
+
+<!-- Zimmermann Telegram popup -->
+<div id="popup-zimmermann" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">The Zimmermann Telegram (1917)</div>
+    <p>A secret diplomatic message from German Foreign Secretary Arthur Zimmermann to the German ambassador in Mexico, proposing a military alliance between Germany and Mexico against the United States.</p>
+    <p>In exchange, Germany promised to help Mexico recover Texas, New Mexico, and Arizona.</p>
+    <p>British intelligence intercepted and decoded the telegram, then shared it with the U.S. Its publication in American newspapers in March 1917 caused enormous public outrage and helped shift opinion toward entering the war.</p>
+</div>
+
+<!-- Eugene Debs / anti-war speech popup -->
+<div id="popup-debs" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Eugene V. Debs and the Espionage Act</div>
+    <p>Eugene Debs was a prominent socialist leader and five-time presidential candidate. In June 1918, he gave a speech in Canton, Ohio, criticizing the war and supporting men who had resisted the draft.</p>
+    <p>He was arrested under the Espionage Act, tried, convicted, and sentenced to ten years in federal prison. He ran for president again in 1920 — <em>from his prison cell</em> — and received nearly one million votes.</p>
+    <p>President Harding commuted his sentence in 1921. Debs's case remains one of the most cited examples of wartime suppression of political speech in U.S. history.</p>
+</div>
+
+<!-- CPI popup -->
+<div id="popup-cpi" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Committee on Public Information (CPI)</div>
+    <p>Created by executive order in April 1917, the CPI was the United States' first large-scale government propaganda agency, headed by journalist George Creel.</p>
+    <p>Its methods included:</p>
+    <ul>
+        <li>Patriotic posters (including the iconic "I Want YOU" Uncle Sam image)</li>
+        <li>Pro-war pamphlets distributed in millions of copies</li>
+        <li>Short films and newsreels</li>
+        <li>75,000 "Four Minute Men" — trained speakers who gave brief pro-war talks at movie theaters, churches, and public gatherings</li>
+    </ul>
+    <p>The CPI also helped promote hostility toward German Americans, contributing to widespread social persecution.</p>
+</div>
+
+<!-- Wilson's 14 Points popup -->
+<div id="popup-14pts" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Wilson's Fourteen Points (1918)</div>
+    <p>A set of principles for the postwar peace settlement delivered by President Wilson in a speech to Congress in January 1918. Key proposals included:</p>
+    <ul>
+        <li>Freedom of the seas</li>
+        <li>Arms reduction among all nations</li>
+        <li>Self-determination for colonized peoples</li>
+        <li>Open diplomacy — no secret treaties</li>
+        <li>A League of Nations to settle future disputes peacefully</li>
+    </ul>
+    <p>Europeans greeted Wilson ecstatically when he arrived at the Paris Peace Conference — he represented the hope of a just peace.</p>
+    <p>However, Britain and France were determined to punish Germany. The resulting Treaty of Versailles bore little resemblance to Wilson's vision — and the U.S. Senate refused to ratify it. The League of Nations was formed without American membership.</p>
+</div>
+
+<div class="slide-counter"></div>
+
+<!-- JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+<script>
+    Reveal.initialize({
+        width: 1920, height: 1080, margin: 0.08,
+        minScale: 0.2, maxScale: 2.0,
+        hash: true, slideNumber: false,
+        transition: 'slide', plugins: [RevealNotes]
+    });
+
+    function updateSlideCounter() {
+        const c = Reveal.getState().indexh + 1;
+        const t = Reveal.getTotalSlides();
+        document.querySelector('.slide-counter').textContent = `${c} / ${t}`;
+    }
+    Reveal.on('slidechanged', updateSlideCounter);
+    updateSlideCounter();
+
+    // Pop-up system
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('popup-trigger')) {
+            const id = e.target.getAttribute('data-popup');
+            const el = document.getElementById(id);
+            if (el) {
+                document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+                el.classList.add('active');
+                e.stopPropagation();
+            }
+        }
+        if (e.target.classList.contains('popup-close')) {
+            e.target.closest('.popup').classList.remove('active');
+        }
+        if (e.target.classList.contains('popup')) {
+            e.target.classList.remove('active');
+        }
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+        }
+    });
+</script>
+</body>
+</html>
