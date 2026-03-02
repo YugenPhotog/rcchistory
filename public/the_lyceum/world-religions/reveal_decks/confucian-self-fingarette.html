@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Confucian Self — PHIL 210</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --antique-gold: #D4AF37;
+            --deep-teal: #2C7873;
+            --rich-purple: #6B4C9A;
+            --ruby-crimson: #9B2C2C;
+            --dark-charcoal: #1A1A1A;
+            --pure-white: #FAFAFA;
+            --soft-cream: #F5F1E8;
+            --bronze-accent: #8B6F47;
+        }
+
+        .reveal-viewport { background: var(--dark-charcoal); }
+
+        .reveal {
+            font-family: 'Lora', serif;
+            font-size: 1.4em;
+            color: var(--pure-white);
+        }
+
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Crimson Pro', serif;
+            color: var(--antique-gold);
+            text-transform: none;
+            letter-spacing: 0.02em;
+        }
+
+        .reveal h1 { font-size: 3.5em; line-height: 1.1; }
+        .reveal h2 { font-size: 2.2em; margin-bottom: 0.4em; }
+        .reveal h3 { font-size: 1.6em; }
+
+        .reveal p { line-height: 1.6; }
+
+        .reveal ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .reveal ul li {
+            margin-bottom: 0.5em;
+            padding-left: 1.4em;
+            position: relative;
+        }
+
+        .reveal ul li:before {
+            content: "◆ ";
+            color: var(--deep-teal);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Full-bleed image slide */
+        .img-full {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0; left: 0;
+            z-index: 0;
+            opacity: 0.45;
+            border-radius: 0;
+        }
+
+        .text-over-image {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Large image per slide */
+        .slide-image {
+            width: 100%;
+            max-height: 340px;
+            object-fit: cover;
+            border: 3px solid var(--antique-gold);
+            border-radius: 8px;
+            display: block;
+            margin: 0.6em auto 0.4em;
+        }
+
+        .img-caption {
+            font-size: 0.45em;
+            color: var(--antique-gold);
+            font-style: italic;
+            text-align: center;
+            margin-top: 0.3em;
+        }
+
+        /* Two-column layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8em;
+            align-items: center;
+        }
+
+        /* Sacred text block */
+        .sacred-text {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 4px solid var(--antique-gold);
+            padding: 1.2em 1.5em;
+            margin: 1em 0;
+            font-style: italic;
+            font-size: 1.1em;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .sacred-text .attribution {
+            text-align: right;
+            color: var(--antique-gold);
+            margin-top: 0.7em;
+            font-style: normal;
+            font-size: 0.85em;
+        }
+
+        /* Key term */
+        .key-term {
+            color: var(--rich-purple);
+            font-weight: 600;
+            border-bottom: 1px dotted var(--rich-purple);
+        }
+
+        /* Popup trigger */
+        .popup-trigger {
+            color: var(--deep-teal);
+            border-bottom: 2px dotted var(--deep-teal);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .popup-trigger:hover { color: var(--antique-gold); }
+
+        /* Popup box */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--soft-cream);
+            color: var(--dark-charcoal);
+            padding: 2em;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+            max-width: 580px;
+            width: 90%;
+            z-index: 1000;
+            border: 3px solid var(--bronze-accent);
+        }
+        .popup.active { display: block; }
+        .popup-close {
+            position: absolute;
+            top: 8px; right: 14px;
+            font-size: 2em;
+            cursor: pointer;
+            color: var(--ruby-crimson);
+            line-height: 1;
+        }
+        .definition-term {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: var(--rich-purple);
+            margin-bottom: 0.5em;
+            font-family: 'Crimson Pro', serif;
+        }
+
+        /* Callout / highlight box */
+        .callout {
+            background: rgba(44, 120, 115, 0.15);
+            border: 2px solid var(--deep-teal);
+            border-radius: 10px;
+            padding: 1em 1.4em;
+            margin: 0.8em 0;
+        }
+
+        /* Closing question slide */
+        .question-slide {
+            background: rgba(107, 76, 154, 0.25);
+            border: 3px solid var(--rich-purple);
+            border-radius: 14px;
+            padding: 1.5em 2em;
+            text-align: center;
+        }
+
+        /* Slide counter */
+        .slide-counter {
+            position: fixed;
+            bottom: 18px; right: 20px;
+            background: rgba(26, 26, 26, 0.9);
+            color: var(--antique-gold);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-family: 'Crimson Pro', serif;
+            font-weight: 600;
+            font-size: 0.85em;
+            border: 2px solid var(--deep-teal);
+            z-index: 100;
+        }
+
+        /* Title slide subtitle */
+        .subtitle {
+            font-size: 1.1em;
+            color: var(--deep-teal);
+            margin-top: 0.6em;
+            font-style: italic;
+        }
+
+        /* Keyboard shortcuts box */
+        .keyboard-hint {
+            position: absolute;
+            bottom: 30px; right: 30px;
+            background: rgba(44, 120, 115, 0.18);
+            padding: 0.9em 1.2em;
+            border-radius: 10px;
+            border: 2px solid var(--deep-teal);
+            font-size: 0.5em;
+            text-align: left;
+            line-height: 1.8;
+        }
+
+        .keyboard-hint .kh-title {
+            color: var(--antique-gold);
+            font-weight: 600;
+            margin-bottom: 0.4em;
+            display: block;
+        }
+
+        .img-placeholder {
+            background: rgba(44, 120, 115, 0.15);
+            border: 2px dashed var(--deep-teal);
+            border-radius: 8px;
+            padding: 2em;
+            text-align: center;
+            color: var(--deep-teal);
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+    <!-- ============================================================
+         SLIDE 1 — TITLE
+         ============================================================ -->
+    <section>
+        <div class="two-col" style="align-items: start;">
+            <div style="text-align: left; padding-top: 1.5em;">
+                <p style="font-size: 0.6em; color: var(--deep-teal); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.3em;">PHIL 210 · World Religions</p>
+                <h1 style="font-size: 2.6em; line-height: 1.15;">The Confucian Self</h1>
+                <p class="subtitle">Identity, Roles, and the Relational Person</p>
+                <p style="font-size: 0.65em; color: #aaa; margin-top: 1.8em;">Based on Herbert Fingarette,<br><em>Confucius: The Secular as Sacred</em> (1972)</p>
+            </div>
+            <div>
+                <img
+                    src="images/confucian-self-title.jpg"
+                    alt="Portrait-style image suggesting multiplicity of identity and reflection"
+                    class="slide-image"
+                    style="max-height: 420px;"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+                >
+                <div class="img-placeholder">📸 confucian-self-title.jpg</div>
+                <p class="img-caption">Title image · confucian-self-title.jpg</p>
+            </div>
+        </div>
+
+        <div class="keyboard-hint">
+            <span class="kh-title">⌨️ Keyboard Shortcuts</span>
+            → / Space: Next slide<br>
+            ← : Previous slide<br>
+            S: Speaker notes<br>
+            F: Fullscreen<br>
+            O: Overview<br>
+            ESC: Exit / Close pop-ups
+        </div>
+
+        <aside class="notes">
+            Welcome. This lecture introduces one of the most philosophically challenging ideas in the Confucian tradition — the nature of the self.
+
+            Warn students upfront: this will feel counterintuitive at first. We are going to question one of the most basic assumptions of modern Western psychology.
+
+            Key scholarly anchor: Herbert Fingarette's 1972 book "Confucius: The Secular as Sacred" is a landmark text in Western reception of Confucian philosophy. Short, accessible, and brilliant. If you have advanced students, recommend it.
+
+            The argument in seven slides: Modern inner self → Fingarette's reversal → the junzi → roles are not masks → self formed through practice → no backstage self → closing question.
+        </aside>
+    </section>
+
+    <!-- ============================================================
+         SLIDE 2 — THE MODERN PICTURE OF THE SELF
+         ============================================================ -->
+    <section>
+        <h2>How We Usually Think About Identity</h2>
+
+        <div class="two-col">
+            <div>
+                <p>Most of us assume there is a <span class="key-term">true self</span> inside us — our authentic personality, our real feelings.</p>
+                <div class="callout" style="margin-top: 1em;">
+                    <p style="margin: 0;">Social roles feel like <em>performances</em> layered on top of that inner self.</p>
+                </div>
+                <p style="margin-top: 1em; font-size: 0.9em; color: #ccc;">The inner self feels <em>primary</em>. Our behavior either expresses it — or hides it.</p>
+            </div>
+            <div>
+                <img
+                    src="slide1.png"
+                    alt="Young adult standing before multiple mirrors, each reflecting a different social role"
+                    class="slide-image"
+                    style="max-height: 360px;"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+                >
+                <div class="img-placeholder">📸 slide-modern-self-mirrors.jpg</div>
+                <p class="img-caption">slide-modern-self-mirrors.jpg</p>
+            </div>
+        </div>
+
+        <aside class="notes">
+            Begin with the assumption students already carry without knowing it.
+
+            Most modern people — especially in the West — believe there is a true self inside: our authentic personality, our real feelings, our private identity.
+
+            Roles — student, employee, child, friend — often feel like performances. Something we put on and take off.
+
+            The common belief is this: the inner self is primary. Social behavior either expresses it or hides it.
+
+            This is sometimes called the "expressive" model of selfhood. It underlies therapy culture, social media authenticity discourse, and most pop psychology.
+
+            Teaching tip: Ask students: "Have you ever felt like your 'real self' was different from the role you were playing?" They will all say yes. That shared assumption is exactly what Confucius is going to challenge.
+        </aside>
+    </section>
+
+    <!-- ============================================================
+         SLIDE 3 — FINGARETTE'S REVERSAL
+         ============================================================ -->
+    <section>
+        <h2>Fingarette's Reversal</h2>
+        <p style="font-size: 0.85em; color: #ccc; margin-bottom: 0.6em;">Confucius sees the self differently</p>
+
+        <div class="two-col">
+            <div>
+                <div class="callout">
+                    <p style="margin: 0;">There is no private soul <em>behind</em> social roles.</p>
+                </div>
+                <p style="margin-top: 0.8em;">
+                    <span class="popup-trigger" data-popup="fingarette-popup">Herbert Fingarette</span> argues that the self is not something hidden inside the individual.
+                </p>
+                <p style="margin-top: 0.8em;">The person <strong style="color: var(--antique-gold);">exists in and through relationships.</strong></p>
+                <p style="font-size: 0.85em; color: #ccc; margin-top: 0.8em;">Identity is <span class="key-term">relational</span>, not private.</p>
+            </div>
+            <div>
+                <img
+                    src="slide2.png"
+                    alt="Diverse group interacting warmly, subtle connections between people emphasizing relational identity"
+                    class="slide-image"
+                    style="max-height: 360px;"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+                >
+                <div class="img-placeholder">📸 slide-relational-identity.jpg</div>
+                <p class="img-caption">slide-relational-identity.jpg</p>
+            </div>
+        </div>
+
+        <!-- Popup -->
+        <div id="fingarette-popup" class="popup">
+            <span class="popup-close">&times;</span>
+            <div class="definition-term">Herbert Fingarette (1921–2018)</div>
+            <p>American philosopher at UC Santa Barbara. His 1972 book <em>Confucius: The Secular as Sacred</em> transformed Western understanding of Confucian ethics. Fingarette argued that Confucius presents a radical alternative to both Western individualism and classical virtue ethics — a fully relational account of the human person.</p>
+        </div>
+
+        <aside class="notes">
+            Fingarette's argument is the philosophical engine of this entire lecture.
+
+            He argues that Confucius does not see social roles as performances layered over a private self.
+
+            Instead: the person IS the pattern of roles they enact in relation to others.
+
+            Who you are is not defined by private feelings or hidden motives.
+            Who you are is defined by the pattern of conduct you enact with other people.
+
+            This is a complete reversal of the modern picture.
+
+            Modern model: Inner self → produces → outward behavior
+            Confucian model: Enacted behavior in relationships → constitutes → the self
+
+            Teaching tip: Use the pop-up to briefly introduce Fingarette before moving on. Students often ask "who said this?"
+        </aside>
+    </section>
+
+    <!-- ============================================================
+         SLIDE 4 — THE JUNZI
+         ============================================================ -->
+    <section>
+        <h2>The Goal: Becoming Fully Human</h2>
+
+        <div class="two-col">
+            <div>
+                <p>Confucius is not concerned with self-expression. His goal is the formation of the <span class="popup-trigger" data-popup="junzi-popup">junzi</span> — the exemplary person.</p>
+                <ul style="margin-top: 0.8em; font-size: 0.95em;">
+                    <li>Keeping commitments</li>
+                    <li>Showing appropriate respect</li>
+                    <li>Fulfilling responsibilities</li>
+                    <li>Acting rightly toward others</li>
+                </ul>
+                <div class="callout" style="margin-top: 0.9em;">
+                    <p style="margin: 0; font-size: 0.9em;">Character is not hidden. Character is what other people <strong style="color: var(--antique-gold);">reliably experience.</strong></p>
+                </div>
+            </div>
+            <div>
+                <img
+                    src="slide-junzi-exemplary.jpg"
+                    alt="Calm dignified figure interacting respectfully across everyday situations, warm golden light"
+                    class="slide-image"
+                    style="max-height: 360px;"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+                >
+                <div class="img-placeholder">📸 slide-junzi-exemplary.jpg</div>
+                <p class="img-caption">slide-junzi-exemplary.jpg</p>
+            </div>
+        </div>
+
+        <!-- Popup -->
+        <div id="junzi-popup" class="popup">
+            <span class="popup-close">&times;</span>
+            <div class="definition-term">Junzi 君子</div>
+            <p>Often translated "gentleman," "exemplary person," or "superior person." In Confucian thought, the junzi is not a social rank but a moral achievement — a person who has cultivated ren (humaneness) and consistently expresses it through li (ritual propriety) in all relationships. The junzi is recognizable by conduct, not by private virtue.</p>
+        </div>
+
+        <aside class="notes">
+            Confucius is not asking: "Have you found your authentic self?"
+
+            He is asking: "Have you become the kind of person your relationships call you to be?"
+
+            The junzi — exemplary person, superior person, fully realized human — is the goal of Confucian self-cultivation.
+
+            What defines a junzi is not inner emotion, private intention, or hidden virtue.
+
+            The junzi is defined by consistent conduct:
+            — keeping commitments
+            — showing respect
+            — fulfilling responsibilities
+            — acting appropriately toward others
+
+            Critical line for students: "In Confucian thought, character is not something hidden. Character is what other people reliably experience."
+
+            This is deeply different from the modern idea that someone might be "a good person inside" despite behaving badly. Confucius would say: if you consistently behave badly, that IS your character.
+
+            Use the pop-up to define junzi. Students often need to see the Chinese characters alongside the English translation.
+        </aside>
+    </section>
+
+    <!-- ============================================================
+         SLIDE 5 — ROLES ARE NOT MASKS
+         ============================================================ -->
+    <section>
+        <h2>Roles Are Not Masks</h2>
+        <p style="font-size: 0.85em; color: #ccc;">Acting differently in different situations is not hypocrisy</p>
+
+        <div class="two-col">
+            <div>
+                <p>Students often worry: if I adjust my behavior for different people, am I being <em>fake</em>?</p>
+                <div class="sacred-text" style="margin-top: 0.8em;">
+                    <p>The exemplary person knows how to act appropriately in each relationship. This flexibility reflects moral awareness, not dishonesty.</p>
+                    <p class="attribution">— Based on Fingarette's reading of the <em>Analects</em></p>
+                </div>
+                <p style="font-size: 0.85em; margin-top: 0.7em;">Expressing <span class="popup-trigger" data-popup="ren-popup">ren</span> through the forms of <span class="popup-trigger" data-popup="li-popup">li</span> — appropriately, in each context.</p>
+            </div>
+            <div>
+                <img
+                    src="`slide-roles-contexts.jpg"
+                    alt="Single individual across three scenes: classroom, friends laughing, comforting someone grieving — unified character across contexts"
+                    class="slide-image"
+                    style="max-height: 360px;"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+                >
+                <div class="img-placeholder">📸 slide-roles-contexts.jpg</div>
+                <p class="img-caption">slide-roles-contexts.jpg</p>
+            </div>
+        </div>
+
+        <!-- Popups -->
+        <div id="ren-popup" class="popup">
+            <span class="popup-close">&times;</span>
+            <div class="definition-term">Ren 仁 — Humaneness / Benevolence</div>
+            <p>The central virtue in Confucian ethics — often translated as humaneness, benevolence, or goodness. Ren is not an abstract principle but a disposition that is only realized in concrete relationships. You cannot possess ren in isolation; it is enacted in how you treat other people.</p>
+        </div>
+
+        <div id="li-popup" class="popup">
+            <span class="popup-close">&times;</span>
+            <div class="definition-term">Li 禮 — Ritual Propriety</div>
+            <p>The ceremonial norms, ritual practices, and codes of appropriate conduct that structure relationships in Confucian society. Li includes everything from formal ceremonies to everyday greetings. For Confucius, li is not mere convention — it is the form through which ren (humaneness) becomes visible in the world.</p>
+        </div>
+
+        <aside class="notes">
+            Students often flag this as a contradiction: "If I act differently with different people, doesn't that make me a hypocrite?"
+
+            Confucius would say the opposite.
+
+            The exemplary person knows that the appropriate way to speak to a professor, a close friend, and someone who is grieving are all different.
+
+            This flexibility is not inauthenticity.
+            It is moral sensitivity — the ability to express ren (humaneness) through the appropriate form of li (ritual propriety) for each relationship.
+
+            The word "appropriate" is key. Li is not rigid conformity; it requires judgment.
+
+            Modern analogy: We all know it is not rude to speak differently at a job interview than at a bar with friends. Confucius is making the same observation — but extending it into a full account of moral formation.
+
+            Use both pop-ups here: ren and li are the two key terms for the entire Confucianism unit.
+        </aside>
+    </section>
+
+    <!-- ============================================================
+         SLIDE 6 — HOW THE SELF IS FORMED
+         ============================================================ -->
+    <section>
+        <h2>How the Self Is Formed</h2>
+        <p style="font-size: 0.85em; color: #ccc;">In Confucian thought, character grows through practice</p>
+
+        <div class="two-col">
+            <div>
+                <div style="background: rgba(155, 44, 44, 0.12); border: 2px solid var(--ruby-crimson); border-radius: 10px; padding: 0.9em 1.2em; margin-bottom: 0.9em;">
+                    <p style="margin: 0; font-size: 0.85em;"><strong style="color: var(--ruby-crimson);">Modern assumption:</strong><br>
+                    Inner character → produces → outward behavior</p>
+                </div>
+                <div style="background: rgba(44, 120, 115, 0.15); border: 2px solid var(--deep-teal); border-radius: 10px; padding: 0.9em 1.2em;">
+                    <p style="margin: 0; font-size: 0.85em;"><strong style="color: var(--deep-teal);">Confucian view:</strong><br>
+                    Outward behavior, repeated → shapes → character</p>
+                </div>
+                <p style="margin-top: 0.9em; font-size: 0.9em;">The self is not <em>discovered</em>.<br>The self is <strong style="color: var(--antique-gold);">cultivated</strong> through repeated participation in relationships.</p>
+            </div>
+            <div>
+                <img
+                    src="slide-self-formation-practice.jpg"
+                    alt="Time-lapse style image showing a person gradually developing calm confident presence through repeated respectful practice"
+                    class="slide-image"
+                    style="max-height: 360px;"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+                >
+                <div class="img-placeholder">📸 slide-self-formation-practice.jpg</div>
+                <p class="img-caption">slide-self-formation-practice.jpg</p>
+            </div>
+        </div>
+
+        <aside class="notes">
+            This is the key slide — the deepest difference between modern psychology and Confucian thought.
+
+            Modern thinking assumes: inner character produces outward behavior.
+            — "I'm a generous person, so I give to charity."
+            — "I'm honest, so I tell the truth."
+
+            Confucius inverts this:
+            — You do not act respectfully because you already possess a respectful nature.
+            — You become respectful by practicing the forms of li again and again.
+
+            Over time, these practices become natural.
+            The habits become dispositions.
+            The dispositions form the person.
+
+            Aristotle made a similar argument in the Nicomachean Ethics: we become just by doing just acts, brave by doing brave acts. The Confucian version is more socially embedded — it is always about practices within relationships, not individual virtuous acts.
+
+            Key line for students: "The self is not discovered. The self is cultivated through repeated participation in relationships."
+
+            Teaching tip: Connect to muscle memory — athletes and musicians practice forms until they become natural. Confucian self-cultivation works the same way, but morally.
+        </aside>
+    </section>
+
+    <!-- ============================================================
+         SLIDE 7 — FINGARETTE'S MOST CHALLENGING CLAIM
+         ============================================================ -->
+    <section>
+        <h2>Fingarette's Most Challenging Claim</h2>
+
+        <div class="two-col">
+            <div>
+                <p>There is <strong style="color: var(--antique-gold);">no hidden moral identity</strong> behind your behavior.</p>
+                <div class="callout" style="margin: 0.9em 0;">
+                    <p style="margin: 0;">Your daily actions are not simply expressing who you are.</p>
+                    <p style="margin: 0.5em 0 0;">They are <span class="key-term">forming</span> who you are.</p>
+                </div>
+                <p style="font-size: 0.9em; color: #ccc;">There is no separate backstage self that exists apart from your behavior.</p>
+                <p style="font-size: 0.9em; margin-top: 0.6em;">The pattern of roles you live out <em>is</em> the person you are becoming.</p>
+            </div>
+            <div>
+                <img
+                    src="images/slide-no-backstage-self.jpg"
+                    alt="Stage scene gradually blending into everyday life, suggesting performance and real life are continuous"
+                    class="slide-image"
+                    style="max-height: 360px;"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+                >
+                <div class="img-placeholder">📸 slide-no-backstage-self.jpg</div>
+                <p class="img-caption">slide-no-backstage-self.jpg</p>
+            </div>
+        </div>
+
+        <aside class="notes">
+            This is Fingarette's most provocative claim — and the one students resist most.
+
+            There is no private moral identity separate from your conduct.
+
+            Your daily actions are not simply expressing who you are — they are forming who you are.
+
+            There is no separate backstage self that exists apart from your behavior.
+
+            The modern temptation: "I'm a good person inside, even if I sometimes act badly."
+            Confucius: That is a consoling fiction. The pattern of what you actually do IS who you are becoming.
+
+            This is why li — ritual and proper conduct — is not superficial for Confucius.
+            Ritual is not mere ceremony layered over the real you.
+            Ritual IS the training ground of the self.
+
+            Fingarette's phrase: "Confucius sees the entire world of human conduct as a vast system of li — of ceremony and ritual — and the moral life as the task of learning to perform this ceremony well."
+
+            Teaching tip: Ask: "If there's no backstage self — no private moral identity — is there such a thing as being a good person in secret?" Let students wrestle with this before moving to the closing slide.
+        </aside>
+    </section>
+
+    <!-- ============================================================
+         SLIDE 8 — THE CONFUCIAN QUESTION (CLOSING)
+         ============================================================ -->
+    <section>
+        <div class="two-col">
+            <div>
+                <h2 style="font-size: 2em;">The Confucian Question</h2>
+                <p style="font-size: 0.85em; color: #ccc; margin-bottom: 1em;">If daily conduct shapes the self…</p>
+                <div class="question-slide">
+                    <p style="font-size: 1.15em; color: var(--antique-gold); font-weight: 600; margin: 0;">What kind of person are your habits forming?</p>
+                </div>
+                <p style="font-size: 0.82em; margin-top: 1em; color: #ccc;">Self-cultivation is not self-expression.<br>
+                It is disciplined participation in relationships<br>until virtuous conduct becomes <em>natural</em>.</p>
+                <p style="font-size: 0.82em; margin-top: 0.8em;">This is the path toward becoming a <span class="key-term">junzi</span>.</p>
+            </div>
+            <div>
+                <img
+                    src="slide-crossroads-sunrise.jpg"
+                    alt="Person standing at a crossroads at sunrise with a long shadow stretching forward, contemplative moral direction"
+                    class="slide-image"
+                    style="max-height: 380px;"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+                >
+                <div class="img-placeholder">📸 slide-crossroads-sunrise.jpg</div>
+                <p class="img-caption">slide-crossroads-sunrise.jpg</p>
+            </div>
+        </div>
+
+        <aside class="notes">
+            End with reflection rather than summary.
+
+            Confucius is less interested in helping you discover your true self.
+
+            He asks a different question: What kind of person are your daily habits forming?
+
+            Self-cultivation is not self-expression. It is disciplined participation in relationships until virtuous conduct becomes natural.
+
+            This is the path toward the junzi.
+
+            CLOSING DISCUSSION — choose one:
+            1. "Think about your daily habits — the way you speak to people, the commitments you keep or break, the way you handle conflict. What kind of person are those habits forming?"
+            2. "Fingarette says there is no backstage self. Do you find this liberating, terrifying, or both? Why?"
+            3. "If character is what other people reliably experience, what does that suggest about the relationship between private virtue and public behavior?"
+
+            BRIDGE TO NEXT LECTURE: If teaching Rectification of Names (zhengming) next, note: "The concept of names and roles becomes dramatically clearer once we accept that roles constitute the person — not the other way around."
+        </aside>
+    </section>
+
+</div><!-- .slides -->
+</div><!-- .reveal -->
+
+<div class="slide-counter"></div>
+
+<!-- All popup divs must live outside .slides to avoid Reveal.js conflicts -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+<script>
+    Reveal.initialize({
+        hash: true,
+        slideNumber: false,
+        transition: 'slide',
+        transitionSpeed: 'default',
+        backgroundTransition: 'fade',
+        plugins: [ RevealNotes ]
+    });
+
+    // Slide counter
+    function updateSlideCounter() {
+        const current = Reveal.getState().indexh + 1;
+        const total = Reveal.getTotalSlides();
+        document.querySelector('.slide-counter').textContent = `${current} / ${total}`;
+    }
+    Reveal.on('slidechanged', updateSlideCounter);
+    Reveal.on('ready', updateSlideCounter);
+
+    // Popup functionality
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('popup-trigger')) {
+            const id = e.target.getAttribute('data-popup');
+            document.getElementById(id).classList.add('active');
+        }
+        if (e.target.classList.contains('popup-close')) {
+            e.target.closest('.popup').classList.remove('active');
+        }
+        if (e.target.classList.contains('popup') && !e.target.closest('.popup')) {
+            document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+        }
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+        }
+    });
+</script>
+</body>
+</html>
