@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter Reading Guides — HIST 102 | Professor Steven Austin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Libre+Baskerville:wght@400;700&family=Lora:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        /* ── HIST 102 Color Palette ── */
+        :root {
+            --steel-blue: #4A6FA5;
+            --industrial-slate: #2E4057;
+            --copper-accent: #C97D60;
+            --bright-teal: #17A398;
+            --warm-cream: #F7F3E8;
+            --charcoal: #1E1E24;
+            --silver-mist: #A3B4C8;
+            --deep-navy: #1B2838;
+        }
+
+        body {
+            background-color: var(--warm-cream);
+            font-family: 'Lora', serif;
+        }
+
+
+        /* ── Main Nav ── */
+        .main-nav {
+            background: var(--industrial-slate);
+            border-bottom: 2px solid var(--steel-blue);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0;
+            padding: 0 1rem;
+        }
+
+        .main-nav .nav-link {
+            color: var(--warm-cream);
+            text-decoration: none;
+            padding: 0.85rem 1.2rem;
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            transition: color 0.2s, background 0.2s;
+        }
+
+        .main-nav .nav-link:hover {
+            color: var(--copper-accent);
+            background: rgba(74, 111, 165, 0.3);
+        }
+
+        /* ── Container ── */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        /* ── Page Header ── */
+        .page-header {
+            text-align: center;
+            padding: 2.5rem 0 1.5rem;
+        }
+
+        .page-portrait {
+            width: 135px;
+            height: auto;
+            border-radius: 8px;
+            border: 2px solid var(--copper-accent);
+            box-shadow: 0 4px 12px rgba(46, 64, 87, 0.2);
+            display: block;
+            margin: 0 auto 1rem;
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--industrial-slate);
+            margin: 0 0 0.4rem;
+        }
+
+        .page-header p {
+            font-family: 'Lora', serif;
+            font-size: 1rem;
+            color: #5a6a7a;
+            margin: 0;
+            font-style: italic;
+        }
+
+        .decorative-rule {
+            height: 3px;
+            border: none;
+            background: linear-gradient(90deg, transparent, var(--copper-accent), var(--steel-blue), var(--copper-accent), transparent);
+            margin: 1.5rem auto;
+            max-width: 400px;
+            border-radius: 2px;
+        }
+
+        /* ── Guide List ── */
+        .guides-wrapper {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--silver-mist);
+            box-shadow: 0 2px 16px rgba(46, 64, 87, 0.09);
+            overflow: hidden;
+        }
+
+        .guides-header {
+            background: linear-gradient(135deg, var(--industrial-slate) 0%, var(--deep-navy) 100%);
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .guides-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--warm-cream);
+            margin: 0;
+            letter-spacing: 0.04em;
+        }
+
+        .guides-header .guide-count {
+            margin-left: auto;
+            background: var(--bright-teal);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+        }
+
+        .guide-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .guide-list li {
+            border-bottom: 1px solid rgba(163, 180, 200, 0.3);
+        }
+
+        .guide-list li:last-child {
+            border-bottom: none;
+        }
+
+        .guide-list li a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: var(--industrial-slate);
+            font-family: 'Lora', serif;
+            font-size: 1rem;
+            transition: background 0.2s ease, padding-left 0.2s ease;
+        }
+
+        .guide-list li a:hover {
+            background: rgba(23, 163, 152, 0.07);
+            padding-left: 1.9rem;
+        }
+
+        .guide-list li a:hover .guide-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .chapter-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--steel-blue), var(--industrial-slate));
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 700;
+            min-width: 5rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            letter-spacing: 0.03em;
+            flex-shrink: 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+        }
+
+        .guide-title {
+            flex: 1;
+        }
+
+        .guide-title strong {
+            display: block;
+            font-weight: 600;
+            color: var(--industrial-slate);
+            margin-bottom: 0.1rem;
+        }
+
+        .guide-title span {
+            font-size: 0.85rem;
+            color: #6b7c8d;
+            font-style: italic;
+        }
+
+        .guide-arrow {
+            color: var(--bright-teal);
+            font-size: 1.1rem;
+            opacity: 0;
+            transform: translateX(-6px);
+            transition: opacity 0.2s, transform 0.2s;
+            flex-shrink: 0;
+        }
+
+        /* ── Info Note ── */
+        .info-note {
+            margin-top: 1.5rem;
+            padding: 1rem 1.25rem;
+            background: rgba(23, 163, 152, 0.08);
+            border-left: 4px solid var(--bright-teal);
+            border-radius: 0 8px 8px 0;
+            font-family: 'Lora', serif;
+            font-size: 0.9rem;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        .info-note.quiz-warning {
+            background: rgba(201, 125, 96, 0.1);
+            border-left-color: var(--copper-accent);
+            margin-top: 0.75rem;
+        }
+
+        .info-note.quiz-warning strong {
+            color: #a0522d;
+        }
+
+        /* ── Back Link ── */
+        .back-link-bar {
+            margin-bottom: 1.5rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--steel-blue);
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--copper-accent);
+        }
+
+        /* ── Footer ── */
+        .site-footer {
+            background: var(--deep-navy);
+            color: var(--silver-mist);
+            text-align: center;
+            padding: 1.5rem 1rem;
+            font-family: 'Lora', serif;
+            font-size: 0.9rem;
+        }
+
+        .site-footer a {
+            color: var(--copper-accent);
+            text-decoration: none;
+        }
+
+        .site-footer a:hover {
+            color: var(--bright-teal);
+        }
+
+        .footer-quote {
+            color: var(--silver-mist);
+            margin: 0 0 0.4rem;
+        }
+
+        .footer-text {
+            margin: 0;
+        }
+
+        .decorative-rule-thin {
+            height: 1px;
+            border: none;
+            background: linear-gradient(90deg, transparent, var(--steel-blue), transparent);
+            margin-bottom: 1rem;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 600px) {
+            .banner-text h1 { font-size: 1.6rem; }
+            .banner-portrait { width: 60px; height: 75px; }
+            .guide-list li a { padding: 0.85rem 1rem; }
+            .guide-list li a:hover { padding-left: 1.4rem; }
+            .chapter-badge { min-width: 4rem; font-size: 0.72rem; }
+            .guide-title span { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nav -->
+    <nav class="main-nav">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="index.html" class="nav-link">HIST 102</a>
+        <a href="../index.html#about" class="nav-link">About</a>
+        <a href="../index.html#courses" class="nav-link">Courses</a>
+        <a href="../index.html#contact" class="nav-link">Contact</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+
+        <!-- Back Link -->
+        <div class="back-link-bar">
+            <a href="index.html" class="back-link">← Back to HIST 102</a>
+        </div>
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <img src="images/prof_study_guide.png" alt="Professor Austin" class="page-portrait">
+            <h1>Chapter Reading Guides</h1>
+            <p>Select a chapter below to open its reading guide</p>
+        </div>
+
+        <p class="info-note">
+            <strong>Note:</strong> Each guide opens in a new browser tab. Guides are designed to accompany
+            <em>Give Me Liberty! An American History</em>, Vol. 2 Brief Edition (Foner). Consult your syllabus for assigned reading dates.
+        </p>
+
+        <p class="info-note quiz-warning">
+            ⚠️ <strong>Before You Take the Quiz:</strong> You must complete the reading guide <em>before</em> attempting the chapter quiz. The quizzes are designed to be taken with your completed reading guide in front of you — students who attempt the quiz without a finished guide are very unlikely to succeed.
+        </p>
+
+        <hr class="decorative-rule">
+
+        <!-- Guide List -->
+        <div class="guides-wrapper">
+            <div class="guides-header">
+                <h2>Chapters 15 – 26 &nbsp;·&nbsp; Give Me Liberty! Vol. 2 Brief Edition</h2>
+                <span class="guide-count">12 Guides</span>
+            </div>
+            <ul class="guide-list">
+
+                <li>
+                    <a href="reading_guides/Chapter_15_Guide.html" target="_blank">
+                        <span class="chapter-badge">Ch. 15</span>
+                        <span class="guide-title">
+                            <strong>Chapter 15 Reading Guide</strong>
+                            <span>Reconstructing America, 1865–1877</span>
+                        </span>
+                        <span class="guide-arrow">→</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="reading_guides/Chapter_16_Guide.html" target="_blank">
+                        <span class="chapter-badge">Ch. 16</span>
+                        <span class="guide-title">
+                            <strong>Chapter 16 Reading Guide</strong>
+                            <span>America's Gilded Age, 1870–1890</span>
+                        </span>
+                        <span class="guide-arrow">→</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="reading_guides/Chapter_17_Guide.html" target="_blank">
+                        <span class="chapter-badge">Ch. 17</span>
+                        <span class="guide-title">
+                            <strong>Chapter 17 Reading Guide</strong>
+                            <span>Freedom's Boundaries, at Home and Abroad, 1890–1900</span>
+                        </span>
+                        <span class="guide-arrow">→</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="reading_guides/Chapter_18_Guide.html" target="_blank">
+                        <span class="chapter-badge">Ch. 18</span>
+                        <span class="guide-title">
+                            <strong>Chapter 18 Reading Guide</strong>
+                            <span>The Progressive Era, 1900–1916</span>
+                        </span>
+                        <span class="guide-arrow">→</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="reading_guides/Chapter_19_Guide.html" target="_blank">
+                        <span class="chapter-badge">Ch. 19</span>
+                        <span class="guide-title">
+                            <strong>Chapter 19 Reading Guide</strong>
+                            <span>Safe for Democracy: The United States and World War I, 1916–1920</span>
+                        </span>
+                        <span class="guide-arrow">→</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="reading_guides/Chapter_20_Guide.html" target="_blank">
+                        <span class="chapter-badge">Ch. 20</span>
+                        <span class="guide-title">
+                            <strong>Chapter 20 Reading Guide</strong>
+                            <span>From Business Culture to the Great Depression, 1920–1932</span>
+                        </span>
+                        <span class="guide-arrow">→</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="reading_guides/Chapter_21_Guide.html" target="_blank">
+                        <span class="chapter-badge">Ch. 21</span>
+                        <span class="guide-title">
+                            <strong>Chapter 21 Reading Guide</strong>
+                            <span>The New Deal, 1932–1940</span>
+                        </span>
+                        <span class="guide-arrow">→</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="reading_guides/Chapter_22_Guide.html" target="_blank">
+                        <span class="chapter-badge">Ch. 22</span>
+                        <span class="guide-title">
+                            <strong>Chapter 22 Reading Guide</strong>
+                            <span>Fighting for the Four Freedoms: World War II, 1941–1945</span>
+                        </span>
+                        <span class="guide-arrow">→</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="reading_guides/Chapter_23_Guide.html" target="_blank">
+                        <span class="chapter-badge">Ch. 23</span>
+                        <span class="guide-title">
+                            <strong>Chapter 23 Reading Guide</strong>
+                            <span>The United States and the Cold War, 1945–1953</span>
+                        </span>
+                        <span class="guide-arrow">→</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="reading_guides/Chapter_24_Guide.html" target="_blank">
+                        <span class="chapter-badge">Ch. 24</span>
+                        <span class="guide-title">
+                            <strong>Chapter 24 Reading Guide</strong>
+                            <span>An Affluent Society, 1953–1960</span>
+                        </span>
+                        <span class="guide-arrow">→</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="reading_guides/Chapter_25_Guide.html" target="_blank">
+                        <span class="chapter-badge">Ch. 25</span>
+                        <span class="guide-title">
+                            <strong>Chapter 25 Reading Guide</strong>
+                            <span>The Sixties, 1960–1968</span>
+                        </span>
+                        <span class="guide-arrow">→</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="reading_guides/Chapter_26_Guide.html" target="_blank">
+                        <span class="chapter-badge">Ch. 26</span>
+                        <span class="guide-title">
+                            <strong>Chapter 26 Reading Guide</strong>
+                            <span>The Triumph of Conservatism, 1969–1988</span>
+                        </span>
+                        <span class="guide-arrow">→</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="decorative-rule-thin"></div>
+        <p class="footer-quote"><em>"The Past is Prologue"</em> — William Shakespeare</p>
+        <p class="footer-text">
+            © 2025 Professor Steven Austin &nbsp;|&nbsp;
+            <a href="index.html">HIST 102</a> &nbsp;|&nbsp;
+            <a href="../index.html">Return to Main Site</a>
+        </p>
+    </footer>
+
+</body>
+</html>
