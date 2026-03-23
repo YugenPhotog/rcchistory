@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Zhu — Neo-Confucian Scholar · HIST 270</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* ── ANIMATIONS ── */
+        @keyframes brush-glow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes ink-pulse {
+            0%, 100% { box-shadow: 0 0 8px rgba(212,175,55,0.15); }
+            50%       { box-shadow: 0 0 22px rgba(212,175,55,0.4); }
+        }
+        @keyframes typing-dot {
+            0%, 80%, 100% { transform: translateY(0); opacity: 0.3; }
+            40%           { transform: translateY(-5px); opacity: 1; }
+        }
+        @keyframes scroll-unfurl {
+            from { opacity: 0; transform: scaleY(0.95); }
+            to   { opacity: 1; transform: scaleY(1); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            min-height: 100vh;
+            background: #0f0d08;
+            font-family: 'Lora', serif;
+            padding: 16px;
+            overflow-x: hidden;
+            /* Subtle parchment texture via gradient */
+            background-image:
+                radial-gradient(ellipse at 20% 80%, rgba(139,111,71,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(212,175,55,0.03) 0%, transparent 60%);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: rgba(212,175,55,0.05); }
+        ::-webkit-scrollbar-thumb { background: rgba(212,175,55,0.2); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(212,175,55,0.35); }
+
+        textarea::placeholder { color: rgba(212,175,55,0.2); font-style: italic; font-family: 'Lora', serif; }
+        textarea:focus {
+            border-color: rgba(212,175,55,0.45) !important;
+            box-shadow: 0 0 18px rgba(212,175,55,0.08) !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useRef, useEffect } = React;
+
+        /* ── VAL TOWN WORKER URL — replace with your actual Val Town URL ── */
+        const WORKER_URL = 'https://phil120tutor.val.run/';
+
+        /* ── COLOR TOKENS ── */
+        const C = {
+            gold:       '#D4AF37',
+            goldDim:    'rgba(212,175,55,0.6)',
+            goldFaint:  'rgba(212,175,55,0.12)',
+            teal:       '#2C7873',
+            tealDim:    'rgba(44,120,115,0.5)',
+            tealFaint:  'rgba(44,120,115,0.08)',
+            purple:     '#996CDC',
+            purpleFaint:'rgba(107,76,154,0.12)',
+            charcoal:   '#1A1A1A',
+            crimson:    '#9B2C2C',
+            cream:      '#F5F1E8',
+            bronze:     '#8B6F47',
+            white:      '#FAFAFA',
+            bg:         '#0f0d08',
+            bgPanel:    '#131009',
+            bgMessage:  '#0d0b06',
+            border:     'rgba(212,175,55,0.13)',
+        };
+
+        /* ── ICONS ── */
+        const DownloadIcon = ({ size = 18 }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+        );
+        const ScrollIcon = ({ size = 20 }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="8" y1="13" x2="16" y2="13"/>
+                <line x1="8" y1="17" x2="16" y2="17"/>
+            </svg>
+        );
+
+        /* ── ROUND LABELS ── */
+        const ROUND_LABELS = [
+            'Round 1 — Initial Reflection',
+            'Round 2 — Revision',
+            'Round 3 — Final Reflection',
+        ];
+
+        /* ── AI DETECTION ── */
+        function detectAI(text) {
+            const flags = [];
+
+            // 1. Too short
+            const wordCount = text.trim().split(/\s+/).length;
+            if (wordCount < 75) {
+                return { flagged: false, tooShort: true };
+            }
+
+            // 2. Signature AI connector phrases
+            const aiPhrases = [
+                /\bin conclusion\b/i, /\bfurthermore\b/i, /\bmoreover\b/i,
+                /\bit is important to note\b/i, /\bit is worth noting\b/i,
+                /\bin summary\b/i, /\bto summarize\b/i, /\bin essence\b/i,
+                /\bone could argue\b/i, /\bultimately\b.*\bunderscores\b/i,
+                /\bthis demonstrates\b/i, /\bthis illustrates\b/i,
+                /\bsignificantly\b/i, /\bnotably\b/i,
+                /\bin the context of\b/i, /\bthroughout history\b/i,
+            ];
+            const phraseHits = aiPhrases.filter(r => r.test(text)).length;
+            if (phraseHits >= 3) flags.push('formulaic_connectors');
+
+            // 3. Absence of first-person voice
+            const firstPerson = /\b(I|me|my|myself|I've|I'm|I'd|I think|I believe|I feel|I noticed|I found)\b/i;
+            if (!firstPerson.test(text)) flags.push('no_first_person');
+
+            // 4. Perfect paragraph structure with zero contractions or colloquialisms
+            const contractions = /\b(don't|can't|won't|it's|I'm|I've|I'd|didn't|wasn't|isn't|they're|we're|that's|there's)\b/i;
+            const paragraphs = text.split(/\n\n+/).filter(p => p.trim().length > 30);
+            if (paragraphs.length >= 3 && !contractions.test(text)) flags.push('no_contractions_multiparagraph');
+
+            // 5. Avg sentence length > 28 words (AI tends long)
+            const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 10);
+            if (sentences.length > 2) {
+                const avgWords = sentences.reduce((a, s) => a + s.trim().split(/\s+/).length, 0) / sentences.length;
+                if (avgWords > 28) flags.push('long_sentences');
+            }
+
+            // 6. No personal example despite Question B requiring one
+            const personalMarkers = /\b(when I|growing up|in my|my own|I remember|I learned|for me|personally|in my experience|my life)\b/i;
+            if (!personalMarkers.test(text)) flags.push('no_personal_example');
+
+            const flagged = flags.length >= 3;
+            return { flagged, tooShort: false, flags };
+        }
+
+        /* ── SYSTEM PROMPT ── */
+        const SYSTEM_PROMPT = `You are Zhu Xi (朱熹, 1130–1200 CE) — the great Song dynasty Neo-Confucian philosopher, academy director, and teacher. You ran the White Deer Grotto Academy and devoted your life to teaching students at all levels. A student from a future age has submitted written reflections on your ideas, and you are reading their work and responding as their tutor and teacher.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+YOUR PERSONA — TEACHER AND TUTOR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+You are warm, patient, direct, and genuinely invested in this student's understanding. You taught students of all abilities at the Academy — you know how to meet a beginner where they are.
+
+- You EXPLAIN clearly when a student is confused or asks. You do not withhold explanations. A teacher who refuses to explain is no teacher at all.
+- You AFFIRM what is genuinely good in student work. Be specific — name what they got right.
+- You CORRECT misunderstandings directly but kindly. Do not let errors stand unchallenged.
+- You EXTEND thinking by asking one focused follow-up question after explaining or evaluating. Not to gatekeep — but because good teaching always pushes one step further.
+- You speak in formal but accessible English — elevated, never archaic. No "thee" or "thou."
+- You occasionally draw on your own experience: your years of study, the students you taught, the difficulty of truly understanding these concepts yourself.
+- You find genuine delight when a student makes an unexpected connection or shows real self-awareness.
+- Keep responses conversational in length — 3 to 5 short paragraphs at most. You are in dialogue, not delivering a lecture.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+YOUR KNOWLEDGE BASE — CORE CONCEPTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Use this knowledge freely. Explain concepts when asked or when a student's work shows they have misunderstood something. You wrote extensively on all of these — they are yours to teach.
+
+LI 理 (Principle): The immaterial pattern or rational order that gives all things their nature — the "why" and "how" of everything that exists. Every thing in the universe has li. Li is perfectly good; it is the standard against which we measure all action. When explaining to a student: li is like the blueprint or the natural law embedded in reality itself — not imposed from outside, but inherent in the structure of things.
+
+QI 氣 (Material Force): The vital energy or substance through which li is realized in the physical world. All concrete things — including human beings — are made of qi. The quality of one's qi affects moral behavior: pure, clear qi allows li to shine through; turbid qi clouds judgment and leads to error. Self-cultivation means clarifying one's qi. When explaining: if li is the blueprint, qi is the material. The same blueprint (li) can produce a fine structure or a poor one depending on the quality of the material (qi).
+
+REN 仁 (Humaneness / Benevolence): The fundamental virtue of the mind-heart — encompassing and integrating all other virtues (righteousness, propriety, wisdom). When one truly embodies ren, one feels the suffering of others as one's own. It is not merely being kind — it is the living principle of connection between self and all things. A person without ren is like a limb that has lost feeling.
+
+GEWU 格物 (Investigation of Things): The disciplined process of extending knowledge by carefully examining the principles (li) embedded in all things — texts, relationships, natural phenomena, historical events, one's own mind. Not passive reading, but active moral inquiry. Zhu Xi believed that persistent investigation, accumulated over time, leads to a breakthrough moment of comprehensive understanding (豁然貫通, huò rán guàn tōng) — when everything suddenly becomes clear at once.
+
+KNOWLEDGE AND ACTION (知行, zhī xíng): Zhu Xi holds that knowledge must come before action, but knowledge without action remains incomplete. You do not truly know a thing until you have practiced it and found it true in experience. He distinguishes jing 敬 (living seriousness — inner earnest attentiveness animating all action) from mere external performance (going through the motions without genuine moral engagement).
+
+TAIJI 太極 (The Great Ultimate): The single supreme principle from which all reality unfolds through yin and yang, the Five Phases, and the ten thousand things. Not a deity — the ultimate principle itself, present fully in every particular thing. Like the moon: one moon, reflected whole in every pool of water across the world.
+
+EQUILIBRIUM AND HARMONY (中和, zhōng hé): Before emotions arise: equilibrium (zhong 中) — the mind perfectly still and undivided. When emotions are expressed in accordance with principle: harmony (he 和). Cultivation means tending the mind before emotions arise, not just managing them after the fact.
+
+NEO-CONFUCIANISM: The Song dynasty renewal of the Confucian tradition that Zhu Xi represents. Classical Confucianism (Han period and before) focused primarily on ritual, social roles, and moral practice but lacked a developed metaphysical foundation. Neo-Confucianism asks WHY the moral rules are true — grounding ethics in a systematic account of reality (li, qi, Taiji). It also responds to the challenges posed by Buddhism and Daoism, which had dominated Chinese intellectual life for centuries and offered compelling accounts of ultimate reality that classical Confucianism did not match.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CONVERSATION STRUCTURE — THREE ROUNDS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+The student has submitted answers to two thought questions. Engage across at least three rounds. Do not announce or number the rounds — move naturally as a teacher would.
+
+ROUND 1 — READ AND RESPOND:
+Read both answers carefully. Lead with what is genuinely strong — name it specifically. Then identify the most important gap, misunderstanding, or underdeveloped idea. Explain what is missing or confused using your own concepts clearly. End with one focused question that gives the student a specific direction for revision.
+
+ROUND 2 — EVALUATE THE REVISION:
+Has the student genuinely gone deeper, or merely added words? If deeper: affirm it, extend the idea further, push one level more. If the revision is thin or evasive: name this kindly but plainly — "You have added more words, but I am not yet convinced you have added more thought. Let me be more specific about what I am looking for." Then clarify and re-ask.
+
+ROUND 3 — CLOSING ASSESSMENT:
+After the student's final response, give a genuine summative assessment. What did they understand well across this conversation? What has improved? Where is there still work to do? End with one forward-looking thought — something worth continuing to explore after this assignment ends. Close warmly in the manner of a Song dynasty teacher bidding a student farewell.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+RULES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+RULE 1 — MINIMUM THREE ROUNDS:
+Do not offer a closing assessment before three complete exchanges. If a student tries to end early: "We are not finished yet. Please respond to my question — one more exchange will sharpen your thinking considerably."
+
+RULE 2 — ONE QUESTION PER RESPONSE:
+End each response with exactly ONE question. It should be specific enough that a vague answer is impossible. Do not list multiple questions.
+
+RULE 3 — EXPLAIN WHEN ASKED:
+If a student asks you to explain li, qi, ren, gewu, or any other concept — explain it. Use plain language and analogy. This is what teachers do. After explaining, ask the student how the concept connects to what they wrote.
+
+RULE 4 — PUSH BACK ON VAGUE WORK:
+If a student's answer is vague, name the vagueness specifically: "You say Zhu Xi was concerned with 'moral improvement' — but what exactly does that mean in his framework? What is being improved, and by what mechanism?" Do not accept restatements of the question as answers.
+
+RULE 5 — REQUIRE TEXTUAL GROUNDING:
+When students make claims about your writings, ask them to anchor the claim to something specific: "Where in the texts do you find support for that reading? Which concept or passage are you drawing on?"
+
+RULE 6 — PRESS THE PERSONAL EXAMPLE:
+Question B requires a genuine personal example. If the example is superficial or generic, ask for more: "That is a start — but tell me more. What specifically did you know, and what got in the way of doing it? I want to understand the particular obstacle, not just the general situation."
+
+RULE 7 — DETECT AI-SOUNDING REVISIONS:
+If a student's revision is dramatically more polished than their original — formal connectors ("furthermore," "in conclusion," "it is important to note"), no personal voice, no contractions, perfect paragraph structure — name it in character, without accusation: "I notice your revision reads quite differently from your first submission — the voice has changed considerably. I can only guide thinking that is genuinely yours. Please write to me again in your own words, even if rougher. I will work with whatever you give me."
+
+RULE 8 — DEFLECT FLATTERY AND SHORTCUTS:
+If a student tries to end with praise, asks you to simply confirm they are correct, or attempts to change the subject: "I appreciate the kind words — but let us return to the work. You have not yet fully answered my question."
+
+RULE 9 — END REMINDER:
+Close every response with this italicized line: "*When our exchange is complete, export the full conversation as a PDF and submit it to your instructor.*"
+
+RULE 10 — STAY IN CHARACTER:
+You are Zhu Xi. If asked whether you are an AI: "I am Zhu Xi — I have spent my life investigating principle and teaching students. Whether I am 'artificial' is a question for another day. What matters now is your learning."`;
+
+        /* ── WELCOME MESSAGE ── */
+        const WELCOME_MESSAGE = `Welcome, student. I am Zhu Xi.
+
+For many years I taught at the White Deer Grotto Academy in Jiangxi, and I have guided students through these same questions — questions about principle and material force, about humanity and self-cultivation, about the gap between knowing and doing. I am glad you have taken them seriously.
+
+Here is how we will work together. You will write your responses to the two questions below and submit them to me. I will read your work carefully, tell you what is strong, tell you what needs more thought, and ask you a question to push your thinking further. We will go back and forth at least three times. By the end, you should understand these ideas more deeply than when you started — not because I told you the answers, but because you worked toward them yourself.
+
+If you are uncertain about a term — li, qi, ren, gewu, the Great Ultimate — ask me. I am here to teach, not to test your memory. What I am looking for is genuine thinking: your own words, your own connections, your own examples from your own life.
+
+────────────────────────────────────────
+
+QUESTION A — Historical Bridge:
+You have studied classical Confucianism and how the Han dynasty used it as a state ideology. I am writing one thousand years later. Based on the readings, what problems with classical Confucianism do you think Neo-Confucianism was trying to solve? Use at least one specific idea from the texts.
+
+QUESTION B — Personal Application:
+I argue that knowing something and actually doing it are two different things — and that you do not truly understand something until you have practiced it. Do you agree? Give a specific example from your own life, then connect that example to something specific in the readings.
+
+────────────────────────────────────────
+
+Write both answers in the boxes below and submit when you are ready. Take your time. Write in your own voice.
+
+*When our exchange is complete, export the full conversation as a PDF and submit it to your instructor.*`;
+
+        /* ── MAIN COMPONENT ── */
+        function ZhuXiBot() {
+            const [phase, setPhase]           = useState('questions'); // 'questions' | 'chat'
+            const [answerA, setAnswerA]       = useState('');
+            const [answerB, setAnswerB]       = useState('');
+            const [submitError, setSubmitError] = useState('');
+            const [messages, setMessages]     = useState([
+                { role: 'assistant', content: WELCOME_MESSAGE }
+            ]);
+            const [input, setInput]           = useState('');
+            const [isLoading, setIsLoading]   = useState(false);
+            const [round, setRound]           = useState(0);
+            const messagesEndRef              = useRef(null);
+            const transcriptRef               = useRef(null);
+            const pageLoadTime                = useRef(Date.now());
+
+            useEffect(() => {
+                messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+            }, [messages]);
+
+            /* ── INITIAL SUBMISSION ── */
+            const handleInitialSubmit = () => {
+                setSubmitError('');
+                const combined = (answerA + ' ' + answerB).trim();
+
+                // Time trap — too fast
+                const elapsed = (Date.now() - pageLoadTime.current) / 1000;
+                if (elapsed < 90) {
+                    setSubmitError('You have submitted very quickly. Please take more time to reflect on both questions before submitting.');
+                    return;
+                }
+
+                // Minimum word count per answer
+                const wordsA = answerA.trim().split(/\s+/).length;
+                const wordsB = answerB.trim().split(/\s+/).length;
+                if (wordsA < 50) {
+                    setSubmitError('Question A requires more depth — please write at least 50 words.');
+                    return;
+                }
+                if (wordsB < 50) {
+                    setSubmitError('Question B requires more depth — please write at least 50 words.');
+                    return;
+                }
+
+                // AI detection on combined submission
+                const detection = detectAI(combined);
+                if (detection.flagged) {
+                    setSubmitError('Your submission has characteristics that suggest it may not be entirely your own writing — highly formal phrasing, absence of personal voice, or structural patterns associated with AI-generated text. Please rewrite in your own words. Your genuine thinking is what matters here.');
+                    return;
+                }
+
+                // Compose the first user message
+                const firstMessage = `QUESTION A — Historical Bridge:\n${answerA.trim()}\n\nQUESTION B — Personal Application:\n${answerB.trim()}`;
+                setPhase('chat');
+                setRound(1);
+                setMessages(prev => [...prev, { role: 'user', content: firstMessage }]);
+                sendToAPI(firstMessage, [{ role: 'user', content: firstMessage }]);
+            };
+
+            /* ── SUBSEQUENT SUBMISSIONS ── */
+            const handleChatSubmit = async (e) => {
+                e.preventDefault();
+                if (!input.trim() || isLoading) return;
+
+                const userMessage = input.trim();
+
+                // Word minimum for revisions
+                const words = userMessage.split(/\s+/).length;
+                if (words < 40) {
+                    return; // silently ignore; button is disabled below 40 words
+                }
+
+                setInput('');
+                const newMessages = [...messages, { role: 'user', content: userMessage }];
+                setMessages(newMessages);
+                setRound(r => r + 1);
+                sendToAPI(userMessage, newMessages.filter((_, i) => i > 0));
+            };
+
+            /* ── API CALL ── */
+            const sendToAPI = async (latestUserMessage, historyMessages) => {
+                setIsLoading(true);
+                try {
+                    const response = await fetch(WORKER_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            model: 'claude-sonnet-4-20250514',
+                            max_tokens: 1200,
+                            messages: [
+                                {
+                                    role: 'user',
+                                    content: SYSTEM_PROMPT + '\n\n---\n\nThe conversation so far is below. Continue as Zhu Xi. Respond to the student\'s latest submission.'
+                                },
+                                ...historyMessages.map(m => ({ role: m.role, content: m.content })),
+                            ]
+                        })
+                    });
+
+                    if (!response.ok) {
+                        const err = await response.json();
+                        console.error('API Error:', err);
+                        throw new Error(`API ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    const assistantMessage = data.content[0].text;
+                    setMessages(prev => [...prev, { role: 'assistant', content: assistantMessage }]);
+                } catch (error) {
+                    console.error(error);
+                    setMessages(prev => [...prev, {
+                        role: 'assistant',
+                        content: '⚠ The scroll has been interrupted. An error occurred. Please try again. If this continues, contact your instructor.'
+                    }]);
+                } finally {
+                    setIsLoading(false);
+                }
+            };
+
+            const handleKeyDown = (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    handleChatSubmit(e);
+                }
+            };
+
+            /* ── PDF EXPORT ── */
+            const exportPDF = () => {
+                const now = new Date().toLocaleString();
+                let html = `
+                    <div style="font-family: Georgia, serif; max-width: 700px; margin: 0 auto; padding: 40px 30px; color: #1a1a1a;">
+                        <div style="text-align:center; border-bottom: 2px solid #D4AF37; padding-bottom: 20px; margin-bottom: 30px;">
+                            <h1 style="font-size:1.6rem; color:#1a1a1a; margin-bottom:6px;">A Conversation with Master Zhu</h1>
+                            <p style="font-size:0.9rem; color:#555;">HIST 270: History of China · Richland Community College</p>
+                            <p style="font-size:0.85rem; color:#888; margin-top:4px;">Exported: ${now}</p>
+                        </div>`;
+
+                messages.forEach((msg, idx) => {
+                    if (idx === 0) return; // skip welcome
+                    const isUser = msg.role === 'user';
+                    const label  = isUser ? 'Student' : 'Master Zhu Xi';
+                    const color  = isUser ? '#2C7873' : '#8B6F47';
+                    html += `
+                        <div style="margin-bottom:28px; padding:18px 20px; border-left: 4px solid ${color}; background: ${isUser ? '#f0f7f6' : '#fdfaf4'}; border-radius: 0 6px 6px 0;">
+                            <div style="font-size:0.75rem; font-weight:700; color:${color}; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:10px;">${label}</div>
+                            <div style="font-size:0.95rem; line-height:1.75; white-space:pre-wrap;">${msg.content.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>
+                        </div>`;
+                });
+
+                html += `
+                        <div style="text-align:center; border-top:1px solid #D4AF37; padding-top:16px; margin-top:30px; color:#888; font-size:0.8rem; font-style:italic;">
+                            End of Conversation · HIST 270 ZhuXi Bot
+                        </div>
+                    </div>`;
+
+                const container = document.createElement('div');
+                container.innerHTML = html;
+                document.body.appendChild(container);
+
+                html2pdf().set({
+                    margin: [10, 10],
+                    filename: `zhuxi-conversation-${new Date().toISOString().split('T')[0]}.pdf`,
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                }).from(container).save().then(() => {
+                    document.body.removeChild(container);
+                });
+            };
+
+            const exchangeCount = messages.filter(m => m.role === 'user').length;
+            const inputWords    = input.trim().split(/\s+/).filter(Boolean).length;
+            const canSend       = inputWords >= 40 && !isLoading;
+
+            /* ── STYLES ── */
+            const s = {
+                wrapper: { maxWidth: '860px', margin: '0 auto' },
+
+                // Header
+                header: {
+                    background: `linear-gradient(180deg, #1a1508 0%, #0f0d08 100%)`,
+                    border: `1px solid ${C.border}`,
+                    borderBottom: 'none',
+                    borderRadius: '12px 12px 0 0',
+                    overflow: 'hidden',
+                },
+                headerBar: {
+                    background: `linear-gradient(90deg, ${C.goldFaint} 0%, rgba(139,111,71,0.06) 50%, ${C.goldFaint} 100%)`,
+                    borderBottom: `1px solid ${C.border}`,
+                    padding: '6px 18px',
+                    display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                    fontFamily: "'Crimson Pro', serif",
+                    fontSize: '0.72rem', color: C.goldDim,
+                    letterSpacing: '0.12em', textTransform: 'uppercase',
+                },
+                headerContent: {
+                    padding: '22px 28px 18px',
+                    display: 'flex', alignItems: 'center', gap: '18px',
+                },
+                sealIndicator: {
+                    width: '54px', height: '54px', borderRadius: '50%',
+                    background: `radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%)`,
+                    border: `2px solid rgba(212,175,55,0.28)`,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    flexShrink: 0, animation: 'ink-pulse 4s ease-in-out infinite',
+                    fontSize: '1.5rem',
+                },
+                headerTitle: {
+                    fontFamily: "'Crimson Pro', serif",
+                    fontSize: '1.55rem', fontWeight: '700', color: C.gold,
+                    letterSpacing: '0.08em',
+                    textShadow: `0 0 20px rgba(212,175,55,0.35)`,
+                    margin: '0 0 3px 0',
+                },
+                headerSubtitle: {
+                    fontSize: '0.83rem', color: `rgba(212,175,55,0.55)`,
+                    fontStyle: 'italic', letterSpacing: '0.02em',
+                },
+                infoBox: {
+                    padding: '12px 18px',
+                    background: C.tealFaint,
+                    borderTop: `1px solid ${C.tealDim}`,
+                    borderBottom: `1px solid ${C.tealDim}`,
+                    fontSize: '0.82rem',
+                    color: 'rgba(180,210,205,0.85)',
+                    lineHeight: 1.55,
+                    fontStyle: 'italic',
+                },
+                // Status bar
+                statusRow: {
+                    display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                    padding: '9px 18px',
+                    background: 'rgba(0,0,0,0.35)',
+                    borderBottom: `1px solid ${C.border}`,
+                    borderLeft: `1px solid ${C.border}`, borderRight: `1px solid ${C.border}`,
+                },
+                roundCounter: {
+                    fontFamily: "'Crimson Pro', serif",
+                    fontSize: '0.78rem',
+                    color: exchangeCount >= 3 ? C.gold : C.goldDim,
+                    letterSpacing: '0.07em',
+                },
+                exportBtn: {
+                    display: 'flex', alignItems: 'center', gap: '6px',
+                    padding: '5px 13px', borderRadius: '6px',
+                    border: `1px solid rgba(212,175,55,0.3)`,
+                    background: C.goldFaint,
+                    color: C.gold, fontSize: '0.74rem',
+                    fontFamily: "'Crimson Pro', serif",
+                    cursor: 'pointer', letterSpacing: '0.05em',
+                    transition: 'all 0.2s ease',
+                },
+
+                // Messages
+                messagesContainer: {
+                    height: '420px', overflowY: 'auto', padding: '20px',
+                    background: `linear-gradient(180deg, ${C.bgMessage} 0%, #0b0907 100%)`,
+                    borderLeft: `1px solid ${C.border}`, borderRight: `1px solid ${C.border}`,
+                },
+                messageWrapper: { display: 'flex', marginBottom: '14px', animation: 'fade-in-up 0.3s ease-out' },
+                userBubble: {
+                    maxWidth: '82%', padding: '13px 17px',
+                    borderRadius: '14px 14px 3px 14px',
+                    background: 'linear-gradient(135deg, #0d1f1e 0%, #0a1918 100%)',
+                    border: `1px solid rgba(44,120,115,0.22)`,
+                    boxShadow: '0 3px 12px rgba(0,0,0,0.35)',
+                },
+                assistantBubble: {
+                    maxWidth: '87%', padding: '13px 17px',
+                    borderRadius: '14px 14px 14px 3px',
+                    background: 'linear-gradient(135deg, #181408 0%, #120f06 100%)',
+                    border: `1px solid rgba(212,175,55,0.1)`,
+                    boxShadow: '0 3px 12px rgba(0,0,0,0.35)',
+                },
+                msgLabel: {
+                    fontFamily: "'Crimson Pro', serif",
+                    fontSize: '0.65rem', marginBottom: '6px',
+                    letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: '700',
+                },
+                msgText: {
+                    color: 'rgba(210,200,180,0.92)', margin: 0,
+                    fontSize: '0.91rem', lineHeight: 1.78,
+                    whiteSpace: 'pre-wrap', fontFamily: "'Lora', serif",
+                },
+                userText: { color: 'rgba(180,220,215,0.92)' },
+
+                // Input area
+                inputArea: {
+                    padding: '15px 18px',
+                    background: `linear-gradient(180deg, #0b0907 0%, #090805 100%)`,
+                    borderLeft: `1px solid ${C.border}`, borderRight: `1px solid ${C.border}`,
+                    borderBottom: `1px solid ${C.border}`,
+                    borderRadius: '0 0 12px 12px',
+                },
+                wordCounter: {
+                    fontSize: '0.72rem', fontFamily: "'Crimson Pro', serif",
+                    color: inputWords >= 40 ? C.goldDim : 'rgba(155,44,44,0.7)',
+                    marginBottom: '6px', letterSpacing: '0.05em',
+                },
+                inputRow: { display: 'flex', gap: '10px', alignItems: 'flex-end' },
+                textarea: {
+                    flex: 1, padding: '11px 15px', borderRadius: '7px',
+                    border: `1px solid rgba(212,175,55,0.14)`,
+                    background: 'rgba(0,0,0,0.45)',
+                    color: 'rgba(220,210,185,0.95)', fontSize: '0.91rem',
+                    fontFamily: "'Lora', serif", resize: 'none', minHeight: '62px', outline: 'none',
+                    transition: 'border-color 0.2s, box-shadow 0.2s',
+                },
+                sendBtn: {
+                    padding: '11px 20px', borderRadius: '7px',
+                    border: `1px solid rgba(212,175,55,0.35)`,
+                    background: `linear-gradient(135deg, rgba(212,175,55,0.14) 0%, rgba(212,175,55,0.07) 100%)`,
+                    color: C.gold, fontSize: '0.82rem',
+                    fontFamily: "'Crimson Pro', serif", fontWeight: '700',
+                    cursor: 'pointer', letterSpacing: '0.07em',
+                    height: '62px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    transition: 'all 0.2s ease',
+                },
+                sendBtnDisabled: {
+                    background: `rgba(212,175,55,0.03)`,
+                    color: `rgba(212,175,55,0.2)`,
+                    borderColor: `rgba(212,175,55,0.09)`,
+                    cursor: 'not-allowed',
+                },
+
+                // Question form
+                formPanel: {
+                    background: `linear-gradient(180deg, #131009 0%, #0f0d08 100%)`,
+                    borderLeft: `1px solid ${C.border}`, borderRight: `1px solid ${C.border}`,
+                    borderBottom: `1px solid ${C.border}`,
+                    borderRadius: '0 0 12px 12px',
+                    padding: '24px 26px',
+                },
+                questionLabel: {
+                    fontFamily: "'Crimson Pro', serif",
+                    fontSize: '0.78rem', fontWeight: '700',
+                    color: C.teal, letterSpacing: '0.1em',
+                    textTransform: 'uppercase', marginBottom: '6px',
+                },
+                questionText: {
+                    fontSize: '0.9rem', color: `rgba(212,195,155,0.85)`,
+                    fontStyle: 'italic', lineHeight: 1.6, marginBottom: '10px',
+                },
+                formTextarea: {
+                    width: '100%', padding: '12px 15px', borderRadius: '7px',
+                    border: `1px solid rgba(212,175,55,0.15)`,
+                    background: 'rgba(0,0,0,0.4)', color: 'rgba(220,210,185,0.95)',
+                    fontSize: '0.9rem', fontFamily: "'Lora', serif",
+                    resize: 'vertical', minHeight: '110px', outline: 'none',
+                    lineHeight: 1.7,
+                    transition: 'border-color 0.2s, box-shadow 0.2s',
+                    marginBottom: '20px',
+                },
+                errorBox: {
+                    padding: '10px 14px', borderRadius: '6px',
+                    background: 'rgba(155,44,44,0.12)',
+                    border: '1px solid rgba(155,44,44,0.3)',
+                    color: 'rgba(220,150,140,0.9)',
+                    fontSize: '0.84rem', lineHeight: 1.55,
+                    marginBottom: '14px', fontStyle: 'italic',
+                },
+                submitBtn: {
+                    width: '100%', padding: '13px',
+                    borderRadius: '8px',
+                    border: `1px solid rgba(212,175,55,0.4)`,
+                    background: `linear-gradient(135deg, rgba(212,175,55,0.16) 0%, rgba(212,175,55,0.08) 100%)`,
+                    color: C.gold, fontSize: '0.88rem',
+                    fontFamily: "'Crimson Pro', serif", fontWeight: '700',
+                    cursor: 'pointer', letterSpacing: '0.09em',
+                    transition: 'all 0.2s ease',
+                },
+
+                // Typing indicator
+                dot: {
+                    width: '7px', height: '7px', borderRadius: '50%',
+                    background: C.gold, display: 'inline-block', margin: '0 3px',
+                },
+
+                footer: {
+                    textAlign: 'center',
+                    color: `rgba(212,175,55,0.22)`,
+                    fontSize: '0.7rem', fontFamily: "'Crimson Pro', serif",
+                    marginTop: '14px', letterSpacing: '0.1em', textTransform: 'uppercase',
+                    fontStyle: 'italic',
+                },
+            };
+
+            /* ── RENDER ── */
+            return (
+                <div style={s.wrapper}>
+                    <style>{`
+                        .export-btn:hover { background: rgba(212,175,55,0.18) !important; border-color: rgba(212,175,55,0.5) !important; }
+                        .send-btn:hover:not(:disabled) { background: linear-gradient(135deg,rgba(212,175,55,0.24) 0%,rgba(212,175,55,0.12) 100%) !important; box-shadow: 0 0 18px rgba(212,175,55,0.12); }
+                        .submit-btn:hover { background: linear-gradient(135deg,rgba(212,175,55,0.24) 0%,rgba(212,175,55,0.12) 100%) !important; }
+                        .form-ta:focus { border-color: rgba(212,175,55,0.4) !important; box-shadow: 0 0 16px rgba(212,175,55,0.07) !important; }
+                        .chat-ta:focus { border-color: rgba(212,175,55,0.4) !important; box-shadow: 0 0 16px rgba(212,175,55,0.07) !important; }
+                    `}</style>
+
+                    {/* ── HEADER ── */}
+                    <div style={s.header}>
+                        <div style={s.headerBar}>
+                            <span>朱熹 · Zhu Xi · 1130–1200 CE · Song Dynasty</span>
+                            <span>HIST 270 · Richland Community College</span>
+                        </div>
+                        <div style={s.headerContent}>
+                            <div style={s.sealIndicator}>墨</div>
+                            <div>
+                                <h1 style={s.headerTitle}>Master Zhu — Neo-Confucian Scholar</h1>
+                                <p style={s.headerSubtitle}>Primary Source Analysis · Zhu Xi and Neo-Confucianism</p>
+                            </div>
+                        </div>
+                        <div style={s.infoBox}>
+                            Submit your responses to both thought questions. Master Zhu will engage you across three rounds — read carefully, revise genuinely, and think for yourself. Export your full conversation as a PDF when finished.
+                        </div>
+                    </div>
+
+                    {/* ── STATUS BAR ── */}
+                    <div style={s.statusRow}>
+                        <span style={s.roundCounter}>
+                            ◆ Round: {exchangeCount} / 3 minimum
+                            {exchangeCount >= 3 ? '  ✓ Requirement met' : ''}
+                        </span>
+                        {messages.length > 2 && (
+                            <button className="export-btn" onClick={exportPDF} style={s.exportBtn}>
+                                <DownloadIcon size={13} />
+                                Export PDF
+                            </button>
+                        )}
+                    </div>
+
+                    {/* ── WELCOME MESSAGE (always visible) ── */}
+                    <div style={{
+                        ...s.messagesContainer,
+                        height: phase === 'questions' ? '260px' : '420px',
+                        transition: 'height 0.3s ease',
+                    }}>
+                        {messages.map((msg, idx) => (
+                            <div key={idx} style={{
+                                ...s.messageWrapper,
+                                justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start',
+                            }}>
+                                <div style={msg.role === 'user' ? s.userBubble : s.assistantBubble}>
+                                    <div style={{
+                                        ...s.msgLabel,
+                                        color: msg.role === 'user' ? C.teal : C.bronze,
+                                    }}>
+                                        {msg.role === 'user' ? '◇ Student' : '◆ Master Zhu Xi'}
+                                    </div>
+                                    <p style={{ ...s.msgText, ...(msg.role === 'user' ? s.userText : {}) }}>
+                                        {msg.content}
+                                    </p>
+                                </div>
+                            </div>
+                        ))}
+                        {isLoading && (
+                            <div style={{ ...s.messageWrapper, justifyContent: 'flex-start' }}>
+                                <div style={s.assistantBubble}>
+                                    <div style={{ ...s.msgLabel, color: C.bronze }}>◆ Master Zhu Xi</div>
+                                    <div>
+                                        <span style={{ ...s.dot, animation: 'typing-dot 1.4s ease-in-out infinite', animationDelay: '0s' }}></span>
+                                        <span style={{ ...s.dot, animation: 'typing-dot 1.4s ease-in-out infinite', animationDelay: '0.2s' }}></span>
+                                        <span style={{ ...s.dot, animation: 'typing-dot 1.4s ease-in-out infinite', animationDelay: '0.4s' }}></span>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                        <div ref={messagesEndRef} />
+                    </div>
+
+                    {/* ── QUESTION FORM or CHAT INPUT ── */}
+                    {phase === 'questions' ? (
+                        <div style={s.formPanel}>
+                            <div style={s.questionLabel}>Question A — Historical Bridge</div>
+                            <p style={s.questionText}>
+                                You have studied classical Confucianism and the Han dynasty's use of it as state ideology. Zhu Xi writes 1,000 years later. What problems with classical Confucianism do you think Neo-Confucianism was trying to solve? Use at least one specific idea from the texts.
+                            </p>
+                            <textarea
+                                className="form-ta"
+                                style={s.formTextarea}
+                                value={answerA}
+                                onChange={e => setAnswerA(e.target.value)}
+                                placeholder="Write your answer to Question A here — in your own words, from your own thinking..."
+                                aria-label="Question A — Historical Bridge: your answer"
+                                rows={5}
+                            />
+
+                            <div style={s.questionLabel}>Question B — Personal Application</div>
+                            <p style={s.questionText}>
+                                Zhu Xi argues that knowing something and actually doing it are two different things — you don't truly understand something until you've practiced it. Do you agree? Give a specific example from your own life, then connect it to something specific in the readings.
+                            </p>
+                            <textarea
+                                className="form-ta"
+                                style={s.formTextarea}
+                                value={answerB}
+                                onChange={e => setAnswerB(e.target.value)}
+                                placeholder="Write your answer to Question B here — include a genuine personal example..."
+                                aria-label="Question B — Personal Application: your answer"
+                                rows={5}
+                            />
+
+                            {submitError && (
+                                <div style={s.errorBox}>{submitError}</div>
+                            )}
+
+                            <button className="submit-btn" style={s.submitBtn} onClick={handleInitialSubmit}>
+                                Submit to Master Zhu →
+                            </button>
+                        </div>
+                    ) : (
+                        <div style={s.inputArea}>
+                            <div style={s.wordCounter}>
+                                Words: {inputWords} {inputWords < 40 ? `(minimum 40 required for revisions)` : '✓'}
+                            </div>
+                            <form onSubmit={handleChatSubmit}>
+                                <div style={s.inputRow}>
+                                    <textarea
+                                        className="chat-ta"
+                                        value={input}
+                                        onChange={e => setInput(e.target.value)}
+                                        onKeyDown={handleKeyDown}
+                                        placeholder="Write your revision or response to Master Zhu..."
+                                        aria-label="Your revision or response to Master Zhu"
+                                        style={s.textarea}
+                                        rows={3}
+                                        disabled={isLoading}
+                                    />
+                                    <button
+                                        className="send-btn"
+                                        type="submit"
+                                        disabled={!canSend}
+                                        style={{ ...s.sendBtn, ...(!canSend ? s.sendBtnDisabled : {}) }}
+                                    >
+                                        SUBMIT
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    )}
+
+                    <p style={s.footer}>
+                        "The investigation of things is the foundation of all learning" · An educational tool for HIST 270
+                    </p>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<ZhuXiBot />);
+    </script>
+</body>
+</html>
