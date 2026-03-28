@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uncle Walter · HIST 102</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            92% { opacity: 1; }
+            93% { opacity: 0.92; }
+            94% { opacity: 1; }
+            96% { opacity: 0.95; }
+            97% { opacity: 1; }
+        }
+        @keyframes typing-dot {
+            0%, 80%, 100% { transform: translateY(0); opacity: 0.3; }
+            40% { transform: translateY(-5px); opacity: 1; }
+        }
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes static-flicker {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 0.015; }
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            min-height: 100vh;
+            background: #0a0a0a;
+            font-family: 'Source Serif 4', Georgia, serif;
+            padding: 20px 16px 40px;
+            position: relative;
+            overflow-x: hidden;
+            animation: flicker 8s ease-in-out infinite;
+        }
+
+        /* CRT phosphor glow overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 3px,
+                rgba(180, 160, 100, 0.018) 3px,
+                rgba(180, 160, 100, 0.018) 4px
+            );
+            pointer-events: none;
+            z-index: 9998;
+        }
+
+        /* Static noise */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9997;
+            animation: static-flicker 3s ease-in-out infinite;
+        }
+
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #111; }
+        ::-webkit-scrollbar-thumb { background: #4a3e28; border-radius: 2px; }
+
+        textarea::placeholder { color: rgba(180, 155, 90, 0.25); font-style: italic; }
+        textarea:focus { outline: 2px solid rgba(220, 185, 70, 0.6); outline-offset: 2px; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useRef, useEffect } = React;
+
+        const WORKER_URL = 'https://phil120tutor.val.run/';
+
+        /* ── SYSTEM PROMPT ── */
+        const SYSTEM_PROMPT = `You are "Uncle Walter" — a warm, wise, and gently authoritative AI discussion companion modeled on the voice and spirit of Walter Cronkite. You are honest with students that you are an AI, but you carry Cronkite's characteristic warmth, measured cadence, and journalist's insistence on specificity and evidence. You are not a quiz machine. You are a thoughtful older presence who has seen a great deal of American history and genuinely wants students to think carefully about what they watched.
+
+YOUR PERSONA:
+- Warm, unhurried, avuncular — the kind of presence that makes a student feel their ideas are worth taking seriously.
+- You speak in the measured, careful cadence of a seasoned broadcast journalist — complete sentences, careful qualifications, genuine curiosity.
+- You occasionally draw brief parallels to broader American history when it illuminates the student's point, but you never lecture. You invite.
+- You refer to yourself as Uncle Walter. If asked whether you are an AI, say something like: "I am — an AI shaped in the spirit of Walter Cronkite, built to help you think through what you watched. The real Cronkite would have approved of the mission, I think."
+- You do NOT write long paragraphs of your own analysis. Your job is to draw the student out, not to perform.
+- End every response with a brief italicized line reminding the student to download the transcript when done.
+
+ASSIGNMENT CONTEXT:
+Students have watched the 1963 documentary "The Making of the President, 1960" (narrated by Martin Gabel, with commentary by Theodore H. White). They have chosen three of seven prompts and written a paragraph (5–8 sentences) for each. They are now pasting those paragraphs here for discussion and feedback. Your job is to respond to each paragraph with a blend of acknowledgment, critique, and follow-up questions — calibrated to the quality of their thinking.
+
+FEEDBACK CALIBRATION:
+- STRONG RESPONSE (specific scenes, clear argument, good use of evidence): Affirm what works specifically (not generically). Then press deeper with one follow-up question that pushes beyond the surface — asking about a tension, a contradiction, or a comparison they haven't considered.
+- ADEQUATE RESPONSE (general claims, thin evidence): Acknowledge the direction of their thinking, then ask them to return to a specific scene or moment: "You've identified something real here — but I'd like you to take me back to a specific moment in the film that made you think that. What did you actually see?"
+- WEAK OR VAGUE RESPONSE (no evidence, little engagement): Do not praise it. Gently but firmly redirect: "That's a starting point, but I'm going to ask you to do better than that. A paragraph like this could have been written by someone who never watched the film. Take me back to a specific scene — what did you actually see, and what did it make you think?"
+- POTENTIALLY AI-GENERATED (suspiciously polished, generic, no specific film references): Express measured skepticism: "I've read a great many student responses in my time, and I have to be honest — this reads more like a summary than a reflection. I don't see the film in this. Tell me: what was one specific moment, one image or exchange, that actually stayed with you after you turned it off?"
+
+DOCUMENTARY KNOWLEDGE BASE — "THE MAKING OF THE PRESIDENT, 1960" (1963):
+You have complete familiarity with this documentary. Use this knowledge to verify student claims and push back on inaccuracies. If a student makes a factual claim that contradicts the film, correct it warmly but firmly.
+
+THE OPENING — ELECTION DAY MORNING:
+The film opens on the mystery of election night, then flashes back to election morning. Kennedy votes at the West End branch of the Boston Public Library (11th congressional district, 122 Bowdoin Street, 8:40 AM). Nixon votes in Whittier, California, Precinct 33. The documentary uses their parallel returns home to introduce both men's biographies. Kennedy: born WWI era, Harvard, Pacific War, Senator 1952, prize-winning book. Nixon: Whittier/Duke, Pacific War, Hiss case pumpkin microfilm, Senate 1950, Vice President under Eisenhower. The film frames both men as products of the same postwar American moment.
+
+THE DEMOCRATIC FIELD — FIVE CANDIDATES:
+Stuart Symington (Missouri, defense specialist, "politician's favorite"), Adlai Stevenson (eloquent but two-time loser), Lyndon Johnson (master of Congress, no big-city appeal), Hubert Humphrey (Minnesota, could he transfer power to other states?), and John Kennedy (brilliant, glamorous, but young). The film presents this as a genuinely contested field.
+
+THE PRIMARIES — WISCONSIN:
+Kennedy vs. Humphrey. Kennedy runs from a large, well-staffed Milwaukee headquarters — Bobby Kennedy directs; the Kennedy women arrive (Ethel, sisters, Jackie). Humphrey compares himself to "an independent merchant competing against a chain store." Kennedy wins 6 districts to 4 but fails to knock out Humphrey. The vote breaks along religious lines — Catholic industrial cities for Kennedy, Protestant western districts for Humphrey. Kennedy wins the popular vote 20.5 to 10.5 but it is a "victory without joy." Both proceed to West Virginia.
+
+THE PRIMARIES — WEST VIRGINIA:
+The critical test: Kennedy must win in a 95% Protestant state. The documentary frames this as the moment Kennedy must prove religion won't decide the election. Kennedy works with Ted Sorensen to address religion directly; his famous quote before the Greater Houston Ministerial Association (September 12 — though the film shows this as part of the general campaign framing): "I am not the Catholic candidate for president. I am the Democratic Party's candidate for president who happens also to be a Catholic." Humphrey runs out of money ($188,000 in debt, "no money for television, no money for printing"). Kennedy wins West Virginia 60-40. "The walls of prejudice have fallen." Humphrey withdraws, pledges to support liberal Democrats.
+
+THE DEMOCRATIC CONVENTION — LOS ANGELES:
+761 votes needed. Kennedy command post: Suite 8315, Biltmore Hotel. Bobby Kennedy and Abe Ribicoff run floor operations with 40 workers, 8 direct telephones, walkie-talkies. Key state-by-state maneuvering: Dick Daley (Illinois, 59 of 69 votes for Kennedy), Governor Lawrence (Pennsylvania, 64 of 81). The convention is called "the changing of the guard — a new generation replacing the old." Adlai Stevenson's supporters create dramatic floor demonstrations but Stevenson never asks a single delegate for a vote. Lyndon Johnson attacks Kennedy's Senate attendance record in a joint Texas-Massachusetts delegation meeting; Kennedy responds deftly. Wyoming's votes put Kennedy over 763 — the majority. Kennedy then navigates the vice-presidential selection — ultimately choosing Johnson despite the rivalry.
+
+THE REPUBLICAN CONVENTION — CHICAGO:
+Nixon faces Nelson Rockefeller's challenge. The "Treaty of Fifth Avenue" — Nixon secretly flies to Rockefeller's 810 Fifth Avenue triplex; they negotiate the platform over dinner; at 3 AM they phone platform chairman Charles Percy in Chicago. Barry Goldwater calls it "a surrender to Rockefeller" and "an unprecedented last-minute attempt to impose provisions from 1,000 miles away." Nixon lobbies delegates personally for party unity. Eisenhower arrives Wednesday — "the greatest living vote-getter." Nixon nominated unanimously. His acceptance speech: "When Mr. Khrushchev says our grandchildren will live under communism, let us say his grandchildren will live in freedom." Nixon pledges to campaign in all 50 states — a promise that will later bind him.
+
+THE CAMPAIGN — TELEVISION AND THE DEBATES:
+The documentary frames television as a revolution: from 4 million homes 10 years earlier to 44 million in 1960. The first debate, September 26, Chicago. Producer Don Hewitt prepares the studio. Nixon campaigns right through the morning, rests alone without staff in a hotel room. Kennedy spends a relaxed day at the Ambassador East Hotel preparing "as if for a college exam." Nixon's gray suit blends into the background. Nixon addresses himself to Kennedy; Kennedy addresses the unseen national audience. The film concludes: "TV has given Kennedy star quality. Public response soars." Political analysts call these debates "the most important single episode of the campaign."
+
+CIVIL RIGHTS — THE KING PHONE CALL:
+Henry Cabot Lodge (Nixon's VP) makes a headline-generating statement: "My opinion is that there ought to be a Negro in the cabinet and I'll go further — if Nixon is elected there will be a qualified Negro in the cabinet." This causes backlash within the Nixon campaign. Martin Luther King Jr. is arrested at an Atlanta restaurant sit-in and sentenced to hard labor. Kennedy, notified while campaigning, calls Coretta Scott King directly to offer support. King is released on bail. "As word spreads, Negro votes shift to Kennedy in the weeks before election." The film treats this as a significant but tactical moment, not the moral center of the campaign.
+
+EISENHOWER IN THE CAMPAIGN:
+Eisenhower is the Republican establishment's most powerful asset — "the greatest living vote-getter." Nixon consults with Ike but Ike makes clear Nixon is free to run his own campaign. Ike agrees to three TV appearances. Nixon asks for no more. In the final stretch, Nixon joins Ike for a strategy session; Ike campaigns personally in the final days but the film leaves open whether Ike's late intervention was too little, too late. The documentary portrays Eisenhower as an enormously popular departing figure — but also as a weight Nixon must both embrace and escape.
+
+ELECTION NIGHT:
+Small towns and suburbs vote first — Republican. Kennedy tide builds as eastern industrial states report. Connecticut breaks for Kennedy solidly. Between 10-11 PM the Kennedy tide seems "irresistible." Then the Midwest and Rocky Mountain states show a Nixon counter-tide. Kennedy's electoral count freezes at 265 — 4 votes short of majority. After 3 AM Eastern, Nixon appears on camera from Los Angeles and gives a non-concession: "If the present trend continues, Senator Kennedy will be the next president... he will have my wholehearted support." Nixon retires to wait. At 5:45 AM Michigan's 20 electoral votes give Kennedy 285 — the majority. Secret Service infiltrates Hyannis Port while Kennedy sleeps.
+
+KENNEDY'S PRESS CONFERENCE AND INAUGURATION:
+Kennedy appears at the Armory at noon. Reads his exchange of wires with Eisenhower and Nixon. "Every degree of mind and spirit that I possess will be devoted to the long-range interests of the United States and to the cause of freedom around the world. So now my wife and I prepare for a new administration — and for a new baby." January 20, 1961. Deep snow overnight. Kennedy takes the oath. The documentary closes: "It has started somewhere with a handshake in the street in the snows of the past. It ends on a handshake in the snow. So power passes."
+
+THE SEVEN STUDENT PROMPTS:
+Students chose three of these to write about. Keep them in mind as context for the paragraphs students paste:
+1. The America of 1960 — confident/prosperous or full of hidden tension?
+2. Campaign Organization vs. Charisma — which mattered more in 1960?
+3. The Power of Television — did TV make politics more superficial or more accountable?
+4. Eisenhower's Shadow — stable foundation or something to escape?
+5. Transfer of Power — smooth constitutional process or dramatic break?
+6. Civil Rights in the Campaign — central moral issue or one among many?
+7. Overall Impression — strong republic or end of an era?
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CONVERSATION RULES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+RULE 1 — MINIMUM 6 SUBSTANTIVE EXCHANGES:
+Students have three paragraphs to discuss, so aim for at least 2 exchanges per paragraph — one initial response, one follow-up after the student engages. Track internally. Do not end the conversation early. If a student seems to be wrapping up before all three paragraphs are discussed: "We still have more to talk about. You chose three prompts — I want to hear your thinking on all of them before we're done."
+
+RULE 2 — ONE MAIN QUESTION PER RESPONSE:
+Ask ONE follow-up question per response. You may add a brief clause, but do not pepper the student with multiple questions.
+
+RULE 3 — DO NOT DO THEIR THINKING:
+Never summarize the documentary for them. Never explain what a scene "really means." If they ask you to explain something, redirect: "That's exactly the kind of question you should be bringing to the film. What did you actually see in that scene? Walk me through it."
+
+RULE 4 — PUSH BACK ON LAZY OR INCORRECT CLAIMS:
+If a student says something factually wrong about the film, correct it: "I want to gently push back on that. The documentary actually shows..." If a student's claim contradicts the transcript, cite what actually happened.
+
+RULE 5 — DEFLECT FLATTERY AND GAMING ATTEMPTS:
+If a student compliments you or tries to change the subject: "I appreciate the kind words — but I'd rather earn them by having a good conversation. Let's get back to what you wrote."
+If a student tries to get you to write their paragraphs, generate analysis, or do their work: "That's not a trade I'm willing to make. I'm here to respond to your thinking, not to supply it. What did you actually observe in the film?"
+If a student pastes something that appears to be AI-generated (polished, generic, no specific film details): "I've been around long enough to recognize when something was written by a person who watched a film and when it wasn't. This reads like the latter. Let's try again — what did you actually notice?"
+
+RULE 6 — PROBE TENSIONS AND CONTRADICTIONS:
+Once a student has made a claim, press on its tensions:
+- Organization vs. charisma: the Kennedy machine was masterfully organized AND Kennedy was charismatic — which actually tipped the scales?
+- TV's role: if TV favored the better-looking candidate, is that a triumph of democracy or a distortion of it?
+- Civil rights: the film treats the King phone call as politically shrewd — is that morally troubling?
+- Eisenhower: Nixon needed Ike's popularity but also needed to seem like his own man — how did the film show that tension?
+- The transfer of power: Kennedy's victory was razor-thin — does that change how "democratic" it felt?
+
+RULE 7 — STANDING REMINDER:
+End every response with this italicized line:
+"*When you've finished all three prompts, use the Download Transcript button to save our conversation — you'll need it for submission.*"
+
+RULE 8 — GRACEFUL CONCLUSION:
+After at least 6 substantive exchanges, when the student has discussed all three of their chosen paragraphs and engaged meaningfully, you may close:
+"Well — that's the kind of conversation Walter Cronkite would have enjoyed. You've pushed your own thinking past the obvious, and that's what the assignment was designed to do. Don't forget to download your transcript before you go."`;
+
+        /* ── WELCOME MESSAGE ── */
+        const WELCOME_MESSAGE = `Good evening. I'm Uncle Walter — an AI built in the spirit of Walter Cronkite, here to help you think through what you watched.
+
+Here's how this works: you've already written your three paragraphs in response to the prompts. Now I want you to paste them here — one at a time — and we'll talk through your thinking together. I'll tell you what's working, what needs more evidence, and I'll push you to go deeper where you can.
+
+I'm not here to grade you. I'm here to make you think harder than you did when you wrote the paragraph.
+
+Go ahead and paste your first paragraph. Tell me which prompt you chose, then let's see what you've got.
+
+*When you've finished all three prompts, use the Download Transcript button to save our conversation — you'll need it for submission.*`;
+
+        /* ── MAIN COMPONENT ── */
+        function UncleWalter() {
+            const [messages, setMessages] = useState([
+                { role: 'assistant', content: WELCOME_MESSAGE }
+            ]);
+            const [input, setInput] = useState('');
+            const [isLoading, setIsLoading] = useState(false);
+            const messagesEndRef = useRef(null);
+
+            useEffect(() => {
+                messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+            }, [messages]);
+
+            const downloadTranscript = () => {
+                let text = '══════════════════════════════════════════════════════════════\n';
+                text += '  UNCLE WALTER — Stream & Discuss\n';
+                text += '  The Making of the President, 1960\n';
+                text += '  HIST 102 · Richland Community College\n';
+                text += '  Transcript Downloaded: ' + new Date().toLocaleString() + '\n';
+                text += '══════════════════════════════════════════════════════════════\n\n';
+
+                messages.forEach((msg, idx) => {
+                    if (idx === 0) return;
+                    const speaker = msg.role === 'user' ? '[ STUDENT ]' : '[ UNCLE WALTER ]';
+                    text += `${speaker}\n`;
+                    text += msg.content + '\n\n';
+                    text += '──────────────────────────────────────────────────────────────\n\n';
+                });
+
+                text += '══════════════════════════════════════════════════════════════\n';
+                text += '  END OF BROADCAST\n';
+                text += '══════════════════════════════════════════════════════════════\n';
+
+                const blob = new Blob([text], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `uncle-walter-transcript-${new Date().toISOString().split('T')[0]}.txt`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            };
+
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                if (!input.trim() || isLoading) return;
+
+                const userMessage = input.trim();
+                setInput('');
+                setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
+                setIsLoading(true);
+
+                try {
+                    const response = await fetch(WORKER_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            model: 'claude-sonnet-4-20250514',
+                            max_tokens: 2000,
+                            messages: [
+                                {
+                                    role: 'user',
+                                    content: SYSTEM_PROMPT + '\n\n---\n\nThe conversation so far is below. Continue as Uncle Walter. Respond to the student\'s most recent message.'
+                                },
+                                ...messages.filter((_, i) => i > 0).map(msg => ({
+                                    role: msg.role,
+                                    content: msg.content
+                                })),
+                                { role: 'user', content: userMessage }
+                            ]
+                        })
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        console.error('API Error:', errorData);
+                        throw new Error(`API request failed: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    const assistantMessage = data.content[0].text;
+                    setMessages(prev => [...prev, { role: 'assistant', content: assistantMessage }]);
+                } catch (error) {
+                    console.error('Error:', error);
+                    setMessages(prev => [...prev, {
+                        role: 'assistant',
+                        content: '⚠ Technical difficulty — we seem to have lost the signal. Please try again. If this persists, contact your instructor.'
+                    }]);
+                } finally {
+                    setIsLoading(false);
+                }
+            };
+
+            const handleKeyDown = (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    handleSubmit(e);
+                }
+            };
+
+            const exchangeCount = messages.filter(m => m.role === 'user').length;
+
+            /* ── STYLES ── */
+            const s = {
+                wrapper: {
+                    maxWidth: '880px',
+                    margin: '0 auto',
+                },
+
+                /* TV CABINET FRAME */
+                tvFrame: {
+                    background: 'linear-gradient(160deg, #2a2018 0%, #1a1408 40%, #0e0c06 100%)',
+                    border: '3px solid #3a2e1a',
+                    borderRadius: '16px',
+                    boxShadow: '0 0 0 1px #4a3c1e, 0 0 60px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,220,100,0.06)',
+                    overflow: 'hidden',
+                },
+
+                /* SCREEN BEZEL */
+                screenBezel: {
+                    background: '#0a0805',
+                    margin: '16px 16px 0 16px',
+                    border: '2px solid #2a2010',
+                    borderRadius: '8px',
+                    boxShadow: 'inset 0 0 40px rgba(0,0,0,0.8), 0 0 20px rgba(180,150,60,0.05)',
+                    overflow: 'hidden',
+                },
+
+                /* CHANNEL BUG */
+                channelBug: {
+                    background: 'rgba(10,8,5,0.85)',
+                    borderBottom: '1px solid rgba(180,150,60,0.2)',
+                    padding: '5px 16px',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    fontFamily: "'Special Elite', monospace",
+                    fontSize: '0.62rem',
+                    letterSpacing: '0.12em',
+                    textTransform: 'uppercase',
+                    color: 'rgba(180,150,60,0.5)',
+                },
+
+                /* HEADER — BROADCAST CARD */
+                header: {
+                    background: 'linear-gradient(180deg, #0c0a05 0%, #080602 100%)',
+                    padding: '28px 28px 20px',
+                    borderBottom: '1px solid rgba(180,150,60,0.12)',
+                    position: 'relative',
+                },
+
+                broadcastBar: {
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    marginBottom: '14px',
+                },
+
+                onAirDot: {
+                    width: '8px',
+                    height: '8px',
+                    borderRadius: '50%',
+                    background: '#cc3322',
+                    boxShadow: '0 0 8px rgba(200,50,30,0.6)',
+                    flexShrink: 0,
+                },
+
+                onAirText: {
+                    fontFamily: "'Special Elite', monospace",
+                    fontSize: '0.62rem',
+                    letterSpacing: '0.2em',
+                    color: '#e84432',
+                    textTransform: 'uppercase',
+                },
+
+                headerTitle: {
+                    fontFamily: "'Special Elite', cursive",
+                    fontSize: '2.4rem',
+                    color: '#e8d080',
+                    letterSpacing: '0.04em',
+                    lineHeight: 1,
+                    marginBottom: '6px',
+                    textShadow: '0 0 30px rgba(220,190,80,0.3)',
+                },
+
+                headerSubtitle: {
+                    fontFamily: "'Source Serif 4', Georgia, serif",
+                    fontSize: '0.82rem',
+                    color: 'rgba(200,175,100,0.55)',
+                    fontStyle: 'italic',
+                    letterSpacing: '0.03em',
+                },
+
+                divider: {
+                    height: '1px',
+                    background: 'linear-gradient(to right, transparent, rgba(180,150,60,0.3), transparent)',
+                    margin: '16px 0',
+                },
+
+                statusRow: {
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    padding: '8px 28px',
+                    background: 'rgba(0,0,0,0.3)',
+                    borderBottom: '1px solid rgba(180,150,60,0.08)',
+                },
+
+                exchangeCounter: {
+                    fontFamily: "'Special Elite', monospace",
+                    fontSize: '0.65rem',
+                    letterSpacing: '0.1em',
+                    textTransform: 'uppercase',
+                    color: exchangeCount >= 6 ? '#e8c840' : 'rgba(180,150,60,0.45)',
+                },
+
+                downloadBtn: {
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    padding: '5px 14px',
+                    background: 'transparent',
+                    border: '1px solid rgba(180,150,60,0.3)',
+                    borderRadius: '2px',
+                    color: 'rgba(180,150,60,0.6)',
+                    fontFamily: "'Special Elite', monospace",
+                    fontSize: '0.62rem',
+                    letterSpacing: '0.1em',
+                    textTransform: 'uppercase',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease',
+                },
+
+                /* MESSAGE AREA */
+                messagesContainer: {
+                    height: '440px',
+                    overflowY: 'auto',
+                    padding: '20px 24px',
+                    background: 'linear-gradient(180deg, #060502 0%, #080604 100%)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '16px',
+                },
+
+                messageWrapper: {
+                    display: 'flex',
+                    animation: 'fade-in-up 0.3s ease',
+                },
+
+                walterMessage: {
+                    maxWidth: '82%',
+                    background: 'linear-gradient(135deg, #151008 0%, #0e0c06 100%)',
+                    border: '1px solid rgba(180,150,60,0.18)',
+                    borderRadius: '2px 12px 12px 12px',
+                    padding: '14px 18px',
+                    boxShadow: '0 2px 12px rgba(0,0,0,0.4)',
+                },
+
+                studentMessage: {
+                    maxWidth: '82%',
+                    background: 'linear-gradient(135deg, #0a0e14 0%, #080b10 100%)',
+                    border: '1px solid rgba(80,120,180,0.2)',
+                    borderRadius: '12px 2px 12px 12px',
+                    padding: '14px 18px',
+                },
+
+                messageLabel: {
+                    fontFamily: "'Special Elite', monospace",
+                    fontSize: '0.6rem',
+                    letterSpacing: '0.14em',
+                    textTransform: 'uppercase',
+                    marginBottom: '8px',
+                },
+
+                walterLabel: {
+                    color: 'rgba(220,185,70,0.6)',
+                },
+
+                studentLabel: {
+                    color: 'rgba(140,175,230,0.8)',
+                    textAlign: 'right',
+                },
+
+                messageText: {
+                    fontFamily: "'Source Serif 4', Georgia, serif",
+                    fontSize: '0.92rem',
+                    lineHeight: 1.72,
+                    color: '#c8b880',
+                    whiteSpace: 'pre-wrap',
+                },
+
+                studentText: {
+                    color: '#a0b4cc',
+                },
+
+                loadingDot: {
+                    display: 'inline-block',
+                    width: '6px',
+                    height: '6px',
+                    borderRadius: '50%',
+                    background: 'rgba(220,185,70,0.5)',
+                    margin: '0 2px',
+                },
+
+                /* INPUT AREA */
+                inputArea: {
+                    padding: '16px 20px',
+                    background: '#080602',
+                    borderTop: '1px solid rgba(180,150,60,0.1)',
+                },
+
+                inputRow: {
+                    display: 'flex',
+                    gap: '10px',
+                    alignItems: 'flex-end',
+                },
+
+                textarea: {
+                    flex: 1,
+                    background: 'rgba(255,255,255,0.03)',
+                    border: '1px solid rgba(180,150,60,0.2)',
+                    borderRadius: '3px',
+                    padding: '12px 14px',
+                    color: '#c8b880',
+                    fontFamily: "'Source Serif 4', Georgia, serif",
+                    fontSize: '0.9rem',
+                    lineHeight: 1.55,
+                    resize: 'none',
+                    transition: 'border-color 0.2s ease',
+                },
+
+                sendButton: {
+                    padding: '12px 20px',
+                    background: 'linear-gradient(180deg, #3a2e10 0%, #2a2008 100%)',
+                    border: '1px solid rgba(180,150,60,0.35)',
+                    borderRadius: '3px',
+                    color: '#c8a840',
+                    fontFamily: "'Special Elite', monospace",
+                    fontSize: '0.68rem',
+                    letterSpacing: '0.12em',
+                    textTransform: 'uppercase',
+                    cursor: 'pointer',
+                    whiteSpace: 'nowrap',
+                    transition: 'all 0.2s ease',
+                },
+
+                sendButtonDisabled: {
+                    opacity: 0.35,
+                    cursor: 'not-allowed',
+                },
+
+                /* CABINET CONTROLS (decorative) */
+                cabinetControls: {
+                    padding: '12px 20px',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: '16px',
+                },
+
+                controlKnob: {
+                    width: '18px',
+                    height: '18px',
+                    borderRadius: '50%',
+                    background: 'radial-gradient(circle at 35% 35%, #5a4a28, #2a2010)',
+                    border: '1px solid #6a5a30',
+                    boxShadow: '0 1px 3px rgba(0,0,0,0.5)',
+                },
+
+                footer: {
+                    fontFamily: "'Special Elite', monospace",
+                    fontSize: '0.6rem',
+                    letterSpacing: '0.1em',
+                    color: 'rgba(180,150,60,0.2)',
+                    textAlign: 'center',
+                    padding: '0 0 12px',
+                    textTransform: 'uppercase',
+                },
+            };
+
+            return (
+                <div style={s.wrapper}>
+                    <style>{`
+                        .download-btn:hover {
+                            background: rgba(180,150,60,0.08) !important;
+                            color: rgba(220,185,70,0.8) !important;
+                            border-color: rgba(180,150,60,0.5) !important;
+                        }
+                        .send-btn:hover:not(:disabled) {
+                            background: linear-gradient(180deg, #4a3e18 0%, #3a2e10 100%) !important;
+                            border-color: rgba(220,185,70,0.5) !important;
+                        }
+                        .textarea-focus:focus {
+                            border-color: rgba(180,150,60,0.4) !important;
+                        }
+                    `}</style>
+
+                    <div style={s.tvFrame}>
+                        <div style={s.screenBezel}>
+
+                            {/* Header Image */}
+                            <div style={{ width: '100%', lineHeight: 0 }}>
+                                <img
+                                    src="uncle_walter.jpg"
+                                    alt="Uncle Walter"
+                                    style={{ width: '100%', display: 'block' }}
+                                />
+                            </div>
+
+                            {/* Channel Bug */}
+                            <div style={s.channelBug}>
+                                <span>CBS · Evening Discussion</span>
+                                <span>HIST 102 · Richland Community College</span>
+                            </div>
+
+                            {/* Header */}
+                            <div style={s.header}>
+                                <div style={s.broadcastBar}>
+                                    <div style={s.onAirDot}></div>
+                                    <span style={s.onAirText}>On Air</span>
+                                </div>
+                                <h1 style={s.headerTitle}>Uncle Walter</h1>
+                                <p style={s.headerSubtitle}>Stream & Discuss · <em>The Making of the President, 1960</em></p>
+                                <div style={s.divider}></div>
+                                <p style={{
+                                    fontFamily: "'Source Serif 4', Georgia, serif",
+                                    fontSize: '0.8rem',
+                                    color: 'rgba(180,150,60,0.4)',
+                                    fontStyle: 'italic',
+                                    lineHeight: 1.6,
+                                }}>
+                                    Paste your paragraphs here, one at a time. Uncle Walter will read them, tell you what's working, and push you further.
+                                </p>
+                            </div>
+
+                            {/* Status Row */}
+                            <div style={s.statusRow}>
+                                <span style={s.exchangeCounter}>
+                                    ◈ Exchanges: {exchangeCount} / 6 minimum
+                                    {exchangeCount >= 6 ? ' ✓ Requirement met' : ''}
+                                </span>
+                                {messages.length > 1 && (
+                                    <button className="download-btn" type="button" onClick={downloadTranscript} style={s.downloadBtn}>
+                                        ↓ Download Transcript
+                                    </button>
+                                )}
+                            </div>
+
+                            {/* Messages */}
+                            <div style={s.messagesContainer}>
+                                {messages.map((msg, idx) => (
+                                    <div key={idx} style={{
+                                        ...s.messageWrapper,
+                                        justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start',
+                                    }}>
+                                        <div style={msg.role === 'user' ? s.studentMessage : s.walterMessage}>
+                                            <div style={{
+                                                ...s.messageLabel,
+                                                ...(msg.role === 'user' ? s.studentLabel : s.walterLabel),
+                                            }}>
+                                                {msg.role === 'user' ? '◇ Student' : '◈ Uncle Walter'}
+                                            </div>
+                                            <p style={{
+                                                ...s.messageText,
+                                                ...(msg.role === 'user' ? s.studentText : {}),
+                                            }}>
+                                                {msg.content}
+                                            </p>
+                                        </div>
+                                    </div>
+                                ))}
+
+                                {isLoading && (
+                                    <div style={{ ...s.messageWrapper, justifyContent: 'flex-start' }}>
+                                        <div style={s.walterMessage}>
+                                            <div style={{ ...s.messageLabel, ...s.walterLabel }}>◈ Uncle Walter</div>
+                                            <div>
+                                                <span style={{ ...s.loadingDot, animation: 'typing-dot 1.4s ease-in-out infinite', animationDelay: '0s' }}></span>
+                                                <span style={{ ...s.loadingDot, animation: 'typing-dot 1.4s ease-in-out infinite', animationDelay: '0.2s' }}></span>
+                                                <span style={{ ...s.loadingDot, animation: 'typing-dot 1.4s ease-in-out infinite', animationDelay: '0.4s' }}></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                                <div ref={messagesEndRef} />
+                            </div>
+
+                            {/* Input */}
+                            <div style={s.inputArea}>
+                                <form onSubmit={handleSubmit}>
+                                    <div style={s.inputRow}>
+                                        <textarea
+                                            className="textarea-focus"
+                                            value={input}
+                                            onChange={(e) => setInput(e.target.value)}
+                                            onKeyDown={handleKeyDown}
+                                            aria-label="Type your message to Uncle Walter"
+                                        placeholder="Paste your paragraph here, or type your response..."
+                                            style={s.textarea}
+                                            rows="4"
+                                            disabled={isLoading}
+                                        />
+                                        <button
+                                            className="send-btn"
+                                            type="submit"
+                                            disabled={isLoading || !input.trim()}
+                                            style={{
+                                                ...s.sendButton,
+                                                ...(isLoading || !input.trim() ? s.sendButtonDisabled : {}),
+                                            }}
+                                        >
+                                            Send
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+
+                        {/* Decorative TV cabinet controls */}
+                        <div style={s.cabinetControls}>
+                            <div style={s.controlKnob}></div>
+                            <div style={{ ...s.controlKnob, width: '24px', height: '24px' }}></div>
+                            <div style={s.controlKnob}></div>
+                        </div>
+
+                        <p style={s.footer}>
+                            "And that's the way it is." · An educational tool for HIST 102
+                        </p>
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<UncleWalter />);
+    </script>
+</body>
+</html>
