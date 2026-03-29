@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socialist Realism — Art as State Ideology</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --antique-gold: #D4AF37;
+            --deep-teal:    #2C7873;
+            --rich-purple:  #996CDC;   /* WCAG nudge from #6B4C9A */
+            --ruby-crimson: #EC4343;   /* WCAG nudge from #9B2C2C */
+            --dark-charcoal:#1A1A1A;
+            --pure-white:   #FAFAFA;
+            --soft-cream:   #F5F1E8;
+            --bronze-accent:#8B6F47;
+            --forest-green: #1B4332;
+            --popup-gold:   #826B21;   /* WCAG nudge for gold on cream */
+        }
+
+        .reveal {
+            font-family: 'Lora', serif;
+            font-size: 1.3em;
+            background-color: var(--dark-charcoal);
+            color: var(--pure-white);
+        }
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Crimson Pro', serif;
+            font-weight: 700;
+            color: var(--antique-gold);
+            text-transform: none;
+        }
+        .reveal h1 { font-size: 5.5em; }
+        .reveal h2 { font-size: 4.5em; margin-bottom: 0.4em; }
+        .reveal h3 { font-size: 2.5em; }
+        .reveal ul { list-style: none; padding-left: 0; }
+        .reveal ul li { margin-bottom: 0.4em; font-size: 1.0em; }
+        .reveal ul li:before { content: "◆ "; color: var(--deep-teal); font-weight: bold; margin-right: 0.5em; }
+        strong { color: var(--antique-gold); }
+        em { color: var(--deep-teal); font-style: italic; }
+
+        /* Pop-up system */
+        .popup-trigger {
+            color: var(--deep-teal);
+            border-bottom: 2px dotted var(--deep-teal);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .popup-trigger:hover { color: var(--antique-gold); }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--soft-cream);
+            color: var(--dark-charcoal);
+            padding: 2em;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            max-width: 640px;
+            max-height: 70%;
+            overflow-y: auto;
+            z-index: 1000;
+            border: 3px solid var(--bronze-accent);
+        }
+        .popup.active { display: block; }
+        .popup-close {
+            position: absolute;
+            top: 10px; right: 15px;
+            font-size: 2em;
+            cursor: pointer;
+            color: var(--ruby-crimson);
+            aria-label: close;
+        }
+        .definition-term {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: var(--popup-gold);
+            margin-bottom: 0.5em;
+            font-family: 'Crimson Pro', serif;
+        }
+        .key-term { color: var(--rich-purple); font-weight: 600; }
+
+        /* Layout helpers */
+        .content-image-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2em;
+            align-items: center;
+        }
+        .content-side { text-align: left; }
+        .image-side {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .image-side img {
+            max-width: 100%;
+            max-height: 560px;
+            object-fit: contain;
+            border-radius: 6px;
+            border: 2px solid var(--bronze-accent);
+        }
+        .img-placeholder {
+            background: rgba(139,111,71,0.2);
+            border: 3px dashed var(--bronze-accent);
+            padding: 3em;
+            text-align: center;
+            color: var(--bronze-accent);
+            font-style: italic;
+            border-radius: 10px;
+            width: 100%;
+            height: 320px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1em;
+        }
+        .img-caption {
+            font-size: 1.3em;
+            color: var(--bronze-accent);
+            font-style: italic;
+            text-align: center;
+            margin-top: 0.5em;
+        }
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2em;
+            align-items: start;
+        }
+        .subtitle { font-size: 2.5em; color: var(--deep-teal); margin-top: 0.4em; }
+        .large-text { font-size: 2.0em; text-align: center; line-height: 1.6; }
+        .callout {
+            background: rgba(212,175,55,0.12);
+            border-left: 5px solid var(--antique-gold);
+            padding: 1em 1.2em;
+            margin: 0.8em 0;
+            font-size: 1.9em;
+            line-height: 1.5;
+        }
+        .definition-block {
+            background: rgba(44,120,115,0.10);
+            border-left: 5px solid var(--deep-teal);
+            padding: 1em 1.4em;
+            margin: 0.6em 0;
+            font-size: 1.9em;
+            line-height: 1.6;
+        }
+        .four-pillars {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1em 2em;
+            margin-top: 0.5em;
+        }
+        .pillar {
+            background: rgba(212,175,55,0.08);
+            border: 1px solid rgba(212,175,55,0.3);
+            border-radius: 8px;
+            padding: 0.7em 1em;
+            font-size: 1.7em;
+        }
+        .pillar strong { display: block; font-size: 1.05em; margin-bottom: 0.2em; }
+        .pillar span { font-size: 0.88em; color: var(--pure-white); opacity: 0.88; }
+
+        /* Slide counter */
+        .slide-counter {
+            position: fixed;
+            bottom: 20px; right: 20px;
+            background: rgba(26,26,26,0.9);
+            color: var(--antique-gold);
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-family: 'Crimson Pro', serif;
+            font-weight: 600;
+            font-size: 0.9em;
+            border: 2px solid var(--deep-teal);
+            z-index: 100;
+        }
+
+        /* Keyboard overlay */
+        #keyboard-trigger {
+            position: fixed;
+            top: 20px; right: 20px;
+            font-size: 2em;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .reveal .slides section {
+                transition: none !important;
+            }
+            .popup, .popup-trigger {
+                transition: none !important;
+            }
+        }
+
+        /* Focus indicator */
+        .popup-trigger:focus-visible,
+        button:focus-visible,
+        [tabindex]:focus-visible {
+            outline: 2px solid var(--antique-gold);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="reveal">
+<div class="slides">
+
+    <!-- ═══════════════════════════════════════════
+         SLIDE 1 — DEFINITION
+         ═══════════════════════════════════════════ -->
+    <section>
+        <h2 style="font-size:4.2em;">Socialist Realism</h2>
+        <div class="subtitle" style="font-size:2.2em;">Art as State Ideology, 1932–1988</div>
+
+        <div class="definition-block">
+            <span class="popup-trigger" data-popup="popup-socrrealism" tabindex="0" role="button" aria-expanded="false"><strong>Socialist Realism</strong></span>
+            was the <em>officially mandated art style</em> of the Soviet Union — decreed by Stalin in 1932 and enforced until the USSR's collapse. All art — painting, sculpture, literature, film, and music — was required to be <strong>accessible, optimistic, and politically useful</strong>.
+        </div>
+
+        <div class="four-pillars" style="margin-top:0.8em;">
+            <div class="pillar">
+                <strong>Partiinost'</strong>
+                <span>Party-mindedness — art must serve Communist ideology</span>
+            </div>
+            <div class="pillar">
+                <strong>Ideinost'</strong>
+                <span>Ideological content — uplifting messages, no criticism</span>
+            </div>
+            <div class="pillar">
+                <strong>Narodnost'</strong>
+                <span>Accessibility to the masses — clear, figurative style</span>
+            </div>
+            <div class="pillar">
+                <strong>Klassovost'</strong>
+                <span>Class consciousness — workers, soldiers, and leaders as heroes</span>
+            </div>
+        </div>
+
+        <div class="callout" style="margin-top:0.8em; font-size:1.7em;">
+            ⚠ Failure to conform was not merely career-ending — it could be fatal.
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         SLIDE 2 — Lenin in Smolny (Brodsky, 1930)
+         ═══════════════════════════════════════════ -->
+    <section>
+        <h2 style="font-size:4.0em;">The Canonized Leader</h2>
+        <div class="content-image-layout">
+            <div class="content-side">
+                <ul style="font-size:1.9em;">
+                    <li><strong>Isaak Brodsky</strong>, <em>Lenin in Smolny</em>, 1930</li>
+                    <li>Painted <strong>six years after Lenin's death</strong> — a deliberate act of secular canonization</li>
+                    <li>Lenin shown working alone, in <strong>humble surroundings</strong> — no Tsarist pomp, no personal glory</li>
+                    <li>Reproduced in <strong>millions of copies</strong> and displayed in schools, offices, and government buildings across the USSR</li>
+                    <li>Described as "almost <span class="popup-trigger" data-popup="popup-photographic" tabindex="0" role="button" aria-expanded="false">photographic</span>" — reality as Socialist Realism demanded it to appear</li>
+                </ul>
+            </div>
+            <div class="image-side">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/1930_Brodsky_Lenin_im_Smolny.JPG"
+                     alt="Isaak Brodsky painting of Lenin sitting alone at a desk in the Smolny Institute, 1930, Socialist Realism oil painting"
+                     style="max-width:100%;max-height:540px;object-fit:contain;border-radius:6px;border:2px solid #8B6F47;"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="img-placeholder" style="display:none;">
+                    📸 <strong>Lenin in Smolny</strong><br>Isaak Brodsky, 1930<br><em>Search:</em> "Brodsky Lenin im Smolny 1930 Wikimedia"
+                </div>
+                <p class="img-caption">Brodsky · <em>Lenin in Smolny</em> · 1930 · Public Domain · Wikimedia Commons</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         SLIDE 3 — Worker and Kolkhoz Woman (Mukhina, 1937)
+         ═══════════════════════════════════════════ -->
+    <section>
+        <h2 style="font-size:3.8em;">The New Soviet Man and Woman</h2>
+        <div class="content-image-layout">
+            <div class="image-side">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Paris-expo-1937-pavillon_de_l'URSS-13.jpg"
+                     alt="Soviet pavilion at the 1937 Paris World Exposition with Vera Mukhina's Worker and Kolkhoz Woman sculpture towering above the building, facing the Nazi Germany pavilion across the Trocadero"
+                     style="max-width:100%;max-height:540px;object-fit:contain;border-radius:6px;border:2px solid #8B6F47;"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="img-placeholder" style="display:none;">
+                    📸 <strong>Soviet Pavilion, Paris Expo 1937</strong><br>With <em>Worker and Kolkhoz Woman</em> atop<br><em>Search:</em> "Paris expo 1937 pavillon URSS Mukhina"
+                </div>
+                <p class="img-caption">Soviet Pavilion · Paris World Exposition · 1937 · Public Domain · Wikimedia Commons</p>
+            </div>
+            <div class="content-side">
+                <ul style="font-size:1.9em;">
+                    <li><strong>Vera Mukhina</strong>, <em>Worker and Kolkhoz Woman</em>, 1937</li>
+                    <li>24.5-meter <strong>stainless steel sculpture</strong> — first unveiled at the Paris World's Fair, 1937</li>
+                    <li>A male <span class="popup-trigger" data-popup="popup-proletarian" tabindex="0" role="button" aria-expanded="false">proletarian</span> and female <span class="popup-trigger" data-popup="popup-kolkhoz" tabindex="0" role="button" aria-expanded="false">collective farmer</span> thrust the <strong>hammer and sickle</strong> skyward together</li>
+                    <li>The most <strong>iconic symbol of Soviet power</strong> — appeared on the Mosfilm studio logo used in every Soviet film</li>
+                    <li>Embodied the state ideal of <strong>unified working-class heroism</strong> — gender equality in service of the collective</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         SLIDE 4 — New Moscow (Pimenov, 1937)
+         ═══════════════════════════════════════════ -->
+    <section>
+        <h2 style="font-size:4.0em;">The Promised Future</h2>
+        <div class="content-image-layout">
+            <div class="content-side">
+                <ul style="font-size:1.9em;">
+                    <li><strong>Yuri Pimenov</strong>, <em>New Moscow</em>, 1937</li>
+                    <li>A woman drives an open convertible through <strong>a transformed, modern Moscow</strong> — skyscrapers, trams, wide boulevards</li>
+                    <li>Painted in 1937 — the same year as <strong>Stalin's Great Terror</strong>, when up to 1.2 million were executed or sent to the <span class="popup-trigger" data-popup="popup-gulag" tabindex="0" role="button" aria-expanded="false">Gulag</span></li>
+                    <li>The <strong>female driver</strong> symbolized women's liberation and socialist progress — a powerful propaganda image for a society under violent repression</li>
+                    <li>Won the gold medal at the <strong>Paris World Exposition</strong>, 1937 — the state's international showcase</li>
+                </ul>
+            </div>
+            <div class="image-side">
+                <img src="https://upload.wikimedia.org/wikipedia/en/8/81/Novoja_Moskva.jpg"
+                     alt="Yuri Pimenov oil painting New Moscow 1937 showing a woman driving a convertible car through a wide modern Moscow street with new buildings and trams in the background"
+                     style="max-width:100%;max-height:540px;object-fit:contain;border-radius:6px;border:2px solid #8B6F47;"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="img-placeholder" style="display:none;">
+                    📸 <strong>New Moscow</strong><br>Yuri Pimenov, 1937<br><em>Search:</em> "Pimenov New Moscow 1937 Tretyakov Gallery painting"
+                </div>
+                <p class="img-caption">Pimenov · <em>New Moscow</em> · 1937 · Public Domain · Wikimedia Commons</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         SLIDE 5 — PROPAGANDA POSTERS
+         ═══════════════════════════════════════════ -->
+    <section>
+        <h2 style="font-size:4.0em;">The Poster as Weapon</h2>
+        <div class="two-column" style="display:grid;grid-template-columns:1fr 1fr;gap:2em;align-items:start;margin-top:0.3em;">
+
+            <!-- Poster 1: "Long Live the USSR!" 1935 -->
+            <div style="display:flex;flex-direction:column;align-items:center;">
+                <img src="images/long_live_ussr.jpg"
+                     alt="1935 Soviet Socialist Realism propaganda poster Long Live the USSR showing heroic workers and peasants of diverse Soviet nationalities united under red banners with Lenin and Stalin portraits"
+                     style="max-width:100%;max-height:460px;object-fit:contain;border-radius:6px;border:2px solid #8B6F47;"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="img-placeholder" style="display:none;height:280px;">
+                    📸 <strong>"Long Live the USSR!"</strong><br>1935 · Soviet State Press
+                </div>
+                <p class="img-caption" style="font-size:1.25em;"><em>"Long Live the USSR!"</em> · 1935 · Public Domain · Wikimedia Commons</p>
+                <ul style="font-size:1.6em;text-align:left;width:100%;margin-top:0.5em;">
+                    <li>Heroic workers of <strong>all Soviet nationalities</strong> united — the collective over the individual</li>
+                    <li>Lenin and Stalin elevated <strong>above the masses</strong> — secular icons, not politicians</li>
+                    <li>Bold figurative style, <strong>no abstraction</strong> — accessible to any Soviet citizen</li>
+                </ul>
+            </div>
+
+            <!-- Poster 2: "Glory to Great Stalin!" c.1940s -->
+            <div style="display:flex;flex-direction:column;align-items:center;">
+                <img src="images/stalin.jpg"
+                     alt="1951 Soviet Socialist Realism propaganda poster Glory to Stalin the Great Architect of Communism showing Stalin colossal in scale before a hydroelectric dam with adoring workers gazing up at him"
+                     style="max-width:100%;max-height:460px;object-fit:contain;border-radius:6px;border:2px solid #8B6F47;"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="img-placeholder" style="display:none;height:280px;">
+                    📸 <strong>"Glory to Great Stalin!"</strong><br>c. 1940s · Soviet State Press
+                </div>
+                <p class="img-caption" style="font-size:1.25em;"><em>"Glory to Stalin, Great Architect of Communism"</em> · c. 1951 · Public Domain</p>
+                <ul style="font-size:1.6em;text-align:left;width:100%;margin-top:0.5em;">
+                    <li>Stalin <strong>colossal in scale</strong> before a hydroelectric dam — leader as <span class="popup-trigger" data-popup="popup-cultpersonality" tabindex="0" role="button" aria-expanded="false">cult of personality</span> and builder of the industrial future</li>
+                    <li>Workers and engineers <strong>gaze upward adoringly</strong> — the masses as grateful witnesses, not agents</li>
+                    <li>Fully <strong>painted and photorealistic</strong> — unambiguous Socialist Realism, no abstraction</li>
+                </ul>
+            </div>
+        </div>
+        <div class="callout" style="font-size:1.6em;margin-top:0.6em;">
+            Both posters follow the four Socialist Realist mandates: <strong>party-minded, ideologically correct, accessible to the masses, and class-conscious</strong>.
+        </div>
+    </section>
+
+</div><!-- .slides -->
+</div><!-- .reveal -->
+
+<!-- ═══════════ GLOBAL UI ═══════════ -->
+<div id="keyboard-trigger" class="popup-trigger" data-popup="keyboard-popup"
+     tabindex="0" role="button" aria-expanded="false" aria-label="Keyboard shortcuts">⌨️</div>
+
+<div id="keyboard-popup" class="popup" role="dialog" aria-modal="true" aria-label="Keyboard shortcuts">
+    <span class="popup-close" aria-label="Close">&times;</span>
+    <div class="definition-term">Keyboard Shortcuts</div>
+    <p style="font-size:1.1em; line-height:1.8;">
+        → / Space: Next &nbsp;&nbsp; ← : Previous &nbsp;&nbsp; S: Speaker Notes<br>
+        F: Fullscreen &nbsp;&nbsp; O: Overview &nbsp;&nbsp; ESC: Close popup
+    </p>
+</div>
+
+<!-- POP-UPS -->
+<div id="popup-socrrealism" class="popup" role="dialog" aria-modal="true" aria-label="Socialist Realism definition">
+    <span class="popup-close" aria-label="Close">&times;</span>
+    <div class="definition-term">Socialist Realism</div>
+    <p>Officially adopted as the sole permitted art style in the USSR in 1932 at Stalin's direction. The term was coined in meetings that included Stalin himself, and first formally articulated by Andrei Zhdanov at the 1934 Congress of Soviet Writers. Artists who defied it risked imprisonment, exile to the Gulag, or execution.</p>
+</div>
+
+<div id="popup-photographic" class="popup" role="dialog" aria-modal="true" aria-label="Photographic realism definition">
+    <span class="popup-close" aria-label="Close">&times;</span>
+    <div class="definition-term">Photographic Realism</div>
+    <p>Socialist Realism demanded that art be "realistic in form" — meaning clearly representational and accessible to any viewer, regardless of education. But "realistic" in content meant depicting an idealized truth: how life <em>should</em> look under socialism, not how it actually appeared. The result was a style as precise as photography but as falsified as state propaganda.</p>
+</div>
+
+<div id="popup-proletarian" class="popup" role="dialog" aria-modal="true" aria-label="Proletarian definition">
+    <span class="popup-close" aria-label="Close">&times;</span>
+    <div class="definition-term">Proletarian</div>
+    <p>From Latin <em>proletarius</em> — a member of the working class who owns no means of production and sells their labor. In Marxist ideology, the proletariat (industrial factory workers) were the revolutionary class whose collective action would overthrow capitalism. Socialist Realism elevated the proletarian worker as the heroic ideal of the new Soviet society.</p>
+</div>
+
+<div id="popup-kolkhoz" class="popup" role="dialog" aria-modal="true" aria-label="Kolkhoz definition">
+    <span class="popup-close" aria-label="Close">&times;</span>
+    <div class="definition-term">Kolkhoz (Collective Farm)</div>
+    <p>A state-directed agricultural cooperative in the Soviet Union. Under Stalin's forced collectivization (1929–1933), privately owned farms were seized and merged into collective enterprises. Peasants who resisted were labeled "kulaks" and deported or executed. The program caused catastrophic famine — including the Holodomor in Ukraine — killing millions. Socialist Realism portrayed kolkhoz life as joyful abundance.</p>
+</div>
+
+<div id="popup-gulag" class="popup" role="dialog" aria-modal="true" aria-label="Gulag definition">
+    <span class="popup-close" aria-label="Close">&times;</span>
+    <div class="definition-term">Gulag</div>
+    <p>The Soviet system of forced labor camps administered by the Main Camp Administration (<em>Glavnoe Upravlenie Lagerei</em> — GULAG). At its peak in the late 1940s, the Gulag held approximately 1.5 million prisoners. Inmates were subjected to brutal labor conditions, starvation rations, and extreme cold. An estimated 1–1.8 million died in the camps. The Gulag was the instrument behind the "productive society" celebrated in Socialist Realist art.</p>
+</div>
+
+<div id="popup-cultpersonality" class="popup" role="dialog" aria-modal="true" aria-label="Cult of personality definition">
+    <span class="popup-close" aria-label="Close">&times;</span>
+    <div class="definition-term">Cult of Personality</div>
+    <p>A state-engineered system of mass adulation directed at a political leader, elevating him to near-divine status through art, literature, film, and public ritual. Under Stalin, the cult was total — his image appeared on buildings, in schools, in films, and in virtually every Soviet home. Artists who depicted him unfavorably, or simply failed to depict him heroically enough, faced arrest. Nikita Khrushchev formally denounced the Stalin cult in his 1956 "Secret Speech," triggering a period of cultural liberalization known as the Thaw.</p>
+</div>
+
+<div class="slide-counter"></div>
+
+<!-- SCRIPTS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+<script>
+    Reveal.initialize({
+        width: 1920, height: 1080, margin: 0.08,
+        minScale: 0.2, maxScale: 2.0,
+        hash: true, slideNumber: false,
+        transition: 'slide',
+        plugins: [RevealNotes]
+    });
+
+    function updateSlideCounter() {
+        const c = Reveal.getState().indexh + 1;
+        const t = Reveal.getTotalSlides();
+        document.querySelector('.slide-counter').textContent = `${c} / ${t}`;
+    }
+    Reveal.on('slidechanged', updateSlideCounter);
+    Reveal.on('ready', updateSlideCounter);
+
+    // Pop-up system
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('popup-trigger') || e.target.closest('.popup-trigger')) {
+            const trigger = e.target.classList.contains('popup-trigger') ? e.target : e.target.closest('.popup-trigger');
+            const popupId = trigger.getAttribute('data-popup');
+            const el = document.getElementById(popupId);
+            if (el) {
+                document.querySelectorAll('.popup').forEach(p => { p.classList.remove('active'); });
+                el.classList.add('active');
+                trigger.setAttribute('aria-expanded', 'true');
+                const closeBtn = el.querySelector('.popup-close');
+                if (closeBtn) closeBtn.focus();
+            }
+            return;
+        }
+        if (e.target.classList.contains('popup-close')) {
+            const popup = e.target.closest('.popup');
+            if (popup) popup.classList.remove('active');
+            document.querySelectorAll('.popup-trigger').forEach(t => t.setAttribute('aria-expanded', 'false'));
+            return;
+        }
+        if (e.target.classList.contains('popup') && !e.target.closest('.popup > *')) {
+            e.target.classList.remove('active');
+            document.querySelectorAll('.popup-trigger').forEach(t => t.setAttribute('aria-expanded', 'false'));
+        }
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.popup-trigger').forEach(t => t.setAttribute('aria-expanded', 'false'));
+        }
+        if (e.key === 'Enter' || e.key === ' ') {
+            const el = document.activeElement;
+            if (el && el.classList.contains('popup-trigger')) {
+                e.preventDefault();
+                el.click();
+            }
+        }
+    });
+</script>
+</body>
+</html>
