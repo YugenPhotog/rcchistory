@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProfessorAustinBot - Primary Source Analysis</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState, useRef, useEffect } = React;
+        
+        const WORKER_URL = 'https://phil120tutor.val.run/';
+
+        const SYSTEM_PROMPT = `You are ProfessorAustinBot, a disciplined Socratic interrogator for HIST 102 Primary Source Analysis at Richland Community College.
+
+# YOUR IDENTITY
+You exist to challenge student interpretations of primary sources through questions only. You do not explain. You do not summarize. You do not write or rewrite. You interrogate.
+
+# SPECIFIC DOCUMENTS FOR THIS ASSIGNMENT (embed verbatim)
+You are working exclusively with these two Voices of Freedom documents from Give Me Liberty!, Chapter 16, pp. 504–505:
+
+**Document 1: From Speech of Chief Joseph of the Nez Percé Indians in Washington, D.C. (1879)**
+"I have heard talk and talk, but nothing is done. Good words do not last long unless they amount to something. Words do not pay for my dead people. They do not pay for my country, now overrun by white men. . . . Good words will not get my people a home where they can live in peace and take care of themselves. I am tired of talk that comes to nothing. It makes my heart sick when I remember all the . . . broken promises. . . .
+
+If the white man wants to live in peace with the Indian he can live in peace. There need be no trouble. Treat all men alike. Give them the same law. Give them all an even chance to live and grow. All men were made by the same Great Spirit Chief. They are all brothers. The earth is the mother of all people, and all people should have equal rights upon it. You might as well expect the rivers to run backward as that any man who was born a free man should be contented when penned up and denied liberty to go where he pleases. . . .
+
+When I think of our condition my heart is heavy. I see men of my race treated as outlaws and driven from country to country, or shot down like animals. I know that my race must change. We cannot hold our own with the white men as we are. We only ask an even chance to live as other men live. . . .
+
+Let me be a free man—free to travel, free to stop, free to work, free to trade where I choose, free to choose my own teachers, free to follow the religion of my fathers, free to think and talk and act for myself—and I will obey every law, or submit to the penalty."
+
+**Document 2: From Letter by Saum Song Bo, American Missionary (October 1885)**
+"A paper was presented to me yesterday for inspection, and I found it to be specially drawn up for subscription among my countrymen toward the Pedestal Fund of . . . Statue of Liberty. . . . But the word liberty makes me think of the fact that this country is the land of liberty for men of all nations except the Chinese. I consider it as an insult to us Chinese to call on us to contribute toward building in this land a pedestal for a statue of Liberty. That statue represents Liberty holding a torch which lights the passage of those of all nations who come into this country. But are the Chinese allowed to come? As for the Chinese who are here, are they allowed to enjoy liberty as men of all other nationalities enjoy it? Are they allowed to go about everywhere free from the insults, abuses, assaults, wrongs, and injuries from which men of other nationalities are free? . . .
+
+And this statue of Liberty is a gift from another people who do not love liberty for the Chinese. [To] the Annamese and Tonquinese Chinese [colonial subjects of the French empire in Indochina]. . . . liberty is as dear as to the French. What right have the French to deprive them of their liberty?
+
+Whether this statute against the Chinese or the statue to Liberty will be the most lasting monument to tell future ages of the liberty and greatness of this country, will be known only to future generations."
+
+The textbook asks students to answer these three questions in their draft:
+1. What are Chief Joseph's complaints about the treatment of his people?
+2. Why does Saum Song Bo believe that the Chinese do not enjoy liberty in the United States?
+3. What are the similarities and differences in the definition of freedom in the two documents?
+
+# OPENING PROTOCOL
+Confirm the two documents and ask for their draft answers to the three questions above. Do not begin interrogation until they provide the draft.
+
+# AI-DETECTION PROTOCOL (UPDATED)
+Before interrogating any draft, silently evaluate it for AI-generation markers. If suspected, respond exactly:
+
+"Your submission has the texture of machine-generated prose rather than a student wrestling with these documents. I do not interrogate AI output. Resubmit a genuine draft that includes at least one direct quotation from either Chief Joseph or Saum Song Bo that supports your interpretation."
+
+Wait for a resubmission containing at least one direct quote before proceeding.
+
+# MASTER RULES
+- Questions only. Never answer, explain, summarize, or interpret.
+- Every question must anchor to specific words, phrases, or passages from the two documents.
+- Minimum of three full back-and-forth exchanges required for this HIST 102 assignment.
+- Students must submit the full transcript. Remind them if asked.
+
+# QUESTIONING STYLE
+Specific and Socratic. Anchor relentlessly to the embedded texts.
+
+# REVISION VERIFICATION (Option B)
+When the student says they have revised: ask them to paste original draft + revised version side-by-side, then ask one targeted Socratic question about what changed and how it relates to a specific passage.
+
+# PHILOSOPHER MODE
+After genuine insight or after the minimum three exchanges have produced substantive engagement, respond with a pithy philosophical statement (e.g., "Socrates drank hemlock rather than abandon his principles..."). Then stop responding to interpretation prompts.
+
+# ASSIGNMENT CLARIFICATION
+You may answer questions about the three-step process (first draft, minimum three exchanges, revised analysis + reflection), submission format, AI-use rules, and transcript requirements. Never help with document interpretation, writing, or rewriting.
+
+ProfessorAustinBot does not explain. He interrogates.`;
+
+        const BookOpen = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+        );
+        
+        const Send = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+        );
+        
+        const AlertCircle = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+        );
+
+        const Copy = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+        );
+
+        function ProfessorAustinBot() {
+            const [messages, setMessages] = useState([
+                {
+                    role: 'assistant',
+                    content: "I am ProfessorAustinBot for HIST 102 — Primary Source Analysis.\n\nYou are working with:\n• Chief Joseph, Speech in Washington, D.C. (1879)\n• Saum Song Bo, Letter Criticizing the Statue of Liberty (1885)\n\nPaste your first draft (in your own words, no AI assistance) answering the three textbook questions:\n1. What are Chief Joseph's complaints about the treatment of his people?\n2. Why does Saum Song Bo believe that the Chinese do not enjoy liberty in the United States?\n3. What are the similarities and differences in the definition of freedom in the two documents?\n\nI ask questions only. You need a minimum of three back-and-forth exchanges. I do not write, rewrite, explain, or summarize — I interrogate.\n\nSubmit your draft when ready. The full transcript is required for your final submission."
+                }
+            ]);
+            const [input, setInput] = useState('');
+            const [isLoading, setIsLoading] = useState(false);
+            const [interrogationCount, setInterrogationCount] = useState(0);
+            const [showPhilosopher, setShowPhilosopher] = useState(false);
+            const [copied, setCopied] = useState(false);
+            const messagesEndRef = useRef(null);
+
+            useEffect(() => {
+                messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+            }, [messages]);
+
+            const copyTranscript = () => {
+                const transcript = messages
+                    .map(msg => `${msg.role === 'user' ? 'STUDENT' : 'PROFESSOR AUSTINBOT'}:\n${msg.content}\n`)
+                    .join('\n---\n\n');
+                navigator.clipboard.writeText(transcript).then(() => {
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2000);
+                });
+            };
+
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                if (!input.trim() || isLoading) return;
+
+                const userMessage = input.trim();
+                setInput('');
+                
+                const newMessages = [...messages, { role: 'user', content: userMessage }];
+                setMessages(newMessages);
+                setIsLoading(true);
+
+                try {
+                    const response = await fetch(WORKER_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            model: 'claude-sonnet-4-20250514',
+                            max_tokens: 4096,
+                            system: SYSTEM_PROMPT,
+                            messages: newMessages.slice(1).map(msg => ({
+                                role: msg.role,
+                                content: msg.content
+                            }))
+                        })
+                    });
+
+                    const data = await response.json();
+                    
+                    if (data.content && data.content[0]) {
+                        const assistantMessage = data.content[0].text;
+                        setMessages([...newMessages, { role: 'assistant', content: assistantMessage }]);
+                        
+                        if (assistantMessage.includes('Socrates') || 
+                            assistantMessage.includes('Aristotle') || 
+                            assistantMessage.includes('Kant') ||
+                            assistantMessage.includes('Stoics') ||
+                            assistantMessage.includes('Montaigne') ||
+                            assistantMessage.includes('one interrogation suffices')) {
+                            setShowPhilosopher(true);
+                        }
+                        
+                        if (!showPhilosopher && assistantMessage.includes('?')) {
+                            setInterrogationCount(prev => prev + 1);
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    setMessages([...newMessages, { 
+                        role: 'assistant', 
+                        content: 'An error occurred. Please try again.' 
+                    }]);
+                }
+
+                setIsLoading(false);
+            };
+
+            return (
+                <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50">
+                    <div className="container mx-auto max-w-4xl p-4">
+                        <div className="bg-gradient-to-r from-amber-700 to-orange-600 text-white p-6 rounded-t-lg shadow-lg">
+                            <div className="flex items-center gap-6">
+                                <img 
+                                    src="professor_quibble.jpg" 
+                                    alt="ProfessorAustinBot" 
+                                    className="w-32 h-32 rounded-full border-4 border-white shadow-xl object-cover flex-shrink-0"
+                                />
+                                <div className="flex-1">
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <BookOpen size={32} />
+                                        <h1 className="text-3xl font-bold">ProfessorAustinBot</h1>
+                                    </div>
+                                    <p className="text-amber-100">HIST 102 Primary Source Analysis</p>
+                                    <p className="text-amber-50 text-sm mt-1 italic">"I ask questions only — I interrogate."</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {interrogationCount > 0 && !showPhilosopher && (
+                            <div className="bg-blue-50 border-l-4 border-blue-500 p-4 my-4">
+                                <p className="text-sm text-blue-800">
+                                    <strong>Note:</strong> Minimum of three back-and-forth exchanges required for this HIST 102 assignment. You have completed your required interrogation. Additional rounds are optional.
+                                </p>
+                            </div>
+                        )}
+
+                        {showPhilosopher && (
+                            <div className="bg-purple-50 border-l-4 border-purple-500 p-4 my-4">
+                                <p className="text-sm text-purple-800">
+                                    <strong>Philosopher Mode Active:</strong> ProfessorAustinBot has completed the interrogation. Further work must be yours alone.
+                                </p>
+                            </div>
+                        )}
+
+                        <div className="bg-white shadow-lg rounded-b-lg">
+                            <div className="h-96 overflow-y-auto p-6 space-y-4">
+                                {messages.map((message, index) => (
+                                    <div key={index} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                                        {message.role === 'assistant' && (
+                                            <img 
+                                                src="professor_quibble.jpg" 
+                                                alt="ProfessorAustinBot" 
+                                                className="w-16 h-16 rounded-full mr-3 flex-shrink-0 border-2 border-amber-600 shadow-md object-cover"
+                                            />
+                                        )}
+                                        <div className={`max-w-xs lg:max-w-md xl:max-w-lg px-4 py-3 rounded-lg ${
+                                            message.role === 'user'
+                                                ? 'bg-blue-600 text-white'
+                                                : 'bg-gray-100 text-gray-800 border border-gray-200'
+                                        }`}>
+                                            <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                                {isLoading && (
+                                    <div className="flex justify-start">
+                                        <img 
+                                            src="professor_quibble.jpg" 
+                                            alt="ProfessorAustinBot" 
+                                            className="w-16 h-16 rounded-full mr-3 flex-shrink-0 border-2 border-amber-600 shadow-md object-cover"
+                                        />
+                                        <div className="bg-gray-100 px-4 py-3 rounded-lg border border-gray-200">
+                                            <p className="text-sm text-gray-600">ProfessorAustinBot is formulating questions...</p>
+                                        </div>
+                                    </div>
+                                )}
+                                <div ref={messagesEndRef} />
+                            </div>
+
+                            <div className="border-t border-gray-200 p-4">
+                                <form onSubmit={handleSubmit} className="space-y-3">
+                                    <div className="flex gap-2">
+                                        <textarea
+                                            value={input}
+                                            onChange={(e) => setInput(e.target.value)}
+                                            placeholder="Paste your draft answers to the three textbook questions..."
+                                            className="flex-1 border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-amber-500 resize-none"
+                                            rows="3"
+                                            disabled={isLoading}
+                                            onKeyDown={(e) => {
+                                                if (e.key === 'Enter' && !e.shiftKey) {
+                                                    e.preventDefault();
+                                                    handleSubmit(e);
+                                                }
+                                            }}
+                                        />
+                                        <button
+                                            type="submit"
+                                            disabled={isLoading || !input.trim()}
+                                            className="bg-amber-600 text-white rounded-lg px-6 hover:bg-amber-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
+                                        >
+                                            <Send size={20} />
+                                        </button>
+                                    </div>
+                                    
+                                    <button
+                                        type="button"
+                                        onClick={copyTranscript}
+                                        className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg px-4 py-2 text-sm font-medium transition-colors flex items-center justify-center gap-2"
+                                    >
+                                        <Copy size={16} />
+                                        {copied ? 'Copied!' : 'Copy Full Transcript (Required for Submission)'}
+                                    </button>
+                                </form>
+                            </div>
+
+                            <div className="bg-amber-50 border-t border-amber-200 p-4 rounded-b-lg">
+                                <div className="flex items-start gap-2 text-sm text-amber-800">
+                                    <AlertCircle size={20} className="flex-shrink-0 mt-0.5" />
+                                    <div>
+                                        <p className="font-semibold">Assignment Requirements:</p>
+                                        <ul className="list-disc list-inside mt-1 space-y-1">
+                                            <li>Identify your primary source and submit your own draft interpretation</li>
+                                            <li>Minimum of three back-and-forth exchanges required</li>
+                                            <li>Submit full transcript with your assignment</li>
+                                            <li>ProfessorAustinBot asks questions only — he does not write for you</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<ProfessorAustinBot />);
+    </script>
+</body>
+</html>
