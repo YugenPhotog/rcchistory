@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HIST 102 — Spring 2026 Course Calendar</title>
+<style>
+  :root {
+    --teal: #1a5c6e;
+    --teal-light: #e8f4f7;
+    --gold: #b8860b;
+    --gold-light: #fdf8e8;
+    --exam-red: #8b1a1a;
+    --exam-bg: #fdf0f0;
+    --break-green: #2d5a27;
+    --break-bg: #f0f7ef;
+    --no-class: #555;
+    --no-class-bg: #f5f5f5;
+    --border: #c8d8dc;
+    --text: #1a1a1a;
+    --subtext: #555;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 13px;
+    color: var(--text);
+    background: #fff;
+    padding: 24px 32px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  /* ── Print Button ── */
+  .print-btn {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+  }
+  .print-btn button {
+    background: var(--teal);
+    color: #fff;
+    border: none;
+    padding: 8px 22px;
+    font-size: 13px;
+    font-family: Arial, sans-serif;
+    border-radius: 4px;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+  }
+  .print-btn button:hover { background: #14475a; }
+
+  /* ── Header ── */
+  .course-header {
+    text-align: center;
+    border-bottom: 3px double var(--teal);
+    padding-bottom: 14px;
+    margin-bottom: 24px;
+  }
+  .course-header h1 {
+    font-size: 20px;
+    color: var(--teal);
+    letter-spacing: 0.03em;
+    margin-bottom: 4px;
+  }
+  .course-header .meta {
+    font-size: 12px;
+    color: var(--subtext);
+    font-style: italic;
+  }
+  .course-header .tagline {
+    font-size: 14px;
+    color: var(--gold);
+    margin-top: 4px;
+    font-style: italic;
+  }
+
+  /* ── Chapter Block ── */
+  .chapter-block {
+    margin-bottom: 28px;
+  }
+
+  .chapter-heading {
+    background: var(--teal);
+    color: #fff;
+    padding: 6px 12px;
+    font-size: 12.5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-radius: 3px 3px 0 0;
+  }
+
+  /* ── Table ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--border);
+  }
+
+  thead th {
+    background: var(--teal-light);
+    color: var(--teal);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 6px 10px;
+    border: 1px solid var(--border);
+    text-align: left;
+  }
+
+  thead th.center { text-align: center; }
+
+  tbody tr { border-bottom: 1px solid var(--border); }
+  tbody tr:last-child { border-bottom: none; }
+
+  td {
+    padding: 7px 10px;
+    vertical-align: top;
+    border: 1px solid var(--border);
+    line-height: 1.4;
+  }
+
+  td.date-col {
+    white-space: nowrap;
+    width: 110px;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    color: var(--subtext);
+  }
+
+  td.topic-col { min-width: 280px; }
+
+  td.notes-col {
+    font-size: 11.5px;
+    color: var(--subtext);
+    font-style: italic;
+  }
+
+  /* ── Row Variants ── */
+  tr.no-class td {
+    background: var(--no-class-bg);
+    color: var(--no-class);
+    font-style: italic;
+  }
+  tr.no-class td.day-num { color: #aaa; }
+
+  tr.exam-row td {
+    background: var(--exam-bg);
+    color: var(--exam-red);
+    font-weight: bold;
+  }
+  tr.exam-row td.day-num { color: var(--exam-red); }
+
+  tr.break-row td {
+    background: var(--break-bg);
+    color: var(--break-green);
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  tr.finals-row td {
+    background: #f0eafa;
+    color: #4a1a7a;
+    font-weight: bold;
+    font-style: italic;
+  }
+
+  tr.holiday-row td {
+    background: #fff8e8;
+    color: #7a5500;
+    font-style: italic;
+  }
+
+  /* ── Standalone Sections (Exam headers, Finals) ── */
+  .section-label {
+    background: var(--gold);
+    color: #fff;
+    font-family: Arial, sans-serif;
+    font-size: 11.5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 5px 12px;
+    border-radius: 3px 3px 0 0;
+    margin-top: 22px;
+  }
+
+  /* ── Withdrawal Notice ── */
+  .notice {
+    margin-top: 20px;
+    border: 1px solid #c8b86e;
+    background: var(--gold-light);
+    border-radius: 4px;
+    padding: 8px 14px;
+    font-size: 12px;
+    color: #5a4400;
+    font-family: Arial, sans-serif;
+  }
+  .notice strong { color: var(--gold); }
+
+  /* ── Print ── */
+  @media print {
+    .print-btn { display: none; }
+    body { padding: 10px 14px; font-size: 11px; }
+    .course-header h1 { font-size: 16px; }
+    .chapter-heading { font-size: 10.5px; }
+    thead th { font-size: 9.5px; }
+    td { padding: 4px 7px; font-size: 10.5px; }
+    .section-label { font-size: 10px; }
+    .chapter-block { margin-bottom: 18px; }
+    table { page-break-inside: avoid; }
+    .chapter-block { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Print Button -->
+<div class="print-btn">
+  <button onclick="window.print()">🖨 Print / Save as PDF</button>
+</div>
+
+<!-- Header -->
+<div class="course-header">
+  <h1>HIST 102: United States Since 1877 — Spring 2026</h1>
+  <div class="meta">MWF 11:00–11:50 AM &nbsp;|&nbsp; Richland Community College</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- INTRO UNIT -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="chapter-block">
+  <div class="chapter-heading">The Historian's Craft</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Topic</th>
+        <th>Coursework / Resources</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date-col">Mon, Jan 12</td>
+        <td class="topic-col">Introduction and Syllabus</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr>
+        <td class="date-col">Wed, Jan 14</td>
+        <td class="topic-col">Lecture 1: Terminology and Frameworks</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr>
+        <td class="date-col">Fri, Jan 16</td>
+        <td class="topic-col">Lecture 2: Ideology and the Slanting of History</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr class="no-class">
+        <td class="date-col">Mon, Jan 19</td>
+        <td class="topic-col">MLK Day — No Class</td>
+        <td class="notes-col"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- CHAPTER 17 -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="chapter-block">
+  <div class="chapter-heading">Chapter 17: Reconstruction, 1863–1877</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Topic</th>
+        <th>Coursework / Resources</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date-col">Wed, Jan 21</td>
+        <td class="topic-col">Lecture 1: Reconstruction's Second Founding</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr>
+        <td class="date-col">Fri, Jan 23</td>
+        <td class="topic-col">Lecture 2: Lost Cause Mythology, Part 1</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr>
+        <td class="date-col">Mon, Jan 26</td>
+        <td class="topic-col">Lecture 3: Lost Cause Mythology, Part 2</td>
+        <td class="notes-col"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- CHAPTER 18 -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="chapter-block">
+  <div class="chapter-heading">Chapter 18: A Transformed Nation — The West and the New South, 1865–1900</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Topic</th>
+        <th>Coursework / Resources</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date-col">Wed, Jan 28</td>
+        <td class="topic-col">Lecture 1: Conquest and Resistance</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr>
+        <td class="date-col">Fri, Jan 30</td>
+        <td class="topic-col">Lecture 2: The Mythic West</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr>
+        <td class="date-col">Mon, Feb 02</td>
+        <td class="topic-col">Lecture 3: Explaining the West (Turner's Frontier Thesis)</td>
+        <td class="notes-col"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- CHAPTER 20 -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="chapter-block">
+  <div class="chapter-heading">Chapter 20: Cities, Peoples, Cultures, 1890–1920</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Topic</th>
+        <th>Coursework / Resources</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date-col">Wed, Feb 04</td>
+        <td class="topic-col">Lecture 1: Migration and Diaspora</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr>
+        <td class="date-col">Fri, Feb 06</td>
+        <td class="topic-col">Lecture 2: Race and Urbanization</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr>
+        <td class="date-col">Mon, Feb 09</td>
+        <td class="topic-col">Lecture 3: Tenements, Disease &amp; Public Health</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr>
+        <td class="date-col">Wed, Feb 11</td>
+        <td class="topic-col">Lecture 4: Reform &amp; the Pluralistic City</td>
+        <td class="notes-col"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- CHAPTER 21 -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="chapter-block">
+  <div class="chapter-heading">Chapter 21: Progressivism, 1900–1917</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Topic</th>
+        <th>Coursework / Resources</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date-col">Fri, Feb 13</td>
+        <td class="topic-col">Lecture 1: The Jungle and Progressive Disgust</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr>
+        <td class="date-col">Mon, Feb 16</td>
+        <td class="topic-col">Lecture 2: Progressive Management of the Body</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr>
+        <td class="date-col">Wed, Feb 18</td>
+        <td class="topic-col">Lecture 3: Progressive Eugenics and Social Engineering</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr>
+        <td class="date-col">Fri, Feb 20</td>
+        <td class="topic-col">Lecture 4: Progressive Eugenics &amp; Social Engineering (cont.)</td>
+        <td class="notes-col"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- CHAPTER 22 -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="chapter-block">
+  <div class="chapter-heading">Chapter 22: Becoming a World Power, 1898–1917</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Topic</th>
+        <th>Coursework / Resources</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date-col">Mon, Feb 23</td>
+        <td class="topic-col">Lecture 1: War and Empire (1898)</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr>
+        <td class="date-col">Wed, Feb 25</td>
+        <td class="topic-col">Lecture 2: Occupation and Resistance</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr class="exam-row">
+        <td class="date-col">Fri, Feb 27</td>
+        <td class="topic-col">📝 IN-CLASS EXAM 1 — Chapters 17, 18, 20, 21</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr>
+        <td class="date-col">Mon, Mar 02</td>
+        <td class="topic-col">Lecture 3: The Imperial Turn</td>
+        <td class="notes-col"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- CHAPTER 23 -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="chapter-block">
+  <div class="chapter-heading">Chapter 23: War and Society, 1914–1920</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Topic</th>
+        <th>Coursework / Resources</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="no-class">
+        <td class="date-col">Wed, Mar 04</td>
+        <td class="topic-col">Lecture 1: Video — Shell Shock (no in-class lecture)</td>
+        <td class="notes-col">Show video as part of Doing History assignment</td>
+      </tr>
+      <tr>
+        <td class="date-col">Fri, Mar 06</td>
+        <td class="topic-col">Lecture 2: Influenza Pandemic</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr class="break-row">
+        <td class="date-col" colspan="3" style="text-align:center; font-weight:bold; color:var(--break-green);">🌴 SPRING BREAK — No Classes &nbsp;|&nbsp; Mon, Mar 09 – Fri, Mar 13</td>
+      </tr>
+      <tr>
+        <td class="date-col">Mon, Mar 16</td>
+        <td class="topic-col">Lecture 3: Sacco-Vanzetti and the Rise of the American Left</td>
+        <td class="notes-col"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- CHAPTER 24 -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="chapter-block">
+  <div class="chapter-heading">Chapter 24: The 1920s</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Topic</th>
+        <th>Coursework / Resources</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date-col">Wed, Mar 18</td>
+        <td class="topic-col">Lecture 1: Jazz Age</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr>
+        <td class="date-col">Fri, Mar 20</td>
+        <td class="topic-col">Lecture 1: Jazz Age (cont.)</td>
+        <td class="notes-col">Lecture 2 — Dry Laws, Wet Pictures is the Doing History assignment</td>
+      </tr>
+      <tr>
+        <td class="date-col">Mon, Mar 23</td>
+        <td class="topic-col">Lecture 3: Harlem Renaissance, Part A</td>
+        <td class="notes-col">Part B is an independent Study Buddy deck (extra credit)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- CHAPTER 25 -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="chapter-block">
+  <div class="chapter-heading">Chapter 25: Great Depression &amp; New Deal, 1929–1939</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Topic</th>
+        <th>Coursework / Resources</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date-col">Wed, Mar 25</td>
+        <td class="topic-col">Lecture 1: Hoover and FDR's Folly</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr>
+        <td class="date-col">Fri, Mar 27</td>
+        <td class="topic-col">Flex Day</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr>
+        <td class="date-col">Mon, Mar 30</td>
+        <td class="topic-col">Lecture 2: Witnessing and Escaping American Culture — Great Depression</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr>
+        <td class="date-col">Wed, Apr 01</td>
+        <td class="topic-col">Lecture 3: Forgotten Emigrants</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr class="holiday-row">
+        <td class="date-col">Fri, Apr 03</td>
+        <td class="topic-col">🌸 Spring Holiday — College Closed</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr class="exam-row">
+        <td class="date-col">Mon, Apr 06</td>
+        <td class="topic-col">📝 IN-CLASS EXAM 2 — Chapters 22–25</td>
+        <td class="notes-col">100 pts</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- CHAPTER 26 -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="chapter-block">
+  <div class="chapter-heading">Chapter 26: America During the Second World War, 1939–1945</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Topic</th>
+        <th>Coursework / Resources</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date-col">Wed, Apr 08</td>
+        <td class="topic-col">Lecture 1: Fascism and the Politics of Expansion</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr>
+        <td class="date-col">Fri, Apr 10</td>
+        <td class="topic-col">Lecture 2: What Were We Fighting?</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr>
+        <td class="date-col">Mon, Apr 13</td>
+        <td class="topic-col">Lecture 3: Hiroshima, Nuremberg, and the Fragile Quest for Justice</td>
+        <td class="notes-col"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- CHAPTER 27 -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="chapter-block">
+  <div class="chapter-heading">Chapter 27: The Age of Containment, 1946–1953</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Topic</th>
+        <th>Coursework / Resources</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date-col">Wed, Apr 15</td>
+        <td class="topic-col">Lecture 1: Origins and Implementation — Realism Confronts Soviet Aggression and the Human Cost of Communism (1945–1949)</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr>
+        <td class="date-col">Fri, Apr 17</td>
+        <td class="topic-col">Lecture 2: The Domestic Front — Exposing Subversion: Chambers, Hiss, McCarthy, and the China Debate (1948–1953)</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr>
+        <td class="date-col">Mon, Apr 20</td>
+        <td class="topic-col">Lecture 3: Containment Tested — The Korean War and the Limits of Limited War (1950–1953)</td>
+        <td class="notes-col"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- CHAPTER 28 -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="chapter-block">
+  <div class="chapter-heading">Chapter 28: America at Midcentury, 1953–1963</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Topic</th>
+        <th>Coursework / Resources</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date-col">Wed, Apr 22</td>
+        <td class="topic-col">Lecture 1: The Eisenhower Years — America's Postwar Zenith, 1953–1961</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr>
+        <td class="date-col">Fri, Apr 24</td>
+        <td class="topic-col">Lecture 2: Television Changes Everything</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr>
+        <td class="date-col">Mon, Apr 27</td>
+        <td class="topic-col">Lecture 3: Civil Rights — Fulfilling the American Creed Through Law, Courage, and Constitutional Process</td>
+        <td class="notes-col"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- CHAPTER 29 -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="chapter-block">
+  <div class="chapter-heading">Chapter 29: America During a Divisive War, 1963–1974</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Topic</th>
+        <th>Coursework / Resources</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date-col">Wed, Apr 29</td>
+        <td class="topic-col">Lecture 1: The Great Society and the War on Poverty — Intentions vs. Results</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr>
+        <td class="date-col">Fri, May 01</td>
+        <td class="topic-col">Lecture 2: The Rise of the Sixties Counterculture — Rebellion Against the American Creed</td>
+        <td class="notes-col"></td>
+      </tr>
+      <tr>
+        <td class="date-col">Mon, May 04</td>
+        <td class="topic-col">Lecture 3: Vietnam, the "Living Room War," and the Collapse of National Consensus</td>
+        <td class="notes-col"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- Withdrawal Notice -->
+<div class="notice">
+  <strong>⚠ Withdrawal Deadline:</strong> Tue, May 05 — Last day for withdrawal with "W" (16-week classes)
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- FINALS -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="section-label" style="margin-top:22px;">📝 Final Exam</div>
+<table style="border-top:none;">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Topic</th>
+      <th>Coursework / Resources</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="no-class">
+      <td class="date-col">Wed, May 06 – Mon, May 11</td>
+      <td class="topic-col">Finals Week</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr class="finals-row">
+      <td class="date-col">TBD (Finals Week)</td>
+      <td class="topic-col">📝 FINAL EXAM — Comprehensive</td>
+      <td class="notes-col">100 pts</td>
+    </tr>
+  </tbody>
+</table>
+
+</body>
+</html>
