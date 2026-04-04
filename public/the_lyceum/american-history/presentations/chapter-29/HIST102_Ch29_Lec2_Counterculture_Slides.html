@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destructive Generation - HIST 102</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --antique-gold:#D4AF37; --deep-teal:#2C7873; --rich-purple:#6B4C9A;
+            --ruby-crimson:#9B2C2C; --dark-charcoal:#1A1A1A; --pure-white:#FAFAFA;
+            --soft-cream:#F5F1E8; --bronze-accent:#8B6F47; --forest-green:#1B4332;
+        }
+        .reveal { font-family:'Lora',serif; font-size:1.0em; background-color:var(--dark-charcoal); color:var(--pure-white); }
+        .reveal h1,.reveal h2,.reveal h3 { font-family:'Crimson Pro',serif; font-weight:700; color:var(--antique-gold); text-transform:none; }
+        .reveal h1 { font-size:6.0em; } .reveal h2 { font-size:4.5em; margin-bottom:0.5em; } .reveal h3 { font-size:2.5em; }
+        .reveal ul { list-style:none; padding-left:0; }
+        .reveal ul li { margin-bottom:0.4em; font-size:1.0em; }
+        .reveal ul li:before { content:"◆ "; color:var(--deep-teal); font-weight:bold; margin-right:0.5em; }
+        strong { color:var(--antique-gold); }
+        em { color:var(--deep-teal); font-style:italic; }
+        .popup-trigger { color:var(--deep-teal); border-bottom:2px dotted var(--deep-teal); cursor:pointer; transition:color 0.3s; }
+        .popup-trigger:hover { color:var(--antique-gold); }
+        .popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+            background:var(--soft-cream); color:var(--dark-charcoal); padding:2em; border-radius:15px;
+            box-shadow:0 8px 32px rgba(0,0,0,0.5); max-width:600px; max-height:70%; overflow-y:auto;
+            z-index:1000; border:3px solid var(--bronze-accent); }
+        .popup.active { display:block; }
+        .popup-close { position:absolute; top:10px; right:15px; font-size:2em; cursor:pointer; color:var(--ruby-crimson); }
+        .definition-term { font-size:1.5em; font-weight:700; color:var(--rich-purple); margin-bottom:0.5em; font-family:'Crimson Pro',serif; }
+        .key-term { color:var(--rich-purple); font-weight:600; }
+        .slide-counter { position:fixed; bottom:20px; right:20px; background:rgba(26,26,26,0.9);
+            color:var(--antique-gold); padding:8px 15px; border-radius:8px; font-family:'Crimson Pro',serif;
+            font-weight:600; font-size:0.9em; border:2px solid var(--deep-teal); z-index:100; }
+        .two-column { display:grid; grid-template-columns:1fr 1fr; gap:2em; align-items:start; }
+        .three-column { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.5em; align-items:start; }
+        .content-image-layout { display:grid; grid-template-columns:1fr 1fr; gap:2em; align-items:center; }
+        .content-image-layout .content-side { text-align:left; }
+        .content-image-layout .image-side { display:flex; flex-direction:column; align-items:center; justify-content:center; }
+        .content-image-layout .image-side img { max-width:100%; max-height:560px; object-fit:contain; border-radius:6px; }
+        .column-header { font-weight:700; color:var(--antique-gold); font-size:2.5em; margin-bottom:0.5em; font-family:'Crimson Pro',serif; }
+        .bottom-text { margin-top:1.2em; font-style:italic; color:var(--deep-teal); font-size:1.8em; }
+        .bottom-text-bold { margin-top:1.2em; font-weight:700; color:var(--antique-gold); font-size:1.8em; }
+        .subtitle { font-size:2.5em; color:var(--deep-teal); margin-top:0.5em; }
+        .large-text { font-size:2.0em; text-align:center; line-height:1.6; }
+        .callout { background:rgba(212,175,55,0.15); border-left:5px solid var(--antique-gold); padding:1.2em; margin:1em 0; font-size:2.0em; }
+        .primary-source { background:rgba(212,175,55,0.1); border-left:5px solid var(--antique-gold); padding:1em; margin:1em 0; font-style:italic; color:var(--pure-white); font-size:1.8em; }
+        .primary-source-attribution { text-align:right; font-size:1.6em; color:var(--bronze-accent); margin-top:0.5em; font-style:normal; }
+        .timeline-item { margin-bottom:0.6em; }
+        .timeline-year { color:var(--antique-gold); font-weight:700; }
+        .assessment-box { background:rgba(44,120,115,0.15); border:2px solid var(--deep-teal); border-radius:10px; padding:1.5em; margin:1em 0; }
+        .assessment-box h3 { color:var(--deep-teal); margin-top:0; }
+        .img-placeholder { background:rgba(139,111,71,0.2); border:3px dashed var(--bronze-accent); padding:3em; text-align:center; color:var(--bronze-accent); font-style:italic; border-radius:10px; }
+        .img-caption { font-size:1.4em; color:var(--bronze-accent); font-style:italic; text-align:center; margin-top:0.4em; }
+        .centered-list { text-align:center; font-size:2.0em; }
+        .centered-list li { margin-bottom:0.7em; }
+    </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+    <!-- ============================================================ -->
+    <!-- TITLE SLIDE -->
+    <!-- ============================================================ -->
+    <section>
+        <h1 style="font-size:5.0em; line-height:1.1;">Destructive Generation</h1>
+        <div class="subtitle" style="font-size:2.3em;">The Sixties Counterculture and the Assault on the American Creed</div>
+        <div style="margin-top:1.5em; color:var(--bronze-accent); font-size:1.8em; font-style:italic;">
+            HIST 102: U.S. History Since 1877 &nbsp;|&nbsp; Chapter 29, Lecture 2
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION I DIVIDER -->
+    <!-- ============================================================ -->
+    <section data-background="#1B4332">
+        <h2 style="font-size:5.0em; color:var(--antique-gold);">Section I</h2>
+        <div class="subtitle" style="font-size:2.5em;">The World the Counterculture Rejected</div>
+        <p style="color:var(--bronze-accent);font-style:italic;font-size:2.0em;">What did midcentury America actually look like — in measurable terms?</p>
+    </section>
+
+    <!-- Slide: The 1950s Baseline — Social Indicators -->
+    <section>
+        <h2 style="font-size:4.5em;">The 1950s: What the Data Show</h2>
+        <div class="content-image-layout">
+            <div class="content-side">
+                <ul style="font-size:2.0em;">
+                    <li>Church attendance at highest recorded levels — ~49% weekly by 1958</li>
+                    <li>Violent crime rates low and <strong>declining</strong></li>
+                    <li>Divorce rates stabilized after postwar spike, then falling</li>
+                    <li>SAT scores reached their post-WWII peak in the early 1960s</li>
+                </ul>
+                <div class="bottom-text" style="font-size:1.8em;">These are the <em>baseline indicators</em> — measure the counterculture's legacy against them</div>
+            </div>
+            <div class="image-side">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/31/Counterculture_of_the_1960s.jpg"
+                     alt="1950s American suburban family life photograph"
+                     style="max-width:100%;max-height:520px;object-fit:contain;border-radius:6px;"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                <div class="img-placeholder" style="display:none;width:100%;height:320px;">📸 Search: "1950s American suburban life photograph"</div>
+                <p class="img-caption">Midcentury American social fabric · Public Domain</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide: What Was Genuinely Wrong -->
+    <section>
+        <h2 style="font-size:4.5em;">The 1950s: Real Failures</h2>
+        <div class="two-column">
+            <div>
+                <div class="column-header" style="font-size:2.5em;">Genuine Injustices</div>
+                <ul style="font-size:2.0em;">
+                    <li>Legal segregation — a <strong>constitutional atrocity</strong></li>
+                    <li>McCarthyism produced injustice against falsely accused individuals</li>
+                    <li>Women's professional aspirations systematically constrained</li>
+                </ul>
+            </div>
+            <div>
+                <div class="column-header" style="font-size:2.5em;">The Analytical Task</div>
+                <ul style="font-size:2.0em;">
+                    <li>Civil Rights Movement: appealed to the <strong>American Creed</strong> to fix specific violations</li>
+                    <li>Counterculture: moved toward rejecting foundational principles altogether</li>
+                    <li>These are <em>categorically different</em> political projects</li>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom-text-bold" style="font-size:1.8em;">Critique and rejection are not the same act</div>
+    </section>
+
+    <!-- Slide: The Distinction That Matters -->
+    <section>
+        <h2 style="font-size:4.5em;">Two Ways to Challenge a Society</h2>
+        <div class="two-column">
+            <div>
+                <div class="column-header" style="font-size:2.5em;">Civil Rights Movement</div>
+                <ul style="font-size:2.0em;">
+                    <li>Invoked the Declaration and Constitution</li>
+                    <li>Held America to its <strong>own stated principles</strong></li>
+                    <li>Operated through constitutional processes</li>
+                    <li>Produced Voting Rights Act, legal transformation</li>
+                </ul>
+            </div>
+            <div>
+                <div class="column-header" style="font-size:2.5em;">Counterculture</div>
+                <ul style="font-size:2.0em;">
+                    <li>Framed American principles as themselves oppressive</li>
+                    <li><strong>Rejected</strong> the foundations — not specific violations</li>
+                    <li>Moved toward coercive disruption</li>
+                    <li>Produced social disintegration alongside reform</li>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom-text" style="font-size:1.8em;">The first produced constitutional progress; the second produced the <span class="popup-trigger" data-popup="social-disintegration-popup">social indicators crisis</span></div>
+    </section>
+
+    <!-- PAUSE & REFLECT — Section I -->
+    <section data-background="#1B4332">
+        <h2 style="font-size:5.0em; color:var(--antique-gold);">⏸ Pause & Reflect</h2>
+        <div class="large-text" style="font-size:2.2em; margin-top:0.8em;">
+            <p style="color:var(--pure-white);">The Civil Rights Movement and the counterculture both challenged aspects of 1950s American society. What is the fundamental difference in how they made their arguments — and which approach was more likely to produce lasting constitutional progress?</p>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION II DIVIDER -->
+    <!-- ============================================================ -->
+    <section data-background="#1B4332">
+        <h2 style="font-size:5.0em; color:var(--antique-gold);">Section II</h2>
+        <div class="subtitle" style="font-size:2.5em;">The New Left's Origins</div>
+        <p style="color:var(--bronze-accent);font-style:italic;font-size:2.0em;">Port Huron, participatory democracy, and the critique of bureaucracy</p>
+    </section>
+
+    <!-- Slide: SDS and the Port Huron Statement -->
+    <section>
+        <h2 style="font-size:4.5em;">Students for a Democratic Society</h2>
+        <div class="content-image-layout">
+            <div class="content-side">
+                <ul style="font-size:2.0em;">
+                    <li>SDS founded 1960; Port Huron Statement adopted <strong>June 1962</strong></li>
+                    <li>Drafted primarily by <span class="popup-trigger" data-popup="hayden-popup">Tom Hayden</span></li>
+                    <li>Called for <em>participatory democracy</em> — politics as meaningful engagement, not institutional routine</li>
+                    <li>Challenged the Old Left's entrenchment in labor unions and the Democratic Party</li>
+                </ul>
+            </div>
+            <div class="image-side">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Port_Huron_Statement_SDS_cover_1962.jpg"
+                     alt="Port Huron Statement SDS cover 1962 booklet"
+                     style="max-width:100%;max-height:520px;object-fit:contain;border-radius:6px;"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                <div class="img-placeholder" style="display:none;width:100%;height:320px;">📸 Search: "Port Huron Statement 1962 SDS pamphlet cover"</div>
+                <p class="img-caption">Port Huron Statement · 1962 · Public Domain</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide: Port Huron — Primary Source -->
+    <section>
+        <h2 style="font-size:5.0em;">Port Huron Statement (1962)</h2>
+        <div class="primary-source" style="font-size:2.0em;">
+            "We are people of this generation, bred in at least modest comfort, housed now in universities, looking uncomfortably to the world we inherit... the permeating and victimizing fact of human degradation, symbolized by the Southern struggle against racial bigotry, compelled most of us from silence to activism."
+            <div class="primary-source-attribution">— Tom Hayden et al., <em style="color:var(--bronze-accent);">Port Huron Statement</em>, Students for a Democratic Society, June 1962</div>
+        </div>
+        <div class="bottom-text" style="font-size:1.8em;">Note: the authors were <strong>bred in modest comfort</strong> — alienation here is cultural, not economic</div>
+    </section>
+
+    <!-- Slide: Seeds of Moral Inversion -->
+    <section>
+        <h2 style="font-size:4.5em;">Port Huron: Legitimate Critique &amp; Hidden Flaws</h2>
+        <div class="two-column">
+            <div>
+                <div class="column-header" style="font-size:2.5em;">Genuine Insights</div>
+                <ul style="font-size:2.0em;">
+                    <li>Bureaucratic alienation in universities was real</li>
+                    <li>Students felt excluded from meaningful civic participation</li>
+                    <li>Critique of Cold War complacency</li>
+                </ul>
+            </div>
+            <div>
+                <div class="column-header" style="font-size:2.5em;">Corrosive Assumptions</div>
+                <ul style="font-size:2.0em;">
+                    <li><span class="popup-trigger" data-popup="antianti-popup">Anti-anti-communism</span>: U.S. and USSR treated as morally equivalent</li>
+                    <li>Prosperity framed as spiritual poverty rather than genuine achievement</li>
+                    <li>Elite students cast as the <strong>natural vanguard</strong> of radical change</li>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom-text" style="font-size:1.8em;"><em>Horowitz</em>: the framework made America's achievements invisible and its imperfections absolute</div>
+    </section>
+
+    <!-- Slide: Daniel Bell and the End of Ideology -->
+    <section>
+        <h2 style="font-size:4.5em;">The Vacuum Bell Didn't See</h2>
+        <div class="content-image-layout">
+            <div class="content-side">
+                <ul style="font-size:2.0em;">
+                    <li><span class="popup-trigger" data-popup="bell-popup">Daniel Bell</span>, <em>The End of Ideology</em> (1960): grand ideological conflict exhausted in prosperous democracies</li>
+                    <li>Argued pragmatic reform, not revolution, was the appropriate mode</li>
+                    <li>Bell was right about the Old Left — but missed the vacuum the New Left would fill</li>
+                    <li>Students in the <strong>most affluent generation in history</strong> treated prosperity as alienation</li>
+                </ul>
+                <div class="bottom-text" style="font-size:1.8em;"><em>Glazer</em>: a revolt against successful bourgeois management, not genuine deprivation</div>
+            </div>
+            <div class="image-side">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Daniel_Bell_sociologist.jpg"
+                     alt="Daniel Bell sociologist portrait photograph"
+                     style="max-width:100%;max-height:520px;object-fit:contain;border-radius:6px;"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                <div class="img-placeholder" style="display:none;width:100%;height:320px;">📸 Search: "Daniel Bell sociologist portrait"</div>
+                <p class="img-caption">Daniel Bell · Sociologist · Columbia University</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide: Elite Alienation vs. Working-Class Grievance -->
+    <section>
+        <h2 style="font-size:4.5em;">Elite Alienation vs. Economic Grievance</h2>
+        <div class="large-text" style="font-size:2.2em; margin-top:0.5em;">
+            <p><strong>New Left leadership:</strong> students from affluent families at elite universities</p>
+            <p style="font-size:0.85em; margin-top:0.5em; color:var(--deep-teal);">People with the most to gain from the existing order</p>
+            <p style="margin-top:0.8em;"><strong>Their radicalism:</strong> cultural, not economic</p>
+            <p style="font-size:0.85em; margin-top:0.5em; color:var(--deep-teal);">Workers moderate demands over time; culturally alienated students do not</p>
+        </div>
+        <div class="bottom-text-bold" style="font-size:1.8em; margin-top:1em;">Cultural radicalism follows different logic than labor movements — no economic stake in stability</div>
+    </section>
+
+    <!-- PAUSE & REFLECT — Section II -->
+    <section data-background="#1B4332">
+        <h2 style="font-size:5.0em; color:var(--antique-gold);">⏸ Pause & Reflect</h2>
+        <div class="assessment-box" style="font-size:2.0em; background:rgba(255,255,255,0.08); border-color:var(--antique-gold);">
+            <p style="color:var(--pure-white);">Daniel Bell predicted the "end of ideology" in 1960. Two years later, the Port Huron Statement launched the New Left. What does the Port Huron Statement's appeal reveal about Bell's prediction?</p>
+            <ol style="list-style-type:upper-alpha; color:var(--pure-white);">
+                <li>Bell was entirely wrong — ideology had never weakened</li>
+                <li>Prosperity satisfies material needs but not the human desire for moral purpose</li>
+                <li>Bell was right, but Port Huron was only a minor historical footnote</li>
+                <li>Grand ideology only disappears when there are no injustices left to address</li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION III DIVIDER -->
+    <!-- ============================================================ -->
+    <section data-background="#1B4332">
+        <h2 style="font-size:5.0em; color:var(--antique-gold);">Section III</h2>
+        <div class="subtitle" style="font-size:2.5em;">Berkeley and Beyond</div>
+        <p style="color:var(--bronze-accent);font-style:italic;font-size:2.0em;">From free speech to coercive disruption — where did the line get crossed?</p>
+    </section>
+
+    <!-- Slide: Free Speech Movement — The Trigger -->
+    <section>
+        <h2 style="font-size:4.5em;">The Free Speech Movement (1964)</h2>
+        <div class="content-image-layout">
+            <div class="content-side">
+                <ul style="font-size:2.0em;">
+                    <li>Trigger: UC Berkeley banned political tables on campus sidewalk</li>
+                    <li>Initial demand: <strong>defensible</strong> — free speech rights shouldn't end at the university gate</li>
+                    <li>Both left-wing civil rights groups and Young Republicans objected</li>
+                    <li><span class="popup-trigger" data-popup="glazer-popup">Nathan Glazer</span> (Berkeley faculty): sympathized with the free-speech claim — at first</li>
+                </ul>
+            </div>
+            <div class="image-side">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/dd/Mario_Savio_sitting_on_cop_car.jpg"
+                     alt="Mario Savio sitting on police car Berkeley Free Speech Movement 1964"
+                     style="max-width:100%;max-height:520px;object-fit:contain;border-radius:6px;"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                <div class="img-placeholder" style="display:none;width:100%;height:320px;">📸 Search: "Mario Savio Free Speech Movement Berkeley 1964"</div>
+                <p class="img-caption">Mario Savio · Sproul Hall · Berkeley, 1964 · Public Domain</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide: Savio — The Line Crossed -->
+    <section>
+        <h2 style="font-size:4.5em;">From Claim to Veto</h2>
+        <div class="primary-source" style="font-size:2.0em;">
+            "There is a time when the operation of the machine becomes so odious, makes you so sick at heart, that you can't take part; you can't even passively take part, and you've got to put your bodies upon the gears and upon the wheels, upon the levers, upon all the apparatus, and you've got to make it stop."
+            <div class="primary-source-attribution">— Mario Savio, <em style="color:var(--bronze-accent);">Sproul Hall Steps, UC Berkeley</em>, December 2, 1964</div>
+        </div>
+        <div class="bottom-text-bold" style="font-size:1.8em;">This is not an argument — it is an announcement of a veto right over institutions one finds morally intolerable</div>
+    </section>
+
+    <!-- Slide: Glazer's Line — Legitimate vs. Coercive -->
+    <section>
+        <h2 style="font-size:4.5em;">The Moment Glazer Drew the Line</h2>
+        <div class="two-column">
+            <div>
+                <div class="column-header" style="font-size:2.5em;">Legitimate Protest</div>
+                <ul style="font-size:2.0em;">
+                    <li>Appeals to constitutional principles</li>
+                    <li>Invokes shared values</li>
+                    <li>Makes an <em>argument</em></li>
+                    <li>Tolerates disagreement</li>
+                </ul>
+            </div>
+            <div>
+                <div class="column-header" style="font-size:2.5em;">Coercive Disruption</div>
+                <ul style="font-size:2.0em;">
+                    <li>Sit-ins, building occupations, shutdowns</li>
+                    <li>Physical interference with institution's operation</li>
+                    <li>Moral theater — intensity of indignation replaces argument</li>
+                    <li>Overrides procedural norms that protect everyone</li>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom-text" style="font-size:1.8em;"><em>Podhoretz</em>: this replaced the liberal tradition of institutional engagement with a politics of moral theater</div>
+    </section>
+
+    <!-- Slide: The Spread — Columbia, Harvard, Cornell -->
+    <section>
+        <h2 style="font-size:4.5em;">Radical Tactics Spread, 1965–1968</h2>
+        <div class="content-image-layout">
+            <div class="content-side">
+                <ul style="font-size:2.0em;">
+                    <li><strong>Columbia (1968):</strong> SDS occupied president's office; faculty files rifled — goal was <em>delegitimization</em>, not reform</li>
+                    <li><strong>Cornell:</strong> Black student militants occupied student union armed with rifles</li>
+                    <li>Mark Rudd's slogan: <strong>"Bring the war home"</strong></li>
+                    <li>Horowitz: moral narcissism — certainty of one's indignation as sufficient warrant for any action</li>
+                </ul>
+            </div>
+            <div class="image-side">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Columbia_University_protest_1968.jpg"
+                     alt="Columbia University student protest occupation 1968"
+                     style="max-width:100%;max-height:520px;object-fit:contain;border-radius:6px;"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                <div class="img-placeholder" style="display:none;width:100%;height:320px;">📸 Search: "Columbia University 1968 student protest occupation"</div>
+                <p class="img-caption">Columbia University occupation · 1968 · Public Domain</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAUSE & REFLECT — Section III -->
+    <section data-background="#1B4332">
+        <h2 style="font-size:5.0em; color:var(--antique-gold);">⏸ Pause & Reflect</h2>
+        <div class="large-text" style="font-size:2.2em; margin-top:0.8em;">
+            <p style="color:var(--pure-white);">Nathan Glazer was sympathetic to students' initial free-speech concerns at Berkeley, but became a critic within months. Where would you draw the line between legitimate protest and coercive disruption — and what principle defines that line?</p>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION IV DIVIDER -->
+    <!-- ============================================================ -->
+    <section data-background="#1B4332">
+        <h2 style="font-size:5.0em; color:var(--antique-gold);">Section IV</h2>
+        <div class="subtitle" style="font-size:2.5em;">The Moral Inversion</div>
+        <p style="color:var(--bronze-accent);font-style:italic;font-size:2.0em;">Family, faith, violence, and the collapse of social norms</p>
+    </section>
+
+    <!-- Slide: The Counterculture Proper 1967–1970 -->
+    <section>
+        <h2 style="font-size:4.5em;">The Counterculture at Its Peak</h2>
+        <div class="content-image-layout">
+            <div class="content-side">
+                <ul style="font-size:2.0em;">
+                    <li>Summer of Love (1967), Woodstock (1969)</li>
+                    <li>Rejection of monogamy, family structure, and Judeo-Christian moral framework</li>
+                    <li>Psychedelics, Eastern spiritualism as replacement for religious practice</li>
+                    <li>Core logic: <strong>individual desire for liberation</strong> is the highest moral standard</li>
+                </ul>
+                <div class="bottom-text" style="font-size:1.8em;"><em>Podhoretz</em>: "If it feels good, do it" is not just an attitude — it is a comprehensive moral philosophy</div>
+            </div>
+            <div class="image-side">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Haight_Ashbury_1967.jpg"
+                     alt="Haight Ashbury San Francisco 1967 counterculture Summer of Love"
+                     style="max-width:100%;max-height:520px;object-fit:contain;border-radius:6px;"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                <div class="img-placeholder" style="display:none;width:100%;height:320px;">📸 Search: "Haight-Ashbury 1967 Summer of Love San Francisco"</div>
+                <p class="img-caption">Haight-Ashbury district, San Francisco · 1967</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide: Podhoretz — What the Counterculture Attacked -->
+    <section>
+        <h2 style="font-size:4.5em;">The Principle of Constraint</h2>
+        <div class="two-column">
+            <div>
+                <div class="column-header" style="font-size:2.5em;">Judeo-Christian Tradition</div>
+                <ul style="font-size:2.0em;">
+                    <li>Authentic selfhood achieved through <strong>discipline, commitment, fidelity</strong></li>
+                    <li>Subordination of desire to duty</li>
+                    <li>Institutions — marriage, family, church — as vehicles of flourishing</li>
+                </ul>
+            </div>
+            <div>
+                <div class="column-header" style="font-size:2.5em;">Counterculture Inversion</div>
+                <ul style="font-size:2.0em;">
+                    <li>Authentic selfhood = what one feels <em>before</em> external norms</li>
+                    <li>Institutions are instruments of repression</li>
+                    <li>Constraint itself — not specific unjust rules — is the enemy</li>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom-text-bold" style="font-size:1.8em;">This philosophy is incompatible with the sustained commitment that families, communities, and democracy require</div>
+    </section>
+
+    <!-- Slide: The Social Indicators Move -->
+    <section>
+        <h2 style="font-size:4.5em;">The Social Indicators Respond</h2>
+        <ul style="font-size:2.0em;">
+            <li class="timeline-item"><span class="timeline-year">1963–1973:</span> Violent crime rate roughly <strong>doubles</strong> — falling trend in 1950s reversed</li>
+            <li class="timeline-item"><span class="timeline-year">After 1965:</span> Divorce rates climb steeply — had stabilized through 1950s</li>
+            <li class="timeline-item"><span class="timeline-year">1963–1978:</span> SAT scores decline for <strong>fifteen consecutive years</strong></li>
+            <li class="timeline-item"><span class="timeline-year">1960s–70s:</span> Illegitimacy rates begin long upward trajectory; drug use expands from marginal to mass</li>
+        </ul>
+        <div class="bottom-text" style="font-size:1.8em;">Magnitude and timing of shifts make it analytically untenable to treat these as entirely unrelated to the simultaneous cultural revolution</div>
+    </section>
+
+    <!-- Slide: SDS Fragmentation and the Weathermen -->
+    <section>
+        <h2 style="font-size:4.5em;">From SDS to the Weather Underground</h2>
+        <div class="content-image-layout">
+            <div class="content-side">
+                <ul style="font-size:2.0em;">
+                    <li>By 1968 SDS: ~100,000 members, fractured by internal competition over who was most radical</li>
+                    <li>Logic of escalation: if America is fundamentally corrupt, <em>reformists</em> are part of the problem</li>
+                    <li><span class="popup-trigger" data-popup="weathermen-popup">The Weathermen</span> (Bill Ayers, Bernardine Dohrn, Mark Rudd): embraced revolutionary violence</li>
+                    <li>Horowitz: moral certainty operated as <strong>epistemological closure</strong> — evidence that didn't fit was discarded</li>
+                </ul>
+            </div>
+            <div class="image-side">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Vietnam_War_protesters_Washington_1967.jpg"
+                     alt="Vietnam War protest march Washington D.C. 1967 anti-war demonstration"
+                     style="max-width:100%;max-height:520px;object-fit:contain;border-radius:6px;"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                <div class="img-placeholder" style="display:none;width:100%;height:320px;">📸 Search: "Vietnam War protest march Washington DC 1967"</div>
+                <p class="img-caption">Anti-war march · Washington, D.C. · 1967 · Public Domain</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide: Dohrn — The Logical Endpoint -->
+    <section>
+        <h2 style="font-size:4.5em;">The Logical Endpoint</h2>
+        <div class="primary-source" style="font-size:2.0em;">
+            "Dig it. First they killed those pigs, then they ate dinner in the same room with them, then they even shoved a fork into a victim's stomach. Wild!"
+            <div class="primary-source-attribution">— Bernardine Dohrn, <em style="color:var(--bronze-accent);">1969 SDS National Council</em>, praising the Manson Family murders</div>
+        </div>
+        <div class="bottom-text-bold" style="font-size:1.8em;">From "love, reflectiveness, reason" (Port Huron, 1962) to celebrating civilian murder (1969) — not an aberration but a trajectory</div>
+    </section>
+
+    <!-- Slide: Television's Amplifying Role -->
+    <section>
+        <h2 style="font-size:4.5em;">Television as Amplifier</h2>
+        <div class="two-column">
+            <div>
+                <div class="column-header" style="font-size:2.5em;">The Reach</div>
+                <ul style="font-size:2.0em;">
+                    <li>93% of U.S. households owned a TV by 1965</li>
+                    <li>Three networks commanded audiences dwarfing today's fragmented media</li>
+                    <li>Protest imagery entered living rooms of millions with no direct contact with the movement</li>
+                </ul>
+            </div>
+            <div>
+                <div class="column-header" style="font-size:2.5em;">The Irony</div>
+                <ul style="font-size:2.0em;">
+                    <li>"Silent majority" was real — many viewers alienated, not converted</li>
+                    <li>Commercial media separated counterculture <em>style</em> from political content</li>
+                    <li>The <strong>anti-capitalist movement</strong> became one of the most successfully marketed cultural products in history</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAUSE & REFLECT — Section IV -->
+    <section data-background="#1B4332">
+        <h2 style="font-size:5.0em; color:var(--antique-gold);">⏸ Pause & Reflect</h2>
+        <div class="large-text" style="font-size:2.2em; margin-top:0.8em;">
+            <p style="color:var(--pure-white);">David Horowitz argues that Bernardine Dohrn's 1969 statement praising the Manson murders was the <em>logical endpoint</em> of the New Left's moral framework — not an aberration. At what point in the movement's development did the moral inversion become irreversible?</p>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- CLOSING SYNTHESIS DIVIDER -->
+    <!-- ============================================================ -->
+    <section data-background="#1B4332">
+        <h2 style="font-size:5.0em; color:var(--antique-gold);">Closing Synthesis</h2>
+        <div class="subtitle" style="font-size:2.5em;">Cultural Capital, Its Destruction, and Its Partial Recovery</div>
+        <p style="color:var(--bronze-accent);font-style:italic;font-size:2.0em;">Who actually bore the costs of the counterculture's disruption?</p>
+    </section>
+
+    <!-- Slide: Who Led vs. Who Paid -->
+    <section>
+        <h2 style="font-size:4.5em;">Elite Rebellion, Working-Class Cost</h2>
+        <div class="two-column">
+            <div>
+                <div class="column-header" style="font-size:2.5em;">Who Led the Revolt</div>
+                <ul style="font-size:2.0em;">
+                    <li>Students from affluent families at elite universities</li>
+                    <li>The demographic with <strong>most to gain</strong> from the existing order</li>
+                    <li>Alienation was cultural, not economic</li>
+                </ul>
+            </div>
+            <div>
+                <div class="column-header" style="font-size:2.5em;">Who Bore the Costs</div>
+                <ul style="font-size:2.0em;">
+                    <li>Urban and rural poor</li>
+                    <li>Working-class families</li>
+                    <li>Minority communities still working toward economic stability</li>
+                    <li>Lacked resources to insulate themselves from cultural disorder</li>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom-text" style="font-size:1.8em;"><em>Magnet</em>: the counterculture's assault on norms most damaged those at the bottom — who had no buffer</div>
+    </section>
+
+    <!-- Slide: Horowitz and Radosh — The Insider Verdict -->
+    <section>
+        <h2 style="font-size:4.5em;">The Insider Verdict</h2>
+        <div class="two-column">
+            <div>
+                <div class="column-header" style="font-size:2.5em;"><span class="popup-trigger" data-popup="horowitz-popup">David Horowitz</span></div>
+                <ul style="font-size:2.0em;">
+                    <li>Active radical at Berkeley; edited <em>Ramparts</em></li>
+                    <li>Left the movement after Black Panther Party violence</li>
+                    <li>Diagnosis: moral certainty produced <strong>epistemological closure</strong></li>
+                    <li>American wickedness was the prior commitment — evidence was filtered through it</li>
+                </ul>
+            </div>
+            <div>
+                <div class="column-header" style="font-size:2.5em;"><span class="popup-trigger" data-popup="radosh-popup">Ronald Radosh</span></div>
+                <ul style="font-size:2.0em;">
+                    <li>Knew many SDS founders personally</li>
+                    <li>Anti-anti-communism was <em>ideological</em>, not naïve</li>
+                    <li>New Left replicated Old Left's selective epistemology about Stalin</li>
+                    <li>Learning was impossible because it required confronting the framework itself</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide: Partial Recovery -->
+    <section>
+        <h2 style="font-size:4.5em;">Damage, Recovery, Open Questions</h2>
+        <ul style="font-size:2.0em;">
+            <li class="timeline-item"><span class="timeline-year">1980:</span> Reagan election — significant popular repudiation of the counterculture's political expression</li>
+            <li class="timeline-item"><span class="timeline-year">1990s:</span> Crime rates decline; welfare reform (1996) reduces dependency rolls</li>
+            <li class="timeline-item"><span class="timeline-year">Still open:</span> Cultural capital — shared norms, institutional trust, family structures — is not rebuilt quickly</li>
+            <li class="timeline-item"><span class="timeline-year">The question:</span> Is the damage primarily contained — or still compounding?</li>
+        </ul>
+        <div class="bottom-text-bold" style="font-size:1.8em;">The historical record alone cannot answer that question — but it can clarify what was at stake</div>
+    </section>
+
+    <!-- Slide: The Conceptual Takeaway -->
+    <section>
+        <h2 style="font-size:4.5em;">What This Lecture Teaches</h2>
+        <div class="callout" style="font-size:2.0em;">
+            A political movement can begin with defensible grievances and escalate toward comprehensive social indictment that the original grievances do not justify. Understanding <em>that transition</em> — and what enables it — is one of the central analytical problems in modern American political history.
+        </div>
+        <div class="large-text" style="font-size:1.9em; margin-top:0.8em;">
+            <p><strong>Critique</strong> holds a society to its own principles &nbsp;|&nbsp; <strong>Rejection</strong> discards those principles as oppressive</p>
+            <p style="font-size:0.85em; margin-top:0.5em; color:var(--deep-teal);">The first produced the Voting Rights Act — the second produced the social disintegration data</p>
+        </div>
+    </section>
+
+</div><!-- /slides -->
+</div><!-- /reveal -->
+
+<!-- ============================================================ -->
+<!-- GLOBAL UI — keyboard overlay + slide counter -->
+<!-- ============================================================ -->
+<div id="keyboard-trigger" class="popup-trigger" data-popup="keyboard-popup"
+     style="position:fixed;top:20px;right:20px;font-size:2em;cursor:pointer;z-index:100;">⌨️</div>
+
+<div id="keyboard-popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Keyboard Shortcuts</div>
+    <p>→ / Space: Next &nbsp;&nbsp; ← : Previous &nbsp;&nbsp; S: Speaker Notes &nbsp;&nbsp; F: Fullscreen &nbsp;&nbsp; O: Overview &nbsp;&nbsp; ESC: Close pop-up</p>
+</div>
+
+<div class="slide-counter"></div>
+
+<!-- ============================================================ -->
+<!-- ALL POP-UPS -->
+<!-- ============================================================ -->
+
+<div id="social-disintegration-popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Social Indicators Crisis</div>
+    <p>Between the early 1960s and mid-1970s: violent crime roughly doubled, divorce rates climbed ~100%, illegitimacy rates began a long upward trajectory, SAT scores fell for 15 consecutive years, and drug use expanded from a marginal to a mass phenomenon. The timing coincides precisely with the counterculture's peak years of influence.</p>
+</div>
+
+<div id="hayden-popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Tom Hayden (1939–2016)</div>
+    <p>Principal author of the Port Huron Statement. Later a California state assemblyman and senator. His trajectory — from radical organizer to mainstream Democratic politician — illustrates how the New Left's energy was eventually absorbed by institutional politics, though not without lasting cultural consequences.</p>
+</div>
+
+<div id="antianti-popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Anti-Anti-Communism</div>
+    <p>A stance that refused to criticize the Soviet Union and its communist allies while subjecting American institutions to comprehensive moral indictment. Identified by Norman Podhoretz as the intellectual signature of the New Left. The result: evidence of communist atrocities (the Cultural Revolution, Stalin's purges) was minimized or explained away, while evidence of American imperfection was treated as confirming the fundamental indictment of American society.</p>
+</div>
+
+<div id="bell-popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Daniel Bell (1919–2011)</div>
+    <p>Harvard sociologist and co-founder of <em>The Public Interest</em>. His 1960 book <em>The End of Ideology</em> argued that grand ideological conflicts had been exhausted in prosperous postwar democracies. Within two years, the Port Huron Statement showed he had identified the Old Left's decline without anticipating the New Left's emergence. Bell later described the 1960s as producing "cultural contradictions of capitalism."</p>
+</div>
+
+<div id="glazer-popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Nathan Glazer (1923–2019)</div>
+    <p>Sociologist at Berkeley during the Free Speech Movement and later at Harvard. Co-author of <em>The Lonely Crowd</em> and <em>Beyond the Melting Pot</em>. His contemporaneous account of the FSM in <em>The Public Interest</em> (1968) is among the most analytically rigorous firsthand accounts. He was initially sympathetic to the free-speech claim but drew the line at the tactics that followed, making him one of the early voices of neoconservative critique of the New Left.</p>
+</div>
+
+<div id="weathermen-popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">The Weathermen / Weather Underground</div>
+    <p>A domestic terrorist faction that emerged from SDS's 1969 collapse. Led by Bill Ayers, Bernardine Dohrn, and Mark Rudd. Conducted bombings of the U.S. Capitol, Pentagon, and New York City Police headquarters in the early 1970s. The group's "Days of Rage" in Chicago (October 1969) ended with violent clashes with police. Ayers later became a Chicago education professor; his 2001 memoir's publication on September 11, 2001 created significant controversy.</p>
+</div>
+
+<div id="horowitz-popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">David Horowitz (b. 1939)</div>
+    <p>Son of communist parents; edited <em>Ramparts</em> magazine in the 1960s, a leading New Left publication. His break with the movement came after a bookkeeper he had recommended to the Black Panther Party was murdered — and the movement's response made clear that ideological loyalty outweighed truth-telling. His memoir <em>Radical Son</em> (1997) is the most analytically penetrating insider account of the New Left's moral structure.</p>
+</div>
+
+<div id="radosh-popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Ronald Radosh (b. 1937)</div>
+    <p>Historian and former communist who spent decades documenting the Old and New Left from the inside. His scholarly work on the Rosenberg case (<em>The Rosenberg File</em>) demonstrated their guilt — a finding that estranged him from many former allies. His memoir <em>Commies</em> (2001) traces the continuities between the Old Left's Stalin apologetics and the New Left's anti-anti-communism, showing how selective epistemology operated across generations.</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- SCRIPTS -->
+<!-- ============================================================ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+<script>
+    Reveal.initialize({
+        width: 1920, height: 1080, margin: 0.04,
+        minScale: 0.1, maxScale: 1.0,
+        hash: true, slideNumber: false,
+        transition: 'slide',
+        plugins: [RevealNotes]
+    });
+
+    function updateSlideCounter() {
+        const c = Reveal.getState().indexh + 1;
+        const t = Reveal.getTotalSlides();
+        document.querySelector('.slide-counter').textContent = `${c} / ${t}`;
+    }
+    Reveal.on('slidechanged', updateSlideCounter);
+    Reveal.on('ready', updateSlideCounter);
+
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('popup-trigger')) {
+            const el = document.getElementById(e.target.getAttribute('data-popup'));
+            if (el) el.classList.add('active');
+        }
+        if (e.target.classList.contains('popup-close') || e.target.classList.contains('popup')) {
+            document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+        }
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+        }
+    });
+</script>
+</body>
+</html>
