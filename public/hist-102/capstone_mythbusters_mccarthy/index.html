@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>"Witches Everywhere" — McCarthy Capstone · HIST 102</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --steel-blue:       #4A6FA5;
+    --industrial-slate: #2E4057;
+    --copper-accent:    #C97D60;
+    --bright-teal:      #17A398;
+    --warm-cream:       #F7F3E8;
+    --charcoal:         #1E1E24;
+    --silver-mist:      #A3B4C8;
+    --deep-navy:        #1B2838;
+    --teal-dark:        #128a80;
+    --ink:              #1E1E24;
+    --ink-mid:          #3a3a44;
+    --ink-light:        #6b7280;
+    --border:           #d1d9e0;
+    --card-bg:          #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Lora', serif;
+    background-color: var(--warm-cream);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* ── HEADER ── */
+  .page-header {
+    background: linear-gradient(135deg, var(--deep-navy) 0%, var(--industrial-slate) 50%, var(--charcoal) 100%);
+    border-bottom: 5px solid var(--copper-accent);
+    padding: 3rem 2rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-header::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234A6FA5' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.5;
+  }
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .header-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--silver-mist);
+    margin-bottom: 0.6rem;
+  }
+  .header-eyebrow a {
+    color: var(--copper-accent);
+    text-decoration: none;
+  }
+  .header-eyebrow a:hover { text-decoration: underline; }
+  .header-eyebrow span { margin: 0 0.4rem; opacity: 0.5; }
+  .page-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+  }
+  .page-header h1 em {
+    color: var(--copper-accent);
+    font-style: italic;
+  }
+  .header-sub {
+    font-size: 1rem;
+    color: var(--silver-mist);
+    font-style: italic;
+    margin-bottom: 1.5rem;
+  }
+  .header-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .header-tag {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--warm-cream);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── NAV ── */
+  .main-nav {
+    background: var(--industrial-slate);
+    border-bottom: 2px solid var(--steel-blue);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  .nav-link {
+    color: var(--warm-cream);
+    text-decoration: none;
+    padding: 0.75rem 1.2rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    transition: color 0.2s, background 0.2s;
+  }
+  .nav-link:hover {
+    color: var(--copper-accent);
+    background: rgba(74,111,165,0.3);
+  }
+
+  /* ── CONTENT ── */
+  .wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem 5rem;
+  }
+
+  /* ── ASSIGNMENT LAUNCH STRIP ── */
+  .launch-strip {
+    background: linear-gradient(135deg, var(--industrial-slate) 0%, var(--deep-navy) 100%);
+    border-radius: 10px;
+    padding: 1.6rem 2rem;
+    margin: 2.5rem 0 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    border: 1px solid rgba(74,111,165,0.3);
+  }
+  .launch-strip-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--silver-mist);
+    margin-bottom: 0.3rem;
+  }
+  .launch-strip-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: #ffffff;
+  }
+  .launch-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+  .launch-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--bright-teal);
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    padding: 0.6rem 1.3rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.1s;
+    box-shadow: 0 2px 8px rgba(23,163,152,0.3);
+  }
+  .launch-btn:hover { background: var(--teal-dark); transform: translateY(-1px); }
+  .launch-btn.secondary {
+    background: transparent;
+    border: 1.5px solid var(--bright-teal);
+    color: var(--bright-teal);
+    box-shadow: none;
+  }
+  .launch-btn.secondary:hover {
+    background: var(--bright-teal);
+    color: #ffffff;
+  }
+
+  /* ── SECTION HEADING ── */
+  .section-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--industrial-slate);
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid var(--steel-blue);
+    position: relative;
+  }
+  .section-heading::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: 0;
+    width: 50px; height: 3px;
+    background: var(--copper-accent);
+  }
+
+  /* ── PROSE ── */
+  .prose p {
+    font-size: 0.97rem;
+    color: var(--ink-mid);
+    margin-bottom: 1rem;
+    line-height: 1.75;
+  }
+  .prose p:last-child { margin-bottom: 0; }
+  .prose strong { color: var(--ink); }
+
+  /* ── MYTH BOX ── */
+  .myth-box {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-left: 5px solid var(--copper-accent);
+    border-radius: 6px;
+    padding: 1.3rem 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .myth-box-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--copper-accent);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .myth-box p {
+    font-size: 0.93rem;
+    color: var(--ink-mid);
+    font-style: italic;
+    line-height: 1.7;
+  }
+  .myth-box cite {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--ink-light);
+    font-style: normal;
+  }
+
+  /* ── STEPS GRID ── */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  @media (max-width: 600px) { .steps-grid { grid-template-columns: 1fr; } }
+  .step-card {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(46,64,87,0.07);
+  }
+  .step-card-header {
+    background: var(--industrial-slate);
+    padding: 0.6rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    border-bottom: 2px solid var(--bright-teal);
+  }
+  .step-num {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.55);
+  }
+  .step-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #ffffff;
+  }
+  .step-body {
+    padding: 1rem;
+    font-size: 0.88rem;
+    color: var(--ink-mid);
+    line-height: 1.6;
+  }
+  .step-body a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: 0.8rem;
+    color: var(--bright-teal);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid var(--bright-teal);
+    transition: color 0.15s;
+  }
+  .step-body a:hover { color: var(--teal-dark); border-color: var(--teal-dark); }
+
+  /* ── SOURCES TABLE ── */
+  .sources-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  @media (max-width: 700px) { .sources-grid { grid-template-columns: 1fr; } }
+  .source-card {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-top: 3px solid var(--steel-blue);
+    border-radius: 6px;
+    padding: 1rem 1.1rem;
+  }
+  .source-card h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--steel-blue);
+    margin-bottom: 0.5rem;
+  }
+  .source-card p {
+    font-size: 0.85rem;
+    color: var(--ink-mid);
+    line-height: 1.55;
+    margin-bottom: 0.6rem;
+  }
+  .source-card a {
+    font-size: 0.82rem;
+    color: var(--bright-teal);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--bright-teal);
+    word-break: break-all;
+  }
+  .source-card a:hover { color: var(--teal-dark); }
+
+  /* ── INTEGRITY BOX ── */
+  .integrity-box {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-left: 5px solid #8B1A1A;
+    border-radius: 6px;
+    padding: 1.2rem 1.5rem;
+    margin: 2rem 0;
+  }
+  .integrity-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #8B1A1A;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .integrity-box p {
+    font-size: 0.9rem;
+    color: var(--ink-mid);
+    line-height: 1.65;
+    margin-bottom: 0.5rem;
+  }
+  .integrity-box p:last-child { margin-bottom: 0; }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    background: var(--deep-navy);
+    color: var(--silver-mist);
+    text-align: center;
+    padding: 2rem 1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+  }
+  .site-footer a { color: var(--copper-accent); text-decoration: none; }
+  .site-footer a:hover { color: var(--bright-teal); }
+  .footer-quote { font-style: italic; margin-bottom: 0.5rem; color: var(--silver-mist); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="main-nav">
+  <a href="../../index.html" class="nav-link">Home</a>
+  <a href="../index.html" class="nav-link">HIST 102</a>
+  <a href="../../index.html#about" class="nav-link">About</a>
+  <a href="../../index.html#contact" class="nav-link">Contact</a>
+</nav>
+
+<!-- HEADER -->
+<header class="page-header">
+  <div class="header-inner">
+    <div class="header-eyebrow">
+      <a href="../index.html">HIST 102</a>
+      <span>›</span>
+      The Historian's Workshop
+      <span>›</span>
+      Chapters 26–27
+    </div>
+    <h1><em>"Witches Everywhere"</em><br>The Witch Hunt That Found Real Witches</h1>
+    <div class="header-sub">McCarthy, Venona &amp; the Soviet Archives — A Capstone Research Project</div>
+    <div class="header-tags">
+      <span class="header-tag">📁 Primary Sources</span>
+      <span class="header-tag">🔐 Declassified Archives</span>
+      <span class="header-tag">✍️ Research Essay</span>
+      <span class="header-tag">Chapters 26–27</span>
+    </div>
+  </div>
+</header>
+
+<!-- MAIN -->
+<div class="wrap">
+
+  <!-- LAUNCH STRIP -->
+  <div class="launch-strip">
+    <div>
+      <div class="launch-strip-label">Assignment Forms</div>
+      <div class="launch-strip-title">Begin with the Research Notes, then move to the Essay Planner</div>
+    </div>
+    <div class="launch-buttons">
+      <a href="McCarthy_Research_Notes.html" class="launch-btn">🔍 Research Notes Form</a>
+      <a href="mccarthy-essay-planner.html" class="launch-btn secondary">✍️ Essay Planner &amp; Draft</a>
+    </div>
+  </div>
+
+  <!-- OVERVIEW -->
+  <h2 class="section-heading">The Assignment</h2>
+  <div class="prose">
+    <p>Most Americans first encounter the word <em>McCarthyism</em> as a synonym for reckless accusation — a cautionary tale about demagoguery, fear, and the abuse of political power. Senator Joseph McCarthy is remembered as a bully who destroyed innocent lives with unsubstantiated charges, and his era is routinely compared to the Salem witch trials of 1692: hysteria mistaken for evidence, accusation substituted for proof.</p>
+    <p>But what if the witch hunt found real witches?</p>
+    <p>In this capstone project, you will go beyond the textbook narrative and examine the actual archival evidence: declassified Soviet intelligence cables from the <strong>Venona Project</strong> and internal KGB records from the <strong>Vassiliev Notebooks</strong> — documents that were hidden behind the Iron Curtain until the 1990s. These records name names, describe operations, and identify U.S. government officials who supplied the Soviet Union with intelligence during the 1940s.</p>
+    <p>Your task is to evaluate McCarthy's specific accusations against the archival record, assess the strength of the evidence, and construct an evidence-based historical argument about what the declassified archives actually reveal.</p>
+  </div>
+
+  <div class="myth-box">
+    <div class="myth-box-label">The Standard Textbook Definition</div>
+    <p>"The practice of making unfair allegations or using unfair investigative techniques, especially in order to restrict dissent or political criticism."</p>
+    <cite>— Dictionary.com, s.v. "McCarthyism"</cite>
+  </div>
+
+  <div class="prose">
+    <p>This is where your research begins — and where the standard narrative may begin to break down. You will decide what the evidence shows.</p>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <h2 class="section-heading">How This Assignment Works</h2>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-card-header">
+        <span class="step-num">Step 1</span>
+        <span class="step-title">Research Notes</span>
+      </div>
+      <div class="step-body">
+        Using the Venona database and Vassiliev Notebooks, research 10 individuals named by McCarthy. For each person, record their government role, McCarthy's accusation, Soviet code name, verbatim quotes from the cables, and your assessment of the evidence.
+        <a href="McCarthy_Research_Notes.html" target="_blank">🔍 Open Research Notes Form →</a>
+      </div>
+    </div>
+    <div class="step-card">
+      <div class="step-card-header">
+        <span class="step-num">Step 2</span>
+        <span class="step-title">Essay Planner</span>
+      </div>
+      <div class="step-body">
+        Using your Research Notes, build a structured historical essay through guided planning steps: thesis, introduction with road map, three archival body paragraphs, a McCarran Committee analysis, an optional counterargument, and a conclusion.
+        <a href="mccarthy-essay-planner.html" target="_blank">✍️ Open Essay Planner →</a>
+      </div>
+    </div>
+    <div class="step-card">
+      <div class="step-card-header">
+        <span class="step-num">Step 3</span>
+        <span class="step-title">Export &amp; Submit</span>
+      </div>
+      <div class="step-body">
+        Each form includes a download button that exports your work as a formatted plain-text file. Both files auto-save to your browser as you work. Submit both exported <code style="font-size:0.82rem;background:#f0f0ee;padding:0.1rem 0.3rem;border-radius:3px;">.txt</code> files to Canvas when complete.
+      </div>
+    </div>
+    <div class="step-card">
+      <div class="step-card-header">
+        <span class="step-num">Note</span>
+        <span class="step-title">Auto-Save</span>
+      </div>
+      <div class="step-body">
+        Both forms automatically save your progress to your browser's local storage. Your work will be waiting for you if you close the tab and return — as long as you use the same browser on the same device. Always export your final <code style="font-size:0.82rem;background:#f0f0ee;padding:0.1rem 0.3rem;border-radius:3px;">.txt</code> file before closing.
+      </div>
+    </div>
+  </div>
+
+  <!-- SOURCES -->
+  <h2 class="section-heading">Primary Sources You Will Use</h2>
+  <div class="sources-grid">
+    <div class="source-card">
+      <h4>Venona Project</h4>
+      <p>Declassified NSA intercepts of Soviet intelligence cables, 1940s. Names U.S. sources by code name with operational details.</p>
+      <a href="https://www.nsa.gov/Helpful-Links/NSA-FOIA/Declassification-Transparency-Initiatives/Historical-Releases/Venona/" target="_blank">NSA Venona Archive →</a>
+    </div>
+    <div class="source-card">
+      <h4>Vassiliev Notebooks</h4>
+      <p>KGB officer Alexander Vassiliev's handwritten notes from Moscow Center files, including the 1948 Gorsky Memo listing active Soviet agents by real name.</p>
+      <a href="https://digitalarchive.wilsoncenter.org/collection/86/vassiliev-notebooks" target="_blank">Wilson Center Digital Archive →</a>
+    </div>
+    <div class="source-card">
+      <h4>McCarthy's Senate Speech</h4>
+      <p>The February 20, 1950 Congressional Record — McCarthy's "81 cases" speech naming State and Treasury officials as security risks or Communists.</p>
+      <a href="https://www.govinfo.gov/content/pkg/GPO-CRECB-1950-pt4/pdf/GPO-CRECB-1950-pt4-2.pdf" target="_blank">Congressional Record (PDF) →</a>
+    </div>
+  </div>
+
+  <!-- INTEGRITY -->
+  <div class="integrity-box">
+    <div class="integrity-label">⚠ Academic Integrity</div>
+    <p>All work submitted for this assignment must reflect your own research and analysis. Do not use AI tools to generate, rewrite, or complete any portion of either form. Review the class AI use policy before beginning.</p>
+    <p>Submitted files will be processed through AI detection tools as part of the grading review.</p>
+  </div>
+
+  <!-- LAUNCH STRIP BOTTOM -->
+  <div class="launch-strip" style="margin-top:1rem;">
+    <div>
+      <div class="launch-strip-label">Ready to begin?</div>
+      <div class="launch-strip-title">Start with the Research Notes form, then move to the Essay Planner.</div>
+    </div>
+    <div class="launch-buttons">
+      <a href="McCarthy_Research_Notes.html" class="launch-btn">🔍 Research Notes Form</a>
+      <a href="mccarthy-essay-planner.html" class="launch-btn secondary">✍️ Essay Planner &amp; Draft</a>
+    </div>
+  </div>
+
+</div><!-- /wrap -->
+
+<footer class="site-footer">
+  <p class="footer-quote"><em>"The Past is Prologue"</em> — William Shakespeare</p>
+  <p>HIST 102 · United States History Since 1877 · Richland Community College · <a href="../../index.html#contact">Professor Austin</a></p>
+</footer>
+
+</body>
+</html>

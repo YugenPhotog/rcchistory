@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Essay Planner & Draft — HIST 102</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cloud-dancer:    #F4F4F2;
+    --cloud-mid:       #EAEAE7;
+    --cloud-deep:      #DCDCDA;
+    --antique-gold:    #B8860B;
+    --antique-gold-text: #7D5B07;  /* darkened for 4.5:1 on white/light bg — text use only */
+    --antique-gold-lt: #D4AF37;
+    --deep-teal:       #1E6B66;
+    --rich-purple:     #5A3D8A;
+    --ruby-crimson:    #8B1A1A;
+    --bronze-accent:   #7A5C30;
+    --forest-green:    #1B4332;
+    --ink:             #1C1C1A;
+    --ink-mid:         #3A3A38;
+    --ink-light:       #6B6B68;
+    --border:          #C8C8C4;
+    --input-bg:        #FFFFFF;
+    --card-bg:         #FFFFFF;
+    --card-alt:        #F8F8F6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Lora', serif;
+    background-color: var(--cloud-dancer);
+    color: var(--ink);
+    padding: 0 0 5rem;
+    line-height: 1.65;
+    font-size: 15px;
+  }
+
+  /* MASTHEAD */
+  .masthead {
+    background: var(--forest-green);
+    padding: 2.2rem 2rem 1.8rem;
+    border-bottom: 5px solid var(--antique-gold-lt);
+  }
+  .masthead-inner { max-width: 1080px; margin: 0 auto; }
+  .masthead-eyebrow {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--antique-gold-lt);
+    margin-bottom: 0.5rem;
+  }
+  .masthead h1 {
+    font-family: 'Crimson Pro', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--cloud-dancer);
+    line-height: 1.2;
+    margin-bottom: 0.4rem;
+  }
+  .masthead h1 em { color: var(--antique-gold-lt); font-style: italic; }
+  .masthead-sub { font-size: 0.88rem; color: rgba(244,244,242,0.65); font-style: italic; }
+
+  /* STUDENT BAND */
+  .student-band {
+    background: var(--card-bg);
+    border-bottom: 2px solid var(--cloud-deep);
+    padding: 1.2rem 1.5rem;
+  }
+  .student-band-inner {
+    max-width: 1080px; margin: 0 auto;
+    display: grid; grid-template-columns: 2.5fr 1fr 1fr; gap: 1rem; align-items: end;
+  }
+  @media (max-width: 640px) { .student-band-inner { grid-template-columns: 1fr; } }
+
+  /* FORM ELEMENTS */
+  label {
+    display: block;
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-light);
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+  }
+  input[type="text"], textarea, select {
+    width: 100%;
+    background: var(--input-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    color: var(--ink);
+    font-family: 'Lora', serif;
+    font-size: 0.9rem;
+    padding: 0.45rem 0.7rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    resize: vertical;
+    appearance: none;
+  }
+  input[type="text"]:focus, textarea:focus, select:focus {
+    outline: 2px solid transparent;
+    border-color: var(--deep-teal);
+    box-shadow: 0 0 0 3px rgba(30,107,102,0.22);
+  }
+  textarea { min-height: 90px; }
+  textarea.short  { min-height: 64px; }
+  textarea.medium { min-height: 120px; }
+  textarea.tall   { min-height: 160px; }
+
+  /* WRAP */
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* SECTION HEADING */
+  .section-heading {
+    margin: 2.5rem 0 1.2rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .section-heading h2 {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--antique-gold-text); white-space: nowrap;
+  }
+  .section-heading-rule {
+    flex: 1; height: 2px;
+    background: linear-gradient(to right, var(--antique-gold-lt), transparent);
+  }
+
+  /* INSTRUCTION HINT */
+  .hint {
+    font-size: 0.82rem;
+    color: var(--ink-light);
+    font-style: italic;
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+  .hint strong { color: var(--ink-mid); font-style: normal; }
+  .example-box {
+    background: var(--cloud-mid);
+    border-left: 4px solid var(--antique-gold-lt);
+    border-radius: 3px;
+    padding: 0.55rem 0.9rem;
+    font-size: 0.83rem;
+    color: var(--ink-mid);
+    font-style: italic;
+    margin-bottom: 0.7rem;
+    line-height: 1.5;
+  }
+  .example-box strong { color: var(--bronze-accent); font-style: normal; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 0.2rem; }
+
+  /* CARD */
+  .planner-card {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 1.8rem;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(28,28,26,0.06);
+  }
+  .card-header {
+    padding: 0.7rem 1.4rem;
+    display: flex; align-items: baseline; gap: 0.7rem;
+    border-bottom: 2px solid var(--cloud-deep);
+  }
+  .card-header.teal   { background: var(--deep-teal);   border-bottom-color: var(--antique-gold-lt); }
+  .card-header.gold   { background: var(--antique-gold); border-bottom-color: var(--forest-green); }
+  .card-header.gold .card-step  { color: rgba(28,28,26,0.55); }
+  .card-header.gold .card-title { color: var(--ink); }
+  .card-header.gold .card-title .optional { color: rgba(28,28,26,0.5); }
+  .card-header.green  { background: var(--forest-green); border-bottom-color: var(--antique-gold-lt); }
+  .card-header.purple { background: var(--rich-purple);  border-bottom-color: var(--antique-gold-lt); }
+  .card-header.crimson{ background: var(--ruby-crimson); border-bottom-color: var(--antique-gold-lt); }
+  .card-header.bronze { background: var(--bronze-accent);border-bottom-color: var(--cloud-deep); }
+  .card-step {
+    font-family: 'Crimson Pro', serif; font-size: 0.75rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(250,250,250,0.65); flex-shrink: 0;
+  }
+  .card-title {
+    font-family: 'Crimson Pro', serif; font-size: 1.2rem;
+    font-weight: 700; color: #FAFAFA;
+  }
+  .card-title .optional {
+    font-size: 0.75rem; font-weight: 400;
+    color: rgba(250,250,250,0.6); margin-left: 0.5rem;
+    font-style: italic; letter-spacing: 0;
+  }
+  .card-body { padding: 1.4rem; }
+  .card-body .field { margin-bottom: 1rem; }
+  .card-body .field:last-child { margin-bottom: 0; }
+
+  /* BODY PARAGRAPH CARD INTERNAL */
+  .para-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .para-sub-label {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--deep-teal);
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+  .para-sub-label.purple { color: var(--rich-purple); }
+  .para-sub-label.gold   { color: var(--antique-gold-text); }
+
+  /* THESIS HIGHLIGHT */
+  .thesis-highlight {
+    background: rgba(212,175,55,0.08);
+    border: 1.5px solid var(--antique-gold-lt);
+    border-radius: 5px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  /* SUMMARY / EXPORT */
+  .export-bar { text-align: center; padding: 0 1.5rem; }
+  .export-btn {
+    background: var(--deep-teal); color: var(--cloud-dancer);
+    font-family: 'Crimson Pro', serif; font-size: 1.05rem; font-weight: 700;
+    border: none; border-radius: 6px; padding: 0.85rem 2.8rem;
+    cursor: pointer; letter-spacing: 0.07em; text-transform: uppercase;
+    transition: background 0.2s, transform 0.1s;
+    box-shadow: 0 3px 10px rgba(30,107,102,0.22);
+  }
+  .export-btn:hover { background: var(--forest-green); }
+  .export-btn:active { transform: scale(0.98); }
+
+  @media (prefers-reduced-motion: reduce) {
+    input[type="text"], textarea, select, .export-btn, #save-indicator { transition: none; }
+    .export-btn:active { transform: none; }
+  }
+  .export-note { margin-top: 0.6rem; font-size: 0.82rem; color: var(--ink-light); font-style: italic; }
+
+  /* DIVIDER */
+  .inner-divider {
+    border: none; border-top: 1.5px solid var(--cloud-deep);
+    margin: 1.1rem 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-inner">
+    <div class="masthead-eyebrow">HIST 102 · Capstone Research Project</div>
+    <h1><em>"Witches Everywhere"</em> — Essay Planner &amp; Draft</h1>
+    <div class="masthead-sub">McCarthy, Venona &amp; the Soviet Archives · Richland Community College</div>
+  </div>
+</div>
+
+<!-- STUDENT BAND -->
+<div class="student-band">
+  <div class="student-band-inner">
+    <div>
+      <label for="student-name">Student Name</label>
+      <input type="text" id="student-name" placeholder="First Last">
+    </div>
+    <div>
+      <label for="class-period">Class / Section</label>
+      <input type="text" id="class-period" placeholder="e.g. HIST 102-01">
+    </div>
+    <div>
+      <label for="date-field">Date</label>
+      <input type="text" id="date-field" placeholder="MM / DD / YYYY">
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ══ STEP 1: THESIS ══ -->
+  <div style="margin-top:2rem;background:#fff;border:1.5px solid var(--border);border-left:5px solid var(--ruby-crimson);border-radius:6px;padding:1.2rem 1.6rem;margin-bottom:2rem;">
+    <p style="font-family:'Crimson Pro',serif;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--ruby-crimson);font-weight:700;margin-bottom:0.6rem;">⚠ Academic Integrity Notice</p>
+    <p style="font-size:0.9rem;color:var(--ink-mid);margin-bottom:0.6rem;">This planner is a scaffolding tool — it is designed to help you organize <strong style="color:var(--ink);">your own thinking</strong>, not to substitute for it. Every field you complete should reflect your own analysis of the primary sources you examined in the Research Notes form. Do not use AI tools to generate, rewrite, or complete any portion of this assignment.</p>
+    <p style="font-size:0.9rem;color:var(--ink-mid);margin-bottom:0.6rem;">Please review the <strong style="color:var(--ink);">class AI use policy</strong> before proceeding. If you are uncertain what is permitted, ask before submitting.</p>
+    <p style="font-size:0.9rem;color:var(--ink-mid);">All submitted work — including the exported <code style="font-size:0.85rem;background:var(--cloud-mid);padding:0.1rem 0.3rem;border-radius:3px;">.txt</code> file from this form — will be submitted to <strong style="color:var(--ink);">AI detection tools</strong> as part of the grading process.</p>
+  </div>
+
+  <div class="section-heading">
+    <h2>Step 1 — Thesis</h2>
+    <div class="section-heading-rule"></div>
+  </div>
+
+  <div class="planner-card">
+    <div class="card-header gold">
+      <span class="card-step">Step 1</span>
+      <span class="card-title">Thesis Statement</span>
+    </div>
+    <div class="card-body">
+      <p class="hint">Write your main argument in <strong>one clear, arguable sentence.</strong> Your thesis should take a position on whether McCarthy's accusations were substantially correct, largely unfounded, or something more nuanced. You may copy and paste your draft thesis directly from the <strong>Final Summary</strong> section of your Research Notes form and refine it here. You will return to this sentence in your introduction and conclusion.</p>
+      <div class="thesis-highlight">
+        <label for="thesis">Your Thesis</label>
+        <textarea class="medium" id="thesis" placeholder="Write or paste your thesis here. Aim for one strong sentence, though two is acceptable if your argument requires nuance."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ STEP 2: INTRODUCTION ══ -->
+  <div class="section-heading">
+    <h2>Step 2 — Introduction</h2>
+    <div class="section-heading-rule"></div>
+  </div>
+
+  <div class="planner-card">
+    <div class="card-header teal">
+      <span class="card-step">Step 2</span>
+      <span class="card-title">Introduction Paragraph</span>
+    </div>
+    <div class="card-body">
+      <p class="hint">Your introduction should move through four beats in order: <strong>(1)</strong> open with the standard textbook "witch hunt" narrative — what most Americans believe about McCarthyism; <strong>(2)</strong> introduce McCarthy's "I have in my hand" claim as the focal moment of the controversy; <strong>(3)</strong> state your thesis clearly; <strong>(4)</strong> provide a brief road map — identify the 2–3 specific cases or lines of evidence your paper will use to support that thesis. The road map tells your reader exactly what the paper will argue and on what grounds.</p>
+      <div class="field">
+        <label for="intro-myth">The Textbook "Myth" — Opening Hook</label>
+        <p class="hint" style="margin-bottom:0.4rem;">Briefly summarize the standard narrative: McCarthy as reckless demagogue, innocent victims, Salem witch hunt comparisons. You may quote the dictionary definition of "McCarthyism" here.</p>
+        <textarea class="medium" id="intro-myth" placeholder="Summarize the conventional view of McCarthyism in 3–4 sentences."></textarea>
+      </div>
+      <hr class="inner-divider">
+      <div class="field">
+        <label for="intro-hand">McCarthy's "I Have in My Hand" Moment</label>
+        <p class="hint" style="margin-bottom:0.4rem;">Briefly introduce the 1950 Wheeling speech and what McCarthy claimed. Keep this to 2–3 sentences — you will develop the evidence in a body paragraph.</p>
+        <textarea class="short" id="intro-hand" placeholder="Introduce the Wheeling speech and McCarthy's central claim in your own words."></textarea>
+      </div>
+      <hr class="inner-divider">
+      <div class="field">
+        <label for="intro-thesis-echo">Thesis (paste or restate from Step 1)</label>
+        <p class="hint" style="margin-bottom:0.4rem;">State your argument clearly. You may copy your thesis from Step 1 or refine it slightly for the introduction.</p>
+        <textarea class="short" id="intro-thesis-echo" placeholder="Your thesis statement goes here."></textarea>
+      </div>
+      <hr class="inner-divider">
+      <div class="field">
+        <label for="intro-roadmap">Road Map — Preview of Your Evidence</label>
+        <p class="hint" style="margin-bottom:0.4rem;">Identify the specific cases, cables, or archival findings your paper will use to support your thesis. This is not a list of topics — it is a preview of your actual argument. Name the individuals and sources. 2–4 sentences.</p>
+        <textarea class="medium" id="intro-roadmap" placeholder="Name the specific people, cables, or archival findings your body paragraphs will examine. Your reader should know after this sentence which cases you are building your argument on."></textarea>
+      </div>
+      <hr class="inner-divider">
+      <div class="field">
+        <label for="intro-full">Full Introduction Draft</label>
+        <p class="hint" style="margin-bottom:0.4rem;">Combine all four beats above into a single flowing paragraph. Aim for 175–225 words.</p>
+        <textarea class="tall" id="intro-full" placeholder="Draft your complete introduction paragraph here..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ STEP 3: BODY PARAGRAPHS ══ -->
+  <div class="section-heading">
+    <h2>Step 3 — Body Paragraphs</h2>
+    <div class="section-heading-rule"></div>
+  </div>
+
+  <p class="hint" style="margin-bottom:1.2rem;">Write <strong>4 body paragraphs</strong> following the structure: Topic Sentence → Evidence → Analysis. Paragraphs 1–3 build your core argument from your archival findings. Paragraph 4 is dedicated to the McCarran Committee. A fifth paragraph addressing counterarguments and complexity is optional but strongly recommended.</p>
+
+  <!-- Body Para 1 -->
+  <div class="planner-card">
+    <div class="card-header green">
+      <span class="card-step">Body Paragraph 1</span>
+      <span class="card-title">Finding #1</span>
+    </div>
+    <div class="card-body">
+      <div class="para-grid">
+        <div class="field">
+          <div class="para-sub-label">Topic Sentence</div>
+          <label for="b1-topic">State the finding you are arguing in this paragraph.</label>
+          <textarea class="short" id="b1-topic" placeholder="Write a topic sentence that identifies the finding and connects it to your thesis."></textarea>
+        </div>
+        <div class="field">
+          <div class="para-sub-label purple">Evidence</div>
+          <label for="b1-evidence">McCarthy's accusation + Venona and/or Vassiliev quotes. Include cable date, code name, and source reference.</label>
+          <textarea class="tall" id="b1-evidence" placeholder="Paste your quotes from your Research Notes. Include McCarthy's accusation, the Venona cable, and/or the Vassiliev entry. Note the cable date, code name, and source reference for each."></textarea>
+        </div>
+        <div class="field">
+          <div class="para-sub-label gold">Analysis</div>
+          <label for="b1-analysis">How does this evidence support or complicate the "witch hunt" myth? What does it reveal about McCarthy's accuracy?</label>
+          <textarea class="medium" id="b1-analysis" placeholder="Explain the significance of your evidence. Don't just describe — argue. What does this prove, and why does it matter for your thesis?"></textarea>
+        </div>
+        <div class="field">
+          <label for="b1-full">Full Paragraph Draft</label>
+          <p class="hint" style="margin-bottom:0.4rem;">Combine topic sentence, evidence, and analysis into a single flowing paragraph. Aim for 150–200 words.</p>
+          <textarea class="tall" id="b1-full" placeholder="Draft your complete Body Paragraph 1 here..."></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Body Para 2 -->
+  <div class="planner-card">
+    <div class="card-header green">
+      <span class="card-step">Body Paragraph 2</span>
+      <span class="card-title">Finding #2</span>
+    </div>
+    <div class="card-body">
+      <div class="para-grid">
+        <div class="field">
+          <div class="para-sub-label">Topic Sentence</div>
+          <label for="b2-topic">State the finding you are arguing in this paragraph.</label>
+          <textarea class="short" id="b2-topic" placeholder="Write a topic sentence that identifies the finding and connects it to your thesis."></textarea>
+        </div>
+        <div class="field">
+          <div class="para-sub-label purple">Evidence</div>
+          <label for="b2-evidence">McCarthy's accusation + Venona and/or Vassiliev quotes. Include cable date, code name, and source reference.</label>
+          <textarea class="tall" id="b2-evidence" placeholder="Paste your quotes and cite them."></textarea>
+        </div>
+        <div class="field">
+          <div class="para-sub-label gold">Analysis</div>
+          <label for="b2-analysis">How does this evidence support or complicate the "witch hunt" myth?</label>
+          <textarea class="medium" id="b2-analysis" placeholder="Explain the significance of your evidence and connect it to your thesis."></textarea>
+        </div>
+        <div class="field">
+          <label for="b2-full">Full Paragraph Draft</label>
+          <p class="hint" style="margin-bottom:0.4rem;">Combine into a single flowing paragraph. Aim for 150–200 words.</p>
+          <textarea class="tall" id="b2-full" placeholder="Draft your complete Body Paragraph 2 here..."></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Body Para 3 -->
+  <div class="planner-card">
+    <div class="card-header green">
+      <span class="card-step">Body Paragraph 3</span>
+      <span class="card-title">Finding #3</span>
+    </div>
+    <div class="card-body">
+      <div class="para-grid">
+        <div class="field">
+          <div class="para-sub-label">Topic Sentence</div>
+          <label for="b3-topic">State the finding you are arguing in this paragraph.</label>
+          <textarea class="short" id="b3-topic" placeholder="Write a topic sentence that identifies the finding and connects it to your thesis."></textarea>
+        </div>
+        <div class="field">
+          <div class="para-sub-label purple">Evidence</div>
+          <label for="b3-evidence">McCarthy's accusation + Venona and/or Vassiliev quotes. Include cable date, code name, and source reference.</label>
+          <textarea class="tall" id="b3-evidence" placeholder="Paste your quotes and cite them."></textarea>
+        </div>
+        <div class="field">
+          <div class="para-sub-label gold">Analysis</div>
+          <label for="b3-analysis">How does this evidence support or complicate the "witch hunt" myth?</label>
+          <textarea class="medium" id="b3-analysis" placeholder="Explain the significance of your evidence and connect it to your thesis."></textarea>
+        </div>
+        <div class="field">
+          <label for="b3-full">Full Paragraph Draft</label>
+          <p class="hint" style="margin-bottom:0.4rem;">Combine into a single flowing paragraph. Aim for 150–200 words.</p>
+          <textarea class="tall" id="b3-full" placeholder="Draft your complete Body Paragraph 3 here..."></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Body Para 4 OPTIONAL -->
+  <div class="planner-card">
+    <div class="card-header green">
+      <span class="card-step">Body Paragraph 4</span>
+      <span class="card-title">The McCarran Committee</span>
+    </div>
+    <div class="card-body">
+      <div class="example-box" style="margin-bottom:1rem;">
+        <strong>Historiographical Prompt — The McCarran Committee</strong>
+        Most U.S. history textbooks cite the Tydings Committee's conclusion that McCarthy's charges were "a fraud and a hoax" — but rarely mention that a second Senate investigation reached the opposite conclusion. The McCarran Committee (1951–52) concluded that communist infiltration had genuinely occurred and had significantly influenced U.S. foreign policy, particularly toward China. Why do you think the McCarran Committee is so rarely included in the standard textbook narrative? What does its omission tell you about how history gets written and whose conclusions get remembered? Then consider how you might use the McCarran findings analytically: does it corroborate your archival evidence, complicate it, or help you explain why the "witch hunt" label stuck even if the accusations had merit?
+      </div>
+      <div class="para-grid">
+        <div class="field">
+          <div class="para-sub-label">Topic Sentence</div>
+          <label for="b4-topic">Introduce the McCarran Committee and its significance for your argument.</label>
+          <textarea class="short" id="b4-topic" placeholder="Write a topic sentence that introduces the McCarran Committee and connects it to your thesis."></textarea>
+        </div>
+        <div class="field">
+          <div class="para-sub-label purple">Evidence</div>
+          <label for="b4-evidence">What did the McCarran Committee conclude, and how does it relate to your archival findings?</label>
+          <textarea class="tall" id="b4-evidence" placeholder="Summarize the McCarran Committee's key conclusions. Connect them to the specific Venona or Vassiliev evidence you found in your Research Notes."></textarea>
+        </div>
+        <div class="field">
+          <div class="para-sub-label gold">Analysis</div>
+          <label for="b4-analysis">Why is the McCarran Committee absent from most textbooks? What does that omission reveal about how the "witch hunt" narrative was constructed and sustained?</label>
+          <textarea class="medium" id="b4-analysis" placeholder="Explain how the McCarran Committee strengthens, complicates, or reframes your argument. Connect its omission from textbooks to your broader claim about historical memory and the archival record."></textarea>
+        </div>
+        <div class="field">
+          <label for="b4-full">Full Paragraph Draft</label>
+          <p class="hint" style="margin-bottom:0.4rem;">Combine into a single flowing paragraph. Aim for 150–200 words.</p>
+          <textarea class="tall" id="b4-full" placeholder="Draft your complete Body Paragraph 4 here..."></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Body Para 5 — Optional -->
+  <div class="planner-card">
+    <div class="card-header green">
+      <span class="card-step">Body Paragraph 5</span>
+      <span class="card-title">Counterargument &amp; Complexity <span class="optional">— Optional but recommended</span></span>
+    </div>
+    <div class="card-body">
+      <p class="hint" style="margin-bottom:1rem;">Acknowledge McCarthy's flaws, exaggerations, or cases where the archival evidence is weak or absent. A strong essay addresses complexity rather than ignoring it — showing you can hold the evidence accountable even when it supports your thesis makes your argument more credible, not less. If you skip this paragraph, your essay is still complete.</p>
+      <div class="para-grid">
+        <div class="field">
+          <div class="para-sub-label">Topic Sentence</div>
+          <label for="b5-topic">Introduce the limitation, flaw, or complication you are addressing.</label>
+          <textarea class="short" id="b5-topic" placeholder="Write a topic sentence that frames the counterargument or complexity without abandoning your thesis."></textarea>
+        </div>
+        <div class="field">
+          <div class="para-sub-label purple">Counterevidence</div>
+          <label for="b5-evidence">Cases, methods, or accusations where McCarthy's record was weak, reckless, or unconfirmed.</label>
+          <textarea class="tall" id="b5-evidence" placeholder="Cite specific cases from your Research Notes where evidence was absent, ambiguous, or contested. You may also address McCarthy's methods — guilt by association, bullying witnesses, inflated numbers — as distinct from whether his core accusations had merit."></textarea>
+        </div>
+        <div class="field">
+          <div class="para-sub-label gold">Analysis</div>
+          <label for="b5-analysis">How do you address this complexity without undermining your thesis?</label>
+          <textarea class="medium" id="b5-analysis" placeholder="Explain how engaging with counterevidence strengthens rather than undermines your overall argument. Distinguish between McCarthy's accuracy and his methods if that distinction matters for your thesis."></textarea>
+        </div>
+        <div class="field">
+          <label for="b5-full">Full Paragraph Draft</label>
+          <p class="hint" style="margin-bottom:0.4rem;">Combine into a single flowing paragraph. Aim for 150–200 words.</p>
+          <textarea class="tall" id="b5-full" placeholder="Draft your complete Body Paragraph 5 here (or leave blank if not using)..."></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ STEP 4: CONCLUSION ══ -->
+  <div class="section-heading">
+    <h2>Step 4 — Conclusion</h2>
+    <div class="section-heading-rule"></div>
+  </div>
+
+  <div class="planner-card">
+    <div class="card-header purple">
+      <span class="card-step">Step 4</span>
+      <span class="card-title">Conclusion Paragraph</span>
+    </div>
+    <div class="card-body">
+      <p class="hint" style="margin-bottom:1rem;">Your conclusion should do three things: <strong>(1)</strong> restate your thesis in different words — do not copy it verbatim; <strong>(2)</strong> briefly summarize your two or three strongest pieces of evidence; <strong>(3)</strong> end with a broader statement about what the Soviet archives ultimately reveal about the "witch hunt" myth and its legacy.</p>
+      <div class="field">
+        <label for="conc-restate">Thesis Restatement (in new words)</label>
+        <textarea class="short" id="conc-restate" placeholder="Restate your argument without repeating the exact words from your thesis."></textarea>
+      </div>
+      <hr class="inner-divider">
+      <div class="field">
+        <label for="conc-evidence">Summary of Strongest Evidence</label>
+        <p class="hint" style="margin-bottom:0.4rem;">Name your 2–3 most compelling findings — the cases with the clearest archival confirmation.</p>
+        <textarea class="short" id="conc-evidence" placeholder="Name your 2–3 most compelling findings from your body paragraphs."></textarea>
+      </div>
+      <hr class="inner-divider">
+      <div class="field">
+        <label for="conc-legacy">Broader Significance</label>
+        <p class="hint" style="margin-bottom:0.4rem;">What does this evidence ultimately tell us? What should we make of the "witch hunt" label in light of the archives?</p>
+        <textarea class="short" id="conc-legacy" placeholder="What does the archival evidence ultimately demand of how we understand the 'witch hunt' label and its legacy?"></textarea>
+      </div>
+      <hr class="inner-divider">
+      <div class="field">
+        <label for="conc-full">Full Conclusion Draft</label>
+        <p class="hint" style="margin-bottom:0.4rem;">Combine the three parts into a single flowing paragraph. Aim for 120–180 words.</p>
+        <textarea class="tall" id="conc-full" placeholder="Draft your complete conclusion paragraph here..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ STEP 5: WORKS CITED ══ -->
+  <div class="section-heading">
+    <h2>Step 5 — Works Cited</h2>
+    <div class="section-heading-rule"></div>
+  </div>
+
+  <div class="planner-card">
+    <div class="card-header bronze">
+      <span class="card-step">Step 5</span>
+      <span class="card-title">Sources</span>
+    </div>
+    <div class="card-body">
+      <p class="hint" style="margin-bottom:0.8rem;">List every source you cited in your essay. Include <strong>specific Venona cables</strong> (with date and sending office), <strong>Vassiliev Notebook references</strong> (notebook number and page), and the <strong>Congressional Record</strong> entry for McCarthy's speech. Add any secondary sources you consulted. Use Chicago, MLA, or Turabian format — be consistent.</p>
+      <div class="field">
+        <label for="works-cited">Works Cited / Bibliography</label>
+        <textarea style="min-height:180px;" id="works-cited" placeholder="List your sources here, one per line. Include specific Venona cables (with date and sending office), Vassiliev Notebook references (notebook number and page), and the Congressional Record entry for McCarthy's speech. Use Chicago, MLA, or Turabian format consistently."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ STEP 6: REFLECTION ══ -->
+  <div class="section-heading">
+    <h2>Step 6 — Reflection</h2>
+    <div class="section-heading-rule"></div>
+  </div>
+
+  <div class="planner-card">
+    <div class="card-header crimson">
+      <span class="card-step">Step 6</span>
+      <span class="card-title">Final Reflection</span>
+    </div>
+    <div class="card-body">
+      <p class="hint" style="margin-bottom:0.8rem;">What surprised you most while completing this assignment? Did the archives change how you think about McCarthyism, Cold War politics, or historical memory? Did any finding complicate your initial assumptions?</p>
+      <div class="field">
+        <label for="reflection">Your Reflection</label>
+        <textarea style="min-height:140px;" id="reflection" placeholder="Write your reflection here."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ EXPORT ══ -->
+  <div class="export-bar">
+    <button class="export-btn" onclick="exportDraft()">⬇ Download Essay Draft (.txt)</button>
+    <p class="export-note">Downloads a formatted near-complete draft of your essay. Submit this file with your assignment.</p>
+    <p id="save-indicator" style="margin-top:0.5rem;font-size:0.8rem;color:var(--deep-teal);font-style:italic;opacity:0;transition:opacity 0.4s;">&#10003; Progress saved</p>
+    <p style="margin-top:0.3rem;font-size:0.78rem;color:var(--ink-light);font-style:italic;">Your work is automatically saved to this browser. It will be here if you close and return — as long as you use the same browser on the same device.</p>
+  </div>
+
+</div><!-- /wrap -->
+
+<script>
+function val(id) {
+  const el = document.getElementById(id);
+  return el ? el.value.trim() : "";
+}
+
+function exportDraft() {
+  const studentName = val("student-name") || "[Name not entered]";
+  const classPeriod = val("class-period") || "[Section not entered]";
+  const dateField   = val("date-field")   || "[Date not entered]";
+
+  const LINE  = "=".repeat(70);
+  const DASH  = "-".repeat(70);
+  const SDASH = "~".repeat(50);
+
+  let d = [];
+
+  // ── HEADER ──
+  d.push(LINE);
+  d.push('"WITCHES EVERYWHERE": ESSAY DRAFT');
+  d.push("HIST 102 — Capstone Research Project");
+  d.push("Richland Community College");
+  d.push(LINE);
+  d.push(`Student Name  : ${studentName}`);
+  d.push(`Class/Section : ${classPeriod}`);
+  d.push(`Date          : ${dateField}`);
+  d.push("");
+
+  // ── THESIS ──
+  d.push(DASH);
+  d.push("THESIS STATEMENT");
+  d.push(DASH);
+  d.push(val("thesis") || "[Thesis not entered]");
+  d.push("");
+
+  // ── INTRODUCTION ──
+  d.push(LINE);
+  d.push("INTRODUCTION");
+  d.push(LINE);
+  const introFull = val("intro-full");
+  if (introFull) {
+    d.push(introFull);
+  } else {
+    // assemble from parts if full draft blank
+    const myth = val("intro-myth");
+    const hand = val("intro-hand");
+    const thesisEcho = val("intro-thesis-echo");
+    const roadmap = val("intro-roadmap");
+    if (myth || hand || thesisEcho || roadmap) {
+      if (myth) { d.push(myth); d.push(""); }
+      if (hand) { d.push(hand); d.push(""); }
+      if (thesisEcho) { d.push(thesisEcho); d.push(""); }
+      if (roadmap) d.push(roadmap);
+    } else {
+      d.push("[Introduction not drafted]");
+    }
+  }
+  d.push("");
+
+  // ── BODY PARAGRAPHS ──
+  const paras = [
+    { num:1, label:"BODY PARAGRAPH 1 — FINDING #1",     full:"b1-full", topic:"b1-topic", ev:"b1-evidence", an:"b1-analysis" },
+    { num:2, label:"BODY PARAGRAPH 2 — FINDING #2",     full:"b2-full", topic:"b2-topic", ev:"b2-evidence", an:"b2-analysis" },
+    { num:3, label:"BODY PARAGRAPH 3 — FINDING #3",     full:"b3-full", topic:"b3-topic", ev:"b3-evidence", an:"b3-analysis" },
+    { num:4, label:"BODY PARAGRAPH 4 — THE McCARRAN COMMITTEE",                              full:"b4-full", topic:"b4-topic", ev:"b4-evidence", an:"b4-analysis" },
+    { num:5, label:"BODY PARAGRAPH 5 — COUNTERARGUMENT & COMPLEXITY (OPTIONAL)",             full:"b5-full", topic:"b5-topic", ev:"b5-evidence", an:"b5-analysis" },
+  ];
+
+  paras.forEach(p => {
+    const full  = val(p.full);
+    const topic = val(p.topic);
+    const ev    = val(p.ev);
+    const an    = val(p.an);
+    // skip para 5 entirely if all fields empty
+    if (p.num === 5 && !full && !topic && !ev && !an) return;
+    d.push(LINE);
+    d.push(p.label);
+    d.push(LINE);
+    if (full) {
+      d.push(full);
+    } else if (topic || ev || an) {
+      if (topic) { d.push("[Topic Sentence]"); d.push(topic); d.push(""); }
+      if (ev)    { d.push("[Evidence]");       d.push(ev);    d.push(""); }
+      if (an)    { d.push("[Analysis]");        d.push(an);   d.push(""); }
+    } else {
+      d.push("[Paragraph not drafted]");
+    }
+    d.push("");
+  });
+
+  // ── CONCLUSION ──
+  d.push(LINE);
+  d.push("CONCLUSION");
+  d.push(LINE);
+  const concFull = val("conc-full");
+  if (concFull) {
+    d.push(concFull);
+  } else {
+    const restate  = val("conc-restate");
+    const evidence = val("conc-evidence");
+    const legacy   = val("conc-legacy");
+    if (restate || evidence || legacy) {
+      if (restate)  { d.push(restate);  d.push(""); }
+      if (evidence) { d.push(evidence); d.push(""); }
+      if (legacy)   d.push(legacy);
+    } else {
+      d.push("[Conclusion not drafted]");
+    }
+  }
+  d.push("");
+
+  // ── WORKS CITED ──
+  d.push(LINE);
+  d.push("WORKS CITED");
+  d.push(LINE);
+  d.push(val("works-cited") || "[Sources not entered]");
+  d.push("");
+
+  // ── REFLECTION ──
+  const refl = val("reflection");
+  if (refl) {
+    d.push(LINE);
+    d.push("FINAL REFLECTION");
+    d.push(LINE);
+    d.push(refl);
+    d.push("");
+  }
+
+  d.push(LINE);
+  d.push("END OF ESSAY DRAFT");
+  d.push(LINE);
+
+  const blob = new Blob([d.join("\n")], { type: "text/plain" });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement("a");
+  const safeName = studentName.replace(/[^a-zA-Z0-9]/g, "_");
+  a.href     = url;
+  a.download = `McCarthy_Essay_Draft_${safeName}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// ── LOCAL STORAGE AUTO-SAVE ──
+const STORAGE_KEY = "mccarthy_essay_planner_v1";
+
+const FIELD_IDS = [
+  "student-name","class-period","date-field",
+  "thesis",
+  "intro-myth","intro-hand","intro-thesis-echo","intro-roadmap","intro-full",
+  "b1-topic","b1-evidence","b1-analysis","b1-full",
+  "b2-topic","b2-evidence","b2-analysis","b2-full",
+  "b3-topic","b3-evidence","b3-analysis","b3-full",
+  "b4-topic","b4-evidence","b4-analysis","b4-full",
+  "b5-topic","b5-evidence","b5-analysis","b5-full",
+  "conc-restate","conc-evidence","conc-legacy","conc-full",
+  "works-cited","reflection"
+];
+
+function saveAll() {
+  const data = {};
+  FIELD_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) data[id] = el.value;
+  });
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    showSaveStatus();
+  } catch(e) { /* storage full or unavailable */ }
+}
+
+function loadAll() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    FIELD_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && data[id] !== undefined) el.value = data[id];
+    });
+  } catch(e) { /* ignore parse errors */ }
+}
+
+function showSaveStatus() {
+  const indicator = document.getElementById("save-indicator");
+  if (!indicator) return;
+  indicator.textContent = "✓ Progress saved";
+  indicator.style.opacity = "1";
+  clearTimeout(indicator._t);
+  indicator._t = setTimeout(() => { indicator.style.opacity = "0"; }, 2000);
+}
+
+// Debounced save on any input
+let saveTimer;
+document.addEventListener("input", () => {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(saveAll, 600);
+});
+
+// Restore on load
+window.addEventListener("DOMContentLoaded", loadAll);
+</script>
+
+</body>
+</html>

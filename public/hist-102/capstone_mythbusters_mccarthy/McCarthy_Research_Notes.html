@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>McCarthy Research Notes — HIST 102</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cloud-dancer:     #F4F4F2;
+    --cloud-mid:        #EAEAE7;
+    --cloud-deep:       #DCDCDA;
+    --antique-gold:     #B8860B;
+    --antique-gold-text: #7D5B07;  /* darkened for 4.5:1 on light bg — text use only */
+    --antique-gold-lt:  #D4AF37;
+    --deep-teal:        #1E6B66;
+    --rich-purple:      #5A3D8A;
+    --ruby-crimson:     #8B1A1A;
+    --bronze-accent:    #7A5C30;
+    --forest-green:     #1B4332;
+    --ink:              #1C1C1A;
+    --ink-mid:          #3A3A38;
+    --ink-light:        #6B6B68;
+    --border:           #C8C8C4;
+    --input-bg:         #FFFFFF;
+    --card-bg:          #FFFFFF;
+    --card-alt:         #F8F8F6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Lora', serif;
+    background-color: var(--cloud-dancer);
+    color: var(--ink);
+    padding: 0 0 5rem;
+    line-height: 1.65;
+    font-size: 15px;
+  }
+
+  /* MASTHEAD */
+  .masthead {
+    background: var(--forest-green);
+    padding: 2.2rem 2rem 1.8rem;
+    border-bottom: 5px solid var(--antique-gold-lt);
+  }
+  .masthead-inner { max-width: 1080px; margin: 0 auto; }
+  .masthead-eyebrow {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--antique-gold-lt);
+    margin-bottom: 0.5rem;
+  }
+  .masthead h1 {
+    font-family: 'Crimson Pro', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--cloud-dancer);
+    line-height: 1.2;
+    margin-bottom: 0.4rem;
+  }
+  .masthead h1 em { color: var(--antique-gold-lt); font-style: italic; }
+  .masthead-sub { font-size: 0.88rem; color: rgba(244,244,242,0.65); font-style: italic; }
+
+  /* STUDENT BAND */
+  .student-band {
+    background: var(--card-bg);
+    border-bottom: 2px solid var(--cloud-deep);
+    padding: 1.2rem 1.5rem;
+  }
+  .student-band-inner {
+    max-width: 1080px; margin: 0 auto;
+    display: grid; grid-template-columns: 2.5fr 1fr 1fr; gap: 1rem; align-items: end;
+  }
+  @media (max-width: 640px) { .student-band-inner { grid-template-columns: 1fr; } }
+
+  /* FORM ELEMENTS */
+  label {
+    display: block;
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-light);
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+  }
+  input[type="text"], textarea, select {
+    width: 100%;
+    background: var(--input-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    color: var(--ink);
+    font-family: 'Lora', serif;
+    font-size: 0.9rem;
+    padding: 0.45rem 0.7rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    resize: vertical;
+    appearance: none;
+  }
+  input[type="text"]:focus, textarea:focus, select:focus {
+    outline: 2px solid transparent;
+    border-color: var(--deep-teal);
+    box-shadow: 0 0 0 3px rgba(30,107,102,0.22);
+  }
+  textarea { min-height: 78px; }
+  textarea.tall { min-height: 108px; }
+
+  /* WRAP */
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* SECTION HEADING */
+  .section-heading {
+    margin: 2.5rem 0 1.2rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .section-heading h2 {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--antique-gold-text); white-space: nowrap;
+  }
+  .section-heading-rule {
+    flex: 1; height: 2px;
+    background: linear-gradient(to right, var(--antique-gold-lt), transparent);
+  }
+
+  /* INSTRUCTIONS */
+  .instructions {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-left: 5px solid var(--deep-teal);
+    border-radius: 6px;
+    padding: 1.4rem 1.6rem;
+    margin-bottom: 1.5rem;
+  }
+  .instructions h3 {
+    font-family: 'Crimson Pro', serif; font-size: 1rem;
+    color: var(--deep-teal); margin-bottom: 0.7rem;
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .instructions p { font-size: 0.9rem; color: var(--ink-mid); margin-bottom: 0.6rem; }
+  .field-guide {
+    margin-top: 1rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem 2rem;
+  }
+  @media (max-width: 640px) { .field-guide { grid-template-columns: 1fr; } }
+  .fg-item strong {
+    font-family: 'Crimson Pro', serif; font-size: 0.85rem;
+    color: var(--antique-gold-text); font-weight: 700;
+  }
+  .fg-item span {
+    display: block; font-size: 0.82rem;
+    color: var(--ink-light); margin-top: 0.1rem; line-height: 1.5;
+  }
+
+  /* LINKS BAR */
+  .links-bar {
+    background: var(--card-alt);
+    border: 1.5px solid var(--border);
+    border-left: 5px solid var(--antique-gold-lt);
+    border-radius: 6px;
+    padding: 1rem 1.4rem;
+    margin-bottom: 2rem;
+  }
+  .links-bar h3 {
+    font-family: 'Crimson Pro', serif; font-size: 0.88rem;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--bronze-accent); margin-bottom: 0.7rem;
+  }
+  .links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.3rem 1rem;
+  }
+  .links-bar a {
+    font-size: 0.85rem; color: var(--deep-teal);
+    text-decoration: none; border-bottom: 1px dotted var(--deep-teal);
+    transition: color 0.15s; line-height: 1.9;
+  }
+  .links-bar a:hover { color: var(--antique-gold); border-bottom-color: var(--antique-gold); }
+
+  /* PERSON CARD */
+  .person-card {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(28,28,26,0.06);
+  }
+  .card-header {
+    background: var(--forest-green);
+    padding: 0.7rem 1.4rem;
+    display: flex; align-items: baseline; gap: 0.8rem;
+    border-bottom: 3px solid var(--antique-gold-lt);
+  }
+  .card-num {
+    font-family: 'Crimson Pro', serif; font-size: 0.8rem;
+    color: rgba(250,250,250,0.6); letter-spacing: 0.05em;
+  }
+  .card-name {
+    font-family: 'Crimson Pro', serif; font-size: 1.25rem;
+    font-weight: 700; color: var(--ink);
+  }
+  .card-body {
+    padding: 1.4rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 1.5rem;
+  }
+  @media (max-width: 720px) { .card-body { grid-template-columns: 1fr; } }
+  .full-w { grid-column: 1 / -1; }
+  .card-hr {
+    grid-column: 1 / -1; border: none;
+    border-top: 1.5px solid var(--cloud-deep); margin: 0.2rem 0;
+  }
+
+  /* ARCHIVE BLOCKS */
+  .archive-block {
+    background: var(--card-alt);
+    border: 1.5px solid var(--border);
+    border-top: 3px solid var(--deep-teal);
+    border-radius: 5px; padding: 1rem 1.2rem;
+  }
+  .archive-block.vassiliev { border-top-color: var(--rich-purple); }
+  .archive-block h4 {
+    font-family: 'Crimson Pro', serif; font-size: 0.82rem;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--deep-teal); margin-bottom: 0.9rem;
+  }
+  .archive-block.vassiliev h4 { color: var(--rich-purple); }
+  .archive-subgrid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem;
+  }
+  .archive-subgrid .span2 { grid-column: 1 / -1; }
+  @media (max-width: 520px) {
+    .archive-subgrid { grid-template-columns: 1fr; }
+    .archive-subgrid .span2 { grid-column: 1; }
+  }
+
+  /* ASSESSMENT STRIP */
+  .assessment-strip {
+    grid-column: 1 / -1;
+    background: var(--cloud-dancer);
+    border: 1.5px solid var(--border);
+    border-radius: 5px; padding: 1rem 1.2rem;
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.8rem 1.2rem;
+  }
+  @media (max-width: 640px) { .assessment-strip { grid-template-columns: 1fr; } }
+  .assessment-strip .span-full { grid-column: 1 / -1; }
+
+  /* SUMMARY */
+  .summary-card {
+    background: var(--card-bg);
+    border: 2px solid var(--antique-gold-lt);
+    border-radius: 8px; overflow: hidden;
+    box-shadow: 0 2px 8px rgba(28,28,26,0.06);
+    margin-bottom: 2.5rem;
+  }
+  .summary-header {
+    background: var(--antique-gold);
+    padding: 0.8rem 1.4rem;
+    font-family: 'Crimson Pro', serif; font-size: 1.05rem;
+    font-weight: 700; color: var(--cloud-dancer);
+    letter-spacing: 0.07em; text-transform: uppercase;
+  }
+  .summary-body {
+    padding: 1.4rem;
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;
+  }
+  @media (max-width: 640px) { .summary-body { grid-template-columns: 1fr; } }
+  .summary-body .full-w { grid-column: 1 / -1; }
+  .tally-box {
+    background: var(--cloud-dancer); border: 1.5px solid var(--border);
+    border-radius: 5px; padding: 0.8rem; text-align: center;
+  }
+  .tally-box input { text-align: center; font-size: 1.4rem; font-weight: 700; color: var(--antique-gold-text); }
+
+  /* EXPORT */
+  .export-bar { text-align: center; padding: 0 1.5rem; }
+  .export-btn {
+    background: var(--deep-teal); color: var(--cloud-dancer);
+    font-family: 'Crimson Pro', serif; font-size: 1.05rem; font-weight: 700;
+    border: none; border-radius: 6px; padding: 0.85rem 2.8rem;
+    cursor: pointer; letter-spacing: 0.07em; text-transform: uppercase;
+    transition: background 0.2s, transform 0.1s;
+    box-shadow: 0 3px 10px rgba(30,107,102,0.22);
+  }
+  .export-btn:hover { background: var(--forest-green); }
+  .export-btn:active { transform: scale(0.98); }
+
+  @media (prefers-reduced-motion: reduce) {
+    input[type="text"], textarea, select, .export-btn, #save-indicator { transition: none; }
+    .export-btn:active { transform: none; }
+  }
+  .export-note { margin-top: 0.6rem; font-size: 0.82rem; color: var(--ink-light); font-style: italic; }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-inner">
+    <div class="masthead-eyebrow">HIST 102 · Capstone Research Project</div>
+    <h1><em>"Witches Everywhere"</em> — Research Notes</h1>
+    <div class="masthead-sub">McCarthy, Venona &amp; the Soviet Archives · Richland Community College</div>
+  </div>
+</div>
+
+<div class="student-band">
+  <div class="student-band-inner">
+    <div>
+      <label for="student-name">Student Name</label>
+      <input type="text" id="student-name" placeholder="First Last">
+    </div>
+    <div>
+      <label for="class-period">Class / Section</label>
+      <input type="text" id="class-period" placeholder="e.g. HIST 102-01">
+    </div>
+    <div>
+      <label for="date-field">Date</label>
+      <input type="text" id="date-field" placeholder="MM / DD / YYYY">
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="section-heading" style="margin-top:2rem;">
+    <h2>Instructions</h2>
+    <div class="section-heading-rule"></div>
+  </div>
+
+  <div class="instructions">
+    <h3>How to Use This Form</h3>
+    <p>For each of the 10 names below, locate archival evidence using the Venona Project database and the Vassiliev Notebooks. Fill in every field as completely as possible — cable dates, code names, and verbatim quotes are especially important. Use the <strong style="color:var(--ink);">Research Databases</strong> links to navigate the archives.</p>
+    <p><strong style="color:var(--ink);">Field Guide — what to include in each section:</strong></p>
+    <div class="field-guide">
+      <div class="fg-item"><strong>Government Role</strong><span>Agency or department, position title, and years of service (e.g., "State Department economist, 1941–47").</span></div>
+      <div class="fg-item"><strong>Soviet Code Name</strong><span>The cryptonym used in KGB/GRU cables (e.g., "Ales," "Page"). Note the source where you found the match.</span></div>
+      <div class="fg-item"><strong>McCarthy's Accusation</strong><span>Summarize what McCarthy specifically claimed: Communist Party member, security risk, policy influencer, etc. Include his case number if listed in the speech.</span></div>
+      <div class="fg-item"><strong>Venona Quote</strong><span>Copy a key passage verbatim from the decrypted cable. Always include the cable date and sending office (e.g., "New York to Moscow, 29 June 1943").</span></div>
+      <div class="fg-item"><strong>Vassiliev / Gorsky Quote</strong><span>Copy a key passage verbatim from the Gorsky Memo or Vassiliev Notebooks. Include the notebook number and page if shown.</span></div>
+      <div class="fg-item"><strong>Spy or Sympathizer?</strong><span>Classify based on evidence: <em>confirmed agent</em> (recruited, tasked, passed material), <em>probable agent</em> (strong circumstantial evidence), <em>communist sympathizer</em> (ideological ties, no clear espionage), or <em>unclear / not confirmed</em>. Explain your reasoning in 1–2 sentences.</span></div>
+      <div class="fg-item"><strong>Evidence Confidence (1–5)</strong><span>1 = weak or circumstantial only. 5 = direct cable + Gorsky memo confirmation. Be honest about gaps.</span></div>
+      <div class="fg-item"><strong>Overall Assessment</strong><span>Choose Strongly Confirmed, Partially Confirmed, Not Found, or Other — then add observations in the Notes field.</span></div>
+    </div>
+  </div>
+
+  <div class="links-bar">
+    <h3>📂 Research Databases &amp; Helper Pages</h3>
+    <div class="links-grid">
+      <a href="https://www.nsa.gov/Helpful-Links/NSA-FOIA/Declassification-Transparency-Initiatives/Historical-Releases/Venona/" target="_blank">NSA Venona Project Decrypts</a>
+      <a href="https://digitalarchive.wilsoncenter.org/collection/86/vassiliev-notebooks" target="_blank">Vassiliev Notebooks — Wilson Center</a>
+      <a href="https://www.wilsoncenter.org/sites/default/files/media/documents/publication/White_Notebook_No.2_Translated1.pdf" target="_blank">White Notebook No. 2 / Gorsky Memo (PDF)</a>
+      <a href="https://algerhiss.com/history/new-evidence-surfaces-1990s/interpreting-russian-files/alexander-vassiliev/the-vassiliev-notebooks/gorskys-list/" target="_blank">Gorsky's List — AlgerHiss.com</a>
+      <a href="https://www.johnearlhaynes.org/page62.html" target="_blank">Haynes Reference Page</a>
+      <a href="https://en.wikipedia.org/wiki/List_of_Americans_in_the_Venona_papers" target="_blank">Americans in the Venona Papers (Wikipedia)</a>
+      <a href="https://www.govinfo.gov/content/pkg/GPO-CRECB-1950-pt4/pdf/GPO-CRECB-1950-pt4-2.pdf" target="_blank">McCarthy Senate Speech — Congressional Record (PDF)</a>
+      <a href="https://historymatters.gmu.edu/d/6456" target="_blank">McCarthy Wheeling Speech Transcript — GMU</a>
+    </div>
+  </div>
+
+  <div class="section-heading">
+    <h2>Part I — Individual Research Entries</h2>
+    <div class="section-heading-rule"></div>
+  </div>
+
+  <script>
+  const PEOPLE = [
+    { n:1,  name:"Lauchlin Currie" },
+    { n:2,  name:"Harold Glasser" },
+    { n:3,  name:"Mary Jane Keeney" },
+    { n:4,  name:"William Remington" },
+    { n:5,  name:"Robert T. Miller" },
+    { n:6,  name:"Stanley Graze" },
+    { n:7,  name:"Gerald Graze" },
+    { n:8,  name:"Franz Neumann" },
+    { n:9,  name:"Harry Dexter White" },
+    { n:10, name:"Alger Hiss" }
+  ];
+  PEOPLE.forEach(p => {
+    const id = `p${p.n}`;
+    document.write(`
+    <div class="person-card" id="card-${id}">
+      <div class="card-header">
+        <span class="card-num">#${p.n}</span>
+        <span class="card-name">${p.name}</span>
+      </div>
+      <div class="card-body">
+        <div>
+          <label for="${id}-role">Government Role</label>
+          <input type="text" id="${id}-role" placeholder="Agency, position, years">
+        </div>
+        <div>
+          <label for="${id}-codename">Soviet Code Name</label>
+          <input type="text" id="${id}-codename" placeholder='e.g. "Page" — source: Gorsky Memo'>
+        </div>
+        <div class="full-w">
+          <label for="${id}-accusation">McCarthy's Accusation</label>
+          <textarea id="${id}-accusation" placeholder="Summarize McCarthy's claim. Include case number if listed."></textarea>
+        </div>
+        <hr class="card-hr">
+        <div class="archive-block full-w">
+          <h4>🔐 Venona Project Findings</h4>
+          <div class="archive-subgrid">
+            <div>
+              <label for="${id}-venona-date">Cable Date &amp; Office</label>
+              <input type="text" id="${id}-venona-date" placeholder='e.g. "New York to Moscow, 29 June 1943"'>
+            </div>
+            <div>
+              <label for="${id}-venona-url">Source URL</label>
+              <input type="text" id="${id}-venona-url" placeholder="https://www.nsa.gov/...">
+            </div>
+            <div class="span2">
+              <label for="${id}-venona-quote">Key Quote (verbatim)</label>
+              <textarea class="tall" id="${id}-venona-quote" placeholder="Paste the relevant passage from the cable. Use brackets for editorial notes, e.g. [Lauchlin Currie]."></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="archive-block vassiliev full-w">
+          <h4>📓 Vassiliev Notebooks / Gorsky Memo Findings</h4>
+          <div class="archive-subgrid">
+            <div>
+              <label for="${id}-vass-ref">Notebook Reference / Page</label>
+              <input type="text" id="${id}-vass-ref" placeholder='e.g. "White Notebook No. 2, p. 112"'>
+            </div>
+            <div>
+              <label for="${id}-vass-url">Source URL</label>
+              <input type="text" id="${id}-vass-url" placeholder="https://digitalarchive.wilsoncenter.org/...">
+            </div>
+            <div class="span2">
+              <label for="${id}-vass-quote">Key Quote (verbatim)</label>
+              <textarea class="tall" id="${id}-vass-quote" placeholder="Paste the relevant passage from the notebook or Gorsky Memo."></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="assessment-strip">
+          <div>
+            <label for="${id}-assessment">Overall Assessment</label>
+            <select id="${id}-assessment">
+              <option value="">— Select —</option>
+              <option value="Strongly Confirmed">Strongly Confirmed</option>
+              <option value="Partially Confirmed">Partially Confirmed</option>
+              <option value="Not Found">Not Found</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div>
+            <label for="${id}-confidence">Evidence Confidence (1–5)</label>
+            <select id="${id}-confidence">
+              <option value="">—</option>
+              <option value="1">1 — Weak / circumstantial</option>
+              <option value="2">2 — Suggestive</option>
+              <option value="3">3 — Moderate</option>
+              <option value="4">4 — Strong</option>
+              <option value="5">5 — Direct cable + Gorsky confirmation</option>
+            </select>
+          </div>
+          <div>
+            <label for="${id}-spy">Spy or Sympathizer?</label>
+            <input type="text" id="${id}-spy" placeholder='e.g. "Confirmed agent — recruited 1939, passed Treasury data"'>
+          </div>
+          <div class="span-full">
+            <label for="${id}-notes">Additional Notes</label>
+            <textarea id="${id}-notes" placeholder="Contradictions, gaps in the record, historiographical debates, your own observations."></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    `);
+  });
+  </script>
+
+  <div class="section-heading">
+    <h2>Part II — Final Summary</h2>
+    <div class="section-heading-rule"></div>
+  </div>
+
+  <div class="summary-card">
+    <div class="summary-header">📊 Summary &amp; Reflection</div>
+    <div class="summary-body">
+      <div class="tally-box">
+        <label for="tally-strong">Strongly Confirmed</label>
+        <input type="text" id="tally-strong" placeholder="0">
+      </div>
+      <div class="tally-box">
+        <label for="tally-partial">Partially Confirmed</label>
+        <input type="text" id="tally-partial" placeholder="0">
+      </div>
+      <div class="tally-box">
+        <label for="tally-notfound">Not Found</label>
+        <input type="text" id="tally-notfound" placeholder="0">
+      </div>
+      <div class="full-w">
+        <label for="summary-accuracy">How accurate was McCarthy's core claim that communists had infiltrated the U.S. government? What does the archival evidence actually show?</label>
+        <textarea style="min-height:120px;" id="summary-accuracy" placeholder="Write 3–5 sentences. Refer to specific names and cables from your research above."></textarea>
+      </div>
+      <div class="full-w">
+        <label for="summary-surprise">What surprised you most? Were any findings unexpected or more complicated than you anticipated?</label>
+        <textarea style="min-height:100px;" id="summary-surprise" placeholder="2–3 sentences minimum."></textarea>
+      </div>
+      <div class="full-w">
+        <label for="summary-thesis">Draft Thesis Sentence</label>
+        <textarea style="min-height:80px;" id="summary-thesis" placeholder='Complete this: "Based on the Venona decrypts and Vassiliev Notebooks, McCarthy\'s accusation that communists had infiltrated the U.S. government was __________ because __________."'></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="export-bar">
+    <button class="export-btn" onclick="exportNotes()">⬇ Download Research Notes (.txt)</button>
+    <p class="export-note">Downloads a plain-text file of all your entries. Submit this file with your assignment.</p>
+    <p id="save-indicator" style="margin-top:0.5rem;font-size:0.8rem;color:var(--deep-teal);font-style:italic;opacity:0;transition:opacity 0.4s;">&#10003; Progress saved</p>
+    <p style="margin-top:0.3rem;font-size:0.78rem;color:var(--ink-light);font-style:italic;">Your work is automatically saved to this browser. It will be here if you close and return — as long as you use the same browser on the same device.</p>
+  </div>
+
+</div>
+
+<script>
+const PEOPLE_DATA = [
+  { n:1,  name:"Lauchlin Currie" },
+  { n:2,  name:"Harold Glasser" },
+  { n:3,  name:"Mary Jane Keeney" },
+  { n:4,  name:"William Remington" },
+  { n:5,  name:"Robert T. Miller" },
+  { n:6,  name:"Stanley Graze" },
+  { n:7,  name:"Gerald Graze" },
+  { n:8,  name:"Franz Neumann" },
+  { n:9,  name:"Harry Dexter White" },
+  { n:10, name:"Alger Hiss" }
+];
+function val(id) {
+  const el = document.getElementById(id);
+  return el ? el.value.trim() : "";
+}
+function exportNotes() {
+  const studentName = val("student-name") || "[Name not entered]";
+  const classPeriod = val("class-period") || "[Section not entered]";
+  const dateField   = val("date-field")   || "[Date not entered]";
+  const LINE  = "=".repeat(70);
+  const DASH  = "-".repeat(70);
+  const SDASH = "~".repeat(70);
+  let txt = [];
+  txt.push(LINE);
+  txt.push('"WITCHES EVERYWHERE" — McCARTHY RESEARCH NOTES');
+  txt.push("HIST 102 — Capstone Research Project");
+  txt.push("Richland Community College");
+  txt.push(LINE);
+  txt.push(`Student Name  : ${studentName}`);
+  txt.push(`Class/Section : ${classPeriod}`);
+  txt.push(`Date          : ${dateField}`);
+  txt.push("");
+  PEOPLE_DATA.forEach(p => {
+    const id = `p${p.n}`;
+    txt.push(LINE);
+    txt.push(`#${p.n}. ${p.name.toUpperCase()}`);
+    txt.push(LINE);
+    txt.push("GOVERNMENT ROLE:");
+    txt.push(val(`${id}-role`) || "(not entered)");
+    txt.push("");
+    txt.push("SOVIET CODE NAME:");
+    txt.push(val(`${id}-codename`) || "(not entered)");
+    txt.push("");
+    txt.push("McCARTHY'S ACCUSATION:");
+    txt.push(val(`${id}-accusation`) || "(not entered)");
+    txt.push("");
+    txt.push(DASH);
+    txt.push("VENONA PROJECT FINDINGS");
+    txt.push(DASH);
+    txt.push("Cable Date & Office:");
+    txt.push(val(`${id}-venona-date`) || "(not entered)");
+    txt.push("");
+    txt.push("Source URL:");
+    txt.push(val(`${id}-venona-url`) || "(not entered)");
+    txt.push("");
+    txt.push("Key Quote:");
+    txt.push(val(`${id}-venona-quote`) || "(not entered)");
+    txt.push("");
+    txt.push(SDASH);
+    txt.push("VASSILIEV NOTEBOOKS / GORSKY MEMO FINDINGS");
+    txt.push(SDASH);
+    txt.push("Notebook Reference / Page:");
+    txt.push(val(`${id}-vass-ref`) || "(not entered)");
+    txt.push("");
+    txt.push("Source URL:");
+    txt.push(val(`${id}-vass-url`) || "(not entered)");
+    txt.push("");
+    txt.push("Key Quote:");
+    txt.push(val(`${id}-vass-quote`) || "(not entered)");
+    txt.push("");
+    txt.push("ASSESSMENT:");
+    txt.push(`  Overall Assessment   : ${val(`${id}-assessment`) || "(not selected)"}`);
+    txt.push(`  Evidence Confidence  : ${val(`${id}-confidence`) || "(not selected)"}`);
+    txt.push(`  Spy or Sympathizer?  : ${val(`${id}-spy`) || "(not entered)"}`);
+    txt.push("");
+    txt.push("Additional Notes:");
+    txt.push(val(`${id}-notes`) || "(none)");
+    txt.push("");
+  });
+  txt.push(LINE);
+  txt.push("PART II — FINAL SUMMARY");
+  txt.push(LINE);
+  txt.push(`Strongly Confirmed  : ${val("tally-strong")   || "0"}`);
+  txt.push(`Partially Confirmed : ${val("tally-partial")  || "0"}`);
+  txt.push(`Not Found           : ${val("tally-notfound") || "0"}`);
+  txt.push("");
+  txt.push("How accurate was McCarthy's core claim?");
+  txt.push(val("summary-accuracy") || "(not entered)");
+  txt.push("");
+  txt.push("What surprised you most?");
+  txt.push(val("summary-surprise") || "(not entered)");
+  txt.push("");
+  txt.push("Draft Thesis Sentence:");
+  txt.push(val("summary-thesis") || "(not entered)");
+  txt.push("");
+  txt.push(LINE);
+  txt.push("END OF RESEARCH NOTES");
+  txt.push(LINE);
+  const blob = new Blob([txt.join("\n")], { type: "text/plain" });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement("a");
+  const safeName = studentName.replace(/[^a-zA-Z0-9]/g, "_");
+  a.href     = url;
+  a.download = `McCarthy_Research_Notes_${safeName}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>
+<script>
+// ── LOCAL STORAGE AUTO-SAVE ──
+const STORAGE_KEY = "mccarthy_research_notes_v1";
+const PEOPLE_IDS = [1,2,3,4,5,6,7,8,9,10];
+const FIELD_IDS = [
+  "student-name","class-period","date-field",
+  "tally-strong","tally-partial","tally-notfound",
+  "summary-accuracy","summary-surprise","summary-thesis"
+];
+PEOPLE_IDS.forEach(n => {
+  const id = "p" + n;
+  ["role","codename","accusation",
+   "venona-date","venona-url","venona-quote",
+   "vass-ref","vass-url","vass-quote",
+   "assessment","confidence","spy","notes"].forEach(f => {
+    FIELD_IDS.push(id + "-" + f);
+  });
+});
+function saveAll() {
+  const data = {};
+  FIELD_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) data[id] = el.value;
+  });
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    showSaveStatus();
+  } catch(e) {}
+}
+function loadAll() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    FIELD_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && data[id] !== undefined) el.value = data[id];
+    });
+  } catch(e) {}
+}
+function showSaveStatus() {
+  const indicator = document.getElementById("save-indicator");
+  if (!indicator) return;
+  indicator.style.opacity = "1";
+  clearTimeout(indicator._t);
+  indicator._t = setTimeout(() => { indicator.style.opacity = "0"; }, 2000);
+}
+let saveTimer;
+document.addEventListener("input", () => {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(saveAll, 600);
+});
+window.addEventListener("DOMContentLoaded", loadAll);
+</script>
