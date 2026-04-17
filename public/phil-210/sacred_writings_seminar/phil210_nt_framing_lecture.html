@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHIL 210: The New Testament — Framing Lecture</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --antique-gold: #D4AF37;
+            --deep-teal: #2C7873;
+            --rich-purple: #6B4C9A;
+            --ruby-crimson: #9B2C2C;
+            --dark-charcoal: #1A1A1A;
+            --pure-white: #FAFAFA;
+            --soft-cream: #F5F1E8;
+            --bronze-accent: #8B6F47;
+        }
+
+        .reveal {
+            font-family: 'Lora', serif;
+            font-size: 1.4em;
+            background-color: var(--dark-charcoal);
+            color: var(--pure-white);
+        }
+
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Crimson Pro', serif;
+            font-weight: 700;
+            color: var(--antique-gold);
+            text-transform: none;
+        }
+
+        .reveal h1 { font-size: 3.2em; line-height: 1.1; }
+        .reveal h2 { font-size: 2.2em; margin-bottom: 0.5em; }
+        .reveal h3 { font-size: 1.6em; }
+
+        .reveal ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .reveal ul li {
+            margin-bottom: 0.4em;
+        }
+
+        .reveal ul li:before {
+            content: "◆ ";
+            color: var(--deep-teal);
+            font-weight: bold;
+            margin-right: 0.4em;
+        }
+
+        .reveal .sacred-text {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 4px solid var(--antique-gold);
+            padding: 1.2em 1.5em;
+            margin: 1em 0;
+            font-style: italic;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        /* ── Popups ── */
+        .popup-trigger {
+            color: var(--deep-teal);
+            border-bottom: 2px dotted var(--deep-teal);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .popup-trigger:hover { color: var(--antique-gold); }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--soft-cream);
+            color: var(--dark-charcoal);
+            padding: 2em 2.2em;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+            max-width: 580px;
+            width: 90%;
+            z-index: 1000;
+            border: 3px solid var(--bronze-accent);
+            line-height: 1.6;
+        }
+        .popup.active { display: block; }
+
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 16px;
+            font-size: 1.8em;
+            cursor: pointer;
+            color: var(--ruby-crimson);
+            font-family: sans-serif;
+        }
+
+        .definition-term {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--rich-purple);
+            margin-bottom: 0.5em;
+            font-family: 'Crimson Pro', serif;
+        }
+
+        .popup p { font-size: 0.85em; margin-bottom: 0.5em; color: #2a2a2a; }
+        .popup p:last-child { margin-bottom: 0; }
+        .popup ul { padding-left: 1.2em; list-style: disc; }
+        .popup ul li { font-size: 0.82em; color: #2a2a2a; margin-bottom: 0.3em; }
+        .popup ul li:before { content: none; }
+
+        /* ── Key terms ── */
+        .key-term {
+            color: var(--rich-purple);
+            font-weight: 600;
+        }
+
+        /* ── Timeline items ── */
+        .timeline-item {
+            display: flex;
+            gap: 1em;
+            margin-bottom: 0.6em;
+            align-items: baseline;
+        }
+        .timeline-date {
+            color: var(--antique-gold);
+            font-family: 'Crimson Pro', serif;
+            font-weight: 700;
+            min-width: 120px;
+            font-size: 0.95em;
+        }
+
+        /* ── Two-column grid ── */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8em;
+            margin-top: 0.5em;
+        }
+
+        .col-teal {
+            background: rgba(44, 120, 115, 0.15);
+            padding: 1.2em;
+            border-radius: 10px;
+            border-top: 3px solid var(--deep-teal);
+        }
+
+        .col-purple {
+            background: rgba(107, 76, 154, 0.15);
+            padding: 1.2em;
+            border-radius: 10px;
+            border-top: 3px solid var(--rich-purple);
+        }
+
+        /* ── Warning box ── */
+        .warning-box {
+            background: rgba(155, 44, 44, 0.15);
+            border-left: 4px solid var(--ruby-crimson);
+            padding: 1em 1.4em;
+            border-radius: 6px;
+            margin-top: 0.8em;
+        }
+
+        /* ── Callout box ── */
+        .callout {
+            background: rgba(212, 175, 55, 0.12);
+            border: 2px solid var(--antique-gold);
+            border-radius: 10px;
+            padding: 1.2em 1.6em;
+            margin-top: 1em;
+            font-style: italic;
+            font-size: 0.95em;
+            line-height: 1.7;
+        }
+
+        /* ── Slide counter ── */
+        .slide-counter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(26, 26, 26, 0.9);
+            color: var(--antique-gold);
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-family: 'Crimson Pro', serif;
+            font-weight: 600;
+            font-size: 0.9em;
+            border: 2px solid var(--deep-teal);
+            z-index: 100;
+        }
+
+        /* ── Tag badges ── */
+        .tag {
+            display: inline-block;
+            background: rgba(44,120,115,0.25);
+            border: 1px solid var(--deep-teal);
+            color: var(--deep-teal);
+            font-size: 0.55em;
+            padding: 0.2em 0.7em;
+            border-radius: 20px;
+            margin-left: 0.5em;
+            vertical-align: middle;
+            font-family: 'Crimson Pro', serif;
+            letter-spacing: 0.5px;
+        }
+
+        /* ── Image placeholder ── */
+        .img-placeholder {
+            background: rgba(44, 120, 115, 0.15);
+            border: 2px dashed var(--deep-teal);
+            padding: 1.5em;
+            border-radius: 10px;
+            text-align: center;
+            color: var(--deep-teal);
+            font-size: 0.8em;
+        }
+
+        /* ── Footer bar ── */
+        .slide-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(44, 120, 115, 0.15);
+            border-top: 1px solid rgba(44,120,115,0.4);
+            padding: 0.3em 1.2em;
+            font-size: 0.38em;
+            color: rgba(250,250,250,0.5);
+            font-family: 'Crimson Pro', serif;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+
+<!-- ============================================================
+     SLIDE 1 — TITLE
+     ============================================================ -->
+<section>
+    <p style="font-size: 0.45em; color: var(--deep-teal); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.5em;">PHIL 210 · World Religions</p>
+    <h1>The New<br>Testament</h1>
+    <p style="font-size: 0.7em; color: var(--pure-white); margin-top: 0.6em; font-style: italic;">Before We Read — A Critical Framework</p>
+
+    <div style="position: absolute; bottom: 50px; right: 40px;
+                background: rgba(44,120,115,0.2);
+                padding: 0.9em 1.1em; border-radius: 10px;
+                border: 2px solid var(--deep-teal);
+                font-size: 0.42em; text-align: left;">
+        <p style="color: var(--antique-gold); font-weight: 600; margin-bottom: 0.5em;">⌨️ Keyboard Shortcuts</p>
+        <p style="margin: 0.25em 0;">→ / Space: Next slide</p>
+        <p style="margin: 0.25em 0;">← : Previous slide</p>
+        <p style="margin: 0.25em 0;">S: Speaker notes</p>
+        <p style="margin: 0.25em 0;">F: Fullscreen</p>
+        <p style="margin: 0.25em 0;">ESC: Close popups</p>
+    </div>
+
+
+    <aside class="notes">
+        Welcome. Before students open a single passage today, they need a critical framework for what the New Testament actually is — how it was made, by whom, and why it looks the way it does.
+
+        The goal of this mini-lecture is not to undermine faith. It is to establish the historical ground rules for reading these texts as primary sources, which is what we do in this course.
+
+        Tell students: "We are not asking whether any of this is true. We are asking what these writers believed, why they argued what they argued, and what was at stake for the communities they were writing to."
+
+        Pacing: This deck is 7 slides, approximately 7–8 minutes. Move briskly. The workshop passages do the heavy lifting today.
+    </aside>
+</section>
+
+
+<!-- ============================================================
+     SLIDE 2 — HOOK: NOT HANDED DOWN FROM HEAVEN
+     ============================================================ -->
+<section>
+    <h2>Not What Most People Assume</h2>
+
+    <div class="callout">
+        "The New Testament was assembled by committee — over three centuries — and people argued bitterly about what belonged in it."
+    </div>
+
+    <ul style="margin-top: 1em;">
+        <li>Martin Luther wanted to remove <span class="popup-trigger" data-popup="james-popup">James</span> entirely</li>
+        <li><span class="popup-trigger" data-popup="revelation-popup">Revelation</span> almost didn't make it</li>
+        <li>The 27-book canon was not finalized until <span class="key-term">367 AD</span></li>
+    </ul>
+
+    <!-- Popup: James -->
+    <div id="james-popup" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">Luther and the "Epistle of Straw"</div>
+        <p>Martin Luther (1483–1546) called James an "epistle of straw" in the preface to his 1522 German New Testament. His objection was theological: James 2:24 states that "a person is justified by works and not by faith alone," which Luther read as a direct contradiction of Paul's doctrine of grace.</p>
+        <p>Luther placed James, Jude, Hebrews, and Revelation at the back of his New Testament, separated from what he considered the "true and certain chief books." He later softened his position but never fully embraced James.</p>
+        <p>This is not ancient history — it shaped every Protestant denomination that followed him.</p>
+    </div>
+
+    <!-- Popup: Revelation -->
+    <div id="revelation-popup" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">Revelation — The Most Contested Book</div>
+        <p>The book of Revelation (also called the Apocalypse) was disputed for centuries. Large portions of the Eastern church — including influential theologians in Syria, Cappadocia, and Constantinople — rejected it well into the medieval period.</p>
+        <p>The Eastern Orthodox church still does not include Revelation in its lectionary (public worship readings) to this day.</p>
+        <p>Reasons for suspicion: authorship was contested (Is this the same John who wrote the Gospel?), the symbolism was considered dangerously open to misinterpretation, and several regional churches simply never used it.</p>
+    </div>
+
+
+    <aside class="notes">
+        HOOK — deliver this with energy. The goal is to destabilize two opposite assumptions simultaneously:
+
+        1. DEVOTIONAL STUDENTS who assume the NT arrived complete and self-evident need to hear that the canon is a historical artifact shaped by human decisions.
+
+        2. DISMISSIVE STUDENTS who think they already know everything about Christianity need to hear that this is stranger and more contested than they assumed.
+
+        The Luther/James point is especially useful because students will be reading James today. Plant the seed now: "The book you're about to read almost wasn't in here."
+
+        The 367 AD date refers to Athanasius of Alexandria's 39th Festal Letter — the first document to list exactly our 27 NT books and declare all others excluded. Even after this, regional churches continued to use variant lists for decades.
+
+        Don't linger here — this slide is the provocation, not the lesson. Move to the timeline.
+    </aside>
+</section>
+
+
+<!-- ============================================================
+     SLIDE 3 — PAUL CAME FIRST (TIMELINE)
+     ============================================================ -->
+<section>
+    <h2>The Surprising Timeline</h2>
+    <p style="font-size: 0.7em; color: rgba(250,250,250,0.7); margin-bottom: 0.8em; font-style: italic;">Most students assume the Gospels came first. They didn't.</p>
+
+    <div class="timeline-item">
+        <div class="timeline-date">~30 AD</div>
+        <div>Crucifixion and resurrection of Jesus</div>
+    </div>
+    <div class="timeline-item">
+        <div class="timeline-date">~50–60 AD</div>
+        <div><span class="key-term">Paul's letters</span> — the earliest NT documents <span class="tag">EARLIEST</span></div>
+    </div>
+    <div class="timeline-item">
+        <div class="timeline-date">~70 AD</div>
+        <div>Gospel of <span class="popup-trigger" data-popup="mark-popup">Mark</span> written</div>
+    </div>
+    <div class="timeline-item">
+        <div class="timeline-date">~80–90 AD</div>
+        <div>Matthew and Luke written</div>
+    </div>
+    <div class="timeline-item">
+        <div class="timeline-date">~90–100 AD</div>
+        <div>Gospel of <span class="popup-trigger" data-popup="john-popup">John</span> written</div>
+    </div>
+    <div class="timeline-item">
+        <div class="timeline-date">367 AD</div>
+        <div>Canon formally closed by <span class="popup-trigger" data-popup="athanasius-popup">Athanasius</span></div>
+    </div>
+
+    <!-- Popup: Mark -->
+    <div id="mark-popup" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">Why Mark Came First</div>
+        <p>Mark is the shortest Gospel (~16 chapters) and the most urgent in style — scholars note the word "immediately" (Greek: <em>euthys</em>) appears over 40 times. It reads like a fast-moving account written under pressure.</p>
+        <p>The traditional view held that Matthew wrote first (hence "Matthew, Mark, Luke, John" in the NT order). The scholarly consensus reversed this in the 19th century based on detailed literary analysis: Matthew and Luke both appear to have used Mark as a source, often copying his language word-for-word.</p>
+        <p>Mark was written shortly after the destruction of the Jerusalem Temple in 70 AD — a catastrophic event that shook Jewish and Jewish-Christian communities profoundly.</p>
+    </div>
+
+    <!-- Popup: John -->
+    <div id="john-popup" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">John — A Different Kind of Gospel</div>
+        <p>John shares almost none of Mark's material. There are no parables, no Sermon on the Mount, no exorcisms. Instead, Jesus speaks in long philosophical discourses ("I am the bread of life," "I am the way, the truth, and the life").</p>
+        <p>John opens with a hymn to the divine Logos (Word/Reason) — a concept drawn from Greek philosophy — identifying Jesus with the eternal creative principle of the universe. This is a very different theological move than anything in the Synoptics.</p>
+        <p>John's community appears to have been in sharp conflict with Jewish synagogue communities, which shapes the Gospel's often harsh language toward "the Jews."</p>
+    </div>
+
+    <!-- Popup: Athanasius -->
+    <div id="athanasius-popup" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">Athanasius of Alexandria (296–373 AD)</div>
+        <p>Athanasius was Bishop of Alexandria and one of the most influential figures in early Christian theology. He is best known for championing the Nicene Creed's definition of Christ as fully divine — a position he defended against the Arian controversy through five exiles from his see.</p>
+        <p>In his 39th Festal Letter (367 AD) — a circular letter sent to churches under his jurisdiction — he listed exactly 27 books as the New Testament canon and instructed that no others be read in worship. This is the first surviving document to match our current NT exactly.</p>
+        <p>The letter was written partly to counter the spread of non-canonical texts, particularly Gnostic gospels, which were widely circulating in Egypt at the time.</p>
+    </div>
+
+
+    <aside class="notes">
+        KEY POINT TO LAND: Paul never met Jesus during his ministry. His letters were written within 20 years of the crucifixion — while eyewitnesses were still alive, but before anyone had written down a Gospel narrative.
+
+        This means:
+        - 1 Corinthians 13 and Ephesians 2 (which students read today) are OLDER than the Gospels
+        - Paul's theology was already shaping communities before Matthew, Mark, Luke, or John existed as texts
+        - The "Paul vs. James" debate they encounter in the workshop is not a marginal dispute — it goes to the heart of what the earliest Christians believed
+
+        Also worth noting: Paul's letters were written to specific communities (Corinth, Rome, Ephesus) to address specific problems. They are not systematic theology — they are crisis correspondence. Reading 1 Corinthians 13 without knowing the Corinthian church's problems is like reading one side of an argument.
+
+        Don't read every timeline item aloud — let students absorb it visually. Speak to the Paul point and the Mark/Matthew reversal. Those are the two surprises worth naming.
+    </aside>
+</section>
+
+
+<!-- ============================================================
+     SLIDE 4 — THE SYNOPTIC PROBLEM
+     ============================================================ -->
+<section>
+    <h2>Why Four Gospels?</h2>
+
+    <div class="two-col">
+        <div class="col-teal">
+            <h3 style="color: var(--deep-teal); font-size: 1.2em; margin-bottom: 0.5em;">The <span class="popup-trigger" data-popup="synoptic-popup">Synoptic Three</span></h3>
+            <ul>
+                <li>Matthew, Mark, Luke</li>
+                <li>Share large amounts of material</li>
+                <li>Mark written first — used by both Matthew and Luke</li>
+                <li>Plus a second shared source: <span class="popup-trigger" data-popup="q-popup">Q</span></li>
+            </ul>
+        </div>
+        <div class="col-purple">
+            <h3 style="color: var(--rich-purple); font-size: 1.2em; margin-bottom: 0.5em;">John — Stands Alone</h3>
+            <ul>
+                <li>No parables, no Sermon on the Mount</li>
+                <li>Jesus speaks in long discourses</li>
+                <li>Opens with a hymn to the divine <span class="popup-trigger" data-popup="logos-popup">Logos</span></li>
+                <li>Distinct theology, distinct community</li>
+            </ul>
+        </div>
+    </div>
+
+    <p style="font-size: 0.65em; color: rgba(250,250,250,0.6); margin-top: 0.8em; font-style: italic; text-align: center;">Four Gospels = Four communities vouching for four portraits of the same figure</p>
+
+    <!-- Popup: Synoptic -->
+    <div id="synoptic-popup" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">Synoptic Gospels</div>
+        <p>From the Greek <em>synoptikos</em> — "seen together." Matthew, Mark, and Luke can be laid side by side (in parallel columns called a "synopsis") and compared directly because they share so much content, often word-for-word.</p>
+        <p>The literary problem this creates — why do three independent accounts share identical Greek phrasing? — is called the Synoptic Problem. The dominant scholarly solution is Markan Priority: Mark came first, and Matthew and Luke independently drew from Mark plus at least one other common source.</p>
+    </div>
+
+    <!-- Popup: Q -->
+    <div id="q-popup" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">Q — The Hypothetical Source</div>
+        <p>Q (from the German <em>Quelle</em>, "source") is a hypothetical collection of Jesus's sayings that scholars believe Matthew and Luke both used independently — material that appears in both Gospels but not in Mark.</p>
+        <p>No physical copy of Q has ever been found. Its existence is inferred from the fact that Matthew and Luke share approximately 235 verses not found in Mark, often in nearly identical Greek wording.</p>
+        <p>The Gospel of Thomas — a non-canonical collection of 114 sayings discovered in Egypt in 1945 — is sometimes compared to what Q might have looked like: pure sayings, no narrative, no passion story.</p>
+        <p>Some scholars doubt Q existed at all, arguing Luke simply used Matthew directly (the "Farrer hypothesis"). The debate continues.</p>
+    </div>
+
+    <!-- Popup: Logos -->
+    <div id="logos-popup" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">Logos (Greek: λόγος)</div>
+        <p>John's Gospel opens: "In the beginning was the Logos, and the Logos was with God, and the Logos was God." This is a deliberate echo of Genesis 1 ("In the beginning God created...") combined with Greek philosophical vocabulary.</p>
+        <p>In Greek philosophy — particularly Stoicism and the writings of Philo of Alexandria — the Logos was the rational principle underlying the universe, the divine mind through which creation was ordered.</p>
+        <p>By identifying Jesus with the Logos, John's author is making a claim intelligible to both Jewish and Greek-educated audiences: Jesus is not merely a teacher or messiah — he is the rational structure of the cosmos made flesh.</p>
+        <p>This theological move had enormous consequences for later Christian doctrine, particularly the development of Trinitarian theology.</p>
+    </div>
+
+
+    <aside class="notes">
+        The practical takeaway students need: the four Gospels are not four identical accounts of the same events. They are four distinct theological portraits, written by different communities, for different audiences, with different emphases and sometimes different theologies.
+
+        Examples of differences worth knowing if students ask:
+        - Matthew's Sermon on the Mount (chapters 5–7) becomes Luke's Sermon on the Plain (Luke 6) — shorter, different setting, different audience
+        - Mark's Jesus is more human — he gets tired, feels emotions, asks questions. John's Jesus is more transcendent — he knows everything in advance
+        - Luke alone has the Good Samaritan and the Prodigal Son. John alone has the raising of Lazarus and the wedding at Cana
+
+        Why four? The short answer is: different communities preserved different traditions, and by the time the canon was assembled, all four had enough regional standing that excluding any of them would have been politically impossible. The four-gospel canon was itself a compromise — Tatian (~170 AD) tried to harmonize them into one text (the Diatessaron) and was eventually condemned for it.
+
+        Marcion (~140 AD) accepted only Luke (edited) and Paul's letters, rejecting everything else. He was declared a heretic. His challenge partly forced the mainstream church to clarify what it considered authoritative.
+    </aside>
+</section>
+
+
+<!-- ============================================================
+     SLIDE 5 — THE LOST GOSPELS
+     ============================================================ -->
+<section>
+    <h2>What Didn't Make the Cut</h2>
+    <p style="font-size: 0.65em; color: rgba(250,250,250,0.65); margin-bottom: 0.7em; font-style: italic;">Dozens of gospels, letters, and apocalypses circulated in early Christianity</p>
+
+    <div class="two-col">
+        <div class="col-teal">
+            <h3 style="color: var(--deep-teal); font-size: 1.1em; margin-bottom: 0.5em;">Excluded Gospels</h3>
+            <ul>
+                <li><span class="popup-trigger" data-popup="thomas-popup">Gospel of Thomas</span></li>
+                <li><span class="popup-trigger" data-popup="mary-popup">Gospel of Mary</span></li>
+                <li><span class="popup-trigger" data-popup="judas-popup">Gospel of Judas</span></li>
+                <li><span class="popup-trigger" data-popup="peter-popup">Gospel of Peter</span></li>
+                <li>Infancy Gospel of Thomas</li>
+            </ul>
+        </div>
+        <div class="col-purple">
+            <h3 style="color: var(--rich-purple); font-size: 1.1em; margin-bottom: 0.5em;">Letters &amp; Other Texts</h3>
+            <ul>
+                <li><span class="popup-trigger" data-popup="didache-popup">The Didache</span></li>
+                <li>Epistle of Barnabas</li>
+                <li>Shepherd of Hermas</li>
+                <li>1 Clement</li>
+                <li>Apocalypse of Peter</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Popup: Thomas -->
+    <div id="thomas-popup" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">Gospel of Thomas</div>
+        <p>A collection of 114 sayings attributed to Jesus — no narrative, no miracles, no crucifixion, no resurrection story. Just sayings, many of them cryptic and philosophical.</p>
+        <p>Discovered at Nag Hammadi, Egypt in 1945 along with 52 other texts. Probably composed in the late 1st or early 2nd century. Some scholars believe it preserves sayings as old as anything in the canonical Gospels.</p>
+        <p>Opening line: "These are the secret sayings that the living Jesus spoke and Didymos Judas Thomas recorded." The emphasis on secrecy and hidden knowledge is characteristic of Gnostic Christianity.</p>
+        <p>Excluded because: no passion narrative, no resurrection, theology seen as incompatible with emerging orthodoxy, and it lacked the broad regional usage (catholicity) required for inclusion.</p>
+    </div>
+
+    <!-- Popup: Mary -->
+    <div id="mary-popup" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">Gospel of Mary</div>
+        <p>Presents Mary Magdalene as the disciple who received special teachings from the risen Jesus — teachings she then shares with the other, skeptical disciples. Peter challenges her authority; Levi defends her.</p>
+        <p>Only fragments survive (in Coptic and Greek). The text reflects communities where Mary Magdalene held significant authority and where her status as a primary witness to the resurrection was contested by those who preferred male apostolic authority.</p>
+        <p>Its exclusion is significant: it represents a road not taken in early Christian leadership structures. The canonical Gospels consistently minimize Mary's role even while acknowledging she was the first witness to the resurrection.</p>
+    </div>
+
+    <!-- Popup: Judas -->
+    <div id="judas-popup" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">Gospel of Judas</div>
+        <p>Known from ancient references, rediscovered in the 1970s in Egypt, and published in 2006 after years of conservation work. A Gnostic text probably composed in the 2nd century.</p>
+        <p>Radically inverts the canonical narrative: Judas is not a traitor but Jesus's closest and most trusted disciple. Jesus privately instructs Judas to hand him over — it is an act of liberation, not betrayal, because it frees Jesus's divine spirit from the material body.</p>
+        <p>The text was condemned by Irenaeus of Lyon around 180 AD, which is how we know it existed. Its theology is Sethian Gnosticism — a strand that viewed the creator God of the Old Testament as a lesser, ignorant deity rather than the supreme God.</p>
+    </div>
+
+    <!-- Popup: Peter -->
+    <div id="peter-popup" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">Gospel of Peter</div>
+        <p>A passion and resurrection narrative that diverges significantly from the canonical accounts. Most strikingly, it includes a direct description of the resurrection itself — which no canonical Gospel does (they only show the aftermath).</p>
+        <p>In the Gospel of Peter, two enormous angels enter the tomb, and three figures emerge: two supporting a third, with a cross following behind them. A voice from heaven asks, "Have you preached to those who sleep?" and the cross answers, "Yes."</p>
+        <p>A walking, talking cross. The bishop Serapion of Antioch initially allowed its use in one of his churches (~200 AD) but later revoked permission after concluding it supported Docetism — the view that Jesus only appeared to suffer but did not actually feel pain.</p>
+    </div>
+
+    <!-- Popup: Didache -->
+    <div id="didache-popup" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">The Didache ("Teaching of the Twelve Apostles")</div>
+        <p>A short manual of Christian ethics, liturgy, and church organization, probably composed in the late 1st century — making it roughly contemporary with some of the canonical letters.</p>
+        <p>Contents include: ethical instruction (the "Two Ways" of life and death), instructions for baptism (prefer running water; if unavailable, pour three times), instructions for the Eucharist, fasting days (Wednesday and Friday), and guidelines for welcoming traveling prophets.</p>
+        <p>Considered scripture by some early communities. Included in the Codex Hierosolymitanus (1056 AD) alongside canonical books. Rediscovered by modern scholarship only in 1873 — lost for over a thousand years.</p>
+        <p>Excluded from the final canon partly because its authorship was considered too recent and uncertain to meet the apostolicity standard.</p>
+    </div>
+
+
+    <aside class="notes">
+        This slide generates genuine interest — students often want to know more about the Gospel of Judas and the Gospel of Thomas in particular. That curiosity is useful: it signals they are starting to see the NT as a historical selection rather than a self-evident list.
+
+        Key teaching point: the texts that were excluded were not always theologically outlandish. The Didache is practically indistinguishable from orthodox Christian ethics. 1 Clement was read as scripture in the Corinthian church for generations. These texts lost not because they were heretical but because they lost the argument about apostolic authority or regional reach.
+
+        The texts that WERE excluded for theological reasons (Thomas, Mary, Judas) share a common thread: they tend to privilege secret or hidden knowledge, challenge male apostolic authority, or present a Jesus who is more fully divine than human. These are Gnostic tendencies — and suppressing them was a deliberate choice by proto-orthodox Christianity.
+
+        Nag Hammadi is worth a brief mention if students ask: in 1945, a farmer in Upper Egypt discovered a sealed jar containing 52 texts — mostly Gnostic Christian documents that had been buried around 400 AD, probably by monks from a nearby monastery who were hiding them from authorities enforcing Athanasius's canon decree. The discovery revolutionized scholarship on early Christianity.
+
+        Infancy Gospel of Thomas: the story of young Jesus killing a child who bumped into him is genuinely alarming to students — use it judiciously. It illustrates how wide the range of early Jesus traditions was before the canon imposed order.
+    </aside>
+</section>
+
+
+<!-- ============================================================
+     SLIDE 6 — HOW THE CANON WAS ASSEMBLED
+     ============================================================ -->
+<section>
+    <h2>How the Canon Was Built</h2>
+    <p style="font-size: 0.65em; color: rgba(250,250,250,0.65); margin-bottom: 0.6em; font-style: italic;">No single council voted the NT into existence — it emerged through centuries of use, debate, and regional consensus</p>
+
+    <ul>
+        <li><span class="key-term">Apostolic Authority</span> — written by or traced to an apostle</li>
+        <li><span class="key-term">Orthodoxy</span> — consistent with what communities already believed</li>
+        <li><span class="key-term">Catholicity</span> — used widely, not just in one region</li>
+        <li><span class="popup-trigger" data-popup="eusebius-popup">Regional bishops</span> compared lists — no central authority made the final call</li>
+        <li><span class="popup-trigger" data-popup="codex-popup">367 AD</span> — Athanasius publishes the first complete list matching our NT; first bound codex follows in the late 4th century</li>
+    </ul>
+
+    <div class="warning-box" style="margin-top: 0.7em;">
+        <p style="font-size: 0.72em;"><strong style="color: var(--ruby-crimson);">Note:</strong> Even books that made the final list were disputed for centuries — James, Jude, 2 Peter, Hebrews, and Revelation were collectively called the <span class="popup-trigger" data-popup="antilegomena-popup"><em>Antilegomena</em></span> — "spoken against."</p>
+    </div>
+
+    <!-- Popup: Eusebius / who decided -->
+    <div id="eusebius-popup" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">Who Actually Decided?</div>
+        <p>There was no single council that voted the NT into existence. The process was decentralized and took centuries. Key figures in the sorting process:</p>
+        <ul>
+            <li><strong>Origen of Alexandria (~230 AD)</strong> — first systematic attempt to compare which books were accepted across regions; identified three tiers: accepted, disputed, rejected</li>
+            <li><strong>Eusebius of Caesarea (~313 AD)</strong> — historian; produced the most influential pre-canon classification in his <em>Ecclesiastical History</em>, separating acknowledged from disputed books</li>
+            <li><strong>Athanasius of Alexandria (367 AD)</strong> — his Easter letter listed exactly our 27 books and instructed churches to use no others; the closest thing to an authoritative declaration</li>
+            <li><strong>Council of Carthage (397 AD)</strong> — Western church council that ratified the same 27-book list; the Eastern church took longer to fully agree</li>
+        </ul>
+        <p>The process was not democratic, but it was also not a single top-down decree. It reflected the gradual convergence of influential regional churches around a shared list.</p>
+    </div>
+
+    <!-- Popup: Codex / first bound Bible -->
+    <div id="codex-popup" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">When Was the NT First Published Together?</div>
+        <p>Early Christians used scrolls — each book was a separate scroll. The idea of binding multiple texts together into a single volume (a <em>codex</em>) was itself a Christian innovation, adopted early and enthusiastically.</p>
+        <p>The oldest surviving near-complete Christian Bibles are both from the 4th century:</p>
+        <ul>
+            <li><strong>Codex Sinaiticus</strong> (~330–360 AD) — discovered at St. Catherine's Monastery, Sinai, in the 19th century; includes the full NT plus the Epistle of Barnabas and the Shepherd of Hermas</li>
+            <li><strong>Codex Vaticanus</strong> (~325–350 AD) — held in the Vatican Library; Old and New Testament together, though the NT ends abruptly before Hebrews 9</li>
+        </ul>
+        <p>Both were likely produced under the patronage of the Emperor Constantine, who in 331 AD commissioned Eusebius to produce 50 copies of the Christian scriptures for churches in Constantinople. Whether these surviving codices are among those copies is debated.</p>
+        <p>Note that Codex Sinaiticus includes non-canonical books alongside canonical ones — evidence that the boundary was still somewhat fluid even after Athanasius's 367 AD letter.</p>
+    </div>
+
+    <!-- Popup: Antilegomena -->
+    <div id="antilegomena-popup" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">Antilegomena (ἀντιλεγόμενα)</div>
+        <p>Greek for "spoken against" or "disputed." The term was used by Eusebius of Caesarea (~313 AD) to categorize books that were known and used in some churches but whose canonical status was questioned.</p>
+        <p>The Antilegomena included: James, Jude, 2 Peter, 2 John, 3 John, Hebrews (authorship uncertain — probably not Paul), and Revelation.</p>
+        <p>Eusebius distinguished these from the <em>Homologoumena</em> (universally acknowledged) — the four Gospels, Acts, Paul's thirteen letters, and 1 Peter and 1 John.</p>
+        <p>The fact that James is one of the Antilegomena matters for today's class: the letter students are reading was contested from the beginning — it was not a universally accepted voice even in the early church.</p>
+    </div>
+
+
+    <aside class="notes">
+        The three criteria are clean but they had a circular quality in practice:
+
+        - "Apostolic authority" was often asserted rather than verified. 2 Peter claims to be written by the apostle Peter — the vast majority of modern scholars believe it is pseudonymous (written under a false name), probably composed in the early 2nd century, decades after Peter's death. This was a common and accepted literary practice in antiquity.
+
+        - "Orthodoxy" meant: does it agree with what we already believe? This is inherently self-reinforcing — texts that challenged emerging consensus were filtered out, which means the canon partly reflects the winners of early theological debates rather than the full range of early Christian thought.
+
+        - "Catholicity" (from Greek <em>katholikos</em>, "universal") meant broad geographic usage. This favored texts associated with major urban centers — Rome, Alexandria, Antioch, Ephesus — over texts used by regional communities.
+
+        Eusebius of Caesarea's classification (~313 AD) in his "Ecclesiastical History" is the clearest pre-Athanasius attempt to sort the texts. He used three categories: Homologoumena (acknowledged), Antilegomena (disputed), and Notha (rejected/spurious).
+
+        Key figure to know if students press: Origen of Alexandria (~230 AD) had an earlier three-category scheme and was the first to systematically compare what was accepted where. He concluded some books were accepted everywhere, some were disputed, and some were clearly false.
+    </aside>
+</section>
+
+
+<!-- ============================================================
+     SLIDE 7 — BRIDGE TO TODAY'S WORKSHOP
+     ============================================================ -->
+<section>
+    <h2>What You Are Reading Today</h2>
+
+    <div class="two-col" style="margin-bottom: 0.8em;">
+        <div class="col-teal">
+            <h3 style="color: var(--deep-teal); font-size: 1.1em; margin-bottom: 0.4em;">Three Genres</h3>
+            <ul>
+                <li><strong>Luke</strong> — Gospel narrative</li>
+                <li><strong>Paul</strong> — Crisis correspondence</li>
+                <li><strong>James</strong> — Wisdom letter <span class="popup-trigger" data-popup="antilegomena-note-popup">⚠</span></li>
+            </ul>
+        </div>
+        <div class="col-purple">
+            <h3 style="color: var(--rich-purple); font-size: 1.1em; margin-bottom: 0.4em;">The Central Question</h3>
+            <ul>
+                <li>Paul: saved by <span class="key-term">faith alone</span></li>
+                <li>James: faith without works is <span class="key-term">dead</span></li>
+                <li>Both made the canon — intentionally</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="callout" style="font-size: 0.75em;">
+        "We are not asking whether any of this is true. We are asking what these writers believed, why they argued what they argued, and what was at stake for the communities they were writing to."
+    </div>
+
+    <!-- Popup: Antilegomena note -->
+    <div id="antilegomena-note-popup" class="popup">
+        <span class="popup-close">&times;</span>
+        <div class="definition-term">James — An Antilegomenon</div>
+        <p>James is one of the contested books — an <em>Antilegomenon</em>. It was disputed in the early church, nearly rejected by Luther, and sits in tension with Paul's letters on the central question of salvation.</p>
+        <p>The fact that it survived and was canonized anyway is itself historically significant. The early church chose to preserve a text that complicated its own theology rather than smooth over the contradiction.</p>
+        <p>That decision — to keep the tension rather than resolve it — is worth thinking about as you read both Paul and James today.</p>
+    </div>
+
+
+    <aside class="notes">
+        This is the bridge slide — it lands the mini-lecture and launches the workshop. Keep it brief.
+
+        Key points to make verbally:
+
+        1. Each genre requires different reading tools. Luke is storytelling — pay attention to characters, reversals, and who the hero is. Paul is argument — pay attention to what he is arguing against, not just what he is arguing for. James is exhortation — shorter, punchier, confrontational in tone.
+
+        2. The Paul/James tension is not an accident or an oversight. The early church knew these texts existed side by side. They chose to keep both. That is itself a theological decision worth taking seriously.
+
+        3. James is one of the Antilegomena — it almost didn't survive. The ⚠ popup on the slide makes that point available for curious students without forcing everyone to sit through it.
+
+        4. Close with the framing statement (already on the slide). Read it aloud. Then say: "Open to Luke 4. Let's begin."
+
+        ── END OF MINI-LECTURE ──
+        Total slides: 7 | Target time: 7–8 minutes
+        Next: Sacred Text Workshop — Guided Reading Check
+    </aside>
+</section>
+
+
+</div><!-- /slides -->
+</div><!-- /reveal -->
+
+<div class="slide-counter"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+<script>
+    Reveal.initialize({
+        hash: true,
+        slideNumber: false,
+        transition: 'slide',
+        transitionSpeed: 'default',
+        plugins: [ RevealNotes ]
+    });
+
+    // Slide counter
+    function updateSlideCounter() {
+        const current = Reveal.getState().indexh + 1;
+        const total = Reveal.getTotalSlides();
+        document.querySelector('.slide-counter').textContent = `${current}/${total}`;
+    }
+    Reveal.on('slidechanged', updateSlideCounter);
+    updateSlideCounter();
+
+    // Popup functionality
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('popup-trigger')) {
+            const popupId = e.target.getAttribute('data-popup');
+            document.getElementById(popupId).classList.add('active');
+            e.stopPropagation();
+        }
+        if (e.target.classList.contains('popup-close')) {
+            document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+        }
+        if (e.target.classList.contains('popup')) {
+            document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+        }
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+        }
+    });
+</script>
+</body>
+</html>
