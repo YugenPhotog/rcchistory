@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Testament Sacred Text Workshop — PHIL 210 World Religions</title>
+<style>
+
+/* ============================================================
+   BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 11.5pt;
+  color: #1a1a1a;
+  background: #f5f1ea;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 0 60px 0;
+}
+
+/* ============================================================
+   HEADER BAR
+   ============================================================ */
+.page-header {
+  background: linear-gradient(135deg, #2C7873 0%, #1a4a47 100%);
+  padding: 28px 36px 22px 36px;
+  border-bottom: 4px solid #D4AF37;
+}
+
+.page-header .eyebrow {
+  font-size: 0.78em;
+  color: #D4AF37;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  font-family: Georgia, serif;
+}
+
+.page-header h1 {
+  font-size: 1.75em;
+  color: #ffffff;
+  font-weight: bold;
+  margin-bottom: 5px;
+  line-height: 1.2;
+}
+
+.page-header .subtitle {
+  font-size: 0.95em;
+  color: #b2d8d8;
+  font-style: italic;
+}
+
+/* ============================================================
+   NAME BLOCK
+   ============================================================ */
+.name-block {
+  background: #ffffff;
+  border-bottom: 3px solid #2C7873;
+  padding: 16px 36px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.name-block label {
+  font-size: 0.95em;
+  font-weight: bold;
+  color: #1a4a47;
+  white-space: nowrap;
+}
+
+.name-block input[type="text"] {
+  border: none;
+  border-bottom: 1.5px solid #1a1a1a;
+  padding: 3px 6px;
+  font-family: Georgia, serif;
+  font-size: 0.95em;
+  background: transparent;
+  color: #1a1a1a;
+  outline: none;
+  width: 260px;
+}
+
+/* ============================================================
+   INSTRUCTIONS
+   ============================================================ */
+.instructions {
+  background: #eaf4f4;
+  border-left: 5px solid #2C7873;
+  margin: 28px 36px 0 36px;
+  padding: 18px 22px;
+}
+
+.instructions .instr-heading {
+  font-size: 0.95em;
+  font-weight: bold;
+  color: #1a4a47;
+  margin-bottom: 10px;
+}
+
+.instructions p {
+  font-size: 0.9em;
+  line-height: 1.75;
+  color: #1a1a1a;
+  margin-bottom: 6px;
+}
+
+.instructions p:last-child { margin-bottom: 0; }
+
+/* ============================================================
+   DIVIDER
+   ============================================================ */
+.ornament {
+  text-align: center;
+  margin: 24px 36px 0 36px;
+  color: #D4AF37;
+  font-size: 1.1em;
+  letter-spacing: 8px;
+}
+
+/* ============================================================
+   PASSAGE BLOCK
+   ============================================================ */
+.passage {
+  margin: 24px 36px 0 36px;
+}
+
+.passage-header {
+  background-color: #2C7873;
+  padding: 12px 20px;
+  border-radius: 4px 4px 0 0;
+}
+
+.passage-header .passage-eyebrow {
+  font-size: 0.72em;
+  color: #ffffff;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+  opacity: 0.85;
+}
+
+.passage-header h2 {
+  font-size: 1.15em;
+  color: #ffffff;
+  font-weight: bold;
+  margin: 0;
+}
+
+.passage-intro {
+  background: #ffffff;
+  border: 1px solid #b8d0d0;
+  border-top: none;
+  padding: 18px 22px;
+  font-size: 0.88em;
+  line-height: 1.8;
+  color: #2a2a2a;
+  font-style: italic;
+}
+
+.passage-intro strong {
+  font-style: normal;
+}
+
+/* ============================================================
+   GRC QUESTION ROWS
+   ============================================================ */
+.grc-row {
+  background: #fdfaf4;
+  border: 1px solid #b8d0d0;
+  border-top: none;
+  padding: 18px 22px;
+}
+
+.grc-row.reflection {
+  background: #fdf6e8;
+  border-left: 4px solid #D4AF37;
+}
+
+.grc-row:last-child {
+  border-radius: 0 0 4px 4px;
+}
+
+.grc-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.grc-badge {
+  flex-shrink: 0;
+  width: 72px;
+  text-align: center;
+  padding: 7px 4px;
+  border-radius: 4px;
+  font-size: 0.78em;
+  font-weight: bold;
+  line-height: 1.3;
+  letter-spacing: 0.5px;
+}
+
+.grc-badge.reading {
+  background-color: #2C7873;
+  color: #ffffff;
+}
+
+.grc-badge.reading .badge-type {
+  display: block;
+  font-size: 0.85em;
+  font-weight: normal;
+  color: #b2d8d8;
+  margin-top: 2px;
+}
+
+.grc-badge.reflect {
+  background-color: #D4AF37;
+  color: #1a1a1a;
+}
+
+.grc-badge.reflect .badge-type {
+  display: block;
+  font-size: 0.85em;
+  font-weight: normal;
+  color: #5a4400;
+  margin-top: 2px;
+}
+
+.grc-content {
+  flex: 1;
+}
+
+.grc-content p {
+  font-size: 0.93em;
+  line-height: 1.7;
+  color: #1a1a1a;
+  margin-bottom: 10px;
+}
+
+.grc-content textarea {
+  width: 100%;
+  padding: 10px 12px;
+  font-family: Georgia, serif;
+  font-size: 0.9em;
+  line-height: 1.6;
+  border: 1px solid #9bbfbf;
+  border-radius: 3px;
+  background: #ffffff;
+  color: #1a1a1a;
+  resize: vertical;
+  min-height: 90px;
+}
+
+.grc-row.reflection .grc-content textarea {
+  border-color: #c8a84b;
+  background: #fffdf5;
+  min-height: 110px;
+}
+
+textarea::placeholder {
+  color: #767676;
+  font-style: italic;
+  font-size: 0.9em;
+}
+
+/* ============================================================
+   GROUP DISCUSSION SECTION
+   ============================================================ */
+.discussion-section {
+  margin: 24px 36px 0 36px;
+}
+
+.discussion-header {
+  background: linear-gradient(135deg, #4a1a6b 0%, #2d0f42 100%);
+  padding: 12px 20px;
+  border-radius: 4px 4px 0 0;
+  border-bottom: 3px solid #D4AF37;
+}
+
+.discussion-header .passage-eyebrow {
+  font-size: 0.72em;
+  color: #ffffff;
+  opacity: 0.85;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.discussion-header h2 {
+  font-size: 1.15em;
+  color: #ffffff;
+  font-weight: bold;
+  margin: 0;
+}
+
+.discussion-intro {
+  background: #ffffff;
+  border: 1px solid #c0a8e0;
+  border-top: none;
+  padding: 18px 22px;
+  font-size: 0.88em;
+  line-height: 1.8;
+  color: #2a2a2a;
+  font-style: italic;
+}
+
+.discussion-intro strong {
+  font-style: normal;
+}
+
+.discussion-prompt-block {
+  background: #f9f4ff;
+  border: 1px solid #c0a8e0;
+  border-top: none;
+  padding: 20px 22px;
+}
+
+.discussion-prompt-block:last-child {
+  border-radius: 0 0 4px 4px;
+}
+
+.discussion-prompt-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.discussion-badge {
+  flex-shrink: 0;
+  width: 72px;
+  text-align: center;
+  padding: 7px 4px;
+  border-radius: 4px;
+  font-size: 0.78em;
+  font-weight: bold;
+  line-height: 1.3;
+  letter-spacing: 0.5px;
+  background-color: #6B4C9A;
+  color: #ffffff;
+}
+
+.discussion-badge .badge-type {
+  display: block;
+  font-size: 0.82em;
+  font-weight: normal;
+  color: #d4b8f0;
+  margin-top: 2px;
+}
+
+.discussion-content p {
+  font-size: 0.93em;
+  line-height: 1.7;
+  color: #1a1a1a;
+  margin-bottom: 10px;
+}
+
+.discussion-content p:last-child {
+  margin-bottom: 0;
+}
+
+.discussion-content textarea {
+  width: 100%;
+  padding: 10px 12px;
+  font-family: Georgia, serif;
+  font-size: 0.9em;
+  line-height: 1.6;
+  border: 1px solid #9b7cc8;
+  border-radius: 3px;
+  background: #ffffff;
+  color: #1a1a1a;
+  resize: vertical;
+  min-height: 110px;
+}
+
+.discussion-note {
+  background: #f0e8ff;
+  border: 1px solid #c0a8e0;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  padding: 14px 22px;
+  font-size: 0.83em;
+  line-height: 1.7;
+  color: #2d0f42;
+  font-style: italic;
+}
+
+.discussion-note strong {
+  font-style: normal;
+  color: #4a1a6b;
+}
+
+/* ============================================================
+   SAVE TO PDF BUTTON AREA
+   ============================================================ */
+.pdf-section {
+  margin: 36px 36px 0 36px;
+  background: #1a4a47;
+  border-radius: 6px;
+  padding: 22px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.pdf-instructions {
+  color: #b2d8d8;
+  font-size: 0.88em;
+  line-height: 1.65;
+  flex: 1;
+}
+
+.pdf-instructions strong {
+  color: #D4AF37;
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.95em;
+  letter-spacing: 0.5px;
+}
+
+.btn-pdf {
+  background: #D4AF37;
+  color: #1a1a1a;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 28px;
+  font-family: Georgia, serif;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+.btn-pdf:hover {
+  background: #c49b25;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.page-footer {
+  margin: 28px 36px 0 36px;
+  background: #2C7873;
+  padding: 14px 22px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.page-footer p {
+  margin: 0;
+  font-size: 0.8em;
+  color: #b2d8d8;
+  letter-spacing: 0.5px;
+}
+
+/* ============================================================
+   PRINT / SAVE AS PDF
+   ============================================================ */
+@media print {
+
+  body {
+    background: #ffffff;
+    font-size: 10.5pt;
+    max-width: none;
+    padding: 0;
+  }
+
+  .page-header {
+    background: #1a4a47 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    padding: 18px 28px 14px 28px;
+    border-bottom: 3px solid #D4AF37 !important;
+  }
+
+  .page-header .eyebrow { color: #D4AF37 !important; }
+  .page-header h1 { font-size: 1.45em; color: #ffffff !important; }
+  .page-header .subtitle { color: #b2d8d8 !important; }
+
+  .name-block {
+    border-bottom: 2px solid #2C7873 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    padding: 12px 28px;
+  }
+
+  .instructions {
+    background: #eaf4f4 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    margin: 18px 28px 0 28px;
+  }
+
+  .ornament {
+    margin: 16px 28px 0 28px;
+  }
+
+  .passage {
+    margin: 16px 28px 0 28px;
+    page-break-inside: avoid;
+  }
+
+  .passage-header {
+    background: #2C7873 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .passage-header .passage-eyebrow { color: #ffffff !important; opacity: 0.85; }
+  .passage-header h2 { color: #ffffff !important; }
+
+  .grc-row {
+    background: #fdfaf4 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    page-break-inside: avoid;
+  }
+
+  .grc-row.reflection {
+    background: #fdf6e8 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .grc-badge.reading {
+    background: #2C7873 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color: #ffffff !important;
+  }
+
+  .grc-badge.reading .badge-type { color: #b2d8d8 !important; }
+
+  .grc-badge.reflect {
+    background: #D4AF37 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color: #1a1a1a !important;
+  }
+
+  /* Make textareas show their content when printed */
+  textarea {
+    border: 1px solid #9bbfbf !important;
+    overflow: visible;
+    height: auto;
+    min-height: 90px;
+  }
+
+  .grc-row.reflection textarea {
+    border-color: #c8a84b !important;
+    min-height: 110px;
+  }
+
+  /* Hide interactive elements */
+  .pdf-section { display: none !important; }
+
+  .page-footer {
+    background: #2C7873 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    margin: 20px 28px 0 28px;
+  }
+
+  .page-footer p { color: #b2d8d8 !important; }
+
+  .discussion-section {
+    margin: 16px 28px 0 28px !important;
+    page-break-inside: avoid;
+  }
+
+  .discussion-header {
+    background: #4a1a6b !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .discussion-header .passage-eyebrow { color: #ffffff !important; opacity: 0.85; }
+  .discussion-header h2 { color: #ffffff !important; }
+
+  .discussion-prompt-block {
+    background: #f9f4ff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    page-break-inside: avoid;
+  }
+
+  .discussion-note {
+    background: #f0e8ff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<div class="page-header">
+  <p class="eyebrow">PHIL 210 · World Religions</p>
+  <h1>New Testament Sacred Text Workshop</h1>
+  <p class="subtitle">Guided Reading Check &mdash; In-Class Activity</p>
+</div>
+
+<!-- NAME BLOCK -->
+<div class="name-block">
+  <label for="student-name">Name:</label>
+  <input type="text" id="student-name" name="student-name" placeholder="Type your full name here" aria-label="Student name">
+  <label for="student-date">Date:</label>
+  <input type="text" id="student-date" name="student-date" placeholder="&nbsp;" aria-label="Date" style="width:140px;">
+</div>
+
+<!-- INSTRUCTIONS -->
+<div class="instructions">
+  <p class="instr-heading">Instructions</p>
+  <p>For each passage below, read the text carefully before answering. The <strong>first two questions</strong> for each passage check your reading comprehension &mdash; there is a correct answer grounded in the text. The <strong>third question</strong> is reflective &mdash; there is no single right answer, but your response should show genuine engagement with what you just read.</p>
+  <p>Write in complete sentences. When you are finished, click <strong>Save to PDF</strong> at the bottom of the page and upload the PDF file to Canvas.</p>
+</div>
+
+<div class="ornament">&#10022; &nbsp; &#10022; &nbsp; &#10022;</div>
+
+
+<!-- ============================================================
+     PASSAGE 1: LUKE 4:16–21
+     ============================================================ -->
+<div class="passage">
+  <div class="passage-header">
+    <p class="passage-eyebrow">Passage 1</p>
+    <h2>Luke 4:16&ndash;21 &mdash; <em>The Nazareth Manifesto</em></h2>
+  </div>
+
+  <div class="passage-intro">
+    Jesus has returned to his hometown of Nazareth after his baptism and time in the wilderness. On the Sabbath he enters the synagogue, as was his custom, and is handed the scroll of the prophet Isaiah. What he reads &mdash; and what he says afterward &mdash; functions as his public mission statement. This is the moment Jesus defines, in his own words, what he believes he has been sent to do. Pay close attention to <strong>who</strong> he says he has come for and <strong>what</strong> he claims is happening in that room.
+  </div>
+
+  <div class="grc-row">
+    <div class="grc-inner">
+      <div class="grc-badge reading">GRC 1<span class="badge-type">Reading</span></div>
+      <div class="grc-content">
+        <p>Jesus reads from the scroll of Isaiah in the synagogue. According to the passage, what specific groups does Jesus say the Spirit has anointed him to serve? List at least three from the text.</p>
+        <textarea placeholder="Write your answer here..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="grc-row">
+    <div class="grc-inner">
+      <div class="grc-badge reading">GRC 2<span class="badge-type">Reading</span></div>
+      <div class="grc-content">
+        <p>After reading from Isaiah, Jesus hands the scroll back to the attendant and sits down. What does he then say to the people watching him, and how do they initially react?</p>
+        <textarea placeholder="Write your answer here..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="grc-row reflection">
+    <div class="grc-inner">
+      <div class="grc-badge reflect">GRC 3<span class="badge-type">Reflection</span></div>
+      <div class="grc-content">
+        <p>Jesus stands in his hometown synagogue and declares that an ancient prophecy has been fulfilled <em>right now, in front of them.</em> If you had been sitting in that synagogue, how do you think you would have responded &mdash; and what would have made that moment either compelling or difficult to believe?</p>
+        <textarea placeholder="No single right answer — engage honestly with the passage..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ornament">&#10022; &nbsp; &#10022; &nbsp; &#10022;</div>
+
+
+<!-- ============================================================
+     PASSAGE 2: LUKE 10:25–37
+     ============================================================ -->
+<div class="passage">
+  <div class="passage-header">
+    <p class="passage-eyebrow">Passage 2</p>
+    <h2>Luke 10:25&ndash;37 &mdash; <em>The Good Samaritan</em></h2>
+  </div>
+
+  <div class="passage-intro">
+    A legal expert approaches Jesus with a question about eternal life &mdash; but the exchange quickly becomes a debate about the boundaries of moral obligation. Jesus responds not with a definition but with a story. The parable&rsquo;s hero is a Samaritan, a member of a group that first-century Jewish audiences would have regarded with deep suspicion and hostility. By the time Jesus asks his final question, the lawyer&rsquo;s original question has been turned completely inside out. Read the exchange carefully, paying attention to who asks what, and how Jesus redirects each question.
+  </div>
+
+  <div class="grc-row">
+    <div class="grc-inner">
+      <div class="grc-badge reading">GRC 4<span class="badge-type">Reading</span></div>
+      <div class="grc-content">
+        <p>A lawyer asks Jesus two questions in this passage. What are they, and how does Jesus respond to each one? Be specific about the order of the exchange.</p>
+        <textarea placeholder="Write your answer here..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="grc-row">
+    <div class="grc-inner">
+      <div class="grc-badge reading">GRC 5<span class="badge-type">Reading</span></div>
+      <div class="grc-content">
+        <p>Three people pass the injured man on the road. Who are they, and what does each one do? Why would the identity of the third person &mdash; the one who helps &mdash; have been surprising to the original audience?</p>
+        <textarea placeholder="Write your answer here..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="grc-row reflection">
+    <div class="grc-inner">
+      <div class="grc-badge reflect">GRC 6<span class="badge-type">Reflection</span></div>
+      <div class="grc-content">
+        <p>The parable ends with Jesus turning the lawyer&rsquo;s question inside out: instead of &ldquo;who is my neighbor?&rdquo; Jesus asks &ldquo;who <em>acted as</em> a neighbor?&rdquo; Why do you think that reframe matters? Does it change what the parable is asking of the reader?</p>
+        <textarea placeholder="No single right answer — engage honestly with the passage..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ornament">&#10022; &nbsp; &#10022; &nbsp; &#10022;</div>
+
+
+<!-- ============================================================
+     PASSAGE 3: 1 CORINTHIANS 13:1–13
+     ============================================================ -->
+<div class="passage">
+  <div class="passage-header">
+    <p class="passage-eyebrow">Passage 3</p>
+    <h2>1 Corinthians 13:1&ndash;13 &mdash; <em>The Love Chapter</em></h2>
+  </div>
+
+  <div class="passage-intro">
+    Paul&rsquo;s first letter to the Corinthians is not a meditation on romance &mdash; it is a corrective letter to a fractured, competitive church community that was ranking members by their spiritual gifts and using those gifts as status markers. Speaking in tongues, prophecy, and miraculous knowledge had become sources of pride and division. Paul&rsquo;s famous hymn to love is his response to that conflict: a deliberate argument that <strong>how</strong> you act matters more than <strong>what</strong> you can do. Read it as a pointed intervention, not a poem, and notice how the opening verses set up everything that follows.
+  </div>
+
+  <div class="grc-row">
+    <div class="grc-inner">
+      <div class="grc-badge reading">GRC 7<span class="badge-type">Reading</span></div>
+      <div class="grc-content">
+        <p>Paul opens the chapter by listing several impressive spiritual gifts and abilities. What does he say each one amounts to if it is not accompanied by love? Be specific about the examples he gives.</p>
+        <textarea placeholder="Write your answer here..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="grc-row">
+    <div class="grc-inner">
+      <div class="grc-badge reading">GRC 8<span class="badge-type">Reading</span></div>
+      <div class="grc-content">
+        <p>Verses 4&ndash;7 define love through a series of concrete statements about what love does and does not do. List at least five characteristics Paul attributes to love in this section &mdash; some positive, some negative.</p>
+        <textarea placeholder="Write your answer here..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="grc-row reflection">
+    <div class="grc-inner">
+      <div class="grc-badge reflect">GRC 9<span class="badge-type">Reflection</span></div>
+      <div class="grc-content">
+        <p>Paul is writing to a specific church community that was apparently competitive, fractured, and preoccupied with spiritual status. Knowing that context, do you read this passage differently than you would as a standalone poem or wedding reading? What changes when you treat it as a <em>corrective letter</em> rather than a <em>celebration?</em></p>
+        <textarea placeholder="No single right answer — engage honestly with the passage..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ornament">&#10022; &nbsp; &#10022; &nbsp; &#10022;</div>
+
+
+<!-- ============================================================
+     PASSAGE 4: EPHESIANS 2:8–9 + ROMANS 3:28
+     ============================================================ -->
+<div class="passage">
+  <div class="passage-header">
+    <p class="passage-eyebrow">Passage 4</p>
+    <h2>Ephesians 2:8&ndash;9 &amp; Romans 3:28 &mdash; <em>Paul on Faith and Salvation</em></h2>
+  </div>
+
+  <div class="passage-intro">
+    These two short passages represent the core of Pauline theology on one of Christianity&rsquo;s most contested questions: how is a person made right before God? Paul&rsquo;s answer is unambiguous &mdash; salvation is not something you earn or achieve through moral effort or religious observance. It is received, not accomplished. This position, sometimes called the doctrine of <strong>grace alone</strong> or <strong>faith alone</strong>, would later become the central flashpoint of the Protestant Reformation. As you read, notice the precision of Paul&rsquo;s language &mdash; he is not just making a positive claim, he is explicitly ruling something out and explaining why.
+  </div>
+
+  <div class="grc-row">
+    <div class="grc-inner">
+      <div class="grc-badge reading">GRC 10<span class="badge-type">Reading</span></div>
+      <div class="grc-content">
+        <p>In Ephesians 2:8&ndash;9, Paul identifies two things: where salvation comes from and where it does <em>not</em> come from. What are both, and what reason does Paul give for ruling out the second?</p>
+        <textarea placeholder="Write your answer here..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="grc-row">
+    <div class="grc-inner">
+      <div class="grc-badge reading">GRC 11<span class="badge-type">Reading</span></div>
+      <div class="grc-content">
+        <p>Romans 3:28 makes Paul&rsquo;s position in a single compressed statement. What specific claim does he make, and what phrase does he use to describe the relationship between faith and the law?</p>
+        <textarea placeholder="Write your answer here..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="grc-row reflection">
+    <div class="grc-inner">
+      <div class="grc-badge reflect">GRC 12<span class="badge-type">Reflection</span></div>
+      <div class="grc-content">
+        <p>Paul is writing to communities hungry for belonging and desperate to know how to be right before God. Why do you think the message &ldquo;you cannot earn this&rdquo; would have been either liberating or deeply unsettling to a first-century audience &mdash; and which do you think it would be for most people today?</p>
+        <textarea placeholder="No single right answer — engage honestly with the passage..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ornament">&#10022; &nbsp; &#10022; &nbsp; &#10022;</div>
+
+
+<!-- ============================================================
+     PASSAGE 5: JAMES 2:14–26
+     ============================================================ -->
+<div class="passage">
+  <div class="passage-header">
+    <p class="passage-eyebrow">Passage 5</p>
+    <h2>James 2:14&ndash;26 &mdash; <em>Faith and Works</em></h2>
+  </div>
+
+  <div class="passage-intro">
+    The letter of James may be the most uncomfortable text in the New Testament if you have just finished reading Paul. James does not soften his position or qualify it carefully &mdash; he states it bluntly, illustrates it with a concrete example, and then backs it up with two figures from the Hebrew Bible. Whether James was directly responding to Paul&rsquo;s teaching, to a misreading of Paul, or simply articulating an independent tradition is a question scholars still debate. What is not debated is that the tension is real. Read James on his own terms first, without trying to resolve the contradiction. <strong>The group discussion will be your opportunity to work through it together.</strong>
+  </div>
+
+  <div class="grc-row">
+    <div class="grc-inner">
+      <div class="grc-badge reading">GRC 13<span class="badge-type">Reading</span></div>
+      <div class="grc-content">
+        <p>James opens with a blunt rhetorical question about faith without works. What concrete scenario does he use to illustrate his point, and what does he conclude from it?</p>
+        <textarea placeholder="Write your answer here..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="grc-row">
+    <div class="grc-inner">
+      <div class="grc-badge reading">GRC 14<span class="badge-type">Reading</span></div>
+      <div class="grc-content">
+        <p>James invokes two Old Testament figures as evidence for his argument. Who are they, what did each one <em>do</em>, and what does James say their actions demonstrated?</p>
+        <textarea placeholder="Write your answer here..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="grc-row reflection">
+    <div class="grc-inner">
+      <div class="grc-badge reflect">GRC 15<span class="badge-type">Reflection</span></div>
+      <div class="grc-content">
+        <p>You have now read both Paul and James. Without resolving the debate yet &mdash; save that for discussion &mdash; which position do you find more intuitive, and why? What assumptions about religion, morality, or human nature are you bringing to that instinct?</p>
+        <textarea placeholder="No single right answer — engage honestly with the passage..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ornament">&#10022; &nbsp; &#10022; &nbsp; &#10022;</div>
+
+
+<!-- ============================================================
+     GROUP DISCUSSION: FAITH, WORKS, AND SALVATION
+     ============================================================ -->
+<div class="discussion-section">
+  <div class="discussion-header">
+    <p class="passage-eyebrow">Group Discussion</p>
+    <h2>The Faith &amp; Works Debate &mdash; <em>Paul vs. James</em></h2>
+  </div>
+
+  <div class="discussion-intro">
+    You have now read two writers who appear to directly contradict each other on one of Christianity&rsquo;s most consequential questions. Paul insists that salvation comes through faith alone, not works &mdash; so that no one can boast. James insists that faith without works is dead &mdash; and backs it up with Abraham and Rahab. This tension was so sharp that Martin Luther wanted to remove James from the New Testament entirely, calling it an &ldquo;epistle of straw.&rdquo; Your group&rsquo;s task is not to resolve this debate definitively &mdash; scholars and theologians have been arguing about it for two thousand years &mdash; but to <strong>map the disagreement clearly</strong> and think carefully about what is actually at stake.
+  </div>
+
+  <div class="discussion-prompt-block">
+    <div class="discussion-prompt-inner">
+      <div class="discussion-badge">D&ndash;1<span class="badge-type">Discussion</span></div>
+      <div class="discussion-content">
+        <p><strong>Establish the positions.</strong> Before your group can argue, you need to agree on what each writer is actually claiming. In your own words, state Paul&rsquo;s position in one sentence and James&rsquo;s position in one sentence. Then identify the single sharpest point of conflict between them &mdash; the place where the two sentences most directly collide.</p>
+        <textarea placeholder="Write your group's working notes here..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="discussion-prompt-block">
+    <div class="discussion-prompt-inner">
+      <div class="discussion-badge">D&ndash;2<span class="badge-type">Discussion</span></div>
+      <div class="discussion-content">
+        <p><strong>Test the standard resolution.</strong> Many theologians argue that Paul and James are not actually contradicting each other &mdash; that Paul is addressing <em>how</em> you are saved (by faith, not moral achievement), while James is addressing <em>what salvation looks like afterward</em> (genuine faith produces action). Does your group find this resolution convincing? What would Paul have to concede for it to work? What would James have to concede?</p>
+        <textarea placeholder="Write your group's working notes here..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="discussion-prompt-block">
+    <div class="discussion-prompt-inner">
+      <div class="discussion-badge">D&ndash;3<span class="badge-type">Discussion</span></div>
+      <div class="discussion-content">
+        <p><strong>Consider the real-world stakes.</strong> Imagine two churches: one built entirely on Paul&rsquo;s framework (salvation by grace through faith alone) and one built entirely on James&rsquo;s framework (faith that does not produce action is dead). What would each community look like in practice? What problems might each one develop over time? Which framework do you think is more vulnerable to abuse &mdash; and why?</p>
+        <textarea placeholder="Write your group's working notes here..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="discussion-prompt-block">
+    <div class="discussion-prompt-inner">
+      <div class="discussion-badge">D&ndash;4<span class="badge-type">Discussion</span></div>
+      <div class="discussion-content">
+        <p><strong>Connect back to the prophetic tradition.</strong> Earlier in this course you read Amos 5 and Isaiah 58 &mdash; texts in which the prophets argued that ritual observance without justice is worthless before God. Where does that prophetic tradition fit in the Paul/James debate? Is James continuing the Hebrew prophets&rsquo; argument in a new key? Or is something genuinely different happening in the New Testament context?</p>
+        <textarea placeholder="Write your group's working notes here..."></textarea>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="ornament">&#10022; &nbsp; &#10022; &nbsp; &#10022;</div>
+
+
+<!-- ============================================================
+     SAVE TO PDF BUTTON
+     ============================================================ -->
+<div class="pdf-section">
+  <div class="pdf-instructions">
+    <strong>&#128196; Save &amp; Submit</strong>
+    Click <em>Save to PDF</em> to open your browser&rsquo;s print dialog. Select <strong>Save as PDF</strong> (or <strong>Microsoft Print to PDF</strong>) as the destination. Your typed answers will be included. Upload the saved PDF file to the Canvas assignment.
+  </div>
+  <button class="btn-pdf" onclick="window.print()">Save to PDF</button>
+</div>
+
+<!-- FOOTER -->
+<div class="page-footer">
+  <p>PHIL 210 &middot; World Religions &nbsp;|&nbsp; Sacred Text Workshop Series &nbsp;|&nbsp; New Testament Unit</p>
+</div>
+
+</body>
+</html>
