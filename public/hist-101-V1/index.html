@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIST 101 Online: US History to 1877 - Professor Steven Austin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Libre+Baskerville:wght@400;700&family=Lora:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        /* ── V1 PALETTE OVERRIDES (Copper & Verdigris) ── */
+        :root {
+            --v1-copper:    #7a1f3d;
+            --v1-copper-lt: #a84060;
+            --v1-copper-dk: #4e1228;
+            --v1-verdigris: #6b6b7a;
+            --v1-verd-lt:   #9090a0;
+            --v1-verd-dk:   #3a3a4a;
+            --v1-ink:       #1a1020;
+            --v1-parchment: #f4f0f5;
+            --v1-cream:     #faf8fc;
+        }
+
+        /* Banner */
+        .course-banner {
+            background: linear-gradient(135deg, var(--v1-ink) 0%, #2e2b26 100%) !important;
+            border-bottom: 4px solid var(--v1-copper) !important;
+        }
+        .banner-course-title  { color: var(--v1-parchment) !important; }
+        .banner-course-subtitle { color: rgba(245,240,232,0.70) !important; }
+
+        /* Quick nav */
+        .quick-nav {
+            background: linear-gradient(135deg, var(--v1-cream) 0%, var(--v1-parchment) 100%);
+            padding: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 2px solid var(--v1-copper);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .quick-nav-btn {
+            background: white;
+            color: #3a2e1e;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid var(--v1-copper);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+        .quick-nav-btn:hover {
+            background: var(--v1-copper);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        /* Section titles & decorative rule */
+        .section-title          { color: var(--v1-copper-dk) !important; border-bottom-color: var(--v1-copper) !important; }
+        .chapter-title-bar      { border-bottom-color: var(--v1-copper) !important; }
+        .objective-number       { background: var(--v1-copper) !important; color: white !important; }
+        .syllabus-button        { background: linear-gradient(135deg, var(--v1-copper) 0%, var(--v1-copper-dk) 100%) !important; }
+        .cta-button             { background: linear-gradient(135deg, var(--v1-copper) 0%, var(--v1-copper-dk) 100%) !important; }
+        .grade-bar              { background: linear-gradient(135deg, var(--v1-copper) 0%, var(--v1-copper-dk) 100%) !important; }
+        .info-card h3           { color: var(--v1-copper-dk); }
+
+        /* Reading guide grid */
+        .chapter-section { margin: 0 0 2rem; }
+
+        .chapter-section-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--v1-verd-dk);
+            margin: 1.75rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--v1-verdigris);
+        }
+
+        .lecture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.1rem;
+        }
+
+        .lecture-card {
+            background: white;
+            border: 1px solid #e0d8cc;
+            border-top: 4px solid var(--v1-verdigris);
+            border-radius: 6px;
+            padding: 1.1rem 1.1rem 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.55rem;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+        .lecture-card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        .lecture-card.coming-soon {
+            opacity: 0.65;
+            filter: grayscale(0.3);
+            border-top-color: #aaa;
+        }
+        .lecture-number {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: var(--v1-verdigris);
+            background: rgba(58,107,94,0.08);
+            padding: 2px 8px;
+            border-radius: 3px;
+            align-self: flex-start;
+        }
+        .lecture-card h4 {
+            font-family: 'Lora', Georgia, serif;
+            font-size: 0.93rem;
+            font-weight: 600;
+            color: var(--v1-ink);
+            line-height: 1.3;
+            margin: 0;
+        }
+        .lecture-card p {
+            font-size: 0.8rem;
+            color: #5c5649;
+            line-height: 1.5;
+            flex: 1;
+            margin: 0;
+        }
+        .lecture-button {
+            display: inline-block;
+            margin-top: 0.4rem;
+            padding: 0.42rem 0.9rem;
+            background: linear-gradient(135deg, var(--v1-verdigris) 0%, var(--v1-verd-dk) 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            text-align: center;
+            transition: opacity 0.2s;
+        }
+        .lecture-button:hover { opacity: 0.88; }
+        .lecture-button.disabled {
+            pointer-events: none;
+            background: #aaa;
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .quick-nav { padding: 0.75rem; gap: 0.5rem; }
+            .quick-nav-btn { font-size: 0.85rem; padding: 0.5rem 0.9rem; }
+            .lecture-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Text Header Section -->
+    <header class="text-banner course-banner">
+        <div class="banner-content">
+            <h1 class="banner-course-title">HIST 101 — ONLINE</h1>
+            <h2 class="banner-course-subtitle">United States History to 1877</h2>
+        </div>
+    </header>
+
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../index.html#about" class="nav-link">About</a>
+        <a href="../index.html#courses" class="nav-link">Courses</a>
+        <a href="../index.html#contact" class="nav-link">Contact</a>
+    </nav>
+
+    <!-- Quick Navigation -->
+    <div class="quick-nav">
+        <a href="#reading-guides" class="quick-nav-btn">📖 Reading Guides</a>
+        <a href="#description"    class="quick-nav-btn">📜 Course Description</a>
+        <a href="#objectives"     class="quick-nav-btn">🎯 Learning Objectives</a>
+        <a href="#topics"         class="quick-nav-btn">📚 Major Topics</a>
+        <a href="#materials"      class="quick-nav-btn">📦 Required Materials</a>
+        <a href="#grading"        class="quick-nav-btn">📊 Grading</a>
+        <a href="#policies"       class="quick-nav-btn">📋 Policies</a>
+    </div>
+
+    <!-- Main Content Container -->
+    <main class="container">
+
+        <!-- Course Header -->
+        <section class="course-header">
+            <div class="course-icon-large">📜</div>
+            <h1 class="course-page-title">HIST 101 — ONLINE</h1>
+            <h2 class="course-page-subtitle">United States History to 1877</h2>
+            <div class="decorative-rule"></div>
+        </section>
+
+        <!-- Syllabus Download -->
+        <section class="syllabus-download">
+            <div class="syllabus-box">
+                <h3>📄 Course Syllabus</h3>
+                <p>Download the complete syllabus for detailed course policies, schedule, and requirements.</p>
+                <a href="../documents/hist101/hist101-V1-syllabus.pdf" class="syllabus-button" target="_blank">Download Syllabus (PDF)</a>
+            </div>
+        </section>
+
+        <!-- Course Information Grid -->
+        <section class="course-info-section">
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>📅 Schedule</h3>
+                    <p><strong>Section:</strong> V1 (Online)</p>
+                    <p><strong>Prerequisites:</strong> Eligibility for ENGL 101</p>
+                    <p><strong>Format:</strong> Online / Canvas</p>
+                </div>
+                <div class="info-card">
+                    <h3>📚 Credits</h3>
+                    <p><strong>Credit Hours:</strong> 4</p>
+                    <p><strong>IAI Number:</strong> S2 900</p>
+                    <p><strong>Textbook:</strong> Give Me Liberty!, Vol. 1 — Foner</p>
+                </div>
+                <div class="info-card">
+                    <h3>👨‍🏫 Instructor</h3>
+                    <p><strong>Professor:</strong> Steven Austin</p>
+                    <p><strong>Email:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fd8e9c888e899493bd8f949e95919c9399d3989988">[email&#160;protected]</a></p>
+                    <p><strong>Office:</strong> S226</p>
+                    <p><strong>Phone:</strong> 875-7211, x6392</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Course Description -->
+        <section class="content-box" id="description">
+            <h2 class="section-title">Course Description</h2>
+            <p>
+                This course covers the development of the United States from the colonial era through the
+                Reconstruction period after the Civil War. Particular attention is given to the founding of
+                the Colonies, Puritan thought and culture, Anglo-French rivalry, the political and
+                economic background of the War of Independence, the formation of the American
+                government, the Federalists, the Jeffersonians, the settlement of the West, Jacksonian
+                democracy, "Manifest Destiny," sectional issues, the Civil War, and Reconstruction.
+            </p>
+            <p>
+                Through primary source analysis, scholarly readings, and class discussions, students will develop
+                critical thinking skills and gain a deeper understanding of the forces that shaped early American
+                society. Special attention will be given to the experiences of diverse groups including Native
+                Americans, African Americans, women, and immigrants.
+            </p>
+        </section>
+
+        <!-- Learning Objectives -->
+        <section class="content-box" id="objectives">
+            <h2 class="section-title">Learning Objectives</h2>
+            <p style="margin-bottom: 1.5rem;">Upon successful completion of this course, a student should be able to:</p>
+            <div class="objectives-list">
+                <div class="objective-item">
+                    <span class="objective-number">1</span>
+                    <div class="objective-content">
+                        <h4>Historical Concepts</h4>
+                        <p>Demonstrate a firm grasp of fundamental American historical concepts through 1877.</p>
+                    </div>
+                </div>
+                <div class="objective-item">
+                    <span class="objective-number">2</span>
+                    <div class="objective-content">
+                        <h4>Document Analysis</h4>
+                        <p>Critically analyze documents and apply historical methods to demonstrate and enhance historical thinking and analytical skills.</p>
+                    </div>
+                </div>
+                <div class="objective-item">
+                    <span class="objective-number">3</span>
+                    <div class="objective-content">
+                        <h4>Historical Context</h4>
+                        <p>Understand, analyze, and compare relationships between historical American events, issues, values, and conflicting ideals, and their relevance to the present.</p>
+                    </div>
+                </div>
+                <div class="objective-item">
+                    <span class="objective-number">4</span>
+                    <div class="objective-content">
+                        <h4>Multicultural Perspectives</h4>
+                        <p>Appreciate the multicultural contributions of different ethnic groups — including Native Americans, African Americans, women, and immigrants — to U.S. history.</p>
+                    </div>
+                </div>
+                <div class="objective-item">
+                    <span class="objective-number">5</span>
+                    <div class="objective-content">
+                        <h4>Historical Perspectives</h4>
+                        <p>Critique and analyze differing historical perspectives and paradigms in U.S. history.</p>
+                    </div>
+                </div>
+                <div class="objective-item">
+                    <span class="objective-number">6</span>
+                    <div class="objective-content">
+                        <h4>The Meaning of Liberty</h4>
+                        <p>Trace how the concept of freedom — its promises and its contradictions — was defined, contested, and transformed across American history to 1877.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Major Topics -->
+        <section class="content-box" id="topics">
+            <h2 class="section-title">Major Topics Covered</h2>
+            <div class="topics-grid">
+                <div class="topic-card">
+                    <h4>🏛️ Colonial America</h4>
+                    <p>European colonization, Native American societies, and the development of distinct regional cultures in the English colonies.</p>
+                </div>
+                <div class="topic-card">
+                    <h4>⚔️ Revolution &amp; Independence</h4>
+                    <p>Causes of the American Revolution, the War for Independence, and the social upheaval the Revolution unleashed.</p>
+                </div>
+                <div class="topic-card">
+                    <h4>📜 Constitutional Era</h4>
+                    <p>Federalism, the Constitution, the Bill of Rights, and the competing visions for the new American republic.</p>
+                </div>
+                <div class="topic-card">
+                    <h4>🌾 Market Revolution &amp; Reform</h4>
+                    <p>Industrial transformation, westward expansion, Jacksonian democracy, and the antebellum reform movements.</p>
+                </div>
+                <div class="topic-card">
+                    <h4>⛓️ Slavery &amp; Sectionalism</h4>
+                    <p>The peculiar institution, abolitionist movements, and the deepening sectional crisis between North and South.</p>
+                </div>
+                <div class="topic-card">
+                    <h4>🪖 Civil War &amp; Reconstruction</h4>
+                    <p>Causes and consequences of the Civil War, emancipation, and the unfinished promise of Reconstruction.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reading Guides Section -->
+        <section class="content-box" id="reading-guides">
+            <h2 class="section-title">Textbook Reading Guides</h2>
+            <p style="margin-bottom: 0.5rem;">
+                Guided reading worksheets for each chapter of <em>Give Me Liberty!, Vol. 1</em> by Eric Foner.
+                Complete each guide before the corresponding quiz. Your answers auto-save in your browser.
+            </p>
+
+            <!-- Chapters 2–7 -->
+            <h3 class="chapter-section-title">Chapters 2–7 · Colonial Era &amp; Revolution</h3>
+            <div class="lecture-grid">
+
+                <div class="lecture-card">
+                    <div class="lecture-number">Chapter 2 · 1600–1660</div>
+                    <h4>European Colonies and Native Nations</h4>
+                    <p>The founding of English colonies, Puritan culture, and early relations between settlers and Native peoples.</p>
+                    <a href="reading_guides/hist101_V1_ch02-reading-guide.html" class="lecture-button" target="_blank">Open Guide</a>
+                </div>
+
+                <div class="lecture-card">
+                    <div class="lecture-number">Chapter 3 · 1660–1750</div>
+                    <h4>Creating Anglo-America</h4>
+                    <p>The Navigation Acts, Bacon's Rebellion, the growth of slavery, and the emerging Atlantic economy.</p>
+                    <a href="reading_guides/hist101_V1_ch03-reading-guide.html" class="lecture-button" target="_blank">Open Guide</a>
+                </div>
+
+                <div class="lecture-card">
+                    <div class="lecture-number">Chapter 4 · To 1763</div>
+                    <h4>Slavery, Freedom, and the Struggle for Empire</h4>
+                    <p>The Great Awakening, the Seven Years' War, and how slavery shaped colonial society and freedom's meaning.</p>
+                    <a href="reading_guides/hist101_V1_ch04-reading-guide.html" class="lecture-button" target="_blank">Open Guide</a>
+                </div>
+
+                <div class="lecture-card">
+                    <div class="lecture-number">Chapter 5 · 1763–1783</div>
+                    <h4>The American Revolution</h4>
+                    <p>From the Stamp Act crisis through independence — the causes, course, and contradictions of the Revolution.</p>
+                    <a href="reading_guides/hist101_V1_ch05-reading-guide.html" class="lecture-button" target="_blank">Open Guide</a>
+                </div>
+
+                <div class="lecture-card">
+                    <div class="lecture-number">Chapter 6 · 1775–1800</div>
+                    <h4>The Revolution Within</h4>
+                    <p>How the Revolution transformed — and limited — the rights of women, enslaved people, and the poor.</p>
+                    <a href="reading_guides/hist101_V1_ch06-reading-guide.html" class="lecture-button" target="_blank">Open Guide</a>
+                </div>
+
+                <div class="lecture-card">
+                    <div class="lecture-number">Chapter 7 · 1783–1791</div>
+                    <h4>Founding a Nation</h4>
+                    <p>The Articles of Confederation, the Constitutional Convention, and the ratification debates.</p>
+                    <a href="reading_guides/hist101_V1_ch07-reading-guide.html" class="lecture-button" target="_blank">Open Guide</a>
+                </div>
+
+            </div>
+
+            <!-- Chapters 8–11 -->
+            <h3 class="chapter-section-title">Chapters 8–11 · The Early Republic</h3>
+            <div class="lecture-grid">
+
+                <div class="lecture-card">
+                    <div class="lecture-number">Chapter 8 · 1791–1815</div>
+                    <h4>Securing the Republic</h4>
+                    <p>Federalists vs. Republicans, the Haitian Revolution, the Louisiana Purchase, and the War of 1812.</p>
+                    <a href="reading_guides/hist101_V1_ch08-reading-guide.html" class="lecture-button" target="_blank">Open Guide</a>
+                </div>
+
+                <div class="lecture-card">
+                    <div class="lecture-number">Chapter 9 · 1800–1840</div>
+                    <h4>The Market Revolution</h4>
+                    <p>Industrialization, the transportation revolution, westward migration, and the rise of free labor ideology.</p>
+                    <a href="reading_guides/hist101_V1_ch09-reading-guide.html" class="lecture-button" target="_blank">Open Guide</a>
+                </div>
+
+                <div class="lecture-card">
+                    <div class="lecture-number">Chapter 10 · 1815–1840</div>
+                    <h4>Democracy in America</h4>
+                    <p>Jacksonian democracy, Indian Removal, the Bank War, and the expansion of white male suffrage.</p>
+                    <a href="reading_guides/hist101_V1_ch10-reading-guide.html" class="lecture-button" target="_blank">Open Guide</a>
+                </div>
+
+                <div class="lecture-card">
+                    <div class="lecture-number">Chapter 11 · 1800–1860</div>
+                    <h4>The Peculiar Institution</h4>
+                    <p>Slavery in the Old South — its economy, culture, and the daily lives and resistance of enslaved people.</p>
+                    <a href="reading_guides/hist101_V1_ch11-reading-guide.html" class="lecture-button" target="_blank">Open Guide</a>
+                </div>
+
+            </div>
+
+            <!-- Chapters 12–14 -->
+            <h3 class="chapter-section-title">Chapters 12–14 · Crisis, War &amp; Reconstruction</h3>
+            <div class="lecture-grid">
+
+                <div class="lecture-card">
+                    <div class="lecture-number">Chapter 12 · 1820–1840</div>
+                    <h4>An Age of Reform</h4>
+                    <p>Abolitionism, women's rights, temperance, and the utopian impulse in antebellum America.</p>
+                    <a href="reading_guides/hist101_V1_ch12-reading-guide.html" class="lecture-button" target="_blank">Open Guide</a>
+                </div>
+
+                <div class="lecture-card">
+                    <div class="lecture-number">Chapter 13 · 1840–1861</div>
+                    <h4>A House Divided</h4>
+                    <p>Manifest Destiny, the Compromise of 1850, Bleeding Kansas, and the collapse of the second party system.</p>
+                    <a href="reading_guides/hist101_V1_ch13-reading-guide.html" class="lecture-button" target="_blank">Open Guide</a>
+                </div>
+
+                <div class="lecture-card">
+                    <div class="lecture-number">Chapter 14 · 1861–1865</div>
+                    <h4>A New Birth of Freedom</h4>
+                    <p>The Civil War — emancipation, the home front, and Lincoln's vision of a reconstructed union.</p>
+                    <a href="reading_guides/hist101_V1_ch14-reading-guide.html" class="lecture-button" target="_blank">Open Guide</a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Required Materials -->
+        <section class="content-box" id="materials">
+            <h2 class="section-title">Required Materials</h2>
+            <div class="materials-section">
+                <h3>📖 Required Textbook</h3>
+                <ul class="materials-list">
+                    <li><strong>Give Me Liberty! An American History, Volume 1: To 1877</strong></li>
+                    <li>Author: Eric Foner</li>
+                    <li>Publisher: W. W. Norton &amp; Company</li>
+                    <li>Note: Any recent edition is acceptable. eBook available through the bookstore.</li>
+                </ul>
+
+                <h3>📄 Additional Resources</h3>
+                <ul class="materials-list">
+                    <li>Primary source documents (provided on Canvas)</li>
+                    <li>Video documentaries (available through Canvas)</li>
+                    <li>Chapter reading guides (linked above — no printing required)</li>
+                </ul>
+
+                <h3>🖥️ Technology Requirements</h3>
+                <ul class="materials-list">
+                    <li>Access to Canvas Learning Management System</li>
+                    <li>Word processing software (Microsoft Word recommended)</li>
+                    <li>Reliable internet connection for online course activities</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Grading & Assessment -->
+        <section class="content-box" id="grading">
+            <h2 class="section-title">Grading &amp; Assessment</h2>
+            <p style="margin-bottom: 1.5rem;">This course follows a points-based system. Your final grade is determined by the total points you earn across all graded activities.</p>
+            <div class="grading-breakdown">
+                <div class="grade-item">
+                    <div class="grade-bar" style="width: 33%;">
+                        <span class="grade-label">Textbook Chapter Quizzes</span>
+                        <span class="grade-percent">375 pts</span>
+                    </div>
+                </div>
+                <div class="grade-item">
+                    <div class="grade-bar" style="width: 35%;">
+                        <span class="grade-label">Video Documentaries</span>
+                        <span class="grade-percent">395 pts</span>
+                    </div>
+                </div>
+                <div class="grade-item">
+                    <div class="grade-bar" style="width: 22%;">
+                        <span class="grade-label">Document-Based Assignments</span>
+                        <span class="grade-percent">245 pts</span>
+                    </div>
+                </div>
+                <div class="grade-item">
+                    <div class="grade-bar" style="width: 27%;">
+                        <span class="grade-label">Exams (3 total)</span>
+                        <span class="grade-percent">300 pts</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Grading Scale</h3>
+            <div class="grading-scale">
+                <span class="scale-item">A: 90–100</span>
+                <span class="scale-item">B: 80–89</span>
+                <span class="scale-item">C: 70–79</span>
+                <span class="scale-item">D: 60–69</span>
+                <span class="scale-item">F: 0–59</span>
+            </div>
+
+            <p style="margin-top: 1.5rem; font-style: italic; color: var(--ink-medium);">
+                <strong>Note:</strong> Point totals are subject to change based on actual coursework assigned. Late work accepted up to 48 hours with a 10% penalty per day.
+            </p>
+        </section>
+
+        <!-- Course Policies -->
+        <section class="content-box" id="policies">
+            <h2 class="section-title">Course Policies</h2>
+
+            <h3>📧 Participation</h3>
+            <p>
+                Regular engagement with course materials is essential. Students are expected to complete all
+                readings, view assigned documentaries, and submit work on time. Online discussion participation
+                counts toward your engagement grade.
+            </p>
+
+            <h3>⏰ Late Work</h3>
+            <p>
+                Assignments are due on the specified Canvas deadline. Late submissions will be accepted
+                up to 48 hours after the deadline with a 10% penalty per day. Extensions may be granted for
+                documented emergencies — contact the instructor before the deadline.
+            </p>
+
+            <h3>🎓 Academic Integrity</h3>
+            <p>
+                All students are expected to adhere to Richland Community College's academic integrity policy.
+                Plagiarism, cheating, or any form of academic dishonesty — including unauthorized use of AI
+                tools on assessed work — will result in disciplinary action including possible failure of the course.
+            </p>
+
+            <h3>♿ Accessibility</h3>
+            <p>
+                Students with disabilities who need accommodations should contact the Office of Disability
+                Services and inform the instructor as soon as possible to arrange appropriate support.
+            </p>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="cta-section">
+            <div class="cta-box">
+                <h3>Ready to Explore American History?</h3>
+                <p>Join us on a journey through the founding and development of the United States — from colonial encounters to the unfinished work of Reconstruction.</p>
+                <a href="../index.html#contact" class="cta-button">Contact Professor Austin</a>
+                <a href="../index.html#courses" class="cta-button-secondary">View Other Courses</a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="decorative-rule-thin"></div>
+        <p class="footer-quote">
+            <em>"The Past is Prologue"</em> — William Shakespeare
+        </p>
+        <p class="footer-text">
+            © 2025 Professor Steven Austin | <a href="../index.html" style="color: inherit;">Return to Home</a>
+        </p>
+    </footer>
+
+</body>
+</html>
