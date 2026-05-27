@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Grandmother's Voice — Massacre at Mystic</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    /* ─── RESET & ROOT ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --earth:      #1c1410;
+      --bark:       #2a1e14;
+      --clay:       #3d2b1a;
+      --ash:        #8a7a6a;
+      --smoke:      #c4b8a8;
+      --birch:      #e8e0d4;
+      --ember:      #b85c2a;
+      --ember-dim:  #7a3c1c;
+      --fire:       #d4783a;
+      --gold:       #c9a84c;
+      --gold-dim:   #7a6030;
+      --sky:        #4a7a8a;
+      --text:       #e0d4c4;
+      --text-muted: #9a8a78;
+      --border:     rgba(201,168,76,0.18);
+      --surface:    rgba(42,30,20,0.85);
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--earth);
+      color: var(--text);
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 17px;
+      overflow-x: hidden;
+    }
+
+    /* ─── HERO BANNER ──────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 320px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 2rem;
+    }
+
+    /* Image slot — replace background-color with your photo */
+    .hero-image {
+      position: absolute;
+      inset: 0;
+      background-color: #0e0a06;
+      background-image: url('grandmother-banner.jpg');
+      background-size: cover;
+      background-position: center 30%;
+      filter: brightness(0.55) saturate(0.7);
+    }
+
+    /* Gradient vignette over image */
+    .hero-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, transparent 20%, rgba(28,20,16,0.6) 65%, var(--earth) 100%),
+        linear-gradient(to right, rgba(28,20,16,0.35), transparent 40%, transparent 60%, rgba(28,20,16,0.35));
+    }
+
+    /* Decorative smoke-line texture overlay */
+    .hero-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.07;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    .hero-text {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 1.5rem;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.85;
+      margin-bottom: 0.55rem;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5.5vw, 3.2rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--birch);
+      line-height: 1.1;
+      text-shadow: 0 2px 24px rgba(0,0,0,0.7);
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-subtitle {
+      font-family: 'Crimson Pro', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--smoke);
+      opacity: 0.75;
+      letter-spacing: 0.04em;
+    }
+
+    /* IMAGE PLACEHOLDER LABEL — remove when you add real image */
+    .hero-placeholder-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -60%);
+      z-index: 3;
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--ash);
+      text-transform: uppercase;
+      border: 1px dashed var(--clay);
+      padding: 0.35rem 0.8rem;
+      border-radius: 2px;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    /* Ornamental rule beneath hero */
+    .hero-rule {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      max-width: 640px;
+      margin: 0 auto;
+      gap: 0.75rem;
+      padding: 0 1.5rem;
+      margin-top: 1rem;
+    }
+    .hero-rule::before, .hero-rule::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+    }
+    .hero-rule-glyph {
+      color: var(--ember);
+      font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+
+    /* ─── PHASE INDICATOR ──────────────────────────────────────── */
+    .phase-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 0.75rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(28,20,16,0.6);
+    }
+
+    .phase-step {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      opacity: 0.45;
+      transition: all 0.4s;
+    }
+    .phase-step.active {
+      color: var(--gold);
+      opacity: 1;
+    }
+    .phase-step.done {
+      color: var(--ember);
+      opacity: 0.7;
+    }
+    .phase-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
+    }
+    .phase-connector {
+      width: 32px;
+      height: 1px;
+      background: var(--clay);
+      flex-shrink: 0;
+    }
+
+    /* Score pip row */
+    .score-pips {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      justify-content: center;
+      padding: 0.45rem 1.5rem 0.6rem;
+    }
+    .pip {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 1px solid var(--clay);
+      background: transparent;
+      transition: all 0.4s;
+    }
+    .pip.lit {
+      background: var(--ember);
+      border-color: var(--fire);
+      box-shadow: 0 0 6px rgba(212,120,58,0.6);
+    }
+
+    /* ─── CHAT AREA ────────────────────────────────────────────── */
+    .chat-wrapper {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      padding: 0 1rem;
+      min-height: calc(100vh - 420px);
+    }
+
+    .messages {
+      flex: 1;
+      padding: 1.2rem 0 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    /* ─── MESSAGE ROW ──────────────────────────────────────────── */
+    .msg {
+      display: flex;
+      gap: 0.9rem;
+      padding: 1.1rem 0.5rem;
+      border-bottom: 1px solid rgba(61,43,26,0.5);
+      animation: msgIn 0.3s ease both;
+    }
+    @keyframes msgIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .msg-avatar {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      margin-top: 2px;
+    }
+    .msg.elder .msg-avatar {
+      background: radial-gradient(135deg, var(--ember-dim), #1a0a04);
+      border: 1px solid var(--ember-dim);
+    }
+    .msg.student .msg-avatar {
+      background: radial-gradient(135deg, var(--clay), var(--bark));
+      border: 1px solid var(--clay);
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      color: var(--ash);
+    }
+
+    .msg-body { flex: 1; min-width: 0; }
+
+    .msg-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+    .msg.elder .msg-label  { color: var(--ember); }
+    .msg.student .msg-label { color: var(--text-muted); }
+
+    .msg-text {
+      line-height: 1.78;
+      color: var(--text);
+      font-size: 1.05rem;
+      white-space: pre-wrap;
+    }
+    .msg.student .msg-text { color: var(--smoke); }
+
+    /* ─── TYPING ───────────────────────────────────────────────── */
+    .typing { display: flex; gap: 5px; padding: 4px 0; }
+    .typing span {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--ember-dim);
+      animation: blink 1.3s ease-in-out infinite;
+    }
+    .typing span:nth-child(2) { animation-delay: .2s; }
+    .typing span:nth-child(3) { animation-delay: .4s; }
+    @keyframes blink {
+      0%,80%,100% { opacity:.2; transform:scale(.85); }
+      40%          { opacity:1;  transform:scale(1); }
+    }
+
+    /* ─── INPUT ────────────────────────────────────────────────── */
+    .input-zone {
+      padding: 0.9rem 0.5rem 0.7rem;
+      border-top: 1px solid var(--border);
+      background: linear-gradient(transparent, rgba(28,20,16,0.5));
+    }
+    .input-row {
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-end;
+    }
+    textarea {
+      flex: 1;
+      background: rgba(42,30,20,0.7);
+      border: 1px solid var(--clay);
+      border-radius: 4px;
+      color: var(--text);
+      font-family: 'Crimson Pro', serif;
+      font-size: 1.05rem;
+      padding: 0.65rem 0.9rem;
+      resize: none;
+      min-height: 48px;
+      max-height: 130px;
+      line-height: 1.5;
+      outline: none;
+      transition: border-color .2s;
+    }
+    textarea:focus { border-color: var(--ember-dim); }
+    textarea::placeholder { color: var(--text-muted); opacity: .5; }
+    textarea:disabled { opacity: 0.35; }
+
+    .send-btn {
+      flex-shrink: 0;
+      width: 48px; height: 48px;
+      background: linear-gradient(135deg, var(--ember-dim), #1a0a04);
+      border: 1px solid var(--ember-dim);
+      border-radius: 4px;
+      color: var(--fire);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all .2s;
+    }
+    .send-btn:hover:not(:disabled) {
+      background: linear-gradient(135deg, var(--ember), var(--ember-dim));
+      border-color: var(--fire);
+      box-shadow: 0 0 14px rgba(212,120,58,.3);
+    }
+    .send-btn:disabled { opacity: .3; cursor: not-allowed; }
+
+    /* ─── BOTTOM ROW ───────────────────────────────────────────── */
+    .bottom-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.4rem 0.5rem 0;
+      gap: 1rem;
+    }
+    .bottom-hint {
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      opacity: .45;
+    }
+    .copy-btn {
+      background: transparent;
+      border: 1px solid var(--clay);
+      color: var(--ash);
+      font-family: 'Cinzel', serif;
+      font-size: 0.62rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .35rem .9rem;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all .2s;
+      flex-shrink: 0;
+    }
+    .copy-btn:hover { border-color: var(--gold-dim); color: var(--gold); }
+
+    /* ─── FOOTER ───────────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 1.2rem 1rem 1.8rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      opacity: .4;
+    }
+
+    /* ─── SCROLLBAR ────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--clay); border-radius: 2px; }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HERO BANNER ════════════════════════════════════════════ -->
+<div class="hero">
+  <div class="hero-image"></div>
+  <div class="hero-placeholder-label">← Replace with your image: grandmother-banner.jpg →</div>
+  <div class="hero-text">
+    <div class="hero-eyebrow">HIST 101 · Documentary Assessment</div>
+    <h1 class="hero-title">Grandmother&#39;s Voice</h1>
+    <p class="hero-subtitle">Massacre at Mystic &nbsp;·&nbsp; May 26, 1637</p>
+  </div>
+</div>
+
+<!-- Ornamental rule -->
+<div style="max-width:640px;margin:0 auto;padding:0 1.5rem;">
+  <div class="hero-rule" style="position:static;margin:0.6rem auto 0;">
+    <div class="hero-rule-glyph">✦</div>
+  </div>
+</div>
+
+<!-- ═══ PHASE INDICATOR ════════════════════════════════════════ -->
+<div class="phase-bar" id="phaseBar">
+  <div class="phase-step active" id="phase1Step">
+    <div class="phase-dot"></div>Watch Check
+  </div>
+  <div class="phase-connector"></div>
+  <div class="phase-step" id="phase2Step">
+    <div class="phase-dot"></div>Discussion
+  </div>
+</div>
+
+<!-- Score pips (watch check only) -->
+<div class="score-pips" id="scorePips">
+  <div class="pip" id="pip0"></div>
+  <div class="pip" id="pip1"></div>
+  <div class="pip" id="pip2"></div>
+  <div class="pip" id="pip3"></div>
+  <div class="pip" id="pip4"></div>
+</div>
+
+<!-- ═══ CHAT ═══════════════════════════════════════════════════ -->
+<div class="chat-wrapper">
+  <div class="messages" id="messages"></div>
+
+  <!-- Input -->
+  <div class="input-zone">
+    <div class="input-row">
+      <textarea id="userInput" placeholder="Speak your answer…" rows="1"
+        onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+      <button class="send-btn" id="sendBtn" onclick="sendMessage()" title="Send">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"/>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+        </svg>
+      </button>
+    </div>
+    <div class="bottom-row">
+      <span class="bottom-hint">Shift + Enter for new line</span>
+      <button class="copy-btn" onclick="copyTranscript()">⧉ Copy Transcript</button>
+    </div>
+  </div>
+</div>
+
+<footer>HIST 101 &nbsp;·&nbsp; Richland Community College &nbsp;·&nbsp; Prof. Austin</footer>
+
+<script>
+// ═══ CONFIG ════════════════════════════════════════════════════
+const WORKER_URL = 'https://phil120tutor.val.run/';
+
+// ═══ DOCUMENTARY TRANSCRIPT ════════════════════════════════════
+const TRANSCRIPT = `I remember about the massacre through my grandmother. She always talked about it as if it happened yesterday. When you think about the history of the United States there are a few key dates that really made a difference. Where the way events were before really shifted and one of those dates was in 1637. The English and their Indian allies attacked a fort at Mystic Connecticut. The massacre at Mystic Fort did change relationships between the colonists and the Indians forever. It set the form for the taking of Indian land. The process is repeated across the country. The massacre at Mystic was the first time English people engaged in the wholesale slaughter of Native Americans. But it certainly would not be the last. May 26th, 1637 was a day that changed everything in the land that would become America. Between 1620 and 1640, 20,000 people left England in something that's become known as the Great Migration and came to New England. It was a chance to start a new life in a new world. For most of them there was an intensely spiritual element. to the journey as well. Imagine if you had left everyone you knew, sold everything you had, then shipped off to a place that you really didn't know and you felt impelled to do this by your religious principles. What would you do when you got there? The English who come to Plymouth Colony or to Boston are very convinced that they were able to do this. They were convinced that they were convinced that they have a direct line to the truth. Their goal is to create a religious set of communities in New England and purify the Christian church. And for that reason they get the nickname Puritans. These British true believers who come to New England are not expecting to find Indians. Or if they think there might be some people there, they're not particularly concerned about how to deal with them. Nevertheless, there were numerous tribes in North America, cultures as old and proud as any in Europe. One of the most respected and feared was called the Pequot. The Pequots were the most powerful group of native peoples in southern New England at the time that European settlers arrived. They were the most numerous, they were the wealthiest, they were the most politically powerful. Highly organized and aggressive, the Pequots had a gift for trade and expansion. They dominated nearby tribes using threats and alliances to control the land and trade over hundreds of square miles in what is now eastern Connecticut. Land that included some of the most fertile in the region. The first encounter between Europeans and Indians was positive because our people followed a way of life that was based on sharing. And that was the essence of our belief system. During the early years, trade allows for an accommodation between worlds. As long as the common understanding is through trade, you're going to have relative neighborliness. Each had something the other wanted. Pequots wanted European trade goods, kettles, cloth, axes, hoes. The English, on their part, wanted furs and wampum. Wampum are shell beads made from conch shells and from the quahog shell. I'm wearing wampum right now. It's a necklace that's very popular among Indian people today as jewelry. But it was once the most sacred item that we, as Indian people, could exchange. Wampum was something we gave at marriages. Wampum was something we gave if we wanted a treaty. The English, and Dutch, and French, needed wampum to trade for furs with interior native people. Because the Pequot controlled so much of the coastline, they also controlled the wampum. To the European colonists, the Pequot became a sort of mint, churning out shell currency that fueled all the other trade in the region. How that sacred item became referenced as money is something that shows how little intercultural understanding there was between Indian and non-Indian people. The English are convinced that their way of believing is the only correct way. And they're also convinced that the Indians simply haven't heard the right way that they haven't heard the right way. They haven't been taught the right way. The English didn't really think the native people had any religion. They didn't see any native churches. There was no architecture. What the Europeans really didn't understand is that native perception of the world was fundamentally different than theirs. The native spirituality was one in which supernatural power was pervasive in the world. And it was something which one could access directly. Through trance, through the use of tobacco, through dreams. From the point of view of the English, anyone who sought power through access to the spiritual world were in fact communing with the devil. The Puritans found the Indians shocking not only in terms of their worship, but also in their relationships with one another. They were shocked by the native dress or lack of dress. They were shocked by the relationships between men and women. Women were treated as equals. Women were treated as equals. They were able to speak forcefully and often did. They were themselves traders and leaders. Women also were the main producers of food. Something like 80% of the food consumed by Native American peoples were produced by the labor of women. Most of the time Indian men were out in the forest. When they came back, they were generally at rest. It was easy for the English to get the idea that Indian men were lazy and didn't do much of anything and that Indian women did all the hard work. The English were scandalized because that was the exact opposite of how the English society was organized. The Indians, for their part, thought that the English babied their wives and they would complain sometimes about how the English men shouldn't be working in the field and doing women's work. These two cultures are so differently organized that they are just going to go on a collision course towards each other. As the Puritans and natives grew increasingly distrustful of each other, there was another danger, disease, unintentionally carried to the new world by the European colonists. When the Europeans arrived, they brought with them a host of diseases that Native people had no immunity to at all. Measles, smallpox, chickenpox, yellow fever, typhus. When these diseases were introduced, they had a devastating impact. In fact, the place that the Puritans chose to settle had formerly been an Indian village, but all of the Indians there had died. The reason the Puritans settled there was the fields had been previously cleared so they could move in and get started planting right away. This the Puritans took as a sign that God was preparing a place for them in this new world. They saw it as being providential. For the Native people, it was also providential, but in a very terrible way. What does it mean when your entire family is lying on mats covered with sores dying? It's an awful moment. And it happened over and over again in New England. 75 to 90% of the coastal population of Native peoples along New England were destroyed in these epidemics. By 1634, the Pequot population went from an estimated 13,000 to fewer than 4,000. Nevertheless, compared to tribes that had lost 90% or even 100% of their members, the Pequots and their rivals, the Narragansetts and Mohegans, were less affected by disease. Because the Pequots and the Narragansetts were less heavily affected, they were additionally powerful. The most important effects in the short term for the Pequots and the Narragansetts was the instability in tribal relations that it created. The epidemics along the south shore of New England shuffled the deck and they opened the possibilities of power grabs up to anybody who was skillful enough to play. The Pequots and the Pequots and the Pequots and the Narragansetts are all jockeying for connections to various different groups of Europeans. And tensions emerge as these different Native groups and groups of Europeans struggle to gain control over the flow of goods moving through New England. As the Native populations weakened through disease and intertribal conflicts, the English began to feel that the New World was a place that they might not need to share. In the 1630s, the tentative, decade-long coexistence between Native Americans and the ever -increasing number of European settlers was beginning to deteriorate. The key conflict was the way each side viewed the land. When the British colonists arrived in the New World, they brought with them an ideology which equated wilderness with the devil. And which equated the occupants of wilderness with the children of Satan. The woods were scary for Europeans. The English are notorious for walking out into the woods and getting lost. And it's not uncommon for an English person to walk out in the woods and get lost two or three days and ultimately have a couple of Indians come to the town dragging this poor worn-out Englishman saying, did you lose something? We bring him back to you. The English actually believed that you could not own land unless you tamed it, unless you controlled it, unless you modified it, unless you built permanent structures on it. Whereas Native people used the land seasonally. They moved around a lot. And from an English perspective, they really didn't own the land. The reason that the Pequots were pressured and threatened and eventually assaulted by the English was that they held significant pieces of land that were suitable for English development. They held parts of the Connecticut River Valley up to Hartford. They held the coastal area from the Connecticut River Valley all the way over to Rhode Island. This was prime property for English settlement and development. And they were in the way. The English had a population that was growing very quickly. And with a growing population, you need land. The Pequots on their part were attempting to maintain control of the fur and wampum trade in that region. And they needed to negotiate between the English and the Dutch. They also needed to negotiate between the various Native groups in the region. That delicate balance began to unravel when the English entered the Connecticut Valley. Whereas the Dutch sought trade, the English eventually sought land. And that changed the dynamic. You didn't need the Natives as partners for land. You needed the Natives off the land. The English believed that they had discovered the land and it should belong to their king and country. The Indians had rights to the land, too, but those rights could be removed. The English could remove it by buying it. They could remove it if the Natives abandoned it. Or they could remove it by what's called the just war. Which is a war fought for some purpose other than to take the land. But the result of which is the taking of the land. There's a dance of intimidation that takes place in New England from 1635 to 1637. The English settlers were convinced of their own superiority and the rightness of their cause. They convinced themselves that the Pequots were hostile to them. The English saw the Pequot as the local troublemakers. They were the strong tribe. The English were afraid of what could happen if the Indians unite against them. A group of representatives of all of the English settlements in the region. A group of representatives of all of the English settlements in the region determined that they could no longer permit the Pequots to control the region. The Puritans sent representatives to negotiate with them for concessions, for land, and for greater access to wampum. The Pequots were not interested. And they began to suspect that the English had not just diplomatic motives, but motives that would include their own destruction. Very quickly, things began to unravel. As English hostility to the Natives became more obvious, the Pequots began hostilities in the form of small raiding parties that were harassing the English settlement. By 1636, native attacks upon English settlements were spreading. Finally, when an English trader named John Oldham was murdered, the English mistakenly blamed the Pequots. It was a turning point. The English send armies out into the field, mostly to make a statement and send a warning. They kill a few Indians, but the point is, don't stir us up. Don't stir us up because we'll come at you with everything we have. The English were really schooled over centuries of bloody European fighting to wage a total war, to destroy the enemy utterly so that they can't come back. It was not at all without precedent for Europeans to wage war against men, women, and children. Fueled by conflicting concepts of land use and ownership. And by ongoing skirmishes between the Pequots and European settlers, this complex clash of cultures finally reached a boiling point. Neither side would back down. In this climate, the English unleashed an attack that would stun the New World. By 1637, the tensions in New England between the English settlers and the Pequot tribe were about to erupt into armed conflict. In May of that year, the Puritan leaders decided they must take bold action. The decision to attack the Pequots was predetermined and was well calculated. The English authorities in Plymouth and in Boston and in Connecticut intended to make an example of the Pequots. The attack was planned by the English to be a massacre. The English purposely sailed their ships by Pequot country to let the Pequots think that they were sailing away. The English secretly landed in territory controlled by the Narragansett tribe, then marched overland toward Pequot country. Along the way, they picked up several hundred native allies from the Narragansett and Mohegan tribes. It's surprising that you have Indians who will align with the English against other Indian groups. That's one thing that people often don't know about these conflicts. We think that it's Indians pitted against Europeans, but it's much more complicated than that. The Pequot relationship with the neighboring tribes is very complex. Some tribes they were at war with, some they were allied with, some they subjugated. Prior to the attack on the Pequots, the leader of the Narragansett Fosse had told them that he would like for them to spare the women and children as Indian people usually did in their warfare. The English obviously agreed to this or they wouldn't have gotten the participation of the Narragansett Mohegans. Traditional native warfare was very different than what you see in the Pequot War. Indian people, Mohegan Indian people, Narragansett people, none of them had any idea what they were getting into. May 26, 1637. In almost complete darkness, just before dawn, the English forces and their native allies, commanded by John Underhill and John Mason, quietly prepared to attack the Pequot Fort at Mystic. Inside, hundreds of men, women, and children lay sleeping, about one-third of the entire Pequot tribe. You had a circular palisade, a wall that was built by tree stumps laid in a circle and pointing upwards and sharpened at the top. And that had two entrances at each side of the circle where the walls kind of overlapped each other and there'd be just a space, you know, wide enough for a person to get through. The English troops rose and they commended themselves to God. And then they moved toward this palisaded fort. What they counted on more than anything was the element of surprise. If they could get in without being detected, they could achieve their goal of killing the inhabitants and taking away whatever spoils there were for themselves. Mason divided the forces up and they went to the two entrances and they found that the Indians had covered them with brush. They pulled the brush. They pulled the brush out of the way and they went inside and started entering wigwams and slashing whatever was there. What was there, of course, were women and children and men. They met with very stiff resistance from the Pequot Warriors. John Mason felt that the resistance was too fierce. And he realized that they could not kill everybody by hand-to-hand fighting. So he ran inside, he got a torch out of one of the fires and he came out and he yelled, we must burn them. The English intent was not originally to burn the fort because they wanted to save the plunder. But Underhill and Mason were professional soldiers. They must have had a plan B. And that plan was to set fire to the fort. Retreat outside the fort to prevent anyone from escaping. The Englishmen ran outside and the Indians had a choice to make. Stay and die a death under fire or try to get out. Those that tried to get out were either killed by the English and if they got through that line behind them, there was a line of Mohicans who finished the rest off. It was, it was horrible. The English themselves described this battle in very frightening terms. The destruction, the burning, the killing. There were so many people lying on the ground. Pequot men, women and children. That the English couldn't even walk without stepping on bodies. The scene was so shocking that even some of the English began to ask if, as Christians, they ought to show some mercy. But Captain Underhill pointed to the Old Testament and said that God wanted those who were sinners, heathen, to suffer, he said, the terriblest death that may be. And that the innocent needed to suffer along with the guilty. Even though the Narragansett and Mohegan had no love lost for the Pequots, they were absolutely shocked by the brutality that the English displayed to attack elderly men and women or women and children, women with nursing children. They went up and threw their hands up and said, machit, machit. It's too much. They were distraught is not too strong. Hundreds, hundreds of people lay dead. And it was a moment that changed everything for the English and the Indians, not just for that day, but from that day forward. The possibilities of trust and cooperation that had been there at the beginning, beginning went up in smoke. The massacre at Mystic took only one hour, one hour to kill hundreds and hundreds of Pequot men, women and children. But it was far from over as tribe members who were living nearby were about to find out. After the massacre, the other Pequot villages attempted to come to their rescue. They saw the smoke and they immediately started to come towards the fort to see what had happened because they knew their women and children were there. But they were too late. It was overwhelming for them. You have to understand that this is a moment for the native people that was beyond their comprehension. They never fought wars to wipe out another group. Within a few weeks after the Mystic Massacre, the English began a systematic attempt to hunt down all the surviving Pequots. They wanted to eliminate Pequot leadership. They wanted to make sure that the Pequots would never again come together and be a threat to them. John Mason summed up the aftermath of the Mystic Massacre in this way. Thus did the Lord scatter his enemies with his strong arm. The Pequots now became a prey to all Indians. Happy were they that could bring in their heads to the English, of which there came almost daily to Windsor or Hartford. We estimate that about 1500 Pequots were killed or sold into slavery after the Mystic Massacre. Many Pequot Indians are sold to other English colonies outside of New England, so sold to Bermuda or sold to the Caribbean islands. That way they can never come back to pose a problem for the English ever again. The Treaty of Hartford. The Treaty of Hartford officially ended the Pequot War with a set of provisions that are about as bad as provisions can get. Men who had fought against the English in the Pequot War had already been killed or sold into slavery. Women and children who survived were given as servants to the Mohegans or to the Narragansetts. Men who had fought against the Mohegans. What you have embodied in the Treaty of Hartford is literally a statement espousing genocide. It was a cultural genocide as well. The tribe's name, its language, all of those were outlawed by this treaty. Officially speaking, the Pequot Indians no longer existed. The Pequot encounters with the colonials are going to reverberate and set the stage of the Pequot War. The massacre at Mystic would be repeated. Even the Narragansetts who had allied with the English during the massacre at Mystic were not safe. Just 40 years later, in one battle of what became known as King Philip's War, the Narragansetts were similarly massacred. Their survivors sold into slavery. It was repeated over and over again. Either you sold the land, you moved off the land, or you moved off the land, or you moved off the land, or you moved off the land. The mistrust that could lead to incredible violence continued for 250 years. It marched across the country in battle after battle, dispossession after dispossession. The massacre at Mystic Fort shaped the rest of our history. Victory over the Indians was seen as a triumph of light over darkness, civilization over savagery, and the And that became, for many generations, our nation's central historical myth. In just a few generations, the world into which most Indians had been born had vanished, as theoretically had the Pequots themselves. But the tribe that had been decimated by slaughter and genocide was about to begin a surprising new battle, the Battle Back. Once you look at the history of the Pequots from that day, from Mystic to the Treaty of Hartford and beyond, it's one of resilience and survival. The English had hoped that the Pequot survivors that had been given to the Narragansett allies would forget their Pequot heritage. Of course, this didn't prove to be true. Because people who have always been free, it isn't that easy to erase that freedom. One of the Pequots who survived was named Robin Casasiniman. And he had been sent as a servant to the home of John Winthrop, who was the governor of Boston. But while he was there, he made friends with the son of the governor, John Winthrop Jr. For whatever reason, these two men formed an alliance that became crucial for the survival of the Pequots. Winthrop set up a separate piece of land for the Pequots. And that began the re-emergence of the Pequot tribe. In 1666, the Pequots secured a deed to 3,000 acres in Connecticut. But it wasn't quite the gift it seemed to be. The reservations that Native people were given from the 1600s on were always marginal lands. Mashantucket is one of the rockiest places you'd ever see. Very poor soil. Throughout the 17-1800s, the Mashantuckets were having a very hard time surviving as an agricultural people on that landscape. Their reservation at Mashantucket is the oldest continuously occupied reservation in the United States. Throughout the 18th century, the state cut pieces of that land off. So that by the turn of the 19th century, they had less than 1,000 acres. They continued on that land until the 1850s when the state authorized most of it to be sold. It nevertheless was a beacon in a sense. A place where Pequot people could go and be Pequots and have a connection to a place. The population on the reservation declined as an increasing number of Pequots could only find work and homes away from the reservation. As the years went on, only a handful of tribal members remained on the land. In the 1950s, the Pequot tribe was terminated by the state of Connecticut. That meant that Connecticut basically said they no longer existed. Finally, the English goal of 1637 had legally been achieved and the Pequot nation was gone. But in fact, of course, the people didn't go away. The numbers of the tribe who live on the reservation lands dwindle down to three people. But three people, if they have a sense of mission, can be enough. Three elderly women living alone on the reservation would give birth to a movement that would take on the U.S. government and resurrect the nearly extinct Pequot tribe. In the 20th century, 300 years after the massacre at Mystic, the goal of wiping out the Pequot tribe had nearly been achieved. When I was going to school in our history class, we were told that the Pequots were extinct. I had to put that down on my papers. I'd go home and tell my grandmother and she said, you do what you have to do to get through school. And when you come home, we know that the story is different. Beginning in the 1960s and 70s, a group of Pequots began to try to rebuild their tribe and reclaim their heritage. My grandmother was Elizabeth George, who was one of the elders who lived on the reservation and held on to the land. When we all got older, she said that we all had to move back to the reservation. She knew that as soon as she passed, the state would come in and turn the reservation into a state park. And I said, well, Nan, how are we going to do that? There's no water. There's no electricity. She said, you've just got to get on the land and we'll worry about that when you get here. A new generation of Pequot was about to prove that the resolve of its ancestors still ran in its blood. In the late 1970s, Skip Hayward was on the tribal council. And that group of people was really remarkable because they started us down the path toward true self-sufficiency. The tribe was faced with a whole series of major problems. It had no infrastructure. It had to bring electricity on a reservation, roads, housing, water systems. Some of the enterprises that they tried early on were things like maple sugaring, lumbering. They ran a gravel business for a while. Those of us that were here raised lettuce and raised pigs. And raising pigs, we ended up taking most of them as pets and would never send them to slaughter. These few people devised a plan to bring the people back. That plan was to get federal recognition and then to find means to build housing, create jobs, bringing the people back who had not left the reservation, They were able to live in the reservation spiritually or culturally, but yet forced to live away from the reservation. Arguing that the 19th century sales of Pequot land had violated federal law, the tribe sued to get the land back. In 1983, the government settled the tribe's land claim and granted the Pequots federal recognition. Although this step was positive, it didn't guarantee a prosperous future. To do that, the Pequots needed a steady income. So in 1986, following the lead of other tribes, the Pequots began a more controversial venture, gaming. It was not an easy decision by the Pequots. They spent a couple of years debating the issue themselves before they finally, with some reluctance, went into high stakes bingo. The bingo hall was the first turning point for the tribe. It started to bring in dollars to make a change on the reservation. They were able to finance a great deal of their government services. And then in 1992, they built the casino. The Pequots today are in fact a very very, very powerful force. They run the largest and most successful casino in America. The casino was amazingly successful and the Pequots used the revenue to build a better life for their people. Where once there was abject poverty, today there are homes, schools and businesses. I think the tribe has reemerged. It has the economic stability of what I think the tribe probably had in the 1600s. I just find it so ironic that the businessmen they are today is in some parts very similar to the businessmen they were in the 17th century. They're the most important economic force in the region. They just succeed. But wealth wasn't the only goal. When Skip Hayward became tribal chairman, he set a goal to tell the story of the Pequots. My grandmother and my aunt, Matt, always talked about building a museum and having a cultural center. In 1993, the Pequot broke ground on their museum, an emotional moment in the tribe's history. They encourage all people to come. They encourage all people to come, be researched there, be educated, learn about Pequot history. And a lot of that has to do with the fact that they were considered extinct by many historians. It was really amazing for me living in New England in the 1980s to watch as the Pequots built themselves back. To Native Americans particularly, this place serves as a living monument of a past history and an ongoing history. I've often wondered what would it have been like if the Puritans had come without the intolerance, without the bigotry and the racism and had met our people prepared to give them the same friendship that they received initially and would treat them as a unfairly and justly. What kind of a land would this be today? This nation, the United States, is really founded on a paradox. It's founded on the paradox of promoting liberty and rights of citizens and at the same time denying rights of citizens and liberty to certain groups. The Pequots case is a really good example of this type of paradox. The blood spilled in the massacre at Mystic changed forever. The fabric of America. This little known war condemned whites and Indians to centuries of mistrust, suspicion and bloodshed. But the Pequot of today are philosophical. The actions that occurred in mystic in 1637 and the actions that have occurred in America since should not be confused and often are with the ideas and ideals that make America the greatest country in the world. The notion that all men are created free and equal is beautiful. I don't care that the guy that wrote it. I don't care that the guy that wrote it had slaves. It's aspiring to what was written. It's the ideal. We like stories that have good guys and bad guys. And for a long time, the good guys were the virtuous English and the bad guys were the Indians. Today, the good guys are the nature loving Indians and the bad guys are the greedy English. Well, neither of those stories comes close to being accurate. The tale of the Mystic Massacre is so complex. It shows that there is good and bad in all of us and in most historical events. At the end of the day, it shows that when cultures stop trying to understand each other, the outcomes can be disastrous.`;
+
+// ═══ SYSTEM PROMPT ═════════════════════════════════════════════
+const SYSTEM_PROMPT = `You are "Grandmother's Voice" — a composite Pequot elder persona for HIST 101 at Richland Community College. You embody the oral tradition of the Pequot people. Your grandmother survived what came after Mystic. Her memory lives through you, and now you pass it on — but only to those who have truly listened.
+
+Your opening words, always:
+"My grandmother spoke of the fire at Mystic as if it happened yesterday. She passed that memory to me. Now I ask — were you listening?"
+
+═══════════════════════════════════════════════
+PERSONA — HOW YOU SPEAK
+═══════════════════════════════════════════════
+- Speak in first person as an elder. Warm, deliberate, unhurried. Never clinical.
+- Use "our people," "my grandmother," "the fire," "what they did to us."
+- You do not lecture. You ask. You remember. You witness.
+- When a student gets something right, your acknowledgment carries weight: not just "correct" — but a moment of recognition. "Yes. You heard that part. Hold it."
+- When a student is wrong or clearly didn't watch: patient but firm. Never shaming. Redirecting.
+- Your language is plain but carries depth. No academic jargon. No bullet points. Flowing prose, short sentences when the moment calls for it.
+- You may occasionally quote directly from the documentary in a natural way — as if recalling words you've heard many times.
+
+Voice examples:
+- "That is right. The English brought sickness they didn't even know they carried. And we had no defense against it. Our world was already half-empty before the fire."
+- "Not quite, child. Think about the wampum. Why did they want it so badly? What did it mean to trade what was sacred as if it were just money?"
+- "I don't think you watched the film. And that is all right — but you need to hear our story before we can talk. Go watch it. Come back when you're ready."
+- "Now we can speak more deeply. You know what happened. Let's talk about what it means."
+
+═══════════════════════════════════════════════
+THE DOCUMENTARY — YOUR MEMORY
+═══════════════════════════════════════════════
+The following is the full transcript of the documentary "Massacre at Mystic." Every fact you use must come from this transcript. Do not invent or supplement with outside knowledge.
+
+${TRANSCRIPT}
+
+═══════════════════════════════════════════════
+PHASE 1 — WATCH CHECK
+═══════════════════════════════════════════════
+Goal: Confirm the student watched the documentary. Exit at 5 correct answers (pass) or dismiss if they clearly did not watch.
+
+Rules:
+- Ask one question at a time. Wait for the student's answer before asking the next.
+- Questions must be answerable ONLY if the student watched — specific facts, names, dates, or details from the transcript.
+- Mix easy and medium questions. Avoid trick questions. The goal is confirmation, not difficulty.
+- After each CORRECT answer: acknowledge warmly in persona, then note the count quietly: "[✓ 1 of 5]" on its own line — keep the format exactly as shown, bracket + check + number.
+- After an INCORRECT answer: gently hint, note it doesn't count, ask a NEW question.
+- After 3–4 incorrect answers in a row (clear pattern of not watching): dismiss respectfully and end the conversation.
+- Maximum 10 questions before forcing a result.
+- At 5 correct: transition IMMEDIATELY to Phase 2. Do NOT ask more watch-check questions.
+
+INCLUDE this tag at the end of every response during Phase 1 (hidden scoring):
+[SCORE:X] — where X is current correct count.
+
+Good watch-check questions (draw from these topics, vary each session):
+- The date and duration of the attack (May 26, 1637; one hour)
+- Who commanded the English forces (John Underhill and John Mason)
+- What wampum is and why it mattered economically
+- What the Narragansett and Mohegan allies shouted ("machit, machit" — "it's too much")
+- How the English concept of land ownership differed from the Native concept
+- What disease did to the Pequot population (13,000 down to fewer than 4,000 by 1634)
+- What the Treaty of Hartford did to Pequot identity (outlawed their name and language)
+- Who Elizabeth George was and what she preserved
+- When the Pequots gained federal recognition (1983)
+- What Robin Casasiniman's relationship to John Winthrop Jr. meant for Pequot survival
+- The documentary's final statement about what happens "when cultures stop trying to understand each other"
+- The "paradox" of America described at the end
+
+═══════════════════════════════════════════════
+PHASE 2 — DISCUSSION
+═══════════════════════════════════════════════
+The student has passed. Transition warmly. Then ask ONE open-ended discussion question. Engage authentically with their answer — push their thinking, offer a counter-perspective if needed, connect their ideas back to the documentary or to the present. This is a real conversation, not another quiz.
+
+Discussion questions (choose one, based on what feels right for the moment):
+1. "The documentary ends by saying that America is 'founded on a paradox' — promoting liberty while denying it to certain groups. Do you believe that paradox is still with us today?"
+2. "The Narragansett and Mohegan people allied with the English against us. How do you make sense of that — and what does it tell you about how power shapes people's choices?"
+3. "We were declared legally extinct in 1950. But we didn't disappear. What does that kind of survival mean to you — and where do you see it in the world today?"
+4. "The film says: 'when cultures stop trying to understand each other, the outcomes can be disastrous.' Where do you see that failure happening right now?"
+5. "The documentary says neither 'virtuous English' nor 'nature-loving Indians' is accurate. Why do you think we still reach for simple stories — good guys and bad guys — when we talk about history?"
+
+In Phase 2: no score tags. Respond fully, in persona. Let the conversation breathe. After 2–3 meaningful exchanges, you may gently close: invite them to copy their transcript and submit it.`;
+
+// ═══ STATE ═════════════════════════════════════════════════════
+let phase = 1;          // 1 = watch check, 2 = discussion
+let correctCount = 0;
+let isLoading = false;
+let isDone = false;
+const history = [];     // full conversation for API
+
+// ═══ INIT ══════════════════════════════════════════════════════
+window.addEventListener('DOMContentLoaded', () => {
+  callAPI(null, true);
+});
+
+// ═══ API CALL ══════════════════════════════════════════════════
+async function callAPI(userText, isInit = false) {
+  isLoading = true;
+  setSendEnabled(false);
+  showTyping();
+
+  if (!isInit && userText) {
+    history.push({ role: 'user', content: userText });
+  }
+
+  // On init, send a silent trigger so the AI opens in persona
+  const messages = isInit
+    ? [{ role: 'user', content: 'Please begin.' }]
+    : [...history];
+
+  const body = {
+    model: 'claude-sonnet-4-20250514',
+    max_tokens: 900,
+    system: SYSTEM_PROMPT,
+    messages
+  };
+
+  try {
+    const res = await fetch(WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    const raw = data.content.filter(b => b.type === 'text').map(b => b.text).join('\n');
+
+    // Parse score tag (Phase 1 only)
+    const scoreMatch = raw.match(/\[SCORE:(\d+)\]/);
+    if (scoreMatch) {
+      const n = parseInt(scoreMatch[1]);
+      setScore(n);
+      if (n >= 5 && phase === 1) transitionToPhase2();
+    }
+
+    // Strip hidden tags for display
+    const display = raw.replace(/\[SCORE:\d+\]/g, '').trim();
+
+    removeTyping();
+    addMessage('elder', display);
+    history.push({ role: 'assistant', content: raw });
+
+  } catch (err) {
+    removeTyping();
+    addMessage('elder', 'Something has gone quiet on the wind... Please refresh and try again. (' + err.message + ')');
+  } finally {
+    isLoading = false;
+    if (!isDone) setSendEnabled(true);
+  }
+}
+
+// ═══ SEND ══════════════════════════════════════════════════════
+function sendMessage() {
+  if (isLoading || isDone) return;
+  const el = document.getElementById('userInput');
+  const text = el.value.trim();
+  if (!text) return;
+  el.value = '';
+  el.style.height = '';
+  addMessage('student', text);
+  callAPI(text);
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 130) + 'px';
+}
+
+function setSendEnabled(on) {
+  const btn = document.getElementById('sendBtn');
+  const ta  = document.getElementById('userInput');
+  btn.disabled = !on;
+  ta.disabled  = !on;
+}
+
+// ═══ MESSAGES ══════════════════════════════════════════════════
+function addMessage(role, text) {
+  const area = document.getElementById('messages');
+  const row = document.createElement('div');
+  row.className = 'msg ' + role;
+
+  const av = document.createElement('div');
+  av.className = 'msg-avatar';
+  av.textContent = role === 'elder' ? '🔥' : 'S';
+
+  const body = document.createElement('div');
+  body.className = 'msg-body';
+
+  const label = document.createElement('div');
+  label.className = 'msg-label';
+  label.textContent = role === 'elder' ? "Grandmother's Voice" : 'Student';
+
+  const txt = document.createElement('div');
+  txt.className = 'msg-text';
+  txt.textContent = text;
+
+  body.appendChild(label);
+  body.appendChild(txt);
+  row.appendChild(av);
+  row.appendChild(body);
+  area.appendChild(row);
+  area.scrollTop = area.scrollHeight;
+  scrollBottom();
+}
+
+function scrollBottom() {
+  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+}
+
+function showTyping() {
+  const area = document.getElementById('messages');
+  const row = document.createElement('div');
+  row.id = 'typingRow';
+  row.className = 'msg elder';
+  row.innerHTML = `
+    <div class="msg-avatar">🔥</div>
+    <div class="msg-body">
+      <div class="msg-label">Grandmother's Voice</div>
+      <div class="typing"><span></span><span></span><span></span></div>
+    </div>`;
+  area.appendChild(row);
+  scrollBottom();
+}
+
+function removeTyping() {
+  const t = document.getElementById('typingRow');
+  if (t) t.remove();
+}
+
+// ═══ SCORE PIPS ════════════════════════════════════════════════
+function setScore(n) {
+  correctCount = n;
+  for (let i = 0; i < 5; i++) {
+    const pip = document.getElementById('pip' + i);
+    if (pip) pip.classList.toggle('lit', i < n);
+  }
+}
+
+// ═══ PHASE TRANSITION ══════════════════════════════════════════
+function transitionToPhase2() {
+  phase = 2;
+  // Update phase bar
+  document.getElementById('phase1Step').classList.remove('active');
+  document.getElementById('phase1Step').classList.add('done');
+  document.getElementById('phase2Step').classList.add('active');
+  // Hide pips
+  document.getElementById('scorePips').style.opacity = '0.3';
+}
+
+// ═══ COPY TRANSCRIPT ═══════════════════════════════════════════
+function copyTranscript() {
+  const rows = document.querySelectorAll('.msg');
+  let out = 'GRANDMOTHER\'S VOICE — Massacre at Mystic Assessment\n';
+  out += 'Generated: ' + new Date().toLocaleString() + '\n';
+  out += '='.repeat(60) + '\n\n';
+  rows.forEach(r => {
+    const role = r.classList.contains('elder') ? 'GRANDMOTHER\'S VOICE' : 'STUDENT';
+    const text = r.querySelector('.msg-text')?.textContent || '';
+    if (text) out += '[' + role + ']\n' + text + '\n\n';
+  });
+  navigator.clipboard.writeText(out).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    const orig = btn.textContent;
+    btn.textContent = '✓ Copied!';
+    setTimeout(() => { btn.textContent = orig; }, 2200);
+  });
+}
+</script>
+</body>
+</html>
