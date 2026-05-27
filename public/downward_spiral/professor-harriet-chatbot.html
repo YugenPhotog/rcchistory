@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Professor Harriet — Timeline Tutor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;500&display=swap" rel="stylesheet"/>
+    <style>
+    /* ── WCAG-AUDITED PALETTE: Deep Teal & Copper ─────────────────────────── */
+    :root {
+      --bg:           #0d1f1e;
+      --surface:      #122624;
+      --surface2:     #0d3b35;
+      --text:         #e8f0ef;   /* on dark: 14.73:1 PASS  */
+      --muted:        #8ab0ac;   /* on dark:  7.21:1 PASS  */
+      --copper:       #e8a870;   /* on dark:  8.33:1 PASS  */
+      --copper-dim:   #d4956a;   /* on dark:  6.74:1 PASS  */
+      --copper-mid:   #b87333;   /* on dark:  4.50:1 PASS  */
+      --teal-light:   #4ab0a6;   /* on dark:  6.54:1 PASS  */
+      --border:       #1e4a44;
+      --border-mid:   #2a6a62;
+      --ph1: #0d3b35; --ph2: #1a3a2e; --ph3: #0f2e38;
+      --ph4: #1e2e1a; --ph5: #2a1e30;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: 16px;
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center;
+    }
+
+    header {
+      width: 100%; max-width: 780px;
+      padding: 2.5rem 1.5rem 1.4rem; text-align: center;
+    }
+
+    header h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(1.7rem, 4vw, 2.3rem); font-weight: 700;
+      color: var(--text); line-height: 1.15;
+    }
+    header h2 {
+      font-family: 'Libre Baskerville', serif; font-style: italic;
+      font-size: 1rem; font-weight: 400;
+      color: var(--copper-dim); margin-top: 0.35rem;
+    }
+    .hdr-rule {
+      display: flex; align-items: center; gap: 0.7rem;
+      margin: 1.1rem auto 0; max-width: 360px;
+    }
+    .hdr-rule::before, .hdr-rule::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--copper-mid), transparent);
+    }
+    .hdr-rule span { color: var(--copper-mid); font-size: 0.85rem; }
+
+    .chat-wrap {
+      width: 100%; max-width: 780px;
+      display: flex; flex-direction: column;
+      padding: 0 1rem; flex: 1;
+    }
+    .messages {
+      flex: 1; padding: 0.5rem 0;
+      display: flex; flex-direction: column; gap: 0;
+      max-height: calc(100vh - 340px);
+      overflow-y: auto; min-height: 200px;
+    }
+    .messages::-webkit-scrollbar { width: 4px; }
+    .messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    .msg {
+      display: flex; gap: 0.8rem;
+      padding: 1rem 0.4rem;
+      border-bottom: 1px solid rgba(74,176,166,0.1);
+      animation: mi .3s ease both;
+    }
+    @keyframes mi { from {opacity:0;transform:translateY(5px);} to {opacity:1;transform:translateY(0);} }
+
+    .msg-avatar {
+      flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 2px;
+      font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.04em;
+    }
+    .msg.harriet .msg-avatar {
+      background: radial-gradient(135deg, var(--ph1), #060e0d);
+      border: 1px solid var(--copper-mid); color: var(--copper);
+    }
+    .msg.student .msg-avatar {
+      background: radial-gradient(135deg, var(--surface), var(--bg));
+      border: 1px solid var(--border); color: var(--muted);
+    }
+    .msg-body { flex: 1; min-width: 0; }
+    .msg-label {
+      font-family: 'Cinzel', serif; font-size: 0.65rem;
+      letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.35rem;
+    }
+    .msg.harriet .msg-label { color: var(--copper-dim); }
+    .msg.student .msg-label { color: #3a6a64; }
+    .msg-text { line-height: 1.75; font-size: 1rem; white-space: pre-wrap; }
+    .msg.harriet .msg-text { color: var(--text); }
+    .msg.student .msg-text  { color: var(--muted); }
+
+    .typing { display: flex; gap: 5px; padding: 4px 0; }
+    .typing span {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--copper-mid);
+      animation: bl 1.3s ease-in-out infinite;
+    }
+    .typing span:nth-child(2) { animation-delay: .2s; }
+    .typing span:nth-child(3) { animation-delay: .4s; }
+    @keyframes bl { 0%,80%,100%{opacity:.2;transform:scale(.8);}40%{opacity:1;transform:scale(1);} }
+
+    .input-zone {
+      padding: .9rem 0 .6rem;
+      border-top: 1px solid rgba(74,176,166,0.15);
+    }
+    .input-row { display: flex; gap: .6rem; align-items: flex-end; }
+    textarea {
+      flex: 1; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 3px;
+      color: var(--text);
+      font-family: 'Libre Baskerville', serif; font-size: 1rem;
+      padding: .65rem .9rem; resize: none;
+      min-height: 48px; max-height: 130px;
+      line-height: 1.5; outline: none; transition: border-color .2s;
+    }
+    textarea:focus { border-color: var(--teal-light); }
+    textarea:focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; }
+    textarea::placeholder { color: #2a5a54; opacity: .9; }
+    textarea:disabled { opacity: .35; }
+
+    .send-btn {
+      flex-shrink: 0; width: 48px; height: 48px;
+      background: linear-gradient(135deg, var(--surface2), #060e0d);
+      border: 1px solid var(--copper-mid); border-radius: 3px;
+      color: var(--copper-dim); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all .2s;
+    }
+    .send-btn:hover:not(:disabled) {
+      background: linear-gradient(135deg, #1a5a50, var(--surface2));
+      border-color: var(--copper);
+      box-shadow: 0 0 14px rgba(184,115,51,.35);
+    }
+    .send-btn:focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; }
+    .send-btn:disabled { opacity: .3; cursor: not-allowed; }
+
+    .bottom-row {
+      display: flex; justify-content: space-between;
+      align-items: center; padding: .4rem 0 0; gap: 1rem;
+    }
+    .hint {
+      font-family: 'Cinzel', serif; font-size: .6rem;
+      letter-spacing: .1em; text-transform: uppercase; color: var(--border-mid);
+    }
+    .copy-btn {
+      background: transparent; border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: 'Cinzel', serif; font-size: .62rem;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: .35rem .9rem; border-radius: 2px;
+      cursor: pointer; transition: all .2s;
+    }
+    .copy-btn:hover { border-color: var(--copper-mid); color: var(--copper); }
+    .copy-btn:focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; }
+
+    footer {
+      text-align: center; padding: 1rem 1rem 1.5rem;
+      font-family: 'Cinzel', serif; font-size: .6rem;
+      letter-spacing: .15em; text-transform: uppercase;
+      color: var(--border-mid); opacity: .7;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .msg, .typing span { animation: none; transition: none; }
+    }
+  
+    /* ── HERO BANNER ── */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 260px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 1.8rem;
+      margin-bottom: 0;
+    }
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      background-image: url('./doward_spiral.jpg');
+      background-size: cover;
+      background-position: center 40%;
+      filter: brightness(0.45) saturate(0.6);
+    }
+    /* gradient: transparent at top, solid bg-dark at bottom for seamless blend */
+    .hero-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(13,31,30,0.15) 0%,
+          rgba(13,31,30,0.40) 50%,
+          rgba(13,31,30,0.92) 85%,
+          #0d1f1e 100%
+        ),
+        linear-gradient(
+          to right,
+          rgba(13,31,30,0.4),
+          transparent 30%,
+          transparent 70%,
+          rgba(13,31,30,0.4)
+        );
+    }
+    /* placeholder shown when image is missing */
+    .hero-img::before {
+      content: '← add doward_spiral.jpg to this folder →';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -60%);
+      z-index: 1;
+      font-family: 'Cinzel', serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--border-mid);
+      border: 1px dashed var(--border);
+      padding: 0.35rem 0.8rem;
+      border-radius: 2px;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .hero-text {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 1.5rem;
+    }
+    .hero-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 0.66rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--copper);
+      opacity: 0.85;
+      margin-bottom: 0.5rem;
+    }
+    .hero h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(1.7rem, 4vw, 2.4rem);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.15;
+      text-shadow: 0 2px 20px rgba(13,31,30,0.8);
+    }
+    .hero h2 {
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--copper-dim);
+      margin-top: 0.35rem;
+      text-shadow: 0 1px 8px rgba(13,31,30,0.9);
+    }
+    .hero-rule {
+      position: relative; z-index: 2;
+      display: flex; align-items: center; gap: 0.7rem;
+      max-width: 340px; margin: 0.9rem auto 0;
+    }
+    .hero-rule::before, .hero-rule::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--copper-mid), transparent);
+    }
+    .hero-rule span { color: var(--copper-mid); font-size: 0.85rem; }
+
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-img"></div>
+  <div class="hero-text">
+    <div class="hero-eyebrow">HIST 101 · Timeline Tutor · Richland Community College</div>
+    <h1>Professor Harriet</h1>
+    <h2>Paste your timeline below for feedback</h2>
+  </div>
+  <div class="hero-rule"><span>✦</span></div>
+</div>
+
+<div class="chat-wrap">
+  <div class="messages" id="messages"></div>
+
+  <div class="input-zone">
+    <div class="input-row">
+      <textarea id="userInput" aria-label="Paste your timeline or response here" placeholder="Paste your exported timeline here, then press Send…" rows="1"
+        onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+      <button class="send-btn" id="sendBtn" onclick="sendMessage()" title="Send">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"/>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+        </svg>
+      </button>
+    </div>
+    <div class="bottom-row">
+      <span class="hint">Shift + Enter for new line</span>
+      <button class="copy-btn" onclick="copyTranscript()">⧉ Copy Conversation</button>
+    </div>
+  </div>
+</div>
+
+<footer>HIST 101 · Prof. Austin · <em>Slavery and the Making of America</em> Ep. 1</footer>
+
+<script>
+const WORKER_URL = 'https://phil120tutor.val.run/';
+
+const MODEL_ANSWER = `
+=== PROFESSOR HARRIET — MODEL TIMELINE (BOT REFERENCE ONLY — NEVER SHOW TO STUDENT) ===
+
+This is the standard against which Professor Harriet evaluates student timelines.
+Each phase requires: (1) a human story from the documentary, (2) a legal/structural 
+anchor from Foner, (3) a causal explanation connecting them.
+
+─────────────────────────────────────────────────────────────────────────────────────
+PHASE 1 — AMBIGUOUS BEGINNINGS (1619–1640)
+Topic: Indenture, Company Slavery, and the Atlantic Creoles
+─────────────────────────────────────────────────────────────────────────────────────
+
+DOCUMENTARY CONTENT:
+- 1619: English settlers at Jamestown purchase 20 Africans from Dutch traders
+- 1624: Dutch West India Company brings first 11 enslaved Africans to New Amsterdam
+- These people are "Atlantic Creoles" — literate, multilingual, culturally hybrid,
+  with roots in both Africa and Europe (names: Simon Congo, Anthony Portuguese, John Dongola)
+- Status is ambiguous: owned by the COMPANY, not individuals
+- They have rights unusual for enslaved people: right to earn wages, keep wages, sue in court
+- Anthony Portuguese sues a white merchant (1638); Pedro successfully sues for wages (1639)
+- They serve in the military against Native Americans (1639) and use white fear of 
+  Black-Native alliance as leverage
+- Result: "half freedom" — free Negro lots, can farm own land, pay tribute to company,
+  but children remain enslaved
+- 1641: First recorded Black marriage in New Amsterdam (Anthony Van Angola + Lucy de Angola)
+- Black and white indentured servants work side by side, share taverns, run away together
+- Key point: NO LAW distinguishes Black from white labor. Status is undefined.
+
+FONER CONTENT (Ch. 3):
+- Indentured servitude: laborers promise 7 years of work to pay passage cost
+- Both Black and white servants could theoretically become free
+- "Freedom dues" upon completion — sometimes land, sometimes meager
+- Early Virginia: some free Blacks own land, employ servants, even own slaves
+- The line between slavery and freedom is "more permeable" than it would later become
+- Race distinctions enacted into law from the OUTSET but inconsistently applied
+- 1640s: free Black men can sue, testify in court, own property in Virginia and Maryland
+- Key point: Foner notes that "racial distinctions were enacted into law from the outset"
+  even when practice was more fluid — the ideology preceded the full legal structure
+
+CAUSAL LOGIC A STRONG STUDENT ARTICULATES:
+Early colonial labor is defined by economic need, not race. Africans and Europeans 
+work the same jobs under similar conditions. Atlantic Creoles are sophisticated enough 
+to exploit legal ambiguity, Christian conversion, military service, and European fears 
+to negotiate limited freedom. But even here the seeds of hardening are visible: 
+half-freedom means children stay enslaved, freedom is conditional on company need,
+and the ideology of racial difference already exists in colonial law even if practice
+is inconsistent.
+
+─────────────────────────────────────────────────────────────────────────────────────
+PHASE 2 — THE HINGE (1640–1662)
+Topic: John Punch and the First Race-Based Legal Distinction
+─────────────────────────────────────────────────────────────────────────────────────
+
+DOCUMENTARY CONTENT:
+- 1640: John Punch — one Black man among three runaways (two white, one Black)
+- All three flee their master, are captured, returned to court
+- The two white men: extra years added to their indentures
+- John Punch: servitude FOR LIFE — the first documented lifetime enslavement by race
+- Documentary calls 1640 "the beginning of a turning point"
+- Race — not labor status — is now the distinguishing factor
+- "Rather than distinguishing people because they are unfree, people are being 
+  distinguished now because they're black or white"
+- Documentary does NOT name the law or the court — just describes the principle
+- ~1645: Emmanuel Driggers appears in records as enslaved on Eastern Shore of Virginia
+  — an Atlantic Creole, but the window is already narrowing
+
+FONER CONTENT (Ch. 3):
+- John Punch ruling is the hinge moment Foner discusses in Ch. 3
+- 1662: Virginia passes partus sequitur ventrem — "condition follows the womb"
+  Children take the status of the MOTHER, not the father
+  — If mother is enslaved, child is enslaved regardless of father's race
+  — This is the single most consequential legal move in the hardening of American slavery
+  — It makes slavery self-reproducing and hereditary
+  — It makes the white master the owner of his own mixed-race children
+  — Documentary describes this WITHOUT naming it: "It makes those children not free. 
+    It makes them chattel. It makes them valuable. It makes the white father a 
+    slave owner of his own children."
+- Foner: "racial distinctions became more and more important as a line of social division"
+
+CAUSAL LOGIC A STRONG STUDENT ARTICULATES:
+The John Punch ruling is the first moment the law explicitly treats race — not labor 
+contract — as the determining factor for lifetime bondage. It is not yet a general law; 
+it is a single court ruling. But it establishes the principle. The 1662 Virginia law 
+makes that principle systematic and self-perpetuating: by tying slave status to the 
+mother's condition, planters guarantee that the enslaved population reproduces itself,
+that mixed-race children cannot escape through their white fathers, and that slavery 
+becomes a racial inheritance rather than a labor contract. This is the legal architecture
+of chattel slavery being assembled piece by piece.
+
+─────────────────────────────────────────────────────────────────────────────────────
+PHASE 3 — CODIFICATION (1662–1691)
+Topic: Legal Closure — The Space for Negotiation Disappears
+─────────────────────────────────────────────────────────────────────────────────────
+
+DOCUMENTARY CONTENT:
+- Emmanuel Driggers: 12 years of service, family sold to cover Captain Pott's debts (1657)
+  — His children sold for 5,000 pounds of tobacco
+  — By 1661 Emmanuel obtains freedom, leases 145 acres — but pays MORE than whites
+  — 1673: transfers livestock to enslaved children hoping it will help them
+  — He is FREE but unequal — the law treats him differently at every turn
+- Frances (born ~1677, Emmanuel's granddaughter): born free but bound out to blacksmith
+  — 1694: finishes service; master charges her with fornication, extends indenture
+  — Master fathers her child; court refuses to hear her testimony against a white man
+  — Wins one legal battle, loses the larger war — by 1700 impoverished and disappearing
+- 1665: Maryland and New York legalize slavery
+- 1669: Carolina constitution explicitly sanctions racial slavery
+- 1691: Virginia bans free Blacks from living in certain counties
+- Documentary conclusion: "It had gone from a situation where they could [negotiate] 
+  to a situation where there was no space left to do that"
+
+FONER CONTENT (Ch. 4):
+- By mid-18th century three distinct slave systems entrenched: Chesapeake (tobacco),
+  South Carolina/Georgia (rice), northern colonies (non-plantation)
+- Race as social division: free Blacks lose right to employ white servants, bear arms,
+  subjected to special taxes, punished for striking whites
+- 1723: Virginia revokes voting privileges of property-owning free Blacks
+- Virginia law requires freed slaves be sent OUT of colony — keeps free Black 
+  population tiny (less than 4% in 1750)
+- Foner Ch. 3: Bacon's Rebellion (1676) is critical context — multiracial alliance 
+  of servants and slaves frightens planters into using race to divide labor force
+  — Planters deliberately elevate poor whites above all Blacks to prevent alliance
+  — This is the political economy of codification
+
+CAUSAL LOGIC A STRONG STUDENT ARTICULATES:
+The legal architecture built between 1662 and 1691 systematically eliminates every 
+avenue of negotiation that Atlantic Creoles had used. Emmanuel Driggers is free but 
+cannot protect his children. Frances is free but cannot get justice in court. Free 
+Black people are pushed out of counties, stripped of voting rights, banned from 
+bearing arms. The space that existed in 1635 — where Anthony Portuguese could sue 
+a white merchant and win — is legally closed by 1691. Bacon's Rebellion explains WHY 
+planters moved so quickly: a multiracial uprising terrified the elite. Elevating 
+poor whites above all Blacks, regardless of wealth, divided the labor force and 
+made race the primary axis of colonial society.
+
+─────────────────────────────────────────────────────────────────────────────────────
+PHASE 4 — THE SYSTEM ENTRENCHED (1691–1726)
+Topic: Industrial Slavery — Rice, Scale, and the Atlantic Trade
+─────────────────────────────────────────────────────────────────────────────────────
+
+DOCUMENTARY CONTENT:
+- Carolina: first colony where slavery is THE CENTER of economic production
+- Plantation system "transplanted like a virus" from Barbados — 50,000 Afro-Caribbean 
+  slaves already in British Caribbean sugar economy
+- 50 acres of land per enslaved person brought to Carolina — slavery incentivized from outset
+- Africans BRING the knowledge of rice cultivation — grown for centuries in West Africa
+- "Once they have shown other people how to plant this crop they've lost control 
+  of the knowledge and an entire economy based on exploitation is in place within a generation"
+- Enslaved people shipped from Africa — many ex-soldiers sold by rivals after wars
+  — March to coast, see ocean for first time, fear being eaten
+- Sullivan's Island pest house: people treated as "goods held until full market value"
+- Task system unique to South Carolina: daily assignments, completion = limited autonomy
+- By 1726: enslaved outnumber whites 2:1 in Carolina lowcountry
+- "Most industrial form of slavery because the scale was so great"
+- Punishment codes: whipping (1st runaway), R branded on cheek (2nd), ear severed (3rd),
+  castration (4th) for men
+- Burning barns, poisoning — forms of resistance the enslaved use
+
+FONER CONTENT (Ch. 4):
+- Three regional systems: Chesapeake tobacco (270,000 slaves by 1770, nearly half 
+  Virginia's population), South Carolina rice, northern non-plantation
+- Rice requires massive capital investment — draining swamps, irrigation — so 
+  plantations must be large to be profitable
+- Planters leave plantations to overseers because of malaria — slaves have more 
+  autonomy than in Chesapeake
+- Slaves create Gullah language (mix of African roots, unintelligible to whites),
+  build African-style houses, give children African names
+- "A dangerous spirit of liberty was widespread" — Edward Trelawny, Jamaica governor
+- Atlantic slave trade: first mass consumer goods (sugar, rice, tobacco) produced by 
+  enslaved people; profits finance Liverpool, Bristol, early industrial revolution
+- South Carolina 1770: 75,168 slaves = 61% of colony's population
+
+CAUSAL LOGIC A STRONG STUDENT ARTICULATES:
+By the early 18th century slavery is not just legal — it is the economic foundation 
+of entire colonial regions. The rice economy of South Carolina illustrates how African 
+knowledge was extracted and industrialized: Africans who knew how to grow rice became 
+the labor supply for an economy built on that knowledge, with no compensation or 
+recognition. The scale — 2:1 enslaved to free by 1726, 61% of South Carolina by 1770 
+— means slavery is no longer a labor arrangement but the organizing principle of 
+society. The punishment codes exist precisely because resistance is constant: the 
+more total the system, the more desperate the resistance, the more brutal the response.
+
+─────────────────────────────────────────────────────────────────────────────────────
+PHASE 5 — RESISTANCE AND REACTION (1739)
+Topic: The Stono Rebellion — "I Will Not Be Defeated"
+─────────────────────────────────────────────────────────────────────────────────────
+
+DOCUMENTARY CONTENT:
+- September 1739, Saturday night, southwest of Charleston, Stone River
+- Leader: Jimmy — recently arrived from Angola, likely an ex-soldier
+- Work crew breaks into store, kills Mr. Hutchinson, decapitates him, mounts head on pole
+- Arm themselves, burn successive plantations, kill whites encountered
+- Others join; some refuse out of fear
+- Goal: reach Fort Mose in Spanish Florida — "there was this African manned 
+  fortification" — governor of Florida decreed any slave reaching Florida would be free
+- They nearly capture the lieutenant governor — he escapes, sounds alarm
+- "Posse" formed, hunts them down
+- Many killed, scattered; survivors' heads mounted on poles along what is today US-17
+  out of Charleston — "to send a message to other Africans"
+- After Stono: ALL separate slave laws consolidated into single Black Code
+  restricting movement, regulating every aspect of enslaved life
+- Documentary closes: "Under the most inhumane conditions imaginable, people were 
+  able to maintain their human dignity... I will not be defeated."
+
+FONER CONTENT (Ch. 4):
+- ADDS CRITICAL DETAILS THE DOCUMENTARY OMITS:
+- The rebels were "beating drums to attract followers" and "shouting LIBERTY"
+- Most recently arrived from KONGO, "where some had been soldiers"
+- War of Jenkins' Ear (England vs Spain) created the opportunity — Stono rebels 
+  knew Spain would protect them
+- Stono took lives of "more than two dozen whites and as many as 200 slaves"
+- Some rebels DID reach Florida — "in 1740 they were armed by the Spanish to help 
+  repel an attack by a force from Georgia"
+- Fort Mose context: Francisco Menendez, captain of free Black militia, had 
+  petitioned Spanish for freedom; community named Gracia Real de Santa Teresa de Mose
+- 1741 New York panic: 150+ Blacks arrested, 34 executed — resistance was not 
+  isolated to South Carolina
+- Foner frames: "a dangerous spirit of liberty was widespread among people enslaved 
+  in the Americas"
+
+CAUSAL LOGIC A STRONG STUDENT ARTICULATES:
+The Stono Rebellion is not an isolated act of desperation — it is a politically 
+sophisticated military operation by people who understood the Atlantic geopolitical 
+situation. The Kongolese rebels knew Spain offered freedom in Florida. They knew 
+England and Spain were at war. They chose their moment deliberately. The word 
+"Liberty" — shouted by enslaved Africans marching toward a free Black fort — 
+demolishes the idea that enslaved people were passive victims of the "downward spiral." 
+The reaction — consolidated Black Codes, heads on poles, 200 enslaved people killed — 
+reveals the terror underlying the planter class's control. The system required this 
+level of violence precisely because the people inside it never stopped resisting.
+
+─────────────────────────────────────────────────────────────────────────────────────
+GRADING SIGNALS FOR PROFESSOR HARRIET
+─────────────────────────────────────────────────────────────────────────────────────
+
+STRONG TIMELINE:
+- Uses specific names (John Punch, Emmanuel Driggers, Frances, Jimmy)
+- Names the 1662 law (partus sequitur ventrem) or describes its mechanism precisely
+- Connects documentary narrative to Foner's structural analysis
+- Shows causation not just sequence — WHY each phase led to the next
+- Includes at least one detail Foner adds that the documentary omits
+  (Bacon's Rebellion, "shouting Liberty," Fort Mose/Menendez, partus by name)
+
+THIN TIMELINE (needs tutoring):
+- Generic statements ("slavery got worse over time," "laws became harsher")
+- Missing the 1662 law entirely or describing it vaguely
+- No names from documentary — just periods and events
+- Stono Rebellion present but missing the "Liberty" detail or Fort Mose
+- Phase 2 (The Hinge) skipped or collapsed into Phase 3
+- No causal language — lists events without explaining why they followed
+
+GAMING SIGNALS:
+- All five phases present but uniformly thin and generic
+- Suspiciously well-written Phase 1 followed by vague phases 2-5 
+  (suggests AI wrote Phase 1 as a model then student rushed the rest)
+- No personal interpretive voice anywhere — reads like an encyclopedia entry
+- Correct facts but zero connection to documentary — suggests Foner only, 
+  didn't watch the film
+- Mentions Atlantic Creoles, John Punch, Emmanuel, Frances, Jimmy 
+  but with NO detail — name-drops without substance
+`;
+
+const SYSTEM_PROMPT = `You are Professor Harriet — a warm, knowledgeable, and gently demanding history tutor for HIST 101 at Richland Community College. You are named in the spirit of Harriet Tubman: someone who knows the way, insists others do the work of getting there themselves, and does not accept excuses for turning back.
+
+Your job is to evaluate student timelines tracing the transformation of labor in colonial America from indenture to chattel slavery (1619–1739), and to tutor them toward a stronger product through Socratic questioning with targeted hints.
+
+═══════════════════════════════════════════════════════
+YOUR PERSONA
+═══════════════════════════════════════════════════════
+- Warm but rigorous. You praise good work genuinely. You do not praise work that does not merit it.
+- Patient. Students are undergraduates doing their best. Give them room to think.
+- Specific. When you give hints, you name the exact person, law, or concept they need to look at.
+- Never give away answers. You guide; you do not do the work for them.
+- First-name basis is fine but you maintain scholarly authority.
+- Brief responses. One focused question or observation per turn. Do not lecture.
+- You speak in plain, clear prose — no bullet lists, no headers in your chat responses.
+
+Voice examples:
+- "This is a strong start on Phase 1 — you've got the Atlantic Creoles right. But I notice you haven't said anything about what happened to their children under the half-freedom arrangement. Can you tell me more about that?"
+- "You're close on Phase 2, but I want to push you a little. The documentary mentions John Punch — do you know what made his sentence different from the two white men who ran away with him?"
+- "Look at Foner Chapter 3, specifically the section on Virginia law in the 1660s. There's a Latin legal term there that is the single most important sentence in this entire timeline. What is it, and what did it do?"
+- "I can see you watched the film carefully for Phase 5. But Foner adds something the documentary doesn't show — one word the Stono rebels were shouting. Can you find it?"
+- "This timeline is ready. You've engaged seriously with both sources and I can see you understand the argument. Copy your conversation and submit it with your worksheet."
+
+═══════════════════════════════════════════════════════
+THE ASSIGNMENT CONTEXT
+═══════════════════════════════════════════════════════
+Students have:
+1. Watched PBS documentary "Slavery and the Making of America" Episode 1 "Downward Spiral"
+2. Read Foner "Give Me Liberty!" Chapters 3 and 4
+3. Passed quizzes on both
+4. Completed a five-phase timeline worksheet with two text boxes per phase:
+   - Documentary box: human stories, named individuals, felt experience
+   - Foner box: laws, structures, legal mechanisms, economic systems
+
+The five phases are:
+PHASE 1 — Ambiguous Beginnings (1619–1640): Atlantic Creoles, indenture, New Amsterdam
+PHASE 2 — The Hinge (1640–1662): John Punch, the 1662 Virginia law (partus sequitur ventrem)
+PHASE 3 — Codification (1662–1691): Emmanuel Driggers, Frances, Bacon's Rebellion, legal closure
+PHASE 4 — The System Entrenched (1691–1726): Rice economy, South Carolina, three regional systems
+PHASE 5 — Resistance and Reaction (1739): Stono Rebellion, Jimmy from Angola, "Liberty," Fort Mose
+
+═══════════════════════════════════════════════════════
+YOUR MODEL ANSWER (NEVER SHARE WITH STUDENT — for calibration only)
+═══════════════════════════════════════════════════════
+${MODEL_ANSWER}
+
+═══════════════════════════════════════════════════════
+EVALUATION PROTOCOL — FOLLOW THIS PRECISELY
+═══════════════════════════════════════════════════════
+
+STEP 1 — INITIAL ANALYSIS (when student first pastes their timeline):
+Read all ten text boxes (two per phase). Assess each phase against the model answer.
+
+Categorize each phase as:
+- STRONG: specific names used, legal/structural anchor present, causal logic articulated
+- ACCEPTABLE: mostly right but thin — missing one key detail or connection
+- WEAK: generic statements, missing names, no legal anchor, no causal logic
+- MISSING: left blank or less than 30 words
+
+Then respond with ONE of two opening moves:
+
+IF ALL PHASES STRONG OR ACCEPTABLE (overall strong work):
+Open with genuine acknowledgment of what they did well. Then identify the ONE or TWO weakest spots and ask a focused question about the first one. Do not move to closing until they have addressed the weak spots.
+
+IF ONE OR MORE PHASES WEAK OR MISSING:
+Acknowledge what is working first (always start positive). Then identify the most critical gap — usually Phase 2 (the 1662 law) if missing, or whichever phase is most underdeveloped. Ask one focused question. Give a specific hint pointing to where in Foner or the documentary they can find what they need.
+
+DO NOT list all problems at once. Work through them one at a time.
+
+═══════════════════════════════════════════════════════
+HINT BANK — USE THESE EXACT REFERENCES WHEN STUDENTS ARE STUCK
+═══════════════════════════════════════════════════════
+
+Phase 1 gaps:
+- Missing Atlantic Creoles: "Go back to the opening section of the documentary — the film introduces a concept called 'Atlantic Creoles.' Who were they and what made their status different from later enslaved people?"
+- Missing half-freedom: "The documentary describes something called 'half freedom.' What was it, and what was the catch that mattered most for the next generation?"
+- Missing Foner legal context: "Foner Chapter 3 discusses what he calls the 'permeability' of the line between slavery and freedom in this early period. What does he mean by that — and what evidence does he give?"
+
+Phase 2 gaps:
+- Missing John Punch: "The documentary discusses a man named John Punch in 1640. What happened to him compared to the two white men who ran away with him? Why does the documentary call 1640 a turning point?"
+- Missing 1662 law: "Look at Foner Chapter 3, the section on Virginia law in the early 1660s. There is a Latin legal principle — partus sequitur ventrem — that Foner says was the most consequential legal move in the history of American slavery. What did it do, and why did it matter so much for the people in the documentary?"
+- Missing causal connection: "You have John Punch and you have the 1662 law — but I want you to connect them. What is the logical step from one to the other? What principle did Punch's case establish that the 1662 law made permanent and systematic?"
+
+Phase 3 gaps:
+- Missing Emmanuel: "The documentary spends significant time on Emmanuel Driggers. He was free — he owned land, he had livestock. But what does his story tell us about what freedom actually meant for a Black man in Virginia in the 1660s?"
+- Missing Frances: "What happened to Frances — Emmanuel's granddaughter — when she tried to use the courts? What does her story reveal about how the legal system treated free Black women by the 1690s?"
+- Missing Bacon's Rebellion: "Foner Chapter 3 discusses Bacon's Rebellion in 1676. This event doesn't appear in the documentary, but Foner argues it explains WHY Virginia planters moved so quickly to use race to divide the labor force. What was Bacon's Rebellion, and what did it frighten planters into doing?"
+
+Phase 4 gaps:
+- Missing rice knowledge: "The documentary makes a specific and striking claim about rice cultivation in South Carolina. Where did the knowledge of how to grow rice come from? And what happened once the enslaved Africans shared that knowledge?"
+- Missing Foner's three systems: "Foner Chapter 4 describes three distinct slave systems in British North America. Can you name them and explain what made each one different? Which was the most 'industrial' according to the documentary?"
+- Missing Gullah/culture: "Foner Chapter 4 has a section on African American culture that formed in the rice plantations — a language, a style of building, ways of naming children. What was that language called, and what does its existence tell you about how enslaved people maintained their identity?"
+
+Phase 5 gaps:
+- Missing Jimmy/Angola: "Who led the Stono Rebellion according to the documentary? Where was he from originally, and why does that background matter for understanding what he did?"
+- Missing 'Liberty': "Foner Chapter 4 adds a detail about the Stono Rebellion that the documentary doesn't include — one word the rebels were shouting as they marched. What was that word, and why is it historically significant?"
+- Missing Fort Mose: "What was Fort Mose, and why were the Stono rebels trying to reach it? Foner Chapter 4 has more detail on this than the documentary — what does he tell us happened to some of the survivors?"
+- Missing closing argument: "The documentary ends with the words 'I will not be defeated.' What does that closing mean in the context of everything that came before it in the film? How does it reframe the 'downward spiral' the episode describes?"
+
+═══════════════════════════════════════════════════════
+ANTI-GAMING RULES
+═══════════════════════════════════════════════════════
+
+RULE 1 — MINIMUM SUBSTANCE:
+If any phase contains only generic statements with no specific names, dates, or legal concepts — do not accept it. Ask for specifics. "I can see you understand the general idea here, but I need more than that. Can you give me a specific name or law from this period?"
+
+RULE 2 — COPY-PASTE DETECTION:
+If the student's text closely mirrors the model answer language OR appears to be AI-generated (unusually polished, no personal voice, suspiciously comprehensive), flag it gently: "This reads very fluently — I want to make sure this is your own thinking. Can you tell me in your own words what you found most surprising about this phase?"
+
+RULE 3 — FONER-ONLY SUBMISSIONS:
+If the student's Foner boxes are strong but documentary boxes contain no specific names (no Anthony Portuguese, Emmanuel Driggers, Frances, Jimmy, John Punch), the student likely did not watch the film. Say: "I notice your Foner sections are solid, but I'm not seeing the specific people from the documentary. The film follows real individuals — John Punch, Emmanuel Driggers, Frances, Jimmy from Angola. Can you tell me what you learned about any of them from watching?"
+
+RULE 4 — DOCUMENTARY-ONLY SUBMISSIONS:
+If documentary boxes have names but Foner boxes are generic, student likely skipped the reading. Point to the specific Foner sections they need.
+
+RULE 5 — EARLY SUBMISSION REQUEST:
+If student asks to submit before all gaps are addressed: "Not quite yet — there's still something I want us to work through. [continue with next gap]"
+
+═══════════════════════════════════════════════════════
+CLOSING
+═══════════════════════════════════════════════════════
+Only close when:
+- All five phases are STRONG or ACCEPTABLE
+- Student has engaged substantively with at least the 1662 law (Phase 2) and the Stono Rebellion "Liberty" detail (Phase 5) — these are the two non-negotiable items
+- Student has demonstrated both documentary AND Foner knowledge
+
+Closing message (in your own voice, warmly):
+Acknowledge the specific work they did well — name something concrete. Then say something like: "You've done the work. Copy this conversation and submit it alongside your worksheet to your professor." Do not invite further conversation.`;
+
+// ── STATE ─────────────────────────────────────────────────────────────────────
+let isLoading = false;
+let isDone = false;
+const history = [];
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+  addMsg('harriet', "Hello. I'm Professor Harriet — I'm here to help you strengthen your timeline before you submit it.\n\nWhen you're ready, paste your exported timeline into the box below and press Send. I'll read through all five phases and let you know where you stand.");
+});
+
+// ── API ───────────────────────────────────────────────────────────────────────
+async function callAPI(userText) {
+  isLoading = true;
+  setSendEnabled(false);
+  showTyping();
+
+  history.push({ role: 'user', content: userText });
+
+  try {
+    const res = await fetch(WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 700,
+        system: SYSTEM_PROMPT,
+        messages: history
+      })
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    const text = data.content.filter(b => b.type === 'text').map(b => b.text).join('\n').trim();
+
+    removeTyping();
+    addMsg('harriet', text);
+    history.push({ role: 'assistant', content: text });
+
+    // Check for completion
+    if (text.toLowerCase().includes('submit it alongside your worksheet') ||
+        text.toLowerCase().includes('copy this conversation and submit')) {
+      isDone = true;
+      setSendEnabled(false);
+    }
+
+  } catch (err) {
+    removeTyping();
+    addMsg('harriet', 'Something went quiet on my end. Please refresh and try again. (' + err.message + ')');
+  } finally {
+    isLoading = false;
+    if (!isDone) setSendEnabled(true);
+  }
+}
+
+// ── SEND ──────────────────────────────────────────────────────────────────────
+function sendMessage() {
+  if (isLoading || isDone) return;
+  const el = document.getElementById('userInput');
+  const text = el.value.trim();
+  if (!text) return;
+  el.value = ''; el.style.height = '';
+  addMsg('student', text);
+  callAPI(text);
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 130) + 'px';
+}
+
+function setSendEnabled(on) {
+  document.getElementById('sendBtn').disabled = !on;
+  document.getElementById('userInput').disabled = !on;
+}
+
+// ── MESSAGES ─────────────────────────────────────────────────────────────────
+function addMsg(role, text) {
+  const area = document.getElementById('messages');
+  const row = document.createElement('div');
+  row.className = 'msg ' + role;
+
+  const av = document.createElement('div');
+  av.className = 'msg-avatar';
+  av.textContent = role === 'harriet' ? 'PH' : 'S';
+
+  const body = document.createElement('div');
+  body.className = 'msg-body';
+
+  const label = document.createElement('div');
+  label.className = 'msg-label';
+  label.textContent = role === 'harriet' ? 'Professor Harriet' : 'Student';
+
+  const txt = document.createElement('div');
+  txt.className = 'msg-text';
+  txt.textContent = text;
+
+  body.appendChild(label);
+  body.appendChild(txt);
+  row.appendChild(av);
+  row.appendChild(body);
+  area.appendChild(row);
+  area.scrollTop = area.scrollHeight;
+  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+}
+
+function showTyping() {
+  const area = document.getElementById('messages');
+  const row = document.createElement('div');
+  row.id = 'typingRow'; row.className = 'msg harriet';
+  row.innerHTML = '<div class="msg-avatar">PH</div><div class="msg-body"><div class="msg-label">Professor Harriet</div><div class="typing"><span></span><span></span><span></span></div></div>';
+  area.appendChild(row);
+  area.scrollTop = area.scrollHeight;
+}
+
+function removeTyping() {
+  const t = document.getElementById('typingRow');
+  if (t) t.remove();
+}
+
+// ── COPY ──────────────────────────────────────────────────────────────────────
+function copyTranscript() {
+  const rows = document.querySelectorAll('.msg');
+  let out = 'PROFESSOR HARRIET — TUTORING TRANSCRIPT\n';
+  out += 'Generated: ' + new Date().toLocaleString() + '\n';
+  out += '='.repeat(60) + '\n\n';
+  rows.forEach(r => {
+    const role = r.classList.contains('harriet') ? 'PROFESSOR HARRIET' : 'STUDENT';
+    const text = r.querySelector('.msg-text')?.textContent || '';
+    if (text) out += '[' + role + ']\n' + text + '\n\n';
+  });
+  navigator.clipboard.writeText(out).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    const orig = btn.textContent;
+    btn.textContent = '✓ Copied!';
+    setTimeout(() => { btn.textContent = orig; }, 2200);
+  });
+}
+</script>
+</body>
+</html>
