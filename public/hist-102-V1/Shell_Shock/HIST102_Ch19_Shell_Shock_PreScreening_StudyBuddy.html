@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shell Shock — Pre-Screening Study Buddy · HIST 102 Online</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --antique-gold:#D4AF37;
+            --deep-teal:#2C7873;
+            --rich-purple:#6B4C9A;
+            --ruby-crimson:#9B2C2C;
+            --dark-charcoal:#1A1A1A;
+            --pure-white:#FAFAFA;
+            --soft-cream:#F5F1E8;
+            --bronze-accent:#8B6F47;
+            --forest-green:#1B4332;
+            --khaki:#C9A96E;
+            --parchment:#F5EDD8;
+        }
+
+        /* ── Base reveal ── */
+        .reveal { font-family:'Lora',serif; font-size:0.72em; background-color:var(--dark-charcoal); color:var(--pure-white); }
+        .reveal h1,.reveal h2,.reveal h3 { font-family:'Crimson Pro',serif; font-weight:700; color:var(--antique-gold); text-transform:none; }
+        .reveal h1 { font-size:3.6em; }
+        .reveal h2 { font-size:2.6em; margin-bottom:0.4em; }
+        .reveal h3 { font-size:1.05em; }
+        .reveal ul { list-style:none; padding-left:0; }
+        .reveal ul li { margin-bottom:0.4em; font-size:1.0em; }
+        .reveal ul li:before { content:"◆ "; color:var(--deep-teal); font-weight:bold; margin-right:0.5em; }
+        strong { color:var(--antique-gold); }
+        em { color:var(--deep-teal); font-style:italic; }
+
+        /* ── Pop-ups ── */
+        .popup-trigger { color:var(--deep-teal); border-bottom:2px dotted var(--deep-teal); cursor:pointer; transition:color 0.3s; }
+        .popup-trigger:hover { color:var(--antique-gold); }
+        .popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+            background:var(--soft-cream); color:var(--dark-charcoal); padding:2em; border-radius:15px;
+            box-shadow:0 8px 32px rgba(0,0,0,0.5); max-width:520px; width:90%; max-height:70%; overflow-y:auto;
+            z-index:1000; border:3px solid var(--bronze-accent); }
+        .popup.active { display:block; }
+        .popup-close { position:absolute; top:10px; right:15px; font-size:2em; cursor:pointer; color:var(--ruby-crimson); font-weight:bold; }
+        .definition-term { font-size:1.0em; font-weight:700; color:var(--rich-purple); margin-bottom:0.5em; font-family:'Crimson Pro',serif; }
+        .popup p { font-size:1.1em; line-height:1.6; margin-bottom:0.8em; color:#2C1F0E; }
+        .popup ul { list-style:disc; padding-left:1.5em; }
+        .popup ul li::before { content:none; }
+        .popup ul li { font-size:1.05em; color:#2C1F0E; margin-bottom:0.4em; }
+
+        /* ── Slide counter ── */
+        .slide-counter { position:fixed; bottom:20px; right:20px; background:rgba(26,26,26,0.9);
+            color:var(--antique-gold); padding:8px 15px; border-radius:8px; font-family:'Crimson Pro',serif;
+            font-weight:600; font-size:0.75em; border:2px solid var(--deep-teal); z-index:100; }
+
+        /* ── Layouts ── */
+        .two-column { display:grid; grid-template-columns:1fr 1fr; gap:2em; align-items:start; }
+        .three-column { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.5em; align-items:start; }
+        .column-header { font-weight:700; color:var(--antique-gold); font-size:1.05em; margin-bottom:0.5em; font-family:'Crimson Pro',serif; }
+
+        /* ── Text helpers ── */
+        .subtitle { font-size:1.05em; color:var(--deep-teal); margin-top:0.5em; }
+        .large-text { font-size:1.3em; text-align:center; line-height:1.6; }
+        .bottom-text { margin-top:1.2em; font-style:italic; color:var(--deep-teal); font-size:1.15em; }
+        .bottom-text-bold { margin-top:1.2em; font-weight:700; color:var(--antique-gold); font-size:1.15em; }
+
+        /* ── Content blocks ── */
+        .callout { background:rgba(212,175,55,0.15); border-left:5px solid var(--antique-gold); padding:1.2em; margin:1em 0; font-size:1.3em; }
+        .primary-source { background:rgba(212,175,55,0.1); border-left:5px solid var(--antique-gold); padding:1em; margin:1em 0; font-style:italic; color:var(--pure-white); font-size:1.15em; }
+        .primary-source-attribution { text-align:right; font-size:1.05em; color:var(--bronze-accent); margin-top:0.5em; font-style:normal; }
+        .parchment-box { background:rgba(245,237,216,0.12); border:2px solid var(--khaki); border-radius:10px; padding:1.4em 1.8em; font-size:1.3em; line-height:1.6; }
+        .parchment-box p { margin:0 0 0.5em 0; }
+
+        /* ── Law card ── */
+        .law-card { background:rgba(107,76,42,0.2); border-left:6px solid var(--khaki); border-radius:6px; padding:1em 1.4em; margin-bottom:0.8em; }
+        .law-card .law-name { font-family:'Crimson Pro',serif; font-weight:700; color:var(--antique-gold); font-size:1.3em; }
+        .law-card .law-desc { font-size:1.1em; color:var(--pure-white); margin-top:0.2em; }
+
+        /* ── Timeline ── */
+        .timeline-item { margin-bottom:0.6em; }
+        .timeline-year { color:var(--antique-gold); font-weight:700; }
+
+        /* ── Image ── */
+        .img-placeholder { background:rgba(139,111,71,0.2); border:3px dashed var(--bronze-accent); padding:3em; text-align:center; color:var(--bronze-accent); font-style:italic; border-radius:10px; }
+        .img-caption { font-size:0.92em; color:var(--bronze-accent); font-style:italic; text-align:center; margin-top:0.4em; }
+
+        /* ── Assessment blocks (interactive) ── */
+        .assessment-box { background:rgba(44,120,115,0.15); border:2px solid var(--deep-teal); border-radius:10px; padding:1.5em; margin:1em 0; }
+        .assessment-box h3 { color:var(--deep-teal); margin-top:0; }
+
+        /* MC interactive */
+        .mc-question { font-size:1.18em; color:var(--pure-white); margin-bottom:0.6em; line-height:1.4; }
+        .mc-choices { list-style:none; padding:0; margin:0; }
+        .mc-choices li { margin-bottom:0.4em; }
+        .mc-choices li::before { content:none; }
+        .mc-choice-btn {
+            display:block; width:100%; text-align:left;
+            background:rgba(255,255,255,0.06); border:2px solid rgba(201,169,110,0.3);
+            border-radius:8px; padding:0.4em 0.9em; color:var(--pure-white);
+            font-family:'Lora',serif; font-size:1.1em; cursor:pointer;
+            transition:background 0.2s, border-color 0.2s;
+        }
+        .mc-choice-btn:hover { background:rgba(255,255,255,0.12); border-color:var(--khaki); }
+        .mc-choice-btn.correct { background:rgba(44,120,115,0.35); border-color:var(--deep-teal); }
+        .mc-choice-btn.incorrect { background:rgba(155,44,44,0.3); border-color:var(--ruby-crimson); }
+        .mc-feedback { margin-top:0.6em; font-size:1.05em; padding:0.5em 0.9em; border-radius:7px; display:none; line-height:1.4; }
+        .mc-feedback.show { display:block; }
+        .mc-feedback.correct { background:rgba(44,120,115,0.2); border:1.5px solid var(--deep-teal); color:var(--pure-white); }
+        .mc-feedback.incorrect { background:rgba(155,44,44,0.15); border:1.5px solid var(--ruby-crimson); color:var(--pure-white); }
+
+        /* Short answer interactive */
+        .sa-label { font-size:1.18em; color:var(--pure-white); margin-bottom:0.4em; line-height:1.4; display:block; }
+        .sa-textarea {
+            width:100%; border:2px solid rgba(201,169,110,0.4); border-radius:8px;
+            padding:0.6em 0.9em; font-family:'Lora',serif; font-size:1.05em;
+            background:rgba(255,255,255,0.06); color:var(--pure-white);
+            resize:vertical; min-height:60px; box-sizing:border-box;
+        }
+        .sa-textarea:focus { outline:none; border-color:var(--deep-teal); background:rgba(255,255,255,0.1); }
+        .sa-textarea::placeholder { color:rgba(250,250,250,0.35); }
+        .sa-hint { font-size:1.0em; color:var(--bronze-accent); font-style:italic; margin-top:0.3em; }
+
+        /* Assessment section wrapper */
+        .assess-section { background:rgba(44,120,115,0.1); border:2px solid var(--deep-teal); border-radius:12px; padding:1.2em 1.5em; margin-bottom:0.7em; }
+        .assess-section-title { font-family:'Crimson Pro',serif; color:var(--deep-teal); font-size:1.3em; font-weight:700; margin-bottom:0.5em; }
+
+        /* Study Buddy callout */
+        .study-buddy-box { background:rgba(212,175,55,0.12); border-left:5px solid var(--antique-gold); border-radius:0 8px 8px 0; padding:1em 1.4em; font-size:1.18em; line-height:1.5; }
+        .study-buddy-label { color:var(--antique-gold); font-family:'Crimson Pro',serif; font-weight:700; margin-bottom:0.2em; }
+
+        /* Lens badge */
+        .lens-badge { display:inline-block; background:rgba(107,76,154,0.3); border:2px solid var(--rich-purple); border-radius:8px; padding:0.15em 0.5em; color:var(--rich-purple); font-weight:700; font-size:0.85em; margin-right:0.4em; font-family:'Crimson Pro',serif; }
+
+        /* Step flow */
+        .step-flow { display:flex; gap:1.2em; align-items:stretch; margin-top:0.6em; }
+        .step-box { flex:1; background:rgba(255,255,255,0.05); border:2px solid var(--khaki); border-radius:10px; padding:0.6em 0.7em; text-align:center; }
+        .step-num { font-family:'Crimson Pro',serif; font-size:1.0em; color:var(--antique-gold); font-weight:700; }
+        .step-label { font-size:1.0em; color:var(--pure-white); line-height:1.4; margin-top:0.2em; }
+        .step-arrow { font-size:1.05em; color:var(--deep-teal); align-self:center; }
+
+        /* Export / PDF */
+        .export-btn {
+            display:inline-block; background:var(--antique-gold); color:var(--dark-charcoal);
+            font-family:'Crimson Pro',serif; font-weight:700; font-size:1.3em;
+            padding:0.4em 1.4em; border-radius:10px; border:3px solid var(--bronze-accent);
+            cursor:pointer; letter-spacing:0.02em; margin-top:0.5em; text-decoration:none;
+        }
+        .export-btn:hover { background:var(--khaki); }
+
+        /* Progress bar */
+        .progress-bar-wrap { width:100%; background:rgba(255,255,255,0.1); border-radius:6px; height:10px; margin-top:0.6em; }
+        .progress-bar-fill { height:10px; border-radius:6px; background:var(--deep-teal); transition:width 0.5s; }
+
+        /* toast */
+        #toast {
+            position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
+            background:var(--forest-green); color:var(--pure-white);
+            padding:0.6em 1.6em; border-radius:8px; font-family:'Crimson Pro',serif;
+            font-size:1.1em; z-index:9999; display:none; box-shadow:0 4px 16px rgba(0,0,0,0.4);
+        }
+
+        /* print / export PDF styles */
+        @media print {
+            .reveal, .reveal .slides, .reveal .slides section { display:block !important; position:static !important; width:100% !important; height:auto !important; transform:none !important; }
+            .slide-counter, #keyboard-trigger, #keyboard-popup { display:none !important; }
+            section { page-break-inside:avoid; padding:1.5em; border-bottom:1px solid #ccc; }
+        }
+    </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 1 — TITLE
+═══════════════════════════════════════════════ -->
+<section data-background="#1A1A1A">
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;padding:2em;">
+        <div style="font-family:'Crimson Pro',serif;font-size:1.15em;color:var(--bronze-accent);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.4em;">
+            HIST 102 Online — United States History Since 1877
+        </div>
+        <div style="font-family:'Crimson Pro',serif;font-size:0.92em;color:var(--khaki);letter-spacing:0.08em;margin-bottom:1.2em;">
+            Richland Community College &nbsp;·&nbsp; Chapter 19
+        </div>
+        <h1 style="font-size:3.2em;color:var(--antique-gold);margin:0 0 0.2em 0;line-height:1.1;">Shell Shock</h1>
+        <div style="font-size:1.0em;color:var(--deep-teal);font-style:italic;margin-bottom:1em;">
+            The Century: America's Time — 1914–1919
+        </div>
+        <div style="font-size:1.3em;color:var(--pure-white);max-width:1200px;line-height:1.6;border-top:2px solid rgba(212,175,55,0.3);padding-top:0.8em;">
+            <em>What happens to democracy during total war?</em>
+        </div>
+        <div style="margin-top:1.2em;font-size:1.05em;color:var(--bronze-accent);font-style:italic;">
+            📚 &nbsp;Pre-Screening Study Buddy — Work through this before watching the documentary
+        </div>
+    </div>
+    <aside class="notes">
+<div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;color:#333;">
+
+<h3 style="color:#2c5282;margin-top:1.5em;">📖 Understanding This Slide</h3>
+<p>Welcome to the Shell Shock Pre-Screening Study Buddy. This interactive deck is your preparation guide before watching the documentary <em>The Century: America's Time — 1914–1919: "Shell Shock."</em> Think of this as your tutor walking you through everything you need to know before you press play.</p>
+
+<h3 style="color:#2c5282;margin-top:1.5em;">How This Works</h3>
+<p>Work through the slides at your own pace. Every section ends with a knowledge check — multiple choice questions and short answer prompts that you'll fill in as you go. At the end, you'll export a PDF of your responses and submit it to Canvas. Use the <strong>S key</strong> (or the speaker notes button) on any slide to open these Study Buddy notes.</p>
+
+<h3 style="color:#2c5282;margin-top:1.5em;">Why This Matters</h3>
+<p>The documentary focuses on human experience — soldiers, families, the emotional cost of war. It does <em>not</em> explain the legal framework the U.S. government built around that war. Your job is to understand that framework first, then watch the documentary through it. This deck gives you that framework.</p>
+
+</div>
+    </aside>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 2 — HOW TO USE THIS DECK
+═══════════════════════════════════════════════ -->
+<section data-background="#1A1A1A">
+    <h2 style="font-size:1.0em;">Your Four-Part Assignment</h2>
+    <div class="step-flow" style="margin-top:0.8em;">
+        <div class="step-box">
+            <div class="step-num">①</div>
+            <div class="step-label"><strong>This Deck</strong><br>Work through slides, answer checks, export PDF<br><span style="color:var(--khaki);font-size:0.85em;">15 pts</span></div>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step-box">
+            <div class="step-num">②</div>
+            <div class="step-label"><strong>Worksheet</strong><br>Complete the PDF form, save &amp; upload to Canvas<br><span style="color:var(--khaki);font-size:0.85em;">10 pts</span></div>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step-box">
+            <div class="step-num">③</div>
+            <div class="step-label"><strong>Watch &amp; Take Notes</strong><br>Print viewing notes, handwrite as you watch, photo upload<br><span style="color:var(--khaki);font-size:0.85em;">10 pts</span></div>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step-box">
+            <div class="step-num">④</div>
+            <div class="step-label"><strong>Post-Screening Follow-Up</strong><br>Complete interactive guide, save as PDF, submit<br><span style="color:var(--khaki);font-size:0.85em;">15 pts</span></div>
+        </div>
+    </div>
+    <div class="bottom-text-bold" style="font-size:1.1em;text-align:center;margin-top:0.8em;">Total: 50 points &nbsp;·&nbsp; Complete all four steps in order</div>
+    <aside class="notes">
+<div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;color:#333;">
+
+<h3 style="color:#2c5282;margin-top:1.5em;">📖 Understanding This Slide</h3>
+<p>This slide maps the complete assignment so you can see exactly where you are in the process. You're at Step 1 right now. The four steps build on each other — the scaffolding in this deck feeds directly into the worksheet questions, your notes during the film feed into the post-screening follow-up, and so on. Don't skip ahead.</p>
+
+<h3 style="color:#2c5282;margin-top:1.5em;">A Word About Sequencing</h3>
+<p>The order matters. If you watch the documentary before completing this deck and the worksheet, you'll miss the analytical framework that makes the film meaningful. The laws you'll learn about in this deck — the Espionage Act, the Sedition Act, Schenck — don't appear in the documentary. <em>You</em> bring that context. This deck gives it to you.</p>
+
+</div>
+    </aside>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION I DIVIDER — SCAFFOLDING
+═══════════════════════════════════════════════ -->
+<section data-background="#1B4332">
+    <h2 style="font-size:3.0em;color:var(--antique-gold);">Section I</h2>
+    <div class="subtitle" style="font-size:1.05em;">Context: The World Before the Film</div>
+    <p style="color:var(--bronze-accent);font-style:italic;font-size:1.3em;">
+        History doesn't explain itself — let's build the framework before you watch.
+    </p>
+</section>
+
+<!-- SLIDE 4 — The World in 1914 -->
+<section>
+    <h2 style="font-size:2.6em;">The World in 1914</h2>
+    <div class="two-column">
+        <div>
+            <ul style="font-size:1.3em;">
+                <li>Europe dominated by <strong>rival empires</strong> — Britain, France, Germany, Austria-Hungary, Russia</li>
+                <li>A web of <strong>secret alliances</strong> meant one spark could ignite all of them</li>
+                <li>June 1914: Archduke Franz Ferdinand assassinated in Sarajevo — the spark arrives</li>
+                <li>U.S. officially <strong>neutral</strong> — most Americans expect to stay out</li>
+            </ul>
+        </div>
+        <div>
+            <div style="text-align:center;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Map_Europe_alliances_1914-en.svg/800px-Map_Europe_alliances_1914-en.svg.png"
+                     alt="Map of European alliance systems in 1914 showing Triple Entente and Triple Alliance"
+                     style="max-width:100%;max-height:380px;border-radius:8px;border:2px solid var(--bronze-accent);"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                <div style="display:none;" class="img-placeholder">Europe's Alliance Networks, 1914</div>
+                <div class="img-caption">Europe's rival alliance systems, 1914</div>
+            </div>
+        </div>
+    </div>
+    <aside class="notes">
+<div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;color:#333;">
+
+<h3 style="color:#2c5282;margin-top:1.5em;">📖 Understanding This Slide</h3>
+<p>Before you can understand why the U.S. passed some of the most restrictive speech laws in its history, you need to understand the world that triggered those laws. Think of this slide as setting the stage — 1914 Europe was a powder keg, and the assassination of Franz Ferdinand was the match.</p>
+
+<h3 style="color:#2c5282;margin-top:1.5em;">Breaking It Down</h3>
+<p><strong>Rival empires and alliances</strong>: Europe in 1914 was divided into two armed camps — the Triple Entente (Britain, France, Russia) and the Triple Alliance (Germany, Austria-Hungary, Italy). These weren't just diplomatic agreements; they were military commitments. When Austria-Hungary declared war on Serbia after the assassination, the alliance system pulled in Germany, then Britain and France. Within weeks, all of Europe was at war.</p>
+<p><strong>U.S. neutrality</strong>: Most Americans in 1914 saw this as a European problem. President Wilson declared neutrality and won re-election in 1916 on the slogan "He kept us out of war." But neutrality was becoming harder to maintain — especially after Germany began sinking ships carrying Americans.</p>
+
+<h3 style="color:#2c5282;margin-top:1.5em;">Why This Matters</h3>
+<p>The alliance map on this slide explains something important: this war was not the result of one bad actor. It was the result of a system where everyone was locked into obligations to everyone else. That systemic quality — war as an inevitable machine — is part of what made it so devastating, and why Americans were so reluctant to join.</p>
+
+<h3 style="color:#2c5282;margin-top:1.5em;">🎓 Historians Weigh In</h3>
+<h4 style="margin-top:1em;">Barbara Tuchman — <em>The Guns of August</em></h4>
+<p>Tuchman's Pulitzer Prize-winning account argues that the war began not from malice but from miscalculation — generals and statesmen following plans that had taken on a life of their own. Her insight matters here: the war that produced the Espionage Act was a war nobody fully intended and nobody could stop once it started.</p>
+
+</div>
+    </aside>
+</section>
+
+<!-- SLIDE 5 — Total War -->
+<section>
+    <h2 style="font-size:1.0em;">Total War: A New Kind of Violence</h2>
+    <div class="two-column">
+        <div>
+            <ul style="font-size:1.3em;">
+                <li>Industrial technology turned war into <strong>mass slaughter</strong> — artillery, machine guns, poison gas</li>
+                <li>Trench warfare: armies advanced <em>yards</em> at the cost of <strong>tens of thousands</strong> of lives</li>
+                <li>The romantic vision of war — heroic charge, quick victory — <em>shattered within weeks</em></li>
+                <li>By end of 1914: French casualties alone approached <strong>one million</strong></li>
+            </ul>
+        </div>
+        <div>
+            <div style="background:rgba(155,44,44,0.15);border:2px solid var(--ruby-crimson);border-radius:10px;padding:1.4em;font-size:1.2em;text-align:center;">
+                <div style="color:var(--ruby-crimson);font-family:'Crimson Pro',serif;font-size:1.3em;font-weight:700;margin-bottom:0.4em;">17 Million</div>
+                <div style="color:var(--pure-white);">Total deaths — military &amp; civilian</div>
+                <hr style="border-color:rgba(155,44,44,0.4);margin:0.8em 0;">
+                <div style="color:var(--ruby-crimson);font-family:'Crimson Pro',serif;font-size:1.3em;font-weight:700;margin-bottom:0.4em;">20 Million</div>
+                <div style="color:var(--pure-white);">Wounded — many permanently disabled</div>
+                <hr style="border-color:rgba(155,44,44,0.4);margin:0.8em 0;">
+                <div style="color:var(--khaki);font-size:0.85em;font-style:italic;">World War I, 1914–1918</div>
+            </div>
+        </div>
+    </div>
+    <aside class="notes">
+<div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;color:#333;">
+
+<h3 style="color:#2c5282;margin-top:1.5em;">📖 Understanding This Slide</h3>
+<p>Here's the thing about World War I that most people don't fully grasp: it was the first industrial war. Every previous war had been fought with the technology of an earlier era. WWI unleashed machine guns, poison gas, and artillery barrages that could last for days against soldiers living in muddy trenches. The result was slaughter on a scale the world had never seen.</p>
+
+<h3 style="color:#2c5282;margin-top:1.5em;">Breaking It Down</h3>
+<p><strong>Trench warfare</strong>: Imagine two opposing armies facing each other across a "no man's land" — a strip of churned-up ground covered with barbed wire and shell craters. Advancing across that ground meant walking into machine gun fire. At the Battle of the Somme in 1916, Britain suffered 57,000 casualties <em>on the first day alone.</em></p>
+<p><strong>The numbers</strong>: 17 million dead. 20 million wounded. These aren't abstract figures — they represent entire generations of young men, and the grief of millions of families. The documentary you're about to watch puts human faces on these numbers.</p>
+
+<h3 style="color:#2c5282;margin-top:1.5em;">Why This Matters</h3>
+<p>Understanding the scale of WWI's violence is essential for understanding why the U.S. government felt it had to control public opinion so aggressively. When a war costs this much in human life, a government cannot afford widespread dissent — or at least, that's the argument the Wilson administration made. Keep that logic in mind as you read about the Espionage Act.</p>
+
+</div>
+    </aside>
+</section>
+
+<!-- SLIDE 6 — What Is Shell Shock -->
+<section>
+    <h2 style="font-size:2.6em;">What Is <span class="popup-trigger" data-popup="popup-shellshock">Shell Shock?</span></h2>
+    <div class="two-column">
+        <div>
+            <ul style="font-size:1.3em;">
+                <li>Cluster of symptoms: <em>tremors, paralysis, nightmares, memory loss, inability to speak</em></li>
+                <li>First widespread recognition that <strong>psychological trauma</strong> is a real wound of war</li>
+                <li>Doctors debated the cause — physical concussion or "mental weakness"?</li>
+                <li>Today we call it <span class="popup-trigger" data-popup="popup-ptsd"><strong>PTSD</strong></span> — in 1917 there was no framework, no treatment, little sympathy</li>
+            </ul>
+        </div>
+        <div>
+            <div class="callout" style="font-size:1.2em;text-align:center;">
+                <div style="color:var(--antique-gold);font-family:'Crimson Pro',serif;font-size:1.2em;font-weight:700;margin-bottom:0.4em;">"Shell shock" as metaphor</div>
+                The documentary uses this title both literally and figuratively — total war traumatized <em>democratic societies</em>, not just individual soldiers.<br><br>
+                <strong>Individual trauma mirrors collective trauma.</strong>
+            </div>
+        </div>
+    </div>
+    <aside class="notes">
+<div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;color:#333;">
+
+<h3 style="color:#2c5282;margin-top:1.5em;">📖 Understanding This Slide</h3>
+<p>The title of the documentary — "Shell Shock" — works on two levels, and the film knows it. Literally, shell shock was the name given to soldiers who broke down psychologically after prolonged exposure to artillery bombardment. Figuratively, the documentary is asking whether American democracy itself was "shell-shocked" by the experience of total war. That double meaning is the film's thesis.</p>
+
+<h3 style="color:#2c5282;margin-top:1.5em;">Breaking It Down</h3>
+<p><strong>The literal condition</strong>: Soldiers who survived sustained artillery bombardment often couldn't function — they shook uncontrollably, went mute, had nightmares, lost memories, or became paralyzed. Their bodies and minds were responding to trauma that no one had words for yet. Many were accused of cowardice. Some were court-martialed. A few were executed.</p>
+<p><strong>Why "PTSD" didn't exist yet</strong>: The concept of post-traumatic stress disorder wasn't formally recognized until 1980, largely because of advocacy after the Vietnam War. In 1917, there was no diagnosis, no treatment protocol, and a prevailing cultural belief that men who broke down in combat were morally weak. The documentary captures this gap between what soldiers experienced and what their society could understand.</p>
+
+<h3 style="color:#2c5282;margin-top:1.5em;">Why This Matters</h3>
+<p>The metaphor extends to democracy. Just as individual soldiers were traumatized into silence and compliance, American society was pressured — through propaganda, law, and social coercion — into a kind of collective shell shock where dissent became dangerous. The Espionage Act and Sedition Act institutionalized that pressure. This is the argument the film is making, even if it never states it explicitly.</p>
+
+</div>
+    </aside>
+</section>
+
+<!-- SLIDE 7 — America's Road to War -->
+<section>
+    <h2 style="font-size:1.0em;">America's Road to War, 1914–1917</h2>
+    <ul style="font-size:1.3em;">
+        <li class="timeline-item"><span class="timeline-year">1915 —</span> German U-boat sinks the <em>Lusitania</em>; <strong>1,198 dead</strong> including 128 Americans</li>
+        <li class="timeline-item"><span class="timeline-year">1916 —</span> Wilson wins reelection on <em>"He kept us out of war"</em></li>
+        <li class="timeline-item"><span class="timeline-year">Feb 1917 —</span> Germany resumes unrestricted submarine warfare; <span class="popup-trigger" data-popup="popup-zimmermann">Zimmermann Telegram</span> exposed</li>
+        <li class="timeline-item"><span class="timeline-year">Apr 1917 —</span> Wilson asks Congress for war — <em>"to make the world safe for democracy"</em></li>
+    </ul>
+    <div class="bottom-text" style="font-size:1.15em;">Notice Wilson's framing: this is a war <em>for</em> democracy. Hold that claim against what you're about to read.</div>
+    <aside class="notes">
+<div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;color:#333;">
+
+<h3 style="color:#2c5282;margin-top:1.5em;">📖 Understanding This Slide</h3>
+<p>America didn't stumble into WWI — it was pushed in over three years by a series of events that gradually made neutrality impossible. This timeline traces that path. Each event shifted public opinion a little further toward war, even as Wilson kept promising to stay out.</p>
+
+<h3 style="color:#2c5282;margin-top:1.5em;">Breaking It Down</h3>
+<p><strong>The Lusitania (1915)</strong>: A British ocean liner torpedoed by a German submarine. 1,198 people died, including 128 Americans. The sinking caused outrage in the U.S., but Wilson still chose neutrality. Germany temporarily stopped unrestricted submarine attacks — until 1917.</p>
+<p><strong>The Zimmermann Telegram</strong>: Click the underlined term above for the full story. Short version: Germany secretly proposed a military alliance with Mexico against the U.S. When British intelligence intercepted and published the telegram, American opinion shifted dramatically.</p>
+<p><strong>"To make the world safe for democracy"</strong>: This is Wilson's justification for going to war — and it's the phrase the entire assignment is built around. If America enters the war to protect democracy, what does it mean when the government then passes laws criminalizing anti-war speech? That tension is the heart of the unit.</p>
+
+<h3 style="color:#2c5282;margin-top:1.5em;">Why This Matters</h3>
+<p>Wilson's phrase "make the world safe for democracy" is one of the most consequential in American political history. It established the idea that America's military power should be used to spread democratic values — a doctrine that would echo through the Cold War and beyond. But the immediate irony is devastating: within months of saying it, Wilson signed the Espionage Act.</p>
+
+</div>
+    </aside>
+</section>
+
+<!-- SLIDE 8 — Democracy Under Pressure -->
+<section>
+    <h2 style="font-size:1.0em;">Democracy Under Pressure</h2>
+    <p style="font-size:1.3em;color:var(--pure-white);margin-bottom:0.5em;">When a democracy goes to war, it faces a fundamental tension:</p>
+    <div class="two-column" style="margin-top:0.5em;">
+        <div class="law-card" style="border-color:var(--antique-gold);padding:1.4em;">
+            <div class="law-name" style="font-size:0.92em;">Democracy Requires</div>
+            <div class="law-desc" style="font-size:1.15em;">
+                Free speech &amp; press<br>
+                Right to dissent<br>
+                Open debate on policy<br>
+                Protection of minorities
+            </div>
+        </div>
+        <div class="law-card" style="border-color:var(--ruby-crimson);padding:1.4em;">
+            <div class="law-name" style="color:var(--ruby-crimson);font-size:0.92em;">Total War Demands</div>
+            <div class="law-desc" style="font-size:1.15em;">
+                Unified public opinion<br>
+                Suppression of "disloyalty"<br>
+                Government control of information<br>
+                Conformity &amp; sacrifice
+            </div>
+        </div>
+    </div>
+    <div class="bottom-text-bold" style="font-size:1.2em;text-align:center;">These two columns are in direct conflict. The laws below are where that conflict played out.</div>
+    <aside class="notes">
+<div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;color:#333;">
+
+<h3 style="color:#2c5282;margin-top:1.5em;">📖 Understanding This Slide</h3>
+<p>This slide is the conceptual core of the whole assignment. Before you read the Espionage Act or the Sedition Act, you need to understand <em>why</em> they exist — and that means understanding the fundamental tension between democratic values and the demands of total war.</p>
+
+<h3 style="color:#2c5282;margin-top:1.5em;">Breaking It Down</h3>
+<p>Look at the two columns. Democracy, by definition, requires free speech — the ability to criticize the government, to dissent, to debate policy in public. That's not optional. It's the mechanism by which democracies correct their own mistakes.</p>
+<p>But total war — war that mobilizes the entire economy and society, not just the military — seems to demand the opposite. Governments at war argue that dissent saps morale, that free debate gives the enemy information, that unity is survival. These arguments aren't crazy. But they lead directly to laws that criminalize speech.</p>
+
+<h3 style="color:#2c5282;margin-top:1.5em;">Why This Matters</h3>
+<p>The question the documentary is asking — and the question your assignments are asking — is whether the U.S. government's wartime restrictions on civil liberties were justified. To answer that, you have to understand the tension this slide lays out. Governments don't suppress speech randomly. They suppress it because they believe they have to. The question is whether they're right.</p>
+
+</div>
+    </aside>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION II DIVIDER — WARTIME LAWS
+═══════════════════════════════════════════════ -->
+<section data-background="#1B4332">
+    <h2 style="font-size:3.0em;color:var(--antique-gold);">Section II</h2>
+    <div class="subtitle" style="font-size:1.05em;">The Legal Architecture of Control</div>
+    <p style="color:var(--bronze-accent);font-style:italic;font-size:1.3em;">
+        These laws won't appear in the documentary — but they're the invisible framework around everything you'll watch.
+    </p>
+</section>
+
+<!-- SLIDE 10 — Espionage Act -->
+<section>
+    <h2 style="font-size:0.95em;">The Espionage Act (1917)</h2>
+    <div class="law-card" style="margin-bottom:0.6em;">
+        <div class="law-name">What It Did</div>
+        <div class="law-desc" style="font-size:1.1em;">Made it illegal to interfere with military operations, recruit for enemy forces, or promote insubordination among U.S. troops during wartime.</div>
+    </div>
+    <div class="primary-source" style="font-size:1.1em;">
+        "Whoever, when the United States is at war, shall willfully make or convey false reports… with intent to interfere with the operation or success of the military… or shall willfully obstruct the recruiting or enlistment service… shall be punished by a fine of not more than $10,000 or imprisonment for not more than twenty years, or both."
+        <div class="primary-source-attribution">— Espionage Act (1917), Section 3</div>
+    </div>
+    <div class="study-buddy-box" style="font-size:1.1em;margin-top:0.5em;">
+        <div class="study-buddy-label">📚 Study Buddy Note</div>
+        Key question: <em>Who decides</em> what counts as "interfering" with military operations? The answer is the wartime government — which creates enormous potential for abuse.
+    </div>
+    <aside class="notes">
+<div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;color:#333;">
+
+<h3 style="color:#2c5282;margin-top:1.5em;">📖 Understanding This Slide</h3>
+<p>The Espionage Act of 1917 is one of the most important laws in American civil liberties history — and one of the most misunderstood. It's still on the books today, and it's been used to prosecute government whistleblowers. Understanding what it said in 1917 is the first step.</p>
+
+<h3 style="color:#2c5282;margin-top:1.5em;">Breaking It Down</h3>
+<p>Read the primary source carefully. The law prohibits "false reports" intended to interfere with military operations, and "obstruction" of the recruiting process. That sounds reasonable — you shouldn't be able to lie about the war to prevent people from enlisting.</p>
+<p>But here's where it gets complicated: What counts as "false"? What counts as "interference"? A newspaper editorial arguing that the war is unjust could be read as discouraging enlistment. A speech by a socialist leader arguing that the war benefits capitalists could be read as promoting insubordination. The law's vagueness gave prosecutors enormous discretion.</p>
+<p><strong>Eugene Debs</strong> — a socialist who ran for president five times — was sentenced to ten years in prison under this law for a speech in which he told young men they were "fit for something better than slavery and cannon fodder." He ran for president again from his prison cell in 1920 and received nearly a million votes.</p>
+
+<h3 style="color:#2c5282;margin-top:1.5em;">Why This Matters</h3>
+<p>The Espionage Act didn't just punish spies. It punished speech. And that's the crucial point: in the name of winning a war for democracy, the U.S. government criminalized democratic dissent. Whether that trade-off was justified is exactly the question your assignments are asking you to think through.</p>
+
+</div>
+    </aside>
+</section>
+
+<!-- SLIDE 11 — Sedition Act -->
+<section>
+    <h2 style="font-size:0.95em;">The Sedition Act (1918)</h2>
+    <div class="law-card" style="margin-bottom:0.6em;">
+        <div class="law-name">What It Did</div>
+        <div class="law-desc" style="font-size:1.1em;">Extended the Espionage Act — criminalized "disloyal, profane, scurrilous, or abusive language" about the U.S. government, its flag, and military forces during wartime.</div>
+    </div>
+    <div class="primary-source" style="font-size:1.1em;">
+        "Whoever, when the United States is at war, shall willfully utter, print, write, or publish any disloyal, profane, scurrilous, or abusive language about the form of government of the United States… or the flag… shall be punished by a fine or imprisonment."
+        <div class="primary-source-attribution">— Sedition Act (1918)</div>
+    </div>
+    <div class="study-buddy-box" style="font-size:1.1em;margin-top:0.5em;">
+        <div class="study-buddy-label">📚 Study Buddy Note</div>
+        Notice how broad this language is. "Abusive" and "scurrilous" are not precise legal terms. Could a veteran saying "this war wasn't worth it" be prosecuted? Possibly — and that's the point.
+    </div>
+    <aside class="notes">
+<div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;color:#333;">
+
+<h3 style="color:#2c5282;margin-top:1.5em;">📖 Understanding This Slide</h3>
+<p>If the Espionage Act was a scalpel — targeting specific acts of interference — the Sedition Act was a sledgehammer. It was passed in 1918 when the Wilson administration felt the Espionage Act wasn't broad enough to silence its critics.</p>
+
+<h3 style="color:#2c5282;margin-top:1.5em;">Breaking It Down</h3>
+<p>The key words in the Sedition Act are "disloyal, profane, scurrilous, or abusive." These are subjective terms — they describe a tone, not a specific act. Saying the government is run by corrupt politicians could be "abusive." Calling the war a mistake could be "disloyal." The law gave prosecutors wide latitude to target almost any criticism of the war effort.</p>
+<p>About 2,000 people were prosecuted under the Espionage and Sedition Acts combined. The targets were disproportionately immigrants, socialists, labor organizers, and members of the Industrial Workers of the World (IWW). In other words, the people who were already politically marginal became the primary targets of the law.</p>
+
+<h3 style="color:#2c5282;margin-top:1.5em;">Why This Matters</h3>
+<p>The Sedition Act was repealed in 1920, after the war ended — which tells you something. Congress itself recognized it had gone too far. But the damage was done. Hundreds of people had served prison time for speech that would be fully protected today under the First Amendment. The Sedition Act is a cautionary tale about what happens when governments are given broad powers to define "disloyalty."</p>
+
+</div>
+    </aside>
+</section>
+
+<!-- SLIDE 12 — Schenck -->
+<section>
+    <h2 style="font-size:0.9em;"><span class="popup-trigger" data-popup="popup-schenck">Schenck v. United States</span> (1919)</h2>
+    <div class="primary-source" style="font-size:1.18em;">
+        "The most stringent protection of free speech would not protect a man in falsely shouting fire in a theatre and causing a panic… The question is whether the words used… create a <strong>clear and present danger.</strong>"
+        <div class="primary-source-attribution">— Justice Oliver Wendell Holmes, unanimous opinion</div>
+    </div>
+    <div class="parchment-box" style="font-size:1.18em;margin-top:0.8em;">
+        <p><strong>The Court upheld the conviction unanimously.</strong> Charles Schenck had mailed anti-draft pamphlets to men called up for service.</p>
+        <p>Holmes's "fire in a theatre" analogy became famous — but ask yourself: <em>who decides what speech creates "clear and present danger"?</em> In wartime: the government does.</p>
+    </div>
+    <aside class="notes">
+<div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;color:#333;">
+
+<h3 style="color:#2c5282;margin-top:1.5em;">📖 Understanding This Slide</h3>
+<p>Schenck v. United States is one of the most famous — and most debated — Supreme Court decisions in American history. It established the "clear and present danger" test for when the government can limit free speech. And it was unanimous, which means all nine justices agreed.</p>
+
+<h3 style="color:#2c5282;margin-top:1.5em;">Breaking It Down</h3>
+<p><strong>What happened</strong>: Charles Schenck was the general secretary of the Socialist Party. He mailed 15,000 pamphlets to men who had been drafted, arguing that the draft was unconstitutional and urging them to resist. He was convicted under the Espionage Act.</p>
+<p><strong>Holmes's argument</strong>: Holmes argued that free speech is not absolute — it depends on context. His "fire in a theatre" analogy is meant to show that some speech creates immediate danger that justifies suppression. During wartime, Holmes argued, anti-draft pamphlets created a "clear and present danger" to the war effort.</p>
+<p><strong>The critical problem</strong>: Holmes's test sounds reasonable, but it's circular during wartime. If the government defines opposition to the war as "danger," then any anti-war speech becomes suppressible. Holmes himself later reconsidered parts of this ruling, but Schenck remained precedent for decades.</p>
+
+<h3 style="color:#2c5282;margin-top:1.5em;">Why This Matters</h3>
+<p>The "clear and present danger" test established in Schenck wasn't significantly revised until 1969 in <em>Brandenburg v. Ohio</em>, which required that speech be "directed to inciting imminent lawless action" before it could be suppressed. By that standard, Schenck's pamphlets would be protected today. But in 1919, the Supreme Court said otherwise — and that matters for understanding the limits of constitutional protections during wartime.</p>
+
+</div>
+    </aside>
+</section>
+
+<!-- SLIDE 13 — CPI -->
+<section>
+    <h2 style="font-size:0.95em;"><span class="popup-trigger" data-popup="popup-cpi">Committee on Public Information</span></h2>
+    <div class="two-column">
+        <div>
+            <ul style="font-size:1.2em;">
+                <li>Created by Wilson in <strong>April 1917</strong> — same month war was declared</li>
+                <li>Headed by journalist <strong>George Creel</strong> — marketed the war to the American public</li>
+                <li><strong>75,000 "Four Minute Men"</strong> — trained speakers deployed at movie theaters, churches, public gatherings</li>
+                <li>Posters, pamphlets, films — <em>all designed to manufacture consent</em></li>
+            </ul>
+        </div>
+        <div>
+            <div style="text-align:center;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/They_pledged_their_lives_and_their_sacred_honor.jpg/519px-They_pledged_their_lives_and_their_sacred_honor.jpg"
+                     alt="World War I CPI propaganda poster urging Americans to support the war"
+                     style="max-width:100%;max-height:400px;border-radius:8px;border:2px solid var(--bronze-accent);"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                <div style="display:none;" class="img-placeholder">WWI CPI Propaganda Poster</div>
+                <div class="img-caption">CPI propaganda poster, c. 1917–1918</div>
+            </div>
+        </div>
+    </div>
+    <aside class="notes">
+<div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;color:#333;">
+
+<h3 style="color:#2c5282;margin-top:1.5em;">📖 Understanding This Slide</h3>
+<p>The Committee on Public Information is one of the most fascinating — and disturbing — institutions of the WWI era. It was America's first large-scale government propaganda agency, and it was extraordinarily effective. Understanding the CPI helps you understand how a government "manufactures consent" for a war in a democracy.</p>
+
+<h3 style="color:#2c5282;margin-top:1.5em;">Breaking It Down</h3>
+<p><strong>Why it existed</strong>: Wilson knew that Americans weren't enthusiastic about entering the war. He needed to shift public opinion — quickly. The CPI was his tool for doing that. Its job was to make Americans feel that supporting the war was patriotic, noble, and necessary.</p>
+<p><strong>How it worked</strong>: The CPI used every available medium. Posters appeared in post offices, schools, and storefronts. Pamphlets were distributed by the millions. Films were produced and shown in theaters. And the "Four Minute Men" — a reference to Minutemen of the Revolution — gave standardized patriotic speeches during the four-minute reel changes at movie theaters.</p>
+<p><strong>The darker side</strong>: The CPI also promoted hostility toward German Americans, encouraging Americans to see their German-American neighbors as potential traitors. This contributed to widespread social persecution — dachshunds were renamed "liberty pups," sauerkraut became "liberty cabbage," and violence against German Americans increased significantly.</p>
+
+<h3 style="color:#2c5282;margin-top:1.5em;">Why This Matters</h3>
+<p>The CPI shows that the suppression of dissent during WWI wasn't only legal (Espionage Act, Sedition Act) — it was also social and cultural. The CPI created an environment where opposing the war felt not just illegal but <em>un-American</em>. That social pressure worked alongside the legal pressure to silence critics.</p>
+
+</div>
+    </aside>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     PAUSE & REFLECT I — After Section II
+═══════════════════════════════════════════════ -->
+<section data-background="#1B4332">
+    <h2 style="font-size:3.0em;color:var(--antique-gold);">⏸ Pause &amp; Reflect</h2>
+    <div class="assessment-box" style="font-size:1.3em;background:rgba(255,255,255,0.08);border-color:var(--antique-gold);">
+        <p style="color:var(--pure-white);">Wilson said America entered the war <em>"to make the world safe for democracy."</em> Which of the following best captures the tension in that claim?</p>
+        <ol style="list-style-type:upper-alpha;color:var(--pure-white);">
+            <li>There is no tension — restricting speech during wartime is consistent with democracy</li>
+            <li>The Espionage and Sedition Acts restricted the very democratic freedoms the war was supposed to defend</li>
+            <li>The tension only applies to Germany, not to the United States</li>
+            <li>Wilson never actually used that phrase</li>
+        </ol>
+    </div>
+    <div style="font-size:1.05em;color:var(--bronze-accent);font-style:italic;margin-top:0.8em;">Think it through before the next slide — the answer is embedded in what you just read.</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION III DIVIDER — KNOWLEDGE CHECKS
+═══════════════════════════════════════════════ -->
+<section data-background="#1B4332">
+    <h2 style="font-size:3.0em;color:var(--antique-gold);">Section III</h2>
+    <div class="subtitle" style="font-size:1.05em;">Knowledge Checks — Part A</div>
+    <p style="color:var(--bronze-accent);font-style:italic;font-size:1.3em;">
+        Answer as you go. Your responses will be collected in your exported PDF.
+    </p>
+</section>
+
+<!-- SLIDE 16 — MC Check 1 -->
+<section>
+    <h2 style="font-size:0.95em;">📝 Check 1 — Multiple Choice</h2>
+    <div class="assess-section">
+        <div class="assess-section-title">Q1 of 3</div>
+        <p class="mc-question">The Espionage Act (1917) was most likely to be used against which of the following?</p>
+        <ul class="mc-choices" id="mc1-choices">
+            <li><button class="mc-choice-btn" onclick="checkMC('mc1','a','c')">A. A German spy who photographed U.S. naval vessels</button></li>
+            <li><button class="mc-choice-btn" onclick="checkMC('mc1','b','c')">B. A journalist who published stories about corruption in the military supply chain</button></li>
+            <li><button class="mc-choice-btn" onclick="checkMC('mc1','c','c')">C. A socialist leader who gave a speech urging young men to resist the draft</button></li>
+            <li><button class="mc-choice-btn" onclick="checkMC('mc1','d','c')">D. A pacifist who refused to buy war bonds but said nothing publicly</button></li>
+        </ul>
+        <div class="mc-feedback" id="mc1-feedback-correct">
+            ✓ <strong>Correct.</strong> The Espionage Act targeted interference with military recruitment and operations — which is exactly what an anti-draft speech does. Option A describes espionage, which is a different crime covered elsewhere. Option D describes a private act with no public speech component. The law's primary target in practice was political dissent, not actual spying.
+        </div>
+        <div class="mc-feedback" id="mc1-feedback-incorrect">
+            ✗ <strong>Not quite.</strong> Think about what the Espionage Act specifically prohibited: interfering with military operations or recruitment. Which option most directly fits that definition? A spy photographing naval vessels is espionage — a different crime. The Act was primarily used in practice against <em>political speech</em> that discouraged enlistment.
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE 17 — MC Check 2 -->
+<section>
+    <h2 style="font-size:0.95em;">📝 Check 1 — Multiple Choice</h2>
+    <div class="assess-section">
+        <div class="assess-section-title">Q2 of 3</div>
+        <p class="mc-question">Justice Holmes's "clear and present danger" test in <em>Schenck v. United States</em> is problematic during wartime primarily because:</p>
+        <ul class="mc-choices" id="mc2-choices">
+            <li><button class="mc-choice-btn" onclick="checkMC('mc2','a','b')">A. Holmes was not a respected legal scholar</button></li>
+            <li><button class="mc-choice-btn" onclick="checkMC('mc2','b','b')">B. The wartime government itself decides what counts as "dangerous" speech, creating a conflict of interest</button></li>
+            <li><button class="mc-choice-btn" onclick="checkMC('mc2','c','b')">C. The test only applies to shouting in theaters, not political speech</button></li>
+            <li><button class="mc-choice-btn" onclick="checkMC('mc2','d','b')">D. The decision was not unanimous, so it carries less legal weight</button></li>
+        </ul>
+        <div class="mc-feedback" id="mc2-feedback-correct">
+            ✓ <strong>Correct.</strong> This is the core problem with the test. A government that is prosecuting a war has every incentive to define opposition to that war as "dangerous." Schenck himself was prosecuted for distributing pamphlets — the government decided that constituted a "clear and present danger." That's a lot of discretion to give the very party being criticized.
+        </div>
+        <div class="mc-feedback" id="mc2-feedback-incorrect">
+            ✗ <strong>Not quite.</strong> Holmes was in fact highly respected, and the decision was unanimous (9-0). The "fire in a theatre" metaphor was meant as an analogy, not a limit on application. The real problem is who gets to decide what "danger" means — and during wartime, that's the government being criticized.
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE 18 — MC Check 3 -->
+<section>
+    <h2 style="font-size:0.95em;">📝 Check 1 — Multiple Choice</h2>
+    <div class="assess-section">
+        <div class="assess-section-title">Q3 of 3</div>
+        <p class="mc-question">The Committee on Public Information (CPI) is best understood as:</p>
+        <ul class="mc-choices" id="mc3-choices">
+            <li><button class="mc-choice-btn" onclick="checkMC('mc3','a','d')">A. A military intelligence agency that monitored enemy communications</button></li>
+            <li><button class="mc-choice-btn" onclick="checkMC('mc3','b','d')">B. A congressional committee that investigated war profiteering</button></li>
+            <li><button class="mc-choice-btn" onclick="checkMC('mc3','c','d')">C. A neutral body that provided Americans with accurate information about the war</button></li>
+            <li><button class="mc-choice-btn" onclick="checkMC('mc3','d','d')">D. A government agency that produced pro-war propaganda to shape public opinion</button></li>
+        </ul>
+        <div class="mc-feedback" id="mc3-feedback-correct">
+            ✓ <strong>Correct.</strong> The CPI's job was to sell the war. It produced posters, pamphlets, films, and trained 75,000 speakers to deliver four-minute pro-war speeches at public events. "Neutral" and "accurate" are the opposite of what it did — its mission was persuasion, not information.
+        </div>
+        <div class="mc-feedback" id="mc3-feedback-incorrect">
+            ✗ <strong>Not quite.</strong> None of the first three options match what you read about the CPI. It wasn't intelligence, it wasn't investigating war profiteering, and it was definitively not neutral. George Creel's agency had one job: get Americans to support the war. That's propaganda, not information.
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION IV DIVIDER — SHORT ANSWER
+═══════════════════════════════════════════════ -->
+<section data-background="#1B4332">
+    <h2 style="font-size:3.0em;color:var(--antique-gold);">Section IV</h2>
+    <div class="subtitle" style="font-size:1.05em;">Knowledge Checks — Part B</div>
+    <p style="color:var(--bronze-accent);font-style:italic;font-size:1.3em;">
+        Short answer questions — type your responses below each prompt. These will export to your PDF.
+    </p>
+</section>
+
+<!-- SLIDE 20 — Short Answer 1 & 2 -->
+<section>
+    <h2 style="font-size:0.9em;">📝 Check 2 — Short Answer</h2>
+    <div style="margin-top:0.3em;">
+        <label class="sa-label" for="sa1"><strong>Q4.</strong> In your own words, what kinds of speech or actions might fall under the Espionage Act (1917)? Give at least two specific examples.</label>
+        <textarea class="sa-textarea" id="sa1" placeholder="Example: A pamphlet arguing that men should refuse to be drafted... / A newspaper editorial claiming the war is immoral..."></textarea>
+        <div class="sa-hint">Aim for 2–3 sentences. Think about what "interfering with military operations" could mean in practice.</div>
+    </div>
+    <div style="margin-top:0.8em;">
+        <label class="sa-label" for="sa2"><strong>Q5.</strong> The Sedition Act prohibited "disloyal, profane, scurrilous, or abusive language." How broad does this language seem? Could it be applied selectively to target specific groups?</label>
+        <textarea class="sa-textarea" id="sa2" placeholder="The language seems... / It could be applied selectively because..."></textarea>
+        <div class="sa-hint">Think about who was actually prosecuted under these laws — socialists, immigrants, labor organizers.</div>
+    </div>
+</section>
+
+<!-- SLIDE 21 — Short Answer 3 & 4 -->
+<section>
+    <h2 style="font-size:0.9em;">📝 Check 2 — Short Answer</h2>
+    <div style="margin-top:0.3em;">
+        <label class="sa-label" for="sa3"><strong>Q6.</strong> Why would a democracy organize propaganda during wartime? What does the existence of the CPI suggest about the relationship between war and public opinion?</label>
+        <textarea class="sa-textarea" id="sa3" placeholder="A democracy would use propaganda because... / The CPI's existence suggests that public opinion is..."></textarea>
+        <div class="sa-hint">Think about what Wilson knew about American public opinion in 1917 — and why he felt propaganda was necessary.</div>
+    </div>
+    <div style="margin-top:0.8em;">
+        <label class="sa-label" for="sa4"><strong>Q7.</strong> In wartime, should a government have more power than usual? Make an argument in 3–4 sentences — include at least one reason for <em>and</em> one reason against.</label>
+        <textarea class="sa-textarea" id="sa4" placeholder="Governments may need more power during wartime because... / However, expanded power is dangerous because..."></textarea>
+        <div class="sa-hint">No single right answer here. Your reasoning matters more than your conclusion.</div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION V DIVIDER — PREDICTIONS
+═══════════════════════════════════════════════ -->
+<section data-background="#1B4332">
+    <h2 style="font-size:3.0em;color:var(--antique-gold);">Section V</h2>
+    <div class="subtitle" style="font-size:1.05em;">Predictions — Before You Watch</div>
+    <p style="color:var(--bronze-accent);font-style:italic;font-size:1.3em;">
+        Make these predictions now. You'll check them against the documentary in the post-screening follow-up.
+    </p>
+</section>
+
+<!-- SLIDE 23 — Documentary Roadmap -->
+<section>
+    <h2 style="font-size:1.0em;">Documentary Roadmap</h2>
+    <p style="font-size:1.2em;color:var(--pure-white);margin-bottom:0.6em;">The film moves through five phases — each connects to the laws you just studied:</p>
+    <ul style="font-size:1.25em;">
+        <li class="timeline-item"><span class="timeline-year">1914–1915 ·</span> <strong>Enthusiasm</strong> — young men rush to enlist; the Lusitania sinking shocks America</li>
+        <li class="timeline-item"><span class="timeline-year">1915–1916 ·</span> <strong>Industrial Slaughter</strong> — trench warfare, mass casualties, romantic vision of war destroyed</li>
+        <li class="timeline-item"><span class="timeline-year">1917 ·</span> <strong>America Enters</strong> — Pershing's AEF; propaganda; the home front mobilizes</li>
+        <li class="timeline-item"><span class="timeline-year">1918 ·</span> <strong>The Breaking Point</strong> — Argonne offensive; epidemic; the cost of victory</li>
+        <li class="timeline-item"><span class="timeline-year">1919 ·</span> <strong>Versailles</strong> — Wilson's <span class="popup-trigger" data-popup="popup-14pts">14 Points</span> vs. allied revenge; seeds of WWII planted</li>
+    </ul>
+    <aside class="notes">
+<div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;color:#333;">
+
+<h3 style="color:#2c5282;margin-top:1.5em;">📖 Understanding This Slide</h3>
+<p>This roadmap gives you the arc of the documentary before you watch it. Knowing the structure in advance helps you watch analytically rather than just following the story. Pay attention to the shift in tone as the film moves from enthusiasm (1914) to disillusionment (1919) — that's the emotional argument of the film.</p>
+
+<h3 style="color:#2c5282;margin-top:1.5em;">The Versailles Question</h3>
+<p>The last item on this timeline is crucial. Wilson went to Paris in 1919 expecting to implement his Fourteen Points — a vision of a just peace based on self-determination and a League of Nations. He was greeted as a hero. But Britain and France wanted to punish Germany, not build a new world order. The Treaty of Versailles was a compromise that satisfied almost no one. Wilson returned home to find the Senate unwilling to ratify it. He died, politically broken, in 1924.</p>
+<p>Why does this matter for your assignment? Because Wilson justified all of the wartime restrictions on civil liberties by promising that the war would "make the world safe for democracy." If the peace treaty didn't achieve that — if it planted the seeds of WWII — then what did those sacrifices mean?</p>
+
+</div>
+    </aside>
+</section>
+
+<!-- SLIDE 24 — Prediction Questions -->
+<section>
+    <h2 style="font-size:0.95em;">📝 Check 3 — Predictions</h2>
+    <div style="margin-top:0.3em;">
+        <label class="sa-label" for="pred1"><strong>P1.</strong> How might dissenters — people who publicly oppose the war — be treated under the Espionage and Sedition Acts? Give a specific example of the kind of person who might be targeted.</label>
+        <textarea class="sa-textarea" id="pred1" placeholder="Under these laws, a person who... might be prosecuted because..."></textarea>
+    </div>
+    <div style="margin-top:0.6em;">
+        <label class="sa-label" for="pred2"><strong>P2.</strong> How might immigrants or political radicals be viewed during wartime? What historical forces — from what you've read — might intensify that suspicion?</label>
+        <textarea class="sa-textarea" id="pred2" placeholder="Immigrants and political radicals might be viewed as... because... / The CPI and Sedition Act would intensify this by..."></textarea>
+    </div>
+</section>
+
+<!-- SLIDE 25 — Prediction + Versailles -->
+<section>
+    <h2 style="font-size:0.95em;">📝 Check 3 — Predictions (cont.)</h2>
+    <div style="margin-top:0.5em;">
+        <label class="sa-label" for="pred3"><strong>P3.</strong> The documentary ends at Versailles. If the peace treaty failed to produce a lasting settlement — if it planted the seeds of WWII — what might that suggest about the wartime sacrifices to democracy?</label>
+        <textarea class="sa-textarea" id="pred3" placeholder="If Versailles failed to produce a lasting peace, then the wartime sacrifices to democracy... / This would suggest that Wilson's justification for the Espionage Act..."></textarea>
+        <div class="sa-hint">You'll return to this prediction in the post-screening follow-up after watching the film.</div>
+    </div>
+    <div class="study-buddy-box" style="font-size:1.1em;margin-top:0.8em;">
+        <div class="study-buddy-label">📚 Study Buddy Note</div>
+        There's no single correct prediction. What matters is that you reason from the evidence — the laws, the propaganda, the rhetoric — not just from gut feeling. <em>Your reasoning is the assignment.</em>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 26 — EXPORT / SUBMIT
+═══════════════════════════════════════════════ -->
+<section data-background="#1A1A1A">
+    <div style="text-align:center;padding:1em;">
+        <h2 style="font-size:2.6em;color:var(--antique-gold);margin-bottom:0.3em;">You're Ready to Watch</h2>
+        <div style="font-size:0.9em;color:var(--pure-white);margin-bottom:1em;line-height:1.7;">
+            Before you close this deck — <strong>export your responses.</strong>
+        </div>
+
+        <button class="export-btn" onclick="exportPDF()" style="font-size:1.15em;margin-bottom:0.6em;">
+            📥 &nbsp;Export My Responses (PDF)
+        </button>
+
+        <div style="font-size:1.1em;color:var(--bronze-accent);font-style:italic;margin-bottom:1.2em;">
+            A print dialog will open. Choose "Save as PDF" → upload to Canvas.
+        </div>
+
+        <div class="parchment-box" style="font-size:1.1em;max-width:1000px;margin:0 auto;text-align:left;">
+            <p><strong>Your next steps:</strong></p>
+            <p><span style="color:var(--deep-teal);">②</span>&ensp;Complete the <strong>Pre-Screening Worksheet</strong> (PDF form) → upload to Canvas</p>
+            <p><span style="color:var(--deep-teal);">③</span>&ensp;Print your <strong>Viewing Notes</strong> sheet → watch the documentary → photograph your notes → upload</p>
+            <p><span style="color:var(--deep-teal);">④</span>&ensp;Complete the <strong>Post-Screening Follow-Up</strong> → save as PDF → upload to Canvas</p>
+        </div>
+
+        <div style="border-top:2px solid rgba(212,175,55,0.3);padding-top:0.8em;margin-top:1em;">
+            <div style="font-size:1.2em;color:var(--bronze-accent);font-style:italic;max-width:1000px;margin:0 auto;">
+                "I lost all my youth. I lost the best years of my life… a few medals don't make up for that, you know."
+            </div>
+            <div style="font-size:1.0em;color:var(--khaki);margin-top:0.4em;">
+                — WWI veteran, interviewed in <em>Shell Shock</em>, The Century: America's Time
+            </div>
+        </div>
+    </div>
+</section>
+
+</div><!-- /slides -->
+</div><!-- /reveal -->
+
+<!-- ═══════════════════════════════════════════════
+     GLOBAL UI
+═══════════════════════════════════════════════ -->
+<div id="keyboard-trigger" class="popup-trigger" data-popup="keyboard-popup"
+     style="position:fixed;top:20px;right:20px;font-size:2em;cursor:pointer;z-index:200;">⌨️</div>
+
+<div id="keyboard-popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Keyboard Shortcuts</div>
+    <p>→ / Space: Next &nbsp;|&nbsp; ←: Previous &nbsp;|&nbsp; S: Speaker Notes &nbsp;|&nbsp; F: Fullscreen &nbsp;|&nbsp; O: Overview &nbsp;|&nbsp; ESC: Close pop-up</p>
+</div>
+
+<!-- Definition pop-ups -->
+<div id="popup-shellshock" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Shell Shock</div>
+    <p>A term coined during World War I for the psychological and neurological symptoms suffered by soldiers exposed to prolonged artillery bombardment and trench warfare.</p>
+    <p>Symptoms included: uncontrollable trembling, paralysis, mutism, nightmares, amnesia, and emotional collapse. Soldiers were often accused of cowardice or malingering.</p>
+    <p>The British Army alone diagnosed over 80,000 cases. We now recognize it as a form of PTSD — Post-Traumatic Stress Disorder.</p>
+</div>
+
+<div id="popup-ptsd" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">PTSD — Post-Traumatic Stress Disorder</div>
+    <p>A mental health condition triggered by experiencing or witnessing a terrifying event. Symptoms include flashbacks, nightmares, severe anxiety, and uncontrollable thoughts about the event.</p>
+    <p>The term did not exist in World War I. Sufferers were often labeled as cowards. PTSD was formally recognized as a medical diagnosis only in 1980, largely due to Vietnam War veteran advocacy.</p>
+</div>
+
+<div id="popup-zimmermann" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">The Zimmermann Telegram (1917)</div>
+    <p>A secret diplomatic message from German Foreign Secretary Arthur Zimmermann to the German ambassador in Mexico, proposing a military alliance against the United States.</p>
+    <p>In exchange, Germany promised to help Mexico recover Texas, New Mexico, and Arizona. British intelligence intercepted and decoded the telegram, then shared it with the U.S.</p>
+    <p>Its publication in American newspapers in March 1917 caused enormous public outrage and helped shift opinion toward entering the war.</p>
+</div>
+
+<div id="popup-schenck" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Schenck v. United States (1919)</div>
+    <p>Charles Schenck was the general secretary of the Socialist Party. He mailed 15,000 anti-draft pamphlets to men who had been called up for military service, arguing the draft was unconstitutional.</p>
+    <p>He was convicted under the Espionage Act. The Supreme Court unanimously upheld the conviction, with Justice Holmes writing the famous "clear and present danger" standard.</p>
+    <p>The decision remained precedent for decades. The modern standard — set in <em>Brandenburg v. Ohio</em> (1969) — is considerably more protective of political speech.</p>
+</div>
+
+<div id="popup-cpi" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Committee on Public Information (CPI)</div>
+    <p>Created by executive order in April 1917, the CPI was the United States' first large-scale government propaganda agency, headed by journalist George Creel.</p>
+    <p>Its methods included: patriotic posters, pro-war pamphlets distributed by the millions, short films and newsreels, and 75,000 "Four Minute Men" — trained speakers who gave brief pro-war talks at movie theaters, churches, and public gatherings.</p>
+    <p>The CPI also promoted hostility toward German Americans, contributing to widespread social persecution.</p>
+</div>
+
+<div id="popup-debs" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Eugene V. Debs and the Espionage Act</div>
+    <p>Eugene Debs was a prominent socialist leader and five-time presidential candidate. In June 1918, he gave a speech in Canton, Ohio, criticizing the war and supporting men who had resisted the draft.</p>
+    <p>He was arrested under the Espionage Act, convicted, and sentenced to ten years in federal prison. He ran for president again in 1920 — <em>from his prison cell</em> — and received nearly one million votes.</p>
+    <p>President Harding commuted his sentence in 1921. Debs's case remains one of the most cited examples of wartime suppression of political speech in U.S. history.</p>
+</div>
+
+<div id="popup-14pts" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Wilson's Fourteen Points (1918)</div>
+    <p>A set of principles for the postwar peace settlement delivered by Wilson in a speech to Congress in January 1918. Key proposals included freedom of the seas, arms reduction, self-determination for colonized peoples, open diplomacy, and a League of Nations.</p>
+    <p>Europeans greeted Wilson ecstatically when he arrived at the Paris Peace Conference. However, Britain and France were determined to punish Germany. The resulting Treaty of Versailles bore little resemblance to Wilson's vision.</p>
+    <p>The U.S. Senate refused to ratify the treaty. The League of Nations was formed without American membership.</p>
+</div>
+
+<div class="slide-counter"></div>
+<div id="toast"></div>
+
+<!-- JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+<script>
+    Reveal.initialize({
+        width:1280, height:800, margin:0.06,
+        minScale:0.2, maxScale:2.0,
+        hash:true, slideNumber:false,
+        transition:'slide', plugins:[RevealNotes]
+    });
+
+    function updateSlideCounter() {
+        const c = Reveal.getState().indexh + 1;
+        const t = Reveal.getTotalSlides();
+        document.querySelector('.slide-counter').textContent = `${c} / ${t}`;
+    }
+    Reveal.on('slidechanged', updateSlideCounter);
+    updateSlideCounter();
+
+    // Pop-up system
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('popup-trigger')) {
+            const id = e.target.getAttribute('data-popup');
+            const el = document.getElementById(id);
+            if (el) {
+                document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+                el.classList.add('active');
+                e.stopPropagation();
+            }
+        }
+        if (e.target.classList.contains('popup-close')) {
+            e.target.closest('.popup').classList.remove('active');
+        }
+        if (e.target.classList.contains('popup') && !e.target.closest('.popup-close')) {
+            e.target.classList.remove('active');
+        }
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+        }
+    });
+
+    // ── MC answer checking ──
+    function checkMC(qid, selected, correct) {
+        // Disable all buttons for this question
+        const buttons = document.querySelectorAll(`#${qid}-choices .mc-choice-btn`);
+        buttons.forEach(b => b.disabled = true);
+
+        // Style the clicked button
+        const letters = ['a','b','c','d'];
+        buttons.forEach((b, i) => {
+            if (letters[i] === selected) {
+                b.classList.add(selected === correct ? 'correct' : 'incorrect');
+            }
+            if (letters[i] === correct && selected !== correct) {
+                b.classList.add('correct');
+            }
+        });
+
+        // Show feedback
+        const isCorrect = selected === correct;
+        const fb = document.getElementById(`${qid}-feedback-${isCorrect ? 'correct' : 'incorrect'}`);
+        fb.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+
+        // Save to storage
+        saveResponse(qid, selected);
+        toast(isCorrect ? '✓ Correct!' : '✗ Review your answer.');
+    }
+
+    // ── Auto-save short answers ──
+    const SA_IDS = ['sa1','sa2','sa3','sa4','pred1','pred2','pred3'];
+
+    function saveResponse(key, value) {
+        try { localStorage.setItem('hist102_ss_' + key, value); } catch(e) {}
+    }
+    function loadResponse(key) {
+        try { return localStorage.getItem('hist102_ss_' + key) || ''; } catch(e) { return ''; }
+    }
+
+    // Attach autosave and load saved values
+    window.addEventListener('load', function() {
+        SA_IDS.forEach(id => {
+            const el = document.getElementById(id);
+            if (!el) return;
+            el.value = loadResponse(id);
+            el.addEventListener('input', () => saveResponse(id, el.value));
+        });
+        // Load saved MC states
+        ['mc1','mc2','mc3'].forEach(qid => {
+            const saved = loadResponse(qid);
+            if (saved) {
+                const correct = {mc1:'c', mc2:'b', mc3:'d'};
+                // Silently mark — don't re-trigger interactivity
+                const buttons = document.querySelectorAll(`#${qid}-choices .mc-choice-btn`);
+                const letters = ['a','b','c','d'];
+                buttons.forEach((b,i) => {
+                    b.disabled = true;
+                    if (letters[i] === saved) b.classList.add(saved === correct[qid] ? 'correct' : 'incorrect');
+                    if (letters[i] === correct[qid] && saved !== correct[qid]) b.classList.add('correct');
+                });
+                const isCorrect = saved === correct[qid];
+                const fb = document.getElementById(`${qid}-feedback-${isCorrect ? 'correct' : 'incorrect'}`);
+                if (fb) fb.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+            }
+        });
+    });
+
+    // ── Export / Print as PDF ──
+    function exportPDF() {
+        // Inject a print-friendly summary page
+        const sa_labels = {
+            sa1: 'Q4. Speech/actions under the Espionage Act',
+            sa2: 'Q5. Breadth of the Sedition Act',
+            sa3: 'Q6. Why a democracy uses propaganda',
+            sa4: 'Q7. Should government have more power in wartime?',
+            pred1: 'P1. How dissenters would be treated',
+            pred2: 'P2. How immigrants/radicals would be viewed',
+            pred3: 'P3. If Versailles failed — implications for democracy'
+        };
+        const mc_labels = {
+            mc1: 'Q1. Espionage Act — most likely target',
+            mc2: 'Q2. Problem with "clear and present danger"',
+            mc3: 'Q3. What the CPI was'
+        };
+        const mc_correct = { mc1:'c', mc2:'b', mc3:'d' };
+        const mc_letters = ['a','b','c','d'];
+
+        let html = `<div style="font-family:Georgia,serif;max-width:750px;margin:0 auto;padding:24px;color:#1A1A1A;">
+        <div style="text-align:center;border-bottom:3px solid #C9A96E;padding-bottom:12px;margin-bottom:20px;">
+            <div style="font-size:0.85rem;letter-spacing:0.1em;text-transform:uppercase;color:#8B6F47;">Richland Community College · HIST 102 Online · Chapter 19</div>
+            <h1 style="font-size:1.8rem;color:#6B4A2A;margin:6px 0;">Shell Shock — Pre-Screening Study Buddy</h1>
+            <div style="font-style:italic;color:#2C7873;font-size:0.95rem;">Student Response Export · ${new Date().toLocaleDateString()}</div>
+        </div>
+
+        <h2 style="color:#6B4A2A;font-size:1.2rem;border-bottom:2px solid #E8D5B0;padding-bottom:4px;">Part A — Multiple Choice</h2>`;
+
+        ['mc1','mc2','mc3'].forEach(qid => {
+            const saved = loadResponse(qid) || '[No answer recorded]';
+            const correct = mc_correct[qid];
+            const isCorrect = saved === correct;
+            html += `<div style="margin-bottom:12px;padding:10px 14px;border-radius:8px;background:${isCorrect ? '#e8f5e9' : '#fdecea'};border-left:5px solid ${isCorrect ? '#2C7873' : '#9B2C2C'};">
+                <div style="font-weight:700;color:#1A1A1A;font-size:0.95rem;">${mc_labels[qid]}</div>
+                <div style="margin-top:4px;font-size:0.9rem;">Selected: <strong>${saved.toUpperCase()}</strong> &nbsp;|&nbsp; ${isCorrect ? '✓ Correct' : `✗ Incorrect (correct: ${correct.toUpperCase()})`}</div>
+            </div>`;
+        });
+
+        html += `<h2 style="color:#6B4A2A;font-size:1.2rem;border-bottom:2px solid #E8D5B0;padding-bottom:4px;margin-top:20px;">Part B — Short Answer</h2>`;
+
+        SA_IDS.forEach(id => {
+            const val = loadResponse(id) || '[No response entered]';
+            html += `<div style="margin-bottom:16px;">
+                <div style="font-weight:700;color:#2C7873;font-size:0.95rem;">${sa_labels[id]}</div>
+                <div style="margin-top:6px;padding:10px 14px;background:#f9f5ed;border:1.5px solid #C9A96E;border-radius:6px;font-size:0.92rem;line-height:1.6;white-space:pre-wrap;">${val}</div>
+            </div>`;
+        });
+
+        html += `<div style="text-align:center;margin-top:24px;font-size:0.8rem;color:#8B6F47;border-top:2px solid #E8D5B0;padding-top:10px;font-style:italic;">
+            Pre-Screening Study Buddy · HIST 102 Online · Shell Shock · Richland Community College
+        </div></div>`;
+
+        // Open print window
+        const win = window.open('', '_blank');
+        win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Shell Shock Pre-Screening — My Responses</title>
+        <style>body{margin:0;padding:0;background:#fff;}@media print{@page{margin:0.75in;}}</style></head>
+        <body>${html}<script>window.onload=function(){window.print();}<\/script></body></html>`);
+        win.document.close();
+    }
+
+    // ── Toast ──
+    function toast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.style.display = 'block';
+        setTimeout(() => { t.style.display = 'none'; }, 2000);
+    }
+</script>
+</body>
+</html>
