@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>"Witches Everywhere" — McCarthy Capstone · HIST 102</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cloud-dancer:    #F4F4F2;
+    --cloud-mid:       #EAEAE7;
+    --cloud-deep:      #DCDCDA;
+    --antique-gold:    #B8860B;
+    --antique-gold-text: #7D5B07;
+    --antique-gold-lt: #D4AF37;
+    --deep-teal:       #1E6B66;
+    --rich-purple:     #5A3D8A;
+    --ruby-crimson:    #8B1A1A;
+    --bronze-accent:   #7A5C30;
+    --forest-green:    #1B4332;
+    --ink:             #1C1C1A;
+    --ink-mid:         #3A3A38;
+    --ink-light:       #6B6B68;
+    --border:          #C8C8C4;
+    --card-bg:         #FFFFFF;
+    --card-alt:        #F8F8F6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Lora', serif;
+    background-color: var(--cloud-dancer);
+    color: var(--ink);
+    padding: 0 0 5rem;
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* NAV */
+  .main-nav {
+    background: var(--forest-green);
+    border-bottom: 2px solid var(--antique-gold-lt);
+    display: flex; flex-wrap: wrap;
+  }
+  .nav-link {
+    color: var(--cloud-dancer);
+    text-decoration: none;
+    padding: 0.7rem 1.2rem;
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.88rem;
+    letter-spacing: 0.05em;
+    transition: color 0.2s, background 0.2s;
+  }
+  .nav-link:hover { color: var(--antique-gold-lt); background: rgba(212,175,55,0.1); }
+
+  /* MASTHEAD */
+  .masthead {
+    background: var(--forest-green);
+    padding: 2.5rem 2rem 2rem;
+    border-bottom: 5px solid var(--antique-gold-lt);
+  }
+  .masthead-inner { max-width: 860px; margin: 0 auto; }
+  .masthead-eyebrow {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--antique-gold-lt);
+    margin-bottom: 0.5rem;
+  }
+  .masthead h1 {
+    font-family: 'Crimson Pro', serif;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 700;
+    color: var(--cloud-dancer);
+    line-height: 1.15;
+    margin-bottom: 0.4rem;
+  }
+  .masthead h1 em { color: var(--antique-gold-lt); font-style: italic; }
+  .masthead-sub {
+    font-size: 0.9rem;
+    color: rgba(244,244,242,0.65);
+    font-style: italic;
+    margin-bottom: 1.4rem;
+  }
+  .masthead-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .masthead-tag {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--cloud-dancer);
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.8rem;
+    padding: 0.2rem 0.7rem;
+    border-radius: 20px;
+  }
+
+  /* WRAP */
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* CARD BASE */
+  .card {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 0 6px 6px 0;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.2rem;
+    overflow: hidden;
+  }
+  .card-label {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.5rem;
+  }
+
+  /* SECTION RULE */
+  .section-rule {
+    display: flex; align-items: center; gap: 0.8rem;
+    margin: 2.5rem 0 1.2rem;
+  }
+  .section-rule h2 {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--antique-gold-text); white-space: nowrap;
+  }
+  .section-rule-line {
+    flex: 1; height: 2px;
+    background: linear-gradient(to right, var(--antique-gold-lt), transparent);
+  }
+
+  /* STEP CARDS */
+  .step-card {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(28,28,26,0.06);
+  }
+  .step-header {
+    background: var(--forest-green);
+    padding: 0.7rem 1.4rem;
+    border-bottom: 3px solid var(--antique-gold-lt);
+    display: flex; align-items: baseline; gap: 0.8rem;
+  }
+  .step-num {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.72rem; letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(250,250,250,0.6);
+    flex-shrink: 0;
+  }
+  .step-title {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.15rem; font-weight: 700;
+    color: #ffffff;
+  }
+  .step-body {
+    padding: 1.2rem 1.4rem;
+    font-size: 0.92rem;
+    color: var(--ink-mid);
+    line-height: 1.75;
+  }
+  .step-body p { margin-bottom: 0.7rem; }
+  .step-body p:last-child { margin-bottom: 0; }
+  .step-link {
+    display: inline-block;
+    background: var(--deep-teal);
+    color: #fafafa;
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.85rem; font-weight: 700;
+    padding: 0.45rem 1.1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 0.6rem;
+    transition: background 0.2s;
+  }
+  .step-link:hover { background: var(--forest-green); }
+  .step-link.secondary {
+    background: transparent;
+    border: 1.5px solid var(--deep-teal);
+    color: var(--deep-teal);
+    margin-left: 0.5rem;
+  }
+  .step-link.secondary:hover { background: var(--deep-teal); color: #fafafa; }
+
+  /* SOURCE GRID */
+  .sources-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  @media (max-width: 600px) { .sources-grid { grid-template-columns: 1fr; } }
+  .source-card {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-top: 3px solid var(--deep-teal);
+    border-radius: 6px;
+    padding: 1rem 1.1rem;
+  }
+  .source-card h4 {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--deep-teal);
+    margin-bottom: 0.5rem;
+  }
+  .source-card p {
+    font-size: 0.85rem;
+    color: var(--ink-mid);
+    line-height: 1.55;
+    margin-bottom: 0.6rem;
+  }
+  .source-card a {
+    font-size: 0.82rem;
+    color: var(--deep-teal);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--deep-teal);
+  }
+  .source-card a:hover { color: var(--forest-green); }
+
+  /* DEADLINE BAND */
+  .deadline-band {
+    background: var(--forest-green);
+    border-radius: 8px;
+    padding: 1.2rem 1.6rem;
+    margin: 1.2rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    flex-wrap: wrap;
+  }
+  .deadline-date {
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .deadline-date .label {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.7rem;
+    color: var(--antique-gold-lt);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .deadline-date .date {
+    font-family: 'Crimson Pro', serif;
+    font-size: 2rem;
+    color: #fafafa;
+    line-height: 1.1;
+  }
+  .deadline-date .year {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.82rem;
+    color: rgba(244,244,242,0.65);
+  }
+  .deadline-text { flex: 1; }
+  .deadline-text p {
+    font-size: 0.9rem;
+    color: rgba(244,244,242,0.85);
+    line-height: 1.75;
+    margin-bottom: 0.3rem;
+  }
+  .deadline-text p:last-child { margin: 0; }
+  .deadline-text strong { color: var(--antique-gold-lt); }
+
+  /* INTEGRITY BOX */
+  .integrity-box {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-left: 5px solid var(--ruby-crimson);
+    border-radius: 6px;
+    padding: 1.1rem 1.4rem;
+    margin: 1.2rem 0;
+  }
+  .integrity-label {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ruby-crimson);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .integrity-box p {
+    font-size: 0.88rem;
+    color: var(--ink-mid);
+    line-height: 1.65;
+    margin-bottom: 0.5rem;
+  }
+  .integrity-box p:last-child { margin-bottom: 0; }
+
+  /* SPY MEMO CARD */
+  .memo-card {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-left: 5px solid var(--antique-gold-lt);
+    border-radius: 0 6px 6px 0;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.2rem;
+  }
+
+  /* FOOTER */
+  .site-footer {
+    background: var(--forest-green);
+    color: rgba(244,244,242,0.65);
+    text-align: center;
+    padding: 1.8rem 1rem;
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.85rem;
+    border-top: 3px solid var(--antique-gold-lt);
+    margin-top: 3rem;
+  }
+  .site-footer a { color: var(--antique-gold-lt); text-decoration: none; }
+  .site-footer .footer-quote { font-style: italic; margin-bottom: 0.4rem; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="main-nav">
+  <a href="../../index.html" class="nav-link">Home</a>
+  <a href="../index.html" class="nav-link">HIST 102</a>
+  <a href="../../index.html#about" class="nav-link">About</a>
+  <a href="../../index.html#contact" class="nav-link">Contact</a>
+</nav>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-inner">
+    <div class="masthead-eyebrow">HIST 102 · Chapters 26–27 · Capstone Research Project</div>
+    <h1><em>"Witches Everywhere"</em><br>The Witch Hunt That Found Real Witches</h1>
+    <div class="masthead-sub">McCarthy, Venona &amp; the Soviet Archives</div>
+    <div class="masthead-tags">
+      <span class="masthead-tag">📁 Primary Sources</span>
+      <span class="masthead-tag">🔐 Declassified Archives</span>
+      <span class="masthead-tag">✍️ Research Essay</span>
+      <span class="masthead-tag">Chapters 26–27</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ══ OPERATIONAL BRIEFING ══ -->
+  <div style="margin-top:2rem;">
+
+    <!-- SPY INTRO CARD with image -->
+    <div class="card" style="border-left:5px solid var(--deep-teal);">
+      <div class="card-label" style="color:var(--antique-gold-text);">⛔ TOP SECRET &nbsp;·&nbsp; EYES ONLY &nbsp;·&nbsp; CLASSIFICATION LEVEL: HIST 102</div>
+      <div style="overflow:hidden;">
+        <img src="me_cloak_dagger.jpg"
+             alt="Professor Austin in cloak and dagger field operative attire"
+             width="190"
+             style="float:left; margin:0.2rem 1.4rem 0.8rem 0; border-radius:6px; border:2px solid var(--border);" />
+        <p style="font-family:'Crimson Pro',serif;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.14em;color:var(--ink-light);margin-bottom:0.5rem;">MEMORANDUM OF URGENT OPERATIONAL IMPORTANCE<br><span style="font-style:italic;text-transform:none;letter-spacing:0;font-size:0.82rem;">Dissemination Restricted to Cleared Personnel &mdash; Destroy After Reading</span></p>
+        <p style="font-size:0.95rem;line-height:1.85;color:var(--ink-mid);margin-bottom:0.8rem;"><strong style="color:var(--ink);">Attention, Agent.</strong> Before we proceed, a matter of operational security must be addressed. Did anyone follow you here? Check the hallway. Look behind you. Close any unnecessary browser tabs &mdash; one of them is definitely suspicious.</p>
+        <p style="font-size:0.95rem;line-height:1.85;color:var(--ink-mid);margin-bottom:0.8rem;">Good. The individual depicted at left is your handler for this operation, currently operating under deep academic cover as a Professor of History at Richland Community College. Do not be fooled by the syllabus. He has read the Gorsky Memo. He knows about the Vassiliev Notebooks. He is watching your progress in the archives very closely.</p>
+        <p style="font-size:0.95rem;line-height:1.85;color:var(--ink-mid);">He also wants you to turn in your capstone assignment.</p>
+        <div style="clear:both;"></div>
+      </div>
+    </div>
+
+    <!-- OPERATIONAL BRIEFING CARD -->
+    <div class="card" style="border-left:5px solid var(--bronze-accent);">
+      <div class="card-label" style="color:var(--antique-gold-text);">🔐 Operational Briefing &mdash; Capstone Assignment Status</div>
+      <p style="font-size:0.88rem;line-height:1.8;color:var(--ink-mid);margin-bottom:0.8rem;">
+        <strong style="color:var(--ink);">RE:</strong> Operation "Witches Everywhere" &mdash; Final Deliverables<br>
+        <strong style="color:var(--ink);">FROM:</strong> Handler Austin, Deep Cover Division, HIST 102<br>
+        <strong style="color:var(--ink);">TO:</strong> All Field Agents Currently Enrolled<br>
+        <strong style="color:var(--ink);">CLASSIFICATION:</strong> Urgent / Graded
+      </p>
+      <p style="font-size:0.95rem;line-height:1.85;color:var(--ink-mid);margin-bottom:0.8rem;">Intelligence has confirmed that the <strong style="color:var(--ink);">"Witches Everywhere" Capstone Assignment</strong> is ACTIVE. This memorandum serves as your official operational briefing. Two classified documents are required for mission closure. Failure to submit constitutes a breach of academic protocol and will be logged in your permanent dossier — also known as your final grade.</p>
+      <div style="background:var(--card-alt);border:1.5px solid var(--border);border-radius:6px;padding:1rem 1.2rem;margin-bottom:0.8rem;">
+        <p style="font-size:0.93rem;color:var(--ink-mid);line-height:1.8;margin-bottom:0.6rem;"><strong style="color:var(--ink);">📁 Document Alpha:</strong> Research Notes &mdash; Archival investigation of five persons of interest. Evidence dossiers, Soviet code names, Venona cable intercepts, and your own analytical judgments. <em style="color:var(--ink-light);">(50 points)</em></p>
+        <p style="font-size:0.93rem;color:var(--ink-mid);line-height:1.8;margin:0;"><strong style="color:var(--ink);">📝 Document Bravo:</strong> Essay Planner &amp; Draft &mdash; Full analytical essay built from your research. Thesis, body paragraphs with archival evidence, conclusion, and reflection. <em style="color:var(--ink-light);">(50 points)</em></p>
+      </div>
+      <p style="font-size:0.95rem;line-height:1.85;color:var(--ink-mid);">Each document is to be submitted to its <strong style="color:var(--ink);">designated Canvas assignment</strong>, each with its own independent grading rubric. Submission through unauthorized channels will not be accepted. Telepathy has not been approved as a delivery method.</p>
+    </div>
+
+    <!-- DEADLINE BAND -->
+    <div class="deadline-band">
+      <div class="deadline-date">
+        <div class="label">Operational Deadline</div>
+        <div class="date" style="font-size:1.1rem;padding:0.4rem 0;">See Canvas</div>
+      </div>
+      <div class="deadline-text">
+        <p><strong>DUE DATE: Check the Canvas assignment for your official deadline.</strong></p>
+        <p style="font-size:0.85rem;color:rgba(244,244,242,0.65);">This deadline is non-negotiable. The archives will not wait. The Gorsky Memo did not wait. Senator McCarthy did not wait. Neither will Canvas.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══ THE ASSIGNMENT ══ -->
+  <div class="section-rule">
+    <h2>The Assignment</h2>
+    <div class="section-rule-line"></div>
+  </div>
+
+  <div class="card" style="border-left:5px solid var(--deep-teal);">
+    <div class="card-label" style="color:var(--antique-gold-text);">The Conventional Textbook Narrative</div>
+    <p style="font-size:0.95rem;line-height:1.85;color:var(--ink-mid);margin-bottom:0.8rem;">Most Americans first encounter the word <em>McCarthyism</em> as a synonym for reckless accusation — a cautionary tale about demagoguery, fear, and the abuse of political power. Senator Joseph McCarthy is remembered as a bully who destroyed innocent lives with unsubstantiated charges. The Senate's Tydings Committee officially declared his accusations <em>"a fraud and a hoax."</em> Textbooks routinely assert he never identified a single spy. His era is compared directly to the Salem witch trials of 1692: hysteria mistaken for evidence.</p>
+    <p style="font-size:0.95rem;line-height:1.85;color:var(--ink-mid);margin-bottom:0;font-style:italic;color:var(--forest-green);">But what if the witch hunt found real witches?</p>
+  </div>
+
+  <div class="card" style="border-left:5px solid var(--rich-purple);">
+    <div class="card-label" style="color:var(--rich-purple);">What the Textbooks Leave Out</div>
+    <p style="font-size:0.95rem;line-height:1.85;color:var(--ink-mid);margin-bottom:0.8rem;">The declassified <strong style="color:var(--ink);">Venona Project</strong> cables and the internal KGB records of the <strong style="color:var(--ink);">Vassiliev Notebooks</strong> — hidden behind the Iron Curtain until the 1990s — name names, describe intelligence operations, and identify U.S. government officials who supplied the Soviet Union with information during the 1940s. In some cases, the archival record confirms accusations McCarthy made. In others, the evidence is thin or absent.</p>
+    <p style="font-size:0.95rem;line-height:1.85;color:var(--ink-mid);margin-bottom:0.8rem;">A second Senate investigation — the <strong style="color:var(--ink);">McCarran Committee</strong> (1951–52) — reached very different conclusions than the Tydings Committee, finding that communist infiltration had genuinely occurred and had shaped U.S. foreign policy. It is rarely mentioned in standard U.S. history textbooks.</p>
+    <p style="font-size:0.95rem;line-height:1.85;color:var(--ink-mid);margin-bottom:0;"><strong style="color:var(--ink);">Your task:</strong> Investigate five individuals McCarthy accused. Evaluate the archival evidence for each. Build a historical argument about what the declassified record actually reveals — and write it up in a full essay.</p>
+  </div>
+
+  <!-- DICTIONARY DEFINITION -->
+  <div style="background:var(--card-bg);border:1.5px solid var(--border);border-left:5px solid var(--antique-gold-lt);border-radius:0 6px 6px 0;padding:1.2rem 1.4rem;margin-bottom:1.2rem;">
+    <div class="card-label" style="color:var(--antique-gold-text);">The Standard Definition</div>
+    <p style="font-size:0.97rem;font-style:italic;color:var(--ink-mid);line-height:1.75;margin-bottom:0.4rem;">"The practice of making unfair allegations or using unfair investigative techniques, especially in order to restrict dissent or political criticism."</p>
+    <p style="font-size:0.8rem;color:var(--ink-light);">&mdash; Dictionary.com, s.v. "McCarthyism," accessed 2026</p>
+  </div>
+
+  <!-- ══ HOW IT WORKS ══ -->
+  <div class="section-rule">
+    <h2>Mission Briefing — How This Works</h2>
+    <div class="section-rule-line"></div>
+  </div>
+
+  <!-- Step 1 -->
+  <div class="step-card">
+    <div class="step-header">
+      <span class="step-num">Step 1</span>
+      <span class="step-title">Research Five Individuals</span>
+    </div>
+    <div class="step-body">
+      <p>Open the <strong>Research Notes Form</strong> and investigate five individuals named by McCarthy. Three cases provide direct links to declassified NSA Venona cables and KGB archive documents — you read the primary sources and copy verbatim quotes. Two cases require independent research using the starting links provided and any other credible scholarly sources you can find.</p>
+      <p>For each person, you will record their government role, Soviet code name, McCarthy's accusation, archival quotes with citations, and your own analytical judgment: spy, probable agent, sympathizer, or unclear? Your campus librarian is one of the most valuable resources available to you for this step — do not hesitate to ask for help.</p>
+      <p>When all five entries are complete, export your work as a <strong>.txt file</strong> — but <strong>do not submit it to Canvas yet.</strong> You will take this file to NotebookLM in Step 2, generate your Briefing Doc, paste it back into the form, and export a final version that includes both your research and the Briefing Doc. That final export is what gets submitted.</p>
+      <a href="McCarthy_Research_Notes.html" class="step-link" target="_blank">🔍 Open Research Notes Form →</a>
+    </div>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="step-card">
+    <div class="step-header">
+      <span class="step-num">Step 2</span>
+      <span class="step-title">Generate Your NotebookLM Briefing Doc</span>
+    </div>
+    <div class="step-body">
+      <p>Once your Research Notes are complete, export the <strong>.txt file</strong> and upload it to a new <strong>Google NotebookLM</strong> notebook as your only source. Then use the <strong>Briefing Doc</strong> feature in the Studio panel to generate a structured summary drawn entirely from your own research.</p>
+      <p>Copy the full text of the Briefing Doc and paste it into the designated field at the bottom of your Research Notes form — it will be included in your exported submission file. This step is a process check: the quality of the Briefing Doc reflects the quality of your research. A thin or generic summary signals thin research.</p>
+      <div style="background:var(--card-alt);border:1.5px solid var(--border);border-left:4px solid var(--ruby-crimson);border-radius:0 4px 4px 0;padding:0.7rem 1rem;margin-top:0.5rem;">
+        <p style="font-size:0.83rem;color:var(--ink-mid);margin:0;"><strong style="color:var(--ruby-crimson);">Sources only:</strong> Upload your Research Notes .txt file as the sole source in NotebookLM. Do not add outside sources. The Briefing Doc must reflect your own research — nothing more.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="step-card">
+    <div class="step-header">
+      <span class="step-num">Step 3</span>
+      <span class="step-title">Build Your Essay</span>
+    </div>
+    <div class="step-body">
+      <p>Open the <strong>Essay Planner</strong> and build your historical argument. Work through the scaffolded fields — thesis, introduction, three archival body paragraphs, an optional McCarran Committee paragraph, an optional counterargument paragraph, conclusion, and works cited. Each field is a piece of your essay, not a substitute for it.</p>
+      <p>When the scaffolding is complete, move to <strong>Step 7 — Full Essay Draft</strong> and assemble everything into a single continuous document. Your essay is already written in pieces above that field — connect the parts, smooth the transitions, and you are done. Target 600–900 words.</p>
+      <p>Export your completed planner as a <strong>.txt file</strong> for submission. The file contains both your scaffolding and your full essay draft.</p>
+      <a href="mccarthy-essay-planner.html" class="step-link" target="_blank">✍️ Open Essay Planner →</a>
+    </div>
+  </div>
+
+  <!-- Step 4 -->
+  <div class="step-card">
+    <div class="step-header">
+      <span class="step-num">Step 4</span>
+      <span class="step-title">Submit to Canvas</span>
+    </div>
+    <div class="step-body">
+      <p>Submit each file to its <strong>designated Canvas assignment</strong> — each has its own submission link and grading rubric.</p>
+      <div style="background:var(--card-alt);border:1.5px solid var(--border);border-radius:6px;padding:0.9rem 1.1rem;margin:0.6rem 0;">
+        <p style="font-size:0.93rem;color:var(--ink-mid);line-height:1.8;margin-bottom:0.5rem;">📁 <strong style="color:var(--ink);">Research Notes (.txt)</strong> — includes your five case entries and your NotebookLM Briefing Doc. <em style="color:var(--ink-light);">50 points</em></p>
+        <p style="font-size:0.93rem;color:var(--ink-mid);line-height:1.8;margin:0;">📝 <strong style="color:var(--ink);">Essay Planner &amp; Draft (.txt)</strong> — includes all scaffolding fields and your full assembled essay. <em style="color:var(--ink-light);">50 points</em></p>
+      </div>
+      <p style="font-size:0.85rem;font-style:italic;color:var(--ink-light);">Both forms auto-save to your browser as you work. Always export before closing.</p>
+    </div>
+  </div>
+
+  <!-- ══ PRIMARY SOURCES ══ -->
+  <div class="section-rule">
+    <h2>Research Guide — Primary Sources</h2>
+    <div class="section-rule-line"></div>
+  </div>
+
+  <p style="font-size:0.88rem;color:var(--ink-mid);line-height:1.7;margin-bottom:1rem;">The following sources are your starting points. You may also use any credible scholarly or primary source you locate independently — encyclopedias, university press books, government archives, or library databases. <strong style="color:var(--ink);">Your campus librarian can help you locate sources you cannot find through a basic web search.</strong> All five starting links are also embedded directly in each person's card inside the Research Notes form.</p>
+
+  <div class="sources-grid">
+    <div class="source-card">
+      <h4>Harry Dexter White — JURIST</h4>
+      <p>Assistant Secretary of the Treasury. NSA Venona cable (4 Aug 1944) + Gorsky Memo / White Notebook No. 2.</p>
+      <a href="https://www.nsa.gov/portals/75/documents/news-features/declassified-documents/venona/dated/1944/4aug_conversaion_harry_dexter_white.pdf" target="_blank">NSA Venona — White Cable (PDF) →</a>
+    </div>
+    <div class="source-card">
+      <h4>Alger Hiss — ALES</h4>
+      <p>State Department official. Venona Cable #1822 (30 Mar 1945). Contested identification — read both sides.</p>
+      <a href="https://famous-trials.com/algerhiss/680-hissvenona" target="_blank">Famous Trials — Venona Cable #1822 →</a>
+    </div>
+    <div class="source-card">
+      <h4>Harold Glasser — RUBLE</h4>
+      <p>Treasury Department economist. Multiple Venona cables. Gorsky Memo confirmation.</p>
+      <a href="https://en.wikipedia.org/wiki/Harold_Glasser" target="_blank">Wikipedia — Harold Glasser →</a>
+    </div>
+    <div class="source-card">
+      <h4>Lauchlin Currie — PAGE</h4>
+      <p>White House economic advisor. Independent research required. Start with Haynes cross-reference.</p>
+      <a href="https://www.johnearlhaynes.org/page62.html" target="_blank">Haynes — McCarthy &amp; Venona Cross-Reference →</a>
+    </div>
+    <div class="source-card" style="grid-column: 1 / -1; max-width: 50%;">
+      <h4>William Remington — No confirmed code name</h4>
+      <p>Commerce Department economist. Perjury conviction; no Venona cable confirmation. Independent research required.</p>
+      <a href="https://en.wikipedia.org/wiki/William_Remington" target="_blank">Wikipedia — William Remington →</a>
+    </div>
+  </div>
+
+  <div style="background:var(--card-alt);border:1.5px solid var(--border);border-left:4px solid var(--antique-gold-lt);border-radius:0 6px 6px 0;padding:0.8rem 1.1rem;margin:0.5rem 0 1.2rem;">
+    <p style="font-size:0.83rem;color:var(--ink-mid);margin:0 0 0.4rem 0;line-height:1.65;"><strong style="color:var(--antique-gold-text);">📌 Note on Soviet Code Names</strong></p>
+    <p style="font-size:0.83rem;color:var(--ink-mid);margin:0;line-height:1.65;">Soviet intelligence used <strong style="color:var(--ink);">cryptonyms</strong> — secret pseudonyms — for all American agents in cables and memos. Only senior Moscow officers knew the true identities. These were matched to real people decades later using Venona decrypts, defector testimony, and the 1948 Gorsky Memo.</p>
+  </div>
+
+  <!-- ADDITIONAL SOURCES -->
+  <div class="sources-grid" style="grid-template-columns:1fr 1fr 1fr;">
+    <div class="source-card">
+      <h4>NSA Venona Archive</h4>
+      <p>Full collection of ~3,000 declassified Soviet cables. Organized alphabetically by code name.</p>
+      <a href="https://www.nsa.gov/Helpful-Links/NSA-FOIA/Declassification-Transparency-Initiatives/Historical-Releases/Venona/" target="_blank">NSA Venona Project →</a>
+    </div>
+    <div class="source-card">
+      <h4>Vassiliev Notebooks</h4>
+      <p>KGB officer's handwritten notes from Moscow Center files, including the 1948 Gorsky Memo listing active agents by real name.</p>
+      <a href="https://www.wilsoncenter.org/sites/default/files/media/documents/publication/White_Notebook_No.2_Translated1.pdf" target="_blank">White Notebook No. 2 / Gorsky Memo (PDF) →</a>
+    </div>
+    <div class="source-card">
+      <h4>McCarthy's Senate Speech</h4>
+      <p>The February 20, 1950 Congressional Record — McCarthy's "81 cases" speech naming government officials as security risks.</p>
+      <a href="https://www.govinfo.gov/content/pkg/GPO-CRECB-1950-pt4/pdf/GPO-CRECB-1950-pt4-2.pdf" target="_blank">Congressional Record (PDF) →</a>
+    </div>
+  </div>
+
+  <!-- ══ ACADEMIC INTEGRITY ══ -->
+  <div class="integrity-box">
+    <div class="integrity-label">⚠ Academic Integrity</div>
+    <p>All work submitted for this assignment must reflect your own research and analysis of the primary sources. Do not use AI tools to generate, rewrite, or complete any portion of the Research Notes form or the Essay Planner.</p>
+    <p>The one permitted use of AI in this assignment is generating the NotebookLM Briefing Doc in Step 2 — and only when working exclusively from your own exported Research Notes file. Review the class AI use policy before beginning.</p>
+  </div>
+
+  <!-- CLOSING MEMO -->
+  <div class="memo-card">
+    <p style="font-size:0.95rem;line-height:1.85;color:var(--ink-mid);margin-bottom:0.6rem;">This memorandum will self-destruct upon the closing of the browser tab. Handler Austin will deny all knowledge of its existence. Your grade, however, will not be denied.</p>
+    <p style="font-size:0.95rem;line-height:1.85;color:var(--ink-mid);font-style:italic;margin-bottom:0.7rem;">Good luck, Agent. The archives are waiting. So is the gradebook.</p>
+    <p style="font-size:0.88rem;color:var(--ink-light);">&mdash; Handler Austin &nbsp;·&nbsp; Deep Cover Division &nbsp;·&nbsp; HIST 102 Clandestine Operations Unit<br><em>P.S. Nobody followed you. Probably.</em></p>
+  </div>
+
+</div><!-- /wrap -->
+
+<footer class="site-footer">
+  <p class="footer-quote"><em>"The Past is Prologue"</em> — William Shakespeare</p>
+  <p>HIST 102 · United States History Since 1877 · Richland Community College · <a href="../../index.html#contact">Professor Austin</a></p>
+</footer>
+
+</body>
+</html>
