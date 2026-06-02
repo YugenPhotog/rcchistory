@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHIL 120 Reading Guides</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --chalkboard: #324d38;
+            --chalkboard-dark: #1f3327;
+            --chalk-dust: #f6f0df;
+            --paper: #fffaf0;
+            --paper-deep: #eadfca;
+            --wood: #8b5a2b;
+            --wood-dark: #543217;
+            --gold: #e7bc52;
+            --denim: #24546a;
+            --red: #b94b35;
+            --ink: #1d221c;
+            --muted: #5e6657;
+            --shadow: 0 18px 45px rgba(31, 51, 39, 0.22);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            font-family: "Inter", Arial, sans-serif;
+            background:
+                linear-gradient(rgba(255, 250, 240, 0.84), rgba(255, 250, 240, 0.9)),
+                repeating-linear-gradient(90deg, rgba(139, 90, 43, 0.08) 0 1px, transparent 1px 7px),
+                var(--paper);
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.85rem clamp(1rem, 4vw, 3rem);
+            color: var(--chalk-dust);
+            background: rgba(31, 51, 39, 0.95);
+            border-bottom: 4px solid var(--wood);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+        }
+
+        .brand {
+            font-family: "Libre Baskerville", Georgia, serif;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .topbar nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 0.65rem;
+        }
+
+        .topbar a {
+            color: var(--chalk-dust);
+            text-decoration: none;
+            font-size: 0.92rem;
+            font-weight: 700;
+            padding: 0.45rem 0.75rem;
+            border-radius: 999px;
+        }
+
+        .topbar a:hover,
+        .topbar a:focus-visible {
+            color: var(--chalkboard-dark);
+            background: var(--gold);
+            outline: none;
+        }
+
+        .hero {
+            width: min(1120px, calc(100% - 2rem));
+            margin: clamp(1.25rem, 4vw, 2.4rem) auto 0;
+            padding: clamp(1.25rem, 4vw, 2.35rem);
+            overflow: auto;
+            color: var(--chalk-dust);
+            background:
+                radial-gradient(circle at 18% 18%, rgba(246, 240, 223, 0.1), transparent 28%),
+                linear-gradient(135deg, var(--chalkboard), var(--chalkboard-dark));
+            border: 8px solid var(--wood);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .hero-content {
+            max-width: none;
+        }
+
+        .hero-image {
+            float: right;
+            width: min(34vw, 300px);
+            min-width: 210px;
+            height: auto;
+            margin: 0 0 1rem clamp(1rem, 4vw, 2rem);
+            display: block;
+            background: var(--paper);
+            border: 6px solid var(--paper);
+            border-radius: 8px;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.32);
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            margin: 0 0 1rem;
+            padding: 0.5rem 0.8rem;
+            color: var(--chalkboard-dark);
+            background: rgba(246, 240, 223, 0.92);
+            border: 2px solid rgba(231, 188, 82, 0.88);
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-family: "Libre Baskerville", Georgia, serif;
+            font-size: clamp(2.35rem, 6vw, 4.8rem);
+            line-height: 1;
+            text-wrap: balance;
+            text-shadow: 0 5px 22px rgba(0, 0, 0, 0.42);
+        }
+
+        .hero p {
+            max-width: 690px;
+            margin: 1.2rem 0 0;
+            color: #fff7df;
+            font-size: clamp(1.02rem, 2vw, 1.35rem);
+            line-height: 1.65;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1.7rem;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 46px;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-weight: 800;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .button:hover,
+        .button:focus-visible {
+            transform: translateY(-2px);
+            outline: none;
+        }
+
+        .button-primary {
+            color: var(--chalkboard-dark);
+            background: var(--gold);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+        }
+
+        .button-secondary {
+            color: var(--chalk-dust);
+            border: 2px solid rgba(246, 240, 223, 0.82);
+            background: rgba(31, 51, 39, 0.62);
+        }
+
+        .page {
+            width: min(1120px, calc(100% - 2rem));
+            margin: 0 auto;
+            padding: clamp(2rem, 6vw, 4rem) 0;
+        }
+
+        .intro {
+            display: grid;
+            grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
+            gap: clamp(1.25rem, 4vw, 2.5rem);
+            align-items: start;
+        }
+
+        .chalk-panel,
+        .note-panel {
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .chalk-panel {
+            padding: clamp(1.35rem, 4vw, 2.35rem);
+            color: var(--chalk-dust);
+            background:
+                radial-gradient(circle at 16% 20%, rgba(246, 240, 223, 0.08), transparent 26%),
+                linear-gradient(135deg, var(--chalkboard), var(--chalkboard-dark));
+            border: 7px solid var(--wood);
+        }
+
+        .chalk-panel h2,
+        .section-heading h2 {
+            margin: 0;
+            font-family: "Libre Baskerville", Georgia, serif;
+            font-size: clamp(1.85rem, 4vw, 3rem);
+            line-height: 1.12;
+        }
+
+        .chalk-panel p {
+            margin: 1rem 0 0;
+            color: #f2ead3;
+            line-height: 1.75;
+            font-size: 1.05rem;
+        }
+
+        .chalk-rule {
+            width: 170px;
+            height: 5px;
+            margin: 1.2rem 0 0;
+            background: linear-gradient(90deg, var(--gold), transparent);
+            border-radius: 999px;
+        }
+
+        .note-panel {
+            padding: 1.35rem;
+            background: var(--paper);
+            border: 1px solid var(--paper-deep);
+            border-top: 7px solid var(--gold);
+        }
+
+        .note-panel h3 {
+            margin: 0 0 0.7rem;
+            color: var(--chalkboard-dark);
+            font-family: "Libre Baskerville", Georgia, serif;
+            font-size: 1.3rem;
+        }
+
+        .note-panel ul {
+            margin: 0;
+            padding-left: 1.15rem;
+            color: var(--muted);
+            line-height: 1.65;
+        }
+
+        .section-heading {
+            margin: clamp(2.5rem, 7vw, 4.5rem) 0 1.25rem;
+        }
+
+        .section-heading p {
+            max-width: 720px;
+            margin: 0.8rem 0 0;
+            color: var(--muted);
+            line-height: 1.65;
+        }
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1rem;
+        }
+
+        .guide-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-height: 178px;
+            padding: 1rem;
+            overflow: hidden;
+            text-decoration: none;
+            background: #fffdf7;
+            border: 1px solid var(--paper-deep);
+            border-left: 8px solid var(--chalkboard);
+            border-radius: 8px;
+            box-shadow: 0 10px 24px rgba(31, 51, 39, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .guide-card::after {
+            content: "";
+            position: absolute;
+            right: -32px;
+            bottom: -32px;
+            width: 92px;
+            height: 92px;
+            background: rgba(231, 188, 82, 0.2);
+            border-radius: 50%;
+        }
+
+        .guide-card:hover,
+        .guide-card:focus-visible {
+            transform: translateY(-4px);
+            border-left-color: var(--gold);
+            box-shadow: 0 18px 34px rgba(31, 51, 39, 0.18);
+            outline: none;
+        }
+
+        .chapter {
+            width: fit-content;
+            margin-bottom: 0.9rem;
+            padding: 0.35rem 0.6rem;
+            color: var(--chalk-dust);
+            background: var(--denim);
+            border-radius: 999px;
+            font-size: 0.82rem;
+            font-weight: 800;
+        }
+
+        .guide-card h3 {
+            margin: 0;
+            color: var(--chalkboard-dark);
+            font-family: "Libre Baskerville", Georgia, serif;
+            font-size: 1.35rem;
+            line-height: 1.22;
+        }
+
+        .guide-card p {
+            margin: 0.7rem 0 0;
+            color: var(--muted);
+            line-height: 1.55;
+        }
+
+        .open-label {
+            margin-top: auto;
+            padding-top: 1rem;
+            color: var(--red);
+            font-size: 0.88rem;
+            font-weight: 800;
+        }
+
+        .footer {
+            padding: 2rem 1rem;
+            color: var(--chalk-dust);
+            text-align: center;
+            background: var(--chalkboard-dark);
+            border-top: 8px solid var(--wood);
+        }
+
+        .footer p {
+            margin: 0;
+            color: #e7dcc4;
+        }
+
+        @media (max-width: 760px) {
+            .topbar {
+                position: static;
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .topbar nav {
+                justify-content: flex-start;
+            }
+
+            .hero-image {
+                float: none;
+                width: min(100%, 320px);
+                min-width: 0;
+                margin: 0 auto 1.25rem;
+            }
+
+            .intro {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <div class="brand">PHIL 120</div>
+        <nav aria-label="Page navigation">
+            <a href="../../index.html">Home</a>
+            <a href="#guides">Reading Guides</a>
+            <a href="../philosophy-tutor.html">Philosophy Tutor</a>
+        </nav>
+    </header>
+
+    <section class="hero" aria-label="PHIL 120 reading guide landing page">
+        <div class="hero-content">
+            <img class="hero-image" src="prof_study_guide.jpg" alt="Professor holding a reading guide in front of a chalkboard">
+            <p class="eyebrow">Introduction to Ethics</p>
+            <h1>PHIL 120 Reading Guides</h1>
+            <p>
+                Use these chapter guides to focus your reading, gather textual evidence, and prepare for class discussions,
+                quizzes, and written work.
+            </p>
+            <div class="hero-actions">
+                <a class="button button-primary" href="#guides">View Chapter Guides</a>
+                <a class="button button-secondary" href="../philosophy-tutor.html">Open Philosophy Tutor</a>
+            </div>
+        </div>
+    </section>
+
+    <main class="page">
+        <section class="intro" aria-labelledby="guide-purpose">
+            <div class="chalk-panel">
+                <h2 id="guide-purpose">Read with a philosopher's eye.</h2>
+                <div class="chalk-rule"></div>
+                <p>
+                    Each guide gives you a structured path through the chapter: key questions, space for notes, and
+                    prompts that help you identify the reasons behind a philosopher's conclusion.
+                </p>
+                <p>
+                    Work through the guide as you read, then bring your answers into Canvas, class discussion, and exam
+                    preparation.
+                </p>
+            </div>
+            <aside class="note-panel" aria-label="How to use the reading guides">
+                <h3>Quick Method</h3>
+                <ul>
+                    <li>Open the assigned chapter guide.</li>
+                    <li>Read the indicated section carefully.</li>
+                    <li>Answer in complete thoughts, using textual evidence.</li>
+                    <li>Review your responses before quizzes and essays.</li>
+                </ul>
+            </aside>
+        </section>
+
+        <section id="guides" aria-labelledby="guides-heading">
+            <div class="section-heading">
+                <h2 id="guides-heading">Choose a Reading Guide</h2>
+                <p>
+                    Select the guide for your assigned chapter. The files open directly in your browser.
+                </p>
+            </div>
+
+            <div class="guide-grid">
+                <a class="guide-card" href="Phil120_Ch1_ReadingGuide.html">
+                    <span class="chapter">Chapter 1</span>
+                    <h3>Reading Guide</h3>
+                    <p>Begin the course by identifying core questions, terms, and habits of ethical reasoning.</p>
+                    <span class="open-label">Open guide</span>
+                </a>
+                <a class="guide-card" href="Phil120_Ch2_ReadingGuide.html">
+                    <span class="chapter">Chapter 2</span>
+                    <h3>Reading Guide</h3>
+                    <p>Track the argument, collect evidence, and clarify the chapter's central ethical claims.</p>
+                    <span class="open-label">Open guide</span>
+                </a>
+                <a class="guide-card" href="Phil120_Ch3A_ReadingGuide.html">
+                    <span class="chapter">Chapter 3A</span>
+                    <h3>Reading Guide</h3>
+                    <p>Work through the first part of Chapter 3 with focused notes and response prompts.</p>
+                    <span class="open-label">Open guide</span>
+                </a>
+                <a class="guide-card" href="Phil120_Ch3B_ReadingGuide.html">
+                    <span class="chapter">Chapter 3B</span>
+                    <h3>Reading Guide</h3>
+                    <p>Continue Chapter 3 by testing definitions, objections, and supporting reasons.</p>
+                    <span class="open-label">Open guide</span>
+                </a>
+                <a class="guide-card" href="Phil120_Ch4_ReadingGuide.html">
+                    <span class="chapter">Chapter 4</span>
+                    <h3>Reading Guide</h3>
+                    <p>Separate claims from evidence and prepare discussion-ready answers.</p>
+                    <span class="open-label">Open guide</span>
+                </a>
+                <a class="guide-card" href="Phil120_Ch5A_ReadingGuide.html">
+                    <span class="chapter">Chapter 5A</span>
+                    <h3>Reading Guide</h3>
+                    <p>Use this guide to map the first half of Chapter 5 and its key philosophical moves.</p>
+                    <span class="open-label">Open guide</span>
+                </a>
+                <a class="guide-card" href="Phil120_Ch5B_ReadingGuide.html">
+                    <span class="chapter">Chapter 5B</span>
+                    <h3>Reading Guide</h3>
+                    <p>Finish Chapter 5 by evaluating the argument and preparing examples of your own.</p>
+                    <span class="open-label">Open guide</span>
+                </a>
+                <a class="guide-card" href="Phil120_Ch6A_ReadingGuide.html">
+                    <span class="chapter">Chapter 6A</span>
+                    <h3>Reading Guide</h3>
+                    <p>Identify the main concepts in the first part of Chapter 6 and connect them to cases.</p>
+                    <span class="open-label">Open guide</span>
+                </a>
+                <a class="guide-card" href="Phil120_Ch6B_ReadingGuide.html">
+                    <span class="chapter">Chapter 6B</span>
+                    <h3>Reading Guide</h3>
+                    <p>Extend your Chapter 6 notes by comparing positions and sharpening your questions.</p>
+                    <span class="open-label">Open guide</span>
+                </a>
+                <a class="guide-card" href="Phil120_Ch7_ReadingGuide.html">
+                    <span class="chapter">Chapter 7</span>
+                    <h3>Reading Guide</h3>
+                    <p>Focus your reading around the chapter's ethical problem, argument, and implications.</p>
+                    <span class="open-label">Open guide</span>
+                </a>
+                <a class="guide-card" href="Phil120_Ch8_ReadingGuide.html">
+                    <span class="chapter">Chapter 8</span>
+                    <h3>Reading Guide</h3>
+                    <p>Prepare for discussion by tracing the chapter's reasons, objections, and replies.</p>
+                    <span class="open-label">Open guide</span>
+                </a>
+                <a class="guide-card" href="Phil120_Ch9A_ReadingGuide.html">
+                    <span class="chapter">Chapter 9A</span>
+                    <h3>Reading Guide</h3>
+                    <p>Begin Chapter 9 with a close-reading structure for evidence and interpretation.</p>
+                    <span class="open-label">Open guide</span>
+                </a>
+                <a class="guide-card" href="Phil120_Ch9B_ReadingGuide.html">
+                    <span class="chapter">Chapter 9B</span>
+                    <h3>Reading Guide</h3>
+                    <p>Complete the final Chapter 9 guide by reviewing conclusions and lingering questions.</p>
+                    <span class="open-label">Open guide</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>PHIL 120: Introduction to Ethics | Professor Steven Austin</p>
+    </footer>
+</body>
+</html>
