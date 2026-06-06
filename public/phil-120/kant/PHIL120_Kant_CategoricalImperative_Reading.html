@@ -980,68 +980,6 @@
 // ══════════════════════════════════════════
 const WORKER_URL = 'https://herr-magister.stvastn.workers.dev/feedback';
 
-// ── Question text map (for Herr Magister context) ──
-const QUESTION_TEXT = {
-  'r_p2_q1': 'According to Kant, what is the only thing that is good without qualification? Why cannot intelligence or courage qualify?',
-  'r_p2_q2': 'What does Kant mean when he says the good will shines like a jewel even when it accomplishes nothing? What is he trying to show?',
-  'r_p3_q1': 'A nurse helps patients because she genuinely loves caring for people. A second nurse helps because he believes it is the right thing to do, even on days when he finds the work difficult. According to Kant, which nurse is acting with more moral worth? Why?',
-  'r_p3_q2': 'In your own words: what is the difference between acting in accordance with duty and acting from duty?',
-  'r_p4_q1': 'Give one original example of a hypothetical imperative and one original example of a categorical imperative (not taken from this reading). Explain what makes each one the type it is.',
-  'r_p5_q1': 'Why does Kant insist the moral question is different from the prudent question? What is wrong with saying do not lie because you might get caught?',
-  'r_p5_q2': 'Apply the universalizability test to this maxim: I will cheat on exams when I have not studied. Walk through all four steps and state your verdict.',
-  'r_p6_q1': 'In your own words, what does it mean to treat a person as a mere means? Give one example not taken from this reading.',
-  'r_p6_q2': 'Can you use someone as a means without violating F2? For example: is hiring a worker for wages treating them as a mere means? Why or why not?'
-};
-
-// ── Herr Magister: send answer to Worker, display feedback ──
-async function askHerrMagister(qid) {
-  const textarea = document.getElementById(qid);
-  const btn      = document.getElementById('hm-btn-' + qid);
-  const panel    = document.getElementById('hm-panel-' + qid);
-  const body     = document.getElementById('hm-body-' + qid);
-
-  if (!textarea || !btn || !panel || !body) return;
-
-  const answer = textarea.value.trim();
-  const questionText = QUESTION_TEXT[qid] || 'Unknown question';
-
-  // Show panel, set loading state
-  panel.classList.add('open');
-  body.innerHTML = '<span class="hm-spinner">Herr Magister is reading your answer…</span>';
-  btn.disabled = true;
-
-  try {
-    const resp = await fetch(WORKER_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ questionText, studentAnswer: answer, questionId: qid })
-    });
-
-    if (!resp.ok) {
-      const err = await resp.json().catch(() => ({ error: 'Unknown error' }));
-      body.innerHTML = '<span class="hm-error">⚠ ' + (err.error || 'Something went wrong. Please try again.') + '</span>';
-      return;
-    }
-
-    const data = await resp.json();
-    body.textContent = data.feedback || 'No feedback received.';
-
-  } catch (err) {
-    body.innerHTML = '<span class="hm-error">⚠ Could not reach Herr Magister. Check your connection and try again.</span>';
-  } finally {
-    btn.disabled = false;
-    // Smooth scroll panel into view
-    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
-}
-
-function dismissPanel(qid) {
-  const panel = document.getElementById('hm-panel-' + qid);
-  const body  = document.getElementById('hm-body-' + qid);
-  if (panel) panel.classList.remove('open');
-  if (body)  body.innerHTML = '';
-}
-
 // ── Field IDs ──
 const FIELD_IDS = [
   'student-name',
@@ -1054,18 +992,83 @@ const FIELD_IDS = [
 
 const STORAGE_KEY = 'phil120_kant_reading_v1';
 
+// ── Question text map (for Herr Magister context) ──
+const QUESTION_TEXT = {
+  'r_p2_q1': 'According to Kant, what is the only thing that is good without qualification? Why cannot intelligence or courage qualify?',
+  'r_p2_q2': 'What does Kant mean when he says the good will shines like a jewel even when it accomplishes nothing? What is he trying to show?',
+  'r_p3_q1': 'A nurse helps patients because she genuinely loves caring for people. A second nurse helps because he believes it is the right thing to do, even on days when he finds the work difficult. According to Kant, which nurse is acting with more moral worth? Why?',
+  'r_p3_q2': 'In your own words: what is the difference between acting in accordance with duty and acting from duty?',
+  'r_p4_q1': 'Give one original example of a hypothetical imperative and one original example of a categorical imperative not taken from this reading. Explain what makes each one the type it is.',
+  'r_p5_q1': 'Why does Kant insist the moral question is different from the prudent question? What is wrong with saying do not lie because you might get caught?',
+  'r_p5_q2': 'Apply the universalizability test to this maxim: I will cheat on exams when I have not studied. Walk through all four steps and state your verdict.',
+  'r_p6_q1': 'In your own words, what does it mean to treat a person as a mere means? Give one example not taken from this reading.',
+  'r_p6_q2': 'Can you use someone as a means without violating F2? For example: is hiring a worker for wages treating them as a mere means? Why or why not?'
+};
+
 // ── Labels for export ──
 const FIELD_LABELS = {
   'student-name': 'Student Name',
-  'r_p2_q1':  'Part 2 — Check Q1: Good Will (qualification)',
-  'r_p2_q2':  'Part 2 — Check Q2: Good Will (jewel)',
-  'r_p3_q1':  'Part 3 — Check Q3: Duty (nurses)',
-  'r_p3_q2':  'Part 3 — Check Q4: Duty (in accordance vs from)',
-  'r_p4_q1':  'Part 4 — Check Q5: Hypothetical vs Categorical (original examples)',
-  'r_p5_q1':  'Part 5 — Check Q6: Moral vs Prudent question',
-  'r_p5_q2':  'Part 5 — Check Q7: Universalizability test (cheating maxim)',
-  'r_p6_q1':  'Part 6 — Check Q8: Mere means (original example)',
-  'r_p6_q2':  'Part 6 — Check Q9: Means without violation?', e); }
+  'r_p2_q1': 'Part 2 — Check Q1: Good Will (qualification)',
+  'r_p2_q2': 'Part 2 — Check Q2: Good Will (jewel)',
+  'r_p3_q1': 'Part 3 — Check Q3: Duty (nurses)',
+  'r_p3_q2': 'Part 3 — Check Q4: Duty (in accordance vs from)',
+  'r_p4_q1': 'Part 4 — Check Q5: Hypothetical vs Categorical (original examples)',
+  'r_p5_q1': 'Part 5 — Check Q6: Moral vs Prudent question',
+  'r_p5_q2': 'Part 5 — Check Q7: Universalizability test (cheating maxim)',
+  'r_p6_q1': 'Part 6 — Check Q8: Mere means (original example)',
+  'r_p6_q2': 'Part 6 — Check Q9: Means without violation?'
+};
+
+// ── Herr Magister: send answer to Worker, display feedback ──
+async function askHerrMagister(qid) {
+  const textarea = document.getElementById(qid);
+  const btn      = document.getElementById('hm-btn-' + qid);
+  const panel    = document.getElementById('hm-panel-' + qid);
+  const body     = document.getElementById('hm-body-' + qid);
+  if (!textarea || !btn || !panel || !body) return;
+  const answer = textarea.value.trim();
+  const questionText = QUESTION_TEXT[qid] || 'Unknown question';
+  panel.classList.add('open');
+  body.innerHTML = '<span class="hm-spinner">Herr Magister is reading your answer…</span>';
+  btn.disabled = true;
+  try {
+    const resp = await fetch(WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ questionText, studentAnswer: answer, questionId: qid })
+    });
+    if (!resp.ok) {
+      const err = await resp.json().catch(() => ({ error: 'Unknown error' }));
+      body.innerHTML = '<span class="hm-error">⚠ ' + (err.error || 'Something went wrong. Please try again.') + '</span>';
+      return;
+    }
+    const data = await resp.json();
+    body.textContent = data.feedback || 'No feedback received.';
+  } catch (err) {
+    body.innerHTML = '<span class="hm-error">⚠ Could not reach Herr Magister. Check your connection and try again.</span>';
+  } finally {
+    btn.disabled = false;
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function dismissPanel(qid) {
+  const panel = document.getElementById('hm-panel-' + qid);
+  const body  = document.getElementById('hm-body-' + qid);
+  if (panel) panel.classList.remove('open');
+  if (body)  body.innerHTML = '';
+}
+
+// ── Load saved data ──
+function loadSaved() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    FIELD_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && saved[id] !== undefined) el.value = saved[id];
+    });
+    updateStatus('saved');
+  } catch(e) { console.warn('Load failed:', e); }
 }
 
 // ── Save data ──
@@ -1128,7 +1131,7 @@ function clearAll() {
 
 // ── Build export text ──
 function buildExportText() {
-  const studentName = (document.getElementById('student-name')?.value || '').trim() || '(not provided)';
+  const studentName = (document.getElementById('student-name') && document.getElementById('student-name').value || '').trim() || '(not provided)';
   const now = new Date().toLocaleString();
   let lines = [];
   lines.push('═══════════════════════════════════════════════════════');
@@ -1139,33 +1142,15 @@ function buildExportText() {
   lines.push('Student Name : ' + studentName);
   lines.push('Exported     : ' + now);
   lines.push('');
-  lines.push('───────────────────────────────────────────────────────');
-  lines.push('  COMPREHENSION CHECK RESPONSES');
-  lines.push('───────────────────────────────────────────────────────');
-  lines.push('');
-
-  const checkIds = ['r_p2_q1','r_p2_q2','r_p3_q1','r_p3_q2','r_p4_q1','r_p5_q1','r_p5_q2','r_p6_q1','r_p6_q2'];
-  checkIds.forEach(id => {
+  FIELD_IDS.forEach(id => {
+    if (id === 'student-name') return;
     const el = document.getElementById(id);
-    const val = (el?.value || '').trim() || '(no answer provided)';
-    lines.push(FIELD_LABELS[id]);
+    const val = (el && el.value || '').trim() || '(no answer provided)';
+    lines.push('───────────────────────────────────────────────────────');
+    lines.push(FIELD_LABELS[id] || id);
     lines.push(val);
     lines.push('');
   });
-
-  lines.push('───────────────────────────────────────────────────────');
-  lines.push('  GUIDED READING QUESTIONS (submit for credit)');
-  lines.push('───────────────────────────────────────────────────────');
-  lines.push('');
-
-  [].forEach((id, i) => {
-    const el = document.getElementById(id);
-    const val = (el?.value || '').trim() || '(no answer provided)';
-    lines.push('Question ' + (i+1) + ': ' + FIELD_LABELS[id].replace('Guided Reading Q'+(i+1)+': ', ''));
-    lines.push(val);
-    lines.push('');
-  });
-
   lines.push('═══════════════════════════════════════════════════════');
   lines.push('  End of submission — PHIL 120 Kant Reading');
   lines.push('═══════════════════════════════════════════════════════');
@@ -1177,7 +1162,6 @@ function openExport() {
   const text = buildExportText();
   document.getElementById('export-preview').value = text;
   document.getElementById('modal-overlay').classList.add('open');
-  document.getElementById('modal-box').focus();
 }
 
 // ── Close modal ──
@@ -1187,7 +1171,7 @@ function closeExport() {
 
 // ── Download .txt ──
 function downloadTxt() {
-  const studentName = (document.getElementById('student-name')?.value || '').trim();
+  const studentName = (document.getElementById('student-name') && document.getElementById('student-name').value || '').trim();
   const safeName = studentName
     ? studentName.replace(/[^a-zA-Z0-9_\-]/g, '_').substring(0, 30)
     : 'student';
