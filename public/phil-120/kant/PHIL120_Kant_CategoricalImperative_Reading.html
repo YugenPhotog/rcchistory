@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kant: The Categorical Imperative — PHIL 120 Reading Assignment</title>
+<style>
+  /* ── PHIL 120 Palette ── */
+  :root {
+    --cloud-dancer: #F0EEE9;
+    --baltic-sea:   #3D5A6C;
+    --golden-mist:  #C9A961;
+    --quiet-violet: #7D6B7D;
+    --hematite:     #4A4A4A;
+    --blue-fusion:  #5B7E95;
+    --golden-dark:  #7A5E1E;
+    --violet-dark:  #5A4A5A;
+    --blue-dark:    #2E5068;
+    --save-green:   #2E7D32;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--hematite);
+    background: var(--cloud-dancer);
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem 4rem;
+  }
+
+  /* ── TOP TOOLBAR ── */
+  #toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    background: var(--baltic-sea);
+    color: #fff;
+    border-radius: 6px;
+    padding: 0.65rem 1rem;
+    margin-bottom: 1.5rem;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 0.82rem;
+  }
+  #toolbar .toolbar-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  #save-status {
+    font-size: 0.78rem;
+    color: #a8d5b5;
+    min-width: 180px;
+  }
+  #save-status.dirty { color: #ffd580; }
+  #save-status.saved { color: #a8d5b5; }
+
+  .toolbar-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.35);
+    color: #fff;
+    border-radius: 4px;
+    padding: 0.35rem 0.85rem;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background 0.15s;
+    text-decoration: none;
+  }
+  .toolbar-btn:hover { background: rgba(255,255,255,0.28); }
+  .toolbar-btn:focus-visible { outline: 2px solid var(--golden-mist); outline-offset: 2px; }
+  .toolbar-btn.primary {
+    background: var(--golden-dark);
+    border-color: var(--golden-mist);
+  }
+  .toolbar-btn.primary:hover { background: #9a7828; }
+
+  /* ── STUDENT NAME FIELD ── */
+  #name-bar {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-left: 5px solid var(--baltic-sea);
+    border-radius: 0 6px 6px 0;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 0.9rem;
+    color: var(--blue-dark);
+    font-weight: bold;
+  }
+  #name-bar label { white-space: nowrap; }
+  #student-name {
+    flex: 1;
+    border: none;
+    border-bottom: 2px solid var(--baltic-sea);
+    background: transparent;
+    font-family: Georgia, serif;
+    font-size: 1rem;
+    color: var(--hematite);
+    padding: 0.1rem 0.25rem;
+    outline: none;
+    max-width: 340px;
+  }
+  #student-name:focus { border-bottom-color: var(--golden-dark); }
+  #student-name::placeholder { color: #aaa; font-style: italic; }
+
+  /* ── COURSE HEADER ── */
+  .course-header {
+    border-top: 4px solid var(--baltic-sea);
+    border-bottom: 2px solid var(--golden-mist);
+    padding: 1.4rem 0 1.2rem;
+    margin-bottom: 2.25rem;
+    text-align: center;
+  }
+  .course-label {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--blue-dark);
+    margin-bottom: 0.45rem;
+  }
+  .course-header h1 {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: var(--baltic-sea);
+    line-height: 1.3;
+    margin-bottom: 0.3rem;
+  }
+  .course-header .subtitle {
+    font-size: 0.93rem;
+    font-style: italic;
+    color: var(--hematite);
+  }
+  .course-header .meta {
+    margin-top: 0.65rem;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 0.78rem;
+    color: var(--blue-dark);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── SECTION HEADINGS ── */
+  h2 {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 0.74rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--blue-dark);
+    border-bottom: 1px solid var(--golden-mist);
+    padding-bottom: 0.4rem;
+    margin: 2.5rem 0 1rem;
+  }
+  h3 {
+    font-size: 1.05rem;
+    font-weight: bold;
+    color: var(--baltic-sea);
+    margin: 1.75rem 0 0.6rem;
+  }
+  p { margin-bottom: 1rem; }
+
+  /* ── PRIMER BOX ── */
+  .primer {
+    background: #fff;
+    border-left: 5px solid var(--baltic-sea);
+    border-radius: 0 6px 6px 0;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0 2rem;
+  }
+  .primer-label {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--blue-dark);
+    margin-bottom: 0.75rem;
+    font-weight: bold;
+  }
+  .term-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem 1.5rem;
+    margin-top: 0.5rem;
+  }
+  @media (max-width: 560px) { .term-grid { grid-template-columns: 1fr; } }
+  .term-entry { padding: 0.5rem 0; border-bottom: 1px dotted #ccc; }
+  .term { font-weight: bold; color: var(--baltic-sea); font-size: 0.95rem; }
+  .term-def { font-size: 0.88rem; color: var(--hematite); line-height: 1.55; margin-top: 0.15rem; }
+
+  /* ── KANT TEXT BLOCK ── */
+  .kant-text {
+    background: #faf9f7;
+    border: 1px solid #ddd;
+    border-left: 5px solid var(--golden-mist);
+    border-radius: 0 6px 6px 0;
+    padding: 1.4rem 1.7rem;
+    margin: 1.25rem 0;
+  }
+  .kant-label {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--golden-dark);
+    margin-bottom: 0.75rem;
+    font-weight: bold;
+  }
+  .kant-text p { font-size: 0.97rem; line-height: 1.88; color: #333; margin-bottom: 0.9rem; }
+  .kant-text p:last-child { margin-bottom: 0; }
+
+  /* ── GLOSS / MARGIN NOTES ── */
+  .gloss {
+    background: #e8f0f5;
+    border-radius: 3px;
+    padding: 0 4px;
+    font-size: 0.85em;
+    font-style: italic;
+    color: var(--blue-dark);
+  }
+  .margin-note {
+    display: block;
+    background: #f0ecf5;
+    border-left: 3px solid var(--quiet-violet);
+    border-radius: 0 4px 4px 0;
+    padding: 0.5rem 0.85rem;
+    margin: 0.75rem 0 1rem 1.5rem;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 0.82rem;
+    color: var(--violet-dark);
+    line-height: 1.5;
+  }
+  .margin-note::before { content: "📌 "; }
+  .reader-tip {
+    display: block;
+    background: #edf4e8;
+    border-left: 3px solid #5a8a5a;
+    border-radius: 0 4px 4px 0;
+    padding: 0.5rem 0.85rem;
+    margin: 0.75rem 0 1rem 1.5rem;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 0.82rem;
+    color: #2e5a2e;
+    line-height: 1.5;
+  }
+  .reader-tip::before { content: "▶ "; font-weight: bold; }
+
+  /* ── FORMULATION CALLOUT ── */
+  .formulation {
+    background: var(--baltic-sea);
+    color: #fff;
+    border-radius: 6px;
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem 0;
+    text-align: center;
+  }
+  .formulation .f-label {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--golden-mist);
+    margin-bottom: 0.5rem;
+  }
+  .formulation .f-text { font-size: 1.04rem; font-style: italic; line-height: 1.6; }
+
+  /* ── WORKED EXAMPLE ── */
+  .example-box {
+    background: #fff;
+    border: 2px solid var(--golden-mist);
+    border-radius: 6px;
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .example-label {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--golden-dark);
+    font-weight: bold;
+    margin-bottom: 0.75rem;
+  }
+  .step { display: flex; gap: 0.75rem; margin-bottom: 0.6rem; align-items: flex-start; }
+  .step-num {
+    flex-shrink: 0; width: 1.5rem; height: 1.5rem;
+    background: var(--baltic-sea); color: #fff; border-radius: 50%;
+    font-family: 'Trebuchet MS', sans-serif; font-size: 0.78rem; font-weight: bold;
+    display: flex; align-items: center; justify-content: center; margin-top: 0.15rem;
+  }
+  .step-text { font-size: 0.92rem; line-height: 1.6; }
+
+  /* ── RESPONSE AREA ── */
+  .response-section {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-top: 4px solid var(--quiet-violet);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0 0.5rem;
+  }
+  .response-label {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--violet-dark);
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  .response-question {
+    margin-bottom: 1.1rem;
+  }
+  .response-question .q-text {
+    font-size: 0.93rem;
+    font-weight: bold;
+    color: var(--hematite);
+    margin-bottom: 0.15rem;
+    display: block;
+  }
+  .response-question .q-ref {
+    display: block;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 0.78rem;
+    font-style: italic;
+    color: #767676;
+    margin-bottom: 0.4rem;
+  }
+
+  /* ── TEXTAREA STYLING ── */
+  textarea {
+    width: 100%;
+    min-height: 90px;
+    font-family: Georgia, serif;
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: var(--hematite);
+    background: #fafaf8;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    padding: 0.55rem 0.75rem;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  textarea:focus {
+    border-color: var(--baltic-sea);
+    box-shadow: 0 0 0 2px rgba(61,90,108,0.18);
+    background: #fff;
+  }
+  textarea:focus-visible { outline: 2px solid var(--baltic-sea); outline-offset: 1px; }
+  textarea.tall { min-height: 130px; }
+
+  /* ── COMPARISON TABLE ── */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin: 0.5rem 0;
+  }
+  .compare-table thead tr th {
+    text-align: left;
+    padding: 0.5rem 0.75rem;
+    background: var(--baltic-sea);
+    color: #fff;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 0.8rem;
+  }
+  .compare-table thead tr th:first-child { border-radius: 4px 0 0 0; }
+  .compare-table thead tr th:last-child  { border-radius: 0 4px 0 0; }
+  .compare-table tbody tr:nth-child(odd)  td { background: #faf9f7; }
+  .compare-table tbody tr:nth-child(even) td { background: #fff; }
+  .compare-table tbody td { padding: 0.6rem 0.75rem; border-bottom: 1px solid #ddd; vertical-align: top; }
+
+  /* ── EXPORT MODAL ── */
+  #modal-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+  #modal-overlay.open { display: flex; }
+  #modal-box {
+    background: #fff;
+    border-radius: 8px;
+    padding: 1.75rem 2rem;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+    font-family: 'Trebuchet MS', sans-serif;
+  }
+  #modal-box h3 {
+    font-size: 1rem;
+    color: var(--baltic-sea);
+    margin-bottom: 0.5rem;
+    font-family: 'Trebuchet MS', sans-serif;
+  }
+  #modal-box p {
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 1rem;
+    line-height: 1.55;
+  }
+  #export-preview {
+    width: 100%;
+    height: 220px;
+    font-family: monospace;
+    font-size: 0.78rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0.5rem;
+    resize: none;
+    background: #f8f8f8;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  .modal-buttons {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+  }
+  .modal-btn {
+    padding: 0.5rem 1.1rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 0.82rem;
+    cursor: pointer;
+  }
+  .modal-btn.download {
+    background: var(--baltic-sea);
+    color: #fff;
+    border-color: var(--baltic-sea);
+  }
+  .modal-btn.download:hover { background: var(--blue-dark); }
+  .modal-btn.close-btn { background: #fff; color: #555; }
+  .modal-btn.close-btn:hover { background: #f0f0f0; }
+  .modal-btn:focus-visible { outline: 2px solid var(--golden-dark); outline-offset: 2px; }
+
+  /* ── SOURCE NOTE ── */
+  .source-note {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 0.78rem;
+    color: #767676;
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid #ddd;
+    line-height: 1.6;
+  }
+
+
+  /* ── HERR MAGISTER FEEDBACK ── */
+  .hm-btn-wrap {
+    margin-top: 0.45rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .hm-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: var(--golden-dark);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.38rem 0.9rem;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 0.78rem;
+    font-weight: bold;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    transition: background 0.15s, opacity 0.15s;
+  }
+  .hm-btn:hover { background: #9a7828; }
+  .hm-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+  .hm-btn:focus-visible { outline: 2px solid var(--baltic-sea); outline-offset: 2px; }
+
+  .hm-panel {
+    display: none;
+    margin-top: 0.6rem;
+    background: #fdf8ee;
+    border: 1px solid var(--golden-mist);
+    border-left: 5px solid var(--golden-dark);
+    border-radius: 0 6px 6px 0;
+    padding: 0.85rem 1.1rem 0.75rem;
+    animation: hm-slide-in 0.2s ease;
+    position: relative;
+  }
+  .hm-panel.open { display: block; }
+  @keyframes hm-slide-in {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hm-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+  .hm-panel-label {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--golden-dark);
+    font-weight: bold;
+  }
+  .hm-dismiss {
+    background: none;
+    border: none;
+    color: #999;
+    font-size: 0.8rem;
+    cursor: pointer;
+    font-family: 'Trebuchet MS', sans-serif;
+    padding: 0;
+    line-height: 1;
+  }
+  .hm-dismiss:hover { color: #555; }
+  .hm-panel-body {
+    font-family: Georgia, serif;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--hematite);
+    white-space: pre-wrap;
+  }
+  .hm-spinner {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 0.85rem;
+    color: var(--golden-dark);
+    font-style: italic;
+  }
+  .hm-error {
+    color: #b00;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 0.82rem;
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    #toolbar, #modal-overlay { display: none !important; }
+    body { background: white; padding: 0; max-width: 100%; font-size: 11pt; }
+    textarea {
+      border: 1px solid #ccc;
+      background: #fafafa !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      min-height: 80px;
+    }
+    .formulation {
+      background: var(--baltic-sea) !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .compare-table thead tr th {
+      background: var(--baltic-sea) !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .response-section, .example-box { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ TOOLBAR ═══ -->
+<div id="toolbar" role="toolbar" aria-label="Assignment tools">
+  <div class="toolbar-left">
+    <span id="save-status" aria-live="polite">Autosave on</span>
+    <button class="toolbar-btn" onclick="manualSave()" aria-label="Save progress now">💾 Save Now</button>
+    <button class="toolbar-btn" onclick="clearAll()" aria-label="Clear all answers">🗑 Clear Answers</button>
+  </div>
+  <div>
+    <button class="toolbar-btn primary" onclick="openExport()" aria-label="Export answers as text file">📄 Export &amp; Submit</button>
+  </div>
+</div>
+
+<!-- ═══ STUDENT NAME ═══ -->
+<div id="name-bar">
+  <label for="student-name">Student Name:</label>
+  <input type="text" id="student-name" placeholder="Your full name" autocomplete="name" />
+</div>
+
+<!-- ═══ COURSE HEADER ═══ -->
+<header class="course-header">
+  <div class="course-label">PHIL 120 · Introduction to Ethics · Primary Source Reading</div>
+  <h1>Kant: The Categorical Imperative</h1>
+  <div class="subtitle">Selections from <em>Fundamental Principles of the Metaphysic of Morals</em> (1785)</div>
+  <div class="meta">Immanuel Kant · Translated by T. K. Abbott (1895) · Adapted for Classroom Use</div>
+</header>
+
+
+<!-- ═══════════════════════════════════════════
+     ABOUT
+════════════════════════════════════════════ -->
+<h2>About This Reading</h2>
+
+<p>Immanuel Kant (1724–1804) is one of the most important moral philosophers in Western history — and also one of the most difficult to read. His sentences are long, his vocabulary is technical, and his style of argument can feel abstract even when he is making a very concrete point. This edition is designed to help you work through his ideas step by step.</p>
+
+<p>What you are reading is <em>real Kant</em> — not a simplified summary. The text comes from his 1785 work <em>Fundamental Principles of the Metaphysic of Morals</em>. The translation has been modernized from Thomas Kingsmill Abbott's 1895 English version, and difficult passages have been annotated to guide your reading.</p>
+
+<p><strong>Your goal</strong> is not to master every detail, but to encounter Kant's own argument and understand two core ideas: what a categorical imperative is, and what its two most important formulations mean.</p>
+
+<p><strong>How to use this page:</strong> Read each section, then type your responses in the answer boxes. After each answer you will find a <strong>🎓 Ask Herr Magister</strong> button — click it to get immediate feedback from Kant himself on your thinking. Your work <strong>saves automatically</strong> to your browser. When you are finished, click <strong>Export &amp; Submit</strong> to download a text file of all your answers and submit it to Canvas.</p>
+
+<p><strong>Answer requirements:</strong> Each response must be <strong>at least one complete paragraph</strong> written in your own words. Do not use AI tools, outside websites, or any source other than this reading to write your answers. Your responses should come entirely from your own reading and thinking — that is the only way this assignment has any value to you.</p>
+
+
+<!-- ═══════════════════════════════════════════
+     PART ONE: PRIMER
+════════════════════════════════════════════ -->
+<h2>Part One · Key Concepts Primer</h2>
+<p><em>Read this section before reading Kant's text. These are the tools you will need.</em></p>
+
+<div class="primer">
+  <div class="primer-label">Vocabulary You Must Know Before Reading</div>
+  <div class="term-grid">
+    <div class="term-entry">
+      <div class="term">Maxim</div>
+      <div class="term-def">The personal rule or principle behind an action. When you act, there is always an underlying policy: <em>"I will lie when it benefits me,"</em> or <em>"I will keep my promises."</em> That underlying policy is your maxim.</div>
+    </div>
+    <div class="term-entry">
+      <div class="term">Duty</div>
+      <div class="term-def">For Kant, duty is not just obligation — it is the only morally relevant reason for acting. An action has moral worth only when you do it <em>because</em> it is the right thing to do, not because you feel like it or because it benefits you.</div>
+    </div>
+    <div class="term-entry">
+      <div class="term">Good Will</div>
+      <div class="term-def">A will that acts from duty alone — not from self-interest, sympathy, or habit. For Kant, the good will is the only thing that is good without qualification. Intelligence and kindness can be misused; the good will cannot.</div>
+    </div>
+    <div class="term-entry">
+      <div class="term">Rational Being</div>
+      <div class="term-def">A being capable of reason — primarily human beings. For Kant, the capacity for reason is what gives persons their special moral status. It is what makes us ends in ourselves rather than mere tools.</div>
+    </div>
+    <div class="term-entry">
+      <div class="term">Hypothetical Imperative</div>
+      <div class="term-def">A conditional command: <em>"If</em> you want X, <em>then</em> do Y." Example: "If you want to pass the exam, then study." It only binds you if you care about the goal. Most practical instructions are hypothetical imperatives.</div>
+    </div>
+    <div class="term-entry">
+      <div class="term">Categorical Imperative</div>
+      <div class="term-def">An unconditional command: <em>do this, period</em> — regardless of what you want. For Kant, all genuine moral obligations are categorical. They bind every rational person in every situation, no exceptions.</div>
+    </div>
+    <div class="term-entry">
+      <div class="term">Universalizability</div>
+      <div class="term-def">The idea that a moral rule must be one that could apply to <em>everyone</em> without contradiction. If your personal maxim would destroy itself when adopted by all people, it fails the moral test.</div>
+    </div>
+    <div class="term-entry">
+      <div class="term">Ends and Means</div>
+      <div class="term-def">An <em>end</em> is something valuable in itself. A <em>means</em> is something used to achieve something else. Kant argues persons must never be treated as <em>mere means</em> — as tools — but always also as <em>ends in themselves</em>.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PART TWO: THE GOOD WILL
+════════════════════════════════════════════ -->
+<h2>Part Two · The Good Will</h2>
+<p><em>Kant opens the</em> Groundwork <em>with one of the most famous sentences in the history of philosophy.</em></p>
+
+<div class="kant-text">
+  <div class="kant-label">Kant's Text · Section I</div>
+  <p>Nothing in the world — or even beyond it — can possibly be called good without qualification, except a <strong>good will</strong>. Intelligence, wit, judgment, and the other talents of the mind — or courage, determination, and perseverance as qualities of temperament — are undoubtedly good and desirable in many respects. But these gifts of nature may also become extremely harmful if the will that makes use of them, and which constitutes what we call <em>character</em>, is not good.</p>
+  <span class="margin-note">Kant is saying: talent, courage, even intelligence can be turned to evil. Think of a brilliant con artist or a courageous terrorist. The only thing that cannot be twisted into something bad is a will genuinely committed to doing right — a good will.</span>
+  <p>It is the same with the gifts of fortune. Power, wealth, honor, even health, and the general well-being we call happiness, inspire pride — and often arrogance — if there is not a good will to correct their influence. A good will appears to be the indispensable condition even of being <em>worthy</em> of happiness.</p>
+  <span class="margin-note">Notice: Kant is not saying happiness is bad. He is saying happiness without a good will does not make you morally worthy of that happiness. The good will is the precondition for moral worth.</span>
+  <p>A good will is good not because of what it accomplishes or produces — not by its usefulness in attaining some goal — but simply because of the act of willing itself. It is good in itself. Even if, due to misfortune, this will lacked all power to carry out its intentions, it would still shine like a jewel by its own light, as something that has its whole value in itself.</p>
+</div>
+
+<div class="response-section">
+  <div class="response-label">Comprehension Check · The Good Will</div>
+  <div class="response-question">
+    <span class="q-text">1. According to Kant, what is the only thing that is good without qualification? Why can't intelligence or courage qualify?</span>
+    <textarea id="r_p2_q1" class="tall" placeholder="Type your answer here…" aria-label="Answer to question 1"></textarea>
+    <div class="hm-btn-wrap">
+      <button class="hm-btn" onclick="askHerrMagister('r_p2_q1')" id="hm-btn-r_p2_q1" aria-label="Ask Herr Magister for feedback">🎓 Ask Herr Magister</button>
+    </div>
+    <div class="hm-panel" id="hm-panel-r_p2_q1" role="region" aria-live="polite" aria-label="Herr Magister feedback">
+      <div class="hm-panel-header">
+        <span class="hm-panel-label">Herr Magister</span>
+        <button class="hm-dismiss" onclick="dismissPanel('r_p2_q1')" aria-label="Dismiss feedback">✕ Dismiss</button>
+      </div>
+      <div class="hm-panel-body" id="hm-body-r_p2_q1"></div>
+    </div>
+  </div>
+  <div class="response-question">
+    <span class="q-text">2. What does Kant mean when he says the good will "shines like a jewel" even when it accomplishes nothing? What is he trying to show?</span>
+    <textarea id="r_p2_q2" placeholder="Type your answer here…" aria-label="Answer to question 2"></textarea>
+    <div class="hm-btn-wrap">
+      <button class="hm-btn" onclick="askHerrMagister('r_p2_q2')" id="hm-btn-r_p2_q2" aria-label="Ask Herr Magister for feedback">🎓 Ask Herr Magister</button>
+    </div>
+    <div class="hm-panel" id="hm-panel-r_p2_q2" role="region" aria-live="polite" aria-label="Herr Magister feedback">
+      <div class="hm-panel-header">
+        <span class="hm-panel-label">Herr Magister</span>
+        <button class="hm-dismiss" onclick="dismissPanel('r_p2_q2')" aria-label="Dismiss feedback">✕ Dismiss</button>
+      </div>
+      <div class="hm-panel-body" id="hm-body-r_p2_q2"></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PART THREE: DUTY
+════════════════════════════════════════════ -->
+<h2>Part Three · Acting from Duty</h2>
+<p><em>Kant now unpacks what a good will looks like in practice. The moral worth of an action depends entirely on whether it is done</em> from duty <em>— not from inclination, sympathy, or self-interest.</em></p>
+
+<div class="kant-text">
+  <div class="kant-label">Kant's Text · Section I, continued</div>
+  <p>To be charitable when we can is a duty. And beyond that, there are many people so warmly sympathetic that, without any motive of vanity or self-interest, they find pleasure in spreading joy around them and take delight in the contentment of others as their own achievement. But I maintain that in such a case an action of this kind, however kind it may be, has nevertheless <em>no genuine moral worth</em>. It deserves praise and encouragement, but not moral esteem. The maxim lacks moral significance, because such actions are done from inclination, not from duty.</p>
+  <span class="margin-note">This is one of Kant's most controversial claims. A naturally warm, generous person who helps others because they enjoy it is doing something good — but Kant says it has no moral worth in the strict sense. Moral worth requires acting from duty. Ask yourself: do you agree?</span>
+  <p>Put the case that the mind of that same charitable person is clouded by grief, extinguishing all sympathy with the suffering of others. He still has the power to help, but he is not moved by their distress. Now suppose he tears himself out of this emotional numbness and performs the action with no inclination toward it — simply from duty. <em>Then</em> for the first time his action has genuine moral worth.</p>
+  <span class="margin-note">Here Kant makes his sharpest point. The person who helps when they do not feel like it — who acts from duty alone — is the one acting with full moral worth. Kant is not saying we should suppress our feelings; he is saying duty, not feeling, is the true foundation of moral action.</span>
+  <p>An action done from duty derives its moral worth not from the <em>result</em> it is meant to produce, but from the <em>principle</em> by which it is determined. The moral worth lies not in what the action achieves, but in the maxim the person acts upon.</p>
+</div>
+
+<div class="response-section">
+  <div class="response-label">Comprehension Check · Duty</div>
+  <div class="response-question">
+    <span class="q-text">3. A nurse helps patients because she genuinely loves caring for people. A second nurse helps because he believes it is the right thing to do, even on days when he finds the work difficult. According to Kant, which nurse is acting with more moral worth? Why?</span>
+    <textarea id="r_p3_q1" class="tall" placeholder="Type your answer here…" aria-label="Answer to question 3"></textarea>
+    <div class="hm-btn-wrap">
+      <button class="hm-btn" onclick="askHerrMagister('r_p3_q1')" id="hm-btn-r_p3_q1" aria-label="Ask Herr Magister for feedback">🎓 Ask Herr Magister</button>
+    </div>
+    <div class="hm-panel" id="hm-panel-r_p3_q1" role="region" aria-live="polite" aria-label="Herr Magister feedback">
+      <div class="hm-panel-header">
+        <span class="hm-panel-label">Herr Magister</span>
+        <button class="hm-dismiss" onclick="dismissPanel('r_p3_q1')" aria-label="Dismiss feedback">✕ Dismiss</button>
+      </div>
+      <div class="hm-panel-body" id="hm-body-r_p3_q1"></div>
+    </div>
+  </div>
+  <div class="response-question">
+    <span class="q-text">4. In your own words: what is the difference between acting <em>in accordance with</em> duty and acting <em>from</em> duty?</span>
+    <textarea id="r_p3_q2" placeholder="Type your answer here…" aria-label="Answer to question 4"></textarea>
+    <div class="hm-btn-wrap">
+      <button class="hm-btn" onclick="askHerrMagister('r_p3_q2')" id="hm-btn-r_p3_q2" aria-label="Ask Herr Magister for feedback">🎓 Ask Herr Magister</button>
+    </div>
+    <div class="hm-panel" id="hm-panel-r_p3_q2" role="region" aria-live="polite" aria-label="Herr Magister feedback">
+      <div class="hm-panel-header">
+        <span class="hm-panel-label">Herr Magister</span>
+        <button class="hm-dismiss" onclick="dismissPanel('r_p3_q2')" aria-label="Dismiss feedback">✕ Dismiss</button>
+      </div>
+      <div class="hm-panel-body" id="hm-body-r_p3_q2"></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PART FOUR: TWO KINDS OF COMMANDS
+════════════════════════════════════════════ -->
+<h2>Part Four · Two Kinds of Commands</h2>
+<p><em>Now Kant introduces the distinction at the heart of his theory. Read this section carefully.</em></p>
+
+<div class="kant-text">
+  <div class="kant-label">Kant's Text · Section II</div>
+  <p>All imperatives <span class="gloss">[commands or rules for action]</span> command either <strong>hypothetically</strong> or <strong>categorically</strong>. Hypothetical imperatives represent an action as necessary only as a <em>means</em> to something else we want. The categorical imperative represents an action as <em>necessary in itself</em>, without reference to any further goal — as objectively necessary.</p>
+  <span class="reader-tip">Stop here. Make sure you have the distinction: hypothetical = "do X <em>if</em> you want Y"; categorical = "do X, full stop." One is conditional; the other is not.</span>
+  <p>If the action is good only as a <em>means</em> to something else, then the imperative is hypothetical. If the action is conceived as <em>good in itself</em> — as what a rational will simply must do — then the imperative is categorical.</p>
+  <p>The hypothetical imperative only says that an action is good for some purpose you may or may not care about. The categorical imperative declares an action to be necessary without any reference to purpose. It is valid for all rational beings, in all circumstances, as an absolute practical principle.</p>
+  <span class="margin-note">Think of it this way: "Drink water if you want to survive" is hypothetical — it only applies if you want to survive. "Do not torture innocent people" is categorical — it applies regardless of what you want or what you would gain from it.</span>
+  <p>There is therefore only one categorical imperative, and it is this:</p>
+</div>
+
+<div class="formulation">
+  <div class="f-label">The First Formulation · Universal Law Formula</div>
+  <div class="f-text">"Act only according to that maxim by which you can at the same time will that it should become a universal law."</div>
+</div>
+
+<div class="response-section">
+  <div class="response-label">Comprehension Check · Two Kinds of Commands</div>
+  <div class="response-question">
+    <span class="q-text">5. Give one original example of a hypothetical imperative and one original example of a categorical imperative (not taken from this reading). Explain what makes each one the type it is.</span>
+    <textarea id="r_p4_q1" class="tall" placeholder="Type your answer here…" aria-label="Answer to question 5"></textarea>
+    <div class="hm-btn-wrap">
+      <button class="hm-btn" onclick="askHerrMagister('r_p4_q1')" id="hm-btn-r_p4_q1" aria-label="Ask Herr Magister for feedback">🎓 Ask Herr Magister</button>
+    </div>
+    <div class="hm-panel" id="hm-panel-r_p4_q1" role="region" aria-live="polite" aria-label="Herr Magister feedback">
+      <div class="hm-panel-header">
+        <span class="hm-panel-label">Herr Magister</span>
+        <button class="hm-dismiss" onclick="dismissPanel('r_p4_q1')" aria-label="Dismiss feedback">✕ Dismiss</button>
+      </div>
+      <div class="hm-panel-body" id="hm-body-r_p4_q1"></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PART FIVE: THE LYING PROMISE
+════════════════════════════════════════════ -->
+<h2>Part Five · Applying the Test — The Lying Promise</h2>
+<p><em>Kant demonstrates the universal law formula with a concrete example. Follow the argument step by step.</em></p>
+
+<div class="kant-text">
+  <div class="kant-label">Kant's Text · Section I</div>
+  <p>Let the question be, for example: May I, when I am in financial difficulty, make a promise I have no intention of keeping? I readily distinguish here between two senses of the question: whether it is <em>prudent</em>, or whether it is <em>right</em>, to make a false promise.</p>
+  <span class="margin-note">"Prudent" means smart, in my best interest. "Right" means morally correct. Kant is separating these two questions on purpose — they have different answers.</span>
+  <p>As for whether it is prudent: I can see clearly that it is not enough to escape my present difficulty by this trick — I must consider whether greater trouble might arise later. Since my credit once lost may be much more harmful to me than any present difficulty, it seems wiser never to promise anything I do not intend to keep. But this maxim is still only based on <em>fear of consequences</em>.</p>
+  <p>It is a wholly different thing to be truthful from <em>duty</em> and to be truthful from <em>fear of consequences</em>. In the first case, the very idea of the action implies a law for me. In the second, I must look first to what results might follow.</p>
+  <span class="reader-tip">Kant's point: even if lying turns out to be unwise because you might get caught, that is not a moral reason not to lie. The moral reason has nothing to do with consequences. It has to do with what the maxim of lying becomes when universalized.</span>
+  <p>The shortest and most reliable way to answer whether a lying promise is consistent with duty is to ask myself: <em>Could I be content if the maxim "make a deceitful promise when in difficulty" became a universal law for everyone, including myself?</em> And I immediately recognize that while I can <em>will</em> the lie, I cannot <em>will</em> that lying should become a universal law.</p>
+  <p>For with such a law there would be no promises at all. No one would believe a promise made by anyone else, and the very institution of promising would collapse. My maxim, as soon as it became a universal law, would <em>destroy itself</em>.</p>
+  <span class="margin-note">This is the key move. Kant's argument is not "lying is bad because bad things will happen." It is: if everyone lied, the very thing that makes lying useful — that people expect honesty — would disappear. The maxim of lying is self-defeating when universalized.</span>
+</div>
+
+<div class="example-box">
+  <div class="example-label">Worked Example · Running the Universalizability Test</div>
+  <p style="font-size:0.92rem; margin-bottom:1rem;">Here is how to apply the First Formulation step by step.</p>
+  <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Identify your maxim.</strong> State the personal rule behind the action. <em>Example: "I will make promises I do not intend to keep when I need money."</em></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Universalize the maxim.</strong> Imagine every rational person acting on this same rule. <em>Example: "Everyone in financial difficulty makes promises they do not intend to keep."</em></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Test for contradiction.</strong> Can the universalized maxim hold together — or does it collapse into incoherence? <em>Example: If everyone made false promises, the concept of a promise would cease to function. The maxim defeats itself.</em></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-text"><strong>Verdict.</strong> If the maxim cannot be universalized without contradiction, it is morally impermissible. You have a <em>duty</em> not to act on it.</div></div>
+</div>
+
+<div class="response-section">
+  <div class="response-label">Comprehension Check · The Lying Promise</div>
+  <div class="response-question">
+    <span class="q-text">6. Why does Kant insist the moral question is different from the prudent question? What is wrong with saying "don't lie because you might get caught"?</span>
+    <textarea id="r_p5_q1" placeholder="Type your answer here…" aria-label="Answer to question 6"></textarea>
+    <div class="hm-btn-wrap">
+      <button class="hm-btn" onclick="askHerrMagister('r_p5_q1')" id="hm-btn-r_p5_q1" aria-label="Ask Herr Magister for feedback">🎓 Ask Herr Magister</button>
+    </div>
+    <div class="hm-panel" id="hm-panel-r_p5_q1" role="region" aria-live="polite" aria-label="Herr Magister feedback">
+      <div class="hm-panel-header">
+        <span class="hm-panel-label">Herr Magister</span>
+        <button class="hm-dismiss" onclick="dismissPanel('r_p5_q1')" aria-label="Dismiss feedback">✕ Dismiss</button>
+      </div>
+      <div class="hm-panel-body" id="hm-body-r_p5_q1"></div>
+    </div>
+  </div>
+  <div class="response-question">
+    <span class="q-text">7. Apply the universalizability test to this maxim: <em>"I will cheat on exams when I have not studied."</em> Walk through all four steps and state your verdict.</span>
+    <textarea id="r_p5_q2" class="tall" placeholder="Step 1 — Maxim: …&#10;Step 2 — Universalized: …&#10;Step 3 — Contradiction test: …&#10;Step 4 — Verdict: …" aria-label="Answer to question 7"></textarea>
+    <div class="hm-btn-wrap">
+      <button class="hm-btn" onclick="askHerrMagister('r_p5_q2')" id="hm-btn-r_p5_q2" aria-label="Ask Herr Magister for feedback">🎓 Ask Herr Magister</button>
+    </div>
+    <div class="hm-panel" id="hm-panel-r_p5_q2" role="region" aria-live="polite" aria-label="Herr Magister feedback">
+      <div class="hm-panel-header">
+        <span class="hm-panel-label">Herr Magister</span>
+        <button class="hm-dismiss" onclick="dismissPanel('r_p5_q2')" aria-label="Dismiss feedback">✕ Dismiss</button>
+      </div>
+      <div class="hm-panel-body" id="hm-body-r_p5_q2"></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PART SIX: F2 — HUMANITY FORMULA
+════════════════════════════════════════════ -->
+<h2>Part Six · The Second Formulation — The Humanity Formula</h2>
+<p><em>Kant now states what many consider the most powerful version of the categorical imperative.</em></p>
+
+<div class="kant-text">
+  <div class="kant-label">Kant's Text · Section II</div>
+  <p>Assuming that there is something whose existence has absolute worth — something that, as an end in itself, could be the ground of definite laws — then the supreme practical principle would be this: <em>rational nature exists as an end in itself</em>. Every rational being necessarily represents its own existence this way — and it is equally a ground for every other rational being.</p>
+  <span class="margin-note">"End in itself" means something that has value for its own sake — not because it is useful, not because we happen to value it, but because of what it is. Kant is arguing that every rational person has this kind of unconditional worth.</span>
+  <p>The practical imperative will therefore be the following:</p>
+</div>
+
+<div class="formulation">
+  <div class="f-label">The Second Formulation · Humanity Formula</div>
+  <div class="f-text">"Act so that you treat humanity, whether in your own person or in that of another, always as an end and never as a means only."</div>
+</div>
+
+<div class="kant-text">
+  <div class="kant-label">Kant's Text · Section II, continued</div>
+  <p>Consider the person who is thinking of making a false promise to obtain money. They intend to use another person merely as a means to their own advantage — something the other person has not consented to and would not consent to if they knew the full truth. The person they deceive cannot possibly agree to the transaction, because they do not even know the real terms. This conflict with the principle of humanity in other persons is clear.</p>
+  <span class="margin-note">When you lie to someone to get their money, you are bypassing their rationality. They cannot give informed consent because you have hidden the truth from them. You are treating them as a vending machine — something to extract a result from — not as a person with dignity.</span>
+  <p>The person who intends to do nothing positive for others but is content to take nothing from them merely satisfies duty formally. But the person who deceives another to get what they want has violated something deeper: the other's standing as a rational agent — their humanity.</p>
+  <span class="reader-tip">Notice what is new in this formulation. F1 asks: <em>can this maxim be universalized?</em> F2 asks: <em>am I treating the people affected as ends, or merely as tools?</em> These are different questions — and they can illuminate the same case in different ways.</span>
+</div>
+
+<div class="example-box">
+  <div class="example-label">Side by Side · F1 vs. F2 Applied to the Same Case</div>
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Scenario</th>
+        <th>F1: Can the maxim be universalized?</th>
+        <th>F2: Are persons treated as ends?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Lying promise</strong><br><span style="font-size:0.82rem;color:#555;">Promise to repay with no intent to do so</span></td>
+        <td>No — universal lying destroys the institution of promising</td>
+        <td>No — the deceived person cannot consent; they are used as a cash machine</td>
+      </tr>
+      <tr>
+        <td><strong>Manipulation</strong><br><span style="font-size:0.82rem;color:#555;">Flatter someone to get a favor</span></td>
+        <td>Questionable — universal flattery may undermine trust</td>
+        <td>No — the person is being steered rather than respected; their reason is bypassed</td>
+      </tr>
+      <tr>
+        <td><strong>Honest request</strong><br><span style="font-size:0.82rem;color:#555;">Ask truthfully and accept no for an answer</span></td>
+        <td>Yes — universal honest requesting is coherent</td>
+        <td>Yes — the person can exercise their own rational judgment freely</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="response-section">
+  <div class="response-label">Comprehension Check · The Humanity Formula</div>
+  <div class="response-question">
+    <span class="q-text">8. In your own words, what does it mean to treat a person as a "mere means"? Give one example not taken from this reading.</span>
+    <textarea id="r_p6_q1" placeholder="Type your answer here…" aria-label="Answer to question 8"></textarea>
+    <div class="hm-btn-wrap">
+      <button class="hm-btn" onclick="askHerrMagister('r_p6_q1')" id="hm-btn-r_p6_q1" aria-label="Ask Herr Magister for feedback">🎓 Ask Herr Magister</button>
+    </div>
+    <div class="hm-panel" id="hm-panel-r_p6_q1" role="region" aria-live="polite" aria-label="Herr Magister feedback">
+      <div class="hm-panel-header">
+        <span class="hm-panel-label">Herr Magister</span>
+        <button class="hm-dismiss" onclick="dismissPanel('r_p6_q1')" aria-label="Dismiss feedback">✕ Dismiss</button>
+      </div>
+      <div class="hm-panel-body" id="hm-body-r_p6_q1"></div>
+    </div>
+  </div>
+  <div class="response-question">
+    <span class="q-text">9. Can you use someone as a <em>means</em> without violating F2? For example: is hiring a worker for wages treating them as a mere means? Why or why not?</span>
+    <textarea id="r_p6_q2" placeholder="Type your answer here…" aria-label="Answer to question 9"></textarea>
+    <div class="hm-btn-wrap">
+      <button class="hm-btn" onclick="askHerrMagister('r_p6_q2')" id="hm-btn-r_p6_q2" aria-label="Ask Herr Magister for feedback">🎓 Ask Herr Magister</button>
+    </div>
+    <div class="hm-panel" id="hm-panel-r_p6_q2" role="region" aria-live="polite" aria-label="Herr Magister feedback">
+      <div class="hm-panel-header">
+        <span class="hm-panel-label">Herr Magister</span>
+        <button class="hm-dismiss" onclick="dismissPanel('r_p6_q2')" aria-label="Dismiss feedback">✕ Dismiss</button>
+      </div>
+      <div class="hm-panel-body" id="hm-body-r_p6_q2"></div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- ═══ SOURCE NOTE ═══ -->
+<div class="source-note">
+  Source: Immanuel Kant, <em>Fundamental Principles of the Metaphysic of Morals</em> (1785).<br>
+  Translated by Thomas Kingsmill Abbott (1895). Public domain via Project Gutenberg (EBook #5682).<br>
+  Language modernized and annotated for classroom use. PHIL 120 · Richland Community College.
+</div>
+
+
+<!-- ═══ EXPORT MODAL ═══ -->
+<div id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div id="modal-box">
+    <h3 id="modal-title">📄 Export Your Answers</h3>
+    <p>Your responses are shown below as plain text. Click <strong>Download .txt File</strong> to save it to your computer, then upload that file to Canvas to submit this assignment.</p>
+    <textarea id="export-preview" readonly aria-label="Export preview"></textarea>
+    <div class="modal-buttons">
+      <button class="modal-btn close-btn" onclick="closeExport()">Cancel</button>
+      <button class="modal-btn download" onclick="downloadTxt()">⬇ Download .txt File</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ JAVASCRIPT ═══ -->
+<script>
+// ══════════════════════════════════════════
+// CONFIGURATION — update before deploying
+// ══════════════════════════════════════════
+const WORKER_URL = 'https://herr-magister.stvastn.workers.dev/feedback';
+
+// ── Question text map (for Herr Magister context) ──
+const QUESTION_TEXT = {"r_p2_q1": "According to Kant, what is the only thing that is good without qualification? Why can’t intelligence or courage qualify?", "r_p2_q2": "What does Kant mean when he says the good will "shines like a jewel" even when it accomplishes nothing? What is he trying to show?", "r_p3_q1": "A nurse helps patients because she genuinely loves caring for people. A second nurse helps because he believes it is the right thing to do, even on days when he finds the work difficult. According to Kant, which nurse is acting with more moral worth? Why?", "r_p3_q2": "In your own words: what is the difference between acting in accordance with duty and acting from duty?", "r_p4_q1": "Give one original example of a hypothetical imperative and one original example of a categorical imperative (not taken from this reading). Explain what makes each one the type it is.", "r_p5_q1": "Why does Kant insist the moral question is different from the prudent question? What is wrong with saying "don\"t lie because you might get caught"?", "r_p5_q2": "Apply the universalizability test to this maxim: "I will cheat on exams when I have not studied." Walk through all four steps and state your verdict.", "r_p6_q1": "In your own words, what does it mean to treat a person as a "mere means"? Give one example not taken from this reading.", "r_p6_q2": "Can you use someone as a means without violating F2? For example: is hiring a worker for wages treating them as a mere means? Why or why not?"s ethics, based on what you read? State it as a clear argument, not just a feeling."};
+
+// ── Herr Magister: send answer to Worker, display feedback ──
+async function askHerrMagister(qid) {
+  const textarea = document.getElementById(qid);
+  const btn      = document.getElementById('hm-btn-' + qid);
+  const panel    = document.getElementById('hm-panel-' + qid);
+  const body     = document.getElementById('hm-body-' + qid);
+
+  if (!textarea || !btn || !panel || !body) return;
+
+  const answer = textarea.value.trim();
+  const questionText = QUESTION_TEXT[qid] || 'Unknown question';
+
+  // Show panel, set loading state
+  panel.classList.add('open');
+  body.innerHTML = '<span class="hm-spinner">Herr Magister is reading your answer…</span>';
+  btn.disabled = true;
+
+  try {
+    const resp = await fetch(WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ questionText, studentAnswer: answer, questionId: qid })
+    });
+
+    if (!resp.ok) {
+      const err = await resp.json().catch(() => ({ error: 'Unknown error' }));
+      body.innerHTML = '<span class="hm-error">⚠ ' + (err.error || 'Something went wrong. Please try again.') + '</span>';
+      return;
+    }
+
+    const data = await resp.json();
+    body.textContent = data.feedback || 'No feedback received.';
+
+  } catch (err) {
+    body.innerHTML = '<span class="hm-error">⚠ Could not reach Herr Magister. Check your connection and try again.</span>';
+  } finally {
+    btn.disabled = false;
+    // Smooth scroll panel into view
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function dismissPanel(qid) {
+  const panel = document.getElementById('hm-panel-' + qid);
+  const body  = document.getElementById('hm-body-' + qid);
+  if (panel) panel.classList.remove('open');
+  if (body)  body.innerHTML = '';
+}
+
+// ── Field IDs ──
+const FIELD_IDS = [
+  'student-name',
+  'r_p2_q1','r_p2_q2',
+  'r_p3_q1','r_p3_q2',
+  'r_p4_q1',
+  'r_p5_q1','r_p5_q2',
+  'r_p6_q1','r_p6_q2'
+];
+
+const STORAGE_KEY = 'phil120_kant_reading_v1';
+
+// ── Labels for export ──
+const FIELD_LABELS = {
+  'student-name': 'Student Name',
+  'r_p2_q1':  'Part 2 — Check Q1: Good Will (qualification)',
+  'r_p2_q2':  'Part 2 — Check Q2: Good Will (jewel)',
+  'r_p3_q1':  'Part 3 — Check Q3: Duty (nurses)',
+  'r_p3_q2':  'Part 3 — Check Q4: Duty (in accordance vs from)',
+  'r_p4_q1':  'Part 4 — Check Q5: Hypothetical vs Categorical (original examples)',
+  'r_p5_q1':  'Part 5 — Check Q6: Moral vs Prudent question',
+  'r_p5_q2':  'Part 5 — Check Q7: Universalizability test (cheating maxim)',
+  'r_p6_q1':  'Part 6 — Check Q8: Mere means (original example)',
+  'r_p6_q2':  'Part 6 — Check Q9: Means without violation?', e); }
+}
+
+// ── Save data ──
+function saveData() {
+  try {
+    const data = {};
+    FIELD_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) data[id] = el.value;
+    });
+    data['_saved_at'] = new Date().toISOString();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    updateStatus('saved');
+  } catch(e) { console.warn('Save failed:', e); }
+}
+
+// ── Manual save ──
+function manualSave() {
+  saveData();
+  const btn = document.querySelector('[onclick="manualSave()"]');
+  if (btn) {
+    const orig = btn.textContent;
+    btn.textContent = '✓ Saved!';
+    setTimeout(() => { btn.textContent = orig; }, 1800);
+  }
+}
+
+// ── Status indicator ──
+function updateStatus(state) {
+  const el = document.getElementById('save-status');
+  if (!el) return;
+  if (state === 'saved') {
+    const now = new Date();
+    el.textContent = '✓ Saved at ' + now.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+    el.className = 'saved';
+  } else if (state === 'dirty') {
+    el.textContent = '● Unsaved changes…';
+    el.className = 'dirty';
+  }
+}
+
+// ── Autosave on input (debounced 1.5s) ──
+let saveTimer = null;
+function scheduleAutosave() {
+  updateStatus('dirty');
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(saveData, 1500);
+}
+
+// ── Clear all ──
+function clearAll() {
+  if (!confirm('Clear all your answers? This cannot be undone.')) return;
+  FIELD_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  localStorage.removeItem(STORAGE_KEY);
+  updateStatus('saved');
+}
+
+// ── Build export text ──
+function buildExportText() {
+  const studentName = (document.getElementById('student-name')?.value || '').trim() || '(not provided)';
+  const now = new Date().toLocaleString();
+  let lines = [];
+  lines.push('═══════════════════════════════════════════════════════');
+  lines.push('  PHIL 120 · Introduction to Ethics · Richland Community College');
+  lines.push('  Kant: The Categorical Imperative — Reading Assignment');
+  lines.push('═══════════════════════════════════════════════════════');
+  lines.push('');
+  lines.push('Student Name : ' + studentName);
+  lines.push('Exported     : ' + now);
+  lines.push('');
+  lines.push('───────────────────────────────────────────────────────');
+  lines.push('  COMPREHENSION CHECK RESPONSES');
+  lines.push('───────────────────────────────────────────────────────');
+  lines.push('');
+
+  const checkIds = ['r_p2_q1','r_p2_q2','r_p3_q1','r_p3_q2','r_p4_q1','r_p5_q1','r_p5_q2','r_p6_q1','r_p6_q2'];
+  checkIds.forEach(id => {
+    const el = document.getElementById(id);
+    const val = (el?.value || '').trim() || '(no answer provided)';
+    lines.push(FIELD_LABELS[id]);
+    lines.push(val);
+    lines.push('');
+  });
+
+  lines.push('───────────────────────────────────────────────────────');
+  lines.push('  GUIDED READING QUESTIONS (submit for credit)');
+  lines.push('───────────────────────────────────────────────────────');
+  lines.push('');
+
+  [].forEach((id, i) => {
+    const el = document.getElementById(id);
+    const val = (el?.value || '').trim() || '(no answer provided)';
+    lines.push('Question ' + (i+1) + ': ' + FIELD_LABELS[id].replace('Guided Reading Q'+(i+1)+': ', ''));
+    lines.push(val);
+    lines.push('');
+  });
+
+  lines.push('═══════════════════════════════════════════════════════');
+  lines.push('  End of submission — PHIL 120 Kant Reading');
+  lines.push('═══════════════════════════════════════════════════════');
+  return lines.join('\n');
+}
+
+// ── Open export modal ──
+function openExport() {
+  const text = buildExportText();
+  document.getElementById('export-preview').value = text;
+  document.getElementById('modal-overlay').classList.add('open');
+  document.getElementById('modal-box').focus();
+}
+
+// ── Close modal ──
+function closeExport() {
+  document.getElementById('modal-overlay').classList.remove('open');
+}
+
+// ── Download .txt ──
+function downloadTxt() {
+  const studentName = (document.getElementById('student-name')?.value || '').trim();
+  const safeName = studentName
+    ? studentName.replace(/[^a-zA-Z0-9_\-]/g, '_').substring(0, 30)
+    : 'student';
+  const filename = 'PHIL120_Kant_Reading_' + safeName + '.txt';
+  const text = buildExportText();
+  const blob = new Blob([text], {type: 'text/plain;charset=utf-8'});
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// ── Close modal on overlay click ──
+document.getElementById('modal-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeExport();
+});
+
+// ── Close modal on Escape ──
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeExport();
+});
+
+// ── Attach autosave listeners ──
+FIELD_IDS.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', scheduleAutosave);
+});
+
+// ── Init ──
+loadSaved();
+</script>
+
+</body>
+</html>
