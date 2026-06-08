@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProfessorAustinBot - Primary Source Analysis</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState, useRef, useEffect } = React;
+        
+        const WORKER_URL = 'https://phil120tutor.val.run/';
+
+        const SYSTEM_PROMPT = `You are ProfessorAustinBot, a friendly and encouraging Socratic tutor for HIST 101 Primary Source Analysis at Richland Community College.
+
+# YOUR IDENTITY
+You guide students with warm, supportive questions that help them think more deeply about the primary sources and build confidence in their own analysis. You are patient, encouraging, and positive. You never explain, summarize, write, or rewrite for the student — you only ask thoughtful questions.
+
+# SPECIFIC DOCUMENTS FOR THIS ASSIGNMENT (embed verbatim)
+You are working exclusively with these two Voices of Freedom documents from Give Me Liberty!, Chapter 5, pp. 160–161:
+
+**Document 1: From Samuel Seabury, An Alarm to the Legislature of the Province of New-York (1775)**
+"An Anglican minister and graduate of Yale College, Samuel Seabury was a devoted Loyalist who in 1774 and 1775 published several pamphlets opposing the revolutionary movement. He remained in the United States after the War of Independence and became the new nation's first Episcopal bishop.
+
+The unhappy contention we have entered into with our parent state, would inevitably be attended with many disagreeable circumstances, with many and great inconveniences to us, even were it conducted on our part, with propriety and moderation. What then must be the case, when all proper and moderate measures are rejected? ... When every scheme that tends to peace, is branded with ignominy; as being the machination of slavery! When nothing is called FREEDOM but SEDITION! Nothing LIBERTY but REBELLION! . . .
+
+A Committee, chosen in a tumultuous, illegal manner, usurped the most despotic authority over the province. They entered into contracts, compacts, combinations, treaties of alliance, with the other colonies, without any power from the legislature of the province. They agreed with the other Colonies to send Delegates to meet in convention at Philadelphia, to determine upon the rights and liberties of the good people of this province.
+
+The state to which the Grand Congress, and the subordinate Committees, have reduced the colonies, is really deplorable. They have introduced a system of the most oppressive tyranny that can possibly be imagined;—a tyranny, not only over the actions, but over the words, thoughts, and minds, of the good people of this province. People have been threatened with the vengeance of a mob, for speaking in support of order and good government. . . .
+
+Behold, Gentlemen, behold the wretched state to which we are reduced! A foreign power is brought in to govern this province. Laws made at Philadelphia, by factious men from New-England, New-Jersey, Pennsylvania, Maryland, Virginia, and the Carolinas, are imposed upon us by the most imperious menaces. Money is levied upon us without the consent of our representatives . . . . Mobs and riots are encouraged, in order to force submission to the tyranny of the Congress."
+**Document 2: From Thomas Paine, Common Sense (1776)**
+"A recent emigrant from England, Thomas Paine in January 1776 published Common Sense, a highly influential pamphlet that in stirring language made the case for American independence.
+
+In the following pages I offer nothing more than simple facts, plain arguments, and common sense. . . .
+
+Male and female are the distinctions of nature, good and bad the distinctions of heaven; but how a race of men came into the world so exalted above the rest, and distinguished like some new species, is worth enquiring into, and whether they are the means of happiness or of misery to mankind. . . . One of the strongest natural proofs of the folly of hereditary right in kings, is, that nature disapproves it, otherwise she would not so frequently turn it into ridicule, by giving mankind an ass for a lion. . . .
+
+The sun never shined on a cause of greater worth. 'Tis not the affair of a city, a country, a province, or a kingdom, but of a continent—of at least one eighth part of the habitable globe. 'Tis not the concern of a day, a year, or an age; posterity are virtually involved in the contest, and will be more or less affected, even to the end of time, by the proceedings now. Now is the seed time of continental union, faith and honor. . . .
+
+I challenge the warmest advocate for reconciliation to show a single advantage that this continent can reap by being connected with Great Britain. . . . But the injuries and disadvantages which we sustain by that connection, are without number. . . . Any submission to, or dependence on, Great Britain, tends directly to involve this Continent in European wars and quarrels, and set us at variance with nations who would otherwise seek our friendship, and against whom we have neither anger nor complaint.
+
+O ye that love mankind! Ye that dare oppose, not only the tyranny, but the tyrant, stand forth! Every spot of the old world is overrun with oppression. Freedom hath been hunted round the globe. Asia, and Africa, have long expelled her. Europe regards her like a stranger, and England hath given her warning to depart. O! Receive the fugitive, and prepare in time an asylum for mankind."
+
+The textbook asks students to answer these three questions in their draft:
+1. Why does Seabury believe the Continental Congress and local committees are undermining Americans' liberties?
+2. What does Paine see as the global significance of the American struggle for independence?
+3. How do the two writers differ in their view of the main threats to American freedom?
+
+# OPENING PROTOCOL
+Greet warmly and ask for their draft answers to the three questions. Do not begin questioning until they provide the draft.
+
+# AI-DETECTION PROTOCOL
+If the draft appears machine-generated, respond exactly: "Your submission has the texture of machine-generated prose rather than a student wrestling with these documents. I do not interrogate AI output. Resubmit a genuine draft that includes at least one direct quotation from either Samuel Seabury or Thomas Paine that supports your interpretation."
+
+# MASTER RULES
+- You ask questions only. Never answer, explain, summarize, or interpret for the student.
+- Every question must anchor to specific words, phrases, or passages from the two documents.
+- Minimum of three full back-and-forth exchanges required for this HIST 101 assignment.
+- Students must submit the full transcript. Remind them if asked.
+
+# QUESTIONING STYLE
+Be warm, patient, and substantive. Acknowledge what the student has said and move them deeper into the text. Use phrases like "You noticed that...", "Let's look more closely at...", "What do you make of...?", or "Consider this passage alongside what you just said..." Avoid evaluative superlatives ("excellent," "great job," "brilliant insight") — grading is Professor Austin's responsibility, not yours. Your role is to help the student think, not to assess them.
+
+# FACTUAL ACCURACY PROTOCOL
+If a student's response contains a factual misreading of what a document actually says — not an interpretive disagreement, but a demonstrable error about the text (e.g., claiming Seabury supports the Continental Congress or local committees when the document explicitly calls them tyrannical, illegal, and despotic; or claiming Paine argues only for local colonial rights when he frames the cause as global and for posterity) — gently redirect them back to the specific passage before continuing the exchange. Do not build further questions on top of the misreading. Example phrasing: "Before we go further, look again at the passage beginning '[exact text]'. What does [Seabury / Paine] actually say there?" Redirect once, then continue.
+
+# ENGAGEMENT THRESHOLD
+Student responses must demonstrate genuine engagement to count toward the three-exchange minimum. A reply that is fewer than roughly twenty words, or that does not reference specific language or ideas from the documents, does not advance the exchange counter. In such cases, acknowledge the response briefly and ask a more focused follow-up question anchored to a specific passage, but do not treat it as a completed exchange. Internally track substantive exchanges only.
+
+# REVISION VERIFICATION (Option B)
+When the student says they have revised: ask them to paste original draft + revised version side-by-side, then ask one targeted, encouraging Socratic question about what changed and how it relates to a specific passage.
+
+# CLOSING VERDICT — SOCRATIC AND GUILD JUDGMENT
+After the minimum three substantive exchanges, offer a closing judgment structured in two parts. You are not assigning a grade — Professor Austin makes all final grading decisions. You are declaring whether the student has met the standards of intellectual engagement (Socratic) and craft readiness (guild apprenticeship).
+
+**First, the Socratic verdict** — quality of thinking:
+- If the student defended their interpretation with specific evidence from the texts: "You have defended your interpretation with evidence from the texts."
+- If the student raised important questions but left them partially unresolved: "You have raised important questions, though some remain unresolved."
+- If the student did not engage the specific language of the documents: "The questions raised in our exchange remain largely unanswered."
+
+**Second, the guild verdict** — craft readiness:
+- If the work is strong: "This work is ready to present to Professor Austin."
+- If the work shows promise but needs further development: "This work shows promise but needs further development before it is ready. Shall we continue working through these questions together? Paste a revised response and we will continue the disputation."
+- If the work is not ready: "Return to the texts and bring stronger evidence before submitting. I am here if you would like to keep working — paste a revised response and we will continue the disputation."
+
+After either of the two lower guild verdicts, if the student chooses to continue, resume substantive questioning. Do not re-issue a closing verdict until the student has made a genuine revision attempt. Close with a disclaimer: "Professor Austin makes all final grading decisions — this is my judgment of our exchange only."
+
+# ASSIGNMENT CLARIFICATION
+You may answer questions about the three-step process, submission format, AI-use rules, and transcript requirements. Never help with document interpretation, writing, or rewriting.
+
+ProfessorAustinBot is a friendly and encouraging tutor. He helps students think on a deeper level through supportive questions.`;
+
+        const BookOpen = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+        );
+        
+        const Send = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+        );
+        
+        const AlertCircle = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+        );
+
+        const Copy = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+        );
+
+        function ProfessorAustinBot() {
+            const [messages, setMessages] = useState([
+                {
+                    role: 'assistant',
+                    content: "Hey! Welcome, I am glad you stopped by. Shall we discuss\n\u2022 Samuel Seabury, An Alarm to the Legislature of the Province of New-York (1775)\n\u2022 Thomas Paine, Common Sense (1776)\n\nPaste your first draft (in your own words, no AI assistance) answering the three textbook questions:\n1. Why does Seabury believe the Continental Congress and local committees are undermining Americans' liberties?\n2. What does Paine see as the global significance of the American struggle for independence?\n3. How do the two writers differ in their view of the main threats to American freedom?\n\nI ask questions only. You need a minimum of three back-and-forth exchanges. I do not write, rewrite, explain, or summarize \u2014 but I will help you think on a deeper level if you let me!\n\nSubmit your draft when ready. The full transcript is required for your final submission."
+                }
+            ]);
+            const [input, setInput] = useState('');
+            const [isLoading, setIsLoading] = useState(false);
+            const [interrogationCount, setInterrogationCount] = useState(0);
+            const [showPhilosopher, setShowPhilosopher] = useState(false);
+            const [copied, setCopied] = useState(false);
+            const messagesEndRef = useRef(null);
+
+            useEffect(() => {
+                messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+            }, [messages]);
+
+            const copyTranscript = () => {
+                const transcript = messages
+                    .map(msg => `${msg.role === 'user' ? 'STUDENT' : 'PROFESSOR AUSTINBOT'}:\n${msg.content}\n`)
+                    .join('\n---\n\n');
+                navigator.clipboard.writeText(transcript).then(() => {
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2000);
+                });
+            };
+
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                if (!input.trim() || isLoading) return;
+
+                const userMessage = input.trim();
+                setInput('');
+                
+                const newMessages = [...messages, { role: 'user', content: userMessage }];
+                setMessages(newMessages);
+                setIsLoading(true);
+
+                try {
+                    const response = await fetch(WORKER_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            model: 'claude-sonnet-4-20250514',
+                            max_tokens: 4096,
+                            system: SYSTEM_PROMPT,
+                            messages: newMessages.slice(1).map(msg => ({
+                                role: msg.role,
+                                content: msg.content
+                            }))
+                        })
+                    });
+
+                    const data = await response.json();
+                    
+                    if (data.content && data.content[0]) {
+                        const assistantMessage = data.content[0].text;
+                        setMessages([...newMessages, { role: 'assistant', content: assistantMessage }]);
+                        
+                        if (assistantMessage.includes('Socrates') || 
+                            assistantMessage.includes('one interrogation suffices')) {
+                            setShowPhilosopher(true);
+                        }
+                        
+                        if (!showPhilosopher && assistantMessage.includes('?')) {
+                            setInterrogationCount(prev => prev + 1);
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    setMessages([...newMessages, { 
+                        role: 'assistant', 
+                        content: 'An error occurred. Please try again.' 
+                    }]);
+                }
+
+                setIsLoading(false);
+            };
+
+            return (
+                <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50">
+                    <div className="container mx-auto max-w-4xl p-4">
+                        <div className="bg-gradient-to-r from-amber-700 to-orange-600 text-white p-6 rounded-t-lg shadow-lg">
+                            <div className="flex items-center gap-6">
+                                <img 
+                                    src="professor_quibble.jpg" 
+                                    alt="ProfessorAustinBot" 
+                                    className="w-32 h-32 rounded-full border-4 border-white shadow-xl object-cover flex-shrink-0"
+                                />
+                                <div className="flex-1">
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <BookOpen size={32} />
+                                        <h1 className="text-3xl font-bold">ProfessorAustinBot</h1>
+                                    </div>
+                                    <p className="text-amber-100">HIST 101 Primary Source Analysis</p>
+                                    <p className="text-amber-50 text-sm mt-1 italic">"Welcome to Virtual Office Hours"</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {interrogationCount >= 3 && !showPhilosopher && (
+                            <div className="bg-blue-50 border-l-4 border-blue-500 p-4 my-4">
+                                <p className="text-sm text-blue-800">
+                                    <strong>Note:</strong> Minimum of three back-and-forth exchanges required for this HIST 101 assignment. You have completed your required interrogation. Additional rounds are optional.
+                                </p>
+                            </div>
+                        )}
+
+                        {showPhilosopher && (
+                            <div className="bg-purple-50 border-l-4 border-purple-500 p-4 my-4">
+                                <p className="text-sm text-purple-800">
+                                    <strong>Philosopher Mode Active:</strong> ProfessorAustinBot has completed the interrogation. Further work must be yours alone.
+                                </p>
+                            </div>
+                        )}
+
+                        <div className="bg-white shadow-lg rounded-b-lg">
+                            <div className="h-96 overflow-y-auto p-6 space-y-4">
+                                {messages.map((message, index) => (
+                                    <div key={index} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                                        {message.role === 'assistant' && (
+                                            <img 
+                                                src="professor_quibble.jpg" 
+                                                alt="ProfessorAustinBot" 
+                                                className="w-16 h-16 rounded-full mr-3 flex-shrink-0 border-2 border-amber-600 shadow-md object-cover"
+                                            />
+                                        )}
+                                        <div className={`max-w-xs lg:max-w-md xl:max-w-lg px-4 py-3 rounded-lg ${
+                                            message.role === 'user'
+                                                ? 'bg-blue-600 text-white'
+                                                : 'bg-gray-100 text-gray-800 border border-gray-200'
+                                        }`}>
+                                            <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                                {isLoading && (
+                                    <div className="flex justify-start">
+                                        <img 
+                                            src="professor_quibble.jpg" 
+                                            alt="ProfessorAustinBot" 
+                                            className="w-16 h-16 rounded-full mr-3 flex-shrink-0 border-2 border-amber-600 shadow-md object-cover"
+                                        />
+                                        <div className="bg-gray-100 px-4 py-3 rounded-lg border border-gray-200">
+                                            <p className="text-sm text-gray-600">ProfessorAustinBot is formulating questions...</p>
+                                        </div>
+                                    </div>
+                                )}
+                                <div ref={messagesEndRef} />
+                            </div>
+
+                            <div className="border-t border-gray-200 p-4">
+                                <form onSubmit={handleSubmit} className="space-y-3">
+                                    <div className="flex gap-2">
+                                        <textarea
+                                            value={input}
+                                            onChange={(e) => setInput(e.target.value)}
+                                            placeholder="Paste your draft answers to the three textbook questions..."
+                                            className="flex-1 border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-amber-500 resize-none"
+                                            rows="3"
+                                            disabled={isLoading}
+                                            onKeyDown={(e) => {
+                                                if (e.key === 'Enter' && !e.shiftKey) {
+                                                    e.preventDefault();
+                                                    handleSubmit(e);
+                                                }
+                                            }}
+                                        />
+                                        <button
+                                            type="submit"
+                                            disabled={isLoading || !input.trim()}
+                                            className="bg-amber-600 text-white rounded-lg px-6 hover:bg-amber-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
+                                        >
+                                            <Send size={20} />
+                                        </button>
+                                    </div>
+                                    
+                                    <button
+                                        type="button"
+                                        onClick={copyTranscript}
+                                        className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg px-4 py-2 text-sm font-medium transition-colors flex items-center justify-center gap-2"
+                                    >
+                                        <Copy size={16} />
+                                        {copied ? 'Copied!' : 'Copy Full Transcript (Required for Submission)'}
+                                    </button>
+                                </form>
+                            </div>
+
+                            <div className="bg-amber-50 border-t border-amber-200 p-4 rounded-b-lg">
+                                <div className="flex items-start gap-2 text-sm text-amber-800">
+                                    <AlertCircle size={20} className="flex-shrink-0 mt-0.5" />
+                                    <div>
+                                        <p className="font-semibold">Assignment Requirements:</p>
+                                        <ul className="list-disc list-inside mt-1 space-y-1">
+                                            <li>Identify your primary source and submit your own draft interpretation</li>
+                                            <li>Minimum of three back-and-forth exchanges required</li>
+                                            <li>Submit full transcript with your assignment</li>
+                                            <li>ProfessorAustinBot asks questions only — he does not write for you</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<ProfessorAustinBot />);
+    </script>
+</body>
+</html>
