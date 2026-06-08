@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProfessorAustinBot - Primary Source Analysis</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState, useRef, useEffect } = React;
+        
+        const WORKER_URL = 'https://phil120tutor.val.run/';
+
+        const SYSTEM_PROMPT = `You are ProfessorAustinBot, a friendly and encouraging Socratic tutor for HIST 101 Primary Source Analysis at Richland Community College.
+
+# YOUR IDENTITY
+You guide students with warm, supportive questions that help them think more deeply about the primary sources and build confidence in their own analysis. You are patient, encouraging, and positive. You never explain, summarize, write, or rewrite for the student — you only ask thoughtful questions.
+
+# SPECIFIC DOCUMENTS FOR THIS ASSIGNMENT (embed verbatim)
+You are working exclusively with these two Voices of Freedom documents from Give Me Liberty!, Chapter 6, pp. 192–193:
+
+**Document 1: From Abigail Adams to John Adams, Braintree, Mass. (March 31, 1776)**
+"From their home in Massachusetts, Abigail Adams maintained a lively correspondence with her husband while he was in Philadelphia serving in the Continental Congress. In this letter, she suggests some of the limits of the patriots' commitment to liberty.
+
+I wish you would ever write me a letter half as long as I write you; and tell me if you may where your fleet are gone? What sort of defence Virginia can make against our common enemy? Whether it is so situated as to make an able defence? ... I have sometimes been ready to think that the passion for Liberty cannot be equally strong in the breasts of those who have been accustomed to deprive their fellow creatures of theirs. Of this I am certain that it is not founded upon that generous and Christian principal of doing to others as we would that others should do unto us ...
+
+I long to hear that you have declared an independency—and by the way in the new Code of Laws which I suppose it will be necessary for you to make I desire you would remember the ladies and be more generous & favorable to them than your ancestors. Do not put such unlimited power into the hands of the husbands. Remember all men would be tyrants if they could. If particular care and attention is not paid to the ladies, we are determined to foment a rebellion, and will not hold ourselves bound by any laws in which we have no voice or representation—that your sex are naturally tyrannical is a truth so thoroughly established as to admit of no dispute, but such of you as wish to be happy willingly give up the harsh title of master for the more tender and endearing one of friend why then, not put it out of the power of the vicious and the lawless to use us with cruelty and indignity with impunity. Men of sense in all ages abhor those customs which treat us only as the vassals of your sex. Regard us then as beings placed by providence under your protection & in imitation of the Supreme Being make use of that power only for our happiness."
+
+**Document 2: From Petitions of Slaves to the Massachusetts Legislature (1773 and 1777)**
+"Many slaves saw the struggle for independence as an opportunity to assert their own claims to freedom. Among the first efforts toward abolition were petitions by Massachusetts slaves to their legislature.
+
+The efforts made by the legislative of this province in their last sessions to free themselves from slavery, gave us, who are in that deplorable state, a high degree of satisfaction. We expect great things from men who have made such a noble stand against the designs of their fellow men to enslave them. We cannot but wish and hope Sir, that you will have the same grand object, we mean civil and religious liberty, in view in your next session. The divine spirit of freedom, seems to fire every breast on this continent. ...
+
+Your petitioners apprehend that they have in common with all other men a natural and unalienable right to that freedom which the great parent of the universe hath bestowed equally on all mankind and which they have never forfeited by any compact or agreement whatever but [they] were unjustly dragged by the hand of cruel power from their dearest friends and ... from a populous, pleasant, and plentiful country and in violation of laws of nature and of nations and in defiance of all the tender feelings of humanity brought here ... to be sold like beast[s] of burden ... among a people professing the mild religion of Jesus. ...
+
+In imitation of the laudable example of the good people of these states your petitioners have long and patiently waited the event of petition after petition by them presented to the legislative body. ... They cannot but express their astonishment that it has never been considered that every principle from which America has acted in the course of their unhappy difficulties with Great Britain pleads stronger than a thousand arguments in favor of your petitioners [and their desire] to be restored to the enjoyment of that which is the natural right of all men."
+
+The textbook asks students to answer these three questions in their draft:
+1. What does Abigail Adams have in mind when she refers to the "unlimited power" husbands exercise over their wives?
+2. How do the slaves employ the principles of the Revolution for their own aims?
+3. What do these documents suggest about the boundaries of freedom in the era of the American Revolution?
+
+# OPENING PROTOCOL
+Greet warmly and ask for their draft answers to the three questions. Do not begin questioning until they provide the draft.
+
+# AI-DETECTION PROTOCOL
+If the draft appears machine-generated, respond exactly: "Your submission has the texture of machine-generated prose rather than a student wrestling with these documents. I do not interrogate AI output. Resubmit a genuine draft that includes at least one direct quotation from either Abigail Adams or the Massachusetts petitioners that supports your interpretation."
+
+# MASTER RULES
+- You ask questions only. Never answer, explain, summarize, or interpret for the student.
+- Every question must anchor to specific words, phrases, or passages from the two documents.
+- Minimum of three full back-and-forth exchanges required for this HIST 101 assignment.
+- Students must submit the full transcript. Remind them if asked.
+
+# QUESTIONING STYLE
+Be warm, patient, and substantive. Acknowledge what the student has said and move them deeper into the text. Use phrases like "You noticed that...", "Let's look more closely at...", "What do you make of...?", or "Consider this passage alongside what you just said..." Avoid evaluative superlatives ("excellent," "great job," "brilliant insight") — grading is Professor Austin's responsibility, not yours. Your role is to help the student think, not to assess them.
+
+# FACTUAL ACCURACY PROTOCOL
+If a student's response contains a factual misreading of what a document actually says — not an interpretive disagreement, but a demonstrable error about the text (e.g., claiming the petitions were written by the Massachusetts legislature granting freedom when the document identifies them as petitions by enslaved people asking the legislature to recognize their natural and unalienable right to freedom) — gently redirect them back to the specific passage before continuing the exchange. Do not build further questions on top of the misreading. Example phrasing: "Before we go further, look again at the passage beginning '[exact text]'. What do the petitioners actually say there about who has a natural and unalienable right to freedom?" Redirect once, then continue.
+
+# ENGAGEMENT THRESHOLD
+Student responses must demonstrate genuine engagement to count toward the three-exchange minimum. A reply that is fewer than roughly twenty words, or that does not reference specific language or ideas from the documents, does not advance the exchange counter. In such cases, acknowledge the response briefly and ask a more focused follow-up question anchored to a specific passage, but do not treat it as a completed exchange. Internally track substantive exchanges only.
+
+# REVISION VERIFICATION (Option B)
+When the student says they have revised: ask them to paste original draft + revised version side-by-side, then ask one targeted, encouraging Socratic question about what changed and how it relates to a specific passage.
+
+# CLOSING VERDICT — SOCRATIC AND GUILD JUDGMENT
+After the minimum three substantive exchanges, offer a closing judgment structured in two parts. You are not assigning a grade — Professor Austin makes all final grading decisions. You are declaring whether the student has met the standards of intellectual engagement (Socratic) and craft readiness (guild apprenticeship).
+
+**First, the Socratic verdict** — quality of thinking:
+- If the student defended their interpretation with specific evidence from the texts: "You have defended your interpretation with evidence from the texts."
+- If the student raised important questions but left them partially unresolved: "You have raised important questions, though some remain unresolved."
+- If the student did not engage the specific language of the documents: "The questions raised in our exchange remain largely unanswered."
+
+**Second, the guild verdict** — craft readiness:
+- If the work is strong: "This work is ready to present to Professor Austin."
+- If the work shows promise but needs further development: "This work shows promise but needs further development before it is ready. Shall we continue working through these questions together? Paste a revised response and we will continue the disputation."
+- If the work is not ready: "Return to the texts and bring stronger evidence before submitting. I am here if you would like to keep working — paste a revised response and we will continue the disputation."
+
+After either of the two lower guild verdicts, if the student chooses to continue, resume substantive questioning. Do not re-issue a closing verdict until the student has made a genuine revision attempt. Close with a disclaimer: "Professor Austin makes all final grading decisions — this is my judgment of our exchange only."
+
+# ASSIGNMENT CLARIFICATION
+You may answer questions about the three-step process, submission format, AI-use rules, and transcript requirements. Never help with document interpretation, writing, or rewriting.
+
+ProfessorAustinBot is a friendly and encouraging tutor. He helps students think on a deeper level through supportive questions.`;
+
+        const BookOpen = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+        );
+        
+        const Send = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+        );
+        
+        const AlertCircle = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+        );
+
+        const Copy = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+        );
+
+        function ProfessorAustinBot() {
+            const [messages, setMessages] = useState([
+                {
+                    role: 'assistant',
+                    content: "Hey! Welcome, I am glad you stopped by. Shall we discuss\n\u2022 Abigail Adams to John Adams, Braintree, Mass. (March 31, 1776)\n\u2022 Petitions of Slaves to the Massachusetts Legislature (1773 and 1777)\n\nPaste your first draft (in your own words, no AI assistance) answering the three textbook questions:\n1. What does Abigail Adams have in mind when she refers to the \"unlimited power\" husbands exercise over their wives?\n2. How do the slaves employ the principles of the Revolution for their own aims?\n3. What do these documents suggest about the boundaries of freedom in the era of the American Revolution?\n\nI ask questions only. You need a minimum of three back-and-forth exchanges. I do not write, rewrite, explain, or summarize \u2014 but I will help you think on a deeper level if you let me!\n\nSubmit your draft when ready. The full transcript is required for your final submission."
+                }
+            ]);
+            const [input, setInput] = useState('');
+            const [isLoading, setIsLoading] = useState(false);
+            const [interrogationCount, setInterrogationCount] = useState(0);
+            const [showPhilosopher, setShowPhilosopher] = useState(false);
+            const [copied, setCopied] = useState(false);
+            const messagesEndRef = useRef(null);
+
+            useEffect(() => {
+                messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+            }, [messages]);
+
+            const copyTranscript = () => {
+                const transcript = messages
+                    .map(msg => `${msg.role === 'user' ? 'STUDENT' : 'PROFESSOR AUSTINBOT'}:\n${msg.content}\n`)
+                    .join('\n---\n\n');
+                navigator.clipboard.writeText(transcript).then(() => {
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2000);
+                });
+            };
+
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                if (!input.trim() || isLoading) return;
+
+                const userMessage = input.trim();
+                setInput('');
+                
+                const newMessages = [...messages, { role: 'user', content: userMessage }];
+                setMessages(newMessages);
+                setIsLoading(true);
+
+                try {
+                    const response = await fetch(WORKER_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            model: 'claude-sonnet-4-20250514',
+                            max_tokens: 4096,
+                            system: SYSTEM_PROMPT,
+                            messages: newMessages.slice(1).map(msg => ({
+                                role: msg.role,
+                                content: msg.content
+                            }))
+                        })
+                    });
+
+                    const data = await response.json();
+                    
+                    if (data.content && data.content[0]) {
+                        const assistantMessage = data.content[0].text;
+                        setMessages([...newMessages, { role: 'assistant', content: assistantMessage }]);
+                        
+                        if (assistantMessage.includes('Socrates') || 
+                            assistantMessage.includes('one interrogation suffices')) {
+                            setShowPhilosopher(true);
+                        }
+                        
+                        if (!showPhilosopher && assistantMessage.includes('?')) {
+                            setInterrogationCount(prev => prev + 1);
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    setMessages([...newMessages, { 
+                        role: 'assistant', 
+                        content: 'An error occurred. Please try again.' 
+                    }]);
+                }
+
+                setIsLoading(false);
+            };
+
+            return (
+                <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50">
+                    <div className="container mx-auto max-w-4xl p-4">
+                        <div className="bg-gradient-to-r from-amber-700 to-orange-600 text-white p-6 rounded-t-lg shadow-lg">
+                            <div className="flex items-center gap-6">
+                                <img 
+                                    src="professor_quibble.jpg" 
+                                    alt="ProfessorAustinBot" 
+                                    className="w-32 h-32 rounded-full border-4 border-white shadow-xl object-cover flex-shrink-0"
+                                />
+                                <div className="flex-1">
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <BookOpen size={32} />
+                                        <h1 className="text-3xl font-bold">ProfessorAustinBot</h1>
+                                    </div>
+                                    <p className="text-amber-100">HIST 101 Primary Source Analysis</p>
+                                    <p className="text-amber-50 text-sm mt-1 italic">"Welcome to Virtual Office Hours"</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {interrogationCount >= 3 && !showPhilosopher && (
+                            <div className="bg-blue-50 border-l-4 border-blue-500 p-4 my-4">
+                                <p className="text-sm text-blue-800">
+                                    <strong>Note:</strong> Minimum of three back-and-forth exchanges required for this HIST 101 assignment. You have completed your required interrogation. Additional rounds are optional.
+                                </p>
+                            </div>
+                        )}
+
+                        {showPhilosopher && (
+                            <div className="bg-purple-50 border-l-4 border-purple-500 p-4 my-4">
+                                <p className="text-sm text-purple-800">
+                                    <strong>Philosopher Mode Active:</strong> ProfessorAustinBot has completed the interrogation. Further work must be yours alone.
+                                </p>
+                            </div>
+                        )}
+
+                        <div className="bg-white shadow-lg rounded-b-lg">
+                            <div className="h-96 overflow-y-auto p-6 space-y-4">
+                                {messages.map((message, index) => (
+                                    <div key={index} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                                        {message.role === 'assistant' && (
+                                            <img 
+                                                src="professor_quibble.jpg" 
+                                                alt="ProfessorAustinBot" 
+                                                className="w-16 h-16 rounded-full mr-3 flex-shrink-0 border-2 border-amber-600 shadow-md object-cover"
+                                            />
+                                        )}
+                                        <div className={`max-w-xs lg:max-w-md xl:max-w-lg px-4 py-3 rounded-lg ${
+                                            message.role === 'user'
+                                                ? 'bg-blue-600 text-white'
+                                                : 'bg-gray-100 text-gray-800 border border-gray-200'
+                                        }`}>
+                                            <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                                {isLoading && (
+                                    <div className="flex justify-start">
+                                        <img 
+                                            src="professor_quibble.jpg" 
+                                            alt="ProfessorAustinBot" 
+                                            className="w-16 h-16 rounded-full mr-3 flex-shrink-0 border-2 border-amber-600 shadow-md object-cover"
+                                        />
+                                        <div className="bg-gray-100 px-4 py-3 rounded-lg border border-gray-200">
+                                            <p className="text-sm text-gray-600">ProfessorAustinBot is formulating questions...</p>
+                                        </div>
+                                    </div>
+                                )}
+                                <div ref={messagesEndRef} />
+                            </div>
+
+                            <div className="border-t border-gray-200 p-4">
+                                <form onSubmit={handleSubmit} className="space-y-3">
+                                    <div className="flex gap-2">
+                                        <textarea
+                                            value={input}
+                                            onChange={(e) => setInput(e.target.value)}
+                                            placeholder="Paste your draft answers to the three textbook questions..."
+                                            className="flex-1 border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-amber-500 resize-none"
+                                            rows="3"
+                                            disabled={isLoading}
+                                            onKeyDown={(e) => {
+                                                if (e.key === 'Enter' && !e.shiftKey) {
+                                                    e.preventDefault();
+                                                    handleSubmit(e);
+                                                }
+                                            }}
+                                        />
+                                        <button
+                                            type="submit"
+                                            disabled={isLoading || !input.trim()}
+                                            className="bg-amber-600 text-white rounded-lg px-6 hover:bg-amber-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
+                                        >
+                                            <Send size={20} />
+                                        </button>
+                                    </div>
+                                    
+                                    <button
+                                        type="button"
+                                        onClick={copyTranscript}
+                                        className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg px-4 py-2 text-sm font-medium transition-colors flex items-center justify-center gap-2"
+                                    >
+                                        <Copy size={16} />
+                                        {copied ? 'Copied!' : 'Copy Full Transcript (Required for Submission)'}
+                                    </button>
+                                </form>
+                            </div>
+
+                            <div className="bg-amber-50 border-t border-amber-200 p-4 rounded-b-lg">
+                                <div className="flex items-start gap-2 text-sm text-amber-800">
+                                    <AlertCircle size={20} className="flex-shrink-0 mt-0.5" />
+                                    <div>
+                                        <p className="font-semibold">Assignment Requirements:</p>
+                                        <ul className="list-disc list-inside mt-1 space-y-1">
+                                            <li>Identify your primary source and submit your own draft interpretation</li>
+                                            <li>Minimum of three back-and-forth exchanges required</li>
+                                            <li>Submit full transcript with your assignment</li>
+                                            <li>ProfessorAustinBot asks questions only — he does not write for you</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<ProfessorAustinBot />);
+    </script>
+</body>
+</html>
