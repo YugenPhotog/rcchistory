@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
@@ -7,765 +6,745 @@
 <title>Chinese History | The Lyceum</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet"/>
 <style>
-        :root {
-            --parchment: #f4e9d8;
-            --parchment-light: #faf6f0;
-            --accent: #c4a03e;
-            --accent-dark: #a38530;
-            --bronze: #8b7355;
-            --ink: #2c2416;
-            --ink-light: #4a3f2f;
-            --marble: #e8e4dc;
-            --shadow: rgba(44, 36, 22, 0.15);
-            /* Chinese history accent colors */
-            --vermillion: #c84536;
-            --jade: #2d8659;
-            --imperial-gold: #d4a84b;
-        }
+  :root {
+    --parchment: #f4e9d8;
+    --parchment-light: #faf6f0;
+    --accent: #c4a03e;
+    --accent-dark: #a38530;
+    --bronze: #8b7355;
+    --ink: #2c2416;
+    --ink-light: #4a3f2f;
+    --marble: #e8e4dc;
+    --shadow: rgba(44, 36, 22, 0.15);
+    --vermillion: #c84536;
+    --jade: #2d8659;
+    --imperial-gold: #d4a84b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    background: var(--parchment);
+    color: var(--ink);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+  header {
+    background: linear-gradient(180deg, var(--ink) 0%, var(--ink-light) 100%);
+    color: var(--parchment);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    border-bottom: 4px solid var(--vermillion);
+  }
+  .breadcrumb { font-size: 0.9rem; margin-bottom: 1rem; opacity: 0.8; }
+  .breadcrumb a { color: var(--parchment); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+  }
+  .subtitle { font-style: italic; margin-top: 0.5rem; opacity: 0.9; font-size: 1.1rem; }
+  main { max-width: 1000px; margin: 0 auto; padding: 2rem; }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  .era-section { margin-bottom: 3rem; }
+  .era-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.4rem;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--bronze);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .era-icon { font-size: 1.5rem; }
 
-        body {
-            font-family: 'Cormorant Garamond', Georgia, serif;
-            background: var(--parchment);
-            color: var(--ink);
-            min-height: 100vh;
-            line-height: 1.6;
-        }
+  .chapter-card {
+    background: var(--parchment-light);
+    border: 1px solid var(--marble);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    box-shadow: 0 2px 8px var(--shadow);
+    transition: box-shadow 0.3s ease;
+  }
+  .chapter-card:hover { box-shadow: 0 4px 16px var(--shadow); }
+  .chapter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  .chapter-header:hover { background: var(--marble); }
+  .chapter-info { flex: 1; }
+  .chapter-number {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    color: var(--vermillion);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+  .chapter-info h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.25rem;
+  }
+  .chapter-dates { font-size: 0.9rem; color: var(--ink-light); font-style: italic; }
+  .toggle-icon { font-size: 1rem; color: var(--bronze); transition: transform 0.3s ease; }
+  .chapter-card.open .toggle-icon { transform: rotate(180deg); }
 
-        header {
-            background: linear-gradient(180deg, var(--ink) 0%, var(--ink-light) 100%);
-            color: var(--parchment);
-            padding: 2.5rem 2rem;
-            text-align: center;
-            border-bottom: 4px solid var(--vermillion);
-        }
+  .lecture-list { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; background: var(--marble); }
+  .chapter-card.open .lecture-list { max-height: 800px; }
+  .lecture-list-inner { padding: 1rem 1.5rem 1.5rem; border-top: 1px solid var(--bronze); }
 
-        .breadcrumb {
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            opacity: 0.8;
-        }
+  .lecture-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    background: var(--parchment-light);
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    text-decoration: none;
+    color: var(--ink);
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+  }
+  .lecture-item:last-child { margin-bottom: 0; }
+  .lecture-item:hover {
+    background: var(--parchment);
+    border-left-color: var(--vermillion);
+    transform: translateX(4px);
+  }
+  .lecture-num { font-family: 'Cinzel', serif; font-size: 0.85rem; color: var(--bronze); min-width: 2rem; }
+  .lecture-content { flex: 1; }
+  .lecture-title { font-weight: 600; font-size: 1rem; margin-bottom: 0.15rem; }
+  .lecture-desc { font-size: 0.85rem; color: var(--ink-light); font-style: italic; }
+  .lecture-arrow { color: var(--bronze); opacity: 0; transition: opacity 0.2s ease; }
+  .lecture-item:hover .lecture-arrow { opacity: 1; }
 
-        .breadcrumb a {
-            color: var(--parchment);
-            text-decoration: none;
-        }
+  .footer-nav { text-align: center; padding: 2rem 0; margin-top: 2rem; border-top: 1px solid var(--marble); }
+  .back-link {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: var(--accent);
+    color: var(--parchment);
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+  }
+  .back-link:hover { background: var(--accent-dark); }
 
-        .breadcrumb a:hover {
-            text-decoration: underline;
-        }
-
-        h1 {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            font-weight: 600;
-            letter-spacing: 0.1em;
-        }
-
-        .subtitle {
-            font-style: italic;
-            margin-top: 0.5rem;
-            opacity: 0.9;
-            font-size: 1.1rem;
-        }
-
-        main {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        /* Era Sections */
-        .era-section {
-            margin-bottom: 3rem;
-        }
-
-        .era-title {
-            font-family: 'Cinzel', serif;
-            font-size: 1.4rem;
-            color: var(--ink);
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 2px solid var(--bronze);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .era-icon {
-            font-size: 1.5rem;
-        }
-
-        /* Chapter Cards - Accordion Style */
-        .chapter-card {
-            background: var(--parchment-light);
-            border: 1px solid var(--marble);
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            overflow: hidden;
-            box-shadow: 0 2px 8px var(--shadow);
-            transition: box-shadow 0.3s ease;
-        }
-
-        .chapter-card:hover {
-            box-shadow: 0 4px 16px var(--shadow);
-        }
-
-        .chapter-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.25rem 1.5rem;
-            cursor: pointer;
-            transition: background 0.2s ease;
-        }
-
-        .chapter-header:hover {
-            background: var(--marble);
-        }
-
-        .chapter-info {
-            flex: 1;
-        }
-
-        .chapter-number {
-            font-family: 'Cinzel', serif;
-            font-size: 0.85rem;
-            color: var(--vermillion);
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            display: block;
-            margin-bottom: 0.25rem;
-        }
-
-        .chapter-info h3 {
-            font-family: 'Cinzel', serif;
-            font-size: 1.15rem;
-            font-weight: 600;
-            color: var(--ink);
-            margin-bottom: 0.25rem;
-        }
-
-        .chapter-dates {
-            font-size: 0.9rem;
-            color: var(--ink-light);
-            font-style: italic;
-        }
-
-        .toggle-icon {
-            font-size: 1rem;
-            color: var(--bronze);
-            transition: transform 0.3s ease;
-        }
-
-        .chapter-card.open .toggle-icon {
-            transform: rotate(180deg);
-        }
-
-        /* Lecture List */
-        .lecture-list {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease;
-            background: var(--marble);
-        }
-
-        .chapter-card.open .lecture-list {
-            max-height: 600px;
-        }
-
-        .lecture-list-inner {
-            padding: 1rem 1.5rem 1.5rem;
-            border-top: 1px solid var(--bronze);
-        }
-
-        .lecture-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.75rem 1rem;
-            background: var(--parchment-light);
-            border-radius: 6px;
-            margin-bottom: 0.5rem;
-            text-decoration: none;
-            color: var(--ink);
-            transition: all 0.2s ease;
-            border-left: 3px solid transparent;
-        }
-
-        .lecture-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .lecture-item:hover {
-            background: var(--parchment);
-            border-left-color: var(--vermillion);
-            transform: translateX(4px);
-        }
-
-        .lecture-num {
-            font-family: 'Cinzel', serif;
-            font-size: 0.85rem;
-            color: var(--bronze);
-            min-width: 2rem;
-        }
-
-        .lecture-content {
-            flex: 1;
-        }
-
-        .lecture-title {
-            font-weight: 600;
-            font-size: 1rem;
-            margin-bottom: 0.15rem;
-        }
-
-        .lecture-desc {
-            font-size: 0.85rem;
-            color: var(--ink-light);
-            font-style: italic;
-        }
-
-        .lecture-arrow {
-            color: var(--bronze);
-            opacity: 0;
-            transition: opacity 0.2s ease;
-        }
-
-        .lecture-item:hover .lecture-arrow {
-            opacity: 1;
-        }
-
-        /* Placeholder for chapters without lectures */
-        .placeholder-message {
-            padding: 1rem;
-            text-align: center;
-            color: var(--ink-light);
-            font-style: italic;
-        }
-
-        .placeholder-message span {
-            font-size: 1.5rem;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Footer Navigation */
-        .footer-nav {
-            text-align: center;
-            padding: 2rem 0;
-            margin-top: 2rem;
-            border-top: 1px solid var(--marble);
-        }
-
-        .back-link {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background: var(--accent);
-            color: var(--parchment);
-            text-decoration: none;
-            font-family: 'Cinzel', serif;
-            font-size: 0.9rem;
-            letter-spacing: 0.05em;
-            border-radius: 4px;
-            transition: background 0.3s ease;
-        }
-
-        .back-link:hover {
-            background: var(--accent-dark);
-        }
-
-        /* Responsive */
-        @media (max-width: 600px) {
-            .chapter-header {
-                padding: 1rem;
-            }
-            
-            .chapter-info h3 {
-                font-size: 1rem;
-            }
-            
-            .lecture-list-inner {
-                padding: 0.75rem 1rem 1rem;
-            }
-        }
-    </style>
+  @media (max-width: 600px) {
+    .chapter-header { padding: 1rem; }
+    .chapter-info h3 { font-size: 1rem; }
+    .lecture-list-inner { padding: 0.75rem 1rem 1rem; }
+  }
+</style>
 </head>
 <body>
 <header>
-<p class="breadcrumb"><a href="../index.html">The Lyceum</a> / Chinese History</p>
-<h1>🐉 Chinese History</h1>
-<p class="subtitle">Five Millennia of Civilization</p>
+  <p class="breadcrumb"><a href="../index.html">The Lyceum</a> / Chinese History</p>
+  <h1>🐉 Chinese History</h1>
+  <p class="subtitle">Five Millennia of Civilization</p>
 </header>
+
 <main>
-<!-- Ancient China: Foundations -->
+
+<!-- ═══════════════════════════════════════════════════════
+     ANCIENT CHINA: FOUNDATIONS
+     ═══════════════════════════════════════════════════════ -->
 <section class="era-section">
 <h2 class="era-title"><span class="era-icon">🏺</span> Ancient China: Foundations</h2>
+
 <!-- Chapter 1 -->
 <div class="chapter-card open">
-<div aria-expanded="true" class="chapter-header" role="button" tabindex="0">
-<div class="chapter-info">
-<span class="chapter-number">Chapter 1</span>
-<h3>China in the Bronze Age: The Shang and Zhou</h3>
-<span class="chapter-dates">1500 – 771 BCE</span>
+  <div aria-expanded="true" class="chapter-header" role="button" tabindex="0">
+    <div class="chapter-info">
+      <span class="chapter-number">Chapter 1</span>
+      <h3>China in the Bronze Age: The Shang and Zhou</h3>
+      <span class="chapter-dates">1500 – 771 BCE</span>
+    </div>
+    <span class="toggle-icon">▼</span>
+  </div>
+  <div class="lecture-list">
+    <div class="lecture-list-inner">
+      <a class="lecture-item" href="reveal_decks/HIST270_ch01_lec1_shang_sacred_state_revSU26.html" target="_blank">
+        <span class="lecture-num">01</span>
+        <div class="lecture-content">
+          <div class="lecture-title">The Shang: Sacred State</div>
+          <div class="lecture-desc">Oracle Bones, Bronze Ritual, and the Origins of Chinese Kingship</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+      <a class="lecture-item" href="reveal_decks/HIST270_ch01_lec2_writing_bronze_wider_world_revSU26.html" target="_blank">
+        <span class="lecture-num">02</span>
+        <div class="lecture-content">
+          <div class="lecture-title">Writing, Bronze, and the Wider World</div>
+          <div class="lecture-desc">Script, Metallurgy, and Early China's Regional Networks</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+      <a class="lecture-item" href="reveal_decks/HIST270_ch01_lec3_zhou_legitimacy_society_revSU26.html" target="_blank">
+        <span class="lecture-num">03</span>
+        <div class="lecture-content">
+          <div class="lecture-title">Zhou: Legitimacy and Society</div>
+          <div class="lecture-desc">Mandate of Heaven, Feudal Order, and the Western Zhou World</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+    </div>
+  </div>
 </div>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="lecture-list">
-<div class="lecture-list-inner">
-<a class="lecture-item" href="reveal_decks/HIST270_Ch1_Lec1_Shang.html" target="_blank">
-<span class="lecture-num">01</span>
-<div class="lecture-content">
-<div class="lecture-title">The Shang Dynasty</div>
-<div class="lecture-desc">Oracle Bones, Bronze, and the Birth of Chinese Civilization</div>
-</div>
-<span class="lecture-arrow">→</span>
-</a>
-<a class="lecture-item" href="reveal_decks/HIST270_Ch1_Lec2_Zhou.html" target="_blank">
-<span class="lecture-num">02</span>
-<div class="lecture-content">
-<div class="lecture-title">The Zhou Dynasty</div>
-<div class="lecture-desc">The Mandate of Heaven and Feudal Order</div>
-</div>
-<span class="lecture-arrow">→</span>
-</a>
-<a class="lecture-item" href="reveal_decks/HIST270_Ch1_Lec3_RegionalDiversity.html" target="_blank">
-<span class="lecture-num">03</span>
-<div class="lecture-content">
-<div class="lecture-title">Regional Diversity</div>
-<div class="lecture-desc">Beyond the Central Plains: Chu, Shu, and Frontier Cultures</div>
-</div>
-<span class="lecture-arrow">→</span>
-</a>
-</div>
-</div>
-</div>
+
 <!-- Chapter 2 -->
 <div class="chapter-card">
-<div aria-expanded="false" class="chapter-header" role="button" tabindex="0">
-<div class="chapter-info">
-<span class="chapter-number">Chapter 2</span>
-<h3>Philosophers and Warring States</h3>
-<span class="chapter-dates">770 – 256 BCE</span>
+  <div aria-expanded="false" class="chapter-header" role="button" tabindex="0">
+    <div class="chapter-info">
+      <span class="chapter-number">Chapter 2</span>
+      <h3>Philosophers and Warring States</h3>
+      <span class="chapter-dates">770 – 256 BCE</span>
+    </div>
+    <span class="toggle-icon">▼</span>
+  </div>
+  <div class="lecture-list">
+    <div class="lecture-list-inner">
+      <a class="lecture-item" href="reveal_decks/HIST270_ch02_lec1_warring_states_world_revSU26.html" target="_blank">
+        <span class="lecture-num">01</span>
+        <div class="lecture-content">
+          <div class="lecture-title">The Warring States World</div>
+          <div class="lecture-desc">Political Fragmentation, Military Revolution, and the Crisis of Order</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+      <a class="lecture-item" href="reveal_decks/HIST270_ch02_lec2_confucianism_critics_revSU26.html" target="_blank">
+        <span class="lecture-num">02</span>
+        <div class="lecture-content">
+          <div class="lecture-title">Confucianism and Its Critics</div>
+          <div class="lecture-desc">Confucius, Mencius, Xunzi, and the Debate over Human Nature</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+      <a class="lecture-item" href="reveal_decks/HIST270_ch02_lec3_daoism_legalism_cosmos_chu_revSU26.html" target="_blank">
+        <span class="lecture-num">03</span>
+        <div class="lecture-content">
+          <div class="lecture-title">Daoism, Legalism, Cosmos, and Chu</div>
+          <div class="lecture-desc">The Way of Nature, the Way of Law, and the Southern Imagination</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+    </div>
+  </div>
 </div>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="lecture-list">
-<div class="lecture-list-inner">
-<a class="lecture-item" href="reveal_decks/HIST270_ch02_lec1_warring_states.html" target="_blank">
-<span class="lecture-num">01</span>
-<div class="lecture-content">
-<div class="lecture-title">The Warring States Period</div>
-<div class="lecture-desc">Political Fragmentation and Military Revolution</div>
-</div>
-<span class="lecture-arrow">→</span>
-</a>
-<a class="lecture-item" href="reveal_decks/HIST270_ch02_lec2_confucian.html" target="_blank">
-<span class="lecture-num">02</span>
-<div class="lecture-content">
-<div class="lecture-title">The Confucian Response</div>
-<div class="lecture-desc">Confucius, Mencius, and the Way of Virtue</div>
-</div>
-<span class="lecture-arrow">→</span>
-</a>
-<a class="lecture-item" href="reveal_decks/HIST270_ch02_lec3_daoist_legalist.html" target="_blank">
-<span class="lecture-num">03</span>
-<div class="lecture-content">
-<div class="lecture-title">Daoist and Legalist Alternatives</div>
-<div class="lecture-desc">The Way of Nature and the Way of Law</div>
-</div>
-<span class="lecture-arrow">→</span>
-</a>
-</div>
-</div>
-</div>
+
 </section>
-<!-- Imperial China: Unification & Expansion -->
+
+<!-- ═══════════════════════════════════════════════════════
+     IMPERIAL CHINA: UNIFICATION & EXPANSION
+     ═══════════════════════════════════════════════════════ -->
 <section class="era-section">
 <h2 class="era-title"><span class="era-icon">👑</span> Imperial China: Unification &amp; Expansion</h2>
+
 <!-- Chapter 3 -->
 <div class="chapter-card">
-<div aria-expanded="false" class="chapter-header" role="button" tabindex="0">
-<div class="chapter-info">
-<span class="chapter-number">Chapter 3</span>
-<h3>The Founding of the Bureaucratic Empire: Qin–Han</h3>
-<span class="chapter-dates">256 BCE – 200 CE</span>
-</div>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="lecture-list">
-<div class="lecture-list-inner">
-  <a class="lecture-item" href="reveal_decks/HIST270_ch03_lec1_qin_unification.html" target="_blank">
-    <span class="lecture-num">01</span>
-    <div class="lecture-content">
-      <div class="lecture-title">The Qin Unification</div>
-      <div class="lecture-desc">First Emperor, Legalist State, and Imperial Foundations</div>
+  <div aria-expanded="false" class="chapter-header" role="button" tabindex="0">
+    <div class="chapter-info">
+      <span class="chapter-number">Chapter 3</span>
+      <h3>The Founding of the Bureaucratic Empire: Qin–Han</h3>
+      <span class="chapter-dates">256 BCE – 200 CE</span>
     </div>
-    <span class="lecture-arrow">→</span>
-  </a>
-
-  <a class="lecture-item" href="reveal_decks/HIST270_ch03_lec2_han_founding.html" target="_blank">
-    <span class="lecture-num">02</span>
-    <div class="lecture-content">
-      <div class="lecture-title">The Han Founding</div>
-      <div class="lecture-desc">From Rebel to Dynasty: Building the Han Order</div>
+    <span class="toggle-icon">▼</span>
+  </div>
+  <div class="lecture-list">
+    <div class="lecture-list-inner">
+      <a class="lecture-item" href="reveal_decks/HIST270_ch03_lec1_qin_power_law_empire_revSU26.html" target="_blank">
+        <span class="lecture-num">01</span>
+        <div class="lecture-content">
+          <div class="lecture-title">Qin: Power, Law, and Empire</div>
+          <div class="lecture-desc">First Emperor, Legalist State, and the Costs of Unification</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+      <a class="lecture-item" href="reveal_decks/HIST270_ch03_lec2_han_founding_confucian_state_revSU26.html" target="_blank">
+        <span class="lecture-num">02</span>
+        <div class="lecture-content">
+          <div class="lecture-title">Han Founding and the Confucian State</div>
+          <div class="lecture-desc">From Rebel to Dynasty: Wu Di, the Examination Ideal, and Imperial Ideology</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+      <a class="lecture-item" href="reveal_decks/HIST270_ch03_lec3_han_society_thought_south_revSU26.html" target="_blank">
+        <span class="lecture-num">03</span>
+        <div class="lecture-content">
+          <div class="lecture-title">Han Society, Thought, and the South</div>
+          <div class="lecture-desc">Social Order, Intellectual Synthesis, and the Expansion of the Han World</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+      <a class="lecture-item" href="reveal_decks/HIST270_ch03_lec4_silk_road_china_world_revSU26.html" target="_blank">
+        <span class="lecture-num">04</span>
+        <div class="lecture-content">
+          <div class="lecture-title">The Silk Road and China's World</div>
+          <div class="lecture-desc">Trade Networks, Steppe Diplomacy, and the Limits of Empire</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
     </div>
-    <span class="lecture-arrow">→</span>
-  </a>
-
-  <a class="lecture-item" href="reveal_decks/HIST270_ch03_lec3_Empire_Expansion_Collapse.html" target="_blank">
-    <span class="lecture-num">03</span>
-    <div class="lecture-content">
-      <div class="lecture-title">Empire, Expansion, and Collapse</div>
-      <div class="lecture-desc">Han Power, Frontier War, and the Costs of Empire</div>
-    </div>
-    <span class="lecture-arrow">→</span>
-  </a>
-
-  <a class="lecture-item" href="reveal_decks/HIST270_ch03_lec4_silkroad.html" target="_blank">
-    <span class="lecture-num">04</span>
-    <div class="lecture-content">
-      <div class="lecture-title">The Silk Road</div>
-      <div class="lecture-desc">Trade Networks, Diplomacy, and Cultural Exchange</div>
-    </div>
-    <span class="lecture-arrow">→</span>
-  </a>
+  </div>
 </div>
 
-</div>
 <!-- Chapter 4 -->
 <div class="chapter-card">
-<div aria-expanded="false" class="chapter-header" role="button" tabindex="0">
-<div class="chapter-info">
-<span class="chapter-number">Chapter 4</span>
-<h3>Political Division in China</h3>
-<span class="chapter-dates">200 – 580 CE</span>
+  <div aria-expanded="false" class="chapter-header" role="button" tabindex="0">
+    <div class="chapter-info">
+      <span class="chapter-number">Chapter 4</span>
+      <h3>Political Division in China</h3>
+      <span class="chapter-dates">200 – 580 CE</span>
+    </div>
+    <span class="toggle-icon">▼</span>
+  </div>
+  <div class="lecture-list">
+    <div class="lecture-list-inner">
+      <a class="lecture-item" href="reveal_decks/HIST270_ch04_lec1_when_center_cannot_hold_revSU26.html" target="_blank">
+        <span class="lecture-num">01</span>
+        <div class="lecture-content">
+          <div class="lecture-title">When the Center Cannot Hold</div>
+          <div class="lecture-desc">Han Collapse, Warlords, and the Three Kingdoms</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+      <a class="lecture-item" href="reveal_decks/HIST270_ch04_lec2_conquerors_and_identity_revSU26.html" target="_blank">
+        <span class="lecture-num">02</span>
+        <div class="lecture-content">
+          <div class="lecture-title">Conquerors and Identity</div>
+          <div class="lecture-desc">Non-Chinese Dynasties and the Question of What It Means to Be Chinese</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+      <a class="lecture-item" href="reveal_decks/HIST270_ch04_lec3_buddhism_conquest_revSU26.html" target="_blank">
+        <span class="lecture-num">03</span>
+        <div class="lecture-content">
+          <div class="lecture-title">Buddhism and Conquest</div>
+          <div class="lecture-desc">A Foreign Faith Transforms China from the Ground Up</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+    </div>
+  </div>
 </div>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="lecture-list">
-<div class="lecture-list-inner">
-<a class="lecture-item" href="reveal_decks/HIST270_ch04_lec1_three_kingdoms.html" target="_blank">
-<span class="lecture-num">01</span>
-<div class="lecture-content">
-<div class="lecture-title">The Three Kingdoms</div>
-<div class="lecture-desc">Heroes, Warlords, and the Fall of Han Unity</div>
-</div>
-<span class="lecture-arrow">→</span>
-</a>
-<a class="lecture-item" href="reveal_decks/HIST270_ch04_lec2_identity.html" target="_blank">
-<span class="lecture-num">02</span>
-<div class="lecture-content">
-<div class="lecture-title">Chinese Identity in Question</div>
-<div class="lecture-desc">Non-Chinese Rule and Cultural Transformation</div>
-</div>
-<span class="lecture-arrow">→</span>
-</a>
-<a class="lecture-item" href="reveal_decks/HIST270_ch04_lec3_buddhism.html" target="_blank">
-<span class="lecture-num">03</span>
-<div class="lecture-content">
-<div class="lecture-title">The Arrival of Buddhism</div>
-<div class="lecture-desc">A Foreign Faith Transforms China</div>
-</div>
-<span class="lecture-arrow">→</span>
-</a>
-</div>
-</div>
-</div>
+
 <!-- Chapter 5 -->
 <div class="chapter-card">
-<div aria-expanded="false" class="chapter-header" role="button" tabindex="0">
-<div class="chapter-info">
-<span class="chapter-number">Chapter 5</span>
-<h3>The Cosmopolitan Empires of Sui and Tang</h3>
-<span class="chapter-dates">591 – 960 CE</span>
+  <div aria-expanded="false" class="chapter-header" role="button" tabindex="0">
+    <div class="chapter-info">
+      <span class="chapter-number">Chapter 5</span>
+      <h3>The Cosmopolitan Empires of Sui and Tang</h3>
+      <span class="chapter-dates">591 – 960 CE</span>
+    </div>
+    <span class="toggle-icon">▼</span>
+  </div>
+  <div class="lecture-list">
+    <div class="lecture-list-inner">
+      <a class="lecture-item" href="reveal_decks/HIST270_ch05_lec1_sui_reunification_revSU26.html" target="_blank">
+        <span class="lecture-num">01</span>
+        <div class="lecture-content">
+          <div class="lecture-title">Sui Reunification</div>
+          <div class="lecture-desc">Grand Canal, Grand Ambitions, and the Costs of Speed</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+      <a class="lecture-item" href="reveal_decks/HIST270_ch05_lec2_early_tang_power_revSU26.html" target="_blank">
+        <span class="lecture-num">02</span>
+        <div class="lecture-content">
+          <div class="lecture-title">Early Tang Power</div>
+          <div class="lecture-desc">Taizong, Wu Zetian, and the Architecture of Empire</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+      <a class="lecture-item" href="reveal_decks/HIST270_ch05_lec3_tang_height_decline_revSU26.html" target="_blank">
+        <span class="lecture-num">03</span>
+        <div class="lecture-content">
+          <div class="lecture-title">Tang at Its Height and in Decline</div>
+          <div class="lecture-desc">Golden Age, An Lushan Rebellion, and the End of Cosmopolitan Empire</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+    </div>
+  </div>
 </div>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="lecture-list">
-<div class="lecture-list-inner">
-<a class="lecture-item" href="reveal_decks/HIST270_ch5_lec1_sui_reunification.html" target="_blank">
-<span class="lecture-num">01</span>
-<div class="lecture-content">
-<div class="lecture-title">The Sui Reunification</div>
-<div class="lecture-desc">Grand Canal, Grand Ambitions, and Rapid Collapse</div>
-</div>
-<span class="lecture-arrow">→</span>
-</a>
-<a class="lecture-item" href="reveal_decks/HIST270_ch5_lec2_early_tang_power.html" target="_blank">
-<span class="lecture-num">02</span>
-<div class="lecture-content">
-<div class="lecture-title">Early Tang Power</div>
-<div class="lecture-desc">Taizong, Wu Zetian, and the Path to Empire</div>
-</div>
-<span class="lecture-arrow">→</span>
-</a>
-<a class="lecture-item" href="reveal_decks/HIST270_ch5_lec3_tang_height_decline.html" target="_blank">
-<span class="lecture-num">03</span>
-<div class="lecture-content">
-<div class="lecture-title">Tang Height and Decline</div>
-<div class="lecture-desc">Golden Age, An Lushan Rebellion, and the End of Cosmopolitan Empire</div>
-</div>
-<span class="lecture-arrow">→</span>
-</a>
-</div>
-</div>
-</div>
+
 </section>
-<!-- Middle Period: Song through Ming -->
+
+<!-- ═══════════════════════════════════════════════════════
+     MIDDLE PERIOD: SONG THROUGH MING
+     ═══════════════════════════════════════════════════════ -->
 <section class="era-section">
 <h2 class="era-title"><span class="era-icon">📜</span> Middle Period: Song through Ming</h2>
+
 <!-- Chapter 8 -->
 <div class="chapter-card">
-<div aria-expanded="false" class="chapter-header" role="button" tabindex="0">
-<div class="chapter-info">
-<span class="chapter-number">Chapter 8</span>
-<h3>China Among Equals</h3>
-<span class="chapter-dates">907 – 1279</span>
+  <div aria-expanded="false" class="chapter-header" role="button" tabindex="0">
+    <div class="chapter-info">
+      <span class="chapter-number">Chapter 8</span>
+      <h3>China Among Equals</h3>
+      <span class="chapter-dates">907 – 1279</span>
+    </div>
+    <span class="toggle-icon">▼</span>
+  </div>
+  <div class="lecture-list">
+    <div class="lecture-list-inner">
+      <a class="lecture-item" href="reveal_decks/HIST270_ch08_lec1_diplomacy_economic_revolution_revSU26.html" target="_blank">
+        <span class="lecture-num">01</span>
+        <div class="lecture-content">
+          <div class="lecture-title">Diplomacy and Economic Revolution</div>
+          <div class="lecture-desc">Song China's World of Rivals, Commerce, and Urban Growth</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+      <a class="lecture-item" href="reveal_decks/HIST270_ch08_lec2_scholar_officials_reform_conquest_revSU26.html" target="_blank">
+        <span class="lecture-num">02</span>
+        <div class="lecture-content">
+          <div class="lecture-title">Scholar-Officials, Reform, and Conquest</div>
+          <div class="lecture-desc">Wang Anshi, the Examination Elite, and the Northern Song's Fall</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+      <a class="lecture-item" href="reveal_decks/HIST270_ch08_lec3_neo_confucian_family_religion_revSU26.html" target="_blank">
+        <span class="lecture-num">03</span>
+        <div class="lecture-content">
+          <div class="lecture-title">Neo-Confucian Family and Religion</div>
+          <div class="lecture-desc">Zhu Xi, Ancestral Rites, Buddhism, and Popular Religion</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+    </div>
+  </div>
 </div>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="lecture-list">
-<div class="lecture-list-inner">
-<a class="lecture-item" href="powerpoints/08%20China%20Among%20Equals.pptx" target="_blank">
-<span class="lecture-num">01</span>
-<div class="lecture-content">
-<div class="lecture-title">China Among Equals</div>
-<div class="lecture-desc">PowerPoint slides: Song dynasty lectures</div>
-</div>
-<span class="lecture-arrow">→</span>
-</a>
-</div>
-</div>
-</div>
+
 <!-- Chapter 12 -->
 <div class="chapter-card">
-<div aria-expanded="false" class="chapter-header" role="button" tabindex="0">
-<div class="chapter-info">
-<span class="chapter-number">Chapter 12</span>
-<h3>China Under Mongol Rule</h3>
-<span class="chapter-dates">1215 – 1368</span>
+  <div aria-expanded="false" class="chapter-header" role="button" tabindex="0">
+    <div class="chapter-info">
+      <span class="chapter-number">Chapter 12</span>
+      <h3>China Under Mongol Rule</h3>
+      <span class="chapter-dates">1215 – 1368</span>
+    </div>
+    <span class="toggle-icon">▼</span>
+  </div>
+  <div class="lecture-list">
+    <div class="lecture-list-inner">
+      <a class="lecture-item" href="reveal_decks/HIST270_ch12_lec1_mongol_conquest_state_building_revSU26.html" target="_blank">
+        <span class="lecture-num">01</span>
+        <div class="lecture-content">
+          <div class="lecture-title">Mongol Conquest and State Building</div>
+          <div class="lecture-desc">Chinggis Khan, the Conquest of China, and the Yuan Dynasty</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+      <a class="lecture-item" href="reveal_decks/HIST270_ch12_lec2_yuan_hierarchy_global_exchange_revSU26.html" target="_blank">
+        <span class="lecture-num">02</span>
+        <div class="lecture-content">
+          <div class="lecture-title">Yuan Hierarchy and Global Exchange</div>
+          <div class="lecture-desc">Ethnic Rankings, the Pax Mongolica, and Marco Polo's World</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+      <a class="lecture-item" href="reveal_decks/HIST270_ch12_lec3_displaced_elites_yuan_collapse_revSU26.html" target="_blank">
+        <span class="lecture-num">03</span>
+        <div class="lecture-content">
+          <div class="lecture-title">Displaced Elites and Yuan Collapse</div>
+          <div class="lecture-desc">Chinese Literati under Mongol Rule and the Road to the Ming</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+    </div>
+  </div>
 </div>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="lecture-list">
-<div class="lecture-list-inner">
-<a class="lecture-item" href="powerpoints/12%20China%20Under%20Mongol%20Rule.pptx" target="_blank">
-<span class="lecture-num">01</span>
-<div class="lecture-content">
-<div class="lecture-title">China Under Mongol Rule</div>
-<div class="lecture-desc">PowerPoint slides: Mongol lectures</div>
-</div>
-<span class="lecture-arrow">→</span>
-</a>
-</div>
-</div>
-</div>
+
 <!-- Chapter 14 -->
 <div class="chapter-card">
-<div aria-expanded="false" class="chapter-header" role="button" tabindex="0">
-<div class="chapter-info">
-<span class="chapter-number">Chapter 14</span>
-<h3>The Ming Empire</h3>
-<span class="chapter-dates">1368 – 1644</span>
+  <div aria-expanded="false" class="chapter-header" role="button" tabindex="0">
+    <div class="chapter-info">
+      <span class="chapter-number">Chapter 14</span>
+      <h3>The Ming Empire</h3>
+      <span class="chapter-dates">1368 – 1644</span>
+    </div>
+    <span class="toggle-icon">▼</span>
+  </div>
+  <div class="lecture-list">
+    <div class="lecture-list-inner">
+      <a class="lecture-item" href="reveal_decks/HIST270_ch14_lec1_founders_autocracy_revSU26.html" target="_blank">
+        <span class="lecture-num">01</span>
+        <div class="lecture-content">
+          <div class="lecture-title">Founders and Autocracy</div>
+          <div class="lecture-desc">The Hongwu Emperor, Eunuch Power, and the Architecture of Ming Rule</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+      <a class="lecture-item" href="reveal_decks/HIST270_ch14_lec2_maritime_frontier_examinations_revSU26.html" target="_blank">
+        <span class="lecture-num">02</span>
+        <div class="lecture-content">
+          <div class="lecture-title">Maritime Voyages, Frontier, and Examinations</div>
+          <div class="lecture-desc">Zheng He, the Great Wall, and the Examination Culture</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+      <a class="lecture-item" href="reveal_decks/HIST270_ch14_lec3_mind_local_society_collapse_revSU26.html" target="_blank">
+        <span class="lecture-num">03</span>
+        <div class="lecture-content">
+          <div class="lecture-title">The Philosophy of Mind, Local Society, and Collapse</div>
+          <div class="lecture-desc">Wang Yangming, Gentry Culture, and the Fall of the Ming</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+    </div>
+  </div>
 </div>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="lecture-list">
-<div class="lecture-list-inner">
-<a class="lecture-item" href="powerpoints/14%20The%20Ming%20Empire%20in%20China.pptx" target="_blank">
-<span class="lecture-num">01</span>
-<div class="lecture-content">
-<div class="lecture-title">The Ming Empire</div>
-<div class="lecture-desc">PowerPoint slides: Ming Empire lectures</div>
-</div>
-<span class="lecture-arrow">→</span>
-</a>
-</div>
-</div>
-</div>
+
 </section>
-<!-- Late Imperial & Modern China -->
+
+<!-- ═══════════════════════════════════════════════════════
+     LATE IMPERIAL & MODERN CHINA
+     ═══════════════════════════════════════════════════════ -->
 <section class="era-section">
 <h2 class="era-title"><span class="era-icon">🏯</span> Late Imperial &amp; Modern China</h2>
+
 <!-- Chapter 16 -->
 <div class="chapter-card">
-<div aria-expanded="false" class="chapter-header" role="button" tabindex="0">
-<div class="chapter-info">
-<span class="chapter-number">Chapter 16</span>
-<h3>The Creation of the Manchu Empire</h3>
-<span class="chapter-dates">1600 – 1800</span>
+  <div aria-expanded="false" class="chapter-header" role="button" tabindex="0">
+    <div class="chapter-info">
+      <span class="chapter-number">Chapter 16</span>
+      <h3>The Creation of the Manchu Empire</h3>
+      <span class="chapter-dates">1600 – 1800</span>
+    </div>
+    <span class="toggle-icon">▼</span>
+  </div>
+  <div class="lecture-list">
+    <div class="lecture-list-inner">
+      <a class="lecture-item" href="reveal_decks/HIST270_ch16_lec1_banner_conquest_loyalism_revSU26.html" target="_blank">
+        <span class="lecture-num">01</span>
+        <div class="lecture-content">
+          <div class="lecture-title">Banner Armies, Conquest, and Loyalism</div>
+          <div class="lecture-desc">Qing Origins, the Conquest of China, and Han Chinese Responses</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+      <a class="lecture-item" href="reveal_decks/HIST270_ch16_lec2_high_qing_empire_trade_population_revSU26.html" target="_blank">
+        <span class="lecture-num">02</span>
+        <div class="lecture-content">
+          <div class="lecture-title">High Qing: Empire, Trade, and Population</div>
+          <div class="lecture-desc">Kangxi, Qianlong, Territorial Expansion, and Economic Growth</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+      <a class="lecture-item" href="reveal_decks/HIST270_ch16_lec3_conservative_turn_social_margins_revSU26.html" target="_blank">
+        <span class="lecture-num">03</span>
+        <div class="lecture-content">
+          <div class="lecture-title">The Conservative Turn and the Social Margins</div>
+          <div class="lecture-desc">Late Qianlong, Corruption, and the Lives of Women and Commoners</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+    </div>
+  </div>
 </div>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="lecture-list">
-<div class="lecture-list-inner">
-<a class="lecture-item" href="powerpoints/16%20The%20Creation%20of%20the%20Manchu%20Empire.pptx" target="_blank">
-<span class="lecture-num">01</span>
-<div class="lecture-content">
-<div class="lecture-title">The Creation of the Manchu Empire</div>
-<div class="lecture-desc">PowerPoint slides (original version)</div>
-</div>
-<span class="lecture-arrow">→</span>
-</a>
-<a class="lecture-item" href="powerpoints/16%20The%20Creation%20of%20the%20Manchu%20Empire%2C%20Revised%20Nov%202024.pptx" target="_blank">
-<span class="lecture-num">02</span>
-<div class="lecture-content">
-<div class="lecture-title">The Creation of the Manchu Empire</div>
-<div class="lecture-desc">PowerPoint slides (Revised Nov 2024)</div>
-</div>
-<span class="lecture-arrow">→</span>
-</a>
-</div>
-</div>
-</div>
+
 <!-- Chapter 18 -->
 <div class="chapter-card">
-<div aria-expanded="false" class="chapter-header" role="button" tabindex="0">
-<div class="chapter-info">
-<span class="chapter-number">Chapter 18</span>
-<h3>China in Decline</h3>
-<span class="chapter-dates">1800 – 1900</span>
+  <div aria-expanded="false" class="chapter-header" role="button" tabindex="0">
+    <div class="chapter-info">
+      <span class="chapter-number">Chapter 18</span>
+      <h3>China in Decline</h3>
+      <span class="chapter-dates">1800 – 1900</span>
+    </div>
+    <span class="toggle-icon">▼</span>
+  </div>
+  <div class="lecture-list">
+    <div class="lecture-list-inner">
+      <a class="lecture-item" href="reveal_decks/HIST270_ch18_lec1_population_opium_war_revSU26.html" target="_blank">
+        <span class="lecture-num">01</span>
+        <div class="lecture-content">
+          <div class="lecture-title">Population Crisis and the Opium War</div>
+          <div class="lecture-desc">Malthusian Pressures, the Canton System, and China's Defeat</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+      <a class="lecture-item" href="reveal_decks/HIST270_ch18_lec2_rebellion_regional_power_revSU26.html" target="_blank">
+        <span class="lecture-num">02</span>
+        <div class="lecture-content">
+          <div class="lecture-title">Rebellion and Regional Power</div>
+          <div class="lecture-desc">Taiping Civil War, the Nian, and the Rise of Regional Armies</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+      <a class="lecture-item" href="reveal_decks/HIST270_ch18_lec3_self_strengthening_imperialism_revSU26.html" target="_blank">
+        <span class="lecture-num">03</span>
+        <div class="lecture-content">
+          <div class="lecture-title">Self-Strengthening and Imperialism</div>
+          <div class="lecture-desc">Reforms, Treaty Ports, and the New Imperialism in China</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+    </div>
+  </div>
 </div>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="lecture-list">
-<div class="lecture-list-inner">
-<a class="lecture-item" href="powerpoints/18%20China%20in%20Decline.pptx" target="_blank">
-<span class="lecture-num">01</span>
-<div class="lecture-content">
-<div class="lecture-title">China in Decline</div>
-<div class="lecture-desc">PowerPoint slides: Opium War lectures</div>
-</div>
-<span class="lecture-arrow">→</span>
-</a>
-</div>
-</div>
-</div>
+
 <!-- Chapter 24 -->
 <div class="chapter-card">
-<div aria-expanded="false" class="chapter-header" role="button" tabindex="0">
-<div class="chapter-info">
-<span class="chapter-number">Chapter 24</span>
-<h3>Remaking China</h3>
-<span class="chapter-dates">Late Qing Reform Era</span>
+  <div aria-expanded="false" class="chapter-header" role="button" tabindex="0">
+    <div class="chapter-info">
+      <span class="chapter-number">Chapter 24</span>
+      <h3>Remaking China</h3>
+      <span class="chapter-dates">1895 – 1919</span>
+    </div>
+    <span class="toggle-icon">▼</span>
+  </div>
+  <div class="lecture-list">
+    <div class="lecture-list-inner">
+      <a class="lecture-item" href="reveal_decks/HIST270_ch24_lec1_reform_revolution_republic_revSU26.html" target="_blank">
+        <span class="lecture-num">01</span>
+        <div class="lecture-content">
+          <div class="lecture-title">Reform, Revolution, and Republic</div>
+          <div class="lecture-desc">From the Hundred Days to the 1911 Revolution and Sun Yat-sen</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+      <a class="lecture-item" href="reveal_decks/HIST270_ch24_lec2_warlords_new_culture_society_revSU26.html" target="_blank">
+        <span class="lecture-num">02</span>
+        <div class="lecture-content">
+          <div class="lecture-title">Warlords, New Culture, and Society</div>
+          <div class="lecture-desc">Yuan Shikai, Warlordism, and the New Culture Movement</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+      <a class="lecture-item" href="reveal_decks/HIST270_ch24_lec3_may_fourth_women_united_front_revSU26.html" target="_blank">
+        <span class="lecture-num">03</span>
+        <div class="lecture-content">
+          <div class="lecture-title">May Fourth, Women, and the United Front</div>
+          <div class="lecture-desc">Student Protest, Feminism, the CCP, and the First United Front</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+    </div>
+  </div>
 </div>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="lecture-list">
-<div class="lecture-list-inner">
-<a class="lecture-item" href="powerpoints/24%20Remaking%20China.pptx" target="_blank">
-<span class="lecture-num">01</span>
-<div class="lecture-content">
-<div class="lecture-title">Remaking China</div>
-<div class="lecture-desc">PowerPoint slides: Self-strengthening lectures</div>
-</div>
-<span class="lecture-arrow">→</span>
-</a>
-</div>
-</div>
-</div>
+
 <!-- Chapter 25 -->
 <div class="chapter-card">
-<div aria-expanded="false" class="chapter-header" role="button" tabindex="0">
-<div class="chapter-info">
-<span class="chapter-number">Chapter 25</span>
-<h3>War and Revolution</h3>
-<span class="chapter-dates">1912 – 1949</span>
+  <div aria-expanded="false" class="chapter-header" role="button" tabindex="0">
+    <div class="chapter-info">
+      <span class="chapter-number">Chapter 25</span>
+      <h3>War and Revolution</h3>
+      <span class="chapter-dates">1927 – 1949</span>
+    </div>
+    <span class="toggle-icon">▼</span>
+  </div>
+  <div class="lecture-list">
+    <div class="lecture-list-inner">
+      <a class="lecture-item" href="reveal_decks/HIST270_ch25_lec1_united_front_peasant_revolution_revSU26.html" target="_blank">
+        <span class="lecture-num">01</span>
+        <div class="lecture-content">
+          <div class="lecture-title">United Front and Peasant Revolution</div>
+          <div class="lecture-desc">The GMD–CCP Alliance, the White Terror, and the Long March</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+      <a class="lecture-item" href="reveal_decks/HIST270_ch25_lec2_nanjing_modernity_gender_revSU26.html" target="_blank">
+        <span class="lecture-num">02</span>
+        <div class="lecture-content">
+          <div class="lecture-title">Nanjing Decade: Modernity and Gender</div>
+          <div class="lecture-desc">Nationalist State-Building, Urban Life, and Women in the Republic</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+      <a class="lecture-item" href="reveal_decks/HIST270_ch25_lec3_war_yan_an_civil_war_revSU26.html" target="_blank">
+        <span class="lecture-num">03</span>
+        <div class="lecture-content">
+          <div class="lecture-title">War, Yan'an, and Civil War</div>
+          <div class="lecture-desc">Sino-Japanese War, the Yan'an Way, and Communist Victory</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+    </div>
+  </div>
 </div>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="lecture-list">
-<div class="lecture-list-inner">
-<a class="lecture-item" href="powerpoints/25%20War%20and%20Revolution%20China.pptx" target="_blank">
-<span class="lecture-num">01</span>
-<div class="lecture-content">
-<div class="lecture-title">War and Revolution</div>
-<div class="lecture-desc">PowerPoint slides: Long March lectures</div>
-</div>
-<span class="lecture-arrow">→</span>
-</a>
-</div>
-</div>
-</div>
+
 <!-- Chapter 27 -->
 <div class="chapter-card">
-<div aria-expanded="false" class="chapter-header" role="button" tabindex="0">
-<div class="chapter-info">
-<span class="chapter-number">Chapter 27</span>
-<h3>China Under Mao</h3>
-<span class="chapter-dates">1949 – 1976</span>
+  <div aria-expanded="false" class="chapter-header" role="button" tabindex="0">
+    <div class="chapter-info">
+      <span class="chapter-number">Chapter 27</span>
+      <h3>China Under Mao</h3>
+      <span class="chapter-dates">1949 – 1976</span>
+    </div>
+    <span class="toggle-icon">▼</span>
+  </div>
+  <div class="lecture-list">
+    <div class="lecture-list-inner">
+      <a class="lecture-item" href="reveal_decks/HIST270_ch27_lec1_revolutionary_state_society_revSU26.html" target="_blank">
+        <span class="lecture-num">01</span>
+        <div class="lecture-content">
+          <div class="lecture-title">The Revolutionary State and Society</div>
+          <div class="lecture-desc">Land Reform, the Korean War, and Remaking Chinese Society</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+      <a class="lecture-item" href="reveal_decks/HIST270_ch27_lec2_hundred_flowers_great_leap_split_revSU26.html" target="_blank">
+        <span class="lecture-num">02</span>
+        <div class="lecture-content">
+          <div class="lecture-title">Hundred Flowers, Great Leap, and the Sino-Soviet Split</div>
+          <div class="lecture-desc">Anti-Rightist Campaigns, the Famine, and Breaking with Moscow</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+      <a class="lecture-item" href="reveal_decks/HIST270_ch27_lec3_cultural_revolution_mao_end_revSU26.html" target="_blank">
+        <span class="lecture-num">03</span>
+        <div class="lecture-content">
+          <div class="lecture-title">Cultural Revolution and the End of the Mao Era</div>
+          <div class="lecture-desc">Red Guards, Destruction of the Old, and the Succession Crisis</div>
+        </div>
+        <span class="lecture-arrow">→</span>
+      </a>
+    </div>
+  </div>
 </div>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="lecture-list">
-<div class="lecture-list-inner">
-<a class="lecture-item" href="powerpoints/27%20China%20Under%20Mao.pptx" target="_blank">
-<span class="lecture-num">01</span>
-<div class="lecture-content">
-<div class="lecture-title">China Under Mao</div>
-<div class="lecture-desc">PowerPoint slides: Cultural Revolution lectures</div>
-</div>
-<span class="lecture-arrow">→</span>
-</a>
-</div>
-</div>
-</div>
-<!-- Chapter 28 (newly added) -->
-<div class="chapter-card">
-<div aria-expanded="false" class="chapter-header" role="button" tabindex="0">
-<div class="chapter-info">
-<span class="chapter-number">Chapter 28</span>
-<h3>China since Mao</h3>
-<span class="chapter-dates">1976 – Present</span>
-</div>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="lecture-list">
-<div class="lecture-list-inner">
-<a class="lecture-item" href="powerpoints/28%20China%20since%20Mao.pptx" target="_blank">
-<span class="lecture-num">01</span>
-<div class="lecture-content">
-<div class="lecture-title">China since Mao</div>
-<div class="lecture-desc">PowerPoint slides: Post-Mao lectures</div>
-</div>
-<span class="lecture-arrow">→</span>
-</a>
-</div>
-</div>
-</div>
-</section>
-<div class="footer-nav">
-<a class="back-link" href="../index.html">← Return to The Lyceum</a>
-</div>
-</main>
-<script>
-        // Accordion toggle functionality
-        document.querySelectorAll('.chapter-header').forEach(header => {
-            header.addEventListener('click', function() {
-                const card = this.closest('.chapter-card');
-                const isOpen = card.classList.contains('open');
-                
-                // Toggle current card
-                card.classList.toggle('open');
-                this.setAttribute('aria-expanded', !isOpen);
-            });
 
-            // Keyboard accessibility
-            header.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    this.click();
-                }
-            });
-        });
-    </script>
+</section>
+
+<div class="footer-nav">
+  <a class="back-link" href="../index.html">← Return to The Lyceum</a>
+</div>
+
+</main>
+
+<script>
+  document.querySelectorAll('.chapter-header').forEach(header => {
+    header.addEventListener('click', function() {
+      const card = this.closest('.chapter-card');
+      const isOpen = card.classList.contains('open');
+      card.classList.toggle('open');
+      this.setAttribute('aria-expanded', !isOpen);
+    });
+    header.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        this.click();
+      }
+    });
+  });
+</script>
 </body>
 </html>
