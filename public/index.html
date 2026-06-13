@@ -1,763 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professor Steven Austin - Courses in History & Philosophy</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Libre+Baskerville:wght@400;700&family=Lora:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;1,400;1,500&family=Inter:wght@400;500;600&family=Special+Elite&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
-    
-    <!-- Desktop Folders Styles -->
-    <style>
-        /* ============================================
-           PROFESSOR'S DESK - RESOURCE FOLDERS
-           ============================================ */
-        
-        .desk-section {
-            padding: 2rem 0 3rem;
-        }
-
-        .desk-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .desk-label {
-            font-family: 'Playfair Display', serif;
-            color: #5a4a3a;
-            font-size: 1.1rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 1.5rem;
-            letter-spacing: 2px;
-        }
-
-        .desk-label::before,
-        .desk-label::after {
-            content: "—";
-            margin: 0 0.75rem;
-            color: #c9b896;
-        }
-
-        /* The desk surface */
-        .desk-surface {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 1536 / 1024;
-            background-image: url('images/desktop.webp');
-            background-size: cover;
-            background-position: center;
-            border-radius: 8px;
-            box-shadow: 
-                0 4px 20px rgba(0,0,0,0.3),
-                0 8px 40px rgba(46, 24, 16, 0.2),
-                inset 0 0 100px rgba(0,0,0,0.1);
-            border: 3px solid #6b5a47;
-            overflow: visible;
-        }
-
-        /* Individual folder on desk */
-        .desk-folder {
-            position: absolute;
-            width: 180px;
-            cursor: pointer;
-            transition: transform 0.3s ease, z-index 0s;
-            z-index: 10;
-        }
-
-        .desk-folder:hover,
-        .desk-folder.open {
-            z-index: 100;
-        }
-
-        .desk-folder:hover {
-            transform: translateY(-8px) rotate(0deg) scale(1.05);
-        }
-
-        .desk-folder.open {
-            transform: translateY(-15px) scale(1.1);
-        }
-
-        /* Folder positions - percentage based for responsiveness */
-        .desk-folder.folder-1 {
-            left: 5%;
-            bottom: 8%;
-            transform: rotate(-5deg);
-        }
-        .desk-folder.folder-1:hover,
-        .desk-folder.folder-1.open {
-            transform: translateY(-8px) rotate(-2deg) scale(1.05);
-        }
-
-        .desk-folder.folder-2 {
-            left: 38%;
-            bottom: 5%;
-            transform: rotate(3deg);
-        }
-        .desk-folder.folder-2:hover,
-        .desk-folder.folder-2.open {
-            transform: translateY(-8px) rotate(1deg) scale(1.05);
-        }
-
-        .desk-folder.folder-3 {
-            right: 8%;
-            bottom: 12%;
-            transform: rotate(-3deg);
-        }
-        .desk-folder.folder-3:hover,
-        .desk-folder.folder-3.open {
-            transform: translateY(-8px) rotate(-1deg) scale(1.05);
-        }
-
-        /* The manila folder graphic */
-        .folder-graphic {
-            position: relative;
-            width: 100%;
-            height: 130px;
-            background: linear-gradient(180deg, #e8d9a8 0%, #d4c48a 100%);
-            border-radius: 3px 12px 4px 4px;
-            box-shadow: 
-                0 4px 8px rgba(0,0,0,0.3),
-                0 2px 4px rgba(0,0,0,0.2),
-                inset 0 1px 0 rgba(255,255,255,0.4);
-            border: 1px solid #b8a870;
-        }
-
-        /* Folder tab */
-        .folder-graphic::before {
-            content: '';
-            position: absolute;
-            top: -15px;
-            right: 15px;
-            width: 50px;
-            height: 18px;
-            background: linear-gradient(180deg, #f0e4bc 0%, #e8d9a8 100%);
-            border-radius: 4px 4px 0 0;
-            border: 1px solid #b8a870;
-            border-bottom: none;
-            box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
-        }
-
-        /* Folder label */
-        .folder-label {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-family: 'Special Elite', 'Courier New', monospace;
-            font-size: 11px;
-            color: #5a4a3a;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            text-align: center;
-            white-space: nowrap;
-            text-shadow: 0 1px 0 rgba(255,255,255,0.5);
-        }
-
-        /* Paper edges peeking out */
-        .folder-papers {
-            position: absolute;
-            top: 5px;
-            left: 8px;
-            right: 8px;
-            height: 8px;
-            background: linear-gradient(180deg, #fff 0%, #f5f5f0 100%);
-            border-radius: 2px 2px 0 0;
-            box-shadow: 0 -1px 2px rgba(0,0,0,0.1);
-            opacity: 0.9;
-        }
-
-        /* Documents popup */
-        .folder-documents {
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%) translateY(20px);
-            background: #fdfbf7;
-            border-radius: 6px;
-            padding: 12px;
-            min-width: 200px;
-            box-shadow: 
-                0 8px 24px rgba(0,0,0,0.25),
-                0 4px 8px rgba(0,0,0,0.15);
-            border: 2px solid #c9b896;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 200;
-            margin-bottom: 10px;
-        }
-
-        .desk-folder.open .folder-documents {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        .folder-documents::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            border: 10px solid transparent;
-            border-top-color: #fdfbf7;
-            border-bottom: none;
-        }
-
-        .folder-documents::before {
-            content: '';
-            position: absolute;
-            bottom: -14px;
-            left: 50%;
-            transform: translateX(-50%);
-            border: 12px solid transparent;
-            border-top-color: #c9b896;
-            border-bottom: none;
-        }
-
-        .documents-title {
-            font-family: 'Libre Baskerville', serif;
-            font-size: 13px;
-            font-weight: 700;
-            color: #3a3020;
-            margin-bottom: 10px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #e5dcc8;
-        }
-
-        .document-link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 10px;
-            margin: 4px -4px;
-            border-radius: 4px;
-            text-decoration: none;
-            color: #3a3020;
-            transition: all 0.2s ease;
-        }
-
-        .document-link:hover {
-            background: #f0ebe0;
-        }
-
-        .document-link .doc-icon {
-            font-size: 18px;
-            flex-shrink: 0;
-        }
-
-        .document-link .doc-info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .document-link .doc-title {
-            font-family: 'Libre Baskerville', serif;
-            font-size: 12px;
-            font-weight: 400;
-            color: #3a3020;
-        }
-
-        .philosophy-course-button {
-            background: linear-gradient(135deg, #4f5f3f 0%, #26351f 100%);
-            color: #fffaf0;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.45);
-        }
-
-        .philosophy-course-button:hover {
-            background: linear-gradient(135deg, #26351f 0%, #4f5f3f 100%);
-            color: #ffffff;
-        }
-
-        .document-link .doc-meta {
-            font-family: 'Inter', sans-serif;
-            font-size: 10px;
-            color: #8b7355;
-            margin-top: 2px;
-        }
-
-        /* Click hint */
-        .folder-hint {
-            position: absolute;
-            bottom: -22px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: 'EB Garamond', serif;
-            font-size: 10px;
-            font-style: italic;
-            color: rgba(255,255,255,0.9);
-            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            white-space: nowrap;
-        }
-
-        .desk-folder:hover .folder-hint {
-            opacity: 1;
-        }
-
-        .desk-folder.open .folder-hint {
-            opacity: 0;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 900px) {
-            .desk-folder {
-                width: 120px;
-            }
-            .folder-graphic {
-                height: 85px;
-            }
-            .folder-label {
-                font-size: 9px;
-            }
-            .folder-documents {
-                min-width: 180px;
-                padding: 10px;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .desk-folder {
-                width: 90px;
-            }
-            .folder-graphic {
-                height: 65px;
-            }
-            .folder-graphic::before {
-                width: 35px;
-                height: 14px;
-                top: -12px;
-                right: 10px;
-            }
-            .folder-label {
-                font-size: 7px;
-            }
-            .folder-documents {
-                min-width: 160px;
-                padding: 8px;
-                position: fixed;
-                bottom: auto;
-                top: 50%;
-                left: 50% !important;
-                right: auto;
-                transform: translate(-50%, -50%) !important;
-            }
-            .desk-folder.open .folder-documents {
-                transform: translate(-50%, -50%) !important;
-            }
-            .folder-documents::before,
-            .folder-documents::after {
-                display: none;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Evergreen course resources in history, philosophy, ethics, and world religions from Professor Steven Austin.">
+  <title>Professor Steven Austin | History &amp; Philosophy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&amp;family=Lora:wght@400;500;600&amp;family=Inter:wght@500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/site-enhancements.css">
 </head>
-<body>
-    <!-- Text Header Section -->
-    <header class="text-banner">
-        <div class="banner-content">
-            <h1 class="banner-main-title">PROFESSOR STEVEN AUSTIN</h1>
-            <h2 class="banner-subtitle">Courses in History & Philosophy</h2>
-            <div class="banner-decorative-rule">
-                <span class="rule-ornament">◆</span>
-            </div>
-            <p class="banner-quote">
-                <em>"The Past is Prologue"</em> — William Shakespeare
-            </p>
+<body class="home-page">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="text-banner home-hero">
+    <div class="banner-content">
+      <p class="eyebrow">History | Philosophy | Religion</p>
+      <h1 class="banner-main-title">Professor Steven Austin</h1>
+      <p class="banner-subtitle">Courses and Digital Learning Resources</p>
+      <p class="banner-quote"><em>"The past is prologue."</em> - William Shakespeare</p>
+    </div>
+  </header>
+
+  <nav class="main-nav" aria-label="Primary navigation">
+    <a href="#courses" class="nav-link">Courses</a>
+    <a href="#resources" class="nav-link">Learning Resources</a>
+    <a href="#about" class="nav-link">About</a>
+    <a href="#contact" class="nav-link">Contact</a>
+    <a href="calendar.html" class="nav-link">Calendar</a>
+  </nav>
+
+  <main id="main-content" class="container">
+    <section class="welcome-section compact-intro" aria-labelledby="welcome-title">
+      <p class="eyebrow">An Evergreen Academic Library</p>
+      <h2 id="welcome-title" class="section-title">Choose Your Course</h2>
+      <p class="welcome-text">Explore course materials, study guides, assignments, and public learning tools.</p>
+    </section>
+
+    <section id="courses" class="courses-section" aria-labelledby="courses-title">
+      <h2 id="courses-title" class="visually-hidden">Course offerings</h2>
+      <div class="catalog-grid">
+        <article class="catalog-card featured-course">
+          <div class="course-kicker">United States History</div>
+          <h3>HIST 101</h3>
+          <h4>United States History to 1877</h4>
+          <p>Colonial foundations, revolution, expansion, Civil War, and Reconstruction.</p>
+          <div class="modality-grid" aria-label="HIST 101 course formats">
+            <a class="modality-card" href="hist-101/index.html">
+              <span class="modality-label">Classroom</span>
+              <strong>Classroom Course</strong>
+              <span>Classroom textbook, coursework, study materials, and syllabus</span>
+            </a>
+            <a class="modality-card online" href="hist-101-V1/index.html">
+              <span class="modality-label">Online</span>
+              <strong>Online Course</strong>
+              <span><em>Give Me Liberty!, Vol. 1</em>, online guides, and asynchronous coursework</span>
+            </a>
+          </div>
+        </article>
+
+        <article class="catalog-card featured-course">
+          <div class="course-kicker">United States History</div>
+          <h3>HIST 102</h3>
+          <h4>United States History Since 1877</h4>
+          <p>Industrialization, world wars, social movements, civil rights, and modern America.</p>
+          <div class="modality-grid" aria-label="HIST 102 course formats">
+            <a class="modality-card" href="hist-102/index.html">
+              <span class="modality-label">Classroom</span>
+              <strong>Classroom Course</strong>
+              <span>Classroom textbook, coursework, study materials, and syllabus</span>
+            </a>
+            <a class="modality-card online" href="hist-102-V1/index.html">
+              <span class="modality-label">Online</span>
+              <strong>Online Course</strong>
+              <span><em>Give Me Liberty!, Vol. 2</em>, online guides, and asynchronous coursework</span>
+            </a>
+          </div>
+        </article>
+
+        <article class="catalog-card">
+          <div class="course-kicker">East Asian History</div>
+          <h3>HIST 270</h3>
+          <h4>History of China</h4>
+          <p>Dynasties, philosophies, social transformations, and revolutions across Chinese history.</p>
+          <a class="course-button" href="hist-270/index.html">Explore HIST 270</a>
+        </article>
+
+        <article class="catalog-card upcoming-course">
+          <div class="course-kicker">World History</div>
+          <h3>HIST 151</h3>
+          <h4>World History, Part I</h4>
+          <p>Global civilizations, cultural exchange, belief systems, states, and societies from the ancient world through the early modern era.</p>
+          <p class="coming-soon-label">Coming Fall 2026</p>
+        </article>
+
+        <article class="catalog-card upcoming-course">
+          <div class="course-kicker">World History</div>
+          <h3>HIST 152</h3>
+          <h4>World History, Part II</h4>
+          <p>Revolutions, industrialization, imperialism, global conflict, decolonization, and the development of the modern world.</p>
+          <p class="coming-soon-label">Coming Spring 2027</p>
+        </article>
+
+        <article class="catalog-card">
+          <div class="course-kicker">Philosophy</div>
+          <h3>PHIL 120</h3>
+          <h4>Introduction to Ethics</h4>
+          <p>Moral reasoning through virtue, duty, consequence, and contemporary ethical problems.</p>
+          <a class="course-button" href="phil-120/index.html">Explore PHIL 120</a>
+        </article>
+
+        <article class="catalog-card">
+          <div class="course-kicker">Religion</div>
+          <h3>PHIL 210</h3>
+          <h4>World Religions</h4>
+          <p>Comparative study of major religious traditions, practices, beliefs, and sacred texts.</p>
+          <a class="course-button" href="phil-210/index.html">Explore PHIL 210</a>
+        </article>
+
+        <article class="catalog-card lyceum-card">
+          <div class="course-kicker">Protected Lecture Library</div>
+          <h3>The Lyceum</h3>
+          <h4>Reveal Lecture Decks</h4>
+          <p>Reveal.js lecture decks are the only protected materials on this site. Cloudflare Access handles authentication.</p>
+          <p class="access-note"><span aria-hidden="true">&#128274;</span> Sign-in required</p>
+          <a class="course-button" href="the_lyceum/index.html">Open Lecture Decks</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="resources" class="resource-section" aria-labelledby="resources-title">
+      <p class="eyebrow">Public Resources</p>
+      <h2 id="resources-title" class="section-title">Learning Beyond the Course Page</h2>
+      <div class="resource-grid">
+        <a class="resource-card" href="ethnic-cleansing/index.html"><strong>Understanding Ethnic Cleansing</strong><span>Analytical frameworks, primary sources, and case studies</span></a>
+        <a class="resource-card" href="lost_cause/index.html"><strong>The Myth of the Lost Cause</strong><span>Historical memory, institutions, and popular culture</span></a>
+        <a class="resource-card" href="history_photography/index.html"><strong>Photography in American History</strong><span>Photography as evidence, art, and social witness</span></a>
+      </div>
+    </section>
+
+    <section id="about" class="about-section content-box">
+      <div class="about-content">
+        <div class="profile-image-container"><img src="images/self-portraits/self-portraits (1).webp" alt="Professor Steven Austin" class="profile-image" width="250" height="333"></div>
+        <div class="about-text">
+          <p class="eyebrow">About the Professor</p>
+          <h2 class="section-title left-aligned">Teaching History as Inquiry</h2>
+          <p>Professor Steven Austin teaches American history, Chinese history, ethics, and comparative religion. These resources invite students to evaluate evidence, compare interpretations, and understand the ideas and experiences that shape human societies.</p>
+          <p class="quote-accent">"History is not merely a chronicle of events, but a tapestry of human experience woven with threads of triumph, tragedy, wisdom, and folly."</p>
         </div>
-    </header>
+      </div>
+    </section>
 
-    <!-- Main Navigation -->
-    <nav class="main-nav">
-        <a href="#about" class="nav-link">About</a>
-        <a href="#courses" class="nav-link">Courses</a>
-        <a href="#contact" class="nav-link">Contact</a>
-        <a href="calendar.html" class="nav-link">Calendar</a>
-    </nav>
+    <section id="contact" class="contact-section content-box" aria-labelledby="contact-title">
+      <p class="eyebrow">Get in Touch</p>
+      <h2 id="contact-title" class="section-title">Contact Information</h2>
+      <div class="contact-grid">
+        <div class="contact-item"><h3>Email</h3><p><a href="mailto:saustin@richland.edu">saustin@richland.edu</a></p></div>
+        <div class="contact-item"><h3>Office</h3><p>S226</p></div>
+        <div class="contact-item"><h3>Office Hours</h3><p>Monday-Friday, 1:00-2:00 PM<br>or by appointment</p></div>
+        <div class="contact-item"><h3>Phone</h3><p>875-7211, ext. 6392</p></div>
+      </div>
+    </section>
+  </main>
 
-    <!-- Main Content Container -->
-    <main class="container">
-        
-        <!-- Welcome Section -->
-        <section class="welcome-section">
-            <div class="decorative-rule"></div>
-            <p class="welcome-text">
-                Welcome to an exploration of human civilization through the lens of history and philosophy. 
-                Here you will find courses that illuminate the past, challenge perspectives, and cultivate wisdom.
-            </p>
-            <div class="decorative-rule"></div>
-        </section>
-
-      
-        <!-- Course Cards Section -->
-        <section id="courses" class="courses-section">
-            <h2 class="section-title">Course Offerings</h2>
-            
-            <div class="course-grid">
-                <!-- HIST 101 -->
-                <article class="course-card">
-                    <div class="course-icon">📜</div>
-                    <h3 class="course-number">HIST 101</h3>
-                    <h4 class="course-title">US History to 1877</h4>
-                    <p class="course-description">
-                        From colonial foundations through the Civil War and Reconstruction. 
-                        4 credit hours. Prerequisites: Eligibility for ENGL 101.
-                    </p>
-                    <a href="hist-101/index.html" class="course-button">View Course Details</a>
-                </article>
-
-                <!-- HIST 101 V1 — ONLINE -->
-                <article class="course-card" style="border-top: 4px solid #7a1f3d;">
-                    <div class="course-icon">🖥️</div>
-                    <h3 class="course-number" style="color: #7a1f3d;">HIST 101 — ONLINE</h3>
-                    <h4 class="course-title">US History to 1877</h4>
-                    <p class="course-description">
-                        The online section of HIST 101. From colonial foundations through the Civil War and Reconstruction.
-                        4 credit hours. Uses <em>Give Me Liberty!, Vol. 1</em> — Foner.
-                    </p>
-                    <a href="hist-101-V1/index.html" class="course-button" style="background: linear-gradient(135deg, #7a1f3d 0%, #4e1228 100%);">View Online Course</a>
-                </article>
-
-                <!-- HIST 102 -->
-                <article class="course-card">
-                    <div class="course-icon">🏛️</div>
-                    <h3 class="course-number">HIST 102</h3>
-                    <h4 class="course-title">US History Since 1877</h4>
-                    <p class="course-description">
-                        Industrial revolution, world wars, civil rights, and modern America. 
-                        Trace the transformation into a global superpower.
-                    </p>
-                    <a href="hist-102/index.html" class="course-button">View Course Details</a>
-                </article>
-
-                <!-- HIST 102 V1 — ONLINE -->
-                <article class="course-card" style="border-top: 4px solid #C1440E;">
-                    <div class="course-icon">🖥️</div>
-                    <h3 class="course-number" style="color: #C1440E;">HIST 102 — ONLINE</h3>
-                    <h4 class="course-title">US History Since 1877</h4>
-                    <p class="course-description">
-                        The online section of HIST 102. Industrial revolution, world wars, civil rights, and modern America.
-                        8-week accelerated format. Uses <em>Give Me Liberty!, Vol. 2</em> — Foner.
-                    </p>
-                    <a href="hist-102-V1/index.html" class="course-button" style="background: linear-gradient(135deg, #C1440E 0%, #8a2f09 100%);">View Online Course</a>
-                </article>
-
-                <!-- HIST 270 -->
-                <article class="course-card">
-                    <div class="course-icon">🏮</div>
-                    <h3 class="course-number">HIST 270</h3>
-                    <h4 class="course-title">Chinese History</h4>
-                    <p class="course-description">
-                        Five thousand years of civilization: dynasties, philosophies, and revolutions. 
-                        Discover the Middle Kingdom's profound influence on world history.
-                    </p>
-                    <a href="hist-270/index.html" class="course-button">View Course Details</a>
-                </article>
-
-                <!-- PHIL 120 -->
-                <article class="course-card">
-                    <div class="course-icon">⚖️</div>
-                    <h3 class="course-number">PHIL 120</h3>
-                    <h4 class="course-title">Introduction to Ethics</h4>
-                    <p class="course-description">
-                        Foundations of moral reasoning: virtue, duty, and consequence. 
-                        Examine ethical theories and apply them to contemporary dilemmas.
-                    </p>
-                    <a href="phil-120/index.html" class="course-button philosophy-course-button">View Course Details</a>
-                </article>
-
-                <!-- PHIL 210 -->
-                <article class="course-card">
-                    <div class="course-icon">🕉️</div>
-                    <h3 class="course-number">PHIL 210</h3>
-                    <h4 class="course-title">World Religions</h4>
-                    <p class="course-description">
-                        Comparative study of major faith traditions: beliefs, practices, and sacred texts. 
-                        Understanding humanity's spiritual quest across cultures.
-                    </p>
-                    <a href="phil-210/index.html" class="course-button philosophy-course-button">View Course Details</a>
-                </article>
-            </div>
-        </section>
-
-        <!-- Beyond the Classroom -->
-        <section id="lyceum" class="courses-section" style="padding-top: 0;">
-            <h2 class="section-title">The Digital Classroom</h2>
-            
-            <div class="course-grid">
-                <!-- The Lyceum -->
-                <article class="course-card" style="border-top: 4px solid #8b7355;">
-                    <div class="course-icon">🦉</div>
-                    <h3 class="course-number" style="color: #8b7355;">THE LYCEUM</h3>
-                    <h4 class="course-title">Studies in History, Faith, and Civilization</h4>
-                    <p class="course-description">
-                        A digital gathering place for lectures spanning continents and millennia. 
-                        Explore American history, world religions, ethics, and more.
-                    </p>
-                    <a href="the_lyceum/index.html" class="course-button" style="background: linear-gradient(135deg, #8b7355 0%, #6b5a47 100%);">Enter The Lyceum</a>
-                </article>
-
-                <!-- Ethnic Cleansing Analysis -->
-                <article class="course-card" style="border-top: 4px solid #8B4513;">
-                    <div class="course-icon">🗺️</div>
-                    <h3 class="course-number" style="color: #8B4513;">UNDERSTANDING ETHNIC CLEANSING</h3>
-                    <h4 class="course-title">Frameworks and Case Studies</h4>
-                    <p class="course-description">
-                        Analytical framework for understanding systematic displacement and violence. 
-                        Case studies from global history with methodological tools.
-                    </p>
-                    <a href="ethnic-cleansing/index.html" class="course-button" style="background: linear-gradient(135deg, #8B4513 0%, #654321 100%);">Enter the Classroom</a>
-                </article>
-
-                <!-- Lost Cause Module -->
-                <article class="course-card" style="border-top: 4px solid #A25FB0;">
-                    <div class="course-icon">⚔️</div>
-                    <h3 class="course-number" style="color: #A25FB0;">THE MYTH OF THE LOST CAUSE</h3>
-                    <h4 class="course-title">How the South Won the War of Memory</h4>
-                    <p class="course-description">
-                        Three-lecture arc examining how white Southerners transformed military defeat 
-                        into moral victory, erased slavery's centrality, and captured American culture.
-                    </p>
-                    <a href="lost_cause/index.html" class="course-button" style="background: linear-gradient(135deg, #A25FB0 0%, #8B4A93 100%);">Explore the Module</a>
-                </article>
-
-                <!-- Photography in American History -->
-                <article class="course-card" style="border-top: 4px solid #4A5D7C;">
-                    <div class="course-icon">📷</div>
-                    <h3 class="course-number" style="color: #4A5D7C;">PHOTOGRAPHY IN AMERICAN HISTORY</h3>
-                    <h4 class="course-title">Witness, Art, and the American Experience</h4>
-                    <p class="course-description">
-                        Explore how photography shaped and recorded American history—from Civil War 
-                        battlefields to social reform, capturing both artistry and witness.
-                    </p>
-                    <a href="history_photography/index.html" class="course-button" style="background: linear-gradient(135deg, #4A5D7C 0%, #364659 100%);">Enter the Gallery</a>
-                </article>
-            </div>
-        </section>
-		
-		  <!-- Professor's Desk Section -->
-        <section class="desk-section">
-            <div class="desk-container">
-				<h2 div class="section-title">Professor Austin's Cluttered Desk</h2>
-                
-                <div class="desk-surface">
-                    
-                  <!-- Folder 1: Extra Credit (bottom-left) -->
-<div class="desk-folder folder-1" data-folder="extra-credit">
-    <div class="folder-graphic">
-        <div class="folder-papers"></div>
-        <span class="folder-label">Extra Credit</span>
-    </div>
-    <div class="folder-documents">
-        <div class="documents-title">📁 Extra Credit</div>
-        <a href="https://austin-academics.com/pierian_spring_how_extra_credit_is_calculated" class="document-link">
-            <span class="doc-icon">📋</span>
-            <div class="doc-info">
-                <div class="doc-title">How Extra Credit Works</div>
-                <div class="doc-meta">Policy & Calculation</div>
-            </div>
-        </a>
-    </div>
-    <span class="folder-hint">click to open</span>
-</div>
-
-                   <!-- Folder 2: Study Aids (bottom-center) -->
-<div class="desk-folder folder-2" data-folder="study-aids">
-    <div class="folder-graphic">
-        <div class="folder-papers"></div>
-        <span class="folder-label">Study Aids</span>
-    </div>
-    <div class="folder-documents">
-        <div class="documents-title">📁 Study Aids</div>
-        <a href="https://austin-academics.com/calendar" class="document-link">
-            <span class="doc-icon">📅</span>
-            <div class="doc-info">
-                <div class="doc-title">Academic Calendar 2026</div>
-                <div class="doc-meta">Important Dates & Deadlines</div>
-            </div>
-        </a>
-    </div>
-    <span class="folder-hint">click to open</span>
-</div>
-
-                    <!-- Folder 3: Templates (bottom-right) -->
-                    <div class="desk-folder folder-3" data-folder="templates">
-                        <div class="folder-graphic">
-                            <div class="folder-papers"></div>
-                            <span class="folder-label">Templates</span>
-                        </div>
-                        <div class="folder-documents">
-                            <div class="documents-title">📁 Templates</div>
-                            <a href="resources/essay-template.docx" class="document-link">
-                                <span class="doc-icon">📄</span>
-                                <div class="doc-info">
-                                    <div class="doc-title">Essay Format</div>
-                                    <div class="doc-meta">Word Document</div>
-                                </div>
-                            </a>
-                            <a href="resources/citation-guide.pdf" class="document-link">
-                                <span class="doc-icon">📋</span>
-                                <div class="doc-info">
-                                    <div class="doc-title">Citation Guide</div>
-                                    <div class="doc-meta">PDF Document</div>
-                                </div>
-                            </a>
-                        </div>
-                        <span class="folder-hint">click to open</span>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-
-        <!-- About Section -->
-        <section id="about" class="about-section">
-            <div class="content-box">
-                <h2 class="section-title">About Professor Austin</h2>
-                <div class="about-content">
-                    <div class="profile-image-container">
-                        <img id="profileImage" src="" alt="Professor Steven Austin" class="profile-image">
-                    </div>
-                    <div class="about-text">
-                        <p class="quote-accent">
-                            "History is not merely a chronicle of events, but a tapestry of human experience 
-                            woven with threads of triumph, tragedy, wisdom, and folly."
-                        </p>
-                        <p>
-                            Professor Steven Austin brings decades of teaching experience and scholarly research 
-                            to the classroom. Specializing in American history, Eastern civilizations, and 
-                            comparative religious studies, his courses challenge students to think critically 
-                            about the forces that have shaped our world.
-                        </p>
-                        <p>
-                            With a commitment to engaging pedagogy and rigorous inquiry, Professor Austin 
-                            helps students develop the analytical skills needed to understand complex 
-                            historical narratives and philosophical questions.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="contact-section">
-            <div class="content-box">
-                <h2 class="section-title">Contact Information</h2>
-                <div class="contact-grid">
-                    <div class="contact-item">
-                        <div class="contact-icon">📧</div>
-                        <h4>Email</h4>
-                        <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c7b4a6b2b4b3aea987b5aea4afaba6a9a3e9a2a3b2">[email&#160;protected]</a></p>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">🏢</div>
-                        <h4>Office</h4>
-                        <p>S226</p>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">🕐</div>
-                        <h4>Office Hours</h4>
-                        <p>Monday - Friday<br>1:00 PM - 2:00 PM<br>or by appointment</p>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">📞</div>
-                        <h4>Phone</h4>
-                        <p>875-7211, ext. 6392</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="decorative-rule-thin"></div>
-        <p class="footer-quote">
-            <em>"The Past is Prologue"</em> — William Shakespeare
-        </p>
-        <p class="footer-text">
-            © 2025 Professor Steven Austin | Courses in History & Philosophy
-        </p>
-    </footer>
-
-    <!-- Random Profile Image Script -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Array of profile image paths
-        const profileImages = [
-            'images/self-portraits/self-portraits (1).webp',
-            'images/self-portraits/self-portraits (1).webp',
-            'images/self-portraits/self-portraits (1).webp',
-            'images/self-portraits/self-portraits (2).webp',
-            'images/self-portraits/self-portraits (3).webp',
-            'images/self-portraits/self-portraits (4).webp',
-            'images/self-portraits/self-portraits (5).webp',
-            'images/self-portraits/self-portraits (6).webp',
-            'images/self-portraits/self-portraits (7).webp'
-        ];
-
-        // Select random image on page load
-        function setRandomProfileImage() {
-            const randomIndex = Math.floor(Math.random() * profileImages.length);
-            const selectedImage = profileImages[randomIndex];
-            document.getElementById('profileImage').src = selectedImage;
-        }
-
-        // Call function when page loads
-        window.addEventListener('DOMContentLoaded', setRandomProfileImage);
-    </script>
-
-    <!-- Desk Folders Script -->
-    <script>
-        // Folder open/close functionality
-        document.querySelectorAll('.desk-folder').forEach(folder => {
-            folder.addEventListener('click', (e) => {
-                // Don't toggle if clicking a document link
-                if (e.target.closest('.document-link')) return;
-                
-                // Close other folders
-                document.querySelectorAll('.desk-folder.open').forEach(openFolder => {
-                    if (openFolder !== folder) {
-                        openFolder.classList.remove('open');
-                    }
-                });
-                
-                folder.classList.toggle('open');
-            });
-        });
-
-        // Close folder when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.desk-folder')) {
-                document.querySelectorAll('.desk-folder.open').forEach(folder => {
-                    folder.classList.remove('open');
-                });
-            }
-        });
-
-        // Keyboard accessibility
-        document.querySelectorAll('.desk-folder').forEach(folder => {
-            folder.setAttribute('tabindex', '0');
-            folder.setAttribute('role', 'button');
-            folder.setAttribute('aria-expanded', 'false');
-            
-            folder.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    folder.click();
-                }
-            });
-        });
-
-        // Update aria-expanded on toggle
-        const observer = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
-                if (mutation.attributeName === 'class') {
-                    const folder = mutation.target;
-                    folder.setAttribute('aria-expanded', folder.classList.contains('open'));
+  <footer class="site-footer">
+    <p class="footer-quote"><em>"The past is prologue."</em></p>
+    <p class="footer-text">Professor Steven Austin | Courses in History &amp; Philosophy</p>
+  </footer>
+</body>
+</html>
