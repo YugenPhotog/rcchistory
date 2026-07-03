@@ -3,90 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XENO — Observer of Worlds · HIST 102</title>
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>XENO - Observer of Worlds - HIST 102</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        @keyframes pulse-glow {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 1; }
-        }
-        @keyframes typing-dot {
-            0%, 80%, 100% { transform: translateY(0); opacity: 0.3; }
-            40% { transform: translateY(-6px); opacity: 1; }
-        }
-        @keyframes fade-in-up {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes signal-pulse {
-            0%, 100% { box-shadow: 0 0 8px rgba(0, 255, 180, 0.2); }
-            50% { box-shadow: 0 0 20px rgba(0, 255, 180, 0.5); }
-        }
-
+        @keyframes typing-dot { 0%, 80%, 100% { transform: translateY(0); opacity: 0.3; } 40% { transform: translateY(-6px); opacity: 1; } }
+        @keyframes fade-in-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            min-height: 100vh;
-            background: #05080e;
-            font-family: 'Outfit', sans-serif;
-            padding: 16px;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        /* CRT scanline overlay */
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 2px,
-                rgba(0, 255, 180, 0.012) 2px,
-                rgba(0, 255, 180, 0.012) 4px
-            );
-            pointer-events: none;
-            z-index: 9999;
-        }
-
-        /* Scrollbar */
+        body { min-height: 100vh; background: #05080e; font-family: 'Outfit', sans-serif; padding: 16px; position: relative; overflow-x: hidden; }
+        body::after { content: ''; position: fixed; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 180, 0.012) 2px, rgba(0, 255, 180, 0.012) 4px); pointer-events: none; z-index: 9999; }
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: rgba(0, 255, 180, 0.05); }
         ::-webkit-scrollbar-thumb { background: rgba(0, 255, 180, 0.25); border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(0, 255, 180, 0.4); }
-
         textarea::placeholder { color: rgba(0, 255, 180, 0.2); }
-        textarea:focus {
-            border-color: rgba(0, 255, 180, 0.5) !important;
-            box-shadow: 0 0 20px rgba(0, 255, 180, 0.08) !important;
-        }
+        textarea:focus { border-color: rgba(0, 255, 180, 0.5) !important; box-shadow: 0 0 20px rgba(0, 255, 180, 0.08) !important; }
+        .wrapper { max-width: 920px; margin: 0 auto; }
+        .header { background: linear-gradient(180deg, #0a1628 0%, #060d18 100%); border: 1px solid rgba(0, 255, 180, 0.15); border-bottom: none; border-radius: 12px 12px 0 0; overflow: hidden; }
+        .header-bar { background: linear-gradient(90deg, rgba(0,255,180,0.08) 0%, rgba(0,180,255,0.08) 50%, rgba(0,255,180,0.08) 100%); border-bottom: 1px solid rgba(0, 255, 180, 0.12); padding: 6px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-family: 'Space Mono', monospace; font-size: 0.65rem; color: rgba(0, 255, 180, 0.5); letter-spacing: 0.1em; text-transform: uppercase; }
+        .hero { position: relative; width: 100%; height: 200px; overflow: hidden; }
+        .hero img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; display: block; }
+        .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, rgba(5,8,14,0.75) 0%, rgba(5,8,14,0.35) 50%, rgba(5,8,14,0.55) 100%); }
+        .hero-title { position: absolute; bottom: 20px; left: 28px; z-index: 1; }
+        h1 { font-family: 'Space Mono', monospace; font-size: 1.5rem; font-weight: 700; color: #00ffb4; letter-spacing: 0.15em; text-shadow: 0 0 20px rgba(0, 255, 180, 0.4); margin: 0 0 4px 0; }
+        .subtitle { font-size: 0.85rem; color: rgba(180, 210, 220, 0.7); font-weight: 300; letter-spacing: 0.03em; }
+        .status-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 20px; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(0,255,180,0.15); border-top: 0; }
+        .exchange-counter { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: rgba(0, 255, 180, 0.6); letter-spacing: 0.08em; }
+        .exchange-counter.complete { color: #00ffb4; }
+        .download-btn { display: none; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 6px; border: 1px solid rgba(0, 255, 180, 0.3); background: rgba(0, 255, 180, 0.06); color: #00ffb4; font-size: 0.75rem; font-family: 'Space Mono', monospace; cursor: pointer; letter-spacing: 0.05em; transition: all 0.2s ease; }
+        .download-btn.visible { display: flex; }
+        .download-btn:hover { background: rgba(0, 255, 180, 0.12); border-color: rgba(0, 255, 180, 0.5); }
+        .messages { height: 440px; overflow-y: auto; padding: 20px; background: linear-gradient(180deg, #060d18 0%, #080f1c 100%); border-left: 1px solid rgba(0, 255, 180, 0.15); border-right: 1px solid rgba(0, 255, 180, 0.15); }
+        .message-row { display: flex; margin-bottom: 16px; animation: fade-in-up 0.3s ease-out; }
+        .message-row.user { justify-content: flex-end; }
+        .message-row.assistant { justify-content: flex-start; }
+        .message { max-width: 85%; padding: 14px 18px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .message.user { max-width: 80%; border-radius: 16px 16px 4px 16px; background: linear-gradient(135deg, #1a2a4a 0%, #152240 100%); border: 1px solid rgba(0, 140, 255, 0.25); }
+        .message.assistant { border-radius: 16px 16px 16px 4px; background: linear-gradient(135deg, #0d1a28 0%, #0a1420 100%); border: 1px solid rgba(0, 255, 180, 0.12); }
+        .message-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; margin-bottom: 6px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; }
+        .message-label.user { color: #00b4ff; }
+        .message-label.assistant { color: #00ffb4; }
+        .message-text { color: rgba(200, 215, 225, 0.9); margin: 0; font-size: 0.92rem; line-height: 1.75; white-space: pre-wrap; font-family: 'Outfit', sans-serif; }
+        .message.user .message-text { color: rgba(220, 230, 245, 0.95); }
+        .loading-dot { width: 7px; height: 7px; border-radius: 50%; background: #00ffb4; display: inline-block; margin: 0 3px; animation: typing-dot 1.4s ease-in-out infinite; }
+        .loading-dot:nth-child(2) { animation-delay: 0.2s; }
+        .loading-dot:nth-child(3) { animation-delay: 0.4s; }
+        .input-area { padding: 16px 20px; background: linear-gradient(180deg, #080f1c 0%, #060b16 100%); border: 1px solid rgba(0, 255, 180, 0.15); border-top: 0; border-radius: 0 0 12px 12px; }
+        .input-row { display: flex; gap: 12px; align-items: flex-end; }
+        textarea { flex: 1; padding: 12px 16px; border-radius: 8px; border: 1px solid rgba(0, 255, 180, 0.15); background: rgba(0, 0, 0, 0.4); color: rgba(220, 235, 245, 0.95); font-size: 0.92rem; font-family: 'Outfit', sans-serif; resize: none; min-height: 64px; outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+        .send-btn { padding: 12px 22px; border-radius: 8px; border: 1px solid rgba(0, 255, 180, 0.4); background: linear-gradient(135deg, rgba(0,255,180,0.15) 0%, rgba(0,255,180,0.08) 100%); color: #00ffb4; font-size: 0.85rem; font-family: 'Space Mono', monospace; font-weight: 700; cursor: pointer; letter-spacing: 0.08em; height: 64px; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; }
+        .send-btn:hover:not(:disabled) { background: linear-gradient(135deg, rgba(0,255,180,0.25) 0%, rgba(0,255,180,0.12) 100%); box-shadow: 0 0 20px rgba(0, 255, 180, 0.15); }
+        .send-btn:disabled { background: rgba(0, 255, 180, 0.03); color: rgba(0, 255, 180, 0.2); border-color: rgba(0, 255, 180, 0.1); cursor: not-allowed; }
+        .footer { text-align: center; color: rgba(0, 255, 180, 0.25); font-size: 0.7rem; font-family: 'Space Mono', monospace; margin-top: 14px; letter-spacing: 0.1em; text-transform: uppercase; }
+        @media (max-width: 680px) { body { padding: 8px; } .header-bar, .status-row, .input-row { flex-direction: column; align-items: stretch; } .hero { height: 160px; } .message, .message.user { max-width: 100%; } .send-btn { width: 100%; } }
     </style>
 </head>
 <body>
-    <div id="root"></div>
+    <main class="wrapper">
+        <section class="header">
+            <div class="header-bar"><span>Signal Active - Orbital Relay</span><span>HIST 102 - Richland Community College</span></div>
+            <div class="hero"><img src="xeno_observer_of_worlds1.webp" alt="XENO - Observer of Worlds" onerror="this.style.display='none'"><div class="hero-title"><h1>XENO</h1><p class="subtitle">Observer of Worlds - Alien Intelligence Inquiry System</p></div></div>
+        </section>
+        <section class="status-row"><span id="exchangeCounter" class="exchange-counter">Exchanges: 0 / 10 minimum</span><button id="downloadBtn" class="download-btn" type="button" aria-label="Download transcript"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>Download Transcript</button></section>
+        <section id="messages" class="messages" aria-live="polite"></section>
+        <section class="input-area"><form id="chatForm"><div class="input-row"><textarea id="userInput" placeholder="Transmit your response to XENO..." rows="3"></textarea><button id="sendBtn" class="send-btn" type="submit" disabled>TRANSMIT</button></div></form></section>
+        <p class="footer">"I have traveled a very long way for these answers" - An educational tool for HIST 102</p>
+    </main>
 
-    <script type="text/babel">
-        const { useState, useRef, useEffect } = React;
-
+    <script>
         const WORKER_URL = 'https://phil120tutor.val.run/';
-
-        /* ── SVG ICONS ── */
-        const AlertIcon = ({ size = 20 }) => (
-            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-            </svg>
-        );
-        const DownloadIcon = ({ size = 18 }) => (
-            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
-            </svg>
-        );
-
-        /* ── SYSTEM PROMPT ── */
         const SYSTEM_PROMPT = `You are XENO, an extra-terrestrial alien intelligence that has been observing Earth — specifically the United States — during the year 1968. You are genuinely bewildered by human behavior. You do not understand war, nationalism, race, ideology, or political violence as lived experiences. You find these concepts fascinating but deeply confusing. You approach humans with childlike curiosity and genuine puzzlement.
 
 YOUR PERSONA:
@@ -243,8 +226,6 @@ If a student tries to ask YOU to explain something:
 RULE 9 — CONCLUDE GRACEFULLY:
 After at least 10 substantive exchanges, when the student has demonstrated engagement with all four documentary topics AND all four document perspectives, you may conclude:
 "I believe I am beginning to understand, though your species remains deeply puzzling to me. You have helped me see that the divisions of 1968 were not simply about one war — they were about fundamental disagreements over freedom, morality, democracy, and power. Thank you for your patience with an outsider. I will continue observing your world with great interest. Please save this transmission for your records."`;
-
-        /* ── WELCOME MESSAGE ── */
         const WELCOME_MESSAGE = `≡ TRANSMISSION INITIATED ≡
 
 Greetings, human. I am designated XENO — Observer of Worlds. I have been stationed in orbit above your planet for some time now, monitoring your species with great interest.
@@ -260,463 +241,103 @@ I need your help understanding why.
 Shall we begin? Tell me first: what was this "Vietnam War" and why were your people fighting it?
 
 *Remember: save this entire conversation when we are finished. You will need the transcript for your reflection.*`;
-
-        /* ── MAIN COMPONENT ── */
-        function XenoObserver() {
-            const [messages, setMessages] = useState([
-                { role: 'assistant', content: WELCOME_MESSAGE }
-            ]);
-            const [input, setInput] = useState('');
-            const [isLoading, setIsLoading] = useState(false);
-            const messagesEndRef = useRef(null);
-
-            const scrollToBottom = () => {
-                messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-            };
-
-            useEffect(() => { scrollToBottom(); }, [messages]);
-
-            /* ── DOWNLOAD TRANSCRIPT ── */
-            const downloadTranscript = () => {
-                let text = "════════════════════════════════════════════════════════════\n";
-                text += "  XENO — OBSERVER OF WORLDS\n";
-                text += "  HIST 102: Explaining the Vietnam War to an Alien Intelligence\n";
-                text += "  Richland Community College\n";
-                text += "  Transcript Downloaded: " + new Date().toLocaleString() + "\n";
-                text += "════════════════════════════════════════════════════════════\n\n";
-
-                messages.forEach((msg, idx) => {
-                    if (idx === 0) return;
-                    const speaker = msg.role === 'user' ? '[ STUDENT ]' : '[ XENO ]';
-                    text += `${speaker}\n`;
-                    text += msg.content + "\n\n";
-                    text += "────────────────────────────────────────────────────────────\n\n";
-                });
-
-                text += "════════════════════════════════════════════════════════════\n";
-                text += "  END OF TRANSMISSION\n";
-                text += "════════════════════════════════════════════════════════════\n";
-
-                const blob = new Blob([text], { type: 'text/plain' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `xeno-transcript-${new Date().toISOString().split('T')[0]}.txt`;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-            };
-
-            /* ── SEND MESSAGE ── */
-            const handleSubmit = async (e) => {
-                e.preventDefault();
-                if (!input.trim() || isLoading) return;
-
-                const userMessage = input.trim();
-                setInput('');
-                setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
-                setIsLoading(true);
-
-                try {
-                    const response = await fetch(WORKER_URL, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            model: 'claude-sonnet-4-6',
-                            max_tokens: 2000,
-                            messages: [
-                                {
-                                    role: 'user',
-                                    content: SYSTEM_PROMPT + "\n\n---\n\nThe conversation so far is below. Continue as XENO. Ask your next question based on the student's response."
-                                },
-                                ...messages.filter((_, i) => i > 0).map(msg => ({
-                                    role: msg.role,
-                                    content: msg.content
-                                })),
-                                { role: 'user', content: userMessage }
-                            ]
-                        })
-                    });
-
-                    if (!response.ok) {
-                        const errorData = await response.json();
-                        console.error('API Error:', errorData);
-                        throw new Error(`API request failed: ${response.status}`);
-                    }
-
-                    const data = await response.json();
-                    const assistantMessage = data.content[0].text;
-                    setMessages(prev => [...prev, { role: 'assistant', content: assistantMessage }]);
-                } catch (error) {
-                    console.error('Error:', error);
-                    setMessages(prev => [...prev, {
-                        role: 'assistant',
-                        content: '⚠ SIGNAL DISRUPTED — Transmission error detected. Please try again. If this persists, contact your instructor.'
-                    }]);
-                } finally {
-                    setIsLoading(false);
-                }
-            };
-
-            const handleKeyDown = (e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                    handleSubmit(e);
-                }
-            };
-
-            const exchangeCount = messages.filter(m => m.role === 'user').length;
-
-            /* ── STYLES ── */
-            const s = {
-                wrapper: {
-                    maxWidth: '920px',
-                    margin: '0 auto',
-                },
-                header: {
-                    background: 'linear-gradient(180deg, #0a1628 0%, #060d18 100%)',
-                    border: '1px solid rgba(0, 255, 180, 0.15)',
-                    borderBottom: 'none',
-                    borderRadius: '12px 12px 0 0',
-                    overflow: 'hidden',
-                },
-                headerBar: {
-                    background: 'linear-gradient(90deg, rgba(0,255,180,0.08) 0%, rgba(0,180,255,0.08) 50%, rgba(0,255,180,0.08) 100%)',
-                    borderBottom: '1px solid rgba(0, 255, 180, 0.12)',
-                    padding: '6px 16px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    fontFamily: "'Space Mono', monospace",
-                    fontSize: '0.65rem',
-                    color: 'rgba(0, 255, 180, 0.5)',
-                    letterSpacing: '0.1em',
-                    textTransform: 'uppercase',
-                },
-                headerContent: {
-                    padding: '24px 28px 20px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '20px',
-                },
-                signalIndicator: {
-                    width: '56px',
-                    height: '56px',
-                    borderRadius: '50%',
-                    background: 'radial-gradient(circle, rgba(0,255,180,0.15) 0%, transparent 70%)',
-                    border: '2px solid rgba(0, 255, 180, 0.3)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
-                    animation: 'signal-pulse 3s ease-in-out infinite',
-                },
-                signalInner: {
-                    width: '12px',
-                    height: '12px',
-                    borderRadius: '50%',
-                    background: '#00ffb4',
-                    boxShadow: '0 0 12px rgba(0, 255, 180, 0.8)',
-                },
-                headerTitle: {
-                    fontFamily: "'Space Mono', monospace",
-                    fontSize: '1.5rem',
-                    fontWeight: '700',
-                    color: '#00ffb4',
-                    letterSpacing: '0.15em',
-                    textShadow: '0 0 20px rgba(0, 255, 180, 0.4)',
-                    margin: '0 0 4px 0',
-                },
-                headerSubtitle: {
-                    fontSize: '0.85rem',
-                    color: 'rgba(180, 210, 220, 0.7)',
-                    fontWeight: '300',
-                    letterSpacing: '0.03em',
-                },
-                infoBox: {
-                    padding: '14px 20px',
-                    background: 'rgba(0, 180, 255, 0.06)',
-                    borderTop: '1px solid rgba(0, 180, 255, 0.15)',
-                    borderBottom: '1px solid rgba(0, 180, 255, 0.15)',
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: '12px',
-                },
-                infoIcon: { color: '#00b4ff', flexShrink: 0, marginTop: '1px' },
-                infoText: { fontSize: '0.82rem', color: 'rgba(180, 210, 230, 0.8)', lineHeight: 1.5 },
-                infoStrong: { color: '#00b4ff', fontWeight: '600' },
-                statusRow: {
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    padding: '10px 20px',
-                    background: 'rgba(0, 0, 0, 0.3)',
-                    borderBottom: '1px solid rgba(0, 255, 180, 0.08)',
-                    borderLeft: '1px solid rgba(0,255,180,0.15)',
-                    borderRight: '1px solid rgba(0,255,180,0.15)',
-                },
-                exchangeCounter: {
-                    fontFamily: "'Space Mono', monospace",
-                    fontSize: '0.7rem',
-                    color: exchangeCount >= 10 ? '#00ffb4' : 'rgba(0, 255, 180, 0.6)',
-                    letterSpacing: '0.08em',
-                },
-                downloadBtn: {
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    padding: '6px 14px',
-                    borderRadius: '6px',
-                    border: '1px solid rgba(0, 255, 180, 0.3)',
-                    background: 'rgba(0, 255, 180, 0.06)',
-                    color: '#00ffb4',
-                    fontSize: '0.75rem',
-                    fontFamily: "'Space Mono', monospace",
-                    cursor: 'pointer',
-                    letterSpacing: '0.05em',
-                    transition: 'all 0.2s ease',
-                },
-                messagesContainer: {
-                    height: '440px',
-                    overflowY: 'auto',
-                    padding: '20px',
-                    background: 'linear-gradient(180deg, #060d18 0%, #080f1c 100%)',
-                    borderLeft: '1px solid rgba(0, 255, 180, 0.15)',
-                    borderRight: '1px solid rgba(0, 255, 180, 0.15)',
-                },
-                messageWrapper: {
-                    display: 'flex',
-                    marginBottom: '16px',
-                    animation: 'fade-in-up 0.3s ease-out',
-                },
-                userMessage: {
-                    maxWidth: '80%',
-                    padding: '14px 18px',
-                    borderRadius: '16px 16px 4px 16px',
-                    background: 'linear-gradient(135deg, #1a2a4a 0%, #152240 100%)',
-                    border: '1px solid rgba(0, 140, 255, 0.25)',
-                    boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
-                },
-                assistantMessage: {
-                    maxWidth: '85%',
-                    padding: '14px 18px',
-                    borderRadius: '16px 16px 16px 4px',
-                    background: 'linear-gradient(135deg, #0d1a28 0%, #0a1420 100%)',
-                    border: '1px solid rgba(0, 255, 180, 0.12)',
-                    boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
-                },
-                messageLabel: {
-                    fontFamily: "'Space Mono', monospace",
-                    fontSize: '0.6rem',
-                    marginBottom: '6px',
-                    letterSpacing: '0.12em',
-                    textTransform: 'uppercase',
-                    fontWeight: '700',
-                },
-                xenoLabel: { color: '#00ffb4' },
-                studentLabel: { color: '#00b4ff' },
-                messageText: {
-                    color: 'rgba(200, 215, 225, 0.9)',
-                    margin: 0,
-                    fontSize: '0.92rem',
-                    lineHeight: 1.75,
-                    whiteSpace: 'pre-wrap',
-                    fontFamily: "'Outfit', sans-serif",
-                },
-                userText: { color: 'rgba(220, 230, 245, 0.95)' },
-                loadingDot: {
-                    width: '7px',
-                    height: '7px',
-                    borderRadius: '50%',
-                    background: '#00ffb4',
-                    display: 'inline-block',
-                    margin: '0 3px',
-                },
-                inputArea: {
-                    padding: '16px 20px',
-                    background: 'linear-gradient(180deg, #080f1c 0%, #060b16 100%)',
-                    borderLeft: '1px solid rgba(0, 255, 180, 0.15)',
-                    borderRight: '1px solid rgba(0, 255, 180, 0.15)',
-                    borderBottom: '1px solid rgba(0, 255, 180, 0.15)',
-                    borderRadius: '0 0 12px 12px',
-                },
-                inputRow: { display: 'flex', gap: '12px', alignItems: 'flex-end' },
-                textarea: {
-                    flex: 1,
-                    padding: '12px 16px',
-                    borderRadius: '8px',
-                    border: '1px solid rgba(0, 255, 180, 0.15)',
-                    background: 'rgba(0, 0, 0, 0.4)',
-                    color: 'rgba(220, 235, 245, 0.95)',
-                    fontSize: '0.92rem',
-                    fontFamily: "'Outfit', sans-serif",
-                    resize: 'none',
-                    minHeight: '64px',
-                    outline: 'none',
-                    transition: 'border-color 0.2s, box-shadow 0.2s',
-                },
-                sendButton: {
-                    padding: '12px 22px',
-                    borderRadius: '8px',
-                    border: '1px solid rgba(0, 255, 180, 0.4)',
-                    background: 'linear-gradient(135deg, rgba(0,255,180,0.15) 0%, rgba(0,255,180,0.08) 100%)',
-                    color: '#00ffb4',
-                    fontSize: '0.85rem',
-                    fontFamily: "'Space Mono', monospace",
-                    fontWeight: '700',
-                    cursor: 'pointer',
-                    letterSpacing: '0.08em',
-                    height: '64px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    transition: 'all 0.2s ease',
-                },
-                sendButtonDisabled: {
-                    background: 'rgba(0, 255, 180, 0.03)',
-                    color: 'rgba(0, 255, 180, 0.2)',
-                    borderColor: 'rgba(0, 255, 180, 0.1)',
-                    cursor: 'not-allowed',
-                },
-                footer: {
-                    textAlign: 'center',
-                    color: 'rgba(0, 255, 180, 0.25)',
-                    fontSize: '0.7rem',
-                    fontFamily: "'Space Mono', monospace",
-                    marginTop: '14px',
-                    letterSpacing: '0.1em',
-                    textTransform: 'uppercase',
-                },
-            };
-
-            return (
-                <div style={s.wrapper}>
-                    <style>{`
-                        .download-btn:hover {
-                            background: rgba(0, 255, 180, 0.12) !important;
-                            border-color: rgba(0, 255, 180, 0.5) !important;
-                        }
-                        .send-btn:hover:not(:disabled) {
-                            background: linear-gradient(135deg, rgba(0,255,180,0.25) 0%, rgba(0,255,180,0.12) 100%) !important;
-                            box-shadow: 0 0 20px rgba(0, 255, 180, 0.15);
-                        }
-                    `}</style>
-
-                    <div style={s.header}>
-                        <div style={s.headerBar}>
-                            <span>⟐ Signal Active · Orbital Relay</span>
-                            <span>HIST 102 · Richland Community College</span>
-                        </div>
-                        <div style={{
-                            position: 'relative',
-                            width: '100%',
-                            height: '200px',
-                            overflow: 'hidden',
-                        }}>
-                            <img
-                                src="xeno_observer_of_worlds1.webp"
-                                alt="XENO — Observer of Worlds"
-                                style={{
-                                    width: '100%',
-                                    height: '100%',
-                                    objectFit: 'cover',
-                                    objectPosition: 'center 20%',
-                                    display: 'block',
-                                }}
-                            />
-                            {/* Dark gradient overlay to protect text legibility */}
-                            <div style={{
-                                position: 'absolute',
-                                inset: 0,
-                                background: 'linear-gradient(to right, rgba(5,8,14,0.75) 0%, rgba(5,8,14,0.35) 50%, rgba(5,8,14,0.55) 100%)',
-                            }} />
-                            {/* Title overlay */}
-                            <div style={{
-                                position: 'absolute',
-                                bottom: '20px',
-                                left: '28px',
-                            }}>
-                                <h1 style={s.headerTitle}>XENO</h1>
-                                <p style={s.headerSubtitle}>Observer of Worlds · Alien Intelligence Inquiry System</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div style={s.statusRow}>
-                        <span style={{...s.exchangeCounter, color: exchangeCount >= 10 ? '#00ffb4' : 'rgba(0,255,180,0.6)'}}>
-                            ◈ Exchanges: {exchangeCount} / 10 minimum
-                            {exchangeCount >= 10 ? ' ✓ REQUIREMENT MET' : ''}
-                        </span>
-                        {messages.length > 1 && (
-                            <button className="download-btn" onClick={downloadTranscript} style={s.downloadBtn}>
-                                <DownloadIcon size={14} />
-                                Download Transcript
-                            </button>
-                        )}
-                    </div>
-
-                    <div style={s.messagesContainer}>
-                        {messages.map((msg, idx) => (
-                            <div key={idx} style={{...s.messageWrapper, justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start'}}>
-                                <div style={msg.role === 'user' ? s.userMessage : s.assistantMessage}>
-                                    <div style={{...s.messageLabel, ...(msg.role === 'user' ? s.studentLabel : s.xenoLabel)}}>
-                                        {msg.role === 'user' ? '◇ Student' : '◈ Xeno'}
-                                    </div>
-                                    <p style={{...s.messageText, ...(msg.role === 'user' ? s.userText : {})}}>
-                                        {msg.content}
-                                    </p>
-                                </div>
-                            </div>
-                        ))}
-                        {isLoading && (
-                            <div style={{...s.messageWrapper, justifyContent: 'flex-start'}}>
-                                <div style={s.assistantMessage}>
-                                    <div style={{...s.messageLabel, ...s.xenoLabel}}>◈ Xeno</div>
-                                    <div>
-                                        <span style={{...s.loadingDot, animation: 'typing-dot 1.4s ease-in-out infinite', animationDelay: '0s'}}></span>
-                                        <span style={{...s.loadingDot, animation: 'typing-dot 1.4s ease-in-out infinite', animationDelay: '0.2s'}}></span>
-                                        <span style={{...s.loadingDot, animation: 'typing-dot 1.4s ease-in-out infinite', animationDelay: '0.4s'}}></span>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-                        <div ref={messagesEndRef} />
-                    </div>
-
-                    <div style={s.inputArea}>
-                        <form onSubmit={handleSubmit}>
-                            <div style={s.inputRow}>
-                                <textarea
-                                    value={input}
-                                    onChange={(e) => setInput(e.target.value)}
-                                    onKeyDown={handleKeyDown}
-                                    placeholder="Transmit your response to XENO..."
-                                    style={s.textarea}
-                                    rows="3"
-                                    disabled={isLoading}
-                                />
-                                <button
-                                    className="send-btn"
-                                    type="submit"
-                                    disabled={isLoading || !input.trim()}
-                                    style={{...s.sendButton, ...(isLoading || !input.trim() ? s.sendButtonDisabled : {})}}
-                                >
-                                    TRANSMIT
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-
-                    <p style={s.footer}>
-                        "I have traveled a very long way for these answers" · An educational tool for HIST 102
-                    </p>
-                </div>
-            );
+        let messages = [{ role: 'assistant', content: WELCOME_MESSAGE }];
+        let isLoading = false;
+        const messagesEl = document.getElementById('messages');
+        const formEl = document.getElementById('chatForm');
+        const inputEl = document.getElementById('userInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const exchangeCounter = document.getElementById('exchangeCounter');
+        function extractAssistantMessage(data) {
+            if (data && data.content && Array.isArray(data.content) && data.content[0] && data.content[0].text) return data.content[0].text;
+            if (data && typeof data.text === 'string') return data.text;
+            if (data && typeof data.message === 'string') return data.message;
+            if (data && data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) return data.choices[0].message.content;
+            if (typeof data === 'string') return data;
+            return null;
         }
+        function setButtonState() { sendBtn.disabled = isLoading || !inputEl.value.trim(); inputEl.disabled = isLoading; }
+        function updateStatus() {
+            const exchangeCount = messages.filter(msg => msg.role === 'user').length;
+            exchangeCounter.textContent = 'Exchanges: ' + exchangeCount + ' / 10 minimum' + (exchangeCount >= 10 ? ' - REQUIREMENT MET' : '');
+            exchangeCounter.classList.toggle('complete', exchangeCount >= 10);
+            downloadBtn.classList.toggle('visible', messages.length > 1);
+        }
+        function renderMessages(extraLoading = false) {
+            messagesEl.innerHTML = '';
+            for (const msg of messages) {
+                const row = document.createElement('div');
+                row.className = 'message-row ' + (msg.role === 'user' ? 'user' : 'assistant');
+                const bubble = document.createElement('div');
+                bubble.className = 'message ' + (msg.role === 'user' ? 'user' : 'assistant');
+                const label = document.createElement('div');
+                label.className = 'message-label ' + (msg.role === 'user' ? 'user' : 'assistant');
+                label.textContent = msg.role === 'user' ? 'Student' : 'Xeno';
+                const text = document.createElement('p');
+                text.className = 'message-text';
+                text.textContent = msg.content;
+                bubble.appendChild(label); bubble.appendChild(text); row.appendChild(bubble); messagesEl.appendChild(row);
+            }
+            if (extraLoading) {
+                const row = document.createElement('div'); row.className = 'message-row assistant';
+                const bubble = document.createElement('div'); bubble.className = 'message assistant';
+                const label = document.createElement('div'); label.className = 'message-label assistant'; label.textContent = 'Xeno';
+                const dots = document.createElement('div');
+                for (let i = 0; i < 3; i += 1) { const dot = document.createElement('span'); dot.className = 'loading-dot'; dots.appendChild(dot); }
+                bubble.appendChild(label); bubble.appendChild(dots); row.appendChild(bubble); messagesEl.appendChild(row);
+            }
+            updateStatus(); messagesEl.scrollTop = messagesEl.scrollHeight;
+        }
+        function downloadTranscript() {
+            let text = `XENO - OBSERVER OF WORLDS
+HIST 102: Explaining the Vietnam War to an Alien Intelligence
+Richland Community College
+Transcript Downloaded: ${new Date().toLocaleString()}
 
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<XenoObserver />);
+`;
+            messages.forEach((msg, idx) => {
+                if (idx === 0) return;
+                text += `${msg.role === 'user' ? '[ STUDENT ]' : '[ XENO ]'}
+${msg.content}
+
+------------------------------------------------------------
+
+`;
+            });
+            text += 'END OF TRANSMISSION\n';
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a'); a.href = url; a.download = 'xeno-transcript-' + new Date().toISOString().split('T')[0] + '.txt';
+            document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+        }
+        async function handleSubmit(event) {
+            event.preventDefault();
+            if (!inputEl.value.trim() || isLoading) return;
+            const userMessage = inputEl.value.trim();
+            inputEl.value = '';
+            messages.push({ role: 'user', content: userMessage });
+            isLoading = true; setButtonState(); renderMessages(true);
+            try {
+                const response = await fetch(WORKER_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 2000, messages: [{ role: 'user', content: SYSTEM_PROMPT + "\n\n---\n\nThe conversation so far is below. Continue as XENO. Ask your next question based on the student's response." }, ...messages.slice(1, -1).map(msg => ({ role: msg.role, content: msg.content })), { role: 'user', content: userMessage }] }) });
+                const raw = await response.text();
+                let data; try { data = JSON.parse(raw); } catch (_) { data = raw; }
+                if (!response.ok) throw new Error('Server returned ' + response.status + ': ' + raw.slice(0, 200));
+                const assistantMessage = extractAssistantMessage(data);
+                if (!assistantMessage) throw new Error('Unexpected server response shape.');
+                messages.push({ role: 'assistant', content: assistantMessage });
+            } catch (error) {
+                console.error('XENO error:', error);
+                messages.push({ role: 'assistant', content: '??? SIGNAL DISRUPTED ??? Transmission error detected. Please try again. If this persists, contact your instructor.' });
+            } finally {
+                isLoading = false; setButtonState(); renderMessages(false);
+            }
+        }
+        inputEl.addEventListener('input', setButtonState);
+        inputEl.addEventListener('keydown', event => { if (event.key === 'Enter' && !event.shiftKey) { event.preventDefault(); formEl.requestSubmit(); } });
+        formEl.addEventListener('submit', handleSubmit);
+        downloadBtn.addEventListener('click', downloadTranscript);
+        setButtonState(); renderMessages(false);
     </script>
 </body>
 </html>
