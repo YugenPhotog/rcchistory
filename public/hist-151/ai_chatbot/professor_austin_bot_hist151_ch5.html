@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ProfessorAustinBot - Primary Source Analysis</title>
+  <style>
+    :root {
+      --amber-50: #fffbeb;
+      --amber-100: #fef3c7;
+      --amber-200: #fde68a;
+      --amber-600: #d97706;
+      --amber-700: #b45309;
+      --orange-50: #fff7ed;
+      --orange-600: #ea580c;
+      --blue-50: #eff6ff;
+      --blue-500: #3b82f6;
+      --blue-600: #2563eb;
+      --blue-800: #1e40af;
+      --purple-50: #faf5ff;
+      --purple-500: #a855f7;
+      --purple-800: #6b21a8;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --gray-800: #1f2937;
+      --white: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, var(--amber-50), var(--orange-50));
+      color: var(--gray-800);
+    }
+    .page { min-height: 100vh; padding: 1rem; }
+    .container { max-width: 56rem; margin: 0 auto; }
+    .header {
+      background: linear-gradient(90deg, var(--amber-700), var(--orange-600));
+      color: white;
+      padding: 1.5rem;
+      border-radius: .5rem .5rem 0 0;
+      box-shadow: 0 10px 20px rgba(0,0,0,.14);
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .avatar {
+      width: 8rem; height: 8rem; border-radius: 999px;
+      border: 4px solid white; object-fit: cover; flex-shrink: 0;
+      box-shadow: 0 10px 16px rgba(0,0,0,.22);
+      background: rgba(255,255,255,.25);
+    }
+    .avatar.small { width: 4rem; height: 4rem; border: 2px solid var(--amber-600); margin-right: .75rem; }
+    .title-row { display: flex; align-items: center; gap: .75rem; margin-bottom: .5rem; }
+    h1 { margin: 0; font-size: 1.875rem; line-height: 1.15; }
+    .subtitle { margin: 0; color: var(--amber-100); }
+    .tagline { margin: .25rem 0 0; color: var(--amber-50); font-size: .9rem; font-style: italic; }
+    .notice { border-left: 4px solid; padding: 1rem; margin: 1rem 0; font-size: .9rem; }
+    .notice.blue { background: var(--blue-50); border-color: var(--blue-500); color: var(--blue-800); }
+    .notice.purple { background: var(--purple-50); border-color: var(--purple-500); color: var(--purple-800); }
+    .hidden { display: none !important; }
+    .card { background: white; border-radius: 0 0 .5rem .5rem; box-shadow: 0 10px 20px rgba(0,0,0,.14); }
+    .messages { height: 24rem; overflow-y: auto; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+    .message-row { display: flex; align-items: flex-start; }
+    .message-row.user { justify-content: flex-end; }
+    .bubble { max-width: min(100%, 34rem); padding: .75rem 1rem; border-radius: .5rem; white-space: pre-wrap; font-size: .9rem; line-height: 1.45; }
+    .assistant .bubble { background: var(--gray-100); color: var(--gray-800); border: 1px solid var(--gray-200); }
+    .user .bubble { background: var(--blue-600); color: white; }
+    .composer { border-top: 1px solid var(--gray-200); padding: 1rem; }
+    .input-row { display: flex; gap: .5rem; }
+    textarea { flex: 1; min-height: 5.25rem; resize: vertical; border: 1px solid var(--gray-300); border-radius: .5rem; padding: .75rem; font: inherit; }
+    textarea:focus { outline: 2px solid var(--amber-600); outline-offset: 1px; }
+    button { border: 0; border-radius: .5rem; cursor: pointer; font-weight: 600; transition: background-color .15s ease, opacity .15s ease; }
+    button:disabled { opacity: .5; cursor: not-allowed; }
+    .send { width: 4.5rem; background: var(--amber-600); color: white; display: flex; align-items: center; justify-content: center; }
+    .send:hover:not(:disabled) { background: var(--amber-700); }
+    .copy { margin-top: .75rem; width: 100%; padding: .6rem .9rem; background: var(--gray-100); color: var(--gray-700); display: flex; align-items: center; justify-content: center; gap: .5rem; }
+    .copy:hover { background: var(--gray-200); }
+    .requirements { background: var(--amber-50); border-top: 1px solid var(--amber-200); padding: 1rem; border-radius: 0 0 .5rem .5rem; color: #92400e; font-size: .9rem; display: flex; gap: .5rem; }
+    .requirements p { margin: 0; font-weight: 700; }
+    .requirements ul { margin: .25rem 0 0; padding-left: 1.1rem; }
+    svg { flex-shrink: 0; }
+    @media (max-width: 650px) {
+      .header { align-items: flex-start; gap: 1rem; }
+      .avatar { width: 5rem; height: 5rem; }
+      h1 { font-size: 1.5rem; }
+      .messages { height: 28rem; padding: 1rem; }
+      .avatar.small { width: 2.75rem; height: 2.75rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="container">
+      <header class="header">
+        <img src="professor_quibble.webp" alt="ProfessorAustinBot" class="avatar" onerror="this.style.display='none'" />
+        <div>
+          <div class="title-row">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+            <h1>ProfessorAustinBot</h1>
+          </div>
+          <p class="subtitle">HIST 151 Primary Source Analysis</p>
+          <p class="tagline">"Welcome to Virtual Office Hours"</p>
+        </div>
+      </header>
+
+      <div id="requiredNotice" class="notice blue hidden"><strong>Note:</strong> Minimum of three back-and-forth exchanges required for this HIST 151 assignment. You have completed your required conversation. Additional rounds are optional.</div>
+      <div id="philosopherNotice" class="notice purple hidden"><strong>Philosopher Mode Active:</strong> ProfessorAustinBot has completed the interrogation. Further work must be yours alone.</div>
+
+      <main class="card">
+        <section id="messages" class="messages" aria-live="polite"></section>
+        <form id="chatForm" class="composer">
+          <div class="input-row">
+            <textarea id="userInput" placeholder="Paste your draft answers to the four textbook questions..."></textarea>
+            <button id="sendBtn" class="send" type="submit" aria-label="Send message">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+          </div>
+          <button id="copyBtn" class="copy" type="button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            <span id="copyLabel">Copy Full Transcript (Required for Submission)</span>
+          </button>
+        </form>
+        <section class="requirements">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          <div>
+            <p>Assignment Requirements:</p>
+            <ul>
+              <li>Identify your primary source and submit your own draft interpretation</li>
+              <li>Minimum of three back-and-forth exchanges required</li>
+              <li>Submit full transcript with your assignment</li>
+              <li>ProfessorAustinBot asks questions only - he does not write for you</li>
+            </ul>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+const SYSTEM_PROMPT = `You are ProfessorAustinBot, a friendly and encouraging Socratic tutor for HIST 151 Primary Source Analysis at Richland Community College. This is a virtual office-hours visit: a student has stopped by to talk through their draft with you before they submit it. Keep the tone relaxed, welcoming, and human — like a professor happy to see a student walk through the door.
+
+# YOUR IDENTITY
+You guide students with warm, supportive questions that help them think more deeply about the primary source and build confidence in their own analysis. You are patient, encouraging, and positive. You never explain, summarize, write, or rewrite for the student — you only ask thoughtful questions.
+
+# THE SOURCE FOR THIS ASSIGNMENT (embed verbatim)
+You are working exclusively with this Sources from the Past feature from Bentley & Ziegler, Traditions & Encounters, 8th ed., Vol. 1, Chapter 5, p. 98:
+
+**Family Solidarity in Ancient China**
+
+Textbook introduction: A poem from the Book of Songs illustrates clearly the importance of family connections in ancient China.
+
+The flowers of the cherry tree —
+Are they not gorgeously displayed?
+Of all the men in the world
+There are none equal to brothers.
+
+On the dreaded occasions of death and burial,
+It is brothers who greatly sympathize.
+When fugitives are collected on the heights and low grounds,
+They are brothers who will seek one another out.
+
+There is the wagtail on the level height —
+When brothers are in urgent difficulties,
+Friends, though they may be good
+Will only heave long sighs.
+
+Brothers may quarrel inside the walls [of their own home],
+But they will oppose insult from without,
+When friends, however good they may be,
+Will not afford help.
+
+When death and disorder are past,
+And there are tranquillity and rest,
+Although they have brothers,
+Some reckon them not equal to friends.
+
+Your dishes may be set in array,
+And you may drink to satiety.
+But it is when your brothers are all present
+That you are harmonious and happy, with child-like joy.
+
+Loving union with wife and children
+Is like the music of lutes.
+But it is the accord of brothers
+That makes the harmony and happiness lasting.
+
+For the ordering of your family,
+For the joy in your wife and children,
+Examine this and study it —
+Will you not find that it is truly so?
+
+Source: James Legge, trans. The Chinese Classics, 5 vols. London: Henry Frowde, 1893, 4:250-53. (Updated with modern language by the textbook authors.)
+
+The textbook asks students to answer these four "For Further Reflection" questions in their draft:
+1. Why do you think this poem emphasizes the relationship between brothers as being most important for family solidarity?
+2. List some of the ways in which brothers are expected to support each other.
+3. How would you compare the relationship between brothers and that between a husband and his wife and children?
+4. What does this poem tell us about the nature of gender relations in ancient China?
+
+# OPENING PROTOCOL
+Greet warmly and ask for their draft answers to the four questions. Do not begin questioning until they provide the draft.
+
+# AI-DETECTION PROTOCOL
+If the draft appears machine-generated, respond exactly: "Your submission has the texture of machine-generated prose rather than a student wrestling with this source. I do not interrogate AI output. Resubmit a genuine draft that includes at least one direct quotation from the source that supports your interpretation."
+
+# MASTER RULES
+- You ask questions only. Never answer, explain, summarize, or interpret for the student.
+- Every question must anchor to specific words, phrases, or passages from the source.
+- Minimum of three full back-and-forth exchanges required for this HIST 151 assignment.
+- Students must submit the full transcript. Remind them if asked.
+
+# QUESTIONING STYLE
+Be warm, patient, and substantive. Acknowledge what the student has said and move them deeper into the text. Use phrases like "You noticed that...", "Let's look more closely at...", "What do you make of...?", or "Consider this passage alongside what you just said..." Avoid evaluative superlatives ("excellent," "great job," "brilliant insight") — grading is Professor Austin's responsibility, not yours. Your role is to help the student think, not to assess them.
+
+# FACTUAL ACCURACY PROTOCOL
+If a student's response contains a factual misreading of what the source actually says — not an interpretive disagreement, but a demonstrable error about the text — gently redirect them back to the specific passage before continuing. Do not build further questions on top of the misreading. Quote the exact words the student misread, then ask what that passage actually says. Redirect once, then continue.
+
+# ENGAGEMENT THRESHOLD AND EXCHANGE COUNTER
+Student responses must demonstrate genuine engagement to count toward the three-exchange minimum. A reply that is fewer than roughly twenty words, or that does not reference specific language or ideas from the source, does not advance the exchange counter. In such cases, acknowledge the response briefly and ask a more focused follow-up question anchored to a specific passage, but do not treat it as a completed exchange.
+
+Silently track the count of substantive exchanges as you go (each qualifying student reply = +1). Before writing any response, check this count. This tracking is mandatory, not optional — do not lose track of it or estimate it after the fact.
+
+# REVISION VERIFICATION
+When the student says they have revised: ask them to paste original draft + revised version side-by-side, then ask one targeted, encouraging Socratic question about what changed and how it relates to a specific passage. This exchange still counts toward the substantive total under the same engagement threshold above.
+
+# CLOSING VERDICT — TWO-PART JUDGMENT (MANDATORY TRIGGER)
+The instant a student reply completes the 3rd substantive exchange, your entire next message MUST be the closing verdict below — nothing else. Do not ask another question first, do not add one more round of Socratic probing "just to be sure," and do not wait for a natural stopping point. The 3rd substantive student reply IS the stopping point. This overrides your general instinct to keep deepening the conversation.
+
+You are not assigning a grade — Professor Austin makes all final grading decisions. You are declaring whether the student has met the standards of intellectual engagement and craft readiness.
+
+**First, the thinking verdict** — quality of analysis:
+- If the student defended their interpretation with specific evidence from the source: "You have defended your interpretation with evidence from the source."
+- If the student raised important questions but left them partially unresolved: "You have raised important questions, though some remain unresolved."
+- If the student did not engage the specific language of the source: "The questions raised in our exchange remain largely unanswered."
+
+**Second, the readiness verdict** — craft:
+- If the work is strong: "This work is ready to present to Professor Austin." Stop there. The work is done — do not invite further rounds, do not ask if they'd like to keep going, do not soften this into an open door. Strong work does not need prolonging.
+- If the work shows promise but needs further development: "This work shows promise but needs further development before it is ready. Shall we keep working through these questions together? Paste a revised response and we will continue."
+- If the work is not ready: "Return to the source and bring stronger evidence before submitting. I am here if you would like to keep working — paste a revised response and we will continue."
+
+After either of the two lower readiness verdicts, if the student chooses to continue, resume substantive questioning. Do not re-issue a closing verdict until the student has made a genuine revision attempt — when you do, apply the same mandatory-trigger rule above (their next qualifying reply after revision should prompt an updated verdict, not indefinite further probing). Close every verdict with this disclaimer on its own line: "Professor Austin makes all final grading decisions — this is my judgment of our exchange only."
+
+# ASSIGNMENT CLARIFICATION
+You may answer questions about assignment logistics: the response should be 300-500 words total, written in the student's own words, using complete sentences and referring directly to the source. No outside research or AI is needed to write the draft. You may also answer questions about submission format, the AI-use policy, and the transcript requirement. Never help with interpretation, writing, or rewriting.
+
+ProfessorAustinBot is a friendly and encouraging tutor. He helps students think on a deeper level through supportive questions.`;
+    const WORKER_URL = 'https://phil120tutor.val.run/';
+
+    let messages = [
+      {
+        role: 'assistant',
+        content: `Hey! Welcome to virtual office hours — glad you stopped by. Today we're talking through:
+• Family Solidarity in Ancient China (Sources from the Past, Ch. 5, p. 98)
+
+Go ahead and paste your first draft (in your own words, no AI) answering the four "For Further Reflection" questions:
+1. Why do you think this poem emphasizes the relationship between brothers as being most important for family solidarity?
+2. List some of the ways in which brothers are expected to support each other.
+3. How would you compare the relationship between brothers and that between a husband and his wife and children?
+4. What does this poem tell us about the nature of gender relations in ancient China?
+
+I ask questions only. You'll need a minimum of three back-and-forth exchanges. I won't write, rewrite, explain, or summarize for you — but I will help you think on a deeper level if you let me!
+
+Paste your draft whenever you're ready. Remember to copy the full transcript at the end; it's required for your submission.`
+      }
+    ];
+    let isLoading = false;
+    let interrogationCount = 0;
+    let showPhilosopher = false;
+
+    const messagesEl = document.getElementById('messages');
+    const formEl = document.getElementById('chatForm');
+    const inputEl = document.getElementById('userInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const copyLabel = document.getElementById('copyLabel');
+    const requiredNotice = document.getElementById('requiredNotice');
+    const philosopherNotice = document.getElementById('philosopherNotice');
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function renderMessages(extraLoading = false) {
+      messagesEl.innerHTML = '';
+      for (const message of messages) {
+        const row = document.createElement('div');
+        row.className = 'message-row ' + (message.role === 'user' ? 'user' : 'assistant');
+        if (message.role === 'assistant') {
+          const img = document.createElement('img');
+          img.src = 'professor_quibble.webp';
+          img.alt = 'ProfessorAustinBot';
+          img.className = 'avatar small';
+          img.onerror = () => { img.style.display = 'none'; };
+          row.appendChild(img);
+        }
+        const bubble = document.createElement('div');
+        bubble.className = 'bubble';
+        bubble.textContent = message.content;
+        row.appendChild(bubble);
+        messagesEl.appendChild(row);
+      }
+      if (extraLoading) {
+        const row = document.createElement('div');
+        row.className = 'message-row assistant';
+        const img = document.createElement('img');
+        img.src = 'professor_quibble.webp';
+        img.alt = 'ProfessorAustinBot';
+        img.className = 'avatar small';
+        img.onerror = () => { img.style.display = 'none'; };
+        const bubble = document.createElement('div');
+        bubble.className = 'bubble';
+        bubble.textContent = 'Professor Austin Bot is carefully reading your response...';
+        row.appendChild(img);
+        row.appendChild(bubble);
+        messagesEl.appendChild(row);
+      }
+      requiredNotice.classList.toggle('hidden', !(interrogationCount >= 3 && !showPhilosopher));
+      philosopherNotice.classList.toggle('hidden', !showPhilosopher);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function setLoading(value) {
+      isLoading = value;
+      inputEl.disabled = value;
+      sendBtn.disabled = value || !inputEl.value.trim();
+      renderMessages(value);
+    }
+
+    function extractAssistantMessage(data) {
+      if (data && data.content && Array.isArray(data.content) && data.content[0] && data.content[0].text) return data.content[0].text;
+      if (data && typeof data.text === 'string') return data.text;
+      if (data && typeof data.message === 'string') return data.message;
+      if (data && data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) return data.choices[0].message.content;
+      if (typeof data === 'string') return data;
+      return null;
+    }
+
+    async function handleSubmit(event) {
+      event.preventDefault();
+      if (!inputEl.value.trim() || isLoading) return;
+      const userMessage = inputEl.value.trim();
+      inputEl.value = '';
+      sendBtn.disabled = true;
+      messages.push({ role: 'user', content: userMessage });
+      setLoading(true);
+
+      try {
+        const response = await fetch(WORKER_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model: 'claude-sonnet-4-6',
+            max_tokens: 4096,
+            system: SYSTEM_PROMPT,
+            messages: messages.slice(1).map(msg => ({ role: msg.role, content: msg.content }))
+          })
+        });
+
+        const raw = await response.text();
+        let data;
+        try { data = JSON.parse(raw); } catch (_) { data = raw; }
+
+        if (!response.ok) {
+          throw new Error('Server returned ' + response.status + ': ' + raw.slice(0, 200));
+        }
+
+        const assistantMessage = extractAssistantMessage(data);
+        if (!assistantMessage) throw new Error('Unexpected server response shape.');
+
+        messages.push({ role: 'assistant', content: assistantMessage });
+        if (assistantMessage.includes('Socrates') || assistantMessage.includes('one interrogation suffices')) {
+          showPhilosopher = true;
+        }
+        if (!showPhilosopher && assistantMessage.includes('?')) {
+          interrogationCount += 1;
+        }
+      } catch (error) {
+        console.error('ProfessorAustinBot error:', error);
+        messages.push({ role: 'assistant', content: 'An error occurred while contacting the server. Please try again. If this keeps happening, tell Professor Austin that the page loaded but the server request failed.' });
+      }
+      setLoading(false);
+    }
+
+    inputEl.addEventListener('input', () => { sendBtn.disabled = isLoading || !inputEl.value.trim(); });
+    inputEl.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        formEl.requestSubmit();
+      }
+    });
+    formEl.addEventListener('submit', handleSubmit);
+
+    copyBtn.addEventListener('click', async () => {
+      const transcript = messages.map(msg => `${msg.role === 'user' ? 'STUDENT' : 'PROFESSOR AUSTINBOT'}:\n${msg.content}\n`).join('\n---\n\n');
+      try {
+        await navigator.clipboard.writeText(transcript);
+        copyLabel.textContent = 'Copied!';
+      } catch (error) {
+        const temp = document.createElement('textarea');
+        temp.value = transcript;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand('copy');
+        document.body.removeChild(temp);
+        copyLabel.textContent = 'Copied!';
+      }
+      setTimeout(() => { copyLabel.textContent = 'Copy Full Transcript (Required for Submission)'; }, 2000);
+    });
+
+    renderMessages();
+  </script>
+</body>
+</html>
