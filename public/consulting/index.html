@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI for Academics — practical AI consulting for faculty, by faculty. Workshops, coaching, course material builds, and speaking from Professor Steven Austin.">
+  <title>AI for Academics | Austin Academics Consulting</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy-deep: #0d1b2a;
+      --navy-mid: #16283c;
+      --navy-card: #1b3048;
+      --brass: #c9a227;
+      --brass-light: #e3c25a;
+      --ice: #eef3f8;
+      --slate-text: #b8c6d4;
+      --line: rgba(201, 162, 39, 0.35);
+      --font-display: 'Fraunces', serif;
+      --font-ui: 'Inter', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-ui);
+      background: var(--navy-deep);
+      color: var(--ice);
+      line-height: 1.65;
+    }
+    .skip-link {
+      position: absolute; left: -9999px; top: 0;
+      background: var(--brass); color: var(--navy-deep);
+      padding: 0.6rem 1rem; z-index: 100; font-weight: 600;
+    }
+    .skip-link:focus { left: 0; }
+
+    /* ===== Header ===== */
+    .hero {
+      padding: 4.5rem 1.5rem 3.5rem;
+      text-align: center;
+      background: radial-gradient(ellipse at 50% -20%, #24405e 0%, var(--navy-deep) 65%);
+      border-bottom: 1px solid var(--line);
+    }
+    .eyebrow {
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--brass-light); margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 900; color: #ffffff; line-height: 1.1;
+    }
+    .hero .tagline {
+      font-size: clamp(1.05rem, 2.5vw, 1.35rem);
+      color: var(--brass-light); font-weight: 500; margin-top: 0.9rem;
+    }
+    .hero .intro {
+      max-width: 620px; margin: 1.4rem auto 0; color: var(--slate-text);
+      font-size: 1.02rem;
+    }
+    .cta-row { margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 0.85rem 1.9rem; border-radius: 6px;
+      font-weight: 600; text-decoration: none; font-size: 0.98rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .btn:hover, .btn:focus { transform: translateY(-2px); }
+    .btn-primary { background: var(--brass); color: var(--navy-deep); }
+    .btn-primary:hover { box-shadow: 0 6px 18px rgba(201,162,39,0.35); }
+    .btn-ghost { border: 1px solid var(--line); color: var(--ice); }
+
+    /* ===== Nav ===== */
+    .main-nav {
+      position: sticky; top: 0; z-index: 50;
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 0.25rem;
+      background: rgba(13, 27, 42, 0.95); backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 0.65rem 1rem;
+    }
+    .main-nav a {
+      color: var(--ice); text-decoration: none; font-size: 0.9rem; font-weight: 500;
+      padding: 0.45rem 0.95rem; border-radius: 5px;
+    }
+    .main-nav a:hover, .main-nav a:focus { background: rgba(201,162,39,0.15); color: var(--brass-light); }
+    .main-nav a.course-site-link { color: var(--brass-light); font-weight: 600; }
+
+    /* ===== Layout ===== */
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+    section { padding: 4rem 0; }
+    .section-title {
+      font-family: var(--font-display); font-size: clamp(1.7rem, 4vw, 2.3rem);
+      font-weight: 700; color: #ffffff; margin-bottom: 0.6rem;
+    }
+    .section-lede { color: var(--slate-text); max-width: 640px; margin-bottom: 2.2rem; }
+    .center { text-align: center; }
+    .center .section-lede { margin-left: auto; margin-right: auto; }
+
+    /* ===== Credibility strip ===== */
+    .cred-strip {
+      background: var(--navy-mid); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      padding: 2.2rem 0;
+    }
+    .cred-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; text-align: center; }
+    .cred-item strong { display: block; font-family: var(--font-display); font-size: 1.25rem; color: var(--brass-light); margin-bottom: 0.25rem; }
+    .cred-item span { color: var(--slate-text); font-size: 0.92rem; }
+
+    /* ===== Services ===== */
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .service-card {
+      background: var(--navy-card); border: 1px solid rgba(255,255,255,0.08);
+      border-top: 3px solid var(--brass); border-radius: 8px; padding: 1.8rem;
+    }
+    .service-card h3 { font-family: var(--font-display); font-size: 1.3rem; color: #ffffff; margin-bottom: 0.6rem; }
+    .service-card p { color: var(--slate-text); font-size: 0.96rem; margin-bottom: 0.9rem; }
+    .service-card ul { list-style: none; }
+    .service-card li {
+      color: var(--ice); font-size: 0.92rem; padding: 0.3rem 0 0.3rem 1.4rem; position: relative;
+    }
+    .service-card li::before { content: "—"; position: absolute; left: 0; color: var(--brass); }
+    .service-note { display: inline-block; margin-top: 1rem; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--brass-light); }
+
+    /* ===== Why ===== */
+    .why-box {
+      background: linear-gradient(135deg, var(--navy-mid), var(--navy-card));
+      border: 1px solid var(--line); border-radius: 10px; padding: 2.5rem;
+    }
+    .why-box p { color: var(--slate-text); max-width: 760px; }
+    .why-box p + p { margin-top: 1rem; }
+    .why-box .pull { font-family: var(--font-display); font-size: 1.25rem; color: var(--brass-light); margin-top: 1.4rem; }
+
+    /* ===== Process ===== */
+    .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
+    .step { text-align: center; padding: 1.5rem 1rem; }
+    .step .num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 2.6rem; height: 2.6rem; border-radius: 50%;
+      border: 2px solid var(--brass); color: var(--brass-light);
+      font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; margin-bottom: 0.8rem;
+    }
+    .step h3 { font-size: 1.05rem; color: #ffffff; margin-bottom: 0.4rem; }
+    .step p { color: var(--slate-text); font-size: 0.92rem; }
+
+    /* ===== About ===== */
+    .about-flex { display: flex; gap: 2.5rem; align-items: center; flex-wrap: wrap; }
+    .about-flex img {
+      width: 230px; height: auto; border-radius: 8px;
+      border: 1px solid var(--line); flex-shrink: 0;
+    }
+    .about-text { flex: 1; min-width: 280px; }
+    .about-text p { color: var(--slate-text); }
+    .about-text p + p { margin-top: 1rem; }
+
+    /* ===== Contact ===== */
+    .contact-box {
+      text-align: center; background: var(--navy-mid);
+      border: 1px solid var(--line); border-radius: 10px; padding: 3rem 2rem;
+    }
+    .contact-box p { color: var(--slate-text); max-width: 560px; margin: 0 auto 1.6rem; }
+    .contact-email { font-size: 1.1rem; font-weight: 600; }
+    .contact-email a { color: var(--brass-light); }
+
+    /* ===== Footer ===== */
+    .site-footer {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 2.2rem 1.5rem; text-align: center; color: var(--slate-text); font-size: 0.9rem;
+    }
+    .site-footer a { color: var(--brass-light); }
+    @media (max-width: 640px) {
+      section { padding: 2.8rem 0; }
+      .about-flex { justify-content: center; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="hero">
+    <p class="eyebrow">Austin Academics Consulting</p>
+    <h1>AI for Academics</h1>
+    <p class="tagline">Practical AI consulting for faculty, by faculty.</p>
+    <p class="intro">Most AI training for higher education is delivered by technologists who have never graded a stack of essays or rebuilt a syllabus over winter break. This practice is different: a working professor showing colleagues what actually works in a real classroom.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#contact">Start a Conversation</a>
+      <a class="btn btn-ghost" href="#services">See Services</a>
+    </div>
+  </header>
+
+  <nav class="main-nav" aria-label="Primary navigation">
+    <a href="#services">Services</a>
+    <a href="#why">Why Faculty-to-Faculty</a>
+    <a href="#process">How It Works</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <a class="course-site-link" href="../index.html">Course Site &rarr;</a>
+  </nav>
+
+  <main id="main-content">
+    <div class="cred-strip">
+      <div class="container">
+        <div class="cred-grid">
+          <div class="cred-item"><strong>7 courses</strong><span>rebuilt with AI-assisted materials, live at austin-academics.com</span></div>
+          <div class="cred-item"><strong>4 disciplines</strong><span>American history, Chinese history, ethics, and world religions</span></div>
+          <div class="cred-item"><strong>Full workflow</strong><span>lecture decks, test banks, study guides, and course websites</span></div>
+          <div class="cred-item"><strong>Zero jargon</strong><span>everything taught in plain faculty language, not tech-speak</span></div>
+        </div>
+      </div>
+    </div>
+
+    <section id="services" aria-labelledby="services-title">
+      <div class="container">
+        <div class="center">
+          <p class="eyebrow">Services</p>
+          <h2 id="services-title" class="section-title">Four Ways to Work Together</h2>
+          <p class="section-lede">Every engagement is grounded in the same premise: AI should give faculty their time back without lowering academic standards.</p>
+        </div>
+        <div class="services-grid">
+          <article class="service-card">
+            <h3>Faculty AI Workshops</h3>
+            <p>Hands-on training for departments and colleges. Faculty leave with working AI workflows for their own courses &mdash; not slideware about "the future of education."</p>
+            <ul>
+              <li>Half-day and full-day formats, in person or remote</li>
+              <li>Discipline-specific examples, not generic demos</li>
+              <li>Academic-integrity and AI-resistant assessment design</li>
+            </ul>
+            <span class="service-note">Booking now</span>
+          </article>
+          <article class="service-card">
+            <h3>1-on-1 Faculty Coaching</h3>
+            <p>Individual sessions for professors who want a colleague, not a helpdesk. We build your AI course-prep workflow together, on your actual courses.</p>
+            <ul>
+              <li>Lecture, assessment, and study-material pipelines</li>
+              <li>Custom AI skills tailored to your teaching style</li>
+              <li>Follow-up support as your workflow matures</li>
+            </ul>
+            <span class="service-note">Booking now</span>
+          </article>
+          <article class="service-card">
+            <h3>Course Material Builds</h3>
+            <p>Done-for-you development of course materials using the same AI-assisted process behind austin-academics.com &mdash; reviewed and refined by a subject-matter professor.</p>
+            <ul>
+              <li>Interactive lecture decks and student study guides</li>
+              <li>AI-resistant test banks ready for your LMS</li>
+              <li>Course websites for student-facing resources</li>
+            </ul>
+            <span class="service-note">Booking now</span>
+          </article>
+          <article class="service-card">
+            <h3>Speaking &amp; Keynotes</h3>
+            <p>Conference talks and campus events on AI in higher education, from a professor who uses these tools every day &mdash; the promise, the pitfalls, and the practice.</p>
+            <ul>
+              <li>Keynotes, panels, and faculty-development days</li>
+              <li>Case study: rebuilding a full teaching load with AI</li>
+              <li>Honest treatment of academic-integrity concerns</li>
+            </ul>
+            <span class="service-note">Inquire for availability</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="why" aria-labelledby="why-title">
+      <div class="container">
+        <div class="why-box">
+          <p class="eyebrow">Why Faculty-to-Faculty</p>
+          <h2 id="why-title" class="section-title">Advice From Someone Who Grades on Sunday Nights</h2>
+          <p>I teach American history, Chinese history, ethics, and comparative religion at a community college. Over the past two years I have rebuilt my entire teaching practice with AI: lecture decks, study guides, test banks designed to resist AI cheating, and the course website you can inspect yourself. Every recommendation I make is something I run in my own classroom first.</p>
+          <p>That matters because faculty do not need another vendor pitch. They need to know which corners are safe to cut, which never are, and how to keep academic rigor while reclaiming their evenings.</p>
+          <p class="pull">The goal is not to automate teaching. It is to automate everything that keeps you from teaching.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="process" aria-labelledby="process-title">
+      <div class="container">
+        <div class="center">
+          <p class="eyebrow">How It Works</p>
+          <h2 id="process-title" class="section-title">A Simple Engagement Model</h2>
+        </div>
+        <div class="process-grid">
+          <div class="step">
+            <span class="num" aria-hidden="true">1</span>
+            <h3>Inquire</h3>
+            <p>Send a short email describing your situation &mdash; a department, a single course, an event date.</p>
+          </div>
+          <div class="step">
+            <span class="num" aria-hidden="true">2</span>
+            <h3>Scope</h3>
+            <p>A free 30-minute call to define goals, format, and a flat-rate quote. No hourly meters.</p>
+          </div>
+          <div class="step">
+            <span class="num" aria-hidden="true">3</span>
+            <h3>Deliver</h3>
+            <p>Workshop delivered, workflow built, or materials shipped &mdash; with follow-up so it sticks.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" aria-labelledby="about-title">
+      <div class="container">
+        <div class="about-flex">
+          <img src="../images/self-portraits/self-portraits%20(2).webp" alt="Professor Steven Austin" width="230" height="288">
+          <div class="about-text">
+            <p class="eyebrow">About</p>
+            <h2 id="about-title" class="section-title">Professor Steven Austin</h2>
+            <p>Steven Austin is a professor of East Asian history, American history, religious studies, and ethics. He is also an advanced photographer working in fine art and conceptual portraiture &mdash; a background that shapes how he thinks about AI as a creative and analytical instrument rather than a shortcut.</p>
+            <p>His course resources &mdash; built with the AI-assisted workflows this practice teaches &mdash; are publicly available at <a href="../index.html" style="color: var(--brass-light);">austin-academics.com</a>. What you see there is the portfolio.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="contact-box">
+          <p class="eyebrow">Contact</p>
+          <h2 id="contact-title" class="section-title">Start a Conversation</h2>
+          <p>Tell me about your department, your course, or your event. Every engagement begins with a free 30-minute scoping call.</p>
+          <p class="contact-email"><a href="mailto:steven@austin-academics.com?subject=AI%20for%20Academics%20Inquiry">steven@austin-academics.com</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Austin Academics Consulting &mdash; AI for Academics</p>
+    <p><a href="../index.html">Course resources: austin-academics.com</a></p>
+  </footer>
+</body>
+</html>
