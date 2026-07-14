@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HIST 270 — Exam 2</title>
+<style>
+  :root{
+    --page:#f3ecdd;
+    --card:#fffaf0;
+    --card-alt:#fdf9f0;
+    --ink:#2c2c2c;
+    --ink-soft:#4a4038;
+    --accent:#8b472f;
+    --accent-dark:#6f3826;
+    --teal:#24433c;
+    --border:#e6dcc9;
+    --border-strong:#d8c9ac;
+    --focus:#8b472f;
+    --good:#2f6b4f;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:Georgia,'Times New Roman',serif;
+    color:var(--ink);
+    background:var(--page);
+    line-height:1.6;
+    font-size:17px;
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:0 20px 120px;}
+
+  /* ---------- Header ---------- */
+  header.masthead{
+    background:var(--teal);
+    color:#f6efe1;
+    padding:2.2rem 20px 2rem;
+    border-bottom:5px solid var(--accent);
+  }
+  .masthead-inner{max-width:860px;margin:0 auto;}
+  .eyebrow{
+    font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;
+    color:#c9a98f;margin:0 0 0.5rem;font-family:Georgia,serif;
+  }
+  header.masthead h1{
+    font-size:2rem;margin:0 0 0.4rem;font-weight:700;letter-spacing:0.01em;
+  }
+  header.masthead .sub{font-size:0.98rem;color:#d9e2dd;margin:0;font-style:italic;}
+  header.masthead .covered{margin:0.9rem 0 0;font-size:0.95rem;color:#f0e7d6;}
+  header.masthead .covered strong{color:#f6efe1;}
+
+  /* ---------- Sticky progress ---------- */
+  .progress-bar{
+    position:sticky;top:0;z-index:20;
+    background:var(--card);
+    border-bottom:1px solid var(--border-strong);
+    box-shadow:0 2px 6px rgba(60,40,20,0.06);
+  }
+  .progress-inner{
+    max-width:860px;margin:0 auto;padding:0.55rem 20px;
+    display:flex;align-items:center;gap:0.9rem;flex-wrap:wrap;
+  }
+  .track{
+    flex:1;min-width:160px;height:9px;background:var(--border);
+    border-radius:6px;overflow:hidden;
+  }
+  .track span{display:block;height:100%;width:0;background:var(--accent);transition:width .25s ease;}
+  .progress-label{font-size:0.82rem;color:var(--ink-soft);white-space:nowrap;}
+  .save-status{font-size:0.78rem;color:var(--good);white-space:nowrap;min-width:96px;text-align:right;}
+  .save-status.saving{color:var(--accent);}
+
+  /* ---------- Panels ---------- */
+  .panel{
+    background:var(--card);border:1px solid var(--border);
+    border-left:4px solid var(--accent);border-radius:4px;
+    padding:1.3rem 1.5rem;margin:1.6rem 0;
+  }
+  .panel h2{margin:0 0 0.6rem;font-size:1.05rem;color:var(--teal);}
+  .panel p{margin:0.5rem 0;font-size:0.95rem;color:var(--ink-soft);}
+  .panel.tip{border-left-color:var(--teal);background:var(--card-alt);}
+  .panel.warn{
+    border:1px solid var(--accent);border-left:5px solid var(--accent);
+    background:#fbeee7;
+  }
+  .panel.warn h2{color:var(--accent-dark);display:flex;align-items:center;gap:0.5rem;}
+  .panel.warn h2 .mark{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:1.5rem;height:1.5rem;border-radius:50%;background:var(--accent);color:#fffaf0;
+    font-size:0.95rem;font-weight:700;flex:none;
+  }
+  .panel.warn p{color:var(--ink);}
+  .panel.warn strong{color:var(--accent-dark);}
+
+  .id-fields{
+    display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.6rem;
+  }
+  .id-fields label{display:flex;flex-direction:column;font-size:0.8rem;color:var(--ink-soft);gap:0.25rem;flex:1;min-width:200px;}
+  .id-fields input{
+    font-family:inherit;font-size:1rem;padding:0.45rem 0.6rem;
+    border:1px solid var(--border-strong);border-radius:3px;background:#fff;color:var(--ink);
+  }
+
+  /* ---------- Chapter sections ---------- */
+  .chapter{margin:2.4rem 0;}
+  .chapter-head{
+    border-bottom:2px solid var(--border-strong);
+    padding-bottom:0.5rem;margin-bottom:1.2rem;
+  }
+  .chapter-head .cnum{
+    display:inline-block;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;
+    background:var(--accent);color:#fffaf0;padding:0.22em 0.6em;border-radius:2px;margin-bottom:0.5rem;
+  }
+  .chapter-head h2{margin:0;font-size:1.28rem;color:var(--teal);line-height:1.35;}
+
+  .item{
+    background:var(--card);border:1px solid var(--border);border-radius:4px;
+    padding:1.1rem 1.25rem;margin:0.9rem 0;
+  }
+  .item.para{border-left:4px solid var(--teal);background:var(--card-alt);}
+  .item-tag{
+    font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);
+    font-weight:700;margin:0 0 0.4rem;
+  }
+  .point-value{
+    display:inline-block;margin-left:0.35rem;padding:0.08rem 0.42rem;
+    border:1px solid #bfd0c8;border-radius:999px;background:#e8f0ec;
+    color:var(--teal);font-size:0.72rem;font-weight:700;
+    letter-spacing:0.02em;text-transform:none;
+  }
+  .item .prompt{margin:0 0 0.7rem;font-size:1rem;color:var(--ink);}
+  .item .prompt .page{font-weight:700;color:var(--accent-dark);}
+  .item .prompt .term{font-weight:700;color:var(--teal);}
+
+  textarea{
+    width:100%;font-family:inherit;font-size:1rem;line-height:1.55;color:var(--ink);
+    border:1px solid var(--border-strong);border-radius:3px;background:#fff;
+    padding:0.6rem 0.7rem;resize:vertical;min-height:78px;
+  }
+  textarea.para-box{min-height:150px;}
+  .term-row{display:flex;gap:0.8rem;align-items:flex-end;flex-wrap:wrap;margin-top:0.5rem;}
+  .term-row .defn{flex:1;min-width:240px;}
+  .term-row .pagecite{display:flex;flex-direction:column;gap:0.25rem;font-size:0.78rem;color:var(--ink-soft);}
+  .term-row .pagecite input{
+    width:90px;font-family:inherit;font-size:1rem;padding:0.45rem 0.55rem;
+    border:1px solid var(--border-strong);border-radius:3px;background:#fff;color:var(--ink);
+  }
+  label.field-label{font-size:0.78rem;color:var(--ink-soft);display:block;margin-bottom:0.25rem;}
+
+  /* ---------- Synthesis ---------- */
+  .synth-options{display:flex;flex-direction:column;gap:0.6rem;margin:0.8rem 0 1rem;}
+  .synth-opt{
+    border:1px solid var(--border-strong);border-radius:4px;background:var(--card);
+    padding:0.9rem 1rem;cursor:pointer;transition:border-color .15s,background .15s;
+  }
+  .synth-opt:hover{border-color:var(--accent);}
+  .synth-opt.selected{border-color:var(--accent);border-left-width:4px;background:var(--card-alt);}
+  .synth-opt label{display:flex;gap:0.7rem;cursor:pointer;align-items:flex-start;}
+  .synth-opt input[type=radio]{margin-top:0.35rem;accent-color:var(--accent);width:1.05rem;height:1.05rem;flex:none;}
+  .synth-opt .opt-title{font-weight:700;color:var(--teal);font-size:1rem;}
+  .synth-opt .opt-prompt{font-size:0.93rem;color:var(--ink-soft);margin-top:0.3rem;}
+
+  /* ---------- Footer / actions ---------- */
+  .actions{
+    position:fixed;bottom:0;left:0;right:0;z-index:30;
+    background:var(--card);border-top:1px solid var(--border-strong);
+    box-shadow:0 -2px 8px rgba(60,40,20,0.08);
+  }
+  .actions-inner{
+    max-width:860px;margin:0 auto;padding:0.7rem 20px;
+    display:flex;gap:0.7rem;align-items:center;flex-wrap:wrap;
+  }
+  .btn{
+    font-family:inherit;font-size:0.92rem;padding:0.6rem 1.15rem;border-radius:4px;
+    border:1px solid var(--accent);cursor:pointer;background:var(--accent);color:#fffaf0;font-weight:700;
+  }
+  .btn:hover{background:var(--accent-dark);border-color:var(--accent-dark);}
+  .btn.secondary{background:transparent;color:var(--accent);}
+  .btn.secondary:hover{background:#f6ece2;}
+  .btn.ghost{background:transparent;color:var(--ink-soft);border-color:var(--border-strong);}
+  .btn.ghost:hover{background:#f2ebdd;}
+  .actions .spacer{flex:1;}
+  .actions .mini-status{font-size:0.78rem;color:var(--good);}
+
+  /* ---------- Focus visibility (WCAG) ---------- */
+  a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible,.synth-opt:focus-within{
+    outline:3px solid var(--focus);outline-offset:2px;
+  }
+
+  /* ---------- Print ---------- */
+  @media print{
+    .progress-bar,.actions{display:none !important;}
+    body{background:#fff;font-size:12pt;}
+    header.masthead{background:#fff;color:#000;border-bottom:2px solid #000;}
+    header.masthead .eyebrow,header.masthead .sub,header.masthead .covered{color:#000;}
+    .panel,.item,.synth-opt{border:1px solid #999;box-shadow:none;break-inside:avoid;}
+    .chapter{break-inside:avoid-page;}
+    textarea,input{border:1px solid #999;}
+    .wrap{padding-bottom:0;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none !important;scroll-behavior:auto !important;}
+  }
+  @media (max-width:560px){
+    header.masthead h1{font-size:1.55rem;}
+    body{font-size:16px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <p class="eyebrow" id="courseLine">HIST 270 · History of China</p>
+    <h1 id="examTitle">Exam 2</h1>
+    <p class="sub" id="textbookLine">Ebrey &amp; Walthall, <em>East Asia: A Cultural, Social, and Political History</em>, 3rd ed.</p>
+    <p class="covered">Chapters covered: <strong id="chaptersCovered">4, 5, 8, and 12</strong></p>
+  </div>
+</header>
+
+<div class="progress-bar">
+  <div class="progress-inner">
+    <span class="progress-label" id="progressLabel">0 of 0 answered</span>
+    <div class="track"><span id="progressFill"></span></div>
+    <span class="save-status" id="saveStatus">Saved</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="panel warn" role="note" aria-label="Academic integrity warning">
+    <h2><span class="mark" aria-hidden="true">!</span>Textbook only — no outside research</h2>
+    <p>You may use <strong>only your textbook</strong> to complete this exam. <strong>No outside research of any kind is permitted</strong> — this includes internet searches, Google, websites, study-help sites, and any other source beyond the assigned text.</p>
+    <p><strong>The use of AI is specifically prohibited.</strong> Any use of AI tools (such as ChatGPT, Claude, Gemini, or similar) to generate, draft, rewrite, or research any part of your answers is a violation of the course academic integrity policy and will be treated accordingly.</p>
+    <p>Every answer must be your own, written in your own words, based on your reading of the textbook.</p>
+  </div>
+
+  <div class="panel">
+    <h2>Before you begin</h2>
+    <p>Answer <strong>every item in your own words</strong>. You may use your textbook. Each chapter's items build toward that chapter's paragraph — the pages and terms you work through first are the raw material for the paragraph at the end of the block.</p>
+    <p>Vague answers copied from headings or captions will not receive full credit. Show that you understood what you read.</p>
+    <div class="id-fields">
+      <label>Your name
+        <input type="text" id="studentName" autocomplete="name" aria-label="Your name">
+      </label>
+      <label>Date
+        <input type="text" id="studentDate" placeholder="Month Day, Year" aria-label="Date">
+      </label>
+    </div>
+  </div>
+
+  <div class="panel tip">
+    <h2>How to work through this exam</h2>
+    <p id="timeGuidance">This exam is designed to take about <strong>80&ndash;130 minutes</strong>. You do not have to finish in one sitting — your work saves automatically in this browser, so you can complete it across <strong>one or two sessions</strong> on the same device and browser.</p>
+    <p>When you are finished, use <strong>Export answers (.txt)</strong> at the bottom of the page and submit the downloaded file as directed on Canvas.</p>
+  </div>
+
+  <main id="examBody"><!-- rendered by script --></main>
+
+</div>
+
+<div class="actions">
+  <div class="actions-inner">
+    <button class="btn" id="exportBtn" type="button">Export answers (.txt)</button>
+    <button class="btn secondary" id="printBtn" type="button">Print / Save as PDF</button>
+    <span class="spacer"></span>
+    <span class="mini-status" id="miniStatus">Auto-saving to this browser</span>
+    <button class="btn ghost" id="clearBtn" type="button">Clear all</button>
+  </div>
+</div>
+
+<script>
+/* =====================================================================
+   EXAM DATA  —  to reuse this template for Exam 2 / Exam 3, replace the
+   EXAM object below. Keep every item "id" unique and stable (it is the
+   autosave key). Structure and rendering code need no other changes.
+   ===================================================================== */
+const EXAM = {
+  storageKey: "hist270_exam2_v1",
+  fileStub: "HIST270_Exam2",
+  courseCode: "HIST 270",
+  courseTitle: "History of China",
+  examTitle: "Exam 2",
+  textbookText: "Ebrey & Walthall, East Asia: A Cultural, Social, and Political History, 3rd ed.",
+  textbookHtml: "Ebrey &amp; Walthall, <em>East Asia: A Cultural, Social, and Political History</em>, 3rd ed.",
+  chaptersCovered: "4, 5, 8, and 12",
+  estimatedMinutes: "80–130",
+  sessionGuidance: "one or two sessions",
+  chapters: [
+    {
+      num: 4,
+      title: "Political Division and the Spread of Buddhism",
+      items: [
+        { id:"4A", type:"pageid", page:71, points:2 },
+        { id:"4B", type:"pageid", page:73, points:2 },
+        { id:"4C", type:"term", term:"Lotus Sutra", points:3 },
+        { id:"4D", type:"term", term:"Faxian", points:3 },
+        { id:"4E", type:"term", term:"Emperor Wu of Liang", points:3 },
+        { id:"4F", type:"paragraph", points:8,
+          text:"Drawing on the pages and terms you examined above, explain why Buddhism gained a lasting place in Chinese society during the Period of Division. Consider how people encountered, practiced, supported, or adapted the religion. Answer in your own words and cite at least one specific textbook page." }
+      ]
+    },
+    {
+      num: 5,
+      title: "The Cosmopolitan Empires of Sui and Tang China",
+      items: [
+        { id:"5A", type:"pageid", page:79, points:2 },
+        { id:"5B", type:"pageid", page:81, points:2 },
+        { id:"5C", type:"term", term:"Chang'an", points:3 },
+        { id:"5D", type:"term", term:"Chan Buddhism", points:3 },
+        { id:"5E", type:"term", term:"Empress Wu", points:3 },
+        { id:"5F", type:"paragraph", points:8,
+          text:"Drawing on the pages and terms you examined above, explain how Buddhism in Tang China could be at once a trans-Asian religion, a part of everyday Chinese life, and a tool or concern of imperial government. Answer in your own words and cite at least one specific textbook page." }
+      ]
+    },
+    {
+      num: 8,
+      title: "China Among Equals: Song, Liao, Xia, and Jin",
+      items: [
+        { id:"8A", type:"pageid", page:135, points:2 },
+        { id:"8B", type:"pageid", page:137, points:2 },
+        { id:"8C", type:"term", term:"jinshi degree", points:3 },
+        { id:"8D", type:"term", term:"Song scholar-official class", points:3 },
+        { id:"8E", type:"term", term:"Wang Anshi's New Policies", points:3 },
+        { id:"8F", type:"paragraph", points:8,
+          text:"Drawing on the pages and terms you examined above, explain how the expanded examination system changed the Song governing elite without making recruitment fully equal or political life harmonious. Answer in your own words and cite at least one specific textbook page." }
+      ]
+    },
+    {
+      num: 12,
+      title: "China Under Mongol Rule",
+      items: [
+        { id:"12A", type:"pageid", page:204, points:2 },
+        { id:"12B", type:"pageid", page:208, points:2 },
+        { id:"12C", type:"term", term:"four-grade ethnic hierarchy under Yuan rule", points:3 },
+        { id:"12D", type:"term", term:"Yuan civil service examination system", points:3 },
+        { id:"12E", type:"term", term:"Zhao Mengfu", points:3 },
+        { id:"12F", type:"paragraph", points:8,
+          text:"Drawing on the pages and terms you examined above, explain how Mongol rule changed the traditional relationship between Chinese learning and government service and how educated Chinese responded. Answer in your own words and cite at least one specific textbook page." }
+      ]
+    }
+  ],
+  synthesis: {
+    id:"SYN",
+    label:"S",
+    points:15,
+    instructions:"Choose ONE of the following chapter pairs and write one paragraph (5–6 sentences) responding to its prompt. Your paragraph must cite at least one specific page from each chapter.",
+    options: [
+      { id:"opt1", title:"Option 1 — Chapters 4 & 5 (Buddhism during the Period of Division · Tang)",
+        prompt:"Compare Buddhism's place in Chinese society during the Period of Division with its place under Sui and Tang. Examine how religious practice, institutions, Asian connections, and relationships with rulers developed across the two periods." },
+      { id:"opt2", title:"Option 2 — Chapters 4 & 8 (Northern Wei Sinification · Liao Dual Administration)",
+        prompt:"Northern Wei and Liao both governed Chinese and non-Chinese populations, but they managed cultural difference in different ways. Compare Emperor Xiaowen's sinification program with Liao's dual system of administration. Explain what each strategy meant for ruling Chinese subjects while preserving or changing the ruling group's identity." },
+      { id:"opt3", title:"Option 3 — Chapters 5 & 8 (Civil Service Examinations from Tang · Song)",
+        prompt:"Compare the role of civil service examinations in Tang and Song China. Evaluate how far the system broadened access to office and changed the governing elite in each period, while also considering the continuing advantages of prominent or official families." },
+      { id:"opt4", title:"Option 4 — Chapters 8 & 12 (Song Scholar-Officials · Yuan Literati)",
+        prompt:"Compare the position of educated men under Song with their position under Yuan rule. Analyze how Mongol conquest changed access to government service and how Chinese literati responded to those changes through service, withdrawal, local leadership, or cultural work." }
+    ]
+  }
+};
+
+/* Populate all exam-specific display text from EXAM. */
+document.title = `${EXAM.courseCode} — ${EXAM.examTitle}`;
+document.getElementById('courseLine').textContent = `${EXAM.courseCode} · ${EXAM.courseTitle}`;
+document.getElementById('examTitle').textContent = EXAM.examTitle;
+document.getElementById('textbookLine').innerHTML = EXAM.textbookHtml;
+document.getElementById('chaptersCovered').textContent = EXAM.chaptersCovered;
+document.getElementById('timeGuidance').innerHTML = `This exam is designed to take about <strong>${esc(EXAM.estimatedMinutes)} minutes</strong>. You do not have to finish in one sitting — your work saves automatically in this browser, so you can complete it across <strong>${esc(EXAM.sessionGuidance)}</strong> on the same device and browser.`;
+
+/* ===================== RENDER ===================== */
+const body = document.getElementById('examBody');
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+function letter(i){return String.fromCharCode(65+i);} // A,B,C...
+
+EXAM.chapters.forEach(ch => {
+  const sec = document.createElement('section');
+  sec.className = 'chapter';
+  let html = `<div class="chapter-head">
+      <span class="cnum">Chapter ${ch.num}</span>
+      <h2>${esc(ch.title)}</h2>
+    </div>`;
+
+  ch.items.forEach((item, idx) => {
+    const tag = `${ch.num}-${letter(idx)}`;
+    if(item.type === 'pageid'){
+      html += `<div class="item">
+        <p class="item-tag">${tag} · Page ID <span class="point-value">(${item.points} points)</span></p>
+        <p class="prompt">What does <span class="page">page ${item.page}</span> teach you? <em>(1–3 sentences, in your own words)</em></p>
+        <label class="field-label" for="f_${item.id}">Your answer</label>
+        <textarea id="f_${item.id}" data-key="${item.id}" aria-label="Answer for item ${tag}, page ${item.page}"></textarea>
+      </div>`;
+    } else if(item.type === 'term'){
+      html += `<div class="item">
+        <p class="item-tag">${tag} · Term <span class="point-value">(${item.points} points)</span></p>
+        <p class="prompt">Define <span class="term">${esc(item.term)}</span> in your own words, and cite the page where it is discussed.</p>
+        <div class="term-row">
+          <div class="defn">
+            <label class="field-label" for="f_${item.id}">Definition</label>
+            <textarea id="f_${item.id}" data-key="${item.id}" aria-label="Definition for ${esc(item.term)}"></textarea>
+          </div>
+          <div class="pagecite">
+            <label for="f_${item.id}_pg">Page</label>
+            <input type="text" id="f_${item.id}_pg" data-key="${item.id}_pg" inputmode="numeric" aria-label="Page number for ${esc(item.term)}">
+          </div>
+        </div>
+      </div>`;
+    } else if(item.type === 'paragraph'){
+      html += `<div class="item para">
+        <p class="item-tag">${tag} · Paragraph <span class="point-value">(${item.points} points)</span></p>
+        <p class="prompt">${esc(item.text)} <em>(4–6 sentences)</em></p>
+        <label class="field-label" for="f_${item.id}">Your paragraph</label>
+        <textarea class="para-box" id="f_${item.id}" data-key="${item.id}" aria-label="Paragraph for item ${tag}"></textarea>
+      </div>`;
+    }
+  });
+
+  sec.innerHTML = html;
+  body.appendChild(sec);
+});
+
+/* Synthesis */
+const syn = EXAM.synthesis;
+const synSec = document.createElement('section');
+synSec.className = 'chapter';
+let synHtml = `<div class="chapter-head">
+    <span class="cnum">Synthesis</span>
+    <h2>Compare Two Chapters</h2>
+  </div>
+  <div class="item para">
+    <p class="item-tag">${esc(syn.label)} · Synthesis Paragraph <span class="point-value">(${syn.points} points)</span></p>
+    <p class="prompt">${esc(syn.instructions)}</p>
+    <div class="synth-options" role="radiogroup" aria-label="Choose one synthesis option">`;
+syn.options.forEach(opt => {
+  synHtml += `<div class="synth-opt" data-opt="${opt.id}">
+      <label>
+        <input type="radio" name="synthChoice" value="${opt.id}" data-key="${syn.id}_choice">
+        <span>
+          <span class="opt-title">${esc(opt.title)}</span>
+          <span class="opt-prompt">${esc(opt.prompt)}</span>
+        </span>
+      </label>
+    </div>`;
+});
+synHtml += `</div>
+    <label class="field-label" for="f_${syn.id}">Your paragraph</label>
+    <textarea class="para-box" id="f_${syn.id}" data-key="${syn.id}" aria-label="Synthesis paragraph"></textarea>
+  </div>`;
+synSec.innerHTML = synHtml;
+body.appendChild(synSec);
+
+/* highlight selected synth option */
+document.querySelectorAll('input[name="synthChoice"]').forEach(r=>{
+  r.addEventListener('change',()=>{
+    document.querySelectorAll('.synth-opt').forEach(o=>o.classList.remove('selected'));
+    const parent = r.closest('.synth-opt');
+    if(parent) parent.classList.add('selected');
+  });
+});
+
+/* ===================== PERSISTENCE ===================== */
+const META_KEYS = ['studentName','studentDate'];
+const saveStatus = document.getElementById('saveStatus');
+let saveTimer = null;
+
+function store(){
+  const data = {};
+  document.querySelectorAll('[data-key]').forEach(el=>{
+    if(el.type === 'radio'){ if(el.checked) data[el.dataset.key] = el.value; }
+    else data[el.dataset.key] = el.value;
+  });
+  META_KEYS.forEach(k=>{ const el=document.getElementById(k); if(el) data['_'+k]=el.value; });
+  try{ localStorage.setItem(EXAM.storageKey, JSON.stringify(data)); }catch(e){}
+  flashSaved();
+  updateProgress();
+}
+
+function flashSaved(){
+  saveStatus.textContent = 'Saving…';
+  saveStatus.classList.add('saving');
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(()=>{
+    saveStatus.textContent = 'Saved';
+    saveStatus.classList.remove('saving');
+  }, 400);
+}
+
+function restore(){
+  let data = {};
+  try{ data = JSON.parse(localStorage.getItem(EXAM.storageKey) || '{}'); }catch(e){}
+  document.querySelectorAll('[data-key]').forEach(el=>{
+    const v = data[el.dataset.key];
+    if(v === undefined) return;
+    if(el.type === 'radio'){
+      if(el.value === v){ el.checked = true; const p=el.closest('.synth-opt'); if(p)p.classList.add('selected'); }
+    } else el.value = v;
+  });
+  META_KEYS.forEach(k=>{ const el=document.getElementById(k); if(el && data['_'+k]!==undefined) el.value=data['_'+k]; });
+  updateProgress();
+}
+
+/* ===================== PROGRESS ===================== */
+function countable(){
+  // one unit per item: page-id textarea, term (defn OR page counts as started->needs both), paragraph, synthesis
+  const units = [];
+  EXAM.chapters.forEach(ch=>ch.items.forEach(it=>{
+    if(it.type==='term') units.push({keys:[it.id, it.id+'_pg']});
+    else units.push({keys:[it.id]});
+  }));
+  units.push({keys:[EXAM.synthesis.id+'_choice', EXAM.synthesis.id]});
+  return units;
+}
+const UNITS = countable();
+
+function valOf(key){
+  const el = document.querySelector(`[data-key="${key}"]`);
+  if(!el) {
+    // radio group
+    const r = document.querySelector(`input[data-key="${key}"]:checked`);
+    return r ? r.value.trim() : '';
+  }
+  if(el.type==='radio'){ const r=document.querySelector(`input[data-key="${key}"]:checked`); return r?r.value:''; }
+  return (el.value||'').trim();
+}
+
+function updateProgress(){
+  let done = 0;
+  UNITS.forEach(u=>{
+    const allFilled = u.keys.every(k=>valOf(k) !== '');
+    if(allFilled) done++;
+  });
+  const total = UNITS.length;
+  const pct = total ? Math.round(done/total*100) : 0;
+  document.getElementById('progressFill').style.width = pct+'%';
+  document.getElementById('progressLabel').textContent = `${done} of ${total} answered`;
+}
+
+/* ===================== EXPORT ===================== */
+function exportTxt(){
+  const name = (document.getElementById('studentName').value||'').trim();
+  const date = (document.getElementById('studentDate').value||'').trim();
+  const lines = [];
+  lines.push(`${EXAM.courseCode.toUpperCase()} — ${EXAM.courseTitle.toUpperCase()}`);
+  lines.push(`${EXAM.examTitle.toUpperCase()}  ·  Chapters ${EXAM.chaptersCovered}`);
+  lines.push('Text: ' + EXAM.textbookText);
+  lines.push('');
+  lines.push('Name: ' + (name || '__________'));
+  lines.push('Date: ' + (date || '__________'));
+  lines.push('');
+  lines.push('='.repeat(60));
+
+  EXAM.chapters.forEach(ch=>{
+    lines.push('');
+    lines.push(`CHAPTER ${ch.num} — ${ch.title}`);
+    lines.push('-'.repeat(60));
+    ch.items.forEach((it, idx)=>{
+      const tag = `${ch.num}-${String.fromCharCode(65+idx)}`;
+      if(it.type==='pageid'){
+        lines.push(`${tag}. Page ID (${it.points} points) — What does page ${it.page} teach you?`);
+        lines.push('   ' + (valOf(it.id) || '[blank]'));
+      } else if(it.type==='term'){
+        lines.push(`${tag}. Term (${it.points} points) — ${it.term}`);
+        lines.push('   Definition: ' + (valOf(it.id) || '[blank]'));
+        lines.push('   Page: ' + (valOf(it.id+'_pg') || '[blank]'));
+      } else if(it.type==='paragraph'){
+        lines.push(`${tag}. Paragraph (${it.points} points)`);
+        lines.push('   Prompt: ' + it.text);
+        lines.push('   Response: ' + (valOf(it.id) || '[blank]'));
+      }
+      lines.push('');
+    });
+  });
+
+  lines.push('='.repeat(60));
+  lines.push(`${EXAM.synthesis.label}. SYNTHESIS PARAGRAPH (${EXAM.synthesis.points} points)`);
+  const choiceKey = EXAM.synthesis.id + '_choice';
+  const chosen = valOf(choiceKey);
+  const chosenOpt = EXAM.synthesis.options.find(o=>o.id===chosen);
+  lines.push('   Pair chosen: ' + (chosenOpt ? chosenOpt.title : '[none selected]'));
+  if(chosenOpt) lines.push('   Prompt: ' + chosenOpt.prompt);
+  lines.push('   Response: ' + (valOf(EXAM.synthesis.id) || '[blank]'));
+  lines.push('');
+  lines.push(`— End of ${EXAM.examTitle} —`);
+
+  /* Structured data for the private instructor grader. The readable exam
+     remains above so students can still open and verify their submission. */
+  const machineData = {
+    schemaVersion: 1,
+    examId: 'HIST270_EXAM2',
+    courseCode: EXAM.courseCode,
+    courseTitle: EXAM.courseTitle,
+    examTitle: EXAM.examTitle,
+    chaptersCovered: EXAM.chaptersCovered,
+    totalPoints: EXAM.chapters.reduce((sum, ch) => sum + ch.items.reduce((s, it) => s + it.points, 0), 0) + EXAM.synthesis.points,
+    student: { name, date },
+    exportedAt: new Date().toISOString(),
+    responses: {},
+    synthesis: {
+      id: EXAM.synthesis.id,
+      points: EXAM.synthesis.points,
+      choiceId: chosen,
+      choiceTitle: chosenOpt ? chosenOpt.title : '',
+      prompt: chosenOpt ? chosenOpt.prompt : '',
+      response: valOf(EXAM.synthesis.id)
+    }
+  };
+  EXAM.chapters.forEach(ch => ch.items.forEach(it => {
+    const base = { id: it.id, chapter: ch.num, type: it.type, points: it.points };
+    if(it.type === 'pageid') machineData.responses[it.id] = { ...base, page: it.page, response: valOf(it.id) };
+    if(it.type === 'term') machineData.responses[it.id] = { ...base, term: it.term, definition: valOf(it.id), pageCitation: valOf(it.id + '_pg') };
+    if(it.type === 'paragraph') machineData.responses[it.id] = { ...base, prompt: it.text, response: valOf(it.id) };
+  }));
+  lines.push('');
+  lines.push('--- BEGIN EXAM DATA ---');
+  lines.push(JSON.stringify(machineData, null, 2));
+  lines.push('--- END EXAM DATA ---');
+
+  const blob = new Blob([lines.join('\n')], {type:'text/plain'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const safe = (name||'student').replace(/[^a-z0-9]+/gi,'_').replace(/^_|_$/g,'') || 'student';
+  a.href = url; a.download = `${EXAM.fileStub}_${safe}.txt`;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+/* ===================== WIRE UP ===================== */
+document.addEventListener('input', e=>{ if(e.target.matches('[data-key], #studentName, #studentDate')) store(); });
+document.addEventListener('change', e=>{ if(e.target.matches('[data-key]')) store(); });
+document.getElementById('exportBtn').addEventListener('click', exportTxt);
+document.getElementById('printBtn').addEventListener('click', ()=>window.print());
+document.getElementById('clearBtn').addEventListener('click', ()=>{
+  if(confirm('Clear all answers on this device? This cannot be undone.')){
+    try{ localStorage.removeItem(EXAM.storageKey); }catch(e){}
+    document.querySelectorAll('[data-key]').forEach(el=>{
+      if(el.type==='radio') el.checked=false; else el.value='';
+    });
+    document.querySelectorAll('.synth-opt').forEach(o=>o.classList.remove('selected'));
+    META_KEYS.forEach(k=>{ const el=document.getElementById(k); if(el) el.value=''; });
+    updateProgress();
+  }
+});
+
+restore();
+updateProgress();
+</script>
+</body>
+</html>
