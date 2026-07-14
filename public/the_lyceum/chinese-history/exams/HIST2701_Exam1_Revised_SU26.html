@@ -122,6 +122,12 @@
     font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);
     font-weight:700;margin:0 0 0.4rem;
   }
+  .point-value{
+    display:inline-block;margin-left:0.35rem;padding:0.08rem 0.42rem;
+    border:1px solid #bfd0c8;border-radius:999px;background:#e8f0ec;
+    color:var(--teal);font-size:0.72rem;font-weight:700;
+    letter-spacing:0.02em;text-transform:none;
+  }
   .item .prompt{margin:0 0 0.7rem;font-size:1rem;color:var(--ink);}
   .item .prompt .page{font-weight:700;color:var(--accent-dark);}
   .item .prompt .term{font-weight:700;color:var(--teal);}
@@ -285,12 +291,12 @@ const EXAM = {
       num: 1,
       title: "China in the Bronze Age: The Shang and Zhou",
       items: [
-        { id:"1A", type:"pageid", page:11 },
-        { id:"1B", type:"pageid", page:14 },
-        { id:"1C", type:"term", term:"Di" },
-        { id:"1D", type:"term", term:"Lady Hao" },
-        { id:"1E", type:"term", term:"taotie" },
-        { id:"1F", type:"paragraph",
+        { id:"1A", type:"pageid", page:11, points:2 },
+        { id:"1B", type:"pageid", page:14, points:2 },
+        { id:"1C", type:"term", term:"Di", points:3 },
+        { id:"1D", type:"term", term:"Lady Hao", points:3 },
+        { id:"1E", type:"term", term:"taotie", points:3 },
+        { id:"1F", type:"paragraph", points:8,
           text:"Drawing on the pages and terms you examined above, explain how material remains from Shang society reveal the relationship among religious belief, social hierarchy, and the ability of rulers to organize labor and resources. Answer in your own words and cite at least one specific textbook page." }
       ]
     },
@@ -298,12 +304,12 @@ const EXAM = {
       num: 2,
       title: "Philosophers and Warring States",
       items: [
-        { id:"2A", type:"pageid", page:22 },
-        { id:"2B", type:"pageid", page:25 },
-        { id:"2C", type:"term", term:"hegemon" },
-        { id:"2D", type:"term", term:"shi" },
-        { id:"2E", type:"term", term:"the merit principle" },
-        { id:"2F", type:"paragraph",
+        { id:"2A", type:"pageid", page:22, points:2 },
+        { id:"2B", type:"pageid", page:25, points:2 },
+        { id:"2C", type:"term", term:"hegemon", points:3 },
+        { id:"2D", type:"term", term:"shi", points:3 },
+        { id:"2E", type:"term", term:"the merit principle", points:3 },
+        { id:"2F", type:"paragraph", points:8,
           text:"Drawing on the pages and terms you examined above, explain how competition among Eastern Zhou states changed who could exercise political influence and what kinds of reforms rulers adopted to strengthen their states. Answer in your own words and cite at least one specific textbook page." }
       ]
     },
@@ -311,12 +317,12 @@ const EXAM = {
       num: 3,
       title: "The Founding of the Bureaucratic Empire: Qin and Han",
       items: [
-        { id:"3A", type:"pageid", page:38 },
-        { id:"3B", type:"pageid", page:44 },
-        { id:"3C", type:"term", term:"standardization under the Qin" },
-        { id:"3D", type:"term", term:"Emperor Gao" },
-        { id:"3E", type:"term", term:"the Confucian scholar-official system" },
-        { id:"3F", type:"paragraph",
+        { id:"3A", type:"pageid", page:38, points:2 },
+        { id:"3B", type:"pageid", page:44, points:2 },
+        { id:"3C", type:"term", term:"standardization under the Qin", points:3 },
+        { id:"3D", type:"term", term:"Emperor Gao", points:3 },
+        { id:"3E", type:"term", term:"the Confucian scholar-official system", points:3 },
+        { id:"3F", type:"paragraph", points:8,
           text:"Drawing on the pages and terms you examined above, explain how Han rulers preserved the centralized empire created by Qin while changing the policies and ideas used to govern it. What did Han retain, and what did it modify? Answer in your own words and cite at least one specific textbook page." }
       ]
     }
@@ -324,6 +330,7 @@ const EXAM = {
   synthesis: {
     id:"SYN",
     label:"S",
+    points:15,
     instructions:"Choose ONE of the following chapter pairs and write one paragraph (5–6 sentences) responding to its prompt. Your paragraph must cite at least one specific page from each chapter.",
     options: [
       { id:"opt1", title:"Option 1 — Chapters 1 & 2 (Western Zhou · Eastern Zhou)",
@@ -365,14 +372,14 @@ EXAM.chapters.forEach(ch => {
     const tag = `${ch.num}-${letter(idx)}`;
     if(item.type === 'pageid'){
       html += `<div class="item">
-        <p class="item-tag">${tag} · Page ID</p>
+        <p class="item-tag">${tag} · Page ID <span class="point-value">(${item.points} points)</span></p>
         <p class="prompt">What does <span class="page">page ${item.page}</span> teach you? <em>(1–3 sentences, in your own words)</em></p>
         <label class="field-label" for="f_${item.id}">Your answer</label>
         <textarea id="f_${item.id}" data-key="${item.id}" aria-label="Answer for item ${tag}, page ${item.page}"></textarea>
       </div>`;
     } else if(item.type === 'term'){
       html += `<div class="item">
-        <p class="item-tag">${tag} · Term</p>
+        <p class="item-tag">${tag} · Term <span class="point-value">(${item.points} points)</span></p>
         <p class="prompt">Define <span class="term">${esc(item.term)}</span> in your own words, and cite the page where it is discussed.</p>
         <div class="term-row">
           <div class="defn">
@@ -387,8 +394,8 @@ EXAM.chapters.forEach(ch => {
       </div>`;
     } else if(item.type === 'paragraph'){
       html += `<div class="item para">
-        <p class="item-tag">${tag} · Paragraph (4–6 sentences)</p>
-        <p class="prompt">${esc(item.text)}</p>
+        <p class="item-tag">${tag} · Paragraph <span class="point-value">(${item.points} points)</span></p>
+        <p class="prompt">${esc(item.text)} <em>(4–6 sentences)</em></p>
         <label class="field-label" for="f_${item.id}">Your paragraph</label>
         <textarea class="para-box" id="f_${item.id}" data-key="${item.id}" aria-label="Paragraph for item ${tag}"></textarea>
       </div>`;
@@ -408,7 +415,7 @@ let synHtml = `<div class="chapter-head">
     <h2>Compare Two Chapters</h2>
   </div>
   <div class="item para">
-    <p class="item-tag">${esc(syn.label)} · Synthesis Paragraph (5–6 sentences)</p>
+    <p class="item-tag">${esc(syn.label)} · Synthesis Paragraph <span class="point-value">(${syn.points} points)</span></p>
     <p class="prompt">${esc(syn.instructions)}</p>
     <div class="synth-options" role="radiogroup" aria-label="Choose one synthesis option">`;
 syn.options.forEach(opt => {
@@ -536,14 +543,14 @@ function exportTxt(){
     ch.items.forEach((it, idx)=>{
       const tag = `${ch.num}-${String.fromCharCode(65+idx)}`;
       if(it.type==='pageid'){
-        lines.push(`${tag}. Page ID — What does page ${it.page} teach you?`);
+        lines.push(`${tag}. Page ID (${it.points} points) — What does page ${it.page} teach you?`);
         lines.push('   ' + (valOf(it.id) || '[blank]'));
       } else if(it.type==='term'){
-        lines.push(`${tag}. Term — ${it.term}`);
+        lines.push(`${tag}. Term (${it.points} points) — ${it.term}`);
         lines.push('   Definition: ' + (valOf(it.id) || '[blank]'));
         lines.push('   Page: ' + (valOf(it.id+'_pg') || '[blank]'));
       } else if(it.type==='paragraph'){
-        lines.push(`${tag}. Paragraph`);
+        lines.push(`${tag}. Paragraph (${it.points} points)`);
         lines.push('   Prompt: ' + it.text);
         lines.push('   Response: ' + (valOf(it.id) || '[blank]'));
       }
@@ -552,7 +559,7 @@ function exportTxt(){
   });
 
   lines.push('='.repeat(60));
-  lines.push(`${EXAM.synthesis.label}. SYNTHESIS PARAGRAPH`);
+  lines.push(`${EXAM.synthesis.label}. SYNTHESIS PARAGRAPH (${EXAM.synthesis.points} points)`);
   const choiceKey = EXAM.synthesis.id + '_choice';
   const chosen = valOf(choiceKey);
   const chosenOpt = EXAM.synthesis.options.find(o=>o.id===chosen);
