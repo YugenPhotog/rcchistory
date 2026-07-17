@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive reading guides for PHIL 210: World Religions, organized by textbook chapter.">
+    <title>PHIL 210 Reading Guides | World Religions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Libre+Baskerville:wght@400;700&family=Lora:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/site-enhancements.css">
+    <link rel="stylesheet" href="../../css/course-landing.css">
+    <style>
+        :root {
+            --guide-gold: #D4AF37;
+            --guide-gold-light: #F1D77A;
+            --guide-teal: #2C7873;
+            --guide-teal-dark: #1E5551;
+            --guide-purple: #6B4C9A;
+            --guide-charcoal: #1A1A1A;
+            --guide-charcoal-light: #2A2A2A;
+            --guide-ivory: #FFFDF7;
+            --guide-line: #D8C9AD;
+        }
+
+        body {
+            background: #F7F1E7;
+        }
+
+        .reading-guides-banner {
+            background: linear-gradient(135deg, var(--guide-charcoal) 0%, #16213E 50%, var(--guide-charcoal) 100%);
+            border-bottom: 3px solid var(--guide-gold);
+            color: var(--guide-ivory);
+            padding: 3.5rem 1.25rem 3rem;
+            text-align: center;
+        }
+
+        .reading-guides-banner .eyebrow {
+            color: var(--guide-gold-light);
+            font-family: Inter, sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            margin: 0 0 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .reading-guides-banner h1 {
+            color: var(--guide-gold);
+            font-family: "Playfair Display", Georgia, serif;
+            font-size: clamp(2.25rem, 6vw, 4.25rem);
+            line-height: 1.05;
+            margin: 0;
+        }
+
+        .reading-guides-banner p {
+            color: #E8E8E8;
+            font-family: "Libre Baskerville", Georgia, serif;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            margin: 0.8rem auto 0;
+            max-width: 680px;
+        }
+
+        .guide-nav {
+            align-items: center;
+            background: var(--guide-charcoal);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            justify-content: center;
+            padding: 0.9rem 1rem;
+        }
+
+        .guide-nav a {
+            border: 1px solid var(--guide-gold);
+            border-radius: 6px;
+            color: var(--guide-ivory);
+            font-family: Inter, sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 0.6rem 1rem;
+            text-decoration: none;
+        }
+
+        .guide-nav a:hover,
+        .guide-nav a:focus-visible {
+            background: var(--guide-gold);
+            color: var(--guide-charcoal);
+        }
+
+        .guides-main {
+            margin: 0 auto;
+            max-width: 1180px;
+            padding: 2.5rem 1.25rem 4rem;
+        }
+
+        .intro-panel {
+            background: var(--guide-ivory);
+            border: 1px solid var(--guide-line);
+            border-left: 5px solid var(--guide-teal);
+            border-radius: 8px;
+            box-shadow: 0 4px 14px rgba(39, 28, 17, 0.08);
+            margin-bottom: 2.25rem;
+            padding: 1.5rem 1.75rem;
+        }
+
+        .intro-panel h2 {
+            color: var(--guide-charcoal);
+            font-family: "Playfair Display", Georgia, serif;
+            margin: 0 0 0.6rem;
+        }
+
+        .intro-panel p {
+            color: #3E3A34;
+            margin: 0.4rem 0;
+        }
+
+        .guide-grid {
+            display: grid;
+            gap: 1.4rem;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .guide-card {
+            background: var(--guide-charcoal);
+            border: 1px solid var(--guide-gold);
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
+            color: var(--guide-ivory);
+            display: flex;
+            flex-direction: column;
+            min-height: 245px;
+            padding: 1.6rem;
+            position: relative;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .guide-card::before {
+            background: linear-gradient(90deg, var(--guide-teal), var(--guide-purple));
+            border-radius: 10px 10px 0 0;
+            content: "";
+            height: 5px;
+            left: -1px;
+            position: absolute;
+            right: -1px;
+            top: -1px;
+        }
+
+        .guide-card:hover,
+        .guide-card:focus-visible {
+            border-color: var(--guide-gold-light);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
+            transform: translateY(-4px);
+        }
+
+        .guide-card:focus-visible,
+        .guide-nav a:focus-visible {
+            outline: 3px solid var(--guide-gold-light);
+            outline-offset: 3px;
+        }
+
+        .chapter-label {
+            color: var(--guide-gold-light);
+            font-family: Inter, sans-serif;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            margin: 0 0 0.65rem;
+            text-transform: uppercase;
+        }
+
+        .guide-card h2 {
+            color: var(--guide-ivory);
+            font-family: "Playfair Display", Georgia, serif;
+            font-size: 1.45rem;
+            line-height: 1.22;
+            margin: 0 0 0.75rem;
+        }
+
+        .guide-card p {
+            color: #D8D8D8;
+            margin: 0 0 1.25rem;
+        }
+
+        .guide-meta {
+            align-items: center;
+            border-top: 1px solid rgba(212, 175, 55, 0.35);
+            color: var(--guide-gold-light);
+            display: flex;
+            font-family: Inter, sans-serif;
+            font-size: 0.88rem;
+            font-weight: 600;
+            justify-content: space-between;
+            margin-top: auto;
+            padding-top: 0.9rem;
+        }
+
+        .reading-guides-footer {
+            background: var(--guide-charcoal);
+            border-top: 2px solid var(--guide-gold);
+            color: #E8E8E8;
+            padding: 1.5rem 1rem;
+            text-align: center;
+        }
+
+        .reading-guides-footer p {
+            margin: 0.25rem 0;
+        }
+
+        @media (max-width: 760px) {
+            .guide-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .reading-guides-banner {
+                padding: 2.75rem 1rem 2.25rem;
+            }
+
+            .guides-main {
+                padding: 1.75rem 0.9rem 3rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .guide-card {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+<body class="course-landing-page course-phil210">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="reading-guides-banner">
+        <p class="eyebrow">PHIL 210 · World Religions</p>
+        <h1>Reading Guides</h1>
+        <p>Read with purpose, collect textual evidence, and prepare for each chapter quiz.</p>
+    </header>
+
+    <nav class="guide-nav" aria-label="Reading guide navigation">
+        <a href="../index.html">← PHIL 210 Course Page</a>
+        <a href="../../index.html">Main Website</a>
+    </nav>
+
+    <main id="main-content" class="guides-main">
+        <section class="intro-panel" aria-labelledby="how-to-use-heading">
+            <h2 id="how-to-use-heading">How to use these guides</h2>
+            <p>Open the guide for your assigned chapter and complete it while you read. Each guide directs you to key textbook passages and asks you to answer the chapter review questions using evidence from the reading.</p>
+            <p><strong>Your work saves automatically in your browser.</strong> Use “Export Answers” if you also want a backup text file.</p>
+        </section>
+
+        <section aria-labelledby="available-guides-heading">
+            <h2 id="available-guides-heading" class="section-title">Available Reading Guides</h2>
+            <div class="guide-grid">
+                <a class="guide-card" href="PHIL210_Ch01_ReadingGuide.html">
+                    <p class="chapter-label">Chapter 1</p>
+                    <h2>Beginning Your Study of World Religions</h2>
+                    <p>Build a foundation for studying religion, including definitions, dimensions, and academic approaches.</p>
+                    <span class="guide-meta"><span>12 questions</span><span>Open guide →</span></span>
+                </a>
+
+                <a class="guide-card" href="PHIL210_Ch03_ReadingGuide.html">
+                    <p class="chapter-label">Chapter 3</p>
+                    <h2>Encountering Hinduism</h2>
+                    <p>Explore Hindu history, sacred texts, central concepts, devotional paths, and liberation.</p>
+                    <span class="guide-meta"><span>12 questions</span><span>Open guide →</span></span>
+                </a>
+
+                <a class="guide-card" href="PHIL210_Ch05_ReadingGuide.html">
+                    <p class="chapter-label">Chapter 5</p>
+                    <h2>Encountering Buddhism</h2>
+                    <p>Trace the Buddha’s life and examine the Middle Path, core teachings, and major traditions.</p>
+                    <span class="guide-meta"><span>12 questions</span><span>Open guide →</span></span>
+                </a>
+
+                <a class="guide-card" href="PHIL210_Ch07_ReadingGuide.html">
+                    <p class="chapter-label">Chapter 7</p>
+                    <h2>Encountering Daoism and Confucianism</h2>
+                    <p>Compare two influential Chinese traditions and their approaches to harmony, virtue, and the Way.</p>
+                    <span class="guide-meta"><span>11 questions</span><span>Open guide →</span></span>
+                </a>
+
+                <a class="guide-card" href="PHIL210_Ch10_ReadingGuide.html">
+                    <p class="chapter-label">Chapter 10</p>
+                    <h2>Encountering Judaism</h2>
+                    <p>Study covenant, scripture, worship, historical development, and Jewish life and identity.</p>
+                    <span class="guide-meta"><span>12 questions</span><span>Open guide →</span></span>
+                </a>
+
+                <a class="guide-card" href="PHIL210_Ch11_ReadingGuide.html">
+                    <p class="chapter-label">Chapter 11</p>
+                    <h2>Encountering Christianity</h2>
+                    <p>Examine Jesus, the early church, major historical developments, beliefs, and global expressions.</p>
+                    <span class="guide-meta"><span>14 questions</span><span>Open guide →</span></span>
+                </a>
+
+                <a class="guide-card" href="PHIL210_Ch12_ReadingGuide.html">
+                    <p class="chapter-label">Chapter 12</p>
+                    <h2>Encountering Islam</h2>
+                    <p>Explore Muhammad, the Qur’an, Islamic history, beliefs, practices, and community life.</p>
+                    <span class="guide-meta"><span>11 questions</span><span>Open guide →</span></span>
+                </a>
+
+                <a class="guide-card" href="PHIL210_Ch13_ReadingGuide.html">
+                    <p class="chapter-label">Chapter 13</p>
+                    <h2>Encountering New Religious Movements</h2>
+                    <p>Consider how scholars define and study modern movements, including several influential examples.</p>
+                    <span class="guide-meta"><span>11 questions</span><span>Open guide →</span></span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="reading-guides-footer">
+        <p><strong>PHIL 210 · World Religions</strong></p>
+        <p>Professor Steven Austin · Richland Community College</p>
+    </footer>
+</body>
+</html>
