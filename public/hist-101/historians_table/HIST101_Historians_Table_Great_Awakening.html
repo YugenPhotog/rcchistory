@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HIST 101 Historian's Table - Great Awakening</title>
+<style>
+    :root {
+        --blue: #17365d;
+        --blue2: #315f8c;
+        --light-blue: #eef5ff;
+        --border: #d1d5db;
+        --text: #1f2937;
+        --muted: #6b7280;
+        --warm: #fff7ed;
+        --amber: #f59e0b;
+        --green: #ecfdf5;
+        --green-line: #10b981;
+        --paper: #ffffff;
+        --soft: #f8fafc;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+        margin: 0;
+        background: #f3f4f6;
+        color: var(--text);
+        font-family: Arial, Helvetica, sans-serif;
+        line-height: 1.55;
+    }
+
+    .page {
+        max-width: 980px;
+        margin: 24px auto 60px;
+        background: var(--paper);
+        border-radius: 10px;
+        box-shadow: 0 4px 18px rgba(0,0,0,.08);
+        overflow: hidden;
+    }
+
+    .hero {
+        background: var(--blue);
+        color: white;
+        padding: 24px 28px;
+    }
+
+    .eyebrow {
+        font-size: .9rem;
+        margin-bottom: 4px;
+    }
+
+    h1 {
+        margin: 0;
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        margin: 6px 0 0;
+        font-size: 1.08rem;
+    }
+
+    .content {
+        padding: 26px 28px 36px;
+    }
+
+    .question-box,
+    .note-box,
+    .clio-box {
+        border-left: 5px solid var(--blue2);
+        background: var(--light-blue);
+        padding: 16px 18px;
+        border-radius: 4px;
+        margin: 0 0 22px;
+    }
+
+    .note-box {
+        background: var(--warm);
+        border-left-color: var(--amber);
+    }
+
+    .clio-box {
+        background: var(--green);
+        border-left-color: var(--green-line);
+    }
+
+    .toolbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: rgba(255,255,255,.97);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 12px;
+        margin: 0 0 24px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+    }
+
+    button {
+        border: 0;
+        border-radius: 6px;
+        padding: 10px 14px;
+        font-weight: 700;
+        cursor: pointer;
+        font-size: .95rem;
+    }
+
+    .primary {
+        background: var(--blue);
+        color: white;
+    }
+
+    .secondary {
+        background: #e5e7eb;
+        color: #111827;
+    }
+
+    .danger {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+
+    .status {
+        margin-left: auto;
+        color: var(--muted);
+        font-size: .9rem;
+        white-space: nowrap;
+    }
+
+    .student-row {
+        display: grid;
+        grid-template-columns: 1.3fr .7fr;
+        gap: 14px;
+        margin-bottom: 26px;
+    }
+
+    label {
+        display: block;
+        font-weight: 700;
+        margin-bottom: 6px;
+    }
+
+    input[type="text"],
+    textarea {
+        width: 100%;
+        border: 1px solid #9ca3af;
+        border-radius: 6px;
+        padding: 10px 12px;
+        font: inherit;
+        color: var(--text);
+        background: white;
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    input[type="text"]:focus,
+    textarea:focus {
+        outline: 3px solid rgba(49,95,140,.18);
+        border-color: var(--blue2);
+    }
+
+    .step {
+        margin-top: 34px;
+        padding-top: 4px;
+    }
+
+    .step h2 {
+        color: var(--blue);
+        border-bottom: 3px solid var(--blue);
+        padding-bottom: 7px;
+        margin-bottom: 10px;
+        font-size: 1.45rem;
+    }
+
+    .source-card {
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 16px;
+        margin: 16px 0;
+        background: var(--soft);
+    }
+
+    .source-card h3 {
+        margin: 0 0 12px;
+        color: var(--blue);
+        font-size: 1.08rem;
+    }
+
+    .field {
+        margin: 12px 0;
+    }
+
+    .hint {
+        color: var(--muted);
+        font-size: .92rem;
+        margin-top: 3px;
+    }
+
+    .historian-grid {
+        display: grid;
+        gap: 16px;
+    }
+
+    .counter {
+        color: var(--muted);
+        text-align: right;
+        font-size: .9rem;
+        margin-top: 5px;
+    }
+
+    .footer {
+        background: var(--blue);
+        color: white;
+        padding: 18px 28px;
+    }
+
+    .small {
+        font-size: .9rem;
+    }
+
+    @media (max-width: 700px) {
+        .page { margin: 0; border-radius: 0; }
+        .content { padding: 20px 16px 30px; }
+        .hero { padding: 20px 16px; }
+        .student-row { grid-template-columns: 1fr; }
+        .status { width: 100%; margin-left: 0; }
+    }
+
+    @media print {
+        body { background: white; }
+        .page { box-shadow: none; margin: 0; max-width: none; }
+        .toolbar { display: none; }
+        textarea, input[type="text"] {
+            border: 1px solid #666;
+        }
+    }
+</style>
+</head>
+
+<body>
+<div class="page">
+    <div class="hero">
+        <div class="eyebrow">HIST 101 | Doing History</div>
+        <h1>The Historian's Table</h1>
+        <p class="subtitle"><strong>Was the Great Awakening a Proto-Revolutionary Event?</strong></p>
+    </div>
+
+    <div class="content">
+        <div class="question-box">
+            <strong>Historical Question:</strong><br>
+            To what extent did the First Great Awakening prepare colonists for revolutionary politics by changing how they understood authority, participation, and dissent?
+        </div>
+
+        <div class="toolbar">
+            <button class="primary" type="button" onclick="exportClio()">Export for Clio</button>
+            <button class="primary" type="button" onclick="exportComplete()">Export Complete Worksheet</button>
+            <button class="secondary" type="button" onclick="saveNow()">Save Now</button>
+            <button class="danger" type="button" onclick="resetWorksheet()">Start Over</button>
+            <span class="status" id="saveStatus">Ready. Your work saves automatically.</span>
+        </div>
+
+        <div class="student-row">
+            <div>
+                <label for="studentName">Your name</label>
+                <input type="text" id="studentName" data-save>
+            </div>
+            <div>
+                <label for="courseSection">Section</label>
+                <input type="text" id="courseSection" data-save placeholder="HIST 101-Y1">
+            </div>
+        </div>
+
+        <div class="note-box">
+            <strong>How saving works:</strong> This worksheet saves automatically in this browser as you type. Use the same browser and device when you return. Export your work before closing the assignment for the final time.
+        </div>
+
+        <section class="step">
+            <h2>Step 1: Examine the Evidence</h2>
+            <p>Read all six primary sources before reading Kidd. For each source, record one specific passage, statement, action, or detail that caught your attention, then explain what you think it reveals about colonial society.</p>
+
+            <div class="source-card">
+                <h3>Boston Evening-Post: Clothes and Book Burning</h3>
+                <div class="field">
+                    <label for="bostonDetail">Passage, statement, action, or detail</label>
+                    <textarea id="bostonDetail" data-save></textarea>
+                </div>
+                <div class="field">
+                    <label for="bostonMeaning">What do you think this reveals about colonial society?</label>
+                    <textarea id="bostonMeaning" data-save></textarea>
+                    <div class="hint">You might notice something about authority, participation, dissent, religious experience, social relationships, or something else.</div>
+                </div>
+            </div>
+
+            <div class="source-card">
+                <h3>Jonathan Edwards: A Faithful Narrative, abridged</h3>
+                <div class="field">
+                    <label for="faithfulDetail">Passage, statement, action, or detail</label>
+                    <textarea id="faithfulDetail" data-save></textarea>
+                </div>
+                <div class="field">
+                    <label for="faithfulMeaning">What do you think this reveals about colonial society?</label>
+                    <textarea id="faithfulMeaning" data-save></textarea>
+                </div>
+            </div>
+
+            <div class="source-card">
+                <h3>Jonathan Edwards: Sinners in the Hands of an Angry God</h3>
+                <div class="field">
+                    <label for="sinnersDetail">Passage, statement, action, or detail</label>
+                    <textarea id="sinnersDetail" data-save></textarea>
+                </div>
+                <div class="field">
+                    <label for="sinnersMeaning">What do you think this reveals about colonial society?</label>
+                    <textarea id="sinnersMeaning" data-save></textarea>
+                </div>
+            </div>
+
+            <div class="source-card">
+                <h3>John Marrant</h3>
+                <div class="field">
+                    <label for="marrantDetail">Passage, statement, action, or detail</label>
+                    <textarea id="marrantDetail" data-save></textarea>
+                </div>
+                <div class="field">
+                    <label for="marrantMeaning">What do you think this reveals about colonial society?</label>
+                    <textarea id="marrantMeaning" data-save></textarea>
+                </div>
+            </div>
+
+            <div class="source-card">
+                <h3>Samson Occom's Conversion</h3>
+                <div class="field">
+                    <label for="occomDetail">Passage, statement, action, or detail</label>
+                    <textarea id="occomDetail" data-save></textarea>
+                </div>
+                <div class="field">
+                    <label for="occomMeaning">What do you think this reveals about colonial society?</label>
+                    <textarea id="occomMeaning" data-save></textarea>
+                </div>
+            </div>
+
+            <div class="source-card">
+                <h3>Gilbert Tennent: The Danger of an Unconverted Ministry</h3>
+                <div class="field">
+                    <label for="tennentDetail">Passage, statement, action, or detail</label>
+                    <textarea id="tennentDetail" data-save></textarea>
+                </div>
+                <div class="field">
+                    <label for="tennentMeaning">What do you think this reveals about colonial society?</label>
+                    <textarea id="tennentMeaning" data-save></textarea>
+                </div>
+            </div>
+
+            <div class="note-box">
+                <strong>Do not force the evidence into one answer.</strong> At this stage, simply notice what seems historically important.
+            </div>
+        </section>
+
+        <section class="step">
+            <h2>Step 2: Make Your First Interpretation</h2>
+            <p>Before reading the historians, write 2–3 sentences based only on the six primary sources.</p>
+
+            <div class="field">
+                <label for="firstInterpretation">Based only on the primary sources, do you see evidence that the Great Awakening might have helped prepare colonial society for later political resistance? Why or why not?</label>
+                <textarea id="firstInterpretation" data-save style="min-height: 130px;"></textarea>
+            </div>
+
+            <p class="hint">This is your first interpretation. It is not supposed to be perfect.</p>
+        </section>
+
+        <section class="step">
+            <h2>Step 3: Invite the Historians to the Table</h2>
+            <p>Now read Thomas S. Kidd, “Historians, the Great Awakening, and the American Revolution,” pp. 22–24.</p>
+
+            <div class="historian-grid">
+                <div class="field">
+                    <label for="histStrong">1. What is the strongest historical argument for connecting the Great Awakening to the American Revolution?</label>
+                    <textarea id="histStrong" data-save></textarea>
+                </div>
+
+                <div class="field">
+                    <label for="histCaution">2. What is the strongest reason for being cautious about that connection?</label>
+                    <textarea id="histCaution" data-save></textarea>
+                </div>
+
+                <div class="field">
+                    <label for="histReconsider">3. What did the historians make you notice, reconsider, or question about your first interpretation?</label>
+                    <textarea id="histReconsider" data-save></textarea>
+                </div>
+            </div>
+
+            <div class="clio-box">
+                <strong>Ready for Clio?</strong> When Steps 1–3 are complete, click <strong>Export for Clio</strong> at the top of this worksheet. Upload that text file to Clio before beginning your conversation.
+            </div>
+        </section>
+
+        <section class="step">
+            <h2>Step 4: Invite Clio to the Table</h2>
+            <p>After your conversation with Clio, return here and record the part of the discussion that mattered most.</p>
+
+            <div class="field">
+                <label for="clioChallenge">Clio's strongest challenge</label>
+                <textarea id="clioChallenge" data-save></textarea>
+                <div class="hint">What question, objection, or alternative interpretation made you think most carefully?</div>
+            </div>
+
+            <div class="field">
+                <label for="clioResponse">Your response</label>
+                <textarea id="clioResponse" data-save></textarea>
+                <div class="hint">Did you accept, reject, or partly accept Clio's challenge? What evidence led you to that decision?</div>
+            </div>
+
+            <div class="clio-box">
+                <strong>Remember:</strong> Clio gets a seat at the table. Clio does not get the final word. You do.
+            </div>
+        </section>
+
+        <section class="step">
+            <h2>Step 5: Leave the Table with Your Judgment</h2>
+            <p>Give your final answer to the historical question in approximately <strong>150–250 words</strong>. This is not a formal essay. Explain what you now think, identify the evidence that matters most, recognize an important limitation or counterargument, and explain how the historians or Clio affected your thinking.</p>
+
+            <div class="field">
+                <label for="finalJudgment">Your final historical judgment</label>
+                <textarea id="finalJudgment" data-save style="min-height: 260px;"></textarea>
+                <div class="counter"><span id="wordCount">0</span> words</div>
+            </div>
+
+            <div class="note-box">
+                <strong>You are not being graded on whether you changed your mind.</strong> You are being graded on how thoughtfully you used evidence and evaluated the different interpretations at the table.
+            </div>
+        </section>
+
+        <section class="step">
+            <h2>Before You Submit</h2>
+            <p>Click <strong>Export Complete Worksheet</strong>. Submit that text file in Canvas along with your complete conversation transcript with Clio.</p>
+        </section>
+    </div>
+
+    <div class="footer">
+        <strong>The Historian's Table</strong><br>
+        <span class="small">Examine the evidence. Form an interpretation. Hear other voices. Test your ideas. Then leave the table with your own historical judgment.</span>
+    </div>
+</div>
+
+<script>
+const STORAGE_KEY = "hist101_great_awakening_historians_table_v1";
+let saveTimer = null;
+
+function getFields() {
+    return Array.from(document.querySelectorAll("[data-save]"));
+}
+
+function collectData() {
+    const data = {};
+    getFields().forEach(field => {
+        data[field.id] = field.value;
+    });
+    return data;
+}
+
+function saveData(showMessage = false) {
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(collectData()));
+        const status = document.getElementById("saveStatus");
+        const now = new Date();
+        status.textContent = "Saved " + now.toLocaleTimeString([], {hour: "numeric", minute: "2-digit"});
+        if (showMessage) {
+            status.textContent = "Saved now at " + now.toLocaleTimeString([], {hour: "numeric", minute: "2-digit"});
+        }
+    } catch (err) {
+        document.getElementById("saveStatus").textContent = "Could not save automatically. Export your work now.";
+    }
+}
+
+function scheduleSave() {
+    document.getElementById("saveStatus").textContent = "Saving...";
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => saveData(false), 350);
+}
+
+function loadData() {
+    try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        const data = JSON.parse(raw);
+        getFields().forEach(field => {
+            if (Object.prototype.hasOwnProperty.call(data, field.id)) {
+                field.value = data[field.id];
+            }
+        });
+        document.getElementById("saveStatus").textContent = "Saved work restored.";
+    } catch (err) {
+        document.getElementById("saveStatus").textContent = "Could not restore saved work.";
+    }
+}
+
+function saveNow() {
+    saveData(true);
+}
+
+function safeFileName(value) {
+    return (value || "student")
+        .trim()
+        .replace(/[^a-z0-9]+/gi, "_")
+        .replace(/^_+|_+$/g, "");
+}
+
+function downloadText(filename, text) {
+    const blob = new Blob([text], {type: "text/plain;charset=utf-8"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+function val(id) {
+    return document.getElementById(id).value.trim();
+}
+
+function exportClio() {
+    saveData(false);
+    const name = safeFileName(val("studentName"));
+    const text = `HIST 101 | THE HISTORIAN'S TABLE
+Great Awakening: Notes for Clio
+Student: ${val("studentName")}
+Section: ${val("courseSection")}
+
+HISTORICAL QUESTION
+To what extent did the First Great Awakening prepare colonists for revolutionary politics by changing how they understood authority, participation, and dissent?
+
+STEP 1: PRIMARY-SOURCE EVIDENCE
+
+BOSTON EVENING-POST: CLOTHES AND BOOK BURNING
+Passage/detail:
+${val("bostonDetail")}
+
+What I think it reveals:
+${val("bostonMeaning")}
+
+JONATHAN EDWARDS: A FAITHFUL NARRATIVE
+Passage/detail:
+${val("faithfulDetail")}
+
+What I think it reveals:
+${val("faithfulMeaning")}
+
+JONATHAN EDWARDS: SINNERS IN THE HANDS OF AN ANGRY GOD
+Passage/detail:
+${val("sinnersDetail")}
+
+What I think it reveals:
+${val("sinnersMeaning")}
+
+JOHN MARRANT
+Passage/detail:
+${val("marrantDetail")}
+
+What I think it reveals:
+${val("marrantMeaning")}
+
+SAMSON OCCOM'S CONVERSION
+Passage/detail:
+${val("occomDetail")}
+
+What I think it reveals:
+${val("occomMeaning")}
+
+GILBERT TENNENT: THE DANGER OF AN UNCONVERTED MINISTRY
+Passage/detail:
+${val("tennentDetail")}
+
+What I think it reveals:
+${val("tennentMeaning")}
+
+STEP 2: MY FIRST INTERPRETATION
+${val("firstInterpretation")}
+
+STEP 3: THE HISTORIANS
+
+Strongest argument connecting the Great Awakening to the Revolution:
+${val("histStrong")}
+
+Strongest reason for caution:
+${val("histCaution")}
+
+What the historians made me notice, reconsider, or question:
+${val("histReconsider")}
+
+INSTRUCTIONS FOR CLIO
+These are my notes and my current interpretation. Join the Historian's Table as a critical participant. Ask me questions that test my interpretation against the assigned evidence and historians. Challenge weak points or suggest evidence I may have overlooked. Ask one question at a time. Do not write my final judgment for me.
+`;
+    downloadText(`Historian_Table_Clio_${name}.txt`, text);
+}
+
+function exportComplete() {
+    saveData(false);
+    const name = safeFileName(val("studentName"));
+    const text = `HIST 101 | THE HISTORIAN'S TABLE
+Was the Great Awakening a Proto-Revolutionary Event?
+Student: ${val("studentName")}
+Section: ${val("courseSection")}
+
+HISTORICAL QUESTION
+To what extent did the First Great Awakening prepare colonists for revolutionary politics by changing how they understood authority, participation, and dissent?
+
+STEP 1: EXAMINE THE EVIDENCE
+
+BOSTON EVENING-POST: CLOTHES AND BOOK BURNING
+Passage/detail:
+${val("bostonDetail")}
+
+What I think it reveals:
+${val("bostonMeaning")}
+
+JONATHAN EDWARDS: A FAITHFUL NARRATIVE
+Passage/detail:
+${val("faithfulDetail")}
+
+What I think it reveals:
+${val("faithfulMeaning")}
+
+JONATHAN EDWARDS: SINNERS IN THE HANDS OF AN ANGRY GOD
+Passage/detail:
+${val("sinnersDetail")}
+
+What I think it reveals:
+${val("sinnersMeaning")}
+
+JOHN MARRANT
+Passage/detail:
+${val("marrantDetail")}
+
+What I think it reveals:
+${val("marrantMeaning")}
+
+SAMSON OCCOM'S CONVERSION
+Passage/detail:
+${val("occomDetail")}
+
+What I think it reveals:
+${val("occomMeaning")}
+
+GILBERT TENNENT: THE DANGER OF AN UNCONVERTED MINISTRY
+Passage/detail:
+${val("tennentDetail")}
+
+What I think it reveals:
+${val("tennentMeaning")}
+
+STEP 2: MY FIRST INTERPRETATION
+${val("firstInterpretation")}
+
+STEP 3: THE HISTORIANS
+
+Strongest argument connecting the Great Awakening to the Revolution:
+${val("histStrong")}
+
+Strongest reason for caution:
+${val("histCaution")}
+
+What the historians made me notice, reconsider, or question:
+${val("histReconsider")}
+
+STEP 4: CLIO
+
+Clio's strongest challenge:
+${val("clioChallenge")}
+
+My response:
+${val("clioResponse")}
+
+STEP 5: MY FINAL HISTORICAL JUDGMENT
+${val("finalJudgment")}
+`;
+    downloadText(`Historian_Table_Complete_${name}.txt`, text);
+}
+
+function resetWorksheet() {
+    const ok = window.confirm("Start over and erase all saved answers from this browser? This cannot be undone.");
+    if (!ok) return;
+    localStorage.removeItem(STORAGE_KEY);
+    getFields().forEach(field => field.value = "");
+    updateWordCount();
+    document.getElementById("saveStatus").textContent = "Worksheet cleared.";
+}
+
+function updateWordCount() {
+    const text = val("finalJudgment");
+    const count = text ? text.split(/\s+/).filter(Boolean).length : 0;
+    document.getElementById("wordCount").textContent = count;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    loadData();
+    getFields().forEach(field => {
+        field.addEventListener("input", scheduleSave);
+    });
+    document.getElementById("finalJudgment").addEventListener("input", updateWordCount);
+    updateWordCount();
+});
+</script>
+</body>
+</html>
