@@ -1,0 +1,8 @@
+# Image Manifest — HIST 101, Ch. 5, Lecture 3: Who Gets to Use the Word Liberty?
+
+| # | Image | Source URL | Slide use | Type | Verified | Interpretive caution |
+|---|-------|-----------|-----------|------|----------|----------------------|
+| 1 | `A Society of Patriotic Ladies at Edenton in North Carolina (BM 2010,7081.3247).jpg` | https://commons.wikimedia.org/wiki/Special:FilePath/A%20Society%20of%20Patriotic%20Ladies%20at%20Edenton%20in%20North%20Carolina%20(BM%202010%2C7081.3247).jpg?width=1000 | Slide 9, "Participation Without Citizenship" | Contemporary hostile satire (mezzotint attributed to Philip Dawe; Sayer & Bennett, London, March 25, 1775; British Museum copy) | ✅ Verified on Wikimedia Commons via web search, July 2026 | A **British mockery** of the Edenton signers, not a portrait of them. The slide reads the ridicule itself as evidence: satire measures how threatening women's public politics appeared. |
+| 2 | `Phillis Wheatley frontispiece.jpg` | https://commons.wikimedia.org/wiki/Special:FilePath/Phillis%20Wheatley%20frontispiece.jpg?width=900 | Slide 10, "Phillis Wheatley Claims the Word" — paired with the Occom letter close-read | Contemporary engraved portrait (frontispiece to *Poems on Various Subjects*, London, 1773; attributed to Scipio Moorhead) | ✅ Verified on Wikimedia Commons via web search, July 2026 | The engraving was made to **certify her authorship** to skeptical readers — itself evidence of the racial politics of publication. Attribution to Moorhead is traditional ("attributed to"); the caption preserves the qualifier. |
+
+**Title slide:** text-only on house charcoal background — no image asset required.
