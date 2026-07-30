@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Historian's Notebook: Chapter 2 — HIST 101</title>
+<style>
+:root{
+  --paper:#F5F1E8;
+  --card:#FFFFFF;
+  --ink:#1F1D1A;
+  --ink-soft:#4F4A46;
+  --charcoal:#1A1A1A;
+  --gold:#D4AF37;
+  --teal:#1B5C57;
+  --bronze:#6E5533;
+  --purple:#5A3E86;
+  --forest:#1B4332;
+  --ruby:#8F2727;
+  --rule:#C9C1B2;
+  --rule-strong:#8C8373;
+  --field-border:#767068;
+  --focus:#0B5FA5;
+  --serif:Georgia,"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --accent:var(--teal);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);font-size:1.0625rem;line-height:1.55;
+}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip-link{position:absolute;left:-9999px;top:0;z-index:200;background:var(--charcoal);color:#FFF;
+  padding:.75rem 1rem;font-family:var(--sans);font-weight:700;text-decoration:none}
+.skip-link:focus{left:.5rem;top:.5rem}
+.wrap{max-width:56rem;margin:0 auto;padding:0 1.1rem 4rem}
+
+/* ---------- Masthead ---------- */
+.masthead{background:var(--charcoal);color:var(--paper);padding:1.6rem 1.1rem 1.35rem;border-bottom:4px solid var(--gold)}
+.masthead .inner{max-width:56rem;margin:0 auto}
+.eyebrow{font-family:var(--sans);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold);margin:0 0 .35rem;font-weight:700}
+h1{font-size:clamp(1.5rem,4.6vw,2.2rem);line-height:1.15;margin:0;color:var(--gold);font-weight:700}
+.subtitle{margin:.5rem 0 0;font-size:clamp(.98rem,2.6vw,1.12rem);font-style:italic;color:#EDE7DA;max-width:42rem}
+
+/* ---------- Toolbar ---------- */
+.toolbar{position:sticky;top:0;z-index:100;background:#FFFDF8;border-bottom:2px solid var(--rule);
+  box-shadow:0 2px 6px rgba(26,26,26,.09);padding:.55rem 1.1rem}
+.toolbar .inner{max-width:56rem;margin:0 auto;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+button,.filebtn{font-family:var(--sans);font-size:.875rem;font-weight:600;min-height:44px;
+  padding:.5rem .85rem;border-radius:6px;border:2px solid var(--charcoal);
+  background:var(--charcoal);color:#FFF;cursor:pointer}
+button.secondary,.filebtn{background:#FFF;color:var(--charcoal)}
+button.danger{background:#FFF;color:var(--ruby);border-color:var(--ruby)}
+button:hover,.filebtn:hover{filter:brightness(1.12)}
+button:focus-visible,.filebtn:focus-within,a:focus-visible,input:focus-visible,
+textarea:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.filebtn{display:inline-flex;align-items:center}
+.filebtn input{position:absolute;width:1px;height:1px;opacity:0}
+#saveStatus{font-family:var(--sans);font-size:.82rem;color:var(--ink-soft)}
+#saveStatus.dirty{color:var(--ruby);font-weight:700}
+
+/* ---------- Jump nav ---------- */
+.jump{font-family:var(--sans);font-size:.8rem;display:flex;flex-wrap:wrap;gap:.4rem;margin:1rem 0 0}
+.jump a{text-decoration:none;color:var(--ink);background:#FFFDF8;border:1px solid var(--rule-strong);
+  border-radius:999px;padding:.42rem .7rem;min-height:34px;display:inline-flex;align-items:center}
+.jump a:hover{background:#F0EADC;text-decoration:underline}
+
+/* ---------- Identity + manage ---------- */
+.identity{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:.75rem;margin:1.25rem 0 0;
+  background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:.9rem 1rem}
+.identity label{font-family:var(--sans);font-size:.75rem;font-weight:700;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:.25rem}
+.identity input{width:100%;font-family:var(--serif);font-size:1rem;padding:.45rem .5rem;
+  border:1px solid var(--field-border);border-radius:5px;background:#FFF;color:var(--ink);min-height:40px}
+details.panel{background:var(--card);border:1px solid var(--rule-strong);border-radius:8px;margin:.9rem 0 0}
+details.panel > summary{font-family:var(--sans);font-size:.85rem;font-weight:700;cursor:pointer;
+  padding:.75rem 1rem;min-height:44px;display:flex;align-items:center;gap:.5rem;border-radius:8px}
+details.panel > summary:hover{background:#FBF8F1}
+details.panel > summary h2{margin:0;font-size:clamp(1.1rem,3vw,1.3rem);color:var(--accent);font-family:var(--serif)}
+details.panel > summary::marker{color:var(--ink-soft)}
+details.panel .panel-body{padding:0 1rem 1rem;border-top:1px solid var(--rule)}
+.btnrow{display:flex;flex-wrap:wrap;gap:.6rem;margin:.9rem 0 0}
+
+/* ---------- Sections ---------- */
+section{margin-top:2.25rem;scroll-margin-top:5.5rem}
+h2{font-size:clamp(1.25rem,3.4vw,1.6rem);line-height:1.2;margin:0 0 .2rem;color:var(--accent);font-weight:700}
+.sect-label{font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-soft);margin:0 0 .3rem}
+h3{font-family:var(--sans);font-size:.8rem;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-soft);margin:1.5rem 0 .5rem}
+h3.atitle{font-family:var(--serif);font-size:1.08rem;font-weight:700;letter-spacing:normal;
+  text-transform:none;color:var(--ink);margin:0 0 .35rem}
+p{margin:.55rem 0}
+.lede{font-size:1.02rem}
+.hairline{height:3px;background:var(--accent);border:0;margin:.55rem 0 1rem;width:4.5rem;border-radius:2px}
+#lec1{--accent:var(--teal)}
+#lec2{--accent:var(--bronze)}
+#lec3{--accent:var(--purple)}
+#lec4{--accent:var(--forest)}
+.lecture{border-top:2px solid var(--rule);padding-top:1.6rem}
+
+/* ---------- Callouts ---------- */
+.inquiry{background:var(--card);border:1px solid var(--rule);border-left:6px solid var(--accent);
+  border-radius:8px;padding:1rem 1.15rem;margin:1rem 0}
+.inquiry .q{font-size:clamp(1.05rem,2.9vw,1.25rem);font-weight:700;margin:.15rem 0 .5rem;line-height:1.35}
+.tag{font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--accent);display:block;margin-bottom:.15rem}
+.argument{background:#FFFDF8;border:1px dashed var(--field-border);border-radius:8px;padding:.8rem 1rem;margin:1rem 0}
+.argument .tag{color:var(--ink-soft)}
+.howto{background:var(--card);border:1px solid var(--rule);border-left:6px solid var(--gold);
+  border-radius:8px;padding:.9rem 1.1rem;margin:1.25rem 0 0}
+.map{list-style:none;margin:1rem 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:.7rem}
+.map li{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:.75rem .85rem}
+.map .n{font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-soft);display:block}
+.map .t{font-weight:700;display:block;margin:.15rem 0 .2rem}
+.map .m{font-size:.92rem;color:var(--ink-soft);display:block}
+ul.cues{margin:.4rem 0 0;padding-left:1.35rem}
+ul.cues li{margin:.4rem 0}
+.online{font-family:var(--sans);font-size:.82rem;color:var(--ink-soft);
+  border-top:1px dotted var(--rule);margin-top:1.4rem;padding-top:.6rem}
+
+/* ---------- Deck stages / note areas ---------- */
+.stage{margin:1.5rem 0}
+.stage-head{font-family:var(--sans);font-size:.75rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--accent);margin:0}
+.stage-sub{font-style:italic;color:var(--ink-soft);margin:.15rem 0 .7rem}
+
+/* ---------- Fields ---------- */
+.field{margin:.65rem 0 1.1rem}
+.field > label,legend.flabel{font-family:var(--sans);font-size:.85rem;font-weight:700;
+  color:var(--ink);display:block;margin-bottom:.3rem}
+.hint{font-family:var(--sans);font-size:.8rem;color:var(--ink-soft);margin:.15rem 0 .4rem}
+.hint b{color:var(--accent)}
+.invite{font-family:var(--serif);font-style:italic;font-size:.97rem;color:var(--ink-soft);margin:.2rem 0 .35rem}
+textarea{width:100%;font-family:var(--serif);font-size:1rem;line-height:1.6;color:var(--ink);
+  background:#FFF;border:1px solid var(--field-border);border-radius:6px;
+  padding:.6rem .7rem;resize:vertical;overflow:hidden;display:block}
+textarea.xs{min-height:3.1rem}
+textarea.sm{min-height:4.5rem}
+textarea.md{min-height:6rem}
+textarea.notes{min-height:9rem}
+input.line{width:100%;font-family:var(--serif);font-size:1rem;padding:.5rem .6rem;min-height:44px;
+  border:1px solid var(--field-border);border-radius:6px;background:#FFF;color:var(--ink)}
+select{font-family:var(--serif);font-size:1rem;padding:.5rem .55rem;min-height:44px;
+  border:1px solid var(--field-border);border-radius:6px;background:#FFF;color:var(--ink);max-width:100%}
+fieldset{border:0;padding:0;margin:0}
+fieldset.choices{margin:.65rem 0 1rem}
+.choice{display:flex;align-items:flex-start;gap:.6rem;background:#FFF;border:1px solid var(--rule-strong);
+  border-radius:6px;padding:.6rem .7rem;margin:.4rem 0;cursor:pointer;min-height:44px}
+.choice:hover{background:#FBF8F1}
+.choice input{margin:.25rem 0 0;width:1.2rem;height:1.2rem;flex:0 0 auto;accent-color:var(--accent)}
+.choice .ctext{flex:1}
+.choice .ctext b{display:block}
+
+/* ---------- Activity cards ---------- */
+.activity{background:var(--card);border:1px solid var(--rule);border-top:5px solid var(--ruby);
+  border-radius:8px;padding:1rem 1.1rem 1.15rem;margin:1.35rem 0}
+.activity .kicker{font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ruby);margin-bottom:.35rem}
+.activity .directions{margin:.3rem 0 .8rem}
+.source{background:#FBF8F1;border:1px solid var(--rule);border-radius:6px;padding:.7rem .85rem;margin:.7rem 0}
+.source .tag{color:var(--ink-soft)}
+.source ul{margin:.35rem 0 0;padding-left:1.25rem}
+.source li{margin:.2rem 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem}
+.pairgrid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem 1rem;align-items:end}
+@media (max-width:44rem){.grid2,.grid3,.pairgrid{grid-template-columns:1fr}}
+.colhead{font-family:var(--sans);font-size:.78rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.08em;color:var(--accent);margin:0 0 .2rem}
+
+/* ---------- Compact comparison table ---------- */
+table.compare{width:100%;border-collapse:collapse;table-layout:fixed;margin:.8rem 0 0}
+table.compare caption{text-align:left;font-family:var(--sans);font-size:.85rem;font-weight:700;padding:0 0 .4rem}
+table.compare th,table.compare td{border:1px solid var(--rule-strong);padding:.45rem .5rem;vertical-align:top;text-align:left}
+table.compare thead th{font-family:var(--sans);font-size:.78rem;text-transform:uppercase;
+  letter-spacing:.06em;color:var(--accent);background:#FBF8F1}
+table.compare tbody th{font-family:var(--sans);font-size:.85rem;width:28%;background:#FBF8F1}
+table.compare textarea{min-height:3.1rem;border:0;padding:.2rem .1rem;border-radius:3px}
+table.compare textarea:focus-visible{outline-offset:0}
+@media (max-width:44rem){
+  table.compare thead{display:none}
+  table.compare,table.compare tbody,table.compare tr,table.compare th,table.compare td{display:block;width:auto}
+  table.compare tr{border:1px solid var(--rule-strong);border-radius:6px;margin:.6rem 0;padding:.4rem}
+  table.compare th,table.compare td{border:0;padding:.25rem .3rem}
+  table.compare td::before{content:attr(data-label);display:block;font-family:var(--sans);
+    font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--accent)}
+  table.compare textarea{border:1px solid var(--field-border);padding:.5rem .6rem}
+}
+
+/* ---------- Terms + review ---------- */
+.terms{list-style:none;margin:.8rem 0 0;padding:0;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:.5rem}
+.terms li{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:.6rem .75rem}
+.terms b{display:block}
+.terms span{font-family:var(--sans);font-size:.75rem;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--ink-soft)}
+.org-row{background:var(--card);border:1px solid var(--rule);border-left:6px solid var(--accent);
+  border-radius:8px;padding:.85rem 1rem;margin:.8rem 0}
+#review .org-row:nth-of-type(1){border-left-color:var(--teal)}
+#review .org-row:nth-of-type(2){border-left-color:var(--bronze)}
+#review .org-row:nth-of-type(3){border-left-color:var(--purple)}
+#review .org-row:nth-of-type(4){border-left-color:var(--forest)}
+.org-row .rowhead{font-weight:700;margin:0 0 .35rem}
+.org-row dl{margin:0 0 .6rem;font-size:.95rem}
+.org-row dt{font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink-soft);margin-top:.35rem}
+.org-row dd{margin:.05rem 0 0}
+.checklist{list-style:none;margin:.8rem 0 0;padding:0}
+.checklist li{margin:.5rem 0}
+.checklist label{display:flex;gap:.7rem;align-items:flex-start;background:var(--card);
+  border:1px solid var(--rule-strong);border-radius:6px;padding:.7rem .85rem;cursor:pointer;min-height:44px}
+.checklist label:hover{background:#FBF8F1}
+.checklist input{margin:.2rem 0 0;width:1.25rem;height:1.25rem;flex:0 0 auto;accent-color:var(--teal)}
+.closing{background:var(--card);border:1px solid var(--rule);border-left:6px solid var(--gold);
+  border-radius:8px;padding:1rem 1.15rem;margin-top:2rem}
+.footnote{font-family:var(--sans);font-size:.8rem;color:var(--ink-soft);margin-top:2rem;
+  border-top:1px solid var(--rule);padding-top:.8rem}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+@media (max-width:44rem),(max-height:30rem){
+  .toolbar{position:static}
+  section{scroll-margin-top:1rem}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#inquiry">Skip to the notebook</a>
+
+<header class="masthead">
+  <div class="inner">
+    <p class="eyebrow">HIST 101 &middot; U.S. History to 1877 &middot; Chapter 2</p>
+    <h1>Historian's Notebook: Chapter&nbsp;2</h1>
+    <p class="subtitle">How England built colonies it never planned &mdash; and never fully controlled</p>
+  </div>
+</header>
+
+<div class="toolbar" role="region" aria-label="Notebook controls">
+  <div class="inner">
+    <button type="button" id="btnSave">Save to This Device</button>
+    <p id="saveStatus" role="status" aria-live="polite">Nothing saved yet</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <nav class="jump" aria-label="Jump to a section">
+    <a href="#inquiry">Chapter Inquiry</a>
+    <a href="#lec1">1. Why Colonize?</a>
+    <a href="#lec2">2. Why Different?</a>
+    <a href="#lec3">3. Puritan Society</a>
+    <a href="#lec4">4. Who Controlled?</a>
+    <a href="#terms">Terms</a>
+    <a href="#review">Optional Review</a>
+  </nav>
+
+  <div class="identity">
+    <div>
+      <label for="meta-name">Name</label>
+      <input type="text" id="meta-name" name="meta-name" autocomplete="name">
+    </div>
+    <div>
+      <label for="meta-section">Section</label>
+      <input type="text" id="meta-section" name="meta-section">
+    </div>
+  </div>
+
+  <div class="howto">
+    <span class="tag">How to use this notebook</span>
+    <p>Complete activity spaces when prompted. Use the note areas only for evidence, explanations,
+    examples, and questions that will help you reconstruct the lecture later. Your notes are not
+    checked for completeness.</p>
+  </div>
+
+  <details class="panel">
+    <summary>Manage Saved Work</summary>
+    <div class="panel-body">
+      <p class="hint">Your work saves automatically in this browser on this device. It is not sent
+      anywhere and does not follow you to another computer or phone. A backup file lets you move your
+      work or keep a copy.</p>
+      <div class="btnrow">
+        <button type="button" class="secondary" id="btnBackup">Download Backup</button>
+        <label class="filebtn" for="fileRestore">Restore Backup
+          <input type="file" id="fileRestore" accept=".json,application/json">
+        </label>
+        <button type="button" class="danger" id="btnClear">Clear Saved Work</button>
+      </div>
+    </div>
+  </details>
+
+  <!-- ============ CHAPTER INQUIRY ============ -->
+  <section id="inquiry" aria-labelledby="inquiry-h">
+    <p class="sect-label">Start here</p>
+    <h2 id="inquiry-h">Chapter Inquiry</h2>
+    <hr class="hairline">
+
+    <div class="inquiry">
+      <span class="tag">The question this chapter answers</span>
+      <p class="q">Why did one nation's colonizing ventures produce several different Americas &mdash; and no single authority over any of them?</p>
+      <p>Lecture 1 argues that colonization happened where separate motives converged, not because England
+      followed a plan. Lectures 2 and 3 show what happened next: goals, environments, migration streams, and
+      labor systems turned English settlers into genuinely different colonial societies. Lecture 4 then asks who
+      had the right to govern the result &mdash; and finds several claimants and no referee.</p>
+    </div>
+
+    <h3>The lecture map</h3>
+    <ol class="map">
+      <li><span class="n">Lecture 1</span><span class="t">Why Colonize?</span><span class="m">Convergence, not design</span></li>
+      <li><span class="n">Lecture 2</span><span class="t">Why Did the Colonies Become Different?</span><span class="m">Variables, not motives alone</span></li>
+      <li><span class="n">Lecture 3</span><span class="t">Building a Puritan Society</span><span class="m">Purpose, institutions, limits</span></li>
+      <li><span class="n">Lecture 4</span><span class="t">Who Controlled America?</span><span class="m">Authority claimed from three directions</span></li>
+    </ol>
+  </section>
+
+  <!-- ============ LECTURE 1 ============ -->
+  <section id="lec1" class="lecture" aria-labelledby="lec1-h">
+    <p class="sect-label">Lecture 1</p>
+    <h2 id="lec1-h">Why Colonize?</h2>
+    <hr class="hairline">
+
+    <div class="inquiry">
+      <span class="tag">Guiding question</span>
+      <p class="q">Why did England begin establishing permanent colonies in North America?</p>
+    </div>
+    <div class="argument">
+      <span class="tag">Argument to watch for</span>
+      <p>England colonized where several separate motives converged &mdash; and wanting a colony turned out to be very different from being able to keep one.</p>
+    </div>
+<div class="stage">
+      <p class="stage-head">Section I &middot; Religion Remade England</p>
+      <p class="stage-sub">What happens to a country when it changes its church?</p>
+      <div class="field">
+        <label for="l1-notes-a">Opening Notes</label>
+        <p class="invite" id="l1-notes-a-inv">Notes go in this box. Fragments are fine &mdash; nobody is grading your handwriting.</p>
+        <p class="hint" id="l1-notes-a-cue"><b>Listen for:</b> How did four monarchs in one generation make being English and being Protestant hard to separate? Why did Spain become the thing England defined itself against?</p>
+        <textarea id="l1-notes-a" name="l1-notes-a" class="notes" aria-describedby="l1-notes-a-inv l1-notes-a-cue"></textarea>
+      </div>
+    </div>
+
+    <div class="activity">
+      <p class="kicker">&#9208; Pause &amp; Reflect</p>
+      <h3 class="atitle">Which connection between religion and colonization is strongest?</h3>
+      <p class="directions">Choose one. Defend it in a sentence.</p>
+      <fieldset class="choices">
+        <legend class="flabel">Your choice</legend>
+        <label class="choice" for="l1a1-a"><input type="radio" name="l1a1-choice" id="l1a1-a" value="A. Escape religious conflict"><span class="ctext"><b>A.</b> Escape religious conflict</span></label>
+        <label class="choice" for="l1a1-b"><input type="radio" name="l1a1-choice" id="l1a1-b" value="B. Spread Protestant influence"><span class="ctext"><b>B.</b> Spread Protestant influence</span></label>
+        <label class="choice" for="l1a1-c"><input type="radio" name="l1a1-choice" id="l1a1-c" value="C. Challenge Catholic Spain"><span class="ctext"><b>C.</b> Challenge Catholic Spain</span></label>
+      </fieldset>
+      <div class="field" style="margin-bottom:0">
+        <label for="l1a1-defend">Defend your choice</label>
+        <textarea id="l1a1-defend" name="l1a1-defend" class="sm"></textarea>
+      </div>
+    </div>
+
+    <div class="stage">
+      <p class="stage-head">Section II &middot; Rivalry and Profit Pull England Outward</p>
+      <p class="stage-sub">Why chase an empire that someone else has already built?</p>
+      <div class="field">
+        <label for="l1-notes-b">Evidence and Explanation</label>
+        <p class="invite" id="l1-notes-b-inv">Your space. Arrows, abbreviations, and questionable spelling all welcome.</p>
+        <p class="hint" id="l1-notes-b-cue"><b>Listen for:</b> Why was Spain's head start both a threat and an opportunity? How does one privateer earn three different verdicts at once? Where does 1588 actually belong in this story?</p>
+        <textarea id="l1-notes-b" name="l1-notes-b" class="notes" aria-describedby="l1-notes-b-inv l1-notes-b-cue"></textarea>
+      </div>
+    </div>
+
+    <div class="activity">
+      <p class="kicker">&#9208; Pause &amp; Predict</p>
+      <h3 class="atitle">From raiding to lasting wealth</h3>
+      <div class="source">
+        <span class="tag">What you know</span>
+        <ul>
+          <li>England can raid Spanish shipping successfully.</li>
+          <li>England wants lasting wealth from the Atlantic.</li>
+        </ul>
+      </div>
+      <div class="field" style="margin-bottom:0">
+        <label for="l1a2-predict">What would England have to do differently to get it?</label>
+        <textarea id="l1a2-predict" name="l1a2-predict" class="sm"></textarea>
+      </div>
+    </div>
+
+    <div class="stage">
+      <p class="stage-head">Section III &middot; Wanting a Colony Is Not Having One</p>
+      <p class="stage-sub">What does a permanent colony actually require?</p>
+      <div class="field">
+        <label for="l1-notes-c">Capacity and People</label>
+        <p class="invite" id="l1-notes-c-inv">Stash anything Future You will want. Future You forgets fast.</p>
+        <p class="hint" id="l1-notes-c-cue"><b>Listen for:</b> What does a colony need that a raid does not? Why is Roanoke a failure of capacity rather than a mystery? And why would anyone leave England at all?</p>
+        <textarea id="l1-notes-c" name="l1-notes-c" class="notes" aria-describedby="l1-notes-c-inv l1-notes-c-cue"></textarea>
+      </div>
+    </div>
+
+    <div class="activity">
+      <p class="kicker">&#9208; Different People, Different Motives</p>
+      <h3 class="atitle">So what was <em>the</em> reason England colonized?</h3>
+      <p class="directions">Match each person to a motive. Then complicate your own matches. Then answer the question.</p>
+      <div class="pairgrid">
+        <div>
+          <label class="colhead" for="l1a3-merchant">A London merchant</label>
+          <select id="l1a3-merchant" name="l1a3-merchant">
+            <option value="">Choose&hellip;</option><option>Religion</option><option>Rivalry</option><option>Profit</option><option>Opportunity</option>
+          </select>
+        </div>
+        <div>
+          <label class="colhead" for="l1a3-crown">The English Crown</label>
+          <select id="l1a3-crown" name="l1a3-crown">
+            <option value="">Choose&hellip;</option><option>Religion</option><option>Rivalry</option><option>Profit</option><option>Opportunity</option>
+          </select>
+        </div>
+        <div>
+          <label class="colhead" for="l1a3-puritan">A Puritan family</label>
+          <select id="l1a3-puritan" name="l1a3-puritan">
+            <option value="">Choose&hellip;</option><option>Religion</option><option>Rivalry</option><option>Profit</option><option>Opportunity</option>
+          </select>
+        </div>
+        <div>
+          <label class="colhead" for="l1a3-migrant">A young migrant</label>
+          <select id="l1a3-migrant" name="l1a3-migrant">
+            <option value="">Choose&hellip;</option><option>Religion</option><option>Rivalry</option><option>Profit</option><option>Opportunity</option>
+          </select>
+        </div>
+      </div>
+      <div class="field" style="margin-top:1rem">
+        <label for="l1a3-complicate">Now complicate it</label>
+        <p class="hint">Could the merchant also want Spain weakened? Could the Puritan family also want land? Could the Crown also care about trade?</p>
+        <textarea id="l1a3-complicate" name="l1a3-complicate" class="sm"></textarea>
+      </div>
+      <div class="field" style="margin-bottom:0">
+        <label for="l1a3-answer">So what was <em>the</em> reason England colonized?</label>
+        <textarea id="l1a3-answer" name="l1a3-answer" class="sm"></textarea>
+      </div>
+    </div>
+
+    <p class="online">Online hour &mdash; Independent Study: Why Roanoke failed &middot; The case made for colonies &middot; The Irish rehearsal &middot; Leaving England.</p>
+  </section>
+
+  <!-- ============ LECTURE 2 ============ -->
+  <section id="lec2" class="lecture" aria-labelledby="lec2-h">
+    <p class="sect-label">Lecture 2</p>
+    <h2 id="lec2-h">Why Did the Colonies Become Different?</h2>
+    <hr class="hairline">
+
+    <div class="inquiry">
+      <span class="tag">Guiding question</span>
+      <p class="q">If the settlers were English, why didn't all English colonies become the same kind of society?</p>
+    </div>
+    <div class="argument">
+      <span class="tag">Argument to watch for</span>
+      <p>Colonists did not reproduce England in America; goals, environment, migration, and labor turned English settlers into different colonial societies.</p>
+    </div>
+<div class="stage">
+      <p class="stage-head">Section I &middot; Virginia Began as a Business</p>
+      <p class="stage-sub">What happens when a colony is founded to make money?</p>
+      <div class="field">
+        <label for="l2-notes-a">Opening Notes</label>
+        <p class="invite" id="l2-notes-a-inv">Type here. Full sentences strictly optional.</p>
+        <p class="hint" id="l2-notes-a-cue"><b>Listen for:</b> What made a colony organized as an investment so badly organized for survival? And what was Tsenacommacah &mdash; what did the English actually walk into in 1607?</p>
+        <textarea id="l2-notes-a" name="l2-notes-a" class="notes" aria-describedby="l2-notes-a-inv l2-notes-a-cue"></textarea>
+      </div>
+    </div>
+
+    <div class="activity">
+      <p class="kicker">&#9208; Pause &amp; Reflect</p>
+      <h3 class="atitle">Two readings of the same settlement</h3>
+      <p class="directions">From the Virginia Company's perspective, Jamestown is an investment.</p>
+      <div class="field" style="margin-bottom:0">
+        <label for="l2a1-powhatan">From Powhatan's perspective, what is Jamestown?</label>
+        <textarea id="l2a1-powhatan" name="l2a1-powhatan" class="sm"></textarea>
+      </div>
+    </div>
+
+    <div class="stage">
+      <p class="stage-head">Section II &middot; Tobacco Changes Everything</p>
+      <p class="stage-sub">The relationship becomes far more dangerous once Virginia learns how to make money.</p>
+      <div class="field">
+        <label for="l2-notes-b">Evidence and Explanation</label>
+        <p class="invite" id="l2-notes-b-inv">Scribble zone. Arrows encouraged, diagrams even better.</p>
+        <p class="hint" id="l2-notes-b-cue"><b>Listen for:</b> How does one crop turn into six consequences? Why did economic success make conflict with Powhatan communities worse rather than better?</p>
+        <textarea id="l2-notes-b" name="l2-notes-b" class="notes" aria-describedby="l2-notes-b-inv l2-notes-b-cue"></textarea>
+      </div>
+    </div>
+
+    <div class="activity">
+      <p class="kicker">&#9208; Pause &amp; Predict</p>
+      <h3 class="atitle">One profitable crop</h3>
+      <div class="source">
+        <span class="tag">The situation</span>
+        <ul>
+          <li>A crop becomes enormously profitable.</li>
+          <li>It requires a great deal of land.</li>
+          <li>It requires a great many workers.</li>
+        </ul>
+      </div>
+      <div class="field" style="margin-bottom:0">
+        <label for="l2a2-predict">What problems would you predict Virginia faces next?</label>
+        <textarea id="l2a2-predict" name="l2a2-predict" class="sm"></textarea>
+      </div>
+    </div>
+
+    <div class="stage">
+      <p class="stage-head">Section III &middot; Labor Systems Build Different Societies</p>
+      <p class="stage-sub">Who is going to do the work?</p>
+      <div class="field">
+        <label for="l2-notes-c">Labor and Comparison Notes</label>
+        <p class="invite" id="l2-notes-c-inv">Big box, on purpose. Park whatever is worth keeping.</p>
+        <p class="hint" id="l2-notes-c-cue"><b>Listen for:</b> What separated indentured servitude from slavery? How did colonial law make slavery lifelong, inheritable, and racial? How did Barbados run the same variables harder?</p>
+        <textarea id="l2-notes-c" name="l2-notes-c" class="notes" aria-describedby="l2-notes-c-inv l2-notes-c-cue"></textarea>
+      </div>
+    </div>
+
+    <div class="activity">
+      <p class="kicker">&#9208; Predict the Colony</p>
+      <h3 class="atitle">After thirty years, what differences would you expect?</h3>
+      <div class="source">
+        <span class="tag">Two colonies</span>
+        <div class="grid2">
+          <div>
+            <p class="colhead">Colony A</p>
+            <ul><li>Warm climate</li><li>Profitable export crop</li><li>Mostly young migrants</li><li>Constant demand for workers</li><li>Settlement spreads outward for land</li></ul>
+          </div>
+          <div>
+            <p class="colhead">Colony B</p>
+            <ul><li>Cooler climate</li><li>More family migration</li><li>Farms and towns</li><li>Less dependence on one export crop</li></ul>
+          </div>
+        </div>
+      </div>
+      <table class="compare">
+        <caption>One short prediction per cell.</caption>
+        <thead>
+          <tr><th scope="col">Difference</th><th scope="col">Colony A</th><th scope="col">Colony B</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Labor</th>
+            <td data-label="Colony A"><textarea id="l2a3-a-labor" name="l2a3-a-labor" aria-label="Colony A — labor"></textarea></td>
+            <td data-label="Colony B"><textarea id="l2a3-b-labor" name="l2a3-b-labor" aria-label="Colony B — labor"></textarea></td>
+          </tr>
+          <tr>
+            <th scope="row">Settlement and population</th>
+            <td data-label="Colony A"><textarea id="l2a3-a-settle" name="l2a3-a-settle" aria-label="Colony A — settlement and population"></textarea></td>
+            <td data-label="Colony B"><textarea id="l2a3-b-settle" name="l2a3-b-settle" aria-label="Colony B — settlement and population"></textarea></td>
+          </tr>
+          <tr>
+            <th scope="row">Land and wealth</th>
+            <td data-label="Colony A"><textarea id="l2a3-a-wealth" name="l2a3-a-wealth" aria-label="Colony A — land and wealth"></textarea></td>
+            <td data-label="Colony B"><textarea id="l2a3-b-wealth" name="l2a3-b-wealth" aria-label="Colony B — land and wealth"></textarea></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="field" style="margin:1rem 0 0">
+        <label for="l2a3-conclusion">Which variable did the most work in your prediction?</label>
+        <textarea id="l2a3-conclusion" name="l2a3-conclusion" class="xs"></textarea>
+      </div>
+    </div>
+
+    <p class="online">Online hour &mdash; Independent Study: Jamestown's near-collapse &middot; The Anglo-Powhatan Wars &middot; 1619 and the historians &middot; The Barbados sugar revolution.</p>
+  </section>
+
+  <!-- ============ LECTURE 3 ============ -->
+  <section id="lec3" class="lecture" aria-labelledby="lec3-h">
+    <p class="sect-label">Lecture 3</p>
+    <h2 id="lec3-h">Building a Puritan Society</h2>
+    <hr class="hairline">
+
+    <div class="inquiry">
+      <span class="tag">Guiding question</span>
+      <p class="q">What happens when people cross an ocean not merely to practice a religion, but to organize an entire society around it?</p>
+    </div>
+    <div class="argument">
+      <span class="tag">Argument to watch for</span>
+      <p>Puritans crossed to build a godly community rather than simply to worship freely &mdash; which is why dissent inside that community proved so hard to tolerate.</p>
+    </div>
+<div class="stage">
+      <p class="stage-head">Section I &middot; A Religious Society, Not Just a Refuge</p>
+      <p class="stage-sub">What did Pilgrims and Puritans actually want?</p>
+      <div class="field">
+        <label for="l3-notes-a">Purpose Notes</label>
+        <p class="invite" id="l3-notes-a-inv">Notes here. Nobody reads this box but you.</p>
+        <p class="hint" id="l3-notes-a-cue"><b>Listen for:</b> What separates Separatist Pilgrims from non-separating Puritans, and how small was Plymouth really? Why was the Mayflower Compact an urgent legal fix rather than the birth of democracy? What did the Wampanoag alliance offer each side?</p>
+        <textarea id="l3-notes-a" name="l3-notes-a" class="notes" aria-describedby="l3-notes-a-inv l3-notes-a-cue"></textarea>
+      </div>
+    </div>
+
+    <div class="activity">
+      <p class="kicker">&#9208; Pause &amp; Reflect</p>
+      <h3 class="atitle">An alliance, read from the other side</h3>
+      <p class="directions">Plymouth needed the Wampanoag alliance simply to survive its first years.</p>
+      <div class="field" style="margin-bottom:0">
+        <label for="l3a1-wampanoag">From the Wampanoag's perspective, what did this alliance offer <em>them</em>?</label>
+        <textarea id="l3a1-wampanoag" name="l3a1-wampanoag" class="sm"></textarea>
+      </div>
+    </div>
+
+    <div class="stage">
+      <p class="stage-head">Section II &middot; Belief Built the Society</p>
+      <p class="stage-sub">What does a society look like when it is organized around religious purpose?</p>
+      <div class="field">
+        <label for="l3-notes-b">Institutions Notes</label>
+        <p class="invite" id="l3-notes-b-inv">Free real estate for anything worth remembering.</p>
+        <p class="hint" id="l3-notes-b-cue"><b>Listen for:</b> What did Winthrop carry across the ocean besides people? Why is a city upon a hill a warning rather than a boast? How far does covenant reach &mdash; family, congregation, town, school, government?</p>
+        <textarea id="l3-notes-b" name="l3-notes-b" class="notes" aria-describedby="l3-notes-b-inv l3-notes-b-cue"></textarea>
+      </div>
+    </div>
+
+    <div class="activity">
+      <p class="kicker">&#9208; Build the Society</p>
+      <h3 class="atitle">You believe God will judge your whole community by how faithfully it lives.</h3>
+      <p class="directions">Which part of life would religion probably shape first?</p>
+      <fieldset class="choices">
+        <legend class="flabel">Choose one</legend>
+        <label class="choice" for="l3a2-family"><input type="radio" name="l3a2-first" id="l3a2-family" value="Family"><span class="ctext">Family</span></label>
+        <label class="choice" for="l3a2-school"><input type="radio" name="l3a2-first" id="l3a2-school" value="School"><span class="ctext">School</span></label>
+        <label class="choice" for="l3a2-govt"><input type="radio" name="l3a2-first" id="l3a2-govt" value="Government"><span class="ctext">Government</span></label>
+        <label class="choice" for="l3a2-public"><input type="radio" name="l3a2-first" id="l3a2-public" value="Public behavior"><span class="ctext">Public behavior</span></label>
+      </fieldset>
+      <div class="field" style="margin-bottom:0">
+        <label for="l3a2-why">Why that one first?</label>
+        <textarea id="l3a2-why" name="l3a2-why" class="xs"></textarea>
+      </div>
+    </div>
+
+    <div class="stage">
+      <p class="stage-head">Section III &middot; Truth Had Limits</p>
+      <p class="stage-sub">What happens when someone inside the community says the community itself is wrong?</p>
+      <div class="field">
+        <label for="l3-notes-c">Limits Notes</label>
+        <p class="invite" id="l3-notes-c-inv">Write it down before it evaporates.</p>
+        <p class="hint" id="l3-notes-c-cue"><b>Listen for:</b> What did Williams actually argue about conscience and coerced worship? What made Hutchinson's claim to direct revelation so dangerous? What does Rhode Island prove by contrast?</p>
+        <textarea id="l3-notes-c" name="l3-notes-c" class="notes" aria-describedby="l3-notes-c-inv l3-notes-c-cue"></textarea>
+      </div>
+    </div>
+
+    <div class="activity">
+      <p class="kicker">&#9208; Freedom or Toleration?</p>
+      <h3 class="atitle">Which better describes Massachusetts Bay?</h3>
+      <div class="source">
+        <span class="tag">Hold these apart</span>
+        <div class="grid2">
+          <div><p class="colhead">Religious freedom</p><p>Our community should be free to practice our religion.</p></div>
+          <div><p class="colhead">Religious toleration</p><p>People who disagree should also be free to practice theirs.</p></div>
+        </div>
+      </div>
+      <fieldset class="choices">
+        <legend class="flabel">Massachusetts Bay is better described by</legend>
+        <label class="choice" for="l3a3-freedom"><input type="radio" name="l3a3-describes" id="l3a3-freedom" value="Religious freedom"><span class="ctext">Religious freedom</span></label>
+        <label class="choice" for="l3a3-toleration"><input type="radio" name="l3a3-describes" id="l3a3-toleration" value="Religious toleration"><span class="ctext">Religious toleration</span></label>
+      </fieldset>
+      <div class="field" style="margin-bottom:0">
+        <label for="l3a3-hypocrites">Were the Puritans hypocrites?</label>
+        <textarea id="l3a3-hypocrites" name="l3a3-hypocrites" class="sm"></textarea>
+      </div>
+    </div>
+
+    <p class="online">Online hour &mdash; Independent Study: The Mayflower Compact myth &middot; The Antinomian Controversy reconsidered &middot; The Half-Way Covenant &middot; Missions and the praying towns.</p>
+  </section>
+
+  <!-- ============ LECTURE 4 ============ -->
+  <section id="lec4" class="lecture" aria-labelledby="lec4-h">
+    <p class="sect-label">Lecture 4</p>
+    <h2 id="lec4-h">Who Controlled America?</h2>
+    <hr class="hairline">
+
+    <div class="inquiry">
+      <span class="tag">Guiding question</span>
+      <p class="q">As English settlements expanded, who had the right to govern people and control land?</p>
+    </div>
+    <div class="argument">
+      <span class="tag">Argument to watch for</span>
+      <p>Seventeenth-century English America had several claimants to legitimate authority and no single center able to settle their conflicts.</p>
+    </div>
+<div class="stage">
+      <p class="stage-head">Section I &middot; Representation</p>
+      <p class="stage-sub">Does electing representatives make a society democratic?</p>
+      <div class="field">
+        <label for="l4-notes-a">Representation Notes</label>
+        <p class="invite" id="l4-notes-a-inv">Your box, your rules. Bullet points are a perfectly respectable life choice.</p>
+        <p class="hint" id="l4-notes-a-cue"><b>Listen for:</b> What did colonists bring from England, and what did distance add? What do the House of Burgesses, the Mayflower Compact, and the town meeting have in common? Who was shut out of all three?</p>
+        <textarea id="l4-notes-a" name="l4-notes-a" class="notes" aria-describedby="l4-notes-a-inv l4-notes-a-cue"></textarea>
+      </div>
+    </div>
+
+    <div class="activity">
+      <p class="kicker">&#9208; Pause &amp; Reflect</p>
+      <h3 class="atitle">Were the English colonies becoming democratic?</h3>
+      <p class="directions">Choose one and defend it.</p>
+      <fieldset class="choices">
+        <legend class="flabel">Your choice</legend>
+        <label class="choice" for="l4a1-yes"><input type="radio" name="l4a1-choice" id="l4a1-yes" value="Yes"><span class="ctext">Yes</span></label>
+        <label class="choice" for="l4a1-no"><input type="radio" name="l4a1-choice" id="l4a1-no" value="No"><span class="ctext">No</span></label>
+        <label class="choice" for="l4a1-sort"><input type="radio" name="l4a1-choice" id="l4a1-sort" value="Sort of"><span class="ctext">Sort of</span></label>
+      </fieldset>
+      <div class="field" style="margin-bottom:0">
+        <label for="l4a1-defend">Defend it with specific evidence</label>
+        <textarea id="l4a1-defend" name="l4a1-defend" class="sm"></textarea>
+      </div>
+    </div>
+
+    <div class="stage">
+      <p class="stage-head">Section II &middot; Sovereignty</p>
+      <p class="stage-sub">What kind of political world did English settlers enter?</p>
+      <div class="field">
+        <label for="l4-notes-b">Sovereignty Notes</label>
+        <p class="invite" id="l4-notes-b-inv">Toss the good stuff in here.</p>
+        <p class="hint" id="l4-notes-b-cue"><b>Listen for:</b> Whose territories, councils, and diplomacy were already here? How did one agreement with Ousamequin get read two ways? Why is the Pequot War not a story of English versus Indians?</p>
+        <textarea id="l4-notes-b" name="l4-notes-b" class="notes" aria-describedby="l4-notes-b-inv l4-notes-b-cue"></textarea>
+      </div>
+    </div>
+
+    <div class="activity">
+      <p class="kicker">&#9208; Pause &amp; Predict</p>
+      <h3 class="atitle">Two expanding claims, one piece of ground</h3>
+      <div class="source">
+        <span class="tag">The situation</span>
+        <ul>
+          <li>English settlements keep growing.</li>
+          <li>Native nations keep governing their homelands.</li>
+          <li>Both need the same land.</li>
+        </ul>
+      </div>
+      <div class="field" style="margin-bottom:0">
+        <label for="l4a2-hardest">Which conflict would be hardest to settle &mdash; and why?</label>
+        <textarea id="l4a2-hardest" name="l4a2-hardest" class="sm"></textarea>
+      </div>
+    </div>
+
+    <div class="stage">
+      <p class="stage-head">Section III &middot; Empire</p>
+      <p class="stage-sub">What happens when the government that supposedly rules you collapses?</p>
+      <div class="field">
+        <label for="l4-notes-c">Empire Notes</label>
+        <p class="invite" id="l4-notes-c-inv">Last note box of the chapter. Send it off with something useful.</p>
+        <p class="hint" id="l4-notes-c-cue"><b>Listen for:</b> What happened to imperial supervision while England fought a civil war and executed its king? After 1660, where did the Crown say assemblies came from, and where did colonists say they came from? What were proprietors handed six colonies to do?</p>
+        <textarea id="l4-notes-c" name="l4-notes-c" class="notes" aria-describedby="l4-notes-c-inv l4-notes-c-cue"></textarea>
+      </div>
+    </div>
+
+    <div class="activity">
+      <p class="kicker">&#9208; Who Has Authority?</p>
+      <h3 class="atitle">Put the three claims in one room</h3>
+      <div class="source">
+        <span class="tag">Three claims</span>
+        <div class="grid3">
+          <div><p class="colhead">English Crown</p><p>&ldquo;We granted the colony.&rdquo;</p></div>
+          <div><p class="colhead">Colonists</p><p>&ldquo;We govern our communities.&rdquo;</p></div>
+          <div><p class="colhead">Native nation</p><p>&ldquo;This is our homeland.&rdquo;</p></div>
+        </div>
+      </div>
+      <div class="field">
+        <label for="l4a3-arena">Name one point of conflict</label>
+        <select id="l4a3-arena" name="l4a3-arena">
+          <option value="">Choose one&hellip;</option>
+          <option>Land</option><option>Law</option><option>Taxes</option>
+          <option>Trade</option><option>Alliance</option><option>Settlement</option>
+        </select>
+      </div>
+      <div class="field" style="margin-bottom:0">
+        <label for="l4a3-hardest">What would each party say about it, and which conflict is hardest to resolve?</label>
+        <textarea id="l4a3-hardest" name="l4a3-hardest" class="sm"></textarea>
+      </div>
+    </div>
+
+    <p class="online">Online hour &mdash; Independent Study: Land as politics &middot; Uncas and the politics of alliance &middot; Carolina's design &middot; New York's charter won and revoked.</p>
+  </section>
+
+  <!-- ============ TERMS ============ -->
+  <section id="terms" aria-labelledby="terms-h">
+    <p class="sect-label">Reference</p>
+    <h2 id="terms-h">Terms to Recognize and Use</h2>
+    <hr class="hairline">
+    <p class="lede">You do not need to write definitions. Recognize these when you hear them, and use them
+    when you explain the chapter. Each deck defines them in a pop-up.</p>
+    <ul class="terms">
+      <li><b>Privateering</b><span>Lecture 1</span></li>
+      <li><b>Roanoke</b><span>Lecture 1</span></li>
+      <li><b>Joint-stock company</b><span>Lecture 2</span></li>
+      <li><b>Indentured servitude</b><span>Lecture 2</span></li>
+      <li><b>Covenant</b><span>Lecture 3</span></li>
+      <li><b>Representative government</b><span>Lecture 4</span></li>
+      <li><b>Sovereignty</b><span>Lecture 4</span></li>
+    </ul>
+  </section>
+
+  <!-- ============ OPTIONAL REVIEW ============ -->
+  <section id="review" aria-labelledby="review-h">
+    <details class="panel">
+      <summary><h2 id="review-h">Optional Chapter Review</h2></summary>
+      <div class="panel-body">
+        <p class="hint" style="margin-top:.9rem">This section is optional. It is not required for notebook
+        completion, and nothing here is collected. Use it if it helps you consolidate the chapter.</p>
+
+        <h3>Chapter organizer</h3>
+        <p>The first two columns are given. Add the tension or consequence that followed &mdash; a phrase is enough.</p>
+
+        <div class="org-row">
+          <p class="rowhead">Lecture 1 &mdash; Why Colonize?</p>
+          <dl>
+            <dt>Historical problem</dt><dd>England had reasons to expand long before it could sustain a colony.</dd>
+            <dt>Forces or claims</dt><dd>Religion, rivalry, profit, opportunity.</dd>
+          </dl>
+          <label class="colhead" for="org1">Resulting tension or consequence</label>
+          <input type="text" class="line" id="org1" name="org1">
+        </div>
+
+        <div class="org-row">
+          <p class="rowhead">Lecture 2 &mdash; Why Did the Colonies Become Different?</p>
+          <dl>
+            <dt>Historical problem</dt><dd>English migrants built unlike societies on the same coast.</dd>
+            <dt>Forces or claims</dt><dd>Goals, environment, migration, labor.</dd>
+          </dl>
+          <label class="colhead" for="org2">Resulting tension or consequence</label>
+          <input type="text" class="line" id="org2" name="org2">
+        </div>
+
+        <div class="org-row">
+          <p class="rowhead">Lecture 3 &mdash; Building a Puritan Society</p>
+          <dl>
+            <dt>Historical problem</dt><dd>A community organized around shared religious truth had to handle disagreement.</dd>
+            <dt>Forces or claims</dt><dd>Purpose, institutions, limits.</dd>
+          </dl>
+          <label class="colhead" for="org3">Resulting tension or consequence</label>
+          <input type="text" class="line" id="org3" name="org3">
+        </div>
+
+        <div class="org-row">
+          <p class="rowhead">Lecture 4 &mdash; Who Controlled America?</p>
+          <dl>
+            <dt>Historical problem</dt><dd>Several communities claimed the right to govern the same people and land.</dd>
+            <dt>Forces or claims</dt><dd>Representation, sovereignty, empire.</dd>
+          </dl>
+          <label class="colhead" for="org4">Resulting tension or consequence</label>
+          <input type="text" class="line" id="org4" name="org4">
+        </div>
+
+        <h3>Retrieval</h3>
+        <p class="hint">Answer from memory first, then check the deck or your notes.</p>
+        <div class="field">
+          <label for="ret-l1">Lecture 1 &mdash; Roanoke had a charter, ships, and settlers, and still failed. What did permanence require that ambition and financing alone could not supply?</label>
+          <textarea id="ret-l1" name="ret-l1" class="sm"></textarea>
+        </div>
+        <div class="field">
+          <label for="ret-l2">Lecture 2 &mdash; Why is hereditary racial slavery better described as constructed across the century than as beginning in 1619? Name two developments that pushed Virginia's labor system that way.</label>
+          <textarea id="ret-l2" name="ret-l2" class="sm"></textarea>
+        </div>
+        <div class="field">
+          <label for="ret-l3">Lecture 3 &mdash; How did covenant thinking reach past the church into family, town, school, and government &mdash; and why did that make the challenges from Williams and Hutchinson so serious?</label>
+          <textarea id="ret-l3" name="ret-l3" class="sm"></textarea>
+        </div>
+        <div class="field">
+          <label for="ret-l4">Lecture 4 &mdash; England's own government collapsed and was restored between 1642 and 1660. What did that do to imperial supervision, and what were Charles II's proprietary grants meant to accomplish?</label>
+          <textarea id="ret-l4" name="ret-l4" class="sm"></textarea>
+        </div>
+
+        <h3>Synthesis</h3>
+        <div class="field">
+          <label for="ret-synth">Optional &mdash; In this chapter, expanded freedom or opportunity for one group repeatedly depended on limits placed on another. Choose two lectures and explain how that worked in each.</label>
+          <textarea id="ret-synth" name="ret-synth" class="md"></textarea>
+        </div>
+
+        <h3>Muddiest point</h3>
+        <div class="field">
+          <label for="ret-muddy">What is still unclear, or what would you ask with one minute of class time?</label>
+          <textarea id="ret-muddy" name="ret-muddy" class="xs"></textarea>
+        </div>
+
+        <h3>I can explain&hellip;</h3>
+        <ul class="checklist">
+          <li><label for="lc1"><input type="checkbox" id="lc1" name="lc1"><span>&hellip;why English colonization is better described as a convergence of separate motives than as a national plan.</span></label></li>
+          <li><label for="lc2"><input type="checkbox" id="lc2" name="lc2"><span>&hellip;the difference between a motive to colonize and the capacity to sustain a colony, using Roanoke as evidence.</span></label></li>
+          <li><label for="lc3"><input type="checkbox" id="lc3" name="lc3"><span>&hellip;how tobacco connected profit, land, labor, and territorial conflict in the Chesapeake.</span></label></li>
+          <li><label for="lc4"><input type="checkbox" id="lc4" name="lc4"><span>&hellip;why hereditary racial slavery should be described as constructed over time, and how Barbados fits the pattern.</span></label></li>
+          <li><label for="lc5"><input type="checkbox" id="lc5" name="lc5"><span>&hellip;how covenant shaped Puritan institutions, and why that community found dissent difficult.</span></label></li>
+          <li><label for="lc6"><input type="checkbox" id="lc6" name="lc6"><span>&hellip;why representative government in the colonies was not the same thing as democracy.</span></label></li>
+          <li><label for="lc7"><input type="checkbox" id="lc7" name="lc7"><span>&hellip;how the Pequot War, the English Civil Wars, and the Restoration each changed who could enforce a claim to authority.</span></label></li>
+        </ul>
+      </div>
+    </details>
+
+    <div class="closing">
+      <span class="tag">Where the chapter leaves you</span>
+      <p>Chapter 2 does not end with a winner. Colonists, Native nations, proprietors, and the Crown all held
+      claims that looked legitimate from the inside, and those claims collided as settlement expanded. Next:
+      <strong>Stream &amp; Discuss: Massacre at Mystic</strong>.</p>
+    </div>
+  </section>
+
+  <p class="footnote">This notebook saves your work in this browser on this device only. Nothing is sent
+  anywhere. Clearing your browser data will erase it &mdash; use <strong>Download Backup</strong> under
+  Manage Saved Work if you want a copy you can keep or move.</p>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var KEY = "hist101-ch2-historians-notebook-v2";
+
+  /* ---------- storage with graceful fallback ---------- */
+  var memory = null, storageOK = true;
+  function readStore(){
+    try { return window.localStorage.getItem(KEY); }
+    catch(e){ storageOK = false; return memory; }
+  }
+  function writeStore(v){
+    try { window.localStorage.setItem(KEY, v); }
+    catch(e){ storageOK = false; memory = v; }
+  }
+  function removeStore(){
+    try { window.localStorage.removeItem(KEY); } catch(e){}
+    memory = null;
+  }
+
+  var fields = Array.prototype.slice.call(
+    document.querySelectorAll("textarea[id], input[id], select[id]")
+  ).filter(function(el){ return el.type !== "file"; });
+
+  var status = document.getElementById("saveStatus");
+  var dirty = false, timer = null;
+
+  function setStatus(msg, isDirty){
+    if (status.textContent !== msg) status.textContent = msg;
+    status.classList.toggle("dirty", !!isDirty);
+  }
+  function stamp(){
+    var d = new Date(), h = d.getHours(), m = d.getMinutes();
+    var ap = h >= 12 ? "PM" : "AM";
+    h = h % 12; if (h === 0) h = 12;
+    return h + ":" + (m < 10 ? "0" + m : m) + " " + ap;
+  }
+  function autosize(el){
+    if (el.tagName !== "TEXTAREA") return;
+    el.style.height = "auto";
+    el.style.height = (el.scrollHeight + 2) + "px";
+  }
+
+  function collect(){
+    var data = {};
+    fields.forEach(function(el){
+      data[el.id] = (el.type === "checkbox" || el.type === "radio") ? el.checked : el.value;
+    });
+    return data;
+  }
+  function apply(data){
+    if (!data) return;
+    fields.forEach(function(el){
+      if (!(el.id in data)) return;
+      if (el.type === "checkbox" || el.type === "radio") el.checked = !!data[el.id];
+      else el.value = data[el.id];
+      autosize(el);
+    });
+  }
+  function save(manual){
+    writeStore(JSON.stringify({ savedAt:new Date().toISOString(), version:2, data:collect() }));
+    dirty = false;
+    if (storageOK) setStatus((manual ? "Saved on this device \u00B7 " : "Saved automatically at ") + stamp(), false);
+    else setStatus("Saved for this session only \u2014 this browser is blocking storage", true);
+  }
+  function restore(){
+    var raw = readStore();
+    if (!raw){
+      setStatus(storageOK ? "Nothing saved yet" : "This browser is blocking saved storage", !storageOK);
+      return;
+    }
+    try {
+      var parsed = JSON.parse(raw);
+      apply(parsed.data || parsed);
+      var when = parsed.savedAt ? new Date(parsed.savedAt) : null;
+      setStatus(when ? "Restored work saved " + when.toLocaleDateString() + " at " +
+        when.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"}) : "Restored saved work", false);
+    } catch(e){
+      setStatus("Saved work could not be read", true);
+    }
+  }
+  function queueSave(){
+    dirty = true;
+    setStatus("Unsaved changes\u2026", true);
+    clearTimeout(timer);
+    timer = setTimeout(function(){ save(false); }, 900);
+  }
+
+  fields.forEach(function(el){
+    var evt = (el.tagName === "SELECT" || el.type === "checkbox" || el.type === "radio") ? "change" : "input";
+    el.addEventListener(evt, function(){ autosize(el); queueSave(); });
+  });
+
+  document.getElementById("btnSave").addEventListener("click", function(){ save(true); });
+
+  document.getElementById("btnClear").addEventListener("click", function(){
+    if (!window.confirm("Clear all saved work in this notebook on this device? This cannot be undone. Consider Download Backup first.")) return;
+    removeStore();
+    fields.forEach(function(el){
+      if (el.type === "checkbox" || el.type === "radio") el.checked = false;
+      else el.value = "";
+      autosize(el);
+    });
+    setStatus("Saved work cleared", false);
+  });
+
+  document.getElementById("btnBackup").addEventListener("click", function(){
+    var payload = JSON.stringify({ savedAt:new Date().toISOString(), version:2, notebook:KEY, data:collect() }, null, 2);
+    var blob = new Blob([payload], {type:"application/json"});
+    var a = document.createElement("a");
+    var name = (document.getElementById("meta-name").value || "student").trim().replace(/[^A-Za-z0-9_-]+/g, "_");
+    a.href = URL.createObjectURL(blob);
+    a.download = "HIST101_Ch2_Notebook_" + name + ".json";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(a.href); }, 2000);
+    setStatus("Backup file downloaded", false);
+  });
+
+  document.getElementById("fileRestore").addEventListener("change", function(e){
+    var f = e.target.files && e.target.files[0];
+    if (!f) return;
+    var reader = new FileReader();
+    reader.onload = function(){
+      try {
+        var parsed = JSON.parse(String(reader.result));
+        if (!parsed || parsed.notebook !== KEY || parsed.version !== 2 || !parsed.data ||
+            typeof parsed.data !== "object" || Array.isArray(parsed.data)) {
+          throw new Error("This backup does not belong to this notebook or uses an unsupported version.");
+        }
+        if (!window.confirm("Replace the work currently in this notebook with the backup file?")) return;
+        apply(parsed.data);
+        save(true);
+        setStatus("Backup restored \u00B7 " + stamp(), false);
+      } catch(err){
+        setStatus("That file is not a valid Chapter 2 notebook backup", true);
+      }
+      e.target.value = "";
+    };
+    reader.readAsText(f);
+  });
+
+  window.addEventListener("beforeunload", function(){ if (dirty) save(false); });
+
+  restore();
+  fields.forEach(autosize);
+})();
+</script>
+</body>
+</html>
