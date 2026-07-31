@@ -39,7 +39,7 @@
 | 2.3.1 Three Flashes | Pass | No flashing content. |
 | 2.2 timing criteria | Pass | No timer, session expiration, auto-advance, or moving content. |
 | 2.3.3 Animation from Interactions | Pass | No essential animation; `prefers-reduced-motion` disables smooth scrolling and effectively removes transition/animation duration. |
-| 1.1.1 Non-text Content | Pass | The application is text-only; no instructional image requires alternative text. |
+| 1.1.1 Non-text Content | Pass | The landing-page banner has concise alternative text that conveys its embedded title; no instructional meaning depends on the image. |
 | 1.4.12 Text Spacing | Pass by inspection | No fixed text containers clip on increased spacing; cards and controls grow vertically. |
 | Screen-reader spot check | Needs manual verification | The browser accessibility tree exposed landmarks, headings, labeled radios, group legend, live feedback, disabled state, and expanded state. Confirm announcement timing with NVDA, JAWS, or VoiceOver before making a formal conformance claim. |
 

@@ -81,6 +81,7 @@ for (let chapter = 2; chapter <= 6; chapter += 1) {
 }
 if (!landingHtml.includes('https://austin-academics.com/hist101-think-like-a-historian/og.png')) fail("Landing page missing social image metadata");
 if (!fs.existsSync(path.join(root, "og.png"))) fail("Social image file is missing");
+if (!landingHtml.includes('class="landing-banner-image" src="og.png"')) fail("Landing page is missing the visible banner image");
 for (const required of [":focus-visible", "prefers-reduced-motion", "@media (max-width: 20rem)"]) {
   if (!css.includes(required)) fail(`Styles missing ${required}`);
 }
