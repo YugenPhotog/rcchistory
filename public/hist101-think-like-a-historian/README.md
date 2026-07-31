@@ -4,7 +4,8 @@ This folder contains a static, practice-only application for Chapters 2–6. Eac
 
 ## Contents
 
-- `index.html`, `practice.css`, `practice.js`: shared student application
+- `index.html`: chapter landing page
+- `practice.html`, `practice.css`, `practice.js`: shared student application
 - `banks/chapter-02.json` through `banks/chapter-06.json`: 30 questions per chapter
 - `review/`: readable question-and-feedback copies
 - `audits/`: source map, item/source audits, cognitive-load audits, shared technical validation, and shared WCAG review
@@ -13,13 +14,13 @@ This folder contains a static, practice-only application for Chapters 2–6. Eac
 
 ## Chapter links
 
-Serve this folder over HTTP(S), then use:
+Serve this folder over HTTP(S). The landing page is `index.html`; chapter practice links use:
 
-- `?chapter=2`
-- `?chapter=3`
-- `?chapter=4`
-- `?chapter=5`
-- `?chapter=6`
+- `practice.html?chapter=2`
+- `practice.html?chapter=3`
+- `practice.html?chapter=4`
+- `practice.html?chapter=5`
+- `practice.html?chapter=6`
 
 Optional scaffolding override: `&scaffold=early`, `&scaffold=mid`, or `&scaffold=late`.
 

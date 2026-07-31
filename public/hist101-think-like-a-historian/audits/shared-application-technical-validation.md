@@ -11,7 +11,8 @@
 | Choice feedback | Pass | All 600 choices include nonempty response-specific feedback. |
 | Required pedagogy fields | Pass | Every question includes move, difficulty, approved/practice status, lecture IDs, walkthrough, transfer strategy, source alignment, and accessibility notes. |
 | Parameter handling | Pass | Chapters outside 2–6 and malformed values produce a plain-language error; early/mid/late scaffold overrides are allow-listed. |
-| Static paths | Pass | The app loads relative CSS, JavaScript, and `banks/chapter-XX.json` paths; no server-side route is required. |
+| Landing-page navigation | Pass | The landing page contains one direct practice link for each chapter, Chapters 2–6. |
+| Static paths | Pass | The landing page links to `practice.html?chapter=N`; the app loads relative CSS, JavaScript, and `banks/chapter-XX.json` paths; no server-side route is required. |
 | Local storage resilience | Pass in code review; browser tested separately | Every storage read, write, and removal is guarded; failure switches to in-memory random selection. |
 | Repeat reduction | Pass | Category-specific recent-ID queues avoid the most recent four items where storage is available and fall back safely when a pool cycles. |
 | Secret/API scan | Pass | No API key pattern, network API dependency, login, database, or grading endpoint found. |
@@ -23,4 +24,4 @@
 
 ## Static-host note
 
-The application must be served over HTTP(S) for `fetch()` to load local JSON reliably. Opening `index.html` directly with a `file:` URL may be blocked by browser security policy; this is a browser restriction, not a server dependency.
+The application must be served over HTTP(S) for `fetch()` to load local JSON reliably. Opening `practice.html` directly with a `file:` URL may be blocked by browser security policy; this is a browser restriction, not a server dependency.

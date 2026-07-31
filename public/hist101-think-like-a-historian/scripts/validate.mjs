@@ -66,19 +66,28 @@ for (let chapter = 2; chapter <= 6; chapter += 1) {
   bank.validation = { counts, maxStem, maxChoiceRatio, positions };
 }
 
-const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
+const landingHtml = fs.readFileSync(path.join(root, "index.html"), "utf8");
+const practiceHtml = fs.readFileSync(path.join(root, "practice.html"), "utf8");
 const css = fs.readFileSync(path.join(root, "practice.css"), "utf8");
 const js = fs.readFileSync(path.join(root, "practice.js"), "utf8");
 for (const required of ["<html lang=\"en\">", "<h1", "<main", "<footer", "class=\"skip-link\"", "aria-live=\"polite\"", "<fieldset", "<legend"]) {
-  if (!html.includes(required)) fail(`Shared app missing ${required}`);
+  if (!practiceHtml.includes(required)) fail(`Shared app missing ${required}`);
 }
+for (const required of ["<html lang=\"en\">", "<h1", "<main", "<footer", "class=\"skip-link\""]) {
+  if (!landingHtml.includes(required)) fail(`Landing page missing ${required}`);
+}
+for (let chapter = 2; chapter <= 6; chapter += 1) {
+  if (!landingHtml.includes(`practice.html?chapter=${chapter}`)) fail(`Landing page missing Chapter ${chapter} link`);
+}
+if (!landingHtml.includes('https://austin-academics.com/hist101-think-like-a-historian/og.png')) fail("Landing page missing social image metadata");
+if (!fs.existsSync(path.join(root, "og.png"))) fail("Social image file is missing");
 for (const required of [":focus-visible", "prefers-reduced-motion", "@media (max-width: 20rem)"]) {
   if (!css.includes(required)) fail(`Styles missing ${required}`);
 }
 for (const required of ["localStorage", "try", "catch", "URLSearchParams", "safeReturnUrl", "chooseQuestion", "defaultScaffold"]) {
   if (!js.includes(required)) fail(`Application logic missing ${required}`);
 }
-if (/sk-[A-Za-z0-9_-]{20,}|api[_-]?key\s*[:=]/i.test(`${html}\n${css}\n${js}\n${banks.map(b => JSON.stringify(b)).join("\n")}`)) fail("Possible secret or API key found");
+if (/sk-[A-Za-z0-9_-]{20,}|api[_-]?key\s*[:=]/i.test(`${landingHtml}\n${practiceHtml}\n${css}\n${js}\n${banks.map(b => JSON.stringify(b)).join("\n")}`)) fail("Possible secret or API key found");
 
 const report = {
   timestamp: new Date().toISOString(),
