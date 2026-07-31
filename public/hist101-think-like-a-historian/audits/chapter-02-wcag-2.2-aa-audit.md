@@ -2,7 +2,7 @@
 
 ## Scope
 
-Files reviewed: `index.html`, `practice.css`, `practice.js`, and `banks/chapter-02.json`.
+Files reviewed: `index.html`, `practice.html`, `historian-practice.css`, `practice.js`, and `banks/chapter-02.json`.
 
 ## Results
 

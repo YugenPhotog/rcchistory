@@ -5,7 +5,7 @@ This folder contains a static, practice-only application for Chapters 2–6. Eac
 ## Contents
 
 - `index.html`: chapter landing page
-- `practice.html`, `practice.css`, `practice.js`: shared student application
+- `practice.html`, `historian-practice.css`, `practice.js`: shared student application
 - `banks/chapter-02.json` through `banks/chapter-06.json`: 30 questions per chapter
 - `review/`: readable question-and-feedback copies
 - `audits/`: source map, item/source audits, cognitive-load audits, shared technical validation, and shared WCAG review
