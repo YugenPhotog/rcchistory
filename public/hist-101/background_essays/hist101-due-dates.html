@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HIST 101-Y1 · Working Due-Date Calendar · Fall 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+  /* ============ TOKENS ============ */
+  :root{
+    --ink:#211d18;
+    --ink-soft:#4a4238;
+    --parchment:#ece3d0;
+    --parchment-deep:#ddcda6;
+    --parchment-line: rgba(33,29,24,0.16);
+    --card:#f6efde;
+    --navy:#1f3355;
+    --navy-deep:#152238;
+    --oxblood:#7c2f2b;
+    --oxblood-deep:#5c211e;
+    --gold:#9c7a2e;
+    --teal:#2c5a55;
+    --paper-shadow: 0 1px 0 rgba(33,29,24,0.06);
+    --radius-stamp: 6px;
+    --font-display: "Fraunces", serif;
+    --font-body: "Spectral", serif;
+    --font-mono: "IBM Plex Mono", monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 600px at 15% -10%, rgba(255,255,255,0.35), transparent 60%),
+      var(--parchment);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:17px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* subtle paper grain via layered gradients */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(33,29,24,0.015) 0px, transparent 1px, transparent 2px, rgba(33,29,24,0.015) 3px);
+    mix-blend-mode:multiply;
+    z-index:0;
+  }
+
+  a{color:inherit;}
+
+  ::selection{ background: var(--gold); color: var(--card); }
+
+  :focus-visible{
+    outline: 2px solid var(--oxblood);
+    outline-offset: 3px;
+  }
+
+  /* ============ TOP NAV ============ */
+  .site-nav{
+    position:sticky; top:0; z-index:50;
+    background: rgba(236,227,208,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--parchment-line);
+  }
+  .site-nav-inner{
+    max-width:980px; margin:0 auto;
+    display:flex; align-items:center; gap:1.25rem;
+    padding:0.7rem 1.5rem;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  .site-nav-inner::-webkit-scrollbar{display:none;}
+  .site-nav-mark{
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    letter-spacing:0.08em;
+    color:var(--oxblood);
+    white-space:nowrap;
+    padding-right:0.75rem;
+    border-right:1px solid var(--parchment-line);
+  }
+  .site-nav a{
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.09em;
+    text-decoration:none;
+    color:var(--ink-soft);
+    white-space:nowrap;
+    padding:0.3rem 0;
+    border-bottom:2px solid transparent;
+    transition:color 0.15s ease, border-color 0.15s ease;
+  }
+  .site-nav a:hover{ color:var(--navy); border-color:var(--gold); }
+
+  /* ============ HERO ============ */
+  .hero{
+    position:relative; z-index:1;
+    max-width:980px; margin:0 auto;
+    padding: 4.5rem 1.5rem 3rem;
+  }
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:0.75rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--oxblood);
+    margin:0 0 1rem;
+    display:flex; align-items:center; gap:0.6rem;
+  }
+  .eyebrow::before{
+    content:"";
+    width:2rem; height:1px;
+    background:var(--oxblood);
+    display:inline-block;
+  }
+  h1.title{
+    font-family:var(--font-display);
+    font-optical-sizing:auto;
+    font-weight:600;
+    font-size:clamp(2.6rem, 6vw, 4.4rem);
+    line-height:0.98;
+    letter-spacing:-0.01em;
+    margin:0 0 0.6rem;
+    color:var(--navy);
+  }
+  h1.title em{
+    font-style:italic;
+    font-weight:400;
+    color:var(--oxblood);
+  }
+  .subtitle{
+    font-family:var(--font-body);
+    font-size:1.15rem;
+    color:var(--ink-soft);
+    max-width:38ch;
+    margin:0;
+  }
+
+  .hero-meta{
+    margin-top:2.2rem;
+    display:flex; flex-wrap:wrap; gap:0.75rem 2rem;
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    color:var(--ink-soft);
+  }
+  .hero-meta span b{
+    color:var(--ink);
+    font-weight:600;
+  }
+
+  /* ============ RHYTHM / FIELD NOTE CARD ============ */
+  .rhythm{
+    position:relative; z-index:1;
+    max-width:980px; margin:0 auto 3.5rem;
+    padding:0 1.5rem;
+  }
+  .rhythm-card{
+    background:var(--card);
+    border:1px solid var(--parchment-line);
+    border-radius:4px;
+    box-shadow: var(--paper-shadow), 0 8px 24px -18px rgba(33,29,24,0.4);
+    padding:2rem 2.2rem;
+    position:relative;
+  }
+  .rhythm-card::before{
+    content:"FIELD NOTES";
+    position:absolute;
+    top:-0.65rem; left:1.8rem;
+    background:var(--parchment);
+    padding:0 0.6rem;
+    font-family:var(--font-mono);
+    font-size:0.68rem;
+    letter-spacing:0.14em;
+    color:var(--gold);
+  }
+  .rhythm-card h2{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:1.3rem;
+    margin:0 0 1rem;
+    color:var(--navy);
+  }
+  .rhythm-list{
+    list-style:none;
+    margin:0; padding:0;
+    display:grid;
+    gap:0.85rem;
+  }
+  .rhythm-list li{
+    padding-left:1.3rem;
+    position:relative;
+    font-size:0.97rem;
+    color:var(--ink-soft);
+  }
+  .rhythm-list li::before{
+    content:"§";
+    position:absolute; left:0; top:0.05em;
+    color:var(--oxblood);
+    font-family:var(--font-mono);
+    font-size:0.9rem;
+  }
+  .rhythm-list li b{ color:var(--ink); font-weight:600; }
+  .rhythm-exceptions{
+    margin-top:1.4rem;
+    padding-top:1.2rem;
+    border-top:1px dashed var(--parchment-line);
+    display:grid;
+    gap:0.6rem;
+  }
+  .rhythm-exceptions .tag{
+    display:inline-block;
+    font-family:var(--font-mono);
+    font-size:0.65rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--oxblood-deep);
+    background:rgba(124,47,43,0.09);
+    border:1px solid rgba(124,47,43,0.25);
+    padding:0.15rem 0.5rem;
+    border-radius:3px;
+    margin-right:0.6rem;
+  }
+
+  /* ============ TIMELINE ============ */
+  .timeline-wrap{
+    position:relative; z-index:1;
+    max-width:980px; margin:0 auto;
+    padding:0 1.5rem 2rem;
+  }
+
+  .month-section{
+    position:relative;
+    padding-top:3rem;
+    scroll-margin-top:4.5rem;
+  }
+  .month-heading{
+    display:flex; align-items:baseline; gap:1rem;
+    margin-bottom:1.8rem;
+  }
+  .month-heading h2{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:2rem;
+    color:var(--navy);
+    margin:0;
+  }
+  .month-heading .month-year{
+    font-family:var(--font-mono);
+    font-size:0.8rem;
+    color:var(--gold);
+    letter-spacing:0.08em;
+  }
+  .month-heading::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:linear-gradient(90deg, var(--parchment-line), transparent);
+    align-self:center;
+  }
+
+  .ledger{
+    position:relative;
+    padding-left:2.4rem;
+    border-left:2px solid var(--parchment-deep);
+  }
+
+  .entry{
+    position:relative;
+    padding-bottom:2.1rem;
+  }
+  .entry:last-child{ padding-bottom:0.3rem; }
+
+  .entry-dot{
+    position:absolute;
+    left:-2.53rem;
+    top:0.35rem;
+    width:11px; height:11px;
+    border-radius:50%;
+    background:var(--parchment);
+    border:2px solid var(--navy);
+  }
+  .entry.type-exam .entry-dot,
+  .entry.type-capstone .entry-dot{
+    background:var(--oxblood);
+    border-color:var(--oxblood-deep);
+  }
+
+  .entry-date{
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:0.5rem;
+    display:flex; align-items:center; gap:0.6rem;
+  }
+  .entry-date .daytag{
+    color:var(--navy);
+    font-weight:600;
+  }
+
+  .entry-card{
+    background:var(--card);
+    border:1px solid var(--parchment-line);
+    border-radius:4px;
+    padding:1.05rem 1.3rem;
+    box-shadow: var(--paper-shadow);
+  }
+  .entry.type-exam .entry-card,
+  .entry.type-capstone .entry-card{
+    border-color:rgba(124,47,43,0.35);
+    background:linear-gradient(180deg, rgba(124,47,43,0.05), var(--card) 40%);
+  }
+
+  .entry-items{
+    list-style:none; margin:0; padding:0;
+    display:grid; gap:0.55rem;
+  }
+  .entry-items li{
+    display:flex; align-items:flex-start; gap:0.6rem;
+  }
+
+  .badge{
+    flex:none;
+    font-family:var(--font-mono);
+    font-size:0.62rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:0.18rem 0.45rem;
+    border-radius:3px;
+    line-height:1.5;
+    white-space:nowrap;
+    margin-top:0.1rem;
+  }
+  .badge-reading{ background:rgba(156,122,46,0.14); color:var(--gold); border:1px solid rgba(156,122,46,0.35); }
+  .badge-quiz{ background:rgba(31,51,85,0.1); color:var(--navy); border:1px solid rgba(31,51,85,0.3); }
+  .badge-sd{ background:rgba(44,90,85,0.12); color:var(--teal); border:1px solid rgba(44,90,85,0.32); }
+  .badge-reply{ background:rgba(44,90,85,0.06); color:var(--teal); border:1px solid rgba(44,90,85,0.22); }
+  .badge-psa{ background:rgba(124,47,43,0.08); color:var(--oxblood-deep); border:1px solid rgba(124,47,43,0.24); }
+  .badge-check{ background:rgba(124,47,43,0.05); color:var(--ink-soft); border:1px solid var(--parchment-line); }
+  .badge-exam{ background:var(--oxblood); color:var(--card); border:1px solid var(--oxblood-deep); font-weight:600; }
+  .badge-capstone{ background:var(--oxblood-deep); color:var(--card); border:1px solid var(--oxblood-deep); font-weight:600; }
+  .badge-note{ background:transparent; color:var(--ink-soft); border:1px dashed var(--parchment-line); }
+
+  .entry-items li span.txt{
+    font-size:0.97rem;
+    color:var(--ink);
+  }
+  .entry-items li span.txt i{ color:var(--ink-soft); font-style:italic; }
+  .entry-items li.muted span.txt{ color:var(--ink-soft); font-style:italic; }
+
+  /* exam stamp flourish */
+  .entry.type-exam .entry-card::before{
+    content:"IN CLASS";
+    float:right;
+    font-family:var(--font-mono);
+    font-size:0.6rem;
+    letter-spacing:0.12em;
+    color:var(--oxblood);
+    border:1px solid var(--oxblood);
+    padding:0.15rem 0.4rem;
+    border-radius:3px;
+    transform:rotate(2deg);
+    margin-left:0.6rem;
+  }
+
+  /* ============ CHAPTER SUMMARY TABLE ============ */
+  .summary{
+    position:relative; z-index:1;
+    max-width:980px; margin:5rem auto 0;
+    padding:0 1.5rem;
+    scroll-margin-top:4.5rem;
+  }
+  .summary h2{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:2rem;
+    color:var(--navy);
+    margin:0 0 0.4rem;
+  }
+  .summary p.lede{
+    color:var(--ink-soft);
+    max-width:56ch;
+    margin:0 0 1.8rem;
+  }
+  .table-wrap{
+    overflow-x:auto;
+    border:1px solid var(--parchment-line);
+    border-radius:4px;
+    background:var(--card);
+    box-shadow:var(--paper-shadow);
+  }
+  table{
+    border-collapse:collapse;
+    width:100%;
+    min-width:720px;
+    font-size:0.9rem;
+  }
+  thead th{
+    font-family:var(--font-mono);
+    font-size:0.68rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--card);
+    background:var(--navy);
+    text-align:left;
+    padding:0.75rem 1rem;
+  }
+  tbody td{
+    padding:0.75rem 1rem;
+    border-bottom:1px solid var(--parchment-line);
+    vertical-align:top;
+  }
+  tbody tr:last-child td{ border-bottom:none; }
+  tbody tr:nth-child(even){ background:rgba(156,122,46,0.05); }
+  td.chp{
+    font-family:var(--font-mono);
+    font-weight:600;
+    color:var(--navy);
+    white-space:nowrap;
+  }
+  td.due{
+    font-family:var(--font-mono);
+    font-size:0.82rem;
+    color:var(--oxblood-deep);
+    white-space:nowrap;
+  }
+  tr.exception td.due{ font-weight:700; }
+
+  /* ============ MARGINALIA / TO CONFIRM ============ */
+  .marginalia{
+    position:relative; z-index:1;
+    max-width:980px; margin:3.5rem auto 6rem;
+    padding:0 1.5rem;
+  }
+  .marginalia-card{
+    border:1px dashed var(--oxblood);
+    background:rgba(124,47,43,0.04);
+    border-radius:4px;
+    padding:1.8rem 2rem;
+  }
+  .marginalia-card h3{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:1.15rem;
+    margin:0 0 0.9rem;
+    color:var(--oxblood-deep);
+    display:flex; align-items:center; gap:0.5rem;
+  }
+  .marginalia-card ol{
+    margin:0; padding-left:1.3rem;
+    display:grid; gap:0.6rem;
+    color:var(--ink-soft);
+    font-size:0.95rem;
+  }
+  .marginalia-card ol li::marker{
+    font-family:var(--font-mono);
+    color:var(--oxblood);
+  }
+
+  /* ============ FOOTER ============ */
+  footer{
+    position:relative; z-index:1;
+    border-top:1px solid var(--parchment-line);
+    padding:2rem 1.5rem 3rem;
+    text-align:center;
+  }
+  footer p{
+    font-family:var(--font-mono);
+    font-size:0.7rem;
+    letter-spacing:0.06em;
+    color:var(--ink-soft);
+    margin:0;
+  }
+
+  @media (max-width:640px){
+    .hero{ padding:3rem 1.25rem 2rem; }
+    .rhythm, .timeline-wrap, .summary, .marginalia{ padding-left:1.25rem; padding-right:1.25rem; }
+    .ledger{ padding-left:1.6rem; }
+    .entry-dot{ left:-1.75rem; }
+    thead th, tbody td{ padding:0.6rem 0.7rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+  }
+
+  /* ============ THIS WEEK / TODAY ============ */
+  .today-banner{
+    position:relative; z-index:1;
+    max-width:980px; margin:0 auto 2.5rem;
+    padding:0 1.5rem;
+    display:none;
+  }
+  .today-banner.is-visible{ display:block; }
+  .today-banner-inner{
+    background:var(--navy);
+    color:var(--parchment);
+    border-radius:4px;
+    padding:0.95rem 1.4rem;
+    display:flex;
+    align-items:center;
+    gap:0.9rem;
+    font-family:var(--font-mono);
+    font-size:0.8rem;
+    letter-spacing:0.03em;
+    box-shadow:0 10px 24px -14px rgba(21,34,56,0.6);
+  }
+  .today-banner-inner::before{
+    content:"◆";
+    color:var(--gold);
+    font-size:0.7rem;
+  }
+  .today-banner-inner a{
+    color:var(--parchment);
+    text-decoration:underline;
+    text-underline-offset:3px;
+    text-decoration-color:var(--gold);
+  }
+  .today-banner-inner a:hover{ color:#fff; }
+
+  .entry.is-this-week .entry-card{
+    border-color:var(--gold);
+    box-shadow:0 0 0 1px var(--gold), var(--paper-shadow);
+  }
+  .entry.is-this-week .entry-dot{
+    background:var(--gold);
+    border-color:var(--gold);
+    box-shadow:0 0 0 4px rgba(156,122,46,0.2);
+  }
+  .entry.is-today .entry-card{
+    border-color:var(--oxblood);
+    box-shadow:0 0 0 1.5px var(--oxblood), 0 6px 18px -12px rgba(124,47,43,0.5);
+  }
+  .entry.is-today .entry-dot{
+    background:var(--oxblood);
+    border-color:var(--oxblood-deep);
+    box-shadow:0 0 0 4px rgba(124,47,43,0.22);
+  }
+  .entry.is-today .entry-date::after,
+  .entry.is-this-week .entry-date::after{
+    content:"TODAY";
+    font-family:var(--font-mono);
+    font-size:0.6rem;
+    letter-spacing:0.1em;
+    color:var(--card);
+    background:var(--oxblood);
+    padding:0.1rem 0.4rem;
+    border-radius:3px;
+  }
+  .entry.is-this-week .entry-date::after{
+    content:"THIS WEEK";
+    background:var(--gold);
+  }
+  .entry.is-past .entry-card{
+    opacity:0.55;
+  }
+  .entry.is-past .entry-dot{
+    background:var(--parchment-deep);
+    border-color:var(--parchment-line);
+  }
+
+  /* ============ PRINT ============ */
+  @media print{
+    body{ background:#fff; font-size:12pt; }
+    body::before{ display:none; }
+    .site-nav, .today-banner, footer{ display:none; }
+    .hero{ padding:0 0 1.5rem; }
+    .rhythm, .timeline-wrap, .summary, .marginalia{ padding:0; max-width:100%; }
+    .rhythm-card, .entry-card, .marginalia-card, .table-wrap{
+      box-shadow:none !important;
+      border:1px solid #999 !important;
+      background:#fff !important;
+    }
+    .entry.is-this-week .entry-card, .entry.is-today .entry-card{
+      box-shadow:none !important;
+    }
+    .entry.is-today .entry-date::after,
+    .entry.is-this-week .entry-date::after{
+      background:transparent !important;
+      color:#000 !important;
+      border:1px solid #000;
+    }
+    .month-section{ page-break-inside:avoid; padding-top:1.5rem; }
+    .entry{ page-break-inside:avoid; }
+    a[href]::after{ content:""; }
+    thead th{ background:#eee !important; color:#000 !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .badge-exam, .badge-capstone{
+      background:#000 !important; color:#fff !important;
+      -webkit-print-color-adjust:exact; print-color-adjust:exact;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <span class="site-nav-mark">HIST 101-Y1 / FA26</span>
+    <a href="#august">Aug</a>
+    <a href="#september">Sep</a>
+    <a href="#october">Oct</a>
+    <a href="#november">Nov</a>
+    <a href="#december">Dec</a>
+    <a href="#summary">Chapter Summary</a>
+    <a href="#confirm">To Confirm</a>
+    <a href="#" id="print-link">Print</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <p class="eyebrow">Richland Community College · U.S. History to 1877</p>
+  <h1 class="title">HIST 101-Y1<br><em>Working Due-Date Calendar</em></h1>
+  <p class="subtitle">A chapter-by-chapter ledger of readings, quizzes, discussions, and exams — Colonization through the Civil War.</p>
+  <div class="hero-meta">
+    <span>Term: <b>Fall 2026</b></span>
+    <span>Format: <b>In-person, T/TH</b></span>
+    <span>Coverage: <b>Ch. 2 — Civil War</b></span>
+    <span>Status: <b>Working draft — items pending confirmation</b></span>
+  </div>
+</header>
+
+<section class="rhythm">
+  <div class="rhythm-card">
+    <h2>Course Rhythm</h2>
+    <ul class="rhythm-list">
+      <li><b>Reading reminders</b> are due at 11:59 p.m. Central Time the night before the first class meeting for that chapter.</li>
+      <li><b>Chapter quizzes</b> and regular chapter assignments are due at 11:59 p.m. on the Sunday after the chapter lectures are completed.</li>
+      <li><b>Stream &amp; Discuss</b> initial posts are due with the chapter quiz on Sunday; the discussion stays open four additional days for the required reply.</li>
+      <li><b>Civil War</b> follows the normal pattern and is due <b>Sunday, December 6 at 11:59 p.m.</b></li>
+    </ul>
+    <div class="rhythm-exceptions">
+      <div><span class="tag">Exception</span>Chapter 6 work is due <b>Wednesday, September 30 at 11:59 p.m.</b>, ahead of Exam 1.</div>
+      <div><span class="tag">Exception</span>The Trail of Tears capstone (introduced in Ch. 11) is due <b>Wednesday, November 18 at 11:59 p.m.</b> — the same date as the Ch. 14 reading reminder.</div>
+    </div>
+  </div>
+</section>
+
+<div class="today-banner" id="today-banner">
+  <div class="today-banner-inner" id="today-banner-inner"></div>
+</div>
+
+<main class="timeline-wrap">
+
+  <!-- ================= AUGUST ================= -->
+  <section class="month-section" id="august">
+    <div class="month-heading"><h2>August</h2><span class="month-year">2026</span></div>
+    <div class="ledger">
+
+      <div class="entry type-reading" data-date="2026-08-24"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Mon, Aug 24</span> · 11:59 p.m.</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-reading">Reading</span><span class="txt">Chapter 2 — <i>Colonization in North America, 1600–1680</i></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry type-quiz" data-date="2026-08-30"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Sun, Aug 30</span> · 11:59 p.m.</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-quiz">Quiz</span><span class="txt">Chapter 2 Quiz</span></li>
+            <li><span class="badge badge-sd">S&amp;D · Initial</span><span class="txt">Stream &amp; Discuss — <i>Massacre at Mystic and the Pequot War</i></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry type-reading" data-date="2026-08-31"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Mon, Aug 31</span> · 11:59 p.m.</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-reading">Reading</span><span class="txt">Chapter 3 — <i>Empires, Indians, and the Struggle for Power in North America, 1670–1720</i></span></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= SEPTEMBER ================= -->
+  <section class="month-section" id="september">
+    <div class="month-heading"><h2>September</h2><span class="month-year">2026</span></div>
+    <div class="ledger">
+
+      <div class="entry type-reply" data-date="2026-09-03"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Thu, Sep 3</span> · 11:59 p.m.</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-reply">S&amp;D · Reply</span><span class="txt">Chapter 2 Stream &amp; Discuss — classmate reply</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry type-quiz" data-date="2026-09-06"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Sun, Sep 6</span> · 11:59 p.m.</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-quiz">Quiz</span><span class="txt">Chapter 3 Quiz</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry type-reading" data-date="2026-09-07"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Mon, Sep 7</span> · 11:59 p.m.</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-reading">Reading</span><span class="txt">Chapter 4 — <i>Provincial America and the Struggle for a Continent, 1720–1763</i></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry type-quiz" data-date="2026-09-13"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Sun, Sep 13</span> · 11:59 p.m.</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-quiz">Quiz</span><span class="txt">Chapter 4 Quiz</span></li>
+            <li><span class="badge badge-psa">PSA</span><span class="txt">Primary Source Analysis — <i>The Great Awakening</i></span></li>
+            <li><span class="badge badge-check">Online Check</span><span class="txt"><i>George Washington's First War</i></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry type-reading" data-date="2026-09-14"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Mon, Sep 14</span> · 11:59 p.m.</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-reading">Reading</span><span class="txt">Chapter 5 — <i>Reform, Resistance, Revolution, 1763–1776</i></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry type-quiz" data-date="2026-09-20"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Sun, Sep 20</span> · 11:59 p.m.</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-quiz">Quiz</span><span class="txt">Chapter 5 Quiz</span></li>
+            <li><span class="badge badge-sd">S&amp;D · Initial</span><span class="txt">Stream &amp; Discuss — <i>Who Held the Power?</i></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry type-reading" data-date="2026-09-21"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Mon, Sep 21</span> · 11:59 p.m.</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-reading">Reading</span><span class="txt">Chapter 6 — <i>The Revolutionary Republic, 1776–1789</i></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry type-reply" data-date="2026-09-24"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Thu, Sep 24</span> · 11:59 p.m.</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-reply">S&amp;D · Reply</span><span class="txt">Chapter 5 Stream &amp; Discuss — classmate reply</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry type-quiz" data-date="2026-09-30"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Wed, Sep 30</span> · 11:59 p.m. <span class="badge badge-note">Exception</span></div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-quiz">Quiz</span><span class="txt">Chapter 6 Quiz</span></li>
+            <li class="muted"><span class="badge badge-note">Note</span><span class="txt">Any other required Chapter 6 coursework remaining in the module — due before Exam 1</span></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= OCTOBER ================= -->
+  <section class="month-section" id="october">
+    <div class="month-heading"><h2>October</h2><span class="month-year">2026</span></div>
+    <div class="ledger">
+
+      <div class="entry type-exam" data-date="2026-10-01"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Thu, Oct 1</span> · in class</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-exam">Exam 1</span><span class="txt">Chapters 2–6</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry type-reading" data-date="2026-10-05"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Mon, Oct 5</span> · 11:59 p.m.</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-reading">Reading</span><span class="txt">Chapter 7 — <i>Completing the Revolution, 1789–1815</i></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry type-quiz" data-date="2026-10-11"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Sun, Oct 11</span> · 11:59 p.m.</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-quiz">Quiz</span><span class="txt">Chapter 7 Quiz</span></li>
+            <li><span class="badge badge-sd">S&amp;D · Initial</span><span class="txt">Stream &amp; Discuss — <i>The War of 1812</i></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry type-reading" data-date="2026-10-12"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Mon, Oct 12</span> · 11:59 p.m.</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-reading">Reading</span><span class="txt">Chapter 9 — <i>The Old South, 1790–1850</i></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry type-reply" data-date="2026-10-15"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Thu, Oct 15</span> · 11:59 p.m.</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-reply">S&amp;D · Reply</span><span class="txt">Chapter 7 Stream &amp; Discuss — classmate reply</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry type-quiz" data-date="2026-10-18"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Sun, Oct 18</span> · 11:59 p.m.</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-quiz">Quiz</span><span class="txt">Chapter 9 Quiz</span></li>
+            <li><span class="badge badge-psa">PSA</span><span class="txt">Primary Source Analysis — <i>Hoodoo and Rootwork</i></span></li>
+            <li><span class="badge badge-check">Online Check</span><span class="txt"><i>Seeds of Destruction</i></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry type-reading" data-date="2026-10-19"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Mon, Oct 19</span> · 11:59 p.m.</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-reading">Reading</span><span class="txt">Chapter 10 — <i>Toward an American Culture, 1815–1850</i></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry type-quiz" data-date="2026-10-25"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Sun, Oct 25</span> · 11:59 p.m.</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-quiz">Quiz</span><span class="txt">Chapter 10 Quiz</span></li>
+            <li><span class="badge badge-sd">S&amp;D · Initial</span><span class="txt">Stream &amp; Discuss — <i>Joseph Smith / Early Mormonism</i></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry type-reading" data-date="2026-10-26"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Mon, Oct 26</span> · 11:59 p.m.</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-reading">Reading</span><span class="txt">Chapter 11 — <i>Whigs and Democrats, 1815–1840</i></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry type-reply" data-date="2026-10-29"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Thu, Oct 29</span> · 11:59 p.m.</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-reply">S&amp;D · Reply</span><span class="txt">Chapter 10 Stream &amp; Discuss — classmate reply</span></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= NOVEMBER ================= -->
+  <section class="month-section" id="november">
+    <div class="month-heading"><h2>November</h2><span class="month-year">2026</span></div>
+    <div class="ledger">
+
+      <div class="entry type-quiz" data-date="2026-11-01"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Sun, Nov 1</span> · 11:59 p.m.</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-quiz">Quiz</span><span class="txt">Chapter 11 Quiz</span></li>
+            <li class="muted"><span class="badge badge-note">Note</span><span class="txt">Trail of Tears capstone continues — not due yet</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry type-reading" data-date="2026-11-02"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Mon, Nov 2</span> · 11:59 p.m.</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-reading">Reading</span><span class="txt">Chapter 12 — <i>Antebellum Reform, 1820–1860</i></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry type-quiz" data-date="2026-11-08"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Sun, Nov 8</span> · 11:59 p.m.</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-quiz">Quiz</span><span class="txt">Chapter 12 Quiz</span></li>
+            <li class="muted"><span class="badge badge-note">Note</span><span class="txt">No additional major assignment planned while the Trail of Tears capstone is underway</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry type-exam" data-date="2026-11-10"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Tue, Nov 10</span> · in class</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-exam">Exam 2</span><span class="txt">Chapters 7, 9–12</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry type-reading" data-date="2026-11-11"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Wed, Nov 11</span> · 11:59 p.m.</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-reading">Reading</span><span class="txt">Chapter 13 — <i>Manifest Destiny: An Empire for Liberty—or Slavery? 1845–1860</i></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry type-capstone" data-date="2026-11-18"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Wed, Nov 18</span> · 11:59 p.m. <span class="badge badge-note">Exception</span></div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-reading">Reading</span><span class="txt">Chapter 14 — <i>The Gathering Tempest, 1853–1860</i></span></li>
+            <li><span class="badge badge-capstone">Capstone</span><span class="txt">Primary Source Analysis Capstone — <i>Trail of Tears</i> — final submission</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry type-quiz" data-date="2026-11-22"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Sun, Nov 22</span> · 11:59 p.m.</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-quiz">Quiz</span><span class="txt">Chapter 13 Quiz</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry type-quiz" data-date="2026-11-29"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Sun, Nov 29</span> · 11:59 p.m.</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-quiz">Quiz</span><span class="txt">Chapter 14 Quiz</span></li>
+            <li><span class="badge badge-sd">S&amp;D · Initial</span><span class="txt">Stream &amp; Discuss — <i>John Brown's Holy War</i></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry type-reading" data-date="2026-11-30"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Mon, Nov 30</span> · 11:59 p.m.</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-reading">Reading</span><span class="txt">Civil War</span></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= DECEMBER ================= -->
+  <section class="month-section" id="december">
+    <div class="month-heading"><h2>December</h2><span class="month-year">2026</span></div>
+    <div class="ledger">
+
+      <div class="entry type-reply" data-date="2026-12-03"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Thu, Dec 3</span> · 11:59 p.m.</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-reply">S&amp;D · Reply</span><span class="txt">Chapter 14 Stream &amp; Discuss — classmate reply</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry type-quiz" data-date="2026-12-06"><span class="entry-dot"></span><div class="entry-date"><span class="daytag">Sun, Dec 6</span> · 11:59 p.m.</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-quiz">Quiz</span><span class="txt">OpenStax Chapter 15 Quiz</span></li>
+            <li><span class="badge badge-check">Online Check</span><span class="txt">Civil War Online Check</span></li>
+            <li class="muted"><span class="badge badge-note">Note</span><span class="txt">No major (PSA/capstone) Civil War assignment planned</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry type-exam" data-date="2026-12-08">
+        <span class="entry-dot"></span>
+        <div class="entry-date"><span class="daytag">Tue, Dec 8</span> · 8:00–9:50 a.m.</div>
+        <div class="entry-card">
+          <ul class="entry-items">
+            <li><span class="badge badge-exam">Final</span><span class="txt">Final Exam — covers the final unit after Exam 2</span></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<section class="summary" id="summary">
+  <h2>Chapter-by-Chapter Summary</h2>
+  <p class="lede">A condensed reference view of every chapter's reading, quiz date, and any major assignment.</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Chapter</th>
+          <th>Reading Due</th>
+          <th>Quiz / Main Due</th>
+          <th>Major Assignment / Special Item</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="chp">Ch. 2</td><td class="due">Aug 24</td><td class="due">Aug 30</td><td>Pequot War S&amp;D initial Aug 30; reply Sep 3</td></tr>
+        <tr><td class="chp">Ch. 3</td><td class="due">Aug 31</td><td class="due">Sep 6</td><td>No major assignment planned</td></tr>
+        <tr><td class="chp">Ch. 4</td><td class="due">Sep 7</td><td class="due">Sep 13</td><td>Great Awakening PSA + George Washington online check</td></tr>
+        <tr><td class="chp">Ch. 5</td><td class="due">Sep 14</td><td class="due">Sep 20</td><td>Who Held the Power? S&amp;D initial Sep 20; reply Sep 24</td></tr>
+        <tr class="exception"><td class="chp">Ch. 6</td><td class="due">Sep 21</td><td class="due">Sep 30</td><td>Due before Exam 1</td></tr>
+        <tr><td class="chp">Ch. 7</td><td class="due">Oct 5</td><td class="due">Oct 11</td><td>War of 1812 S&amp;D initial Oct 11; reply Oct 15</td></tr>
+        <tr><td class="chp">Ch. 9</td><td class="due">Oct 12</td><td class="due">Oct 18</td><td>Hoodoo PSA + Seeds of Destruction online check</td></tr>
+        <tr><td class="chp">Ch. 10</td><td class="due">Oct 19</td><td class="due">Oct 25</td><td>Joseph Smith S&amp;D initial Oct 25; reply Oct 29</td></tr>
+        <tr><td class="chp">Ch. 11</td><td class="due">Oct 26</td><td class="due">Nov 1</td><td>Trail of Tears capstone introduced; final due Nov 18</td></tr>
+        <tr><td class="chp">Ch. 12</td><td class="due">Nov 2</td><td class="due">Nov 8</td><td>Intentionally lighter while capstone continues</td></tr>
+        <tr><td class="chp">Ch. 13</td><td class="due">Nov 11</td><td class="due">Nov 22</td><td>No major assignment planned</td></tr>
+        <tr><td class="chp">Ch. 14</td><td class="due">Nov 18</td><td class="due">Nov 29</td><td>John Brown S&amp;D initial Nov 29; reply Dec 3</td></tr>
+        <tr class="exception"><td class="chp">Civil War</td><td class="due">Nov 30</td><td class="due">Dec 6</td><td>OpenStax Chapter 15 Quiz + Civil War Online Check</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="marginalia" id="confirm">
+  <div class="marginalia-card">
+    <h3>Items to Confirm Before Building the Canvas Dating Script</h3>
+    <ol>
+      <li>Confirm the exact title of the Civil War Online Check if the Canvas script will match assignments by exact name.</li>
+      <li>During the Canvas assignment audit, apply each chapter's Sunday due date to any additional required low-stakes checks that are intended to close with that chapter.</li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <p>HIST 101-Y1 · Fall 2026 · Richland Community College — working draft, subject to revision</p>
+</footer>
+
+<script>
+(function(){
+  // Local calendar date, not UTC — avoids off-by-one near midnight.
+  var now = new Date();
+  var todayISO = now.getFullYear() + '-' +
+    String(now.getMonth()+1).padStart(2,'0') + '-' +
+    String(now.getDate()).padStart(2,'0');
+  var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+  // "This week" = the 7-day window starting today (through 6 days out).
+  var weekEnd = new Date(today);
+  weekEnd.setDate(weekEnd.getDate() + 6);
+
+  var entries = document.querySelectorAll('.entry[data-date]');
+  var todayEntry = null;
+  var thisWeekEntries = [];
+  var nextUpcoming = null;
+  var nextUpcomingDate = null;
+
+  entries.forEach(function(el){
+    var parts = el.getAttribute('data-date').split('-').map(Number);
+    var d = new Date(parts[0], parts[1]-1, parts[2]);
+
+    if (d.getTime() === today.getTime()){
+      el.classList.add('is-today');
+      todayEntry = el;
+    } else if (d > today && d <= weekEnd){
+      el.classList.add('is-this-week');
+      thisWeekEntries.push(el);
+    } else if (d < today){
+      el.classList.add('is-past');
+    }
+
+    if (d >= today && (!nextUpcomingDate || d < nextUpcomingDate)){
+      nextUpcomingDate = d;
+      nextUpcoming = el;
+    }
+  });
+
+  // Banner: prioritize "today", else the nearest upcoming item.
+  var banner = document.getElementById('today-banner');
+  var bannerInner = document.getElementById('today-banner-inner');
+  var target = todayEntry || nextUpcoming;
+
+  if (target){
+    var dateLabel = target.querySelector('.daytag') ? target.querySelector('.daytag').textContent : '';
+    var itemText = target.querySelector('.entry-items li .txt');
+    itemText = itemText ? itemText.textContent.trim() : 'an assignment';
+    var msg;
+    if (todayEntry){
+      msg = 'Due today (' + dateLabel + '): ' + itemText + (thisWeekEntries.length ? ' — plus ' + thisWeekEntries.length + ' more this week.' : '.');
+    } else {
+      var diffDays = Math.round((nextUpcomingDate - today) / 86400000);
+      var when = diffDays === 0 ? 'today' : diffDays === 1 ? 'tomorrow' : 'in ' + diffDays + ' days';
+      msg = 'Next due ' + when + ' (' + dateLabel + '): ' + itemText + '.';
+    }
+    bannerInner.innerHTML = msg + ' <a href="#' + '" id="jump-link">Jump to it \u2192</a>';
+    banner.classList.add('is-visible');
+
+    var jumpLink = document.getElementById('jump-link');
+    jumpLink.addEventListener('click', function(e){
+      e.preventDefault();
+      target.scrollIntoView({ behavior:'smooth', block:'center' });
+      target.style.transition = 'outline-color 0.3s ease';
+      target.style.outline = '2px solid transparent';
+      requestAnimationFrame(function(){
+        target.style.outlineColor = 'transparent';
+      });
+    });
+  }
+
+  // Print button
+  var printLink = document.getElementById('print-link');
+  if (printLink){
+    printLink.addEventListener('click', function(e){
+      e.preventDefault();
+      window.print();
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

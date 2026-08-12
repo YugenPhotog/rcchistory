@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why Colonize? — HIST 101, Chapter 2, Lecture 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #26241f;
+    --ink-soft: #55503f;
+    --paper: #e8e0cb;
+    --paper-panel: #f2ecda;
+    --paper-deep: #ded4b6;
+    --rule: #b9ab84;
+    --brass: #8f5a20;
+    --brass-bright: #a86c28;
+    --rubric: #8b3a3a;
+    --teal: #2c6b64;
+    --teal-deep: #1f4d48;
+    --shadow: rgba(38, 36, 31, 0.18);
+    --font-scale: 1;
+    --serif-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+    --serif-body: "Lora", "Iowan Old Style", Georgia, serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html {
+    font-size: calc(17px * var(--font-scale));
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    background-image:
+      radial-gradient(ellipse at 10% 0%, rgba(255,255,255,0.35), transparent 45%),
+      radial-gradient(ellipse at 90% 100%, rgba(0,0,0,0.05), transparent 50%);
+    color: var(--ink);
+    font-family: var(--serif-body);
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- Controls ---------- */
+  .controls {
+    position: fixed;
+    top: 14px;
+    right: 14px;
+    z-index: 60;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    background: var(--paper-panel);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 5px;
+    box-shadow: 0 3px 10px var(--shadow);
+  }
+  .controls button {
+    font-family: var(--serif-display);
+    font-weight: 600;
+    background: transparent;
+    border: none;
+    color: var(--ink-soft);
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s, color 0.15s;
+  }
+  .controls button:hover, .controls button:focus-visible {
+    background: var(--teal);
+    color: #fff;
+    outline: none;
+  }
+  .controls .divider {
+    width: 1px;
+    height: 20px;
+    background: var(--rule);
+  }
+  .controls button.print-btn { font-size: 16px; }
+
+  /* ---------- Title block ---------- */
+  .titlepage {
+    max-width: 640px;
+    margin: 4.5rem auto 3rem;
+    padding: 0 1.5rem;
+    text-align: center;
+  }
+  .eyebrow {
+    font-family: var(--serif-display);
+    font-variant: small-caps;
+    letter-spacing: 0.14em;
+    font-size: 0.82rem;
+    color: var(--brass);
+    font-weight: 600;
+  }
+  .titlepage h1 {
+    font-family: var(--serif-display);
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-size: clamp(2.1rem, 6vw, 3.1rem);
+    line-height: 1.08;
+    margin: 0.5rem 0 0.4rem;
+    color: var(--ink);
+  }
+  .titlepage .subtitle {
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+  }
+  .rule {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 1.4rem auto;
+    width: 60%;
+  }
+  .rule.double { border-top: 3px double var(--rule); width: 80%; }
+
+  /* ---------- Objectives card ---------- */
+  .objectives {
+    max-width: 640px;
+    margin: 0 auto 3.2rem;
+    padding: 1.4rem 1.7rem;
+    background: var(--paper-panel);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+  }
+  .objectives .label {
+    font-family: var(--serif-display);
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+    color: var(--brass);
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-bottom: 0.6rem;
+  }
+  .objectives ol {
+    margin: 0;
+    padding-left: 1.2rem;
+  }
+  .objectives li {
+    margin-bottom: 0.5rem;
+    font-size: 0.97rem;
+    color: var(--ink-soft);
+  }
+  .objectives li:last-child { margin-bottom: 0; }
+
+  /* ---------- Thesis / driving theme callout ---------- */
+  .thesis {
+    max-width: 640px;
+    margin: 0 auto 3.2rem;
+    padding: 1.5rem 1.8rem;
+    background: linear-gradient(135deg, var(--paper-deep), var(--paper-panel));
+    border: 1px solid var(--brass);
+    border-left: 4px solid var(--brass);
+    border-radius: 4px;
+    box-shadow: 0 3px 10px var(--shadow);
+  }
+  .thesis .label {
+    font-family: var(--serif-display);
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+    color: var(--brass);
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+  .thesis .four-causes {
+    font-family: var(--serif-display);
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+  }
+  .thesis .four-causes span {
+    color: var(--brass-bright);
+  }
+  .thesis p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  /* ---------- Layout: essay + margin rail ---------- */
+  .essay-wrap {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 1.5rem 5rem;
+  }
+
+  article.essay { min-width: 0; }
+
+  .intro p:first-of-type::first-letter {
+    font-family: var(--serif-display);
+    font-weight: 700;
+    float: left;
+    font-size: 3.6rem;
+    line-height: 0.82;
+    padding: 0.05em 0.09em 0 0;
+    color: var(--brass);
+  }
+
+  h2.section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
+    margin: 3.2rem 0 1.2rem;
+    font-family: var(--serif-display);
+    font-weight: 700;
+  }
+  h2.section-head .num {
+    font-size: 2rem;
+    color: var(--brass);
+    line-height: 1;
+  }
+  h2.section-head .txt {
+    font-size: 1.35rem;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  h2.section-head::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+    align-self: center;
+  }
+
+  h3.sub-head {
+    font-family: var(--serif-display);
+    font-weight: 600;
+    font-size: 1.08rem;
+    color: var(--teal-deep);
+    margin: 2rem 0 0.6rem;
+  }
+
+  p { margin: 0 0 1.05rem; font-size: 1rem; color: var(--ink); }
+
+  .closing p:first-of-type::first-letter {
+    font-family: var(--serif-display);
+    font-weight: 700;
+    float: left;
+    font-size: 3rem;
+    line-height: 0.82;
+    padding: 0.05em 0.08em 0 0;
+    color: var(--brass);
+  }
+
+  blockquote {
+    margin: 1.6rem 0.5rem 1.6rem 0;
+    padding: 0.9rem 1.3rem;
+    border-left: 3px solid var(--brass);
+    background: var(--paper-panel);
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 0.97rem;
+  }
+  blockquote cite {
+    display: block;
+    margin-top: 0.5rem;
+    font-style: normal;
+    font-variant: small-caps;
+    font-size: 0.82rem;
+    color: var(--brass);
+  }
+
+  /* ---------- Marginalia (Instructor note / Analytical significance) ---------- */
+  .gloss {
+    margin: 1.4rem 0;
+    padding: 0.9rem 1.1rem;
+    border-radius: 3px;
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+  .gloss .gloss-label {
+    font-family: var(--serif-display);
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    font-size: 0.78rem;
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+  .gloss.note {
+    background: #f4e9df;
+    border-left: 3px solid var(--rubric);
+    color: #5a3a30;
+  }
+  .gloss.note .gloss-label { color: var(--rubric); }
+  .gloss.sig {
+    background: #e9f0ee;
+    border-left: 3px solid var(--teal);
+    color: #294541;
+  }
+  .gloss.sig .gloss-label { color: var(--teal-deep); }
+
+  /* ---------- Term popovers ---------- */
+  .term {
+    color: var(--teal-deep);
+    text-decoration: underline dotted 1.5px;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  .term:hover, .term:focus-visible { color: var(--teal); }
+  .popover {
+    position: absolute;
+    max-width: 300px;
+    background: var(--ink);
+    color: var(--paper-panel);
+    padding: 0.85rem 1rem;
+    border-radius: 6px;
+    font-size: 0.86rem;
+    line-height: 1.5;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    z-index: 80;
+    font-family: var(--serif-body);
+  }
+  .popover .pv-term {
+    font-family: var(--serif-display);
+    font-weight: 700;
+    color: #f2ecda;
+    display: block;
+    margin-bottom: 0.35rem;
+    font-size: 0.92rem;
+  }
+  .popover a {
+    color: #9fd6cc;
+    font-size: 0.8rem;
+    text-decoration: none;
+    font-variant: small-caps;
+    letter-spacing: 0.04em;
+  }
+  .popover a:hover { text-decoration: underline; }
+  .popover .pv-close {
+    position: absolute;
+    top: 6px; right: 8px;
+    background: none; border: none;
+    color: #cfc9b6; cursor: pointer;
+    font-size: 0.9rem;
+    line-height: 1;
+  }
+
+  /* ---------- Bibliography ---------- */
+  .biblio {
+    max-width: 680px;
+    margin: 4rem auto 0;
+  }
+  .biblio-toggle {
+    width: 100%;
+    text-align: left;
+    background: var(--paper-panel);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 1rem 1.3rem;
+    font-family: var(--serif-display);
+    font-weight: 600;
+    font-size: 1.02rem;
+    color: var(--ink);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .biblio-toggle .chevron { transition: transform 0.2s; color: var(--brass); }
+  .biblio-toggle[aria-expanded="true"] .chevron { transform: rotate(90deg); }
+  .biblio-body {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.35s ease;
+  }
+  .biblio-body.open { max-height: 3000px; }
+  .biblio-list {
+    padding: 1.3rem 0.2rem 0.5rem;
+    display: grid;
+    gap: 1.1rem;
+  }
+  .biblio-entry {
+    padding: 0.9rem 1.1rem;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    background: rgba(255,255,255,0.35);
+  }
+  .biblio-entry .cite {
+    font-size: 0.95rem;
+    color: var(--ink);
+  }
+  .biblio-entry .cite b { font-weight: 600; }
+  .biblio-entry .desc {
+    font-size: 0.86rem;
+    color: var(--ink-soft);
+    margin-top: 0.35rem;
+  }
+  .biblio-links { margin-top: 0.6rem; display: flex; gap: 0.5rem; }
+  .biblio-links a {
+    font-size: 0.76rem;
+    font-variant: small-caps;
+    letter-spacing: 0.05em;
+    color: var(--teal-deep);
+    text-decoration: none;
+    border: 1px solid var(--teal);
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+  }
+  .biblio-links a:hover { background: var(--teal); color: #fff; }
+
+  footer.colophon {
+    max-width: 680px;
+    margin: 4rem auto 3rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  /* ---------- Print ---------- */
+  @media print {
+    .controls, .popover { display: none !important; }
+    body { background: #fff; color: #000; }
+    .essay-wrap { max-width: 100%; }
+    .gloss.note { border-left-color: #444; background: #f3f3f3; color: #000; }
+    .gloss.sig { border-left-color: #444; background: #eee; color: #000; }
+    a { color: #000; text-decoration: underline; }
+    .biblio-body { max-height: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="controls" role="toolbar" aria-label="Reading controls">
+  <button id="font-dec" aria-label="Decrease text size">A−</button>
+  <button id="font-reset" aria-label="Reset text size" style="font-size:12px;">A</button>
+  <button id="font-inc" aria-label="Increase text size">A+</button>
+  <div class="divider"></div>
+  <button class="print-btn" id="print-page" aria-label="Print this essay">⎙</button>
+</div>
+
+<div class="titlepage">
+  <div class="eyebrow">HIST 101 · Chapter 2 · Lecture 1</div>
+  <h1>Why Colonize?</h1>
+  <div class="subtitle">Professor's Background Essay</div>
+  <hr class="rule">
+</div>
+
+<div class="objectives">
+  <div class="label">Lecture Learning Objectives</div>
+  <ol>
+    <li>Explain how the English Reformation and rivalry with Catholic Spain helped turn overseas expansion into a religious, political, and strategic project.</li>
+    <li>Analyze how privateering, commercial ambition, and the search for new markets encouraged an English turn toward the Atlantic without making permanent colonization inevitable.</li>
+    <li>Evaluate the roles of Richard Hakluyt, Spanish precedents, and the colonization of Ireland in shaping English arguments and assumptions about overseas settlement.</li>
+    <li>Explain why the Roanoke ventures exposed the logistical, diplomatic, environmental, and institutional difficulties of permanent colonization.</li>
+    <li>Assess why sustained migration and accumulated colonial capacity, rather than any single motive or master plan, made seventeenth-century English settlement durable.</li>
+  </ol>
+</div>
+
+<div class="thesis">
+  <div class="label">Driving Theme</div>
+  <div class="four-causes"><span>Religion</span> · <span>Rivalry</span> · <span>Profit</span> · <span>Opportunity</span></div>
+  <p>Four initially separate pressures that converged, unevenly and without a master plan, to make English colonization thinkable — then durable. No single cause explains it; the essay traces how each category gets complicated on closer instructor-level inspection.</p>
+</div>
+
+<div class="essay-wrap">
+  <article class="essay">
+
+    <section class="intro">
+      <h2 class="section-head"><span class="txt">Introductory Framing</span></h2>
+      <p>The question "Why did England colonize?" sounds simpler than the historical process it describes. There was no single moment at which England decided to build an American empire, no fully developed national blueprint in the 1550s, and no one motive shared by monarchs, merchants, soldiers, religious reformers, sailors, servants, and prospective settlers. The course textbook captures this gradual development by asking what ambitions and historical developments "committed England to overseas colonization" and by moving from the English Reformation to plundering, Roanoke, and mass migration. That sequence is best understood not as a march toward an inevitable empire but as a convergence of initially separate pressures and opportunities.</p>
+      <p>For lecture purposes, the convergence can be reduced to four memorable categories: religion, rivalry, profit, and opportunity. For instructor preparation, however, those categories need to be unpacked. Religion mattered not merely because later Puritans sought refuge, but because the Reformation reoriented English state identity and foreign policy. Rivalry mattered not simply because Spain possessed colonies, but because English participation in an anti-Spanish Atlantic taught mariners, investors, and officials how overseas violence and commerce could serve national strategy. Profit mattered because colonial promoters imagined new commodities, markets, naval resources, and customs revenues, even when most English merchants still preferred established trades elsewhere. Opportunity mattered because colonization required actual human beings willing or compelled to move, and because the economic and demographic changes of early modern England created large populations for whom migration could appear plausible.</p>
+      <p>The essay therefore treats early English colonization as a problem of state formation, ideology, political economy, violence, institutional learning, and migration. It also resists a familiar retrospective trap: because Jamestown survived in 1607, it is easy to narrate Gilbert, Raleigh, Hakluyt, Drake, Ireland, and Roanoke as steps in a plan that was already heading toward Virginia. Historians such as David Beers Quinn, Karen Ordahl Kupperman, Nicholas Canny, David Armitage, Andrew Fitzmaurice, Peter C. Mancall, and Alison Games instead help reveal how uncertain, contested, and experimental the process remained.</p>
+    </section>
+
+    <section>
+      <h2 class="section-head"><span class="num">1</span><span class="txt">Religion, State Formation, and the Making of Protestant England</span></h2>
+
+      <h3 class="sub-head">Henry VIII's Break with Rome: Political Crisis Before Protestant Nation</h3>
+      <p>England's later Protestant identity should not be projected backward onto Henry VIII's initial break with Rome. Henry's conflict with papal authority arose first from dynastic and jurisdictional concerns: his inability to secure an annulment from Catherine of Aragon, his urgent concern for the Tudor succession, and his determination to establish royal supremacy within his realm. The break nevertheless had consequences that exceeded its initial purposes. The Crown dissolved monasteries, appropriated ecclesiastical wealth, and asserted that English political sovereignty did not depend on an external papal authority. That fusion of religious jurisdiction and royal sovereignty created the institutional space in which more thorough Protestant reform could proceed.</p>
+      <p>The reigns of Henry's children transformed the character of the settlement. Edward VI's government pushed doctrine and worship more decisively in a Protestant direction. Mary I restored Catholic worship and papal communion, while the persecution and exile of Protestants intensified the confessional stakes. English exiles encountered Reformed communities on the Continent, including Calvinist traditions that later shaped Puritan critiques of the Church of England. Elizabeth I's accession in 1558 did not end religious conflict, but it gave England a durable Protestant state church whose theology was more Reformed than its retained episcopal structure, liturgy, and ceremonial forms suggested.</p>
+
+      <h3 class="sub-head">Elizabethan Settlement, Puritan Dissatisfaction, and National Identity</h3>
+      <p>The <span class="term" data-term="Elizabethan Religious Settlement" data-def="The 1559 laws under which Elizabeth I fixed England's church as Protestant in doctrine while keeping bishops, vestments, and much of the older liturgy — a deliberate middle course meant to hold a religiously divided kingdom together." data-link="https://www.rmg.co.uk/stories/topics/elizabeth-religious-settlement" data-source="Royal Museums Greenwich">Elizabethan religious settlement</span> matters to colonization less because it created immediate demand for a refuge than because it helped redefine the political meaning of religion. The queen's government confronted Catholic plots, foreign Catholic powers, and disputes over how thoroughly the English church should be reformed. Puritans, most of whom initially sought further reform from within rather than separation from the national church, became an enduring reminder that Protestant England remained internally contested. The Separatist impulse that later contributed to Plymouth was only one edge of a much broader Reformed culture.</p>
+      <p>The more consequential development for the late sixteenth century was the increasing alignment of English Protestant identity with resistance to Spain. Spain was not merely another European rival. It was the leading Catholic monarchy, the possessor of an enormous American empire, and a central participant in the wars of the Low Countries. Religious polemic, dynastic politics, and geopolitics increasingly reinforced one another. English support for Protestant resistance abroad and Spanish support for Catholic interests in and around England made Atlantic competition intelligible as part of a larger confessional struggle.</p>
+
+      <h3 class="sub-head">The Protestant "Black Legend" and the Moral Language of Rivalry</h3>
+      <p>Anti-Spanish propaganda supplied a moral vocabulary for expansion. Northern European Protestants circulated accounts and images of Spanish cruelty in the Americas, helping create what later historians call the <span class="term" data-term="Black Legend" data-def="The image of Spain, spread by its Protestant rivals, as uniquely cruel toward the peoples of the Americas — a moral vocabulary England used to justify its own overseas ambitions, even as its own colonists behaved no better." data-link="https://www.britannica.com/topic/Black-Legend" data-source="Britannica">"Black Legend."</span> The course textbook's discussion of Theodor de Bry's imagery is valuable because it shows how depictions of Spanish violence could justify Protestant challenges to Spanish power. Yet the propaganda should never be mistaken for a reliable moral distinction between Catholic and Protestant colonialism. English colonizers would themselves employ coercion, dispossession, massacre, and unfree labor.</p>
+
+      <div class="gloss note">
+        <span class="gloss-label">Instructor Note</span>
+        Avoid framing English expansion as a humane Protestant alternative to Spanish conquest. Anti-Spanish polemic was politically powerful, but the later behavior of English settlers repeatedly contradicted the moral superiority claimed in promotional literature.
+      </div>
+
+      <h3 class="sub-head">Historiographical Perspective: Protestantism and Empire</h3>
+      <p>David Armitage's work is especially useful for avoiding a simplistic "religion caused colonization" thesis. In <em>The Ideological Origins of the British Empire</em>, Armitage connects Protestantism, state formation, maritime claims, property arguments, and emerging imperial thought. His contribution is to show that Protestantism became one language through which English expansion could be legitimated, not that a mature British imperial ideology already existed under Elizabeth. Indeed, the very language of "British Empire" can mislead when applied too confidently to a period in which political union and imperial institutions were still incomplete.</p>
+
+      <div class="gloss sig">
+        <span class="gloss-label">Analytical Significance</span>
+        The Reformation mattered to colonization because it altered the relationship among religion, sovereignty, and foreign policy. By Elizabeth's reign, overseas rivalry could be imagined not merely as commercial competition but as the defense and enlargement of a Protestant political order. Religion therefore did more than send future dissenters across the Atlantic: it helped make expansion against Spain appear nationally and morally purposeful.
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-head"><span class="num">2</span><span class="txt">Rivalry, Privateering, and England's Turn Toward the Atlantic</span></h2>
+
+      <h3 class="sub-head">Spain's Head Start and England's Peripheral Position</h3>
+      <p>At the beginning of Elizabeth's reign, England was not the obvious future center of an Atlantic empire. Spain had conquered vast American territories, extracted enormous quantities of silver, developed transatlantic shipping systems, and established imperial cities and administrative institutions. Portugal possessed its own global commercial network. Even English merchants often found established trades with the Mediterranean, Muscovy, the Low Countries, and eventually Asia more attractive than speculative North American ventures.</p>
+      <p>This asymmetry is crucial. Spain's success functioned simultaneously as a threat, an example, and a target. English observers saw American wealth strengthening a hostile monarchy; they also saw proof that overseas enterprise could transform the resources of a European state. Before England could create comparable settlements, however, it could insert itself into the Atlantic through raiding, smuggling, exploration, and privateering.</p>
+
+      <h3 class="sub-head">Privateering as a Bridge Between Commerce and War</h3>
+      <p>Privateering blurred distinctions that modern students often assume were clear. A privately financed voyage could pursue profit while also serving royal strategy. A mariner celebrated in England as a patriotic captain could be condemned in Spain as a pirate. The Crown could encourage attacks on enemy commerce without paying the full costs of a permanent naval establishment. Investors could share prize money, crews gained knowledge of Atlantic routes and ports, and officials learned to treat commercial violence as an instrument of state competition.</p>
+      <p>Francis Drake personifies this overlap. His voyages were commercial ventures, military attacks, acts of exploration, and performances of Protestant-national rivalry all at once. The interpretive point is not whether Drake was "really" a pirate or patriot. The categories themselves depended on sovereignty and perspective. Privateering helped create the human and institutional experience from which later colonial enterprise could draw, but it did not solve the central problem of settlement: a raid could return home after a season; a colony had to survive indefinitely.</p>
+
+      <h3 class="sub-head">The Armada in Proper Perspective</h3>
+      <p>The Spanish Armada of 1588 has often been narrated as a decisive hinge after which Spanish power collapsed and English mastery of the seas began. That teleology is too neat. The Armada was a failed invasion project within a much longer Anglo-Spanish war that continued until 1604. The campaign mattered enormously for English political culture and confidence, and the demands of war directly affected colonial ventures, including John White's delayed return to Roanoke. But the defeat did not instantly create English naval supremacy or make colonization inevitable.</p>
+      <p>Recent work by Colin Martin and Geoffrey Parker is useful here because it deliberately dismantles heroic national myths surrounding the Armada. Their scholarship combines archival research with marine archaeology to reconstruct a complicated military failure rather than a simple morality tale of nimble English genius defeating an obsolete Spain. For this lecture, the most useful conclusion is modest: 1588 confirmed the seriousness of Anglo-Spanish rivalry and helped sustain England's Atlantic orientation, but English colonizing projects both preceded and survived the campaign.</p>
+
+      <div class="gloss note">
+        <span class="gloss-label">Instructor Note</span>
+        The course textbook says the Armada's loss "crippled Spain." For classroom purposes, soften that formulation. Spain remained a major European and Atlantic power after 1588. The more defensible point is that the failed invasion strengthened English confidence and intensified a long conflict in which Atlantic raiding and colonization acquired strategic value.
+      </div>
+
+      <h3 class="sub-head">From Atlantic Violence to Atlantic Orientation</h3>
+      <p>The most consequential shift was cumulative. London merchants and courtiers became more familiar with transatlantic ventures; English crews acquired knowledge; investors became accustomed to risk; and the Crown learned that private capital could be mobilized for geopolitical purposes. The course textbook is especially perceptive in noting that English involvement in Atlantic privateering represented a turn toward the Atlantic even when North America remained less attractive than other commercial regions. Colonization emerged from this wider world of mobility and competition, not from an isolated fascination with the future United States.</p>
+
+      <div class="gloss sig">
+        <span class="gloss-label">Analytical Significance</span>
+        Privateering created an Atlantic habit before England possessed an Atlantic empire. It joined profit-seeking to state rivalry and produced knowledge, networks, and expectations that permanent settlement could later exploit. The crucial transition was therefore not from "no interest" to "colonial plan," but from episodic participation in Atlantic competition to growing confidence that England could sustain a permanent presence overseas.
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-head"><span class="num">3</span><span class="txt">Imagining Colonization: Richard Hakluyt, Profit, Strategy, and National Purpose</span></h2>
+
+      <h3 class="sub-head">Colonization Had to Be Argued For</h3>
+      <p>Permanent colonization was expensive, uncertain, and by no means self-evidently preferable to trade or privateering. Advocates therefore had to construct a case that colonies would serve multiple interests at once. No figure is more useful for understanding that work of persuasion than Richard Hakluyt the younger, an Oxford-educated cleric, compiler of voyages, and tireless promoter of English overseas enterprise.</p>
+      <p>Peter C. Mancall's <em>Hakluyt's Promise</em> is particularly valuable because it restores the contingency of Hakluyt's project. Mancall emphasizes that English America had to be imagined and sold before it could become durable. Hakluyt collected travel accounts, cultivated patrons, and translated scattered voyages into an argument that England possessed both the capacity and the obligation to expand. His achievement was rhetorical and intellectual as much as geographical.</p>
+
+      <h3 class="sub-head">The <span class="term" data-term="Discourse of Western Planting" data-def="Hakluyt's 1584 state paper for Elizabeth I, arguing that colonization would serve religion, trade, naval strength, and royal revenue all at once — the single best window into how promoters bundled English motives together." data-link="https://nationalhumanitiescenter.org/pds/amerbegin/exploration/text5/hakluyt.pdf" data-source="National Humanities Center (excerpts)">Discourse of Western Planting</span>: A Bundle of Motives</h3>
+      <p>Hakluyt's 1584 <em>Discourse of Western Planting</em>, prepared for Elizabeth and her advisers in the context of Raleigh's plans, makes the lecture's four-cause model visible in a single source. It argues for Protestant mission, new trade, royal revenue, naval strength, strategic settlement, and claims against Spain. Hakluyt did not present religion, rivalry, and profit as competing explanations. He presented them as mutually reinforcing reasons for action.</p>
+
+      <blockquote>
+        Hakluyt promised an "enlargement of the gospel of Christ," stronger "Navye," and revenues that would be "mightely be inlarged."
+        <cite>Richard Hakluyt, Discourse of Western Planting (1584)</cite>
+      </blockquote>
+
+      <p>These fragments reveal why single-cause explanations are misleading. A Protestant mission could weaken Spain. New trade could increase customs revenue. Colonies could support shipping and naval manpower. Settlement could provide strategic bases while creating new markets. Hakluyt's vision was expansive precisely because it translated overseas enterprise into the language of national improvement.</p>
+
+      <h3 class="sub-head">Political Economy: Markets, Employment, and the "Commonwealth"</h3>
+      <p>Colonial promotion also responded to anxieties about England's domestic economy. Population growth, <span class="term" data-term="Enclosure" data-def="The conversion of open, communally-worked English fields into fenced private plots — a long process that displaced small farmers and fed the anxieties promoters used to sell colonization as a solution to English poverty." data-link="https://www.britannica.com/topic/enclosure" data-source="Britannica">enclosure</span>, shifts toward pastoral production, urbanization, and periodic unemployment contributed to a recurring fear that the realm contained too many underemployed people. Promoters could describe colonization as a means to employ the poor, expand markets for English manufactures, obtain commodities otherwise purchased from foreign powers, and strengthen the fiscal base of the Crown.</p>
+      <p>Such arguments should not be treated as objective economic forecasts. They were promotional claims made by men trying to mobilize capital and political support. Many colonies failed to deliver the commodities promoters predicted; some became dependent on crops or labor systems that their original advocates had not anticipated. Nevertheless, the language of improvement mattered because it allowed colonization to be represented as a solution to domestic problems as well as an overseas venture.</p>
+
+      <h3 class="sub-head">Intellectual History: Legitimation, Virtue, and the Problem of Possession</h3>
+      <p>Andrew Fitzmaurice complicates a purely mercantilist reading by showing that English colonization was argued within humanist traditions concerned with virtue, civic order, law, and legitimate possession. Colonial promoters had to answer moral and legal questions: What justified taking possession? What distinguished legitimate settlement from piracy? Could conquest be reconciled with Christian or classical ideals? The answers were often self-serving, but the need to produce them demonstrates that early colonization was not imagined solely in the language of raw profit.</p>
+      <p>David Armitage likewise stresses that Protestantism, property, maritime sovereignty, and political economy gradually became components of imperial ideology. Taken together, Mancall, Fitzmaurice, and Armitage encourage an instructor to treat Hakluyt not merely as a propagandist with a list of reasons, but as a participant in the creation of a new political imagination: England could be strengthened by organizing distant places, peoples, and resources into a durable overseas system.</p>
+
+      <div class="gloss sig">
+        <span class="gloss-label">Analytical Significance</span>
+        Hakluyt matters because he made disparate motives appear compatible. His promotional literature converted religious duty, anti-Spanish strategy, naval strength, employment, trade, and royal revenue into one argument for permanent settlement. Colonization became thinkable as a national project before it became reliable as a practical one.
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-head"><span class="num">4</span><span class="txt">Ireland as Colonial Precedent: Transfer, Analogy, and Violence</span></h2>
+
+      <h3 class="sub-head">A Colonial Problem Closer to Home</h3>
+      <p>The English did not encounter the problem of conquest and settlement for the first time in North America. Ireland supplied centuries of experience with contested sovereignty, cultural difference, military occupation, land confiscation, and attempts to impose English law and social organization. In the sixteenth century, especially, English officials and adventurers debated how to transform regions that they regarded as disorderly or insufficiently governed into territories more securely controlled by the Crown.</p>
+      <p>Plantation schemes sought to establish loyal settlers on confiscated or reorganized land and to extend English agriculture, language, law, religion, and local government. The process was neither uniform nor uncontested. Policies varied among conciliation, reform, coercion, plantation, and outright military destruction. The key point for North American history is that English personnel and political vocabulary moved between these arenas. Men with experience in Ireland later appeared in Atlantic enterprises, and analogies used to describe the Irish helped shape expectations about Indigenous peoples.</p>
+
+      <h3 class="sub-head">Nicholas Canny and the Ireland-America Connection</h3>
+      <p>Nicholas Canny made the Ireland-America connection central to modern scholarship on English expansion. His early work on the Elizabethan conquest and his later <em>Making Ireland British</em> demonstrated that plantation policy, conquest, cultural stereotyping, and state-building in Ireland cannot be separated from the origins of English imperial practice. Canny's contribution was not merely to identify similar violence. He showed that Ireland served as a field in which English thinkers and administrators developed assumptions about civility, property, religion, improvement, and political order that could travel overseas.</p>
+      <p>The course textbook makes this transfer unusually explicit, arguing that English attitudes toward the Irish helped shape preconceptions about Native Americans and noting that veterans of Irish warfare participated in early Atlantic projects. For an instructor, the comparison is valuable precisely because it reveals colonization as a repertoire of practices rather than a single invention: surveying, plantation, fortification, land grants, legal reorganization, cultural hierarchy, and coercive warfare could all be adapted to new circumstances.</p>
+
+      <h3 class="sub-head">The Limits of the "Ireland as Blueprint" Model</h3>
+      <p>The connection should not be flattened into a claim that America was simply Ireland reproduced overseas. Ireland possessed a very different legal history, population density, religious landscape, ecology, and relationship to the English Crown. Native American polities were not Gaelic lordships, and English settlers confronted very different demographic and geopolitical conditions across North America. Transfer was selective. Personnel carried habits and analogies, but local conditions reshaped practice.</p>
+      <p>This distinction matters historiographically. Canny's emphasis on conquest and plantation corrected older narratives that treated English America as a nearly autonomous New World beginning. Later scholarship has deepened rather than erased that insight by examining the gap between imperial theory and local practice. The most useful formulation is therefore that Ireland was a colonial precedent and laboratory, not a deterministic template.</p>
+
+      <h3 class="sub-head">Civility, Barbarism, and the Moral Work of Stereotypes</h3>
+      <p>English descriptions of both Irish and Native peoples frequently employed a hierarchy of "civil" and "barbarous" societies. Such language did political work. If a population could be described as lacking proper agriculture, law, religion, or settled government, intervention could be represented as improvement rather than dispossession. The categories were ideological, but they had material consequences: assumptions about who used land properly and who possessed legitimate sovereignty could rationalize settlement and violence.</p>
+
+      <div class="gloss note">
+        <span class="gloss-label">Instructor Note</span>
+        The Ireland connection is intellectually important but easy to overteach in Lecture 1. For background preparation, understand the depth of the transfer debate. In class, one concise explanation can establish that English colonizers already possessed models of plantation, cultural hierarchy, and coercive settlement before Roanoke.
+      </div>
+
+      <div class="gloss sig">
+        <span class="gloss-label">Analytical Significance</span>
+        Ireland reveals that English colonization did not begin at the Atlantic shoreline. Practices and assumptions formed within the Tudor state supplied a vocabulary for judging other peoples and reorganizing their land. The significance is not that America copied Ireland exactly, but that English expansion overseas drew on an existing repertoire of conquest, plantation, and claims to "improvement."
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-head"><span class="num">5</span><span class="txt">Roanoke: Trial-and-Error Colonization</span></h2>
+
+      <h3 class="sub-head">Raleigh's Ventures and the Difference Between Outpost and Settlement</h3>
+      <p>Roanoke is often remembered as a mystery story, but its greater value lies in exposing the difference between claiming territory and sustaining a colony. Raleigh's enterprises followed earlier English efforts, including Humphrey Gilbert's failed Newfoundland venture, and combined reconnaissance, strategic ambition, commercial speculation, and the hope of creating a base against Spain. The 1585 colony functioned heavily as a military and exploratory outpost; the 1587 venture included women and was more clearly intended as a permanent settlement.</p>
+      <p>The ventures depended on fragile transatlantic supply lines and uncertain assumptions about local resources. English planners had imperfect knowledge of soils, seasons, food supplies, and Indigenous political relationships. The colonists also expected forms of trade and assistance that local Algonquian communities had no obligation to provide indefinitely. The colony's vulnerability was therefore not a single logistical error but the product of interdependent weaknesses.</p>
+
+      <h3 class="sub-head">Native Peoples Were Political Actors, Not Background Conditions</h3>
+      <p>Karen Ordahl Kupperman's <em>Roanoke: The Abandoned Colony</em> is especially useful because it reconstructs the Carolina Algonquian world into which the English intruded. Kupperman's approach shifts attention away from the colonists as isolated protagonists and toward the changing relationship between English demands and Native interests. Early cooperation could give way to suspicion when colonists consumed food, disrupted political balances, or appeared likely to become permanent.</p>
+      <p>That perspective provides an important continuity with later Jamestown. English survival depended not simply on European courage or supply but on the decisions of Native communities whose own political calculations changed over time. Roanoke failed in an Indigenous world already governed, used, and contested by Native peoples. A permanent English settlement required diplomacy and accommodation as surely as ships and provisions.</p>
+
+      <h3 class="sub-head">The "Lost Colony": Evidence and Uncertainty</h3>
+      <p>When Governor John White returned in 1590 after a delay caused by the Anglo-Spanish war, he found the settlement abandoned and the word "<span class="term" data-term="Croatoan" data-def="The single word John White found carved into a post at the abandoned Roanoke settlement in 1590 — the strongest surviving clue that the colonists relocated deliberately rather than vanished, though their fate remains unconfirmed." data-link="https://www.ncpedia.org/croatoan" data-source="NCpedia">CROATOAN</span>" marking the site. The clue strongly suggests purposeful relocation rather than a sudden disappearance, but the subsequent history of the settlers remains uncertain. David Beers Quinn devoted decades to reconstructing the voyages and argued controversially that many colonists may have moved toward the Chesapeake region and later been killed amid Powhatan political consolidation. The surviving evidence does not permit that reconstruction to be treated as certain.</p>
+      <p>Quinn's scholarship remains foundational because of its exhaustive reconstruction of voyages, personnel, documents, maps, and geographical knowledge. Kupperman's later interpretation places more weight on the conditions necessary for successful colonization and on the agency of Native peoples. Together they suggest a better teaching emphasis: the "mystery" is engaging, but the historical lesson lies in the colony's structural fragility.</p>
+
+      <h3 class="sub-head">Why Roanoke Failed as a System</h3>
+      <p>A permanent settlement required a package of capacities that Elizabethan ventures could not yet reliably assemble: adequate financing, experienced leadership, agricultural knowledge, skilled labor, dependable resupply, favorable relations with neighboring peoples, intelligence about regional politics, and protection from European war. Failure in one area could amplify failure in others. A delayed ship meant fewer tools and less food; scarcity intensified demands on Native communities; deteriorating diplomacy increased military danger; military danger diverted labor away from subsistence.</p>
+      <p>This systemic interpretation explains why Roanoke should not be reduced to bad luck. Storms, war, and individual decisions mattered, but the project lacked resilience. Later English colonies also suffered catastrophic mortality and conflict. The difference was that by the early seventeenth century promoters and governments had developed stronger financing mechanisms, larger flows of migrants, more continuous resupply, and a greater willingness to absorb repeated losses.</p>
+
+      <div class="gloss sig">
+        <span class="gloss-label">Analytical Significance</span>
+        Roanoke demonstrates that imperial intention is not the same as colonial capacity. England could claim land, authorize voyages, and imagine profit long before it could keep a distant settlement alive. Its failure was therefore part of the learning process by which English colonization shifted from spectacular expeditions to institutions capable of surviving repeated crisis.
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-head"><span class="num">6</span><span class="txt">Migration, Coercion, and the Human Capacity for Sustainable Settlement</span></h2>
+
+      <h3 class="sub-head">The Demographic and Economic Context of English Migration</h3>
+      <p>Colonies required people, and the scale of English Atlantic settlement cannot be understood apart from demographic change at home. England's population expanded substantially in the sixteenth and early seventeenth centuries. Agricultural commercialization, enclosure, regional dislocation, urban growth, and uneven access to land contributed to fears of overpopulation and underemployment. London's dramatic growth made such anxieties visible even when the causes of poverty and mobility were more complex than promoters admitted.</p>
+      <p>Colonial propaganda turned those anxieties into opportunity. Overseas settlement could be represented as an outlet for the unemployed, a source of land for people with limited prospects, and a way to convert allegedly "idle" population into productive labor. For individual migrants, motives varied. Some sought land, wages, religious community, commercial advancement, military service, or escape from constrained circumstances. The very diversity of motives reinforces the lecture's central argument: migration did not require all participants to share the goals of the Crown or investors.</p>
+
+      <h3 class="sub-head">Migration Was Also Unfree and Coerced</h3>
+      <p>The word migration can conceal profound differences in freedom. The course textbook estimates that more than 700,000 people crossed to English colonies in North America and the Caribbean during the seventeenth century. Its settlement table identifies approximately 395,000 European immigrants and 349,000 African immigrants by 1700. Most European migrants were young, many of them servants bound by labor contracts; African movement across the Atlantic was increasingly coerced through the slave trade.</p>
+      <p>This distinction matters because the lecture category "opportunity" applies most directly to the choices of some English migrants, not to the Atlantic population as a whole. Even among European servants, choice was constrained by poverty, labor markets, family circumstances, and the terms of indenture. For enslaved Africans, the language of opportunity is wholly inappropriate. A sophisticated account of English colonization must therefore place voluntary migration, bound labor, and forced migration inside the same expanding Atlantic system without treating them as equivalent experiences.</p>
+
+      <h3 class="sub-head">Alison Games and Migration as the Making of an Atlantic World</h3>
+      <p>Alison Games's <em>Migration and the Origins of the English Atlantic World</em> shifts the emphasis from colonies as static destinations to migration as a constitutive process. Using the unusually rich London port register of 1635, Games reconstructs the people moving among England, Europe, the Chesapeake, New England, the West Indies, and Bermuda. Her larger contribution is to show that the English Atlantic was sustained by networks of mobile people: merchants, servants, clergy, soldiers, planters, governors, and families.</p>
+      <p>That perspective helps explain why permanent settlement became possible after Roanoke. Survival did not depend on a colony becoming immediately self-sufficient. It could depend on repeated replacement of people and supplies. Jamestown's early mortality was horrifying, but a continuing stream of newcomers prevented local demographic collapse from automatically ending the project. Colonial durability was therefore partly a metropolitan achievement: England developed the financial, maritime, administrative, and demographic capacity to keep sending people after earlier ventures would have ended.</p>
+
+      <h3 class="sub-head">Family Migration and the Unequal Geography of Survival</h3>
+      <p>The textbook's comparison of migration patterns also foreshadows why English colonies diverged. New England and the Middle Atlantic attracted only a small portion of total immigrants, yet family migration and healthier disease environments allowed their European-descended populations to grow rapidly through natural increase. The Chesapeake and Caribbean drew much larger streams of migrants but experienced high mortality and greater dependence on continuing arrivals.</p>
+      <p>For Lecture 1, this distinction should remain a preview rather than a full regional analysis. Its purpose is to clarify what "sustainable colonization" actually meant. A colony did not merely need settlers at the moment of foundation. It needed a continuing demographic system capable of replacing deaths, forming households, reproducing labor, and connecting local society to Atlantic supply networks.</p>
+
+      <div class="gloss sig">
+        <span class="gloss-label">Analytical Significance</span>
+        Migration converted colonial aspiration into demographic reality. England's decisive advantage by the seventeenth century was not simply stronger motives but a growing capacity to mobilize and continually replace people across the Atlantic. Yet that human movement combined aspiration with coercion: the same system that offered land or advancement to some Europeans increasingly depended on bound service and forced African migration.
+      </div>
+    </section>
+
+    <section class="closing">
+      <h2 class="section-head"><span class="txt">Closing Synthesis</span></h2>
+      <p>English colonization grew from convergence rather than design. The Reformation altered the political meaning of religion and helped define Spain as a confessional and geopolitical enemy. Privateering drew English sailors, investors, and officials into Atlantic competition and taught them that private profit could serve public strategy. Promoters such as Richard Hakluyt translated scattered motives into a national argument for Protestant mission, trade, naval power, employment, revenue, and settlement. Ireland supplied experience with plantation, cultural hierarchy, land reorganization, and coercive state-building, while Roanoke exposed how little ideological enthusiasm could accomplish without reliable institutions.</p>
+      <p>The central distinction is therefore between motive and capacity. England possessed reasons to challenge Spain before it possessed the capacity to maintain a permanent North American colony. Roanoke failed during a period when supply, diplomacy, finance, and strategic planning remained fragile. By the seventeenth century, accumulated experience, larger flows of capital, more regular shipping, and sustained migration made it possible for colonies to survive disasters that would previously have ended an enterprise.</p>
+      <p>The four lecture categories — religion, rivalry, profit, and opportunity — remain useful because they make multiple causation visible. But they should never imply that all participants shared the same purpose. The Crown could seek strategic power, investors commercial returns, Puritans a godly community, young servants a path toward independence, and enslaved Africans no colonial opportunity at all. "English colonization" names the historical outcome produced by these unequal and often contradictory projects, not a unified intention that existed from the beginning.</p>
+      <p>An open question remains for further reflection: at what point should historians say that England possessed an empire — when the Crown claimed overseas territory, when promoters articulated an imperial ideology, when settlers survived permanently, or when English institutions and migration began irreversibly transforming Indigenous homelands?</p>
+    </section>
+
+  </article>
+
+
+</div>
+
+<div class="biblio">
+  <button class="biblio-toggle" id="biblio-toggle" aria-expanded="false" aria-controls="biblio-body">
+    <span>Suggested Reading for Deeper Preparation</span>
+    <span class="chevron">›</span>
+  </button>
+  <div class="biblio-body" id="biblio-body">
+    <div class="biblio-list">
+
+      <div class="biblio-entry">
+        <div class="cite"><b>Peter C. Mancall</b>, <em>Hakluyt's Promise: An Elizabethan's Obsession for an English America</em> (2007)</div>
+        <div class="desc">Essential starting point. Explains how English America had to be imagined and sold before permanent colonization became durable.</div>
+        <div class="biblio-links">
+          <a href="https://www.amazon.com/s?k=Hakluyt%27s+Promise+Peter+Mancall" target="_blank" rel="noopener">Amazon</a>
+          <a href="https://www.jstor.org/action/doBasicSearch?Query=Hakluyt%27s+Promise+Mancall" target="_blank" rel="noopener">JSTOR</a>
+        </div>
+      </div>
+
+      <div class="biblio-entry">
+        <div class="cite"><b>David Beers Quinn</b>, <em>Set Fair for Roanoke: Voyages and Colonies, 1584–1606</em> (1985)</div>
+        <div class="desc">Classic reconstruction. Foundational for the Raleigh voyages and the documentary record of colonization before Jamestown.</div>
+        <div class="biblio-links">
+          <a href="https://www.amazon.com/s?k=Set+Fair+for+Roanoke+David+Beers+Quinn" target="_blank" rel="noopener">Amazon</a>
+          <a href="https://www.jstor.org/action/doBasicSearch?Query=Set+Fair+for+Roanoke+Quinn" target="_blank" rel="noopener">JSTOR</a>
+        </div>
+      </div>
+
+      <div class="biblio-entry">
+        <div class="cite"><b>Karen Ordahl Kupperman</b>, <em>Roanoke: The Abandoned Colony</em>, 2nd ed. (2007)</div>
+        <div class="desc">Major reassessment. Shifts attention from the Lost Colony mystery to the logistics, diplomacy, and cross-cultural conditions of success and failure.</div>
+        <div class="biblio-links">
+          <a href="https://www.amazon.com/s?k=Roanoke+The+Abandoned+Colony+Kupperman" target="_blank" rel="noopener">Amazon</a>
+          <a href="https://www.jstor.org/action/doBasicSearch?Query=Roanoke+The+Abandoned+Colony+Kupperman" target="_blank" rel="noopener">JSTOR</a>
+        </div>
+      </div>
+
+      <div class="biblio-entry">
+        <div class="cite"><b>Nicholas Canny</b>, <em>Making Ireland British, 1580–1650</em> (2001)</div>
+        <div class="desc">Connects English state-building in Ireland to the wider history of overseas expansion; shows plantation policy as contested and uneven.</div>
+        <div class="biblio-links">
+          <a href="https://www.amazon.com/s?k=Making+Ireland+British+Nicholas+Canny" target="_blank" rel="noopener">Amazon</a>
+          <a href="https://www.jstor.org/action/doBasicSearch?Query=Making+Ireland+British+Canny" target="_blank" rel="noopener">JSTOR</a>
+        </div>
+      </div>
+
+      <div class="biblio-entry">
+        <div class="cite"><b>David Armitage</b>, <em>The Ideological Origins of the British Empire</em> (2000)</div>
+        <div class="desc">Traces how Protestantism, property, and political economy gradually entered the language of empire — useful for avoiding anachronism.</div>
+        <div class="biblio-links">
+          <a href="https://www.amazon.com/s?k=Ideological+Origins+of+the+British+Empire+Armitage" target="_blank" rel="noopener">Amazon</a>
+          <a href="https://www.jstor.org/action/doBasicSearch?Query=Ideological+Origins+of+the+British+Empire+Armitage" target="_blank" rel="noopener">JSTOR</a>
+        </div>
+      </div>
+
+      <div class="biblio-entry">
+        <div class="cite"><b>Andrew Fitzmaurice</b>, <em>Humanism and America: An Intellectual History of English Colonisation, 1500–1625</em> (2003)</div>
+        <div class="desc">Places colonial advocacy within humanist debates about virtue, law, and legitimate possession — deepens the lecture beyond economic motive.</div>
+        <div class="biblio-links">
+          <a href="https://www.amazon.com/s?k=Humanism+and+America+Andrew+Fitzmaurice" target="_blank" rel="noopener">Amazon</a>
+          <a href="https://www.jstor.org/action/doBasicSearch?Query=Humanism+and+America+Fitzmaurice" target="_blank" rel="noopener">JSTOR</a>
+        </div>
+      </div>
+
+      <div class="biblio-entry">
+        <div class="cite"><b>Alison Games</b>, <em>Migration and the Origins of the English Atlantic World</em> (1999)</div>
+        <div class="desc">Uses the 1635 London port register to reconstruct the people who created and sustained the English Atlantic through movement.</div>
+        <div class="biblio-links">
+          <a href="https://www.amazon.com/s?k=Migration+and+the+Origins+of+the+English+Atlantic+World+Alison+Games" target="_blank" rel="noopener">Amazon</a>
+          <a href="https://www.jstor.org/action/doBasicSearch?Query=Migration+and+the+Origins+of+the+English+Atlantic+World+Games" target="_blank" rel="noopener">JSTOR</a>
+        </div>
+      </div>
+
+      <div class="biblio-entry">
+        <div class="cite"><b>Richard Hakluyt</b>, <em>A Particuler Discourse … Known as Discourse of Western Planting</em>, ed. David B. Quinn and Alison M. Quinn (Hakluyt Society, 1993)</div>
+        <div class="desc">Primary-source edition. The authoritative facsimile and transcription of Hakluyt's 1584 state paper, with commentary.</div>
+        <div class="biblio-links">
+          <a href="https://www.amazon.com/s?k=Discourse+of+Western+Planting+Hakluyt+Society+Quinn" target="_blank" rel="noopener">Amazon</a>
+          <a href="https://www.jstor.org/action/doBasicSearch?Query=Discourse+of+Western+Planting+Hakluyt" target="_blank" rel="noopener">JSTOR</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer class="colophon">
+  Course source foundation: Murrin, Hämäläinen, Johnson, Brunsman &amp; McPherson, <em>Liberty, Equality, Power: A History of the American People</em>, Vol. 1: To 1877, 7th ed., §2-4.
+</footer>
+
+<script>
+  // Font size toggle
+  let scale = 1;
+  const root = document.documentElement;
+  const applyScale = () => { root.style.setProperty('--font-scale', scale); };
+  document.getElementById('font-inc').addEventListener('click', () => {
+    scale = Math.min(1.35, +(scale + 0.08).toFixed(2)); applyScale();
+  });
+  document.getElementById('font-dec').addEventListener('click', () => {
+    scale = Math.max(0.8, +(scale - 0.08).toFixed(2)); applyScale();
+  });
+  document.getElementById('font-reset').addEventListener('click', () => {
+    scale = 1; applyScale();
+  });
+
+  // Print
+  document.getElementById('print-page').addEventListener('click', () => window.print());
+
+  // Bibliography toggle
+  const bToggle = document.getElementById('biblio-toggle');
+  const bBody = document.getElementById('biblio-body');
+  bToggle.addEventListener('click', () => {
+    const open = bBody.classList.toggle('open');
+    bToggle.setAttribute('aria-expanded', open);
+    bToggle.querySelector('.chevron').textContent = open ? '⌄' : '›';
+  });
+
+  // Term popovers
+  let activePopover = null;
+  function closePopover() {
+    if (activePopover) { activePopover.remove(); activePopover = null; }
+  }
+  let activeTermEl = null;
+  document.querySelectorAll('.term').forEach(termEl => {
+    termEl.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const wasOpenForThisTerm = activeTermEl === termEl;
+      closePopover();
+      activeTermEl = null;
+      if (wasOpenForThisTerm) return; // clicking the same open term just closes it
+
+      const pv = document.createElement('div');
+      pv.className = 'popover';
+      pv.innerHTML = `
+        <button class="pv-close" aria-label="Close">✕</button>
+        <span class="pv-term">${termEl.dataset.term}</span>
+        ${termEl.dataset.def}
+        <br><a href="${termEl.dataset.link}" target="_blank" rel="noopener">Read more — ${termEl.dataset.source} ↗</a>
+      `;
+      document.body.appendChild(pv);
+
+      const rect = termEl.getBoundingClientRect();
+      const pvWidth = 300;
+      let left = rect.left + window.scrollX;
+      if (left + pvWidth > window.innerWidth - 16) {
+        left = window.innerWidth - pvWidth - 16;
+      }
+      pv.style.left = left + 'px';
+      pv.style.top = (rect.bottom + window.scrollY + 8) + 'px';
+
+      pv.querySelector('.pv-close').addEventListener('click', (ev) => {
+        ev.stopPropagation();
+        closePopover();
+        activeTermEl = null;
+      });
+
+      activePopover = pv;
+      activeTermEl = termEl;
+    });
+  });
+  document.addEventListener('click', () => { closePopover(); activeTermEl = null; });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closePopover(); activeTermEl = null; } });
+</script>
+
+</body>
+</html>
