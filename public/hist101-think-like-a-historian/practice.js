@@ -6,6 +6,7 @@
     chapter: null,
     scaffold: "early",
     session: [],
+    responses: [],
     index: 0,
     answered: false,
     storageAvailable: true,
@@ -26,7 +27,10 @@
       "question-form", "answer-fieldset", "choices", "selection-error", "check-answer", "try-again",
       "continue-button", "feedback-region", "feedback-heading", "feedback-summary", "choice-feedback",
       "walkthrough-toggle", "walkthrough-region", "walkthrough-steps", "transfer-strategy", "complete-card",
-      "complete-heading", "practice-more", "review-moves", "moves-panel", "return-link", "reset-practice"
+      "complete-heading", "practice-more", "review-moves", "moves-panel", "return-link", "reset-practice",
+      "developmental-intro", "developmental-question", "developmental-intro-copy", "reasoning-review-card",
+      "reasoning-review-heading", "reasoning-review-list", "show-reasoning-review", "explain-description",
+      "use-description", "connect-description"
     ].forEach(id => { el[id] = document.getElementById(id); });
   }
 
@@ -40,8 +44,8 @@
       return;
     }
     state.chapter = Number(chapterParam);
-    if (state.chapter < 2 || state.chapter > 6) {
-      showLoadError("Practice is available for Chapters 2 through 6. Use a link such as ?chapter=2.", false);
+    if (state.chapter < 2 || state.chapter > 7) {
+      showLoadError("Practice is available for Chapters 2 through 7. Use a link such as ?chapter=2.", false);
       return;
     }
     state.scaffoldOverride = ["early", "mid", "late"].includes(params.get("scaffold")) ? params.get("scaffold") : "";
@@ -56,6 +60,7 @@
     el["walkthrough-toggle"].addEventListener("click", toggleWalkthrough);
     el["practice-more"].addEventListener("click", startSession);
     el["review-moves"].addEventListener("click", reviewMoves);
+    el["show-reasoning-review"].addEventListener("click", showOptionalReasoningReview);
     el["retry-load"].addEventListener("click", loadBank);
     el["reset-practice"].addEventListener("click", resetPractice);
     document.querySelectorAll("button").forEach(button => {
@@ -82,6 +87,7 @@
       document.title = bank.studentTitle;
       el["page-title"].textContent = "Think Like a Historian";
       el["chapter-label"].textContent = "Chapter " + bank.chapter + ": " + bank.chapterTitle;
+      configureDevelopmentalIntro(bank);
       configureReturnLink(bank);
       el["status-card"].hidden = true;
       startSession();
@@ -115,14 +121,24 @@
       }
     }
     if (categories.some(cat => counts[cat] < 1)) return { valid: false, message: "Each category needs at least one valid question" };
+    if (bank.endOfSessionReview === true) {
+      const reviewValid = ["full", "reduced", "optional"].includes(bank.reasoningReviewMode) &&
+        Array.isArray(bank.reasoningReviewPrompts) && bank.reasoningReviewPrompts.length === 6 &&
+        validQuestions.every(q => q.reasoningReview && typeof q.reasoningReview.partialValidity === "string" &&
+          typeof q.reasoningReview.qualification === "string");
+      if (!reviewValid) return { valid: false, message: "The developmental reasoning review is incomplete" };
+    }
     bank.questions = validQuestions;
     return { valid: true };
   }
 
   function startSession() {
     state.session = categories.map(category => chooseQuestion(category));
+    state.responses = [];
     state.index = 0;
     el["complete-card"].hidden = true;
+    el["reasoning-review-card"].hidden = true;
+    el["show-reasoning-review"].hidden = true;
     el["practice-card"].hidden = false;
     renderQuestion();
   }
@@ -238,6 +254,7 @@
     const choice = q.choices.find(c => c.id === selected.value);
     const correct = selected.value === q.correctChoiceId;
     state.answered = true;
+    state.responses[state.index] = { selectedChoiceId: selected.value };
     lockChoices(q, selected.value);
     el["feedback-region"].hidden = false;
     el["feedback-region"].classList.toggle("correct", correct);
@@ -288,7 +305,7 @@
     }
     el["practice-card"].hidden = true;
     el["complete-card"].hidden = false;
-    el["complete-heading"].focus({ preventScroll: false });
+    finishReasoningReview();
   }
 
   function resetFeedback() {
@@ -321,6 +338,109 @@
     el["moves-panel"].open = true;
     el["moves-panel"].scrollIntoView({ block: "start" });
     el["moves-panel"].querySelector("summary").focus();
+  }
+
+  function configureDevelopmentalIntro(bank) {
+    const show = typeof bank.reasoningStage === "string" && bank.reasoningStage.startsWith("exam2");
+    el["developmental-intro"].hidden = !show;
+    if (!show) return;
+    el["explain-description"].textContent = "Weigh competing plausible interpretations.";
+    el["use-description"].textContent = "Test an interpretation against new evidence.";
+    el["connect-description"].textContent = "Build a larger interpretation across lectures.";
+    el["developmental-question"].textContent = bank.developmentalQuestion || "How do historians decide which explanation is stronger?";
+    el["developmental-intro-copy"].textContent = bank.studentReasoningIntro || "More than one interpretation can contain part of the truth. Compare what each explanation accounts for and where it needs qualification.";
+  }
+
+  function finishReasoningReview() {
+    const mode = state.bank.endOfSessionReview === true ? state.bank.reasoningReviewMode : "none";
+    if (["full", "reduced"].includes(mode)) {
+      buildReasoningReview(mode);
+      el["reasoning-review-card"].hidden = false;
+      el["reasoning-review-heading"].focus({ preventScroll: false });
+      return;
+    }
+    if (mode === "optional") {
+      buildReasoningReview("reduced");
+      el["show-reasoning-review"].hidden = false;
+    }
+    el["complete-heading"].focus({ preventScroll: false });
+  }
+
+  function showOptionalReasoningReview() {
+    el["reasoning-review-card"].hidden = false;
+    el["show-reasoning-review"].hidden = true;
+    el["reasoning-review-heading"].focus({ preventScroll: false });
+  }
+
+  function buildReasoningReview(mode) {
+    el["reasoning-review-list"].replaceChildren();
+    state.session.forEach((q, index) => {
+      const response = state.responses[index] || {};
+      const selected = q.choices.find(choice => choice.id === response.selectedChoiceId);
+      const strongest = q.choices.find(choice => choice.id === q.correctChoiceId);
+      const article = document.createElement("article");
+      article.className = "reasoning-review-item";
+
+      const meta = document.createElement("p");
+      meta.className = "review-category";
+      meta.textContent = "Question " + (index + 1) + " | " + categoryLabels[q.category];
+      const heading = document.createElement("h3");
+      heading.textContent = q.stem;
+      article.append(meta, heading);
+      appendReviewParagraph(article, "Your response:", selected ? selected.text : "No response recorded");
+
+      const prompts = state.bank.reasoningReviewPrompts;
+      const showIndexes = mode === "reduced" ? [1, 3, 5] : [0, 1, 2, 3, 4, 5];
+      const list = document.createElement("ol");
+      list.className = "reasoning-process";
+      showIndexes.forEach(promptIndex => {
+        const item = document.createElement("li");
+        const label = document.createElement("strong");
+        label.textContent = prompts[promptIndex];
+        item.append(label);
+        if (promptIndex === 0) {
+          const claims = document.createElement("ul");
+          q.choices.forEach(choice => {
+            const claim = document.createElement("li");
+            claim.textContent = choice.text + (choice.id === q.correctChoiceId ? " — strongest interpretation" : "");
+            claims.append(claim);
+          });
+          item.append(claims);
+        } else {
+          const answer = document.createElement("p");
+          if (promptIndex === 1) answer.textContent = "Evidence to center: " + q.sourceAlignment.lectureClaim;
+          if (promptIndex === 2) answer.textContent = selected ? selected.feedback : "Compare each claim with the lecture evidence and identify what it leaves unexplained.";
+          if (promptIndex === 3) answer.textContent = strongest.text + " " + q.conciseCorrectFeedback;
+          if (promptIndex === 4) answer.textContent = q.reasoningReview.partialValidity;
+          if (promptIndex === 5) answer.textContent = q.reasoningReview.qualification;
+          item.append(answer);
+        }
+        list.append(item);
+      });
+      article.append(list);
+
+      const walkthroughHeading = document.createElement("h4");
+      walkthroughHeading.textContent = "Reasoning walkthrough";
+      const walkthrough = document.createElement("ol");
+      walkthrough.className = "review-walkthrough";
+      q.walkthrough.forEach(step => {
+        const item = document.createElement("li");
+        item.textContent = step;
+        walkthrough.append(item);
+      });
+      article.append(walkthroughHeading, walkthrough);
+      appendReviewParagraph(article, "Strategy to reuse:", q.transferStrategy, "review-strategy");
+      el["reasoning-review-list"].append(article);
+    });
+  }
+
+  function appendReviewParagraph(parent, labelText, value, className = "") {
+    const paragraph = document.createElement("p");
+    if (className) paragraph.className = className;
+    const label = document.createElement("strong");
+    label.textContent = labelText + " ";
+    paragraph.append(label, document.createTextNode(value));
+    parent.append(paragraph);
   }
 
   function resetPractice() {
@@ -360,6 +480,7 @@
     el["retry-load"].hidden = true;
     el["practice-card"].hidden = true;
     el["complete-card"].hidden = true;
+    el["reasoning-review-card"].hidden = true;
   }
 
   function showLoadError(message, allowRetry = true) {
@@ -368,6 +489,7 @@
     el["retry-load"].hidden = !allowRetry;
     el["practice-card"].hidden = true;
     el["complete-card"].hidden = true;
+    el["reasoning-review-card"].hidden = true;
   }
 
   function announceStatus(message) {

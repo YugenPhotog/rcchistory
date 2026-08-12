@@ -13,7 +13,7 @@ const moves = ["cause", "comparison", "context", "consequence", "evidence"];
 function fail(message) { errors.push(message); }
 function warn(message) { warnings.push(message); }
 
-for (let chapter = 2; chapter <= 6; chapter += 1) {
+for (let chapter = 2; chapter <= 7; chapter += 1) {
   const bankPath = path.join(root, "banks", `chapter-${String(chapter).padStart(2, "0")}.json`);
   let bank;
   try { bank = JSON.parse(fs.readFileSync(bankPath, "utf8")); }
@@ -23,10 +23,10 @@ for (let chapter = 2; chapter <= 6; chapter += 1) {
   if (bank.practiceOnly !== true) fail(`Chapter ${chapter}: practiceOnly is not true`);
   if (!Array.isArray(bank.sourceFiles) || !bank.sourceFiles.length) fail(`Chapter ${chapter}: missing source inventory`);
   const counts = Object.fromEntries(categories.map(cat => [cat, bank.questions.filter(q => q.category === cat).length]));
-  if (bank.questions.length < 30 || bank.questions.length > 45) fail(`Chapter ${chapter}: total outside 30–45`);
-  if (counts.explain < 15 || counts.explain > 20) fail(`Chapter ${chapter}: Explain outside 15–20`);
-  if (counts.use < 8 || counts.use > 12) fail(`Chapter ${chapter}: Use outside 8–12`);
-  if (counts.connect < 7 || counts.connect > 10) fail(`Chapter ${chapter}: Connect outside 7–10`);
+  if (bank.questions.length !== 30) fail(`Chapter ${chapter}: total is not exactly 30`);
+  if (counts.explain !== 15) fail(`Chapter ${chapter}: Explain is not exactly 15`);
+  if (counts.use !== 8) fail(`Chapter ${chapter}: Use is not exactly 8`);
+  if (counts.connect !== 7) fail(`Chapter ${chapter}: Connect is not exactly 7`);
   const stems = new Set();
   const positions = { a: 0, b: 0, c: 0, d: 0 };
   let maxStem = 0;
@@ -43,6 +43,7 @@ for (let chapter = 2; chapter <= 6; chapter += 1) {
     if (!moves.includes(q.thinkingMove)) fail(`${q.id}: invalid thinking move`);
     if (q.status !== "approved" || q.practiceOnly !== true) fail(`${q.id}: invalid status/boundary`);
     if (!Array.isArray(q.lectureIds) || !q.lectureIds.length) fail(`${q.id}: missing lecture IDs`);
+    if (q.category === "connect" && q.lectureIds.length < 2) fail(`${q.id}: Connect item does not span at least two lectures`);
     if (!Array.isArray(q.choices) || q.choices.length !== 4) fail(`${q.id}: does not have four choices`);
     if (new Set(q.choices.map(c => c.id)).size !== 4) fail(`${q.id}: duplicate choice IDs`);
     if (q.choices.some(c => !c.text?.trim() || !c.feedback?.trim())) fail(`${q.id}: incomplete choice or feedback`);
@@ -52,6 +53,7 @@ for (let chapter = 2; chapter <= 6; chapter += 1) {
     if (!q.transferStrategy?.trim()) fail(`${q.id}: missing transfer strategy`);
     if (!q.sourceAlignment?.lectureClaim?.trim()) fail(`${q.id}: missing source claim`);
     if (!q.accessibilityNotes?.trim()) fail(`${q.id}: missing accessibility notes`);
+    if (chapter === 7 && (!q.reasoningReview?.partialValidity?.trim() || !q.reasoningReview?.qualification?.trim())) fail(`${q.id}: incomplete Exam 2 reasoning review`);
     if (/\bnot\b.{0,35}\b(no|never|not)\b/i.test(q.stem)) fail(`${q.id}: possible double negative in stem`);
     if (/\b(all|none) of the above\b/i.test(q.choices.map(c => c.text).join(" "))) fail(`${q.id}: all/none of the above`);
     maxStem = Math.max(maxStem, q.stem.length);
@@ -64,6 +66,12 @@ for (let chapter = 2; chapter <= 6; chapter += 1) {
   if (immediateShorter !== bank.questions.length) fail(`Chapter ${chapter}: immediate feedback is not shorter for every item`);
   if (Math.max(...Object.values(positions)) - Math.min(...Object.values(positions)) > 2) warn(`Chapter ${chapter}: correct positions uneven ${JSON.stringify(positions)}`);
   bank.validation = { counts, maxStem, maxChoiceRatio, positions };
+  if (chapter === 7) {
+    if (bank.reasoningStage !== "exam2-early") fail("Chapter 7: reasoningStage is not exam2-early");
+    if (bank.developmentalQuestion !== "How do historians decide which explanation is stronger?") fail("Chapter 7: developmental question mismatch");
+    if (bank.endOfSessionReview !== true || bank.reasoningReviewMode !== "full") fail("Chapter 7: full end-of-session review is not configured");
+    if (!Array.isArray(bank.reasoningReviewPrompts) || bank.reasoningReviewPrompts.length !== 6) fail("Chapter 7: six reasoning-review prompts are required");
+  }
 }
 
 const landingHtml = fs.readFileSync(path.join(root, "index.html"), "utf8");
@@ -76,7 +84,7 @@ for (const required of ["<html lang=\"en\">", "<h1", "<main", "<footer", "class=
 for (const required of ["<html lang=\"en\">", "<h1", "<main", "<footer", "class=\"skip-link\""]) {
   if (!landingHtml.includes(required)) fail(`Landing page missing ${required}`);
 }
-for (let chapter = 2; chapter <= 6; chapter += 1) {
+for (let chapter = 2; chapter <= 7; chapter += 1) {
   if (!landingHtml.includes(`practice.html?chapter=${chapter}`)) fail(`Landing page missing Chapter ${chapter} link`);
 }
 if (!landingHtml.includes('https://austin-academics.com/hist101-think-like-a-historian/og.png')) fail("Landing page missing social image metadata");
@@ -88,6 +96,12 @@ for (const required of [":focus-visible", "prefers-reduced-motion", "@media (max
 }
 for (const required of ["localStorage", "try", "catch", "URLSearchParams", "safeReturnUrl", "chooseQuestion", "defaultScaffold"]) {
   if (!js.includes(required)) fail(`Application logic missing ${required}`);
+}
+for (const required of ["reasoning-review-card", "How a Historian Would Work Through These", "developmental-intro"]) {
+  if (!practiceHtml.includes(required)) fail(`Shared app missing Chapter 7 scaffold: ${required}`);
+}
+for (const required of ["buildReasoningReview", "reasoningReviewMode", "state.session.forEach", "state.responses"]) {
+  if (!js.includes(required)) fail(`Application logic missing reasoning review support: ${required}`);
 }
 if (/sk-[A-Za-z0-9_-]{20,}|api[_-]?key\s*[:=]/i.test(`${landingHtml}\n${practiceHtml}\n${css}\n${js}\n${banks.map(b => JSON.stringify(b)).join("\n")}`)) fail("Possible secret or API key found");
 

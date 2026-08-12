@@ -12,24 +12,36 @@ const cautions = {
   3: ["Metacom is not treated as absolute commander of a unified Native side.", "Contested casualties and source wording are not turned into false precision.", "Pueblo testimony is identified as coerced, translated, and filtered without being discarded.", "Frontier war is a strong Salem interpretation within a multicausal crisis, not a sole cause.", "Captive choices support bounded inference about belonging; archival silence is not filled with invented quotation."],
   4: ["Spanish sanctuary is conditional and strategic, not universal abolition.", "Kongolese context for Stono is used as probability, not proof of every participant's identity.", "The Shingas–Braddock wording is treated as a layered retrospective report.", "The Monongahela is a meeting engagement and coalition victory, not a stereotype of inherent European incompetence.", "Acadian and Native political statuses are compared carefully rather than collapsed."],
   5: ["The 1763 map distinguishes British claim from practical control and Native consent.", "Pontiac's coalition remains decentralized and nation-specific.", "Stamp resistance is explained through enforcement dependency as well as ideas.", "Participation is not equated with citizenship, and Patriot liberty is tested against slavery and Native sovereignty.", "Independence is treated as an outcome of escalating practice, not a settled plan present in 1763."],
-  6: ["Military victory is distinguished from political control and allegiance.", "British and Patriot freedom offers are selective and strategic, not universal emancipation.", "Native nations make distinct strategic choices; the Treaty of Paris does not erase their sovereignty.", "The Confederation is evaluated as an experiment with achievements and limits, not a caricature.", "Shays's Rebellion is consequential evidence in a contested crisis argument, not a self-explaining verdict."]
+  6: ["Military victory is distinguished from political control and allegiance.", "British and Patriot freedom offers are selective and strategic, not universal emancipation.", "Native nations make distinct strategic choices; the Treaty of Paris does not erase their sovereignty.", "The Confederation is evaluated as an experiment with achievements and limits, not a caricature.", "Shays's Rebellion is consequential evidence in a contested crisis argument, not a self-explaining verdict."],
+  7: ["The Constitution becomes an operating government through precedent, capacity, and legitimacy rather than text alone.", "The Whiskey Rebellion combines large-scale federal enforcement with limited fighting, legal process, and pardons.", "Real foreign threats help explain fear of faction without turning criticism into treason by definition.", "The Louisiana Purchase transfers a claim more quickly than it creates control or Native consent; Saint-Domingue is a major contingent cause, not the only cause.", "Lewis and Clark extend U.S. knowledge and claims while depending on Native diplomatic and commercial worlds.", "The road to war is multicausal, preserves Indigenous agency, includes failed alternatives, and ends in a divided vote."]
 };
 
-for (let chapter = 2; chapter <= 6; chapter += 1) {
+for (let chapter = 2; chapter <= 7; chapter += 1) {
   const slug = String(chapter).padStart(2, "0");
   const bank = JSON.parse(fs.readFileSync(path.join(root, "banks", `chapter-${slug}.json`), "utf8"));
   const result = validation.chapters.find(c => c.chapter === chapter);
+  const sourceSection = chapter === 7 ? [
+    "## Formal instructional sources", "",
+    ...bank.sourceFiles.slice(0, 5).map(s => `- ${s}`), "",
+    "## Development sources reused", "",
+    ...bank.sourceFiles.slice(5).map(s => `- ${s}`), "",
+    "The standalone Chapter 7 application was treated as a development snapshot: its questions, feedback, and scaffolding were harvested into the shared architecture rather than deployed as a parallel application. Optional Rabbit Hole and Want to Go Deeper sections were excluded as required knowledge."
+  ] : [
+    "## Approved sources used", "",
+    ...bank.sourceFiles.map(s => `- ${s}`), "",
+    "The full source-to-lecture selection rationale and ambiguity log is in `source-map-chapters-02-06.md`."
+  ];
   const sourceLines = [
     `# Chapter ${chapter} Source-Fidelity and Item-Quality Audit`, "",
     "## Result", "",
     "**Pass after correction.** All 30 items are traceable to the approved chapter source set, use independently authored practice wording, contain one designated best answer, and include response-specific feedback, a 3–5-step walkthrough, and a transferable strategy.", "",
-    "## Approved sources used", "",
-    ...bank.sourceFiles.map(s => `- ${s}`), "",
-    "The full source-to-lecture selection rationale and ambiguity log is in `source-map-chapters-02-06.md`.", "",
+    ...sourceSection, "",
     "## Audit checks", "",
     "| Check | Result | Evidence / correction |", "|---|---|---|",
     `| Source traceability | Pass | Every item names lecture IDs and a specific lecture claim; ${bank.questions.filter(q => q.sourceAlignment?.lectureClaim).length}/30 claims present. |`,
-    "| Correct-answer accuracy | Pass | Correct choices and rationales were checked against the background-essay interpretation and the concepts emphasized in the approved Reveal deck. |",
+    chapter === 7
+      ? "| Correct-answer accuracy | Pass | Correct choices and rationales were checked against the four final formal lecture decks and the Chapter 7 Historian's Notebook. |"
+      : "| Correct-answer accuracy | Pass | Correct choices and rationales were checked against the background-essay interpretation and the concepts emphasized in the approved Reveal deck. |",
     "| Distractor accuracy | Pass | Distractors represent chronology errors, overgeneralizations, actor mismatches, causes confused with triggers or consequences, and common interpretive errors. Feedback corrects rather than repeats each misconception. |",
     "| One best answer | Pass | Every `correctChoiceId` resolves to one of exactly four unique choices. |",
     `| Choice-length clue | Pass after balancing | Maximum longest-to-shortest character ratio: ${result.maxChoiceRatio.toFixed(2)}. Correct positions: A ${result.positions.a}, B ${result.positions.b}, C ${result.positions.c}, D ${result.positions.d}. |`,
@@ -37,6 +49,7 @@ for (let chapter = 2; chapter <= 6; chapter += 1) {
     "| Feedback and walkthrough | Pass | Every choice has specific feedback; every walkthrough has 3–5 steps; immediate feedback is shorter than the walkthrough for all items. |",
     "| Connect category | Pass | Each Connect item lists two or more lecture IDs and makes a cross-lecture causal, comparative, evidentiary, or contextual connection. |",
     "| Outside knowledge | Pass | No item requires an unassigned source, unidentified image, or external research. |", "",
+    ...(chapter === 7 ? ["## Handoff adaptation", "", "The integrated bank retains 25 of the 30 handoff questions, removes two repetitive Use items and three lower-value Connect items, and adds five formal-stream Explain items. The result is a genuine 15 Explain / 8 Use / 7 Connect bank; no item was merely relabeled to reach the balance.", ""] : []),
     "## Historical cautions preserved", "", ...cautions[chapter].map(c => `- ${c}`), "",
     "## Item trace", "", "| Item | Category / move | Lecture(s) | Source-aligned claim |", "|---|---|---|---|",
     ...bank.questions.map(q => `| \`${q.id}\` | ${q.category} / ${q.thinkingMove} | ${q.lectureIds.join(", ")} | ${q.sourceAlignment.lectureClaim.replaceAll("|", "\\|")} |`), "",
@@ -57,6 +70,7 @@ for (let chapter = 2; chapter <= 6; chapter += 1) {
     "| No scoring pressure | Pass | No points, percentages, grades, timers, streaks, badges, or leaderboards appear. |",
     "| Optional continuation | Pass | Completion explicitly says one set is enough; Practice Three More is optional. |",
     `| Scaffolding | Pass | Default is \`${bank.defaultScaffold}\`; URL override supports early, mid, and late. Hints appear only in early mode; late mode reveals the move after submission. |`,
+    ...(chapter === 7 ? ["| Exam 2 reasoning layer | Pass | The separate `exam2-early` developmental layer adds a concise introduction and a six-step review of the exact completed session without changing the early/mid/late interface controls. |"] : []),
     "| Stable layout | Pass | Feedback expands below the choices, controls stay in a consistent action area, and no modal or surprise navigation is used. |",
     "| Technical instructions | Pass | Student copy focuses on reasoning; loading and error language is plain. |", "",
     "## Review note", "", "The bank uses related families—cause/trigger, evidence, application, consequence, and cross-lecture synthesis—without repeating the same stem through simple word substitution."
@@ -68,21 +82,22 @@ const tech = [
   "# Shared Application Technical Validation", "",
   `**Result: ${validation.result}.** Machine-readable details are in \`validation-results.json\`.`, "",
   "| Test | Result | Evidence |", "|---|---|---|",
-  "| JSON parsing | Pass | All five bank files parse. |",
-  "| Bank size and category range | Pass | Every chapter has 30 questions: 15 Explain, 8 Use, 7 Connect. |",
-  "| Global IDs | Pass | All 150 question IDs are unique. |",
-  "| Correct-choice resolution | Pass | All 150 correct IDs resolve to one of four unique choices. |",
-  "| Choice feedback | Pass | All 600 choices include nonempty response-specific feedback. |",
+  "| JSON parsing | Pass | All six bank files parse. |",
+  "| Bank size and category range | Pass | Every chapter has exactly 30 questions: 15 Explain, 8 Use, 7 Connect. |",
+  "| Global IDs | Pass | All 180 question IDs are unique. |",
+  "| Correct-choice resolution | Pass | All 180 correct IDs resolve to one of four unique choices. |",
+  "| Choice feedback | Pass | All 720 choices include nonempty response-specific feedback. |",
   "| Required pedagogy fields | Pass | Every question includes move, difficulty, approved/practice status, lecture IDs, walkthrough, transfer strategy, source alignment, and accessibility notes. |",
-  "| Parameter handling | Pass | Chapters outside 2–6 and malformed values produce a plain-language error; early/mid/late scaffold overrides are allow-listed. |",
+  "| Parameter handling | Pass | Chapters outside 2–7 and malformed values produce a plain-language error; early/mid/late scaffold overrides are allow-listed. |",
   "| Static paths | Pass | The app loads relative CSS, JavaScript, and `banks/chapter-XX.json` paths; no server-side route is required. |",
   "| Local storage resilience | Pass in code review; browser tested separately | Every storage read, write, and removal is guarded; failure switches to in-memory random selection. |",
   "| Repeat reduction | Pass | Category-specific recent-ID queues avoid the most recent four items where storage is available and fall back safely when a pool cycles. |",
+  "| Exam 2 session review | Pass | Chapter 7 displays six reasoning prompts for each exact session question, preserves the student's recorded response, identifies the strongest interpretation, and includes the walkthrough and reusable strategy. Chapters 2–6 do not display the review. |",
   "| Secret/API scan | Pass | No API key pattern, network API dependency, login, database, or grading endpoint found. |",
   "| Reduced motion | Pass | CSS disables smooth scrolling and effectively removes animation/transition durations. |",
-  "| Runtime browser flow | Pass | Loading, answer submission, retry, walkthrough, Explain → Use → Connect progression, completion, Practice Three More, review moves, reset, return-link configuration, all chapter parameters, early override, late reveal, and invalid chapter handling passed. |",
+  "| Runtime browser flow | Pass | Chapters 2–7 loaded and completed Explain → Use → Connect sessions. Answer submission, response-specific feedback, retry, walkthrough, Practice Three More, review moves, reset, return-link filtering, early/mid/late overrides, invalid chapter handling, and the Chapter 7 exact-session review passed. |",
   "| Browser console | Pass | No warning or error was reported after the final Chromium and Chrome smoke tests. |",
-  "| Responsive runtime | Pass | No horizontal overflow at 640 or 320 CSS pixels; no clipped choices; all visible interaction targets were at least 44 CSS pixels high at 320. |",
+  "| Responsive runtime | Pass | No horizontal overflow at 640 or 320 CSS pixels; all visible interaction targets measured at least 44 CSS pixels high at 320. |",
   "| Browser matrix | Partial pass | In-app Chromium and Google Chrome passed. Edge and Firefox remain listed for human verification in the WCAG report. |", "",
   "## Static-host note", "", "The application must be served over HTTP(S) for `fetch()` to load local JSON reliably. Opening `index.html` directly with a `file:` URL may be blocked by browser security policy; this is a browser restriction, not a server dependency."
 ];

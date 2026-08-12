@@ -1,12 +1,12 @@
 # Think Like a Historian — HIST 101 Practice Series
 
-This folder contains a static, practice-only application for Chapters 2–6. Each session presents exactly three ungraded, untimed questions in the sequence **Explain → Use → Connect**. It uses no AI API, database, login, score, timer, or instructor reporting.
+This folder contains a static, practice-only application for Chapters 2–7. Each session presents exactly three ungraded, untimed questions in the sequence **Explain → Use → Connect**. It uses no AI API, database, login, score, timer, or instructor reporting.
 
 ## Contents
 
 - `index.html`: chapter landing page
 - `practice.html`, `historian-practice.css`, `practice.js`: shared student application
-- `banks/chapter-02.json` through `banks/chapter-06.json`: 30 questions per chapter
+- `banks/chapter-02.json` through `banks/chapter-07.json`: 30 questions per chapter
 - `review/`: readable question-and-feedback copies
 - `audits/`: source map, item/source audits, cognitive-load audits, shared technical validation, and shared WCAG review
 - `scripts/`: reproducible bank, review, audit, and validation tools
@@ -21,6 +21,7 @@ Serve this folder over HTTP(S). The landing page is `index.html`; chapter practi
 - `practice.html?chapter=4`
 - `practice.html?chapter=5`
 - `practice.html?chapter=6`
+- `practice.html?chapter=7`
 
 Optional scaffolding override: `&scaffold=early`, `&scaffold=mid`, or `&scaffold=late`.
 
@@ -36,6 +37,12 @@ Every chapter contains:
 - 8 Use
 - 7 Connect
 - 30 total
+
+## Developmental reasoning
+
+Chapter 7 begins Exam 2 practice. Its bank carries a separate `reasoningStage: "exam2-early"` layer while preserving the existing early/mid/late interface scaffold. After each Chapter 7 set, the application models how a historian compares the exact interpretations and responses from that session. Chapters 2–6 retain their existing completion behavior.
+
+The shared application also recognizes `reasoningReviewMode` values of `full`, `reduced`, and `optional`, allowing later Exam 2 chapters to fade this reasoning scaffold without changing the visible Explain → Use → Connect sequence.
 
 ## Practice-only boundary
 

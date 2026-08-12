@@ -6,7 +6,7 @@
 
 ## Methods
 
-- Automated structural and content checks in `scripts/validate.mjs` across the landing page, shared practice HTML/CSS/JavaScript, and all 150 questions.
+- Automated structural and content checks in `scripts/validate.mjs` across the landing page, shared practice HTML/CSS/JavaScript, and all 180 questions.
 - Programmatic contrast calculation for the final color pairs.
 - Accessibility-tree inspection in the in-app Chromium browser and Google Chrome.
 - Keyboard-only activation of a radio choice, answer submission, and walkthrough expansion.
@@ -21,11 +21,11 @@
 |---|---|---|
 | 3.1.1 Language of Page | Pass | `<html lang="en">`. |
 | 2.4.2 Page Titled | Pass | The landing page has a descriptive title; the practice title updates to the selected chapter. |
-| 1.3.1 Info and Relationships | Pass | Both pages have one H1, logical H2/H3 hierarchy, and `header`, `main`, and `footer`; chapter choices use articles and links; each question uses `form`, `fieldset`, `legend`, radios, and labels. Accessibility snapshots exposed the practice roles and names correctly. |
+| 1.3.1 Info and Relationships | Pass | Both pages have one H1, logical heading hierarchy, and `header`, `main`, and `footer`; chapter choices and Chapter 7 reasoning reviews use articles; each question uses `form`, `fieldset`, `legend`, radios, and labels. Accessibility snapshots exposed the practice roles and names correctly. |
 | 2.4.1 Bypass Blocks | Pass | Visible-on-focus skip link targets `#main-content`. |
 | 2.1.1 Keyboard | Pass | Landing-page chapter choices are native links. In practice, radio selection succeeded with Space; Check My Reasoning and Walk Me Through It succeeded with Enter; no pointer-only action exists. Explicit keyboard handling was added for dynamically created radios and buttons while preserving native semantics. |
 | 2.1.2 No Keyboard Trap | Pass | No modal, custom focus cage, or trapping widget. Tab order follows document order. |
-| 2.4.3 Focus Order | Pass | Question heading receives focus when a new question loads; feedback heading receives focus after submission; completion heading receives focus after the third question. |
+| 2.4.3 Focus Order | Pass | Question heading receives focus when a new question loads; feedback heading receives focus after submission; the Chapter 7 reasoning-review heading receives focus after the third question, while Chapters 2–6 retain focus on the completion heading. |
 | 2.4.7 / 2.4.11 Focus Visible / Not Obscured | Pass | A high-contrast 3px dark outline with a white separation ring is applied through `:focus-visible`; no sticky overlay obscures focused controls. |
 | 3.2.1 / 3.2.2 On Focus / On Input | Pass | Focusing and selecting a radio do not navigate or submit. Submission requires the named button. |
 | 3.3.1 / 3.3.2 Error Identification / Labels | Pass | Submitting without a choice produces a text error and moves focus to the first radio. Controls use stable, descriptive labels. |
@@ -45,7 +45,7 @@
 
 ## Browser coverage
 
-- In-app Chromium browser: full three-question flow, retry, walkthrough, reset, optional continuation, five chapter links, invalid parameter, scaffold overrides, responsive widths, and console check passed.
+- In-app Chromium browser: full three-question flows for Chapters 2–7, retry, walkthrough, reset, optional continuation, six chapter links, invalid parameter, scaffold overrides, safe return links, the Chapter 7 exact-session review, responsive widths, and console check passed.
 - Google Chrome: Chapter 2 loaded with four labeled radios, correct title and chapter label, no horizontal overflow, and no console warning or error.
 - Microsoft Edge: needs manual verification. Windows automation could not establish a sufficiently confident target URL and stopped without changing the existing Edge session.
 - Firefox: needs manual verification where practical; no Firefox control surface was available in this run.
