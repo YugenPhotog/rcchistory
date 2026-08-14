@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapping Your Worldview — PHIL 120: Introduction to Ethics</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background-color: #f0eee9;
+    color: #2c2c2c;
+    line-height: 1.7;
+    margin: 0;
+    padding: 0 16px 60px;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; }
+
+  /* ---------- Toolbar ---------- */
+  .toolbar {
+    position: sticky; top: 0; z-index: 50;
+    background: #ffffff;
+    border-bottom: 3px solid #9f2436;
+    margin: 0 -16px 24px;
+    padding: 10px 16px;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.08);
+  }
+  .toolbar .tb-inner {
+    max-width: 900px; margin: 0 auto; width: 100%;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+  }
+  button {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1em; cursor: pointer;
+    border-radius: 4px; padding: 10px 18px;
+    border: 2px solid transparent;
+  }
+  .btn-main { background: #9f2436; color: #ffffff; border-color: #9f2436; font-weight: bold; }
+  .btn-main:hover, .btn-main:focus { background: #7d1b2a; border-color: #7d1b2a; }
+  .btn-alt { background: #ffffff; color: #2a5c6a; border-color: #2a5c6a; }
+  .btn-alt:hover, .btn-alt:focus { background: #eef4f6; }
+  .btn-quiet { background: #ffffff; color: #656665; border-color: #656665; }
+  .btn-quiet:hover, .btn-quiet:focus { background: #f0f0f0; }
+  button:focus-visible, textarea:focus-visible, input:focus-visible, a:focus-visible {
+    outline: 3px solid #2a5c6a; outline-offset: 2px;
+  }
+  .linkbtn {
+    display: inline-block; background: #9f2436; color: #ffffff;
+    text-decoration: none; font-weight: bold;
+    padding: 12px 22px; border-radius: 4px; border: 2px solid #9f2436;
+  }
+  .linkbtn:hover, .linkbtn:focus { background: #7d1b2a; border-color: #7d1b2a; color: #ffffff; }
+  .save-note { font-size: .85em; color: #656665; font-style: italic; margin-left: auto; }
+
+  /* ---------- Header ---------- */
+  .hero {
+    background: linear-gradient(135deg, #9f2436 0%, #96637b 100%);
+    color: #ffffff; padding: 30px; border-radius: 8px; margin-bottom: 25px;
+  }
+  .hero .kicker { font-size: .9em; margin-bottom: 8px; letter-spacing: .04em; }
+  .hero h1 { margin: 0; font-size: 2.2em; line-height: 1.2; }
+
+  /* ---------- Cards ---------- */
+  .card {
+    background-color: #ffffff; padding: 25px; border-radius: 6px; margin-bottom: 25px;
+  }
+  .card h2 {
+    color: #9f2436; font-size: 1.6em; margin-top: 0;
+    border-bottom: 2px solid #f0eee9; padding-bottom: 10px;
+  }
+  .card p:last-child { margin-bottom: 0; }
+
+  /* ---------- Layer blocks ---------- */
+  .layer {
+    background-color: #f8f8f8; padding: 20px; margin: 24px 0;
+    border-radius: 4px; border-left: 6px solid #656665;
+  }
+  .layer h3 { margin-top: 0; font-size: 1.3em; }
+  .layer .field-label { font-style: italic; color: #545439; margin: 0 0 15px; }
+  .layer ul { margin-left: 20px; padding-left: 0; }
+  .layer li { margin-bottom: 6px; }
+  .l1 { border-left-color: #2a5c6a; } .l1 h3 { color: #2a5c6a; }
+  .l2 { border-left-color: #96637b; } .l2 h3 { color: #85566c; }
+  .l3 { border-left-color: #545439; } .l3 h3 { color: #545439; }
+  .l4 { border-left-color: #9f2436; } .l4 h3 { color: #9f2436; }
+  .l5 { border-left-color: #656665; } .l5 h3 { color: #656665; }
+
+  /* ---------- Write boxes ---------- */
+  .writebox { margin-top: 18px; }
+  .writebox label {
+    display: block; font-weight: bold; margin-bottom: 6px; color: #2c2c2c;
+  }
+  .prompt-hint { font-size: .9em; color: #656665; margin: 0 0 8px; }
+  textarea {
+    width: 100%; min-height: 170px; resize: vertical;
+    font-family: Georgia, 'Times New Roman', serif; font-size: 1em; line-height: 1.6;
+    color: #2c2c2c; background: #ffffff;
+    border: 2px solid #656665; border-radius: 4px; padding: 12px;
+  }
+  textarea:focus { border-color: #2a5c6a; }
+  .counter { font-size: .85em; color: #656665; margin-top: 4px; }
+  input[type="text"] {
+    font-family: Georgia, 'Times New Roman', serif; font-size: 1em;
+    padding: 8px 10px; border: 2px solid #656665; border-radius: 4px;
+    background: #ffffff; color: #2c2c2c; min-width: 260px;
+  }
+
+  /* ---------- Notices ---------- */
+  .notice {
+    background-color: #f8f8f8; border: 2px solid #656665;
+    border-radius: 6px; padding: 20px; margin-bottom: 25px;
+  }
+  .notice h3 { margin-top: 0; color: #656665; font-size: 1.2em; }
+  .notice ul, .notice ol { margin-left: 20px; padding-left: 0; margin-bottom: 0; }
+  .panel-dark {
+    background-color: #2a5c6a; color: #ffffff;
+    padding: 25px; border-radius: 6px; margin-bottom: 25px;
+  }
+  .panel-dark h2 { color: #ffffff; font-size: 1.6em; margin-top: 0; border: none; }
+  .panel-dark a { color: #ffffff; }
+  .good {
+    background-color: #f0f9f4; border-left: 4px solid #2f6b45;
+    padding: 20px; margin: 15px 0; border-radius: 4px;
+  }
+  .bad {
+    background-color: #fff5f5; border-left: 4px solid #9f2436;
+    padding: 20px; margin: 15px 0; border-radius: 4px;
+  }
+  .good p, .bad p { margin: 0 0 10px; }
+  .good p:last-child, .bad p:last-child { margin-bottom: 0; }
+  .footer-note {
+    background-color: #85566c; color: #ffffff; padding: 20px;
+    border-radius: 6px; text-align: center; font-size: 1.1em;
+  }
+  a { color: #2a5c6a; }
+  ol, ul { line-height: 1.8; }
+  .steps li { margin-bottom: 8px; }
+  h2 .num { color: #656665; font-size: .7em; display: block; letter-spacing: .05em; }
+
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 1.6em; }
+    .card, .panel-dark, .notice { padding: 18px; }
+    .linkbtn {
+    display: inline-block; background: #9f2436; color: #ffffff;
+    text-decoration: none; font-weight: bold;
+    padding: 12px 22px; border-radius: 4px; border: 2px solid #9f2436;
+  }
+  .linkbtn:hover, .linkbtn:focus { background: #7d1b2a; border-color: #7d1b2a; color: #ffffff; }
+  .save-note { margin-left: 0; width: 100%; }
+    input[type="text"] { min-width: 0; width: 100%; }
+  }
+  @media print {
+    .toolbar { display: none !important; }
+    body { background: #ffffff; }
+    textarea { border: 1px solid #656665; min-height: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="tb-inner">
+    <button type="button" class="btn-main" id="exportBtn">⬇ Export to Text File</button>
+    <button type="button" class="btn-alt" id="copyBtn">Copy All Text</button>
+    <button type="button" class="btn-quiet" id="clearBtn">Clear Page</button>
+    <span class="save-note" id="saveNote">Your work is saved in this browser as you type.</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="kicker">PHIL 120 &bull; INTRODUCTION TO ETHICS</div>
+    <h1>Assignment: Mapping Your Worldview</h1>
+  </div>
+
+  <div class="notice">
+    <h3>📌 How This Page Works</h3>
+    <ul>
+      <li><strong>Type your answers directly into the boxes below.</strong> Nothing is submitted from this page.</li>
+      <li><strong>Minimum: one solid paragraph per box.</strong> Write more if you have more to say. Length is not the point; specificity is.</li>
+      <li>When you are finished, click <strong>Export to Text File</strong> at the top. Your browser will download a plain <code>.txt</code> file containing everything you wrote.</li>
+      <li>That <code>.txt</code> file is what you upload to NotebookLM as your source, and it is also what you submit to Canvas.</li>
+      <li>Your typing is saved in this browser automatically, but that is a convenience, not a backup. <strong>Export early and often</strong>, especially on a shared or lab computer.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Purpose: Why Start Here?</h2>
+    <p>Before we can think clearly about ethics, we need to understand how we already think&mdash;often without realizing it.</p>
+    <p>Every ethical judgment you make sits inside a larger framework of assumptions about reality, knowledge, human nature, and value. Philosophers call this a <strong>worldview</strong>. It's your mental operating system, running silently in the background, shaping what seems obvious, what seems questionable, and what seems impossible.</p>
+    <p>Here's the problem: worldviews are nearly invisible to the people who hold them. They feel like "just how things are" rather than <em>one way</em> of seeing things. This creates a serious obstacle to genuine ethical thinking. If you can't see your own assumptions, you can't examine them, and unexamined assumptions control your conclusions.</p>
+    <p>This assignment asks you to do something difficult: make your worldview visible. You'll identify the core beliefs and commitments that shape your moral intuitions, see how they connect to each other, and discover where they might be in tension. Only after this work can we productively engage the ethical theories and dilemmas we'll study this semester.</p>
+    <p><strong>What you'll create:</strong> A visual map of your worldview built from written reflections on four fundamental questions. You'll write honest responses about what's real, how you know what's true, what humans are, and what matters, then use NotebookLM to generate a mind map that shows how those beliefs fit together.</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">STEP 1</span>Answer the Reflection Questions</h2>
+    <p>Answer in your own words in the boxes below. <strong>Write at least one full paragraph for each</strong>&mdash;more if you want the room. Be honest and be specific. The bullet points under each layer are prompts to get you started, not a checklist you must answer one by one.</p>
+
+    <div class="writebox">
+      <label for="studentName">Your name (goes at the top of your exported file)</label>
+      <input type="text" id="studentName" placeholder="First and last name" autocomplete="name">
+    </div>
+
+    <div class="layer l1">
+      <h3>Layer 1: What's Real? (The Foundation)</h3>
+      <p class="field-label">Philosophers call this "metaphysics" &mdash; your beliefs about the nature of reality</p>
+      <p>This is about what you think actually exists in the universe.</p>
+      <p><strong>Prompts to consider:</strong></p>
+      <ul>
+        <li>Is there a God? Multiple gods? No god?</li>
+        <li>Is there anything beyond the physical world (souls, spirits, an afterlife)?</li>
+        <li>Is the universe just matter and energy following physical laws, or is there something more?</li>
+        <li>Do things like "justice" or "love" really exist, or are they just concepts humans made up?</li>
+      </ul>
+      <div class="writebox">
+        <label for="layer1">Your response &mdash; Layer 1</label>
+        <p class="prompt-hint">Explain your position on what is fundamentally real. One paragraph minimum.</p>
+        <textarea id="layer1" data-heading="LAYER 1: WHAT'S REAL? (METAPHYSICS)"></textarea>
+        <div class="counter" data-for="layer1">0 words</div>
+      </div>
+    </div>
+
+    <div class="layer l2">
+      <h3>Layer 2: How Do I Know What's True? (Your Evidence Rules)</h3>
+      <p class="field-label">Philosophers call this "epistemology" &mdash; your theory of knowledge and justification</p>
+      <p>This is about what you trust when you're trying to figure out if something is true.</p>
+      <p><strong>Prompts to consider:</strong></p>
+      <ul>
+        <li>Do you trust science and observation most?</li>
+        <li>Do you trust religious texts or teachings?</li>
+        <li>Do you trust your own reasoning and logic?</li>
+        <li>Do you trust your gut feelings or intuitions?</li>
+        <li>Do you trust what authorities (parents, teachers, religious leaders) tell you?</li>
+        <li>Do you trust tradition &mdash; "this is what people have always believed"?</li>
+      </ul>
+      <p>Most people trust a <em>combination</em> of these, but usually rank them differently.</p>
+      <div class="writebox">
+        <label for="layer2">Your response &mdash; Layer 2</label>
+        <p class="prompt-hint">Explain which sources of knowledge matter most to you, in what order, and why. One paragraph minimum.</p>
+        <textarea id="layer2" data-heading="LAYER 2: HOW DO I KNOW WHAT'S TRUE? (EPISTEMOLOGY)"></textarea>
+        <div class="counter" data-for="layer2">0 words</div>
+      </div>
+    </div>
+
+    <div class="layer l3">
+      <h3>Layer 3: What Are Humans? (Your View of People)</h3>
+      <p class="field-label">Philosophers call this "philosophical anthropology" &mdash; your understanding of human nature</p>
+      <p>This is about what you think human beings fundamentally <em>are</em>.</p>
+      <p><strong>Prompts to consider:</strong></p>
+      <ul>
+        <li>Are humans basically good, basically bad, or neutral?</li>
+        <li>Are we just very smart animals, or something more?</li>
+        <li>Do we have souls? Free will? A purpose we're supposed to fulfill?</li>
+        <li>What makes humans different from (or the same as) other animals?</li>
+        <li>What's most important about being human &mdash; our ability to reason? Our capacity to love? Our creativity? Our survival instincts?</li>
+      </ul>
+      <div class="writebox">
+        <label for="layer3">Your response &mdash; Layer 3</label>
+        <p class="prompt-hint">Explain what you think humans are and what makes us matter. One paragraph minimum.</p>
+        <textarea id="layer3" data-heading="LAYER 3: WHAT ARE HUMANS? (PHILOSOPHICAL ANTHROPOLOGY)"></textarea>
+        <div class="counter" data-for="layer3">0 words</div>
+      </div>
+    </div>
+
+    <div class="layer l4">
+      <h3>Layer 4: What Matters? (Your Values Base)</h3>
+      <p class="field-label">Philosophers call this "axiology" &mdash; your theory of value, including ethics</p>
+      <p>This is about what you think has value or importance.</p>
+      <p><strong>Prompts to consider:</strong></p>
+      <ul>
+        <li>What makes life meaningful? (Relationships? Achievement? Happiness? Serving others? Serving God? Creating things? Learning?)</li>
+        <li>What do you think is <em>most</em> important in life?</li>
+        <li>Where do you think right and wrong come from? (God? Human reason? Culture? Evolution? Social agreement?)</li>
+        <li>What do you value most? (Freedom? Fairness? Loyalty? Compassion? Order? Progress?)</li>
+      </ul>
+      <div class="writebox">
+        <label for="layer4">Your response &mdash; Layer 4</label>
+        <p class="prompt-hint">Identify what you value most and where you think moral rules come from. One paragraph minimum.</p>
+        <textarea id="layer4" data-heading="LAYER 4: WHAT MATTERS? (AXIOLOGY)"></textarea>
+        <div class="counter" data-for="layer4">0 words</div>
+      </div>
+    </div>
+
+    <div class="layer l5">
+      <h3>Connections &amp; Tensions</h3>
+      <p>This is the part that turns four separate answers into a worldview.</p>
+      <p><strong>Explain at least one important connection among your beliefs and identify at least one place where your beliefs may not fit together perfectly.</strong></p>
+      <ul>
+        <li><strong>A connection</strong> sounds like: "Because I believe X about reality, I therefore believe Y about knowledge, human nature, or value."</li>
+        <li><strong>A tension</strong> is a place where two of your own beliefs pull against each other. Find a real one; a manufactured tension is easy to spot.</li>
+      </ul>
+      <div class="writebox">
+        <label for="connections">Your response &mdash; Connections &amp; Tensions</label>
+        <p class="prompt-hint">One paragraph minimum, covering both. Write more if you need the room.</p>
+        <textarea id="connections" data-heading="CONNECTIONS &amp; TENSIONS"></textarea>
+        <div class="counter" data-for="connections">0 words</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">STEP 2</span>Export Your Text File</h2>
+    <ol class="steps">
+      <li>Scroll up and click the red <strong>Export to Text File</strong> button.</li>
+      <li>Your browser downloads a plain text file named something like <code>Worldview-Map_YourName.txt</code>. Look in your <strong>Downloads</strong> folder.</li>
+      <li>Open it once to confirm all of your writing is there. It should be plain text with a heading above each response.</li>
+      <li>Keep this file. You will upload it to NotebookLM in Step 3 <em>and</em> submit it to Canvas at the end.</li>
+    </ol>
+    <p><strong>If the download does not start:</strong> use <strong>Copy All Text</strong> instead, paste it into a blank document, and save it as a <code>.txt</code> file (in Word or Google Docs, choose <em>Save as</em> or <em>Download</em> and pick <em>Plain Text (.txt)</em>). A Word <code>.docx</code> or a Google Doc works in NotebookLM too, but plain text is the most reliable.</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">STEP 3</span>Create Your Mind Map in NotebookLM</h2>
+    <ol class="steps">
+      <li>Go to NotebookLM (<a href="https://notebooklm.google.com">notebooklm.google.com</a>) and sign in with your Google account.</li>
+      <li>Create a new notebook.</li>
+      <li>Click <strong>Add source</strong> and upload the <code>.txt</code> file you exported in Step 2.</li>
+      <li>Use the <strong>Mind Map</strong> feature. NotebookLM will generate a visual map from your reflections.</li>
+      <li>Review the map. Does it accurately represent your thinking? If not, come back to this page, sharpen your writing, export a new file, and replace the source.</li>
+      <li>Once you're satisfied, use the <strong>Share</strong> feature to create a shareable link to your notebook.</li>
+    </ol>
+    <p>Vague writing produces a vague map. If the map looks thin, that is usually the map telling you something true about the reflections.</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">STEP 4</span>Write a Brief Reflection</h2>
+    <p>Once your mind map exists, you have one more short piece of writing to do &mdash; and it lives on its own page, with its own export and its own Canvas submission.</p>
+    <p>You'll answer three questions there: what surprised you, what was hardest, and how the map helped. One paragraph minimum each. Do this <strong>after</strong> you've built and looked at your map, not before.</p>
+    <p style="margin-top: 20px;"><a class="linkbtn" href="phil120-worldview-reflection.html">Go to the Reflection Page &rarr;</a></p>
+    <p style="font-size: .9em; color: #656665; margin-top: 14px;">Open it in a new tab if you'd rather keep this page handy. Your writing here is saved separately and won't be affected.</p>
+  </div>
+
+  <div class="panel-dark">
+    <h2>What to Submit</h2>
+    <p>Three items, submitted in Canvas:</p>
+    <ol>
+      <li><strong>Your worldview text file</strong> &mdash; <code>Worldview-Map_YourName.txt</code>, exported from this page (the same file you uploaded to NotebookLM)</li>
+      <li><strong>Your reflection text file</strong> &mdash; <code>Worldview-Reflection_YourName.txt</code>, exported from the reflection page in Step 4</li>
+      <li><strong>Your NotebookLM share link</strong>, pasted into the Canvas submission comment box</li>
+    </ol>
+    <p style="margin-bottom: 0;">Two separate text files, one link. Check that the link opens for someone who isn't you &mdash; see the technical notes below.</p>
+  </div>
+
+  <div class="card">
+    <h2>What I'm Looking For</h2>
+    <div class="good">
+      <p><strong>✓ Honest, thoughtful responses</strong> &mdash; not just what you think sounds good</p>
+      <p><strong>✓ Specificity</strong> &mdash; actual beliefs, not vague platitudes like "I believe in being a good person"</p>
+      <p><strong>✓ Clear connections</strong> between layers &mdash; show how your beliefs fit together</p>
+      <p><strong>✓ A genuine tension</strong> &mdash; not one invented to check a box</p>
+      <p><strong>✓ Evidence of real thinking</strong> in your final reflection</p>
+    </div>
+    <h3 style="color: #545439; font-size: 1.2em; margin-top: 25px;">What I'm NOT Looking For</h3>
+    <div class="bad">
+      <p><strong>✗ The "right" worldview</strong> &mdash; there's no grade for having beliefs I agree with</p>
+      <p><strong>✗ Perfect consistency</strong> &mdash; nobody's worldview is perfectly consistent</p>
+      <p><strong>✗ Length for its own sake</strong> &mdash; one sharp paragraph beats three padded ones</p>
+      <p><strong>✗ A "pretty" mind map</strong> &mdash; NotebookLM handles that; I'm grading your <em>thinking</em></p>
+      <p><strong>✗ Certainty about everything</strong> &mdash; "I'm not sure" and "I'm still figuring this out" are legitimate answers</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Tips for Success</h2>
+    <ul>
+      <li><strong>Be specific.</strong> NotebookLM can only map what you give it. If your writing is vague, the map will be too.</li>
+      <li><strong>Use examples.</strong> If you say you value compassion, describe what that actually looks like in practice.</li>
+      <li><strong>Don't perform.</strong> Write about the worldview you actually have, not the one you wish you had or think you should have.</li>
+      <li><strong>The map is a tool, not the assignment.</strong> I'm grading your reflections and your thinking.</li>
+      <li><strong>Write in one sitting if you can.</strong> Momentum helps on questions like these. But the page saves your work if you need to step away.</li>
+    </ul>
+  </div>
+
+  <div class="notice">
+    <h3>📌 Technical Notes</h3>
+    <ul>
+      <li><strong>Saving:</strong> Your typing is stored in this browser on this device. It will not follow you to a different computer, and clearing your browser data will erase it. Export your text file when you finish a work session.</li>
+      <li><strong>Private browsing:</strong> If you're in an incognito or private window, autosave may not work at all. Export before you close the tab.</li>
+      <li><strong>First time using NotebookLM?</strong> That's fine &mdash; it's designed to be intuitive. If you run into technical trouble, come to office hours or email me.</li>
+      <li><strong>Check your share link.</strong> Before submitting, open it in a private/incognito window to verify I'll be able to access it.</li>
+      <li><strong>Privacy:</strong> Only people with the link can see your notebook. It isn't public.</li>
+    </ul>
+  </div>
+
+  <div class="footer-note">
+    <strong>Questions?</strong> Come to office hours. This is new territory for many students, and I'm happy to help.
+  </div>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var STORAGE_KEY = "phil120_worldview_map_v1";
+  var fields = Array.prototype.slice.call(document.querySelectorAll("textarea[data-heading]"));
+  var nameInput = document.getElementById("studentName");
+  var saveNote = document.getElementById("saveNote");
+  var exported = false;
+
+  /* ---------- word counters ---------- */
+  function countWords(str) {
+    var t = (str || "").trim();
+    if (!t) return 0;
+    return t.split(/\s+/).length;
+  }
+  function updateCounter(el) {
+    var c = document.querySelector('.counter[data-for="' + el.id + '"]');
+    if (!c) return;
+    var n = countWords(el.value);
+    c.textContent = n + (n === 1 ? " word" : " words");
+  }
+
+  /* ---------- autosave ---------- */
+  var saveTimer = null;
+  function collect() {
+    var data = { name: nameInput.value };
+    fields.forEach(function (f) { data[f.id] = f.value; });
+    return data;
+  }
+  function save() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(collect()));
+      saveNote.textContent = "Saved in this browser \u2022 remember to export";
+    } catch (e) {
+      saveNote.textContent = "Autosave unavailable \u2014 export before closing this tab";
+    }
+  }
+  function queueSave() {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(save, 600);
+  }
+  function restore() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      var data = JSON.parse(raw);
+      if (data.name) nameInput.value = data.name;
+      fields.forEach(function (f) {
+        if (typeof data[f.id] === "string") f.value = data[f.id];
+      });
+      saveNote.textContent = "Restored your saved work \u2022 remember to export";
+    } catch (e) { /* no saved work, or storage blocked */ }
+  }
+
+  /* ---------- build the export text ---------- */
+  function buildText() {
+    var name = nameInput.value.trim() || "(name not entered)";
+    var today = new Date().toLocaleDateString();
+    var bar = "========================================";
+    var out = [];
+    out.push("PHIL 120: INTRODUCTION TO ETHICS");
+    out.push("MAPPING YOUR WORLDVIEW \u2014 WORLDVIEW DOCUMENT");
+    out.push("");
+    out.push("Name: " + name);
+    out.push("Date: " + today);
+    out.push("");
+    fields.forEach(function (f) {
+      var body = f.value.trim();
+      out.push(bar);
+      out.push(f.getAttribute("data-heading"));
+      out.push(bar);
+      out.push("");
+      out.push(body ? body : "[left blank]");
+      out.push("");
+    });
+    out.push(bar);
+    out.push("End of document.");
+    return out.join("\n");
+  }
+
+  function emptyFieldCount() {
+    return fields.filter(function (f) { return !f.value.trim(); }).length;
+  }
+
+  function safeName() {
+    var n = nameInput.value.trim().replace(/[^A-Za-z0-9 _-]/g, "").replace(/\s+/g, "-");
+    return n ? "Worldview-Map_" + n + ".txt" : "Worldview-Map.txt";
+  }
+
+  /* ---------- export ---------- */
+  document.getElementById("exportBtn").addEventListener("click", function () {
+    var blanks = emptyFieldCount();
+    if (blanks > 0) {
+      var msg = blanks === 1
+        ? "One box is still blank. Export anyway?"
+        : blanks + " boxes are still blank. Export anyway?";
+      if (!window.confirm(msg)) return;
+    }
+    var text = buildText();
+    try {
+      var blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = safeName();
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+      exported = true;
+      saveNote.textContent = "Exported \u2022 check your Downloads folder";
+    } catch (e) {
+      window.alert("Your browser blocked the download. Use \u201cCopy All Text\u201d instead, then paste into a document and save it as a .txt file.");
+    }
+  });
+
+  /* ---------- copy ---------- */
+  document.getElementById("copyBtn").addEventListener("click", function () {
+    var text = buildText();
+    var done = function () {
+      exported = true;
+      saveNote.textContent = "Copied \u2022 paste into a document and save as .txt";
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, fallbackCopy);
+    } else {
+      fallbackCopy();
+    }
+    function fallbackCopy() {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); done(); }
+      catch (e) { window.alert("Copy failed. Select your text manually from each box."); }
+      document.body.removeChild(ta);
+    }
+  });
+
+  /* ---------- clear ---------- */
+  document.getElementById("clearBtn").addEventListener("click", function () {
+    if (!window.confirm("This erases everything you have typed on this page. Export your text file first if you haven't. Clear the page?")) return;
+    nameInput.value = "";
+    fields.forEach(function (f) { f.value = ""; updateCounter(f); });
+    try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+    saveNote.textContent = "Page cleared";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  /* ---------- wiring ---------- */
+  fields.forEach(function (f) {
+    f.addEventListener("input", function () {
+      updateCounter(f);
+      exported = false;
+      queueSave();
+    });
+  });
+  nameInput.addEventListener("input", queueSave);
+
+  window.addEventListener("beforeunload", function (e) {
+    var hasText = fields.some(function (f) { return f.value.trim(); });
+    if (hasText && !exported) {
+      e.preventDefault();
+      e.returnValue = "";
+    }
+  });
+
+  restore();
+  fields.forEach(updateCounter);
+})();
+</script>
+
+</body>
+</html>

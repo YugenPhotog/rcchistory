@@ -1,0 +1,186 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1680 945" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <!-- Deep teal night fading to mauve dusk -->
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#08141a"/>
+      <stop offset="0.45" stop-color="#132f3a"/>
+      <stop offset="0.78" stop-color="#1f4551"/>
+      <stop offset="1" stop-color="#3b2836"/>
+    </linearGradient>
+
+    <!-- Glassy lens interior -->
+    <radialGradient id="glass" cx="0.42" cy="0.38" r="0.85">
+      <stop offset="0" stop-color="#d8ecec"/>
+      <stop offset="0.35" stop-color="#8fbcc6"/>
+      <stop offset="0.7" stop-color="#3d7180"/>
+      <stop offset="1" stop-color="#14313c"/>
+    </radialGradient>
+
+    <!-- Warm glow behind the focused world -->
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#f2e3bd" stop-opacity="0.85"/>
+      <stop offset="0.55" stop-color="#e8cf9a" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#e8cf9a" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Brass barrel -->
+    <linearGradient id="brass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e3cb96"/>
+      <stop offset="0.5" stop-color="#a8823f"/>
+      <stop offset="1" stop-color="#6d5427"/>
+    </linearGradient>
+
+    <!-- Vignette -->
+    <radialGradient id="vignette" cx="0.5" cy="0.46" r="0.75">
+      <stop offset="0" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="0.7" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.5"/>
+    </radialGradient>
+
+    <!-- Light ray -->
+    <linearGradient id="ray" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e9f4f2" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#e9f4f2" stop-opacity="0"/>
+    </linearGradient>
+
+    <filter id="blurSoft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+    <filter id="blurHeavy" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.9  0 0 0 0 0.9  0 0 0 0 0.85  0 0 0 0.05 0"/>
+      <feComposite operator="over" in2="SourceGraphic"/>
+    </filter>
+
+    <clipPath id="glassClip"><circle cx="1180" cy="468" r="298"/></clipPath>
+    <clipPath id="globeClip"><circle cx="1180" cy="468" r="204"/></clipPath>
+
+    <!-- The focused world: a crisp graticule globe -->
+    <g id="globe">
+      <circle cx="1180" cy="468" r="204" fill="none" stroke="#f4efe2" stroke-width="3"/>
+      <ellipse cx="1180" cy="468" rx="138" ry="204" fill="none" stroke="#f4efe2" stroke-width="1.8" opacity="0.85"/>
+      <ellipse cx="1180" cy="468" rx="66" ry="204" fill="none" stroke="#f4efe2" stroke-width="1.6" opacity="0.75"/>
+      <line x1="1180" y1="264" x2="1180" y2="672" stroke="#f4efe2" stroke-width="1.6" opacity="0.75"/>
+      <g clip-path="url(#globeClip)">
+        <ellipse cx="1180" cy="468" rx="204" ry="66" fill="none" stroke="#f4efe2" stroke-width="1.6" opacity="0.75"/>
+        <ellipse cx="1180" cy="468" rx="204" ry="138" fill="none" stroke="#f4efe2" stroke-width="1.8" opacity="0.85"/>
+        <line x1="976" y1="468" x2="1384" y2="468" stroke="#f4efe2" stroke-width="1.8" opacity="0.9"/>
+        <!-- abstract landmasses -->
+        <path d="M1078 356 q42 -26 84 -12 q34 12 22 44 q-10 28 -46 30 q-44 4 -66 -18 q-16 -22 6 -44 z"
+              fill="#e8cf9a" opacity="0.4"/>
+        <path d="M1218 470 q50 -12 76 16 q22 26 2 56 q-22 30 -62 20 q-38 -10 -42 -44 q-2 -34 26 -48 z"
+              fill="#e8cf9a" opacity="0.34"/>
+        <path d="M1092 520 q30 -6 42 18 q10 22 -10 38 q-24 18 -46 2 q-20 -16 -8 -38 q8 -16 22 -20 z"
+              fill="#e8cf9a" opacity="0.3"/>
+      </g>
+    </g>
+  </defs>
+
+  <!-- ======== Background ======== -->
+  <rect width="1680" height="945" fill="url(#bg)"/>
+
+  <!-- Distorted, out-of-focus world beyond the lens -->
+  <g opacity="0.16" filter="url(#blurHeavy)">
+    <g transform="translate(-760,-140) scale(1.55) skewX(-4)">
+      <use href="#globe"/>
+    </g>
+  </g>
+  <g opacity="0.1" filter="url(#blurHeavy)">
+    <g transform="translate(520,470) scale(0.62) skewX(9)">
+      <use href="#globe"/>
+    </g>
+  </g>
+
+  <!-- Warped gridlines drifting through the dark -->
+  <g stroke="#7fb4c4" fill="none" opacity="0.1" filter="url(#blurSoft)">
+    <path d="M-40 210 C 320 150, 620 300, 940 240 S 1500 130, 1720 220" stroke-width="2"/>
+    <path d="M-40 640 C 260 700, 560 560, 860 640 S 1460 760, 1720 660" stroke-width="2"/>
+    <path d="M-40 430 C 360 380, 700 480, 1040 430" stroke-width="1.5"/>
+    <path d="M180 -20 C 140 260, 220 560, 160 965" stroke-width="1.5"/>
+    <path d="M560 -20 C 600 240, 520 620, 590 965" stroke-width="1.5"/>
+  </g>
+
+  <!-- Soft light rays from upper left -->
+  <g>
+    <polygon points="0,0 560,0 260,620 0,420" fill="url(#ray)"/>
+    <polygon points="180,0 760,0 520,540 260,380" fill="url(#ray)" opacity="0.6"/>
+  </g>
+
+  <!-- Drifting dust / stars -->
+  <g fill="#e9f4f2">
+    <circle cx="150" cy="150" r="1.6" opacity="0.4"/>
+    <circle cx="315" cy="95" r="1.2" opacity="0.3"/>
+    <circle cx="255" cy="335" r="1.8" opacity="0.28"/>
+    <circle cx="90" cy="520" r="1.3" opacity="0.32"/>
+    <circle cx="420" cy="205" r="1.1" opacity="0.35"/>
+    <circle cx="520" cy="420" r="1.7" opacity="0.22"/>
+    <circle cx="660" cy="130" r="1.4" opacity="0.3"/>
+    <circle cx="705" cy="560" r="1.2" opacity="0.26"/>
+    <circle cx="835" cy="270" r="1.9" opacity="0.3"/>
+    <circle cx="960" cy="120" r="1.3" opacity="0.33"/>
+    <circle cx="1040" cy="820" r="1.5" opacity="0.24"/>
+    <circle cx="1420" cy="120" r="1.6" opacity="0.3"/>
+    <circle cx="1560" cy="300" r="1.2" opacity="0.28"/>
+    <circle cx="1500" cy="760" r="1.7" opacity="0.24"/>
+    <circle cx="380" cy="720" r="1.5" opacity="0.26"/>
+    <circle cx="620" cy="860" r="1.3" opacity="0.22"/>
+  </g>
+
+  <!-- ======== The Lens ======== -->
+  <!-- Outer barrel -->
+  <circle cx="1180" cy="468" r="352" fill="none" stroke="#0a161b" stroke-width="30"/>
+  <circle cx="1180" cy="468" r="336" fill="none" stroke="url(#brass)" stroke-width="7"/>
+  <circle cx="1180" cy="468" r="320" fill="none" stroke="#0e2229" stroke-width="22"/>
+  <circle cx="1180" cy="468" r="307" fill="none" stroke="#d9c08a" stroke-width="1.8" opacity="0.55"/>
+
+  <!-- Focus scale ticks on the barrel -->
+  <g stroke="#d9c08a" stroke-width="2.5" opacity="0.65">
+    <line x1="1180" y1="126" x2="1180" y2="146"/>
+    <line x1="1180" y1="790" x2="1180" y2="810"/>
+    <line x1="838" y1="468" x2="858" y2="468"/>
+    <line x1="1502" y1="468" x2="1522" y2="468"/>
+    <line x1="938" y1="226" x2="952" y2="240" opacity="0.5"/>
+    <line x1="1422" y1="226" x2="1408" y2="240" opacity="0.5"/>
+    <line x1="938" y1="710" x2="952" y2="696" opacity="0.5"/>
+    <line x1="1422" y1="710" x2="1408" y2="696" opacity="0.5"/>
+  </g>
+
+  <!-- Glass -->
+  <circle cx="1180" cy="468" r="298" fill="url(#glass)"/>
+
+  <g clip-path="url(#glassClip)">
+    <!-- warm glow behind the world -->
+    <circle cx="1180" cy="468" r="270" fill="url(#glow)"/>
+    <!-- the world, in focus -->
+    <use href="#globe"/>
+    <!-- viewfinder focus brackets -->
+    <g stroke="#f5f1e8" stroke-width="3" fill="none" opacity="0.8">
+      <path d="M1010 322 v-24 h24"/>
+      <path d="M1350 322 v-24 h-24"/>
+      <path d="M1010 614 v24 h24"/>
+      <path d="M1350 614 v24 h-24"/>
+    </g>
+    <g stroke="#f5f1e8" stroke-width="2" opacity="0.55">
+      <line x1="1180" y1="188" x2="1180" y2="214"/>
+      <line x1="1180" y1="722" x2="1180" y2="748"/>
+      <line x1="900" y1="468" x2="926" y2="468"/>
+      <line x1="1434" y1="468" x2="1460" y2="468"/>
+    </g>
+    <!-- glass highlights -->
+    <ellipse cx="1050" cy="330" rx="150" ry="82" fill="#ffffff" opacity="0.14" filter="url(#blurSoft)" transform="rotate(-28 1050 330)"/>
+    <ellipse cx="1332" cy="640" rx="90" ry="40" fill="#ffffff" opacity="0.07" filter="url(#blurSoft)" transform="rotate(-24 1332 640)"/>
+    <!-- inner rim shadow -->
+    <circle cx="1180" cy="468" r="288" fill="none" stroke="#04090c" stroke-width="24" opacity="0.35" filter="url(#blurSoft)"/>
+  </g>
+
+  <!-- small lens flare -->
+  <circle cx="1032" cy="312" r="7" fill="#fdf8ea" opacity="0.75"/>
+  <circle cx="1032" cy="312" r="16" fill="#fdf8ea" opacity="0.2" filter="url(#blurSoft)"/>
+
+  <!-- ======== Atmosphere ======== -->
+  <rect width="1680" height="945" fill="url(#vignette)"/>
+  <rect width="1680" height="945" filter="url(#grain)" opacity="0.5" fill="none" pointer-events="none"/>
+</svg>
