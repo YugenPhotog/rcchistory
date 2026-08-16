@@ -88,8 +88,8 @@
     button:disabled { opacity: .5; cursor: not-allowed; }
     .send { width: 4.5rem; background: var(--amber-600); color: white; display: flex; align-items: center; justify-content: center; }
     .send:hover:not(:disabled) { background: var(--amber-700); }
-    .copy { margin-top: .75rem; width: 100%; padding: .6rem .9rem; background: var(--gray-100); color: var(--gray-700); display: flex; align-items: center; justify-content: center; gap: .5rem; }
-    .copy:hover { background: var(--gray-200); }
+    .export { margin-top: .75rem; width: 100%; padding: .6rem .9rem; background: var(--gray-100); color: var(--gray-700); display: flex; align-items: center; justify-content: center; gap: .5rem; }
+    .export:hover { background: var(--gray-200); }
     .requirements { background: var(--amber-50); border-top: 1px solid var(--amber-200); padding: 1rem; border-radius: 0 0 .5rem .5rem; color: #92400e; font-size: .9rem; display: flex; gap: .5rem; }
     .requirements p { margin: 0; font-weight: 700; }
     .requirements ul { margin: .25rem 0 0; padding-left: 1.1rem; }
@@ -130,9 +130,9 @@
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
             </button>
           </div>
-          <button id="copyBtn" class="copy" type="button">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-            <span id="copyLabel">Copy Full Transcript (Required for Submission)</span>
+          <button id="exportBtn" class="export" type="button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            <span id="exportLabel">Export Full Transcript (.txt) - Required for Submission</span>
           </button>
         </form>
         <section class="requirements">
@@ -142,7 +142,7 @@
             <ul>
               <li>Identify your primary source and submit your own draft interpretation</li>
               <li>Minimum of three back-and-forth exchanges required</li>
-              <li>Submit full transcript with your assignment</li>
+              <li>Export the full transcript as a .txt file and submit it with your assignment</li>
               <li>ProfessorAustinBot asks questions only - he does not write for you</li>
             </ul>
           </div>
@@ -241,7 +241,7 @@ Go ahead and paste your first draft (in your own words, no AI) answering the two
 
 I ask questions only. You'll need a minimum of three back-and-forth exchanges. I won't write, rewrite, explain, or summarize for you — but I will help you think on a deeper level if you let me!
 
-Paste your draft whenever you're ready. Remember to copy the full transcript at the end; it's required for your submission.`
+Paste your draft whenever you're ready. Remember to export the full transcript as a .txt file at the end; it's required for your submission.`
       }
     ];
     let isLoading = false;
@@ -252,8 +252,8 @@ Paste your draft whenever you're ready. Remember to copy the full transcript at 
     const formEl = document.getElementById('chatForm');
     const inputEl = document.getElementById('userInput');
     const sendBtn = document.getElementById('sendBtn');
-    const copyBtn = document.getElementById('copyBtn');
-    const copyLabel = document.getElementById('copyLabel');
+    const exportBtn = document.getElementById('exportBtn');
+    const exportLabel = document.getElementById('exportLabel');
     const requiredNotice = document.getElementById('requiredNotice');
     const philosopherNotice = document.getElementById('philosopherNotice');
 
@@ -376,21 +376,52 @@ Paste your draft whenever you're ready. Remember to copy the full transcript at 
     });
     formEl.addEventListener('submit', handleSubmit);
 
-    copyBtn.addEventListener('click', async () => {
-      const transcript = messages.map(msg => `${msg.role === 'user' ? 'STUDENT' : 'PROFESSOR AUSTINBOT'}:\n${msg.content}\n`).join('\n---\n\n');
-      try {
-        await navigator.clipboard.writeText(transcript);
-        copyLabel.textContent = 'Copied!';
-      } catch (error) {
-        const temp = document.createElement('textarea');
-        temp.value = transcript;
-        document.body.appendChild(temp);
-        temp.select();
-        document.execCommand('copy');
-        document.body.removeChild(temp);
-        copyLabel.textContent = 'Copied!';
+    const EXPORT_LABEL = 'Export Full Transcript (.txt) - Required for Submission';
+
+    exportBtn.addEventListener('click', () => {
+      if (!messages.some(msg => msg.role === 'user')) {
+        exportLabel.textContent = 'Nothing to export yet - start the conversation first';
+        setTimeout(() => { exportLabel.textContent = EXPORT_LABEL; }, 2500);
+        return;
       }
-      setTimeout(() => { copyLabel.textContent = 'Copy Full Transcript (Required for Submission)'; }, 2000);
+
+      const page = (location.pathname.split('/').pop() || '').replace(/\.html?$/i, '');
+      const tagMatch = page.match(/hist151[_-](.+)$/i);
+      const tag = tagMatch ? tagMatch[1] : 'transcript';
+      const now = new Date();
+      const stamp = now.getFullYear() + '-' +
+        String(now.getMonth() + 1).padStart(2, '0') + '-' +
+        String(now.getDate()).padStart(2, '0');
+
+      const header = [
+        'HIST 151 - Sources From the Past',
+        'ProfessorAustinBot conversation transcript',
+        'Chapter: ' + tag,
+        'Exported: ' + now.toLocaleString(),
+        'Student exchanges: ' + messages.filter(msg => msg.role === 'user').length,
+        '',
+        'Student name: ______________________________',
+        '',
+        '==================================================',
+        ''
+      ].join('\n');
+
+      const body = messages
+        .map(msg => `${msg.role === 'user' ? 'STUDENT' : 'PROFESSOR AUSTINBOT'}:\n${msg.content}\n`)
+        .join('\n---\n\n');
+
+      const blob = new Blob([header + body], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `HIST151_${tag}_ProfessorAustinBot_Transcript_${stamp}.txt`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+      exportLabel.textContent = 'Transcript downloaded - attach it to your submission';
+      setTimeout(() => { exportLabel.textContent = EXPORT_LABEL; }, 3000);
     });
 
     renderMessages();
