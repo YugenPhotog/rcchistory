@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HIST 270 — History of China — Fall 2026 Lecture Calendar</title>
+<style>
+/* ============================================================
+   Scholar's Studio house style
+   Ivory #FFFAF0 · Charcoal #2C2C2C · Forest #24433C
+   Terracotta #8B472F · Sage #3D755E · Amber #C18B32 (borders only)
+   ============================================================ */
+:root{
+  --ivory:#FFFAF0;
+  --charcoal:#2C2C2C;
+  --forest:#24433C;
+  --terracotta:#8B472F;
+  --sage:#3D755E;
+  --amber:#C18B32;
+  --tint-sage:#EEF4F1;
+  --tint-cream:#F7F1E6;
+  --tint-amber:#FFF7E6;
+  --tint-rust:#FBEEE7;
+  --muted:#5F5A54;
+  --rule:#DCD3C4;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;scroll-padding-top:120px;}
+body{
+  font-family:Georgia,"Iowan Old Style","Times New Roman",serif;
+  background:var(--ivory);
+  color:var(--charcoal);
+  line-height:1.55;
+  font-size:17px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1080px;margin:0 auto;padding:0 1.4rem 4rem;}
+
+/* ---------- Masthead ---------- */
+.masthead{
+  background:var(--forest);
+  color:var(--ivory);
+  border-bottom:5px solid var(--terracotta);
+  padding:2.2rem 1.4rem 1.9rem;
+}
+.masthead .inner{max-width:1080px;margin:0 auto;}
+.eyebrow{
+  font-family:"Helvetica Neue",Arial,sans-serif;
+  font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
+  color:#E9DFCB;margin-bottom:.55rem;
+}
+.masthead h1{
+  font-size:2.15rem;line-height:1.15;font-weight:700;letter-spacing:.01em;
+}
+.masthead h1 .sub{display:block;font-size:1.1rem;font-weight:400;color:#E9DFCB;margin-top:.45rem;letter-spacing:.02em;}
+.masthead .meta{
+  margin-top:1.1rem;padding-top:.9rem;border-top:1px solid rgba(255,250,240,.28);
+  font-family:"Helvetica Neue",Arial,sans-serif;font-size:.85rem;color:#EFE7D8;
+  display:flex;flex-wrap:wrap;gap:.4rem 1.6rem;
+}
+
+/* ---------- Control bar ---------- */
+.controls{
+  position:sticky;top:0;z-index:20;
+  background:var(--tint-cream);
+  border-bottom:2px solid var(--amber);
+  box-shadow:0 2px 10px rgba(44,44,44,.09);
+}
+.controls .inner{
+  max-width:1080px;margin:0 auto;padding:.7rem 1.4rem;
+  display:flex;flex-wrap:wrap;align-items:center;gap:.55rem;
+  font-family:"Helvetica Neue",Arial,sans-serif;
+}
+.controls .label{
+  font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);margin-right:.15rem;
+}
+button.filter,button.action{
+  font-family:"Helvetica Neue",Arial,sans-serif;
+  font-size:.82rem;padding:.42rem .85rem;
+  border:1.5px solid var(--forest);border-radius:3px;
+  background:transparent;color:var(--forest);
+  cursor:pointer;transition:background .15s,color .15s;
+}
+button.filter:hover,button.action:hover{background:var(--forest);color:var(--ivory);}
+button.filter[aria-pressed="true"]{background:var(--forest);color:var(--ivory);}
+button.filter:focus-visible,button.action:focus-visible,#search:focus-visible,a:focus-visible{
+  outline:3px solid var(--terracotta);outline-offset:2px;
+}
+button.action{border-color:var(--terracotta);color:var(--terracotta);}
+button.action:hover{background:var(--terracotta);color:var(--ivory);}
+#search{
+  font-family:"Helvetica Neue",Arial,sans-serif;font-size:.82rem;
+  padding:.42rem .7rem;border:1.5px solid var(--rule);border-radius:3px;
+  background:#fff;color:var(--charcoal);min-width:190px;flex:1 1 190px;max-width:300px;
+}
+.spacer{flex:1 1 auto;}
+
+/* ---------- Section headers ---------- */
+.unit{margin-top:2.6rem;}
+.unit-head{
+  border-left:6px solid var(--sage);
+  background:var(--tint-sage);
+  padding:.75rem 1rem;margin-bottom:1.1rem;
+}
+.unit-head h2{
+  font-size:1.22rem;color:var(--forest);letter-spacing:.01em;
+}
+.unit-head p{
+  font-family:"Helvetica Neue",Arial,sans-serif;font-size:.82rem;
+  color:var(--muted);margin-top:.2rem;
+}
+
+/* ---------- Meeting cards ---------- */
+.day{
+  display:grid;
+  grid-template-columns:150px 1fr;
+  border:1px solid var(--rule);
+  border-left:5px solid var(--sage);
+  background:#fff;
+  margin-bottom:.85rem;
+  page-break-inside:avoid;break-inside:avoid;
+}
+.day.is-hidden{display:none;}
+.day.intro{border-left-color:var(--amber);}
+.day.break{border-left-color:var(--terracotta);background:var(--tint-rust);}
+.day.next{border-left-color:var(--terracotta);box-shadow:0 0 0 2px var(--terracotta);}
+.daycol{
+  background:var(--tint-cream);
+  border-right:1px solid var(--rule);
+  padding:.8rem .9rem;
+}
+.dow{
+  font-family:"Helvetica Neue",Arial,sans-serif;
+  font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--terracotta);
+}
+.date{font-size:1.28rem;font-weight:700;color:var(--forest);line-height:1.2;margin-top:.1rem;}
+.tag-next{
+  display:inline-block;margin-top:.45rem;
+  font-family:"Helvetica Neue",Arial,sans-serif;font-size:.62rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  background:var(--terracotta);color:var(--ivory);padding:.16rem .45rem;border-radius:2px;
+}
+.blocks{padding:.7rem .95rem .8rem;}
+.block{padding:.35rem 0;}
+.block + .block{border-top:1px dotted var(--rule);}
+.bnum{
+  font-family:"Helvetica Neue",Arial,sans-serif;
+  font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--muted);display:block;
+}
+.btitle{font-size:1.02rem;line-height:1.35;}
+.btitle .ch{color:var(--forest);font-weight:700;}
+.btitle .ps{color:var(--terracotta);font-weight:700;}
+.pill{
+  display:inline-block;margin-left:.4rem;vertical-align:.08em;
+  font-family:"Helvetica Neue",Arial,sans-serif;font-size:.62rem;
+  letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--amber);color:var(--muted);
+  padding:.08rem .38rem;border-radius:2px;background:var(--tint-amber);
+}
+.notes{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.35rem;}
+.note{
+  font-family:"Helvetica Neue",Arial,sans-serif;font-size:.75rem;
+  padding:.24rem .55rem;border-radius:2px;line-height:1.35;
+}
+.note.due{background:var(--tint-rust);border-left:3px solid var(--terracotta);color:#5C2F1E;}
+.note.exam{background:var(--tint-amber);border-left:3px solid var(--amber);color:#5A4416;font-weight:700;}
+.note.info{background:var(--tint-sage);border-left:3px solid var(--sage);color:#25443A;}
+
+/* ---------- Post-session table ---------- */
+table.after{
+  width:100%;border-collapse:collapse;margin-top:.6rem;
+  font-size:.95rem;background:#fff;
+}
+table.after caption{text-align:left;font-size:.8rem;color:var(--muted);padding-bottom:.4rem;
+  font-family:"Helvetica Neue",Arial,sans-serif;}
+table.after th{
+  background:var(--forest);color:var(--ivory);text-align:left;
+  padding:.5rem .7rem;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;
+  font-family:"Helvetica Neue",Arial,sans-serif;font-weight:600;
+}
+table.after td{border:1px solid var(--rule);padding:.55rem .7rem;vertical-align:top;}
+table.after td:first-child{width:200px;font-weight:700;color:var(--forest);white-space:nowrap;}
+
+/* ---------- Rules / arc panels ---------- */
+.panels{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1rem;margin-top:1rem;}
+.panel{border:1px solid var(--rule);border-top:4px solid var(--amber);background:#fff;padding:.95rem 1.1rem;}
+.panel h3{font-size:1.02rem;color:var(--forest);margin-bottom:.5rem;}
+.panel ul{list-style:none;}
+.panel li{font-size:.92rem;padding:.22rem 0 .22rem .95rem;position:relative;line-height:1.45;}
+.panel li::before{content:"";position:absolute;left:0;top:.72em;width:6px;height:6px;background:var(--sage);}
+.arc-list li::before{background:var(--terracotta);}
+
+/* ---------- Legend ---------- */
+.legend{
+  margin-top:1.4rem;border:1px solid var(--rule);background:var(--tint-cream);
+  padding:.8rem 1rem;display:flex;flex-wrap:wrap;gap:.6rem 1.5rem;
+  font-family:"Helvetica Neue",Arial,sans-serif;font-size:.78rem;color:var(--muted);
+}
+.legend span.key{display:inline-flex;align-items:center;gap:.4rem;}
+.swatch{width:14px;height:14px;display:inline-block;border:1px solid var(--rule);}
+.sw-forest{background:var(--forest);}
+.sw-terra{background:var(--terracotta);}
+.sw-amber{background:var(--amber);}
+.sw-sage{background:var(--sage);}
+
+footer.doc{
+  margin-top:2.6rem;padding-top:.9rem;border-top:2px solid var(--amber);
+  font-family:"Helvetica Neue",Arial,sans-serif;font-size:.78rem;color:var(--muted);
+  display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;justify-content:space-between;
+}
+h2.section-title{
+  font-size:1.35rem;color:var(--forest);margin-top:2.6rem;
+  border-bottom:2px solid var(--amber);padding-bottom:.35rem;
+}
+.no-results{
+  display:none;padding:1.2rem;border:1px dashed var(--rule);
+  text-align:center;color:var(--muted);font-family:"Helvetica Neue",Arial,sans-serif;font-size:.9rem;
+}
+.no-results.show{display:block;}
+
+@media (max-width:640px){
+  .day{grid-template-columns:1fr;}
+  .daycol{border-right:none;border-bottom:1px solid var(--rule);display:flex;align-items:baseline;gap:.6rem;}
+  .date{font-size:1.1rem;}
+  .masthead h1{font-size:1.6rem;}
+  table.after td:first-child{width:auto;white-space:normal;}
+}
+
+/* ============================================================
+   PRINT — compact, ink-light, one clean handout
+   ============================================================ */
+@media print{
+  @page{margin:0.55in;}
+  body{background:#fff;font-size:9.6pt;line-height:1.32;}
+  .controls,.no-results,.tag-next{display:none !important;}
+  .wrap{max-width:none;padding:0;}
+  .masthead{
+    background:#fff !important;color:var(--charcoal) !important;
+    border-bottom:2.5pt solid var(--forest);padding:0 0 .35rem;margin-bottom:.5rem;
+  }
+  .masthead .eyebrow,.masthead h1 .sub,.masthead .meta{color:#3a3a3a !important;}
+  .masthead h1{font-size:15pt;}
+  .masthead h1 .sub{font-size:10pt;margin-top:.15rem;}
+  .masthead .meta{font-size:8pt;margin-top:.35rem;padding-top:.3rem;border-top:.5pt solid #999;gap:.2rem .9rem;}
+  .unit{margin-top:.75rem;page-break-inside:auto;}
+  .unit-head{
+    background:#fff !important;border-left:3pt solid var(--forest);
+    padding:.2rem .5rem;margin-bottom:.35rem;page-break-after:avoid;
+  }
+  .unit-head h2{font-size:11pt;}
+  .unit-head p{font-size:8pt;}
+  .day{
+    grid-template-columns:118px 1fr;margin-bottom:.22rem;
+    border:.5pt solid #999;border-left:2.5pt solid var(--forest);
+    box-shadow:none !important;
+  }
+  .day.break{background:#fff !important;}
+  .daycol{background:#fff !important;border-right:.5pt solid #999;padding:.3rem .4rem;}
+  .dow{font-size:6.5pt;color:#3a3a3a !important;}
+  .date{font-size:10.5pt;}
+  .blocks{padding:.3rem .45rem;}
+  .block{padding:.12rem 0;}
+  .bnum{font-size:6.5pt;display:inline;margin-right:.35rem;}
+  .btitle{font-size:9.4pt;display:inline;}
+  .pill{font-size:6pt;background:#fff !important;}
+  .notes{margin-top:.22rem;gap:.2rem;}
+  .note{font-size:7.4pt;padding:.06rem .3rem;background:#fff !important;color:#2C2C2C !important;}
+  .note.due{border-left:2pt solid var(--terracotta);}
+  .note.exam{border-left:2pt solid var(--forest);font-weight:700;}
+  .note.info{border-left:2pt solid #777;}
+  h2.section-title{font-size:11pt;margin-top:.8rem;page-break-after:avoid;}
+  table.after{font-size:8.6pt;page-break-inside:avoid;}
+  table.after th{background:#fff !important;color:var(--charcoal) !important;border:.5pt solid #999;font-size:7.6pt;}
+  table.after td{border:.5pt solid #999;padding:.22rem .4rem;}
+  .panels{gap:.5rem;page-break-inside:avoid;}
+  .panel{border:.5pt solid #999;border-top:2pt solid var(--forest);padding:.4rem .55rem;}
+  .panel h3{font-size:9.4pt;}
+  .panel li{font-size:8.2pt;padding:.08rem 0 .08rem .7rem;}
+  .legend{background:#fff !important;border:.5pt solid #999;font-size:7.6pt;padding:.3rem .5rem;}
+  .swatch{border:.5pt solid #333;}
+  footer.doc{font-size:7.6pt;margin-top:.7rem;padding-top:.3rem;border-top:1pt solid var(--forest);}
+  a{text-decoration:none;color:var(--charcoal);}
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="inner">
+    <p class="eyebrow">Richland College &middot; Fall 2026</p>
+    <h1>HIST 270-Y1: History of China
+      <span class="sub">Lecture Calendar &middot; August 18 &ndash; December 11, 2026</span>
+    </h1>
+    <div class="meta">
+      <span>Tuesday &amp; Thursday &middot; two 35-minute instructional blocks per meeting</span>
+      <span>Textbook: Ebrey, <em>A History of China</em>, 3rd ed.</span>
+      <span>60 instructional blocks after the opening class</span>
+    </div>
+  </div>
+</header>
+
+<nav class="controls" aria-label="Calendar controls">
+  <div class="inner">
+    <span class="label">View</span>
+    <button class="filter" type="button" data-filter="all" aria-pressed="true">All meetings</button>
+    <button class="filter" type="button" data-filter="lecture" aria-pressed="false">Lectures only</button>
+    <button class="filter" type="button" data-filter="ps" aria-pressed="false">Primary Source blocks</button>
+    <button class="filter" type="button" data-filter="due" aria-pressed="false">Deadline days</button>
+    <label for="search" class="label" style="margin-left:.5rem;">Find</label>
+    <input id="search" type="search" placeholder="chapter, date, deadline&hellip;" autocomplete="off">
+    <span class="spacer"></span>
+    <button class="action" type="button" id="print-btn">Print / Save as PDF</button>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <div id="calendar"><!-- rendered by script; static fallback appended below if JS is off --></div>
+  <p class="no-results" id="no-results">No meetings match that filter or search term.</p>
+
+  <h2 class="section-title">After the Final Regular Class</h2>
+  <table class="after">
+    <caption>All remaining coursework is completed online.</caption>
+    <thead>
+      <tr><th scope="col">Date</th><th scope="col">Online Coursework</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Mon Dec 7</td><td>Unit 3 Exam due</td></tr>
+      <tr><td>Tue Dec 8, 10:00&ndash;11:50 a.m.</td><td>Tentative college final period &mdash; no classroom exam required under the current assessment design</td></tr>
+      <tr><td>Thu Dec 10</td><td>Mao Stream &amp; Discuss due and closes</td></tr>
+      <tr><td>Thu Dec 10</td><td>Chapter 27 Final Exam / coursework due</td></tr>
+      <tr><td>Fri Dec 11</td><td>Revised Worldview Map &amp; Course Reflection due</td></tr>
+    </tbody>
+  </table>
+
+  <h2 class="section-title">How This Calendar Is Built</h2>
+  <div class="panels">
+    <div class="panel">
+      <h3>Scheduling Rules</h3>
+      <ul>
+        <li>Two 35-minute blocks per Tuesday/Thursday meeting.</li>
+        <li>The first meeting is reserved for course introduction.</li>
+        <li>New chapters begin <strong>only</strong> in Block 1.</li>
+        <li>Every classroom chapter closes with exactly one Primary Source / Application block.</li>
+        <li>Chapter 12 is completed online only.</li>
+        <li>All three Unit Exams are online.</li>
+        <li>No exam-review, synthesis, catch-up, or generic flex blocks.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Early Semester &mdash; Building the Framework</h3>
+      <ul class="arc-list">
+        <li>Ch. 1 &mdash; 5 lectures + application</li>
+        <li>Ch. 2 &mdash; 5 lectures + application</li>
+        <li>Ch. 3 &mdash; 5 lectures + application</li>
+        <li>Ch. 4 &mdash; 5 lectures + application</li>
+        <li>Ch. 5 &mdash; 5 lectures + application</li>
+        <li>Ch. 8 &mdash; 5 lectures + application</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Transition &amp; Later Semester</h3>
+      <ul class="arc-list">
+        <li>Ch. 12 &mdash; online only</li>
+        <li>Ch. 14 &mdash; 3 lectures + application</li>
+        <li>Ch. 16 &mdash; 3 lectures + application</li>
+        <li>Ch. 18 &mdash; 3 lectures + application</li>
+        <li>Ch. 24 &mdash; 3 lectures + application</li>
+        <li>Ch. 25 &mdash; 3 lectures + application</li>
+        <li>Ch. 27 &mdash; 3 lectures + application</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="legend">
+    <span class="key"><span class="swatch sw-forest"></span> Chapter lecture block</span>
+    <span class="key"><span class="swatch sw-terra"></span> Primary Source / Application block</span>
+    <span class="key"><span class="swatch sw-amber"></span> Exam or major deadline</span>
+    <span class="key"><span class="swatch sw-sage"></span> Online / scheduling note</span>
+  </div>
+
+  <footer class="doc">
+    <span>HIST 270-Y1 &middot; History of China &middot; Fall 2026 &middot; Richland College</span>
+    <span>Calendar subject to revision; Canvas due dates govern.</span>
+  </footer>
+</main>
+
+<script>
+/* ---------------- Calendar data ---------------- */
+var UNITS = [
+  {
+    title: "Unit 1 — Foundations: Bronze Age through Political Division",
+    sub: "Chapters 1–4 · Unit 1 Exam due Sun Sep 27 (online)",
+    days: [
+      {dow:"Tue", date:"Aug 18", kind:"intro",
+       b1:{t:"Syllabus &amp; Course Introduction", type:"intro"},
+       b2:{t:"Hybrid Course Orientation / Course Framework", type:"intro"},
+       notes:[{c:"info", t:"Classes begin"}]},
+      {dow:"Thu", date:"Aug 20",
+       b1:{t:"Chapter 1, Lecture 1", type:"lecture"},
+       b2:{t:"Chapter 1, Lecture 2", type:"lecture"},
+       notes:[{c:"due", t:"Introduce Yourself due"}]},
+      {dow:"Tue", date:"Aug 25",
+       b1:{t:"Chapter 1, Lecture 3", type:"lecture"},
+       b2:{t:"Chapter 1, Lecture 4", type:"lecture"}, notes:[]},
+      {dow:"Thu", date:"Aug 27",
+       b1:{t:"Chapter 1, Lecture 5", type:"lecture"},
+       b2:{t:"Chapter 1, Primary Source / Application", type:"ps"},
+       notes:[{c:"due", t:"Ch. 1 due Sun Aug 30"}]},
+      {dow:"Tue", date:"Sep 1",
+       b1:{t:"Chapter 2, Lecture 1", type:"lecture"},
+       b2:{t:"Chapter 2, Lecture 2", type:"lecture"}, notes:[]},
+      {dow:"Thu", date:"Sep 3",
+       b1:{t:"Chapter 2, Lecture 3", type:"lecture"},
+       b2:{t:"Chapter 2, Lecture 4", type:"lecture"}, notes:[]},
+      {dow:"Tue", date:"Sep 8",
+       b1:{t:"Chapter 2, Lecture 5", type:"lecture"},
+       b2:{t:"Chapter 2, Primary Source / Application", type:"ps"},
+       notes:[{c:"due", t:"Ch. 2 due Sun Sep 13"}]},
+      {dow:"Thu", date:"Sep 10",
+       b1:{t:"Chapter 3, Lecture 1", type:"lecture"},
+       b2:{t:"Chapter 3, Lecture 2", type:"lecture"}, notes:[]},
+      {dow:"Tue", date:"Sep 15",
+       b1:{t:"Chapter 3, Lecture 3", type:"lecture"},
+       b2:{t:"Chapter 3, Lecture 4", type:"lecture"}, notes:[]},
+      {dow:"Thu", date:"Sep 17",
+       b1:{t:"Chapter 3, Lecture 5", type:"lecture"},
+       b2:{t:"Chapter 3, Primary Source / Application", type:"ps"},
+       notes:[{c:"due", t:"Ch. 3 due Sun Sep 20"}]},
+      {dow:"Tue", date:"Sep 22",
+       b1:{t:"Chapter 4, Lecture 1", type:"lecture"},
+       b2:{t:"Chapter 4, Lecture 2", type:"lecture"}, notes:[]},
+      {dow:"Thu", date:"Sep 24",
+       b1:{t:"Chapter 4, Lecture 3", type:"lecture"},
+       b2:{t:"Chapter 4, Lecture 4", type:"lecture"}, notes:[]},
+      {dow:"Tue", date:"Sep 29",
+       b1:{t:"Chapter 4, Lecture 5", type:"lecture"},
+       b2:{t:"Chapter 4, Primary Source / Application", type:"ps"},
+       notes:[{c:"exam", t:"Unit 1 Exam due Sun Sep 27"},{c:"due", t:"Ch. 4 due Sun Oct 4"}]}
+    ]
+  },
+  {
+    title: "Unit 2 — Empire, Equals, and Mongol Rule",
+    sub: "Chapters 5, 8, and 12 · Ch. 12 online only · Unit 2 Exam due Sun Nov 1 (online)",
+    days: [
+      {dow:"Thu", date:"Oct 1",
+       b1:{t:"Chapter 5, Lecture 1", type:"lecture"},
+       b2:{t:"Chapter 5, Lecture 2", type:"lecture"}, notes:[]},
+      {dow:"Tue", date:"Oct 6",
+       b1:{t:"Chapter 5, Lecture 3", type:"lecture"},
+       b2:{t:"Chapter 5, Lecture 4", type:"lecture"}, notes:[]},
+      {dow:"Thu", date:"Oct 8",
+       b1:{t:"Chapter 5, Lecture 5", type:"lecture"},
+       b2:{t:"Chapter 5, Primary Source / Application", type:"ps"},
+       notes:[{c:"due", t:"Ch. 5 due Sun Oct 11"}]},
+      {dow:"Tue", date:"Oct 13",
+       b1:{t:"Chapter 8, Lecture 1", type:"lecture"},
+       b2:{t:"Chapter 8, Lecture 2", type:"lecture"}, notes:[]},
+      {dow:"Thu", date:"Oct 15",
+       b1:{t:"Chapter 8, Lecture 3", type:"lecture"},
+       b2:{t:"Chapter 8, Lecture 4", type:"lecture"}, notes:[]},
+      {dow:"Tue", date:"Oct 20",
+       b1:{t:"Chapter 8, Lecture 5", type:"lecture"},
+       b2:{t:"Chapter 8, Primary Source / Application", type:"ps"},
+       notes:[{c:"due", t:"Ch. 8 due Sun Oct 25"}]}
+    ]
+  },
+  {
+    title: "Unit 3 — Late Imperial China through the Mao Era",
+    sub: "Chapters 14, 16, 18, 24, 25, 27 · Unit 3 Exam due Mon Dec 7 (online)",
+    days: [
+      {dow:"Thu", date:"Oct 22",
+       b1:{t:"Chapter 14, Lecture 1", type:"lecture"},
+       b2:{t:"Chapter 14, Lecture 2", type:"lecture"},
+       notes:[{c:"info", t:"Ch. 12 being completed online"}]},
+      {dow:"Tue", date:"Oct 27",
+       b1:{t:"Chapter 14, Lecture 3", type:"lecture"},
+       b2:{t:"Chapter 14, Primary Source / Application", type:"ps"}, notes:[]},
+      {dow:"Thu", date:"Oct 29",
+       b1:{t:"Chapter 16, Lecture 1", type:"lecture"},
+       b2:{t:"Chapter 16, Lecture 2", type:"lecture"},
+       notes:[{c:"exam", t:"Ch. 12 + Unit 2 Exam due Sun Nov 1"}]},
+      {dow:"Tue", date:"Nov 3",
+       b1:{t:"Chapter 16, Lecture 3", type:"lecture"},
+       b2:{t:"Chapter 16, Primary Source / Application", type:"ps"},
+       notes:[{c:"due", t:"Ch. 14 due Wed Nov 4"},{c:"due", t:"Ch. 16 due Sun Nov 8"}]},
+      {dow:"Thu", date:"Nov 5",
+       b1:{t:"Chapter 18, Lecture 1", type:"lecture"},
+       b2:{t:"Chapter 18, Lecture 2", type:"lecture"}, notes:[]},
+      {dow:"Tue", date:"Nov 10",
+       b1:{t:"Chapter 18, Lecture 3", type:"lecture"},
+       b2:{t:"Chapter 18, Primary Source / Application", type:"ps"},
+       notes:[{c:"due", t:"Ch. 18 due Sun Nov 15"}]},
+      {dow:"Thu", date:"Nov 12",
+       b1:{t:"Chapter 24, Lecture 1", type:"lecture"},
+       b2:{t:"Chapter 24, Lecture 2", type:"lecture"}, notes:[]},
+      {dow:"Tue", date:"Nov 17",
+       b1:{t:"Chapter 24, Lecture 3", type:"lecture"},
+       b2:{t:"Chapter 24, Primary Source / Application", type:"ps"},
+       notes:[{c:"due", t:"Ch. 24 due Sun Nov 22"}]},
+      {dow:"Thu", date:"Nov 19",
+       b1:{t:"Chapter 25, Lecture 1", type:"lecture"},
+       b2:{t:"Chapter 25, Lecture 2", type:"lecture"}, notes:[]},
+      {dow:"Tue", date:"Nov 24",
+       b1:{t:"Chapter 25, Lecture 3", type:"lecture"},
+       b2:{t:"Chapter 25, Primary Source / Application", type:"ps"},
+       notes:[{c:"due", t:"Ch. 25 due Sun Nov 29"}]},
+      {dow:"Thu", date:"Nov 26", kind:"break",
+       b1:{t:"NO CLASS", type:"break"},
+       b2:{t:"Thanksgiving Break", type:"break"},
+       notes:[{c:"info", t:"College closed"}]},
+      {dow:"Tue", date:"Dec 1",
+       b1:{t:"Chapter 27, Lecture 1", type:"lecture"},
+       b2:{t:"Chapter 27, Lecture 2", type:"lecture"}, notes:[]},
+      {dow:"Thu", date:"Dec 3",
+       b1:{t:"Chapter 27, Lecture 3", type:"lecture"},
+       b2:{t:"Chapter 27, Primary Source / Application", type:"ps"},
+       notes:[{c:"exam", t:"Capstone due tonight"}]}
+    ]
+  }
+];
+
+/* ---------------- Render ---------------- */
+function blockHTML(n, b){
+  var cls = b.type === "ps" ? "ps" : (b.type === "lecture" ? "ch" : "");
+  var pill = "";
+  if (b.type === "ps") pill = '<span class="pill">Application</span>';
+  if (b.type === "break") pill = '<span class="pill">No class</span>';
+  return '<div class="block"><span class="bnum">Block ' + n + '</span>' +
+         '<span class="btitle"><span class="' + cls + '">' + b.t + '</span>' + pill + '</span></div>';
+}
+
+function dayHTML(d){
+  var classes = ["day"];
+  if (d.kind) classes.push(d.kind);
+  var types = [d.b1.type, d.b2.type].join(" ");
+  var hasDue = (d.notes || []).some(function(n){ return n.c === "due" || n.c === "exam"; });
+  var noteHTML = (d.notes && d.notes.length)
+    ? '<div class="notes">' + d.notes.map(function(n){
+        return '<span class="note ' + n.c + '">' + n.t + '</span>'; }).join("") + '</div>'
+    : "";
+  var searchText = (d.dow + " " + d.date + " " + d.b1.t + " " + d.b2.t + " " +
+      (d.notes || []).map(function(n){ return n.t; }).join(" ")).replace(/<[^>]+>/g, "").toLowerCase();
+  return '<article class="' + classes.join(" ") + '" data-types="' + types +
+         '" data-due="' + (hasDue ? "yes" : "no") +
+         '" data-search="' + searchText.replace(/"/g, "") + '">' +
+         '<div class="daycol"><span class="dow">' + d.dow + '</span>' +
+         '<span class="date">' + d.date + '</span></div>' +
+         '<div class="blocks">' + blockHTML(1, d.b1) + blockHTML(2, d.b2) + noteHTML + '</div>' +
+         '</article>';
+}
+
+(function render(){
+  var out = "";
+  UNITS.forEach(function(u){
+    out += '<section class="unit"><div class="unit-head"><h2>' + u.title + '</h2>' +
+           '<p>' + u.sub + '</p></div>' + u.days.map(dayHTML).join("") + '</section>';
+  });
+  document.getElementById("calendar").innerHTML = out;
+})();
+
+/* ---------------- Filter + search ---------------- */
+var currentFilter = "all";
+var searchBox = document.getElementById("search");
+var noResults = document.getElementById("no-results");
+
+function applyFilters(){
+  var q = searchBox.value.trim().toLowerCase();
+  var days = document.querySelectorAll(".day");
+  var visible = 0;
+  days.forEach(function(el){
+    var okFilter = true;
+    if (currentFilter === "lecture") okFilter = el.dataset.types.indexOf("lecture") > -1;
+    else if (currentFilter === "ps") okFilter = el.dataset.types.indexOf("ps") > -1;
+    else if (currentFilter === "due") okFilter = el.dataset.due === "yes";
+    var okSearch = !q || el.dataset.search.indexOf(q) > -1;
+    var show = okFilter && okSearch;
+    el.classList.toggle("is-hidden", !show);
+    if (show) visible++;
+  });
+  document.querySelectorAll(".unit").forEach(function(sec){
+    var any = sec.querySelectorAll(".day:not(.is-hidden)").length > 0;
+    sec.style.display = any ? "" : "none";
+  });
+  noResults.classList.toggle("show", visible === 0);
+}
+
+document.querySelectorAll("button.filter").forEach(function(btn){
+  btn.addEventListener("click", function(){
+    currentFilter = btn.dataset.filter;
+    document.querySelectorAll("button.filter").forEach(function(b){
+      b.setAttribute("aria-pressed", String(b === btn));
+    });
+    applyFilters();
+  });
+});
+searchBox.addEventListener("input", applyFilters);
+
+/* ---------------- Highlight the next meeting ---------------- */
+(function markNext(){
+  var all = [];
+  UNITS.forEach(function(u){ u.days.forEach(function(d){ all.push(d); }); });
+  var nodes = document.querySelectorAll(".day");
+  var today = new Date();
+  for (var i = 0; i < all.length; i++){
+    var parts = all[i].date.split(" ");
+    var months = {Aug:7, Sep:8, Oct:9, Nov:10, Dec:11};
+    var dt = new Date(2026, months[parts[0]], parseInt(parts[1], 10), 23, 59);
+    if (dt >= today){
+      nodes[i].classList.add("next");
+      var col = nodes[i].querySelector(".daycol");
+      var tag = document.createElement("span");
+      tag.className = "tag-next";
+      tag.textContent = "Next class";
+      col.appendChild(tag);
+      break;
+    }
+  }
+})();
+
+/* ---------------- Print ---------------- */
+document.getElementById("print-btn").addEventListener("click", function(){
+  document.querySelectorAll(".day").forEach(function(el){ el.classList.remove("is-hidden"); });
+  document.querySelectorAll(".unit").forEach(function(sec){ sec.style.display = ""; });
+  window.print();
+  applyFilters();
+});
+</script>
+</body>
+</html>
