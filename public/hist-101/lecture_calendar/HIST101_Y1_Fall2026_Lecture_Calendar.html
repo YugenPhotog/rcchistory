@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HIST 101 Y1 | Fall 2026 Lecture Calendar</title>
+  <style>
+    :root{
+      --charcoal:#111827;
+      --deep-blue:#1e3a8a;
+      --sky:#3b82f6;
+      --emerald:#047857;
+      --amber:#b45309;
+      --warm-gray:#f3f4f6;
+      --white:#ffffff;
+      --border:#d1d5db;
+      --muted:#4b5563;
+      --exam:#7f1d1d;
+      --break:#374151;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:#eef2f7;
+      color:var(--charcoal);
+      font-family:Arial,Helvetica,sans-serif;
+      line-height:1.55;
+    }
+    a{color:var(--deep-blue)}
+    a:focus-visible,button:focus-visible{outline:3px solid #f59e0b;outline-offset:3px}
+    .page{
+      width:min(1120px,calc(100% - 32px));
+      margin:28px auto 56px;
+      background:var(--white);
+      border:1px solid var(--border);
+      border-radius:14px;
+      box-shadow:0 12px 30px rgba(17,24,39,.08);
+      overflow:hidden;
+    }
+    header{
+      background:linear-gradient(135deg,#1e3a8a 0%,#172554 100%);
+      color:#fff;
+      padding:34px 38px 30px;
+    }
+    .eyebrow{
+      margin:0 0 8px;
+      font-size:.88rem;
+      font-weight:700;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      color:#dbeafe;
+    }
+    h1{margin:0;font-size:clamp(2rem,4vw,3.25rem);line-height:1.08}
+    .subtitle{margin:10px 0 0;font-size:1.1rem;color:#dbeafe}
+    .toolbar{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+      padding:16px 28px;
+      background:#eff6ff;
+      border-bottom:1px solid #bfdbfe;
+    }
+    .print-btn{
+      border:0;
+      border-radius:8px;
+      padding:11px 16px;
+      background:var(--deep-blue);
+      color:#fff;
+      font-size:1rem;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .toolbar-note{color:#374151;font-size:.95rem}
+    main{padding:28px 30px 36px}
+    .overview{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:14px;
+      margin-bottom:24px;
+    }
+    .overview-card{
+      padding:16px 18px;
+      background:var(--warm-gray);
+      border:1px solid var(--border);
+      border-radius:10px;
+    }
+    .overview-card strong{display:block;color:var(--deep-blue);margin-bottom:3px}
+    .notice{
+      margin:0 0 26px;
+      padding:16px 18px;
+      background:#fffbeb;
+      border-left:5px solid #d97706;
+      border-radius:6px;
+    }
+    h2{
+      margin:34px 0 12px;
+      color:var(--deep-blue);
+      font-size:1.5rem;
+      border-bottom:2px solid #dbeafe;
+      padding-bottom:6px;
+    }
+    .table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:10px}
+    table{width:100%;border-collapse:collapse;min-width:760px}
+    caption{text-align:left;font-weight:700;padding:12px 14px;background:#f8fafc;color:#374151}
+    th{
+      background:#e5e7eb;
+      color:#111827;
+      text-align:left;
+      padding:11px 12px;
+      font-size:.9rem;
+      letter-spacing:.02em;
+      border-bottom:1px solid #cbd5e1;
+    }
+    td{padding:12px;border-bottom:1px solid #e5e7eb;vertical-align:top}
+    tbody tr:last-child td{border-bottom:0}
+    tbody tr:nth-child(even):not(.exam-row):not(.break-row){background:#fafafa}
+    .date{font-weight:700;white-space:nowrap}
+    .block-title{font-weight:700;color:#1f2937}
+    .small{font-size:.9rem;color:var(--muted)}
+    .exam-row{background:#fef2f2}
+    .exam-row td{border-color:#fecaca}
+    .exam-label{color:var(--exam);font-weight:800}
+    .break-row{background:#f3f4f6;color:#374151}
+    .break-label{font-weight:800}
+    .unit-tag{
+      display:inline-block;
+      margin-bottom:4px;
+      padding:2px 8px;
+      border-radius:999px;
+      background:#dbeafe;
+      color:#1e3a8a;
+      font-size:.75rem;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+    }
+    .final-box{
+      margin-top:28px;
+      padding:18px 20px;
+      background:#fef2f2;
+      border:1px solid #fecaca;
+      border-left:6px solid var(--exam);
+      border-radius:8px;
+    }
+    .final-box h2{margin:0 0 8px;border:0;padding:0;color:var(--exam)}
+    footer{
+      padding:18px 30px 26px;
+      border-top:1px solid var(--border);
+      background:#f8fafc;
+      color:#4b5563;
+      font-size:.9rem;
+    }
+    @media (max-width:760px){
+      .page{width:100%;margin:0;border:0;border-radius:0}
+      header{padding:28px 22px}
+      main{padding:20px 16px 30px}
+      .toolbar{padding:14px 16px}
+      .overview{grid-template-columns:1fr}
+    }
+    @media print{
+      @page{size:letter portrait;margin:.45in}
+      body{background:#fff;font-size:10pt;line-height:1.28}
+      .page{width:100%;margin:0;border:0;border-radius:0;box-shadow:none}
+      header{background:#fff!important;color:#000;padding:0 0 12px;border-bottom:2px solid #000}
+      .eyebrow,.subtitle{color:#000}
+      h1{font-size:20pt}
+      .toolbar{display:none}
+      main{padding:10px 0 0}
+      .overview{grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px}
+      .overview-card{padding:7px 8px;background:#fff;border:1px solid #999}
+      .notice{padding:8px 10px;margin-bottom:10px;background:#fff;border:1px solid #999;border-left:4px solid #333}
+      h2{font-size:13pt;margin:16px 0 6px;color:#000;border-color:#777;break-after:avoid}
+      .table-wrap{overflow:visible;border:1px solid #888;border-radius:0}
+      table{min-width:0;font-size:8.4pt}
+      thead{display:table-header-group}
+      tr{break-inside:avoid}
+      th{background:#eee!important;color:#000;padding:5px 6px}
+      td{padding:5px 6px}
+      tbody tr:nth-child(even):not(.exam-row):not(.break-row){background:#fff}
+      .exam-row,.break-row{background:#f3f3f3!important}
+      .exam-label,.final-box h2{color:#000}
+      .unit-tag{background:#fff;color:#000;border:1px solid #777;padding:1px 4px}
+      .final-box{background:#fff;border-color:#777;border-left-color:#000;padding:10px 12px;margin-top:14px}
+      footer{background:#fff;padding:10px 0 0;border-top:1px solid #777}
+      a{text-decoration:none;color:#000}
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <p class="eyebrow">HIST 101 Y1 • United States History to 1877</p>
+      <h1>Fall 2026 Lecture Calendar</h1>
+      <p class="subtitle">Tuesday &amp; Thursday • 8:30-9:45 a.m. • W243 • Two approximately 35-minute instructional blocks per class meeting</p>
+    </header>
+
+    <div class="toolbar" aria-label="Calendar controls">
+      <button class="print-btn" type="button" onclick="window.print()">Print / Save as PDF</button>
+      <span class="toolbar-note">The print view removes navigation controls and reformats the calendar for paper or PDF.</span>
+    </div>
+
+    <main>
+      <section class="overview" aria-label="Course calendar overview">
+        <div class="overview-card"><strong>Exam 1</strong>Thursday, October 1<br><span class="small">Chapters 2-6</span></div>
+        <div class="overview-card"><strong>Exam 2</strong>Tuesday, November 10<br><span class="small">Chapters 7, 9-12</span></div>
+        <div class="overview-card"><strong>Final Exam / Exam 3</strong>Tuesday, December 8, 8:00-9:50 a.m.<br><span class="small">Chapters 13-14 + Civil War</span></div>
+      </section>
+
+      <p class="notice"><strong>Calendar note:</strong> Chapter 8 is not assigned. Lecture numbers identify the current classroom sequence; special workshops and exam days are shown separately. Canvas remains the official source for assignment deadlines and any schedule changes.</p>
+
+      <h2>August 2026</h2>
+      <div class="table-wrap">
+        <table>
+          <caption>Opening week and Chapters 2-3</caption>
+          <thead><tr><th scope="col">Date</th><th scope="col">Block 1</th><th scope="col">Block 2</th><th scope="col">Notes</th></tr></thead>
+          <tbody>
+            <tr><td class="date">Tue, Aug. 18</td><td><span class="unit-tag">Introduction</span><div class="block-title">Course Introduction &amp; Syllabus Overview</div></td><td><span class="unit-tag">Historiography</span><div class="block-title">Lecture 1: What Is History?</div></td><td class="small">First class meeting</td></tr>
+            <tr><td class="date">Thu, Aug. 20</td><td><span class="unit-tag">Historiography</span><div class="block-title">Lecture 2: What Makes History Happen?</div></td><td><span class="unit-tag">Historiography</span><div class="block-title">Lecture 3: Why Do Historians Disagree?</div></td><td class="small">Three-lecture historiography sequence completed</td></tr>
+            <tr><td class="date">Tue, Aug. 25</td><td><span class="unit-tag">Chapter 2</span><div class="block-title">Lecture 1</div></td><td><span class="unit-tag">Chapter 2</span><div class="block-title">Lecture 2</div></td><td class="small">Colonization in North America, 1600-1680</td></tr>
+            <tr><td class="date">Thu, Aug. 27</td><td><span class="unit-tag">Chapter 2</span><div class="block-title">Lecture 3</div></td><td><span class="unit-tag">Chapter 2</span><div class="block-title">Lecture 4</div></td><td class="small">Chapter 2 classroom sequence completed</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>September 2026</h2>
+      <div class="table-wrap">
+        <table>
+          <caption>Chapters 3-6 and Exam 1 preparation</caption>
+          <thead><tr><th scope="col">Date</th><th scope="col">Block 1</th><th scope="col">Block 2</th><th scope="col">Notes</th></tr></thead>
+          <tbody>
+            <tr><td class="date">Tue, Sept. 1</td><td><span class="unit-tag">Chapter 3</span><div class="block-title">Lecture 1</div></td><td><span class="unit-tag">Chapter 3</span><div class="block-title">Lecture 2</div></td><td class="small">Empires, Indians, and the Struggle for Power</td></tr>
+            <tr><td class="date">Thu, Sept. 3</td><td><span class="unit-tag">Chapter 3</span><div class="block-title">Lecture 3</div></td><td><span class="unit-tag">Chapter 3</span><div class="block-title">Lecture 4</div></td><td class="small">Locked calendar revision</td></tr>
+            <tr><td class="date">Tue, Sept. 8</td><td><span class="unit-tag">Workshop</span><div class="block-title">Slavery Workshop</div></td><td><span class="unit-tag">Chapter 4</span><div class="block-title">Lecture 1</div></td><td class="small">Locked calendar revision</td></tr>
+            <tr><td class="date">Thu, Sept. 10</td><td><span class="unit-tag">Chapter 4</span><div class="block-title">Lecture 2</div></td><td><span class="unit-tag">Chapter 4</span><div class="block-title">Lecture 3</div></td><td class="small">Provincial America and the Struggle for a Continent</td></tr>
+            <tr><td class="date">Tue, Sept. 15</td><td><span class="unit-tag">Chapter 4</span><div class="block-title">Lecture 4</div></td><td><span class="unit-tag">Chapter 5</span><div class="block-title">Lecture 1</div></td><td class="small">Transition from imperial victory to imperial crisis</td></tr>
+            <tr><td class="date">Thu, Sept. 17</td><td><span class="unit-tag">Chapter 5</span><div class="block-title">Lecture 2</div></td><td><span class="unit-tag">Chapter 5</span><div class="block-title">Lecture 3</div></td><td class="small">Reform, Resistance, Revolution, 1763-1776</td></tr>
+            <tr><td class="date">Tue, Sept. 22</td><td><span class="unit-tag">Chapter 5</span><div class="block-title">Lecture 4</div></td><td><span class="unit-tag">Chapter 6</span><div class="block-title">Lecture 1</div></td><td class="small">Transition into the Revolutionary Republic</td></tr>
+            <tr><td class="date">Thu, Sept. 24</td><td><span class="unit-tag">Chapter 6</span><div class="block-title">Lecture 2</div></td><td><span class="unit-tag">Chapter 6</span><div class="block-title">Lecture 3</div></td><td class="small">The Revolutionary Republic, 1776-1789</td></tr>
+            <tr><td class="date">Tue, Sept. 29</td><td><span class="unit-tag">Chapter 6</span><div class="block-title">Lecture 4</div></td><td><span class="unit-tag">Workshop</span><div class="block-title">Constitutional Design Workshop</div></td><td class="small">Locked calendar revision; no separate Exam 1 review day</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>October 2026</h2>
+      <div class="table-wrap">
+        <table>
+          <caption>Exam 1 and Chapters 7, 9-11</caption>
+          <thead><tr><th scope="col">Date</th><th scope="col">Block 1</th><th scope="col">Block 2</th><th scope="col">Notes</th></tr></thead>
+          <tbody>
+            <tr class="exam-row"><td class="date">Thu, Oct. 1</td><td colspan="2"><span class="exam-label">LECTURE EXAM 1 - Chapters 2-6</span></td><td class="small">Full class period</td></tr>
+            <tr><td class="date">Tue, Oct. 6</td><td><span class="unit-tag">Chapter 7</span><div class="block-title">Lecture 1</div></td><td><span class="unit-tag">Chapter 7</span><div class="block-title">Lecture 2</div></td><td class="small">Completing the Revolution, 1789-1815</td></tr>
+            <tr><td class="date">Thu, Oct. 8</td><td><span class="unit-tag">Chapter 7</span><div class="block-title">Lecture 3</div></td><td><span class="unit-tag">Chapter 7</span><div class="block-title">Lecture 4</div></td><td class="small">Chapter 7 classroom sequence completed</td></tr>
+            <tr><td class="date">Tue, Oct. 13</td><td><span class="unit-tag">Chapter 9</span><div class="block-title">Lecture 1</div></td><td><span class="unit-tag">Chapter 9</span><div class="block-title">Lecture 2</div></td><td class="small">Chapter 8 intentionally omitted</td></tr>
+            <tr><td class="date">Thu, Oct. 15</td><td><span class="unit-tag">Chapter 9</span><div class="block-title">Lecture 3</div></td><td><span class="unit-tag">Chapter 9</span><div class="block-title">Lecture 4</div></td><td class="small">The Old South, 1790-1850</td></tr>
+            <tr><td class="date">Tue, Oct. 20</td><td><span class="unit-tag">Chapter 10</span><div class="block-title">Lecture 1</div></td><td><span class="unit-tag">Chapter 10</span><div class="block-title">Lecture 2</div></td><td class="small">Toward an American Culture, 1815-1850</td></tr>
+            <tr><td class="date">Thu, Oct. 22</td><td><span class="unit-tag">Chapter 10</span><div class="block-title">Lecture 3</div></td><td><span class="unit-tag">Chapter 10</span><div class="block-title">Lecture 4</div></td><td class="small">Chapter 10 classroom sequence completed</td></tr>
+            <tr><td class="date">Tue, Oct. 27</td><td><span class="unit-tag">Chapter 11</span><div class="block-title">Lecture 1</div></td><td><span class="unit-tag">Chapter 11</span><div class="block-title">Lecture 2</div></td><td class="small">Whigs and Democrats, 1815-1840</td></tr>
+            <tr><td class="date">Thu, Oct. 29</td><td><span class="unit-tag">Chapter 11</span><div class="block-title">Lecture 3</div></td><td><span class="unit-tag">Chapter 11</span><div class="block-title">Lecture 4</div><div class="small">Trail of Tears capstone launch / bridge</div></td><td class="small">Capstone continues into Chapter 12</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>November 2026</h2>
+      <div class="table-wrap">
+        <table>
+          <caption>Chapter 12, Exam 2, and the road to Civil War</caption>
+          <thead><tr><th scope="col">Date</th><th scope="col">Block 1</th><th scope="col">Block 2</th><th scope="col">Notes</th></tr></thead>
+          <tbody>
+            <tr><td class="date">Tue, Nov. 3</td><td><span class="unit-tag">Chapter 12</span><div class="block-title">Lecture 1</div></td><td><span class="unit-tag">Chapter 12</span><div class="block-title">Lecture 2</div></td><td class="small">Antebellum Reform, 1820-1860</td></tr>
+            <tr><td class="date">Thu, Nov. 5</td><td><span class="unit-tag">Chapter 12</span><div class="block-title">Lecture 3</div></td><td><span class="unit-tag">Chapter 12</span><div class="block-title">Lecture 4</div></td><td class="small">Exam 2 unit completed</td></tr>
+            <tr class="exam-row"><td class="date">Tue, Nov. 10</td><td colspan="2"><span class="exam-label">LECTURE EXAM 2 - Chapters 7, 9-12</span></td><td class="small">Full class period</td></tr>
+            <tr><td class="date">Thu, Nov. 12</td><td><span class="unit-tag">Chapter 13</span><div class="block-title">Lecture 1</div></td><td><span class="unit-tag">Chapter 13</span><div class="block-title">Lecture 2</div></td><td class="small">Manifest Destiny: An Empire for Liberty-or Slavery?</td></tr>
+            <tr><td class="date">Tue, Nov. 17</td><td><span class="unit-tag">Chapter 13</span><div class="block-title">Lecture 3</div></td><td><span class="unit-tag">Chapter 13</span><div class="block-title">Lecture 4</div></td><td class="small">Chapter 13 classroom sequence completed</td></tr>
+            <tr><td class="date">Thu, Nov. 19</td><td><span class="unit-tag">Chapter 14</span><div class="block-title">Lecture 1</div></td><td><span class="unit-tag">Chapter 14</span><div class="block-title">Lecture 2</div></td><td class="small">The Gathering Tempest, 1853-1860</td></tr>
+            <tr><td class="date">Tue, Nov. 24</td><td><span class="unit-tag">Chapter 14</span><div class="block-title">Lecture 3</div></td><td><span class="unit-tag">Chapter 14</span><div class="block-title">Lecture 4</div></td><td class="small">Last class meeting before Thanksgiving break</td></tr>
+            <tr class="break-row"><td class="date">Thu, Nov. 26</td><td colspan="2"><span class="break-label">NO CLASS - Thanksgiving / College Closed</span></td><td class="small">Fall Break</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>December 2026</h2>
+      <div class="table-wrap">
+        <table>
+          <caption>Civil War and course conclusion</caption>
+          <thead><tr><th scope="col">Date</th><th scope="col">Block 1</th><th scope="col">Block 2</th><th scope="col">Notes</th></tr></thead>
+          <tbody>
+            <tr><td class="date">Tue, Dec. 1</td><td><span class="unit-tag">Civil War</span><div class="block-title">Lecture 1</div></td><td><span class="unit-tag">Civil War</span><div class="block-title">Lecture 2</div></td><td class="small">OpenStax Chapter 15</td></tr>
+            <tr><td class="date">Thu, Dec. 3</td><td><span class="unit-tag">Civil War</span><div class="block-title">Lecture 3</div></td><td><span class="unit-tag">Civil War</span><div class="block-title">Lecture 4 + Course Synthesis</div></td><td class="small">Last regular class meeting</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <section class="final-box" aria-labelledby="final-heading">
+        <h2 id="final-heading">Final Exam / Lecture Exam 3</h2>
+        <strong>Tuesday, December 8, 2026 • 8:00-9:50 a.m.</strong><br>
+        Covers <strong>Chapters 13-14 and the Civil War</strong>.
+      </section>
+    </main>
+
+    <footer>
+      HIST 101 Y1 • Fall 2026 • Working lecture calendar. The instructional sequence may be adjusted to accommodate class pace, College closures, or other instructional needs. Students should use Canvas for official assignment deadlines and schedule updates.
+    </footer>
+  </div>
+</body>
+</html>
