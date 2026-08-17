@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day One — PHIL 210 Introduction to World Religions</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/white.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=EB+Garamond:ital,wght@0,500;0,600;0,700;0,800;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --vellum:#F0E6D2;      /* parchment ground */
+  --vellum2:#E4D5B7;     /* deeper parchment panel */
+  --ink:#2B2118;         /* iron-gall ink */
+  --vermilion:#B33A2E;   /* rubrication — text-safe on vellum */
+  --coral:#E8836F;       /* rubrication for dark grounds */
+  --lapis:#1F3A93;       /* ultramarine */
+  --lapis-deep:#16306F;  /* flooded lapis ground */
+  --gold:#B8912A;        /* gold leaf — DECORATIVE FILL ONLY on vellum */
+  --gold-lit:#D9AE3F;    /* gilding, text-safe on dark grounds */
+  --gold-deep:#8A6A18;   /* text-safe gold on vellum, large sizes */
+  --night:#1E1710;       /* dark ground */
+}
+
+/* ---------- ground ---------- */
+.reveal{ font-family:'Spectral',Georgia,serif; font-size:1.0em; background-color:var(--vellum); color:var(--ink); }
+html,body{background:var(--vellum);}
+.reveal-viewport{background:var(--vellum);}
+/* parchment tooth */
+body:before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:2;
+  background-image:
+    radial-gradient(circle at 18% 24%, rgba(139,111,71,.10), transparent 42%),
+    radial-gradient(circle at 82% 76%, rgba(139,111,71,.09), transparent 46%),
+    repeating-linear-gradient(112deg, rgba(90,70,45,.035) 0 2px, transparent 2px 5px);
+}
+
+/* ---------- type ---------- */
+.reveal h1,.reveal h2,.reveal h3{
+  font-family:'EB Garamond',Garamond,serif; font-weight:700; color:var(--lapis);
+  text-transform:none; letter-spacing:-.005em; line-height:1.06;
+}
+.reveal h1{font-size:5.6em;} .reveal h2{font-size:4.2em;margin-bottom:.35em;} .reveal h3{font-size:2.4em;}
+.reveal p,.reveal li{line-height:1.45;}
+.reveal ul{list-style:none;padding-left:0;}
+.reveal ul li{margin-bottom:.42em;font-size:1.0em;text-align:left;}
+.reveal ul li:before{content:"❧";color:var(--vermilion);font-weight:700;margin-right:.55em;}
+.reveal ol{padding-left:1.2em;}
+.reveal ol li{margin-bottom:.4em;text-align:left;}
+strong{color:var(--lapis);font-weight:700;}
+em{color:var(--vermilion);font-style:italic;}
+.reveal section{text-align:left;}
+.reveal .slides section{box-sizing:border-box;padding:20px 18px 18px 0;}
+
+/* display type with a hand-inked feel */
+.reveal .versal-title{
+  font-family:'EB Garamond',Garamond,serif;font-weight:800;color:var(--lapis);
+  display:block;line-height:1.02;text-shadow:.028em .03em 0 rgba(184,145,42,.55);
+}
+.reveal .flood .versal-title{color:var(--gold-lit);text-shadow:.028em .03em 0 rgba(0,0,0,.5);}
+
+/* rubric — small caps label, the manuscript "heading in red" */
+.rubric{
+  font-family:'Cinzel',serif;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--vermilion);font-size:1.35em;display:inline-block;
+}
+.chip{
+  display:inline-block;font-family:'Cinzel',serif;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;font-size:1.3em;padding:.24em .85em;margin:.14em .22em .14em 0;
+  border:2px solid var(--ink);border-radius:3px;background:var(--vellum2);color:var(--ink);
+}
+.chip.gold{background:var(--gold);color:var(--ink);border-color:var(--ink);}
+.chip.red{background:var(--vermilion);color:var(--vellum);border-color:var(--ink);}
+.chip.blue{background:var(--lapis);color:var(--vellum);border-color:var(--ink);}
+
+/* illuminated panel — the workhorse card */
+.panel{
+  background:var(--vellum);border:3px solid var(--ink);padding:.95em 1.15em;position:relative;
+  box-shadow:0 0 0 4px var(--vellum), 0 0 0 6px var(--gold);
+}
+.panel.red-line{box-shadow:0 0 0 4px var(--vellum), 0 0 0 6px var(--vermilion);}
+.panel.blue-line{box-shadow:0 0 0 4px var(--vellum), 0 0 0 6px var(--lapis);}
+.panel-title{
+  font-family:'EB Garamond',Garamond,serif;font-weight:700;font-size:2.2em;
+  color:var(--lapis);margin:0 0 .3em 0;line-height:1.06;
+}
+.panel-title.red{color:var(--vermilion);}
+
+/* drop cap / versal */
+.dropcap{
+  float:left;width:1.55em;height:1.55em;margin:.06em .38em -.05em 0;
+  background:var(--lapis);color:var(--gold-lit);border:3px solid var(--ink);
+  font-family:'EB Garamond',serif;font-weight:800;font-size:2.6em;line-height:1.5em;text-align:center;
+}
+
+.gloss{
+  background:rgba(31,58,147,.08);border-left:7px solid var(--lapis);
+  padding:.7em 1em;margin:.65em 0;font-size:1.85em;line-height:1.4;
+}
+.gloss.red{background:rgba(179,58,46,.10);border-left-color:var(--vermilion);}
+.quotebox{
+  background:var(--vellum2);border:3px solid var(--ink);padding:.85em 1.05em;
+  font-size:1.9em;line-height:1.42;font-style:italic;
+}
+.column-header{
+  font-family:'EB Garamond',Garamond,serif;font-weight:700;color:var(--lapis);
+  font-size:2.2em;margin-bottom:.3em;line-height:1.06;
+}
+.bottom-text{margin-top:.85em;font-style:italic;color:var(--vermilion);font-size:1.7em;}
+.subtitle{font-size:2.4em;color:var(--ink);margin-top:.45em;font-weight:500;}
+.large-text{font-size:2.0em;line-height:1.5;}
+.two-column{display:grid;grid-template-columns:1fr 1fr;gap:2em;align-items:start;}
+.three-column{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.4em;align-items:start;}
+.split{display:grid;grid-template-columns:1.12fr .88fr;gap:2em;align-items:center;}
+.split-rev{display:grid;grid-template-columns:.88fr 1.12fr;gap:2em;align-items:center;}
+.stat{border:3px solid var(--ink);padding:.5em .55em;text-align:center;background:var(--vellum);}
+.stat-number{font-family:'EB Garamond',serif;font-size:2.9em;font-weight:800;color:var(--vermilion);line-height:1.05;}
+.stat-label{font-size:1.35em;color:var(--ink);margin-top:.15em;}
+
+/* flooded (dark / lapis) slides */
+.flood h1,.flood h2,.flood h3{color:var(--gold-lit);}
+.flood, .flood p, .flood li{color:var(--vellum);}
+.flood ul li:before{color:var(--coral);}
+.flood strong{color:var(--gold-lit);}
+.flood em{color:var(--coral);}
+.flood .subtitle{color:var(--vellum);}
+.flood .rubric{color:var(--gold-lit);}
+.flood .panel{background:rgba(255,255,255,.05);border-color:var(--vellum);box-shadow:0 0 0 4px transparent, 0 0 0 6px var(--gold-lit);}
+.flood .panel.red-line{box-shadow:0 0 0 4px transparent, 0 0 0 6px var(--coral);}
+.flood .panel.blue-line{box-shadow:0 0 0 4px transparent, 0 0 0 6px var(--vellum);}
+.flood .panel-title{color:var(--gold-lit);}
+.flood .panel-title.red{color:var(--coral);}
+.flood .column-header{color:var(--gold-lit);}
+.flood .bottom-text{color:var(--gold-lit);}
+.flood .gloss{background:rgba(255,255,255,.08);border-left-color:var(--gold-lit);}
+.flood .gloss.red{background:rgba(232,131,111,.14);border-left-color:var(--coral);}
+.flood .quotebox{background:rgba(255,255,255,.06);border-color:var(--vellum);color:var(--vellum);}
+.flood .stat{border-color:var(--vellum);background:rgba(255,255,255,.05);}
+.flood .stat-number{color:var(--gold-lit);}
+.flood .stat-label{color:var(--vellum);}
+.flood .chip{background:rgba(255,255,255,.10);color:var(--vellum);border-color:var(--vellum);}
+.flood .chip.gold{background:var(--gold-lit);color:var(--ink);}
+.flood .chip.red{background:var(--coral);color:var(--ink);}
+.flood .popup-trigger{color:var(--gold-lit);border-bottom-color:var(--gold-lit);}
+.flood .dropcap{background:var(--gold-lit);color:var(--ink);border-color:var(--vellum);}
+
+/* ---------- popups ---------- */
+.popup-trigger{color:var(--lapis);border-bottom:2px dotted var(--lapis);cursor:pointer;font-weight:600;}
+.popup-trigger:hover{color:var(--vermilion);border-bottom-color:var(--vermilion);}
+.popup{
+  display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+  background:var(--vellum);color:var(--ink);padding:1.5em 1.8em;
+  border:3px solid var(--ink);box-shadow:0 0 0 5px var(--vellum), 0 0 0 8px var(--gold), 0 14px 40px rgba(0,0,0,.35);
+  max-width:680px;max-height:74%;overflow-y:auto;z-index:1000;
+  font-family:'Spectral',Georgia,serif;font-size:1.02em;line-height:1.5;
+}
+.popup.active{display:block;}
+.popup-close{position:absolute;top:6px;right:16px;font-size:2em;cursor:pointer;color:var(--vermilion);font-weight:700;}
+.definition-term{font-family:'EB Garamond',serif;font-size:1.6em;font-weight:700;color:var(--lapis);margin-bottom:.3em;}
+.key-term{color:var(--vermilion);font-weight:600;}
+
+/* ---------- chrome ---------- */
+.slide-counter{
+  position:fixed;bottom:18px;right:18px;background:var(--ink);color:var(--gold-lit);
+  padding:5px 14px;font-family:'Cinzel',serif;font-weight:700;font-size:.85em;
+  letter-spacing:.08em;border:2px solid var(--gold-lit);z-index:100;
+}
+#keyboard-trigger{position:fixed;top:18px;right:18px;font-size:1.9em;cursor:pointer;z-index:100;
+  background:var(--gold);border:2px solid var(--ink);padding:2px 10px 5px;line-height:1;}
+.reveal a.big-link{
+  display:inline-block;background:var(--lapis);color:var(--vellum);
+  font-family:'Cinzel',serif;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  font-size:1.45em;line-height:1.15;padding:.5em 1em;border:3px solid var(--ink);
+  text-decoration:none;box-shadow:5px 5px 0 var(--gold);transition:transform .12s ease, box-shadow .12s ease;
+}
+.reveal a.big-link:hover,.reveal a.big-link:focus{
+  color:var(--vellum);background:var(--vermilion);transform:translate(2px,2px);box-shadow:3px 3px 0 var(--gold);
+}
+.pending{font-family:'Cinzel',serif;font-size:1.15em;letter-spacing:.08em;color:var(--vermilion);margin-top:.4em;}
+.flood .pending{color:var(--coral);}
+.reveal .progress{color:var(--vermilion);}
+
+.ill{display:block;width:100%;height:auto;}
+@keyframes sway{0%,100%{transform:rotate(-1.4deg)}50%{transform:rotate(1.4deg)}}
+.sway{animation:sway 6s ease-in-out infinite;transform-origin:center bottom;}
+@media (prefers-reduced-motion: reduce){.sway{animation:none;}}
+</style>
+</head>
+<body>
+<div class="reveal"><div class="slides">
+
+<!-- ============ 1. TITLE ============ -->
+<section>
+  <div class="split" style="align-items:center;">
+    <div>
+      <div class="rubric" style="font-size:1.5em;">Day One &nbsp;·&nbsp; Fall 2026</div>
+      <h1 class="versal-title" style="font-size:5.0em;margin:.1em 0 0 0;">PHIL 210</h1>
+      <div style="font-family:'EB Garamond',serif;font-weight:700;font-size:3.0em;color:var(--ink);margin-top:.05em;line-height:1.08;">Introduction to<br>World Religions</div>
+      <p style="font-size:1.75em;margin-top:.55em;max-width:17em;">Seven traditions, one semester, and a great many assumptions worth examining.</p>
+      <p style="font-size:1.4em;margin-top:.4em;color:var(--vermilion);font-style:italic;">Tuesday &amp; Thursday &nbsp;·&nbsp; 11:30–12:45 &nbsp;·&nbsp; Room W243</p>
+    </div>
+    <div>
+      <!-- SKYLINE OF SACRED STRUCTURES, equal weight, alphabetical by tradition -->
+      <svg class="ill" viewBox="0 0 640 480" role="img" aria-label="A row of six sacred structures drawn at equal size in the style of a manuscript illumination: a Buddhist stupa, a Christian church with a steeple, a Chinese temple roof, a Hindu temple tower, a mosque with dome and minaret, and a synagogue with a rounded dome — set inside a gold border with a vine motif.">
+        <!-- gold frame -->
+        <rect x="10" y="10" width="620" height="460" fill="none" stroke="#B8912A" stroke-width="10"/>
+        <rect x="26" y="26" width="588" height="428" fill="none" stroke="#2B2118" stroke-width="3"/>
+        <rect x="40" y="40" width="560" height="400" fill="#E4D5B7"/>
+        <!-- vine corners -->
+        <g stroke="#1F3A93" stroke-width="4" fill="none" stroke-linecap="round">
+          <path d="M40 92 q26 -34 56 -26 q-22 16 -18 34 q-24 -12 -38 -8"/>
+          <path d="M600 388 q-26 34 -56 26 q22 -16 18 -34 q24 12 38 8"/>
+        </g>
+        <g fill="#B33A2E"><circle cx="86" cy="72" r="7"/><circle cx="554" cy="408" r="7"/></g>
+        <!-- ground line -->
+        <path d="M58 372 h524" stroke="#2B2118" stroke-width="4"/>
+
+        <!-- 1 · stupa -->
+        <g stroke="#2B2118" stroke-width="4">
+          <rect x="86" y="356" width="64" height="16" fill="#B33A2E"/>
+          <path d="M118 296 c-28 0 -40 22 -40 40 c0 12 8 20 18 20 h44 c10 0 18 -8 18 -20 c0 -18 -12 -40 -40 -40 z" fill="#F0E6D2"/>
+          <rect x="106" y="272" width="24" height="24" fill="#B8912A"/>
+          <path d="M118 272 v-22" stroke-width="5"/>
+          <circle cx="118" cy="244" r="8" fill="#B8912A"/>
+        </g>
+        <!-- 2 · church -->
+        <g stroke="#2B2118" stroke-width="4">
+          <rect x="174" y="312" width="54" height="60" fill="#F0E6D2"/>
+          <path d="M168 312 l33 -30 l33 30 z" fill="#1F3A93"/>
+          <rect x="192" y="244" width="18" height="68" fill="#F0E6D2"/>
+          <path d="M188 244 l13 -22 l13 22 z" fill="#B33A2E"/>
+          <path d="M201 222 v-20 M193 210 h16" stroke-width="5"/>
+          <path d="M192 344 a9 9 0 0 1 18 0 v28 h-18 z" fill="#B8912A"/>
+        </g>
+        <!-- 3 · Chinese temple -->
+        <g stroke="#2B2118" stroke-width="4">
+          <rect x="256" y="318" width="52" height="54" fill="#F0E6D2"/>
+          <path d="M246 318 q36 -32 72 0 q-12 -10 -36 -10 q-24 0 -36 10 z" fill="#B33A2E"/>
+          <path d="M254 280 q28 -26 56 0 q-10 -8 -28 -8 q-18 0 -28 8 z" fill="#B33A2E"/>
+          <rect x="274" y="258" width="14" height="22" fill="#B8912A"/>
+          <path d="M270 340 v32 M294 340 v32"/>
+        </g>
+        <!-- 4 · Hindu shikhara -->
+        <g stroke="#2B2118" stroke-width="4">
+          <rect x="338" y="326" width="52" height="46" fill="#F0E6D2"/>
+          <path d="M342 326 q22 -92 44 0 z" fill="#1F3A93"/>
+          <g stroke="#F0E6D2" stroke-width="3" opacity=".8"><path d="M352 306 h24 M357 286 h14"/></g>
+          <circle cx="364" cy="252" r="8" fill="#B8912A"/>
+          <path d="M364 244 v-14" stroke-width="4"/>
+          <path d="M356 344 a8 8 0 0 1 16 0 v28 h-16 z" fill="#B33A2E"/>
+        </g>
+        <!-- 5 · mosque -->
+        <g stroke="#2B2118" stroke-width="4">
+          <rect x="418" y="322" width="52" height="50" fill="#F0E6D2"/>
+          <path d="M420 322 c0 -38 20 -52 24 -62 c4 10 24 24 24 62 z" fill="#B8912A"/>
+          <path d="M444 258 v-12" stroke-width="4"/>
+          <path d="M438 240 a10 10 0 1 0 10 -10 a8 8 0 1 1 -10 10 z" fill="#B8912A"/>
+          <rect x="474" y="272" width="16" height="100" fill="#F0E6D2"/>
+          <path d="M470 272 q12 -22 24 0 z" fill="#1F3A93"/>
+          <path d="M436 346 a8 8 0 0 1 16 0 v26 h-16 z" fill="#1F3A93"/>
+        </g>
+        <!-- 6 · synagogue -->
+        <g stroke="#2B2118" stroke-width="4">
+          <rect x="504" y="316" width="56" height="56" fill="#F0E6D2"/>
+          <path d="M506 316 c0 -34 22 -44 26 -52 c4 8 26 18 26 52 z" fill="#1F3A93"/>
+          <path d="M532 262 v-14" stroke-width="4"/>
+          <path d="M532 232 l8 14 h-16 z M532 248 l-8 -14 h16 z" fill="#B8912A" stroke-width="3"/>
+          <circle cx="532" cy="336" r="11" fill="#B8912A"/>
+          <path d="M524 344 h16 M524 328 h16" stroke="#2B2118" stroke-width="3"/>
+          <path d="M524 350 a8 8 0 0 1 16 0 v22 h-16 z" fill="#B33A2E"/>
+        </g>
+        <text x="320" y="418" text-anchor="middle" font-family="Cinzel, serif" font-size="21" font-weight="700" letter-spacing="3" fill="#2B2118">MANY HOUSES · ONE SEMESTER</text>
+      </svg>
+    </div>
+  </div>
+  <aside class="notes">
+  <div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;color:#333;">
+  <p><strong>Delivery:</strong> Hold here while students settle. Say the course name out loud, then go straight to the opening question — do not start reading the syllabus. The syllabus is a reference document; today is an orientation to how the course works and how to succeed in it.</p>
+  <p>Frame the scale honestly: seven major traditions in sixteen weeks. Then relieve the pressure immediately — you do not expect anyone to arrive already knowing them.</p>
+  <p>Promise the payoff: by December, words like <em>dharma, karma, covenant, Torah, umma, Dao, sangha,</em> and <em>Trinity</em> will stop being vocabulary and start being ways of seeing.</p>
+  <p><strong>Image description:</strong> A manuscript-style gold-framed panel holding a row of sacred structures drawn at equal size — a stupa, a church, a Chinese temple roof, a Hindu shikhara, and a mosque — above the words "Many Houses · One Semester."</p>
+  </div>
+  </aside>
+</section>
+
+<!-- ============ 2. NO PREREQ / WHAT YOU'LL LEARN ============ -->
+<section>
+  <h2 style="font-size:3.9em;">You do not need to already know any of this.</h2>
+  <div class="two-column" style="margin-top:.3em;">
+    <div>
+      <div class="panel red-line">
+        <p class="panel-title red">Not required today</p>
+        <ul style="font-size:1.7em;">
+          <li>Any prior study of religion</li>
+          <li>A faith of your own — or none</li>
+          <li>The ability to pronounce every term correctly</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel blue-line">
+        <p class="panel-title">What you <em>will</em> learn</p>
+        <ul style="font-size:1.7em;">
+          <li>To <strong>interpret</strong> religious sources and practices</li>
+          <li>To <strong>compare</strong> traditions across real dimensions</li>
+          <li>To read religion <strong>in context</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <p class="bottom-text" style="font-size:1.7em;">Curiosity is the prerequisite. Everything else we build together.</p>
+  <aside class="notes">
+  <div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;color:#333;">
+  <p><strong>Delivery:</strong> Say this plainly and mean it. Students arrive worried in two opposite directions — that they know too little, or that their own commitments make them suspect. Name both and set them down.</p>
+  <p><strong>The course objectives, in the syllabus's own terms</strong> — worth naming here since this is the "what you will learn" slide:</p>
+  <p><strong>1. Interpret</strong> religious sources and practices — texts, images, rituals, material culture — by identifying form or genre, context, and the perspective of the community that produced or used them.<br>
+     <strong>2. Compare</strong> traditions across at least two dimensions: ritual practice, conceptions of authority, ethics, salvation or liberation, community identity.<br>
+     <strong>3. Analyze in context</strong> — how historical, social, and political settings shape religious change and diversity over time.<br>
+     <strong>4. Describe and explain</strong> core beliefs, practices, texts, and historical development using accurate terminology.<br>
+     <strong>5. Apply scholarly approaches</strong> to unfamiliar or emerging religious movements, including debates about classification and public perception.</p>
+  <p>The fifth one is worth flagging early — it is why the course ends with New Religious Movements rather than treating them as a curiosity.</p>
+  </div>
+  </aside>
+</section>
+
+<!-- ============ 3. RECURRING QUESTIONS ============ -->
+<section>
+  <h2 style="font-size:3.7em;">The questions we keep coming back to</h2>
+  <div class="three-column" style="margin-top:.3em;">
+    <div>
+      <div class="panel blue-line">
+        <ul style="font-size:1.55em;">
+          <li>What does this tradition say is <strong>ultimately real</strong>?</li>
+          <li>What has gone <strong>wrong</strong> with us — and what would fix it?</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel red-line">
+        <ul style="font-size:1.55em;">
+          <li>Where does <strong>authority</strong> live — text, teacher, community, experience?</li>
+          <li>What does a person actually <strong>do</strong>? Ritual, ethics, daily practice.</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel">
+        <ul style="font-size:1.55em;">
+          <li>How does a tradition <strong>change</strong> when history moves under it?</li>
+          <li>Who counts as <strong>inside</strong> — and who decides?</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="gloss red" style="font-size:1.8em;margin-top:.6em;">
+    We are not collecting facts about seven religions. We are learning to ask the <em>same good questions</em> of each one — and to take the different answers seriously.
+  </div>
+  <aside class="notes">
+  <div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;color:#333;">
+  <p><strong>Delivery:</strong> Read these fast — they are a preview, not a lesson. The gloss at the bottom is the line that matters. Say it twice if you have to.</p>
+  <p>These six are the comparative dimensions the course objectives name: conceptions of authority, ritual practice, ethics, salvation or liberation, community identity, and change over time. Students will meet them again on every exam.</p>
+  <p>Do not answer any of them today. The point is that the questions recur — they are the spine of the semester rather than trivia.</p>
+  </div>
+  </aside>
+</section>
+
+<!-- ============ 4. IN PERSON + CANVAS ============ -->
+<section>
+  <h2 style="font-size:3.8em;">In person &mdash; and entirely in Canvas</h2>
+  <div class="split" style="margin-top:.2em;">
+    <div>
+      <ul style="font-size:1.75em;">
+        <li>We meet <strong>in this room</strong> for every scheduled session. Attendance is part of your grade.</li>
+        <li>Course materials, announcements, assignments, quizzes, and exams are all organized <strong>through Canvas</strong>.</li>
+        <li>This is a <strong>reading-intensive</strong> course. Plan roughly <strong>two hours outside class per credit hour, per week</strong>.</li>
+      </ul>
+      <div class="gloss" style="font-size:1.75em;">
+        Showing up is necessary. It is not sufficient. Nearly every graded thing you do this semester is submitted online.
+      </div>
+    </div>
+    <div>
+      <!-- lectern + codex + glowing window -->
+      <svg class="ill" viewBox="0 0 560 400" role="img" aria-label="A reading lectern holding an open book, beside a bright window; a small stack of pages sits at the foot of the lectern.">
+        <rect x="330" y="46" width="190" height="230" fill="#F0E6D2" stroke="#2B2118" stroke-width="5"/>
+        <path d="M425 46 v230 M330 161 h190" stroke="#2B2118" stroke-width="5"/>
+        <path d="M330 46 q95 -40 190 0" fill="none" stroke="#2B2118" stroke-width="5"/>
+        <g stroke="#B8912A" stroke-width="4" opacity=".8"><path d="M348 300 l-26 26 M368 312 l-18 30 M400 318 l-6 34"/></g>
+        <!-- lectern -->
+        <path d="M60 176 l180 -40 l0 42 l-180 40 z" fill="#B33A2E" stroke="#2B2118" stroke-width="5"/>
+        <path d="M148 200 v150" stroke="#2B2118" stroke-width="10"/>
+        <path d="M96 356 h108" stroke="#2B2118" stroke-width="10" stroke-linecap="round"/>
+        <!-- open codex on lectern -->
+        <path d="M56 150 q46 -30 90 -12 v40 q-44 -18 -90 10 z" fill="#F0E6D2" stroke="#2B2118" stroke-width="5"/>
+        <path d="M240 122 q-46 -30 -94 -12 v40 q48 -18 94 10 z" fill="#F0E6D2" stroke="#2B2118" stroke-width="5"/>
+        <g stroke="#1F3A93" stroke-width="3" opacity=".6">
+          <path d="M72 148 q34 -18 62 -8 M72 160 q34 -18 62 -8"/>
+          <path d="M224 132 q-34 -18 -64 -8 M224 144 q-34 -18 -64 -8"/>
+        </g>
+        <rect x="66" y="366" width="120" height="10" fill="#B8912A"/>
+      </svg>
+    </div>
+  </div>
+  <aside class="notes">
+  <div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;color:#333;">
+  <p><strong>Delivery:</strong> The trap in an in-person course with a heavy online component is the opposite of the hybrid trap. Students assume that because they came to class, they are current. They are not.</p>
+  <p>Say the words: <strong>check Canvas several times a week.</strong> This is not a course where you can ignore Canvas until an exam appears.</p>
+  <p><strong>Two administrative facts worth stating out loud on Day 1:</strong> the college permits an instructor to drop a student who misses the first two class sessions; and attendance is a graded item inside Course Engagement and Enrichment.</p>
+  <p>The study-time guideline is a college guideline, not a threat — three credit hours implies roughly six hours a week outside class. Students who hear this in August budget better than students who discover it in October.</p>
+  </div>
+  </aside>
+</section>
+
+<!-- ============ 5. THE LOOP ============ -->
+<section>
+  <h2 style="font-size:3.5em;">Read → Guide → Quiz → Class → Sacred Text → Stream &amp; Discuss</h2>
+  <svg class="ill" viewBox="0 0 1300 430" style="margin-top:.15em;" role="img" aria-label="Six circles connected left to right by arrows: read the chapter, work the reading guide, take the chapter quiz, come to class, complete the Sacred Text assignment, and post to Stream and Discuss. A dashed arrow loops back from the sixth to the first.">
+    <defs>
+      <marker id="ar" markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="20" refX="15" refY="10" orient="auto">
+        <path d="M0 0 L20 10 L0 20 z" fill="#2B2118"/>
+      </marker>
+      <marker id="arb" markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="20" refX="15" refY="10" orient="auto">
+        <path d="M0 0 L20 10 L0 20 z" fill="#1F3A93"/>
+      </marker>
+    </defs>
+    <g stroke="#2B2118" stroke-width="5" marker-end="url(#ar)">
+      <path d="M182 150 h34"/><path d="M370 150 h34"/><path d="M558 150 h34"/><path d="M746 150 h34"/><path d="M934 150 h34"/>
+    </g>
+    <!-- 1 read -->
+    <g><circle cx="120" cy="150" r="68" fill="#E4D5B7" stroke="#2B2118" stroke-width="5"/>
+      <path d="M86 126 h30 v50 h-30 z M124 126 h30 v50 h-30 z" fill="#F0E6D2" stroke="#2B2118" stroke-width="4"/>
+      <path d="M120 126 v50" stroke="#2B2118" stroke-width="4"/></g>
+    <!-- 2 guide -->
+    <g><circle cx="308" cy="150" r="68" fill="#B33A2E" stroke="#2B2118" stroke-width="5"/>
+      <rect x="280" y="116" width="56" height="70" fill="#F0E6D2" stroke="#2B2118" stroke-width="4"/>
+      <g stroke="#2B2118" stroke-width="4" stroke-linecap="round"><path d="M292 136 h32 M292 152 h32 M292 168 h18"/></g></g>
+    <!-- 3 quiz -->
+    <g><circle cx="496" cy="150" r="68" fill="#1F3A93" stroke="#2B2118" stroke-width="5"/>
+      <path d="M476 176 q-6 -30 16 -40 q20 -9 20 -25 q0 -18 -22 -18 q-20 0 -24 18" stroke="#F0E6D2" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <circle cx="480" cy="194" r="8" fill="#F0E6D2"/></g>
+    <!-- 4 class -->
+    <g><circle cx="684" cy="150" r="68" fill="#E4D5B7" stroke="#2B2118" stroke-width="5"/>
+      <path d="M650 176 l34 -18 l34 18 v10 h-68 z" fill="#1F3A93" stroke="#2B2118" stroke-width="4"/>
+      <circle cx="684" cy="128" r="18" fill="#F0E6D2" stroke="#2B2118" stroke-width="4"/></g>
+    <!-- 5 sacred text -->
+    <g><circle cx="872" cy="150" r="68" fill="#B8912A" stroke="#2B2118" stroke-width="5"/>
+      <path d="M838 122 h68 v56 h-68 z" fill="#F0E6D2" stroke="#2B2118" stroke-width="4"/>
+      <g stroke="#B33A2E" stroke-width="4" stroke-linecap="round"><path d="M850 138 h44 M850 152 h44 M850 166 h26"/></g></g>
+    <!-- 6 stream & discuss -->
+    <g><circle cx="1060" cy="150" r="68" fill="#B33A2E" stroke="#2B2118" stroke-width="5"/>
+      <rect x="1022" y="118" width="60" height="42" rx="6" fill="#F0E6D2" stroke="#2B2118" stroke-width="4"/>
+      <path d="M1038 160 v16 l18 -16 z" fill="#F0E6D2" stroke="#2B2118" stroke-width="4" stroke-linejoin="round"/>
+      <path d="M1046 132 l20 8 l-20 8 z" fill="#1F3A93"/></g>
+    <!-- loop back -->
+    <path d="M1132 150 H1186 Q1210 150 1210 174 V366 Q1210 390 1186 390 H62 Q38 390 38 366 V174 Q38 150 62 150 H86"
+          fill="none" stroke="#1F3A93" stroke-width="5" stroke-dasharray="14 11" stroke-linecap="round" marker-end="url(#arb)"/>
+    <rect x="330" y="364" width="620" height="52" fill="#F0E6D2"/>
+    <text x="640" y="399" text-anchor="middle" font-family="Cinzel, serif" font-size="25" font-weight="700" letter-spacing="2" fill="#1F3A93">AND THEN THE NEXT TRADITION BEGINS IT AGAIN</text>
+    <g font-family="Cinzel, serif" font-size="22" font-weight="700" fill="#2B2118" text-anchor="middle" letter-spacing="1">
+      <text x="120" y="256">READ</text>
+      <text x="308" y="256">GUIDE</text>
+      <text x="496" y="256">QUIZ</text>
+      <text x="684" y="256">CLASS</text>
+      <text x="872" y="256">SACRED TEXT</text>
+      <text x="1060" y="256">DISCUSS</text>
+    </g>
+  </svg>
+  <aside class="notes">
+  <div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;color:#333;">
+  <p><strong>Delivery:</strong> Walk the six stations left to right, one sentence each. Note that class comes <em>after</em> the quiz on purpose — class time develops the comparative argument, it does not deliver the reading.</p>
+  <p><strong>Reassurance to state explicitly:</strong> you are not doing six unrelated assignments per tradition. The structure repeats deliberately, so once you learn the circuit you always know what is coming.</p>
+  <p>Show them the pattern in the schedule: Hinduism, Buddhism, Chinese traditions, Judaism, Christianity, Islam, and New Religious Movements each run this same loop. Only the tradition changes.</p>
+  </div>
+  </aside>
+</section>
+
+<!-- ============ 6. SACRED TEXTS ============ -->
+<section>
+  <div class="rubric">The largest part of your grade &nbsp;·&nbsp; 30%</div>
+  <h2 style="font-size:3.7em;margin-top:.16em;">Sacred Texts</h2>
+  <div class="split" style="margin-top:.1em;">
+    <div>
+      <div class="two-column" style="gap:1.3em;">
+        <div>
+          <div class="panel blue-line">
+            <p class="panel-title" style="font-size:1.95em;">Stage 1 &middot; Read &amp; respond</p>
+            <p style="font-size:1.6em;">Work through the assigned <strong>primary-source packet</strong> — reading checks and interpretive questions.</p>
+          </div>
+        </div>
+        <div>
+          <div class="panel red-line">
+            <p class="panel-title red" style="font-size:1.95em;">Stage 2 &middot; Converse</p>
+            <p style="font-size:1.6em;">Use your completed work as the basis for a guided conversation with the <strong>course chatbot</strong>.</p>
+          </div>
+        </div>
+      </div>
+      <div class="gloss" style="font-size:1.7em;">
+        <strong>No anthology to buy.</strong> The readings come free through the PHIL 210 <em>Sacred Writings</em> packets.
+      </div>
+      <p style="font-size:1.55em;margin-top:.5em;">You will read from the <em>Bhagavad Gita</em>, <em>Dhammapada</em>, <em>Analects</em>, <em>Mencius</em>, <em>Dao De Jing</em>, <em>Zhuangzi</em>, the Hebrew Bible and rabbinic writings, the New Testament and Nicene Creed, and the Qur'an.</p>
+    </div>
+    <div>
+      <!-- five scripture forms, equal size -->
+      <svg class="ill" viewBox="0 0 400 470" role="img" aria-label="Five forms that scripture takes, drawn at equal size: a rolled scroll, a bound codex, a palm-leaf manuscript strung on cord, a set of bamboo writing slips, and a volume with a geometric medallion on its cover.">
+        <g stroke="#2B2118" stroke-width="4">
+          <!-- scroll -->
+          <g><rect x="30" y="34" width="150" height="56" fill="#F0E6D2"/>
+             <circle cx="30" cy="62" r="20" fill="#B33A2E"/><circle cx="180" cy="62" r="20" fill="#B33A2E"/>
+             <path d="M56 52 h96 M56 72 h74" stroke="#2B2118" stroke-width="3" opacity=".6"/></g>
+          <!-- codex -->
+          <g><rect x="230" y="26" width="140" height="76" fill="#1F3A93"/>
+             <rect x="244" y="38" width="112" height="52" fill="#F0E6D2"/>
+             <path d="M300 38 v52" stroke="#2B2118" stroke-width="3"/></g>
+          <!-- palm-leaf -->
+          <g><rect x="30" y="150" width="180" height="20" rx="10" fill="#E4D5B7"/>
+             <rect x="30" y="178" width="180" height="20" rx="10" fill="#E4D5B7"/>
+             <rect x="30" y="206" width="180" height="20" rx="10" fill="#E4D5B7"/>
+             <path d="M120 142 v92" stroke="#B8912A" stroke-width="6"/>
+             <circle cx="120" cy="136" r="9" fill="#B8912A"/></g>
+          <!-- bamboo slips -->
+          <g><rect x="248" y="146" width="18" height="94" fill="#E4D5B7"/>
+             <rect x="272" y="146" width="18" height="94" fill="#E4D5B7"/>
+             <rect x="296" y="146" width="18" height="94" fill="#E4D5B7"/>
+             <rect x="320" y="146" width="18" height="94" fill="#E4D5B7"/>
+             <path d="M240 172 h106 M240 214 h106" stroke="#B33A2E" stroke-width="5"/></g>
+          <!-- geometric-cover volume -->
+          <g><rect x="120" y="286" width="160" height="112" fill="#B8912A"/>
+             <g fill="none" stroke="#2B2118" stroke-width="4">
+               <path d="M200 306 l38 36 l-38 36 l-38 -36 z"/>
+               <path d="M200 326 l19 16 l-19 16 l-19 -16 z"/>
+               <path d="M162 342 h-22 M238 342 h22"/>
+             </g>
+             <rect x="120" y="286" width="14" height="112" fill="#B33A2E" stroke="#2B2118" stroke-width="4"/></g>
+        </g>
+        <text x="200" y="440" text-anchor="middle" font-family="Cinzel, serif" font-size="15" font-weight="700" letter-spacing="1" fill="#2B2118">SCROLL · CODEX · LEAF · SLIP · BOOK</text>
+      </svg>
+    </div>
+  </div>
+  <aside class="notes">
+  <div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;color:#333;">
+  <p><strong>Delivery:</strong> Spend real time here — this is 30% of the grade and the assignment type students most often underestimate.</p>
+  <p>Emphasize the order of operations. Stage 1 is your own reading and writing. Stage 2 is a conversation with the course chatbot <em>built on</em> that completed work. The chatbot is not a shortcut past the reading; it is a check that you did it and understood it.</p>
+  <p>Mention <strong>PRACTICE: The Book of the Sacred Noodle</strong>, due August 28 with the first quiz. It is a low-stakes dry run of the whole two-stage workflow on an invented scripture, so the first real one — the <em>Bhagavad Gita</em> — is not also a technology lesson. Students who skip the practice regret it.</p>
+  <p>Say plainly that no sacred-text anthology needs to be purchased. Students budget for books in week one and this is genuinely good news.</p>
+  <p><strong>Image description:</strong> Five equal-sized drawings of the physical forms scripture takes — a rolled scroll, a bound codex, a strung palm-leaf manuscript, bamboo writing slips, and a volume with a geometric medallion cover.</p>
+  </div>
+  </aside>
+</section>
+
+<!-- ============ 7. STREAM & DISCUSS ============ -->
+<section>
+  <div class="rubric">15% &nbsp;·&nbsp; one per major tradition</div>
+  <h2 style="font-size:3.7em;margin-top:.16em;">Stream &amp; Discuss</h2>
+  <div class="two-column" style="margin-top:.1em;">
+    <div>
+      <div class="panel">
+        <p class="panel-title" style="font-size:2.0em;">What you do</p>
+        <ul style="font-size:1.6em;">
+          <li>Watch the documentary in Canvas — it must record <strong>at least 90% completion</strong>.</li>
+          <li><strong>Initial post:</strong> normally three substantive paragraphs investigating topics from the film.</li>
+          <li><strong>Two replies</strong> to classmates, normally a paragraph each, with citations for factual claims.</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel red-line">
+        <p class="panel-title red" style="font-size:2.0em;">Why documentaries</p>
+        <div class="quotebox" style="font-size:1.7em;">
+          Learn about a religious tradition from its <em>adherents</em> rather than primarily from its critics.
+          <div style="text-align:right;font-size:.8em;font-style:normal;margin-top:.5em;color:var(--vermilion);">— <span class="popup-trigger" data-popup="pop-stendahl">Krister Stendahl's</span> principle</div>
+        </div>
+        <p style="font-size:1.6em;margin-top:.6em;">These films let us meet religions through the people who actually practice them.</p>
+      </div>
+    </div>
+  </div>
+  <div class="gloss red" style="font-size:1.75em;margin-top:.6em;">
+    <strong>Discussions are time-sensitive.</strong> Post by the due date, then return during the following <strong>four days</strong> to reply. After that the discussion closes — there is no late version.
+  </div>
+  <aside class="notes">
+  <div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;color:#333;">
+  <p><strong>Delivery:</strong> The two-part deadline is the single most common place students lose points in the first month. Say it twice: the initial post has a due date, and the replies have their own window that closes.</p>
+  <p>The 90% completion tracking surprises people. Say it out loud — Canvas records watch time, and skipping to the end does not count as watching.</p>
+  <p>Stendahl's principle is worth a full minute. It is the methodological commitment of the whole course: you do not get to describe a tradition by its worst adherents or its loudest opponents. Students who grasp this write markedly better discussion posts.</p>
+  <p>Note that some assignments specify additional topics or paragraphs — the prompt in Canvas governs, and detailed grading criteria come with each one.</p>
+  </div>
+  </aside>
+</section>
+
+<!-- ============ 8. ANCHOR VS REVIEW ============ -->
+<section>
+  <h2 style="font-size:3.7em;">Two kinds of questions</h2>
+  <div class="two-column" style="margin-top:.15em;">
+    <div>
+      <div class="panel">
+        <svg viewBox="0 0 300 170" style="width:52%;display:block;margin:0 auto .15em;" role="img" aria-label="A pointing hand — the manuscript manicule — drawn in the margin of a ruled page, its index finger indicating one highlighted line.">
+          <g stroke="#2B2118" stroke-width="4" opacity=".42" fill="none">
+            <path d="M158 44 h128 M158 66 h128 M158 110 h128 M158 132 h116"/>
+          </g>
+          <path d="M158 88 h128" stroke="#B33A2E" stroke-width="8" stroke-linecap="round"/>
+          <!-- manicule -->
+          <g transform="translate(18,36)">
+            <path d="M2 24 l18 -6 v56 l-18 -6 z" fill="#1F3A93" stroke="#2B2118" stroke-width="4" stroke-linejoin="round"/>
+            <rect x="18" y="16" width="52" height="60" rx="18" fill="#F0E6D2" stroke="#2B2118" stroke-width="4"/>
+            <path d="M58 38 h56 q14 0 14 14 t-14 14 h-56 z" fill="#F0E6D2" stroke="#2B2118" stroke-width="4" stroke-linejoin="round"/>
+            <g fill="none" stroke="#2B2118" stroke-width="3">
+              <path d="M62 66 q12 0 12 -7 t-12 -7"/>
+              <path d="M62 78 q10 0 10 -6"/>
+              <path d="M34 22 q16 -12 28 -2"/>
+            </g>
+          </g>
+        </svg>
+        <p class="panel-title" style="text-align:center;">Anchor Questions</p>
+        <p style="font-size:1.7em;">An anchor points you at a <strong>specific passage</strong>. You should be able to recognize <em>where</em> an idea appears, <em>what</em> the passage discusses, and <em>why</em> it matters.</p>
+      </div>
+    </div>
+    <div>
+      <div class="panel red-line">
+        <svg viewBox="0 0 260 160" style="width:46%;display:block;margin:0 auto .15em;" role="img" aria-label="A quill pen writing a commentary note in the margin beside a ruled page.">
+          <g stroke="#2B2118" stroke-width="4" opacity=".45" fill="none">
+            <path d="M16 40 h108 M16 62 h108 M16 84 h108 M16 106 h108"/>
+          </g>
+          <path d="M140 34 v96" stroke="#B33A2E" stroke-width="6"/>
+          <g stroke="#1F3A93" stroke-width="4" fill="none" opacity=".75"><path d="M152 52 h64 M152 72 h78 M152 92 h52"/></g>
+          <!-- quill -->
+          <path d="M216 138 c26 -34 34 -78 30 -112 c-30 16 -56 52 -62 88 z" fill="#F0E6D2" stroke="#2B2118" stroke-width="4" stroke-linejoin="round"/>
+          <path d="M184 114 l-22 30" stroke="#2B2118" stroke-width="5" stroke-linecap="round"/>
+          <path d="M240 30 c-18 30 -30 62 -34 88" stroke="#2B2118" stroke-width="3" opacity=".6" fill="none"/>
+        </svg>
+        <p class="panel-title red" style="text-align:center;">Review Questions</p>
+        <p style="font-size:1.7em;">A review question asks you to show that you understand the <strong>larger issue</strong> the passage belongs to.</p>
+      </div>
+    </div>
+  </div>
+  <p class="bottom-text" style="font-size:1.7em;text-align:center;">Find the evidence. Then say what it means.</p>
+  <aside class="notes">
+  <div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;color:#333;">
+  <p><strong>Delivery:</strong> The pointing hand and the marginal gloss are the mental model students should walk out with. Anchor = location. Review = meaning. Both devices are borrowed from actual manuscript practice, which is a nice half-sentence aside if the room enjoys it.</p>
+  <p><strong>Say this plainly:</strong> I am not trying to trick you into remembering an isolated fact. I want you to locate the evidence and understand what it tells us.</p>
+  <p><strong>Optional live demo — worth the minutes.</strong> Write a term from Chapter 1 on the board — <em>preunderstanding</em>, or <em>the dimensions of religion</em>. Ask the room what section of the chapter they would expect it to sit in. Then ask what larger question a scholar of religion could build on it.</p>
+  <p>For <em>preunderstanding</em> you are fishing for: Why is a neutral description of religion so difficult? What does a scholar owe a tradition they do not belong to? Can you study something fairly from outside it? Then name the move you just made — the anchor located the evidence, the review question asked you to understand it.</p>
+  <p>Quiz mechanics to state out loud: the quizzes are short, multiple-choice, <strong>timed</strong>, completed online through Canvas, drawn from the chapter's Anchor and Review Questions, and worth <strong>25 points</strong> each. Availability windows and due dates live in Canvas.</p>
+  </div>
+  </aside>
+</section>
+
+<!-- ============ 9. LIVE READING GUIDE ============ -->
+<section>
+  <div class="rubric">Let's open yours right now</div>
+  <h2 style="font-size:3.6em;margin-top:.16em;">Your Chapter 1 Reading Guide</h2>
+  <div class="split" style="margin-top:.05em;">
+    <div>
+      <ul style="font-size:1.6em;">
+        <li><strong>12 numbered questions</strong> for Chapter 1.</li>
+        <li>Each one gives you <strong>two anchor sentences</strong> — a page number and the opening words. Go find them and copy them down.</li>
+        <li>Then <strong>one review question</strong>, answered <em>in your own words</em>, using those anchors as your evidence.</li>
+        <li><strong>Focus areas</strong> point you at the concepts each question is really about.</li>
+        <li>Your typing <strong>auto-saves</strong>. When finished: <strong>Export</strong> a backup or <strong>Print to PDF</strong>.</li>
+      </ul>
+      <div class="gloss" style="font-size:1.65em;">
+        Work the Guide <em>as you read</em>, not the night before the quiz. Do that and you are preparing for the quiz and the exam at the same time.
+      </div>
+      <p style="margin-top:.6em;">
+        <a class="big-link" href="https://austin-academics.com/phil-210/reading_guides/PHIL210_Ch01_ReadingGuide" target="_blank" rel="noopener">Open the Chapter 1 Reading Guide&nbsp;&#8599;</a>
+      </p>
+      <p style="font-size:1.2em;margin-top:.4em;word-break:break-all;">austin-academics.com/phil-210/reading_guides/PHIL210_Ch01_ReadingGuide</p>
+    </div>
+    <div>
+      <!-- manuscript page mockup: rubric heading, ruled text, manicule, marginal gloss box -->
+      <svg class="ill" viewBox="-76 0 636 470" role="img" aria-label="A manuscript-style page mockup of the reading guide: a red rubric heading, an illuminated initial, two labelled anchor-sentence boxes each giving a page number and opening words, a pointing hand in the margin, and a boxed review answer field.">
+        <rect x="16" y="14" width="528" height="442" fill="#F0E6D2" stroke="#2B2118" stroke-width="5"/>
+        <rect x="30" y="28" width="500" height="414" fill="none" stroke="#B8912A" stroke-width="3"/>
+        <text x="150" y="72" font-family="Cinzel, serif" font-size="24" font-weight="700" letter-spacing="3" fill="#B33A2E">CHAPTER I · QUESTION 1</text>
+        <!-- illuminated initial -->
+        <rect x="58" y="94" width="66" height="66" fill="#1F3A93" stroke="#2B2118" stroke-width="4"/>
+        <text x="91" y="146" text-anchor="middle" font-family="EB Garamond, serif" font-size="50" font-weight="800" fill="#D9AE3F">W</text>
+        <g stroke="#2B2118" stroke-width="5" opacity=".40" stroke-linecap="round">
+          <path d="M140 110 h374 M140 134 h374 M140 158 h330"/>
+        </g>
+        <!-- anchor 1 -->
+        <text x="58" y="204" font-family="Cinzel, serif" font-size="17" font-weight="700" letter-spacing="2" fill="#B33A2E">ANCHOR 1 · p. 6 · &#8220;Religion is&#8230;&#8221;</text>
+        <rect x="58" y="212" width="456" height="34" fill="#E4D5B7" stroke="#B33A2E" stroke-width="4"/>
+        <!-- anchor 2 -->
+        <text x="58" y="278" font-family="Cinzel, serif" font-size="17" font-weight="700" letter-spacing="2" fill="#B33A2E">ANCHOR 2 · p. 9 · &#8220;Scholars often&#8230;&#8221;</text>
+        <rect x="58" y="286" width="456" height="34" fill="#E4D5B7" stroke="#B33A2E" stroke-width="4"/>
+        <!-- manicule pointing at the anchors -->
+        <g transform="translate(-70,192) scale(.58)">
+          <path d="M2 24 l18 -6 v56 l-18 -6 z" fill="#1F3A93" stroke="#2B2118" stroke-width="6" stroke-linejoin="round"/>
+          <rect x="18" y="16" width="52" height="60" rx="18" fill="#E4D5B7" stroke="#2B2118" stroke-width="6"/>
+          <path d="M58 38 h56 q14 0 14 14 t-14 14 h-56 z" fill="#E4D5B7" stroke="#2B2118" stroke-width="6" stroke-linejoin="round"/>
+          <g fill="none" stroke="#2B2118" stroke-width="5">
+            <path d="M62 66 q12 0 12 -7 t-12 -7"/><path d="M34 22 q16 -12 28 -2"/>
+          </g>
+        </g>
+        <!-- review answer box -->
+        <rect x="58" y="342" width="456" height="80" fill="#F0E6D2" stroke="#1F3A93" stroke-width="5"/>
+        <text x="74" y="368" font-family="Cinzel, serif" font-size="17" font-weight="700" letter-spacing="2" fill="#1F3A93">REVIEW · IN YOUR OWN WORDS</text>
+        <g stroke="#2B2118" stroke-width="4" opacity=".32" stroke-linecap="round"><path d="M74 390 h420 M74 408 h330"/></g>
+      </svg>
+    </div>
+  </div>
+  <aside class="notes">
+  <div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;color:#333;">
+  <p><strong>Delivery:</strong> Put the Guide on the screen and walk question 1 out loud — read the pointer to the passage, then the interpretive prompt beneath it — so students see the anchor/review pairing in the assignment they are actually about to do rather than in the abstract.</p>
+  <p>Point out the buttons at the bottom. Students consistently miss that their work auto-saves and that they can print a clean copy to study from before the exam.</p>
+  <p>Tell them to bookmark it. The Chapter 1 quiz is due August 28 alongside Mapping Your Worldview and the Sacred Noodle practice — three things, one deadline.</p>
+  </div>
+  </aside>
+</section>
+
+<!-- ============ 10. TWO EXAMS ============ -->
+<section>
+  <h2 style="font-size:3.8em;">Two exams, taken at home</h2>
+  <div class="two-column" style="margin-top:.3em;">
+    <div>
+      <div class="panel blue-line" style="text-align:center;">
+        <div style="font-family:'EB Garamond',serif;font-weight:800;font-size:3.6em;color:var(--lapis);line-height:1;">I</div>
+        <p class="panel-title" style="font-size:2.0em;">Asian Traditions</p>
+        <p style="font-size:1.7em;">Hinduism, Buddhism, and Chinese Traditions<br><strong>Chapters 3, 5, and 7</strong></p>
+        <p style="font-size:1.5em;margin-top:.35em;color:var(--vermilion);"><em>78 points &nbsp;·&nbsp; due October 13</em></p>
+      </div>
+    </div>
+    <div>
+      <div class="panel red-line" style="text-align:center;">
+        <div style="font-family:'EB Garamond',serif;font-weight:800;font-size:3.6em;color:var(--vermilion);line-height:1;">II</div>
+        <p class="panel-title red" style="font-size:2.0em;">Abrahamic Traditions</p>
+        <p style="font-size:1.7em;">Judaism, Christianity, and Islam<br><strong>Chapters 10, 11, and 12</strong></p>
+        <p style="font-size:1.5em;margin-top:.35em;color:var(--vermilion);"><em>78 points &nbsp;·&nbsp; due December 10</em></p>
+      </div>
+    </div>
+  </div>
+  <div class="gloss" style="font-size:1.8em;margin-top:.7em;">
+    The exams test what you can <strong>explain, apply, compare, and interpret</strong> — not what you can locate fastest.
+  </div>
+  <aside class="notes">
+  <div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;color:#333;">
+  <p><strong>Delivery:</strong> Point out that the two exams split the semester along a real fault line, not an arbitrary one — the traditions that grew out of South and East Asia, and the traditions that trace themselves to Abraham. Chapter 13, New Religious Movements, sits outside both and closes the course.</p>
+  <p>Exams are completed through the course's online exam system and submitted to Canvas. Each has a firm closing date and an availability window listed in Canvas — tell students to begin early enough to absorb a technical problem.</p>
+  <p>Note that both exams are required. Failing to complete a substantial portion of the required work can make passing the course impossible.</p>
+  </div>
+  </aside>
+</section>
+
+<!-- ============ 11. HOW AN EXAM WORKS ============ -->
+<section data-background="#1E1710" class="flood">
+  <h2 style="font-size:3.5em;">How an exam actually works</h2>
+  <div style="margin:.05em 0 .45em;">
+    <span class="chip gold">Exam 1 &middot; Chapters 3, 5, 7</span>
+    <span class="chip red">78 points</span>
+    <span class="chip">Online, at home</span>
+    <span class="chip">Textbook chapters only</span>
+  </div>
+  <div class="three-column" style="gap:1.2em;">
+    <div>
+      <div class="panel blue-line">
+        <p class="panel-title" style="font-size:1.85em;">Open</p>
+        <ul style="font-size:1.4em;">
+          <li>Taken through the <strong>course exam system</strong>, not inside Canvas.</li>
+          <li>Watch the <strong>availability window</strong> — it has a firm close.</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel red-line">
+        <p class="panel-title red" style="font-size:1.85em;">Write</p>
+        <ul style="font-size:1.4em;">
+          <li>Answer <strong>in your own words</strong>, using <strong>only the assigned textbook chapters</strong>.</li>
+          <li>Outside sources, <strong>course chatbots</strong>, and generative AI are all prohibited.</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel">
+        <p class="panel-title" style="font-size:1.85em;">Submit</p>
+        <ul style="font-size:1.4em;">
+          <li>Submit <strong>to Canvas</strong> exactly as the exam instructions direct.</li>
+          <li>Finishing the exam is not the same as <strong>turning it in</strong>.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="gloss red" style="font-size:1.55em;margin-top:.55em;">
+    Each exam carries its own detailed instructions — permitted resources, availability period, submission procedure. <strong>Those instructions govern.</strong> Read them before you begin.
+  </div>
+  <p style="margin-top:.5em;text-align:center;">
+    <a class="big-link" href="https://austin-academics.com/the_lyceum/world-religions/exams/PHIL210_Exam1" target="_blank" rel="noopener" style="font-size:1.35em;">Preview Exam 1&nbsp;&#8599;</a>
+  </p>
+  <p style="font-size:1.15em;margin-top:.35em;text-align:center;word-break:break-all;">austin-academics.com/the_lyceum/world-religions/exams/PHIL210_Exam1</p>
+  <aside class="notes">
+  <div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;color:#333;">
+  <p><strong>Delivery:</strong> Open the Exam 1 link on the screen and scroll it slowly. Students relax measurably once they can see the format instead of imagining it. Do not work any questions — the point is recognition.</p>
+  <p>The detail students most often miss: <strong>the course chatbot is permitted on Sacred Text assignments and prohibited on exams.</strong> A tool being allowed in one activity does not make it allowed in another. Say this explicitly, because in this course it is a genuinely easy mistake rather than a cynical one.</p>
+  <p>The second thing they miss is that finishing is not submitting. Walk them to the Canvas submission step out loud.</p>
+  <p>Only the assigned textbook chapters may be used — not the Sacred Writings packets, not lecture slides, not their notes, unless a specific exam's instructions say otherwise. When the exam instructions differ from anything on this slide, the exam instructions win.</p>
+  </div>
+  </aside>
+</section>
+
+<!-- ============ 12. THE AI POLICY ============ -->
+<section>
+  <h2 style="font-size:3.7em;">AI: a genuinely useful line</h2>
+  <div class="three-column" style="margin-top:.2em;gap:1.3em;">
+    <div>
+      <div class="panel blue-line">
+        <p class="panel-title" style="font-size:1.95em;">✔ Allowed as a learning aid</p>
+        <ul style="font-size:1.45em;">
+          <li>Brainstorming before you write</li>
+          <li>Clarifying an unfamiliar term</li>
+          <li>Asking for extra examples</li>
+          <li>Grammar and clarity checks on <em>your own</em> writing</li>
+          <li>Suggesting search terms</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel red-line">
+        <p class="panel-title red" style="font-size:1.95em;">✘ Not allowed</p>
+        <ul style="font-size:1.45em;">
+          <li>Writing or rewriting what you submit</li>
+          <li>Generating discussion posts or replies</li>
+          <li>Answering Sacred Text reading questions</li>
+          <li>Summarizing readings instead of doing them</li>
+          <li>Any part of a quiz or exam</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel">
+        <p class="panel-title" style="font-size:1.95em;">⁂ Sometimes required</p>
+        <p style="font-size:1.5em;">Sacred Text assignments ask you to converse with an <strong>instructor-designed course chatbot</strong> — after your own reading and writing are done.</p>
+        <p style="font-size:1.5em;margin-top:.4em;">When an assignment permits or requires AI, <strong>its instructions override</strong> the general rule.</p>
+      </div>
+    </div>
+  </div>
+  <div class="gloss red" style="font-size:1.6em;margin-top:.55em;">
+    <strong>Do not assume that because AI is permitted in one activity it is permitted in another.</strong> If an assignment doesn't authorize it, do the work without it — or ask me first.
+  </div>
+  <aside class="notes">
+  <div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;color:#333;">
+  <p><strong>Delivery:</strong> Say this once, calmly. Resist the temptation to moralize — the policy is unusually reasonable and it argues for itself.</p>
+  <p><strong>The honest version of the argument:</strong> AI can produce very convincing prose about religion. That does not mean it has read our textbook, sat in our classroom, or engaged the particular passage in front of you. The course values authentic learning, careful reading, and the development of your own analytical voice; AI should assist your thinking rather than replace it.</p>
+  <p>Two practical additions worth saying aloud. <strong>Disclosure:</strong> if permitted AI contributed to work you submit and it is not already built into the assignment, add a brief note — "AI assistance was used for brainstorming and grammar review." Routine use of the required course chatbot needs no separate disclosure unless the assignment asks. <strong>Verification:</strong> some assignments may require drafts, planning notes, reading responses, revision history, or a complete chatbot transcript. Altering or submitting an incomplete required transcript is itself an integrity issue.</p>
+  <p>Also worth one sentence: AI-generated information should be verified before you rely on it. In a course about seven traditions, confident-sounding errors about doctrine and history are extremely common.</p>
+  </div>
+  </aside>
+</section>
+
+<!-- ============ 13. WHAT'S NEXT ============ -->
+<section data-background="#1E1710" class="flood">
+  <h2 style="font-size:4.0em;">Before we meet again</h2>
+  <div class="three-column" style="margin-top:.35em;">
+    <div><div class="panel red-line" style="text-align:center;">
+      <div class="chip red" style="font-size:1.15em;">Due today</div>
+      <p class="panel-title red" style="font-size:1.9em;margin-top:.3em;">Introduce Yourself</p>
+      <p style="font-size:1.5em;"><em>Who am I? Why am I here? Where am I going?</em></p>
+    </div></div>
+    <div><div class="panel blue-line" style="text-align:center;">
+      <div class="chip gold" style="font-size:1.15em;">By Aug. 28</div>
+      <p class="panel-title" style="font-size:1.9em;margin-top:.3em;">Three at once</p>
+      <p style="font-size:1.5em;">Ch. 1 Quiz &nbsp;·&nbsp; Mapping Your Worldview &nbsp;·&nbsp; the Sacred Noodle practice</p>
+    </div></div>
+    <div><div class="panel" style="text-align:center;">
+      <div class="chip" style="font-size:1.15em;">This week</div>
+      <p class="panel-title" style="font-size:1.9em;margin-top:.3em;">Read &amp; explore</p>
+      <p style="font-size:1.5em;">Chapter 1, the syllabus, and the Chapter 1 module in Canvas</p>
+    </div></div>
+  </div>
+  <p class="bottom-text" style="font-size:1.75em;text-align:center;margin-top:.8em;">Bring your questions to Thursday — or send them by Canvas Mail. I would rather answer one in week one than untangle a problem in week five.</p>
+  <aside class="notes">
+  <div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;color:#333;">
+  <p><strong>Delivery:</strong> Keep this brisk — a checklist, not a discussion. Students should leave knowing exactly what to open first.</p>
+  <p><strong>Introduce Yourself is due today</strong>, August 18, and is worth 15 points. Say that clearly; some students will assume the first assignment cannot possibly be due on the first day.</p>
+  <p>The August 28 cluster is three things on one date. Frame it as a package rather than three surprises: the quiz proves you read the chapter, Mapping Your Worldview surfaces your preunderstanding, and the Sacred Noodle practice teaches the workflow you will use nine more times.</p>
+  <p>Remind them that Canvas Mail is the channel for course questions, and that the Modules page is the roadmap — if they are ever unsure what comes next, start there.</p>
+  </div>
+  </aside>
+</section>
+
+<!-- ============ 14. TRANSITION TO WORLDVIEW ============ -->
+<section data-background="#B33A2E" class="flood">
+  <div class="split">
+    <div>
+      <h2 style="font-size:3.7em;color:var(--vellum);">One idea we'll return to constantly:</h2>
+      <div class="versal-title" style="font-size:5.4em;margin:.08em 0;color:var(--gold-lit);">worldview</div>
+      <p style="font-size:1.95em;color:var(--vellum);">The assumptions you already carry about <strong style="color:var(--gold-lit);">reality, authority, morality, community,</strong> and the proper way to live.</p>
+      <p class="bottom-text" style="font-size:1.85em;color:var(--gold-lit);">Before we map seven of them — let's map yours.</p>
+    </div>
+    <div>
+      <!-- illuminated initial containing a small cosmos -->
+      <svg class="ill sway" viewBox="0 0 400 420" role="img" aria-label="A large illuminated letter W drawn as a decorated initial; inside its counters sit a small globe, a set of scales, and a scattering of stars.">
+        <rect x="40" y="30" width="320" height="330" fill="#F0E6D2" stroke="#2B2118" stroke-width="6"/>
+        <rect x="56" y="46" width="288" height="298" fill="none" stroke="#B8912A" stroke-width="6"/>
+        <text x="200" y="286" text-anchor="middle" font-family="EB Garamond, serif" font-size="250" font-weight="800" fill="#1F3A93">W</text>
+        <circle cx="200" cy="176" r="44" fill="#B33A2E" stroke="#2B2118" stroke-width="5"/>
+        <g stroke="#B8912A" stroke-width="4" fill="none"><ellipse cx="200" cy="176" rx="44" ry="18"/><path d="M200 132 v88"/></g>
+        <!-- scales -->
+        <g stroke="#2B2118" stroke-width="4" fill="none" transform="translate(96,236)">
+          <path d="M32 0 v46 M8 12 h48"/>
+          <path d="M8 12 l-11 20 h22 z" fill="#B8912A"/><path d="M56 12 l-11 20 h22 z" fill="#1F3A93"/>
+        </g>
+        <g fill="#B8912A"><circle cx="292" cy="112" r="7"/><circle cx="314" cy="146" r="5"/><circle cx="272" cy="86" r="4"/></g>
+        <!-- vine drollery: a snail in the margin -->
+        <g transform="translate(272,268)">
+          <path d="M0 30 q6 -14 22 -14 q20 0 20 16 q0 14 -14 14 q-10 0 -10 -8 q0 -6 6 -6" fill="none" stroke="#2B2118" stroke-width="5"/>
+          <path d="M-16 32 h20 M-16 32 q-6 -12 4 -14" fill="none" stroke="#2B2118" stroke-width="5" stroke-linecap="round"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <aside class="notes">
+  <div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;color:#333;">
+  <p><strong>Delivery:</strong> This is the hinge between the two halves of class. Deliver the definition slowly — worldview and preunderstanding are the two words from Chapter 1 that carry through every unit.</p>
+  <p>Ask the room, out loud and without writing anything down, what they already assume religion <em>is</em>. Whatever they say is worldview data — gathered before they knew it, and exactly what the assignment is about to make explicit.</p>
+  <p><strong>Image description:</strong> A gold-framed illuminated letter W in ultramarine, with a small red globe, a balance scale, and gold stars set among its strokes, and a snail drawn in the margin.</p>
+  </div>
+  </aside>
+</section>
+
+<!-- ============ 15. THE WORKSHOP ============ -->
+<section>
+  <h2 style="font-size:3.8em;">How this works</h2>
+  <div class="split">
+    <div>
+      <div class="panel blue-line">
+        <p class="panel-title">There is no &ldquo;right&rdquo; worldview here</p>
+        <p style="font-size:1.75em;">You are not graded on <em>having</em> the correct one. The point is to identify the assumptions you already carry — including the ones you have never had to say out loud.</p>
+      </div>
+      <div class="panel red-line" style="margin-top:.7em;">
+        <p class="panel-title red">Why we do it in week one</p>
+        <p style="font-size:1.75em;">In October, when we read the Qur'an or the <em>Dao De Jing</em>, this gives you something honest to <strong>compare against</strong> — instead of an invisible default you mistake for neutrality.</p>
+      </div>
+      <p class="bottom-text" style="font-size:1.65em;">I'll be circulating. Flag me down.</p>
+    </div>
+    <div>
+      <!-- compass rose over a mappa-mundi style disc -->
+      <svg class="ill" viewBox="0 0 420 420" role="img" aria-label="A circular medieval-style world map with a compass rose at its center, drawn in gold, ultramarine and vermilion.">
+        <circle cx="210" cy="210" r="186" fill="#E4D5B7" stroke="#2B2118" stroke-width="6"/>
+        <circle cx="210" cy="210" r="168" fill="none" stroke="#B8912A" stroke-width="7"/>
+        <g stroke="#1F3A93" stroke-width="5" fill="none" opacity=".55">
+          <path d="M60 168 q80 -26 150 6 t140 -18"/>
+          <path d="M52 258 q80 -26 158 6 t150 -18"/>
+          <path d="M210 42 v336"/>
+        </g>
+        <circle cx="210" cy="210" r="92" fill="#F0E6D2" stroke="#2B2118" stroke-width="5"/>
+        <path d="M210 128 l24 58 l58 24 l-58 24 l-24 58 l-24 -58 l-58 -24 l58 -24 z" fill="#B33A2E" stroke="#2B2118" stroke-width="5" stroke-linejoin="round"/>
+        <circle cx="210" cy="210" r="15" fill="#1F3A93" stroke="#2B2118" stroke-width="5"/>
+        <g font-family="Cinzel, serif" font-size="22" font-weight="700" fill="#2B2118" text-anchor="middle">
+          <text x="210" y="36">N</text><text x="210" y="404">S</text>
+          <text x="20" y="218">W</text><text x="402" y="218">E</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <aside class="notes">
+  <div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;color:#333;">
+  <p><strong>Delivery:</strong> Get students into the assignment quickly — the remaining time is theirs. Circulate rather than hovering at the front.</p>
+  <p>Treat "am I doing this right?" as a chance to restate the prompt out loud for whoever else is wondering. Procedural questions get direct answers; questions about content get returned to the student.</p>
+  <p>Some students will be reluctant to write down a religious or non-religious commitment in a graded document. Say clearly that the assignment asks for description, not confession, and that you are not grading the content of anyone's beliefs.</p>
+  </div>
+  </aside>
+</section>
+
+<!-- ============ 16. CLOSING QUESTION ============ -->
+<section data-background="#1E1710" class="flood">
+  <div style="text-align:center;">
+    <div class="chip red" style="font-size:1.35em;">If there's time at the end</div>
+    <h2 style="font-size:3.2em;color:var(--vellum);margin-top:.45em;">Which tradition do you most expect</h2>
+    <div class="versal-title" style="font-size:4.0em;margin-top:.1em;">to surprise you?</div>
+    <svg class="ill" viewBox="0 0 900 60" style="max-width:50%;margin:1.0em auto 0;" aria-hidden="true">
+      <path d="M20 38 q60 -30 120 0 t120 0 t120 0 t120 0 t120 0 t120 0 t140 0" fill="none" stroke="#E8836F" stroke-width="5" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <aside class="notes">
+  <div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;color:#333;">
+  <p><strong>Delivery:</strong> Optional closer. Two or three answers is plenty — you want them leaving curious, not resolved.</p>
+  <p><strong>Alternate exit question:</strong> <em>What is one thing about religion, or about a particular tradition, that you would like to understand by the end of this course?</em> Take a few aloud or have students write a response and hand it in as an engagement item.</p>
+  <p>Either version gives you something to return to in December, which makes the last day of class considerably better.</p>
+  </div>
+  </aside>
+</section>
+
+<!-- ============ 17. SEE YOU ============ -->
+<section>
+  <div style="text-align:center;">
+    <svg class="ill" viewBox="0 0 560 320" style="max-width:46%;margin:0 auto;" role="img" aria-label="A scribe seated at a sloped desk with a quill and an open book, with a hare in the margin blowing a trumpet — a traditional manuscript joke.">
+      <!-- desk -->
+      <path d="M150 246 l150 -40 v34 l-150 40 z" fill="#B33A2E" stroke="#2B2118" stroke-width="5"/>
+      <path d="M226 268 v42 M170 310 h112" stroke="#2B2118" stroke-width="9" stroke-linecap="round"/>
+      <!-- book on desk -->
+      <path d="M156 226 q40 -24 76 -10 v30 q-36 -14 -76 8 z" fill="#F0E6D2" stroke="#2B2118" stroke-width="5"/>
+      <path d="M300 206 q-40 -24 -78 -10 v30 q38 -14 78 8 z" fill="#F0E6D2" stroke="#2B2118" stroke-width="5"/>
+      <!-- scribe -->
+      <circle cx="196" cy="126" r="40" fill="#E4D5B7" stroke="#2B2118" stroke-width="5"/>
+      <path d="M156 122 q40 -46 80 0 q-6 -42 -40 -42 q-34 0 -40 42 z" fill="#1F3A93" stroke="#2B2118" stroke-width="5"/>
+      <circle cx="182" cy="132" r="5" fill="#2B2118"/><circle cx="212" cy="132" r="5" fill="#2B2118"/>
+      <path d="M182 150 q14 12 30 0" stroke="#2B2118" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <path d="M148 246 c0 -52 22 -80 48 -80 s48 28 48 80 z" fill="#B8912A" stroke="#2B2118" stroke-width="5"/>
+      <!-- quill -->
+      <path d="M262 196 c22 -28 28 -62 24 -90 c-24 14 -46 42 -50 72 z" fill="#F0E6D2" stroke="#2B2118" stroke-width="5" stroke-linejoin="round"/>
+      <!-- drollery: hare with trumpet -->
+      <g transform="translate(378,150)">
+        <ellipse cx="46" cy="86" rx="40" ry="52" fill="#F0E6D2" stroke="#2B2118" stroke-width="5"/>
+        <circle cx="46" cy="34" r="28" fill="#F0E6D2" stroke="#2B2118" stroke-width="5"/>
+        <path d="M32 12 q-10 -44 4 -50 q12 -4 10 42" fill="#F0E6D2" stroke="#2B2118" stroke-width="5"/>
+        <path d="M60 12 q10 -44 -4 -50 q-12 -4 -10 42" fill="#F0E6D2" stroke="#2B2118" stroke-width="5"/>
+        <circle cx="38" cy="34" r="4" fill="#2B2118"/>
+        <path d="M62 40 l52 -26 l0 34 z" fill="#B8912A" stroke="#2B2118" stroke-width="5" stroke-linejoin="round"/>
+      </g>
+    </svg>
+    <h2 class="versal-title" style="font-size:4.0em;margin-top:.25em;">See you in Chapter 1.</h2>
+    <p style="font-size:2.0em;margin-top:.25em;">Read → Guide → Quiz → Class → Sacred Text → Discuss. That's the whole circuit.</p>
+  </div>
+  <aside class="notes">
+  <div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;color:#333;">
+  <p><strong>Closing statement, if you want one:</strong> You do not need to become an expert on seven religions in one semester. What I hope happens is that by December you can encounter an unfamiliar tradition and know what questions to ask of it — instead of reaching for the nearest stereotype. If that happens, you will have learned what the academic study of religion is actually for.</p>
+  <p><strong>Image description:</strong> A scribe in a blue cap seated at a sloped desk with a quill and an open book, while a hare in the margin blows a golden trumpet — a traditional manuscript joke.</p>
+  </div>
+  </aside>
+</section>
+
+</div></div>
+
+<!-- ================= GLOBAL UI ================= -->
+<div id="keyboard-trigger" class="popup-trigger" data-popup="keyboard-popup" title="Keyboard shortcuts" role="button" tabindex="0" aria-label="Keyboard shortcuts">⌨</div>
+
+<div id="keyboard-popup" class="popup">
+  <span class="popup-close" role="button" tabindex="0" aria-label="Close">&times;</span>
+  <div class="definition-term">Keyboard Shortcuts</div>
+  <p>→ / Space: Next &nbsp;|&nbsp; ←: Previous &nbsp;|&nbsp; <strong>S</strong>: Presenter notes &nbsp;|&nbsp; <strong>F</strong>: Fullscreen &nbsp;|&nbsp; <strong>O</strong>: Slide overview &nbsp;|&nbsp; <strong>ESC</strong>: Close this box</p>
+</div>
+
+<div id="pop-stendahl" class="popup">
+  <span class="popup-close" role="button" tabindex="0" aria-label="Close">&times;</span>
+  <div class="definition-term">Krister Stendahl</div>
+  <p>A Swedish New Testament scholar and bishop who taught at Harvard Divinity School. He is remembered for a set of rules for how to study someone else's religion fairly.</p>
+  <p>The one that governs this course: <span class="key-term">let a tradition be described by its own adherents rather than by its enemies</span> — compare their best against your best, not their worst against your ideals.</p>
+  <p>It is why our documentaries feature practitioners, and why our readings are the traditions' own writings.</p>
+</div>
+
+<div class="slide-counter" aria-live="polite"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+<script>
+Reveal.initialize({
+  width:1920, height:1080, margin:0.04, minScale:0.1, maxScale:1.0,
+  hash:true, slideNumber:false, transition:'fade', plugins:[RevealNotes]
+});
+
+function updateSlideCounter(){
+  const c = Reveal.getState().indexh + 1, t = Reveal.getTotalSlides();
+  document.querySelector('.slide-counter').textContent = c + ' / ' + t;
+}
+Reveal.on('slidechanged', updateSlideCounter);
+Reveal.on('ready', updateSlideCounter);
+
+function openPopup(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+}
+
+document.addEventListener('click', function(e){
+  const trigger = e.target.classList.contains('popup-trigger') ? e.target : e.target.closest('.popup-trigger');
+  if(trigger){ openPopup(trigger.getAttribute('data-popup')); }
+  if(e.target.classList.contains('popup-close')){ e.target.closest('.popup').classList.remove('active'); }
+});
+
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){ document.querySelectorAll('.popup').forEach(p => p.classList.remove('active')); }
+  if((e.key === 'Enter' || e.key === ' ')){
+    const t = document.activeElement;
+    if(t && t.classList.contains('popup-trigger')){ e.preventDefault(); openPopup(t.getAttribute('data-popup')); }
+    if(t && t.classList.contains('popup-close')){ e.preventDefault(); t.closest('.popup').classList.remove('active'); }
+  }
+});
+
+document.addEventListener('click', function(e){
+  const navLink = e.target.classList.contains('nav-link') ? e.target : e.target.closest('.nav-link');
+  if(navLink){
+    e.preventDefault();
+    const target = document.getElementById(navLink.getAttribute('href').replace('#',''));
+    if(target){
+      const i = Reveal.getIndices(target);
+      Reveal.slide(i.h, i.v);
+      document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+    }
+  }
+});
+</script>
+</body>
+</html>
