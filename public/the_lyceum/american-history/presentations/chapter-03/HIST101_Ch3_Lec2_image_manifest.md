@@ -1,14 +1,14 @@
 # Image Manifest — HIST 101, Chapter 3, Lecture 2
 ## "Now the God of the Spaniards Is Dead" (The Pueblo Revolt, 1680)
 
-All entries are **pending manual insertion**. This deck contains no live image URLs — every `<img>` uses a `PLACEHOLDER` `src` and `alt` text written as a search instruction. Replace each placeholder with a real, verified image and update the caption if the image's actual nature (later representation vs. contemporary source) requires it.
+Title background was already live. The three content slots are filled with generated woodcut-style educational illustrations; captions and alt text state that plainly.
 
-| # | Slide | Search Instruction (alt text) | Type Needed | Caution | Status |
+| # | Slide | File | Type | Caution | Status |
 |---|---|---|---|---|---|
-| 1 | Title | High desert of northern New Mexico / upper Rio Grande valley at dawn or dusk, adobe pueblo architecture in silhouette, muted earthen tones. Not a specific event or person. | Decorative / atmospheric | Avoid anything resembling a documentary photograph — none exist from 1680. | Pending manual insertion |
-| 2 | 3. "A Mission in Crisis" | 17th-century Spanish Franciscan mission church in New Mexico (adobe mission architecture, Rio Grande pueblo region) — a surviving or reconstructed mission | Photograph or engraving | Caption should note if the structure postdates 1680 (most surviving mission buildings do). | Pending manual insertion |
-| 3 | 15. "What the Spanish Couldn't Take" | Mounted Plains Native peoples on horseback, 18th–19th century painting or engraving (e.g. Comanche or Apache horse culture) | Later historical representation | Must be captioned as a *later* consequence — it postdates 1680 by generations. Do not present as contemporary to the revolt. | Pending manual insertion |
-| 4 | 22. IS — "Mapping the Horse Frontier" | Diffusion/spread of horses across western North America from the Spanish Southwest to the Great Plains and Great Basin, late 17th–18th century | Map | Keep focus on diffusion geography, not the deeper Comanche/Lakota narrative (reserved for the Topic Spotlight video). | Pending manual insertion |
+| 1 | Title | `images/HIST101_Ch3_Lec2_Now_the_God_of_the_Spaniards_Is_Dead_title.png` | Decorative / atmospheric | Not a documentary photograph of 1680. | Inserted (background) |
+| 2 | 3. "A Mission in Crisis" | `images/HIST101_Ch3_Lec2_mission_woodcut.png` | Generated woodcut-style mission | Most surviving mission buildings postdate 1680; caption notes this. | **Inserted (generated)** |
+| 3 | 15. "What the Spanish Couldn't Take" | `images/HIST101_Ch3_Lec2_horses_woodcut.png` | Generated woodcut-style later mounted scene | Must be read as a later consequence, not contemporary to 1680 or as the origin of Indigenous horse cultures. | **Inserted (generated)** |
+| 4 | 22. IS — "Mapping the Horse Frontier" | `images/HIST101_Ch3_Lec2_is_horsemap_woodcut.png` | Generated woodcut-style diffusion map | Distinguishes pre-1680 Indigenous horse evidence from post-1680 redistribution/acceleration. Keep focus on geography, not the full Comanche/Lakota saga. | **Inserted (generated)** |
 
 ## Summary for delivery report
 
@@ -18,7 +18,7 @@ All entries are **pending manual insertion**. This deck contains no live image U
 - Independent Study slides: 4 (1 divider + 3 content: the Spanish reconquest, reading Naranjo's declaration line by line, mapping the horse frontier).
 - Pop-ups: 2 content pop-ups (coordinated uprising, Pedro Naranjo) + 1 keyboard-shortcuts utility popup.
 - Activities: 3, each at a genuine hinge — the "sorcery" charge (write one sentence), source-skepticism (quick write), the horse reveal (predict).
-- Major visual slots: 3 (all pending manual insertion — no live URLs).
+- Major visual slots: 4 (title + 3 generated woodcuts; all filled).
 - Horse material: kept tight per Chief's direction; the full Comanche/Lakota saga is reserved for the separate Topic Spotlight video and is NOT expanded in the live deck or Independent Study.
 
 ## Component reuse / variation note (per skill's anti-cookie-cutter rule)
