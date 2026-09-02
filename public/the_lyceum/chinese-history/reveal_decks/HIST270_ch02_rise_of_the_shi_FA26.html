@@ -8,3 +8,310 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --antique-gold: #D4AF37;
+    --deep-teal: #2C7873;
+    --rich-purple: #6B4C9A;          /* on light (pop-up) backgrounds */
+    --purple-on-dark: #9A6DDE;       /* skill nudge: 4.55:1 on charcoal */
+    --ruby-crimson: #9B2C2C;
+    --dark-charcoal: #1A1A1A;
+    --pure-white: #FAFAFA;
+    --soft-cream: #F5F1E8;
+    --bronze-accent: #8B6F47;
+}
+
+.reveal {
+    font-family: 'Lora', serif;
+    font-size: 1.3em;
+    background-color: var(--dark-charcoal);
+    color: var(--pure-white);
+}
+
+.reveal h1, .reveal h2, .reveal h3 {
+    font-family: 'Crimson Pro', serif;
+    font-weight: 700;
+    color: var(--antique-gold);
+    text-transform: none;
+}
+
+.reveal h1 { font-size: 3.2em; }
+.reveal h2 { font-size: 2.2em; margin-bottom: 0.5em; }
+.reveal h3 { font-size: 1.6em; }
+
+.reveal ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.reveal ul li {
+    margin-bottom: 0.4em;
+    font-size: 0.95em;
+}
+
+.reveal ul li:before {
+    content: "\25C6 ";
+    color: var(--deep-teal);
+    font-weight: bold;
+    margin-right: 0.5em;
+}
+
+strong { color: var(--antique-gold); }
+em { color: #35918B; font-style: italic; }   /* skill nudge: 4.62:1 on charcoal */
+
+/* === POP-UP SYSTEM === */
+.popup-trigger {
+    color: var(--deep-teal);
+    border-bottom: 2px dotted var(--deep-teal);
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.popup-trigger:hover { color: var(--antique-gold); }
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--soft-cream);
+    color: var(--dark-charcoal);
+    padding: 2em;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    max-width: 780px;
+    max-height: 72%;
+    font-size: 1.35rem;
+    line-height: 1.5;
+    overflow-y: auto;
+    z-index: 1000;
+    border: 3px solid var(--bronze-accent);
+}
+
+.popup.active { display: block; }
+
+/* Cream pop-up background: gold fails (1.87:1) and the teal nudge dips below
+   4.5:1, so both revert to their compliant on-cream values. */
+.popup strong { color: #826B21; }   /* 4.57:1 on #F5F1E8 */
+.popup em     { color: #2C7873; }   /* 4.61:1 on #F5F1E8 */
+
+.popup-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2em;
+    cursor: pointer;
+    color: var(--ruby-crimson);
+}
+
+.definition-term {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--rich-purple);
+    margin-bottom: 0.5em;
+    font-family: 'Crimson Pro', serif;
+}
+
+.key-term { color: var(--purple-on-dark); font-weight: 600; }
+
+/* === SLIDE COUNTER === */
+.slide-counter {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(26, 26, 26, 0.9);
+    color: var(--antique-gold);
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-family: 'Crimson Pro', serif;
+    font-weight: 600;
+    font-size: 0.9em;
+    border: 2px solid var(--deep-teal);
+    z-index: 100;
+}
+
+/* === LAYOUT CLASSES === */
+/* Grid children default to min-width:auto, which lets long lines push a
+   column past the slide edge. Force them to shrink and wrap instead. */
+.two-column > *,
+.three-column > *,
+.content-image-layout > * { min-width: 0; }
+
+.reveal li, .reveal p, .reveal h1, .reveal h2 { overflow-wrap: break-word; }
+
+.two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2em;
+    align-items: start;
+}
+
+.three-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5em;
+    align-items: start;
+}
+
+.content-image-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2em;
+    align-items: center;
+}
+
+.content-image-layout .content-side { text-align: left; }
+
+.content-image-layout .image-side {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content-image-layout .image-side img {
+    max-width: 100%;
+    max-height: 560px;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+.column-header {
+    font-weight: 700;
+    color: var(--antique-gold);
+    font-size: 1.1em;
+    margin-bottom: 0.5em;
+    font-family: 'Crimson Pro', serif;
+}
+
+.bottom-text {
+    margin-top: 1.2em;
+    font-style: italic;
+    color: var(--deep-teal);
+    font-size: 0.9em;
+}
+
+.bottom-text-bold {
+    margin-top: 1.2em;
+    font-weight: 700;
+    color: var(--antique-gold);
+    font-size: 0.95em;
+}
+
+.subtitle {
+    font-size: 1.1em;
+    color: var(--deep-teal);
+    margin-top: 0.5em;
+}
+
+.large-text {
+    font-size: 1.3em;
+    text-align: center;
+    line-height: 1.6;
+}
+
+/* === CONTENT BOXES === */
+.callout {
+    background: rgba(212, 175, 55, 0.15);
+    border-left: 5px solid var(--antique-gold);
+    padding: 1.2em;
+    margin: 1em 0;
+    font-size: 0.9em;
+}
+
+.primary-source {
+    background: rgba(212, 175, 55, 0.1);
+    border-left: 5px solid var(--antique-gold);
+    padding: 1em;
+    margin: 1em 0;
+    font-style: italic;
+    color: var(--pure-white);
+}
+
+.primary-source-attribution {
+    text-align: right;
+    font-size: 0.9em;
+    color: var(--bronze-accent);
+    margin-top: 0.5em;
+    font-style: normal;
+}
+
+.timeline-item { margin-bottom: 0.6em; }
+.timeline-year { color: var(--antique-gold); font-weight: 700; }
+
+.assessment-box {
+    background: rgba(44, 120, 115, 0.15);
+    border: 2px solid var(--deep-teal);
+    border-radius: 10px;
+    padding: 1.5em;
+    margin: 1em 0;
+}
+
+.assessment-box h3 { color: var(--deep-teal); margin-top: 0; }
+
+.img-placeholder {
+    background: rgba(139, 111, 71, 0.2);
+    border: 3px dashed var(--bronze-accent);
+    padding: 2em;
+    text-align: center;
+    color: var(--bronze-accent);
+    font-style: italic;
+    border-radius: 10px;
+    font-size: 1.5em;
+    line-height: 1.4;
+}
+
+.img-placeholder strong { color: var(--antique-gold); }
+.img-placeholder em { color: var(--deep-teal); }
+
+.centered-list { text-align: center; font-size: 1.1em; }
+.centered-list li { margin-bottom: 0.7em; }
+
+/* Visible keyboard focus (2.4.7) */
+.popup-trigger:focus-visible,
+.popup-close:focus-visible {
+    outline: 3px solid var(--antique-gold);
+    outline-offset: 3px;
+}
+
+/* Respect reduced-motion preferences (2.3.3) */
+@media (prefers-reduced-motion: reduce) {
+    .reveal .slides section,
+    .reveal .slides,
+    .popup-trigger {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* Speaker-note readability in the notes window */
+.reveal aside.notes { font-family: 'Lora', serif; }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ============ 1. TITLE ============ -->
+<section>
+    <h1 style="font-size: 6.0em;">When Birth Was No Longer Enough</h1>
+    <div class="subtitle" style="font-size: 2.5em;">The Rise of the Shi in the Eastern Zhou</div>
+    <p style="color: var(--bronze-accent); font-style: italic; font-size: 2.0em; margin-top: 0.6em;">
+        HIST 270 &mdash; Chapter 2: Philosophers and Warring States
+    </p>
+
+    <aside class="notes">
+        <h4>&#127908; Lecture Script</h4>
+        <p><em>(Open cold &mdash; do not preview the content. Go straight to the thought experiment on the next slide.)</em></p>
+
+        <h4>&#9201; Timing &amp; Scope</h4>
+        <p>Approximately 10 minutes. This lecture deliberately stops <strong>before</strong> the detailed Shang Yang case study developed in the companion video. Do not preempt it &mdash; the cliffhanger at the end is doing the work.</p>
+
+        <h4>&#127919; The Argument in One Sentence</h4>
+        <p>The breakdown of hereditary political order plus interstate competition created demand for portable expertise, and the men who supplied it &mdash; the <em>shi</em> &mdash; produced the Hundred Schools of Thought.</p>
+
+        <h4>&#128444; Title Slide Image</h4>
+        <p>Consider a full-bleed background: Warring States bronze or bamboo-strip manuscript. See the image manifest note in the placeholder on this deck's later slides.</p>
+    </aside>
+</section>
