@@ -8,8 +8,1009 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --antique-gold: #D4AF37;
+    --deep-teal: #2C7873;
+    --rich-purple: #6B4C9A;          /* on light (pop-up) backgrounds */
+    --purple-on-dark: #9A6DDE;       /* skill nudge: 4.55:1 on charcoal */
+    --ruby-crimson: #9B2C2C;
+    --dark-charcoal: #1A1A1A;
+    --pure-white: #FAFAFA;
+    --soft-cream: #F5F1E8;
+    --bronze-accent: #8B6F47;
+}
+
+.reveal {
+    font-family: 'Lora', serif;
+    font-size: 1.3em;
+    background-color: var(--dark-charcoal);
+    color: var(--pure-white);
+}
+
+.reveal h1, .reveal h2, .reveal h3 {
+    font-family: 'Crimson Pro', serif;
+    font-weight: 700;
+    color: var(--antique-gold);
+    text-transform: none;
+}
+
+.reveal h1 { font-size: 3.2em; }
+.reveal h2 { font-size: 2.2em; margin-bottom: 0.5em; }
+.reveal h3 { font-size: 1.6em; }
+
+.reveal ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.reveal ul li {
+    margin-bottom: 0.4em;
+    font-size: 0.95em;
+}
+
+.reveal ul li:before {
+    content: "\25C6 ";
+    color: var(--deep-teal);
+    font-weight: bold;
+    margin-right: 0.5em;
+}
+
+strong { color: var(--antique-gold); }
+em { color: #35918B; font-style: italic; }   /* skill nudge: 4.62:1 on charcoal */
+
+/* === POP-UP SYSTEM === */
+.popup-trigger {
+    color: var(--deep-teal);
+    border-bottom: 2px dotted var(--deep-teal);
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.popup-trigger:hover { color: var(--antique-gold); }
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--soft-cream);
+    color: var(--dark-charcoal);
+    padding: 2em;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    max-width: 780px;
+    max-height: 72%;
+    font-size: 1.35rem;
+    line-height: 1.5;
+    overflow-y: auto;
+    z-index: 1000;
+    border: 3px solid var(--bronze-accent);
+}
+
+.popup.active { display: block; }
+
+/* Cream pop-up background: gold fails (1.87:1) and the teal nudge dips below
+   4.5:1, so both revert to their compliant on-cream values. */
+.popup strong { color: #826B21; }   /* 4.57:1 on #F5F1E8 */
+.popup em     { color: #2C7873; }   /* 4.61:1 on #F5F1E8 */
+
+.popup-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2em;
+    cursor: pointer;
+    color: var(--ruby-crimson);
+}
+
+.definition-term {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--rich-purple);
+    margin-bottom: 0.5em;
+    font-family: 'Crimson Pro', serif;
+}
+
+.key-term { color: var(--purple-on-dark); font-weight: 600; }
+
+/* === SLIDE COUNTER === */
+.slide-counter {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(26, 26, 26, 0.9);
+    color: var(--antique-gold);
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-family: 'Crimson Pro', serif;
+    font-weight: 600;
+    font-size: 0.9em;
+    border: 2px solid var(--deep-teal);
+    z-index: 100;
+}
+
+/* === LAYOUT CLASSES === */
+/* Grid children default to min-width:auto, which lets long lines push a
+   column past the slide edge. Force them to shrink and wrap instead. */
+.two-column > *,
+.three-column > *,
+.content-image-layout > * { min-width: 0; }
+
+.reveal li, .reveal p, .reveal h1, .reveal h2 { overflow-wrap: break-word; }
+
+.two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2em;
+    align-items: start;
+}
+
+.three-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5em;
+    align-items: start;
+}
+
+.content-image-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2em;
+    align-items: center;
+}
+
+.content-image-layout .content-side { text-align: left; }
+
+.content-image-layout .image-side {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content-image-layout .image-side img {
+    max-width: 100%;
+    max-height: 560px;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+.column-header {
+    font-weight: 700;
+    color: var(--antique-gold);
+    font-size: 1.1em;
+    margin-bottom: 0.5em;
+    font-family: 'Crimson Pro', serif;
+}
+
+.bottom-text {
+    margin-top: 1.2em;
+    font-style: italic;
+    color: var(--deep-teal);
+    font-size: 0.9em;
+}
+
+.bottom-text-bold {
+    margin-top: 1.2em;
+    font-weight: 700;
+    color: var(--antique-gold);
+    font-size: 0.95em;
+}
+
+.subtitle {
+    font-size: 1.1em;
+    color: var(--deep-teal);
+    margin-top: 0.5em;
+}
+
+.large-text {
+    font-size: 1.3em;
+    text-align: center;
+    line-height: 1.6;
+}
+
+/* === CONTENT BOXES === */
+.callout {
+    background: rgba(212, 175, 55, 0.15);
+    border-left: 5px solid var(--antique-gold);
+    padding: 1.2em;
+    margin: 1em 0;
+    font-size: 0.9em;
+}
+
+.primary-source {
+    background: rgba(212, 175, 55, 0.1);
+    border-left: 5px solid var(--antique-gold);
+    padding: 1em;
+    margin: 1em 0;
+    font-style: italic;
+    color: var(--pure-white);
+}
+
+.primary-source-attribution {
+    text-align: right;
+    font-size: 0.9em;
+    color: var(--bronze-accent);
+    margin-top: 0.5em;
+    font-style: normal;
+}
+
+.timeline-item { margin-bottom: 0.6em; }
+.timeline-year { color: var(--antique-gold); font-weight: 700; }
+
+.assessment-box {
+    background: rgba(44, 120, 115, 0.15);
+    border: 2px solid var(--deep-teal);
+    border-radius: 10px;
+    padding: 1.5em;
+    margin: 1em 0;
+}
+
+.assessment-box h3 { color: var(--deep-teal); margin-top: 0; }
+
+.img-placeholder {
+    background: rgba(139, 111, 71, 0.2);
+    border: 3px dashed var(--bronze-accent);
+    padding: 2em;
+    text-align: center;
+    color: var(--bronze-accent);
+    font-style: italic;
+    border-radius: 10px;
+    font-size: 1.5em;
+    line-height: 1.4;
+}
+
+.img-placeholder strong { color: var(--antique-gold); }
+.img-placeholder em { color: var(--deep-teal); }
+
+.centered-list { text-align: center; font-size: 1.1em; }
+.centered-list li { margin-bottom: 0.7em; }
+
+/* Visible keyboard focus (2.4.7) */
+.popup-trigger:focus-visible,
+.popup-close:focus-visible {
+    outline: 3px solid var(--antique-gold);
+    outline-offset: 3px;
+}
+
+/* Respect reduced-motion preferences (2.3.3) */
+@media (prefers-reduced-motion: reduce) {
+    .reveal .slides section,
+    .reveal .slides,
+    .popup-trigger {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* Speaker-note readability in the notes window */
+.reveal aside.notes { font-family: 'Lora', serif; }
+</style>
 </head>
 <body>
-<p>FULL_DECK_SEE_FILE</p>
+<div class="reveal">
+<div class="slides">
+
+<!-- ============ 1. TITLE ============ -->
+<section>
+    <h1 style="font-size: 6.0em;">When Birth Was No Longer Enough</h1>
+    <div class="subtitle" style="font-size: 2.5em;">The Rise of the Shi in the Eastern Zhou</div>
+    <p style="color: var(--bronze-accent); font-style: italic; font-size: 2.0em; margin-top: 0.6em;">
+        HIST 270 &mdash; Chapter 2: Philosophers and Warring States
+    </p>
+
+    <aside class="notes">
+        <h4>&#127908; Lecture Script</h4>
+        <p><em>(Open cold &mdash; do not preview the content. Go straight to the thought experiment on the next slide.)</em></p>
+
+        <h4>&#9201; Timing &amp; Scope</h4>
+        <p>Approximately 10&ndash;15 minutes. This lecture deliberately stops <strong>before</strong> the detailed Shang Yang case study developed in the companion video. Do not preempt it &mdash; the cliffhanger at the end is doing the work.</p>
+
+        <h4>&#127919; The Argument in One Sentence</h4>
+        <p>The breakdown of hereditary political order plus interstate competition created demand for portable expertise, and the men who supplied it &mdash; the <em>shi</em> &mdash; produced the Hundred Schools of Thought.</p>
+
+        <h4>&#128444; Title Slide Image</h4>
+        <p>Consider a full-bleed background: Warring States bronze or bamboo-strip manuscript. Images for this lecture are in the ch2_rise_of_shi_images folder.</p>
+    </aside>
+</section>
+
+<!-- ============ 2. TWO APPLICANTS ============ -->
+<section>
+    <h2 style="font-size: 4.5em;">Two Applicants</h2>
+    <div class="two-column">
+        <div>
+            <div class="column-header" style="font-size: 2.5em;">Applicant One</div>
+            <ul style="font-size: 2.0em;">
+                <li>Ancient, respected family</li>
+                <li>Generations of land and authority</li>
+                <li>Knows the proper ceremonies</li>
+                <li>An impressive title</li>
+                <li><em>Has never governed anything</em></li>
+            </ul>
+        </div>
+        <div>
+            <div class="column-header" style="font-size: 2.5em;">Applicant Two</div>
+            <ul style="font-size: 2.0em;">
+                <li>Undistinguished background</li>
+                <li>A family that lost its land</li>
+                <li>Already left one state behind</li>
+                <li><strong>Can read, write, keep records</strong></li>
+                <li><strong>Knows strategy, taxes, diplomacy</strong></li>
+            </ul>
+        </div>
+    </div>
+    <div class="bottom-text" style="font-size: 1.8em;">
+        You are a ruler fighting for survival. Which one do you hire?
+    </div>
+
+    <aside class="notes">
+        <h4>&#127908; Lecture Script</h4>
+        <p>I want you to imagine two job applicants standing before the ruler of a Warring States kingdom.</p>
+        <p>The first applicant comes from an ancient and respected family. His ancestors have held land and political authority for generations. He knows the proper ceremonies. He has an impressive title. Everyone recognizes his family name.</p>
+        <p>But he has never administered a large territory. He has never organized a mass army. He has never collected taxes from thousands of households. He has never negotiated an alliance or managed a newly conquered population.</p>
+        <p>The second applicant has a much less impressive family background. Perhaps his family once held land but lost it. Perhaps he comes from a minor branch of the aristocracy. Perhaps he has already left one state in search of an opportunity somewhere else.</p>
+        <p>But he can read and write. He can keep records. He understands military strategy. He can explain how to increase agricultural production, collect taxes, organize officials, or negotiate with rival states.</p>
+
+        <h4>&#127891; Delivery</h4>
+        <p>Let the columns sit side by side while you narrate. Do not answer the question yet &mdash; the pause is the point.</p>
+    </aside>
+</section>
+
+<!-- ============ 3. THE CHOICE ============ -->
+<section>
+    <h2 style="font-size: 5.0em;">The Choice</h2>
+    <div class="large-text" style="font-size: 2.0em;">
+        <p>Do you choose the man with the <strong>better ancestors</strong>?</p>
+        <p style="margin-top: 1.0em;">Or the man who might <strong>help you win</strong>?</p>
+    </div>
+    <div class="bottom-text-bold" style="font-size: 1.8em;">
+        That choice explains the rise of the <span class="key-term">shi</span>.
+    </div>
+
+    <aside class="notes">
+        <h4>&#127908; Lecture Script</h4>
+        <p>If you are a ruler fighting for survival, which person do you choose?</p>
+        <p>Do you choose the man with the better ancestors?</p>
+        <p>Or do you choose the man who might help you win?</p>
+        <p>That choice helps explain the rise of the shi during the Eastern Zhou period.</p>
+
+        <h4>&#127891; Delivery</h4>
+        <p>Say the two questions slowly, with a beat between them. Most students will answer &quot;the second man&quot; instinctively &mdash; that instinct is exactly what the older Zhou order did <em>not</em> permit, which is the tension the rest of the lecture explains.</p>
+    </aside>
+</section>
+
+<!-- ============ 4. WHO WERE THE SHI ============ -->
+<section>
+    <h2 style="font-size: 5.0em;">Who Were the <span class="key-term">Shi</span>?</h2>
+    <div class="content-image-layout">
+        <div class="content-side">
+            <div class="column-header" style="font-size: 2.5em;">The Lowest Rung of the Aristocracy</div>
+            <ul style="font-size: 2.0em;">
+                <li>Below the great hereditary lords</li>
+                <li>Below the powerful noble families</li>
+                <li>Warriors and minor officials</li>
+                <li>Household retainers and scribes</li>
+                <li>Ritual specialists and advisers</li>
+            </ul>
+            <div class="bottom-text" style="font-size: 1.8em;">
+                Under the old <span class="popup-trigger" role="button" tabindex="0" aria-expanded="false" data-popup="zhou-popup">Zhou system</span>, their opportunities were limited by birth.
+            </div>
+        </div>
+        <div class="image-side">
+            <figure style="margin:0;text-align:center;"><img src="ch2_rise_of_shi_images/bamboo_slips.jpg" alt="Tied bamboo-slip manuscript — the medium of shi literacy" style="max-width:100%;max-height:460px;object-fit:contain;border-radius:6px;"><figcaption style="margin-top:0.5em;font-size:0.7em;color:var(--bronze-accent);font-style:italic;">Tied bamboo-slip manuscript — the medium of shi literacy</figcaption></figure>
+        </div>
+    </div>
+
+    <aside class="notes">
+        <h4>&#127908; Lecture Script</h4>
+        <p>The term shi originally referred to the lowest level of the Zhou aristocracy. These men stood below the great hereditary lords and powerful noble families. They might serve as warriors, minor officials, household retainers, scribes, ritual specialists, or advisers.</p>
+        <p>Under the older Zhou system, their opportunities were limited by birth.</p>
+
+        <h4>&#128218; Key Definition</h4>
+        <p><strong>Shi</strong> &#22763; &mdash; originally the lowest stratum of Zhou aristocracy; over the Eastern Zhou the word shifts toward &quot;man of service,&quot; and eventually toward &quot;scholar.&quot; Emphasize that the word's meaning <em>moves</em> across the period. That movement is the history.</p>
+    </aside>
+</section>
+
+<!-- ============ 5. AUTHORITY BY INHERITANCE ============ -->
+<section>
+    <h2 style="font-size: 4.5em;">Authority by Inheritance</h2>
+    <div class="large-text" style="font-size: 2.0em;">
+        <p>Political authority was tied to <strong>land</strong>, <strong>lineage</strong>, and <strong>hereditary office</strong>.</p>
+        <p style="font-size: 0.85em; margin-top: 0.4em;">A powerful family controlled a territory and passed its position to the next generation.</p>
+        <p style="margin-top: 0.9em;">Born into the right family? You inherited a place in the political order.</p>
+    </div>
+    <div class="bottom-text" style="font-size: 1.8em;">
+        Ability was never irrelevant &mdash; but it operated <em>inside</em> a system dominated by hereditary rank.
+    </div>
+
+    <aside class="notes">
+        <h4>&#127908; Lecture Script</h4>
+        <p>Political authority was connected to land, lineage, and hereditary office. A powerful family controlled a territory and passed its position from one generation to the next. If you were born into the right family, you inherited a place in the political order.</p>
+        <p>This did not mean that ability was completely irrelevant. Rulers had always needed capable people. But ability normally operated inside a system dominated by hereditary rank.</p>
+
+        <h4>&#9888; Precision Point</h4>
+        <p>Do not let students hear &quot;the Zhou did not care about talent.&quot; The claim is about <em>structure</em>, not attitude: talent was employed <strong>within</strong> a hereditary framework rather than as an alternative to it.</p>
+    </aside>
+</section>
+
+<!-- ============ 6. THE DISRUPTION ============ -->
+<section>
+    <h2 style="font-size: 4.5em;">The Eastern Zhou Disruption</h2>
+    <div class="content-image-layout">
+        <div class="content-side">
+            <ul style="font-size: 2.0em;">
+                <li>The Zhou king loses effective control</li>
+                <li>Regional rulers become independent</li>
+                <li>States attack and absorb neighbors</li>
+                <li>Smaller states disappear</li>
+                <li>Noble families lose their lands</li>
+                <li><strong>Hereditary offices become insecure</strong></li>
+            </ul>
+        </div>
+        <div class="image-side">
+            <figure style="margin:0;text-align:center;"><img src="ch2_rise_of_shi_images/warring_states_map.jpg" alt="Warring States China, c. 260 BCE (schematic educational map)" style="max-width:100%;max-height:460px;object-fit:contain;border-radius:6px;"><figcaption style="margin-top:0.5em;font-size:0.7em;color:var(--bronze-accent);font-style:italic;">Warring States China, c. 260 BCE (schematic educational map)</figcaption></figure>
+        </div>
+    </div>
+
+    <aside class="notes">
+        <h4>&#127908; Lecture Script</h4>
+        <p>The Eastern Zhou period disrupted that system.</p>
+        <p>The Zhou king gradually lost effective control over the regional states. Powerful rulers became increasingly independent. States attacked and absorbed their neighbors. Smaller states disappeared. Noble families lost their lands. Hereditary offices became less secure.</p>
+
+        <h4>&#128172; If You Show the Map</h4>
+        <p>A before-and-after map makes the argument visually in five seconds: dozens of polities collapse into a handful. Every state that vanishes is an aristocracy that loses its inheritance.</p>
+    </aside>
+</section>
+
+<!-- ============ 7. WHAT CONQUEST MEANT ============ -->
+<section>
+    <h2 style="font-size: 4.5em;">What Conquest Meant</h2>
+    <div class="callout" style="font-size: 2.0em;">
+        Imagine the aristocracy of a <strong>defeated</strong> state.
+    </div>
+    <ul style="font-size: 2.0em;">
+        <li>The ruling family: killed, driven out, or stripped of power</li>
+        <li>Lesser nobles: estates that supported them, gone</li>
+        <li>Officials: the offices they expected to inherit no longer exist</li>
+    </ul>
+
+    <aside class="notes">
+        <h4>&#127908; Lecture Script</h4>
+        <p>Imagine what conquest meant for the aristocracy of a defeated state.</p>
+        <p>The ruling family might be killed, driven away, or stripped of power. Lesser nobles might lose the estates that had supported their families. Officials who had expected to inherit positions might discover that those positions no longer existed.</p>
+
+        <h4>&#127891; Delivery</h4>
+        <p>Slow down here. This is the human mechanism that produces the shi as a group: conquest does not only redraw borders, it manufactures educated men with nothing to inherit.</p>
+    </aside>
+</section>
+
+<!-- ============ 8. KNOWLEDGE REMAINED ============ -->
+<section>
+    <h2 style="font-size: 4.5em;">His Knowledge Remained</h2>
+    <div class="two-column">
+        <div>
+            <div class="column-header" style="font-size: 2.5em;">Lost in One Campaign</div>
+            <ul style="font-size: 2.0em;">
+                <li>Land</li>
+                <li>Estate income</li>
+                <li>Hereditary office</li>
+                <li>Local authority</li>
+            </ul>
+        </div>
+        <div>
+            <div class="column-header" style="font-size: 2.5em;">Still His</div>
+            <ul style="font-size: 2.0em;">
+                <li>Writing official documents</li>
+                <li>Diplomatic custom</li>
+                <li>Military strategy</li>
+                <li>Ritual, law, taxation, administration</li>
+            </ul>
+        </div>
+    </div>
+    <div class="bottom-text-bold" style="font-size: 1.8em;">
+        The old order rewarded what a man <em>inherited</em>. The new order rewarded what a man <em>could do</em>.
+    </div>
+
+    <aside class="notes">
+        <h4>&#127908; Lecture Script</h4>
+        <p>A conquered noble could lose his land in a single campaign.</p>
+        <p>But he did not necessarily lose his education.</p>
+        <p>He might still know how to write official documents. He might understand diplomatic customs. He might know military strategy, ritual, law, taxation, or administration.</p>
+        <p>His inherited position had disappeared, but his knowledge remained.</p>
+        <p>That is the central transformation I want you to see.</p>
+        <p>The old aristocratic order based authority primarily on what a person inherited.</p>
+        <p>The emerging political order placed greater value on what a person could do.</p>
+        <p>The shi benefited from that change because their most valuable possession was increasingly portable.</p>
+
+        <h4>&#127919; Thesis Slide</h4>
+        <p>This is the conceptual center of the lecture. If students remember one slide, make it this one. Consider writing &quot;inherited &#8594; demonstrated&quot; on the board and leaving it up.</p>
+    </aside>
+</section>
+
+<!-- ============ 9. PORTABILITY ============ -->
+<section>
+    <h2 style="font-size: 4.5em;">Land Cannot Travel</h2>
+    <div class="content-image-layout">
+        <div class="content-side">
+            <div class="large-text" style="font-size: 1.9em; text-align: left;">
+                <p>Land cannot travel.</p>
+                <p>A hereditary estate cannot travel.</p>
+                <p>A family's local authority may vanish with its state.</p>
+                <p style="margin-top: 0.7em;"><strong>But knowledge can travel.</strong></p>
+            </div>
+        </div>
+        <div class="content-side">
+            <div class="column-header" style="font-size: 2.5em;">Portable Expertise</div>
+            <ul style="font-size: 2.0em;">
+                <li>The literate adviser offers his services elsewhere</li>
+                <li>The strategist presents a plan to a ruler who needs victories</li>
+                <li>The administrator registers households and collects revenue</li>
+                <li>The diplomat moves between courts and builds alliances</li>
+            </ul>
+        </div>
+    </div>
+    <div class="bottom-text-bold" style="font-size: 1.8em;">
+        The shi became <span class="key-term">mobile men of service</span>.
+    </div>
+
+    <aside class="notes">
+        <h4>&#127908; Lecture Script</h4>
+        <p>Land cannot travel.</p>
+        <p>A hereditary estate cannot travel.</p>
+        <p>A family's local authority may disappear when its state is conquered.</p>
+        <p>But knowledge can travel.</p>
+        <p>A literate adviser can leave one state and offer his services to another. A military strategist can present a plan to a ruler who needs victories. An administrator can explain how to register households and collect revenue. A diplomat can move between courts and negotiate an alliance.</p>
+        <p>The shi therefore became mobile men of service.</p>
+
+        <h4>&#128172; Analogy If Needed</h4>
+        <p>Portable human capital: credentials and skills that move with the person rather than assets fixed in one place. Useful, but flag it as an analogy, not a claim about Zhou economics.</p>
+    </aside>
+</section>
+
+<!-- ============ 10. WHAT THEY WERE NOT ============ -->
+<section>
+    <h2 style="font-size: 4.5em;">What the Shi Were <em>Not</em></h2>
+    <div class="two-column">
+        <div>
+            <div class="column-header" style="font-size: 2.5em;">Not</div>
+            <ul style="font-size: 2.0em;">
+                <li>A modern middle class</li>
+                <li>Civil servants sitting <span class="popup-trigger" role="button" tabindex="0" aria-expanded="false" data-popup="exam-popup">examinations</span></li>
+                <li>A single organization with a membership list</li>
+                <li>A group of equal social background</li>
+            </ul>
+        </div>
+        <div>
+            <div class="column-header" style="font-size: 2.5em;">Instead</div>
+            <ul style="font-size: 2.0em;">
+                <li>Minor aristocratic families</li>
+                <li>Descendants of conquered nobles</li>
+                <li>Some still tied to elite houses</li>
+                <li>Some wholly dependent on finding a patron</li>
+            </ul>
+        </div>
+    </div>
+    <div class="bottom-text-bold" style="font-size: 1.8em;">
+        What joined them: a growing dependence on <strong>education, expertise, and service</strong>.
+    </div>
+
+    <aside class="notes">
+        <h4>&#127908; Lecture Script</h4>
+        <p>They were not a modern middle class, and they were not civil servants taking standardized examinations. That system belonged to a much later period.</p>
+        <p>They also did not form a single organization with a clear membership list.</p>
+        <p>The term covered people with different backgrounds and different abilities. Some came from minor aristocratic families. Some were descendants of nobles whose states had been conquered. Some remained connected to elite families. Others depended almost entirely on finding a ruler willing to employ them.</p>
+        <p>What joined them was not complete equality of background. It was their growing dependence on education, expertise, and service.</p>
+
+        <h4>&#9888; Anti-Anachronism Slide</h4>
+        <p>Students routinely import the imperial examination system backward by a thousand years. Name the error explicitly here so it does not reappear on the exam.</p>
+    </aside>
+</section>
+
+<!-- ============ 11. WHY RULERS NEEDED THEM ============ -->
+<section>
+    <h2 style="font-size: 4.5em;">Why Rulers Needed Them</h2>
+    <div class="callout" style="font-size: 2.0em;">
+        Warfare had become <strong>larger</strong>, <strong>longer</strong>, and <strong>far more expensive</strong>.
+    </div>
+    <div class="large-text" style="font-size: 2.0em;">
+        <p>A ruler could no longer govern through tradition and family loyalty alone.</p>
+    </div>
+    <div class="three-column" style="margin-top: 0.6em;">
+        <div>
+            <ul style="font-size: 2.0em;">
+                <li>Soldiers</li>
+                <li>Weapons</li>
+                <li>Roads</li>
+            </ul>
+        </div>
+        <div>
+            <ul style="font-size: 2.0em;">
+                <li>Grain</li>
+                <li>Taxes</li>
+            </ul>
+        </div>
+        <div>
+            <ul style="font-size: 2.0em;">
+                <li>Population records</li>
+                <li>Officials</li>
+            </ul>
+        </div>
+    </div>
+
+    <aside class="notes">
+        <h4>&#127908; Lecture Script</h4>
+        <p>Interstate competition created a demand for those qualities.</p>
+        <p>A ruler could not afford to govern only through tradition and family loyalty. Warfare had become larger, longer, and more expensive. Governments needed soldiers, weapons, roads, grain, taxes, population records, and officials.</p>
+
+        <h4>&#127919; Causal Logic</h4>
+        <p>This is the <em>demand</em> side of the argument. The previous slides created a supply of displaced educated men; this slide explains why anyone wanted to hire them.</p>
+    </aside>
+</section>
+
+<!-- ============ 12. GOVERNING WHAT YOU CONQUER ============ -->
+<section>
+    <h2 style="font-size: 4.5em;">Capturing vs. Governing</h2>
+    <div class="content-image-layout">
+        <div class="content-side">
+            <div class="column-header" style="font-size: 2.5em;">A Ruler's Questions</div>
+            <ul style="font-size: 2.0em;">
+                <li>Who lives here?</li>
+                <li>How do I collect taxes?</li>
+                <li>How do I prevent rebellion?</li>
+                <li>How do I make local officials obey?</li>
+                <li>How do I move soldiers and supplies?</li>
+            </ul>
+            <div class="bottom-text-bold" style="font-size: 1.8em;">
+                No family tree answers these questions.
+            </div>
+        </div>
+        <div class="image-side">
+            <figure style="margin:0;text-align:center;"><img src="ch2_rise_of_shi_images/qin_registers.jpg" alt="Qin household registers and legal documents (Shuihudi type; Qin/Han date)" style="max-width:100%;max-height:460px;object-fit:contain;border-radius:6px;"><figcaption style="margin-top:0.5em;font-size:0.7em;color:var(--bronze-accent);font-style:italic;">Qin household registers and legal documents (Shuihudi type; Qin/Han date)</figcaption></figure>
+        </div>
+    </div>
+
+    <aside class="notes">
+        <h4>&#127908; Lecture Script</h4>
+        <p>Conquest created additional problems.</p>
+        <p>Capturing territory was one thing. Governing it was another.</p>
+        <p>How would the ruler know who lived there?</p>
+        <p>How would he collect taxes?</p>
+        <p>How would he prevent rebellion?</p>
+        <p>How would he make local officials obey the central court?</p>
+        <p>How would he move soldiers and supplies across a growing state?</p>
+        <p>These problems could not be solved by an impressive family tree.</p>
+        <p>They required knowledge and organization.</p>
+
+        <h4>&#127891; Delivery</h4>
+        <p>Ask the five questions as questions &mdash; pace, eye contact, no answers. The accumulation is the argument.</p>
+    </aside>
+</section>
+
+<!-- ============ 13. COMPETITION FOR TALENT ============ -->
+<section>
+    <h2 style="font-size: 4.5em;">Competing for Talent</h2>
+    <div class="two-column">
+        <div>
+            <div class="column-header" style="font-size: 2.5em;">The Ruler's Risk</div>
+            <ul style="font-size: 2.0em;">
+                <li>Recruit talent &#8594; gain an advantage over rivals</li>
+                <li>Ignore talent for lack of ancestry &#8594; endanger the state</li>
+            </ul>
+        </div>
+        <div>
+            <div class="column-header" style="font-size: 2.5em;">The Adviser's Leverage</div>
+            <ul style="font-size: 2.0em;">
+                <li>Refused a hearing? Travel to another court</li>
+                <li>Rival states bid against one another</li>
+            </ul>
+        </div>
+    </div>
+    <div class="bottom-text-bold" style="font-size: 1.8em;">
+        States competed for land and soldiers &mdash; and for <strong>talent</strong>.
+    </div>
+
+    <aside class="notes">
+        <h4>&#127908; Lecture Script</h4>
+        <p>This gave the shi an opening.</p>
+        <p>A ruler who recruited a talented adviser might gain an advantage over his rivals. A ruler who ignored talented people because they lacked the right ancestry might place his state in danger.</p>
+        <p>Competition therefore encouraged rulers to search beyond the highest hereditary aristocracy.</p>
+        <p>It also gave educated men leverage. If one ruler refused to listen, an adviser might travel to another court. Rival states were not only competing for land and soldiers. They were also competing for talent.</p>
+
+        <h4>&#128172; The Mechanism</h4>
+        <p>Mobility is what converts a personal skill into structural leverage. A single ruler could ignore an adviser; a system of rival rulers could not collectively ignore expertise without one of them defecting and winning.</p>
+    </aside>
+</section>
+
+<!-- ============ 14. OPPORTUNITY WITHOUT SECURITY ============ -->
+<!-- ============ 15. PERSUADING THE RULER ============ -->
+<section>
+    <h2 style="font-size: 4.5em;">He Had to Persuade</h2>
+    <div class="large-text" style="font-size: 2.0em;">
+        <p>An adviser could not simply announce, <em>&quot;I am wise. Give me an office.&quot;</em></p>
+        <p style="font-size: 0.85em; margin-top: 0.4em;">He had to identify a problem, explain its cause, and offer a solution.</p>
+    </div>
+    <div class="two-column" style="margin-top: 0.5em;">
+        <div>
+            <ul style="font-size: 2.0em;">
+                <li>The state needs <strong>better laws</strong></li>
+                <li>The ruler must behave <strong>more morally</strong></li>
+                <li>The army needs <strong>reform</strong></li>
+            </ul>
+        </div>
+        <div>
+            <ul style="font-size: 2.0em;">
+                <li>Extravagant <strong>ritual wastes resources</strong></li>
+                <li>Government <strong>interference</strong> makes disorder worse</li>
+            </ul>
+        </div>
+    </div>
+    <div class="bottom-text-bold" style="font-size: 1.8em;">
+        The court became a place where rival programs competed for attention.
+    </div>
+
+    <aside class="notes">
+        <h4>&#127908; Lecture Script</h4>
+        <p>That relationship transformed more than government. It also transformed ideas.</p>
+        <p>Think about what an adviser had to do when he entered a ruler's court.</p>
+        <p>He could not simply announce, &quot;I am wise. Give me an office.&quot;</p>
+        <p>He had to persuade the ruler.</p>
+        <p>He had to identify a problem, explain its cause, and offer a solution.</p>
+        <p>One adviser might argue that the state needed better laws.</p>
+        <p>Another might argue that the ruler needed to behave more morally.</p>
+        <p>Another might propose military reform.</p>
+        <p>Another might insist that extravagant rituals wasted resources.</p>
+        <p>Another might argue that excessive government interference was making disorder worse.</p>
+        <p>The court became a place where different programs competed for attention.</p>
+
+        <h4>&#127891; Foreshadowing</h4>
+        <p>Each bullet is a school in embryo &mdash; but do <strong>not</strong> name Legalism, Confucianism, Mohism, or Daoism yet if the course sequence introduces them later. Let students hear the positions before they learn the labels.</p>
+    </aside>
+</section>
+
+<!-- ============ 16. HUNDRED SCHOOLS ============ -->
+<section>
+    <h2 style="font-size: 4.5em;">The <span class="popup-trigger" role="button" tabindex="0" aria-expanded="false" data-popup="hundred-popup">Hundred Schools of Thought</span></h2>
+    <div class="content-image-layout">
+        <div class="content-side">
+            <div class="column-header" style="font-size: 2.5em;">They Disagreed About</div>
+            <ul style="font-size: 2.0em;">
+                <li>Human nature</li>
+                <li>Law</li>
+                <li>Ritual</li>
+                <li>The proper use of force</li>
+                <li>Moral example vs. practical benefit vs. strict administration vs. leaving people alone</li>
+            </ul>
+        </div>
+        <div class="image-side">
+            <figure style="margin:0;text-align:center;"><img src="ch2_rise_of_shi_images/hundred_schools.jpg" alt="Traveling teachers and advisers competing at court" style="max-width:100%;max-height:460px;object-fit:contain;border-radius:6px;"><figcaption style="margin-top:0.5em;font-size:0.7em;color:var(--bronze-accent);font-style:italic;">Traveling teachers and advisers competing at court</figcaption></figure>
+        </div>
+    </div>
+    <div class="bottom-text-bold" style="font-size: 1.8em;">
+        One shared problem: the old Zhou order was failing. <em>What should replace it?</em>
+    </div>
+
+    <aside class="notes">
+        <h4>&#127908; Lecture Script</h4>
+        <p>That competition helped produce the Hundred Schools of Thought.</p>
+        <p>The phrase does not mean that exactly one hundred organized schools suddenly appeared. It describes the remarkable variety of teachers, advisers, and intellectual traditions that developed during the Eastern Zhou period.</p>
+        <p>These thinkers disagreed about almost everything.</p>
+        <p>They disagreed about human nature.</p>
+        <p>They disagreed about law.</p>
+        <p>They disagreed about ritual.</p>
+        <p>They disagreed about the proper use of force.</p>
+        <p>They disagreed about whether rulers should govern through moral example, practical benefit, strict administration, or limited interference.</p>
+        <p>But they were responding to the same historical problem.</p>
+        <p>The old Zhou order was failing.</p>
+        <p>What should replace it?</p>
+
+        <h4>&#9888; Precision Point</h4>
+        <p>&quot;Hundred&quot; is idiomatic for &quot;many.&quot; Say so out loud &mdash; students will otherwise try to count them.</p>
+    </aside>
+</section>
+
+<!-- ============ 17. WHY IT MATTERS ============ -->
+<!-- ============ 18. RETURN TO THE APPLICANTS ============ -->
+<section>
+    <h2 style="font-size: 4.5em;">Return to the Two Applicants</h2>
+    <div class="two-column">
+        <div>
+            <div class="column-header" style="font-size: 2.5em;">Applicant One</div>
+            <div class="large-text" style="font-size: 1.9em;">
+                <p><strong>Inherited status</strong></p>
+            </div>
+        </div>
+        <div>
+            <div class="column-header" style="font-size: 2.5em;">Applicant Two</div>
+            <div class="large-text" style="font-size: 1.9em;">
+                <p><strong>Portable expertise</strong></p>
+            </div>
+        </div>
+    </div>
+    <div class="callout" style="font-size: 2.2em; margin-top: 1.2em; text-align: center;">
+        Birth did not cease to matter.<br>
+        <strong>Birth was no longer enough.</strong>
+    </div>
+
+    <aside class="notes">
+        <h4>&#127908; Lecture Script</h4>
+        <p>So return to the two applicants standing before the ruler.</p>
+        <p>One represents inherited status.</p>
+        <p>The other represents portable expertise.</p>
+        <p>The ruler may still respect ancestry, but the pressures of war make ability increasingly difficult to ignore.</p>
+        <p>The rise of the shi did not mean that birth ceased to matter.</p>
+        <p>It meant that birth was no longer enough.</p>
+
+        <h4>&#127891; Delivery</h4>
+        <p>Land hard on the final line and pause. This sentence is the title of the lecture and the answer to the opening question.</p>
+    </aside>
+</section>
+
+<!-- ============ 19. CAUSAL CHAIN ============ -->
+<section>
+    <h2 style="font-size: 4.5em;">The Causal Relationship</h2>
+    <div class="large-text" style="font-size: 1.9em; text-align: left;">
+        <p><strong>1.</strong> The breakdown of hereditary political order <em>displaced</em> educated members of the lower aristocracy.</p>
+        <p style="margin-top: 0.6em;"><strong>2.</strong> Interstate competition <em>created demand</em> for administrators, strategists, diplomats, and advisers.</p>
+        <p style="margin-top: 0.6em;"><strong>3.</strong> That demand gave the shi <em>opportunities</em> to travel, serve rulers, and rise through demonstrated ability.</p>
+        <p style="margin-top: 0.6em;"><strong>4.</strong> Competing to persuade rulers, their political advice helped <em>create</em> the Hundred Schools of Thought.</p>
+    </div>
+
+    <aside class="notes">
+        <h4>&#127908; Lecture Script</h4>
+        <p>That is the causal relationship to remember:</p>
+        <p>The breakdown of hereditary political order displaced educated members of the lower aristocracy.</p>
+        <p>Interstate competition created a demand for administrators, strategists, diplomats, and advisers.</p>
+        <p>That demand gave the shi new opportunities to travel, serve rulers, and rise through demonstrated ability.</p>
+        <p>And as the shi competed to persuade rulers, their political advice helped create the Hundred Schools of Thought.</p>
+
+        <h4>&#128221; Assessment Note</h4>
+        <p>This four-step chain is the exam-ready version of the lecture. Tell students it is worth copying verbatim.</p>
+    </aside>
+</section>
+
+<!-- ============ 20. KEY TERMS ============ -->
+<section>
+    <h2 style="font-size: 5.0em;">Key Terms</h2>
+    <div class="two-column">
+        <div>
+            <ul style="font-size: 2.0em;">
+                <li><strong>Shi</strong> &mdash; lowest Zhou aristocratic stratum; becomes &quot;men of service&quot;</li>
+                <li><strong>Hereditary office</strong> &mdash; position inherited with land and lineage</li>
+                <li><strong>Eastern Zhou</strong> &mdash; era of declining Zhou royal power</li>
+            </ul>
+        </div>
+        <div>
+            <ul style="font-size: 2.0em;">
+                <li><strong>Warring States</strong> &mdash; era of large-scale interstate warfare</li>
+                <li><strong>Portable expertise</strong> &mdash; literacy, strategy, administration, diplomacy</li>
+                <li><strong>Hundred Schools of Thought</strong> &mdash; the era's competing intellectual traditions</li>
+            </ul>
+        </div>
+    </div>
+
+    <aside class="notes">
+        <h4>&#128221; Use</h4>
+        <p>Optional slide. Show only if the clock allows; otherwise leave it in the deck as a study reference for students reviewing the file.</p>
+    </aside>
+</section>
+
+<!-- ============ 21. CLIFFHANGER ============ -->
+<section data-background="linear-gradient(135deg, #2C7873 0%, #1A1A1A 100%)">
+    <h2 style="font-size: 4.5em;">What Did This Look Like in Practice?</h2>
+    <div class="large-text" style="font-size: 2.0em;">
+        <p>What happened when a traveling adviser arrived at a ruler's court with a plan to <strong>rebuild the state</strong>?</p>
+        <p style="margin-top: 0.9em;">And how much power could a man gain when his greatest possession was <strong>not land, but an idea</strong>?</p>
+    </div>
+
+    <aside class="notes">
+        <h4>&#127908; Lecture Script</h4>
+        <p>The next question is what this looked like in practice.</p>
+        <p>What happened when one of these traveling advisers arrived at a ruler's court with a plan to rebuild the state?</p>
+        <p>And how much power could a person gain when his greatest possession was not land, but an idea?</p>
+
+        <h4>&#9888; Stop Here</h4>
+        <p>End the verbal lecture on this slide. The Shang Yang case study is developed in the companion video &mdash; do not preview its content, or the video loses its payoff.</p>
+    </aside>
+</section>
+
+</div>
+</div>
+
+<!-- GLOBAL UI (outside Reveal transforms) -->
+<div id="keyboard-trigger" class="popup-trigger" data-popup="keyboard-popup" aria-expanded="false"
+     style="position: fixed; top: 20px; right: 20px; font-size: 2em; cursor: pointer; z-index: 100;"
+     role="button" tabindex="0" aria-label="Keyboard shortcuts">&#9000;</div>
+
+<div id="keyboard-popup" class="popup" role="dialog" aria-modal="true" aria-label="Keyboard Shortcuts">
+    <span class="popup-close" role="button" tabindex="0" aria-label="Close">&times;</span>
+    <div class="definition-term">Keyboard Shortcuts</div>
+    <p>&#8594; / Space: Next slide</p>
+    <p>&#8592; : Previous slide</p>
+    <p>S: Speaker notes</p>
+    <p>F: Fullscreen</p>
+    <p>O: Overview</p>
+    <p>ESC: Exit/Close</p>
+</div>
+
+<div id="zhou-popup" class="popup" role="dialog" aria-modal="true" aria-label="The Zhou Order">
+    <span class="popup-close" role="button" tabindex="0" aria-label="Close">&times;</span>
+    <div class="definition-term">The Zhou Order</div>
+    <p>The Western Zhou (c. 1045&ndash;771 BCE) distributed authority through hereditary grants of land and office. A ruling family held a territory, performed its ancestral rites, and passed its position to the next generation.</p>
+    <p>The Eastern Zhou (771&ndash;256 BCE) preserved the Zhou king as a ritual figure while real power drained to the regional states. Historians divide it into the <strong>Spring and Autumn</strong> period and the <strong>Warring States</strong> period.</p>
+</div>
+<div id="exam-popup" class="popup" role="dialog" aria-modal="true" aria-label="Not the Examination System">
+    <span class="popup-close" role="button" tabindex="0" aria-label="Close">&times;</span>
+    <div class="definition-term">Not the Examination System</div>
+    <p>The civil service examinations that most people associate with Chinese government develop much later &mdash; institutionalized under the Sui and Tang and elaborated under the Song, more than a thousand years after the Warring States.</p>
+    <p>Warring States recruitment was personal and unsystematic: recommendation, reputation, patronage, and the direct audience with a ruler. There was no standardized test, no fixed curriculum, and no guaranteed career.</p>
+</div>
+<div id="hundred-popup" class="popup" role="dialog" aria-modal="true" aria-label="Hundred Schools of Thought">
+    <span class="popup-close" role="button" tabindex="0" aria-label="Close">&times;</span>
+    <div class="definition-term">Hundred Schools of Thought</div>
+    <p>A traditional Chinese phrase (&#30334;&#23478;, <em>baijia</em>, &quot;the hundred houses&quot;) for the intellectual ferment of the Eastern Zhou. &quot;Hundred&quot; means <strong>many</strong>, not a count.</p>
+    <p>These were not schools in the institutional sense &mdash; not campuses with enrollments &mdash; but teachers, texts, disciples, and lineages of argument, many of them formed in the effort to persuade rulers to adopt a program of government.</p>
+</div>
+
+<div class="slide-counter"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+
+<script>
+Reveal.initialize({
+    width: 1920,
+    height: 1080,
+    margin: 0.08,
+    minScale: 0.2,
+    maxScale: 2.0,
+    hash: true,
+    slideNumber: false,
+    transition: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'none' : 'slide',
+    plugins: [ RevealNotes ]
+});
+
+function updateSlideCounter() {
+    const current = Reveal.getState().indexh + 1;
+    const total = Reveal.getTotalSlides();
+    document.querySelector('.slide-counter').textContent = current + '/' + total;
+}
+Reveal.on('slidechanged', updateSlideCounter);
+Reveal.on('ready', updateSlideCounter);
+
+function openPopup(id, trigger) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.add('active');
+    if (trigger) trigger.setAttribute('aria-expanded', 'true');
+    const close = el.querySelector('.popup-close');
+    if (close) close.focus();
+}
+
+function closeAllPopups() {
+    document.querySelectorAll('.popup.active').forEach(p => {
+        p.classList.remove('active');
+        const t = document.querySelector('[data-popup="' + p.id + '"]');
+        if (t) { t.setAttribute('aria-expanded', 'false'); if (t.focus) t.focus(); }
+    });
+}
+
+document.addEventListener('click', function(e) {
+    const trigger = e.target.closest('.popup-trigger');
+    if (trigger) { openPopup(trigger.getAttribute('data-popup'), trigger); return; }
+    if (e.target.classList.contains('popup-close')) closeAllPopups();
+});
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') { closeAllPopups(); return; }
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const trigger = e.target.closest && e.target.closest('.popup-trigger');
+    if (trigger) { e.preventDefault(); e.stopPropagation(); openPopup(trigger.getAttribute('data-popup'), trigger); return; }
+    if (e.target.classList && e.target.classList.contains('popup-close')) {
+        e.preventDefault(); e.stopPropagation(); closeAllPopups();
+    }
+}, true);
+</script>
 </body>
 </html>
