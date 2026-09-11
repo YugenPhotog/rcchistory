@@ -138,8 +138,24 @@ h2 { font-size: 15pt; }
 .q-instructions { font-style: italic; color: #3d3d3d; margin-bottom: 1.2em; }
 .mc-options { list-style: none; padding-left: 2em; margin-top: 0.3em; }
 .mc-options li { margin-bottom: 0.3em; }
+.mc-option {
+  display: block; width: 100%; padding: 0.35em 0.55em; text-align: left;
+  border: 1px solid transparent; border-radius: 4px; background: transparent;
+  color: inherit; font: inherit; cursor: pointer;
+}
+.mc-option:hover, .mc-option:focus { background: #f7f4ee; border-color: var(--rule); }
+.mc-option:focus { outline: 2px solid var(--teal); outline-offset: 1px; }
+.mc-option.selected { border-color: var(--teal); background: #eef7f5; }
 .opt-letter { font-weight: 700; color: var(--gold); display: inline-block; width: 1.4em; }
 .question.mc { margin-bottom: 1.1em; }
+.mc-feedback {
+  display: none; margin: 0.55em 0 0 2em; padding: 0.65em 0.85em;
+  border-left: 4px solid var(--teal); background: #eef7f5; font-size: 10.5pt;
+}
+.mc-feedback.visible { display: block; }
+.mc-feedback.incorrect { border-left-color: #9b3d32; background: #fbf0ed; }
+.mc-feedback strong { color: var(--teal); }
+.mc-feedback.incorrect strong { color: #9b3d32; }
 .question { margin-bottom: 1.35em; page-break-inside: avoid; break-inside: avoid; }
 .q-text { margin-bottom: 0.5em; }
 .q-num { font-weight: 700; color: var(--teal); }
@@ -262,6 +278,24 @@ h2 { font-size: 15pt; }
     });
     var nameEl = document.getElementById("student-name");
     if (nameEl) nameEl.addEventListener("input", save);
+
+    /* --- interactive reading-check feedback --- */
+    document.querySelectorAll(".question.mc").forEach(function (question) {
+      var feedback = question.querySelector(".mc-feedback");
+      question.querySelectorAll(".mc-option").forEach(function (option) {
+        option.addEventListener("click", function () {
+          question.querySelectorAll(".mc-option").forEach(function (item) {
+            item.classList.remove("selected");
+            item.setAttribute("aria-pressed", "false");
+          });
+          option.classList.add("selected");
+          option.setAttribute("aria-pressed", "true");
+          var correct = option.dataset.correct === "true";
+          feedback.className = "mc-feedback visible" + (correct ? "" : " incorrect");
+          feedback.innerHTML = "<strong>" + (correct ? "Correct." : "Not quite.") + "</strong> " + option.dataset.feedback;
+        });
+      });
+    });
   });
 })();
 </script>
@@ -400,67 +434,67 @@ h2 { font-size: 15pt; }
 <section>
 <h2>Questions for Reading</h2>
 <h3 class="q-subheading">1. Reading Checks</h3>
-<p class="q-instructions">Choose the best answer for each question. These checks are designed to confirm close reading of the selection.</p>
+<p class="q-instructions">Choose the best answer for each question. After you click, read the feedback beneath the choices: it explains the passage and connects the idea to the Gita&rsquo;s larger spiritual path.</p>
 <div class="question mc"><p class="q-text"><span class="q-num">1.</span> When Arjuna sees his relatives prepared to fight, what is his immediate response?</p><ul class="mc-options">
-<li><span class="opt-letter">A.</span> He celebrates the coming victory.</li>
-<li><span class="opt-letter">B.</span> He is overcome by compassion and despair.</li>
-<li><span class="opt-letter">C.</span> He asks Krishna for a new weapon.</li>
-<li><span class="opt-letter">D.</span> He leaves the battlefield.</li>
-</ul></div>
+<li><button type="button" class="mc-option" data-correct="false" aria-pressed="false" data-feedback="Arjuna does not celebrate; seeing teachers, relatives, and friends turns the battle into a painful moral crisis for him."><span class="opt-letter">A.</span> He celebrates the coming victory.</button></li>
+<li><button type="button" class="mc-option" data-correct="true" aria-pressed="false" data-feedback="Compassion and despair make his limbs tremble and his bow slip. The Gita begins by taking moral anguish seriously before offering a teaching about action and duty (1.28–30)."><span class="opt-letter">B.</span> He is overcome by compassion and despair.</button></li>
+<li><button type="button" class="mc-option" data-correct="false" aria-pressed="false" data-feedback="Arjuna already has his weapons; the problem is not equipment but whether he can justly fight people he loves."><span class="opt-letter">C.</span> He asks Krishna for a new weapon.</button></li>
+<li><button type="button" class="mc-option" data-correct="false" aria-pressed="false" data-feedback="He does not leave immediately. He remains in the chariot and voices his crisis, creating the setting for Krishna’s teaching."><span class="opt-letter">D.</span> He leaves the battlefield.</button></li>
+</ul><div class="mc-feedback" role="status" aria-live="polite"></div></div>
 <div class="question mc"><p class="q-text"><span class="q-num">2.</span> What is the Gāṇḍīva?</p><ul class="mc-options">
-<li><span class="opt-letter">A.</span> Arjuna’s bow.</li>
-<li><span class="opt-letter">B.</span> Krishna’s chariot.</li>
-<li><span class="opt-letter">C.</span> A form of meditation.</li>
-<li><span class="opt-letter">D.</span> A royal title.</li>
-</ul></div>
+<li><button type="button" class="mc-option" data-correct="true" aria-pressed="false" data-feedback="The Gāṇḍīva is Arjuna’s famous bow. His letting it fall dramatizes how deeply his emotional and ethical crisis affects his warrior identity (1.29, 1.47)."><span class="opt-letter">A.</span> Arjuna’s bow.</button></li>
+<li><button type="button" class="mc-option" data-correct="false" aria-pressed="false" data-feedback="Krishna is Arjuna’s charioteer in this scene; the chariot is not called the Gāṇḍīva."><span class="opt-letter">B.</span> Krishna’s chariot.</button></li>
+<li><button type="button" class="mc-option" data-correct="false" aria-pressed="false" data-feedback="Meditation becomes important later, but Gāṇḍīva names a physical object, not a practice."><span class="opt-letter">C.</span> A form of meditation.</button></li>
+<li><button type="button" class="mc-option" data-correct="false" aria-pressed="false" data-feedback="Gāṇḍīva is not a title; it is the weapon associated with Arjuna’s role as an archer."><span class="opt-letter">D.</span> A royal title.</button></li>
+</ul><div class="mc-feedback" role="status" aria-live="polite"></div></div>
 <div class="question mc"><p class="q-text"><span class="q-num">3.</span> According to 2.13, what passes through childhood, youth, and old age?</p><ul class="mc-options">
-<li><span class="opt-letter">A.</span> Dharma.</li>
-<li><span class="opt-letter">B.</span> The cosmos.</li>
-<li><span class="opt-letter">C.</span> The embodied self in a body.</li>
-<li><span class="opt-letter">D.</span> Krishna’s divine form.</li>
-</ul></div>
+<li><button type="button" class="mc-option" data-correct="false" aria-pressed="false" data-feedback="Dharma is a central concept in the Gita, but 2.13 specifically describes the embodied self moving through changing bodily stages."><span class="opt-letter">A.</span> Dharma.</button></li>
+<li><button type="button" class="mc-option" data-correct="false" aria-pressed="false" data-feedback="The verse is not describing the cosmos changing stages; it focuses on the relationship between self and body."><span class="opt-letter">B.</span> The cosmos.</button></li>
+<li><button type="button" class="mc-option" data-correct="true" aria-pressed="false" data-feedback="The embodied self remains the subject of experience while the body changes from childhood to youth to old age. This prepares Krishna’s analogy between bodily change and death (2.13)."><span class="opt-letter">C.</span> The embodied self in a body.</button></li>
+<li><button type="button" class="mc-option" data-correct="false" aria-pressed="false" data-feedback="Krishna’s divine form is revealed later; 2.13 is making a more immediate claim about embodied human life."><span class="opt-letter">D.</span> Krishna’s divine form.</button></li>
+</ul><div class="mc-feedback" role="status" aria-live="polite"></div></div>
 <div class="question mc"><p class="q-text"><span class="q-num">4.</span> What image does 2.22 use for the embodied self’s movement from one body to another?</p><ul class="mc-options">
-<li><span class="opt-letter">A.</span> A river changing course.</li>
-<li><span class="opt-letter">B.</span> A person changing worn-out clothes.</li>
-<li><span class="opt-letter">C.</span> A warrior laying down weapons.</li>
-<li><span class="opt-letter">D.</span> A king changing kingdoms.</li>
-</ul></div>
+<li><button type="button" class="mc-option" data-correct="false" aria-pressed="false" data-feedback="A river is not the image used in 2.22. The verse uses an ordinary human act to make a difficult metaphysical idea more approachable."><span class="opt-letter">A.</span> A river changing course.</button></li>
+<li><button type="button" class="mc-option" data-correct="true" aria-pressed="false" data-feedback="Just as a person discards worn-out clothes and puts on new ones, the embodied self is described as taking on another body (2.22). The image invites reflection on identity as deeper than outward form."><span class="opt-letter">B.</span> A person changing worn-out clothes.</button></li>
+<li><button type="button" class="mc-option" data-correct="false" aria-pressed="false" data-feedback="Weapons appear elsewhere in Krishna’s teaching, but they are used to describe the self’s invulnerability, not its movement between bodies."><span class="opt-letter">C.</span> A warrior laying down weapons.</button></li>
+<li><button type="button" class="mc-option" data-correct="false" aria-pressed="false" data-feedback="The verse does not use royal imagery here; it uses a familiar image of changing clothes."><span class="opt-letter">D.</span> A king changing kingdoms.</button></li>
+</ul><div class="mc-feedback" role="status" aria-live="polite"></div></div>
 <div class="question mc"><p class="q-text"><span class="q-num">5.</span> According to 2.47, what lies within a person’s proper sphere?</p><ul class="mc-options">
-<li><span class="opt-letter">A.</span> Action.</li>
-<li><span class="opt-letter">B.</span> Guaranteed success.</li>
-<li><span class="opt-letter">C.</span> Other people’s choices.</li>
-<li><span class="opt-letter">D.</span> The final results of action.</li>
-</ul></div>
+<li><button type="button" class="mc-option" data-correct="true" aria-pressed="false" data-feedback="Krishna says one has a claim to action, not to its fruits (2.47). This is not an excuse for carelessness; it is an invitation to offer one’s effort without making the result the measure of one’s worth."><span class="opt-letter">A.</span> Action.</button></li>
+<li><button type="button" class="mc-option" data-correct="false" aria-pressed="false" data-feedback="The Gita does not promise that disciplined action guarantees a desired outcome. Results depend on many conditions beyond one person’s control."><span class="opt-letter">B.</span> Guaranteed success.</button></li>
+<li><button type="button" class="mc-option" data-correct="false" aria-pressed="false" data-feedback="Other people’s choices are outside one’s control, but 2.47’s wording centers on the difference between action and its results."><span class="opt-letter">C.</span> Other people’s choices.</button></li>
+<li><button type="button" class="mc-option" data-correct="false" aria-pressed="false" data-feedback="The final fruits of action are precisely what Krishna says do not belong to one’s claim. The teaching addresses attachment, not responsibility."><span class="opt-letter">D.</span> The final results of action.</button></li>
+</ul><div class="mc-feedback" role="status" aria-live="polite"></div></div>
 <div class="question mc"><p class="q-text"><span class="q-num">6.</span> Why does Krishna mention King Janaka and others in 3.20?</p><ul class="mc-options">
-<li><span class="opt-letter">A.</span> They avoided all action.</li>
-<li><span class="opt-letter">B.</span> They proved that perfection can be attained through action.</li>
-<li><span class="opt-letter">C.</span> They were defeated in battle.</li>
-<li><span class="opt-letter">D.</span> They created the universe.</li>
-</ul></div>
+<li><button type="button" class="mc-option" data-correct="false" aria-pressed="false" data-feedback="Janaka and the others are examples of people who acted, not people who escaped action altogether."><span class="opt-letter">A.</span> They avoided all action.</button></li>
+<li><button type="button" class="mc-option" data-correct="true" aria-pressed="false" data-feedback="Krishna points to Janaka and others who reached perfection through action (3.20). Their example supports a path of engaged, responsible participation rather than withdrawal from the world."><span class="opt-letter">B.</span> They proved that perfection can be attained through action.</button></li>
+<li><button type="button" class="mc-option" data-correct="false" aria-pressed="false" data-feedback="The verse’s point is not their defeat; it is the possibility of spiritual maturity while fulfilling one’s role."><span class="opt-letter">C.</span> They were defeated in battle.</button></li>
+<li><button type="button" class="mc-option" data-correct="false" aria-pressed="false" data-feedback="Krishna invokes them as models of action and perfection, not as creators of the universe."><span class="opt-letter">D.</span> They created the universe.</button></li>
+</ul><div class="mc-feedback" role="status" aria-live="polite"></div></div>
 <div class="question mc"><p class="q-text"><span class="q-num">7.</span> When does Krishna say he brings himself forth into the world?</p><ul class="mc-options">
-<li><span class="opt-letter">A.</span> Whenever a ruler asks him to do so.</li>
-<li><span class="opt-letter">B.</span> Whenever people achieve perfect meditation.</li>
-<li><span class="opt-letter">C.</span> When dharma declines and adharma rises.</li>
-<li><span class="opt-letter">D.</span> Only at the beginning of time.</li>
-</ul></div>
+<li><button type="button" class="mc-option" data-correct="false" aria-pressed="false" data-feedback="Krishna’s appearance is not presented as dependent on a ruler’s request; it responds to a moral and cosmic imbalance."><span class="opt-letter">A.</span> Whenever a ruler asks him to do so.</button></li>
+<li><button type="button" class="mc-option" data-correct="false" aria-pressed="false" data-feedback="Meditation is one spiritual practice in the Gita, but it is not the condition named in 4.7–8 for Krishna’s manifestation."><span class="opt-letter">B.</span> Whenever people achieve perfect meditation.</button></li>
+<li><button type="button" class="mc-option" data-correct="true" aria-pressed="false" data-feedback="When dharma declines and adharma rises, Krishna says he manifests to protect the good, destroy destructive forces, and reestablish dharma (4.7–8). The passage presents divine action as care for the moral order."><span class="opt-letter">C.</span> When dharma declines and adharma rises.</button></li>
+<li><button type="button" class="mc-option" data-correct="false" aria-pressed="false" data-feedback="The verse describes recurring divine intervention, not a single event only at the beginning of time."><span class="opt-letter">D.</span> Only at the beginning of time.</button></li>
+</ul><div class="mc-feedback" role="status" aria-live="polite"></div></div>
 <div class="question mc"><p class="q-text"><span class="q-num">8.</span> What should a practitioner do when the mind wanders during meditation?</p><ul class="mc-options">
-<li><span class="opt-letter">A.</span> Follow every thought wherever it leads.</li>
-<li><span class="opt-letter">B.</span> End the meditation immediately.</li>
-<li><span class="opt-letter">C.</span> Suppress all emotion.</li>
-<li><span class="opt-letter">D.</span> Draw the mind back and bring it under the self’s direction.</li>
-</ul></div>
+<li><button type="button" class="mc-option" data-correct="false" aria-pressed="false" data-feedback="Following every thought would leave attention governed by whatever arises. The instruction is to notice distraction and return."><span class="opt-letter">A.</span> Follow every thought wherever it leads.</button></li>
+<li><button type="button" class="mc-option" data-correct="false" aria-pressed="false" data-feedback="Wandering is expected in practice; the Gita does not treat it as a reason to give up."><span class="opt-letter">B.</span> End the meditation immediately.</button></li>
+<li><button type="button" class="mc-option" data-correct="false" aria-pressed="false" data-feedback="The instruction is not emotional numbness. It is steady guidance of attention, with patience toward the mind’s movements."><span class="opt-letter">C.</span> Suppress all emotion.</button></li>
+<li><button type="button" class="mc-option" data-correct="true" aria-pressed="false" data-feedback="Krishna advises gently bringing the wandering mind back under the self’s direction (6.26). Spiritually, each return can be understood as a small act of freedom and renewed attention."><span class="opt-letter">D.</span> Draw the mind back and bring it under the self’s direction.</button></li>
+</ul><div class="mc-feedback" role="status" aria-live="polite"></div></div>
 <div class="question mc"><p class="q-text"><span class="q-num">9.</span> In 11.32, Krishna identifies himself most directly as:</p><ul class="mc-options">
-<li><span class="opt-letter">A.</span> Time, the mighty destroyer of worlds.</li>
-<li><span class="opt-letter">B.</span> A human king.</li>
-<li><span class="opt-letter">C.</span> Arjuna’s servant.</li>
-<li><span class="opt-letter">D.</span> A teacher who rejects action.</li>
-</ul></div>
+<li><button type="button" class="mc-option" data-correct="true" aria-pressed="false" data-feedback="Krishna identifies himself as Time, the mighty destroyer of worlds (11.32). The vision widens Arjuna’s perspective, but it does not erase the need for him to reflect on his own responsibility (18.63)."><span class="opt-letter">A.</span> Time, the mighty destroyer of worlds.</button></li>
+<li><button type="button" class="mc-option" data-correct="false" aria-pressed="false" data-feedback="The vision in chapter 11 reveals Krishna in a cosmic form far beyond an ordinary human king."><span class="opt-letter">B.</span> A human king.</button></li>
+<li><button type="button" class="mc-option" data-correct="false" aria-pressed="false" data-feedback="Krishna serves as Arjuna’s charioteer in the narrative, but 11.32 identifies the cosmic divine reality revealed in the vision."><span class="opt-letter">C.</span> Arjuna’s servant.</button></li>
+<li><button type="button" class="mc-option" data-correct="false" aria-pressed="false" data-feedback="Krishna does not reject action; much of his teaching asks Arjuna to act with discipline and without attachment to results."><span class="opt-letter">D.</span> A teacher who rejects action.</button></li>
+</ul><div class="mc-feedback" role="status" aria-live="polite"></div></div>
 <div class="question mc"><p class="q-text"><span class="q-num">10.</span> Which quality belongs to the devotee Krishna calls dear in chapter 12?</p><ul class="mc-options">
-<li><span class="opt-letter">A.</span> Hatred of enemies.</li>
-<li><span class="opt-letter">B.</span> Possessiveness and pride.</li>
-<li><span class="opt-letter">C.</span> Friendship and compassion toward creatures.</li>
-<li><span class="opt-letter">D.</span> Constant pursuit of praise.</li>
-</ul></div>
+<li><button type="button" class="mc-option" data-correct="false" aria-pressed="false" data-feedback="Hatred conflicts with the Gita’s description of a dear devotee as friendly, compassionate, and free from hostility (12.13)."><span class="opt-letter">A.</span> Hatred of enemies.</button></li>
+<li><button type="button" class="mc-option" data-correct="false" aria-pressed="false" data-feedback="Possessiveness and pride are among the habits the Gita asks practitioners to loosen, not qualities it praises in a devotee."><span class="opt-letter">B.</span> Possessiveness and pride.</button></li>
+<li><button type="button" class="mc-option" data-correct="true" aria-pressed="false" data-feedback="Krishna names friendliness and compassion toward all creatures as marks of a dear devotee (12.13). Devotion is therefore expressed not only inwardly but also in the way one relates to living beings."><span class="opt-letter">C.</span> Friendship and compassion toward creatures.</button></li>
+<li><button type="button" class="mc-option" data-correct="false" aria-pressed="false" data-feedback="The devotee described in chapter 12 is not dependent on praise or recognition; the practice is steadiness, humility, and love."><span class="opt-letter">D.</span> Constant pursuit of praise.</button></li>
+</ul><div class="mc-feedback" role="status" aria-live="polite"></div></div>
 <h3 class="q-subheading">2. Thought Questions</h3>
 <p class="q-instructions">Type each answer in 4&ndash;5 complete sentences in the box below the question. Use the assigned reading as evidence and include at least one parenthetical verse citation in every answer, for example, (2.47). When finished, use the <strong>Export Answers (.txt)</strong> button at the top of the page to download your responses for the chatbot portion of the assignment.</p>
 <p class="name-row"><label for="student-name"><strong>Name:</strong></label>
