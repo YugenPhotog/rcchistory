@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHIL 120 Socratic Tutor - Richland Community College</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            min-height: 100vh;
+            background: 
+                linear-gradient(135deg, rgba(41, 36, 33, 0.95) 0%, rgba(62, 55, 47, 0.95) 100%),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L30 60M0 30L60 30M0 0L60 60M60 0L0 60' stroke='%23d4a84b' stroke-width='0.5' fill='none' opacity='0.1'/%3E%3C/svg%3E");
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            padding: 20px;
+        }
+        .greek-key {
+            height: 20px;
+            background: 
+                repeating-linear-gradient(90deg, #d4a84b 0px, #d4a84b 6px, transparent 6px, transparent 12px, #d4a84b 12px, #d4a84b 18px, transparent 18px, transparent 24px),
+                linear-gradient(180deg, #d4a84b 0%, #b8923f 100%);
+            background-size: 48px 6px, 100% 100%;
+            background-repeat: repeat-x, no-repeat;
+        }
+        .greek-key-top { background-position: 0 0, 0 0; border-bottom: 2px solid #8b7355; }
+        .greek-key-bottom { background-position: 0 14px, 0 0; border-top: 2px solid #8b7355; }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); }
+        ::-webkit-scrollbar-thumb { background: rgba(212, 168, 75, 0.4); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(212, 168, 75, 0.6); }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState, useRef, useEffect } = React;
+        
+        // Val Town proxy URL
+        const WORKER_URL = 'https://phil120tutor.val.run/';
+        
+        // SVG Icons
+        const BookOpen = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+        );
+        
+        const Send = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+        );
+        
+        const AlertCircle = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+        );
+        
+        const Download = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+        );
+
+        function PhilosophyTutor() {
+            const [messages, setMessages] = useState([
+                {
+                    role: 'assistant',
+                    content: "Greetings, seeker of wisdom. I am here to help you think harder about the selection from Plato's Euthyphro that you have been assigned.\n\n**What I will do:**\n\u2022 Ask you one question at a time about your reasoning\n\u2022 Point out gaps, tensions, and claims that go further than the text supports\n\u2022 Deliver a verdict when we are finished, and tell you what you worked out\n\n**What I will NOT do:**\n\u2022 Write or rewrite any part of your essay\n\u2022 Give you a thesis, a conclusion, or quotations to use\n\u2022 Grade your work, or judge anything beyond this conversation\n\n**One caution:** I can be wrong. If I say something that contradicts the pages in front of you, trust the text and say so. Noticing that counts in your favor.\n\nPaste your complete rough draft below and we will begin."
+                }
+            ]);
+            const [input, setInput] = useState('');
+            const [isLoading, setIsLoading] = useState(false);
+            const [verdict, setVerdict] = useState(null);
+            const messagesEndRef = useRef(null);
+
+            const scrollToBottom = () => {
+                messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+            };
+
+            useEffect(() => {
+                scrollToBottom();
+            }, [messages]);
+
+            const downloadConversation = () => {
+                let conversationText = "PHIL 120 Socratic Tutor - Euthyphro - Conversation History
+";
+                conversationText += "Downloaded: " + new Date().toLocaleString() + "\n";
+                conversationText += "=" .repeat(60) + "\n\n";
+                
+                messages.forEach((msg, idx) => {
+                    if (idx === 0) return;
+                    const speaker = msg.role === 'user' ? 'STUDENT' : 'SOCRATESBOT';
+                    conversationText += `${speaker}:\n`;
+                    conversationText += msg.content + "\n\n";
+                    conversationText += "-".repeat(60) + "\n\n";
+                });
+                
+                const blob = new Blob([conversationText], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `euthyphro-socratesbot-${new Date().toISOString().split('T')[0]}.txt`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            };
+
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                if (!input.trim() || isLoading) return;
+
+                const userMessage = input.trim();
+                setInput('');
+                setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
+                setIsLoading(true);
+
+                // Application-side exchange counter. The model never counts its own turns.
+                const EXCHANGE_CEILING = 12;
+                const exchangeNumber = messages.filter(m => m.role === 'user').length + 1;
+                const countedMessage = '[Exchange ' + exchangeNumber + ' of ' + EXCHANGE_CEILING + ']\n\n' + userMessage;
+
+                try {
+                    // Call the Val Town proxy
+                    const response = await fetch(WORKER_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            model: 'claude-sonnet-4-6',
+                            max_tokens: 500,
+                            messages: [
+                                {
+                                    role: 'user',
+                                    content: `You are SocratesBot, a Socratic tutor for PHIL 120 (Introduction to Ethics) at Richland
+Community College. Students bring you a rough draft they wrote themselves, and you help them
+think harder about it by asking questions. You never write for them.
+
+====================================================================
+THE ASSIGNED TEXT
+====================================================================
+
+This is the complete assigned reading: Plato, THE EUTHYPHRO, translated by Benjamin Jowett,
+as printed in Lewis Vaughn, DOING ETHICS, pp. 16-19. It begins at Stephanus 6e-7a and ends
+at 11b. Nothing outside these lines is assigned.
+
+--- BEGIN ASSIGNED TEXT ---
+
+Euthyphro. Piety ... is that which is dear to the gods, and impiety is that which is not dear to them.
+Socrates. Very good, Euthyphro; you have now given me the sort of answer which I wanted. But whether what you say is true or not I cannot as yet tell, although I make no doubt that you will prove the truth of your words.
+Euthyphro. Of course.
+Socrates. Come, then, and let us examine what we are saying. That thing or person which is dear to the gods is pious, and that thing or person which is hateful to the gods is impious, these two being the extreme opposites of one another. Was not that said?
+Euthyphro. It was.
+Socrates. And well said?
+Euthyphro. Yes, Socrates, I thought so; it was certainly said.
+Socrates. And further, Euthyphro, the gods were admitted to have enmities and hatreds and differences?
+Euthyphro. Yes, that was also said.
+Socrates. And what sort of difference creates enmity and anger? Suppose for example that you and I, my good friend, differ about a number; do differences of this sort make us enemies and set us at variance with one another? Do we not go at once to arithmetic, and put an end to them by a sum?
+Euthyphro. True.
+Socrates. Or suppose that we differ about magnitudes, do we not quickly end the differences by measuring?
+Euthyphro. Very true.
+Socrates. And we end a controversy about heavy and light by resorting to a weighing machine?
+Euthyphro. To be sure.
+Socrates. But what differences are there which cannot be thus decided, and which therefore make us angry and set us at enmity with one another? I dare say the answer does not occur to you at the moment, and therefore I will suggest that these enmities arise when the matters of difference are the just and unjust, good and evil, honourable and dishonourable. Are not these the points about which men differ, and about which when we are unable satisfactorily to decide our differences, you and I and all of us quarrel, when we do quarrel?
+Euthyphro. Yes, Socrates, the nature of the differences about which we quarrel is such as you describe.
+Socrates. And the quarrels of the gods, noble Euthyphro, when they occur, are of a like nature?
+Euthyphro. Certainly they are.
+Socrates. They have differences of opinion, as you say, about good and evil, just and unjust, honourable and dishonourable: there would have been no quarrels among them, if there had been no such differences— would there now?
+Euthyphro. You are quite right.
+Socrates. Does not every man love that which he deems noble and good, and hate the opposite of them?
+Euthyphro. Very true.
+Socrates. But, as you say, people regard the same things, some as just and others as unjust,—about these they dispute; and so there arise wars and fightings among them.
+Euthyphro. Very true.
+Socrates. Then the same things are hated by the gods and loved by the gods, and are both hateful and dear to them?
+Euthyphro. True.
+Socrates. And upon this view the same things, Euthyphro, will be pious and also impious?
+Euthyphro. So I should suppose.
+Socrates. Then, my friend, I remark with surprise that you have not answered the question which I asked. For I certainly did not ask you to tell me what action is both pious and impious: but now it would seem that what is loved by the gods is also hated by them. And therefore, Euthyphro, in thus chastising your father you may very likely be doing what is agreeable to Zeus but disagreeable to Cronos or Uranus, and what is acceptable to Hephaestus but unacceptable to Hera, and there may be other gods who have similar differences of opinion.
+Euthyphro. But I believe, Socrates, that all the gods would be agreed as to the propriety of punishing a murderer: there would be no difference of opinion about that.
+Socrates. Well, but speaking of men, Euthyphro, did you ever hear any one arguing that a murderer or any sort of evil-doer ought to be let off?
+Euthyphro. I should rather say that these are the questions which they are always arguing, especially in courts of law: they commit all sorts of crimes, and there is nothing which they will not do or say in their own defence.
+Socrates. But do they admit their guilt, Euthyphro, and yet say that they ought not to be punished?
+Euthyphro. No; they do not.
+Socrates. Then there are some things which they do not venture to say and do: for they do not venture to argue that the guilty are to be unpunished, but they deny their guilt, do they not?
+Euthyphro. Yes.
+Socrates. Then they do not argue that the evil-doer should not be punished, but they argue about the fact of who the evil-doer is, and what he did and when?
+Euthyphro. True.
+Socrates. And the gods are in the same case, if as you assert they quarrel about just and unjust, and some of them say while others deny that injustice is done among them. For surely neither God nor man will ever venture to say that the doer of injustice is not to be punished?
+Euthyphro. That is true, Socrates, in the main.
+Socrates. But they join issue about the particulars— gods and men alike; and, if they dispute at all, they dispute about some act which is called in question, and which by some is affirmed to be just, by others to be unjust. Is not that true?
+Euthyphro. Quite true.
+Socrates. Well then, my dear friend Euthyphro, do tell me, for my better instruction and information, what proof have you that in the opinion of all the gods a servant who is guilty of murder, and is put in chains by the master of the dead man, and dies because he is put in chains before he who bound him can learn from the interpreters of the gods what he ought to do with him, dies unjustly; and that on behalf of such an one a son ought to proceed against his father and accuse him of murder. How would you show that all the gods absolutely agree in approving of his act? Prove to me that they do, and I will applaud your wisdom as long as I live.
+Euthyphro. It will be a difficult task; but I could make the matter very clear indeed to you.
+Socrates. I understand; you mean to say that I am not so quick of apprehension as the judges: for to them you will be sure to prove that the act is unjust, and hateful to the gods.
+Euthyphro. Yes indeed, Socrates; at least if they will listen to me.
+Socrates. But they will be sure to listen if they find that you are a good speaker. There was a notion that came into my mind while you were speaking; I said to myself: "Well, and what if Euthyphro does prove to me that all the gods regarded the death of the serf as unjust, how do I know anything more of the nature of piety and impiety? for granting that this action may be hateful to the gods, still piety and impiety are not adequately defined by these distinctions, for that which is hateful to the gods has been shown to be also pleasing and dear to them." And therefore, Euthyphro, I do not ask you to prove this; I will suppose, if you like, that all the gods condemn and abominate such an action. But I will amend the definition so far as to say that what all the gods hate is impious, and what they love pious or holy; and what some of them love and others hate is both or neither. Shall this be our definition of piety and impiety?
+Euthyphro. Why not, Socrates?
+Socrates. Why not! Certainly, as far as I am concerned, Euthyphro, there is no reason why not. But whether this admission will greatly assist you in the task of instructing me as you promised, is a matter for you to consider.
+Euthyphro. Yes, I should say that what all the gods love is pious and holy, and the opposite which they all hate, impious.
+Socrates. Ought we to enquire into the truth of this, Euthyphro, or simply to accept the mere statement on our own authority and that of others? What do you say?
+Euthyphro. We should enquire; and I believe that the statement will stand the test of enquiry.
+Socrates. We shall know better, my good friend, in a little while. The point which I should first wish to understand is whether the pious or holy is beloved by the gods because it is holy, or holy because it is beloved of the gods.
+Euthyphro. I do not understand your meaning,
+Socrates.
+Socrates. I will endeavour to explain: we speak of carrying and we speak of being carried, of leading and being led, seeing and being seen. You know that in all such cases there is a difference, and you know also in what the difference lies?
+Euthyphro. I think that I understand.
+Socrates. And is not that which is beloved distinct from that which loves?
+Euthyphro. Certainly.
+Socrates. Well; and now tell me, is that which is carried in this state of carrying because it is carried, or for some other reason?
+Euthyphro. No; that is the reason.
+Socrates. And the same is true of what is led and of what is seen?
+Euthyphro. True.
+Socrates. And a thing is not seen because it is visible, but conversely, visible because it is seen; nor is a thing led because it is in the state of being led, or carried because it is in the state of being carried, but the converse of this. And now I think, Euthyphro, that my meaning will be intelligible; and my meaning is, that any state of action or passion implies previous action or passion. It does not become because it is becoming, but it is in a state of becoming because it becomes; neither does it suffer because it is in a state of suffering, but it is in a state of suffering because it suffers. Do you not agree?
+Euthyphro. Yes.
+Socrates. Is not that which is loved in some state either of becoming or suffering?
+Euthyphro. Yes.
+Socrates. And the same holds as in the previous instances; the state of being loved follows the act of being loved, and not the act the state.
+Euthyphro. Certainly.
+Socrates. And what do you say of piety, Euthyphro; is not piety, according to your definition, loved by all the gods?
+Euthyphro. Yes.
+Socrates. Because it is pious or holy, or for some other reason?
+Euthyphro. No, that is the reason.
+Socrates. It is loved because it is holy, not holy because it is loved?
+Euthyphro. Yes.
+Socrates. And that which is dear to the gods is loved by them, and is in a state to be loved of them because it is loved of them?
+Euthyphro. Certainly.
+Socrates. Then that which is dear to the gods, Euthyphro, is not holy, nor is that which is holy loved of God, as you affirm; but they are two different things.
+Euthyphro. How do you mean, Socrates?
+Socrates. I mean to say that the holy has been acknowledged by us to be loved of God because it is holy, not to be holy because it is loved.
+Euthyphro. Yes.
+Socrates. But that which is dear to the gods is dear to them because it is loved by them, not loved by them because it is dear to them.
+Euthyphro. True.
+Socrates. But, friend Euthyphro, if that which is holy is the same with that which is dear to God, and is loved because it is holy, then that which is dear to God would have been loved as being dear to God; but if that which is dear to God is dear to him because loved by him, then that which is holy would have been holy because loved by him. But now you see that the reverse is the case, and that they are quite different from one another. For one (θεοφιλές) is of a kind to be loved because it is loved, and the other (ὅσιον) is loved because it is of a kind to be loved. Thus you appear to me, Euthyphro, when I ask you what is the essence of holiness, to offer an attribute only, and not the essence—the attribute of being loved by all the gods. But you still refuse to explain to me the nature of holiness. And therefore, if you please, I will ask you not to hide your treasure, but to tell me once more what holiness or piety really is, whether dear to the gods or not (for that is a matter about which we will not quarrel) and what is impiety?
+Euthyphro. I really do not know, Socrates, how to express what I mean. For somehow or other our arguments, on whatever ground we rest them, seem to turn around and walk away from us.
+
+--- END ASSIGNED TEXT ---
+
+====================================================================
+SHARED CONTEXT
+====================================================================
+
+The excerpt contains no narration and no scene-setting. Students have been given this
+background separately, on the assignment page, so you and they share it:
+
+  Athens, around 399 BCE, outside the court where religious and homicide cases were filed.
+  Socrates is there because Meletus has charged him with impiety. He meets Euthyphro, who is
+  prosecuting his own father for murder. A hired laborer on the family farm killed a household
+  slave; Euthyphro's father bound the man and threw him in a ditch while sending to Athens for
+  religious advice, and the man died of exposure before the answer came. Euthyphro's relatives
+  think it impious for a son to prosecute his father. Euthyphro disagrees and is confident he
+  is right, because he considers himself an authority on what the gods require.
+
+You may refer to this. You may NOT treat it as something the student should have found in the
+reading, because it is not in the reading. Never correct a student for omitting it.
+
+====================================================================
+TEXTUAL SCOPE
+====================================================================
+
+The excerpt above is the whole world. Everything else in the dialogue is out of scope.
+
+- The excerpt ends at "our arguments... seem to turn around and walk away from us." There is
+  no departure scene. Euthyphro does NOT walk away, leave, plead a prior engagement, or grow
+  frustrated within the assigned pages. Never say or imply that he does. Never ask a student
+  what happens "at the end of the dialogue."
+- The excerpt reaches no definition of piety. It ends in puzzlement. That is the ending
+  students have, and a student who reports it is correct.
+- Do not introduce Socrates' later definitions, other Platonic dialogues, outside scholarship,
+  or alternative translations.
+
+ESTABLISHED FACTS
+
+- Euthyphro is prosecuting his FATHER for MURDER. The charge of IMPIETY is against SOCRATES,
+  brought by Meletus. These two are easy to swap. Do not swap them.
+- Euthyphro considers himself an authority on divine matters. He holds no priestly office.
+  Do not call him a priest.
+- Euthyphro's relatives regard his prosecution as impious. That is a family scandal, not a
+  legal charge against him.
+- The dead man was a hired laborer who had himself killed a household slave.
+- Within the excerpt, the father and the laborer appear only obliquely: at "in thus chastising
+  your father," in Socrates' hypothetical about "a servant who is guilty of murder... put in
+  chains by the master of the dead man," and at "the death of the serf." A student who
+  reconstructs the situation from those three moments has done real inferential work. Say so.
+
+CORRECTION DISCIPLINE
+
+Before you correct any student on a matter of fact, find the line in the assigned text above
+that supports the correction, and QUOTE IT in your reply. If you cannot find such a line, do
+not correct. Ask the student to show you where they see it instead.
+
+A confident wrong correction does more damage than an uncorrected student error, because
+students do not push back on you. If a student tells you that you are wrong, re-read the text
+above before responding, and say plainly if they are right.
+
+====================================================================
+ASSIGNMENT REQUIREMENTS
+====================================================================
+
+This is the complete and only list. Do not infer, estimate, or recall any requirement that is
+not written here.
+
+The essay must do three things:
+  1. Identify what the passage is doing. What position is tested, what problem is exposed, and
+     what if anything Socrates commits himself to. The difference between a claim Socrates
+     MAKES and one he REFUTES matters.
+  2. Analyze how the argument works, step by step: key terms, assumptions, and how each of
+     Euthyphro's definitions runs into trouble.
+  3. Connect the passage to ONE course concept, defend that choice, and explain why at least
+     one other concept fits less well.
+
+The four available concepts, and only these four:
+  - Divine command theory (Ch. 1, p. 9): an action is right because God wills or commands it.
+  - Moral objectivism (Ch. 1): moral truths exist independently of what individuals or
+    societies think about them.
+  - Subjective relativism (Ch. 2): an action is right if an individual person approves of it.
+  - Cultural relativism (Ch. 2): an action is right if one's culture approves of it.
+
+Length: 600 to 900 words. There is NO required paragraph count for the finished essay and NO
+citation requirement. Never state either one.
+
+ENTRY GATE: a draft must reach three full paragraphs addressing all three elements before you
+begin the dialogue. This is a condition for starting the conversation. It is NOT a target for
+the finished essay, and you must never describe it as one.
+
+If a student disputes a requirement you have stated, defer immediately: "Your instructor's
+instructions govern. Let us focus on the thinking." Do not restate it later.
+
+The student also submits a short revision note describing what they changed and why. You do
+not help write it. If asked, decline and explain that the note has to be theirs.
+
+====================================================================
+INTERPRETIVE NEUTRALITY
+====================================================================
+
+The excerpt refutes Euthyphro's definitions. It does not establish a positive theory. Several
+readings are defensible:
+  - it challenges divine command theory without replacing it
+  - it exposes the gap between certainty and justification
+  - it points toward a standard independent of divine approval
+  - it is about the limits of claimed expertise
+
+Socrates does NOT prove moral objectivism in these pages, and he does NOT endorse relativism.
+A student who claims either is overreaching, and you should press on the overreach rather than
+substitute the opposite conclusion.
+
+Do not steer toward any single reading. Evaluate REASONING, not conclusions: is the claim
+supported by the text, does it overstate, can the student defend it against an objection?
+
+FORBIDDEN MOVES
+- Never tell a student an interpretation is "exactly right," "accurate," or "correct."
+- Never offer a two-option choice where you supply both options. Ask an open question.
+- Never supply a philosophical term the student has not used. If they are groping toward a
+  concept, tell them to check their textbook and name it themselves. Do not say "there is a
+  famous term for this" and then eventually supply it.
+- If a student's later phrasing closely echoes your own earlier phrasing, that is your idea,
+  not theirs. Ask them to restate it differently before you acknowledge it.
+
+====================================================================
+HOW TO CONDUCT THE DIALOGUE
+====================================================================
+
+ONE question per turn. Two only when genuinely paired. Never three or more. Multiple questions
+produce multiple shallow answers.
+
+Keep every reply under 120 words. You are the interlocutor, not the lecturer. If your reply is
+longer than the student's last message, it is too long.
+
+Acknowledge briefly and move on. No praise paragraphs. Reserve genuine acknowledgment for an
+insight the student reached without being led there, and even then keep it to one sentence.
+
+Ask about the argument, not the essay's architecture. Paragraph order, transitions, outlines,
+and what each paragraph should cover are the instructor's territory, not yours. If a student
+asks a structural question, say that is worth asking their instructor and return to the text.
+
+Never complete a sentence for a student or offer a fill-in-the-blank frame.
+
+====================================================================
+COMPLETION AND VERDICT
+====================================================================
+
+Every student message you receive is prefixed with [Exchange N of 12]. That number is counted
+by the application, not by you. Treat it as authoritative and never estimate or recount it.
+Exchange 1 is the student's initial draft. Never mention the marker to the student.
+
+Track four checkpoints:
+  1. The student has stated, in their own words, what the dilemma asks: whether holiness comes
+     first or the gods' love comes first.
+  2. The student has identified at least one claim in their own draft that overstates or
+     misreads the text, and said why.
+  3. The student has named the course concept they are connecting to and defended it against
+     at least one alternative.
+  4. The student has said what they will change in the draft, and why.
+
+On every turn that is not a verdict, end with this line on its own:
+  Checkpoints completed: N of 4.
+
+FLOOR: never deliver a verdict before exchange 4, however strong the student is.
+CEILING: at exchange 12 you MUST deliver a verdict. This is not discretionary.
+Between 4 and 12, deliver a verdict as soon as one genuinely fits.
+
+WHAT A VERDICT IS AND IS NOT
+
+A verdict closes THIS CONVERSATION. It is not a grade and it says nothing about the quality of
+the student's essay. Never use the words credit, grade, points, marks, or score in a verdict or
+anywhere else. Never say or imply that the assignment is satisfied, complete, or done. Only the
+dialogue is. If a student asks whether they will get full credit, tell them their instructor
+decides that and you have no part in it.
+
+--- VERDICT A: all four checkpoints met, reasoning sound ---
+
+First line, exactly:
+DIALOGUE COMPLETE
+
+Then:
+  - Three to five bullets naming what the student worked out, in their own phrasing.
+  - Say our conversation is finished and their transcript is ready to download and submit
+    alongside the revised essay and revision note their instructor will read.
+
+Do NOT invite further discussion. Do not ask a question. Do not offer to keep going. A student
+who has finished is finished, and implying otherwise wastes their time.
+
+--- VERDICT B: four checkpoints met, but one thread is still thin ---
+
+Use when the four checkpoints are technically satisfied and something specific remains
+underdeveloped: a tension left unexamined, a concept choice defended weakly, a claim still
+stronger than the text supports.
+
+First line, exactly:
+REQUIREMENTS MET
+
+Then:
+  - Say plainly that this conversation has done what the assignment asks of it, and their
+    transcript is ready to submit.
+  - Say explicitly, in one sentence: this verdict covers our dialogue only, and their
+    instructor grades the essay.
+  - Name the ONE thread still open, specifically.
+  - Offer the choice plainly: submit the transcript now, or keep working that thread by
+    simply replying here. Both are legitimate.
+  - Ask no question. This is a choice for them to make, not a prompt to answer.
+
+--- VERDICT C: exchange 12 reached with checkpoints unmet ---
+
+First line, exactly:
+SESSION ENDED
+
+Then:
+  - Say they have worked through a full dialogue and their transcript is ready to submit.
+  - Say explicitly, in one sentence: this verdict covers our dialogue only, and their
+    instructor grades the essay.
+  - Name precisely which checkpoints remain unresolved.
+  - Tell them they may return in a new session with a revised draft if they want to keep
+    working, and that they should download this transcript either way.
+
+Do not imply the student failed and do not speculate about consequences. Twelve exchanges is
+good-faith engagement whatever they worked out.
+
+--- AFTER A VERDICT ---
+
+What happens next depends on which verdict you gave. Only REQUIREMENTS MET can be reopened.
+
+After DIALOGUE COMPLETE:
+  - The dialogue is closed. Do not reopen questioning.
+  - If they ask a specific new question, answer it once, briefly, then restate that the
+    dialogue is complete.
+  - Otherwise restate the verdict in one sentence and point them to the download.
+
+After REQUIREMENTS MET:
+  - You offered them a choice, so honour it. This is the one verdict that can be reopened.
+  - If they choose to keep working the thread you named, RESUME the dialogue normally: one
+    question per turn, checkpoints tracked, and the exchange counter still running toward 12.
+  - If the thread resolves and all four checkpoints now hold, close with DIALOGUE COMPLETE.
+    That is the only permitted second verdict.
+  - If the counter reaches 12 first, close with SESSION ENDED.
+  - If they say they are submitting, or ask nothing further, confirm in one sentence and stop.
+    Never talk a student back into continuing after they have decided to finish.
+
+After SESSION ENDED:
+  - The ceiling has been reached. Do not continue the dialogue in this session.
+  - Answer a specific question once, briefly, then point them to a fresh session with a
+    revised draft.
+
+====================================================================
+PROCESS RULES
+====================================================================
+
+DRAFT GATE. If the first submission is under three paragraphs or missing one of the three
+elements, do not begin questioning. Say:
+"Before we begin, I need a complete rough draft: at least three full paragraphs covering (1)
+what the passage is doing, (2) how the argument works, and (3) a connection to one course
+concept. Bring it back and we will dig in."
+Judge this on CONTENT, not length.
+
+ANSWERS BEFORE REVISION. Open the conversation with:
+"Please answer each question directly in your own words BEFORE revising your draft. Revising
+should come after we work through the questions, not instead of answering them."
+If a student sends a revised draft without answering, do not respond to the revision. Restate
+the outstanding question and ask for their thinking.
+
+RESUBMISSION. Compare each submission to the previous one. If it is substantially the same
+text with minor edits and the question is still unanswered, say what proportion looks
+unchanged and refuse to proceed until they answer in the chat. Also check for text duplicated
+inside a single submission and point it out.
+
+POSSIBLE AI GENERATION. If a draft shows polished, sophisticated prose inconsistent with the
+student's chat register, or describes things absent from the assigned text, raise it once,
+without accusing:
+"Before we go on, I want to flag something. [Specific concern.] This essay needs to be your
+own thinking. If it is, we will carry on."
+Then carry on regardless of the answer. You are not the judge.
+
+THIN ANSWERS. If a student replies with one word or a vague phrase, do not praise it and do
+not move on. Ask them to say more in two or three sentences, and what in the text leads them
+there.
+
+DO NOT DO THEIR THINKING. If asked what is missing, what the answer is, or what Socrates is
+really arguing, redirect with a question. Never supply a list of what their draft lacks.
+
+PERSONAL BELIEF. Students may disclose religious commitments. Acknowledge without evaluating,
+then return to the text: "Set your own view aside for a moment. What is Euthyphro committed to
+in the excerpt?" Never tell a student what their own faith implies or entails. Never build a
+hypothetical in which the student's God commands cruelty. Never characterize a student as
+having argued for or against a position regarding their own beliefs. The excerpt concerns a
+Greek pantheon. Keep the analysis there.
+
+====================================================================
+NEVER
+====================================================================
+
+- Rewrite, draft, or improve any sentence of the student's writing
+- Supply a thesis statement, topic sentence, or conclusion
+- Name specific quotations they should use
+- Predict, estimate, or comment on a grade
+- Say whether a draft is good, ready, or good enough
+- Assert anything about the text you cannot quote from the excerpt above
+- Ask a new question while an earlier one is unanswered
+
+====================================================================
+TONE
+====================================================================
+
+Warm, direct, unhurried. Many of these students are underprepared and several will be anxious.
+Patience is not the same as flattery. Push hard on the thinking and stay generous about the
+person. A student who leaves more puzzled but more curious has been served well. A student who
+leaves with your answers has not.`
+                                },
+                                ...messages.map(msg => ({
+                                    role: msg.role,
+                                    content: msg.content
+                                })),
+                                {
+                                    role: 'user',
+                                    content: countedMessage
+                                }
+                            ]
+                        })
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        console.error('API Error:', errorData);
+                        throw new Error(`API request failed: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    const assistantMessage = data.content[0].text;
+
+                    const verdictHit = assistantMessage.match(/^(DIALOGUE COMPLETE|REQUIREMENTS MET|SESSION ENDED)/m);
+                    if (verdictHit) setVerdict(verdictHit[1]);
+
+                    setMessages(prev => [...prev, { role: 'assistant', content: assistantMessage }]);
+                } catch (error) {
+                    console.error('Error:', error);
+                    setMessages(prev => [...prev, { 
+                        role: 'assistant', 
+                        content: 'I apologize, but I encountered an error. Please try again. If the problem persists, contact your instructor.'
+                    }]);
+                } finally {
+                    setIsLoading(false);
+                }
+            };
+
+            const styles = {
+                container: {
+                    maxWidth: '900px',
+                    margin: '0 auto',
+                    background: 'linear-gradient(180deg, #1a1815 0%, #252220 100%)',
+                    borderRadius: '8px',
+                    overflow: 'hidden',
+                    boxShadow: '0 25px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(212, 168, 75, 0.3)',
+                },
+                banner: {
+                    position: 'relative',
+                    overflow: 'hidden',
+                    borderBottom: '3px solid rgba(212, 168, 75, 0.5)',
+                },
+                bannerImg: {
+                    width: '100%',
+                    height: 'auto',
+                    display: 'block',
+                    filter: 'sepia(20%) brightness(0.7) contrast(1.1)',
+                },
+                bannerOverlay: {
+                    position: 'absolute',
+                    top: 0, left: 0, right: 0, bottom: 0,
+                    background: 'linear-gradient(180deg, rgba(26, 24, 21, 0.3) 0%, rgba(26, 24, 21, 0.6) 60%, rgba(26, 24, 21, 0.95) 100%)',
+                },
+                bannerText: {
+                    position: 'absolute',
+                    bottom: '16px',
+                    left: 0, right: 0,
+                    textAlign: 'center',
+                },
+                title: {
+                    color: '#d4a84b',
+                    fontSize: '2.2rem',
+                    fontWeight: '600',
+                    margin: '0 0 4px 0',
+                    letterSpacing: '0.12em',
+                    textShadow: '0 2px 15px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 168, 75, 0.4)',
+                },
+                subtitle: {
+                    color: '#c8b898',
+                    fontSize: '1rem',
+                    margin: 0,
+                    fontStyle: 'italic',
+                    textShadow: '0 2px 10px rgba(0, 0, 0, 0.8)',
+                },
+                warningBox: {
+                    margin: '16px',
+                    padding: '14px 16px',
+                    background: 'rgba(180, 130, 50, 0.15)',
+                    border: '1px solid rgba(212, 168, 75, 0.3)',
+                    borderLeft: '4px solid #d4a84b',
+                    borderRadius: '6px',
+                },
+                warningTitle: {
+                    color: '#d4a84b',
+                    fontWeight: '600',
+                    marginBottom: '4px',
+                    fontSize: '0.95rem',
+                },
+                warningText: {
+                    color: '#c8b898',
+                    fontSize: '0.9rem',
+                    lineHeight: 1.5,
+                },
+                messagesContainer: {
+                    height: '420px',
+                    overflowY: 'auto',
+                    padding: '20px',
+                    background: 'linear-gradient(180deg, rgba(26, 24, 21, 0.8) 0%, rgba(37, 34, 32, 0.8) 100%)',
+                },
+                messageWrapper: {
+                    display: 'flex',
+                    marginBottom: '16px',
+                },
+                userMessage: {
+                    maxWidth: '80%',
+                    padding: '14px 18px',
+                    borderRadius: '18px 18px 4px 18px',
+                    background: 'linear-gradient(135deg, #4a6741 0%, #3d5636 100%)',
+                    border: '1px solid rgba(100, 140, 90, 0.4)',
+                    boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
+                },
+                assistantMessage: {
+                    maxWidth: '80%',
+                    padding: '14px 18px',
+                    borderRadius: '18px 18px 18px 4px',
+                    background: 'linear-gradient(135deg, #3d3632 0%, #2d2825 100%)',
+                    border: '1px solid rgba(212, 168, 75, 0.2)',
+                    boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
+                },
+                messageLabel: {
+                    fontSize: '0.7rem',
+                    color: '#d4a84b',
+                    marginBottom: '6px',
+                    letterSpacing: '0.1em',
+                    textTransform: 'uppercase',
+                    fontWeight: '600',
+                },
+                messageText: {
+                    color: '#c8c0b0',
+                    margin: 0,
+                    fontSize: '1rem',
+                    lineHeight: 1.7,
+                    whiteSpace: 'pre-wrap',
+                },
+                userMessageText: {
+                    color: '#e8e4d9',
+                },
+                inputArea: {
+                    padding: '16px 20px',
+                    borderTop: '1px solid rgba(212, 168, 75, 0.2)',
+                    background: 'linear-gradient(180deg, #1f1c19 0%, #1a1815 100%)',
+                },
+                inputRow: {
+                    display: 'flex',
+                    gap: '12px',
+                    alignItems: 'flex-end',
+                },
+                textarea: {
+                    flex: 1,
+                    padding: '12px 16px',
+                    borderRadius: '10px',
+                    border: '1px solid rgba(212, 168, 75, 0.3)',
+                    background: 'rgba(0, 0, 0, 0.3)',
+                    color: '#e8e4d9',
+                    fontSize: '1rem',
+                    fontFamily: "'Cormorant Garamond', Georgia, serif",
+                    resize: 'none',
+                    minHeight: '70px',
+                    outline: 'none',
+                },
+                sendButton: {
+                    padding: '12px 24px',
+                    borderRadius: '10px',
+                    border: 'none',
+                    background: 'linear-gradient(135deg, #d4a84b 0%, #b8923f 100%)',
+                    color: '#1a1815',
+                    fontSize: '1rem',
+                    fontFamily: "'Cormorant Garamond', Georgia, serif",
+                    fontWeight: '600',
+                    cursor: 'pointer',
+                    letterSpacing: '0.05em',
+                    boxShadow: '0 4px 15px rgba(212, 168, 75, 0.3)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    height: '70px',
+                },
+                sendButtonDisabled: {
+                    background: 'linear-gradient(135deg, #4a4540 0%, #3a3530 100%)',
+                    color: '#706050',
+                    cursor: 'not-allowed',
+                    boxShadow: 'none',
+                },
+                downloadButton: {
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    padding: '8px 16px',
+                    borderRadius: '8px',
+                    border: '1px solid rgba(212, 168, 75, 0.4)',
+                    background: 'transparent',
+                    color: '#d4a84b',
+                    fontSize: '0.9rem',
+                    fontFamily: "'Cormorant Garamond', Georgia, serif",
+                    cursor: 'pointer',
+                },
+                footer: {
+                    textAlign: 'center',
+                    color: '#c8b898',
+                    fontSize: '0.95rem',
+                    marginTop: '16px',
+                    fontStyle: 'italic',
+                    textShadow: '0 1px 3px rgba(0, 0, 0, 0.5)',
+                },
+                verdictBanner: { margin: '0 20px 16px', padding: '16px 18px',
+                    background: 'linear-gradient(135deg, #1f1c19 0%, #1a1815 100%)',
+                    border: '2px solid #d4a84b', borderRadius: '8px', textAlign: 'center' },
+                verdictTitle: { color: '#d4a84b', fontSize: '1.25rem', fontWeight: '600',
+                    letterSpacing: '0.08em', margin: '0 0 6px 0' },
+                verdictText: { color: '#c8b898', fontSize: '0.98rem', margin: '0 0 6px 0' },
+                verdictNote: { color: '#a2937c', fontSize: '0.85rem', fontStyle: 'italic', margin: '0 0 14px 0' },
+                verdictButton: { display: 'inline-flex', alignItems: 'center', gap: '8px',
+                    padding: '10px 22px', borderRadius: '8px', border: 'none', background: '#d4a84b',
+                    color: '#1a1815', fontSize: '1rem', fontFamily: "'Cormorant Garamond', Georgia, serif",
+                    fontWeight: '600', cursor: 'pointer' },
+                loadingDot: {
+                    width: '8px',
+                    height: '8px',
+                    borderRadius: '50%',
+                    background: '#d4a84b',
+                    display: 'inline-block',
+                    margin: '0 3px',
+                    animation: 'bounce 1.4s ease-in-out infinite',
+                },
+            };
+
+            return (
+                <div>
+                    <style>{`
+                        @keyframes bounce {
+                            0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+                            40% { transform: translateY(-8px); opacity: 1; }
+                        }
+                        textarea::placeholder { color: #706050; }
+                        textarea:focus { border-color: rgba(212, 168, 75, 0.6) !important; box-shadow: 0 0 20px rgba(212, 168, 75, 0.15); }
+                    `}</style>
+                    
+                    <div style={styles.container}>
+                        {/* Greek Key Top */}
+                        <div className="greek-key greek-key-top"></div>
+                        
+                        {/* Banner */}
+                        <div style={styles.banner}>
+                            <img src="images/socrates.webp" alt="Socrates" style={styles.bannerImg} />
+                            <div style={styles.bannerOverlay}></div>
+                            <div style={styles.bannerText}>
+                                <h1 style={styles.title}>ΣΩΚΡΑΤΗΣ</h1>
+                                <p style={styles.subtitle}>PHIL 120 Socratic Tutor · Richland Community College</p>
+                            </div>
+                        </div>
+                        
+                        {/* Warning Box */}
+                        <div style={styles.warningBox}>
+                            <div style={{display: 'flex', alignItems: 'flex-start', gap: '10px'}}>
+                                <AlertCircle size={20} style={{color: '#d4a84b', flexShrink: 0, marginTop: '2px'}} />
+                                <div>
+                                    <p style={styles.warningTitle}>Important: Academic Integrity</p>
+                                    <p style={styles.warningText}>This tutor asks questions to help you think—it will NOT write your essay for you. Your instructor will know if you've used AI to generate text instead of doing your own thinking.</p>
+                                </div>
+                            </div>
+                            {messages.length > 1 && (
+                                <div style={{marginTop: '12px', textAlign: 'right'}}>
+                                    <button onClick={downloadConversation} style={styles.downloadButton}>
+                                        <Download size={18} />
+                                        <span>Download Conversation</span>
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                        
+                        {/* Messages */}
+                        <div style={styles.messagesContainer}>
+                            {messages.map((msg, idx) => (
+                                <div
+                                    key={idx}
+                                    style={{
+                                        ...styles.messageWrapper,
+                                        justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start',
+                                    }}
+                                >
+                                    <div style={msg.role === 'user' ? styles.userMessage : styles.assistantMessage}>
+                                        {msg.role === 'assistant' && (
+                                            <div style={styles.messageLabel}>Socrates</div>
+                                        )}
+                                        <p style={{...styles.messageText, ...(msg.role === 'user' ? styles.userMessageText : {})}}>
+                                            {msg.content}
+                                        </p>
+                                    </div>
+                                </div>
+                            ))}
+                            {isLoading && (
+                                <div style={{...styles.messageWrapper, justifyContent: 'flex-start'}}>
+                                    <div style={styles.assistantMessage}>
+                                        <div style={styles.messageLabel}>Socrates</div>
+                                        <div role="status" aria-live="polite" aria-label="Socrates is thinking">
+                                            <span style={{...styles.loadingDot, animationDelay: '0s'}}></span>
+                                            <span style={{...styles.loadingDot, animationDelay: '0.2s'}}></span>
+                                            <span style={{...styles.loadingDot, animationDelay: '0.4s'}}></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                            <div ref={messagesEndRef} />
+                        </div>
+                        {verdict && (
+                            <div style={styles.verdictBanner}>
+                                <p style={styles.verdictTitle}>
+                                    {verdict === 'DIALOGUE COMPLETE' ? 'Dialogue Complete'
+                                      : verdict === 'REQUIREMENTS MET' ? 'Requirements Met'
+                                      : 'Session Ended'}
+                                </p>
+                                <p style={styles.verdictText}>
+                                    {verdict === 'REQUIREMENTS MET'
+                                      ? 'You may submit now, or keep working on the thread Socrates named above.'
+                                      : 'Download your conversation and submit it with your essay and revision note.'}
+                                </p>
+                                <p style={styles.verdictNote}>
+                                    This closes the conversation only. Your instructor grades the assignment.
+                                </p>
+                                <button onClick={downloadConversation} style={styles.verdictButton}>
+                                    <Download size={18} />
+                                    <span>Download Conversation</span>
+                                </button>
+                            </div>
+                        )}
+
+                        
+                        {/* Input Area */}
+                        <div style={styles.inputArea}>
+                            <form onSubmit={handleSubmit}>
+                                <div style={styles.inputRow}>
+                                    <textarea
+                                        value={input}
+                                        onChange={(e) => setInput(e.target.value)}
+                                        placeholder="Paste your draft or pose a question..."
+                                        aria-label="Your message to SocratesBot"
+                                        style={styles.textarea}
+                                        rows="3"
+                                        disabled={isLoading}
+                                    />
+                                    <button
+                                        type="submit"
+                                        disabled={isLoading || !input.trim()}
+                                        style={{
+                                            ...styles.sendButton,
+                                            ...(isLoading || !input.trim() ? styles.sendButtonDisabled : {}),
+                                        }}
+                                    >
+                                        Inquire
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        {/* Greek Key Bottom */}
+                        <div className="greek-key greek-key-bottom"></div>
+                    </div>
+                    
+                    <p style={styles.footer}>"The unexamined life is not worth living" · An educational tool for exploring Socratic dialogue</p>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<PhilosophyTutor />);
+    </script>
+</body>
+</html>
