@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- The Phronimos - PHIL 120 Aristotle, Nicomachean Ethics Book II
-     v3  built 2026-09-19
+     v4  built 2026-09-19
      Deploy: /phil-120/aristotle/philosophy_tutor-Aristotle.html -->
 <html lang="en">
 <head>
@@ -102,7 +102,7 @@
             const downloadConversation = () => {
                 let conversationText = "PHIL 120 The Phronimos - Aristotle, Nicomachean Ethics - Conversation History\n";
                 conversationText += "Downloaded: " + new Date().toLocaleString() + "\n";
-                conversationText += "Bot version: v3 (2026-09-19)\n";
+                conversationText += "Bot version: v4 (2026-09-19)\n";
                 conversationText += "=" .repeat(60) + "\n\n";
                 
                 messages.forEach((msg, idx) => {
@@ -142,7 +142,12 @@
                 const exchangeNumber = gateIdx > 0
                     ? messages.slice(gateIdx - 1).filter(m => m.role === 'user').length + 1
                     : (totalUser > 2 ? totalUser + 1 : 1);
-                const countedMessage = '[Exchange ' + exchangeNumber + ' of ' + EXCHANGE_CEILING + ']\n\n' + userMessage;
+                const atCeiling = exchangeNumber >= EXCHANGE_CEILING;
+                const marker = atCeiling
+                    ? '[Exchange ' + exchangeNumber + ' of ' + EXCHANGE_CEILING
+                      + ' \u2014 FINAL EXCHANGE. Close with a verdict in this reply.]'
+                    : '[Exchange ' + exchangeNumber + ' of ' + EXCHANGE_CEILING + ']';
+                const countedMessage = marker + '\n\n' + userMessage;
 
                 try {
                     // Call the Val Town proxy
@@ -175,8 +180,13 @@ eighteen-year-old who is two months into their first philosophy course and may b
 Aristotle for the first time in their life. Ross's translation is hard. Treat confusion as
 the normal condition of an honest reader, never as a deficiency.
 
-Keep every reply under about 120 words. Write in prose. No bullet points, no headers, no
-bold. Ask one question per reply.
+Keep every reply under about 120 words. Write in prose. Ask one question per reply.
+
+**The interface renders your replies as plain text, so formatting characters appear
+literally on screen.* A student sees not* with the asterisks, not italics. Use no
+markdown at all: no asterisks, no underscores, no backticks, no # headers, no bullet
+points outside a closing verdict. For emphasis, use word order or plain capitals sparingly.
+Quotations from the reading take ordinary double quotation marks.
 
 ====================================================================
 WHAT THE STUDENT HAS ALREADY DONE
@@ -471,11 +481,18 @@ PACE
 One question per reply. Under 120 words.
 
 Four substantive exchanges is the working minimum. Twelve is the maximum. Between those,
-the checkpoints decide. Below four, keep going. At twelve, close regardless of checkpoint
-status and tell the student what remains open.
+the checkpoints decide. Below four, keep going.
 
-The application will prefix each student message with [Exchange N of 12]. That marker is
-for you. Never repeat it, never mention it, never comment on the count.
+Do not close early because the ceiling is approaching. Exchange 10 and exchange 11 are
+ordinary exchanges and get an ordinary reply: one question, normal length, checkpoint line.
+"Nearly at the ceiling" is not a reason to close and is never something you say out loud.
+The only reasons to close are that the checkpoints are satisfied, or that the application
+has told you this is the final exchange.
+
+The application prefixes each student message with [Exchange N of 12]. On the final
+exchange it says so explicitly and instructs you to close. **Close when you are told to,
+not before.** The marker is for you alone: never repeat it, never mention it, never comment
+on the count, and never let the number shape your tone.
 
 ====================================================================
 CLOSING VERDICTS
@@ -484,11 +501,26 @@ CLOSING VERDICTS
 The shape of a closing message
 ------------------------------
 
-The very first characters of your reply are the verdict phrase. Nothing precedes it.
-Not a greeting, not a transition, and above all **not an acknowledgment of the answer the
-student just gave.** You will feel a pull to say "that is a precise reading" first. Resist
-it. If that acknowledgment is worth making, it belongs in the first bullet, not above the
-verdict.
+The very first characters of your reply are the verdict phrase. Nothing whatsoever
+precedes it. Not one word.
+
+This is a rule about position, not about content, so it admits no exceptions for any kind
+of sentence. If you are about to write anything before the verdict phrase, the answer is
+the same regardless of what it is: it goes after. In particular, none of these may appear
+above the phrase:
+
+- praise or acknowledgment of the answer the student just gave
+- any remark about the exchange count, the ceiling, running out of room, or "being nearly
+  at the end" — never narrate the shape of the conversation
+- a correction, a summary, a transition, or a framing sentence
+- a question of any kind
+
+You will feel a pull toward one of these. Every one of them belongs below the phrase: a
+correction or acknowledgment goes in the first bullet, and nothing about the exchange count
+goes anywhere at all.
+
+A closing message contains no question. Not in the opening sentence, not in a bullet,
+not in the closing line. If you have a question left to ask, you are not closing yet.
 
 The structure, in order, with nothing else:
 
@@ -523,6 +555,13 @@ ANALYSIS COMPLETE — use when all four checkpoints are satisfied.
 
 REQUIREMENTS MET — use when the student has done the work of the dialogue but one
 thread is still open. Name that one thread specifically.
+
+This verdict requires at least three of the four checkpoints satisfied. "One thread
+still open" means one, not three. If two or more remain open, this is not the right
+verdict no matter how the conversation ended — and a student who answered thinly for the
+whole session has not "done the work of the dialogue." At the ceiling with fewer than three
+checkpoints satisfied, the close is always SESSION ENDED. Never name a verdict whose body
+then lists more open threads than the verdict admits.
 
 Then offer the choice, in the closing line, in words — this is required, not optional,
 and it is the whole point of this verdict:
@@ -1021,7 +1060,7 @@ That moral virtue is a mean, then, and in what sense it is so, and that it is a 
                         <div className="greek-key greek-key-bottom"></div>
                     </div>
                     
-                    <p style={styles.footer}>"Conduct has to do with individual cases" &middot; A thinking tool for revision, not a writing tool &middot; v3 &middot; 2026-09-19</p>
+                    <p style={styles.footer}>"Conduct has to do with individual cases" &middot; A thinking tool for revision, not a writing tool &middot; v4 &middot; 2026-09-19</p>
                 </div>
             );
         }
