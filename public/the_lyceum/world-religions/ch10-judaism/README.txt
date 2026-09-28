@@ -1,7 +1,7 @@
 Judaism Reveal.js deck
 ========================
 
-Open judaism.html in a browser.
+Open rel210-ch10-supplement-encountering-judaism-full-chapter.html in a browser.
 
 Navigation
 ----------
@@ -13,8 +13,8 @@ O: overview
 
 Editing
 -------
-All ordinary slide text and tables are HTML in judaism.html and can be edited in a text editor.
-For temporary in-browser editing, open judaism.html?edit=1. Browser edits are not saved automatically.
+All ordinary slide text and tables are HTML in rel210-ch10-supplement-encountering-judaism-full-chapter.html and can be edited in a text editor.
+For temporary in-browser editing, open rel210-ch10-supplement-encountering-judaism-full-chapter.html?edit=1. Browser edits are not saved automatically.
 
 Package contents
 ----------------

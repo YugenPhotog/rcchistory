@@ -1,7 +1,7 @@
 Christianity Reveal.js deck
 ============================
 
-Open christianity.html in a browser.
+Open rel210-ch11-supplement-christianity-full-chapter.html in a browser.
 
 Navigation
 ----------
@@ -13,8 +13,8 @@ O: overview
 
 Editing
 -------
-All ordinary slide text is HTML in christianity.html and can be edited in a text editor.
-For temporary in-browser editing, open christianity.html?edit=1. Browser edits are not saved automatically.
+All ordinary slide text is HTML in rel210-ch11-supplement-christianity-full-chapter.html and can be edited in a text editor.
+For temporary in-browser editing, open rel210-ch11-supplement-christianity-full-chapter.html?edit=1. Browser edits are not saved automatically.
 
 Package contents
 ----------------
