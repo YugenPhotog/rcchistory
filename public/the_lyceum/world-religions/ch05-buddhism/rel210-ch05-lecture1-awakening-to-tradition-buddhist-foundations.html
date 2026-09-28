@@ -103,6 +103,37 @@
             color: var(--ruby-crimson);
         }
 
+        .popup.video-popup {
+            width: 80%;
+            max-width: 1000px;
+            max-height: 85%;
+            overflow-y: auto;
+        }
+
+        .video-embed {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 6px;
+            overflow: hidden;
+            background: #000;
+            margin-top: 0.5em;
+        }
+
+        .video-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-fallback {
+            text-align: center;
+            margin-top: 0.6em;
+        }
+
         .definition-term {
             font-size: 1.5em;
             font-weight: 700;
@@ -728,12 +759,27 @@
                     </div>
                 </div>
                 
+                <p style="font-size: 0.95em; margin-top: 1em; text-align: center;"><span class="popup-trigger" data-popup="tanhui-video-popup">&#9654; Video: The Story of Tanhui (7:20)</span></p>
+
                 <div id="bhikkhuni-note" class="popup">
                     <span class="popup-close">&times;</span>
                     <div class="definition-term">Note on Women's Ordination</div>
                     <p>The bhikkhuni (nuns') full ordination lineage died out in Theravada countries centuries ago and has been controversially revived in recent decades. Women's full ordination remains a contested issue in some Buddhist traditions today.</p>
                 </div>
                 
+                <div id="tanhui-video-popup" class="popup video-popup" role="dialog" aria-label="Video: What Could Buddhism Offer a Woman? The Story of Tanhui">
+                    <span class="popup-close">&times;</span>
+                    <h3>What Could Buddhism Offer a Woman? The Story of Tanhui</h3>
+                    <div class="video-embed">
+                        <iframe data-video-src="https://www.youtube-nocookie.com/embed/VrMBh3uoVUs?rel=0"
+                                title="What Could Buddhism Offer a Woman? The Story of Tanhui"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin"
+                                allowfullscreen></iframe>
+                    </div>
+                    <p class="video-fallback"><a href="https://youtu.be/VrMBh3uoVUs" target="_blank" rel="noopener">Watch on YouTube</a> (7:20)</p>
+                </div>
+
                 <aside class="notes">
   <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
     <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
@@ -751,6 +797,8 @@
     <h3 style="color: #2c5282; margin-top: 1.5em;">🎓 Historians/Scholars/Philosophers Weigh In</h3>
     <p style="margin-bottom: 1em;">No extra scholar spotlight on this slide—this one is about getting the core terms clear and usable. If you want a “research rabbit hole,” a good move is to look up one key term (like <strong>dukkha</strong> or <strong>Theravada</strong>) in a reliable reference and compare how different sources define it.</p>
   </div>
+
+                <p>Tanhui (422&#8211;504), a Chinese nun who refused an arranged marriage, shows what monastic life offered women and that nuns' ordination spread to China (Sri Lankan nuns helped ordain Chinese women in the 430s).</p>
 </aside>
             </section>
             
@@ -1343,22 +1391,39 @@
         updateSlideCounter();
 
         // Pop-up functionality
+        function closeAllPopups() {
+            document.querySelectorAll('.popup').forEach(function(popup) {
+                popup.classList.remove('active');
+                const frame = popup.querySelector('iframe[data-video-src]');
+                if (frame) frame.setAttribute('src', 'about:blank');
+            });
+        }
+
+        function openPopup(popup) {
+            closeAllPopups();
+            popup.classList.add('active');
+            const frame = popup.querySelector('iframe[data-video-src]');
+            if (frame && frame.getAttribute('src') !== frame.dataset.videoSrc) {
+                frame.setAttribute('src', frame.dataset.videoSrc);
+            }
+        }
+
         document.addEventListener('click', function(e) {
             if (e.target.classList.contains('popup-trigger')) {
                 const popupId = e.target.getAttribute('data-popup');
-                const el = document.getElementById(popupId);
-                if (el) el.classList.add('active');
-            }
-            if (e.target.classList.contains('popup-close') || e.target.classList.contains('popup')) {
-                document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+                const popup = document.getElementById(popupId);
+                if (popup) openPopup(popup);
+            } else if (e.target.classList.contains('popup-close') ||
+                       e.target.classList.contains('popup')) {
+                closeAllPopups();
             }
         });
 
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
-            }
+            if (e.key === 'Escape') closeAllPopups();
         });
+
+        Reveal.on('slidechanged', closeAllPopups);
     </script>
 </body>
 </html>
