@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homō hominī lupus est — Man's Inhumanity to Man</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --antique-gold:#D4AF37; --deep-teal:#2C7873; --rich-purple:#6B4C9A;
+            --ruby-crimson:#9B2C2C; --dark-charcoal:#1A1A1A; --pure-white:#FAFAFA;
+            --soft-cream:#F5F1E8; --bronze-accent:#8B6F47; --forest-green:#1B4332;
+        }
+        .reveal { font-family:'Lora',serif; font-size:1.0em; background-color:var(--dark-charcoal); color:var(--pure-white); }
+        .reveal h1,.reveal h2,.reveal h3 { font-family:'Crimson Pro',serif; font-weight:700; color:var(--antique-gold); text-transform:none; }
+        .reveal h1 { font-size:6.0em; } .reveal h2 { font-size:4.5em; margin-bottom:0.5em; } .reveal h3 { font-size:2.5em; }
+        .reveal ul { list-style:none; padding-left:0; }
+        .reveal ul li { margin-bottom:0.4em; font-size:1.0em; }
+        .reveal ul li:before { content:"◆ "; color:var(--deep-teal); font-weight:bold; margin-right:0.5em; }
+        strong { color:var(--antique-gold); }
+        em { color:var(--deep-teal); font-style:italic; }
+        .popup-trigger { color:var(--deep-teal); border-bottom:2px dotted var(--deep-teal); cursor:pointer; transition:color 0.3s; }
+        .popup-trigger:hover { color:var(--antique-gold); }
+        .popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+            background:var(--soft-cream); color:var(--dark-charcoal); padding:2em; border-radius:15px;
+            box-shadow:0 8px 32px rgba(0,0,0,0.5); max-width:600px; max-height:70%; overflow-y:auto;
+            z-index:1000; border:3px solid var(--bronze-accent); }
+        .popup.active { display:block; }
+        .popup-close { position:absolute; top:10px; right:15px; font-size:2em; cursor:pointer; color:var(--ruby-crimson); }
+        .definition-term { font-size:1.5em; font-weight:700; color:var(--rich-purple); margin-bottom:0.5em; font-family:'Crimson Pro',serif; }
+        .key-term { color:var(--rich-purple); font-weight:600; }
+        .slide-counter { position:fixed; bottom:20px; right:20px; background:rgba(26,26,26,0.9);
+            color:var(--antique-gold); padding:8px 15px; border-radius:8px; font-family:'Crimson Pro',serif;
+            font-weight:600; font-size:0.9em; border:2px solid var(--deep-teal); z-index:100; }
+        .two-column { display:grid; grid-template-columns:1fr 1fr; gap:2em; align-items:start; }
+        .three-column { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.5em; align-items:start; }
+        .content-image-layout { display:grid; grid-template-columns:1fr 1fr; gap:2em; align-items:center; }
+        .content-image-layout .content-side { text-align:left; }
+        .content-image-layout .image-side { display:flex; flex-direction:column; align-items:center; justify-content:center; }
+        .content-image-layout .image-side img { max-width:100%; max-height:560px; object-fit:contain; border-radius:6px; }
+        .column-header { font-weight:700; color:var(--antique-gold); font-size:2.5em; margin-bottom:0.5em; font-family:'Crimson Pro',serif; }
+        .bottom-text { margin-top:1.2em; font-style:italic; color:var(--deep-teal); font-size:1.8em; }
+        .bottom-text-bold { margin-top:1.2em; font-weight:700; color:var(--antique-gold); font-size:1.8em; }
+        .subtitle { font-size:2.5em; color:var(--deep-teal); margin-top:0.5em; }
+        .large-text { font-size:2.0em; text-align:center; line-height:1.6; }
+        .callout { background:rgba(212,175,55,0.15); border-left:5px solid var(--antique-gold); padding:1.2em; margin:1em 0; font-size:2.0em; }
+        .primary-source { background:rgba(212,175,55,0.1); border-left:5px solid var(--antique-gold); padding:1em; margin:1em 0; font-style:italic; color:var(--pure-white); font-size:1.8em; }
+        .primary-source-attribution { text-align:right; font-size:1.6em; color:var(--bronze-accent); margin-top:0.5em; font-style:normal; }
+        .timeline-item { margin-bottom:0.6em; }
+        .timeline-year { color:var(--antique-gold); font-weight:700; }
+        .assessment-box { background:rgba(44,120,115,0.15); border:2px solid var(--deep-teal); border-radius:10px; padding:1.5em; margin:1em 0; }
+        .assessment-box h3 { color:var(--deep-teal); margin-top:0; }
+        .img-placeholder { background:rgba(139,111,71,0.2); border:3px dashed var(--bronze-accent); padding:3em; text-align:center; color:var(--bronze-accent); font-style:italic; border-radius:10px; }
+        .img-caption { font-size:1.4em; color:var(--bronze-accent); font-style:italic; text-align:center; margin-top:0.4em; }
+        .centered-list { text-align:center; font-size:2.0em; }
+        .centered-list li { margin-bottom:0.7em; }
+        .latin-title { font-family:'Crimson Pro',serif; font-style:italic; font-size:1.1em; color:var(--deep-teal); }
+        /* Forest-green background nudges for contrast compliance */
+        [data-background="#1B4332"] .subtitle { color:#4AA89F; } /* teal nudge: 3.90:1 large text PASS */
+        [data-background="#1B4332"] p[style*="bronze-accent"] { color:#B8966A; } /* bronze nudge: 4.01:1 large PASS */
+        /* prefers-reduced-motion */
+        @media (prefers-reduced-motion: reduce) {
+            .reveal .slides section { transition: none !important; }
+            .popup { transition: none !important; }
+            .popup-trigger { transition: none !important; }
+        }
+    </style>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+
+    <!-- ============================================================ -->
+    <!-- TITLE SLIDE -->
+    <!-- ============================================================ -->
+    <section>
+        <h1 style="font-size:4.5em; font-style:italic;">Homō hominī lupus est</h1>
+        <div class="subtitle" style="font-size:2.5em;">Man is a Wolf to His Fellow Man</div>
+        <p style="color:var(--bronze-accent); font-style:italic; font-size:2.0em; margin-top:0.8em;">Man's Inhumanity to Man: The Problem of Evil</p>
+        <p style="color:var(--pure-white); font-size:1.6em; margin-top:1.2em;">— <em>Plautus, Asinaria</em>, c. 195 BCE</p>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION I DIVIDER -->
+    <!-- ============================================================ -->
+    <section data-background="#1B4332">
+        <h2 style="font-size:5.0em; color:var(--antique-gold);">Section I</h2>
+        <div class="subtitle" style="font-size:2.5em; color:#4AA89F;">Human Nature</div>
+        <p style="color:#B8966A; font-style:italic; font-size:2.0em;">What kind of creature are we, really?</p>
+    </section>
+
+    <!-- Human Nature -->
+    <section>
+        <aside class="notes">
+            Human nature is fundamentally the same and universal regardless of time and place — this is why we can understand each other, whether our neighbors today or the ancient Chinese or Japanese. Because we have the same nature, when we read about the ancients' desire for power, wealth, or sex, we understand that. When we read about their desire to care for their families and children, we understand that too.
+
+            Human beings are born good and innocent, but "encumbered." We are born into a corrupted (secular) or "fallen" (religious) world with agency — the ability to choose. We are encumbered because we have a natural tendency to choose badly and/or make mistakes. Still, we do have moral agency and can choose good or evil. Our ability to think — that inner dialogue — to choose, and our subsequent actions determine our nature. Monsters or Saints are made, not born.
+        </aside>
+        <h2 style="font-size:5.0em;">Human Nature</h2>
+        <div class="content-image-layout">
+            <div class="content-side">
+                <ul style="font-size:2.0em;">
+                    <li>Human nature is <strong>fundamentally the same</strong> and universal</li>
+                    <li>Human beings are born <strong>good and innocent</strong>, but "<em>encumbered</em>"</li>
+                    <li>We have <strong>moral agency</strong> — the capacity to choose good or evil</li>
+                    <li>Our inner dialogue, choices, and actions <strong>determine our nature</strong></li>
+                </ul>
+                <div class="bottom-text-bold" style="font-size:1.8em;">Monsters or Saints are <em>made</em>, not born.</div>
+            </div>
+            <div class="image-side">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg"
+                     alt="Philosophical reflection on human nature — imagery placeholder"
+                     style="max-width:100%;max-height:500px;object-fit:contain;border-radius:6px;"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                <div class="img-placeholder" style="width:100%;height:340px;display:none;">
+                    📸 <strong>IMAGE PLACEHOLDER</strong><br>
+                    <em>Search:</em> "Plautus Roman playwright bust" or "Immanuel Kant portrait"<br>
+                    <em>Source:</em> Wikimedia Commons
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Wrench in the Works -->
+    <section>
+        <aside class="notes">
+            The wrench in the works is human evil. How can we understand evil? For example, how do we understand when two men break into the home of Dr. William Petit, his wife and two daughters — beat him nearly to death, rape and strangle his wife, sexually assault the 11-year-old daughter, then tie both daughters to beds, douse them with gasoline, and light them on fire while still alive?
+
+            Many people want to understand evil by pathologizing it — they assume evildoers are mentally ill. And while this may be true for some, for most, evil is the only explanation. This kind of evil is unfathomable. It is so far distant from normal human nature that surely we cannot share the same nature. This is what Immanuel Kant calls "radical evil."
+        </aside>
+        <h2 style="font-size:4.5em;">The Wrench in the Works</h2>
+        <div class="callout" style="font-size:2.0em; margin-bottom:0.8em;">
+            <strong>The Problem:</strong> Human Evil
+        </div>
+        <ul style="font-size:2.0em;">
+            <li>We are "<em>encumbered</em>" — we have a <strong>natural tendency to choose badly</strong></li>
+            <li>According to <span class="popup-trigger" data-popup="kant-encumbered-popup">Kant</span>: an <strong>innate propensity to evil</strong></li>
+            <li>This propensity = <strong>subordinating the moral law</strong> to <em>self-conceit</em></li>
+        </ul>
+        <div class="bottom-text" style="font-size:1.8em;">So how do we account for the evil that humans do to one another?</div>
+    </section>
+
+    <!-- Pause & Reflect I -->
+    <section data-background="#1B4332">
+        <h2 style="font-size:5.0em; color:var(--antique-gold);">⏸ Pause &amp; Reflect</h2>
+        <div class="large-text" style="font-size:2.2em; margin-top:0.8em;">
+            <p style="color:var(--pure-white);">If human beings are born good and innocent, what transforms an ordinary person into someone capable of atrocity?</p>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION II DIVIDER -->
+    <!-- ============================================================ -->
+    <section data-background="#1B4332">
+        <h2 style="font-size:5.0em; color:var(--antique-gold);">Section II</h2>
+        <div class="subtitle" style="font-size:2.5em; color:#4AA89F;">Radical Evil</div>
+        <p style="color:#B8966A; font-style:italic; font-size:2.0em;">Immanuel Kant and the depths of human corruption</p>
+    </section>
+
+    <!-- Radical Evil — Kant overview -->
+    <section>
+        <aside class="notes">
+            Some want to understand evil by pathologizing it — might be true for some, but for others evil is the only explanation. This kind of evil is unfathomable — what Kant calls "radical evil."
+
+            The failure of human moral agents to observe the moral law is symptomatic of a character or disposition (Gesinnung) that has been corrupted by an innate propensity to evil, which is to subordinate the moral law to self-conceit (def. undue pride in oneself). Because this propensity corrupts an agent's character as a whole, and is the innate "source" of every other evil deed, it may be considered "radical."
+        </aside>
+        <h2 style="font-size:4.5em;">Radical Evil <span style="font-size:0.65em; color:var(--bronze-accent);">(Kant)</span></h2>
+        <div class="content-image-layout">
+            <div class="content-side">
+                <ul style="font-size:2.0em;">
+                    <li>Some want to explain evil by <strong>pathologizing</strong> it — assume evil-doers are mentally ill</li>
+                    <li>For some cases this may be true; for others, <strong>evil is the only explanation</strong></li>
+                    <li>This kind of evil is <em>unfathomable</em> — beyond normal human comprehension</li>
+                    <li>Kant names it: <span class="popup-trigger" data-popup="radical-evil-popup" style="color:var(--deep-teal);">"Radical Evil"</span></li>
+                </ul>
+            </div>
+            <div class="image-side">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/43/Immanuel_Kant_%28painted_portrait%29.jpg"
+                     alt="Immanuel Kant painted portrait philosopher"
+                     style="max-width:100%;max-height:500px;object-fit:contain;border-radius:6px;"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                <div class="img-placeholder" style="width:100%;height:300px;display:none;">📸 Immanuel Kant portrait · c. 1790 · Public Domain · Wikimedia Commons</div>
+                <p class="img-caption">Immanuel Kant · c. 1790 · Public Domain · Wikimedia Commons</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Radical Evil — transformative effect -->
+    <section>
+        <aside class="notes">
+            Consistent evil choices have a transformative effect — it "corrupts…character as a whole." They become an enemy to God (goodness) and their nature is changed. Evil choices create an evil nature. Because their nature is now so far different from ours, we cannot understand it — thus the discussion is over. We can only describe the actions; we cannot understand the person.
+
+            This is the crucial distinction: for ordinary wrongdoing, we can explain the motive, the weakness, the temptation. For radical evil, we are left only with description. Understanding is foreclosed.
+        </aside>
+        <h2 style="font-size:4.5em;">Evil Choices, Evil Nature</h2>
+        <div class="primary-source" style="font-size:1.8em;">
+            "The failure of human moral agents to observe the moral law is symptomatic of a character corrupted by an innate propensity to evil — to subordinate the moral law to <em>self-conceit</em>. Because this propensity corrupts an agent's character as a whole… it may be considered 'radical.'"
+            <div class="primary-source-attribution">— Immanuel Kant, <em>Religion within the Bounds of Bare Reason</em></div>
+        </div>
+        <ul style="font-size:2.0em;">
+            <li>Consistent evil choices have a <strong>transformative effect</strong> on character</li>
+            <li>Evil choices create an <strong>evil nature</strong> — the whole character is corrupted</li>
+            <li>Such evil becomes <em>incomprehensible</em> — we can only describe the acts</li>
+        </ul>
+    </section>
+
+    <!-- Pause & Reflect II -->
+    <section data-background="#1B4332">
+        <h2 style="font-size:5.0em; color:var(--antique-gold);">⏸ Pause &amp; Reflect</h2>
+        <div class="assessment-box" style="font-size:2.0em; background:rgba(255,255,255,0.08); border-color:var(--antique-gold);">
+            <p style="color:var(--pure-white);">According to Kant, what makes "radical evil" different from ordinary wrongdoing?</p>
+            <ol style="list-style-type:upper-alpha; color:var(--pure-white);">
+                <li>It is committed by mentally ill individuals</li>
+                <li>It corrupts the entire character of the person who commits it</li>
+                <li>It is always politically motivated</li>
+                <li>It cannot be described or documented</li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION III DIVIDER -->
+    <!-- ============================================================ -->
+    <section data-background="#1B4332">
+        <h2 style="font-size:5.0em; color:var(--antique-gold);">Section III</h2>
+        <div class="subtitle" style="font-size:2.5em; color:#4AA89F;">Extreme Evil &amp; the Banality of Evil</div>
+        <p style="color:#B8966A; font-style:italic; font-size:2.0em;">Hannah Arendt and the horror of ordinary perpetrators</p>
+    </section>
+
+    <!-- Extreme Evil -->
+    <section>
+        <aside class="notes">
+            What about evils committed by totalitarian regimes and ideologies — the Holocaust, the Rape of Nanjing, the 100 million deaths under communist regimes? Hannah Arendt called this "extreme evil" — or crimes against humanity. These are atrocities committed on such a large scale that they necessarily involve the actions and support of otherwise normal, good people.
+
+            People who otherwise would have been normal good people had they not been thrown into those extreme situations. It is these people who give us pause. Are we just like them? How would we act in a similar situation?
+
+            This can be understood — and in fact must be understood. Hannah Arendt calls this the banality of evil.
+        </aside>
+        <h2 style="font-size:4.5em;">Extreme Evil</h2>
+        <div class="content-image-layout">
+            <div class="content-side">
+                <div class="column-header" style="font-size:2.5em;">Crimes Against Humanity</div>
+                <ul style="font-size:2.0em;">
+                    <li>Atrocities committed by <strong>totalitarian regimes</strong> on a massive scale</li>
+                    <li>Necessarily involve the actions of <strong>otherwise normal, good people</strong></li>
+                    <li>Raises the unsettling question: <em>Are we just like them?</em></li>
+                    <li>Arendt insists: this <strong>can and must be understood</strong></li>
+                </ul>
+            </div>
+            <div class="image-side">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/32/Hannah_Arendt_1975_%28cropped%29.jpg"
+                     alt="Hannah Arendt philosopher political theorist 1975 photograph"
+                     style="max-width:100%;max-height:500px;object-fit:contain;border-radius:6px;"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                <div class="img-placeholder" style="width:100%;height:300px;display:none;">📸 Hannah Arendt · 1975 · Public Domain</div>
+                <p class="img-caption">Hannah Arendt · 1975 · Public Domain · Wikimedia Commons</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Banality of Evil — causes -->
+    <section>
+        <aside class="notes">
+            What causes good people to do evil is often ideology. Specifically the ideology of fascism or communism.
+
+            Anytime you have an ideology that subordinates the intrinsic value of the individual for some alleged greater good — no matter what the claimed greater good is, God, the State, or class, etc. — these types of atrocities happen. It happened in Communist Russia and Nazi Germany. And it happened in Fascist Japan. Like communism, fascism subordinates the value of the individual — and beginning in the 1920s–30s Japan took a fascist turn.
+
+            When the value of the individual is subordinated to some greater good, the individual becomes expendable and sacrificed to that greater good. If you feel you are creating paradise on earth, then anyone standing in your way must be got rid of. Further, both fascism and communism attempted to change human nature itself — to create the "new man."
+        </aside>
+        <h2 style="font-size:4.5em;">The Banality of Evil</h2>
+        <ul style="font-size:2.0em;">
+            <li>What causes good people to do evil? Most often: <strong>ideology</strong></li>
+            <li>Any ideology that <strong>subordinates the individual</strong> to some "greater good" produces atrocities</li>
+            <li>Totalitarian regimes create <em>superfluous people</em> — those who have lost the <strong>ability to think</strong></li>
+            <li>Examples: <span class="popup-trigger" data-popup="totalitarianism-examples-popup">Communist Russia, Nazi Germany, Fascist Japan</span></li>
+        </ul>
+        <div class="bottom-text-bold" style="font-size:1.8em;">The individual becomes expendable — sacrificed to the "greater good."</div>
+    </section>
+
+    <!-- Superfluous Human -->
+    <section>
+        <aside class="notes">
+            In totalitarianism, such as fascism and communism, the human as a human being becomes superfluous. This designation applies to both the victim and the perpetrator. It eliminates all spontaneity, all creativity, all individuality. It dehumanizes everybody.
+
+            Totalitarianism strives not toward despotic rule over men, but toward a system in which men are superfluous. Total power can be achieved and safeguarded only in a world of conditioned reflexes, of marionettes without the slightest trace of spontaneity. Man can be fully dominated only when he becomes a specimen of the animal-species man.
+
+            Thus, totalitarian ideologies create living corpses — people unable to think.
+        </aside>
+        <h2 style="font-size:4.5em;">The <span class="popup-trigger" data-popup="superfluous-popup">Superfluous Human</span></h2>
+        <ul style="font-size:2.0em;">
+            <li>Under totalitarianism, the human <em>as a human being</em> becomes <strong>superfluous</strong></li>
+            <li>This applies to <strong>both victim and perpetrator</strong></li>
+            <li>Eliminates all spontaneity, creativity, and individuality</li>
+            <li>It <strong>dehumanizes everybody</strong></li>
+        </ul>
+        <div class="primary-source" style="font-size:1.7em;">
+            "…men are taught they are superfluous through a way of life in which punishment is meted out without connection with crime, in which exploitation is practiced without profit, and where work is performed without product…"
+            <div class="primary-source-attribution">— Hannah Arendt, <em>Origins of Totalitarianism</em></div>
+        </div>
+    </section>
+
+    <!-- Arendt — Superfluous Human long quote -->
+    <section>
+        <aside class="notes">
+            Pause here on this quote. Arendt is describing what totalitarianism actually does — it doesn't just rule people, it renders them unnecessary as persons. The bureaucrat following orders is superfluous. The prisoner in the camp is superfluous. The party official is superfluous. All have been reduced to functions, not persons.
+
+            This is the logical end of any ideology that subordinates the individual to the collective: eventually the individual simply ceases to matter at all. The regime needs bodies to serve functions — not persons to exercise judgment.
+        </aside>
+        <h2 style="font-size:4.5em;">Men Made Superfluous</h2>
+        <div class="primary-source" style="font-size:1.8em;">
+            "Men insofar as they are more than animal reaction and fulfilment of functions are entirely superfluous to totalitarian regimes. Totalitarianism strives not toward despotic rule over men, but toward a system in which men are superfluous… [man] can be fully dominated only when he becomes a specimen of the animal-species man."
+            <div class="primary-source-attribution">— Hannah Arendt, <em>Origins of Totalitarianism</em></div>
+        </div>
+        <div class="bottom-text" style="font-size:1.8em;">Result: totalitarian ideologies produce <strong>living corpses</strong> — people unable to think.</div>
+    </section>
+
+    <!-- Inability to Think -->
+    <section>
+        <aside class="notes">
+            To Arendt, "to think" means something very specific — it is the inner dialogue with the self; the place where we are constantly asking ourselves: "Is this action right? Does this action put my self-interest above the needs and rights of others?"
+
+            Totalitarianism desires to change human nature into one who no longer has the ability to think, to judge between right and wrong — but simply to serve the state.
+
+            "Evil comes from a failure to think." This is the core of the banality of evil. It is not that the perpetrators were demonic. It is that they stopped asking the question.
+        </aside>
+        <h2 style="font-size:4.5em;">The Inability to Think</h2>
+        <div class="callout" style="font-size:2.0em; margin-bottom:0.6em;">
+            <strong>To Think</strong> (Arendt's definition): the <em>inner dialogue with the self</em> — constantly asking, "Is this action right? Am I placing my self-interest above the rights of others?"
+        </div>
+        <ul style="font-size:2.0em;">
+            <li>Totalitarianism desires to <strong>destroy this inner dialogue</strong></li>
+            <li>It creates citizens who no longer judge between <strong>right and wrong</strong> — who simply <em>serve the state</em></li>
+        </ul>
+        <div class="primary-source" style="font-size:1.7em;">
+            "Good can be radical; evil can never be radical… it can spread like a fungus over the surface of the earth… <strong>Evil comes from a failure to think.</strong>"
+            <div class="primary-source-attribution">— Hannah Arendt, <em>Eichmann in Jerusalem</em></div>
+        </div>
+    </section>
+
+    <!-- Adolf Eichmann and the Banality -->
+    <section>
+        <aside class="notes">
+            Arendt arrived at the banality of evil by observing the trial of Adolf Eichmann in Jerusalem in 1961. She went expecting a monster — a man who had organized the deportation of millions of Jews to the death camps. Instead she found a mindless bureaucrat. He was proud of his loyalty to Hitler and his efficiency in "just following orders."
+
+            Here was a man capable of defiantly moving millions of Jews to their deaths, without even holding a grudge against them. He didn't hate them. He was just doing his job.
+
+            Most of the people responsible for atrocities in Nazi Germany, Communist Russia, or Fascist Japan were simply un-thinking bureaucrats or soldiers. This is not to say there were not radically evil individuals who took advantage of the situation to inflict their evil will — but atrocities happen when most people do not or cannot think and choose the good.
+        </aside>
+        <h2 style="font-size:4.5em;">Adolf Eichmann &amp; the Banality</h2>
+        <div class="content-image-layout">
+            <div class="content-side">
+                <ul style="font-size:2.0em;">
+                    <li>Arendt's concept arrived from observing the <span class="popup-trigger" data-popup="eichmann-popup">Eichmann Trial</span>, 1961</li>
+                    <li>Not the evil monster she expected — a <strong>mindless bureaucrat</strong></li>
+                    <li>Proud of his loyalty and efficiency in <em>"just following orders"</em></li>
+                    <li>Capable of moving millions to their death <strong>without even holding a grudge</strong></li>
+                </ul>
+                <div class="bottom-text-bold" style="font-size:1.8em;">Most perpetrators are <em>un-thinking bureaucrats</em> — not monsters.</div>
+            </div>
+            <div class="image-side">
+                <div class="img-placeholder" style="width:100%;height:340px;">
+                    📸 <strong>IMAGE PLACEHOLDER</strong><br>
+                    <em>Search:</em> "Adolf Eichmann trial Jerusalem 1961"<br>
+                    <em>Source:</em> Wikimedia Commons, Getty Images
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pause & Reflect III -->
+    <section data-background="#1B4332">
+        <h2 style="font-size:5.0em; color:var(--antique-gold);">⏸ Pause &amp; Reflect</h2>
+        <div class="large-text" style="font-size:2.2em; margin-top:0.8em;">
+            <p style="color:var(--pure-white);">Hannah Arendt concluded that most perpetrators of atrocity were not monsters — they were ordinary people who had stopped thinking. What does that imply about <em>us</em>?</p>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION IV DIVIDER -->
+    <!-- ============================================================ -->
+    <section data-background="#1B4332">
+        <h2 style="font-size:5.0em; color:var(--antique-gold);">Section IV</h2>
+        <div class="subtitle" style="font-size:2.5em; color:#4AA89F;">Prevention</div>
+        <p style="color:#B8966A; font-style:italic; font-size:2.0em;">Memory, education, and the courage to think</p>
+    </section>
+
+    <!-- Prevention — Education -->
+    <section>
+        <aside class="notes">
+            Education is key — but not just education for education's sake. Dr. Joseph Mengele held a doctorate in anthropology and a medical degree. Dr. Shiro Ishii was a trained microbiologist and general. Both were highly educated. Both were monsters.
+
+            Education must teach people how to think — critical thinking and the moral courage to act on those judgments. We need a society where people have both the ability and the liberty to think; and citizens with the courage to act on moral choices.
+
+            American education may be going down a bad path. When safe spaces, enforced trigger warnings, and violent protests against speech become the norm — when identity politics trumps the value of individual rights — we are slouching toward the very conditions that make the banality of evil possible.
+        </aside>
+        <h2 style="font-size:5.0em;">Education Is Key</h2>
+        <ul style="font-size:2.0em;">
+            <li>Education is essential — but <em>not</em> education for its own sake</li>
+            <li>Dr. <span class="popup-trigger" data-popup="mengele-ishii-popup">Joseph Mengele &amp; Dr. Shiro Ishii</span> were both <strong>highly educated</strong></li>
+            <li>Education must teach people <strong>how to think</strong> — critical reasoning and moral courage</li>
+            <li>We need citizens with the <strong>ability, liberty, and courage</strong> to act on moral choices</li>
+        </ul>
+        <div class="bottom-text" style="font-size:1.8em;">Credentials are not conscience. Diplomas do not guarantee decency.</div>
+    </section>
+
+    <!-- Prevention — Memory -->
+    <section>
+        <aside class="notes">
+            Carol Gluck of Columbia University: "How did it happen? And how can we together try to prevent this from happening again. If memory and history are not used for a better future, but only to re-enact the hostilities of a bad past then none of us is doing our job."
+
+            Do I want you to hate the Japanese? Absolutely not. The Japanese are a wonderful people with a fascinating history and rich culture. What I do want you to understand, hate, and be on the constant lookout for is fascism — and any other twin ideology that devalues the individual.
+
+            After an assignment like this, it is important to remind ourselves that there IS good in the world — and for you to go take part in it and contribute to that good.
+        </aside>
+        <h2 style="font-size:4.5em;">Memory &amp; History</h2>
+        <div class="primary-source" style="font-size:2.0em;">
+            "If memory and history are not used for a better future, but only to re-enact the hostilities of a bad past — then none of us is doing our job."
+            <div class="primary-source-attribution">— Carol Gluck, Columbia University</div>
+        </div>
+        <ul style="font-size:2.0em; margin-top:0.5em;">
+            <li>The lesson of atrocity is not <strong>hatred of a people</strong> — but hatred of <em>ideologies</em> that devalue the individual</li>
+            <li>Fascism, communism, and any creed that makes the individual <strong>expendable</strong></li>
+        </ul>
+    </section>
+
+    <!-- Closing Warning -->
+    <section>
+        <aside class="notes">
+            The warning signs are not exotic. They are ordinary. Any ideology — religious, political, or social — that makes the individual expendable for some larger cause has crossed the line. The specific "greater good" being invoked doesn't matter. God, the State, the Race, the Class, Social Justice — the mechanism is the same.
+
+            Protect individual rights. Cultivate the inner dialogue. And act. Edmund Burke's point is simple: evil does not require evil people. It only requires good people who go silent and passive.
+        </aside>
+        <h2 style="font-size:4.5em;">The Standing Warning</h2>
+        <div class="two-column">
+            <div>
+                <div class="column-header" style="font-size:2.5em;">The Danger Signs</div>
+                <ul style="font-size:2.0em;">
+                    <li>Any ideology that <strong>subordinates the individual</strong> to a "greater good"</li>
+                    <li>Suppression of <strong>free thought</strong> and dissent</li>
+                    <li>Creation of <em>superfluous</em> classes of people</li>
+                </ul>
+            </div>
+            <div>
+                <div class="column-header" style="font-size:2.5em;">The Response</div>
+                <ul style="font-size:2.0em;">
+                    <li>Protect and defend <strong>individual rights</strong></li>
+                    <li>Cultivate the <em>inner dialogue</em> — the habit of moral thinking</li>
+                    <li>Act — good people who <strong>do nothing</strong> enable evil</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Closing Slide -->
+    <section data-background="#1B4332">
+        <h2 style="font-size:5.0em; color:var(--antique-gold);">⏸ Pause &amp; Reflect</h2>
+        <div class="primary-source" style="font-size:2.2em; background:rgba(255,255,255,0.08); border-color:var(--antique-gold); margin-bottom:1em;">
+            "All that is necessary for the triumph of evil is that good people do nothing."
+            <div class="primary-source-attribution" style="color:var(--bronze-accent);">— Edmund Burke (attrib.)</div>
+        </div>
+        <div class="large-text" style="font-size:1.8em;">
+            <p style="color:var(--pure-white);">There <strong style="color:var(--antique-gold);">is</strong> good in the world. Go take part in it.</p>
+        </div>
+    </section>
+
+  </div><!-- /slides -->
+</div><!-- /reveal -->
+
+<!-- ============================================================ -->
+<!-- GLOBAL UI — outside Reveal transforms -->
+<!-- ============================================================ -->
+<div id="keyboard-trigger" class="popup-trigger" data-popup="keyboard-popup"
+     style="position:fixed;top:20px;right:20px;font-size:2em;cursor:pointer;z-index:100;">⌨️</div>
+<div id="keyboard-popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <div class="definition-term">Keyboard Shortcuts</div>
+    <p>→ / Space: Next &nbsp;|&nbsp; ← : Previous &nbsp;|&nbsp; S: Notes &nbsp;|&nbsp; F: Fullscreen &nbsp;|&nbsp; O: Overview &nbsp;|&nbsp; ESC: Close popup</p>
+</div>
+
+<div class="slide-counter"></div>
+
+<!-- ============================================================ -->
+<!-- POP-UP DEFINITIONS -->
+<!-- ============================================================ -->
+<div id="kant-encumbered-popup" class="popup" role="dialog" aria-modal="true">
+    <span class="popup-close" aria-label="Close">&times;</span>
+    <div class="definition-term">Immanuel Kant (1724–1804)</div>
+    <p>German philosopher and central figure of the Enlightenment. In <em>Religion within the Bounds of Bare Reason</em> (1793), Kant argued that human beings possess an innate "propensity to evil" — not that we are born evil, but that we have a built-in tendency to subordinate moral duty to self-interest. He called this <strong>self-conceit</strong> (undue pride in oneself).</p>
+</div>
+
+<div id="radical-evil-popup" class="popup" role="dialog" aria-modal="true">
+    <span class="popup-close" aria-label="Close">&times;</span>
+    <div class="definition-term">Radical Evil (Kant)</div>
+    <p>Kant's term for evil that is not merely a bad choice but a <strong>fundamental corruption of character</strong>. The person's very disposition (<em>Gesinnung</em>) has been corrupted, such that every subsequent act flows from a corrupted source. Because their nature has become so alien to normal moral experience, such evil is unfathomable — we can describe the acts but cannot truly understand the person.</p>
+</div>
+
+<div id="totalitarianism-examples-popup" class="popup" role="dialog" aria-modal="true">
+    <span class="popup-close" aria-label="Close">&times;</span>
+    <div class="definition-term">Totalitarian Atrocities — Examples</div>
+    <p><strong>Communist Russia:</strong> Stalin's Great Terror, the Gulag, and the Ukrainian Holodomor killed tens of millions. The individual was sacrificed to the Soviet state and the "classless society."</p>
+    <p><strong>Nazi Germany:</strong> The Holocaust and the machinery of genocide killed six million Jews and millions of others. The individual was sacrificed to racial purity and the Volk.</p>
+    <p><strong>Fascist Japan:</strong> The Rape of Nanking (1937–38), Unit 731's human experimentation, and the conquest of Asia involved massive atrocities justified by imperial ideology and ethnic hierarchy.</p>
+</div>
+
+<div id="superfluous-popup" class="popup" role="dialog" aria-modal="true">
+    <span class="popup-close" aria-label="Close">&times;</span>
+    <div class="definition-term">Superfluous Human (Arendt)</div>
+    <p>Arendt's term for what totalitarianism does to human beings — it renders them <strong>unnecessary as persons</strong>. This applies equally to victims (who are made expendable and eliminated) and to perpetrators (who are reduced to interchangeable functions in a bureaucratic machine). The individual ceases to exist as a thinking, choosing moral agent.</p>
+</div>
+
+<div id="eichmann-popup" class="popup" role="dialog" aria-modal="true">
+    <span class="popup-close" aria-label="Close">&times;</span>
+    <div class="definition-term">The Eichmann Trial (Jerusalem, 1961)</div>
+    <p>Adolf Eichmann was a senior SS officer responsible for the logistics of the Holocaust — organizing the deportation of millions of Jews to death camps. Captured in Argentina by Israeli intelligence, he was tried in Jerusalem in 1961.</p>
+    <p>Hannah Arendt covered the trial for <em>The New Yorker</em>. She expected a monster. Instead she found a mediocre bureaucrat who claimed he was simply following orders and doing his job efficiently. This observation led to her concept of the <strong>"banality of evil."</strong></p>
+</div>
+
+<div id="mengele-ishii-popup" class="popup" role="dialog" aria-modal="true">
+    <span class="popup-close" aria-label="Close">&times;</span>
+    <div class="definition-term">Mengele &amp; Ishii — Educated Perpetrators</div>
+    <p><strong>Dr. Josef Mengele</strong> was a trained physician and SS officer who conducted barbaric medical experiments on prisoners at Auschwitz. He held a doctorate in anthropology as well as a medical degree.</p>
+    <p><strong>Dr. Shiro Ishii</strong> was a microbiologist and general who commanded Japan's Unit 731 in Manchuria — a covert biological and chemical warfare research unit that conducted lethal human experiments on thousands of prisoners.</p>
+    <p>Both were highly credentialed. Education without the cultivation of moral thinking produced monsters, not healers.</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- SCRIPTS -->
+<!-- ============================================================ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+<script>
+    Reveal.initialize({
+        width: 1920, height: 1080, margin: 0.04, minScale: 0.1, maxScale: 1.0,
+        hash: true, slideNumber: false, transition: 'slide', plugins: [RevealNotes]
+    });
+    function updateSlideCounter() {
+        const c = Reveal.getState().indexh + 1, t = Reveal.getTotalSlides();
+        document.querySelector('.slide-counter').textContent = `${c}/${t}`;
+    }
+    Reveal.on('slidechanged', updateSlideCounter);
+    updateSlideCounter();
+
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('popup-trigger')) {
+            const el = document.getElementById(e.target.getAttribute('data-popup'));
+            if (el) {
+                el.classList.add('active');
+                e.target.setAttribute('aria-expanded', 'true');
+            }
+        }
+        if (e.target.classList.contains('popup-close') || e.target.classList.contains('popup')) {
+            document.querySelectorAll('.popup').forEach(p => {
+                p.classList.remove('active');
+            });
+            document.querySelectorAll('.popup-trigger').forEach(t => t.setAttribute('aria-expanded', 'false'));
+        }
+    });
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.popup-trigger').forEach(t => t.setAttribute('aria-expanded', 'false'));
+        }
+    });
+</script>
+</body>
+</html>
