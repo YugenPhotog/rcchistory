@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Steer Clear — a HIST 101 desk game on Washington's Farewell Address (1796).">
+<title>Steer Clear — Washington's Farewell Address | HIST 101</title>
+<style>
+:root {
+  --parchment: #f3e6c8;
+  --parchment-dark: #e8d4a8;
+  --ink: #2c1810;
+  --ink-soft: #5c4030;
+  --candle: #f5c542;
+  --candle-glow: #ffd96a;
+  --wax: #c4782a;
+  --desk: #3d2914;
+  --desk-light: #5a3d1e;
+  --green: #2d5a3d;
+  --green-light: #3d7a52;
+  --red: #8b3a2a;
+  --red-light: #a84838;
+  --blue: #2a4a6b;
+  --gold: #b8860b;
+  --bar-bg: #d4c4a0;
+  --shadow: rgba(44, 24, 16, 0.35);
+  --radius: 12px;
+  --font-display: Georgia, "Times New Roman", serif;
+  --font-body: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: radial-gradient(ellipse at 50% 20%, #5a3d1e 0%, #2a1810 55%, #1a0e08 100%);
+  color: var(--ink);
+  min-height: 100dvh;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+button { font-family: inherit; cursor: pointer; border: none; }
+button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
+  outline: 3px solid var(--candle); outline-offset: 3px;
+}
+.app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 12px 14px 40px;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+.screen { display: none; animation: fadeIn 0.35s ease; }
+.screen.active { display: flex; flex-direction: column; flex: 1; gap: 14px; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* Header / meters */
+.topbar {
+  background: linear-gradient(180deg, var(--parchment) 0%, var(--parchment-dark) 100%);
+  border: 2px solid var(--desk-light);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  box-shadow: 0 4px 16px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.4);
+}
+.topbar-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.candles {
+  display: flex; gap: 4px; align-items: center;
+  font-size: 1.15rem;
+  letter-spacing: 2px;
+}
+.candle-lit { filter: drop-shadow(0 0 4px var(--candle-glow)); }
+.candle-out { opacity: 0.35; filter: grayscale(1); }
+.meters {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 10px;
+}
+@media (min-width: 520px) {
+  .meters { grid-template-columns: 1fr 1fr 1fr; }
+}
+.meter { font-size: 0.7rem; color: var(--ink-soft); }
+.meter-label { display: flex; justify-content: space-between; margin-bottom: 2px; font-weight: 600; }
+.meter-bar {
+  height: 8px; background: var(--bar-bg); border-radius: 4px; overflow: hidden;
+  border: 1px solid var(--desk-light);
+}
+.meter-fill {
+  height: 100%; border-radius: 3px; transition: width 0.45s ease, background 0.3s;
+  width: 50%;
+}
+.meter-fill.unity { background: linear-gradient(90deg, #3d7a52, #5aab72); }
+.meter-fill.party { background: linear-gradient(90deg, #a84838, #c96048); }
+.meter-fill.debt { background: linear-gradient(90deg, #8b6914, #c9a227); }
+.meter-fill.foreign { background: linear-gradient(90deg, #2a4a6b, #4a7aaa); }
+.meter-fill.public { background: linear-gradient(90deg, #6b4a8b, #9a6abb); }
+
+/* Cards / panels */
+.panel {
+  background: linear-gradient(165deg, var(--parchment) 0%, #efe0bc 100%);
+  border: 2px solid var(--desk-light);
+  border-radius: var(--radius);
+  padding: 18px 16px;
+  box-shadow: 0 6px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.5);
+  position: relative;
+}
+.panel::before {
+  content: "";
+  position: absolute; inset: 6px;
+  border: 1px solid rgba(92, 64, 48, 0.18);
+  border-radius: 8px;
+  pointer-events: none;
+}
+.panel h1, .panel h2 {
+  font-family: var(--font-display);
+  color: var(--ink);
+  line-height: 1.25;
+}
+.panel h1 { font-size: 1.65rem; margin-bottom: 6px; text-align: center; }
+.panel h2 { font-size: 1.25rem; margin-bottom: 10px; }
+.panel p, .panel li { color: var(--ink-soft); font-size: 0.95rem; }
+.lede { text-align: center; font-style: italic; margin-bottom: 12px; }
+.badge {
+  display: inline-block;
+  background: var(--desk);
+  color: var(--parchment);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+.mode-badge { text-align: center; }
+
+/* Buttons */
+.btn-row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 14px; }
+.btn {
+  appearance: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: transform 0.12s, box-shadow 0.12s, background 0.2s;
+  box-shadow: 0 3px 0 var(--desk);
+  min-height: 44px;
+}
+.btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--desk); }
+.btn-primary {
+  background: linear-gradient(180deg, var(--candle) 0%, var(--wax) 100%);
+  color: var(--ink);
+}
+.btn-primary:hover { background: linear-gradient(180deg, var(--candle-glow) 0%, var(--candle) 100%); }
+.btn-heed {
+  background: linear-gradient(180deg, #4a8a5e 0%, var(--green) 100%);
+  color: #fff; flex: 1; min-width: 120px;
+}
+.btn-ignore {
+  background: linear-gradient(180deg, #b05040 0%, var(--red) 100%);
+  color: #fff; flex: 1; min-width: 120px;
+}
+.btn-secondary {
+  background: linear-gradient(180deg, #d4c4a0 0%, #c4b080 100%);
+  color: var(--ink);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--parchment);
+  border: 1px solid rgba(243,230,200,0.4);
+  box-shadow: none;
+  font-weight: 600;
+}
+.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.link-out {
+  color: var(--blue);
+  font-weight: 600;
+  word-break: break-all;
+}
+.hint { font-size: 0.8rem; color: var(--ink-soft); text-align: center; margin-top: 8px; opacity: 0.85; }
+
+/* Splash */
+.splash-ornament {
+  text-align: center;
+  font-size: 2rem;
+  margin: 4px 0 8px;
+  filter: drop-shadow(0 0 8px var(--candle-glow));
+}
+.video-card {
+  background: rgba(61, 41, 20, 0.08);
+  border: 1px dashed var(--desk-light);
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  margin: 12px 0;
+}
+.checklist { list-style: none; margin: 10px 0 4px; }
+.checklist li {
+  padding: 6px 0 6px 28px;
+  position: relative;
+  font-size: 0.9rem;
+}
+.checklist li::before {
+  content: "🕯";
+  position: absolute; left: 0; top: 4px;
+  font-size: 0.9rem;
+}
+
+/* Dispatch card */
+.dispatch-wrap {
+  perspective: 800px;
+  min-height: 220px;
+  display: flex;
+  align-items: stretch;
+}
+.dispatch-card {
+  flex: 1;
+  background: #faf3e0;
+  border: 2px solid var(--desk);
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 4px 6px 0 rgba(0,0,0,0.15);
+  transition: transform 0.25s ease, opacity 0.25s;
+  touch-action: pan-y;
+  user-select: none;
+}
+.dispatch-card.swipe-left { transform: translateX(-80px) rotate(-4deg); opacity: 0.7; }
+.dispatch-card.swipe-right { transform: translateX(80px) rotate(4deg); opacity: 0.7; }
+.dispatch-card.exit-heed { transform: translateX(120%) rotate(8deg); opacity: 0; }
+.dispatch-card.exit-ignore { transform: translateX(-120%) rotate(-8deg); opacity: 0; }
+.card-meta {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.75rem; color: var(--ink-soft); margin-bottom: 8px; gap: 8px;
+}
+.card-tag {
+  background: var(--desk); color: var(--parchment);
+  padding: 2px 8px; border-radius: 4px; font-weight: 600;
+}
+.card-body {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--ink);
+  line-height: 1.4;
+}
+.progress-dot {
+  display: flex; gap: 5px; justify-content: center; margin: 4px 0;
+}
+.progress-dot span {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--bar-bg); border: 1px solid var(--desk-light);
+}
+.progress-dot span.done { background: var(--wax); }
+.progress-dot span.current { background: var(--candle); box-shadow: 0 0 6px var(--candle-glow); }
+
+/* Feedback toast */
+.feedback {
+  background: #fff8e7;
+  border-left: 4px solid var(--wax);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 14px;
+  font-size: 0.9rem;
+  color: var(--ink);
+  display: none;
+}
+.feedback.show { display: block; animation: fadeIn 0.25s ease; }
+.feedback.good { border-left-color: var(--green); }
+.feedback.soft { border-left-color: var(--red); }
+.feedback strong { display: block; margin-bottom: 4px; font-family: var(--font-display); }
+
+/* Stamp mode */
+.stamp-tray {
+  display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 12px;
+}
+.stamp {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 2px dashed var(--desk-light);
+  background: #faf3e0;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  min-height: 44px;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+}
+.stamp.selected {
+  border-style: solid;
+  border-color: var(--wax);
+  background: var(--candle);
+  transform: scale(1.04);
+  box-shadow: 0 0 10px rgba(245, 197, 66, 0.45);
+}
+.stamp.used { opacity: 0.45; }
+.quote-list { display: flex; flex-direction: column; gap: 10px; }
+.quote-item {
+  background: #faf3e0;
+  border: 2px solid var(--desk-light);
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  min-height: 44px;
+}
+.quote-item:hover { border-color: var(--wax); }
+.quote-item.stamped {
+  border-color: var(--green);
+  background: #eef6ef;
+  cursor: default;
+}
+.quote-text {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.quote-stamp-mark {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: var(--desk);
+  color: var(--parchment);
+}
+.quote-feedback {
+  font-size: 0.8rem;
+  margin-top: 6px;
+  color: var(--ink-soft);
+}
+.quote-item.wrong-temp {
+  border-color: var(--red);
+  animation: shake 0.35s ease;
+}
+@keyframes shake {
+  0%, 100% { transform: none; }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+/* Dawn debate */
+.headline {
+  background: #faf3e0;
+  border: 2px solid var(--desk-light);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+.headline-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+  color: var(--ink);
+}
+.tag-choices {
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.tag-btn {
+  padding: 6px 10px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  border-radius: 999px;
+  border: 1.5px solid var(--desk-light);
+  background: #fff;
+  color: var(--ink-soft);
+  min-height: 36px;
+}
+.tag-btn.picked {
+  background: var(--desk);
+  color: var(--parchment);
+  border-color: var(--desk);
+}
+.prompt-box {
+  background: rgba(61,41,20,0.07);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-style: italic;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+}
+
+/* Report */
+.report {
+  background: #fffef8;
+  border: 2px solid var(--desk);
+  border-radius: 8px;
+  padding: 16px;
+  font-family: var(--font-display);
+}
+.report h3 {
+  text-align: center;
+  border-bottom: 2px double var(--desk-light);
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+  font-size: 1.15rem;
+}
+.report-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 12px;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+.report-themes { font-size: 0.9rem; margin-bottom: 12px; }
+.report-themes li { margin-left: 1.2em; margin-bottom: 4px; }
+.discuss {
+  background: rgba(45, 90, 61, 0.08);
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 10px;
+}
+.discuss h4 { font-family: var(--font-display); margin-bottom: 6px; color: var(--green); }
+.discuss ol { margin-left: 1.2em; font-size: 0.9rem; color: var(--ink-soft); }
+.discuss li { margin-bottom: 6px; }
+
+.footer-note {
+  text-align: center;
+  font-size: 0.75rem;
+  color: rgba(243,230,200,0.55);
+  margin-top: auto;
+  padding-top: 16px;
+}
+.hidden { display: none !important; }
+
+@media print {
+  body { background: #fff; }
+  .topbar, .btn-row, .btn-ghost, .footer-note, .stamp-tray { display: none !important; }
+  .screen { display: none !important; }
+  .screen.active, #screen-report { display: block !important; }
+  .panel, .report { box-shadow: none; border-color: #000; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+<div class="app" id="app" role="application" aria-label="Steer Clear game">
+
+  <!-- Persistent meters (hidden on splash) -->
+  <div class="topbar hidden" id="topbar" aria-live="polite">
+    <div class="topbar-title">
+      <span>Night Desk · Mount Vernon, 1796</span>
+      <div class="candles" id="candles" aria-label="Candles remaining: 3" title="Candles remaining">
+        <span class="candle-lit" aria-hidden="true">🕯</span>
+        <span class="candle-lit" aria-hidden="true">🕯</span>
+        <span class="candle-lit" aria-hidden="true">🕯</span>
+      </div>
+    </div>
+    <div class="meters" id="meters" role="group" aria-label="Republic meters">
+      <div class="meter">
+        <div class="meter-label"><span>Unity</span><span id="v-unity">50</span></div>
+        <div class="meter-bar" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-label="Unity"><div class="meter-fill unity" id="m-unity" style="width:50%"></div></div>
+      </div>
+      <div class="meter">
+        <div class="meter-label"><span>Spirit of Party</span><span id="v-party">30</span></div>
+        <div class="meter-bar" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="30" aria-label="Spirit of Party"><div class="meter-fill party" id="m-party" style="width:30%"></div></div>
+      </div>
+      <div class="meter">
+        <div class="meter-label"><span>Debt Load</span><span id="v-debt">40</span></div>
+        <div class="meter-bar" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="40" aria-label="Debt Load"><div class="meter-fill debt" id="m-debt" style="width:40%"></div></div>
+      </div>
+      <div class="meter">
+        <div class="meter-label"><span>Foreign Entanglements</span><span id="v-foreign">25</span></div>
+        <div class="meter-bar" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25" aria-label="Foreign Entanglements"><div class="meter-fill foreign" id="m-foreign" style="width:25%"></div></div>
+      </div>
+      <div class="meter" style="grid-column: 1 / -1;">
+        <div class="meter-label"><span>Enlightened Public</span><span id="v-public">45</span></div>
+        <div class="meter-bar" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="45" aria-label="Enlightened Public"><div class="meter-fill public" id="m-public" style="width:45%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPLASH -->
+  <section class="screen active" id="screen-splash" aria-labelledby="splash-title">
+    <div class="panel">
+      <div class="splash-ornament" aria-hidden="true">🕯 📜 🕯</div>
+      <h1 id="splash-title">Steer Clear</h1>
+      <p class="lede">Mount Vernon night clerk, autumn 1796</p>
+      <p>President Washington’s Farewell Address has left the desk in stacks of drafts and dispatches. Your job: sort what the republic should <strong>heed</strong>, stamp the principles, and draft a dawn report for class.</p>
+      <div class="video-card">
+        <p><strong>Play after the Farewell Address video</strong></p>
+        <p style="margin-top:6px;font-size:0.9rem;">AI reading of Washington Farewell excerpts:</p>
+        <p style="margin-top:8px;"><a class="link-out" href="https://youtu.be/btt3U51g57g" target="_blank" rel="noopener noreferrer">youtu.be/btt3U51g57g</a></p>
+      </div>
+      <ul class="checklist">
+        <li>Mode A — Swipe Dispatch (HEED / IGNORE)</li>
+        <li>Mode B — Stamp the Principle</li>
+        <li>Mode C — Dawn Debate &amp; Clerk Report</li>
+      </ul>
+      <p class="hint">~6–8 minutes · wrong answers cost a candle, never a hard fail · low-stress HIST 101</p>
+      <div class="btn-row">
+        <button type="button" class="btn btn-primary" id="btn-begin">Light the desk lamp →</button>
+      </div>
+    </div>
+    <p class="footer-note">HIST 101 · Washington’s Farewell Address · No tracking · Works offline after load</p>
+  </section>
+
+  <!-- MODE A -->
+  <section class="screen" id="screen-dispatch" aria-labelledby="dispatch-title">
+    <div class="panel">
+      <div class="mode-badge"><span class="badge">Mode A · Swipe Dispatch</span></div>
+      <h2 id="dispatch-title">Sort the night’s papers</h2>
+      <p class="hint" style="margin-top:0;margin-bottom:10px;">HEED = follow Washington’s counsel · IGNORE = set aside (risky)</p>
+      <div class="progress-dot" id="dispatch-progress" aria-hidden="true"></div>
+      <div class="dispatch-wrap">
+        <div class="dispatch-card" id="dispatch-card" tabindex="0" role="article" aria-live="polite">
+          <div class="card-meta">
+            <span class="card-tag" id="card-era">1796</span>
+            <span id="card-num">1 / 9</span>
+          </div>
+          <div class="card-body" id="card-body"></div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button type="button" class="btn btn-ignore" id="btn-ignore" aria-keyshortcuts="ArrowLeft">← IGNORE</button>
+        <button type="button" class="btn btn-heed" id="btn-heed" aria-keyshortcuts="ArrowRight">HEED →</button>
+      </div>
+      <p class="hint">Keyboard: ← Ignore · → Heed · or tap buttons</p>
+      <div class="feedback" id="dispatch-feedback" role="status"></div>
+    </div>
+  </section>
+
+  <!-- MODE B -->
+  <section class="screen" id="screen-stamp" aria-labelledby="stamp-title">
+    <div class="panel">
+      <div class="mode-badge"><span class="badge">Mode B · Stamp the Principle</span></div>
+      <h2 id="stamp-title">Mark each fragment</h2>
+      <p class="hint" style="margin-top:0;margin-bottom:10px;">Select a stamp, then tap the quote it belongs to.</p>
+      <div class="stamp-tray" id="stamp-tray" role="group" aria-label="Principle stamps"></div>
+      <div class="quote-list" id="quote-list"></div>
+      <div class="btn-row">
+        <button type="button" class="btn btn-primary hidden" id="btn-stamp-next">Continue to Dawn Debate →</button>
+      </div>
+      <div class="feedback" id="stamp-feedback" role="status"></div>
+    </div>
+  </section>
+
+  <!-- MODE C -->
+  <section class="screen" id="screen-debate" aria-labelledby="debate-title">
+    <div class="panel">
+      <div class="mode-badge"><span class="badge">Mode C · Dawn Debate</span></div>
+      <h2 id="debate-title">Has the republic heeded this?</h2>
+      <div class="prompt-box">Open prompt: skim each modern headline and tag which Farewell warning it most tests. There is no single right answer — practice matching themes.</div>
+      <div id="headline-list"></div>
+      <div class="btn-row">
+        <button type="button" class="btn btn-primary" id="btn-report" disabled>Seal the Clerk Report →</button>
+      </div>
+      <p class="hint">Tag every headline to unlock your report.</p>
+    </div>
+  </section>
+
+  <!-- REPORT -->
+  <section class="screen" id="screen-report" aria-labelledby="report-title">
+    <div class="panel">
+      <div class="mode-badge"><span class="badge">Clerk Report</span></div>
+      <h2 id="report-title" class="sr-only">Your Clerk Report</h2>
+      <div class="report" id="report-body"></div>
+      <div class="btn-row">
+        <button type="button" class="btn btn-secondary" id="btn-print">Print / Save report</button>
+        <button type="button" class="btn btn-primary" id="btn-replay">Play again</button>
+      </div>
+    </div>
+    <p class="footer-note">HIST 101 · Steer Clear · Mount Vernon night desk</p>
+  </section>
+
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  const clamp = (n, lo, hi) => Math.max(lo, Math.min(hi, n));
+
+  const state = {
+    candles: 3,
+    meters: { unity: 50, party: 30, debt: 40, foreign: 25, public: 45 },
+    dispatchIndex: 0,
+    dispatchDone: false,
+    stamped: {},
+    selectedStamp: null,
+    stampCorrect: 0,
+    stampAttempts: 0,
+    headlineTags: {},
+    themesPracticed: new Set(),
+  };
+
+  const DISPATCHES = [
+    {
+      era: '1796',
+      text: 'A northern gazette and a southern broadside each demand the other region “submit or secede.” Your clerk’s note asks: answer them separately, or call the Union one people?',
+      correct: 'heed',
+      theme: 'unity',
+      effects: { heed: { unity: 12, party: -6 }, ignore: { unity: -10, party: 10 } },
+      good: 'Washington warned geographic factions to treat the Union as one people under one government.',
+      soft: 'Setting regional fury aside lets geographic faction harden — the Farewell begged Americans to cherish national unity.',
+    },
+    {
+      era: '1796',
+      text: 'A partisan club presses you to brand every opponent a traitor and pack offices with loyal friends. Stamp “loyalty first”?',
+      correct: 'ignore',
+      theme: 'party',
+      effects: { heed: { party: 14, unity: -8 }, ignore: { party: -10, unity: 8 } },
+      good: 'Right call. The “spirit of party,” Washington wrote, distracts public councils and opens a door toward despotism.',
+      soft: 'Heeding pure party loyalty feeds the spirit of party he feared — faction as a road toward despotism.',
+    },
+    {
+      era: 'Modern echo',
+      text: 'Cable hosts urge viewers to see the other party as an existential enemy, not fellow citizens. Boost that framing in the night brief?',
+      correct: 'ignore',
+      theme: 'party',
+      effects: { heed: { party: 12, unity: -10 }, ignore: { party: -8, unity: 8 } },
+      good: 'Steer clear. Modern tribal media echoes the Farewell’s warning: party spirit can poison the public mind.',
+      soft: 'Amplifying “enemy” language inflames spirit of party — the very habit Washington linked to despotism risk.',
+    },
+    {
+      era: '1796',
+      text: 'Congress eyes a flashy new project while interest on the public debt goes unpaid. Delay the creditors?',
+      correct: 'ignore',
+      theme: 'credit',
+      effects: { heed: { debt: 14, unity: -4 }, ignore: { debt: -12, public: 4 } },
+      good: 'Protect public credit. Washington urged cherishing credit and using it sparingly — avoid accumulation of debt.',
+      soft: 'Ignoring creditors raises Debt Load. The Farewell tied public credit to national character and peace.',
+    },
+    {
+      era: '1796',
+      text: 'A European court offers a “permanent alliance” with secret military obligations if America picks a side in their war.',
+      correct: 'ignore',
+      theme: 'alliances',
+      effects: { heed: { foreign: 16, unity: -4 }, ignore: { foreign: -12, unity: 4 } },
+      good: 'Steer clear of permanent alliances. Washington allowed temporary ones in extremity, not lasting entanglements.',
+      soft: 'A permanent foreign tie spikes Foreign Entanglements — the Farewell’s famous counsel was to avoid them.',
+    },
+    {
+      era: 'Modern echo',
+      text: 'A think-tank memo proposes automatic forever-commitments abroad “so we never have to debate them again.” File under urgent yes?',
+      correct: 'ignore',
+      theme: 'alliances',
+      effects: { heed: { foreign: 14 }, ignore: { foreign: -10, public: 4 } },
+      good: 'Debate first. Permanent, unexamined commitments are the modern face of the entanglement he warned against.',
+      soft: 'Rubber-stamping forever commitments raises Foreign Entanglements without the public deliberation he prized.',
+    },
+    {
+      era: '1796',
+      text: 'A county skips funding common schools: “Virtue will take care of itself.” Approve the cut?',
+      correct: 'ignore',
+      theme: 'education',
+      effects: { heed: { public: -14 }, ignore: { public: 14, unity: 4 } },
+      good: 'Fund institutions that diffuse knowledge. Religion and morality, plus education, prop republican government.',
+      soft: 'Cutting civic learning dims the Enlightened Public. Washington linked knowledge, morality, and free government.',
+    },
+    {
+      era: '1796',
+      text: 'A faction pamphlet says religion and morality are private hobbies, useless to public life. Endorse that line?',
+      correct: 'ignore',
+      theme: 'morality',
+      effects: { heed: { public: -12, party: 6 }, ignore: { public: 12, unity: 4 } },
+      good: 'Washington called religion and morality indispensable supports of political prosperity — not mere private taste.',
+      soft: 'Dismissing moral supports weakens the Enlightened Public meter he thought republics need.',
+    },
+    {
+      era: 'Modern echo',
+      text: 'Online, regional memes mock “the other coast” as not really American. Pin them to the official clerk board?',
+      correct: 'ignore',
+      theme: 'unity',
+      effects: { heed: { unity: -12, party: 8 }, ignore: { unity: 10, party: -6 } },
+      good: 'Don’t. Geographic scorn is the old sectional habit in a new coat — the Farewell prized national unity.',
+      soft: 'Platforming regional contempt lowers Unity and feeds faction — exactly what he asked citizens to resist.',
+    },
+  ];
+
+  const QUOTES = [
+    {
+      id: 'q1',
+      text: '“The unity of government… is a main pillar in the edifice of your real independence.”',
+      stamp: 'UNITY',
+      explain: 'National unity as the pillar of independence — resist geographic and party fracture.',
+    },
+    {
+      id: 'q2',
+      text: '“The spirit of party… agitates the community with ill-founded jealousies… and opens the door to foreign influence and corruption.”',
+      stamp: 'FACTION',
+      explain: 'Party spirit → jealousy, misrule, and a path toward despotism / foreign meddling.',
+    },
+    {
+      id: 'q3',
+      text: '“As a very important source of strength and security, cherish public credit… avoid the accumulation of debt.”',
+      stamp: 'CREDIT',
+      explain: 'Public credit and disciplined debt — pay what you owe; borrow sparingly.',
+    },
+    {
+      id: 'q4',
+      text: '“Steer clear of permanent alliances with any portion of the foreign world.”',
+      stamp: 'ALLIANCES',
+      explain: 'The namesake counsel: temporary exigencies maybe; permanent entanglements, no.',
+    },
+    {
+      id: 'q5',
+      text: '“Promote then, as an object of primary importance, institutions for the general diffusion of knowledge.”',
+      stamp: 'EDUCATION',
+      explain: 'An enlightened public opinion needs schools and diffused knowledge.',
+    },
+    {
+      id: 'q6',
+      text: '“Of all the dispositions and habits which lead to political prosperity, religion and morality are indispensable supports.”',
+      stamp: 'MORALITY',
+      explain: 'Religion and morality as props of republican political prosperity.',
+    },
+  ];
+
+  const STAMPS = ['UNITY', 'FACTION', 'CREDIT', 'ALLIANCES', 'EDUCATION', 'MORALITY'];
+
+  const HEADLINES = [
+    {
+      id: 'h1',
+      title: 'Poll: Majority say the other party is a “threat to the nation’s future,” not just a rival.',
+      themes: ['FACTION', 'UNITY'],
+    },
+    {
+      id: 'h2',
+      title: 'Interest payments crowd out other spending as national debt hits another record.',
+      themes: ['CREDIT'],
+    },
+    {
+      id: 'h3',
+      title: 'Senate debates automatic multi-decade security pact with limited exit clauses.',
+      themes: ['ALLIANCES'],
+    },
+    {
+      id: 'h4',
+      title: 'State cuts civics and history hours; “job skills only,” board argues.',
+      themes: ['EDUCATION', 'MORALITY'],
+    },
+  ];
+
+  const THEME_LABELS = {
+    UNITY: 'National unity',
+    FACTION: 'Spirit of party / faction',
+    CREDIT: 'Public credit & debt',
+    ALLIANCES: 'Permanent foreign alliances',
+    EDUCATION: 'Diffusion of knowledge',
+    MORALITY: 'Religion & morality',
+  };
+
+  // DOM
+  const $ = (id) => document.getElementById(id);
+  const topbar = $('topbar');
+  const screens = {
+    splash: $('screen-splash'),
+    dispatch: $('screen-dispatch'),
+    stamp: $('screen-stamp'),
+    debate: $('screen-debate'),
+    report: $('screen-report'),
+  };
+
+  function showScreen(name) {
+    Object.keys(screens).forEach((k) => {
+      screens[k].classList.toggle('active', k === name);
+    });
+    topbar.classList.toggle('hidden', name === 'splash');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function setMeter(key, value) {
+    state.meters[key] = clamp(Math.round(value), 0, 100);
+    const el = $('m-' + key);
+    const val = $('v-' + key);
+    const bar = el.parentElement;
+    el.style.width = state.meters[key] + '%';
+    val.textContent = state.meters[key];
+    bar.setAttribute('aria-valuenow', state.meters[key]);
+  }
+
+  function applyEffects(effects) {
+    Object.keys(effects).forEach((k) => {
+      setMeter(k, state.meters[k] + effects[k]);
+    });
+  }
+
+  function renderCandles() {
+    const box = $('candles');
+    box.innerHTML = '';
+    box.setAttribute('aria-label', 'Candles remaining: ' + state.candles);
+    for (let i = 0; i < 3; i++) {
+      const s = document.createElement('span');
+      s.setAttribute('aria-hidden', 'true');
+      s.textContent = '🕯';
+      s.className = i < state.candles ? 'candle-lit' : 'candle-out';
+      box.appendChild(s);
+    }
+  }
+
+  function loseCandle() {
+    if (state.candles > 0) {
+      state.candles -= 1;
+      renderCandles();
+    }
+  }
+
+  // ——— Mode A ———
+  function renderProgress() {
+    const box = $('dispatch-progress');
+    box.innerHTML = '';
+    DISPATCHES.forEach((_, i) => {
+      const d = document.createElement('span');
+      if (i < state.dispatchIndex) d.className = 'done';
+      else if (i === state.dispatchIndex) d.className = 'current';
+      box.appendChild(d);
+    });
+  }
+
+  function renderDispatchCard() {
+    const card = DISPATCHES[state.dispatchIndex];
+    if (!card) return;
+    const el = $('dispatch-card');
+    el.classList.remove('exit-heed', 'exit-ignore', 'swipe-left', 'swipe-right');
+    $('card-era').textContent = card.era;
+    $('card-num').textContent = (state.dispatchIndex + 1) + ' / ' + DISPATCHES.length;
+    $('card-body').textContent = card.text;
+    $('dispatch-feedback').className = 'feedback';
+    $('dispatch-feedback').innerHTML = '';
+    $('btn-heed').disabled = false;
+    $('btn-ignore').disabled = false;
+    renderProgress();
+  }
+
+  function finishDispatch() {
+    state.dispatchDone = true;
+    $('btn-heed').disabled = true;
+    $('btn-ignore').disabled = true;
+    const fb = $('dispatch-feedback');
+    fb.className = 'feedback show good';
+    fb.innerHTML = '<strong>Dispatches sorted.</strong> The stamp desk is cleared — time to mark Farewell principles.';
+    setTimeout(() => {
+      buildStampMode();
+      showScreen('stamp');
+    }, 900);
+  }
+
+  function chooseDispatch(choice) {
+    if (state.dispatchDone) return;
+    const card = DISPATCHES[state.dispatchIndex];
+    if (!card) return;
+    $('btn-heed').disabled = true;
+    $('btn-ignore').disabled = true;
+
+    const correct = choice === card.correct;
+    applyEffects(card.effects[choice]);
+    state.themesPracticed.add(card.theme);
+
+    const el = $('dispatch-card');
+    el.classList.add(choice === 'heed' ? 'exit-heed' : 'exit-ignore');
+
+    const fb = $('dispatch-feedback');
+    if (correct) {
+      fb.className = 'feedback show good';
+      fb.innerHTML = '<strong>Well sorted.</strong> ' + card.good;
+    } else {
+      loseCandle();
+      fb.className = 'feedback show soft';
+      fb.innerHTML = '<strong>Candle dims — but the night continues.</strong> ' + card.soft;
+    }
+
+    setTimeout(() => {
+      state.dispatchIndex += 1;
+      if (state.dispatchIndex >= DISPATCHES.length) {
+        finishDispatch();
+      } else {
+        renderDispatchCard();
+      }
+    }, 1100);
+  }
+
+  // Swipe support
+  (function setupSwipe() {
+    const el = $('dispatch-card');
+    let startX = null;
+    let tracking = false;
+    el.addEventListener('touchstart', (e) => {
+      if (e.touches.length !== 1) return;
+      startX = e.touches[0].clientX;
+      tracking = true;
+    }, { passive: true });
+    el.addEventListener('touchmove', (e) => {
+      if (!tracking || startX === null) return;
+      const dx = e.touches[0].clientX - startX;
+      el.classList.toggle('swipe-right', dx > 40);
+      el.classList.toggle('swipe-left', dx < -40);
+    }, { passive: true });
+    el.addEventListener('touchend', (e) => {
+      if (!tracking || startX === null) return;
+      const dx = (e.changedTouches[0].clientX - startX);
+      el.classList.remove('swipe-left', 'swipe-right');
+      tracking = false;
+      startX = null;
+      if (dx > 80) chooseDispatch('heed');
+      else if (dx < -80) chooseDispatch('ignore');
+    });
+  })();
+
+  // ——— Mode B ———
+  function buildStampMode() {
+    state.selectedStamp = null;
+    state.stamped = {};
+    state.stampCorrect = 0;
+    state.stampAttempts = 0;
+    $('btn-stamp-next').classList.add('hidden');
+    $('stamp-feedback').className = 'feedback';
+
+    const tray = $('stamp-tray');
+    tray.innerHTML = '';
+    STAMPS.forEach((s) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'stamp';
+      b.textContent = s;
+      b.setAttribute('aria-pressed', 'false');
+      b.dataset.stamp = s;
+      b.addEventListener('click', () => selectStamp(s, b));
+      tray.appendChild(b);
+    });
+
+    const list = $('quote-list');
+    list.innerHTML = '';
+    // shuffle copy for variety
+    const order = QUOTES.slice();
+    for (let i = order.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [order[i], order[j]] = [order[j], order[i]];
+    }
+    order.forEach((q) => {
+      const item = document.createElement('div');
+      item.className = 'quote-item';
+      item.dataset.id = q.id;
+      item.setAttribute('role', 'button');
+      item.setAttribute('tabindex', '0');
+      item.setAttribute('aria-label', 'Quote: ' + q.text);
+      item.innerHTML = '<div class="quote-text">' + q.text + '</div><div class="quote-feedback"></div>';
+      item.addEventListener('click', () => tryStampQuote(q, item));
+      item.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          tryStampQuote(q, item);
+        }
+      });
+      list.appendChild(item);
+    });
+  }
+
+  function selectStamp(name, btn) {
+    if (Object.values(state.stamped).includes(name)) return;
+    state.selectedStamp = name;
+    document.querySelectorAll('.stamp').forEach((b) => {
+      b.classList.toggle('selected', b.dataset.stamp === name);
+      b.setAttribute('aria-pressed', b.dataset.stamp === name ? 'true' : 'false');
+    });
+  }
+
+  function tryStampQuote(q, item) {
+    if (state.stamped[q.id]) return;
+    if (!state.selectedStamp) {
+      const fb = $('stamp-feedback');
+      fb.className = 'feedback show soft';
+      fb.innerHTML = '<strong>Pick a stamp first.</strong> Select UNITY, FACTION, CREDIT, ALLIANCES, EDUCATION, or MORALITY, then tap the quote.';
+      return;
+    }
+    state.stampAttempts += 1;
+    const fbLine = item.querySelector('.quote-feedback');
+    if (state.selectedStamp === q.stamp) {
+      state.stamped[q.id] = q.stamp;
+      state.stampCorrect += 1;
+      state.themesPracticed.add(q.stamp.toLowerCase());
+      item.classList.add('stamped');
+      item.insertAdjacentHTML('beforeend', '<span class="quote-stamp-mark">' + q.stamp + '</span>');
+      fbLine.textContent = q.explain;
+      applyEffects(stampEffects(q.stamp, true));
+      // mark stamp used
+      document.querySelectorAll('.stamp').forEach((b) => {
+        if (b.dataset.stamp === q.stamp) {
+          b.classList.add('used');
+          b.classList.remove('selected');
+          b.disabled = true;
+        }
+      });
+      state.selectedStamp = null;
+      $('stamp-feedback').className = 'feedback';
+      if (Object.keys(state.stamped).length >= QUOTES.length) {
+        $('btn-stamp-next').classList.remove('hidden');
+        const fb = $('stamp-feedback');
+        fb.className = 'feedback show good';
+        fb.innerHTML = '<strong>All fragments stamped.</strong> Dawn is near — open the debate desk.';
+      }
+    } else {
+      loseCandle();
+      item.classList.add('wrong-temp');
+      fbLine.textContent = 'Not quite — that stamp fits another warning. Candle dims; try a different mark.';
+      applyEffects(stampEffects(state.selectedStamp, false));
+      setTimeout(() => item.classList.remove('wrong-temp'), 400);
+    }
+  }
+
+  function stampEffects(stamp, ok) {
+    if (!ok) return { party: 3 };
+    switch (stamp) {
+      case 'UNITY': return { unity: 8, party: -4 };
+      case 'FACTION': return { party: -8, unity: 4 };
+      case 'CREDIT': return { debt: -8, public: 4 };
+      case 'ALLIANCES': return { foreign: -8 };
+      case 'EDUCATION': return { public: 10 };
+      case 'MORALITY': return { public: 8, unity: 2 };
+      default: return {};
+    }
+  }
+
+  // ——— Mode C ———
+  function buildDebate() {
+    state.headlineTags = {};
+    $('btn-report').disabled = true;
+    const list = $('headline-list');
+    list.innerHTML = '';
+    HEADLINES.forEach((h) => {
+      const box = document.createElement('div');
+      box.className = 'headline';
+      box.dataset.id = h.id;
+      const title = document.createElement('div');
+      title.className = 'headline-title';
+      title.textContent = h.title;
+      const choices = document.createElement('div');
+      choices.className = 'tag-choices';
+      choices.setAttribute('role', 'group');
+      choices.setAttribute('aria-label', 'Tag farewell warning for: ' + h.title);
+      STAMPS.forEach((s) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'tag-btn';
+        b.textContent = s;
+        b.addEventListener('click', () => {
+          state.headlineTags[h.id] = s;
+          state.themesPracticed.add(s.toLowerCase());
+          choices.querySelectorAll('.tag-btn').forEach((x) => x.classList.remove('picked'));
+          b.classList.add('picked');
+          // soft meter nudge — any thoughtful tag is ok
+          if (h.themes.includes(s)) {
+            applyEffects({ public: 2, unity: 1 });
+          } else {
+            applyEffects({ public: 1 });
+          }
+          checkDebateReady();
+        });
+        choices.appendChild(b);
+      });
+      box.appendChild(title);
+      box.appendChild(choices);
+      list.appendChild(box);
+    });
+  }
+
+  function checkDebateReady() {
+    const ready = HEADLINES.every((h) => state.headlineTags[h.id]);
+    $('btn-report').disabled = !ready;
+  }
+
+  function softScore() {
+    const m = state.meters;
+    // Higher unity & public good; lower party, debt, foreign good
+    const score =
+      m.unity +
+      m.public +
+      (100 - m.party) +
+      (100 - m.debt) +
+      (100 - m.foreign);
+    const avg = Math.round(score / 5);
+    let band = 'Apprentice clerk';
+    if (avg >= 70 && state.candles >= 2) band = 'Steady hand at Mount Vernon';
+    else if (avg >= 55 || state.candles >= 1) band = 'Thoughtful night watch';
+    else band = 'Lessons still glowing in the wax';
+    return { avg, band };
+  }
+
+  function buildReport() {
+    const { avg, band } = softScore();
+    const themes = Array.from(state.themesPracticed);
+    const themeList = themes.length
+      ? themes.map((t) => {
+          const key = t.toUpperCase();
+          return THEME_LABELS[key] || t;
+        })
+      : ['Unity', 'Faction', 'Credit', 'Alliances', 'Education / morality'];
+
+    const headlineLines = HEADLINES.map((h) => {
+      const tag = state.headlineTags[h.id] || '—';
+      return '<li><em>' + escapeHtml(h.title) + '</em> → tagged <strong>' + tag + '</strong></li>';
+    }).join('');
+
+    const body = $('report-body');
+    body.innerHTML =
+      '<h3>Clerk Report — Steer Clear</h3>' +
+      '<p style="text-align:center;font-size:0.9rem;margin-bottom:12px;">Mount Vernon night desk · HIST 101</p>' +
+      '<div class="report-grid">' +
+      '<div>🕯 Candles left: <strong>' + state.candles + ' / 3</strong></div>' +
+      '<div>Soft score: <strong>' + avg + '</strong> · ' + band + '</div>' +
+      '<div>Unity: <strong>' + state.meters.unity + '</strong></div>' +
+      '<div>Spirit of Party: <strong>' + state.meters.party + '</strong></div>' +
+      '<div>Debt Load: <strong>' + state.meters.debt + '</strong></div>' +
+      '<div>Foreign Entanglements: <strong>' + state.meters.foreign + '</strong></div>' +
+      '<div style="grid-column:1/-1;">Enlightened Public: <strong>' + state.meters.public + '</strong></div>' +
+      '</div>' +
+      '<div class="report-themes"><strong>Themes practiced</strong><ul>' +
+      themeList.map((t) => '<li>' + escapeHtml(String(t)) + '</li>').join('') +
+      '</ul></div>' +
+      '<div class="report-themes"><strong>Dawn Debate tags</strong><ul>' + headlineLines + '</ul></div>' +
+      '<p style="font-size:0.85rem;color:var(--ink-soft);">Wrong sorts dim a candle but never end the night — Washington’s warnings are habits to practice, not a single quiz grade.</p>' +
+      '<div class="discuss">' +
+      '<h4>Discussion questions (bring to class)</h4>' +
+      '<ol>' +
+      '<li>Which Farewell warning feels hardest for a large, diverse republic to “heed” today — unity, party spirit, public credit, permanent alliances, or education/morality — and why?</li>' +
+      '<li>Washington feared the spirit of party could open a path toward despotism. Where is the line between loyal opposition and the factional habits he described?</li>' +
+      '</ol></div>';
+  }
+
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function resetGame() {
+    state.candles = 3;
+    state.meters = { unity: 50, party: 30, debt: 40, foreign: 25, public: 45 };
+    state.dispatchIndex = 0;
+    state.dispatchDone = false;
+    state.stamped = {};
+    state.selectedStamp = null;
+    state.stampCorrect = 0;
+    state.stampAttempts = 0;
+    state.headlineTags = {};
+    state.themesPracticed = new Set();
+    Object.keys(state.meters).forEach((k) => setMeter(k, state.meters[k]));
+    renderCandles();
+    showScreen('splash');
+  }
+
+  // Events
+  $('btn-begin').addEventListener('click', () => {
+    Object.keys(state.meters).forEach((k) => setMeter(k, state.meters[k]));
+    renderCandles();
+    renderDispatchCard();
+    showScreen('dispatch');
+  });
+  $('btn-heed').addEventListener('click', () => chooseDispatch('heed'));
+  $('btn-ignore').addEventListener('click', () => chooseDispatch('ignore'));
+  $('btn-stamp-next').addEventListener('click', () => {
+    buildDebate();
+    showScreen('debate');
+  });
+  $('btn-report').addEventListener('click', () => {
+    buildReport();
+    showScreen('report');
+  });
+  $('btn-print').addEventListener('click', () => window.print());
+  $('btn-replay').addEventListener('click', resetGame);
+
+  document.addEventListener('keydown', (e) => {
+    if (!screens.dispatch.classList.contains('active')) return;
+    if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      chooseDispatch('heed');
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      chooseDispatch('ignore');
+    }
+  });
+})();
+</script>
+</body>
+</html>
