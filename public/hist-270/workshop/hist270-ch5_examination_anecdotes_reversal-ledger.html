@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Reversal Ledger — The Examination System — HIST 270</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: Arial, Helvetica, sans-serif; font-size: 11pt;
+  color: #1a1a1a; background: #fff; max-width: 980px;
+  margin: 0 auto; padding: 1.4em 1.6em 2em;
+  line-height: 1.5;
+}
+.toolbar { display: flex; flex-wrap: wrap; gap: 0.6em; justify-content: flex-end; margin-bottom: 1.2em; }
+.btn {
+  padding: 0.55em 1.3em; background: #1a1a1a; color: #fff; border: none;
+  border-radius: 4px; font-size: 10pt; cursor: pointer; font-family: Arial, sans-serif;
+}
+.btn:hover { background: #333; }
+.btn:focus-visible { outline: 3px solid #0b5fa5; outline-offset: 2px; }
+.btn.secondary { background: #fff; color: #1a1a1a; border: 1px solid #767676; }
+.btn.secondary:hover { background: #f0f0f0; }
+.doc-header { border-bottom: 2px solid #1a1a1a; padding-bottom: 0.5em; margin-bottom: 1em; }
+.course-line { font-size: 9.5pt; color: #444; margin-bottom: 0.2em; }
+h1.doc-title { font-size: 15pt; font-weight: 700; line-height: 1.25; margin-bottom: 0.3em; }
+.source-line { font-size: 10pt; color: #444; }
+.name-row { margin-top: 0.9em; display: flex; flex-wrap: wrap; gap: 1.2em; align-items: center; }
+.name-row label { font-size: 10.5pt; font-weight: 700; }
+.name-row input {
+  font-family: Arial, sans-serif; font-size: 10.5pt; padding: 0.3em 0.4em;
+  border: none; border-bottom: 1px solid #333; background: transparent; width: 260px; color: #1a1a1a;
+}
+.name-row input:focus { outline: none; border-bottom: 2px solid #0b5fa5; background: #f4f8fc; }
+.instructions {
+  border: 1px solid #ccc; background: #f8f8f8;
+  padding: 0.9em 1.1em; margin: 1.2em 0 1.6em; font-size: 10pt;
+}
+.instructions p { margin-bottom: 0.45em; line-height: 1.55; }
+.instructions p:last-child { margin-bottom: 0; }
+.instructions ul { margin: 0.4em 0 0.5em 1.3em; }
+.instructions li { margin-bottom: 0.3em; line-height: 1.5; }
+h2.part-heading {
+  font-size: 13pt; font-weight: 700; color: #1a1a1a;
+  border-bottom: 2px solid #444; padding-bottom: 0.2em; margin: 1.8em 0 0.8em;
+}
+.sub-hint { font-size: 9.5pt; color: #767676; font-style: italic; margin-bottom: 0.9em; }
+.status { font-size: 9pt; color: #767676; font-style: italic; min-height: 1.2em; margin-bottom: 0.4em; text-align: right; }
+table.ledger { width: 100%; border-collapse: collapse; margin-top: 0.4em; font-size: 10pt; }
+table.ledger th {
+  background: #e0e0e0; border: 1px solid #999;
+  padding: 0.5em 0.6em; text-align: left; font-size: 9.5pt; font-weight: 700; vertical-align: bottom;
+}
+table.ledger td { border: 1px solid #999; padding: 0.4em 0.5em; vertical-align: top; }
+td.name-cell { width: 20%; font-size: 9.5pt; padding-top: 0.6em; }
+td.name-cell .anec-pos { display: block; font-weight: 700; font-size: 10pt; margin-bottom: 0.15em; }
+td.name-cell .anec-title { display: block; margin-bottom: 0.3em; }
+td.name-cell .anec-locator { display: block; font-size: 8.5pt; color: #767676; font-style: italic; line-height: 1.4; }
+td.field-cell { width: 20%; padding: 0.25em; }
+textarea.cell-input {
+  width: 100%; min-height: 7.5em; border: 1px solid #d4d4d4; border-radius: 3px;
+  font-family: Arial, Helvetica, sans-serif; font-size: 9.5pt; line-height: 1.45;
+  padding: 0.4em 0.45em; resize: vertical; color: #1a1a1a; background: #fff;
+  overflow: hidden;
+}
+textarea.cell-input:focus { outline: none; border: 2px solid #0b5fa5; background: #f4f8fc; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.question-block { margin-bottom: 1.5em; page-break-inside: avoid; }
+.q-prompt { font-size: 10.5pt; line-height: 1.6; margin-bottom: 0.5em; }
+.q-prompt strong { display: block; margin-bottom: 0.25em; }
+textarea.answer-input {
+  width: 100%; min-height: 7em; border: 1px solid #d4d4d4; border-radius: 3px;
+  font-family: Arial, Helvetica, sans-serif; font-size: 10.5pt; line-height: 1.6;
+  padding: 0.5em 0.6em; resize: vertical; color: #1a1a1a; background: #fff; overflow: hidden;
+}
+textarea.answer-input:focus { outline: none; border: 2px solid #0b5fa5; background: #f4f8fc; }
+.doc-footer {
+  margin-top: 2.2em; padding-top: 0.5em; border-top: 1px solid #ccc;
+  font-size: 9pt; color: #767676; font-style: italic; text-align: center;
+}
+@media (max-width: 760px) {
+  body { padding: 1em 0.9em 2em; }
+  table.ledger, table.ledger tbody, table.ledger tr, table.ledger td { display: block; width: 100%; }
+  table.ledger thead { display: none; }
+  table.ledger tr { border: 2px solid #1a1a1a; margin-bottom: 1.4em; padding: 0.6em; }
+  table.ledger td { border: none; padding: 0.3em 0; }
+  td.name-cell { font-size: 11pt; border-bottom: 1px solid #ccc; padding-bottom: 0.5em; margin-bottom: 0.5em; }
+  td.name-cell .anec-locator { font-size: 9.5pt; }
+  td.field-cell::before {
+    content: attr(data-label); display: block; font-size: 9.5pt; font-weight: 700;
+    color: #1a1a1a; margin-bottom: 0.25em;
+  }
+  td.field-cell { padding: 0.5em 0 0.2em; }
+  .toolbar { justify-content: stretch; }
+  .btn { flex: 1 1 auto; }
+  .name-row input { width: 100%; }
+}
+@media print {
+  .toolbar, .status { display: none !important; }
+  body { padding: 0; max-width: none; font-size: 10pt; }
+  h2.part-heading { page-break-after: avoid; }
+  table.ledger tr { page-break-inside: avoid; }
+  .question-block { page-break-inside: avoid; }
+  textarea.cell-input, textarea.answer-input { border: 1px solid #999; background: #fff !important; }
+  .instructions { background: #f8f8f8 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  table.ledger th { background: #e0e0e0 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .name-row input { border-bottom: 1px solid #333; }
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button type="button" class="btn" id="export-btn">Export answers as .txt</button>
+  <button type="button" class="btn secondary" id="print-btn">Print / Save as PDF</button>
+  <button type="button" class="btn secondary" id="clear-btn">Clear all</button>
+</div>
+
+<div class="doc-header">
+  <p class="course-line">HIST 270: History of China · Richland Community College</p>
+  <h1 class="doc-title">The Reversal Ledger</h1>
+  <p class="source-line">Primary source: &ldquo;The Examination System,&rdquo; in <em>Chinese Civilization: A Sourcebook</em>, trans. Clara Yu</p>
+  <div class="name-row">
+    <label for="student-name">Name:</label>
+    <input type="text" id="student-name" autocomplete="name">
+  </div>
+</div>
+
+<div class="instructions">
+  <p><strong>Step one: the reading.</strong> Read &ldquo;The Examination System&rdquo; in <em>Chinese Civilization</em>. The selection opens with a short editor&rsquo;s introduction, then gives eight anecdotes separated by asterisks. <strong>Read all eight.</strong> As you read, keep one thing in mind: these are not government records. They come from an anthology of gossip and vignettes compiled late in the Tang dynasty, and they are <em>supposedly</em> based on true incidents. Someone chose to collect these particular stories and to leave others out. Keep the text in front of you for the rest of this assignment &mdash; the work is not designed to be done from memory.</p>
+  <p><strong>Step two: the ledger.</strong> You will chart <strong>four</strong> of the eight &mdash; the 1st, the 2nd, the 6th, and the 8th &mdash; which together run from the opening of the selection to its last paragraph. The ledger names each one and tells you where to find it. Work on your own: do not confer with anyone and do not split the anecdotes among friends. I want your reading, not someone else&rsquo;s. Once you have finished the selection, the table should take about fifteen minutes. Fill in four columns for each anecdote:</p>
+  <ul>
+    <li><strong>Starts high</strong> &mdash; who holds rank, wealth, reputation, or office at the opening of the story.</li>
+    <li><strong>Starts low</strong> &mdash; who holds none of those things at the opening.</li>
+    <li><strong>What causes the flip</strong> &mdash; the specific event, decision, or accident that changes their positions. Be precise. &ldquo;He studied hard&rdquo; and &ldquo;he was more talented&rdquo; are not answers; something in the story made the change happen, and in two of these four it is not what you would expect.</li>
+    <li><strong>Who is humiliated, and how</strong> &mdash; name the person and name the exact humiliation. Several of these are public, and a few are permanent. Read carefully: the person humiliated is not always the rival who lost.</li>
+  </ul>
+  <p><strong>One rule that matters: work from the text, not from memory.</strong> Every cell should be something you could point to on the page. If a cell is genuinely thin &mdash; if the story simply does not tell you much &mdash; say so in four or five words rather than inventing a detail. Precision counts for more than a full box.</p>
+  <p><strong>Step three: the questions.</strong> When the table is done, answer the three questions underneath it in complete sentences. Those questions ask about the whole selection, not only the four you charted, so draw on everything you read.</p>
+  <p><strong>Submitting.</strong> Your work saves in this browser as you type, on this device only. When you are finished, click <strong>Export answers as .txt</strong> and upload the downloaded file. Do not close the page before you export.</p>
+</div>
+
+<h2 class="part-heading">The ledger</h2>
+<p class="sub-hint">Four anecdotes, spanning the selection from beginning to end. Every cell should be traceable to a specific place in the text.</p>
+<p class="status" id="save-status" role="status" aria-live="polite"></p>
+
+<table class="ledger">
+  <thead>
+    <tr>
+      <th scope="col">Anecdote</th>
+      <th scope="col">Starts high</th>
+      <th scope="col">Starts low</th>
+      <th scope="col">What causes the flip</th>
+      <th scope="col">Who is humiliated, and how</th>
+    </tr>
+  </thead>
+  <tbody id="ledger-body"></tbody>
+</table>
+
+<h2 class="part-heading">After the ledger</h2>
+<p class="sub-hint">Answer in complete sentences, drawing on the whole selection. Two or three sentences each is enough.</p>
+
+<div class="question-block">
+  <p class="q-prompt"><strong>1. What behavior gets punished in this collection?</strong> Look down your humiliation column, then think about the four anecdotes you did not chart. What do the humiliated men have in common?</p>
+  <label class="vh" for="q1">Answer to question 1</label>
+  <textarea class="answer-input" id="q1" data-key="q1"></textarea>
+</div>
+
+<div class="question-block">
+  <p class="q-prompt"><strong>2. What behavior gets rewarded?</strong> Same method, from the other direction.</p>
+  <label class="vh" for="q2">Answer to question 2</label>
+  <textarea class="answer-input" id="q2" data-key="q2"></textarea>
+</div>
+
+<div class="question-block">
+  <p class="q-prompt"><strong>3. The editor&rsquo;s introduction says that most men who sat the examinations still came from well-connected families.</strong> Almost every story in this selection says the opposite: the poor man beats the rich man, the clerk beats the twenty-year candidate, the arrogant jinshi dies a minor official. If the system mostly kept powerful families in power, why would anyone collect and circulate stories insisting that it did not? Who benefits from stories that teach these particular lessons?</p>
+  <label class="vh" for="q3">Answer to question 3</label>
+  <textarea class="answer-input" id="q3" data-key="q3"></textarea>
+</div>
+
+<div class="doc-footer">HIST 270: History of China · Richland Community College</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var ANECDOTES = [
+    {
+      key: "a1",
+      pos: "1st of 8",
+      title: "Xiao Yingshi and the old man in the purple robe",
+      locator: "Opens the selection, right after the editor's introduction."
+    },
+    {
+      key: "a2",
+      pos: "2nd of 8",
+      title: "Lu Zhao and Huang Po",
+      locator: "Follows the first set of asterisks. Ends with a poem about a dragon boat race."
+    },
+    {
+      key: "a6",
+      pos: "6th of 8",
+      title: "Xu Tang and Wang Zun",
+      locator: "The first clear reversal after the three middle anecdotes. Xu Tang calls someone a “lowly clerk.”"
+    },
+    {
+      key: "a8",
+      pos: "8th of 8",
+      title: "Zhang Shu and Cui Zhaowei",
+      locator: "The last anecdote in the selection. It begins with a visit to a fortune-teller."
+    }
+  ];
+
+  var FIELDS = [
+    { key: "high", label: "Starts high" },
+    { key: "low", label: "Starts low" },
+    { key: "flip", label: "What causes the flip" },
+    { key: "shame", label: "Who is humiliated, and how" }
+  ];
+
+  var STORE_KEY = "hist270-reversal-ledger-v2";
+  var body = document.getElementById("ledger-body");
+  var status = document.getElementById("save-status");
+
+  ANECDOTES.forEach(function (anec) {
+    var tr = document.createElement("tr");
+
+    var nameTd = document.createElement("td");
+    nameTd.className = "name-cell";
+
+    var posSpan = document.createElement("span");
+    posSpan.className = "anec-pos";
+    posSpan.textContent = "Anecdote " + anec.pos;
+
+    var titleSpan = document.createElement("span");
+    titleSpan.className = "anec-title";
+    titleSpan.textContent = anec.title;
+
+    var locSpan = document.createElement("span");
+    locSpan.className = "anec-locator";
+    locSpan.textContent = anec.locator;
+
+    nameTd.appendChild(posSpan);
+    nameTd.appendChild(titleSpan);
+    nameTd.appendChild(locSpan);
+    tr.appendChild(nameTd);
+
+    FIELDS.forEach(function (field) {
+      var td = document.createElement("td");
+      td.className = "field-cell";
+      td.setAttribute("data-label", field.label);
+
+      var id = anec.key + "-" + field.key;
+      var lab = document.createElement("label");
+      lab.className = "vh";
+      lab.setAttribute("for", id);
+      lab.textContent = "Anecdote " + anec.pos + ", " + anec.title + " — " + field.label;
+
+      var ta = document.createElement("textarea");
+      ta.className = "cell-input";
+      ta.id = id;
+      ta.setAttribute("data-key", id);
+
+      td.appendChild(lab);
+      td.appendChild(ta);
+      tr.appendChild(td);
+    });
+
+    body.appendChild(tr);
+  });
+
+  var inputs = Array.prototype.slice.call(
+    document.querySelectorAll("[data-key], #student-name")
+  );
+
+  function autoGrow(el) {
+    if (el.tagName !== "TEXTAREA") return;
+    el.style.height = "auto";
+    el.style.height = (el.scrollHeight + 2) + "px";
+  }
+
+  function readStore() {
+    try {
+      var raw = window.localStorage.getItem(STORE_KEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function save() {
+    var data = {};
+    inputs.forEach(function (el) {
+      var key = el.id === "student-name" ? "name" : el.getAttribute("data-key");
+      data[key] = el.value;
+    });
+    try {
+      window.localStorage.setItem(STORE_KEY, JSON.stringify(data));
+      var t = new Date();
+      status.textContent = "Saved in this browser at " +
+        t.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+    } catch (e) {
+      status.textContent = "Could not save to this browser — export before closing the page.";
+    }
+  }
+
+  var stored = readStore();
+  inputs.forEach(function (el) {
+    var key = el.id === "student-name" ? "name" : el.getAttribute("data-key");
+    if (typeof stored[key] === "string") el.value = stored[key];
+    autoGrow(el);
+  });
+
+  var saveTimer = null;
+  inputs.forEach(function (el) {
+    el.addEventListener("input", function () {
+      autoGrow(el);
+      window.clearTimeout(saveTimer);
+      saveTimer = window.setTimeout(save, 600);
+    });
+  });
+
+  function val(id) {
+    var el = document.getElementById(id);
+    var v = el ? el.value.trim() : "";
+    return v === "" ? "[left blank]" : v;
+  }
+
+  function wrap(text, width, indent) {
+    var words = text.replace(/\s+/g, " ").split(" ");
+    var lines = [];
+    var line = "";
+    words.forEach(function (w) {
+      if ((line + " " + w).trim().length > width) {
+        lines.push(line.trim());
+        line = w;
+      } else {
+        line = (line + " " + w).trim();
+      }
+    });
+    if (line) lines.push(line.trim());
+    return lines.map(function (l, i) { return (i === 0 ? "" : indent) + l; }).join("\n");
+  }
+
+  function buildText() {
+    var name = document.getElementById("student-name").value.trim();
+    var out = [];
+    out.push("THE REVERSAL LEDGER");
+    out.push("HIST 270: History of China — Richland Community College");
+    out.push("Source: \"The Examination System,\" Chinese Civilization: A Sourcebook, trans. Clara Yu");
+    out.push("");
+    out.push("Name: " + (name === "" ? "[not entered]" : name));
+    out.push("Exported: " + new Date().toLocaleString());
+    out.push("");
+    out.push("==================================================");
+    out.push("PART ONE — THE LEDGER (4 of 8 anecdotes)");
+    out.push("==================================================");
+
+    ANECDOTES.forEach(function (anec) {
+      out.push("");
+      out.push("ANECDOTE " + anec.pos.toUpperCase() + ": " + anec.title);
+      out.push("--------------------------------------------------");
+      FIELDS.forEach(function (field) {
+        var text = val(anec.key + "-" + field.key);
+        out.push("  " + field.label + ": " + wrap(text, 72, "    "));
+      });
+    });
+
+    out.push("");
+    out.push("==================================================");
+    out.push("PART TWO — AFTER THE LEDGER");
+    out.push("==================================================");
+
+    var questions = [
+      "1. What behavior gets punished in this collection?",
+      "2. What behavior gets rewarded?",
+      "3. If the system mostly kept powerful families in power, why would anyone collect and circulate stories insisting that it did not? Who benefits?"
+    ];
+    ["q1", "q2", "q3"].forEach(function (id, i) {
+      out.push("");
+      out.push(wrap(questions[i], 76, ""));
+      out.push("");
+      out.push(wrap(val(id), 76, ""));
+    });
+
+    out.push("");
+    out.push("==================================================");
+    out.push("END OF SUBMISSION");
+    return out.join("\n");
+  }
+
+  function slug(s) {
+    return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  }
+
+  document.getElementById("export-btn").addEventListener("click", function () {
+    save();
+    var name = document.getElementById("student-name").value.trim();
+    var fname = "reversal-ledger-" + (name ? slug(name) : "unnamed") + ".txt";
+    var blob = new Blob([buildText()], { type: "text/plain;charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = fname;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    status.textContent = "Exported as " + fname;
+  });
+
+  document.getElementById("print-btn").addEventListener("click", function () {
+    window.print();
+  });
+
+  document.getElementById("clear-btn").addEventListener("click", function () {
+    if (!window.confirm("Clear every answer on this page? This cannot be undone.")) return;
+    inputs.forEach(function (el) { el.value = ""; autoGrow(el); });
+    try { window.localStorage.removeItem(STORE_KEY); } catch (e) {}
+    status.textContent = "Cleared.";
+  });
+
+  window.addEventListener("beforeunload", function (e) {
+    var hasText = inputs.some(function (el) { return el.value.trim() !== ""; });
+    if (hasText) { e.preventDefault(); e.returnValue = ""; }
+  });
+})();
+</script>
+</body>
+</html>
