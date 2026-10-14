@@ -27,14 +27,31 @@ The Pages project builds all non-production branches as public previews, using
 only the `public` output directory and no build command. Pushing the migration
 branch would trigger a Pages preview, not production. No push has occurred.
 
-Full deployment and version IDs still require authenticated API/CLI verification.
-The dashboard Copy buttons did not provide the full UUID to the automation clipboard.
-Do not use these short prefixes as rollback commands.
+Full rollback identities were verified through authenticated Cloudflare APIs:
+
+| Worker | Original deployment ID | Original active version ID | Traffic |
+| --- | --- | --- | --- |
+| herr-magister | 765f8343-42cd-4948-9d6c-813de55a638f | bd33d084-d811-4ac0-bf6e-3589345d52e5 | 100% |
+| lecture-tracker | 8e4553a1-9077-478a-b12f-28b9e4d41e7d | b390a2e8-f7c9-4af9-9048-12ed51f5cc1e | 100% |
+
+Sanitized metadata is saved in [production-baseline.json](production-baseline.json).
+The exact active-version API export matches the pilot source byte for byte
+(5,584 bytes; one application/javascript+module named worker.js).
+The documented wrangler init --from-dash herr-magister export path was attempted;
+its project generator stopped at an optional dependency build approval before
+downloading source. No dependency approval or deployment was performed.
+The completed export instead uses the documented GET Worker Version API with
+include=modules and the exact active version UUID.
+
+Wrangler OAuth is authorized for account/user read and Workers/Workers Scripts
+write. Authentication stays outside this Git checkout and no credentials are
+included in the source or metadata.
 
 ### herr-magister: pilot
 
 - Active and latest source: dashboard editor explicitly showed `bd33d084 (Active) Latest`.
-- Source exported through the editor clipboard, with CRLF normalized to LF and no other changes.
+- Source exported through the editor clipboard, then verified byte-for-byte
+  against the exact active version via the official API. No code changes.
 - SHA-256 of `src/worker.js`: `5082ae8c7bd2d99959edf910ae3ed515ec8780797ac8dac00882e6f0ae113984`.
 - Compatibility date: `2026-06-06`; no compatibility flags displayed.
 - Default placement; Workers Cache disabled.
@@ -50,8 +67,9 @@ Do not use these short prefixes as rollback commands.
   parsing, and all prompt text are deliberately preserved. Model modernization is
   a separate production change.
 - No application dependencies or imports; no build command needed.
-- Draft Wrangler configuration reflects visible settings. Final server metadata
-  comparison is still required before upload or Git connection.
+- Wrangler configuration now matches verified API settings; all log persistence,
+  sampling, query-redaction, logpush, and tail-consumer values are explicit.
+  The existing secret is retained by Cloudflare; no plaintext variables exist.
 
 ### lecture-tracker: special handling
 
@@ -63,7 +81,7 @@ Do not use these short prefixes as rollback commands.
   `449b4bd0e00825f27866d0e83ed4455c6ba6603e` on `cloudflare/workers-autoconfig`.
 - Compatibility date `2026-07-09`; flag `nodejs_compat`; static-assets-only Worker.
 - No runtime variables, secrets, bindings, or triggers supported/displayed for this type.
-- No custom domains/routes shown; workers.dev enabled.
+- No custom domains/routes shown; workers.dev and version previews enabled.
 - Production branch `main`; non-production branch builds enabled.
 - Build command blank; deploy command AND version command both `npx wrangler deploy`.
 - Root directory `/`; include watch path `*`; no excludes displayed.

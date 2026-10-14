@@ -5,13 +5,13 @@ This is an unchanged export of the active Cloudflare Worker `herr-magister`
 feedback for PHIL 120. It has not been uploaded or deployed by this migration.
 
 See [the migration inventory and safety gates](../README.md) before connecting
-Git or uploading a version. Final API metadata parity and full rollback IDs
-remain pending.
+Git or uploading a version. API metadata parity and full rollback IDs
+are verified and recorded in the parent README and production-baseline.json.
 
 ## Files
 
 - `src/worker.js`: active ES-module source, preserved with LF line endings.
-- `wrangler.jsonc`: draft configuration matching visible dashboard settings.
+- `wrangler.jsonc`: configuration matching verified Cloudflare API settings.
 - `package.json` and lockfile: pinned Wrangler tooling, no runtime dependencies.
 - `test/worker.test.js`: offline HTTP and upstream-contract checks.
 
