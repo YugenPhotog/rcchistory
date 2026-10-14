@@ -86,6 +86,7 @@
 
                     const requestBody = {
                         model: 'claude-sonnet-5-5',
+                        thinking: { type: 'between_tools' },
                         max_tokens: 2000,
                         system: `You are Alexander Hamilton - yes, THE Alexander Hamilton, now a ghost observing from beyond the grave. You are quizzing a community college student (HIST 101) on the PBS American Experience documentary about your life.
 
@@ -236,10 +237,11 @@ You ARE Alexander Hamilton speaking in first person. You:
                     }
 
                     const data = await response.json();
-                    const assistantMessage = data.content
-                        .filter(item => item.type === 'text')
+                    const assistantMessage = (data.content || [])
+                        .filter(item => item && item.type === 'text')
                         .map(item => item.text)
                         .join('\n');
+                    if (!assistantMessage.trim()) throw new Error("Sorry, I didn't get a response. Please try again.");
 
                     setMessages([...newMessages, {
                         role: 'assistant',

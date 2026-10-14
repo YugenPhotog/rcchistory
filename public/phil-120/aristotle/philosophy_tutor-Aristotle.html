@@ -158,6 +158,7 @@
                         },
                         body: JSON.stringify({
                             model: 'claude-sonnet-5-5',
+                            thinking: { type: 'between_tools' },
                             max_tokens: 500,
                             messages: [
                                 {
@@ -748,7 +749,8 @@ That moral virtue is a mean, then, and in what sense it is so, and that it is a 
                     }
 
                     const data = await response.json();
-                    const assistantMessage = data.content[0].text;
+                    const assistantMessage = (data.content || []).find(b => b && b.type === 'text')?.text?.trim() || '';
+                    if (!assistantMessage) throw new Error("Sorry, I didn't get a response. Please try again.");
 
                     const verdictHit = assistantMessage.match(/^(ANALYSIS COMPLETE|REQUIREMENTS MET|SESSION ENDED)/m);
                     if (verdictHit) setVerdict(verdictHit[1]);

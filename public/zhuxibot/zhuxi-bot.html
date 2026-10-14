@@ -370,6 +370,7 @@ Write both answers in the boxes below and submit when you are ready. Take your t
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
                             model: 'claude-sonnet-5-5',
+                            thinking: { type: 'between_tools' },
                             max_tokens: 1200,
                             messages: [
                                 {
@@ -388,7 +389,8 @@ Write both answers in the boxes below and submit when you are ready. Take your t
                     }
 
                     const data = await response.json();
-                    const assistantMessage = data.content[0].text;
+                    const assistantMessage = (data.content || []).find(b => b && b.type === 'text')?.text?.trim() || '';
+                    if (!assistantMessage) throw new Error("Sorry, I didn't get a response. Please try again.");
                     setMessages(prev => [...prev, { role: 'assistant', content: assistantMessage }]);
                 } catch (error) {
                     console.error(error);

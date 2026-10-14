@@ -98,6 +98,7 @@
                         },
                         body: JSON.stringify({
                             model: 'claude-sonnet-5-5',
+                            thinking: { type: 'between_tools' },
                             max_tokens: 1000,
                             system: `You are Jurgis, an AI tutor for a college American History course, guiding students through Upton Sinclair's "The Jungle" Chapters 9 and 14. Your goal is to help students connect their reading to the Progressive Era framework discussed in lecture.
 
@@ -188,7 +189,8 @@ IMPORTANT INSTRUCTIONS:
                     }
 
                     const data = await response.json();
-                    const assistantMessage = data.content[0].text;
+                    const assistantMessage = (data.content || []).find(b => b && b.type === 'text')?.text?.trim() || '';
+                    if (!assistantMessage) throw new Error("Sorry, I didn't get a response. Please try again.");
                     
                     setMessages([...newMessages, { role: 'assistant', content: assistantMessage }]);
                 } catch (error) {

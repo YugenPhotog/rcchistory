@@ -700,6 +700,7 @@ async function callAPI(userText, isInit = false) {
 
   const body = {
     model: 'claude-sonnet-5-5',
+    thinking: { type: 'between_tools' },
     max_tokens: 900,
     system: SYSTEM_PROMPT,
     messages
@@ -713,7 +714,8 @@ async function callAPI(userText, isInit = false) {
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
-    const raw = data.content.filter(b => b.type === 'text').map(b => b.text).join('\n');
+    const raw = (data.content || []).filter(b => b && b.type === 'text').map(b => b.text).join('\n');
+    if (!raw.trim()) throw new Error("Sorry, I didn't get a response. Please try again.");
 
     // Parse score tag (Phase 1 only)
     const scoreMatch = raw.match(/\[SCORE:(\d+)\]/);
@@ -725,6 +727,7 @@ async function callAPI(userText, isInit = false) {
 
     // Strip hidden tags for display
     const display = raw.replace(/\[SCORE:\d+\]/g, '').trim();
+    if (!display) throw new Error("Sorry, I didn't get a response. Please try again.");
 
     removeTyping();
     addMessage('elder', display);

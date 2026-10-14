@@ -327,7 +327,10 @@ Paste your draft whenever you're ready. Remember to export the full transcript a
     }
 
     function extractAssistantMessage(data) {
-      if (data && data.content && Array.isArray(data.content) && data.content[0] && data.content[0].text) return data.content[0].text;
+      if (data && Array.isArray(data.content)) {
+        const text = data.content.find(b => b && b.type === 'text')?.text;
+        return typeof text === 'string' ? text.trim() : '';
+      }
       if (data && typeof data.text === 'string') return data.text;
       if (data && typeof data.message === 'string') return data.message;
       if (data && data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) return data.choices[0].message.content;
@@ -350,6 +353,7 @@ Paste your draft whenever you're ready. Remember to export the full transcript a
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             model: 'claude-sonnet-5-5',
+            thinking: { type: 'between_tools' },
             max_tokens: 4096,
             system: SYSTEM_PROMPT,
             messages: messages.slice(1).map(msg => ({ role: msg.role, content: msg.content }))
@@ -365,7 +369,7 @@ Paste your draft whenever you're ready. Remember to export the full transcript a
         }
 
         const assistantMessage = extractAssistantMessage(data);
-        if (!assistantMessage) throw new Error('Unexpected server response shape.');
+        if (!assistantMessage || !assistantMessage.trim()) throw new Error("Sorry, I didn't get a response. Please try again.");
 
         messages.push({ role: 'assistant', content: assistantMessage });
         if (assistantMessage.includes('Socrates') || assistantMessage.includes('one interrogation suffices')) {

@@ -310,10 +310,9 @@ header {
   }
 
   function extractAssistantMessage(data) {
-    if (data && data.content && Array.isArray(data.content)) {
-      var parts = data.content.filter(function (b) { return b && b.type === 'text' && b.text; }).map(function (b) { return b.text; });
-      if (parts.length) return parts.join('\n');
-      if (data.content[0] && data.content[0].text) return data.content[0].text;
+    if (data && Array.isArray(data.content)) {
+      const text = data.content.find(b => b && b.type === 'text')?.text;
+      return typeof text === 'string' ? text.trim() : '';
     }
     if (data && typeof data.text === 'string') return data.text;
     if (data && typeof data.message === 'string') return data.message;
@@ -335,6 +334,7 @@ header {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: 'claude-sonnet-5-5',
+        thinking: { type: 'between_tools' },
         max_tokens: 4096,
         system: SYSTEM_PROMPT,
         messages: messages.slice(1).map(function (m) { return { role: m.role, content: m.content }; })
@@ -344,7 +344,7 @@ header {
       .then(function (data) {
         loadingRow.remove();
         var text = extractAssistantMessage(data);
-        if (!text) throw new Error('empty response');
+        if (!text || !text.trim()) throw new Error("Sorry, I didn't get a response. Please try again.");
         messages.push({ role: 'assistant', content: text });
         exchangeCount++;
         renderAll();

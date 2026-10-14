@@ -171,6 +171,7 @@ Professor Quibble does not explain. He interrogates.`;
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
                             model: 'claude-sonnet-5-5',
+                            thinking: { type: 'between_tools' },
                             max_tokens: 4096,
                             system: SYSTEM_PROMPT,
                             messages: newMessages.slice(1).map(msg => ({
@@ -182,8 +183,9 @@ Professor Quibble does not explain. He interrogates.`;
 
                     const data = await response.json();
                     
-                    if (data.content && data.content[0]) {
-                        const assistantMessage = data.content[0].text;
+                    const assistantMessage = (data.content || []).find(b => b && b.type === 'text')?.text?.trim() || '';
+                    if (!assistantMessage) throw new Error("Sorry, I didn't get a response. Please try again.");
+                    if (assistantMessage) {
                         setMessages([...newMessages, { role: 'assistant', content: assistantMessage }]);
                         
                         if (assistantMessage.includes('Socrates') || 

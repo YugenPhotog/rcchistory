@@ -269,6 +269,7 @@ Go ahead and paste your first paragraph. Tell me which prompt you chose, then le
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
                             model: 'claude-sonnet-5-5',
+                            thinking: { type: 'between_tools' },
                             max_tokens: 2000,
                             messages: [
                                 {
@@ -291,7 +292,8 @@ Go ahead and paste your first paragraph. Tell me which prompt you chose, then le
                     }
 
                     const data = await response.json();
-                    const assistantMessage = data.content[0].text;
+                    const assistantMessage = (data.content || []).find(b => b && b.type === 'text')?.text?.trim() || '';
+                    if (!assistantMessage) throw new Error("Sorry, I didn't get a response. Please try again.");
                     setMessages(prev => [...prev, { role: 'assistant', content: assistantMessage }]);
                 } catch (error) {
                     console.error('Error:', error);

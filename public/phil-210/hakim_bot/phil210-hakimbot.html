@@ -275,10 +275,9 @@ async function copyTranscript() {
 }
 
 function extractAssistantMessage(data) {
-  if (data && data.content && Array.isArray(data.content)) {
-    const parts = data.content.filter(b => b && b.type === 'text' && b.text).map(b => b.text);
-    if (parts.length) return parts.join('\n');
-    if (data.content[0] && data.content[0].text) return data.content[0].text;
+  if (data && Array.isArray(data.content)) {
+    const text = data.content.find(b => b && b.type === 'text')?.text;
+    return typeof text === 'string' ? text.trim() : '';
   }
   if (data && typeof data.text === 'string') return data.text;
   if (data && typeof data.message === 'string') return data.message;
@@ -293,6 +292,7 @@ async function callModel() {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       model: 'claude-sonnet-5-5',
+      thinking: { type: 'between_tools' },
       max_tokens: 4096,
       system: SYSTEM_PROMPT,
       messages: messages.slice(1).map(m => ({ role: m.role, content: m.content }))
@@ -300,7 +300,7 @@ async function callModel() {
   });
   const data = await response.json();
   const msg = extractAssistantMessage(data);
-  if (!response.ok || !msg) throw new Error((data && (data.error || data.message)) || 'Unable to get a valid response from the tutor service.');
+  if (!response.ok || !msg || !msg.trim()) throw new Error((data && (data.error || data.message)) || "Sorry, I didn't get a response. Please try again.");
   return msg;
 }
 

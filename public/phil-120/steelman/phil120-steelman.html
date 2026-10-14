@@ -494,14 +494,9 @@
   }
 
   function extractAssistantMessage(data) {
-    if (data && data.content && Array.isArray(data.content)) {
-      var parts = [];
-      for (var i = 0; i < data.content.length; i++) {
-        var b = data.content[i];
-        if (b && b.type === 'text' && b.text) parts.push(b.text);
-      }
-      if (parts.length) return parts.join('\n');
-      if (data.content[0] && data.content[0].text) return data.content[0].text;
+    if (data && Array.isArray(data.content)) {
+      const text = data.content.find(b => b && b.type === 'text')?.text;
+      return typeof text === 'string' ? text.trim() : '';
     }
     if (data && typeof data.text === 'string') return data.text;
     if (data && typeof data.message === 'string') return data.message;
@@ -523,6 +518,7 @@
 
     var payload = {
       model: 'claude-sonnet-5-5',
+      thinking: { type: 'between_tools' },
       max_tokens: 2000,
       system: SYSTEM_PROMPT,
       messages: messages.slice(1).map(function (m) {
@@ -541,7 +537,7 @@
       })
       .then(function (data) {
         var reply = extractAssistantMessage(data);
-        if (!reply) throw new Error('Empty response');
+        if (!reply || !reply.trim()) throw new Error("Sorry, I didn't get a response. Please try again.");
         messages.push({ role: 'assistant', content: reply });
       })
       .catch(function (err) {

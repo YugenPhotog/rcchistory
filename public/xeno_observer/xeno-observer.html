@@ -250,7 +250,10 @@ Shall we begin? Tell me first: what was this "Vietnam War" and why were your peo
         const downloadBtn = document.getElementById('downloadBtn');
         const exchangeCounter = document.getElementById('exchangeCounter');
         function extractAssistantMessage(data) {
-            if (data && data.content && Array.isArray(data.content) && data.content[0] && data.content[0].text) return data.content[0].text;
+            if (data && Array.isArray(data.content)) {
+              const text = data.content.find(b => b && b.type === 'text')?.text;
+              return typeof text === 'string' ? text.trim() : '';
+            }
             if (data && typeof data.text === 'string') return data.text;
             if (data && typeof data.message === 'string') return data.message;
             if (data && data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) return data.choices[0].message.content;
@@ -319,12 +322,12 @@ ${msg.content}
             messages.push({ role: 'user', content: userMessage });
             isLoading = true; setButtonState(); renderMessages(true);
             try {
-                const response = await fetch(WORKER_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ model: 'claude-sonnet-5-5', max_tokens: 2000, messages: [{ role: 'user', content: SYSTEM_PROMPT + "\n\n---\n\nThe conversation so far is below. Continue as XENO. Ask your next question based on the student's response." }, ...messages.slice(1, -1).map(msg => ({ role: msg.role, content: msg.content })), { role: 'user', content: userMessage }] }) });
+                const response = await fetch(WORKER_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ model: 'claude-sonnet-5-5', thinking: { type: 'between_tools' }, max_tokens: 2000, messages: [{ role: 'user', content: SYSTEM_PROMPT + "\n\n---\n\nThe conversation so far is below. Continue as XENO. Ask your next question based on the student's response." }, ...messages.slice(1, -1).map(msg => ({ role: msg.role, content: msg.content })), { role: 'user', content: userMessage }] }) });
                 const raw = await response.text();
                 let data; try { data = JSON.parse(raw); } catch (_) { data = raw; }
                 if (!response.ok) throw new Error('Server returned ' + response.status + ': ' + raw.slice(0, 200));
                 const assistantMessage = extractAssistantMessage(data);
-                if (!assistantMessage) throw new Error('Unexpected server response shape.');
+                if (!assistantMessage || !assistantMessage.trim()) throw new Error("Sorry, I didn't get a response. Please try again.");
                 messages.push({ role: 'assistant', content: assistantMessage });
             } catch (error) {
                 console.error('XENO error:', error);

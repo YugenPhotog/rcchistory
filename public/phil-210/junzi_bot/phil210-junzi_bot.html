@@ -222,10 +222,9 @@ function setLoading(value) {
 }
 
 function extractAssistantMessage(data) {
-  if (data && data.content && Array.isArray(data.content)) {
-    const parts = data.content.filter(b => b && b.type === 'text' && b.text).map(b => b.text);
-    if (parts.length) return parts.join('\n');
-    if (data.content[0] && data.content[0].text) return data.content[0].text;
+  if (data && Array.isArray(data.content)) {
+    const text = data.content.find(b => b && b.type === 'text')?.text;
+    return typeof text === 'string' ? text.trim() : '';
   }
   if (data && typeof data.text === 'string') return data.text;
   if (data && typeof data.message === 'string') return data.message;
@@ -260,6 +259,7 @@ async function sendMessage(overrideText) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: 'claude-sonnet-5-5',
+        thinking: { type: 'between_tools' },
         max_tokens: 4096,
         system: SYSTEM_PROMPT,
         messages: conversation.slice(1).map(m => ({ role: m.role, content: m.content }))
@@ -268,7 +268,7 @@ async function sendMessage(overrideText) {
     if (!response.ok) throw new Error('Server returned ' + response.status);
     const data = await response.json();
     const assistantText = extractAssistantMessage(data);
-    if (!assistantText) throw new Error('No assistant message was returned.');
+    if (!assistantText || !assistantText.trim()) throw new Error("Sorry, I didn't get a response. Please try again.");
     conversation.push({ role: 'assistant', content: assistantText });
     removeThinking();
     addMessage('assistant', assistantText);
