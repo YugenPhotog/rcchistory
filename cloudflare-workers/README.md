@@ -1,6 +1,6 @@
 # Cloudflare Workers migration
 
-Status as of 2026-10-14: **local pilot prepared; no Worker connected, uploaded, or deployed by this migration**.
+Status as of 2026-10-14: **pilot exported, committed, pushed, and Git-connected; an inactive version is verified; no production deployment performed**.
 
 The Cloudflare Pages project named `austin-academics` is connected to
 `YugenPhotog/rcchistory`, the repository containing this directory.
@@ -12,7 +12,7 @@ Account: `fffc85f812c2747d6720cf27271b0658`; workers.dev subdomain: `stvastn`.
 
 | Worker | Production URL | Active version prefix | Type | Git integration |
 | --- | --- | --- | --- | --- |
-| herr-magister | https://herr-magister.stvastn.workers.dev/ | bd33d084 (100%) | ES module, one worker.js module | Not connected |
+| herr-magister | https://herr-magister.stvastn.workers.dev/ | bd33d084 (100%) | ES module, one worker.js module | YugenPhotog/rcchistory; upload-only migration branch |
 | lecture-tracker | https://lecture-tracker.stvastn.workers.dev/ | b390a2e8 (100%) | Static assets only | austin-academics/lecture-tracker |
 
 Only two Workers were listed. Four separate Pages projects were also listed:
@@ -24,8 +24,8 @@ The pilot source hash, JavaScript syntax, all nine offline behavior tests, and
 Wrangler 4.151.0 dry run passed. The dependency lockfile has been generated.
 
 The Pages project builds all non-production branches as public previews, using
-only the `public` output directory and no build command. Pushing the migration
-branch would trigger a Pages preview, not production. No push has occurred.
+only the `public` output directory and no build command. The migration
+branch has been pushed; Pages may build public previews, while production remains on main.
 
 Full rollback identities were verified through authenticated Cloudflare APIs:
 
@@ -108,7 +108,28 @@ API calls, or production storage access.
 The source fingerprint verifies export parity; the tests preserve current HTTP,
 CORS, error, request, and response behavior. These are not live Anthropic checks.
 
-## Required checks before connecting or uploading
+## Git builds and inactive upload status
+
+The existing herr-magister Worker is connected to `YugenPhotog/rcchistory`,
+branch `migration/cloudflare-workers`, with root `cloudflare-workers/herr-magister`.
+Both deploy and version commands are `npx wrangler versions upload --keep-vars`.
+The build command is empty, and the include watch path is
+`cloudflare-workers/herr-magister/**`. No credentials were copied into Git.
+The first Git-triggered build is pending verification.
+
+Manual inactive upload `8fd5890c-e829-47f9-aef5-2acc2f502e7b` was verified
+against the original active version: identical source/module metadata, runtime
+metadata, and secret-binding names. Both Workers still serve their recorded
+original versions at 100%. Script settings and preview settings are unchanged.
+See [upload-verification.json](herr-magister/upload-verification.json).
+Version URLs remain disabled; no live Anthropic or preview request was made.
+
+For future edits, change the pilot source/config on the migration branch, run
+the checks below, review the diff, and push. A matching Git change should upload
+an inactive version only. Verify its build log and exact version against the
+production baseline. Production cutover always requires separate approval.
+
+## Migration checklist and operating safeguards
 
 1. Obtain full active deployment/version IDs, traffic allocations, exact server
    settings, and module metadata through authenticated read-only operations.
