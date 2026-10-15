@@ -1,10 +1,13 @@
 # Cloudflare Workers migration
 
-Status as of 2026-10-14: **pilot exported, committed, pushed, and Git-connected; an inactive version is verified; no production deployment performed**.
+Status as of 2026-10-15: **the Herr Magister pilot is in Git, its model fix is
+verified, and version `742fa755-c204-4bb1-b8df-dac2e1074ee2` is serving 100% of
+production traffic**.
 
 The Cloudflare Pages project named `austin-academics` is connected to
 `YugenPhotog/rcchistory`, the repository containing this directory.
-Preparation is on branch `migration/cloudflare-workers`. Production remains unchanged.
+Work is on branch `migration/cloudflare-workers`. The original version remains
+available for rollback.
 Review: [draft pull request #6](https://github.com/YugenPhotog/rcchistory/pull/6).
 
 ## Account inventory
@@ -13,7 +16,7 @@ Account: `fffc85f812c2747d6720cf27271b0658`; workers.dev subdomain: `stvastn`.
 
 | Worker | Production URL | Active version prefix | Type | Git integration |
 | --- | --- | --- | --- | --- |
-| herr-magister | https://herr-magister.stvastn.workers.dev/ | bd33d084 (100%) | ES module, one worker.js module | YugenPhotog/rcchistory; upload-only migration branch |
+| herr-magister | https://herr-magister.stvastn.workers.dev/ | 742fa755 (100%) | ES module, one worker.js module | YugenPhotog/rcchistory; upload-only migration branch |
 | lecture-tracker | https://lecture-tracker.stvastn.workers.dev/ | b390a2e8 (100%) | Static assets only | austin-academics/lecture-tracker |
 
 Only two Workers were listed. Four separate Pages projects were also listed:
@@ -21,8 +24,9 @@ Only two Workers were listed. Four separate Pages projects were also listed:
 They are not being migrated. In particular, the lecture-tracker Worker and Pages
 project are separate resources.
 
-The pilot source hash, JavaScript syntax, all nine offline behavior tests, and
-Wrangler 4.151.0 dry run passed. The dependency lockfile has been generated.
+The original source export, updated JavaScript syntax, all 14 offline behavior
+tests, Wrangler 4.151.0 dry run, candidate-source comparison, and live request
+passed. The dependency lockfile has been generated.
 
 The Pages project builds all non-production branches as public previews, using
 only the `public` output directory and no build command. The migration
@@ -63,10 +67,11 @@ included in the source or metadata.
 - Logs enabled; invocation logs and persistence enabled; log sampling 100%;
   traces and issues disabled; no export destinations.
 - External API: https://api.anthropic.com/v1/messages.
-- Allowed origin: https://austin-academics.pages.dev.
-- Existing model `claude-sonnet-4-20250514`, `max_tokens: 400`, first-block response
-  parsing, and all prompt text are deliberately preserved. Model modernization is
-  a separate production change.
+- Allowed origins: https://austin-academics.pages.dev and
+  https://austin-academics.com.
+- Production uses `claude-sonnet-5-5`, `thinking: { type: "between_tools" }`,
+  first-text-block response parsing, and `max_tokens: 400`. The original system
+  prompt was preserved exactly.
 - No application dependencies or imports; no build command needed.
 - Wrangler configuration now matches verified API settings; all log persistence,
   sampling, query-redaction, logpush, and tail-consumer values are explicit.
@@ -106,8 +111,10 @@ Wrangler is pinned to 4.151.0. The dry run compiles/validates without deployment
 Tests use synthetic input and mocked Anthropic responses, with no real secrets,
 API calls, or production storage access.
 
-The source fingerprint verifies export parity; the tests preserve current HTTP,
-CORS, error, request, and response behavior. These are not live Anthropic checks.
+The source fingerprint verifies export parity. All 14 offline tests and the
+Wrangler 4.151.0 dry run passed. Tests cover HTTP, CORS, error, request,
+thinking-block, and text-response behavior. One approved live request from
+`https://austin-academics.com` returned HTTP 200 with non-empty feedback.
 
 ## Git builds and inactive upload status
 
@@ -128,10 +135,18 @@ unchanged-production checks passing.
 See [git-build-verification.json](git-build-verification.json) and
 [git-build-settings.json](git-build-settings.json). Other branch builds are disabled.
 
+Model-fix build `ee803018-0d20-419a-9097-41fcfe013f26` succeeded for commit
+`5c17f71d5c69056c277b478456baf227af6b9190` and uploaded version
+`742fa755-c204-4bb1-b8df-dac2e1074ee2`. The uploaded source matched the commit;
+the system prompt, runtime metadata, module metadata, and secret-binding names
+were verified. After explicit approval, this version was deployed at 100%.
+
 Manual inactive upload `8fd5890c-e829-47f9-aef5-2acc2f502e7b` was verified
 against the original active version: identical source/module metadata, runtime
-metadata, and secret-binding names. Both Workers still serve their recorded
-original versions at 100%. Script settings and preview settings are unchanged.
+metadata, and secret-binding names. At that stage both Workers still served their
+recorded original versions at 100%. Herr Magister later moved to the approved
+model-fix version; lecture-tracker remains unchanged. Script settings and preview
+settings are unchanged.
 See [upload-verification.json](herr-magister/upload-verification.json).
 Version URLs remain disabled; no live Anthropic or preview request was made.
 
@@ -165,7 +180,8 @@ production baseline. Production cutover always requires separate approval.
     first build, STOP and use Cloudflare's documented Builds API with separately
     authorized access. Do not connect first and change the command afterward.
 11. Compare active deployment IDs/traffic before and after each upload.
-    Uploading is not deploying; production must remain on the recorded original.
+    Uploading is not deploying; production traffic must remain unchanged until
+    a specific candidate receives explicit approval.
 12. Version URLs use the version's configured resources/secrets. They are not
     automatically isolated. Keep previews disabled until a safe test plan is
     approved; use mocked local tests now. Any live test should use synthetic
@@ -178,23 +194,17 @@ no deploy script. Do not use `wrangler deploy` without `--dry-run`, `versions de
 
 ## Remaining work
 
-- No production cutover has been authorized or performed. No Worker was deleted,
-  recreated, renamed, or assigned a new URL.
-- No live Anthropic check or version-URL test was performed; version URLs remain
-  disabled. Nine mocked behavior tests, syntax checks, dry run, and exact uploaded
-  source/config comparisons passed. These do not prove the old Claude model works.
-- Keep the unchanged pilot model and parser separate from migration approval.
+- Version preview URLs remain disabled.
+- Keep future Git builds upload-only and require explicit approval before moving
+  production traffic.
 - lecture-tracker is inventoried only. Its active static-asset source and repository
   access need to be resolved before exporting or changing its existing Git link.
   Its current automatic production-deploy commands were not changed.
 
 ## Cutover and rollback
 
-No cutover is authorized by this migration preparation. After export parity,
-offline validation, upload-only build verification, and safe preview validation,
-present the exact candidate version, original full version/deployment IDs,
-traffic allocation, configuration differences, and test results for explicit
-production approval.
+Version `742fa755-c204-4bb1-b8df-dac2e1074ee2` was deployed at 100% only after
+explicit approval. The original version remains the rollback target.
 
 Before any approved cutover, retain the original deployed version and deployment
 identity. If rollback is later authorized, restore that exact original version
@@ -202,7 +212,7 @@ at its recorded traffic allocation. Do not rebuild old code and assume it is
 identical. Versions do not snapshot external KV, R2, D1, or Durable Object state.
 Never delete or recreate a Worker as a rollback technique.
 
-After explicit approval of a specific candidate, run from the pilot directory:
+For a future explicitly approved candidate, run from the pilot directory:
 
 ```sh
 npx wrangler versions deploy <approved-version-id>@100
@@ -214,8 +224,9 @@ If a rollback is explicitly authorized, restore the recorded original:
 npx wrangler versions deploy bd33d084-d811-4ac0-bf6e-3589345d52e5@100
 ```
 
-These are instructions only; neither command was run during migration. Check
-the active deployment/traffic immediately after any future approved action.
+The candidate deployment command was run for version `742fa755`; the rollback
+command was not run. Check active deployment traffic immediately after every
+future approved deployment or rollback.
 Do not change the Git production-branch setting to main or merge the migration
 PR until the review plan is accepted; the existing Pages project deploys main.
 
