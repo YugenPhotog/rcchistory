@@ -5,6 +5,7 @@ Status as of 2026-10-14: **pilot exported, committed, pushed, and Git-connected;
 The Cloudflare Pages project named `austin-academics` is connected to
 `YugenPhotog/rcchistory`, the repository containing this directory.
 Preparation is on branch `migration/cloudflare-workers`. Production remains unchanged.
+Review: [draft pull request #6](https://github.com/YugenPhotog/rcchistory/pull/6).
 
 ## Account inventory
 
@@ -120,6 +121,10 @@ Git build `2dd242cf-83de-4b5e-a79d-556826636c4d` succeeded for commit
 `eca20ea0-5ff6-4a2e-99bc-428145bf8ca8`. The uploaded source/modules, runtime
 metadata, and secret-binding names exactly match the original. Both production
 deployments and their traffic allocations remain unchanged.
+A second build `5812a932-e4fd-4628-a1bd-1d718cc800db` also succeeded for
+commit `5f7a12a9017b9d27291f9b42343222dda4e3c7f3`, uploading inactive version
+`d0ca8b0e-1dbb-42d9-aa57-0488af2573cb` with the same exact parity and
+unchanged-production checks passing.
 See [git-build-verification.json](git-build-verification.json) and
 [git-build-settings.json](git-build-settings.json). Other branch builds are disabled.
 
@@ -196,6 +201,23 @@ identity. If rollback is later authorized, restore that exact original version
 at its recorded traffic allocation. Do not rebuild old code and assume it is
 identical. Versions do not snapshot external KV, R2, D1, or Durable Object state.
 Never delete or recreate a Worker as a rollback technique.
+
+After explicit approval of a specific candidate, run from the pilot directory:
+
+```sh
+npx wrangler versions deploy <approved-version-id>@100
+```
+
+If a rollback is explicitly authorized, restore the recorded original:
+
+```sh
+npx wrangler versions deploy bd33d084-d811-4ac0-bf6e-3589345d52e5@100
+```
+
+These are instructions only; neither command was run during migration. Check
+the active deployment/traffic immediately after any future approved action.
+Do not change the Git production-branch setting to main or merge the migration
+PR until the review plan is accepted; the existing Pages project deploys main.
 
 ## Official references
 
