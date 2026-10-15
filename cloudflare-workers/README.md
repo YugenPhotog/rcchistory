@@ -49,7 +49,7 @@ included in the source or metadata.
 
 ### herr-magister: pilot
 
-- Active and latest source: dashboard editor explicitly showed `bd33d084 (Active) Latest`.
+- Original active source: dashboard editor showed `bd33d084 (Active) Latest` before migration uploads.
 - Source exported through the editor clipboard, then verified byte-for-byte
   against the exact active version via the official API. No code changes.
 - SHA-256 of `src/worker.js`: `5082ae8c7bd2d99959edf910ae3ed515ec8780797ac8dac00882e6f0ae113984`.
@@ -115,7 +115,13 @@ branch `migration/cloudflare-workers`, with root `cloudflare-workers/herr-magist
 Both deploy and version commands are `npx wrangler versions upload --keep-vars`.
 The build command is empty, and the include watch path is
 `cloudflare-workers/herr-magister/**`. No credentials were copied into Git.
-The first Git-triggered build is pending verification.
+Git build `2dd242cf-83de-4b5e-a79d-556826636c4d` succeeded for commit
+`d2f6c6a013a821d49e30078b122efcb25accd409`, uploading inactive version
+`eca20ea0-5ff6-4a2e-99bc-428145bf8ca8`. The uploaded source/modules, runtime
+metadata, and secret-binding names exactly match the original. Both production
+deployments and their traffic allocations remain unchanged.
+See [git-build-verification.json](git-build-verification.json) and
+[git-build-settings.json](git-build-settings.json). Other branch builds are disabled.
 
 Manual inactive upload `8fd5890c-e829-47f9-aef5-2acc2f502e7b` was verified
 against the original active version: identical source/module metadata, runtime
@@ -125,7 +131,7 @@ See [upload-verification.json](herr-magister/upload-verification.json).
 Version URLs remain disabled; no live Anthropic or preview request was made.
 
 For future edits, change the pilot source/config on the migration branch, run
-the checks below, review the diff, and push. A matching Git change should upload
+the local validation checks above, review the diff, and push. A matching Git change should upload
 an inactive version only. Verify its build log and exact version against the
 production baseline. Production cutover always requires separate approval.
 
@@ -164,6 +170,18 @@ production baseline. Production cutover always requires separate approval.
 Existing secrets remain managed in Cloudflare. This project intentionally has
 no deploy script. Do not use `wrangler deploy` without `--dry-run`, `versions deploy`,
 `rollback`, or `triggers deploy` during migration preparation.
+
+## Remaining work
+
+- No production cutover has been authorized or performed. No Worker was deleted,
+  recreated, renamed, or assigned a new URL.
+- No live Anthropic check or version-URL test was performed; version URLs remain
+  disabled. Nine mocked behavior tests, syntax checks, dry run, and exact uploaded
+  source/config comparisons passed. These do not prove the old Claude model works.
+- Keep the unchanged pilot model and parser separate from migration approval.
+- lecture-tracker is inventoried only. Its active static-asset source and repository
+  access need to be resolved before exporting or changing its existing Git link.
+  Its current automatic production-deploy commands were not changed.
 
 ## Cutover and rollback
 

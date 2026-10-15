@@ -39,8 +39,9 @@ parsing intentionally match production. Improvements require a separate change.
 After the parent README's parity and approval gates are met,
 `npm run upload-version` uploads a version without activating production traffic.
 The existing Worker is Git-connected on `migration/cloudflare-workers`, with
-this folder as its root and upload-only deploy/version commands. The first Git
-build is pending verification. Only changes in this folder trigger Worker builds.
+this folder as its root and upload-only deploy/version commands. See the parent
+README for the latest Git build verification. Only changes in this folder on
+the migration branch trigger Worker builds; other branch builds are disabled.
 
 Manual upload `8fd5890c-e829-47f9-aef5-2acc2f502e7b` exactly matches the
 original production source and runtime metadata. See `upload-verification.json`.
