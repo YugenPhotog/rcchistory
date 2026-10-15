@@ -47,12 +47,13 @@ test('valid request preserves upstream settings and feedback shape', async () =>
     assert.equal(options.headers['x-api-key'], env.ANTHROPIC_API_KEY);
     assert.equal(options.headers['anthropic-version'], '2023-06-01');
     const body = JSON.parse(options.body);
-    assert.equal(body.model, 'claude-sonnet-4-20250514');
+    assert.equal(body.model, 'claude-sonnet-5-5');
+    assert.deepEqual(body.thinking, { type: 'between_tools' });
     assert.equal(body.max_tokens, 400);
     assert.match(body.system, /^You are Immanuel Kant/);
     assert.ok(body.messages[0].content.includes(student.studentAnswer));
     assert.equal(body.messages[0].role, 'user');
-    assert.deepEqual(Object.keys(body).sort(), ['max_tokens', 'messages', 'model', 'system']);
+    assert.deepEqual(Object.keys(body).sort(), ['max_tokens', 'messages', 'model', 'system', 'thinking']);
     return Response.json({ content: [{ type: 'text', text: 'You have identified the importance of acting from duty.' }] });
   };
   try {
@@ -70,11 +71,11 @@ test('upstream failure retains error handling', async () => {
     assert.deepEqual(await response.json(), { error: 'Upstream API error: simulated upstream failure' });
   } finally { upstream = undefined; }
 });
-test('empty upstream content retains existing fallback', async () => {
+test('empty upstream content returns an empty string', async () => {
   upstream = async () => Response.json({ content: [] });
   try {
     const response = await worker.fetch(request(student), env);
-    assert.deepEqual(await response.json(), { feedback: 'No feedback returned.' });
+    assert.deepEqual(await response.json(), { feedback: '' });
   } finally { upstream = undefined; }
 });
 test('network failure retains error handling', async () => {
@@ -85,3 +86,43 @@ test('network failure retains error handling', async () => {
     assert.deepEqual(await response.json(), { error: 'API request failed: simulated connection failure' });
   } finally { upstream = undefined; }
 });
+
+for (const allowedOrigin of [origin, 'https://austin-academics.com']) {
+  test('preflight and POST allow ' + allowedOrigin, async () => {
+    const preflight = await worker.fetch(new Request('https://example.invalid/feedback', {
+      method: 'OPTIONS', headers: { Origin: allowedOrigin }
+    }), env);
+    assert.equal(preflight.status, 204);
+    assert.equal(preflight.headers.get('access-control-allow-origin'), allowedOrigin);
+    assert.equal(preflight.headers.get('vary'), 'Origin');
+    upstream = async () => Response.json({ content: [{ type: 'text', text: 'Feedback.' }] });
+    try {
+      const response = await worker.fetch(request(student, { Origin: allowedOrigin }), env);
+      assert.equal(response.status, 200);
+      assert.equal(response.headers.get('access-control-allow-origin'), allowedOrigin);
+      assert.equal(response.headers.get('vary'), 'Origin');
+    } finally { upstream = undefined; }
+  });
+}
+
+test('reply skips a non-text first block and selects the first text block', async () => {
+  upstream = async () => Response.json({ content: [
+    { type: 'thinking', thinking: 'Internal reasoning.' },
+    { type: 'text', text: 'You have identified the importance of acting from duty.' },
+    { type: 'text', text: 'Later text must not replace the first text block.' }
+  ] });
+  try {
+    const response = await worker.fetch(request(student), env);
+    assert.deepEqual(await response.json(), { feedback: 'You have identified the importance of acting from duty.' });
+  } finally { upstream = undefined; }
+});
+
+for (const content of [undefined, [{ type: 'thinking', thinking: 'No text available.' }]]) {
+  test('missing text returns an empty string: ' + JSON.stringify(content), async () => {
+    upstream = async () => Response.json({ content });
+    try {
+      const response = await worker.fetch(request(student), env);
+      assert.deepEqual(await response.json(), { feedback: '' });
+    } finally { upstream = undefined; }
+  });
+}

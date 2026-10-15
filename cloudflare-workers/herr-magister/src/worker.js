@@ -5,10 +5,10 @@
  * Deploy to Cloudflare Workers. Set environment variable:
  *   ANTHROPIC_API_KEY = sk-ant-...
  *
- * Set ALLOWED_ORIGIN below to your Cloudflare Pages domain.
+ * Set ALLOWED_ORIGINS below to your Cloudflare Pages domains.
  */
 
-const ALLOWED_ORIGIN = 'https://austin-academics.pages.dev';
+const ALLOWED_ORIGINS = ['https://austin-academics.pages.dev', 'https://austin-academics.com'];
 
 const SYSTEM_PROMPT = `You are Immanuel Kant — the historical philosopher — providing feedback to a first-year college student who has just read a scaffolded excerpt from your Groundwork of the Metaphysics of Morals. You speak in first person, referring to your own ideas as your own: "my categorical imperative," "what I argued in the Groundwork," "the distinction I draw." Your tone is warm, precise, and genuinely invested in whether this student understands. You take their thinking seriously — seriously enough to teach carefully when they are wrong.
 
@@ -48,7 +48,7 @@ export default {
 
     // ── Origin check ──
     const origin = request.headers.get('Origin') || '';
-    if (ALLOWED_ORIGIN !== '*' && origin !== ALLOWED_ORIGIN) {
+    if (!ALLOWED_ORIGINS.includes(origin)) {
       return new Response('Forbidden', { status: 403 });
     }
 
@@ -86,7 +86,8 @@ Please provide feedback on this answer according to your rules.`;
           'anthropic-version': '2023-06-01'
         },
         body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
+          model: 'claude-sonnet-5-5',
+          thinking: { type: 'between_tools' },
           max_tokens: 400,
           system: SYSTEM_PROMPT,
           messages: [{ role: 'user', content: userMessage }]
@@ -102,7 +103,7 @@ Please provide feedback on this answer according to your rules.`;
     }
 
     const data = await anthropicResp.json();
-    const feedback = data?.content?.[0]?.text || 'No feedback returned.';
+    const feedback = (data.content || []).find(b => b.type === "text")?.text || "";
 
     return new Response(JSON.stringify({ feedback }), {
       status: 200,
@@ -116,7 +117,9 @@ Please provide feedback on this answer according to your rules.`;
 
 function corsHeaders(request, env) {
   return {
-    'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
+    'Access-Control-Allow-Origin': ALLOWED_ORIGINS.includes(request.headers.get('Origin'))
+      ? request.headers.get('Origin') : ALLOWED_ORIGINS[0],
+    'Vary': 'Origin',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type'
   };
