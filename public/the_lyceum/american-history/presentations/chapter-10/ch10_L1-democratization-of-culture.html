@@ -181,6 +181,7 @@
         }
         .reveal img.zoomable { cursor: zoom-in; transition: transform 0.3s ease; }
         .reveal img.zoomable:hover, .reveal img.zoomable:focus { transform: scale(1.04); outline: 2px solid var(--accent-color); }
+        .reveal .zoom-cue { display: block; margin: 3px 0 1px; font-family: 'Montserrat', sans-serif; font-size: 0.6em; letter-spacing: 0.03em; color: #cbd5e0; opacity: 0.9; }
 
         /* Popup triggers (L3 popup-link look) */
         .click-btn {
@@ -251,12 +252,14 @@
         .modal-footer { display: flex; justify-content: flex-end; margin-top: 0.6em; }
         .btn-close {
             border: 1px solid var(--accent-color); background: transparent; color: var(--text-color);
-            border-radius: 8px; padding: 0.35em 0.9em; cursor: pointer; font-size: 0.95em;
+            border-radius: 8px; padding: 0.35em 0.9em; cursor: pointer; font-size: 0.95em; white-space: nowrap; flex: 0 0 auto;
         }
         .btn-close.red { background: #e74c3c; border-color: #e74c3c; color: #fff; }
 
         /* Gallery */
         .gallery-overlay { background: rgba(0,0,0,0.88); }
+        .gallery-x { position: fixed; top: 10px; right: 14px; z-index: 2; background: rgba(0,0,0,0.55); border: 1px solid #666; color: #fff; width: 36px; height: 36px; border-radius: 50%; font-size: 24px; line-height: 1; cursor: pointer; }
+        .gallery-x:hover, .gallery-x:focus { border-color: var(--accent-color); color: var(--accent-color); }
         .gallery-dialog {
             background: #111; border-radius: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             padding: 1.2vh 1.2vw; max-width: 94vw; max-height: 94vh; box-sizing: border-box;
@@ -635,8 +638,8 @@
                     <div class="plain">
                         <div class="box box-gold center"><p class="big"><strong>CRITICAL QUESTION:<br>Where is the boundary between truth and entertainment?</strong></p></div>
                         <div class="image-grid" aria-label="Gallery showing Great Moon Hoax detail followed by later sensationalist illustration">
-                            <figure class="fig"><img src="images/f0332666-800px-wm.webp" alt="Close-up detail from the Great Moon Hoax illustration" style="max-height:200px;"><figcaption><em>Close-up from the <strong>Great Moon Hoax</strong> (1835) — the dramatic detail that drew readers in</em></figcaption></figure>
-                            <figure class="fig"><img src="images/hm_january_february_2022_reasure_crime_law_school_2.jpg.webp" alt="Later 19th-century sensationalist illustration reflecting crime and press culture" style="max-height:200px;"><figcaption><em>Crime and spectacle — the sensationalist legacy of the penny-press model</em></figcaption></figure>
+                            <figure class="fig"><img src="images/f0332666-800px-wm.webp" alt="Close-up detail from the Great Moon Hoax illustration" title="Click to enlarge" tabindex="0" class="zoomable" onclick="openGallery('sensational',0)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openGallery('sensational',0)}" style="max-height:200px;"><span class="zoom-cue" aria-hidden="true">🔍 click to enlarge</span><figcaption><em>Close-up from the <strong>Great Moon Hoax</strong> (1835) — the dramatic detail that drew readers in</em></figcaption></figure>
+                            <figure class="fig"><img src="images/hm_january_february_2022_reasure_crime_law_school_2.jpg.webp" alt="Later 19th-century sensationalist illustration reflecting crime and press culture" title="Click to enlarge" tabindex="0" class="zoomable" onclick="openGallery('sensational',1)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openGallery('sensational',1)}" style="max-height:200px;"><span class="zoom-cue" aria-hidden="true">🔍 click to enlarge</span><figcaption><em>Crime and spectacle — the sensationalist legacy of the penny-press model</em></figcaption></figure>
                         </div>
                     </div>
                 </div>
@@ -1027,8 +1030,9 @@
         </div>
     </div>
 
-    <!-- Image gallery (Slide 10 Harper &amp; Brothers; Slide 12 Currier &amp; Ives) -->
+    <!-- Image gallery / lightbox (Book Revolution: Harper &amp; Brothers; Sensationalism: full-size images; Visual Print Culture: Currier &amp; Ives) -->
     <div id="galleryModal" class="modal-overlay gallery-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Image gallery">
+        <button type="button" class="gallery-x" onclick="closeGallery()" aria-label="Close">&times;</button>
         <div class="gallery-dialog">
             <div class="gallery-stage">
                 <img id="galleryImg" alt="">
@@ -1139,6 +1143,10 @@
       {src:"images/currier_ives.webp", cap:"Currier &amp; Ives studio print — affordable art for everyday Americans."},
       {src:"images/fireman-night.webp", cap:"<em>The Fireman</em> — heroic labor rendered in romantic light."},
       {src:"images/met_currier_central_park_in_winter-scaled.webp", cap:"<em>Central Park in Winter</em> — urban leisure and serenity."}
+    ],
+            sensational: [
+      {src:"images/great_moon_hoax_lunar_animals_1835_full.webp", cap:"<em>Lunar Animals and Other Objects</em> — lithograph sold by Benjamin Day&rsquo;s <em>Sun</em> (New York), 1835, to illustrate the Great Moon Hoax. Uncolored original, Library of Congress (the slide shows a later hand-colored copy)."},
+      {src:"images/jewett_murder_illustration_c1878_full.webp", cap:"&ldquo;The young murderer had done the dreadful deed at last&hellip;&rdquo; — the 1836 Helen Jewett murder retold in <em>The Truly Remarkable Life of the Beautiful Helen Jewett</em> (Philadelphia: Barclay &amp; Co., c. 1878). Cornell University Law Library, Trial Pamphlets Collection."}
     ]
         };
         let galleryKey = 'book', galleryIndex = 0;
