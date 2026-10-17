@@ -1,1146 +1,1019 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Lecture 1: Democratization of Culture</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 1: Democratization of Culture</title>
 
-  <!-- External CSS for all presentations -->
-  <link rel="stylesheet" href="../presentation-style.css"/>
+    <!-- Reveal.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reset.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/black.css">
 
-  <style>
-    /* ========== Local UI Styles (safe to keep inline) ========== */
+    <style>
+        /* Import professional fonts (same as Lecture 3) */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Merriweather:wght@300;400;700&display=swap');
 
-   
+        /* Root variables for color palette (same as Lecture 3) */
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2c5282;
+            --accent-color: #d69e2e;
+            --text-color: #f7fafc;
+            --light-text: #e2e8f0;
+            --background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+            --card-background: rgba(45, 55, 72, 0.8);
+        }
 
-    /* Help overlay (triggered by ?) */
-    .help-overlay {
-      position: fixed; inset: 0; z-index: 9998;
-      display: none; align-items: center; justify-content: center;
-      background: rgba(0,0,0,.5); backdrop-filter: blur(2px);
-    }
-    .help-card {
-      width: min(760px, 90vw); max-height: 85vh; overflow: auto;
-      background: #ffffff; color: #111; border-radius: 12px; border: 1px solid #ececec;
-      box-shadow: 0 18px 50px rgba(0,0,0,.25); padding: 18px 20px;
-      font-family: system-ui, Segoe UI, Roboto, Arial, sans-serif;
-    }
-    .help-card h2 { margin: 0 0 .5rem 0; }
-    .help-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: .6rem 1.2rem; }
-    .help-grid kbd { border: 1px solid #ddd; background: #f7f7f7; padding: 2px 6px; border-radius: 6px; }
-    .help-close { margin-top: .75rem; border: 1px solid #ccc; background:#f7f7f7; border-radius: 8px; padding: .5rem .75rem; cursor: pointer; }
+        /* Global reveal.js overrides (L3 sizes scaled from 1920x1080 to 960x700) */
+        .reveal {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 19px;
+            font-weight: 300;
+            color: var(--text-color);
+        }
+        .reveal-viewport { background: var(--background); }
 
-    /* Blackout overlay (B / .) */
-    #blackout { position: fixed; inset: 0; background: #000; z-index: 9997; display: none; }
+        .reveal h1 {
+            font-family: 'Montserrat', 'Helvetica Neue', sans-serif;
+            font-size: 1.75em;
+            font-weight: 700;
+            color: var(--text-color);
+            text-transform: none;
+            margin: 0 0 0.45em 0;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .reveal h1 .cont { font-size: 0.6em; font-weight: 400; color: var(--light-text); }
+        .reveal h2 {
+            font-family: 'Montserrat', 'Helvetica Neue', sans-serif;
+            font-size: 1.25em;
+            font-weight: 600;
+            color: var(--accent-color);
+            text-transform: none;
+            margin: 0.5em 0 0.35em 0;
+            line-height: 1.3;
+        }
+        .reveal h3 {
+            font-family: 'Montserrat', 'Helvetica Neue', sans-serif;
+            font-size: 1.05em;
+            font-weight: 600;
+            color: var(--light-text);
+            text-transform: none;
+            margin: 0.55em 0 0.25em 0;
+        }
+        .reveal h4 {
+            font-family: 'Montserrat', 'Helvetica Neue', sans-serif;
+            font-size: 1em;
+            font-weight: 600;
+            color: var(--accent-color);
+            text-transform: none;
+            margin-bottom: 0.4em;
+        }
+        .reveal p { margin: 0.5em 0; line-height: 1.55; }
+        .reveal strong { color: var(--accent-color); font-weight: 600; }
+        .reveal em { color: var(--light-text); font-style: italic; }
+        .reveal ul, .reveal ol { margin: 0.3em 0 0.4em 1.1em; line-height: 1.45; }
+        .reveal li { margin: 0.3em 0; }
 
-    /* Overview (O / Esc toggles) — show all slides in a grid */
-    body.overview .slide-container { display: grid !important; gap: 1rem; padding: 1rem; }
-    body.overview .slide {
-      display: block !important; transform: none !important; opacity: 1 !important;
-      width: min(560px, 46vw); max-height: 50vh; overflow: auto; border: 1px solid rgba(0,0,0,.08);
-      border-radius: 12px;
-    }
-    body.overview .slide.active { box-shadow: 0 0 0 3px #1e3a8a inset; }
+        /* Slides */
+        .reveal .slides { text-align: left; }
+        .reveal .slides > section {
+            padding: 30px 44px;
+            height: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        .reveal .slides > section > * { margin-left: 0; margin-right: 0; }
 
-    /* Simple popup overlay (postal / print stats) */
-    .popup-overlay {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.55);
-      display: none; align-items: center; justify-content: center; z-index: 9996;
-      padding: 1rem;
-    }
-    .popup-overlay.active { display: flex; }
-    .popup-content {
-      width: min(960px, 92vw); max-height: 86vh; overflow: auto;
-      background: #fff; color: #111; border-radius: 12px; border: 1px solid #eee;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25); padding: 1.25rem 1.5rem;
-      font-family: system-ui, Segoe UI, Roboto, Arial, sans-serif;
-    }
-    .popup-close {
-      float: right; border: none; background: #e74c3c; color: #fff;
-      border-radius: 8px; padding: .35rem .6rem; font-size: 1.1rem; cursor: pointer;
-    }
+        /* Title slide */
+        .reveal .title-slide {
+            text-align: center;
+            display: flex !important;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .reveal .title-slide h1 { font-size: 1.85em; margin-bottom: 0.25em; padding: 0 95px; }
+        .reveal .title-slide p { margin: 0.25em 0; color: var(--light-text); }
+        .reveal .lecture-number { font-family: 'Montserrat', sans-serif; font-size: 1.05em; letter-spacing: 0.08em; text-transform: uppercase; }
+        .reveal .subtitle { font-size: 1.15em; font-style: italic; color: var(--accent-color) !important; }
+        .reveal .title-fig { width: 62%; margin: 0.7em auto 0 auto; }
+        .reveal .title-fig img { max-height: 330px; }
+        .reveal .nav-hint { font-size: 0.7em; color: #a0aec0 !important; margin-top: 0.6em !important; }
 
-    /* :target modal (Stereotyping info) */
-    #stereo-info {
-      position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.35);
-      opacity: 0; pointer-events: none; transition: opacity .2s ease;
-    }
-    #stereo-info:target { opacity: 1; pointer-events: auto; }
-    #stereo-info .backdrop { position: absolute; inset: 0; display: block; background: transparent; }
-    #stereo-info .card {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      width: min(760px, 94vw); max-height: 86vh; overflow: auto;
-      background: #fff; color: #111; border: 1px solid #ddd; border-radius: 10px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25); font-family: Georgia, 'Times New Roman', serif;
-    }
-    #stereo-info header { padding: 14px 18px; border-bottom: 1px solid #eee; }
-    #stereo-info header h3 { margin: 0; font-size: 22px; }
-    #stereo-info .body { padding: 14px 18px; font-size: 18px; line-height: 1.5; }
-    #stereo-info footer { display: flex; justify-content: flex-end; gap: 10px; padding: 12px 16px; border-top: 1px solid #eee; }
-    #stereo-info .btn-close {
-      display: inline-block; padding: 8px 12px; font-size: 16px;
-      border: 1px solid #ccc; background: #f7f7f7; border-radius: 8px; text-decoration: none; color: #111;
-    }
-    /* ===== Study Buddy Notes (S key / Notes button) ===== */
-    .slide aside.notes { display: none !important; }
-    #notesToggle {
-      position: fixed; right: 14px; bottom: 14px; z-index: 9990;
-      border: 1px solid #c9c9c9; background: #ffffffee; color: #1C2833; border-radius: 999px;
-      padding: .45rem .9rem; font: 600 14px system-ui, Segoe UI, Roboto, Arial, sans-serif; cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,.15);
-    }
-    #notesPanel {
-      position: fixed; top: 0; right: 0; bottom: 0; width: min(560px, 92vw); z-index: 9995;
-      background: #fff; border-left: 1px solid #ddd; box-shadow: -8px 0 24px rgba(0,0,0,.18);
-      overflow-y: auto; padding: 14px 22px 40px; display: none;
-    }
-    #notesPanel.open { display: block; }
-    #notesPanel .notes-head { display: flex; justify-content: space-between; align-items: center;
-      font: 600 14px system-ui, Segoe UI, Roboto, Arial, sans-serif; color: #555; border-bottom: 1px solid #eee; padding-bottom: 8px; }
-    #notesPanel .notes-close { border: 1px solid #ccc; background: #f7f7f7; border-radius: 8px; padding: .3rem .6rem; cursor: pointer; }
-  </style>
+        /* Conclusion slide */
+        .reveal .conclusion-slide { display: flex !important; flex-direction: column; justify-content: center; }
+        .reveal .conclusion-slide h1 { text-align: center; font-size: 2em; }
+
+        /* Two-column layouts (L3) */
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin: 0.5em 0;
+            align-items: start;
+        }
+        .two-columns.tight { gap: 18px; }
+        .column {
+            background: var(--card-background);
+            padding: 14px 18px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+        }
+        .column > h2:first-child, .column > h3:first-child { margin-top: 0; }
+        .plain { display: flex; flex-direction: column; gap: 10px; }
+
+        /* Content boxes (L3 content-box with color variants for the original gold/navy/gray/cream boxes) */
+        .box {
+            background: var(--card-background);
+            padding: 10px 18px;
+            border-radius: 8px;
+            margin: 0.6em 0;
+            border-left: 4px solid var(--accent-color);
+        }
+        .box p { margin: 0.3em 0; }
+        .box-gold { background: rgba(214, 158, 46, 0.16); border-left-color: var(--accent-color); }
+        .box-navy { background: rgba(44, 82, 130, 0.55); border-left-color: #63b3ed; }
+        .box-gray { background: rgba(74, 85, 104, 0.6); border-left-color: #a0aec0; }
+        .box-cream { background: rgba(250, 240, 214, 0.1); border-left-color: #f6e05e; }
+        .center { text-align: center; }
+        .reveal p.big { font-size: 1.08em; }
+        .reveal .postal { margin-top: 1.2em; padding: 22px 34px; }
+        .reveal .postal h2 { font-size: 1.6em; margin-top: 0; }
+        .reveal .postal .tagline { font-size: 1.1em; }
+        .reveal .postal p.big { font-size: 1.3em; margin: 0.6em 0; }
+
+        /* Access list (Who's excluded?) */
+        .access-list { list-style: none; margin-left: 0 !important; padding-left: 0; }
+        .access-list li { margin: 0.45em 0; }
+        .checkmark { color: #68d391; font-weight: 700; margin-right: 0.4em; }
+        .partial { color: #f6e05e; font-weight: 700; margin-right: 0.4em; }
+        .crossmark { color: #fc8181; font-weight: 700; margin-right: 0.4em; }
+
+        /* Stats column (Print Revolution) */
+        .stats-col h2 { margin-top: 0; }
+        .aside-note { font-style: italic; color: #cbd5e0; font-size: 0.9em; }
+
+        /* Figures and images (L3 image-container look) */
+        .reveal img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            margin: 0;
+        }
+        .reveal figure.fig { margin: 0; text-align: center; }
+        .reveal figure.fig img { display: block; margin: 0 auto; object-fit: contain; }
+        .reveal figure.fig figcaption {
+            font-size: 0.68em;
+            color: var(--light-text);
+            margin-top: 0.4em;
+            line-height: 1.35;
+        }
+        .reveal .ai-credit { font-style: normal; color: #f6e05e; font-size: 0.95em; }
+        .image-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 0;
+            align-items: start;
+        }
+        .reveal img.zoomable { cursor: zoom-in; transition: transform 0.3s ease; }
+        .reveal img.zoomable:hover, .reveal img.zoomable:focus { transform: scale(1.04); outline: 2px solid var(--accent-color); }
+
+        /* Popup triggers (L3 popup-link look) */
+        .click-btn {
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85em;
+            font-weight: 600;
+            color: #1a202c;
+            background: var(--accent-color);
+            border: none;
+            border-radius: 6px;
+            padding: 6px 14px;
+            margin: 0.4em 0;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+        }
+        .click-btn:hover, .click-btn:focus { background: #ecc94b; outline: 2px solid #fff; }
+        .click-btn.inline { font-size: 0.95em; padding: 1px 8px; margin: 0; text-decoration: underline; }
+        .reveal .term-link { color: #f6e05e; text-decoration: underline dotted; background: none; border: 0; padding: 0; font: inherit; cursor: pointer; }
+        .reveal a { color: #90cdf4; }
+
+        /* Help icon on first slide (same as Lecture 3) */
+        .help-container { position: absolute; top: 10px; right: 10px; cursor: pointer; z-index: 100; }
+        .help-container img { width: 80px; height: auto; opacity: 0.85; margin: 0; box-shadow: none; }
+        .help-popup {
+            display: none; position: absolute; top: 90px; right: 0;
+            background: rgba(0,0,0,0.9); color: #fff; padding: 10px 12px; border-radius: 6px;
+            font-size: 0.62em; text-align: left; width: 210px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5); line-height: 1.5;
+        }
+
+        /* Speaker notes are shown only in Reveal's speaker view (S) */
+        .reveal aside.notes { display: none; }
+
+        /* ===== Popups (outside the scaled slide; sized to the viewport) ===== */
+        .modal-overlay {
+            position: fixed; inset: 0; z-index: 2000;
+            display: none; align-items: center; justify-content: center;
+            background: rgba(0,0,0,0.72); padding: 2vh 2vw; box-sizing: border-box;
+        }
+        .modal-overlay[aria-hidden="false"] { display: flex; }
+        .modal-dialog {
+            position: relative;
+            width: min(1100px, 96vw); max-height: 96vh; overflow: auto; box-sizing: border-box;
+            background: #1f2937; color: var(--text-color);
+            border: 2px solid var(--accent-color); border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            padding: 1.6vh 2vw 1.4vh 2vw;
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: clamp(11px, 1.9vh, 17px); line-height: 1.4;
+        }
+        .modal-dialog h2 { font-family: 'Montserrat', sans-serif; color: var(--accent-color); font-size: 1.35em; margin: 0 2.2em 0.5em 0; }
+        .modal-dialog h3 { font-family: 'Montserrat', sans-serif; color: #f6e05e; font-size: 1.05em; margin: 0.2em 0 0.25em 0; }
+        .modal-dialog h4 { font-family: 'Montserrat', sans-serif; color: var(--accent-color); margin: 0.8em 0 0.3em 0; }
+        .modal-dialog p { margin: 0.2em 0; }
+        .modal-dialog ul { margin: 0.3em 0 0.3em 1.2em; padding: 0; }
+        .modal-dialog li { margin: 0.25em 0; }
+        .modal-dialog strong { color: var(--accent-color); }
+        .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6em 1.6em; }
+        .stat-group { break-inside: avoid; }
+        .stat-number { color: var(--accent-color); font-weight: 700; }
+        .stereo-dialog { width: min(820px, 94vw); font-size: clamp(12px, 2.1vh, 18px); }
+        .modal-close-btn {
+            position: absolute; top: 8px; right: 10px;
+            border: none; background: #e74c3c; color: #fff; border-radius: 8px;
+            padding: 0.15em 0.55em; font-size: 1.4em; line-height: 1.2; cursor: pointer;
+        }
+        .modal-footer { display: flex; justify-content: flex-end; margin-top: 0.6em; }
+        .btn-close {
+            border: 1px solid var(--accent-color); background: transparent; color: var(--text-color);
+            border-radius: 8px; padding: 0.35em 0.9em; cursor: pointer; font-size: 0.95em;
+        }
+        .btn-close.red { background: #e74c3c; border-color: #e74c3c; color: #fff; }
+
+        /* Gallery */
+        .gallery-overlay { background: rgba(0,0,0,0.88); }
+        .gallery-dialog {
+            background: #111; border-radius: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            padding: 1.2vh 1.2vw; max-width: 94vw; max-height: 94vh; box-sizing: border-box;
+            display: flex; flex-direction: column; gap: 1vh;
+        }
+        .gallery-stage { position: relative; display: flex; justify-content: center; align-items: center; width: 88vw; height: 80vh; }
+        #galleryImg { max-width: 82vw; max-height: 80vh; width: auto; height: auto; border-radius: 10px; box-shadow: 0 4px 18px rgba(0,0,0,0.4); }
+        .gallery-nav {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 44px; height: 44px; border: none; border-radius: 50%;
+            background: rgba(255,255,255,0.18); color: #fff; font-size: 24px; cursor: pointer;
+        }
+        .gallery-nav.prev { left: 0.4vw; }
+        .gallery-nav.next { right: 0.4vw; }
+        .gallery-bar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; color: #eee; font-size: clamp(12px, 1.9vh, 16px); }
+        #galleryCaption { flex: 1 1 auto; line-height: 1.3; }
+        #galleryCaption strong { color: var(--accent-color); }
+        #galleryCounter { color: #ccc; white-space: nowrap; }
+        /* Text-only slides get a larger type size */
+        .reveal .roomy { font-size: 1.14em; }
+        .reveal .roomy h1 { font-size: 1.6em; }
+        .reveal .compact { font-size: 0.93em; }
+
+    </style>
 </head>
 <body>
-  <div class="slide-container">
+    <div class="reveal">
+        <div class="slides">
 
-      <!-- SLIDE 1: Title -->
-    <div class="slide active bg-cream" data-slide="1">
-      <div class="slide-number">Slide 1 of 15</div>
-      <div class="nav-hint">← → Arrow keys to navigate | ESC to close popups</div>
+            <section class="title-slide">
+                <p class="lecture-number">Lecture 1</p>
+                <h1>The Democratization of Culture:<br/>Print, Literacy, and the New Public</h1>
+                <p class="subtitle">Popular Culture in America, 1815–1850</p>
+                <figure class="fig title-fig"><img src="images/Indelible-Journal-American-newsroom-631.webp" alt="Crowded twentieth-century American newspaper office"><figcaption><em>A modern American newsroom (20th-century photograph) — heir to the expanding print culture of the new republic</em></figcaption></figure>
+                <p class="nav-hint">← → Arrow keys to navigate | ESC to close popups</p>
+                <div class="help-container" onmouseover="document.getElementById('help-popup').style.display='block';" onmouseout="document.getElementById('help-popup').style.display='none';" onclick="document.getElementById('help-popup').style.display='block';">
+                    <img src="images/help.webp" alt="Help">
+                    <div id="help-popup" class="help-popup">
+                        <strong style="display:block; margin-bottom:6px;">Navigation:</strong>
+                        <div>→ or Space: Next slide<br>←: Previous slide<br>PgUp/PgDn: Previous/Next slide<br>Home: First slide<br>End: Last slide<br>F: Fullscreen<br>Esc: Overview mode<br>S: Speaker notes<br>?: Help menu<br>B or .: Pause (blackout)<br>Alt+Click: Zoom</div>
+                    </div>
+                </div>
+<aside class="notes">
+<div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
 
-      <div class="center-content title-slide">
-        <p class="lecture-number">Lecture 1</p>
-        <h1>The Democratization of Culture:<br/>Print, Literacy, and the New Public</h1>
-        <p class="subtitle">Popular Culture in America, 1815–1850</p>
+<h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+<p style="margin-bottom: 1em;">Welcome to Lecture 1 of Chapter 10, <em>Popular Culture in America, 1815–1850</em>. Picture the newsroom on this slide: crowded, noisy, full of people who expect to read the news every day. (The photograph is from the twentieth century, used as a symbol; 1830s newspaper offices were small print shops.) That daily-news expectation was new in our period. This lecture tells the story of how cheap print turned ordinary Americans into a reading <em>public</em>, and asks who got left out.</p>
 
-        <figure style="width: 60%; margin: 4vh auto 0 auto; text-align: center;">
-          <img src="images/Indelible-Journal-American-newsroom-631.webp"
-               alt="Crowded newspaper office, people reading newspapers in the 1830s"
-               style="width: 100%; height: auto; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.3);">
-          <figcaption style="font-size: 0.9em; color: #444; margin-top: 0.5em;">
-            <em>American newsroom, 1830s — the expanding print culture of the new republic</em>
-          </figcaption>
-        </figure>
-      </div>
-    
-      <aside class="notes">
-      <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+<h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+<p style="margin-bottom: 1em;"><strong>The big question</strong>: What happened when ordinary people, not just wealthy elites, gained everyday access to newspapers, books, pictures, and public lectures?</p>
+<p style="margin-bottom: 1em;"><strong>The roadmap</strong>: We start in 1815, define two key ideas (popular culture and the public sphere), then follow the penny press, cheap books, mass-produced pictures, the lyceum lecture circuit, and party newspapers. We end by asking whom this “democratization” actually reached.</p>
 
-      <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
-      <p style="margin-bottom: 1em;">Welcome to Lecture 1 of Chapter 10, <em>Popular Culture in America, 1815–1850</em>. Picture the newsroom on this slide: crowded, noisy, full of people who expect to read the news every day. That expectation was new. This lecture tells the story of how cheap print turned ordinary Americans into a reading <em>public</em>, and asks who got left out.</p>
+<h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+<p style="margin-bottom: 1em;">Everything else in Chapter 10 builds on this lecture. In Lecture 2 the same hunger for feeling and participation shows up in revival religion, and in Lecture 3 it shows up on the stage. Keep one question in your pocket the whole time: <em>democratization for whom?</em></p>
 
-      <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
-      <p style="margin-bottom: 1em;"><strong>The big question</strong>: What happened when ordinary people, not just wealthy elites, gained everyday access to newspapers, books, pictures, and public lectures?</p>
-      <p style="margin-bottom: 1em;"><strong>The roadmap</strong>: We start in 1815, define two key ideas (popular culture and the public sphere), then follow the penny press, cheap books, mass-produced pictures, the lyceum lecture circuit, and party newspapers. We end by asking whom this “democratization” actually reached.</p>
+</div>
+</aside>
+            </section>
 
-      <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
-      <p style="margin-bottom: 1em;">Everything else in Chapter 10 builds on this lecture. In Lecture 2 the same hunger for feeling and participation shows up in revival religion, and in Lecture 3 it shows up on the stage. Keep one question in your pocket the whole time: <em>democratization for whom?</em></p>
+            <section class="roomy">
+                <h1>Key Concepts</h1>
+                <h2>What is "Popular Culture"?</h2>
+                <ul>
+                    <li>Culture produced for and consumed by <strong>ordinary people</strong> (not just elites)</li>
+                    <li>Commercially produced and distributed for mass audiences</li>
+                    <li>Accessible, affordable, entertaining</li>
+                    <li>Distinguished from "high culture" — BUT boundaries are blurring</li>
+                </ul>
+                <h2>What is "Democratization of Culture"?</h2>
+                <ul>
+                    <li>Expanding cultural access beyond traditional elite gatekeepers</li>
+                    <li>Lower costs, new technologies (steam press), new institutions (lyceums)</li>
+                    <li>Culture becomes market-based rather than patronage-based</li>
+                </ul>
+                <div class="box box-gold center"><p class="big"><strong>CRITICAL QUESTION: Democratization for whom?<br>Who gains access and who remains excluded?</strong></p></div>
+<aside class="notes">
+<div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
 
-      </div>
-      </aside>
+<h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+<p style="margin-bottom: 1em;">Before we tell the story, we need two tools. Think of them as the lenses on a pair of glasses: one helps you see <em>what kind</em> of culture we are talking about, and the other helps you see <em>how</em> it changed.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+<p style="margin-bottom: 1em;"><strong><a href="https://en.wikipedia.org/wiki/Popular_culture" target="_blank">Popular culture</a></strong>: culture made for and enjoyed by ordinary people: cheap newspapers, novels, songs, prints, and shows. It is usually sold in a market, so it has to be affordable and entertaining enough that people will pay for it.</p>
+<p style="margin-bottom: 1em;"><strong><a href="https://en.wikipedia.org/wiki/High_culture" target="_blank">High culture</a></strong>: the arts and learning that elites treated as refined, such as classical learning, fine art, and serious literature. The slide says the boundary was <em>blurring</em>: in this period Shakespeare was popular entertainment, and lecture halls mixed philosophy with stage demonstrations.</p>
+<p style="margin-bottom: 1em;"><strong>Democratization of culture</strong>: the widening of access beyond old gatekeepers (wealthy patrons, college-educated ministers, and gentlemen editors). Three forces drive it: lower costs, new technology such as the steam-powered press, and new institutions such as the <a href="https://en.wikipedia.org/wiki/Lyceum_movement" target="_blank">lyceum</a>. Culture shifts from <strong>patronage</strong> (a rich sponsor pays) to the <strong>market</strong> (many buyers pay a little).</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+<p style="margin-bottom: 1em;">The gold box is the lecture’s critical question. “Democratization” sounds like pure good news, but access was never equal. As you study each slide, ask who could afford it, who could read it, and who was legally or socially shut out.</p>
+
+</div>
+</aside>
+            </section>
+
+            <section>
+                <h1>Setting the Scene: 1815</h1>
+                <div class="two-columns">
+                    <div class="column">
+                        <h2>A Cultural Turning Point</h2>
+                        <ul>
+                            <li>Post-War of 1812 nationalism and rising literacy</li>
+                            <li>Urban growth and expanding markets</li>
+                            <li>Steam technology enables faster printing</li>
+                            <li>Cultural institutions begin to democratize</li>
+                        </ul>
+                        <div class="box box-cream center"><p class="big"><strong>Why would the federal government subsidize newspaper distribution?</strong></p></div>
+                    </div>
+                    <div class="plain">
+                        <figure class="fig"><img src="images/NewEngland-postoffice-1878-image4.webp" alt="Post Route Map of New Hampshire, Vermont, Massachusetts, Rhode Island, and Connecticut, 1878" style="max-height:360px;"><figcaption><em>New England Post Route Map, 1878 — expanding communication networks of the early republic</em></figcaption></figure>
+                    </div>
+                </div>
+<aside class="notes">
+<div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+<p style="margin-bottom: 1em;">In 1815 the War of 1812 had just ended, and Americans felt a surge of national pride. This slide sets the stage: a country that was still mostly rural but already had a large reading population and a remarkable mail system that carried news everywhere.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+<p style="margin-bottom: 1em;"><strong>The turning point</strong>: Nationalism after the war, rising literacy, growing towns and markets, and faster steam-powered printing all arrived together. Institutions that had served a small elite began opening up.</p>
+<p style="margin-bottom: 1em;"><strong>The map</strong>: This 1878 Post Route Map of New England is later than our period, but its dense web of mail routes shows how far the network begun in 1792 had spread. The next slide explains the law that built it.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+<p style="margin-bottom: 1em;">The cream box asks why the government would pay to spread newspapers. The founders believed a republic needs informed citizens, so the post office was a deliberate investment in democracy. Notice, though, that it was a <em>government</em> choice: the people who ran the mail could also decide what <em>not</em> to carry, as abolitionists learned in 1835.</p>
+
+</div>
+</aside>
+            </section>
+
+            <section>
+                <h1>Setting the Scene: 1815 <span class="cont">(continued)</span></h1>
+                <div class="box box-navy postal">
+                    <h2 class="center">🏛️ THE POSTAL ACT OF 1792</h2>
+                    <p class="center tagline"><em>The Information Superhighway</em></p>
+                    <p class="big">Newspapers mailed at extremely low rates (often free between publishers)</p>
+                    <p class="big">Creates a national information network: news from Washington reaches frontier towns</p>
+                    <div class="center"><button type="button" class="click-btn" onclick="openModal('postal-stats')">📊 CLICK FOR STATISTICS</button></div>
+                </div>
+<aside class="notes">
+<div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+<p style="margin-bottom: 1em;">This slide continues “Setting the Scene” by zooming in on the law that made a national reading public possible: the Post Office Act of 1792.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+<p style="margin-bottom: 1em;"><strong>The <a href="https://en.wikipedia.org/wiki/Postal_Service_Act" target="_blank">Post Office Act of 1792</a></strong>: Congress set very low postage for newspapers (1 cent for up to 100 miles and 1.5 cents beyond, when a letter cost 6 to 25 cents) and let printers exchange papers with each other free. Small-town editors filled their pages with stories clipped from exchange papers, so news from Washington reached frontier towns. That is why the slide calls it an “information superhighway.”</p>
+<p style="margin-bottom: 1em;"><strong>The statistics popup</strong>: The network grew from 75 post offices in 1790 to 8,450 in 1830 and 18,417 in 1850. By 1840 post roads stretched more than 155,000 miles. By the 1830s newspapers made up most of the <em>weight</em> of the mail but paid only a small share of its costs, so letter-writers and the Treasury were in effect subsidizing the news.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+<p style="margin-bottom: 1em;">Cheap, reliable delivery of newspapers is the hidden foundation of everything else in this lecture. The penny press, the partisan press, and reform publishing all depended on a federal network that carried print to almost every town.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">🎓 Historians Weigh In</h3>
+<h4 style="margin-top: 1em;">Richard R. John – <em>Spreading the News: The American Postal System from Franklin to Morse</em></h4>
+<p style="margin-bottom: 1em;">John argues that the post office was the most important branch of the early federal government in most Americans’ lives. For this slide, his point is that the national “public” was built on government infrastructure, not just on private enterprise.</p>
+
+</div>
+</aside>
+            </section>
+
+            <section>
+                <h1>Understanding the Public Sphere</h1>
+                <div class="two-columns">
+                    <div class="column">
+                        <h2>What is the Public Sphere?</h2>
+                        <ul>
+                            <li>A social space where private individuals discuss public matters</li>
+                            <li>Distinct from private life (family, home)</li>
+                            <li>Distinct from the state (government)</li>
+                            <li>Created through communication—newspapers, pamphlets, lectures</li>
+                            <li>Access based on literacy and participation (ideally)</li>
+                        </ul>
+                    </div>
+                    <div class="plain">
+                        <figure class="fig"><img src="images/public_sphere.webp" alt="Diagram illustrating the relationship between private life, the public sphere, and the state" style="max-height:400px;"><figcaption><em>The Public Sphere — a space between private life and the state, shaped by print culture and communication</em></figcaption></figure>
+                    </div>
+                </div>
+<aside class="notes">
+<div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+<p style="margin-bottom: 1em;">This slide gives you a key concept you will use all semester: the <strong>public sphere</strong>. Think of it as an imaginary town square. It is not your home and it is not the government; it is the space in between, where people talk about common problems.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+<p style="margin-bottom: 1em;"><strong>A social space for public talk</strong>: Private people come together, in person or through print, to discuss public matters such as elections, wars, and moral questions.</p>
+<p style="margin-bottom: 1em;"><strong>Distinct from private life and from the state</strong>: Your family dinner table is private; Congress is the state. The public sphere sits between them, where citizens form opinions that the state then has to reckon with. The diagram on the right shows these three zones.</p>
+<p style="margin-bottom: 1em;"><strong>Created through communication</strong>: Newspapers, pamphlets, letters, and lectures are what <em>make</em> the public sphere. No print, no shared conversation among strangers.</p>
+<p style="margin-bottom: 1em;"><strong>Access “ideally” open</strong>: In theory anyone who could read and argue could join. The word “ideally” is a warning that practice fell short, which is the subject of Slide 6.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+<p style="margin-bottom: 1em;">Why use a concept like this? It lets us see that newspapers and lectures were not just entertainment. They were where Americans practiced self-government. When access to print widened, the circle of people who could take part in public debate widened too.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">🎓 Historians Weigh In</h3>
+<h4 style="margin-top: 1em;">Jürgen Habermas – <em>The Structural Transformation of the Public Sphere</em></h4>
+<p style="margin-bottom: 1em;">The German philosopher <a href="https://en.wikipedia.org/wiki/J%C3%BCrgen_Habermas" target="_blank">Habermas</a> described how coffeehouses, salons, and newspapers in eighteenth-century Europe created a space for reasoned public debate. He also argued that commercial mass media later turned citizens into consumers. Keep that worry in mind when we reach the penny press.</p>
+
+</div>
+</aside>
+            </section>
+
+            <section class="roomy">
+                <h1>How Print Creates the Public Sphere</h1>
+                <h2>The Power of Print</h2>
+                <ul>
+                    <li>Newspapers circulate information to geographically dispersed readers</li>
+                    <li>Readers imagine themselves as part of a larger community of "the public"</li>
+                    <li>Print enables debate, discussion, and formation of public opinion</li>
+                    <li>Penny press makes participation affordable (1¢ vs 6¢)</li>
+                    <li>Lyceums bring public lectures to ordinary citizens</li>
+                </ul>
+                <div class="box box-gray">
+                    <p class="big"><strong>CONCRETE EXAMPLE:</strong></p>
+                    <p>A farmer in Ohio and a merchant in Boston both read about the same Senate debate in their local newspapers. Though they've never met, they now share knowledge and can discuss the same political issue. This is the public sphere in action.</p>
+                </div>
+<aside class="notes">
+<div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+<p style="margin-bottom: 1em;">How does a stack of newspapers create a public? This slide answers with a simple example: two strangers, hundreds of miles apart, reading the same story on the same day.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+<p style="margin-bottom: 1em;"><strong>Circulation to scattered readers</strong>: Newspapers carried the same information to people who would never meet.</p>
+<p style="margin-bottom: 1em;"><strong>Imagining a community</strong>: Readers began to picture themselves as part of a larger group, “the public” or “the nation,” made up of people reading the same things at the same time.</p>
+<p style="margin-bottom: 1em;"><strong>Debate and public opinion</strong>: Once people share information, they can argue about it. Letters to editors, party papers, and tavern conversations turned shared news into public opinion.</p>
+<p style="margin-bottom: 1em;"><strong>The penny press and lyceums</strong>: A one-cent paper (instead of six cents) and cheap public lectures made taking part affordable for many more people. Both get their own slides later.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+<p style="margin-bottom: 1em;">The farmer in Ohio and the merchant in Boston are the heart of this lecture. Print made it possible for a huge, spread-out country to hold one conversation. That shared conversation is a big part of how Americans came to feel like one nation.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">🎓 Historians Weigh In</h3>
+<h4 style="margin-top: 1em;">Benedict Anderson – <em>Imagined Communities</em></h4>
+<p style="margin-bottom: 1em;">Anderson argued that nations are “imagined communities”: you will never meet most of your fellow citizens, yet you feel connected to them. He pointed to newspapers as a key reason. Reading the same paper at the same moment is a daily ritual that makes the nation feel real. The Ohio farmer and Boston merchant are a perfect example.</p>
+
+</div>
+</aside>
+            </section>
+
+            <section class="roomy">
+                <h1>The Public Sphere: Who's Excluded?</h1>
+                <div class="box box-navy center"><p class="big"><strong>Key Question: Who has access to this "public" sphere?</strong></p></div>
+                <ul class="access-list">
+                    <li><span class="checkmark">✓</span> White men (primary participants—voting rights, literacy, leisure time)</li>
+                    <li><span class="partial">◐</span> Some middle-class women (limited roles—reading circles, moral reform societies)</li>
+                    <li><span class="crossmark">✗</span> African Americans (largely excluded, create separate spheres—Freedom's Journal, 1827)</li>
+                    <li><span class="crossmark">✗</span> Enslaved people (legally barred from literacy in most Southern states)</li>
+                    <li><span class="crossmark">✗</span> Working poor (economic barriers—time, cost, limited literacy)</li>
+                </ul>
+                <div class="box box-gold center"><p class="big"><em><strong>"Democratization" is partial and contested—access remains structured by race, class, and gender.</strong></em></p></div>
+<aside class="notes">
+<div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+<p style="margin-bottom: 1em;">Now the hard question: who actually got into this “public” town square? The checkmarks, half-circles, and X’s on this slide sort Americans by how much access they had. The answer is that democratization was real but <em>partial</em>.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+<p style="margin-bottom: 1em;"><strong>White men (✓)</strong>: By the 1830s nearly all white men could vote, most could read, and many had at least some time and money for newspapers. They were the main participants.</p>
+<p style="margin-bottom: 1em;"><strong>Some middle-class women (◐)</strong>: Women were readers, writers, and organizers of reading circles and moral reform societies, but they could not vote and faced criticism for speaking in public.</p>
+<p style="margin-bottom: 1em;"><strong>African Americans (✗)</strong>: Free Black Americans were largely shut out of white institutions, so they built their own. <a href="https://en.wikipedia.org/wiki/Freedom%27s_Journal" target="_blank"><em>Freedom’s Journal</em></a> (New York, 1827) was the first newspaper owned and edited by African Americans.</p>
+<p style="margin-bottom: 1em;"><strong>Enslaved people (✗)</strong>: Most Southern states passed <a href="https://en.wikipedia.org/wiki/Anti-literacy_laws_in_the_United_States" target="_blank">anti-literacy laws</a>, especially after David Walker’s <em>Appeal</em> (1829) and Nat Turner’s rebellion (1831), making it a crime to teach enslaved people to read.</p>
+<p style="margin-bottom: 1em;"><strong>The working poor (✗)</strong>: Long workdays, tight budgets, and limited schooling kept many laborers and poor immigrants on the edges.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+<p style="margin-bottom: 1em;">The gold box states the lecture’s thesis in miniature: access was structured by <strong>race, class, and gender</strong>. Notice that excluded groups did not simply wait. They built <em>counterpublics</em>, their own newspapers, churches, and societies. When you study any “democratization,” always ask who built the doors and who held the keys.</p>
+
+</div>
+</aside>
+            </section>
+
+            <section>
+                <h1>The Print Revolution: Scale &amp; Impact</h1>
+                <div class="two-columns tight">
+                    <div class="column">
+                        <h3>Technological Innovation</h3>
+                        <ul><li>Steam presses, mass-produced paper, <button type="button" class="term-link" onclick="openModal('stereo-info')">stereotyping</button></li></ul>
+                        <h3>Economic Innovation</h3>
+                        <ul><li>Advertising replaces subscriptions as primary revenue</li></ul>
+                        <h3>Social Impact</h3>
+                        <ul>
+                            <li>Literacy expands across class and region</li>
+                            <li>Print becomes a commodity, not a luxury</li>
+                        </ul>
+                        <h3>Key Example</h3>
+                        <ul><li>Benjamin Day's <em>New York Sun</em> (1833)—news for a penny</li></ul>
+                    </div>
+                    <div class="column stats-col">
+                        <h2 class="center">BY THE NUMBERS</h2>
+                        <div class="center"><button type="button" class="click-btn" onclick="openModal('print-stats')">📊 VIEW STATISTICS</button></div>
+                        <ul>
+                            <li>~1,000 newspapers by 1835<br><span class="aside-note">(vs. ~200 in 1800)</span></li>
+                            <li>~90% of white adults literate by 1840 (census)</li>
+                            <li>Lower in the South; barred for most enslaved people</li>
+                            <li>Book prices drop from $1.50 to 25¢</li>
+                        </ul>
+                        <figure class="fig"><img src="images/the_sun_masthead_1833.webp" alt="Masthead of the New York Sun, September 21, 1833" style="max-height:130px;"><figcaption><em>The <strong>Sun</strong> (New York), September 21, 1833 — Day’s penny paper, product of the print revolution</em></figcaption></figure>
+                    </div>
+                </div>
+<aside class="notes">
+<div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+<p style="margin-bottom: 1em;">This slide shows the scale of the print revolution: new machines, a new way of paying for newspapers, and a huge jump in the number of papers and readers.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+<p style="margin-bottom: 1em;"><strong>Technological innovation</strong>: Steam-powered presses printed far faster than hand presses, machine-made paper was cheaper, and <strong><a href="https://en.wikipedia.org/wiki/Stereotype_(printing)" target="_blank">stereotyping</a></strong> (click the word on the slide) cast a whole page of type as one metal plate so popular books could be reprinted quickly and cheaply.</p>
+<p style="margin-bottom: 1em;"><strong>Economic innovation</strong>: Advertising, not subscriptions, became the main source of income. A paper that sells ads can sell copies cheaply, and more readers means higher ad prices.</p>
+<p style="margin-bottom: 1em;"><strong>Social impact</strong>: Print stopped being a luxury and became an everyday commodity, something you buy, read, and toss, like a snack.</p>
+<p style="margin-bottom: 1em;"><strong>By the numbers</strong>: The U.S. went from roughly 200 newspapers in 1800 to about 1,000 by 1835. When the 1840 census first asked about literacy, it counted roughly nine in ten white adults as able to read and write, among the highest rates in the world, though lower in the South. Book prices fell from a dollar or more to as little as a quarter for cheap editions. Treat the figures as estimates; nineteenth-century counts were rough.</p>
+<p style="margin-bottom: 1em;"><strong>Key example</strong>: Benjamin Day’s <em>New York Sun</em> (1833) proved a one-cent daily could succeed. The next slide explains how.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+<p style="margin-bottom: 1em;">The point is that technology and money worked together. Machines made print possible at scale; advertising made it profitable. That combination is the ancestor of nearly every mass medium you use today, from TV to social media, which are also paid for by advertisers.</p>
+
+</div>
+</aside>
+            </section>
+
+            <section>
+                <h1>The Penny Press: A New Business Model</h1>
+                <div class="two-columns">
+                    <div class="column">
+                        <h2>The Innovation</h2>
+                        <ul>
+                            <li>Newspapers sold for 1¢ (not 6¢)—affordable to working-class readers</li>
+                            <li>Sold on streets by newsboys, not by subscription</li>
+                            <li>Advertising revenue replaces subscriber fees</li>
+                            <li>Mass circulation = mass influence</li>
+                        </ul>
+                        <h2>The Players</h2>
+                        <ul>
+                            <li><strong>New York Sun (1833)</strong> – Benjamin Day</li>
+                            <li><strong>New York Herald (1835)</strong> – James Gordon Bennett</li>
+                            <li><strong>New York Tribune (1841)</strong> – Horace Greeley</li>
+                        </ul>
+                    </div>
+                    <div class="plain">
+                        <div class="box box-cream center"><p class="big"><strong>Why would selling papers on the street change what gets published?</strong></p></div>
+                        <figure class="fig"><img src="images/Newsboys-Strike.webp" alt="Newsboys selling papers on the streets of New York City during the 19th century" style="max-height:280px;"><figcaption><em>Newsboys in New York City — the street-level revolution of the Penny Press era</em></figcaption></figure>
+                    </div>
+                </div>
+<aside class="notes">
+<div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+<p style="margin-bottom: 1em;">The penny press was a business revolution. Imagine your favorite news site suddenly charging one-sixth of what it used to, and paying for itself with ads and street sales. That is what happened in New York in the 1830s.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+<p style="margin-bottom: 1em;"><strong>1¢ instead of 6¢</strong>: Older papers cost six cents and were sold by yearly subscription to merchants and lawyers. A penny paper was affordable to clerks, apprentices, and laborers.</p>
+<p style="margin-bottom: 1em;"><strong>Newsboys, not subscriptions</strong>: Day hired boys to buy papers in bulk and sell them on street corners, shouting the headlines. The photo of newsboys is from later in the century, but the street-sale model started here.</p>
+<p style="margin-bottom: 1em;"><strong>Advertising pays the bills</strong>: More readers meant more advertising revenue.</p>
+<p style="margin-bottom: 1em;"><strong>The players</strong>: <a href="https://en.wikipedia.org/wiki/The_Sun_(New_York_City)" target="_blank"><em>The Sun</em></a> (1833, <a href="https://en.wikipedia.org/wiki/Benjamin_Day" target="_blank">Benjamin Day</a>), the <a href="https://en.wikipedia.org/wiki/New_York_Herald" target="_blank"><em>New York Herald</em></a> (1835, <a href="https://en.wikipedia.org/wiki/James_Gordon_Bennett_Sr." target="_blank">James Gordon Bennett</a>), and the <a href="https://en.wikipedia.org/wiki/New-York_Tribune" target="_blank"><em>New-York Tribune</em></a> (1841, <a href="https://en.wikipedia.org/wiki/Horace_Greeley" target="_blank">Horace Greeley</a>). Bennett loved scandal; Greeley aimed for a more serious, reform-minded cheap paper.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+<p style="margin-bottom: 1em;">The cream box asks the key question. If you have to grab a passerby’s attention every single morning, you print what grabs attention: crime, fires, courtroom drama, human-interest stories. Selling on the street changed not just who read the news but <em>what counted as news</em>.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">🎓 Historians Weigh In</h3>
+<h4 style="margin-top: 1em;">Michael Schudson – <em>Discovering the News</em></h4>
+<p style="margin-bottom: 1em;">Schudson argues that the penny press invented modern “news” as a product: timely, about ordinary people, and sold to a mass market. Before the 1830s, papers mostly served parties and merchants. After, they served readers and advertisers, and that shift still shapes journalism.</p>
+
+</div>
+</aside>
+            </section>
+
+            <section>
+                <h1>Sensationalism: Where's the Line?</h1>
+                <div class="two-columns tight">
+                    <div class="column">
+                        <h2>What the Penny Press Published</h2>
+                        <ul>
+                            <li><strong>The Great Moon Hoax (1835):</strong> “scientists” discover winged humanoids on the moon</li>
+                            <li><strong>Helen Jewett murder case (1836):</strong> sex worker’s death becomes daily drama</li>
+                            <li>Crime, scandal, spectacle — anything that sells papers</li>
+                        </ul>
+                        <h3>Impact on Democracy</h3>
+                        <ul>
+                            <li>Ordinary readers become participants in shared public conversation</li>
+                            <li>Journalism shifts from “information” to “performance”</li>
+                        </ul>
+                    </div>
+                    <div class="plain">
+                        <div class="box box-gold center"><p class="big"><strong>CRITICAL QUESTION:<br>Where is the boundary between truth and entertainment?</strong></p></div>
+                        <div class="image-grid" aria-label="Gallery showing Great Moon Hoax detail followed by later sensationalist illustration">
+                            <figure class="fig"><img src="images/f0332666-800px-wm.webp" alt="Close-up detail from the Great Moon Hoax illustration" style="max-height:200px;"><figcaption><em>Close-up from the <strong>Great Moon Hoax</strong> (1835) — the dramatic detail that drew readers in</em></figcaption></figure>
+                            <figure class="fig"><img src="images/hm_january_february_2022_reasure_crime_law_school_2.jpg.webp" alt="Later 19th-century sensationalist illustration reflecting crime and press culture" style="max-height:200px;"><figcaption><em>Crime and spectacle — the sensationalist legacy of the penny-press model</em></figcaption></figure>
+                        </div>
+                    </div>
+                </div>
+<aside class="notes">
+<div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+<p style="margin-bottom: 1em;">Once papers competed for pennies on the street, they found that sensation sold. This slide gives two famous cases and asks where the line between truth and entertainment falls.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+<p style="margin-bottom: 1em;"><strong>The <a href="https://en.wikipedia.org/wiki/Great_Moon_Hoax" target="_blank">Great Moon Hoax</a> (1835)</strong>: In late August the <em>Sun</em> ran a series claiming that the astronomer Sir John Herschel had seen forests, animals, and winged, human-like “man-bats” on the moon. It was invented, most likely by reporter Richard Adams Locke. Many readers believed it at first, and the paper’s sales soared.</p>
+<p style="margin-bottom: 1em;"><strong>The <a href="https://en.wikipedia.org/wiki/Helen_Jewett" target="_blank">Helen Jewett</a> murder (1836)</strong>: Jewett, a young woman working in a New York brothel, was killed in April 1836. Bennett’s <em>Herald</em> described the scene in vivid detail, and the papers fought for weeks over whether the accused clerk, Richard Robinson, was guilty. A jury acquitted him. A real woman’s death became daily entertainment.</p>
+<p style="margin-bottom: 1em;"><strong>Impact on democracy</strong>: Ordinary readers joined a shared public conversation, arguing about these stories everywhere. But journalism also shifted from “information” toward “performance,” news staged to keep an audience hooked.</p>
+<p style="margin-bottom: 1em;"><strong>The images</strong>: The two pictures pair a Moon Hoax illustration with a later crime picture, showing how long this sensational style lasted.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+<p style="margin-bottom: 1em;">There is no easy answer to the gold box question, and that is the point. The penny press gave working people a voice and an audience, but it also rewarded exaggeration and turned suffering into a product. You live with the same tension every time a headline is written to be clicked.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">🎓 Historians Weigh In</h3>
+<h4 style="margin-top: 1em;">Patricia Cline Cohen – <em>The Murder of Helen Jewett</em></h4>
+<p style="margin-bottom: 1em;">Cohen shows how the Jewett case let editors build mass audiences by mixing crime, sex, and moral lessons. She also recovers Jewett as a real, literate young woman, not just a headline, a good reminder to look for the person behind the spectacle.</p>
+
+</div>
+</aside>
+            </section>
+
+            <section class="roomy">
+                <h1>The Book Revolution</h1>
+                <h2>Publishing Explosion</h2>
+                <ul>
+                    <li><button type="button" class="click-btn inline" onclick="openGallery('book',0)">Harper &amp; Brothers</button>, Carey &amp; Lea pioneer cheap editions</li>
+                    <li>James Fenimore Cooper’s <em>Leatherstocking Tales</em> create frontier mythology</li>
+                    <li>Serialization in story papers creates new reading habits</li>
+                    <li>Books become affordable commodities, not luxury items</li>
+                </ul>
+                <div class="box box-gray">
+                    <p class="big"><strong>IMPACT:</strong></p>
+                    <p>Reading becomes a form of leisure, self-improvement, and identity formation. Americans begin to imagine themselves through the stories they read—whether tales of frontier adventure or sentimental domestic life.</p>
+                </div>
+<aside class="notes">
+<div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+<p style="margin-bottom: 1em;">Books went through the same revolution as newspapers. They got cheaper, publishers got bigger, and reading became something ordinary people did for fun and self-improvement.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+<p style="margin-bottom: 1em;"><strong>Cheap editions</strong>: Publishers such as <a href="https://en.wikipedia.org/wiki/Harper_%26_Brothers" target="_blank">Harper &amp; Brothers</a> in New York (click the name for a gallery) and Carey &amp; Lea in Philadelphia used new presses to sell books cheaply. Because the U.S. did not protect foreign copyrights, they could also reprint British authors like Walter Scott and Charles Dickens without paying them.</p>
+<p style="margin-bottom: 1em;"><strong><a href="https://en.wikipedia.org/wiki/James_Fenimore_Cooper" target="_blank">James Fenimore Cooper</a></strong>: His <a href="https://en.wikipedia.org/wiki/Leatherstocking_Tales" target="_blank">Leatherstocking Tales</a>, including <em>The Last of the Mohicans</em> (1826), made the frontier into a national myth about wilderness and conquest, and about the supposed “vanishing” of Native peoples, a myth that hid ongoing removal.</p>
+<p style="margin-bottom: 1em;"><strong>Serialization</strong>: Story papers printed novels in weekly installments, so readers waited eagerly for the next chapter, much like a streaming series today.</p>
+<p style="margin-bottom: 1em;"><strong>Books as commodities</strong>: Books became affordable purchases rather than heirlooms.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+<p style="margin-bottom: 1em;">The gray box makes the cultural point: reading became a way to relax, to improve yourself, and to figure out who you were. Americans began to imagine themselves through stories, whether frontier adventures or domestic dramas, and those stories shaped what “American” meant.</p>
+
+</div>
+</aside>
+            </section>
+
+            <section class="compact">
+                <h1>Sentimental Fiction &amp; Female Readers</h1>
+                <div class="two-columns">
+                    <div class="column">
+                        <h2>The "Scribbling Women"</h2>
+                        <ul>
+                            <li>Susan Warner (The Wide, Wide World, 1850)</li>
+                            <li>Maria Cummins (The Lamplighter, 1854)</li>
+                            <li>E.D.E.N. Southworth (The Hidden Hand, serialized)</li>
+                        </ul>
+                        <h3>Cultural Significance</h3>
+                        <ul>
+                            <li>Blend of sentiment and moral didacticism</li>
+                            <li>Novels teach "emotional literacy"—feeling becomes virtuous</li>
+                            <li>Female reading publics gain cultural authority</li>
+                        </ul>
+                        <div class="box box-navy center"><p><em><strong>Link forward: Emotional reading prepares ground for Lecture 2's religious feeling</strong></em></p></div>
+                    </div>
+                    <div class="plain">
+                        <div class="image-grid">
+                            <figure class="fig"><img src="images/wide wide world.webp" alt="Cover of Susan Warner's The Wide, Wide World (1850)" style="max-height:380px;"><figcaption><em>The Wide, Wide World</em> (1850) — cover</figcaption></figure>
+                            <figure class="fig"><img src="images/wide wide world inside.webp" alt="Interior illustration from The Wide, Wide World" style="max-height:380px;"><figcaption><em>The Wide, Wide World</em> — interior illustration</figcaption></figure>
+                        </div>
+                    </div>
+                </div>
+<aside class="notes">
+<div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+<p style="margin-bottom: 1em;">The best-selling novels of the mid-1800s were often written by women for women. This slide asks why these “sentimental” novels mattered so much, and it links forward to the religious feeling of Lecture 2.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+<p style="margin-bottom: 1em;"><strong>The “scribbling women”</strong>: The phrase comes from a jealous 1855 letter in which Nathaniel Hawthorne complained to his publisher about a “mob of scribbling women” whose books outsold his. The authors on the slide include <a href="https://en.wikipedia.org/wiki/Susan_Warner" target="_blank">Susan Warner</a> (<em>The Wide, Wide World</em>, 1850), <a href="https://en.wikipedia.org/wiki/Maria_Susanna_Cummins" target="_blank">Maria Cummins</a> (<em>The Lamplighter</em>, 1854), and <a href="https://en.wikipedia.org/wiki/E._D._E._N._Southworth" target="_blank">E.D.E.N. Southworth</a> (<em>The Hidden Hand</em>, first serialized in 1859). These titles come at or just after the end of our period, so think of them as where the reading culture of the 1830s and 1840s was heading.</p>
+<p style="margin-bottom: 1em;"><strong>Sentiment and moral teaching</strong>: <a href="https://en.wikipedia.org/wiki/Sentimental_novel" target="_blank">Sentimental novels</a> told stories of young heroines who suffer loss and learn faith and self-control. <strong>Didacticism</strong> means teaching a lesson; these books meant to make readers better people.</p>
+<p style="margin-bottom: 1em;"><strong>“Emotional literacy”</strong>: Readers were expected to cry and to feel for the characters. Feeling deeply was treated as a sign of virtue.</p>
+<p style="margin-bottom: 1em;"><strong>Female readers gain authority</strong>: When millions of women decided which books sold, they gained real power over American culture.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+<p style="margin-bottom: 1em;">Watch the link-forward box. The same idea, that true feeling proves a good heart, powers the revival meetings in Lecture 2. Sentimental reading and emotional religion grew up together.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">🎓 Historians Weigh In</h3>
+<h4 style="margin-top: 1em;">Jane Tompkins – <em>Sensational Designs</em></h4>
+<p style="margin-bottom: 1em;">Tompkins argues that critics wrongly dismissed these novels as shallow. She says they did serious “cultural work,” teaching readers how to think about family, faith, and even slavery.</p>
+<h4 style="margin-top: 1em;">Ann Douglas – <em>The Feminization of American Culture</em></h4>
+<p style="margin-bottom: 1em;">Douglas takes the opposite view, arguing that sentimental culture softened and commercialized American religion and thought. Reading the two together shows you how historians can look at the same books and disagree.</p>
+
+</div>
+</aside>
+            </section>
+
+            <section>
+                <h1>Visual Print Culture: Images for the Masses</h1>
+                <div class="two-columns">
+                    <div class="column">
+                        <h3>Lithography Revolution (1820s–1830s)</h3>
+                        <ul>
+                            <li>Cheap decorative prints enter middle-class homes</li>
+                            <li>Currier &amp; Ives (Currier’s firm from 1834; Ives joined 1857) mass-produce American scenes</li>
+                        </ul>
+                        <h3>Political Cartoons &amp; Illustrated Newspapers</h3>
+                        <ul>
+                            <li>Visual culture democratizes alongside textual culture</li>
+                            <li>Images shape national myths — frontier, domesticity, prosperity</li>
+                        </ul>
+                    </div>
+                    <div class="plain">
+                        <figure class="fig"><img src="images/american_homestead_currier_ives.webp" alt="Currier &amp; Ives: American Homestead — idealized rural family scene" title="Open gallery" tabindex="0" class="zoomable" onclick="openGallery('currier',2)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openGallery('currier',2)}" style="max-height:300px;"><figcaption><em>American Homestead</em> (Currier &amp; Ives)</figcaption></figure>
+                    </div>
+                </div>
+                <div class="box box-gray center"><p><em>Americans could now see idealized versions of themselves and their nation hanging on their walls.</em></p></div>
+<aside class="notes">
+<div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+<p style="margin-bottom: 1em;">Pictures went mass-market too. Before this period, most families owned few or no pictures. By mid-century, cheap prints hung in parlors across the country.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+<p style="margin-bottom: 1em;"><strong><a href="https://en.wikipedia.org/wiki/Lithography" target="_blank">Lithography</a> (1820s–1830s)</strong>: Printing from an image drawn in grease on a flat stone. It was much cheaper than engraving metal or carving wood, so prints became affordable for middle-class homes.</p>
+<p style="margin-bottom: 1em;"><strong><a href="https://en.wikipedia.org/wiki/Currier_and_Ives" target="_blank">Currier &amp; Ives</a></strong>: Nathaniel Currier opened his print business in 1834; James Merritt Ives became his partner in 1857, when the famous name was born. The firm sold millions of cheap prints of disasters, horse races, farm scenes, and politicians. Most of the prints in the gallery (such as <em>Central Park in Winter</em> and <em>Across the Continent</em>) date from the 1860s, after our period, but they show where this visual culture led.</p>
+<p style="margin-bottom: 1em;"><strong>Political cartoons and illustrated papers</strong>: Images could carry political messages to people who read little, which made visual culture democratic in its own way.</p>
+<p style="margin-bottom: 1em;"><strong>National myths</strong>: Prints celebrated the frontier, the cozy home, and prosperity, idealized pictures that left out slavery, poverty, and conflict.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+<p style="margin-bottom: 1em;">The gray box sums it up: Americans could now <em>see</em> idealized versions of themselves on their walls. Images teach values quietly. When the same hopeful farm scene hangs in thousands of homes, it helps define what a “proper” American life looks like.</p>
+
+</div>
+</aside>
+            </section>
+
+            <section>
+                <h1>The Lyceum Movement: Education, Culture, and Spectacle</h1>
+                <div class="two-columns">
+                    <div class="column">
+                        <h2>What Were Lyceums?</h2>
+                        <p>The <strong>Lyceum movement</strong> began in the 1820s as a network of local associations devoted to adult education, civic improvement, and moral uplift. These organizations hosted <em>lectures, debates, and demonstrations</em> designed to bring knowledge to ordinary citizens.</p>
+                        <p>Founded by <strong>Josiah Holbrook</strong> in 1826, the lyceum became the backbone of antebellum public culture—where Americans could learn about science, literature, reform, and philosophy outside formal schools.</p>
+                    </div>
+                    <div class="plain">
+                        <figure class="fig"><img src="images/Gemini_Generated_Image_7mmqwk7mmqwk7mmq.webp" alt="AI-generated depiction of a 19th-century Lyceum lecture hall" style="max-height:340px;"><figcaption><em>Typical Lyceum lecture scene — education as civic performance</em><br><span class="ai-credit">AI-generated illustration (Google Gemini), not a historical image</span></figcaption></figure>
+                    </div>
+                </div>
+<aside class="notes">
+<div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+<p style="margin-bottom: 1em;">Imagine paying a small fee to hear a famous speaker in your town hall on a winter evening. That was the lyceum. This slide and the next two show how lectures became a mix of school, civic duty, and show business.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+<p style="margin-bottom: 1em;"><strong>What lyceums were</strong>: Local associations for adult education and self-improvement, named after Aristotle’s school in ancient Athens. They hosted lectures, debates, and science demonstrations.</p>
+<p style="margin-bottom: 1em;"><strong><a href="https://en.wikipedia.org/wiki/Josiah_Holbrook" target="_blank">Josiah Holbrook</a></strong>: He organized the first town lyceum in Millbury, Massachusetts, in 1826. The idea spread quickly across New England, New York, and the Midwest. (The lecture-hall picture on the slide is an AI-generated illustration, not a historical image.)</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+<p style="margin-bottom: 1em;">Lyceums gave ordinary townspeople a place to hear new ideas without enrolling in a college. They are the spoken-word partner of the print revolution: another way culture moved out of elite hands.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">🎓 Historians Weigh In</h3>
+<h4 style="margin-top: 1em;">Angela G. Ray – <em>The Lyceum and Public Culture in the Nineteenth-Century United States</em></h4>
+<p style="margin-bottom: 1em;">Ray shows that the lyceum created a new kind of public. Ordinary people gathered to listen, judge, and argue, and the lecture hall became a place where Americans practiced being a self-improving democratic audience.</p>
+
+</div>
+</aside>
+            </section>
+
+            <section>
+                <h1>The Lyceum Movement: Education, Culture, and Spectacle <span class="cont">(continued)</span></h1>
+                <div class="two-columns">
+                    <div class="column">
+                        <h2>High Culture and Moral Philosophy</h2>
+                        <p>Prominent writers and thinkers like <strong>Ralph Waldo Emerson</strong> brought Transcendentalist ideas to Lyceum audiences. Their lectures on <em>self-reliance, moral philosophy, and the pursuit of truth</em> helped popularize intellectual and literary culture among the middle class.</p>
+                        <p>Emerson’s tours through small towns and city halls made philosophy a public performance, accessible to tradesmen, teachers, and farmers alike.</p>
+                    </div>
+                    <div class="plain">
+                        <figure class="fig"><img src="images/emerson.webp" alt="Portrait of Ralph Waldo Emerson" style="max-height:380px;"><figcaption><em>Ralph Waldo Emerson</em> — philosopher of self-culture and moral independence</figcaption></figure>
+                    </div>
+                </div>
+<aside class="notes">
+<div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+<p style="margin-bottom: 1em;">The second lyceum slide shows the “high culture” side of the lecture circuit through its most famous speaker.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+<p style="margin-bottom: 1em;"><strong>High culture and moral philosophy</strong>: <a href="https://en.wikipedia.org/wiki/Ralph_Waldo_Emerson" target="_blank">Ralph Waldo Emerson</a> earned much of his living on the lecture circuit; many of his essays began as talks to paying audiences. His themes, such as self-reliance and finding truth for yourself, fit an audience of strivers.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+<p style="margin-bottom: 1em;">Emerson shows that serious ideas could reach tradesmen, teachers, and farmers when they were delivered as a public performance. Keep this example in mind when you answer the gold-box question on the next slide.</p>
+
+</div>
+</aside>
+            </section>
+
+            <section class="compact">
+                <h1>The Lyceum Movement: Education, Culture, and Spectacle <span class="cont">(continued)</span></h1>
+                <div class="two-columns tight">
+                    <div class="column">
+                        <h2>Popular Science and Spectacle</h2>
+                        <p>Alongside high-minded philosophy, Lyceum stages also hosted demonstrations of <strong>phrenology, mesmerism</strong>, and electrical experiments—blurring the line between <em>education and entertainment</em>.</p>
+                        <p>Figures like <strong>Orson and Lorenzo Fowler</strong> delivered engaging phrenology lectures, promising moral and personal insight through the “science” of skull reading. These popular pseudo-sciences reflected Americans’ hunger for self-knowledge and moral order.</p>
+                    </div>
+                    <div class="plain">
+                        <figure class="fig"><div class="image-grid"><img src="images/phrenologychart.webp" alt="Phrenology chart showing faculties of the brain" style="max-height:250px;"><img src="images/Phrenological Chart_ KC.webp" alt="Detailed phrenological head diagram" style="max-height:250px;"></div><figcaption><em>Phrenology charts</em> — pseudo-scientific tools for moral self-assessment</figcaption></figure>
+                    </div>
+                </div>
+                <div class="box box-gold center">
+                    <p class="big"><strong>Critical Question:</strong></p>
+                    <p><em>Was the Lyceum a democratic classroom or a performance stage? Did it elevate the public or merely entertain them?</em></p>
+                </div>
+<aside class="notes">
+<div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+<p style="margin-bottom: 1em;">The third lyceum slide shows the spectacle side of the lecture circuit and asks the big question about the whole movement.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+<p style="margin-bottom: 1em;"><strong>Popular science and spectacle</strong>: Audiences also flocked to <a href="https://en.wikipedia.org/wiki/Phrenology" target="_blank">phrenology</a>, the false claim that you can read character from bumps on the skull, and to mesmerism (putting volunteers into trances). The brothers <a href="https://en.wikipedia.org/wiki/Orson_Squire_Fowler" target="_blank">Orson and Lorenzo Fowler</a> built a phrenology business reading heads for a fee. Today we call these <strong>pseudosciences</strong>, claims that look scientific but are not. To audiences then, they seemed like exciting new knowledge anyone could judge.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+<p style="margin-bottom: 1em;">The gold box asks whether the lyceum was a classroom or a stage. It was both. Paying audiences judged speakers like performers, which made learning democratic and also blurred education with entertainment, just as the penny press blurred news with spectacle.</p>
+
+</div>
+</aside>
+            </section>
+
+            <section>
+                <h1>Print and Politics: From Pamphlet to Partisan Press</h1>
+                <div class="two-columns">
+                    <div class="column">
+                        <h2>Political Mobilization Through Print</h2>
+                        <ul>
+                            <li>Broadsides and party newspapers link print to mobilization</li>
+                            <li>Jacksonian era's "partisan press" turns voting into spectacle</li>
+                            <li>Editorials and cartoons appeal to working-class readers</li>
+                            <li>Political participation becomes a form of popular entertainment</li>
+                        </ul>
+                    </div>
+                    <div class="plain">
+                        <div class="image-grid">
+                            <figure class="fig"><img src="images/slaying_bank.webp" alt="Political cartoon: Andrew Jackson 'slaying' the Bank of the United States" style="max-height:260px;"><figcaption><em>“Slaying the Bank”</em> — Jackson versus the BUS</figcaption></figure>
+                            <figure class="fig"><img src="images/king_andrew_the_first_political_cartoon_of_president_andrew_jackson.webp" alt="Political cartoon: 'King Andrew the First' showing Jackson in royal regalia trampling the Constitution" style="max-height:260px;"><figcaption><em>“King Andrew the First”</em> — fears of executive overreach</figcaption></figure>
+                        </div>
+                    </div>
+                </div>
+                <div class="box box-navy center"><p class="big"><strong>KEY CONCEPT: Print makes politics accessible and exciting—but also partisan and emotional</strong></p></div>
+<aside class="notes">
+<div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+<p style="margin-bottom: 1em;">Cheap print also changed politics. Elections became loud, colorful shows, and newspapers were the stagehands.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+<p style="margin-bottom: 1em;"><strong>Broadsides and party newspapers</strong>: A broadside is a one-sheet poster. Parties used broadsides and their own newspapers to rally voters. Jackson’s supporters built a national network of friendly papers, led by the Washington <em>Globe</em> (1830), and the Whigs built their own.</p>
+<p style="margin-bottom: 1em;"><strong>The partisan press</strong>: These papers did not pretend to be neutral. They printed speeches alongside insults, rumors, songs, and cartoons. By the 1830s most states had dropped property requirements, so nearly all white men could vote, and parties needed ways to reach them.</p>
+<p style="margin-bottom: 1em;"><strong>The cartoons</strong>: “General Jackson Slaying the Many Headed Monster” shows Jackson fighting the <a href="https://en.wikipedia.org/wiki/Second_Bank_of_the_United_States" target="_blank">Second Bank of the United States</a> during the <a href="https://en.wikipedia.org/wiki/Bank_War" target="_blank">Bank War</a>; “King Andrew the First” (1830s) is an opposition cartoon showing Jackson as a tyrant trampling the Constitution. Same president, opposite messages.</p>
+<p style="margin-bottom: 1em;"><strong>Politics as entertainment</strong>: In the <a href="https://en.wikipedia.org/wiki/1840_United_States_presidential_election" target="_blank">1840 election</a>, Whigs staged log-cabin rallies, parades, and songs (“Tippecanoe and Tyler Too”). About 80 percent of eligible voters turned out, a record at the time.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+<p style="margin-bottom: 1em;">The key-concept box captures a paradox. Print brought millions of ordinary white men into politics and made elections exciting. It also rewarded slogans, images, and anger over careful argument. Wider participation and sharper partisanship arrived together, and that pattern should feel familiar today.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">🎓 Historians Weigh In</h3>
+<h4 style="margin-top: 1em;">Sean Wilentz – <em>The Rise of American Democracy</em></h4>
+<p style="margin-bottom: 1em;">Wilentz argues that Jacksonian-era democracy was built by organized parties and their newspapers, not just by Andrew Jackson himself. The partisan press was how ordinary voters were mobilized and how political identities were formed.</p>
+
+</div>
+</aside>
+            </section>
+
+            <section class="conclusion-slide">
+                <h1>Conclusion: Print and the Making of American Culture</h1>
+                <div class="box box-gray">
+                    <p class="big"><strong>Main Argument:</strong></p>
+                    <p>Print didn't just spread information—it created a new kind of public and a new kind of American identity. But democratization had limits: access remained structured by race, class, and gender.</p>
+                </div>
+                <div class="box box-navy">
+                    <p class="big"><strong>Next Time: Lecture 2</strong></p>
+                    <p>From print culture to spiritual culture—camp meetings, revivals, and the democratization of religion. Who gets to define American faith?</p>
+                </div>
+<aside class="notes">
+<div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
+<p style="margin-bottom: 1em;">This slide pulls the lecture together. It gives you the main argument in two sentences and points you toward Lecture 2.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
+<p style="margin-bottom: 1em;"><strong>The main argument</strong>: Print did more than spread information. It created a new kind of public, millions of strangers who read the same things and argued about them, and a new sense of American identity.</p>
+<p style="margin-bottom: 1em;"><strong>The limits</strong>: Access was shaped by race, class, and gender. Enslaved people were barred from reading by law, free Black Americans built their own institutions, women read and wrote but could not vote, and the poor had little time or money.</p>
+<p style="margin-bottom: 1em;"><strong>Next time</strong>: The same hunger for feeling and participation moves from the newspaper to the revival tent. Lecture 2 asks who got to define American faith.</p>
+
+<h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
+<p style="margin-bottom: 1em;">If you can explain how the postal system, the steam press, advertising, and the penny paper worked together, and then explain who was excluded and why, you understand this lecture. Practice by explaining it to a friend in three minutes.</p>
+
+</div>
+</aside>
+            </section>
+
+        </div>
     </div>
 
-    <!-- SLIDE 2: Key Concepts -->
-    <div class="slide bg-white" data-slide="2">
-      <div class="slide-number">Slide 2 of 15</div>
-      <h1>Key Concepts</h1>
-
-      <h2>What is "Popular Culture"?</h2>
-      <ul>
-        <li>Culture produced for and consumed by <strong>ordinary people</strong> (not just elites)</li>
-        <li>Commercially produced and distributed for mass audiences</li>
-        <li>Accessible, affordable, entertaining</li>
-        <li>Distinguished from "high culture" — BUT boundaries are blurring</li>
-      </ul>
-
-      <h2 style="margin-top: 3vh;">What is "Democratization of Culture"?</h2>
-      <ul>
-        <li>Expanding cultural access beyond traditional elite gatekeepers</li>
-        <li>Lower costs, new technologies (steam press), new institutions (lyceums)</li>
-        <li>Culture becomes market-based rather than patronage-based</li>
-      </ul>
-
-      <div class="box gold-box" style="margin-top: 3vh; text-align: center;">
-        <p style="font-weight: bold; font-size: 2em;">CRITICAL QUESTION: Democratization for whom?<br>Who gains access and who remains excluded?</p>
-      </div>
-    
-      <aside class="notes">
-      <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
-      <p style="margin-bottom: 1em;">Before we tell the story, we need two tools. Think of them as the lenses on a pair of glasses: one helps you see <em>what kind</em> of culture we are talking about, and the other helps you see <em>how</em> it changed.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
-      <p style="margin-bottom: 1em;"><strong><a href="https://en.wikipedia.org/wiki/Popular_culture" target="_blank">Popular culture</a></strong>: culture made for and enjoyed by ordinary people: cheap newspapers, novels, songs, prints, and shows. It is usually sold in a market, so it has to be affordable and entertaining enough that people will pay for it.</p>
-      <p style="margin-bottom: 1em;"><strong><a href="https://en.wikipedia.org/wiki/High_culture" target="_blank">High culture</a></strong>: the arts and learning that elites treated as refined, such as classical learning, fine art, and serious literature. The slide says the boundary was <em>blurring</em>: in this period Shakespeare was popular entertainment, and lecture halls mixed philosophy with stage demonstrations.</p>
-      <p style="margin-bottom: 1em;"><strong>Democratization of culture</strong>: the widening of access beyond old gatekeepers (wealthy patrons, college-educated ministers, and gentlemen editors). Three forces drive it: lower costs, new technology such as the steam-powered press, and new institutions such as the <a href="https://en.wikipedia.org/wiki/Lyceum_movement" target="_blank">lyceum</a>. Culture shifts from <strong>patronage</strong> (a rich sponsor pays) to the <strong>market</strong> (many buyers pay a little).</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
-      <p style="margin-bottom: 1em;">The gold box is the lecture’s critical question. “Democratization” sounds like pure good news, but access was never equal. As you study each slide, ask who could afford it, who could read it, and who was legally or socially shut out.</p>
-
-      </div>
-      </aside>
-    </div>
-
-    <!-- SLIDE 3: Setting the Scene -->
-    <div class="slide bg-white" data-slide="3" style="overflow-y: auto; max-height: 100vh;">
-      <div class="slide-number">Slide 3 of 15</div>
-      <h1>Setting the Scene: 1815</h1>
-
-      <div class="two-column">
-        <div class="column">
-          <h2>A Cultural Turning Point</h2>
-          <ul>
-            <li>Post-War of 1812 nationalism and rising literacy</li>
-            <li>Urban growth and expanding markets</li>
-            <li>Steam technology enables faster printing</li>
-            <li>Cultural institutions begin to democratize</li>
-          </ul>
-          <div class="box navy-box" style="margin-top: 3vh;">
-            <h3 style="text-align: center; color: #D4AF37; font-size: 2.4em;">🏛️ THE POSTAL ACT OF 1792</h3>
-            <p style="text-align: center; font-style: italic; margin-bottom: 2vh;">The Information Superhighway</p>
-            <p style="font-size: 2.4em;">Newspapers mailed at extremely low rates (often free between publishers)</p>
-            <p style="font-size: 2.4em; margin-top: 1vh;">Creates a national information network: news from Washington reaches frontier towns</p>
-
-            <div style="text-align: center; margin-top: 2vh;">
-              <span class="click-btn" onclick="showPopup('postal-stats')">📊 CLICK FOR STATISTICS</span>
-            </div>
-          </div>
-        </div>
-        <div class="column">
-          <figure style="width: 100%; margin: 0 auto 3vh auto; text-align: center;">
-            <img src="images/NewEngland-postoffice-1878-image4.webp"
-                 alt="19th-century New England post office interior, 1878"
-                 style="width: 100%; height: auto; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.3);">
-            <figcaption style="font-size: 0.9em; color: #444; margin-top: 0.5em;">
-              <em>New England Post Office, 1878 — expanding communication networks of the early republic</em>
-            </figcaption>
-          </figure>
-          <div class="box cream-box">
-            <p style="text-align: center; font-weight: bold; font-size: 2em;">
-              Why would the federal government subsidize newspaper distribution?
-            </p>
-          </div>
-        </div>
-      </div>
-    
-      <aside class="notes">
-      <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
-      <p style="margin-bottom: 1em;">In 1815 the War of 1812 had just ended, and Americans felt a surge of national pride. This slide sets the stage: a country that was still mostly rural but already had a large reading population and a remarkable mail system that carried news everywhere.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
-      <p style="margin-bottom: 1em;"><strong>The turning point</strong>: Nationalism after the war, rising literacy, growing towns and markets, and faster steam-powered printing all arrived together. Institutions that had served a small elite began opening up.</p>
-      <p style="margin-bottom: 1em;"><strong>The <a href="https://en.wikipedia.org/wiki/Postal_Service_Act" target="_blank">Post Office Act of 1792</a></strong>: Congress set very low postage for newspapers (1 cent for up to 100 miles and 1.5 cents beyond, when a letter cost 6 to 25 cents) and let printers exchange papers with each other free. Small-town editors filled their pages with stories clipped from exchange papers, so news from Washington reached frontier towns. That is why the slide calls it an “information superhighway.”</p>
-      <p style="margin-bottom: 1em;"><strong>The statistics popup</strong>: The network grew from 75 post offices in 1790 to 8,450 in 1830 and 18,417 in 1850. By 1840 post roads stretched more than 155,000 miles. By the 1830s newspapers made up most of the <em>weight</em> of the mail but paid only a small share of its costs, so letter-writers and the Treasury were in effect subsidizing the news.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
-      <p style="margin-bottom: 1em;">The cream box asks why the government would pay to spread newspapers. The founders believed a republic needs informed citizens, so the post office was a deliberate investment in democracy. Notice, though, that it was a <em>government</em> choice: the people who ran the mail could also decide what <em>not</em> to carry, as abolitionists learned in 1835.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">🎓 Historians Weigh In</h3>
-      <h4 style="margin-top: 1em;">Richard R. John – <em>Spreading the News: The American Postal System from Franklin to Morse</em></h4>
-      <p style="margin-bottom: 1em;">John argues that the post office was the most important branch of the early federal government in most Americans’ lives. For this slide, his point is that the national “public” was built on government infrastructure, not just on private enterprise.</p>
-
-      </div>
-      </aside>
-    </div>
-
-    <!-- SLIDE 4: Public Sphere Definition -->
-    <div class="slide bg-white" data-slide="4" style="font-size: 1.3em; line-height: 1.4;">
-      <div class="slide-number">Slide 4 of 15</div>
-      <h1>Understanding the Public Sphere</h1>
-
-      <div class="two-column">
-        <div class="column">
-          <h2>What is the Public Sphere?</h2>
-          <ul>
-            <li>A social space where private individuals discuss public matters</li>
-            <li>Distinct from private life (family, home)</li>
-            <li>Distinct from the state (government)</li>
-            <li>Created through communication—newspapers, pamphlets, lectures</li>
-            <li>Access based on literacy and participation (ideally)</li>
-          </ul>
-        </div>
-
-        <div class="column">
-          <figure style="width: 100%; margin: 0 auto; text-align: center;">
-            <img src="images/public_sphere.webp"
-                 alt="Diagram illustrating the relationship between private life, the public sphere, and the state"
-                 style="width: 100%; height: auto; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.3);">
-            <figcaption style="font-size: 0.9em; color: #444; margin-top: 0.5em;">
-              <em>The Public Sphere — a space between private life and the state, shaped by print culture and communication</em>
-            </figcaption>
-          </figure>
-        </div>
-      </div>
-    
-      <aside class="notes">
-      <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
-      <p style="margin-bottom: 1em;">This slide gives you a key concept you will use all semester: the <strong>public sphere</strong>. Think of it as an imaginary town square. It is not your home and it is not the government; it is the space in between, where people talk about common problems.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
-      <p style="margin-bottom: 1em;"><strong>A social space for public talk</strong>: Private people come together, in person or through print, to discuss public matters such as elections, wars, and moral questions.</p>
-      <p style="margin-bottom: 1em;"><strong>Distinct from private life and from the state</strong>: Your family dinner table is private; Congress is the state. The public sphere sits between them, where citizens form opinions that the state then has to reckon with. The diagram on the right shows these three zones.</p>
-      <p style="margin-bottom: 1em;"><strong>Created through communication</strong>: Newspapers, pamphlets, letters, and lectures are what <em>make</em> the public sphere. No print, no shared conversation among strangers.</p>
-      <p style="margin-bottom: 1em;"><strong>Access “ideally” open</strong>: In theory anyone who could read and argue could join. The word “ideally” is a warning that practice fell short, which is the subject of Slide 6.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
-      <p style="margin-bottom: 1em;">Why use a concept like this? It lets us see that newspapers and lectures were not just entertainment. They were where Americans practiced self-government. When access to print widened, the circle of people who could take part in public debate widened too.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">🎓 Historians Weigh In</h3>
-      <h4 style="margin-top: 1em;">Jürgen Habermas – <em>The Structural Transformation of the Public Sphere</em></h4>
-      <p style="margin-bottom: 1em;">The German philosopher <a href="https://en.wikipedia.org/wiki/J%C3%BCrgen_Habermas" target="_blank">Habermas</a> described how coffeehouses, salons, and newspapers in eighteenth-century Europe created a space for reasoned public debate. He also argued that commercial mass media later turned citizens into consumers. Keep that worry in mind when we reach the penny press.</p>
-
-      </div>
-      </aside>
-    </div>
-
-    <!-- SLIDE 5: How Print Creates the Public Sphere -->
-    <div class="slide bg-white" data-slide="5">
-      <div class="slide-number">Slide 5 of 15</div>
-      <h1>How Print Creates the Public Sphere</h1>
-
-      <h2>The Power of Print</h2>
-      <ul>
-        <li>Newspapers circulate information to geographically dispersed readers</li>
-        <li>Readers imagine themselves as part of a larger community of "the public"</li>
-        <li>Print enables debate, discussion, and formation of public opinion</li>
-        <li>Penny press makes participation affordable (1¢ vs 6¢)</li>
-        <li>Lyceums bring public lectures to ordinary citizens</li>
-      </ul>
-
-      <div class="box gray-box" style="margin-top: 4vh; padding: 3vh 3vw;">
-        <p style="font-weight: bold; font-size: 2.1em; margin-bottom: 1vh;">CONCRETE EXAMPLE:</p>
-        <p>A farmer in Ohio and a merchant in Boston both read about the same Senate debate in their local newspapers. Though they've never met, they now share knowledge and can discuss the same political issue. This is the public sphere in action.</p>
-      </div>
-    
-      <aside class="notes">
-      <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
-      <p style="margin-bottom: 1em;">How does a stack of newspapers create a public? This slide answers with a simple example: two strangers, hundreds of miles apart, reading the same story on the same day.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
-      <p style="margin-bottom: 1em;"><strong>Circulation to scattered readers</strong>: Newspapers carried the same information to people who would never meet.</p>
-      <p style="margin-bottom: 1em;"><strong>Imagining a community</strong>: Readers began to picture themselves as part of a larger group, “the public” or “the nation,” made up of people reading the same things at the same time.</p>
-      <p style="margin-bottom: 1em;"><strong>Debate and public opinion</strong>: Once people share information, they can argue about it. Letters to editors, party papers, and tavern conversations turned shared news into public opinion.</p>
-      <p style="margin-bottom: 1em;"><strong>The penny press and lyceums</strong>: A one-cent paper (instead of six cents) and cheap public lectures made taking part affordable for many more people. Both get their own slides later.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
-      <p style="margin-bottom: 1em;">The farmer in Ohio and the merchant in Boston are the heart of this lecture. Print made it possible for a huge, spread-out country to hold one conversation. That shared conversation is a big part of how Americans came to feel like one nation.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">🎓 Historians Weigh In</h3>
-      <h4 style="margin-top: 1em;">Benedict Anderson – <em>Imagined Communities</em></h4>
-      <p style="margin-bottom: 1em;">Anderson argued that nations are “imagined communities”: you will never meet most of your fellow citizens, yet you feel connected to them. He pointed to newspapers as a key reason. Reading the same paper at the same moment is a daily ritual that makes the nation feel real. The Ohio farmer and Boston merchant are a perfect example.</p>
-
-      </div>
-      </aside>
-    </div>
-
-    <!-- SLIDE 6: Who's Excluded? -->
-    <div class="slide bg-white" data-slide="6">
-      <div class="slide-number">Slide 6 of 15</div>
-      <h1>The Public Sphere: Who's Excluded?</h1>
-
-      <div class="box navy-box" style="text-align: center; padding: 2vh;">
-        <p style="font-weight: bold; font-size: 1.9em;">Key Question: Who has access to this "public" sphere?</p>
-      </div>
-
-      <ul style="margin-top: 4vh;">
-        <li><span class="checkmark">✓</span> White men (primary participants—voting rights, literacy, leisure time)</li>
-        <li style="margin-top: 2vh;"><span class="partial">◐</span> Some middle-class women (limited roles—reading circles, moral reform societies)</li>
-        <li style="margin-top: 2vh;"><span class="crossmark">✗</span> African Americans (largely excluded, create separate spheres—Freedom's Journal, 1827)</li>
-        <li style="margin-top: 2vh;"><span class="crossmark">✗</span> Enslaved people (legally barred from literacy in most Southern states)</li>
-        <li style="margin-top: 2vh;"><span class="crossmark">✗</span> Working poor (economic barriers—time, cost, limited literacy)</li>
-      </ul>
-
-      <div class="box gold-box" style="margin-top: 4vh; text-align: center;">
-        <p style="font-style: italic; font-weight: bold; font-size: 2em;">"Democratization" is partial and contested—access remains structured by race, class, and gender.</p>
-      </div>
-    
-      <aside class="notes">
-      <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
-      <p style="margin-bottom: 1em;">Now the hard question: who actually got into this “public” town square? The checkmarks, half-circles, and X’s on this slide sort Americans by how much access they had. The answer is that democratization was real but <em>partial</em>.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
-      <p style="margin-bottom: 1em;"><strong>White men (✓)</strong>: By the 1830s nearly all white men could vote, most could read, and many had at least some time and money for newspapers. They were the main participants.</p>
-      <p style="margin-bottom: 1em;"><strong>Some middle-class women (◐)</strong>: Women were readers, writers, and organizers of reading circles and moral reform societies, but they could not vote and faced criticism for speaking in public.</p>
-      <p style="margin-bottom: 1em;"><strong>African Americans (✗)</strong>: Free Black Americans were largely shut out of white institutions, so they built their own. <a href="https://en.wikipedia.org/wiki/Freedom%27s_Journal" target="_blank"><em>Freedom’s Journal</em></a> (New York, 1827) was the first newspaper owned and edited by African Americans.</p>
-      <p style="margin-bottom: 1em;"><strong>Enslaved people (✗)</strong>: Most Southern states passed <a href="https://en.wikipedia.org/wiki/Anti-literacy_laws_in_the_United_States" target="_blank">anti-literacy laws</a>, especially after David Walker’s <em>Appeal</em> (1829) and Nat Turner’s rebellion (1831), making it a crime to teach enslaved people to read.</p>
-      <p style="margin-bottom: 1em;"><strong>The working poor (✗)</strong>: Long workdays, tight budgets, and limited schooling kept many laborers and poor immigrants on the edges.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
-      <p style="margin-bottom: 1em;">The gold box states the lecture’s thesis in miniature: access was structured by <strong>race, class, and gender</strong>. Notice that excluded groups did not simply wait. They built <em>counterpublics</em>, their own newspapers, churches, and societies. When you study any “democratization,” always ask who built the doors and who held the keys.</p>
-
-      </div>
-      </aside>
-    </div>
-
-    <!-- SLIDE 7: Print Revolution -->
-    <div class="slide bg-white" data-slide="7" id="slide-7">
-      <div class="slide-number">Slide 7 of 15</div>
-      <h1>The Print Revolution: Scale & Impact</h1>
-
-      <div class="two-column">
-        <div class="column">
-          <h3>Technological Innovation</h3>
-          <ul>
-            <li>Steam presses, mass-produced paper, <a href="#stereo-info">stereotyping</a></li>
-          </ul>
-
-          <h3 style="margin-top: 2vh;">Economic Innovation</h3>
-          <ul><li>Advertising replaces subscriptions as primary revenue</li></ul>
-
-          <h3 style="margin-top: 2vh;">Social Impact</h3>
-          <ul>
-            <li>Literacy expands across class and region</li>
-            <li>Print becomes a commodity, not a luxury</li>
-          </ul>
-
-          <h3 style="margin-top: 2vh;">Key Example</h3>
-          <ul><li>Benjamin Day's <em>New York Sun</em> (1833)—news for a penny</li></ul>
-        </div>
-
-        <div class="column">
-          <div class="stats-box">
-            <h2 style="text-align: center; color: #1C2833;">BY THE NUMBERS</h2>
-            <div style="text-align: center; margin-top: 2vh;">
-              <span class="click-btn" onclick="showPopup('print-stats')">📊 VIEW STATISTICS</span>
-            </div>
-            <ul style="margin-top: 3vh;">
-              <li>~1,000 newspapers by 1835<br><span style="font-size: 2.1em; font-style: italic; color: #34495E;">(vs. ~200 in 1800)</span></li>
-              <li style="margin-top: 1.5vh;">~90% of white adults literate by 1840 (census)</li>
-              <li>Lower in the South; barred for most enslaved people</li>
-              <li style="margin-top: 1.5vh;">Book prices drop from $1.50 to 25¢</li>
-            </ul>
-          </div>
-
-          <figure style="width: 100%; margin: 2vh auto 0 auto; text-align: center;">
-            <img src="https://i.imgur.com/Kp90xBl.png"
-                 alt="19th-century printing press"
-                 style="width: 100%; height: auto; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.3);">
-            <figcaption style="font-size: 0.9em; color: #444; margin-top: 0.5em;">
-              <em>Steam printing press — symbol of the print revolution</em>
-            </figcaption>
-          </figure>
-        </div>
-      </div>
-    
-      <aside class="notes">
-      <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
-      <p style="margin-bottom: 1em;">This slide shows the scale of the print revolution: new machines, a new way of paying for newspapers, and a huge jump in the number of papers and readers.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
-      <p style="margin-bottom: 1em;"><strong>Technological innovation</strong>: Steam-powered presses printed far faster than hand presses, machine-made paper was cheaper, and <strong><a href="https://en.wikipedia.org/wiki/Stereotype_(printing)" target="_blank">stereotyping</a></strong> (click the word on the slide) cast a whole page of type as one metal plate so popular books could be reprinted quickly and cheaply.</p>
-      <p style="margin-bottom: 1em;"><strong>Economic innovation</strong>: Advertising, not subscriptions, became the main source of income. A paper that sells ads can sell copies cheaply, and more readers means higher ad prices.</p>
-      <p style="margin-bottom: 1em;"><strong>Social impact</strong>: Print stopped being a luxury and became an everyday commodity, something you buy, read, and toss, like a snack.</p>
-      <p style="margin-bottom: 1em;"><strong>By the numbers</strong>: The U.S. went from roughly 200 newspapers in 1800 to about 1,000 by 1835. When the 1840 census first asked about literacy, it counted roughly nine in ten white adults as able to read and write, among the highest rates in the world, though lower in the South. Book prices fell from a dollar or more to as little as a quarter for cheap editions. Treat the figures as estimates; nineteenth-century counts were rough.</p>
-      <p style="margin-bottom: 1em;"><strong>Key example</strong>: Benjamin Day’s <em>New York Sun</em> (1833) proved a one-cent daily could succeed. The next slide explains how.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
-      <p style="margin-bottom: 1em;">The point is that technology and money worked together. Machines made print possible at scale; advertising made it profitable. That combination is the ancestor of nearly every mass medium you use today, from TV to social media, which are also paid for by advertisers.</p>
-
-      </div>
-      </aside>
-    </div>
-
-    <!-- SLIDE 8: Penny Press -->
-    <div class="slide bg-white" data-slide="8">
-      <div class="slide-number">Slide 8 of 15</div>
-      <h1>The Penny Press: A New Business Model</h1>
-
-      <div class="two-column">
-        <div class="column">
-          <h2>The Innovation</h2>
-          <ul>
-            <li>Newspapers sold for 1¢ (not 6¢)—affordable to working-class readers</li>
-            <li>Sold on streets by newsboys, not by subscription</li>
-            <li>Advertising revenue replaces subscriber fees</li>
-            <li>Mass circulation = mass influence</li>
-          </ul>
-
-          <h2 style="margin-top: 3vh;">The Players</h2>
-          <ul>
-            <li><strong>New York Sun (1833)</strong> – Benjamin Day</li>
-            <li><strong>New York Herald (1835)</strong> – James Gordon Bennett</li>
-            <li><strong>New York Tribune (1841)</strong> – Horace Greeley</li>
-          </ul>
-        </div>
-
-        <div class="column">
-          <div class="box cream-box" style="height: 20%; margin-bottom: 2vh;">
-            <p style="text-align: center; font-weight: bold; font-size: 2em;">
-              Why would selling papers on the street change what gets published?
-            </p>
-          </div>
-
-          <figure style="width: 100%; margin: 0 auto; text-align: center;">
-            <img src="images/Newsboys-Strike.webp"
-                 alt="Newsboys selling papers on the streets of New York City during the 19th century"
-                 style="width: 100%; height: auto; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.3);">
-            <figcaption style="font-size: 0.9em; color: #444; margin-top: 0.5em;">
-              <em>Newsboys in New York City — the street-level revolution of the Penny Press era</em>
-            </figcaption>
-          </figure>
-        </div>
-      </div>
-    
-      <aside class="notes">
-      <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
-      <p style="margin-bottom: 1em;">The penny press was a business revolution. Imagine your favorite news site suddenly charging one-sixth of what it used to, and paying for itself with ads and street sales. That is what happened in New York in the 1830s.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
-      <p style="margin-bottom: 1em;"><strong>1¢ instead of 6¢</strong>: Older papers cost six cents and were sold by yearly subscription to merchants and lawyers. A penny paper was affordable to clerks, apprentices, and laborers.</p>
-      <p style="margin-bottom: 1em;"><strong>Newsboys, not subscriptions</strong>: Day hired boys to buy papers in bulk and sell them on street corners, shouting the headlines. The photo of newsboys is from later in the century, but the street-sale model started here.</p>
-      <p style="margin-bottom: 1em;"><strong>Advertising pays the bills</strong>: More readers meant more advertising revenue.</p>
-      <p style="margin-bottom: 1em;"><strong>The players</strong>: <a href="https://en.wikipedia.org/wiki/The_Sun_(New_York_City)" target="_blank"><em>The Sun</em></a> (1833, <a href="https://en.wikipedia.org/wiki/Benjamin_Day" target="_blank">Benjamin Day</a>), the <a href="https://en.wikipedia.org/wiki/New_York_Herald" target="_blank"><em>New York Herald</em></a> (1835, <a href="https://en.wikipedia.org/wiki/James_Gordon_Bennett_Sr." target="_blank">James Gordon Bennett</a>), and the <a href="https://en.wikipedia.org/wiki/New-York_Tribune" target="_blank"><em>New-York Tribune</em></a> (1841, <a href="https://en.wikipedia.org/wiki/Horace_Greeley" target="_blank">Horace Greeley</a>). Bennett loved scandal; Greeley aimed for a more serious, reform-minded cheap paper.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
-      <p style="margin-bottom: 1em;">The cream box asks the key question. If you have to grab a passerby’s attention every single morning, you print what grabs attention: crime, fires, courtroom drama, human-interest stories. Selling on the street changed not just who read the news but <em>what counted as news</em>.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">🎓 Historians Weigh In</h3>
-      <h4 style="margin-top: 1em;">Michael Schudson – <em>Discovering the News</em></h4>
-      <p style="margin-bottom: 1em;">Schudson argues that the penny press invented modern “news” as a product: timely, about ordinary people, and sold to a mass market. Before the 1830s, papers mostly served parties and merchants. After, they served readers and advertisers, and that shift still shapes journalism.</p>
-
-      </div>
-      </aside>
-    </div>
-
-    <!-- SLIDE 9: Sensationalism -->
-    <div class="slide bg-white" data-slide="9">
-      <div class="slide-number">Slide 9 of 15</div>
-      <h1>Sensationalism: Where's the Line?</h1>
-
-      <div class="two-column">
-        <div class="column">
-          <h2>What the Penny Press Published</h2>
-          <ul>
-            <li><strong>The Great Moon Hoax (1835):</strong> “scientists” discover winged humanoids on the moon</li>
-            <li><strong>Helen Jewett murder case (1836):</strong> sex worker’s death becomes daily drama</li>
-            <li>Crime, scandal, spectacle — anything that sells papers</li>
-          </ul>
-
-          <div class="box gold-box" style="margin-top:3vh;text-align:center;">
-            <p style="font-weight:bold;font-size:2em;">
-              CRITICAL QUESTION:<br>Where is the boundary between truth and entertainment?
-            </p>
-          </div>
-
-          <h3 style="margin-top:3vh;">Impact on Democracy</h3>
-          <ul>
-            <li>Ordinary readers become participants in shared public conversation</li>
-            <li>Journalism shifts from “information” to “performance”</li>
-          </ul>
-        </div>
-
-        <!-- Right column: scrollable stacked images -->
-        <div class="column" style="text-align:center;">
-          <div id="sensational-scroll" tabindex="0"
-               aria-label="Scrollable gallery showing Great Moon Hoax detail followed by later sensationalist illustration"
-               style="
-                 max-height:70vh;
-                 overflow:auto;
-                 padding:1rem;
-                 border:2px solid rgba(0,0,0,0.12);
-                 border-radius:12px;
-                 background:#fffdf8;
-                 box-shadow:0 2px 10px rgba(0,0,0,0.08);
-                 scroll-behavior:smooth;
-               ">
-            <figure style="width:100%;margin:0 0 2vh 0;text-align:center;">
-              <img src="images/f0332666-800px-wm.webp"
-                   alt="Close-up detail from the Great Moon Hoax illustration"
-                   style="width:100%;height:auto;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.3);">
-              <figcaption style="font-size:0.9em;color:#444;margin-top:0.5em;">
-                <em>Close-up from the <strong>Great Moon Hoax</strong> (1835) — the dramatic detail that drew readers in</em>
-              </figcaption>
-            </figure>
-            <figure style="width:100%;margin:0;text-align:center;">
-              <img src="images/hm_january_february_2022_reasure_crime_law_school_2.jpg.webp"
-                   alt="Later 19th-century sensationalist illustration reflecting crime and press culture"
-                   style="width:100%;height:auto;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.3);">
-              <figcaption style="font-size:0.9em;color:#444;margin-top:0.5em;">
-                <em>Crime and spectacle — the sensationalist legacy of the penny-press model</em>
-              </figcaption>
-            </figure>
-          </div>
-          <div style="text-align:center;font-size:0.95em;color:#666;margin-top:0.5rem;">
-            Use mouse wheel or ↑ / ↓ to scroll inside the box
-          </div>
-        </div>
-      </div>
-    
-      <aside class="notes">
-      <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
-      <p style="margin-bottom: 1em;">Once papers competed for pennies on the street, they found that sensation sold. This slide gives two famous cases and asks where the line between truth and entertainment falls.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
-      <p style="margin-bottom: 1em;"><strong>The <a href="https://en.wikipedia.org/wiki/Great_Moon_Hoax" target="_blank">Great Moon Hoax</a> (1835)</strong>: In late August the <em>Sun</em> ran a series claiming that the astronomer Sir John Herschel had seen forests, animals, and winged, human-like “man-bats” on the moon. It was invented, most likely by reporter Richard Adams Locke. Many readers believed it at first, and the paper’s sales soared.</p>
-      <p style="margin-bottom: 1em;"><strong>The <a href="https://en.wikipedia.org/wiki/Helen_Jewett" target="_blank">Helen Jewett</a> murder (1836)</strong>: Jewett, a young woman working in a New York brothel, was killed in April 1836. Bennett’s <em>Herald</em> described the scene in vivid detail, and the papers fought for weeks over whether the accused clerk, Richard Robinson, was guilty. A jury acquitted him. A real woman’s death became daily entertainment.</p>
-      <p style="margin-bottom: 1em;"><strong>Impact on democracy</strong>: Ordinary readers joined a shared public conversation, arguing about these stories everywhere. But journalism also shifted from “information” toward “performance,” news staged to keep an audience hooked.</p>
-      <p style="margin-bottom: 1em;"><strong>The images</strong>: The scroll box pairs a Moon Hoax illustration with a later crime picture, showing how long this sensational style lasted.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
-      <p style="margin-bottom: 1em;">There is no easy answer to the gold box question, and that is the point. The penny press gave working people a voice and an audience, but it also rewarded exaggeration and turned suffering into a product. You live with the same tension every time a headline is written to be clicked.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">🎓 Historians Weigh In</h3>
-      <h4 style="margin-top: 1em;">Patricia Cline Cohen – <em>The Murder of Helen Jewett</em></h4>
-      <p style="margin-bottom: 1em;">Cohen shows how the Jewett case let editors build mass audiences by mixing crime, sex, and moral lessons. She also recovers Jewett as a real, literate young woman, not just a headline, a good reminder to look for the person behind the spectacle.</p>
-
-      </div>
-      </aside>
-    </div>
-
-    <!-- SLIDE 10: Book Revolution -->
-    <div class="slide bg-white" data-slide="10">
-      <div class="slide-number">Slide 10 of 15</div>
-      <h1>The Book Revolution</h1>
-
-      <h2>Publishing Explosion</h2>
-      <ul>
-        <li>
-          <span class="click-btn" onclick="openGallery(0)" style="cursor:pointer;text-decoration:underline;">Harper &amp; Brothers</span>, Carey &amp; Lea pioneer cheap editions
-        </li>
-        <li>James Fenimore Cooper’s <em>Leatherstocking Tales</em> create frontier mythology</li>
-        <li>Serialization in story papers creates new reading habits</li>
-        <li>Books become affordable commodities, not luxury items</li>
-      </ul>
-
-      <div class="box gray-box" style="margin-top:4vh;padding:3vh 3vw;">
-        <p style="font-weight:bold;font-size:2em;margin-bottom:1vh;">IMPACT:</p>
-        <p>
-          Reading becomes a form of leisure, self-improvement, and identity formation. Americans begin to imagine
-          themselves through the stories they read—whether tales of frontier adventure or sentimental domestic life.
-        </p>
-      </div>
-    
-      <aside class="notes">
-      <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
-      <p style="margin-bottom: 1em;">Books went through the same revolution as newspapers. They got cheaper, publishers got bigger, and reading became something ordinary people did for fun and self-improvement.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
-      <p style="margin-bottom: 1em;"><strong>Cheap editions</strong>: Publishers such as <a href="https://en.wikipedia.org/wiki/Harper_%26_Brothers" target="_blank">Harper &amp; Brothers</a> in New York (click the name for a gallery) and Carey &amp; Lea in Philadelphia used new presses to sell books cheaply. Because the U.S. did not protect foreign copyrights, they could also reprint British authors like Walter Scott and Charles Dickens without paying them.</p>
-      <p style="margin-bottom: 1em;"><strong><a href="https://en.wikipedia.org/wiki/James_Fenimore_Cooper" target="_blank">James Fenimore Cooper</a></strong>: His <a href="https://en.wikipedia.org/wiki/Leatherstocking_Tales" target="_blank">Leatherstocking Tales</a>, including <em>The Last of the Mohicans</em> (1826), made the frontier into a national myth about wilderness and conquest, and about the supposed “vanishing” of Native peoples, a myth that hid ongoing removal.</p>
-      <p style="margin-bottom: 1em;"><strong>Serialization</strong>: Story papers printed novels in weekly installments, so readers waited eagerly for the next chapter, much like a streaming series today.</p>
-      <p style="margin-bottom: 1em;"><strong>Books as commodities</strong>: Books became affordable purchases rather than heirlooms.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
-      <p style="margin-bottom: 1em;">The gray box makes the cultural point: reading became a way to relax, to improve yourself, and to figure out who you were. Americans began to imagine themselves through stories, whether frontier adventures or domestic dramas, and those stories shaped what “American” meant.</p>
-
-      </div>
-      </aside>
-    </div>
-
-    <!-- POPUP (Lightbox) GALLERY for Slide 10 -->
-    <div id="galleryModal" aria-hidden="true"
-         style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(2px);z-index:9999;">
-      <div role="dialog" aria-modal="true" aria-label="Image gallery"
-           style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-                  background:#111;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,0.5);
-                  padding:1rem;max-width:92vw;max-height:88vh;
-                  display:flex;flex-direction:column;gap:0.75rem;">
-        <div style="position:relative;display:flex;justify-content:center;align-items:center;
-                    width:90vw;max-width:1400px;max-height:80vh;overflow:hidden;">
-          <img id="galleryImg" alt=""
-               style="max-width:90vw;max-height:78vh;width:auto;height:auto;border-radius:10px;box-shadow:0 4px 18px rgba(0,0,0,0.4);">
-          <button type="button" onclick="prevImg()" aria-label="Previous image"
-                  style="position:absolute;left:0.5rem;top:50%;transform:translateY(-50%);
-                         width:44px;height:44px;border:none;border-radius:50%;
-                         background:rgba(255,255,255,0.14);color:#fff;font-size:22px;cursor:pointer;">‹</button>
-          <button type="button" onclick="nextImg()" aria-label="Next image"
-                  style="position:absolute;right:0.5rem;top:50%;transform:translateY(-50%);
-                         width:44px;height:44px;border:none;border-radius:50%;
-                         background:rgba(255,255,255,0.14);color:#fff;font-size:22px;cursor:pointer;">›</button>
-        </div>
-
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;color:#eee;font-size:0.95rem;">
-          <div id="galleryCaption" style="flex:1 1 auto;line-height:1.3;"></div>
-          <div style="display:flex;align-items:center;gap:0.5rem;">
-            <span id="galleryCounter" style="color:#ccc;"></span>
-            <button type="button" onclick="closeGallery()" aria-label="Close gallery"
-                    style="border:none;border-radius:8px;padding:0.5rem 0.75rem;background:#e74c3c;color:white;cursor:pointer;">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SLIDE 11: Sentimental Fiction -->
-    <div class="slide bg-white" data-slide="11">
-      <div class="slide-number">Slide 11 of 15</div>
-      <h1>Sentimental Fiction &amp; Female Readers</h1>
-
-      <div class="two-column">
-        <div class="column">
-          <h2>The "Scribbling Women"</h2>
-          <ul>
-            <li>Susan Warner (The Wide, Wide World, 1850)</li>
-            <li>Maria Cummins (The Lamplighter, 1854)</li>
-            <li>E.D.E.N. Southworth (The Hidden Hand, serialized)</li>
-          </ul>
-
-          <h3 style="margin-top: 3vh;">Cultural Significance</h3>
-          <ul>
-            <li>Blend of sentiment and moral didacticism</li>
-            <li>Novels teach "emotional literacy"—feeling becomes virtuous</li>
-            <li>Female reading publics gain cultural authority</li>
-          </ul>
-
-          <div class="box navy-box" style="margin-top: 3vh; background: rgba(28, 40, 51, 0.1); color: #1C2833; text-align: center;">
-            <p style="font-weight: bold; font-style: italic;">Link forward: Emotional reading prepares ground for Lecture 2's religious feeling</p>
-          </div>
-        </div>
-
-        <div class="column">
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start; justify-items: center;">
-            <figure style="width: 100%; margin: 0; text-align: center;">
-              <img src="images/wide wide world.webp"
-                   alt="Cover of Susan Warner's The Wide, Wide World (1850)"
-                   style="width: 100%; height: auto; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.3); object-fit: contain;">
-              <figcaption style="font-size: 0.9em; color: #444; margin-top: 0.5em;">
-                <em>The Wide, Wide World</em> (1850) — cover
-              </figcaption>
-            </figure>
-
-            <figure style="width: 100%; margin: 0; text-align: center;">
-              <img src="images/wide wide world inside.webp"
-                   alt="Interior illustration from The Wide, Wide World"
-                   style="width: 100%; height: auto; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.3); object-fit: contain;">
-              <figcaption style="font-size: 0.9em; color: #444; margin-top: 0.5em;">
-                <em>The Wide, Wide World</em> — interior illustration
-              </figcaption>
-            </figure>
-          </div>
-        </div>
-      </div>
-    
-      <aside class="notes">
-      <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
-      <p style="margin-bottom: 1em;">The best-selling novels of the mid-1800s were often written by women for women. This slide asks why these “sentimental” novels mattered so much, and it links forward to the religious feeling of Lecture 2.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
-      <p style="margin-bottom: 1em;"><strong>The “scribbling women”</strong>: The phrase comes from a jealous 1855 letter in which Nathaniel Hawthorne complained to his publisher about a “mob of scribbling women” whose books outsold his. The authors on the slide include <a href="https://en.wikipedia.org/wiki/Susan_Warner" target="_blank">Susan Warner</a> (<em>The Wide, Wide World</em>, 1850), <a href="https://en.wikipedia.org/wiki/Maria_Susanna_Cummins" target="_blank">Maria Cummins</a> (<em>The Lamplighter</em>, 1854), and <a href="https://en.wikipedia.org/wiki/E._D._E._N._Southworth" target="_blank">E.D.E.N. Southworth</a> (<em>The Hidden Hand</em>, first serialized in 1859). These titles come at or just after the end of our period, so think of them as where the reading culture of the 1830s and 1840s was heading.</p>
-      <p style="margin-bottom: 1em;"><strong>Sentiment and moral teaching</strong>: <a href="https://en.wikipedia.org/wiki/Sentimental_novel" target="_blank">Sentimental novels</a> told stories of young heroines who suffer loss and learn faith and self-control. <strong>Didacticism</strong> means teaching a lesson; these books meant to make readers better people.</p>
-      <p style="margin-bottom: 1em;"><strong>“Emotional literacy”</strong>: Readers were expected to cry and to feel for the characters. Feeling deeply was treated as a sign of virtue.</p>
-      <p style="margin-bottom: 1em;"><strong>Female readers gain authority</strong>: When millions of women decided which books sold, they gained real power over American culture.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
-      <p style="margin-bottom: 1em;">Watch the link-forward box. The same idea, that true feeling proves a good heart, powers the revival meetings in Lecture 2. Sentimental reading and emotional religion grew up together.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">🎓 Historians Weigh In</h3>
-      <h4 style="margin-top: 1em;">Jane Tompkins – <em>Sensational Designs</em></h4>
-      <p style="margin-bottom: 1em;">Tompkins argues that critics wrongly dismissed these novels as shallow. She says they did serious “cultural work,” teaching readers how to think about family, faith, and even slavery.</p>
-      <h4 style="margin-top: 1em;">Ann Douglas – <em>The Feminization of American Culture</em></h4>
-      <p style="margin-bottom: 1em;">Douglas takes the opposite view, arguing that sentimental culture softened and commercialized American religion and thought. Reading the two together shows you how historians can look at the same books and disagree.</p>
-
-      </div>
-      </aside>
-    </div>
-
-    <!-- SLIDE 12: Visual Print Culture -->
-    <div class="slide bg-white" data-slide="12">
-      <div class="slide-number">Slide 12 of 15</div>
-      <h1>Visual Print Culture: Images for the Masses</h1>
-
-      <div class="two-column">
-        <div class="column">
-          <h3>Lithography Revolution (1820s–1830s)</h3>
-          <ul>
-            <li>Cheap decorative prints enter middle-class homes</li>
-            <li>Currier &amp; Ives (Currier’s firm from 1834; Ives joined 1857) mass-produce American scenes</li>
-          </ul>
-
-          <h3 style="margin-top:3vh;">Political Cartoons &amp; Illustrated Newspapers</h3>
-          <ul>
-            <li>Visual culture democratizes alongside textual culture</li>
-            <li>Images shape national myths — frontier, domesticity, prosperity</li>
-          </ul>
-        </div>
-
-
-        <div class="column" style="display:flex;justify-content:center;align-items:center;">
-          <figure style="margin:0;text-align:center;">
-            <img
-              src="images/american_homestead_currier_ives.webp"
-              alt="Currier & Ives: American Homestead — idealized rural family scene"
-              title="Open gallery"
-              tabindex="0"
-              onclick="openCurrierGallery(2)"
-              onkeydown="if(event.key==='Enter'||event.key===' '){openCurrierGallery(2)}"
-              style="max-width:800px;max-height:800px;width:auto;height:auto;border-radius:10px;box-shadow:0 4px 14px rgba(0,0,0,0.35);cursor:pointer;transition:transform 0.3s ease;"
-              onmouseover="this.style.transform='scale(1.04)'"
-              onmouseout="this.style.transform='scale(1)'">
-            <figcaption style="font-size:0.9em;color:#444;margin-top:0.5em;">
-              <em>American Homestead</em> (Currier &amp; Ives)
-            </figcaption>
-          </figure>
-        </div>
-      </div>
-
-      <div class="box gray-box" style="margin-top:3vh;text-align:center;">
-        <p style="font-style:italic;">
-          Americans could now see idealized versions of themselves and their nation hanging on their walls.
-        </p>
-      </div>
-    
-      <aside class="notes">
-      <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
-      <p style="margin-bottom: 1em;">Pictures went mass-market too. Before this period, most families owned few or no pictures. By mid-century, cheap prints hung in parlors across the country.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
-      <p style="margin-bottom: 1em;"><strong><a href="https://en.wikipedia.org/wiki/Lithography" target="_blank">Lithography</a> (1820s–1830s)</strong>: Printing from an image drawn in grease on a flat stone. It was much cheaper than engraving metal or carving wood, so prints became affordable for middle-class homes.</p>
-      <p style="margin-bottom: 1em;"><strong><a href="https://en.wikipedia.org/wiki/Currier_and_Ives" target="_blank">Currier &amp; Ives</a></strong>: Nathaniel Currier opened his print business in 1834; James Merritt Ives became his partner in 1857, when the famous name was born. The firm sold millions of cheap prints of disasters, horse races, farm scenes, and politicians. Most of the prints in the gallery (such as <em>Central Park in Winter</em> and <em>Across the Continent</em>) date from the 1860s, after our period, but they show where this visual culture led.</p>
-      <p style="margin-bottom: 1em;"><strong>Political cartoons and illustrated papers</strong>: Images could carry political messages to people who read little, which made visual culture democratic in its own way.</p>
-      <p style="margin-bottom: 1em;"><strong>National myths</strong>: Prints celebrated the frontier, the cozy home, and prosperity, idealized pictures that left out slavery, poverty, and conflict.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
-      <p style="margin-bottom: 1em;">The gray box sums it up: Americans could now <em>see</em> idealized versions of themselves on their walls. Images teach values quietly. When the same hopeful farm scene hangs in thousands of homes, it helps define what a “proper” American life looks like.</p>
-
-      </div>
-      </aside>
-    </div>
-
-    <!-- FULL-SCREEN GALLERY for Slide 12 -->
-    <div id="currierGallery" aria-hidden="true"
-         style="display:none;position:fixed;inset:0;z-index:10000;background:black;color:white;">
-      <button onclick="closeCurrierGallery()" aria-label="Close gallery"
-              style="position:absolute;top:1rem;right:1rem;padding:0.5rem 0.75rem;background:#e74c3c;border:none;border-radius:8px;color:white;cursor:pointer;z-index:10001;">
-        Close ✕
-      </button>
-      <div style="height:100%;display:flex;justify-content:center;align-items:center;flex-direction:column;">
-        <img id="currierImg" alt=""
-             style="max-width:95vw;max-height:90vh;border-radius:6px;box-shadow:0 0 20px rgba(255,255,255,0.2);">
-        <div id="currierCaption" style="margin-top:1rem;text-align:center;font-size:1rem;color:#ccc;"></div>
-      </div>
-      <button onclick="prevCurrier()" aria-label="Previous image"
-              style="position:absolute;left:2%;top:50%;transform:translateY(-50%);background:none;border:none;color:white;font-size:3rem;cursor:pointer;">‹</button>
-      <button onclick="nextCurrier()" aria-label="Next image"
-              style="position:absolute;right:2%;top:50%;transform:translateY(-50%);background:none;border:none;color:white;font-size:3rem;cursor:pointer;">›</button>
-    </div>
-
-    <!-- SLIDE 13: Lyceum Movement -->
-    <div class="slide bg-white" data-slide="13">
-      <div class="slide-number">Slide 13 of 15</div>
-      <h1>The Lyceum Movement: Education, Culture, and Spectacle</h1>
-
-      <div style="max-height: 75vh; overflow-y: auto; padding: 2vh 2vw; border: 2px solid rgba(0,0,0,0.1); border-radius: 12px; background: #fffdf8; box-shadow: 0 2px 10px rgba(0,0,0,0.08); scroll-behavior: smooth;">
-        <div class="two-column" style="margin-bottom: 5vh;">
-          <div class="column">
-            <h2>What Were Lyceums?</h2>
-            <p>
-              The <strong>Lyceum movement</strong> began in the 1820s as a network of local associations devoted to
-              adult education, civic improvement, and moral uplift. These organizations hosted <em>lectures, debates,
-              and demonstrations</em> designed to bring knowledge to ordinary citizens.
-            </p>
-            <p>
-              Founded by <strong>Josiah Holbrook</strong> in 1826, the lyceum became the backbone of antebellum public
-              culture—where Americans could learn about science, literature, reform, and philosophy outside formal
-              schools.
-            </p>
-          </div>
-
-          <div class="column" style="text-align:center;">
-            <figure style="margin:0 auto;text-align:center;">
-              <img src="images/Gemini_Generated_Image_7mmqwk7mmqwk7mmq.webp"
-                   alt="AI-generated depiction of a 19th-century Lyceum lecture hall"
-                   style="max-width:600px;width:100%;height:auto;border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.3);">
-              <figcaption style="font-size:0.9em;color:#444;margin-top:0.5em;">
-                <em>Typical Lyceum lecture scene — education as civic performance</em>
-              </figcaption>
-            </figure>
-          </div>
-        </div>
-
-        <div class="two-column" style="margin-bottom: 5vh;">
-          <div class="column">
-            <h2>High Culture and Moral Philosophy</h2>
-            <p>
-              Prominent writers and thinkers like <strong>Ralph Waldo Emerson</strong> brought Transcendentalist ideas to
-              Lyceum audiences. Their lectures on <em>self-reliance, moral philosophy, and the pursuit of truth</em>
-              helped popularize intellectual and literary culture among the middle class.
-            </p>
-            <p>
-              Emerson’s tours through small towns and city halls made philosophy a public performance, accessible to
-              tradesmen, teachers, and farmers alike.
-            </p>
-          </div>
-
-          <div class="column" style="text-align:center;">
-            <figure style="margin:0 auto;text-align:center;">
-              <img src="images/emerson.webp"
-                   alt="Portrait of Ralph Waldo Emerson"
-                   style="max-width:400px;width:100%;height:auto;border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.3);">
-              <figcaption style="font-size:0.9em;color:#444;margin-top:0.5em;">
-                <em>Ralph Waldo Emerson</em> — philosopher of self-culture and moral independence
-              </figcaption>
-            </figure>
-          </div>
-        </div>
-
-        <div class="two-column">
-          <div class="column">
-            <h2>Popular Science and Spectacle</h2>
-            <p>
-              Alongside high-minded philosophy, Lyceum stages also hosted demonstrations of <strong>phrenology,
-              mesmerism</strong>, and electrical experiments—blurring the line between <em>education and entertainment</em>.
-            </p>
-            <p>
-              Figures like <strong>Orson and Lorenzo Fowler</strong> delivered engaging phrenology lectures,
-              promising moral and personal insight through the “science” of skull reading. These popular pseudo-sciences
-              reflected Americans’ hunger for self-knowledge and moral order.
-            </p>
-          </div>
-
-          <div class="column" style="text-align:center;">
-            <figure style="margin:0 auto;text-align:center;">
-              <img src="images/phrenologychart.webp"
-                   alt="Phrenology chart showing faculties of the brain"
-                   style="max-width:300px;width:100%;height:auto;margin-bottom:2vh;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.3);">
-              <img src="images/Phrenological Chart_ KC.webp"
-                   alt="Detailed phrenological head diagram"
-                   style="max-width:300px;width:100%;height:auto;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.3);">
-              <figcaption style="font-size:0.9em;color:#444;margin-top:0.5em;">
-                <em>Phrenology charts</em> — pseudo-scientific tools for moral self-assessment
-              </figcaption>
-            </figure>
-          </div>
-        </div>
-      </div>
-
-      <div class="box gold-box" style="margin-top:4vh;padding:3vh 3vw;text-align:center;">
-        <p style="font-weight:bold;font-size:2em;margin-bottom:1vh;">Critical Question:</p>
-        <p style="font-style:italic;">
-          Was the Lyceum a democratic classroom or a performance stage?
-          Did it elevate the public or merely entertain them?
-        </p>
-      </div>
-    
-      <aside class="notes">
-      <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
-      <p style="margin-bottom: 1em;">Imagine paying a small fee to hear a famous speaker in your town hall on a winter evening. That was the lyceum. This slide shows how lectures became a mix of school, civic duty, and show business.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
-      <p style="margin-bottom: 1em;"><strong>What lyceums were</strong>: Local associations for adult education and self-improvement, named after Aristotle’s school in ancient Athens. They hosted lectures, debates, and science demonstrations.</p>
-      <p style="margin-bottom: 1em;"><strong><a href="https://en.wikipedia.org/wiki/Josiah_Holbrook" target="_blank">Josiah Holbrook</a></strong>: He organized the first town lyceum in Millbury, Massachusetts, in 1826. The idea spread quickly across New England, New York, and the Midwest. (The lecture-hall picture on the slide is an AI-generated illustration, not a historical image.)</p>
-      <p style="margin-bottom: 1em;"><strong>High culture and moral philosophy</strong>: <a href="https://en.wikipedia.org/wiki/Ralph_Waldo_Emerson" target="_blank">Ralph Waldo Emerson</a> earned much of his living on the lecture circuit; many of his essays began as talks to paying audiences. His themes, such as self-reliance and finding truth for yourself, fit an audience of strivers.</p>
-      <p style="margin-bottom: 1em;"><strong>Popular science and spectacle</strong>: Audiences also flocked to <a href="https://en.wikipedia.org/wiki/Phrenology" target="_blank">phrenology</a>, the false claim that you can read character from bumps on the skull, and to mesmerism (putting volunteers into trances). The brothers <a href="https://en.wikipedia.org/wiki/Orson_Squire_Fowler" target="_blank">Orson and Lorenzo Fowler</a> built a phrenology business reading heads for a fee. Today we call these <strong>pseudosciences</strong>, claims that look scientific but are not. To audiences then, they seemed like exciting new knowledge anyone could judge.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
-      <p style="margin-bottom: 1em;">The gold box asks whether the lyceum was a classroom or a stage. It was both. Paying audiences judged speakers like performers, which made learning democratic and also blurred education with entertainment, just as the penny press blurred news with spectacle.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">🎓 Historians Weigh In</h3>
-      <h4 style="margin-top: 1em;">Angela G. Ray – <em>The Lyceum and Public Culture in the Nineteenth-Century United States</em></h4>
-      <p style="margin-bottom: 1em;">Ray shows that the lyceum created a new kind of public. Ordinary people gathered to listen, judge, and argue, and the lecture hall became a place where Americans practiced being a self-improving democratic audience.</p>
-
-      </div>
-      </aside>
-    </div>
-
-    <!-- SLIDE 14: Print & Politics -->
-    <div class="slide bg-white" data-slide="14">
-      <div class="slide-number">Slide 14 of 15</div>
-      <h1 style="font-size: 3em;">Print and Politics: From Pamphlet to Partisan Press</h1>
-
-      <div style="max-height: 75vh; overflow-y: auto; padding: 2vh 2vw; border: 2px solid rgba(0,0,0,0.1); border-radius: 12px; background: #fffdf8; box-shadow: 0 2px 10px rgba(0,0,0,0.08); scroll-behavior: smooth;">
-        <div class="two-column">
-          <div class="column" style="font-size: 1.4em; line-height: 1.6;">
-            <h2 style="font-size: 2em;">Political Mobilization Through Print</h2>
-            <ul>
-              <li>Broadsides and party newspapers link print to mobilization</li>
-              <li>Jacksonian era's "partisan press" turns voting into spectacle</li>
-              <li>Editorials and cartoons appeal to working-class readers</li>
-              <li>Political participation becomes a form of popular entertainment</li>
-            </ul>
-          </div>
-
-          <div class="column">
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; align-items: start; justify-items: center;">
-              <figure style="width: 100%; margin: 0; text-align: center;">
-                <img src="images/slaying_bank.webp"
-                     alt="Political cartoon: Andrew Jackson 'slaying' the Bank of the United States"
-                     style="width: 100%; height: auto; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.3); object-fit: contain;">
-                <figcaption style="font-size: 1em; color: #444; margin-top: 0.5em;">
-                  <em>“Slaying the Bank”</em> — Jackson versus the BUS
-                </figcaption>
-              </figure>
-
-              <figure style="width: 100%; margin: 0; text-align: center;">
-                <img src="images/king_andrew_the_first_political_cartoon_of_president_andrew_jackson.webp"
-                     alt="Political cartoon: 'King Andrew the First' showing Jackson in royal regalia trampling the Constitution"
-                     style="width: 100%; height: auto; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.3); object-fit: contain;">
-                <figcaption style="font-size: 1em; color: #444; margin-top: 0.5em;">
-                  <em>“King Andrew the First”</em> — fears of executive overreach
-                </figcaption>
-              </figure>
-            </div>
-          </div>
-        </div>
-
-        <div style="height: 10vh;"></div>
-
-        <div class="box navy-box" style="margin-top: 6vh; background: rgba(28, 40, 51, 0.1); color: #1C2833; text-align: center; font-size: 1.3em; padding: 2vh 3vw; border-radius: 8px;">
-          <p style="font-weight: bold;">
-            KEY CONCEPT: Print makes politics accessible and exciting—but also partisan and emotional
-          </p>
-        </div>
-      </div>
-    
-      <aside class="notes">
-      <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
-      <p style="margin-bottom: 1em;">Cheap print also changed politics. Elections became loud, colorful shows, and newspapers were the stagehands.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
-      <p style="margin-bottom: 1em;"><strong>Broadsides and party newspapers</strong>: A broadside is a one-sheet poster. Parties used broadsides and their own newspapers to rally voters. Jackson’s supporters built a national network of friendly papers, led by the Washington <em>Globe</em> (1830), and the Whigs built their own.</p>
-      <p style="margin-bottom: 1em;"><strong>The partisan press</strong>: These papers did not pretend to be neutral. They printed speeches alongside insults, rumors, songs, and cartoons. By the 1830s most states had dropped property requirements, so nearly all white men could vote, and parties needed ways to reach them.</p>
-      <p style="margin-bottom: 1em;"><strong>The cartoons</strong>: “General Jackson Slaying the Many Headed Monster” shows Jackson fighting the <a href="https://en.wikipedia.org/wiki/Second_Bank_of_the_United_States" target="_blank">Second Bank of the United States</a> during the <a href="https://en.wikipedia.org/wiki/Bank_War" target="_blank">Bank War</a>; “King Andrew the First” (1830s) is an opposition cartoon showing Jackson as a tyrant trampling the Constitution. Same president, opposite messages.</p>
-      <p style="margin-bottom: 1em;"><strong>Politics as entertainment</strong>: In the <a href="https://en.wikipedia.org/wiki/1840_United_States_presidential_election" target="_blank">1840 election</a>, Whigs staged log-cabin rallies, parades, and songs (“Tippecanoe and Tyler Too”). About 80 percent of eligible voters turned out, a record at the time.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
-      <p style="margin-bottom: 1em;">The key-concept box captures a paradox. Print brought millions of ordinary white men into politics and made elections exciting. It also rewarded slogans, images, and anger over careful argument. Wider participation and sharper partisanship arrived together, and that pattern should feel familiar today.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">🎓 Historians Weigh In</h3>
-      <h4 style="margin-top: 1em;">Sean Wilentz – <em>The Rise of American Democracy</em></h4>
-      <p style="margin-bottom: 1em;">Wilentz argues that Jacksonian-era democracy was built by organized parties and their newspapers, not just by Andrew Jackson himself. The partisan press was how ordinary voters were mobilized and how political identities were formed.</p>
-
-      </div>
-      </aside>
-    </div>
-
-    <!-- SLIDE 15: Conclusion -->
-    <div class="slide bg-cream" data-slide="15">
-      <div class="slide-number">Slide 15 of 15</div>
-      <div class="center-content">
-        <h1 style="font-size: 4em; margin-bottom: 4vh;">Conclusion: Print and the Making of American Culture</h1>
-
-        <div class="box" style="background: #FFFFFF; padding: 3vh 4vw; max-width: 80%; margin-bottom: 3vh;">
-          <p style="font-weight: bold; font-size: 2.2em; margin-bottom: 1.5vh;">Main Argument:</p>
-          <p style="font-size: 2em;">Print didn't just spread information—it created a new kind of public and a new kind of American identity. But democratization had limits: access remained structured by race, class, and gender.</p>
-        </div>
-
-        <div class="box" style="background: rgba(52, 73, 94, 0.1); padding: 3vh 4vw; max-width: 80%;">
-          <p style="font-weight: bold; font-size: 2.2em; margin-bottom: 1.5vh;">Next Time: Lecture 2</p>
-          <p style="font-size: 2em;">From print culture to spiritual culture—camp meetings, revivals, and the democratization of religion. Who gets to define American faith?</p>
-        </div>
-      </div>
-    
-      <aside class="notes">
-      <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">📖 Understanding This Slide</h3>
-      <p style="margin-bottom: 1em;">This slide pulls the lecture together. It gives you the main argument in two sentences and points you toward Lecture 2.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">Breaking It Down</h3>
-      <p style="margin-bottom: 1em;"><strong>The main argument</strong>: Print did more than spread information. It created a new kind of public, millions of strangers who read the same things and argued about them, and a new sense of American identity.</p>
-      <p style="margin-bottom: 1em;"><strong>The limits</strong>: Access was shaped by race, class, and gender. Enslaved people were barred from reading by law, free Black Americans built their own institutions, women read and wrote but could not vote, and the poor had little time or money.</p>
-      <p style="margin-bottom: 1em;"><strong>Next time</strong>: The same hunger for feeling and participation moves from the newspaper to the revival tent. Lecture 2 asks who got to define American faith.</p>
-
-      <h3 style="color: #2c5282; margin-top: 1.5em;">Why This Matters</h3>
-      <p style="margin-bottom: 1em;">If you can explain how the postal system, the steam press, advertising, and the penny paper worked together, and then explain who was excluded and why, you understand this lecture. Practice by explaining it to a friend in three minutes.</p>
-
-      </div>
-      </aside>
-    </div>
-  </div>
-
-  <!-- Postal Act Statistics Popup -->
-  <div id="postal-stats" class="popup-overlay">
-    <div class="popup-content">
-      <button class="popup-close" onclick="closePopup('postal-stats')">&times;</button>
-      <h2>THE POSTAL ACT OF 1792: BY THE NUMBERS</h2>
-
-      <h3>Newspaper Distribution</h3>
+    <!-- Postal Act Statistics Popup -->
+    <div id="postal-stats" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="The Postal Act of 1792: by the numbers">
+        <div class="modal-dialog stats-dialog">
+            <button type="button" class="modal-close-btn" onclick="closeModal('postal-stats')" aria-label="Close">&times;</button>
+            <h2>THE POSTAL ACT OF 1792: BY THE NUMBERS</h2>
+
+      
+<div class="stat-grid"><div class="stat-group"><h3>Newspaper Distribution</h3>
       <p class="stat-item"><span class="stat-number">90%</span> of all postal traffic by 1840 was newspapers (not letters)</p>
       <p class="stat-item">Newspapers could be mailed <span class="stat-number">between publishers at no cost</span></p>
       <p class="stat-item">Subscriber newspaper postage: <span class="stat-number">1¢</span> for up to 100 miles, 1.5¢ beyond (vs. 6¢–25¢ for letters)</p>
-      <p class="stat-item">By 1830s: newspapers traveled <span class="stat-number">nationwide within 2-3 weeks</span></p>
-
-      <h3>Growth of the Postal Network</h3>
+      <p class="stat-item">By 1830s: newspapers traveled <span class="stat-number">nationwide within 2-3 weeks</span></p></div><div class="stat-group"><h3>Growth of the Postal Network</h3>
       <p class="stat-item">1790: <span class="stat-number">75</span> post offices across the United States</p>
       <p class="stat-item">1800: <span class="stat-number">903</span> post offices</p>
       <p class="stat-item">1830: <span class="stat-number">8,450</span> post offices</p>
-      <p class="stat-item">1850: <span class="stat-number">18,417</span> post offices</p>
-
-      <h3>Impact on Newspaper Circulation</h3>
+      <p class="stat-item">1850: <span class="stat-number">18,417</span> post offices</p></div><div class="stat-group"><h3>Impact on Newspaper Circulation</h3>
       <p class="stat-item">1790: ~<span class="stat-number">90</span> newspapers published in the U.S.</p>
       <p class="stat-item">1800: ~<span class="stat-number">200</span> newspapers</p>
       <p class="stat-item">1835: ~<span class="stat-number">1,000</span> newspapers</p>
-      <p class="stat-item">1850: ~<span class="stat-number">2,500</span> newspapers</p>
-
-      <h3>Geographic Reach</h3>
+      <p class="stat-item">1850: ~<span class="stat-number">2,500</span> newspapers</p></div><div class="stat-group"><h3>Geographic Reach</h3>
       <p class="stat-item">By 1840, postal routes covered <span class="stat-number">155,000 miles</span> (more than any nation on Earth)</p>
-      <p class="stat-item">Even frontier settlements received newspapers within weeks of publication</p>
-
-      <h3>Federal Subsidy</h3>
+      <p class="stat-item">Even frontier settlements received newspapers within weeks of publication</p></div><div class="stat-group"><h3>Federal Subsidy</h3>
       <p class="stat-item">The Post Office <span class="stat-number">operated at a loss</span> for decades</p>
-      <p class="stat-item">Congress deliberately subsidized information flow as a <span class="stat-number">democratic investment</span></p>
+      <p class="stat-item">Congress deliberately subsidized information flow as a <span class="stat-number">democratic investment</span></p></div></div>
+        </div>
     </div>
-  </div>
 
-  <!-- Print Revolution Statistics Popup -->
-  <div id="print-stats" class="popup-overlay">
-    <div class="popup-content">
-      <button class="popup-close" onclick="closePopup('print-stats')">&times;</button>
-      <h2>THE PRINT REVOLUTION: DETAILED STATISTICS</h2>
+    <!-- Print Revolution Statistics Popup -->
+    <div id="print-stats" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="The print revolution: detailed statistics">
+        <div class="modal-dialog stats-dialog">
+            <button type="button" class="modal-close-btn" onclick="closeModal('print-stats')" aria-label="Close">&times;</button>
+            <h2>THE PRINT REVOLUTION: DETAILED STATISTICS</h2>
 
-      <h3>Newspaper Growth</h3>
+      
+<div class="stat-grid"><div class="stat-group"><h3>Newspaper Growth</h3>
       <p class="stat-item">1775: Approximately <span class="stat-number">37</span> newspapers in colonial America</p>
       <p class="stat-item">1800: <span class="stat-number">200</span> newspapers nationwide</p>
       <p class="stat-item">1810: <span class="stat-number">376</span> newspapers</p>
       <p class="stat-item">1820: <span class="stat-number">512</span> newspapers</p>
       <p class="stat-item">1830: <span class="stat-number">852</span> newspapers</p>
       <p class="stat-item">1835: <span class="stat-number">1,000+</span> newspapers</p>
-      <p class="stat-item">1840: <span class="stat-number">1,400+</span> newspapers</p>
-
-      <h3>Literacy Rates</h3>
+      <p class="stat-item">1840: <span class="stat-number">1,400+</span> newspapers</p></div><div class="stat-group"><h3>Literacy Rates</h3>
       <p class="stat-item">c. 1800: Most white men in the North could read; women’s literacy lagged (estimates vary widely)</p>
       <p class="stat-item">1840 census (first to ask): about <span class="stat-number">9%</span> of white adults reported unable to read and write, so roughly <span class="stat-number">91%</span> literate</p>
       <p class="stat-item">Literacy was lower in the South and among some immigrant groups</p>
       <p class="stat-item">By mid-century, women’s literacy in the North had nearly caught up with men’s</p>
-      <p class="stat-item">African American literacy severely restricted by law in Southern states</p>
-
-      <h3>Book Production</h3>
+      <p class="stat-item">African American literacy severely restricted by law in Southern states</p></div><div class="stat-group"><h3>Book Production</h3>
       <p class="stat-item">1820: American publishers produced fewer than <span class="stat-number">100</span> book titles per year</p>
-      <p class="stat-item">1850: Over <span class="stat-number">1,000</span> book titles published annually</p>
-
-      <h3>Price Revolution</h3>
+      <p class="stat-item">1850: Over <span class="stat-number">1,000</span> book titles published annually</p></div><div class="stat-group"><h3>Price Revolution</h3>
       <p class="stat-item">1820s: Average book price <span class="stat-number">$1.50-$2.00</span></p>
       <p class="stat-item">1840s: Cheap editions available for <span class="stat-number">25¢-50¢</span></p>
-      <p class="stat-item">Penny press newspapers: <span class="stat-number">1¢</span> vs. traditional subscription papers at <span class="stat-number">6¢</span></p>
-
-      <h3>Circulation Numbers</h3>
+      <p class="stat-item">Penny press newspapers: <span class="stat-number">1¢</span> vs. traditional subscription papers at <span class="stat-number">6¢</span></p></div><div class="stat-group"><h3>Circulation Numbers</h3>
       <p class="stat-item"><em>New York Sun</em> (1833): Circulation reached <span class="stat-number">15,000</span> within 3 years</p>
-      <p class="stat-item">By comparison: elite papers typically had <span class="stat-number">1,000-2,000</span> subscribers</p>
+      <p class="stat-item">By comparison: elite papers typically had <span class="stat-number">1,000-2,000</span> subscribers</p></div></div>
+        </div>
     </div>
-  </div>
 
-  <!-- :TARGET POPUP — Stereotyping (Printing) -->
-  <div id="stereo-info" role="dialog" aria-modal="true" aria-labelledby="stereo-title">
-    <!-- Clicking the dark area closes by navigating back to the slide anchor -->
-    <a class="backdrop" href="#slide-7" aria-label="Close"></a>
-    <div class="card">
-      <header><h3 id="stereo-title">Stereotyping (printing)</h3></header>
-      <div class="body">
-        <p><strong>Definition:</strong> Stereotyping creates a single, durable metal plate of a fully typeset page. Printers set the page in movable type, take a mold (<em>flong</em>), then cast a solid plate (lead alloy) from the mold. The plate prints quickly and can be stored for identical reprints, freeing the handset type for other work.</p>
+    <!-- Stereotyping (printing) Popup -->
+    <div id="stereo-info" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="stereo-title">
+        <div class="modal-dialog stereo-dialog">
+            <button type="button" class="modal-close-btn" onclick="closeModal('stereo-info')" aria-label="Close">&times;</button>
+            <h3 id="stereo-title">Stereotyping (printing)</h3>
+            <p><strong>Definition:</strong> Stereotyping creates a single, durable metal plate of a fully typeset page. Printers set the page in movable type, take a mold (<em>flong</em>), then cast a solid plate (lead alloy) from the mold. The plate prints quickly and can be stored for identical reprints, freeing the handset type for other work.</p>
 
         <h4 style="margin: 1em 0 0.5em;">Very brief history of typesetting (context)</h4>
         <ul>
@@ -1150,287 +1023,158 @@
           <li><strong>Linotype (1880s):</strong> Mechanized line-casting for composition—post-Civil War innovation, outside the antebellum window.</li>
           <li><strong>Monotype (1890s):</strong> Cast individual characters via keyboard; favored for high-quality book composition (also post-antebellum).</li>
         </ul>
-      </div>
-      <footer>
-        <a class="btn-close" href="#slide-7">Close</a>
-      </footer>
+            <div class="modal-footer"><button type="button" class="btn-close" onclick="closeModal('stereo-info')">Close</button></div>
+        </div>
     </div>
-  </div>
 
-  <!-- Study Buddy Notes panel: shows the active slide's aside.notes (press S or click Notes) -->
-  <button id="notesToggle" type="button" aria-controls="notesPanel" aria-expanded="false" onclick="toggleNotes()">📝 Notes (S)</button>
-  <aside id="notesPanel" role="complementary" aria-label="Study buddy notes for this slide">
-    <div class="notes-head"><span id="notesTitle">Study Buddy Notes</span><button class="notes-close" type="button" onclick="toggleNotes(false)">Close ✕</button></div>
-    <div id="notesBody"></div>
-  </aside>
-
-  <!-- Core Navigation / Popups / Keyboard Support -->
-  <div id="blackout" aria-hidden="true"></div>
-  <div class="help-overlay" id="helpOverlay" role="dialog" aria-modal="true" aria-label="Keyboard shortcuts help">
-    <div class="help-card">
-      <h2>Shortcuts (Reveal-style)</h2>
-      <div class="help-grid">
-        <div><kbd>F</kbd> Toggle Fullscreen</div>         <div><kbd>O</kbd> / <kbd>Esc</kbd> Overview grid</div>
-        <div><kbd>B</kbd> or <kbd>.</kbd> Blackout</div>  <div><kbd>?</kbd> Show/Hide this help</div>
-        <div><kbd>→</kbd> Next slide</div>                <div><kbd>←</kbd> Previous slide</div>
-        <div><kbd>↑</kbd>/<kbd>↓</kbd> Scroll in boxes</div><div><kbd>Home</kbd>/<kbd>End</kbd> First/Last slide</div>
-        <div><kbd>PgDn</kbd>/<kbd>PgUp</kbd> Next/Prev</div><div><kbd>Space</kbd> Next</div>
-        <div><kbd>S</kbd> Study buddy notes</div>
-      </div>
-      <button class="help-close" type="button" onclick="toggleHelp(false)">Close</button>
+    <!-- Image gallery (Slide 10 Harper &amp; Brothers; Slide 12 Currier &amp; Ives) -->
+    <div id="galleryModal" class="modal-overlay gallery-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Image gallery">
+        <div class="gallery-dialog">
+            <div class="gallery-stage">
+                <img id="galleryImg" alt="">
+                <button type="button" class="gallery-nav prev" onclick="prevImg()" aria-label="Previous image">‹</button>
+                <button type="button" class="gallery-nav next" onclick="nextImg()" aria-label="Next image">›</button>
+            </div>
+            <div class="gallery-bar">
+                <div id="galleryCaption"></div>
+                <span id="galleryCounter"></span>
+                <button type="button" class="btn-close red" onclick="closeGallery()" aria-label="Close gallery">Close ✕</button>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <script>
-    /* ===== Simple slide navigation (Left/Right only) ===== */
-    let currentSlide = 1;
-    const totalSlides = 15;
+    <!-- Reveal.js JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
+    <!-- Add the Notes plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/notes/notes.js"></script>
 
-    function showSlide(n) {
-      const slides = document.querySelectorAll('.slide');
-      slides.forEach(slide => slide.classList.remove('active'));
-      if (n > totalSlides) currentSlide = 1;
-      else if (n < 1) currentSlide = totalSlides;
-      else currentSlide = n;
-      slides[currentSlide - 1].classList.add('active');
-    }
-    function nextSlide() { showSlide(currentSlide + 1); }
-    function prevSlide() { showSlide(currentSlide - 1); }
+    <script>
+        // Initialize Reveal.js (settings match Lecture 3; slide size 960x700)
+        Reveal.initialize({
+            // Display settings
+            width: 960,
+            height: 700,
+            margin: 0.04,
+            minScale: 0.2,
+            maxScale: 2.0,
 
-    // Left/Right navigation and Esc to close simple popups
-    document.addEventListener('keydown', function(e) {
-      // Do not consume if focused in an input/textarea, etc.
-      const t = e.target;
-      if (t && (t.isContentEditable || /^(input|textarea|select)$/i.test(t.tagName))) return;
+            // Navigation settings
+            controls: true,
+            controlsTutorial: false,
+            progress: true,
+            center: false,
+            hash: true,
+            respondToHashChanges: true,
+            keyboard: true,
 
-      if (e.key === 'ArrowRight') { e.preventDefault(); nextSlide(); }
-      else if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
-      else if (e.key === 'Escape') {
-        document.querySelectorAll('.popup-overlay').forEach(popup => popup.classList.remove('active'));
-      }
-    });
+            // Slide navigation
+            navigationMode: 'linear',
 
-    // Click outside popup to close
-    document.querySelectorAll('.popup-overlay').forEach(overlay => {
-      overlay.addEventListener('click', function(e) {
-        if (e.target === overlay) overlay.classList.remove('active');
-      });
-    });
+            // Transition
+            transition: 'slide',
+            transitionSpeed: 'default',
+            backgroundTransition: 'fade',
 
-    // Mouse wheel for scrolling within long popups (prevent bubbling)
-    document.querySelectorAll('.popup-content').forEach(content => {
-      content.addEventListener('wheel', function(e) { e.stopPropagation(); }, { passive: true });
-    });
+            // Other settings
+            slideNumber: 'c/t',
+            showSlideNumber: 'all',
+            history: true,
+            fragments: true,
+            fragmentInURL: false,
+            help: true,
+            showNotes: false,
+            autoPlayMedia: null,
+            preloadIframes: null,
+            autoAnimate: true,
+            autoAnimateMatcher: null,
+            autoAnimateEasing: 'ease',
+            autoAnimateDuration: 1.0,
+            autoAnimateUnmatched: true,
+            display: 'block',
+            hideAddressBar: true,
+            previewLinks: false,
+            focusBodyOnPageVisibilityChange: true,
 
-    // Prevent wheel bubbling for any explicitly scrollable element
-    function stopWheelBubblingForScrollBoxes() {
-      document.querySelectorAll('[style*="overflow:auto"], [style*="overflow-y"]').forEach(box => {
-        box.addEventListener('wheel', e => e.stopPropagation(), { passive: true });
-        box.addEventListener('keydown', e => {
-          // Let ArrowUp/Down scroll inside the box only
-          const step = 48;
-          if (e.key === 'ArrowDown') { box.scrollBy({ top: step, behavior: 'smooth' }); e.preventDefault(); e.stopPropagation(); }
-          else if (e.key === 'ArrowUp') { box.scrollBy({ top: -step, behavior: 'smooth' }); e.preventDefault(); e.stopPropagation(); }
+            // Plugins
+            plugins: [RevealNotes]
         });
-      });
-    }
 
-    // Popup helpers
-    function showPopup(id) { document.getElementById(id)?.classList.add('active'); }
-    function closePopup(id) { document.getElementById(id)?.classList.remove('active'); }
-
-    // Initialize on load
-    showSlide(1);
-    stopWheelBubblingForScrollBoxes();
-
-    /* ===== Reveal-like keyboard support (no ArrowUp/Down hijack) ===== */
-    (function(){
-      const blackout = document.getElementById('blackout');
-      const help = document.getElementById('helpOverlay');
-
-      function isEditable(el){ return el && (/^(input|textarea|select)$/i.test(el.tagName) || el.isContentEditable); }
-      function toggleFullscreen(){
-        if (!document.fullscreenElement) {
-          (document.documentElement.requestFullscreen || document.body.requestFullscreen || function(){})().call(document.documentElement);
-        } else {
-          (document.exitFullscreen || function(){})().call(document);
+        /* ===== Popups (modal overlays) ===== */
+        let openModalId = null;
+        function lockReveal(lock) { Reveal.configure({ keyboard: !lock }); }
+        function openModal(id) {
+            const m = document.getElementById(id);
+            if (!m) return;
+            m.setAttribute('aria-hidden', 'false');
+            openModalId = id;
+            lockReveal(true);
+            const btn = m.querySelector('.modal-close-btn, .btn-close');
+            if (btn) btn.focus({ preventScroll: true });
         }
-      }
-      function toggleBlackout(){ if(!blackout) return; blackout.style.display = (blackout.style.display === 'block') ? 'none' : 'block'; }
-      function toggleOverview(force){
-        if (typeof force === 'boolean') document.body.classList.toggle('overview', force);
-        else document.body.classList.toggle('overview');
-      }
-      function toggleHelp(force){
-        if(!help) return;
-        const show = (typeof force === 'boolean') ? force : help.style.display !== 'flex';
-        help.style.display = show ? 'flex' : 'none';
-      }
-      window.toggleHelp = toggleHelp;
+        function closeModal(id) {
+            const m = document.getElementById(id || openModalId);
+            if (!m) return;
+            m.setAttribute('aria-hidden', 'true');
+            openModalId = null;
+            lockReveal(false);
+        }
+        document.querySelectorAll('.modal-overlay').forEach(function (m) {
+            m.addEventListener('click', function (e) { if (e.target === m) { m.id === 'galleryModal' ? closeGallery() : closeModal(m.id); } });
+        });
 
-      function gotoFirst(){ showSlide(1); }
-      function gotoLast(){ showSlide(totalSlides); }
-
-      document.addEventListener('keydown', function(e){
-        if (isEditable(e.target)) return;
-
-        // ? toggles help
-        if (e.key === '?' || (e.shiftKey && e.key === '/')) { e.preventDefault(); toggleHelp(); return; }
-        // Fullscreen
-        if (e.key && e.key.toLowerCase && e.key.toLowerCase() === 'f') { e.preventDefault(); toggleFullscreen(); return; }
-        // Blackout (B or .)
-        if ((e.key && e.key.toLowerCase && e.key.toLowerCase() === 'b') || e.key === '.') { e.preventDefault(); toggleBlackout(); return; }
-        // Overview grid (O); Esc also exits overview
-        if (e.key && e.key.toLowerCase && e.key.toLowerCase() === 'o') { e.preventDefault(); toggleOverview(); return; }
-        if (e.key === 'Escape' && document.body.classList.contains('overview')) { e.preventDefault(); toggleOverview(false); return; }
-        // Home/End jump
-        if (e.key === 'Home') { e.preventDefault(); gotoFirst(); return; }
-        if (e.key === 'End')  { e.preventDefault(); gotoLast(); return; }
-        // PageUp/PageDown map to prev/next
-        if (e.key === 'PageDown') { e.preventDefault(); nextSlide(); return; }
-        if (e.key === 'PageUp')   { e.preventDefault(); prevSlide(); return; }
-        // NOTE: We intentionally DO NOT handle ArrowUp/ArrowDown here
-      });
-    })();
-
-    /* ===== Slide 9: dedicated scroll box protection (redundant safety) ===== */
-    (function(){
-      const box = document.getElementById('sensational-scroll');
-      if(!box) return;
-      box.addEventListener('wheel', e => e.stopPropagation(), { passive: true });
-      box.addEventListener('keydown', e => {
-        const step = 48;
-        if(e.key==='ArrowDown'){ box.scrollBy({top:step,behavior:'smooth'}); e.preventDefault(); e.stopPropagation(); }
-        else if(e.key==='ArrowUp'){ box.scrollBy({top:-step,behavior:'smooth'}); e.preventDefault(); e.stopPropagation(); }
-      });
-    })();
-
-    /* ===== Slide 10: gallery controls ===== */
-    const galleryImages = [
+        /* ===== Galleries ===== */
+        const galleries = {
+            book: [
       {src:"images/harpers_brothers.webp", cap:"<strong>Harper &amp; Brothers</strong> — pioneers of affordable editions and mass-market publishing."},
       {src:"images/wide wide world.webp", cap:"<em>The Wide, Wide World</em> (1850) — sentimental fiction taps vast female readerships."},
       {src:"images/wide wide world inside.webp", cap:"Interior illustration — novels as guides to feeling and domestic virtue."},
       {src:"images/il_570xN.2731078852_swq7.webp", cap:"Period advertising — cheap bindings and the ‘book as commodity.’"},
       {src:"images/il_fullxfull.5621718883_hqec_1500x.webp", cap:"Victorian bookshelf imagery — middle-class literary aspiration."},
       {src:"images/unnamed.webp", cap:"Readers and identity — leisure and self-fashioning through print."}
-    ];
-    let galleryIndex=0;
-    const modal=document.getElementById("galleryModal"),
-          imgEl=document.getElementById("galleryImg"),
-          capEl=document.getElementById("galleryCaption"),
-          countEl=document.getElementById("galleryCounter");
-
-    function renderImage(){
-      const item=galleryImages[galleryIndex];
-      imgEl.src=item.src;
-      imgEl.alt=item.cap.replace(/<[^>]+>/g,"");
-      capEl.innerHTML=item.cap;
-      countEl.textContent=(galleryIndex+1)+" / "+galleryImages.length;
-    }
-    function openGallery(startAt=0){
-      galleryIndex=Math.max(0,Math.min(startAt,galleryImages.length-1));
-      renderImage();
-      modal.style.display="block";
-      modal.setAttribute("aria-hidden","false");
-      document.addEventListener("keydown",keyHandler,{capture:true});
-    }
-    function closeGallery(){
-      modal.style.display="none";
-      modal.setAttribute("aria-hidden","true");
-      document.removeEventListener("keydown",keyHandler,{capture:true});
-    }
-    function nextImg(){ galleryIndex=(galleryIndex+1)%galleryImages.length; renderImage(); }
-    function prevImg(){ galleryIndex=(galleryIndex-1+galleryImages.length)%galleryImages.length; renderImage(); }
-    function keyHandler(e){
-      if(modal.style.display!=="block") return;
-      if(["ArrowRight","ArrowLeft","Escape"].includes(e.key)){ e.stopPropagation(); e.preventDefault(); }
-      if(e.key==="ArrowRight") nextImg();
-      else if(e.key==="ArrowLeft") prevImg();
-      else if(e.key==="Escape") closeGallery();
-    }
-    function openCurrierGallery(startAt=0){} // defined below
-    modal?.addEventListener("click",e=>{ if(e.target===modal) closeGallery(); },{passive:true});
-    window.openGallery = openGallery;
-    window.closeGallery = closeGallery;
-    window.nextImg = nextImg;
-    window.prevImg = prevImg;
-
-    /* ===== Slide 12: Currier & Ives gallery ===== */
-    const currierImages=[
+    ],
+            currier: [
       {src:"images/yale_currier_home_to_thanksgiving.webp", cap:"<em>Home to Thanksgiving</em> — domestic warmth and reunion."},
       {src:"images/across_the_continent_westward_the_course_of_empire_takes_its_way_1985.64.160.webp", cap:"<em>Across the Continent</em> — manifest destiny in motion."},
       {src:"images/american_homestead_currier_ives.webp", cap:"<em>American Homestead</em> — the ideal rural family scene."},
       {src:"images/currier_ives.webp", cap:"Currier &amp; Ives studio print — affordable art for everyday Americans."},
       {src:"images/fireman-night.webp", cap:"<em>The Fireman</em> — heroic labor rendered in romantic light."},
       {src:"images/met_currier_central_park_in_winter-scaled.webp", cap:"<em>Central Park in Winter</em> — urban leisure and serenity."}
-    ];
-    let currierIndex=0;
-    const currierModal=document.getElementById("currierGallery"),
-          currierImg=document.getElementById("currierImg"),
-          currierCap=document.getElementById("currierCaption");
+    ]
+        };
+        let galleryKey = 'book', galleryIndex = 0;
+        const imgEl = document.getElementById('galleryImg'),
+              capEl = document.getElementById('galleryCaption'),
+              countEl = document.getElementById('galleryCounter');
+        function renderImage() {
+            const list = galleries[galleryKey], item = list[galleryIndex];
+            imgEl.src = item.src;
+            imgEl.alt = item.cap.replace(/<[^>]+>/g, '');
+            capEl.innerHTML = item.cap;
+            countEl.textContent = (galleryIndex + 1) + ' / ' + list.length;
+        }
+        function openGallery(key, startAt) {
+            galleryKey = key;
+            const list = galleries[key];
+            galleryIndex = Math.max(0, Math.min(startAt || 0, list.length - 1));
+            renderImage();
+            openModal('galleryModal');
+        }
+        function closeGallery() { closeModal('galleryModal'); }
+        function nextImg() { const n = galleries[galleryKey].length; galleryIndex = (galleryIndex + 1) % n; renderImage(); }
+        function prevImg() { const n = galleries[galleryKey].length; galleryIndex = (galleryIndex - 1 + n) % n; renderImage(); }
 
-    function renderCurrier(){
-      const item=currierImages[currierIndex];
-      currierImg.src=item.src;
-      currierImg.alt=item.cap.replace(/<[^>]+>/g,"");
-      currierCap.innerHTML=item.cap;
-    }
-    function openCurrierGallery(startAt=0){
-      currierIndex=Math.max(0,Math.min(startAt,currierImages.length-1));
-      renderCurrier();
-      currierModal.style.display="block";
-      currierModal.setAttribute("aria-hidden","false");
-      document.addEventListener("keydown",currierKey,{capture:true});
-    }
-    function closeCurrierGallery(){
-      currierModal.style.display="none";
-      currierModal.setAttribute("aria-hidden","true");
-      document.removeEventListener("keydown",currierKey,{capture:true});
-    }
-    function nextCurrier(){ currierIndex=(currierIndex+1)%currierImages.length; renderCurrier(); }
-    function prevCurrier(){ currierIndex=(currierIndex-1+currierImages.length)%currierImages.length; renderCurrier(); }
-    function currierKey(e){
-      if(currierModal.style.display!=="block") return;
-      if(["ArrowRight","ArrowLeft","Escape"].includes(e.key)){ e.stopPropagation(); e.preventDefault(); }
-      if(e.key==="ArrowRight") nextCurrier();
-      else if(e.key==="ArrowLeft") prevCurrier();
-      else if(e.key==="Escape") closeCurrierGallery();
-    }
-    currierModal?.addEventListener("click",e=>{ if(e.target===currierModal) closeCurrierGallery(); },{passive:true});
-    window.openCurrierGallery = openCurrierGallery;
-    window.closeCurrierGallery = closeCurrierGallery;
-    window.nextCurrier = nextCurrier;
-    window.prevCurrier = prevCurrier;
-    /* ===== Study Buddy Notes panel ===== */
-    function renderNotes(){
-      const body=document.getElementById('notesBody'), title=document.getElementById('notesTitle');
-      if(!body) return;
-      const active=document.querySelector('.slide.active');
-      const n=active ? active.querySelector('aside.notes') : null;
-      body.innerHTML = n ? n.innerHTML : '<p>No notes for this slide.</p>';
-      if(title) title.textContent='Study Buddy Notes · Slide '+currentSlide+' of '+totalSlides;
-      body.parentElement.scrollTop=0;
-    }
-    function toggleNotes(force){
-      const p=document.getElementById('notesPanel'), b=document.getElementById('notesToggle');
-      if(!p) return;
-      const open=(typeof force==='boolean')?force:!p.classList.contains('open');
-      p.classList.toggle('open',open);
-      if(b) b.setAttribute('aria-expanded',String(open));
-      if(open) renderNotes();
-    }
-    window.toggleNotes=toggleNotes;
-    (function(){
-      const _show=showSlide;
-      showSlide=function(n){ _show(n); const p=document.getElementById('notesPanel'); if(p&&p.classList.contains('open')) renderNotes(); };
-      document.addEventListener('keydown',function(e){
-        const t=e.target;
-        if (t && (t.isContentEditable || /^(input|textarea|select)$/i.test(t.tagName))) return;
-        if (e.key && e.key.toLowerCase()==='s' && !e.ctrlKey && !e.metaKey && !e.altKey){ e.preventDefault(); toggleNotes(); }
-      });
-      const panel=document.getElementById('notesPanel');
-      if(panel) panel.addEventListener('wheel',e=>e.stopPropagation(),{passive:true});
-    })();
-  </script>
+        // Keyboard while a popup is open: Esc closes; arrows page the gallery
+        document.addEventListener('keydown', function (e) {
+            if (!openModalId) return;
+            if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); closeModal(openModalId); return; }
+            if (openModalId === 'galleryModal') {
+                if (e.key === 'ArrowRight') { e.preventDefault(); e.stopPropagation(); nextImg(); }
+                else if (e.key === 'ArrowLeft') { e.preventDefault(); e.stopPropagation(); prevImg(); }
+            }
+        }, { capture: true });
+
+        // Close any open popup when the slide changes
+        Reveal.on('slidechanged', function () { if (openModalId) closeModal(openModalId); });
+    </script>
 </body>
 </html>
