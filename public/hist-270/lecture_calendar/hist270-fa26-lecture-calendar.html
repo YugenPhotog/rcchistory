@@ -124,6 +124,12 @@ button.action:hover{background:var(--terracotta);color:var(--ivory);}
 .day.is-hidden{display:none;}
 .day.intro{border-left-color:var(--amber);}
 .day.break{border-left-color:var(--terracotta);background:var(--tint-rust);}
+.day.online{border-left-color:var(--sage);border-style:dashed;border-left-style:solid;background:var(--tint-sage);}
+.day.online .daycol{background:var(--tint-sage);}
+.day.online .dow{display:block;}
+.day.online .date{font-size:1.05rem;}
+.btitle .ol{color:var(--sage);font-weight:700;}
+.pill.offsite{border-color:var(--sage);background:#fff;color:#25443A;}
 .day.next{border-left-color:var(--terracotta);box-shadow:0 0 0 2px var(--terracotta);}
 .daycol{
   background:var(--tint-cream);
@@ -464,7 +470,10 @@ var UNITS = [
       {dow:"Tue", date:"Oct 20",
        b1:{t:"Chapter 8, Lecture 5", type:"lecture"},
        b2:{t:"Chapter 8, Primary Source / Application", type:"ps"},
-       notes:[{c:"due", t:"Ch. 8 due Sun Oct 25"}]}
+       notes:[{c:"due", t:"Ch. 8 due Sun Oct 25"}]},
+      {dow:"Independent study", date:"Online", kind:"online",
+       b1:{t:"Chapter 12 \u2014 China under Mongol Rule (Lectures 1\u20133, Study Buddy decks)", type:"online", label:"Module"},
+       notes:[{c:"info", t:"Not taught in the classroom \u2014 work through the module and complete its assignments on your own"}]}
     ]
   },
   {
@@ -526,29 +535,30 @@ var UNITS = [
 function blockHTML(n, b){
   var cls = b.type === "ps" ? "ps" : (b.type === "lecture" ? "ch" : "");
   var pill = "";
+  if (b.type === "online") { cls = "ol"; pill = '<span class="pill offsite">Not taught in classroom</span>'; }
   if (b.type === "ps") pill = '<span class="pill">Application</span>';
   if (b.type === "break") pill = '<span class="pill">No class</span>';
-  return '<div class="block"><span class="bnum">Block ' + n + '</span>' +
+  return '<div class="block"><span class="bnum">' + (b.label || ('Block ' + n)) + '</span>' +
          '<span class="btitle"><span class="' + cls + '">' + b.t + '</span>' + pill + '</span></div>';
 }
 
 function dayHTML(d){
   var classes = ["day"];
   if (d.kind) classes.push(d.kind);
-  var types = [d.b1.type, d.b2.type].join(" ");
+  var types = [d.b1.type, d.b2 ? d.b2.type : ""].join(" ");
   var hasDue = (d.notes || []).some(function(n){ return n.c === "due" || n.c === "exam"; });
   var noteHTML = (d.notes && d.notes.length)
     ? '<div class="notes">' + d.notes.map(function(n){
         return '<span class="note ' + n.c + '">' + n.t + '</span>'; }).join("") + '</div>'
     : "";
-  var searchText = (d.dow + " " + d.date + " " + d.b1.t + " " + d.b2.t + " " +
+  var searchText = (d.dow + " " + d.date + " " + d.b1.t + " " + (d.b2 ? d.b2.t : "") + " " +
       (d.notes || []).map(function(n){ return n.t; }).join(" ")).replace(/<[^>]+>/g, "").toLowerCase();
   return '<article class="' + classes.join(" ") + '" data-types="' + types +
          '" data-due="' + (hasDue ? "yes" : "no") +
          '" data-search="' + searchText.replace(/"/g, "") + '">' +
          '<div class="daycol"><span class="dow">' + d.dow + '</span>' +
          '<span class="date">' + d.date + '</span></div>' +
-         '<div class="blocks">' + blockHTML(1, d.b1) + blockHTML(2, d.b2) + noteHTML + '</div>' +
+         '<div class="blocks">' + blockHTML(1, d.b1) + (d.b2 ? blockHTML(2, d.b2) : "") + noteHTML + '</div>' +
          '</article>';
 }
 
