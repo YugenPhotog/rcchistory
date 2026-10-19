@@ -12,7 +12,7 @@ Prepared 2026-10-19 for Steven Austin. Covers REL 210 Ch10 Lectures 1-3 only (th
 
 ## Result
 
-- **Lecture 1** (`rel210-ch10-lecture1-judaism-origins-exodus-temple-diaspora_revFA26.html`, formerly `rel210-ch10-lecture1-judaism-origins-exodus-temple-diaspora.html`): 28 old slides → 31 new slides. 42 old text units are not verbatim in the new deck; 38 are below 90% word coverage. All are listed in the intentional-changes section. **No unexplained content loss.**
+- **Lecture 1** (`rel210-ch10-lecture1-judaism-origins-exodus-temple-diaspora_revFA26.html`, formerly `rel210-ch10-lecture1-judaism-origins-exodus-temple-diaspora.html`): 28 old slides → 32 new slides. 47 old text units are not verbatim in the new deck; 43 are below 90% word coverage. All are listed in the intentional-changes section. **No unexplained content loss.**
 - **Lecture 2** (`rel210-ch10-lecture2-judaism-god-covenant-holiness-hope_revFA26.html`, formerly `rel210-ch10-lecture2-judaism-god-covenant-holiness-hope.html`): 31 old slides → 44 new slides. 58 old text units are not verbatim in the new deck; 30 are below 90% word coverage. All are listed in the intentional-changes section. **No unexplained content loss.**
 - **Lecture 3** (`rel210-ch10-lecture3-judaism-text-worship-sacred-practice_revFA26.html`, formerly `rel210-ch10-lecture3-judaism-text-worship-sacred-practice.html`): 27 old slides → 30 new slides. 20 old text units are not verbatim in the new deck; 16 are below 90% word coverage. All are listed in the intentional-changes section. **No unexplained content loss.**
 - Lecture 1 slides B (old 2, Lecture Roadmap) and E (old 5, History, Memory & Sacred Story) were removed on 2026-10-19 at Steven's request; their converted HTML is preserved verbatim in the "L1 slide edits after the _revFA26 rename" section, and the originals remain in the archived pre-edit deck.
@@ -42,7 +42,7 @@ Prepared 2026-10-19 for Steven Austin. Covers REL 210 Ch10 Lectures 1-3 only (th
 | 18 | Return & the Second Temple | S | Return & the Second Temple | 100% |
 | 19 | Pause and Reflect | T | Pause & Reflect | 38% |
 | 20 | Section III Conquest, Diaspora & Rabbinic Judaism | U | Section III: Conquest, Diaspora & Rabbinic Judaism | 100% |
-| 21 | Hellenism, Revolt & Hanukkah | V | Hellenism, Revolt & Hanukkah | 95% |
+| 21 | Hellenism, Revolt & Hanukkah | V | Hellenism & the Road to Revolt | 60% |
 | 22 | Roman Rule & Rising Tension | W | Roman Rule & Rising Tension | 100% |
 | 23 | Revolt & the Destruction of the Temple | X | Revolt & the Destruction of the Temple | 98% |
 | 24 | Understanding Diaspora | Y, Z | Understanding Diaspora; Four Features of a Diaspora | 100% |
@@ -51,9 +51,10 @@ Prepared 2026-10-19 for Steven Austin. Covers REL 210 Ch10 Lectures 1-3 only (th
 | 27 | Antisemitism: A Historical Pattern | AC | Antisemitism: A Historical Pattern | 100% |
 | 28 | Pause and Synthesize | AD | Pause & Reflect | 60% |
 | (new) | (none) | AH | Joseph in Egypt: How Israel Came to Egypt | n/a |
+| (new) | (none) | AI | The Maccabean Revolt & Hanukkah | n/a |
 | (new) | (none) | AE | Beyond the Lecture: Modern Jewish Worlds | n/a |
 
-**Full ID list (L1):** A C D F G H I J AG AH K L M N O P Q R S T U V W X Y Z AA AB AC AD AE
+**Full ID list (L1):** A C D F G H I J AG AH K L M N O P Q R S T U V AI W X Y Z AA AB AC AD AE
 
 ## Lecture 2: slide mapping (old slide number → new permanent ID)
 
@@ -462,6 +463,47 @@ Requested by Steven. This pass changed Lecture 1 only. The L2 and L3 files are b
     - under Herod "the area of the Temple Mount was doubled" and "the Temple was raised, enlarged, and faced with white stone."
   - The note adds that this is the Temple destroyed in 70 CE (X), and that the fortress suggests the Antonia.
 
+**U, V, AI, W, AE, and the Roman Judea mini-lecture (Steven's request, 3:24 PM):**
+- **U, Section III: Conquest, Diaspora & Rabbinic Judaism.**
+  - Was a plain section divider. It now uses the A/C/L format: full-bleed background `images/rel210-ch10-l1-section3-portable-torah.webp`, the same dark panel with gold rule, and the alt text in screen-reader text.
+  - Text is unchanged. **Flag:** the panel reuses L's `.title-overlay.left-sky` placement (max 430px, left, raised 4.2em). It sits in the empty upper-left sky, clear of the burning city (right) and the scroll-bearer (bottom right) at all three sizes.
+  - Notes: one paragraph tying the image to the section question and to AB (portable, Torah-centered Judaism).
+- **V, retitled "Hellenism & the Road to Revolt"** (was "Hellenism, Revolt & Hanukkah"). It now explains *why* the revolt happened, in three story cards:
+  - A Greek World (332 BCE; many Jews adopt Greek ways and remain fully Jewish);
+  - Jews Disagree (the high priest Jason's gymnasium, welcomed by some Jews and seen by others as a betrayal of the covenant);
+  - The King Bans Judaism (167 BCE: Sabbath, circumcision, and Torah forbidden; pagan sacrifice on the Temple altar).
+  - Takeaway: "The revolt began as a fight over whether Jews could keep living by the Torah."
+  - Notes: a storytelling script, plus a framing note that Hellenizers still saw themselves as Jews and that 1–2 Maccabees are written from the rebels' side.
+  - **Flag (date):** the old V dated the Temple plunder to 168 BCE (textbook p. 229). 1 Maccabees 1:20 dates it to the 143rd Seleucid year (about 169 BCE). The slide no longer dates the plunder; the notes give both dates. The decrees and the "desolating sacrilege" stay at 167 BCE (1 Macc 1:54).
+  - Old V bullets, preserved verbatim: "332 BCE: Alexander's conquest brings Judea into a Greek-speaking world" · "Cultural exchange: many Jews adopt Greek language and customs while remaining Jewish" · "Maccabean Revolt: Antiochus IV plunders the Temple (168 BCE), bans Sabbath, circumcision, and Torah, and sets up pagan worship there; the revolt begins in 167 BCE" · "Hanukkah: remembers the Temple's rededication and renewed Jewish worship". The old Brenton/Sefaria source note was replaced with NRSV citations.
+- **AI, "The Maccabean Revolt & Hanukkah" (new, after V; next unused ID after AH).** It covers *who* and *outcome*, image+text layout:
+  - Modein, 167 BCE: Mattathias refuses the king's sacrifice and cries, "Let every one who is zealous for the law and supports the covenant come out with me!" (1 Macc 2:27, NRSV);
+  - From the hills: Judah "the Maccabee" leads a guerrilla war;
+  - 164 BCE: Temple rededicated; Hanukkah (the **same popup, `l1-hanukkah`, moved here unchanged**) remembers it for eight days;
+  - Afterward: the Hasmoneans rule an independent Jewish state (by 142 BCE; 1 Macc 13:41).
+  - Image `images/rel210-ch10-l1-maccabean-revolt.webp`, caption "AI-generated imagining of the Maccabean revolt; not a specific battle". The notes link the war elephant and tower to 1 Macc 6:30, 6:37.
+  - NRSV text checked 2026-10-19 on biblestudytools.com (NRSV with Apocrypha, US edition). bible.oremus.org serves only the Anglicized NRSV for the Apocrypha (same wording, British spelling and punctuation), so it was used only as a cross-check.
+  - Pauses and Look-backs: no pause, Look-back, or worksheet reference points to V or W, so the split changes none of them. AD still looks back to X and AB.
+- **W, "Roman Rule & Rising Tension".** The four bullets are unchanged (now tight). New items:
+  - image `images/rel210-ch10-l1-herod-client-king.webp`, caption "AI-generated imagining of Herod as Rome's client king";
+  - a visible button "Mini-lecture: Roman Judea →" (`a.button-link`, `target="_blank" rel="noopener"`). It is a native link, so it is Tab-focusable and Enter opens it. Tested: one Tab reaches it, Enter opens the deck in a new tab, and the lecture stays on W;
+  - two notes paragraphs (Senate 40 BCE, Jerusalem 37 BCE, Temple begun about 20/19 BCE; what the mini-lecture covers), sourced to Britannica "Herod" and Antiquities 15.11.1.
+- **AE, "Beyond the Lecture".** A second button was added below the Rabbit Hole button, in the same `button-link` style: "Roman Judea: How Rome Conquered and Governed Judea →". It has a one-line lead-in and a notes line.
+- **L1-only CSS:** `.mini-link` (centers W's button). L2 and L3 are byte-identical (bec758237ad3, 1d86cb60bd38).
+- **New supplement: `rel210-ch10-supplement-roman-judea_revFA26.html`** (25 slides, permanent IDs A–Y).
+  - Style follows the Rabbit Hole supplement: deck.css, the local reveal runtime, 1600×900, `ppt-*` layout, `rh-*` cards, callouts and flow, trail dividers, Pause & Connect slides, a synthesis flow, fragments, `?edit=1` and `?show-all-fragments`.
+  - **Flag:** the Rabbit Hole deck has no permanent slide IDs and no capture-phase Esc fix. The new deck adds both from the house decks: a PERMANENT SLIDE IDS comment, `data-slide-id`, a corner label, and an Esc handler that closes the keyboard panel without toggling the overview. It also adds `aria-expanded`/`aria-controls` and focus return on the ⌨ button, alt text, a visible "AI-generated…" caption on every image, and sourced speaker notes on every slide.
+  - Josephus is cited by book.chapter.section (Whiston, Project Gutenberg). Britannica articles were checked 2026-10-19. There are no Bible quotations in slide text.
+  - **Dropped as unverifiable or overclaiming:**
+    - Herod's age when he took Galilee (Josephus says 15; the figure is disputed);
+    - any Macrobius "better to be Herod's pig" quote;
+    - "tax farming" of direct taxes (kept only tolls and toll collectors);
+    - a fixed Sanhedrin jurisdiction (kept only the Antiquities 20.9.1 evidence of limits);
+    - a single Zealot movement from 6 to 73 CE (presented as debated);
+    - a single cause for Bar Kokhba (presented as debated);
+    - a firm Masada date (given as 73/74).
+- **index.html:** a new card after the Rabbit Hole card in the Judaism grid (lecture-day "Optional Deep-Dive", badge "Mini-Lecture"). The grid now has 6 cards (2 columns). **Flag:** index.html already contains mojibake (e.g. "â†’", "âœ¡ï¸") in older cards. It was left untouched; the new card uses `&rarr;`, as the newer cards do.
+
 ## Removed (with reason)
 - **Fragments** (all decks): not used in the house style.
 - **`assets/original-media/image1.jpeg`** (gray texture background on every old slide): decorative template background; the house style uses the charcoal theme. The file is untouched and still used by the supplements via `deck.css`.
@@ -530,6 +572,9 @@ All Bible quotations in L1–L3 are now the 1989 NRSV, verbatim, labeled "(NRSV)
 | L1 AG | rel210-ch10-l1-joseph-robe.webp | 184,058 B | AI-generated painting of a teenage boy with dark curly hair in an ankle-length, long-sleeved robe striped crimson, saffron, indigo, and green, standing in a golden-hour hillside pasture among grazing sheep while five bearded men in plain brown robes watch from behind. (Supplied by Steven 2026-10-19.) |
 | L1 L | rel210-ch10-l1-section2-exodus-pillar.webp | 114,118 B | AI-generated painting of a long line of travelers with donkeys and bundles, seen from behind, walking across a dark desert plain toward distant mountains, led by a tall, glowing pillar of fire under a starry indigo sky, with the lights of a city on the far left horizon. (Supplied by Steven 2026-10-19; background with title-slide panel.) |
 | L1 S | rel210-ch10-l1-second-temple.webp | 210,136 B | AI-generated painting of Jerusalem’s Temple Mount as rebuilt by Herod: a tall, boxy white sanctuary with a gold doorway rises above inner courts on a huge platform with massive stone walls and colonnaded porticoes; smoke rises from the altar, crowds climb a monumental stairway, and a stone fortress stands at the left corner, with the city and hills around. (Supplied by Steven 2026-10-19. Caption: AI-generated imagining of the Second Temple as later expanded by Herod; not an archaeological reconstruction.) |
+| L1 U | rel210-ch10-l1-section3-portable-torah.webp | 135,160 B | AI-generated painting of a hillside at night: several robed figures, seen from behind, walk away along diverging roads, one of them in the foreground carrying a softly glowing scroll, while a distant walled city on the right glows with fires among ruins, under a starry indigo sky. (Supplied by Steven 2026-10-19; background with title-slide panel. Also used in the Roman Judea deck, V.) |
+| L1 AI | rel210-ch10-l1-maccabean-revolt.webp | 208,932 B | AI-generated painting of Jewish fighters in tunics and head cloths charging down rocky slopes at a Seleucid column of soldiers with round shields and long pikes in a narrow pass, with a war elephant carrying a tower behind them. (Supplied by Steven 2026-10-19. Caption: AI-generated imagining of the Maccabean revolt; not a specific battle. Also the Roman Judea Trail I background.) |
+| L1 W | rel210-ch10-l1-herod-client-king.webp | 174,992 B | AI-generated painting of a bearded king in purple and gold robes with a white diadem, seated on a throne, as a Roman officer in armor and a red cloak presents him a scroll with a red wax seal; through the colonnade behind them, a temple complex stands under scaffolding. (Supplied by Steven 2026-10-19. Caption: AI-generated imagining of Herod as Rome's client king. Also used in the Roman Judea deck, G.) |
 | L1 F | rel210-ch10-l1-creation-light-over-waters.webp | 122,996 B | AI-generated painting of golden light breaking through swirling clouds over a dark, wide sea, with the sun on the horizon. |
 | L1 G | rel210-ch10-l1-noah-ark-rainbow.webp | 142,752 B | AI-generated painting of a large wooden ark resting on a rocky hilltop under a rainbow, with elephants, giraffes, and sheep coming out and a man, a woman, and two children watching nearby. |
 | L1 M | rel210-ch10-l1-exodus-sea-crossing.webp | 190,660 B | AI-generated painting of a crowd of ancient families with children and sheep walking on a wet seabed between towering walls of green water toward the sunrise, led by a man with a staff seen from behind. |
