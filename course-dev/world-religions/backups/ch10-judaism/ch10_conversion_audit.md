@@ -12,9 +12,9 @@ Prepared 2026-10-19 for Steven Austin. Covers REL 210 Ch10 Lectures 1-3 only (th
 
 ## Result
 
-- **Lecture 1** (`rel210-ch10-lecture1-judaism-origins-exodus-temple-diaspora_revFA25.html`, formerly `rel210-ch10-lecture1-judaism-origins-exodus-temple-diaspora.html`): 28 old slides → 31 new slides. 20 old text units are not verbatim in the new deck; 18 are below 90% word coverage. All are listed in the intentional-changes section. **No unexplained content loss.**
-- **Lecture 2** (`rel210-ch10-lecture2-judaism-god-covenant-holiness-hope_revFA25.html`, formerly `rel210-ch10-lecture2-judaism-god-covenant-holiness-hope.html`): 31 old slides → 44 new slides. 58 old text units are not verbatim in the new deck; 30 are below 90% word coverage. All are listed in the intentional-changes section. **No unexplained content loss.**
-- **Lecture 3** (`rel210-ch10-lecture3-judaism-text-worship-sacred-practice_revFA25.html`, formerly `rel210-ch10-lecture3-judaism-text-worship-sacred-practice.html`): 27 old slides → 30 new slides. 20 old text units are not verbatim in the new deck; 16 are below 90% word coverage. All are listed in the intentional-changes section. **No unexplained content loss.**
+- **Lecture 1** (`rel210-ch10-lecture1-judaism-origins-exodus-temple-diaspora_revFA26.html`, formerly `rel210-ch10-lecture1-judaism-origins-exodus-temple-diaspora.html`): 28 old slides → 31 new slides. 20 old text units are not verbatim in the new deck; 18 are below 90% word coverage. All are listed in the intentional-changes section. **No unexplained content loss.**
+- **Lecture 2** (`rel210-ch10-lecture2-judaism-god-covenant-holiness-hope_revFA26.html`, formerly `rel210-ch10-lecture2-judaism-god-covenant-holiness-hope.html`): 31 old slides → 44 new slides. 58 old text units are not verbatim in the new deck; 30 are below 90% word coverage. All are listed in the intentional-changes section. **No unexplained content loss.**
+- **Lecture 3** (`rel210-ch10-lecture3-judaism-text-worship-sacred-practice_revFA26.html`, formerly `rel210-ch10-lecture3-judaism-text-worship-sacred-practice.html`): 27 old slides → 30 new slides. 20 old text units are not verbatim in the new deck; 16 are below 90% word coverage. All are listed in the intentional-changes section. **No unexplained content loss.**
 - Old slide-ID/number cross-references in notes: one stale reference in L3 notes ("slides 55-57") was changed to "the previous slide".
 
 ## Lecture 1: slide mapping (old slide number → new permanent ID)
@@ -201,7 +201,7 @@ Prepared 2026-10-19 for Steven Austin. Covers REL 210 Ch10 Lectures 1-3 only (th
 - **Old 25.** "(chuppah)" popup added inside the marriage bullet.
 
 ## Reading-guide review-question pass (2026-10-19)
-Requested by Steven. Pause slides now ask questions from the PHIL 210 Ch10 Reading Guide (source: `public/phil-210/reading_guides/PHIL210_Ch10_ReadingGuide.html` in this repo). The decks were also renamed (git mv) to `…_revFA25.html`, and `index.html` was updated.
+Requested by Steven. Pause slides now ask questions from the PHIL 210 Ch10 Reading Guide (source: `public/phil-210/reading_guides/PHIL210_Ch10_ReadingGuide.html` in this repo). The decks were also renamed (git mv) to `…_revFA26.html`, and `index.html` was updated.
 
 **How each pause works now:**
 - The guide question is quoted verbatim, labeled "Reading Guide · Review Question N".
