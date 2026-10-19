@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<!--
+  PERMANENT SLIDE IDS
+  Every top-level slide <section> (and any vertical sub-slide) carries a fixed
+  data-slide-id attribute (A, B, ... Z, AA, AB, ...). IDs were assigned once, in
+  slide order, on 2026-10-19. They are permanent labels, NOT positions:
+    - Never renumber when slides are moved, added, or deleted.
+    - A new slide gets the next unused letter after the highest ID ever used in this deck.
+    - IDs are never reused, even after a slide is deleted.
+  A small label showing the ID is drawn in the bottom-left corner by the
+  "slide-id-label" CSS and script near the end of this file (hidden in print).
+  ID changes (2026-10-19, reading-guide review-question pass):
+    - J (Pause & Reflect) moved from after I to after X so that its review question follows the slides that teach it. ID unchanged.
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="REL 210 Chapter 10 Lecture 3: sacred writings, law, worship, sacred time, and life-cycle practice in Judaism.">
+    <title>REL 210 Ch10 Lecture 3: Text, Worship &amp; Sacred Practice</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --antique-gold: #D4AF37;
+            --deep-teal: #2C7873;
+            --rich-purple: #6B4C9A;
+            --ruby-crimson: #9B2C2C;
+            --dark-charcoal: #1A1A1A;
+            --pure-white: #FAFAFA;
+            --soft-cream: #F5F1E8;
+            --bronze-accent: #8B6F47;
+            /* AA-passing text tints (>= 4.5:1 on the dark slide background) */
+            --deep-teal-light: #5FB3AD;
+            --rich-purple-light: #AE93D8;
+            --ruby-crimson-light: #E58A8A;
+        }
+
+        .reveal {
+            font-family: 'Lora', serif;
+            font-size: 1.4em;
+            background-color: var(--dark-charcoal);
+            color: var(--pure-white);
+        }
+
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Crimson Pro', serif;
+            font-weight: 700;
+            color: var(--antique-gold);
+            text-transform: none;
+        }
+
+        .reveal h1 { font-size: 3.2em; }
+        .reveal h2 { font-size: 2.0em; line-height: 1.12; margin-bottom: 0.45em; }
+        .reveal h2.long-title { font-size: 1.7em; }
+        .reveal h3 { font-size: 1.15em; }
+
+        .reveal p, .reveal li { line-height: 1.4; }
+
+        .reveal ul {
+            list-style: none;
+            padding-left: 0;
+            margin-left: 0;
+        }
+
+        .reveal ul li {
+            margin-bottom: 0.5em;
+            padding-left: 1.4em;
+            text-indent: -1.4em;
+        }
+
+        .reveal ul li:before {
+            content: "\25C6  ";
+            color: var(--deep-teal-light);
+            font-weight: bold;
+            margin-right: 0.35em;
+        }
+
+        .reveal ul li strong { color: var(--antique-gold); }
+        .reveal .slides section { text-align: left; }
+        .reveal .slides section.section-header,
+        .reveal .slides section.title-slide { text-align: center; }
+        .reveal .slides section h2 { text-align: center; }
+
+        .reveal .kicker {
+            font-size: 0.62em;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--deep-teal-light);
+            margin: 0 0 0.3em 0;
+            text-align: center;
+        }
+
+        .reveal .sacred-text {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 4px solid var(--antique-gold);
+            padding: 0.8em 1.1em;
+            margin: 0.6em 0 0.3em 0;
+            font-style: italic;
+            font-size: 1.1em;
+            width: auto;
+            box-shadow: none;
+            quotes: none;
+        }
+        .reveal .sacred-text p { margin: 0; }
+        .reveal .sacred-text.compact { font-size: 0.95em; }
+        .reveal .citation {
+            font-size: 0.62em;
+            color: #cfcfcf;
+            margin: 0.35em 0 0.6em 0;
+            text-align: right;
+            letter-spacing: 0.02em;
+        }
+        .reveal .translit { font-style: normal; color: var(--soft-cream); }
+
+        .reveal .scroll-quote {
+            background: url('images/rel210-ch10-parchment-scroll-frame.webp') center / 100% 100% no-repeat;
+            color: #2b1d0e;
+            padding: 1.7em 15% 1.9em;
+            max-width: 860px;
+            margin: 0.4em auto 0.2em auto;
+            border: 0;
+            font-size: 0.92em;
+            line-height: 1.45;
+            text-shadow: none;
+        }
+        .reveal .scroll-quote p { color: #2b1d0e; }
+
+        .reveal .takeaway {
+            background: rgba(44, 120, 115, 0.22);
+            border-left: 4px solid var(--deep-teal-light);
+            padding: 0.55em 0.9em;
+            margin: 0.8em 0 0 0;
+            font-size: 0.8em;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .reveal .card-grid {
+            display: grid;
+            gap: 0.9em;
+            align-items: stretch;
+            margin-top: 0.3em;
+        }
+        .reveal .card-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+        .reveal .card-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+        .reveal .card-grid.cols-4 { grid-template-columns: 1fr 1fr 1fr 1fr; gap: 0.7em; }
+        .reveal .card {
+            padding: 0.75em 0.85em;
+            border-radius: 10px;
+            text-align: left;
+        }
+        .reveal .card h3 { margin: 0 0 0.35em 0; font-size: 1.05em; line-height: 1.15; }
+        .reveal .card p { margin: 0; font-size: 0.78em; line-height: 1.4; }
+        .reveal .card.teal { background: rgba(44, 120, 115, 0.2); }
+        .reveal .card.teal h3 { color: var(--deep-teal-light); }
+        .reveal .card.purple { background: rgba(107, 76, 154, 0.2); }
+        .reveal .card.purple h3 { color: var(--rich-purple-light); }
+        .reveal .card.crimson { background: rgba(155, 44, 44, 0.2); }
+        .reveal .card.crimson h3 { color: var(--ruby-crimson-light); }
+        .reveal .card.gold { background: rgba(212, 175, 55, 0.13); }
+        .reveal .card.gold h3 { color: var(--antique-gold); }
+        .reveal .card .roman { display:block; font-size: 0.7em; letter-spacing: 0.12em; color: #d9d9d9; margin-bottom: 0.2em; }
+
+        .reveal ul.tight li { margin-bottom: 0.3em; }
+        .reveal .card-grid.cols-3.five { grid-template-columns: repeat(6, 1fr); }
+        .reveal .card-grid.cols-3.five > .card { grid-column: span 2; }
+        .reveal .card-grid.cols-3.five > .card:nth-child(4) { grid-column: 2 / span 2; }
+        .reveal .card-grid.compact-cards { gap: 0.55em; }
+        .reveal .card-grid.compact-cards .card { padding: 0.55em 0.7em; }
+        .reveal .card-grid.compact-cards .card p { font-size: 0.7em; }
+        .reveal .card-grid.symbols .card { text-align: center; }
+        .reveal .card .symbol { display: block; font-size: 2em; line-height: 1.1; color: var(--antique-gold); margin-bottom: 0.15em; font-family: 'Noto Sans Hebrew', 'Segoe UI Symbol', 'Noto Color Emoji', serif; }
+        .reveal .split { display: grid; gap: 1.3em; }
+        .reveal .split-text ul { font-size: 0.86em; }
+        .reveal .split-media { text-align: center; }
+        .reveal figure.fig { margin: 0; }
+        .reveal figure.fig img {
+            display: block;
+            width: 100%;
+            max-height: 380px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+            margin: 0 auto;
+        }
+        .reveal figure.fig.contain img { object-fit: contain; background: transparent; box-shadow: none; }
+        .reveal figure.fig.portrait img { max-height: 400px; width: auto; max-width: 100%; }
+        .reveal .img-caption { font-size: 0.5em; margin-top: 0.45em; opacity: 0.85; text-align: center; }
+
+        .reveal .flow {
+            display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+            gap: 0.45em; margin: 0.8em 0;
+        }
+        .reveal .flow.vertical { flex-direction: column; flex-wrap: nowrap; gap: 0.25em; }
+        .reveal .flow.vertical .flow-arrow { transform: rotate(90deg); }
+        .reveal .flow-node {
+            background: rgba(212, 175, 55, 0.14);
+            border: 2px solid var(--antique-gold);
+            color: var(--soft-cream);
+            border-radius: 10px;
+            padding: 0.45em 0.7em;
+            font-family: 'Crimson Pro', serif;
+            font-weight: 700;
+            font-size: 0.85em;
+            text-align: center;
+        }
+        .reveal .flow-arrow { color: var(--deep-teal-light); font-size: 1.1em; font-weight: 700; }
+
+        .popup-trigger {
+            color: var(--deep-teal-light);
+            border-bottom: 2px dotted var(--deep-teal-light);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .popup-trigger:hover { color: var(--antique-gold); }
+        .popup-trigger:focus-visible,
+        .popup-close:focus-visible,
+        .reveal a:focus-visible,
+        .reveal iframe:focus-visible {
+            outline: 2px solid var(--antique-gold);
+            outline-offset: 3px;
+        }
+
+        /* Screen-reader-only text */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--soft-cream);
+            color: var(--dark-charcoal);
+            padding: 1.6em 2em;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            max-width: 600px;
+            width: 80%;
+            z-index: 1000;
+            border: 3px solid var(--bronze-accent);
+            text-align: left;
+        }
+        .popup.active { display: block; }
+        .popup p { font-size: 0.78em; line-height: 1.5; margin: 0; color: var(--dark-charcoal); }
+        .popup-close {
+            position: absolute;
+            top: 6px;
+            right: 14px;
+            font-size: 1.6em;
+            line-height: 1;
+            cursor: pointer;
+            color: var(--ruby-crimson);
+        }
+        .definition-term {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--rich-purple);
+            margin-bottom: 0.4em;
+            font-family: 'Crimson Pro', serif;
+        }
+        .key-term { color: var(--rich-purple-light); font-weight: 600; }
+
+        /* Slide counter (global UI) */
+        .slide-counter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(26, 26, 26, 0.9);
+            color: var(--antique-gold);
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-family: 'Crimson Pro', serif;
+            font-weight: 600;
+            font-size: 0.9em;
+            border: 2px solid var(--deep-teal);
+            z-index: 100;
+        }
+
+        .assessment-slide { background: var(--rich-purple) !important; }
+        .reveal .assessment-prompt {
+            background: rgba(255,255,255,0.1);
+            padding: 1.3em 1.6em;
+            border-radius: 15px;
+            border: 3px solid var(--antique-gold);
+            text-align: center;
+        }
+        .reveal .prompt-label { color: #D4AF37; font-weight: 600; font-size: 0.85em; margin: 0 0 0.6em 0; }
+        .reveal .prompt-text { font-size: 1.1em; margin: 0; }
+        .reveal .pause-lookback { text-align: center; font-size: 0.8em; color: rgba(245, 241, 232, 0.82); margin: 1.1em 0 0.3em; }
+        .reveal .pause-action { text-align: center; font-size: 0.8em; color: rgba(245, 241, 232, 0.82); margin: 0.3em 0 0; }
+        .reveal .pause-action a { color: #D4AF37; border-bottom: 1px dotted #D4AF37; }
+
+        .reveal .subtitle {
+            font-size: 1.15em;
+            color: var(--deep-teal-light);
+            margin-top: 0.5em;
+            text-align: center;
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, rgba(44, 120, 115, 0.3), rgba(107, 76, 154, 0.3));
+        }
+        .reveal .divider-title { font-size: 2.6em; line-height: 1.1; margin: 0.1em 0 0.2em; }
+
+        /* Title slide: background image with readable overlay */
+        .reveal .title-overlay {
+            background: rgba(14, 14, 14, 0.74);
+            -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(3px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+            border: 1px solid rgba(212, 175, 55, 0.45);
+            border-radius: 14px;
+            padding: 1.1em 1.4em 1.2em;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+        .reveal .title-overlay h1 { font-size: 2.5em; line-height: 1.05; margin: 0.1em 0 0.15em; text-shadow: 0 3px 14px rgba(0,0,0,0.6); }
+        .reveal .title-overlay .kicker { color: var(--soft-cream); }
+        .reveal .title-overlay .subtitle { color: var(--soft-cream); font-size: 0.95em; margin: 0; }
+        .reveal .title-rule { width: 140px; height: 2px; background: var(--antique-gold); margin: 0.4em auto 0.6em; opacity: 0.8; }
+
+        .reveal .big-statement { font-family: 'Crimson Pro', serif; font-size: 1.5em; color: var(--soft-cream); text-align: center; margin: 0.4em 0; }
+
+        .reveal a { color: var(--deep-teal-light); }
+        .reveal .button-link {
+            display: inline-block; padding: .55em 1.15em; border: 2px solid var(--antique-gold);
+            border-radius: 8px; color: #F5F1E8; text-decoration: none; font-size: .9em; background: rgba(15,42,32,.35);
+        }
+
+        small { font-size: 0.7em; color: #aaa; }
+
+        /* Responsive 16:9 video (Ch05 L3 pattern) */
+        .video-wrap { display: flex; justify-content: center; }
+        .video-frame { position: relative; width: 80%; max-width: 600px; aspect-ratio: 16 / 9; }
+        .video-frame iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+        /* Keyboard icon (global UI) */
+        #keyboard-trigger {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(26, 26, 26, 0.9);
+            color: var(--antique-gold);
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 2px solid var(--deep-teal);
+            font-size: 0.9em;
+            font-family: 'Crimson Pro', serif;
+            cursor: pointer;
+            z-index: 200;
+            /* IMPORTANT: stop inheriting underline/dotted border from .popup-trigger */
+            border-bottom: 2px solid var(--deep-teal);
+            text-decoration: none;
+        }
+        #keyboard-popup p { font-size: 0.8em; margin: 0.15em 0; }
+    </style>
+
+    <style id="slide-id-label-css">
+        /* Permanent slide ID label (see PERMANENT SLIDE IDS comment at top of file).
+           Sits just right of the keyboard-shortcuts icon so the two never overlap. */
+        #slideIdLabel { position: fixed; left: 78px; bottom: 26px; z-index: 30; pointer-events: none;
+            font: 600 13px/1 'Crimson Pro', serif; letter-spacing: 0.06em; color: rgba(245, 241, 232, 0.55);
+            padding: 3px 7px; border-radius: 4px; }
+        #slideIdLabel.on-image { background: rgba(0, 0, 0, 0.38); color: rgba(255, 255, 255, 0.78); }
+        @media print { #slideIdLabel { display: none !important; } }
+    </style>
+</head>
+
+<body>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <section data-slide-id="A" class="title-slide" data-background-image="images/rel210-ch10-l3-title-torah-scroll-yad.webp" data-background-size="cover" data-background-position="center" data-background-color="#1A1A1A">
+            <div class="title-overlay">
+              <p class="kicker">REL 210 World Religions &middot; Chapter 10 &middot; Lecture 3</p>
+              <h1>Text, Worship &amp;<br>Sacred Practice</h1>
+              <div class="title-rule" aria-hidden="true"></div>
+              <p class="subtitle">Sacred writings, law, ritual, and the rhythms of Jewish life</p>
+            </div>
+            <span class="sr-only">Background image: AI-generated close-up photo of an open Torah scroll on wooden rollers, with columns of handwritten Hebrew text and a silver pointer (yad) resting on the parchment, against a dark background.</span>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">This lecture asks how Judaism is lived. Text and ritual are not separate domains: Torah is read, interpreted, worn, touched, eaten around, remembered in time, and enacted through relationships.</p>
+                <p style="margin-bottom: 1em;">Preview the three movements: sacred texts become an interpretive conversation; interpretation becomes halakhah and everyday holiness; practice builds communities through synagogue, sacred time, food, and life-cycle ritual.</p>
+              </div>
+            </aside>
+            </section>
+
+            <section data-slide-id="B">
+            <p class="kicker">Lecture Roadmap</p>
+            <h2>Three Ways Judaism Is Lived</h2>
+            <div class="card-grid cols-3">
+              <div class="card teal">
+                <h3><span class="roman">I</span>Text as Conversation</h3>
+                <p>How do written scripture and oral interpretation remain authoritative?</p>
+              </div>
+              <div class="card purple">
+                <h3><span class="roman">II</span>Holiness in Ordinary Life</h3>
+                <p>How do mitzvot and halakhah turn daily choices into sacred practice?</p>
+              </div>
+              <div class="card crimson">
+                <h3><span class="roman">III</span>Community in Sacred Time</h3>
+                <p>How do worship, festivals, food, and life-cycle rituals preserve identity?</p>
+              </div>
+            </div>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">Use the three phrases as advance organizers. The first section explains the textual tradition. The second focuses on commandments and daily discipline. The third shows how home and synagogue create communal rhythms.</p>
+                <p style="margin-bottom: 1em;">Students should leave able to explain why describing Judaism as only a belief system misses the tradition’s emphasis on practice, interpretation, memory, and peoplehood.</p>
+              </div>
+            </aside>
+            </section>
+
+            <section data-slide-id="C" class="section-header">
+            <p class="kicker">Section I</p>
+            <h1 class="divider-title">Sacred Writings &amp; Interpretation</h1>
+            <p class="subtitle">How can a fixed text remain a living source of guidance?</p>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">Introduce Jewish scripture as a library and rabbinic tradition as a disciplined conversation. Authority operates through reading, commentary, disagreement, and application.</p>
+              </div>
+            </aside>
+            </section>
+
+            <section data-slide-id="D">
+            <h2>Torah: More Than &ldquo;Law&rdquo;</h2>
+            <div class="card-grid cols-4">
+              <div class="card teal">
+                <h3>Instruction</h3>
+                <p>The Hebrew word <em>torah</em> means teaching, guidance, or instruction.</p>
+              </div>
+              <div class="card purple">
+                <h3>Five Books</h3>
+                <p>In its narrowest sense, Torah means Genesis through Deuteronomy.</p>
+              </div>
+              <div class="card crimson">
+                <h3>Written Teaching</h3>
+                <p>The term may extend to the Tanakh and the inherited scriptural tradition.</p>
+              </div>
+              <div class="card gold">
+                <h3>Living Tradition</h3>
+                <p>In its broadest sense, Torah includes study, interpretation, and a way of life.</p>
+              </div>
+            </div>
+            <p class="takeaway">Torah teaches a people how to remember, interpret, and live.</p>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">Correct the common equation of Torah with a modern statute book. Torah includes narrative, genealogy, poetry, ritual, ethical command, and covenant memory as well as law.</p>
+                <p style="margin-bottom: 1em;">The word expands or contracts depending on context. It can mean the Pentateuch, written scripture, or the whole body of Jewish teaching. That flexibility helps explain why study and interpretation are themselves religious practices.</p>
+              </div>
+            </aside>
+            </section>
+
+            <section data-slide-id="E">
+            <h2>The Tanakh: Three Collections</h2>
+            <div class="card-grid cols-3">
+              <div class="card teal">
+                <h3>Torah</h3>
+                <p>Instruction: Genesis, Exodus, Leviticus, Numbers, and Deuteronomy.</p>
+              </div>
+              <div class="card purple">
+                <h3>Nevi&rsquo;im</h3>
+                <p>Prophets: historical narratives and prophetic voices calling Israel to covenant faithfulness.</p>
+              </div>
+              <div class="card crimson">
+                <h3>Ketuvim</h3>
+                <p>Writings: poetry, wisdom, festival scrolls, historical works, and apocalyptic hope.</p>
+              </div>
+            </div>
+            <p style="text-align:center; font-size:0.8em; margin:0.5em 0 0;"><span class="popup-trigger" data-popup="l3-tanakh" role="button" tabindex="0" aria-haspopup="dialog">TaNaKh</span> = <strong>T</strong>orah + <strong>N</strong>evi&rsquo;im + <strong>K</strong>etuvim</p>
+            <p class="takeaway">Arrangement is interpretation: the order of books helps tell a distinctly Jewish story.</p>
+            <div id="l3-tanakh" class="popup" role="dialog" aria-modal="true" aria-labelledby="l3-tanakh-title" aria-hidden="true">
+              <span class="popup-close" role="button" tabindex="0" aria-label="Close">&times;</span>
+              <div class="definition-term" id="l3-tanakh-title">Tanakh</div>
+              <p>An acronym from the first letters of the three collections: <strong>T</strong>orah, <strong>N</strong>evi&rsquo;im, <strong>K</strong>etuvim. It contains the same books as the Protestant Old Testament, but arranged and counted differently; it ends with Chronicles rather than Malachi.</p>
+            </div>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">Tanakh is an acronym formed from the Hebrew names Torah, Nevi’im, and Ketuvim. The Jewish ordering differs from the Christian Old Testament, especially in the placement of books and the canon’s closing emphasis.</p>
+                <p style="margin-bottom: 1em;">The collection formed over centuries. Avoid presenting a single, universally agreed date when it was “finalized.” Textual and canonical boundaries developed gradually, while the Torah achieved special authority earliest.</p>
+              </div>
+            </aside>
+            </section>
+
+            <section data-slide-id="F">
+            <h2>Written Torah &amp; Oral Torah</h2>
+            <div class="card-grid cols-2">
+              <div class="card teal">
+                <h3>Written Torah</h3>
+                <p>Scriptural text&mdash;especially the Five Books of Moses&mdash;copied, read, and transmitted in Hebrew.</p>
+              </div>
+              <div class="card purple">
+                <h3>Oral Torah</h3>
+                <p>Interpretive traditions explaining how commandments apply to changing circumstances.</p>
+              </div>
+            </div>
+            <p class="takeaway">Rabbinic Judaism treats text and interpretation as mutually dependent.</p>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">Many biblical commandments are too brief to function without interpretation: What counts as work on Shabbat? How is a marriage contracted? What makes slaughter valid? Oral traditions supply definitions, procedures, and arguments.</p>
+                <p style="margin-bottom: 1em;">Traditional Judaism holds that written and oral Torah ultimately derive from Sinai. Modern movements and scholars differ about origins and authority, but even communities that reject a literal Sinai claim continue to interpret inherited texts.</p>
+              </div>
+            </aside>
+            </section>
+
+            <section data-slide-id="G">
+            <h2>Mishnah, Gemara &amp; Talmud</h2>
+            <div class="card-grid cols-4">
+              <div class="card teal">
+                <h3>Mishnah</h3>
+                <p>Compiled around 200 CE; organizes legal traditions into six major orders.</p>
+              </div>
+              <div class="card purple">
+                <h3>Gemara</h3>
+                <p>Rabbinic discussions analyze the Mishnah through cases, objections, stories, and debate.</p>
+              </div>
+              <div class="card crimson">
+                <h3>Jerusalem Talmud</h3>
+                <p>Palestinian rabbinic discussion completed roughly in the fourth or fifth century.</p>
+              </div>
+              <div class="card gold">
+                <h3>Babylonian Talmud</h3>
+                <p>Later and more extensive; becomes especially authoritative in much of Jewish law.</p>
+              </div>
+            </div>
+            <p style="text-align:center; font-size:0.8em; margin:0.4em 0 0;">Mishnah + Gemara = <span class="popup-trigger" data-popup="l3-talmud" role="button" tabindex="0" aria-haspopup="dialog">Talmud</span></p>
+            <p class="takeaway">The page preserves argument&mdash;not just the winning answer.</p>
+            <div id="l3-talmud" class="popup" role="dialog" aria-modal="true" aria-labelledby="l3-talmud-title" aria-hidden="true">
+              <span class="popup-close" role="button" tabindex="0" aria-label="Close">&times;</span>
+              <div class="definition-term" id="l3-talmud-title">Talmud</div>
+              <p>From a Hebrew root meaning &ldquo;to study&rdquo; or &ldquo;to learn.&rdquo; A printed Talmud page puts the Mishnah and Gemara in the center, with later commentaries (Rashi and the Tosafot) wrapped around them: centuries of discussion on a single page.</p>
+            </div>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">Talmud is not simply a law code. Its pages preserve layered debate, minority opinions, stories, biblical interpretation, scientific assumptions, and unresolved questions.</p>
+                <p style="margin-bottom: 1em;">There are two Talmuds because rabbinic academies developed in Palestine and Babylonia. The Babylonian Talmud generally became more authoritative in later Jewish legal study, though the Jerusalem Talmud remains important.</p>
+              </div>
+            </aside>
+            </section>
+
+            <section data-slide-id="H">
+            <h2>Midrash: Reading between the Lines</h2>
+            <ul>
+              <li><strong>Method:</strong> close reading connects words, repetitions, gaps, and apparent contradictions</li>
+              <li><strong>Halakhic midrash:</strong> derives or clarifies legal practice from scripture</li>
+              <li><strong>Aggadic midrash:</strong> explores narrative, theology, ethics, and imaginative possibilities</li>
+              <li><strong>Plurality:</strong> multiple interpretations can remain in conversation rather than collapse into one</li>
+            </ul>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">Midrash can mean an interpretive method, an individual interpretation, or a collection of interpretations. It assumes that scripture is dense enough to reward sustained questioning.</p>
+                <p style="margin-bottom: 1em;">Do not describe aggadah as mere legend. Narrative interpretation can carry serious theological and ethical argument. Midrash also reveals that Jewish tradition values disciplined disagreement.</p>
+              </div>
+            </aside>
+            </section>
+
+            <section data-slide-id="I">
+            <h2>Study Is a Religious Practice</h2>
+            <div class="split" style="grid-template-columns: 1.2fr 0.8fr; align-items: center;">
+            <div class="split-text">
+            <div class="card-grid cols-2 compact-cards">
+              <div class="card teal">
+                <h3>Reading Aloud</h3>
+                <p>Text is often chanted, voiced, and heard rather than consumed silently.</p>
+              </div>
+              <div class="card purple">
+                <h3>Havruta</h3>
+                <p>Partners test interpretations through questioning, objection, and response.</p>
+              </div>
+              <div class="card crimson">
+                <h3>Bet Midrash</h3>
+                <p>The house of study makes learning a communal activity.</p>
+              </div>
+              <div class="card gold">
+                <h3>Lifelong Obligation</h3>
+                <p>Torah study is not limited to clergy or childhood education.</p>
+              </div>
+            </div>
+            </div>
+            <div class="split-media">
+            <figure class="fig">
+              <img src="images/rel210-ch10-l3-havruta-study.webp" alt="AI-generated photo of two young men in kippot sitting across from each other at a wooden table covered with open and stacked books, one gesturing as he makes a point while the other listens, in a study hall lined with bookshelves.">
+              <p class="img-caption">AI-generated image: havruta partners in a house of study</p>
+            </figure>
+            </div>
+            </div>
+            <p class="takeaway">To study Torah is to participate in the tradition, not merely observe it.</p>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">Havruta study can sound argumentative to outsiders because productive disagreement is part of the method. Partners are expected to challenge weak readings and help one another refine arguments.</p>
+                <p style="margin-bottom: 1em;">Study is performative: learners join a conversation across generations. This makes the library portable and helps explain how Judaism thrives without a central Temple or universal hierarchy.</p>
+              </div>
+            </aside>
+            </section>
+
+            <section data-slide-id="K" class="section-header">
+            <p class="kicker">Section II</p>
+            <h1 class="divider-title">Law, Holiness &amp; Everyday Practice</h1>
+            <p class="subtitle">How does covenant enter the kitchen, workplace, body, and home?</p>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">Move from texts to patterns of action. Mitzvot and halakhah make ordinary choices religiously meaningful, while communities disagree over authority and observance.</p>
+              </div>
+            </aside>
+            </section>
+
+            <section data-slide-id="L">
+            <h2 class="long-title">Mitzvot: Commandments as Covenant Practice</h2>
+            <ul>
+              <li><strong>613:</strong> rabbinic tradition enumerates 248 positive and 365 negative commandments</li>
+              <li><strong>Whole life:</strong> commandments address worship, food, labor, family, courts, land, and ethics</li>
+              <li><strong>Temple limits:</strong> some commandments cannot be performed without the Temple or ancient institutions</li>
+              <li><strong>Movement differences:</strong> Jewish communities disagree about authority, interpretation, and obligation</li>
+            </ul>
+            <p class="takeaway">Practice turns covenant from an identity claim into a pattern of action.</p>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">Mitzvah means commandment, though in ordinary speech it can also suggest a good deed. The traditional number 613 comes from rabbinic enumeration rather than a numbered list in the Torah itself.</p>
+                <p style="margin-bottom: 1em;">Avoid dividing ritual and moral commandments as if the tradition always treats them as separate categories. Both can be understood as covenantal responses to God. Contemporary observance varies substantially.</p>
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Sources</h3>
+                <p style="margin-bottom: 0.6em;">The count of 613 (248 positive, 365 negative) is attributed to Rabbi Simlai in the Babylonian Talmud, Makkot 23b.</p>
+              </div>
+            </aside>
+            </section>
+
+            <section data-slide-id="M">
+            <h2>Halakhah: A Way of Walking</h2>
+            <div class="card-grid cols-4">
+              <div class="card teal">
+                <h3>Meaning</h3>
+                <p>Halakhah comes from a root meaning to walk or go: a path of Jewish life.</p>
+              </div>
+              <div class="card purple">
+                <h3>Sources</h3>
+                <p>Torah, Talmud, legal codes, customs, precedents, and <span class="popup-trigger" data-popup="l3-responsa" role="button" tabindex="0" aria-haspopup="dialog">responsa</span> guide decisions.</p>
+              </div>
+              <div class="card crimson">
+                <h3>Application</h3>
+                <p>Law addresses recurring life as well as new technologies and dilemmas.</p>
+              </div>
+              <div class="card gold">
+                <h3>Diversity</h3>
+                <p>Communities and movements differ over who decides and what is binding.</p>
+              </div>
+            </div>
+            <p class="takeaway">Law is not only a rulebook; it is a disciplined way of inhabiting the world.</p>
+            <div id="l3-responsa" class="popup" role="dialog" aria-modal="true" aria-labelledby="l3-responsa-title" aria-hidden="true">
+              <span class="popup-close" role="button" tabindex="0" aria-label="Close">&times;</span>
+              <div class="definition-term" id="l3-responsa-title">Responsa</div>
+              <p>Hebrew <em>she&rsquo;elot u-teshuvot</em>, &ldquo;questions and answers&rdquo;: written rulings by recognized legal authorities replying to concrete questions sent to them. Rabbis still write responsa today, for example on electricity on Shabbat or medical ethics.</p>
+            </div>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">Halakhah is often translated Jewish law, but “way of walking” captures its lived character. It includes ritual, civil, familial, economic, and ethical practice.</p>
+                <p style="margin-bottom: 1em;">Responsa are answers by recognized authorities to concrete questions. They show a legal tradition reasoning by analogy and precedent. Modern communities differ sharply about whether and how halakhah binds.</p>
+              </div>
+            </aside>
+            </section>
+
+            <section data-slide-id="N">
+            <p class="kicker">Leviticus 19</p>
+            <h2 class="long-title">The Holiness Code: &ldquo;You Shall Be Holy&rdquo;</h2>
+            <blockquote class="sacred-text scroll-quote">
+              <p>You shall be holy, for I the L<span style="font-variant: small-caps;">ord</span> your God am holy.</p>
+            </blockquote>
+            <p class="citation">Leviticus 19:2 (NRSV)</p>
+            <ul>
+              <li><strong>Imitatio Dei:</strong> holiness means reflecting divine character in everyday conduct</li>
+            </ul>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">Leviticus 17-26 is often called the Holiness Code. Chapter 19 is especially useful because ritual and ethical obligations appear side by side rather than in separate compartments.</p>
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Sources</h3>
+                <p style="margin-bottom: 0.6em;">Leviticus 19:2, NRSV (1989), checked 2026-10-19 against biblestudytools.com (NRS) and bible.oremus.org (NRSV, &copy; 1989). The original slide&rsquo;s uncited wording (&ldquo;You shall be holy, for I the LORD your God am holy&rdquo;) is the same as the NRSV (and ESV); it is now cited, matching Lecture 2. Leviticus 17&ndash;26 is the section scholars call the Holiness Code.</p>
+              </div>
+            </aside>
+            </section>
+
+            <section data-slide-id="O">
+            <h2 class="long-title">The Holiness Code: Sacred &amp; Ordinary</h2>
+            <ul>
+              <li><strong>Ritual:</strong> Sabbath, sacrifice, food, sexuality, and sacred boundaries</li>
+              <li><strong>Ethics:</strong> wages, courts, disability, speech, neighbors, strangers, and the poor</li>
+            </ul>
+            <p class="takeaway">Holiness is not escape from ordinary life; it is the sanctification of ordinary life.</p>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">Connect to Lecture 2: ethical monotheism becomes visible when holiness shapes labor, speech, sexuality, judgment, care for vulnerable people, and love of neighbor and stranger.</p>
+              </div>
+            </aside>
+            </section>
+
+            <section data-slide-id="P">
+            <h2 class="long-title">Temple Sacrifice &amp; Its Transformation</h2>
+            <div class="card-grid cols-3">
+              <div class="card teal">
+                <h3>Burnt Offering</h3>
+                <p>An animal offering wholly consumed on the altar as devotion or atonement.</p>
+              </div>
+              <div class="card purple">
+                <h3>Well-Being Offering</h3>
+                <p>A shared sacrifice associated with thanksgiving, vows, and communal meals.</p>
+              </div>
+              <div class="card crimson">
+                <h3>Purification / Reparation</h3>
+                <p>Offerings address impurity, wrongdoing, or damage requiring restoration.</p>
+              </div>
+            </div>
+            <p class="takeaway">After 70 CE, prayer, repentance, charity, study, and the home table carry forward sacred service.</p>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">Ancient sacrifice was structured worship, not random destruction. Different offerings expressed dedication, gratitude, purification, restitution, and communal fellowship. Priests descended from Aaron performed sacrificial duties in the Temple.</p>
+                <p style="margin-bottom: 1em;">After 70 CE, sacrifice could no longer be offered. Prayer, repentance, charity, study, and the ritual table took on greater significance. Traditional liturgy still remembers the Temple, while Jewish movements differ about hopes for restoration.</p>
+              </div>
+            </aside>
+            </section>
+
+            <section data-slide-id="Q">
+            <p class="kicker">Ritual &amp; Practice</p>
+            <h2>Kashrut: Making Food Sacred</h2>
+            <ul>
+              <li><span class="popup-trigger" data-popup="l3-kosher" role="button" tabindex="0" aria-haspopup="dialog">Kosher</span> means fit or proper according to Jewish dietary law</li>
+              <li>Permitted land animals chew the cud and have split hooves; aquatic animals require fins and scales</li>
+              <li>Meat requires prescribed slaughter and preparation; meat and dairy are kept separate</li>
+              <li>Passover adds restrictions on leavened grain products and often requires separate preparation</li>
+            </ul>
+            <div id="l3-kosher" class="popup" role="dialog" aria-modal="true" aria-labelledby="l3-kosher-title" aria-hidden="true">
+              <span class="popup-close" role="button" tabindex="0" aria-label="Close">&times;</span>
+              <div class="definition-term" id="l3-kosher-title">Kosher</div>
+              <p>Hebrew <em>kasher</em>, &ldquo;fit&rdquo; or &ldquo;proper.&rdquo; The basic animal rules are in Leviticus 11 and Deuteronomy 14. Keeping meat and dairy apart is the rabbinic reading of &ldquo;You shall not boil a kid in its mother&rsquo;s milk&rdquo; (Exodus 23:19, NRSV).</p>
+            </div>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">Correct a common misconception: rabbis do not make food kosher by blessing it. Certification verifies ingredients and preparation. Kashrut concerns species, slaughter, processing, utensils, kitchens, and combinations of food.</p>
+                <p style="margin-bottom: 1em;">Observance varies widely. Some Jews maintain fully separate meat and dairy kitchens; some avoid only pork and shellfish; others do not observe dietary law. Present the system as a way of making ordinary consumption intentional and connected to covenant, not as an ancient hygiene code. Passover kashrut is stricter because leavened grain products are excluded. Textbook connection: section 10-5d.</p>
+              </div>
+            </aside>
+            </section>
+
+            <section data-slide-id="R">
+            <h2>Texts Worn, Touched &amp; Remembered</h2>
+            <div class="card-grid cols-4">
+              <div class="card teal">
+                <h3>Mezuzah</h3>
+                <p>Scriptural passages in a case on the doorpost mark the home with covenant memory.</p>
+              </div>
+              <div class="card purple">
+                <h3>Tefillin</h3>
+                <p>Small boxes containing Torah passages are bound to arm and head during weekday prayer.</p>
+              </div>
+              <div class="card crimson">
+                <h3>Tzitzit</h3>
+                <p>Fringes on a garment or prayer shawl serve as physical reminders of commandments.</p>
+              </div>
+              <div class="card gold">
+                <h3>Berakhot</h3>
+                <p>Blessings connect food, time, natural events, and human action to gratitude toward God.</p>
+              </div>
+            </div>
+            <p class="takeaway">Sacred words move from page to body, doorway, table, and time.</p>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">These practices make text bodily and spatial. Deuteronomy 6 commands Israel to bind words as a sign, teach them, recite them, and write them on doorposts.</p>
+                <p style="margin-bottom: 1em;">Traditional gender expectations and contemporary practice vary. In many Orthodox settings tefillin and time-bound ritual garments are associated primarily with men; many non-Orthodox communities encourage participation across genders.</p>
+              </div>
+            </aside>
+            </section>
+
+            <section data-slide-id="S" class="assessment-slide">
+            <h2>Pause &amp; Reflect</h2>
+            <div class="assessment-prompt">
+              <p class="prompt-label">Reading Guide &middot; Review Question 10</p>
+              <p class="prompt-text">What are the main features of the Jewish kosher food laws?</p>
+            </div>
+            <p class="pause-lookback">Look back: <em>Kashrut: Making Food Sacred</em></p>
+            <p class="pause-action">Answer on your own, then write it on your <a href="https://austin-academics.com/phil-210/reading_guides/PHIL210_Ch10_ReadingGuide" target="_blank" rel="noopener">live reading-guide worksheet&nbsp;&#8599;</a>&mdash;use your textbook anchor sentences as evidence</p>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;"><strong>Review question:</strong> PHIL 210 Chapter 10 Reading Guide, Question 10, quoted verbatim from the guide.</p>
+                <p style="margin-bottom: 1em;"><strong>Taught on:</strong> Q (Kashrut: Making Food Sacred).</p>
+                <p style="margin-bottom: 1em;"><strong>Retrieval first:</strong> give students one minute to answer from memory, on their own.</p>
+                <p style="margin-bottom: 1em;">After that minute, recap the four bullets on Q and ask the class for one rule about animals and one about preparation.</p>
+                <p style="margin-bottom: 1em;">Then let them finish individually and write the answer on their live reading-guide worksheet (it auto-saves in their browser), using their textbook anchor sentences as evidence.</p>
+                <p style="margin-bottom: 1em;"><strong>A strong answer mentions:</strong> <em>kosher</em> means fit or proper; permitted land animals chew the cud and have split hooves, and water animals need fins and scales; meat requires prescribed slaughter and preparation; meat and dairy are kept separate; and Passover adds rules about leavened grain.</p>
+              </div>
+            </aside>
+            </section>
+
+            <section data-slide-id="T" class="section-header">
+            <p class="kicker">Section III</p>
+            <h1 class="divider-title">Worship, Sacred Time &amp; Life Cycle</h1>
+            <p class="subtitle">How do home and synagogue turn memory into communal rhythm?</p>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">The final section follows Jewish time from the weekly Shabbat through the annual calendar and across a human lifetime. Home ritual and communal worship reinforce one another.</p>
+              </div>
+            </aside>
+            </section>
+
+            <section data-slide-id="U">
+            <p class="kicker">Ritual &amp; Practice</p>
+            <h2>Worship in the Synagogue</h2>
+            <div class="split" style="grid-template-columns: 1fr 1fr; align-items: center;">
+            <div class="split-text">
+            <ul>
+              <li><strong>Ark:</strong> sacred cabinet holding Torah scrolls, oriented toward Jerusalem when possible</li>
+              <li><strong>Service:</strong> blessings, hymns, Hebrew prayer, Torah reading, interpretation, and communal response</li>
+            </ul>
+            </div>
+            <div class="split-media">
+            <figure class="fig">
+              <img src="images/rel210-ch10-l3-synagogue-ark-bimah.webp" alt="AI-generated photo of a synagogue sanctuary with an open wooden ark holding Torah scrolls in red and gold embroidered covers, a reading table draped in purple on a raised platform in front, wooden pews, and an eternal lamp hanging above.">
+              <p class="img-caption">AI-generated image: ark, Torah scrolls, and reading table</p>
+            </figure>
+            </div>
+            </div>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">The synagogue is simultaneously a house of prayer, study, and community. The Torah scroll is treated with great care: worshippers stand when it is removed from the ark, readers chant from it, and a pointer helps avoid touching the parchment.</p>
+              </div>
+            </aside>
+            </section>
+
+            <section data-slide-id="V">
+            <p class="kicker">Worship in the Synagogue</p>
+            <h2>Who Leads, Who Counts</h2>
+            <ul>
+              <li><strong>Leadership:</strong> cantor leads musical prayer; rabbi teaches and interprets; community participation remains central</li>
+              <li><strong><span class="popup-trigger" data-popup="l3-minyan" role="button" tabindex="0" aria-haspopup="dialog">Minyan</span>:</strong> prayer quorum traditionally counted as ten adult Jewish men; many communities count adults of all genders</li>
+            </ul>
+            <div id="l3-minyan" class="popup" role="dialog" aria-modal="true" aria-labelledby="l3-minyan-title" aria-hidden="true">
+              <span class="popup-close" role="button" tabindex="0" aria-label="Close">&times;</span>
+              <div class="definition-term" id="l3-minyan-title">Minyan</div>
+              <p>Hebrew for &ldquo;count&rdquo; or &ldquo;number.&rdquo; Certain prayers, such as the Kaddish and the public Torah reading, are said only when a quorum of ten is present.</p>
+            </div>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">Practices differ across communities. Orthodox synagogues generally separate men and women and traditionally count men for a minyan. Conservative, Reform, Reconstructionist, and many other communities generally include women equally, though practice varies. A rabbi is primarily a teacher and legal-religious guide, not a priest who performs sacrifice. Textbook connection: section 10-5a.</p>
+              </div>
+            </aside>
+            </section>
+
+            <section data-slide-id="W">
+            <h2 class="long-title">Shabbat: The Meaning of Sacred Rest</h2>
+            <ul>
+              <li><strong>Creation:</strong> rest imitates the seventh day and recognizes the world as gift</li>
+              <li><strong>Liberation:</strong> Deuteronomy links rest to freedom from slavery in Egypt</li>
+              <li><strong>Dignity:</strong> household members, workers, strangers, and animals share the cessation</li>
+              <li><strong>Covenant sign:</strong> recurring sacred time marks Jewish identity every week</li>
+            </ul>
+            <p class="takeaway">Shabbat is not simply a day off; it is freedom practiced every week.</p>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">Exodus 20 grounds Shabbat in creation; Deuteronomy 5 grounds it in liberation. Together they make rest theological, ethical, and social.</p>
+                <p style="margin-bottom: 1em;">Traditional halakhah defines categories of prohibited creative labor in detail. Stress the positive vision as well: time released from production for prayer, meals, study, family, community, pleasure, and renewal.</p>
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Sources</h3>
+                <p style="margin-bottom: 0.6em;">Exodus 20:8&ndash;11 grounds the Sabbath in creation; Deuteronomy 5:12&ndash;15 grounds it in the memory of slavery in Egypt.</p>
+              </div>
+            </aside>
+            </section>
+
+            <section data-slide-id="X">
+            <h2>Shabbat as Lived Practice</h2>
+            <div class="split" style="grid-template-columns: 1.15fr 0.85fr; align-items: center;">
+            <div class="split-text">
+            <ul class="tight">
+              <li>Shabbat runs from just before sunset on Friday to nightfall on Saturday, when <span class="popup-trigger" data-popup="l3-havdalah" role="button" tabindex="0" aria-haspopup="dialog">Havdalah</span> ends it</li>
+              <li>Home rituals may include candle lighting, blessings over wine, challah, a festive meal, and song</li>
+              <li>Synagogue worship centers prayer, Torah reading, study, and community</li>
+              <li>Traditional law forbids 39 kinds of creative work (<em>melakhah</em>), such as kindling a fire or writing</li>
+            </ul>
+            </div>
+            <div class="split-media">
+            <figure class="fig">
+              <img src="images/rel210-ch10-l3-shabbat-dinner-table.webp" alt="AI-generated photo of three generations of a family smiling around a Friday-night table with two lit candles in silver candlesticks, a silver kiddush cup, and a braided challah partly covered by an embroidered cloth.">
+              <p class="img-caption">AI-generated image: Friday-night Shabbat table</p>
+            </figure>
+            </div>
+            </div>
+            <div id="l3-havdalah" class="popup" role="dialog" aria-modal="true" aria-labelledby="l3-havdalah-title" aria-hidden="true">
+              <span class="popup-close" role="button" tabindex="0" aria-label="Close">&times;</span>
+              <div class="definition-term" id="l3-havdalah-title">Havdalah</div>
+              <p>Hebrew for &ldquo;separation&rdquo;: the short ceremony that ends Shabbat on Saturday night, with blessings over wine, fragrant spices, and a braided candle, marking the move from holy time back to ordinary time.</p>
+            </div>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">Connect this slide to the previous slide: the earlier slides explain the commandment; this slide shows how the commandment is embodied. Practices range from strict halakhic observance to selective family traditions.</p>
+                <p style="margin-bottom: 1em;">Traditional restrictions on work are detailed and interpreted through rabbinic law. Rather than presenting Shabbat as merely a list of prohibitions, stress its positive meaning: welcoming sacred time, freedom from production, communal belonging, and a weekly rehearsal of creation and liberation. The home is as important as the synagogue. Textbook connection: section 10-5b.</p>
+                <p style="margin-bottom: 1em;"><strong>Caution:</strong> textbook p. 245 says Shabbat ends at sunset on Saturday; traditional practice waits until nightfall (three stars, Shulchan Arukh, Orach Chayim 293:2).</p>
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Sources</h3>
+                <p style="margin-bottom: 0.6em;">Mishnah Shabbat 7:2 (William Davidson Edition, Sefaria), checked 2026-10-19: the primary categories of prohibited labor &ldquo;number forty-less-one,&rdquo; including &ldquo;one who writes two letters&rdquo; and kindling.</p>
+                <p style="margin-bottom: 0.6em;">Shulchan Arukh, Orach Chayim 293:2 (Sefaria Community Translation): one should not do work &ldquo;until he sees three small stars&rdquo;; 296:1 gives the order of Havdalah: &ldquo;wine, spices and havdalah candle.&rdquo;</p>
+                <p style="margin-bottom: 0.6em;">Textbook p. 245: candles are lit &ldquo;at least eighteen minutes before sundown on Friday.&rdquo;</p>
+              </div>
+            </aside>
+            </section>
+
+            <section data-slide-id="J" class="assessment-slide">
+            <h2>Pause &amp; Reflect</h2>
+            <div class="assessment-prompt">
+              <p class="prompt-label">Reading Guide &middot; Review Question 9</p>
+              <p class="prompt-text">What are the main features of the traditional Jewish Sabbath observance?</p>
+            </div>
+            <p class="pause-lookback">Look back: <em>Shabbat: The Meaning of Sacred Rest</em> &middot; <em>Shabbat as Lived Practice</em></p>
+            <p class="pause-action">Answer on your own, then write it on your <a href="https://austin-academics.com/phil-210/reading_guides/PHIL210_Ch10_ReadingGuide" target="_blank" rel="noopener">live reading-guide worksheet&nbsp;&#8599;</a>&mdash;use your textbook anchor sentences as evidence</p>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;"><strong>Review question:</strong> PHIL 210 Chapter 10 Reading Guide, Question 9, quoted verbatim from the guide.</p>
+                <p style="margin-bottom: 1em;"><strong>Taught on:</strong> W (Shabbat: The Meaning of Sacred Rest), X (Shabbat as Lived Practice).</p>
+                <p style="margin-bottom: 1em;"><strong>Retrieval first:</strong> give students one minute to answer from memory, on their own.</p>
+                <p style="margin-bottom: 1em;">This pause was moved here from the end of Section I (after I) so that it follows the Shabbat slides. After that minute, recap the timeline and home rituals on X.</p>
+                <p style="margin-bottom: 1em;">Then let them finish individually and write the answer on their live reading-guide worksheet (it auto-saves in their browser), using their textbook anchor sentences as evidence.</p>
+                <p style="margin-bottom: 1em;"><strong>A strong answer mentions:</strong> Shabbat runs from just before sunset on Friday to nightfall on Saturday, when Havdalah ends it; the Friday-evening home rituals (candles, blessings over wine, challah, a festive meal, song); synagogue prayer and Torah reading; rest from work, traditionally 39 categories of creative work (<em>melakhah</em>) such as kindling a fire or writing; and its meanings: imitating God&rsquo;s rest at creation, remembering freedom from slavery, and serving as a weekly covenant sign.</p>
+              </div>
+            </aside>
+            </section>
+
+            <section data-slide-id="Y">
+            <h2>The Sacred Year: Major Festivals</h2>
+            <div class="card-grid cols-3">
+              <div class="card teal">
+                <h3>Return &amp; Atonement</h3>
+                <p>Rosh Hashanah begins a season of reflection. Yom Kippur centers fasting, confession, and reconciliation.</p>
+              </div>
+              <div class="card purple">
+                <h3>Pilgrimage Festivals</h3>
+                <p>Passover remembers Exodus. Shavuot celebrates Torah. Sukkot recalls wilderness dependence and harvest.</p>
+              </div>
+              <div class="card crimson">
+                <h3>Deliverance &amp; Identity</h3>
+                <p>Purim retells Esther. Hanukkah remembers the Temple&rsquo;s rededication after the Maccabean Revolt.</p>
+              </div>
+            </div>
+            <p class="takeaway">The calendar turns collective memory into repeated practice.</p>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">Jewish holidays begin at sunset and follow a lunisolar calendar, so their dates move relative to the Gregorian calendar. Avoid treating every festival as equally important: Yom Kippur is the most solemn holy day, while Passover is especially central in home ritual and collective memory.</p>
+                <p style="margin-bottom: 1em;">The Passover seder uses foods, questions, storytelling, and ritual actions to make participants experience the Exodus as their own story. Hanukkah is culturally prominent in North America but is not the Jewish equivalent of Christmas. The three groupings on the slide organize the calendar thematically rather than chronologically. Textbook connection: section 10-5c.</p>
+              </div>
+            </aside>
+            </section>
+
+            <section data-slide-id="Z">
+            <h2>Passover Seder: Memory Performed</h2>
+            <div class="card-grid cols-4">
+              <div class="card teal">
+                <h3>Haggadah</h3>
+                <p>A scripted order combines biblical passages, rabbinic interpretation, songs, and blessings.</p>
+              </div>
+              <div class="card purple">
+                <h3>Questions</h3>
+                <p>The youngest participant traditionally asks why this night differs from all others.</p>
+              </div>
+              <div class="card crimson">
+                <h3>Symbolic Foods</h3>
+                <p>Matzah, bitter herbs, wine, and other foods make the Exodus story tangible.</p>
+              </div>
+              <div class="card gold">
+                <h3>Participation</h3>
+                <p>Each generation is to see itself as personally leaving Egypt.</p>
+              </div>
+            </div>
+            <p class="takeaway">The story is preserved because every generation performs it anew.</p>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">Seder means order. The Haggadah structures a home liturgy around storytelling, questions, symbolic foods, blessings, and songs. Different communities add distinctive foods and customs.</p>
+                <p style="margin-bottom: 1em;">The &ldquo;Participation&rdquo; card paraphrases Mishnah Pesachim 10:5; the next slide quotes it.</p>
+              </div>
+            </aside>
+            </section>
+
+            <section data-slide-id="AA">
+            <p class="kicker">Passover Seder</p>
+            <h2>As Though You Left Egypt</h2>
+            <div class="split" style="grid-template-columns: 1.15fr 0.85fr; align-items: center;">
+            <div class="split-text">
+            <blockquote class="sacred-text compact">
+              <p>In every generation a man is obligated to regard himself as though he personally had gone forth from Egypt.</p>
+            </blockquote>
+            <p class="citation">Mishnah Pesachim 10:5 (trans. Joshua Kulp, Mishnah Yomit)</p>
+            <ul>
+              <li>The Mishnah grounds this in Exodus 13:8: &ldquo;It is because of what the L<span style="font-variant: small-caps;">ord</span> did for me when I came out of Egypt&rdquo; (NRSV)</li>
+              <li>The seder places participants inside the story</li>
+            </ul>
+            </div>
+            <div class="split-media">
+            <figure class="fig">
+              <img src="images/rel210-ch10-l3-passover-seder-plate.webp" alt="AI-generated photo of a blue-patterned Passover seder plate holding a roasted shank bone, a roasted egg, green herbs, grated horseradish, and a mound of charoset, beside a stack of matzah, a glass of red wine, and an open illustrated Haggadah.">
+              <p class="img-caption">AI-generated image: seder plate, matzah, and Haggadah</p>
+            </figure>
+            </div>
+            </div>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">The educational logic matters: the ritual does not merely recall information. It places participants inside the Exodus and converts historical memory into gratitude, identity, and obligations toward others.</p>
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Sources</h3>
+                <p style="margin-bottom: 0.6em;">Mishnah Pesachim 10:5, trans. Dr. Joshua Kulp (Mishnah Yomit), via Sefaria, checked 2026-10-19. This line is recited in the Haggadah at every seder.</p>
+                <p style="margin-bottom: 0.6em;">Exodus 13:8, NRSV (1989), checked 2026-10-19 against biblestudytools.com (NRS) and bible.oremus.org (NRSV, &copy; 1989): &ldquo;You shall tell your child on that day, &lsquo;It is because of what the LORD did for me when I came out of Egypt.&rsquo;&rdquo; (The Mishnah quotation above uses Kulp&rsquo;s own rendering of the verse.)</p>
+              </div>
+            </aside>
+            </section>
+
+            <section data-slide-id="AB">
+            <h2 class="long-title">Life Cycle: Covenant, Community &amp; Family</h2>
+            <div class="split" style="grid-template-columns: 1.2fr 0.8fr; align-items: center;">
+            <div class="split-text">
+            <ul class="tight">
+              <li><strong>Brit milah / naming:</strong> welcomes a child into covenant and community; practices differ by family and movement</li>
+              <li><strong>Bar or bat mitzvah:</strong> at 13 (12 for girls in many communities) a young person becomes responsible for the commandments; a synagogue celebration, often with a Torah reading, marks it</li>
+              <li><strong>Marriage:</strong> covenant formalized under a canopy (<span class="popup-trigger" data-popup="l3-chuppah" role="button" tabindex="0" aria-haspopup="dialog">chuppah</span>), often with a ketubah and the breaking of a glass</li>
+              <li><strong>Rituals</strong> connect personal transitions to Torah, historical memory, family, and the Jewish people</li>
+            </ul>
+            </div>
+            <div class="split-media">
+            <figure class="fig">
+              <img src="images/rel210-ch10-l3-wedding-chuppah.webp" alt="AI-generated photo of a smiling bride and groom beneath a white fabric wedding canopy on wooden poles wrapped in white flowers and greenery in a garden; the groom and the officiant, who holds an open book, both wear kippot and prayer shawls.">
+              <p class="img-caption">AI-generated image: a wedding under the chuppah</p>
+            </figure>
+            </div>
+            </div>
+            <div id="l3-chuppah" class="popup" role="dialog" aria-modal="true" aria-labelledby="l3-chuppah-title" aria-hidden="true">
+              <span class="popup-close" role="button" tabindex="0" aria-label="Close">&times;</span>
+              <div class="definition-term" id="l3-chuppah-title">Chuppah &amp; Ketubah</div>
+              <p>The <em>chuppah</em> is the wedding canopy, often read as a symbol of the new home. The <em>ketubah</em> is the marriage contract, written in Aramaic in its traditional form, that sets out the husband&rsquo;s obligations to his wife.</p>
+            </div>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">Brit milah is traditionally performed for boys on the eighth day and recalls the Abrahamic covenant. Jewish communities also use naming ceremonies for girls and have developed additional inclusive practices. Avoid implying that one ritual pattern represents every Jewish family.</p>
+                <p style="margin-bottom: 1em;">Bar/bat mitzvah literally describes becoming responsible for commandments, not merely having a party. The young person may chant Torah, lead prayers, and offer interpretation after extensive preparation. A Jewish wedding may include a ketubah, blessings beneath a chuppah, and breaking a glass. Interpretations of the glass vary; remembrance of the destroyed Temple is traditional. Textbook connection: sections 10-5e through 10-5g.</p>
+                <h3 style="color: #2c5282; margin-top: 1.5em;">Sources</h3>
+                <p style="margin-bottom: 0.6em;">Pirkei Avot 5:21 (trans. Joshua Kulp, Mishnah Yomit, Sefaria), checked 2026-10-19: &ldquo;At thirteen subject to the commandments.&rdquo;</p>
+                <p style="margin-bottom: 0.6em;">Mishnah Niddah 5:6 (William Davidson Edition, Sefaria): a girl&rsquo;s vows are binding from twelve years and one day, a boy&rsquo;s from thirteen years and one day&mdash;the classical basis for 12 and 13.</p>
+                <p style="margin-bottom: 0.6em;">Textbook p. 247: at an age of understanding, &ldquo;traditionally thirteen,&rdquo; children &ldquo;become obligated in God&rsquo;s sight to obey the Torah.&rdquo;</p>
+              </div>
+            </aside>
+            </section>
+
+            <section data-slide-id="AC">
+            <h2>Death, Mourning &amp; Memory</h2>
+            <ul>
+              <li>Burial is traditionally prompt, simple, and equal in dignity</li>
+              <li><strong>Shiva:</strong> seven-day period in which mourners withdraw from ordinary life and receive the community</li>
+              <li><strong><span class="popup-trigger" data-popup="l3-kaddish" role="button" tabindex="0" aria-haspopup="dialog">Kaddish</span>:</strong> prayer praising God, recited during an extended period of mourning</li>
+              <li><strong>Yahrzeit</strong> and memorial practices keep the deceased present in family and communal memory</li>
+            </ul>
+            <div id="l3-kaddish" class="popup" role="dialog" aria-modal="true" aria-labelledby="l3-kaddish-title" aria-hidden="true">
+              <span class="popup-close" role="button" tabindex="0" aria-label="Close">&times;</span>
+              <div class="definition-term" id="l3-kaddish-title">Mourner&rsquo;s Kaddish</div>
+              <p>An Aramaic prayer whose opening words are <em>Yitgadal v&rsquo;yitkadash sh&rsquo;mei raba</em>, &ldquo;Magnified and sanctified be His great name.&rdquo; It never mentions death. Mourners traditionally recite it for eleven months for a parent, and on each <em>yahrzeit</em> (anniversary of the death).</p>
+            </div>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">Jewish mourning practices serve the living while honoring the dead. Traditional burial avoids display and emphasizes equality. Shiva structures the first intense period of grief and shifts ordinary obligations so the community can care for mourners.</p>
+                <p style="margin-bottom: 1em;">The Mourner’s Kaddish does not describe death; it magnifies and sanctifies God’s name. This makes it both an affirmation and, for some mourners, a difficult act of faith. Mourning decreases in stages rather than ending abruptly. Practices vary among movements and families, particularly regarding cremation, autopsy, organ donation, gender roles, and the length of observance. Textbook connection: section 10-5h.</p>
+              </div>
+            </aside>
+            </section>
+
+            <section data-slide-id="AD" class="assessment-slide">
+            <h2>Pause &amp; Reflect</h2>
+            <div class="assessment-prompt">
+              <p class="prompt-label">Reading Guide &middot; Review Question 11</p>
+              <p class="prompt-text">What is the significance of the bar mitzvah and bat mitzvah ceremonies?</p>
+            </div>
+            <p class="pause-lookback">Look back: <em>Life Cycle: Covenant, Community &amp; Family</em></p>
+            <p class="pause-action">Answer on your own, then write it on your <a href="https://austin-academics.com/phil-210/reading_guides/PHIL210_Ch10_ReadingGuide" target="_blank" rel="noopener">live reading-guide worksheet&nbsp;&#8599;</a>&mdash;use your textbook anchor sentences as evidence</p>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;"><strong>Review question:</strong> PHIL 210 Chapter 10 Reading Guide, Question 11, quoted verbatim from the guide.</p>
+                <p style="margin-bottom: 1em;"><strong>Taught on:</strong> AB (Life Cycle: Covenant, Community &amp; Family), L (mitzvot) and U (synagogue service) for background.</p>
+                <p style="margin-bottom: 1em;"><strong>Retrieval first:</strong> give students one minute to answer from memory, on their own.</p>
+                <p style="margin-bottom: 1em;">After that minute, revisit the bar/bat mitzvah bullet on AB and ask the class what changes for the young person afterward.</p>
+                <p style="margin-bottom: 1em;">Then let them finish individually and write the answer on their live reading-guide worksheet (it auto-saves in their browser), using their textbook anchor sentences as evidence.</p>
+                <p style="margin-bottom: 1em;"><strong>A strong answer mentions:</strong> the coming of age at 13 (12 for girls in many communities); becoming responsible for keeping the commandments (mitzvot); the status comes with age, not the ceremony; the ceremony (often a Torah reading) is a public celebration; and practice varies by movement.</p>
+              </div>
+            </aside>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- GLOBAL UI (outside Reveal transforms) -->
+    <div id="keyboard-trigger" class="popup-trigger" data-popup="keyboard-popup" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Keyboard shortcuts">&#9000;&#65039;</div>
+
+    <div id="keyboard-popup" class="popup" role="dialog" aria-modal="true" aria-labelledby="keyboard-popup-title" aria-hidden="true">
+        <span class="popup-close" role="button" tabindex="0" aria-label="Close">&times;</span>
+        <div class="definition-term" id="keyboard-popup-title">Keyboard Shortcuts</div>
+        <p>&rarr; / Space: Next slide</p>
+        <p>&larr; : Previous slide</p>
+        <p>Tab / Shift+Tab: Move between pop-up terms and links</p>
+        <p>Enter / Space on a dotted term: Open its pop-up</p>
+        <p>S: Speaker notes</p>
+        <p>F: Fullscreen</p>
+        <p>O: Overview</p>
+        <p>ESC: Close an open pop-up (otherwise toggles the overview)</p>
+    </div>
+
+    <div class="slide-counter" aria-hidden="true"></div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: false,
+            transition: 'slide',
+            plugins: [ RevealNotes ]
+        });
+
+        // Slide counter
+        function updateSlideCounter() {
+            const current = Reveal.getState().indexh + 1;
+            const total = Reveal.getTotalSlides();
+            document.querySelector('.slide-counter').textContent = `${current}/${total}`;
+        }
+        Reveal.on('ready', updateSlideCounter);
+        Reveal.on('slidechanged', updateSlideCounter);
+
+        // Keep keyboard focus on the visible slide: slides that are not current are made inert,
+        // so Tab never lands on a pop-up trigger, link, or video on a hidden slide.
+        function syncInert() {
+            const current = Reveal.getCurrentSlide();
+            document.querySelectorAll('.reveal .slides > section').forEach(function(s) {
+                if (s === current) { s.removeAttribute('inert'); } else { s.setAttribute('inert', ''); }
+            });
+        }
+        Reveal.on('ready', syncInert);
+        Reveal.on('slidechanged', syncInert);
+
+        // Pop-up functionality (click, Enter/Space); focus moves into the pop-up and returns to its trigger
+        let lastTrigger = null;
+        function openPopup(trigger) {
+            const el = document.getElementById(trigger.getAttribute('data-popup'));
+            if (!el) return;
+            closeAllPopups(false);
+            lastTrigger = trigger;
+            el.classList.add('active');
+            el.setAttribute('aria-hidden', 'false');
+            trigger.setAttribute('aria-expanded', 'true');
+            const closer = el.querySelector('.popup-close');
+            if (closer) closer.focus();
+        }
+        function closeAllPopups(restoreFocus) {
+            let closedAny = false;
+            document.querySelectorAll('.popup.active').forEach(function(p) {
+                p.classList.remove('active');
+                p.setAttribute('aria-hidden', 'true');
+                closedAny = true;
+            });
+            document.querySelectorAll('.popup-trigger[aria-expanded="true"]').forEach(function(t) { t.setAttribute('aria-expanded', 'false'); });
+            if (closedAny && restoreFocus && lastTrigger && document.contains(lastTrigger)) lastTrigger.focus();
+            return closedAny;
+        }
+        document.querySelectorAll('.popup-trigger').forEach(function(t) { t.setAttribute('aria-expanded', 'false'); });
+
+        document.addEventListener('click', function(e) {
+            const trigger = e.target.closest('.popup-trigger');
+            if (trigger) { openPopup(trigger); return; }
+            if (e.target.closest('.popup-close') || e.target.classList.contains('popup')) {
+                closeAllPopups(true);
+            }
+        });
+
+        // Keyboard access for focusable pop-up triggers and close buttons (Enter/Space)
+        document.addEventListener('keydown', function(e) {
+            const t = e.target;
+            if (!t.classList) return;
+            if (e.key !== 'Enter' && e.key !== ' ' && e.key !== 'Spacebar') return;
+            if (t.classList.contains('popup-trigger')) {
+                e.preventDefault();
+                e.stopPropagation(); // keep Space/Enter from also advancing the slide
+                openPopup(t);
+            } else if (t.classList.contains('popup-close')) {
+                e.preventDefault();
+                e.stopPropagation();
+                closeAllPopups(true);
+            }
+        }, true);
+
+        // Esc closes an open pop-up ONLY. Capture phase on window runs before Reveal's
+        // document keydown listener, so stopping the event here keeps Esc from also
+        // toggling the slide overview. With no pop-up open, Esc reaches Reveal as normal.
+        window.addEventListener('keydown', function(e) {
+            if (e.key !== 'Escape' && e.key !== 'Esc' && e.keyCode !== 27) return;
+            if (!document.querySelector('.popup.active')) return;
+            closeAllPopups(true);
+            e.preventDefault();
+            e.stopImmediatePropagation();
+        }, true);
+
+        // Close any open pop-up when the slide changes
+        Reveal.on('slidechanged', function () { closeAllPopups(false); });
+    </script>
+
+    <script id="slide-id-label-js">
+        /* Permanent slide ID label: shows the current slide's data-slide-id (see comment at top of file) */
+        (function () {
+            var el = document.createElement('div');
+            el.id = 'slideIdLabel'; el.setAttribute('aria-hidden', 'true');
+            document.body.appendChild(el);
+            function update() {
+                var s = Reveal.getCurrentSlide(), id = s && s.getAttribute('data-slide-id');
+                el.textContent = id || ''; el.style.display = id ? '' : 'none';
+                el.classList.toggle('on-image', !!(s && (s.classList.contains('full-bleed-title') || s.hasAttribute('data-background-image'))));
+            }
+            Reveal.on('ready', update); Reveal.on('slidechanged', update);
+            if (Reveal.isReady && Reveal.isReady()) update();
+        })();
+    </script>
+
+</body>
+</html>
