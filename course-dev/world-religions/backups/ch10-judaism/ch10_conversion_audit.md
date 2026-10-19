@@ -12,9 +12,10 @@ Prepared 2026-10-19 for Steven Austin. Covers REL 210 Ch10 Lectures 1-3 only (th
 
 ## Result
 
-- **Lecture 1** (`rel210-ch10-lecture1-judaism-origins-exodus-temple-diaspora_revFA26.html`, formerly `rel210-ch10-lecture1-judaism-origins-exodus-temple-diaspora.html`): 28 old slides → 31 new slides. 20 old text units are not verbatim in the new deck; 18 are below 90% word coverage. All are listed in the intentional-changes section. **No unexplained content loss.**
+- **Lecture 1** (`rel210-ch10-lecture1-judaism-origins-exodus-temple-diaspora_revFA26.html`, formerly `rel210-ch10-lecture1-judaism-origins-exodus-temple-diaspora.html`): 28 old slides → 31 new slides. 42 old text units are not verbatim in the new deck; 38 are below 90% word coverage. All are listed in the intentional-changes section. **No unexplained content loss.**
 - **Lecture 2** (`rel210-ch10-lecture2-judaism-god-covenant-holiness-hope_revFA26.html`, formerly `rel210-ch10-lecture2-judaism-god-covenant-holiness-hope.html`): 31 old slides → 44 new slides. 58 old text units are not verbatim in the new deck; 30 are below 90% word coverage. All are listed in the intentional-changes section. **No unexplained content loss.**
 - **Lecture 3** (`rel210-ch10-lecture3-judaism-text-worship-sacred-practice_revFA26.html`, formerly `rel210-ch10-lecture3-judaism-text-worship-sacred-practice.html`): 27 old slides → 30 new slides. 20 old text units are not verbatim in the new deck; 16 are below 90% word coverage. All are listed in the intentional-changes section. **No unexplained content loss.**
+- Lecture 1 slides B (old 2, Lecture Roadmap) and E (old 5, History, Memory & Sacred Story) were removed on 2026-10-19 at Steven's request; their converted HTML is preserved verbatim in the "L1 slide edits after the _revFA26 rename" section, and the originals remain in the archived pre-edit deck.
 - Old slide-ID/number cross-references in notes: one stale reference in L3 notes ("slides 55-57") was changed to "the previous slide".
 
 ## Lecture 1: slide mapping (old slide number → new permanent ID)
@@ -22,14 +23,14 @@ Prepared 2026-10-19 for Steven Austin. Covers REL 210 Ch10 Lectures 1-3 only (th
 | Old # | Old title / label | New ID(s) | New slide title(s) | Word coverage |
 |---|---|---|---|---|
 | 1 | Judaism I Origins Exodus Temple and Diaspora | A | Origins, Exodus, Temple & Diaspora | 100% |
-| 2 | Lecture Roadmap | B | Three Historical Turning Points | 100% |
+| 2 | Lecture Roadmap | removed (ID B retired) | see "L1 slide edits after the _revFA26 rename" | n/a |
 | 3 | Section I Ancestral Memory & Covenant | C | Section I: Ancestral Memory & Covenant | 100% |
 | 4 | Names across Jewish History | D | Names across Jewish History | 99% |
-| 5 | History, Memory & Sacred Story | E | History, Memory & Sacred Story | 100% |
+| 5 | History, Memory & Sacred Story | removed (ID E retired) | see "L1 slide edits after the _revFA26 rename" | n/a |
 | 6 | Creation: A World of Order & Responsibility | F | Creation: A World of Order & Responsibility | 100% |
 | 7 | The Great Flood: Divine Judgment and Mercy | G | The Great Flood: Divine Judgment and Mercy | 100% |
 | 8 | Covenant People | H, I | Covenant People; The Covenant Promise | 92% |
-| 9 | Patriarchal Order | J | Patriarchal Order | 97% |
+| 9 | Patriarchal Order | J, AG | Patriarchal Order; The Story of Joseph: The Favored Son | 99% |
 | 10 | Pause and Reflect | K | Pause & Reflect | 25% |
 | 11 | Section II Exodus, Monarchy & Exile | L | Section II: Exodus, Monarchy & Exile | 100% |
 | 12 | The Exodus Narrative | M | The Exodus Narrative | 100% |
@@ -49,9 +50,10 @@ Prepared 2026-10-19 for Steven Austin. Covers REL 210 Ch10 Lectures 1-3 only (th
 | 26 | From Temple to Torah: Rabbinic Judaism | AB | From Temple to Torah: Rabbinic Judaism | 100% |
 | 27 | Antisemitism: A Historical Pattern | AC | Antisemitism: A Historical Pattern | 100% |
 | 28 | Pause and Synthesize | AD | Pause & Reflect | 60% |
+| (new) | (none) | AH | Joseph in Egypt: How Israel Came to Egypt | n/a |
 | (new) | (none) | AE | Beyond the Lecture: Modern Jewish Worlds | n/a |
 
-**Full ID list (L1):** A B C D E F G H I J K L M N O P Q R S T U V W X Y Z AA AB AC AD AE
+**Full ID list (L1):** A C D F G H I J AG AH K L M N O P Q R S T U V W X Y Z AA AB AC AD AE
 
 ## Lecture 2: slide mapping (old slide number → new permanent ID)
 
@@ -146,8 +148,9 @@ Prepared 2026-10-19 for Steven Austin. Covers REL 210 Ch10 Lectures 1-3 only (th
 
 ### Lecture 1
 - **Old 1 (title) → A.** Kicker reworded (see above).
+- **Old 2 → B, removed 2026-10-19** (ID B retired). **Old 3 → C,** restyled with a background image. **Old 5 → E, removed 2026-10-19** (ID E retired; one method sentence moved into C's notes). See "L1 slide edits after the _revFA26 rename" below.
 - **Old 8 → H + I.** The Genesis 17:7 reference is now a quote slide (I) with the full NRSV text. The "Covenant: Literally, a contract. In the Bible, an agreement between God and his people; two-way promise" box was reworded per Steven: heading "Covenant (Hebrew *berit*)", text "Like a contract, it binds two parties with promises. Unlike a contract, it is an ongoing relationship of mutual loyalty between unequal partners—God and Israel—sealed by an oath or a sign." (same wording on L2 S). The notes already say covenant is "more than a commercial contract" and the I takeaway says "not a one-time deal", so they agree; the note phrase "thy seed after thee" became "your offspring after you" to match NRSV.
-- **Old 9 → J.** The SmartArt image (Abraham → Isaac → Jacob (Israel)) is rebuilt as an HTML flow with the same three labels.
+- **Old 9 → J.** The SmartArt image (Abraham → Isaac → Jacob (Israel)) is rebuilt as an HTML flow with the same three labels. Later passes added the matriarchs to the flow and a final tier of Jacob's children by mother (see "L1 slide edits after the _revFA26 rename").
 - **Old 24 → Y + Z.** The dense slide was split: the definition and exile distinction on Y, the four features on Z.
 - **Old 17, 23, 27.** Takeaway lines kept verbatim.
 - **New AE.** "Beyond the Lecture" slide linking the existing rabbit-hole supplement (house pattern from Ch07), relative link only.
@@ -201,7 +204,7 @@ Prepared 2026-10-19 for Steven Austin. Covers REL 210 Ch10 Lectures 1-3 only (th
 - **Old 25.** "(chuppah)" popup added inside the marriage bullet.
 
 ## Reading-guide review-question pass (2026-10-19)
-Requested by Steven. Pause slides now ask questions from the PHIL 210 Ch10 Reading Guide (source: `public/phil-210/reading_guides/PHIL210_Ch10_ReadingGuide.html` in this repo). The decks were also renamed (git mv) to `…_revFA26.html`, and `index.html` was updated.
+Requested by Steven. Pause slides now ask questions from the PHIL 210 Ch10 Reading Guide (source: `public/phil-210/reading_guides/PHIL210_Ch10_ReadingGuide.html` in this repo). The decks were also renamed (git mv) to `…_revFA25.html`, then by Steven to `…_revFA26.html` (commit 1efe28b), and `index.html` was updated.
 
 **How each pause works now:**
 - The guide question is quoted verbatim, labeled "Reading Guide · Review Question N".
@@ -321,6 +324,144 @@ Steven approved items 1–17 of `external_audit_evaluation.md`. Not done: the op
 
 **Textbook cautions:** recorded for the instructor only in `ch10_textbook_cautions.md`; they are not in the decks (the AP and X notes include short cautions where the deck topic overlaps).
 
+## L1 slide edits after the _revFA26 rename (2026-10-19)
+Requested by Steven. This pass changed Lecture 1 only. The L2 and L3 files are byte-identical to commit 1efe28b. L1 now has 31 slides: A C D F G H I J AG AH K L … AE (after the J/AF change and the Joseph slides below).
+
+**Removed slides (IDs retired, never reused; recorded in the PERMANENT SLIDE IDS comment):**
+- **B, "Lecture Roadmap: Three Historical Turning Points"** (old slide 2). It previewed the three sections; the section slides C, L and U still name each one.
+- **E, "History, Memory & Sacred Story"** (old slide 5).
+  - Cross-reference check: no Look-back line, "Taught on" list, popup, or note in L1–L3 cited B or E. The only mention was in my workspace evaluation of the external audit ("L1 E itself separates sacred narrative from historical evidence", finding 10), which is not in the repo.
+  - **Flag:** E's method point supports the wording on H ("Jewish tradition traces its story to Abram"), so one sentence was moved into C's speaker notes only: "Method reminder (moved from the removed slide E): Genesis is sacred narrative that interprets origins through relationship with God; historians ask different questions of texts and archaeology, and a remembered story can shape identity even where its details are debated."
+  - Already covered elsewhere: A's notes ("the earliest biblical narratives cannot be treated like modern archival history"). E's Passover example of collective memory is not carried over.
+- The originals of both slides remain in the archived pre-edit deck (`backups/ch10-judaism/rel210-ch10-lecture1-judaism-origins-exodus-temple-diaspora.html`, old slides 2 and 5). The converted versions as they stood at commit 1efe28b are preserved verbatim here:
+
+```html
+<section data-slide-id="B">
+<p class="kicker">Lecture Roadmap</p>
+<h2>Three Historical Turning Points</h2>
+<div class="card-grid cols-3">
+  <div class="card teal">
+    <h3><span class="roman">I</span>A People before a State</h3>
+    <p>How do creation, ancestry, and covenant establish identity?</p>
+  </div>
+  <div class="card purple">
+    <h3><span class="roman">II</span>Liberation, Kingdom &amp; Exile</h3>
+    <p>How do Exodus, Torah, monarchy, and catastrophe reshape the people?</p>
+  </div>
+  <div class="card crimson">
+    <h3><span class="roman">III</span>Temple to Torah</h3>
+    <p>How does Judaism survive conquest, diaspora, and the loss of the Temple?</p>
+  </div>
+</div>
+<aside class="notes">
+  <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+    <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+    <p style="margin-bottom: 1em;">Preview the lecture’s three movements. Each section ends with an institutional or theological adaptation: covenant identity, renewed Torah-centered community, and rabbinic Judaism.</p>
+    <p style="margin-bottom: 1em;">Students should track both continuity and change. The tradition preserves older memories while interpreting them differently in new historical settings.</p>
+  </div>
+</aside>
+</section>
+
+<section data-slide-id="E">
+<h2>History, Memory &amp; Sacred Story</h2>
+<div class="card-grid cols-3">
+  <div class="card teal">
+    <h3>Sacred Narrative</h3>
+    <p>Genesis and Exodus interpret origins through relationship with God.</p>
+  </div>
+  <div class="card purple">
+    <h3>Historical Evidence</h3>
+    <p>Texts, archaeology, inscriptions, and comparative study answer different questions.</p>
+  </div>
+  <div class="card crimson">
+    <h3>Collective Memory</h3>
+    <p>A story can shape identity and practice even when its details remain historically debated.</p>
+  </div>
+</div>
+<p class="takeaway">Historical and religious questions overlap&mdash;but they are not identical.</p>
+<aside class="notes">
+  <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+    <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+    <p style="margin-bottom: 1em;">Establish a careful method before discussing Genesis and Exodus. Religious narratives make claims about divine purpose, human identity, and covenant; historians investigate composition, context, material evidence, and chronology.</p>
+    <p style="margin-bottom: 1em;">Do not reduce the choice to “literal fact or meaningless fiction.” Collective memory can be historically formative. Passover is a clear example: later generations place themselves inside the Exodus story.</p>
+  </div>
+</aside>
+</section>
+```
+
+**C, Section I: Ancestral Memory & Covenant (restyled):**
+- It was a plain section divider; it now uses the same format as title slide A:
+  - full-bleed background `images/rel210-ch10-l1-section1-abraham-stars.webp`;
+  - the same dark blurred panel with gold border and gold rule;
+  - the background alt text in screen-reader text, starting "AI-generated…", as on A.
+- Text is unchanged: kicker "Section I", title, and question.
+- **Flag:** the panel is moved up 3.6em (`.title-overlay.upper`, L1-only CSS) so it does not cover the figure on the hill. Otherwise it is identical to A.
+- Notes added:
+  - the Genesis 15:5 (NRSV) connection: "Look toward heaven and count the stars, if you are able to count them" / "So shall your descendants be."
+  - the method sentence from E.
+
+**J, Patriarchal Order (Jacob's children folded in at Steven's request):**
+- The pedigree is now four tiers in the same gold-bordered box style: Abraham & Sarah ↓ Isaac & Rebekah ↓ Jacob (Israel), Leah & Rachel ↓ a final row of four boxes, one per mother (Genesis 35:22–26, NRSV spellings):
+  - Leah: Reuben *(firstborn)*, Simeon, Levi, Judah, Issachar, Zebulun; daughter Dinah
+  - Rachel: Joseph, Benjamin
+  - Bilhah (Rachel's maid): Dan, Naphtali
+  - Zilpah (Leah's maid): Gad, Asher
+- Layout: the bullets now sit above the pedigree at full width. The old two-column split is gone.
+- Legibility, measured at 1280×720: names 16.8px, mother names 18.8px, the "maid" labels 16.5px.
+- No overflow at 960×700, 1280×720 or 1920×1080.
+- Bullets: the firstborn bullet and its popup are unchanged. "Jacob's twelve sons establish the twelve tribes of Israel" is kept, with "(next slide)" dropped.
+- Moved from the slide into J's notes:
+  - the third bullet, "Story of Joseph", now a note that his story (Genesis 37–50) brings the family to Egypt (that note later moved to AG; J's notes now say "Next: AG and AH tell the story of Joseph…");
+  - from the short-lived AF slide: the closing line "Reuben is the firstborn, yet Judah leads and the birthright passes to Joseph's sons";
+  - AF's notes on the births and Dinah, on 1 Chronicles 5:1–2, and on Ephraim and Manasseh (Genesis 48:5; Joshua 14:4), with their NRSV sources.
+
+**AF, "Jacob's Children: The Twelve Tribes":** added after J earlier on 2026-10-19, then removed the same day once its content fit on J. ID AF is retired and never reused, as recorded in the PERMANENT SLIDE IDS comment. It was never committed.
+
+**AG and AH, the story of Joseph (new, after J; Steven's request):**
+- Purpose: connect the tribes on J to Egypt and the Exodus. Seven story beats were too dense for one slide, so the story is split across two.
+- IDs: AG is the next unused ID after the retired AF; AH follows. Both are recorded in the PERMANENT SLIDE IDS comment.
+- Bullets are written for first-year students. All quotations are NRSV (1989), checked 2026-10-19 on bible.oremus.org; the KJV wording was checked on biblegateway.com.
+- **AG, "The Story of Joseph: The Favored Son"** (kicker Genesis 37). Image and text layout, like M.
+  - Bullets:
+    - "Favored son: Jacob loves Joseph most and gives him 'a long robe with sleeves'" (Genesis 37:3)
+    - "Dreams: Joseph dreams that his family will bow down to him" (37:5–8)
+    - "Betrayal: his jealous brothers sell him, and traders carry him off to Egypt" (37:28)
+  - Image `images/rel210-ch10-l1-joseph-robe.webp`. Visible caption: "AI-generated illustration: Joseph's robe, the 'coat of many colours' of older translations such as the KJV" (KJV Genesis 37:3: "a coat of many colours").
+  - Notes:
+    - J's "Story of Joseph" note, moved here;
+    - a two-minute storytelling script;
+    - a note on the translation difference (the Hebrew phrase is uncertain);
+    - a link back to J's firstborn theme;
+    - sources.
+- **AH, "Joseph in Egypt: How Israel Came to Egypt"** (kicker Genesis 39–47). Text only.
+  - Bullets:
+    - Rise: Pharaoh's dreams, seven years of plenty and seven of famine (41:25–30, 41:41)
+    - Famine
+    - Reconciliation: "I am your brother, Joseph, whom you sold into Egypt" (45:4)
+    - Settlement: seventy people in Goshen (46:27; 47:27)
+  - Takeaway: "Generations later, 'a new king arose over Egypt, who did not know Joseph' (Exodus 1:8)—and the Exodus story begins."
+  - Notes: a storytelling script quoting 45:5 ("God sent me before you to preserve life"), the Genesis 50:20 theme, the transition to Section II, and the sacred-narrative reminder.
+- **M, "The Exodus Narrative":** one transition note added, linking back to AG–AH and Exodus 1:8. The pause K and Section II divider L still sit between AH and M, and the flow reads cleanly.
+- **Mapping:** AG is mapped to old slide 9, because it expands the original "Story of Joseph" bullet. AH is new.
+
+**L and S, new images (Steven's request; no ID changes, no new slides):**
+- **L, Section II: Exodus, Monarchy & Exile.**
+  - Was a plain section divider. It now uses the A/C format:
+    - full-bleed background `images/rel210-ch10-l1-section2-exodus-pillar.webp`;
+    - the same dark blurred panel with gold border and gold rule;
+    - the alt text in screen-reader text, starting "AI-generated…".
+  - Text is unchanged.
+  - **Flag:** the panel is narrower (max 430px), aligned left and moved up 4.2em (`.title-overlay.left-sky`, L1-only CSS). This keeps it clear of the pillar of fire and the procession at all three test sizes. The title wraps to two lines.
+  - Notes: added Exodus 13:21 (NRSV, checked 2026-10-19 on bible.oremus.org): "The Lord went in front of them in a pillar of cloud by day, to lead them along the way, and in a pillar of fire by night, to give them light, so that they might travel by day and by night."
+- **S, Return & the Second Temple.**
+  - Now uses the house image+text layout. The four bullets are unchanged; the list is now tight.
+  - Image: `images/rel210-ch10-l1-second-temple.webp`.
+  - **Flag:** S teaches the Persian-era rebuilding (538/515 BCE), but the image shows Herod's expansion (begun 20 BCE). The visible caption therefore reads "AI-generated imagining of the Second Temple as later expanded by Herod; not an archaeological reconstruction". The alt text says "as rebuilt by Herod".
+  - New notes paragraph on the difference, quoting Britannica, "Temple of Jerusalem" (checked 2026-10-19):
+    - the 515 BCE Temple "was constructed as a modest version of the original building";
+    - under Herod "the area of the Temple Mount was doubled" and "the Temple was raised, enlarged, and faced with white stone."
+  - The note adds that this is the Temple destroyed in 70 CE (X), and that the fortress suggests the Antonia.
+
 ## Removed (with reason)
 - **Fragments** (all decks): not used in the house style.
 - **`assets/original-media/image1.jpeg`** (gray texture background on every old slide): decorative template background; the house style uses the charcoal theme. The file is untouched and still used by the supplements via `deck.css`.
@@ -385,6 +526,10 @@ All Bible quotations in L1–L3 are now the 1989 NRSV, verbatim, labeled "(NRSV)
 | Deck/ID | File (images/) | Size | Alt text |
 |---|---|---|---|
 | L1 A | rel210-ch10-l1-title-jerusalem-dawn.webp | 123,370 B | AI-generated painting of an ancient walled city crowded onto a hilltop at golden sunrise, with misty hills behind and a small camel caravan climbing a dirt road toward it. |
+| L1 C | rel210-ch10-l1-section1-abraham-stars.webp | 106,126 B (1280×720) | AI-generated painting of a robed figure, seen from behind, standing on a rocky hilltop beside dark goat-hair tents under a night sky crowded with stars, with the Milky Way and faint streaks of starlight above a wide, shadowed valley. (Supplied by Steven 2026-10-19; full-bleed background with the title-slide panel, alt text in screen-reader text as on A.) |
+| L1 AG | rel210-ch10-l1-joseph-robe.webp | 184,058 B | AI-generated painting of a teenage boy with dark curly hair in an ankle-length, long-sleeved robe striped crimson, saffron, indigo, and green, standing in a golden-hour hillside pasture among grazing sheep while five bearded men in plain brown robes watch from behind. (Supplied by Steven 2026-10-19.) |
+| L1 L | rel210-ch10-l1-section2-exodus-pillar.webp | 114,118 B | AI-generated painting of a long line of travelers with donkeys and bundles, seen from behind, walking across a dark desert plain toward distant mountains, led by a tall, glowing pillar of fire under a starry indigo sky, with the lights of a city on the far left horizon. (Supplied by Steven 2026-10-19; background with title-slide panel.) |
+| L1 S | rel210-ch10-l1-second-temple.webp | 210,136 B | AI-generated painting of Jerusalem’s Temple Mount as rebuilt by Herod: a tall, boxy white sanctuary with a gold doorway rises above inner courts on a huge platform with massive stone walls and colonnaded porticoes; smoke rises from the altar, crowds climb a monumental stairway, and a stone fortress stands at the left corner, with the city and hills around. (Supplied by Steven 2026-10-19. Caption: AI-generated imagining of the Second Temple as later expanded by Herod; not an archaeological reconstruction.) |
 | L1 F | rel210-ch10-l1-creation-light-over-waters.webp | 122,996 B | AI-generated painting of golden light breaking through swirling clouds over a dark, wide sea, with the sun on the horizon. |
 | L1 G | rel210-ch10-l1-noah-ark-rainbow.webp | 142,752 B | AI-generated painting of a large wooden ark resting on a rocky hilltop under a rainbow, with elephants, giraffes, and sheep coming out and a man, a woman, and two children watching nearby. |
 | L1 M | rel210-ch10-l1-exodus-sea-crossing.webp | 190,660 B | AI-generated painting of a crowd of ancient families with children and sheep walking on a wet seabed between towering walls of green water toward the sunrise, led by a man with a staff seen from behind. |
