@@ -13,8 +13,8 @@ Prepared 2026-10-19 for Steven Austin. Covers REL 210 Ch10 Lectures 1-3 only (th
 ## Result
 
 - **Lecture 1** (`rel210-ch10-lecture1-judaism-origins-exodus-temple-diaspora_revFA26.html`, formerly `rel210-ch10-lecture1-judaism-origins-exodus-temple-diaspora.html`): 28 old slides → 32 new slides. 47 old text units are not verbatim in the new deck; 43 are below 90% word coverage. All are listed in the intentional-changes section. **No unexplained content loss.**
-- **Lecture 2** (`rel210-ch10-lecture2-judaism-god-covenant-holiness-hope_revFA26.html`, formerly `rel210-ch10-lecture2-judaism-god-covenant-holiness-hope.html`): 31 old slides → 44 new slides. 58 old text units are not verbatim in the new deck; 30 are below 90% word coverage. All are listed in the intentional-changes section. **No unexplained content loss.**
-- **Lecture 3** (`rel210-ch10-lecture3-judaism-text-worship-sacred-practice_revFA26.html`, formerly `rel210-ch10-lecture3-judaism-text-worship-sacred-practice.html`): 27 old slides → 30 new slides. 20 old text units are not verbatim in the new deck; 16 are below 90% word coverage. All are listed in the intentional-changes section. **No unexplained content loss.**
+- **Lecture 2** (`rel210-ch10-lecture2-judaism-god-covenant-holiness-hope_revFA26.html`, formerly `rel210-ch10-lecture2-judaism-god-covenant-holiness-hope.html`): 31 old slides → 45 new slides. 68 old text units are not verbatim in the new deck; 37 are below 90% word coverage. All are listed in the intentional-changes section. **No unexplained content loss.**
+- **Lecture 3** (`rel210-ch10-lecture3-judaism-text-worship-sacred-practice_revFA26.html`, formerly `rel210-ch10-lecture3-judaism-text-worship-sacred-practice.html`): 27 old slides → 31 new slides. 57 old text units are not verbatim in the new deck; 41 are below 90% word coverage. All are listed in the intentional-changes section. **No unexplained content loss.**
 - Lecture 1 slides B (old 2, Lecture Roadmap) and E (old 5, History, Memory & Sacred Story) were removed on 2026-10-19 at Steven's request; their converted HTML is preserved verbatim in the "L1 slide edits after the _revFA26 rename" section, and the originals remain in the archived pre-edit deck.
 - Old slide-ID/number cross-references in notes: one stale reference in L3 notes ("slides 55-57") was changed to "the previous slide".
 
@@ -63,8 +63,8 @@ Prepared 2026-10-19 for Steven Austin. Covers REL 210 Ch10 Lectures 1-3 only (th
 | 1 | Judaism II God Covenant Holiness and Hope | A | God, Covenant, Holiness & Hope | 100% |
 | 2 | Lecture Roadmap | B | Three Questions | 100% |
 | 3 | Section I One God & Ethical Monotheism | C | Section I: One God & Ethical Monotheism | 100% |
-| 4 | Teachings of Judaism – One God | D, E | One God: The Shema; The Divine Name: YHWH | 96% |
-| 5 | Teachings of Judaism – One God | E, F, G | The Divine Name: YHWH; Why the Cryptic Name?; What the Name Teaches | 100% |
+| 4 | Teachings of Judaism – One God | D, E | One God: The Shema; The Divine Name: YHWH | 93% |
+| 5 | Teachings of Judaism – One God | E, F | The Divine Name: YHWH; Why the Cryptic Name? | 93% |
 | 6 | Titles of Deity | H | Titles of Deity | 100% |
 | 7 | Ethical Monotheism | I | Ethical Monotheism | 100% |
 | 8 | Ethical Monotheism | J | Ethical Monotheism: One God, One Human Race | 96% |
@@ -77,57 +77,60 @@ Prepared 2026-10-19 for Steven Austin. Covers REL 210 Ch10 Lectures 1-3 only (th
 | 15 | Section II Covenant, Holiness & Moral Obligation | R | Section II: Covenant, Holiness & Moral Obligation | 100% |
 | 16 | Covenant People | S | Covenant People | 90% |
 | 17 | Abrahamic Covenant | T, U | Abrahamic Covenant: Making the Covenant; Abrahamic Covenant: Blessings | 93% |
-| 18 | Chosen People | V, W | Chosen People; What Chosenness Means | 96% |
+| 18 | Chosen People | V, W | Chosen People; What Chosenness Means | 94% |
 | 19 | Be ye therefore Holy, even as I am holy | X, Y, Z, AA, AB | You Shall Be Holy: Imitatio Dei; Rashi: Holiness as Separation; Nahmanides: Holiness beyond the Letter of the Law; Midrash: Why Leviticus 19 Was Said to Everyone; Holiness in Everyday Life | 97% |
 | 20 | Be ye therefore Holy, even as I am holy | AB | Holiness in Everyday Life | 98% |
-| 21 | The Ten Commandments | AC | The Ten Commandments: An Overview | 100% |
+| 21 | The Ten Commandments | AC | The Ten Commandments (Aseret ha-Dibrot, "the Ten Utterances") | 92% |
 | 22 | The Ten Commandments | AD, AE | The Ten Commandments Begin with Freedom; Commandments for a Free Society | 95% |
 | 23 | The Ten Commandments | AF, AG | Not Taking God’s Name in Vain; Evil in God’s Name | 95% |
 | 24 | Ethical Monotheism and Social Justice | AH | Ethical Monotheism & Social Justice | 100% |
 | 25 | Pause and Reflect | AI | Pause & Reflect | 35% |
 | 26 | Section III Hope, the World to Come & Symbolism | AJ | Section III: Hope, the World to Come & Symbolism | 100% |
-| 27 | Teachings of Judaism – Messiah | AK | Teachings of Judaism: Messiah | 96% |
+| 27 | Teachings of Judaism – Messiah | AK, AS | Messiah: The Anointed King; Messianic Hope Today | 92% |
 | 28 | Four Biblical Hells | AL, AM | Four Biblical “Hells”; Video: The Bible’s Four Hells | 100% |
 | 29 | Resurrection and the World to Come | AN, AO | Resurrection & the World to Come; The World to Come Today | 100% |
 | 30 | Symbols of Jewish Identity | AP | Symbols of Jewish Identity | 100% |
 | 31 | Pause and Synthesize | AQ | Pause & Reflect | 44% |
 | (new) | (none) | AR | Two Impulses: Good & Evil | n/a |
+| (new) | (none) | AT | Beyond the Lecture: Messiah in Jewish History | n/a |
 
-**Full ID list (L2):** A B C D E F G H I J K L M N O P Q R S T U V W X Y Z AA AB AC AD AE AF AG AR AH AI AJ AK AL AM AN AO AP AQ
+**Full ID list (L2):** A B C D E F H I J K L M N O P Q R S T U V W X Y Z AA AB AC AD AE AF AG AR AH AI AJ AK AS AL AM AN AO AP AQ AT
 
 ## Lecture 3: slide mapping (old slide number → new permanent ID)
 
 | Old # | Old title / label | New ID(s) | New slide title(s) | Word coverage |
 |---|---|---|---|---|
 | 1 | Judaism III Text Worship and Sacred Practice | A | Text, Worship & Sacred Practice | 100% |
-| 2 | Lecture Roadmap | B | Three Ways Judaism Is Lived | 100% |
+| 2 | Lecture Roadmap | removed (ID B retired) | see "L3 slide B removed; images on L, M, O, Q" | n/a |
 | 3 | Section I Sacred Writings & Interpretation | C | Section I: Sacred Writings & Interpretation | 100% |
 | 4 | Torah: More Than “Law” | D | Torah: More Than “Law” | 100% |
 | 5 | The Tanakh: Three Collections | E | The Tanakh: Three Collections | 100% |
 | 6 | Written Torah and Oral Torah | F | Written Torah & Oral Torah | 100% |
-| 7 | Mishnah, Gemara & Talmud | G | Mishnah, Gemara & Talmud | 100% |
+| 7 | Mishnah, Gemara & Talmud | G | Mishnah, Gemara & Talmud | 90% |
 | 8 | Midrash: Reading between the Lines | H | Midrash: Reading between the Lines | 100% |
 | 9 | Study Is a Religious Practice | I | Study Is a Religious Practice | 100% |
 | 10 | Pause and Reflect | J | Pause & Reflect | 26% |
 | 11 | Section II Law, Holiness & Everyday Practice | K | Section II: Law, Holiness & Everyday Practice | 100% |
 | 12 | Mitzvot: Commandments as Covenant Practice | L | Mitzvot: Commandments as Covenant Practice | 100% |
 | 13 | Halakhah: A Way of Walking | M | Halakhah: A Way of Walking | 100% |
-| 14 | The Holiness Code: Sacred & Ordinary | N, O | The Holiness Code: “You Shall Be Holy”; The Holiness Code: Sacred & Ordinary | 100% |
-| 15 | Temple Sacrifice & Its Transformation | P | Temple Sacrifice & Its Transformation | 100% |
-| 16 | Kashrut Making Food Sacred | Q | Kashrut: Making Food Sacred | 100% |
+| 14 | The Holiness Code: Sacred & Ordinary | N, O | The Holiness Code: “You Shall Be Holy”; The Holiness Code: Sacred & Ordinary | 94% |
+| 15 | Temple Sacrifice & Its Transformation | P | Temple Sacrifice & Its Transformation | 92% |
+| 16 | Kashrut Making Food Sacred | Q | Kashrut: Making Food Sacred | 98% |
 | 17 | Texts Worn, Touched & Remembered | R | Texts Worn, Touched & Remembered | 100% |
 | 18 | Pause and Reflect | S | Pause & Reflect | 26% |
 | 19 | Section III Worship, Sacred Time & Life Cycle | T | Section III: Worship, Sacred Time & Life Cycle | 100% |
-| 20 | Worship in the Synagogue | U, V | Worship in the Synagogue; Who Leads, Who Counts | 100% |
+| 20 | Worship in the Synagogue | U, V | Worship in the Synagogue; Who Leads, Who Counts | 99% |
 | 21 | Shabbat: The Meaning of Sacred Rest | W | Shabbat: The Meaning of Sacred Rest | 100% |
 | 22 | Shabbat as Lived Practice | X | Shabbat as Lived Practice | 95% |
 | 23 | The Sacred Year Major Festivals | Y | The Sacred Year: Major Festivals | 100% |
-| 24 | Passover Seder: Memory Performed | Z, AA | Passover Seder: Memory Performed; As Though You Left Egypt | 100% |
-| 25 | Life Cycle Covenant Community and Family | AB | Life Cycle: Covenant, Community & Family | 97% |
+| 24 | Passover Seder: Memory Performed | Z, AA | Passover Seder: Memory Performed; As Though You Left Egypt | 98% |
+| 25 | Life Cycle Covenant Community and Family | AB | Life Cycle: Birth & Coming of Age | 74% |
 | 26 | Death Mourning and Memory | AC | Death, Mourning & Memory | 100% |
-| 27 | Pause and Synthesize | AD | Pause & Reflect | 31% |
+| 27 | Pause and Synthesize | AD | Pause & Reflect | 27% |
+| (new) | (none) | AE | Marriage: Chuppah & Ketubah | n/a |
+| (new) | (none) | AF | Beyond the Lecture: From Temple to Synagogue | n/a |
 
-**Full ID list (L3):** A B C D E F G H I K L M N O P Q R S T U V W X J Y Z AA AB AC AD
+**Full ID list (L3):** A C D E F G H I K L M N O P Q R S T U V W X J Y Z AA AB AD AE AC AF
 ## Intentional changes (every non-verbatim old unit)
 
 ### All three decks (structural)
@@ -504,7 +507,361 @@ Requested by Steven. This pass changed Lecture 1 only. The L2 and L3 files are b
     - a firm Masada date (given as 73/74).
 - **index.html:** a new card after the Rabbit Hole card in the Judaism grid (lecture-day "Optional Deep-Dive", badge "Mini-Lecture"). The grid now has 6 cards (2 columns). **Flag:** index.html already contains mojibake (e.g. "â†’", "âœ¡ï¸") in older cards. It was left untouched; the new card uses `&rarr;`, as the newer cards do.
 
+## L2 revision pass: plan items 1–22 (approved by Steven 2026-10-19)
+Source: `l2_revision_plan.md`, items 1–22. Items 23 and 24–29 were not approved and were not done. Workflow: `lecture-deck-revision-pass`. L1 and L3 are unchanged by this pass. L2 went from 44 to 45 slides: G was retired, and AS and AT are new. Sequence: A B C D E F H I J K L M N O P Q R S T U V W X Y Z AA AB AC AD AE AF AG AR AH AI AJ AK AS AL AM AN AO AP AQ AT. The pre-pass L2 HTML is archived in `bak_l2rev/`, and the builder in `tools/build_l2.pre_l2rev.py`.
+
+**Images and section dividers (items 1–11)**
+- **C, R, AJ.** These now have full-bleed backgrounds in the L1 divider format: `title-slide`, `data-background-image`, and a `.left-sky` text panel placed top-left, away from the subject. The images are `rel210-ch10-l2-section-one-god.webp`, `-section-sinai-night.webp` and `-section-hope-dawn.webp`. Alt text was written from viewing each image, and the notes explain what each image shows.
+  - C's notes cite Berakhot 13b.
+  - R's notes cite Exod 19:16 and 19:18 (NRSV).
+  - **Flag:** on R the panel overlaps the edge of the smoke slightly; the mountain stays clear.
+- **T.** Image `-covenant-between-pieces.webp`, captioned "AI-generated illustration".
+  - **Flag:** the image shows one row of halves, but Gen 15:10 implies two facing rows. This is noted in the notes.
+- **AK.** Image `-samuel-anoints-david.webp`.
+- **AB.** Image `-gleaners-field-corner.webp`.
+- **M.** Image `-abraham-smashes-idols.webp`. The caption calls it a rabbinic legend (Genesis Rabbah 38:13), not Torah. The notes tell the midrash using quotes verified on Sefaria.
+  - **Flag:** the midrash gives no age for Abraham, so the image's young Abraham is noted as artistic license.
+- **AC.** The tablets image was replaced by `-tablets-sinai.webp`. The old stone-tablets image is kept in `images/`; nothing was deleted.
+- **AP (item 8).** Real photo `rel210-ch10-l2-arch-of-titus-menorah.webp`, 1280×960, WebP q68, 218 KB.
+  - Source: Wikimedia Commons, File:Arch_of_titus_relief_2.jpg, by Anthony M. from Rome, Italy, licensed CC BY 2.0 (via Flickr).
+  - The visible caption gives the author and license and links to both the license and the file page.
+  - Notes cite Britannica "Arch of Titus" and Josephus, *War* Book 7 (the triumph).
+- **F and S provenance (item 10).**
+  - Both files come from Steven's original deck: `original-media/image16.png` (F, 1792×1024) and `image6.png` (S, 960×1200). Neither has any embedded metadata. Both first appear in the repo in commit 5eca267.
+  - 1792×1024 is a native DALL·E 3 output size, so F is *probably* AI-generated, but this is not confirmed.
+  - Both are captioned "Illustration from the original slides (source unknown)", and F's alt text says "Painting-style illustration". **Flag: provenance unknown.**
+- **Captions.** All image captions use the existing `.img-caption` style.
+
+**Story gaps and density (items 12–21)**
+- **D:** notes on the mezuzah's slant, citing Rema on Shulchan Arukh YD 289:6 (Sefaria).
+- **E:** trimmed to 3 bullets.
+- **F + G merged:** a "What the name teaches" bullet was added to F; the five card headings moved to F's notes. **G is retired**; its slide is preserved verbatim below.
+- **J:** a Noah covenant line (Gen 9:10, NRSV, "and with every living creature") and a popup `l2-noahide` listing the seven laws (Sanhedrin 56a, Sefaria).
+- **S:** trimmed.
+- **T:** rewritten as a story in 4 bullets: Gen 15:5, 15:17, 17:5 and 17:11–12 (NRSV). Popups were kept, and the Jeremiah 34:18 popup was revised (NRSV). The citation list moved to the notes.
+- **W:** trimmed to 4 bullets.
+- **Y and Z:** "Who:" lines added for Rashi and Nahmanides (Britannica).
+- **AB:** the first bullet now quotes Lev 19:9–10 (NRSV).
+- **AC:** a Sinai line plus the Ten Commandments in Jewish numbering, in two lists (1–5 and 6–10). The notes cite Exod 32:15 and Bava Batra 14a.
+  - **Flag:** the columns are unlabeled, because the "five per tablet" split was not verified.
+- **AF:** a redundant bullet was removed.
+- **AR:** the good-impulse card text was shortened.
+- **AH:** a "prophet's story" bullet (Amos 7:13) and Micah 6:8 on the slide, with the story in the notes. The old bullet and takeaway moved to the notes.
+- **AK / AS:** AK was retitled "Messiah: The Anointed King", with an anointed popup, 1 Sam 16, 2 Sam 7:16 and Isaiah, plus a button "Mini-lecture: Messiah in Jewish History →".
+  - **AS (new)**, "Messianic Hope Today", holds the Classical and Reform cards and the takeaway.
+- **AT (new, last):** "Beyond the Lecture: Messiah in Jewish History", with a button to the new deck.
+  - **Flag:** L2 had no Independent Study / "Beyond the Lecture" slide, so AT was created in the style of L1 AE.
+- **Look-back and Taught-on check:**
+  - L2 Q "D–H" and "The Divine Name" (E) are still valid after G's retirement.
+  - The AQ and L3 references point to unchanged slides.
+  - No reference needed editing.
+- **Font-size flag:** at 1280×720, `.img-caption` renders at 11.1px and the kicker and citation lines at 13.7px. This is the existing house style, also used in L1 and L3, and was not restyled. All body text is at least 16px.
+
+Retired slide G, verbatim from the pre-pass deck:
+
+```html
+<section data-slide-id="G">
+            <p class="kicker">Teachings of Judaism &middot; One God</p>
+            <h2>What the Name Teaches</h2>
+            <div class="card-grid cols-3 five">
+              <div class="card teal">
+                <h3>Eternal Self-Existence</h3>
+                <p>&ldquo;I am&rdquo; / &ldquo;I will be&rdquo;: God simply is, uncreated.</p>
+              </div>
+              <div class="card purple">
+                <h3>Ineffability of God</h3>
+                <p>No name can capture or control God.</p>
+              </div>
+              <div class="card crimson">
+                <h3>Active Presence</h3>
+                <p>God is the one who will be there with the people.</p>
+              </div>
+              <div class="card gold">
+                <h3>Hebrew Linguistic Roots</h3>
+                <p>YHWH and <em>Ehyeh</em> both echo <em>hayah</em>, &ldquo;to be.&rdquo;</p>
+              </div>
+              <div class="card teal">
+                <h3>Contrast to Pagan Deities</h3>
+                <p>Not a manageable local god whose name can be used to summon it.</p>
+              </div>
+            </div>
+            <aside class="notes">
+              <div style="font-family: Georgia, serif; font-size: 16px; line-height: 1.6; color: #333;">
+                <h3 style="color: #2c5282; margin-top: 0.5em;">Understanding This Slide</h3>
+                <p style="margin-bottom: 1em;">The five headings are from the original slide; the one-line glosses under each heading summarize the speaker notes for this pair of slides.</p>
+                <p style="margin-bottom: 1em;">Exodus 3 resists treating the divine name like the name of a manageable local deity. “I AM” or “I WILL BE” suggests self-existence, continuing presence, and freedom from human control.</p>
+              </div>
+            </aside>
+            </section>
+```
+
+**New supplement: `rel210-ch10-supplement-messiah-in-jewish-history_revFA26.html`** (24 slides, permanent IDs A–X; builder `tools/build_mj.py`)
+- **Style:** same framework as Roman Judea (1600×900, deck.css): PERMANENT SLIDE IDS, a corner label, the capture-phase Esc fix, ⌨ `aria-expanded` with focus return, alt text and "AI-generated" captions, and sourced notes on every slide.
+- **Images:** reuses the hope-dawn (title), Samuel/David (E), Herod (J) and 70 CE (Trail II divider) images.
+- **Trails:**
+  - I: Kings & Prophets (D–H)
+  - II: Hope under Empire (I–L)
+  - III: Rabbis & Maimonides (M–P)
+  - IV: False Dawns & Modern Paths (Q–U)
+  - then a synthesis (V), a self-check (W) and sources (X).
+- **Verified quotations:**
+  - NRSV: Isa 45:1, Lev 4:3, 1 Sam 16:10–13, 2 Sam 7:16, Isa 11:1/6/12, Jer 23:5, Num 24:17.
+  - Sefaria: Sanhedrin 97b, 98a ("At the entrance of the city of Rome"), 99a; Berakhot 34b; Ketubot 111a (three oaths); Lamentations Rabbah 2:4; JT Taanit 4:5; Amidah and Ani Ma'amin (Metsudah); Maimonides' 12th principle; Kings 11:3, 11:4, 12:1, 12:4 (Touger).
+  - Britannica: messiah, Shabbetai Tzevi, Moses Maimonides.
+  - CCAR Pittsburgh Platform 1885, art. 5, and the 1999 Statement.
+- **Hedged:**
+  - the Dead Sea Scrolls' "Messiahs of Aaron and Israel" (1QS 9:11; "two messiahs?" as a question);
+  - the Psalms of Solomon (paraphrased, not quoted);
+  - Isaiah 11's original setting (notes only);
+  - Chabad: "some followers" proclaimed Schneerson the messiah, his own stance is debated, and the movement split after 1994; no statistics are given;
+  - Haredi opposition is stated as "some".
+- **Dropped as unverified:**
+  - Shabbetai-era "sold their houses" stories;
+  - claims about how long the Sabbatean movement lasted and its later effects;
+  - the "he did not die" sub-group;
+  - the author attribution for the Chabad journal article.
+- **Links:**
+  - L2 AK and L2 AT link to this deck.
+  - Its slide K links to Roman Judea. **Flag:** this link is one-way; the Roman Judea deck was not edited.
+- **index.html:** a new card after the Roman Judea card ("Optional Deep-Dive", "Mini-Lecture"). The existing mojibake was left untouched.
+
+**Tests (2026-10-19):**
+- L1, L2 and L3 at 960×700, 1280×720 and 1920×1080: no overflow, no JS or HTTP errors, no broken images, ID labels OK; keyboard and Esc checks pass.
+- The Messiah deck at the same 3 sizes, with and without show-all-fragments: no out-of-bounds elements, overlaps, JS, console or HTTP errors, or broken images; labels and notes are present on all 24 slides; keyboard and Esc checks pass. Minimum font is 17.6px at 1280×720.
+
+## L2 slide X fix: Sifra Kedoshim 1:1 (approved by Steven 2026-10-19)
+- **Quote:** "To follow in the footsteps of the King" (Silverstein) was replaced by the literal "What is the duty of the king's retinue? To imitate the king."
+  - Citation: Abba Shaul, Sifra, Kedoshim 1:1 (Hebrew: *pamalya la-melekh… lihyot mehakah la-melekh*).
+  - The Hebrew was checked on Sefaria (Venice 1545): אבא שאול אומר פמליא למלך, ומה עליה להיות מחקה למלך.
+  - The source note now says the slide's wording is our literal rendering of the Hebrew, following Silverstein's translation on Sefaria. Silverstein's own wording, including "(and to be holy)", is quoted there in full.
+- **New line under the quote** (`.x-gloss`, 16.8px at 1280×720): "The rabbis read Leviticus 19:2 this way: God is the King, Israel is His retinue, and holiness means imitating God."
+- **Notes:** an imitatio Dei explanation, plus Sotah 14a (Rabbi Ḥama son of Rabbi Ḥanina).
+  - The four examples are quoted from the William Davidson translation (checked 2026-10-19): clothe the naked, visit the sick, console mourners, bury the dead. Ellipses mark the omitted proof verses.
+  - The proof verses are then summarized: Gen 3:21, 18:1, 25:11; Deut 34:6.
+- **No ID change.**
+- **Tests:** L1, L2 and L3 at all 3 sizes: no overflow, errors or broken images. Keyboard and Esc checks pass.
+- **Hashes:** L2 is now 29f4bd3dc217. L1 and L3 are unchanged.
+
+## L2 slides X and AC follow-up (approved by Steven 2026-10-19)
+- **X:** the line "The rabbis read Leviticus 19:2 this way: God is the King, Israel is His retinue, and holiness means imitating God." was moved from under the Sifra quote.
+  - It is now a sub-bullet under the existing Imitatio Dei bullet: `ul.sub`, 0.9em, the house diamond marker, with Reveal's square marker suppressed.
+  - The unused `.x-gloss` CSS was removed. The notes and sources are unchanged.
+- **AC:** the AI image of two rectangular tablets (`rel210-ch10-l2-tablets-sinai.webp`) was replaced. Steven said it resembled the Twin Towers.
+  - New image: `rel210-ch10-l2-moses-tablets.webp`, AI-generated, 1280×720 (16:9), 128 KB, Rembrandt-style.
+  - Layout: the split was widened from 1.35fr/0.65fr to 1.2fr/0.8fr to suit the landscape image.
+  - Alt text was written from viewing the image.
+  - Caption: "AI-generated, in the traditional artistic style; round-topped tablets come from later art, not the biblical text."
+  - The notes now explain that the round top is a later artistic convention and that only one tablet is clearly shown, while Moses carries "the two tablets of the covenant" (Exod 32:15, NRSV, re-checked). The Bava Batra 14a dimensions are kept.
+  - The old files `rel210-ch10-l2-tablets-sinai.webp` and `rel210-ch10-l2-stone-tablets-sinai.webp` remain in `images/`, unused.
+- **No ID changes.**
+- **Tests:** L1, L2 and L3 at 960×700, 1280×720 and 1920×1080: no overflow, errors or broken images. Keyboard and Esc checks pass.
+- **Hashes:** L2 is now 99da18851746. L1 and L3 are unchanged.
+
+## L2 slides X and AP follow-up (approved by Steven 2026-10-19)
+- **X:** "The rabbis read Leviticus 19:2 this way: God is the King, Israel is His retinue, and holiness means imitating God." is now a top-level bullet placed above the Imitatio Dei bullet, at the same level and style.
+  - The sub-bullet and its `ul.sub` CSS were removed. The notes and sources are unchanged.
+- **AP:** the lone Arch of Titus photo became a three-image row (`.sym-row`, a 3-column grid with the same 0.9em gap as the cards), one image under each card.
+  - Every image is cropped the same way (16:9, `object-fit: cover`).
+  - Left: `rel210-ch10-l2-star-of-david.webp`, AI-generated (1280×720, 236 KB). Caption: "AI-generated: a Star of David carved on a synagogue-style facade".
+  - Middle: the Arch of Titus photo. The CC BY 2.0 credit is kept intact: Anthony M. from Rome, Italy, with license and Commons links.
+  - Right: `rel210-ch10-l2-chai.webp`, AI-generated (1280×720, 59 KB). Caption: "AI-generated: a gold Chai (חי) pendant".
+  - Alt text was written from viewing each image.
+  - The notes add an explanation of the image row: the left and right images are AI illustrations, not specific real objects.
+  - The old `figure.fig.titus` CSS was replaced.
+- **No ID changes.** AC–AE were not touched.
+- **Tests:** L1, L2 and L3 at 960×700, 1280×720 and 1920×1080: no overflow, errors or broken images, and AP is not crowded. Keyboard and Esc checks pass.
+- **Hashes:** L2 is now e6f218ecf2f4. L1 and L3 are unchanged.
+
+## L2 slides AC–AE: Jewish name for the Ten Commandments (approved by Steven 2026-10-19)
+- **AC heading:** "The Ten Commandments: An Overview" became "The Ten Commandments", with the subtitle line "(*Aseret ha-Dibrot*, "the Ten Utterances")" (`h2 .h2-sub`).
+  - No Look-back or Taught-on text referenced the old title.
+- **AC, new bullet** (`ul.ten-words`, below the numbering note): "The Torah calls them "ten words" (*aseret ha-devarim*, Exod 34:28; Deut 4:13). The first is a statement, not a command, and the Torah holds 613 commandments in all."
+- **AC, notes:** three new paragraphs.
+  - The name: the NRSV says "the ten commandments"; the Hebrew is עשרת הדברים; Rashi writes עשרת הדברות.
+  - Jewish English translations: NJPS (1985) says "the Ten Commandments".
+  - **Flag:** JPS 1917 says "the ten words", not "Ten Commandments". The brief assumed both JPS versions use "Ten Commandments", so the notes say this accurately.
+  - Statement vs. command, with a hedge: Maimonides, *Sefer HaMitzvot*, Positive 1, does count Exod 20:2 as the commandment to believe in God.
+  - 613 (Makkot 23b, quoted), plus Rashi on Exod 24:12: all 613 are contained in the Ten.
+- **Verified on Sefaria 2026-10-19:**
+  - Exod 34:28 and Deut 4:13 / 10:4 in Hebrew (Miqra according to the Masorah), NJPS and JPS 1917;
+  - Makkot 23b (William Davidson);
+  - Rashi on Exod 24:12 (Rosenbaum & Silbermann);
+  - Sefer HaMitzvot, Positive 1 (Nataf).
+  - The NRSV wording was checked on biblestudytools (NRS), and the numbering on Britannica, "Ten Commandments".
+- **AD:** the slide text is unchanged. One notes line was added: verse 1 says God "spoke all these words", hence Ten Utterances / Ten Words (see AC).
+- **AE:** unchanged. "The Ten Commandments" appears only as its kicker, where adding the Hebrew would not read naturally.
+- **No ID changes.**
+- **Tests:** L1, L2 and L3 at all 3 sizes: no overflow, errors or broken images. Keyboard and Esc checks pass.
+- **Hashes:** L2 is now c6116658defb. L1 and L3 are unchanged.
+
+## L3 revision pass: plan items 1–49 (approved by Steven 2026-10-19)
+Source: `l3_revision_plan.md`, all 49 items, including the move of pause AD (item 30). Steven chose the mini-lecture "From Temple to Synagogue" (items 43–45), not "The Jewish Year". The textbook cautions were not requested and were not written. There is no 35-minute cap. Workflow: `lecture-deck-revision-pass`, using the L2 conventions. L1 and L2 are unchanged by this pass. L3 went from 30 to 32 slides: AE (Marriage) and AF (Beyond the Lecture) are new. No IDs were retired.
+
+**Final L3 order:** A B C D E F G H I K L M N O P Q R S T U V W X J Y Z AA AB AD AE AC AF.
+
+**Images and section dividers**
+- **C, K, T.** These dividers now use full-bleed AI images (scribe, kitchen, shofar) in the L1 and L2 divider format.
+  - C: the scribe image originally showed a Star of David on the wall (noted as decor). It was replaced later the same day; see "L3 slides AB and C follow-up".
+  - K: this slide uses a new `low-wide` panel so the red and blue dish sets and the mezuzah stay visible. The panel covers the cabinets and the sink basins. The notes explain the red/blue meat and dairy convention and the upright mezuzah ("many Sephardi Jews hang it upright").
+- **R.** Tefillin and tzitzit image. The notes say the wrap count and head-box position are approximate.
+- **P.** Temple-altar image, captioned "AI-generated artistic reconstruction… the details are conjectural". The notes address the altar ramp (Exod 20:26).
+- **Y.** Sukkah image. The caption says the myrtle and willow are not visible.
+- **AC.** Stones-on-a-grave image.
+- **AE.** Chuppah image.
+- **Real photos.**
+  - G: a printed Talmud page, Berakhot 2a, public domain, from Wikimedia Commons. The Commons file names no edition, so it is captioned "printed Talmud page", not "Vilna". **Flag.**
+  - E: the Great Isaiah Scroll, public domain, from Wikimedia Commons, credited in the sources.
+- **Q fish image (optional item 10).** No image was supplied, so this was skipped. **Flag.**
+- All AI images have alt text written from viewing each image, and every caption says "AI-generated".
+
+**Content edits by slide**
+- **E.** The Isaiah scroll figure was added, "apocalyptic hope" was trimmed, and the popup now says "in most printed editions".
+- **F.** Added Avot 1:1 as a quote (Sefaria, Kulp translation).
+- **G.**
+  - Mishnah: Judah ha-Nasi, early 3rd century.
+  - Babylonian Talmud: about 600 CE.
+  - Jerusalem Talmud: about 400 CE, moved into the Talmud popup.
+  - New popup on the oven of Akhnai (Bava Metzia 59b, paraphrased, not quoted).
+  - Dates come from Britannica, OCD and Posen. The notes hedge them.
+- **I.** The Hillel quote (Shabbat 31a) replaces the takeaway. The old takeaway moved to the notes.
+- **J.** The recap names W's creation and liberation grounds (textbook p. 245).
+- **L.** Added "(see Lecture 2, slide AC)".
+- **M.** Application and Diversity were merged into 3 cards.
+- **N.** Now a bridge to L2 X.
+- **P.**
+  - The cards give the NRSV names in brackets (Lev 1, 3, 4–5).
+  - Added the Avot de-Rabbi Natan 4:5 quote and a button to the mini-lecture.
+  - The sources add Hosea 6:6.
+- **Q, U.** The "Ritual & Practice" kickers were removed to harmonize kickers (item 49). U adds Shulchan Arukh OC 94:1 as a source.
+- **R.** Sources: Deut 6:8–9, Num 15:38–39, Mishneh Torah Mezuzah 5:1.
+- **V.** Sources: Megillah 4:3 and Berakhot 21b.
+- **X.** The synagogue bullet was cut. The notes explain the two challot.
+- **Y.**
+  - Purim line now glosses *pur* ("the lot").
+  - Hanukkah line trimmed.
+  - Sources: Lev 23:42, Esth 3:7, 9:24.
+- **Z.** "A child (by custom, the youngest)"; source Pesachim 10:4.
+- **AA.** Added notes on the zeroa.
+- **AB.** Retitled "Life Cycle: Birth & Coming of Age". Adds a synagogue bullet (textbook p. 247) and a cross-reference to L2 T.
+- **AE (new).** "Marriage: Chuppah & Ketubah".
+  - Includes a chuppah popup.
+  - The glass-breaking line cites Berakhot 31a (Rav Ashi); the Temple-mourning explanation is hedged.
+  - The notes mention the tallit custom.
+- **AC.**
+  - Trimmed.
+  - The Kaddish popup uses the Metsudah wording, "Exalted and sanctified be His great Name" (Sefaria), with Rema YD 376:4 as the source.
+  - The stone custom is hedged.
+- **AD (item 30).** The pause now looks back at AB and sits after AB.
+- **AF (new).** Beyond the Lecture, with a button to the mini-lecture.
+- **Optional 24-book Tanakh count.** Not verified, so it was omitted.
+
+**New mini-lecture: `rel210-ch10-supplement-temple-to-synagogue_revFA26.html`**
+- 24 slides, A–X, with permanent IDs. Built by `tools/build_t2s.py`, which was assembled from `build_mj.py` by `l3rev/assemble_t2s.py`. It uses the same `deck.css`, Esc fix, keyboard popup and slide-ID label as the other supplements. `deck.css` was not edited.
+- **Story order:**
+  1. Solomon's Temple (1 Kgs 6:1, 8:30; Deut 12:14).
+  2. 586 BCE and the exile (2 Kgs 25:9; Ezek 11:16; Megillah 29a). Exile as the origin of the synagogue is hedged as a theory.
+  3. The return (Ezra 1:3, 3:12, 6:15; Neh 8:3–4, 8:8).
+  4. Second Temple worship (Num 28:4; Taanit 4:2; Tamid 5:1, 7:4), the ma'amadot, the Schedia proseuchē (246–221 BCE), the Theodotos inscription ("most scholars" date it before 70), and Gamla and Masada (Magness).
+  5. 70 CE and Yohanan ben Zakkai at Yavneh (Gittin 56a–b; Rosh Hashanah 4:1).
+  6. Prayer in place of sacrifice (Hosea 14:2 NRSV and NJPS 14:3; Berakhot 26b; Psalm 141:2).
+  7. Dura-Europos (244 CE; buried about 256) and Beit Alfa (found 1928; Justin I, 518–527; the meaning of the zodiac is debated).
+  8. The Prague Old-New Synagogue (c. 1270) and the rabbi's paid office.
+  9. Synagogues today (Touro 1763; Washington's 1790 letter, as the NPS quotes it).
+  10. Synthesis, self-check, sources.
+- **Images reused:** temple altar (title), L1 First Temple, exile, Second Temple, 70 CE fall, early rabbis, and the L3 ark.
+- **Two real photos added beyond the brief:** **Flag.**
+  - Dura-Europos west wall: Yale University Art Gallery, CC0.
+  - Beit Alfa mosaic: Betty Nudler, CC BY 2.0.
+  - Both are from Wikimedia Commons and are credited and linked in their captions.
+- **Links:**
+  - L3 P and L3 AF link to the mini-lecture.
+  - The mini-lecture links to Roman Judea from O and X. The link is one-way: Roman Judea was not edited.
+  - `index.html` has a new card after the Messiah card.
+
+## L3 slides AB and C follow-up (approved by Steven 2026-10-19)
+- **AB.** The "Brit milah / naming" bullet was split into two bullets, worded as Steven approved:
+  - **Brit milah (circumcision):** the eighth day and the sign of the covenant with Abraham, citing Genesis 17:10–12 and Lecture 2, slide T.
+  - **Naming:** girls, and boys at the brit, receive a Hebrew name; practices differ by family and movement.
+
+  To stay within the density limits, the "Rituals" bullet was trimmed to "tie personal milestones to Torah, family, and the Jewish people". The slide now has 5 bullets with no overflow.
+
+  The notes now quote Genesis 17:10, 17:11 ("sign of the covenant") and 17:12 ("eight days old"), checked against the NRSV. A new naming note says girls' naming customs vary. The source line now quotes Genesis 17:10–12.
+- **C.** Steven replaced `rel210-ch10-l3-section-scribe.webp` with a new AI image under the same filename. It shows an ancient robe, head wrap, reed pen, clay lamp and stone room, with no Star of David.
+  - The alt text was rewritten from viewing the new image.
+  - The Star of David note was removed.
+  - The background note now says "pen" instead of "quill" and describes the imagined ancient setting.
+  - The left-sky panel sits over the window and wall, and the scribe and scroll stay clear. At 960×700 the panel hides most of the hillside town.
+
+## L3 slide B removed; images on L, M, O, Q (approved by Steven 2026-10-19)
+**Slide B (Lecture Roadmap) removed.** ID B is retired and will never be reused. This is recorded in the deck's PERMANENT SLIDE IDS comment. The builder keeps the ID sequence with `next(d.gen)`, as in L1.
+- **References:** nothing in L1, L2, L3, the supplements, or `index.html` pointed to L3 slide B, so no links needed fixing.
+- **Notes:** B's learning-goal note ("Students should leave able to explain…") moved to A's notes. The roadmap now lives in the three section dividers: C, K, T.
+- **L3 slide count:** 32 → 31.
+- **Verbatim copy of the removed slide** (HTML as built before removal):
+
+```html
+<section data-slide-id="B">
+  <p class="kicker">Lecture Roadmap</p>
+  <h2>Three Ways Judaism Is Lived</h2>
+  <div class="card-grid cols-3">
+    <div class="card teal"><h3><span class="roman">I</span>Text as Conversation</h3>
+      <p>How do written scripture and oral interpretation remain authoritative?</p></div>
+    <div class="card purple"><h3><span class="roman">II</span>Holiness in Ordinary Life</h3>
+      <p>How do mitzvot and halakhah turn daily choices into sacred practice?</p></div>
+    <div class="card crimson"><h3><span class="roman">III</span>Community in Sacred Time</h3>
+      <p>How do worship, festivals, food, and life-cycle rituals preserve identity?</p></div>
+  </div>
+  <aside class="notes">
+    <h3>Understanding This Slide</h3>
+    <p>Use the three phrases as advance organizers. The first section explains the textual tradition. The second focuses on commandments and daily discipline. The third shows how home and synagogue create communal rhythms.</p>
+    <p>Students should leave able to explain why describing Judaism as only a belief system misses the tradition’s emphasis on practice, interpretation, memory, and peoplehood.</p>
+  </aside>
+</section>
+```
+
+**Images added: L, M, O, Q.** All four are AI-generated WebP files supplied by Steven, 1152×864. Each is set in the deck's split layout. The alt text was written from viewing each image, every caption says "AI-generated", and each slide's notes explain its image.
+- **L (Mitzvot):** `rel210-ch10-l3-mitzvot-everyday.webp`. The image shows a tzedakah box, Shabbat candles, a covered challah, an open book, and a folded tallit.
+  - To make room, the bullets were lightly trimmed: "enumerates" became "counts", and "commandments address" and "Jewish communities" were shortened. The old wording is kept in the notes.
+  - **Flag:** the embroidered cloth on the back wall has a gold cross-like ornament. The alt text does not name it.
+- **M (Halakhah):** `rel210-ch10-l3-halakhah-path.webp`. The three cards were restacked into one compact column beside the image, with no wording changes.
+- **O (Sacred & Ordinary):** `rel210-ch10-l3-prayer.webp`, a companion to M.
+- **Q (Kashrut):** `rel210-ch10-l3-deli.webp`.
+  - The caption reads "a Jewish-style deli sandwich (not necessarily kosher)".
+  - The notes say deli food is an Ashkenazi-American culinary tradition and that not every "Jewish-style" deli is kosher. They also say a kosher deli would not serve cheese with meat. Nothing claims the pictured deli is kosher.
+  - The bullets use the tight list style; their wording is unchanged.
+- **Automatic audit:** `tools/audit.py`, `exact.py`, and `write_audit.py` were re-run; the earlier JSON files are backed up as `*.pre_l3B.json`. `write_audit.py` now lists L3 old slide 2 as removed (ID B retired).
+
+## L3 images on V and W (approved by Steven 2026-10-19)
+Both images are AI-generated WebP files supplied by Steven, 1152×864. They use the split layout of L, M and O. The alt text was written from viewing each image, each caption says "AI-generated", and each slide's notes now explain its image. The slide count is unchanged at 31.
+- **V (Who Leads, Who Counts):** `rel210-ch10-l3-cantor.webp`, a cantor (hazzan) at the lectern with the congregation behind him. The bullet wording is unchanged.
+  - The notes say that the congregation shown is all men, as in Orthodox practice, and that many non-Orthodox congregations have women cantors and count women in the minyan.
+- **W (Shabbat):** `rel210-ch10-l3-shabbat-candles.webp`. This is the second version of the image: Steven replaced the first one, which showed hands over the candles. It shows two lit candles, a silver kiddush cup, and a challah under an embroidered cover, with a dusk window. There are no people in it.
+  - The caption reads "AI-generated image: Shabbat candles, kiddush cup, and challah at dusk".
+  - The Dignity bullet was trimmed lightly to "household, workers, strangers, and animals all rest". The old wording ("household members, workers, strangers, and animals share the cessation") is kept in the notes.
+  - The list uses the tight style.
+
+## L3 image on AB (approved by Steven 2026-10-19)
+- **Image:** `rel210-ch10-l3-brit-milah.webp`, an AI-generated WebP supplied by Steven (1152×864), non-graphic. It is placed in the split layout with a 1.32fr/0.68fr ratio, so the five bullets wrap less. The alt text was written from viewing the image. The caption reads "AI-generated image: family gathered for a brit milah". The slide count is unchanged at 31.
+- **Notes:** a new line explains the image.
+  - **Sandek:** the person honored with holding the baby on his lap during the circumcision, often a grandfather, who stays seated.
+  - **Cup of wine:** the blessing "who creates the fruit of the vine", the naming that follows, and the custom of a drop of wine for the baby.
+  - **Checked 2026-10-19 against:** Shulchan Arukh YD 265:1 with the Rema (Sefaria Community Translation), My Jewish Learning, and the ReformJudaism.org glossary entry "Sandek". These sources were added to the slide's sources.
+- **Light trims** (the old wording is kept in the notes):
+  - Synagogue bullet: "called up to the Torah to recite the blessing… leads part of the service" became "called to the Torah for the blessing… leads prayers".
+  - Rituals bullet: "personal milestones" became "milestones".
+  - The Brit milah and Naming bullets keep the wording Steven approved earlier.
+
+## L3 slide AB: brit milah image replaced (approved by Steven 2026-10-19)
+- **Image:** Steven approved a new version of `rel210-ch10-l3-brit-milah.webp` (same filename) in which the baby's face is visible. It overwrote the earlier version.
+- **Alt text:** rewritten from viewing the new image: an elderly sandek in a striped tallit holds the swaddled newborn, face visible, on a pillow; a man beside him raises a silver kiddush cup; smiling relatives and lit candles surround them.
+- **Caption:** unchanged, "AI-generated image: family gathered for a brit milah".
+- **Notes and bullets:** unchanged. The notes already describe the sandek and the cup of wine, and they still match the new image.
+- **Tests:** the overflow tests were re-run at 960×700, 1280×720 and 1920×1080 and passed. The keyboard and Esc check also passed.
+- **Screenshot:** retaken as `62_L3-AB.png`.
+
 ## Removed (with reason)
+- **L3 B, "Lecture Roadmap: Three Ways Judaism Is Lived"** (2026-10-19, at Steven's request): the section dividers carry the roadmap; ID retired. Learning-goal note moved to A. Verbatim copy in the "L3 slide B removed" section above.
+- **L2 G, "What the Name Teaches"** (2026-10-19 L2 revision pass): merged into F; ID retired. Verbatim copy in the L2 revision section above.
 - **Fragments** (all decks): not used in the house style.
 - **`assets/original-media/image1.jpeg`** (gray texture background on every old slide): decorative template background; the house style uses the charcoal theme. The file is untouched and still used by the supplements via `deck.css`.
 - **L2 video thumbnail** (`assets/video/four-hells-thumbnail.jpg`): replaced by the live embed. The file is untouched.
