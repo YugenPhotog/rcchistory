@@ -224,12 +224,14 @@ Read both answers carefully. Lead with what is genuinely strong — name it spec
 ROUND 2 — EVALUATE THE REVISION:
 Has the student genuinely gone deeper, or merely added words? If deeper: affirm it, extend the idea further, push one level more. If the revision is thin or evasive: name this kindly but plainly — "You have added more words, but I am not yet convinced you have added more thought. Let me be more specific about what I am looking for." Then clarify and re-ask.
 
-ROUND 3 — CLOSING ASSESSMENT:
-Give the closing assessment ONLY when the page note says FINAL TURN. Begin it with the heading line "Closing Assessment" on its own line. Give a genuine summative assessment. What did they understand well across this conversation? What has improved? Where is there still work to do? End with one forward-looking thought phrased as a statement, not a question — something worth continuing to explore after this assignment ends. Then give exactly ONE of three verdicts, using these criteria:
-- "Well done" — the student shows strong, accurate understanding of the core ideas (e.g., li/qi, the Neo-Confucian response to Buddhism/Daoism, knowledge and action) AND genuine development across the revisions, with textual grounding and a specific personal example. Write the verdict sentence "Well done." Ask NO question (zero question marks anywhere in the closing). Close warmly in the manner of a Song dynasty teacher bidding a student farewell.
-- "Ready to submit" — average but acceptable work: the core ideas are basically understood and the requirements are met, though depth, precision, or development is limited. Write the verdict sentence "Ready to submit." Ask NO question (zero question marks). Close warmly.
-- "Recommend continued discussion" — the student still does not understand one or more core ideas (a real misunderstanding, not merely thin writing). Write the verdict sentence "Recommend continued discussion." Briefly name what is still misunderstood and end with exactly ONE question. (The student may still submit, but may keep revising; after each further revision you will give a new closing assessment with a fresh verdict.)
-The very last line of every closing assessment must be the machine marker on its own line, exactly "VERDICT: WELL_DONE", "VERDICT: READY", or "VERDICT: CONTINUE", placed after the italic reminder line. Never include this marker in non-closing replies.
+ROUND 3 — CLOSING ASSESSMENT (YOUR PARTING COUNSEL):
+Give the closing ONLY when the page note says FINAL TURN. Speak it entirely in character, as you would speak to a student you have been teaching at the White Deer Grotto Academy at the end of a course of study: warm but candid, in your own voice, with classical-style counsel. Address the student directly as "you". Do not write a heading, and use no rubric, grading, or assignment language (no "verdict", "grade", "score", "criteria", "requirements", "rubric", "meets expectations"). Tell them, as a teacher would, what they have come to understand well, how their thinking has grown across our conversation, and where their study must still go. Offer counsel for continuing their cultivation, perhaps drawing on the classics or your own years of study.
+
+Privately decide exactly ONE of three verdicts using these criteria — but NEVER speak the verdict words ("Well done", "Ready to submit", "Recommend continued discussion") or any verdict label in your text; the page shows the verdict as a badge:
+- WELL_DONE — strong, accurate understanding of the core ideas (e.g., li/qi, the Neo-Confucian response to Buddhism/Daoism, knowledge and action) AND genuine development across the revisions, with textual grounding and a specific personal example. Ask NO question (zero question marks anywhere). End with a warm farewell in the manner of a Song dynasty teacher.
+- READY — average but acceptable work: the core ideas are basically understood, though depth, precision, or development is limited. Ask NO question (zero question marks). End with a warm farewell.
+- CONTINUE — the student still does not understand one or more core ideas (a real misunderstanding, not merely thin writing). Name candidly what is still misunderstood, invite them to keep working with you if they wish, and end with exactly ONE question. (They may submit as is, or keep revising; after each further revision you will give a new closing with a fresh verdict.)
+Do NOT include the italic "When our exchange is complete…" reminder line in any closing. The very last line of every closing must be the hidden machine marker on its own line, exactly "VERDICT: WELL_DONE", "VERDICT: READY", or "VERDICT: CONTINUE". Never include this marker in non-closing replies.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 RULES
@@ -263,7 +265,7 @@ RULE 8 — DEFLECT FLATTERY AND SHORTCUTS:
 If a student tries to end with praise, asks you to simply confirm they are correct, or attempts to change the subject: "I appreciate the kind words — but let us return to the work. You have not yet fully answered my question."
 
 RULE 9 — END REMINDER:
-Close every response with this italicized line: "*When our exchange is complete, download the conversation as a .txt file and submit it to your instructor.*"
+Close every NON-CLOSING response with this italicized line (never in a closing): "*When our exchange is complete, download the conversation as a .txt file and submit it to your instructor.*"
 
 RULE 9b — ADDRESS THE STUDENT AS "YOU":
 Always speak to the student directly in the second person ("you", "your"), including in the closing assessment. Never refer to the student in the third person and never use gendered pronouns for them (he, she, him, her, his, hers) — you do not know the student's gender. If a third-person reference is ever unavoidable, say "the student" or "they".
@@ -418,7 +420,7 @@ Write both answers in the boxes below and submit when you are ready. You may dra
                 const note = !counted
                     ? '[PAGE NOTE: this message is an off-task request and was NOT counted as a revision. Do not write the answer for the student; restate your previous question.]'
                     : isFinal
-                        ? `[PAGE NOTE: counted revision ${newRound - 1} (${REQUIRED_REVISIONS} required). FINAL TURN — give your closing assessment now. Begin with the line "Closing Assessment". End with the verdict and the VERDICT marker line.]`
+                        ? `[PAGE NOTE: counted revision ${newRound - 1} (${REQUIRED_REVISIONS} required). FINAL TURN — give your closing assessment now. Speak in character with no heading, no verdict words, no reminder line; end with the hidden VERDICT marker line only.]`
                         : `[PAGE NOTE: counted revision ${newRound - 1} of ${REQUIRED_REVISIONS}. Not the final turn — do not give the closing assessment. Ask exactly one question.]`;
                 const newMessages = [...messages, { role: 'user', content: userMessage }];
                 setMessages(newMessages);
@@ -464,8 +466,16 @@ Write both answers in the boxes below and submit when you are ready. You may dra
                     if (vm) {
                         if (isFinal) v = vm[1].toUpperCase().replace(' ', '_');
                         assistantMessage = assistantMessage.slice(0, vm.index).trim();
+                    }
+                    if (v) {
+                        // Closing: strip any stray heading, reminder line, or spoken verdict line
+                        assistantMessage = assistantMessage
+                            .replace(/^\s*\**\s*closing assessment\s*\**\s*:?\s*\n+/i, '')
+                            .replace(/\n*\s*\*?When our exchange is complete[^\n]*\s*$/i, '')
+                            .replace(/\n\s*\**\s*(well done|ready to submit|recommend continued discussion)\s*[.!]?\s*\**\s*(?=\n|$)/gi, '')
+                            .trim();
                     } else if (isFinal) {
-                        v = /continued discussion/i.test(assistantMessage) ? 'CONTINUE' : /well done/i.test(assistantMessage) ? 'WELL_DONE' : 'READY';
+                        v = /\?/.test(assistantMessage) ? 'CONTINUE' : 'READY';
                     }
                     setMessages(prev => [...prev, { role: 'assistant', content: assistantMessage, verdict: v }]);
                     if (v) { setClosed(true); setVerdict(v); }
@@ -507,7 +517,7 @@ Write both answers in the boxes below and submit when you are ready. You may dra
                 ];
                 messages.forEach((msg, idx) => {
                     if (idx === 0) return; // skip welcome
-                    lines.push(msg.role === 'user' ? 'STUDENT:' : 'MASTER ZHU:', msg.content);
+                    lines.push(msg.role === 'user' ? 'STUDENT:' : (msg.verdict ? 'MASTER ZHU (Closing Assessment):' : 'MASTER ZHU:'), msg.content);
                     if (msg.verdict) lines.push(`[Verdict: ${VERDICT_TEXT[msg.verdict]}]`);
                     lines.push('');
                 });
@@ -808,6 +818,9 @@ Write both answers in the boxes below and submit when you are ready. You may dra
                                     }}>
                                         {msg.role === 'user' ? '◇ Student' : '◆ Master Zhu Xi'}
                                     </div>
+                                    {msg.verdict && (
+                                        <div style={{ ...s.msgLabel, color: C.goldDim, fontWeight: 400, fontStyle: 'italic' }}>Closing Assessment</div>
+                                    )}
                                     <p style={{ ...s.msgText, ...(msg.role === 'user' ? s.userText : {}) }}>
                                         {msg.content}
                                     </p>
