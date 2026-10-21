@@ -1,11 +1,47 @@
 #!/usr/bin/env python3
 """HIST 270 deck linter: checks Reveal decks against HOUSE_STANDARD.md.
+Checks: notes on every slide (>=60 words), classroom phrases, letter IDs + ids.json ledger, WebP/local images,
+slide numbers, title slide, Pierian Spring, Your Turn order, fonts, essay link, bullets (<=5/slide, <=15 words),
+image coverage (warning below 80% of content slides; mark the sources slide data-role="sources").
 Usage: lint_hist270.py [--root REVEAL_DECKS_DIR] [--report out.md] [deck.html ...]
 With no deck args, lints every in-scope deck (chapters 01,02,03,04,05,08,12; skips archive/, _tools/, *_pre-*).
 Exit code 1 if any ERROR found."""
 import re, os, sys, json, glob, html, argparse, collections
+from html.parser import HTMLParser
 SCOPE = ['01','02','03','04','05','08','12']
 MIN_WORDS = 60
+MAX_BULLETS = 5          # per slide
+MAX_BULLET_WORDS = 15    # per bullet ("about 15")
+MIN_IMAGE_COVERAGE = 0.80  # share of content slides with an image (warning)
+ESSAY_HREF = 'background_essays/essays/'
+
+class _Bullets(HTMLParser):
+    """Collect on-slide bullet texts: <li> (not in .source-list/.popup/notes), .story-beat,
+    children of .vdates/.dates/.steps, and <p> inside .card/.num-card."""
+    VOID = {'img','br','hr','meta','link','input','source','wbr','area','col','embed','param','track'}
+    def __init__(self):
+        super().__init__(convert_charrefs=True); self.stack = []; self.cap = None; self.out = []
+    def _cls(self, a): return set((dict(a).get('class') or '').split())
+    def _excluded(self): return any(t == 'aside' or c & {'popup', 'source-list'} for t, c in self.stack)
+    def handle_starttag(self, tag, attrs):
+        if tag in self.VOID: return
+        cls = self._cls(attrs); parent = self.stack[-1][1] if self.stack else set()
+        self.stack.append((tag, cls))
+        if self.cap is None and not self._excluded():
+            if (tag == 'li' or 'story-beat' in cls or (tag == 'div' and parent & {'vdates', 'dates', 'steps'})
+                    or (tag == 'p' and parent & {'card', 'num-card'})):
+                self.cap = [len(self.stack), []]
+    def handle_endtag(self, tag):
+        if tag in self.VOID: return
+        while self.stack:
+            t, _ = self.stack.pop()
+            if self.cap and len(self.stack) < self.cap[0]:
+                self.out.append(re.sub(r'\s+', ' ', ''.join(self.cap[1])).strip()); self.cap = None
+            if t == tag: break
+    def handle_data(self, d):
+        if self.cap: self.cap[1].append(d)
+def bullets_of(section_html):
+    p = _Bullets(); p.feed(section_html); return [b for b in p.out if b]
 BANNED = r"turn to (your|a) neighbou?r|your neighbou?r|(with|your|a) partner\b|partner up|pair up|pair-share|think-pair|small groups?|in[- ]class|tonight|next time|last time|this week|tomorrow|circulate( the room|[;.]| and (check|listen|help|look))|take a (quick )?vote|show of hands|raise your hand|poll the class|on the board|handout|ask (the |one )?students?|have students|students should|remind students|instructor|teaching cautions?|for instructor preparation|\bassessed\b|break into"
 ID_RE = re.compile(r'^[A-Z]{1,3}$')
 def txt(s): return re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', ' ', s))).strip()
@@ -21,13 +57,25 @@ def lint(path):
     # --- notes
     nonotes, thin, banned_hits = [], [], collections.Counter()
     ids, ytn = [], []
+    dense, longb, content, with_img = [], [], 0, 0
     for i, (a, s) in enumerate(secs, 1):
         sid = attr(a, 'data-slide-id') or f'#{i}'
         ids.append(attr(a, 'data-slide-id'))
+        bl = bullets_of(s)
+        if len(bl) > MAX_BULLETS: dense.append(f'{sid}({len(bl)})')
+        for b in bl:
+            if len(b.split()) > MAX_BULLET_WORDS: longb.append(f'{sid}:{len(b.split())}w "{" ".join(b.split()[:6])}…"')
+        if attr(a, 'data-role') != 'sources':
+            content += 1
+            if re.search(r'<img\b|data-background-image=', a + s): with_img += 1
         m = re.search(r'<aside class="notes"[^>]*>(.*?)</aside>', s, re.S)
         if not m: nonotes.append(sid)
         elif len(txt(m.group(1)).split()) < MIN_WORDS: thin.append(sid)
         for h in re.findall(BANNED, txt(s), re.I): banned_hits[(h if isinstance(h, str) else h[0]).lower() or 'match'] += 1
+    if dense: E.append(f'{len(dense)} slide(s) with > {MAX_BULLETS} bullets: {", ".join(dense)}')
+    if longb: E.append(f'{len(longb)} bullet(s) over {MAX_BULLET_WORDS} words: ' + '; '.join(longb[:6]) + ('…' if len(longb) > 6 else ''))
+    if content and with_img / content < MIN_IMAGE_COVERAGE:
+        W.append(f'image coverage {with_img}/{content} content slides ({with_img/content:.0%}) is below {MIN_IMAGE_COVERAGE:.0%}')
     if nonotes: E.append(f'{len(nonotes)} slide(s) without notes: {",".join(nonotes[:12])}{"…" if len(nonotes)>12 else ""}')
     if thin: E.append(f'{len(thin)} slide(s) with notes < {MIN_WORDS} words: {",".join(thin[:12])}{"…" if len(thin)>12 else ""}')
     bh = collections.Counter()
@@ -74,6 +122,7 @@ def lint(path):
     if not re.search(r'pierian', t, re.I): E.append('no Pierian Spring section')
     first = secs[0][0] + secs[0][1] if secs else ''
     if not re.search(r'title-hero|title-slide', first): E.append('first slide is not a title slide (class title-hero/title-slide)')
+    if ESSAY_HREF not in t: E.append('no link to the lecture background essay (href containing background_essays/essays/)')
     if not re.search(r'Crimson\+Pro', t) or not re.search(r'Lora', t): E.append('house fonts (Crimson Pro + Lora) not loaded')
     if not re.search(r'reveal\.js/4\.5\.0', t): W.append('Reveal not pinned to cdnjs 4.5.0')
     if not re.search(r'_revised_FA26\.html$', path): W.append('filename does not end _revised_FA26.html (expected for legacy decks)')

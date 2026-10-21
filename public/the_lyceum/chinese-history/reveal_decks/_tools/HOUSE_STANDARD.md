@@ -3,16 +3,18 @@
 
 **1. Files and archiving.** Build each new deck as a new file next to the old one: `chapter-NN/HIST270_chNN_lecN_<slug>_revised_FA26.html`. Never edit the old deck. Move the old deck to `chapter-NN/archive/` only after Steven approves the new one. Every old deck is archived in the end. Skip `_pre-*` files and `archive/`.
 
-**2. Audience.** Write for online, independent study by 17–19-year-olds with no background. Tell the story before the analysis, use lots of images, and aim for about 35 minutes on the main path plus an optional Pierian Spring section. No classroom mechanics anywhere, on slides or in notes. That means no votes, partners, neighbors, small groups, "circulate," in-class or assessed writing, "tonight," "next/last time," "this week," "on the board," or instructor-use appendices. Say "in the next lecture" instead.
+**2. Audience.** Write for online, independent study by 17–19-year-olds with no background. Tell the story before the analysis. **No time limit:** these are independent-study decks, so use as many slides as the story needs. No classroom mechanics anywhere, on slides or in notes. That means no votes, partners, neighbors, small groups, "circulate," in-class or assessed writing, "tonight," "next/last time," "this week," "on the board," or instructor-use appendices. Say "in the next lecture" instead.
+
+**2a. Bullets.** Use at most **5 bullets per slide**. Each bullet is a complete phrase a student can understand without the notes, about **15 words or fewer**. Full sentences and explanation go in the notes. Prefer more slides to dense ones: split a crowded slide instead of shrinking its text. Lint counts `<li>`, `.story-beat`, `.vdates`/`.dates`/`.steps` rows and `.card`/`.num-card` paragraphs. Quotes, captions, popups and the sources list are exempt.
 
 **3. Notes = study buddy only.** Every `<section>` has `<aside class="notes">` of 60 words or more, written to the student in a warm second-person voice ("This slide gives you…", "Notice…"). Define new terms in **bold** the first time they appear. Each content-slide note follows this pattern:
 1. what the slide gives you;
 2. the story;
 3. how to read the image or map, saying whether it is a primary source, a later artwork, or AI-generated;
 4. why it matters, naming the reading-guide question it builds toward;
-5. one "Check yourself" question.
+5. one "Check yourself" question. Keep both the "Check yourself" line in the notes **and** the Your Turn slides.
 
-The title slide's note explains how to use the deck (S for notes, arrow keys, Esc for overview, the time estimate, which questions it covers). Nothing addressed to the instructor goes in the notes.
+The title slide's note explains how to use the deck (S for notes, arrow keys, Esc for overview, which questions it covers, and the essay link). Nothing addressed to the instructor goes in the notes.
 
 **4. Background essays (professor material).** Instructor content (historiography, teaching cautions, sources and debates, mined from the old notes) goes in one essay per lecture: `public/hist-270/background_essays/essays/chN-lM-<slug>.html` (for example `ch5-l2-early-tang-power.html`). The essays follow the HIST 101 layout:
 - topbar with back and print buttons, a progress bar, a table of contents, a `readmeta` line and a `prose` body;
@@ -30,7 +32,12 @@ The title slide's note explains how to use the deck (S for notes, arrow keys, Es
 
 `Reveal.initialize({hash:true, slideNumber:'c/t', …})` with Reveal 4.5.0 from cdnjs, the `black` theme, and **Crimson Pro** (headings) and **Lora** (body) from Google Fonts. Use the Ch12 CSS type scale; don't use inline font sizes or families.
 
-**7. Images.** Every image is a local **WebP** file in `chapter-NN/images/chNN-lecN/`. No base64, no hotlinks, no missing files. Every image has alt text and a credit, and AI images are labelled. Videos need a text summary in the notes. Run `_tools/webp_convert.py DECK` to build the new deck with converted images. It never overwrites anything.
+**7. Images.**
+- **Most slides should have an image,** especially where it helps teach the idea. Lint warns when fewer than about **80%** of content slides have one. The sources slide is marked `data-role="sources"` and exempt.
+- **Real period images are preferred** if they are sharp at slide size. Otherwise use an AI-generated image, labelled "AI-generated interpretation, not a historical source." **Steven sees every new AI image before it goes into a committed deck.**
+- Every image is a local **WebP** file in `chapter-NN/images/chNN-lecN/`. No base64, no hotlinks, no missing files.
+- Every image has alt text and a credit. Videos need a text summary in the notes.
+- Run `_tools/webp_convert.py DECK` to build the new deck with converted images. It never overwrites anything.
 
 **8. Permanent slide IDs.** Every slide (including vertical sub-slides) gets `data-slide-id="A"`, `"B"` … `"Z"`, `"AA"`, `"AB"` …, assigned once in slide order when the deck is created. Never renumber or reuse an ID. A new slide takes the next unused letter after the highest one ever used. Keep the old word IDs as `data-slug="map-1050"` (and `id=` if you need to preserve existing hash links). Copy the PERMANENT SLIDE IDS header comment, the `#slideIdLabel` CSS (fixed, `left:12px; bottom:10px`, 13px, muted, with an `.on-image` variant, hidden in print) and the label script from `american-history/presentations/chapter-10/ch10_L1-democratization-of-culture.html`. Each chapter folder has an `ids.json` ledger: `{"<deck>.html": {"assigned": ["A",…], "retired": [], "next": "AC"}}`.
 
@@ -39,4 +46,4 @@ The title slide's note explains how to use the deck (S for notes, arrow keys, Es
 - a "coming" state for essays that are not written yet;
 - the Ch05 research-reconnaissance page kept as `card--recon`.
 
-Rename `HIST270_ch05_lec2_early_tang_power_revFA26.html` to `ch5-l2-early-tang-power.html` and add a redirect stub. Reconcile `assets/essays.css` with the HIST 101 version. Open decision for Steven: should each deck's credits slide link to its essay?
+Rename `HIST270_ch05_lec2_early_tang_power_revFA26.html` to `ch5-l2-early-tang-power.html` and add a redirect stub. Reconcile `assets/essays.css` with the HIST 101 version. **Decided:** each deck links to its essay with a small "Background essay" link on the title slide and/or the sources slide (lint checks for an `href` containing `background_essays/essays/`).
