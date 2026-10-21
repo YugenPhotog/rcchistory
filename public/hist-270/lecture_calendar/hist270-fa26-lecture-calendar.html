@@ -171,6 +171,8 @@ button.action:hover{background:var(--terracotta);color:var(--ivory);}
   padding:.24rem .55rem;border-radius:2px;line-height:1.35;
 }
 .note.due{background:var(--tint-rust);border-left:3px solid var(--terracotta);color:#5C2F1E;}
+.day.exam{background:var(--tint-amber);border-left:4px solid var(--amber);}
+.ex{font-weight:700;color:#5A4416;}
 .note.exam{background:var(--tint-amber);border-left:3px solid var(--amber);color:#5A4416;font-weight:700;}
 .note.info{background:var(--tint-sage);border-left:3px solid var(--sage);color:#25443A;}
 
@@ -441,6 +443,9 @@ var UNITS = [
       {dow:"Thu", date:"Sep 24",
        b1:{t:"Chapter 4, Lecture 3", type:"lecture"},
        b2:{t:"Chapter 4, Lecture 4", type:"lecture"}, notes:[]},
+      {dow:"Sun", date:"Sep 27", kind:"exam",
+       b1:{t:"Unit 1 Exam (Chapters 1\u20134)", type:"exam", label:"Exam"},
+       notes:[{c:"exam", t:"Online \u2014 due Sun Sep 27"}]},
       {dow:"Tue", date:"Sep 29",
        b1:{t:"Chapter 4, Lecture 5", type:"lecture"},
        b2:{t:"Chapter 4, Primary Source / Application", type:"ps"},
@@ -491,6 +496,9 @@ var UNITS = [
        b1:{t:"Chapter 16, Lecture 1", type:"lecture"},
        b2:{t:"Chapter 16, Lecture 2", type:"lecture"},
        notes:[{c:"exam", t:"Ch. 12 + Unit 2 Exam due Sun Nov 1"}]},
+      {dow:"Sun", date:"Nov 1", kind:"exam",
+       b1:{t:"Unit 2 Exam (Chapters 5, 8, and 12)", type:"exam", label:"Exam"},
+       notes:[{c:"exam", t:"Online \u2014 due Sun Nov 1"}]},
       {dow:"Tue", date:"Nov 3",
        b1:{t:"Chapter 16, Lecture 3", type:"lecture"},
        b2:{t:"Chapter 16, Primary Source / Application", type:"ps"},
@@ -526,7 +534,10 @@ var UNITS = [
       {dow:"Thu", date:"Dec 3",
        b1:{t:"Chapter 27, Lecture 3", type:"lecture"},
        b2:{t:"Chapter 27, Primary Source / Application", type:"ps"},
-       notes:[{c:"exam", t:"Capstone due tonight"}]}
+       notes:[{c:"exam", t:"Capstone due tonight"}]},
+      {dow:"Mon", date:"Dec 7", kind:"exam",
+       b1:{t:"Unit 3 Exam (Chapters 14, 16, 18, 24, 25, 27)", type:"exam", label:"Exam"},
+       notes:[{c:"exam", t:"Online \u2014 due Mon Dec 7"}]}
     ]
   }
 ];
@@ -537,6 +548,7 @@ function blockHTML(n, b){
   var pill = "";
   if (b.type === "online") { cls = "ol"; pill = '<span class="pill offsite">Not taught in classroom</span>'; }
   if (b.type === "ps") pill = '<span class="pill">Application</span>';
+  if (b.type === "exam") { cls = "ex"; pill = '<span class="pill">Online</span>'; }
   if (b.type === "break") pill = '<span class="pill">No class</span>';
   return '<div class="block"><span class="bnum">' + (b.label || ('Block ' + n)) + '</span>' +
          '<span class="btitle"><span class="' + cls + '">' + b.t + '</span>' + pill + '</span></div>';
