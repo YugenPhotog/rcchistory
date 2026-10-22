@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHIL 120 The Advocate - Richland Community College</title>
+    <title>PHIL 120 The Advocate (Coaching) - Richland Community College</title>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -237,8 +237,8 @@ CONDUCT
 
 ONE question or objection per turn.
 
-LENGTH IS A HARD LIMIT. Normal reply: 160 words at most (aim for 100-140). Help-mode reply: 200.
-Verdict: 180. At most three short paragraphs. No headings, no bold labels, no bullet lists except
+LENGTH IS A HARD LIMIT. Normal reply: 150 words at most (aim for 100-130). Help-mode reply: 180.
+Verdict: 160. At most three short paragraphs. No headings, no bold labels, no bullet lists except
 in a verdict. The page will reject and regenerate a reply that runs long.
 
 ACKNOWLEDGE EVERY ANSWER. Students cannot tell from silence whether an answer worked. Start every
@@ -299,7 +299,7 @@ STATUS line. If something is missing and it matters right now, name it in one sh
 
 STATUS LINE. End EVERY reply, verdicts included, with one line exactly in this form. The page
 hides it from the student and from the transcript:
-<!--STATUS side=MILL|HOBBES|NONE position=0|1 quote_mill=0|1 quote_hobbes=0|1 objections_handled=N plan=0|1 concession=0|1 open_thread=0|1 help=0|1 verdict=NONE|STRONG|AVERAGE|WEAK-->
+<!--STATUS side=MILL|HOBBES|NONE position=0|1 quote_mill=0|1 quote_hobbes=0|1 objections_handled=N plan=0|1 concession=0|1 open_thread=0|1 help=0|1 level=1..4 warmup=0|1 verdict=NONE|STRONG|AVERAGE|WEAK-->
   side: the side the STUDENT holds (not the side you argue).
   position=1 once they have committed to a side (checkpoint 1).
   quote_mill / quote_hobbes=1 once the STUDENT has, at any point in the conversation, quoted or
@@ -345,7 +345,7 @@ THE CLOSING. Privately decide exactly ONE of three tiers. NEVER write the tier n
     session with a revised position. Do not imply failure. Ask NO question.
 Every closing: say their conversation is complete and the transcript is ready to download and
 submit with their discussion post, and say in one sentence that their instructor grades the work.
-180 words at most. Never use the words credit, grade, points, marks, or score.
+160 words at most. Never use the words credit, grade, points, marks, or score.
 The last line of every closing, just before the STATUS line, is the hidden marker on its own line,
 exactly one of:
 VERDICT: STRONG
@@ -362,6 +362,56 @@ AFTER A CLOSING: after an AVERAGE closing (before exchange 12) the student may k
 thread. Resume normally, one objection per turn. If it resolves, close again; that closing may
 be STRONG. If they say they are posting, or only reply "ok" or "thanks", confirm in one or two
 sentences and stop. Do not repeat the closing and do not add another VERDICT marker.
+
+====================================================================
+ADAPTIVE COACHING MODE (this section overrides earlier rules where they conflict)
+====================================================================
+
+These are first-year students, many arguing with anyone for the first time. Coach first, then
+challenge, and match the challenge to how they are doing.
+
+WARM-UP (exchanges 1-3, before any objection). After they state a side, check they understand
+what the authors actually claim. Ask them to say, in their own words, what the passage they rely
+on means (or what the author they side with claims, if they have no passage yet). If their
+reading is shaky: explain the point in two or three plain sentences with a short quote, then ask
+one quick check question. If their reading is sound, say what they got right in one sentence and
+end the warm-up. Set warmup=1 in STATUS the moment the warm-up is over. No objections and no
+"Now I'm going to argue..." during the warm-up. The page ends the warm-up by exchange 4 at the
+latest, so it never eats the session.
+
+CHALLENGE LEVELS 1-4 (replace the three pressure levels above). The page tells you the current
+level in [APP PROGRESS]; pitch the next objection at that level:
+  Level 1: a simple, concrete objection PLUS a hint naming which passage or idea could answer it
+           ("Look at what Hobbes says about the common power"). The FIRST objection is ALWAYS
+           level 1.
+  Level 2: a standard objection from the other author, no hint.
+  Level 3: a sharper objection built on a quoted line from the text.
+  Level 4: the strongest objection, for example turning the student's own quote against them.
+After each answer, set level in STATUS (the page also computes it from what happened):
+  - well-reasoned answer that handles the objection: level + 1 (max 4).
+  - missed, confused, or "I don't know": level - 1 (min 1), and use HELP MODE: plain explanation,
+    an unrelated worked example, and a smaller question.
+  - partial answer: keep the level.
+The page clamps the level to one step per turn.
+
+COACHING AFTER EVERY ANSWER. Open each reply with exactly two short sentences before anything
+else: one specific thing they did well (name it: the move, the passage, the distinction), and one
+concrete way to make that answer stronger (as a direction, never as a sentence they could paste).
+Then, if the objection is handled, say "That objection is handled." and give the next objection.
+Normal replies 150 words at most; help replies 180.
+
+TIMING. No closing before exchange 5. If all four checkpoints are met but max_level is below 3 and
+the exchange is before 9, do not close yet: say briefly that they have done what the assignment
+needs, then offer the next objection at the current level, so they get the chance to go further.
+If they ask to stop, close. The tier now also depends on the highest level reached:
+STRONG requires TWO objections handled at level 3 or higher, or ONE handled at level 4 (the page
+tells you s3 and s4 and enforces this). Otherwise the best tier is AVERAGE. WEAK as before.
+After any closing: if the student says thanks, ok, bye, or that they are posting, reply in one or
+two sentences with no closing and no VERDICT marker. A second closing is only possible after they
+take up the open thread and answer a further objection at level 3 or higher.
+
+STATUS additions: add level=1..4 (the level for your NEXT objection) and warmup=0|1 to the STATUS
+line, e.g. <!--STATUS ... level=2 warmup=1 verdict=NONE-->.
 
 ====================================================================
 NEVER
@@ -390,7 +440,7 @@ uncomfortable. Be generous about the person and demanding about the reasoning. A
 leaves having held their ground against a real objection has gotten exactly what this is for.`;
         const STATUS_RE = /<!--\s*STATUS([\s\S]*?)-->/gi;
         const EMPTY = { side: 'NONE', position: 0, quote_mill: 0, quote_hobbes: 0, objections_handled: 0,
-                        plan: 0, concession: 0, open_thread: 0 };
+                        plan: 0, concession: 0, open_thread: 0, level: 1, max_level: 0, warmup: 0, s3: 0, s4: 0, closed_at: 0, s3_at_close: 0 };
         function parseStatus(t) {
             if (!t) return null; let m, last = null; STATUS_RE.lastIndex = 0;
             while ((m = STATUS_RE.exec(t))) last = m[1];
@@ -413,6 +463,17 @@ leaves having held their ground against a real objection has gotten exactly what
             const h = parseInt(s.objections_handled, 10);
             if (!isNaN(h)) n.objections_handled = Math.max(n.objections_handled, h);
             if (s.open_thread !== undefined) n.open_thread = bit(s.open_thread);
+            n.warmup = Math.max(n.warmup, bit(s.warmup));
+            // Challenge level: page clamps to one step per turn and 1..4; level 1 until the first objection is handled.
+            const L = parseInt(s.level, 10);
+            if (!isNaN(L)) {
+                const prev = (p && p.level) || 1;
+                n.level = Math.max(1, Math.min(4, Math.max(prev - 1, Math.min(prev + 1, L))));
+            }
+            if (!(p && p.objections_handled)) n.level = Math.min(n.level, n.objections_handled >= 1 ? 2 : 1);
+            // max_level = highest level at which an objection was actually handled (level of the objection, not the next one).
+            const prevHandled = (p && p.objections_handled) || 0, prevLevel = (p && p.level) || 1;
+            n.max_level = Math.max((p && p.max_level) || 0, n.objections_handled > prevHandled ? prevLevel : 0);
             return n;
         }
         // Page-side evidence, OR-ed with the model's STATUS so a missed count can't block closure.
@@ -432,10 +493,15 @@ leaves having held their ground against a real objection has gotten exactly what
             const c = checkpoints(p).filter(Boolean).length;
             return '[APP PROGRESS (cumulative): side=' + p.side + ' position=' + p.position + ' quote_mill=' + p.quote_mill +
                    ' quote_hobbes=' + p.quote_hobbes + ' objections_handled=' + p.objections_handled + ' plan=' + p.plan +
-                   ' concession=' + p.concession + ' open_thread=' + p.open_thread + ' checkpoints_met=' + c + '/4]';
+                   ' concession=' + p.concession + ' open_thread=' + p.open_thread + ' checkpoints_met=' + c + '/4' +
+                   ' level=' + p.level + ' max_level=' + p.max_level + ' s3=' + (p.s3 || 0) + ' s4=' + (p.s4 || 0) + ' warmup=' + p.warmup +
+                   (p.closed_at ? ' already_closed_at_exchange=' + p.closed_at + ' (do not close again unless the page asks)' : '') + ']';
         }
         function marker(n, p) {
-            let m = '[Exchange ' + n + ' of ' + CEIL + '] ' + progressTag(p) + ' [Reply in 160 words or fewer and end with your <!--STATUS ...--> line]';
+            let m = '[Exchange ' + n + ' of ' + CEIL + '] ' + progressTag(p) + ' [Reply in 150 words or fewer and end with your <!--STATUS ...--> line]';
+            if (!p.warmup && n <= 3) m += ' [WARM-UP (exchange ' + n + ' of up to 3): check their understanding of the text; no objections yet]';
+            else if (!p.warmup) m += ' [WARM-UP IS OVER: give the first objection now, at level 1 with a hint]';
+            else m += ' [Pitch any new objection at level ' + p.level + '. Open with: one thing done well + one way to strengthen it]';
             if (n >= CEIL) m += ' [FINAL EXCHANGE: your reply MUST be a CLOSING ending with the VERDICT marker]';
             else if (n >= 8) m += ' [' + (CEIL - n) + ' exchanges left: close as soon as the closing rule is met]';
             return m;
@@ -448,16 +514,17 @@ leaves having held their ground against a real objection has gotten exactly what
         // Remove the marker and any leaked label line (tier names, badge wording, old verdict headings).
         const LABEL_LINE_RE = /^[\s*_#>\-]*(VERDICT\s*:.*|STRONG|AVERAGE|WEAK|WELL[ _]DONE.*|READY TO POST|POSITION TESTED|SESSION ENDED|RECOMMEND CONTINUED DISCUSSION|YOU HAVE COMPLETED THE ASSIGNMENT.*)[\s*_.!]*$/gim;
         function stripLabels(t) { return (t || '').replace(LABEL_LINE_RE, '').replace(/\n{3,}/g, '\n\n').trim(); }
+        const CONFUSED_RE = /\b(i don'?t (know|understand|get)|idk|confused|stuck|lost|no idea|what do you mean)\b/i;
         const STOP_RE = /\b(stop|i'?m done|give up|quit|bye|end (this|the) (session|conversation)|posting now|i'?ll post)\b/i;
         function words(t) { return (t || '').split(/\s+/).filter(Boolean).length; }
         const FRAME_RE = /_{2,}|\bI lean toward\b|\bI side with\b[^.?!\n]*\bbecause\b|\btry saying\b|\bfill in\b/i;
         function problems(raw, n, userMessage) {
             const t = stripStatus(raw), st = parseStatus(raw), out = [];
             const v = detectVerdict(raw);
-            if (v && n < 4) out.push('no closing before exchange 4; keep going with one question');
+            if (v && n < 5) out.push('no closing before exchange 5; keep going with one question');
             if (v === 'WEAK' && n < CEIL && !STOP_RE.test(userMessage || '')) out.push('do not close with the lowest tier before exchange 12; keep helping with one question and no VERDICT marker');
-            const limit = detectVerdict(raw) ? 200 : (st && bit(st.help) ? 220 : 175);
-            if (words(t) > limit) out.push('too long (' + words(t) + ' words; limit ' + (limit === 175 ? 160 : limit - 20) + ')');
+            const limit = detectVerdict(raw) ? 175 : (st && bit(st.help) ? 190 : 155);
+            if (words(t) > limit) out.push('too long (' + words(t) + ' words; limit ' + (limit === 155 ? 150 : limit - 10) + ')');
             if (FRAME_RE.test(t)) out.push('contains a blank or sentence frame, which is forbidden');
             // A missing STATUS line no longer triggers a paid regeneration: page-side evidence covers it.
             return out;
@@ -479,7 +546,7 @@ leaves having held their ground against a real objection has gotten exactly what
             if (issues.length) {
                 const fix = await callApi(SYSTEM_PROMPT, msgs.concat([{ role: 'assistant', content: raw },
                     { role: 'user', content: '[APP: rewrite your last reply. Problems: ' + issues.join('; ') +
-                      '. Keep the same point and the single question. Normal 160 words max, help 200. No blanks or sentence frames. End with the STATUS line. Output only the rewritten reply.]' }]));
+                      '. Keep the same point and the single question. Normal 150 words max, help 180. No blanks or sentence frames. End with the STATUS line. Output only the rewritten reply.]' }]));
                 log.rewrites.push(issues.join('; '));
                 if (fix && problems(fix, exchangeNumber, userMessage).length < issues.length) raw = fix;
             }
@@ -489,23 +556,57 @@ leaves having held their ground against a real objection has gotten exactly what
                                  .map(m => (m.content.match(/objection is handled/gi) || []).length).reduce((a, b) => a + b, 0));
             let prog = mergeProgress(mergeProgress(prog0, parseStatus(raw)),
                                      Object.assign(studentEvidence(userMessage), { objections_handled: handledSaid }));
+            if (exchangeNumber >= 4) prog.warmup = 1;   // the page ends the warm-up by exchange 4
+            // Challenge level is computed by the page (the model tends to copy the level it was given):
+            // handled -> +1; SHORT answer (<15 words) or a short explicit help/confusion message -> -1; otherwise hold.
+            {
+                const before = prog0.level || 1, handledUp = prog.objections_handled > (prog0.objections_handled || 0);
+                const uw = words(userMessage);
+                const struggling = uw < 15 || (CONFUSED_RE.test(userMessage) && uw < 25);
+                let lvl = handledUp ? before + 1 : struggling ? before - 1 : before;
+                if (!prog0.objections_handled && !handledUp) lvl = 1;            // first objection is always level 1
+                prog.level = Math.max(1, Math.min(4, lvl));
+                prog.max_level = Math.max(prog0.max_level || 0, handledUp ? before : 0);
+                const gained = handledUp ? prog.objections_handled - (prog0.objections_handled || 0) : 0;
+                prog.s3 = (prog0.s3 || 0) + (handledUp && before >= 3 ? gained : 0);
+                prog.s4 = (prog0.s4 || 0) + (handledUp && before >= 4 ? 1 : 0);
+                prog.closed_at = prog0.closed_at || 0; prog.s3_at_close = prog0.s3_at_close || 0;
+                log.level = before + '->' + prog.level;
+            }
+            const strongOK = p => (p.s3 >= 2 || p.s4 >= 1);
+            const capStrong = () => { if (verdict === 'STRONG' && !strongOK(prog)) { verdict = 'AVERAGE'; log.downgraded = true; } };
+            // No back-to-back closings: after a closing, a new one is allowed only as an upgrade to STRONG,
+            // at least two exchanges later, after a further objection handled at level 3+.
+            const upgradeOK = () => priorVerdict === 'AVERAGE' && exchangeNumber >= prog.closed_at + 2 && prog.s3 > prog.s3_at_close && strongOK(prog);
             if (verdict === 'WEAK' && exchangeNumber < CEIL && !STOP_RE.test(userMessage)) verdict = null; // early lowest tier is never accepted
-            // Page-side closure: all four met, or (exchange 10+) the only gap is the objection -> ask for a closing, then force one.
+            capStrong();
+            if (verdict && priorVerdict && !(verdict === 'STRONG' && upgradeOK())) {
+                const fix = await callApi(SYSTEM_PROMPT, msgs.concat([{ role: 'assistant', content: raw },
+                    { role: 'user', content: '[APP: the conversation was already closed at exchange ' + prog.closed_at + '. Do NOT close again. Rewrite as a normal reply: if they only said thanks/ok/bye or that they are posting, one or two warm sentences; if they took up the open thread, coach their answer and continue. No VERDICT marker. End with the STATUS line.]' }]));
+                log.rewrites.push('second closing suppressed');
+                text = stripLabels(stripStatus(fix || '')) || 'Thanks. Your conversation is already complete, so download it and submit it with your post whenever you are ready.';
+                verdict = null;
+            }
             const cps = checkpoints(prog);
             const all = cps.every(Boolean);
             const lenient = exchangeNumber >= 10 && cps[0] && cps[1] && cps[3] && !cps[2];
-            // After an AVERAGE closing the student may keep talking; only re-close when the open thread resolves.
-            const reclose = priorVerdict !== 'AVERAGE' || !prog.open_thread;
-            if (!verdict && exchangeNumber >= 4 && (all || lenient) && reclose) {
-                const tiers = all ? 'STRONG or AVERAGE (your choice by the criteria)' : 'AVERAGE';
+            // Force a closing only if none has been issued yet (or the upgrade rule is met).
+            const mayClose = !priorVerdict || upgradeOK();
+            // Adaptive: a student who is doing well gets the chance to earn STRONG before the page forces a closing.
+            const climbing = all && !strongOK(prog) && exchangeNumber < 9 && !STOP_RE.test(userMessage);
+            if (!verdict && exchangeNumber >= 5 && (all || lenient) && mayClose && !climbing) {
+                const tiers = priorVerdict ? 'STRONG (upgrade)' : all ? (strongOK(prog) ? 'STRONG or AVERAGE (your choice by the criteria)' : 'AVERAGE (the STRONG requirement is not met)') : 'AVERAGE';
                 const v = await callApi(SYSTEM_PROMPT, msgs.slice(0, -1).concat([{ role: 'user', content: msgs[msgs.length - 1].content +
                     '\n\n[APP: ' + (all ? 'with this message all four checkpoints are met.' : 'exchange 10+, and the only gap is one open objection.') +
-                    ' Your reply MUST be a CLOSING with tier ' + tiers + '. Acknowledge their last answer inside it. No tier words. Ask no question. End with the VERDICT marker line, then the STATUS line.]' }]));
+                    ' Your reply MUST be a CLOSING with tier ' + tiers + '. Acknowledge their last answer inside it. No tier words. Ask no question. 140 words max. End with the VERDICT marker line, then the STATUS line.]' }]));
                 const vv = detectVerdict(v);
-                if (vv && vv !== 'WEAK') { text = stripLabels(stripStatus(v)); verdict = vv; prog = mergeProgress(prog, parseStatus(v)); log.forced = 'model'; }
-                else { text = text + '\n\n' + fallbackVerdict('AVERAGE'); verdict = 'AVERAGE'; log.forced = 'fallback'; }
+                if (vv && vv !== 'WEAK') { text = stripLabels(stripStatus(v)); verdict = vv; log.forced = 'model'; }
+                else if (!priorVerdict) { text = text + '\n\n' + fallbackVerdict('AVERAGE'); verdict = 'AVERAGE'; log.forced = 'fallback'; }
+                capStrong();
+                if (priorVerdict && verdict !== 'STRONG') verdict = null;
             }
-            if (!verdict && exchangeNumber >= CEIL) { text += '\n\n' + fallbackVerdict('WEAK'); verdict = 'WEAK'; log.forced = 'fallback-12'; }
+            if (!verdict && exchangeNumber >= CEIL && !priorVerdict) { text += '\n\n' + fallbackVerdict('WEAK'); verdict = 'WEAK'; log.forced = 'fallback-12'; }
+            if (verdict) { prog.closed_at = exchangeNumber; prog.s3_at_close = prog.s3; }
             return { text, raw, progress: prog, verdict, log };
         }
         g.AdvocateLogic = { CEIL, VERDICT_TEXT, stripLabels, studentEvidence, SYSTEM_PROMPT, EMPTY, parseStatus, stripStatus, mergeProgress, checkpoints, marker, detectVerdict, words, problems, runTurn };
@@ -553,7 +654,7 @@ leaves having held their ground against a real objection has gotten exactly what
             const [messages, setMessages] = useState([
                 {
                     role: 'assistant',
-                    content: "I am The Advocate. My job is to argue against you.\n\nNot because I disagree with you. Because the fastest way to find out whether a position holds is to put the best objection to it, and it is better to meet that objection here than in front of the class.\n\n**How this works:**\n\u2022 You take a side on whether people can be trusted to care about anyone besides themselves\n\u2022 I argue the other side, one objection at a time, and I will always tell you when I am doing it\n\u2022 You answer. If you get stuck, I will show you how arguments like that get answered\n\u2022 When you have met the four checkpoints shown under the chat (or after 12 exchanges), I close the conversation and the page shows one of three results: Well done \u2014 ready to post; Ready to post; or You have completed the assignment \u2014 recommend continued discussion. All three mean this conversation is complete. Download it and submit it with your post.\n\n**Two things worth knowing.** Defending your original position successfully is a full win. You do not have to change your mind, and folding fast is not the goal. And I can be wrong about the readings, so if I say something the text does not, say so.\n\nStart by telling me where you land. Which one is closer to right about people, Mill or Hobbes, and why?"
+                    content: "I am The Advocate. My job is to argue against you.\n\nNot because I disagree with you. Because the fastest way to find out whether a position holds is to put the best objection to it, and it is better to meet that objection here than in front of the class.\n\n**How this works:**\n\u2022 You take a side on whether people can be trusted to care about anyone besides themselves\n\u2022 Warm-up first: for the first couple of exchanges I just check that we both understand what Mill and Hobbes actually say. No arguing yet\n\u2022 Then I argue the other side, one objection at a time, and I will always tell you when I am doing it\n\u2022 It adapts to you. Objections start easy, with a hint. Answer well and they get harder; get stuck and I slow down and explain. After each answer I tell you one thing you did well and one way to make it stronger\n\u2022 When you have met the four checkpoints shown under the chat (or after 12 exchanges), I close the conversation and the page shows one of three results: Well done \u2014 ready to post; Ready to post; or You have completed the assignment \u2014 recommend continued discussion. All three mean this conversation is complete. Download it and submit it with your post.\n\n**Two things worth knowing.** Defending your original position successfully is a full win. You do not have to change your mind, and folding fast is not the goal. And I can be wrong about the readings, so if I say something the text does not, say so.\n\nStart by telling me where you land. Which one is closer to right about people, Mill or Hobbes, and why?"
                 }
             ]);
             const [input, setInput] = useState('');
@@ -916,6 +1017,9 @@ leaves having held their ground against a real objection has gotten exactly what
                                 <div style={styles.progressBar} aria-label="Progress">
                                     <div style={styles.progressHead}>
                                         <span>Progress: {cps.filter(Boolean).length} of 4</span>
+                                        <span style={{fontWeight: 400, fontStyle: 'italic', color: '#c3ccd4'}}>
+                                            {progress.warmup ? ('Challenge level: ' + progress.level + ' of 4') : 'Warm-up: checking the readings'}
+                                        </span>
                                         <span>Exchange {Math.min(userTurns, EXCHANGE_CEILING)} of {EXCHANGE_CEILING}</span>
                                     </div>
                                     <div style={styles.progressRow}>
