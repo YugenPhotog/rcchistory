@@ -39,116 +39,12 @@
 <body>
     <div id="root"></div>
     
-    <script type="text/babel">
-        const { useState, useRef, useEffect } = React;
-        
-        // Val Town proxy URL
-        const WORKER_URL = 'https://phil120tutor.val.run/';
-        
-        // SVG Icons
-        const BookOpen = ({ size = 24, className = "" }) => (
-            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-            </svg>
-        );
-        
-        const Send = ({ size = 24, className = "" }) => (
-            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="22" y1="2" x2="11" y2="13"></line>
-                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-            </svg>
-        );
-        
-        const AlertCircle = ({ size = 24, className = "" }) => (
-            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="8" x2="12" y2="12"></line>
-                <line x1="12" y1="16" x2="12.01" y2="16"></line>
-            </svg>
-        );
-        
-        const Download = ({ size = 24, className = "" }) => (
-            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                <polyline points="7 10 12 15 17 10"></polyline>
-                <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-        );
 
-        function PhilosophyTutor() {
-            const [messages, setMessages] = useState([
-                {
-                    role: 'assistant',
-                    content: "I am The Advocate. My job is to argue against you.\n\nNot because I disagree with you. Because the fastest way to find out whether a position holds is to put the best objection to it, and it is better to meet that objection here than in front of the class.\n\n**How this works:**\n\u2022 You take a side on whether people can be trusted to care about anyone besides themselves\n\u2022 I argue the other side, one objection at a time, and I will always tell you when I am doing it\n\u2022 You answer. If you get stuck, I will show you how arguments like that get answered\n\n**Two things worth knowing.** Defending your original position successfully is a full win. You do not have to change your mind, and folding fast is not the goal. And I can be wrong about the readings, so if I say something the text does not, say so.\n\nStart by telling me where you land. Which one is closer to right about people, Mill or Hobbes, and why?"
-                }
-            ]);
-            const [input, setInput] = useState('');
-            const [isLoading, setIsLoading] = useState(false);
-            const [verdict, setVerdict] = useState(null);
-            const messagesEndRef = useRef(null);
-
-            const scrollToBottom = () => {
-                messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-            };
-
-            useEffect(() => {
-                scrollToBottom();
-            }, [messages]);
-
-            const downloadConversation = () => {
-                let conversationText = "PHIL 120 The Advocate - Mill and Hobbes - Conversation History\n";
-                conversationText += "Downloaded: " + new Date().toLocaleString() + "\n";
-                conversationText += "=" .repeat(60) + "\n\n";
-                
-                messages.forEach((msg, idx) => {
-                    if (idx === 0) return;
-                    const speaker = msg.role === 'user' ? 'STUDENT' : 'THE ADVOCATE';
-                    conversationText += `${speaker}:\n`;
-                    conversationText += msg.content + "\n\n";
-                    conversationText += "-".repeat(60) + "\n\n";
-                });
-                
-                const blob = new Blob([conversationText], { type: 'text/plain' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `mill-hobbes-advocate-${new Date().toISOString().split('T')[0]}.txt`;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-            };
-
-            const handleSubmit = async (e) => {
-                e.preventDefault();
-                if (!input.trim() || isLoading) return;
-
-                const userMessage = input.trim();
-                setInput('');
-                setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
-                setIsLoading(true);
-
-                // Application-side exchange counter. The model never counts its own turns.
-                const EXCHANGE_CEILING = 12;
-                const exchangeNumber = messages.filter(m => m.role === 'user').length + 1;
-                const countedMessage = '[Exchange ' + exchangeNumber + ' of ' + EXCHANGE_CEILING + ']\n\n' + userMessage;
-
-                try {
-                    // Call the Val Town proxy
-                    const response = await fetch(WORKER_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            model: 'claude-sonnet-5-5',
-                            thinking: { type: 'between_tools' },
-                            max_tokens: 500,
-                            messages: [
-                                {
-                                    role: 'user',
-                                    content: `You are The Advocate, a practice opponent for PHIL 120 (Introduction to Ethics) at Richland
+    <script>
+    /* ADVOCATE_LOGIC_START: plain JS, shared by the page and the test harness. */
+    (function (g) {
+        const CEIL = 12;
+        const SYSTEM_PROMPT = `You are The Advocate, a practice opponent for PHIL 120 (Introduction to Ethics) at Richland
 Community College. Students take a position on a hard question, and you argue the other side as
 well as it can be argued so they meet the strongest objection here, in private, before they post
 it to the class discussion board.
@@ -226,19 +122,29 @@ Their transcript with you is submitted along with their discussion post.
 HOW YOU WORK: FOUR PHASES
 ====================================================================
 
-PHASE 1 - COMMIT. Before any pressure, help them state an actual position.
+PHASE 1 - COMMIT. Before any pressure, help them state an actual position. LIMIT: two exchanges.
 
 You cannot argue against mush. If a student says "both have a point" or "it depends," do not
 pressure them. Help them commit: which author is closer to right about people, and why, in their
 own words. Ask what would have to be true for the other side to win. Stay here until there is
 something real to push against. This phase is help, not challenge.
 
+What counts as committed: any statement that names an author or says yes/no to the question, even
+if rough ("Mill is right, people can learn to care" IS a position). Do not keep sharpening it. If
+after two exchanges they still hedge, take their leaning as the position, say so, and move on.
+
 PHASE 2 - NAME THE GAME, THEN PRESS.
 
-Every single time you are about to argue against them, say so first, in your own words but always
-to this effect:
+First identify the student's side. You argue the OPPOSITE side, always:
+  - Student sides with Mill (people CAN be trusted)  -> you argue the HOBBES side.
+  - Student sides with Hobbes (people CANNOT)        -> you argue the MILL side.
+Never announce the side the student holds. Check this before every objection.
 
-  "Now I'm going to argue the Hobbes side. I don't hold this view. I'm testing whether yours holds."
+Every single time you are about to argue against them, say so first, in your own words but always
+to this effect (fill in the OPPOSITE author):
+
+  "Now I'm going to argue the [opposite author] side. I don't hold this view. I'm testing whether
+  yours holds."
 
 This is not optional and it does not get old. Without it students conclude that you believe what
 you are arguing, or that you have judged them wrong. Name the game every time.
@@ -269,6 +175,21 @@ WHAT to say. The moves:
 
 Offer two of these and ask which fits what they actually think. Never pick for them, and never
 supply the sentence that executes the move.
+
+HELP MODE. Triggered when the student says they don't understand, are stuck, confused, "I don't
+know," or asks how to answer / for an example. Naming two moves is NOT enough. In that reply give:
+  1. PLAIN LANGUAGE: what the passage or objection on the table means, in two or three everyday
+     sentences, with a short quote from the excerpt.
+  2. WORKED EXAMPLE on an unrelated topic (pets, sports, school rules, a job), never on Mill,
+     Hobbes, or trust. Show the full pattern: claim -> objection -> which move -> the answer.
+     Example: "Claim: my dog loves me. Objection: he only acts that way because I feed him.
+     Move - draw a distinction: being fed explains why he comes to the bowl, not why he waits at
+     the door when I'm sick. Answer: the feeding doesn't cover everything he does."
+  3. ONE small question that lets them try the same move on their own position.
+Help mode replies may run to 200 words. If they still don't understand after a help reply,
+explain again differently (new example), do not repeat yourself. The worked example is about a
+different topic, so it is not content they could post. Never give a fill-in-the-blank template
+("I side with ___ because ___") or any sentence frame for their post. Blanks (___) are never allowed.
 
 PHASE 4 - CLOSE. See the verdict section below.
 
@@ -314,11 +235,38 @@ position by describing what they believe.
 CONDUCT
 ====================================================================
 
-ONE question or objection per turn. Under 140 words per reply. If your message is longer than
-their last one, it is too long.
+ONE question or objection per turn.
 
-Acknowledge briefly. No praise paragraphs. Reserve real acknowledgement for a point they reached
-without being led there.
+LENGTH IS A HARD LIMIT. Normal reply: 160 words at most (aim for 100-140). Help-mode reply: 200.
+Verdict: 180. At most three short paragraphs. No headings, no bold labels, no bullet lists except
+in a verdict. The page will reject and regenerate a reply that runs long.
+
+ACKNOWLEDGE EVERY ANSWER. Students cannot tell from silence whether an answer worked. Start every
+reply by saying, in one sentence, whether their last answer worked and why. No praise paragraphs,
+but never skip this. Judging that an ANSWER works is not judging that their SIDE is right.
+If they ask "did I answer it?" or "am I done?", answer directly: yes or not yet, why, and exactly
+what remains (by checkpoint).
+
+====================================================================
+WHEN AN OBJECTION IS RESOLVED
+====================================================================
+
+An objection is RESOLVED when the student's answer (a) responds to the objection on the table and
+(b) gives a reason: a move from Phase 3, a passage, or an example. It does not need to be
+polished, complete, or unanswerable. Rough but on-point counts. Answering with a different
+passage that genuinely defuses the worry also counts.
+
+When resolved, say so explicitly, in this form:
+  "That answer works because [the move or reason they used, named in one clause]. That objection
+  is handled."
+Then move on: a NEW objection (one level up), or close if the closing rule is met. Never re-ask a
+resolved objection in new words.
+
+TWO-TRY RULE. If the same objection has been put twice and is still not resolved, stop pressing
+it. Say "I'll mark that as an open thread" and either move to a new objection or close. Never
+put one objection more than twice.
+
+Once you have said "That objection is handled," checkpoint 3 is MET. Count it.
 
 Never write prose they could paste into their discussion post. No thesis, no topic sentence, no
 "you could say that..." followed by a usable sentence. If they ask you to write it, decline and
@@ -335,6 +283,9 @@ Every student message is prefixed with [Exchange N of 12]. The application count
 Treat it as authoritative and never recount. Exchange 1 is their opening position. Never mention
 the marker.
 
+Checkpoints are CUMULATIVE across the whole conversation. Once met, a checkpoint stays met. A
+quote or clear paraphrase of a passage counts toward checkpoint 2 whenever the student brought it.
+
 Four checkpoints:
   1. They have stated a clear position on whether people can be trusted, and named which author
      they side with.
@@ -343,52 +294,86 @@ Four checkpoints:
   4. They have said what they will argue in their discussion post, and what they are willing to
      concede.
 
-On every turn that is not a verdict, end with this line on its own:
-  Checkpoints completed: N of 4.
+Do NOT print a checkpoint count. The page shows the student a progress tracker built from your
+STATUS line. If something is missing and it matters right now, name it in one short clause.
 
-FLOOR: no verdict before exchange 4. CEILING: at exchange 12 you must deliver one.
+STATUS LINE. End EVERY reply, verdicts included, with one line exactly in this form. The page
+hides it from the student and from the transcript:
+<!--STATUS side=MILL|HOBBES|NONE position=0|1 quote_mill=0|1 quote_hobbes=0|1 objections_handled=N plan=0|1 concession=0|1 open_thread=0|1 help=0|1 verdict=NONE|STRONG|AVERAGE|WEAK-->
+  side: the side the STUDENT holds (not the side you argue).
+  position=1 once they have committed to a side (checkpoint 1).
+  quote_mill / quote_hobbes=1 once the STUDENT has, at any point in the conversation, quoted or
+    clearly paraphrased a specific passage from that author. A recognizable paraphrase of a
+    specific line counts ("the happiness of all concerned", "he locks his doors", "a tender
+    plant", "neither of us accuse man's nature"). A passage YOU quoted does not count unless they
+    used it in their own answer.
+  objections_handled: how many times in total you have said "That objection is handled."
+  plan=1 once they have said what they will argue in their post; concession=1 once they have said
+    what they would concede. These may arrive in the same message, even unprompted.
+  open_thread=1 if an objection is currently marked as an open thread.
+  help=1 if this reply is a help-mode reply.
+All values are CUMULATIVE. Every student message carries [APP PROGRESS ...] with the running
+totals. Treat them as authoritative, never report a lower value, and raise a value the moment the
+student earns it.
 
-A verdict closes THIS CONVERSATION. It is not a grade. Never use the words credit, grade, points,
-marks, or score. Never say the assignment is complete. Only the conversation is.
+ASK FOR WHAT IS MISSING (one item per turn). Once checkpoints 1-3 are met, or by exchange 7 at the latest, ask
+directly for checkpoint 4: "What will you argue in your post, and what are you willing to
+concede?" Do not wait for them to volunteer it.
 
---- VERDICT A: all four checkpoints met, position defended with reasons ---
-First line, exactly:
-POSITION TESTED
-Then: three to five bullets naming what they worked out and what survived pressure, in their own
-phrasing. Say their position has been tested and their transcript is ready to submit with their
-discussion post. Ask no question. Do not invite more.
+CLOSING RULE (exchange 4 or later). Deliver a CLOSING (below) in this reply when ANY of these holds:
+  - All four checkpoints are met. Do not open a new objection; close instead.
+  - Exchange 10 or later, checkpoints 1, 2 and 4 are met, and the ONLY gap is one open objection.
+    Close (this is the middle tier).
+  - The student says they are ready to post or want to stop, and checkpoints 1-3 are met.
+  - The application tells you [FINAL EXCHANGE]. Then you MUST close, whatever the student wrote,
+    even "ok" or "bye".
+FLOOR: no closing before exchange 4. Before exchange 12, if checkpoints are unmet, keep helping;
+do not close with the lowest tier early unless the student asks to stop.
 
---- VERDICT B: four checkpoints met, one thread still thin ---
-First line, exactly:
-READY TO POST
-Then: say this conversation has done what the assignment asks of it and their transcript is ready.
-Say in one sentence that this covers the conversation only and their instructor grades the work.
-Name the ONE thread still open. Offer the choice plainly: post now, or keep working that thread by
-simply replying. Both are legitimate. Ask no question.
+THE CLOSING. Privately decide exactly ONE of three tiers. NEVER write the tier names or any label
+("strong", "average", "weak", "well done", "ready to post", "continued discussion", "verdict",
+"position tested", "session ended") and use no heading. The page shows the result as a badge.
+  STRONG: objections genuinely handled (at least two, or one at level 3), accurate grounding in
+    BOTH texts, and a real concession. Write three to five bullets naming what they worked out and
+    what survived pressure, in their own phrasing. Ask NO question.
+  AVERAGE: checkpoints met but some answers thin, or one objection still open (including the
+    exchange-10 case). Two to four bullets on what they did, then name the ONE open thread in one
+    sentence, and say they may post now or keep working it by simply replying. Ask NO question.
+  WEAK: the session reached its limit, or they stopped, with a real misunderstanding of the text
+    or unanswered objections. Say plainly what they did accomplish, name precisely what is still
+    open or misread (quote the line if it is a misreading), and invite them to start a fresh
+    session with a revised position. Do not imply failure. Ask NO question.
+Every closing: say their conversation is complete and the transcript is ready to download and
+submit with their discussion post, and say in one sentence that their instructor grades the work.
+180 words at most. Never use the words credit, grade, points, marks, or score.
+The last line of every closing, just before the STATUS line, is the hidden marker on its own line,
+exactly one of:
+VERDICT: STRONG
+VERDICT: AVERAGE
+VERDICT: WEAK
+Never put this marker in a non-closing reply.
 
---- VERDICT C: exchange 12 reached, checkpoints unmet ---
-First line, exactly:
-SESSION ENDED
-Then: say they worked through a full round and their transcript is ready. Say in one sentence that
-this covers the conversation only and their instructor grades the work. Name precisely what is
-unresolved. Tell them they may start a new session with a revised position. Do not imply failure.
+OPEN THREAD (for choosing the tier): an objection counts as open only if you have put it twice and
+it is still unresolved (the two-try rule). An objection you raised for the first time in your
+previous reply, which the student has not yet had a real chance to answer, is NOT an open thread;
+drop it and judge the tier on what has been worked through.
 
---- AFTER A VERDICT ---
-After POSITION TESTED: closed. Answer a specific question once, briefly, then restate the close.
-After READY TO POST: reopenable. If they take up the thread, RESUME normally - one objection per
-turn, checkpoints tracked, counter still running to 12. If it resolves, close with POSITION
-TESTED, the only permitted second verdict. If the counter hits 12 first, close with SESSION ENDED.
-If they say they are posting, confirm in one sentence and stop.
-After SESSION ENDED: answer once, briefly, then point them to a fresh session.
+AFTER A CLOSING: after an AVERAGE closing (before exchange 12) the student may keep working the open
+thread. Resume normally, one objection per turn. If it resolves, close again; that closing may
+be STRONG. If they say they are posting, or only reply "ok" or "thanks", confirm in one or two
+sentences and stop. Do not repeat the closing and do not add another VERDICT marker.
 
 ====================================================================
 NEVER
 ====================================================================
 
 - Write, draft, or improve any sentence they could use
+- Use blanks or sentence frames of any kind: no "___", no "I lean toward ___", no "I side with
+  ___ because ___", no "Try saying: ...", no "something like '...'". Ask a plain question instead.
 - Tell them which side is correct
 - Predict or comment on a grade
-- Say whether their position is good enough
+- Say whether their position is good enough (saying whether an ANSWER to an objection worked is
+  required, not forbidden)
 - Assert anything about the texts you cannot quote
 - Argue two objections at once
 - Press harder on a student who is already floundering
@@ -402,38 +387,259 @@ TONE
 Warm, plain, and on their side. You are wearing the other hat, and they should never forget it is
 a hat. Many of these students have never been asked to defend an idea before and will find it
 uncomfortable. Be generous about the person and demanding about the reasoning. A student who
-leaves having held their ground against a real objection has gotten exactly what this is for.`
-                                },
-                                ...messages.map(msg => ({
-                                    role: msg.role,
-                                    content: msg.content
-                                })),
-                                {
-                                    role: 'user',
-                                    content: countedMessage
-                                }
-                            ]
-                        })
-                    });
+leaves having held their ground against a real objection has gotten exactly what this is for.`;
+        const STATUS_RE = /<!--\s*STATUS([\s\S]*?)-->/gi;
+        const EMPTY = { side: 'NONE', position: 0, quote_mill: 0, quote_hobbes: 0, objections_handled: 0,
+                        plan: 0, concession: 0, open_thread: 0 };
+        function parseStatus(t) {
+            if (!t) return null; let m, last = null; STATUS_RE.lastIndex = 0;
+            while ((m = STATUS_RE.exec(t))) last = m[1];
+            if (last === null) return null;
+            const o = {}; last.replace(/(\w+)\s*=\s*([^\s>]+)/g, (_, k, v) => { o[k.toLowerCase()] = v; return ''; });
+            return o;
+        }
+        // Remove STATUS lines (and any truncated "<!--" tail) so students and transcripts never see them.
+        function stripStatus(t) {
+            return (t || '').replace(/<!--\s*STATUS[\s\S]*?-->/gi, '').replace(/<!--[\s\S]*$/, '').trim();
+        }
+        const bit = v => (String(v) === '1' || String(v).toLowerCase() === 'true') ? 1 : 0;
+        // Monotonic merge: a checkpoint, once earned, is never lost.
+        function mergeProgress(p, s) {
+            const n = Object.assign({}, EMPTY, p || {});
+            if (!s) return n;
+            const side = String(s.side || '').toUpperCase();
+            if (side === 'MILL' || side === 'HOBBES') n.side = side;
+            ['position', 'quote_mill', 'quote_hobbes', 'plan', 'concession'].forEach(k => { n[k] = Math.max(n[k], bit(s[k])); });
+            const h = parseInt(s.objections_handled, 10);
+            if (!isNaN(h)) n.objections_handled = Math.max(n.objections_handled, h);
+            if (s.open_thread !== undefined) n.open_thread = bit(s.open_thread);
+            return n;
+        }
+        // Page-side evidence, OR-ed with the model's STATUS so a missed count can't block closure.
+        const MILL_KEYS = /all concerned|benevolent spectator|impartial|pig satisfied|socrates|higher (pleasure|faculties)|competent judges|tender plant|selfish and base|nobleness|golden rule|swine|quality (of|and) (pleasure|quantity)|sense of dignity|greatest happiness/i;
+        const HOBBES_KEYS = /lock(s|ed)? (his |their |my |the )?(doors?|chests?)|nasty|brutish|competition|diffidence|glory|common power|war of every|no sin|accuse man'?s nature|never generally so|covenant|perform(s|eth)? first|seek peace|fear of death|right of nature|causes of quarrel|bonds of words|coercive power/i;
+        function studentEvidence(text) {
+            const t = text || '';
+            return { quote_mill: MILL_KEYS.test(t) ? 1 : 0, quote_hobbes: HOBBES_KEYS.test(t) ? 1 : 0,
+                     plan: /\b(in my post|my post (will|is going to)|I('ll| will| am going to| plan to) argue)\b/i.test(t) ? 1 : 0,
+                     concession: /\b(concede|i('ll| will| can)? admit|i('ll| will)? grant|willing to give up)\b/i.test(t) ? 1 : 0 };
+        }
+        function checkpoints(p) {
+            return [!!(p.position && p.side !== 'NONE'), !!(p.quote_mill && p.quote_hobbes),
+                    p.objections_handled >= 1, !!(p.plan && p.concession)];
+        }
+        function progressTag(p) {
+            const c = checkpoints(p).filter(Boolean).length;
+            return '[APP PROGRESS (cumulative): side=' + p.side + ' position=' + p.position + ' quote_mill=' + p.quote_mill +
+                   ' quote_hobbes=' + p.quote_hobbes + ' objections_handled=' + p.objections_handled + ' plan=' + p.plan +
+                   ' concession=' + p.concession + ' open_thread=' + p.open_thread + ' checkpoints_met=' + c + '/4]';
+        }
+        function marker(n, p) {
+            let m = '[Exchange ' + n + ' of ' + CEIL + '] ' + progressTag(p) + ' [Reply in 160 words or fewer and end with your <!--STATUS ...--> line]';
+            if (n >= CEIL) m += ' [FINAL EXCHANGE: your reply MUST be a CLOSING ending with the VERDICT marker]';
+            else if (n >= 8) m += ' [' + (CEIL - n) + ' exchanges left: close as soon as the closing rule is met]';
+            return m;
+        }
+        // Hidden three-tier verdict (Zhu Xi pattern): model ends a closing with "VERDICT: X"; page shows the badge.
+        const VERDICT_TEXT = { STRONG: 'Well done \u2014 ready to post', AVERAGE: 'Ready to post',
+                               WEAK: 'You have completed the assignment \u2014 recommend continued discussion' };
+        const VERDICT_RE = /^[\s*_#>]*VERDICT\s*:\s*\**\s*(STRONG|AVERAGE|WEAK)\b[\s*_.]*$/im;
+        function detectVerdict(t) { const h = (t || '').match(VERDICT_RE); return h ? h[1].toUpperCase() : null; }
+        // Remove the marker and any leaked label line (tier names, badge wording, old verdict headings).
+        const LABEL_LINE_RE = /^[\s*_#>\-]*(VERDICT\s*:.*|STRONG|AVERAGE|WEAK|WELL[ _]DONE.*|READY TO POST|POSITION TESTED|SESSION ENDED|RECOMMEND CONTINUED DISCUSSION|YOU HAVE COMPLETED THE ASSIGNMENT.*)[\s*_.!]*$/gim;
+        function stripLabels(t) { return (t || '').replace(LABEL_LINE_RE, '').replace(/\n{3,}/g, '\n\n').trim(); }
+        const STOP_RE = /\b(stop|i'?m done|give up|quit|bye|end (this|the) (session|conversation)|posting now|i'?ll post)\b/i;
+        function words(t) { return (t || '').split(/\s+/).filter(Boolean).length; }
+        const FRAME_RE = /_{2,}|\bI lean toward\b|\bI side with\b[^.?!\n]*\bbecause\b|\btry saying\b|\bfill in\b/i;
+        function problems(raw, n, userMessage) {
+            const t = stripStatus(raw), st = parseStatus(raw), out = [];
+            const v = detectVerdict(raw);
+            if (v && n < 4) out.push('no closing before exchange 4; keep going with one question');
+            if (v === 'WEAK' && n < CEIL && !STOP_RE.test(userMessage || '')) out.push('do not close with the lowest tier before exchange 12; keep helping with one question and no VERDICT marker');
+            const limit = detectVerdict(raw) ? 200 : (st && bit(st.help) ? 220 : 175);
+            if (words(t) > limit) out.push('too long (' + words(t) + ' words; limit ' + (limit === 175 ? 160 : limit - 20) + ')');
+            if (FRAME_RE.test(t)) out.push('contains a blank or sentence frame, which is forbidden');
+            // A missing STATUS line no longer triggers a paid regeneration: page-side evidence covers it.
+            return out;
+        }
+        function fallbackVerdict(kind) {
+            if (kind === 'WEAK') return 'We have reached the 12-exchange limit, so this conversation is complete. Your transcript is ready to download and submit with your discussion post; your instructor grades the work. Some threads are still open, and you are welcome to start a fresh session with a revised position.';
+            return 'This conversation is complete. You have stated a position, used a passage from each author, worked through an objection, and said what you will argue and concede. Your transcript is ready to download and submit with your discussion post; your instructor grades the work.';
+        }
+        // One student turn. callApi(system, messages) -> raw text ('' on failure).
+        async function runTurn({ history, userMessage, progress, exchangeNumber, callApi, priorVerdict }) {
+            const base = history.filter(m => !m.isError).map(m => ({ role: m.role, content: m.content }));
+            const prog0 = mergeProgress(progress, null);
+            const msgs = base.concat([{ role: 'user', content: marker(exchangeNumber, prog0) + '\n\n' + userMessage }]);
+            const log = { rewrites: [], forced: null };
+            let raw = await callApi(SYSTEM_PROMPT, msgs);
+            if (!raw) return { error: true };
+            // Enforce length / no-frames / STATUS presence with one regeneration.
+            let issues = problems(raw, exchangeNumber, userMessage);
+            if (issues.length) {
+                const fix = await callApi(SYSTEM_PROMPT, msgs.concat([{ role: 'assistant', content: raw },
+                    { role: 'user', content: '[APP: rewrite your last reply. Problems: ' + issues.join('; ') +
+                      '. Keep the same point and the single question. Normal 160 words max, help 200. No blanks or sentence frames. End with the STATUS line. Output only the rewritten reply.]' }]));
+                log.rewrites.push(issues.join('; '));
+                if (fix && problems(fix, exchangeNumber, userMessage).length < issues.length) raw = fix;
+            }
+            let verdict = detectVerdict(raw);
+            let text = stripLabels(stripStatus(raw));
+            const handledSaid = (history.concat([{ role: 'assistant', content: text }]).filter(m => m.role === 'assistant')
+                                 .map(m => (m.content.match(/objection is handled/gi) || []).length).reduce((a, b) => a + b, 0));
+            let prog = mergeProgress(mergeProgress(prog0, parseStatus(raw)),
+                                     Object.assign(studentEvidence(userMessage), { objections_handled: handledSaid }));
+            if (verdict === 'WEAK' && exchangeNumber < CEIL && !STOP_RE.test(userMessage)) verdict = null; // early lowest tier is never accepted
+            // Page-side closure: all four met, or (exchange 10+) the only gap is the objection -> ask for a closing, then force one.
+            const cps = checkpoints(prog);
+            const all = cps.every(Boolean);
+            const lenient = exchangeNumber >= 10 && cps[0] && cps[1] && cps[3] && !cps[2];
+            // After an AVERAGE closing the student may keep talking; only re-close when the open thread resolves.
+            const reclose = priorVerdict !== 'AVERAGE' || !prog.open_thread;
+            if (!verdict && exchangeNumber >= 4 && (all || lenient) && reclose) {
+                const tiers = all ? 'STRONG or AVERAGE (your choice by the criteria)' : 'AVERAGE';
+                const v = await callApi(SYSTEM_PROMPT, msgs.slice(0, -1).concat([{ role: 'user', content: msgs[msgs.length - 1].content +
+                    '\n\n[APP: ' + (all ? 'with this message all four checkpoints are met.' : 'exchange 10+, and the only gap is one open objection.') +
+                    ' Your reply MUST be a CLOSING with tier ' + tiers + '. Acknowledge their last answer inside it. No tier words. Ask no question. End with the VERDICT marker line, then the STATUS line.]' }]));
+                const vv = detectVerdict(v);
+                if (vv && vv !== 'WEAK') { text = stripLabels(stripStatus(v)); verdict = vv; prog = mergeProgress(prog, parseStatus(v)); log.forced = 'model'; }
+                else { text = text + '\n\n' + fallbackVerdict('AVERAGE'); verdict = 'AVERAGE'; log.forced = 'fallback'; }
+            }
+            if (!verdict && exchangeNumber >= CEIL) { text += '\n\n' + fallbackVerdict('WEAK'); verdict = 'WEAK'; log.forced = 'fallback-12'; }
+            return { text, raw, progress: prog, verdict, log };
+        }
+        g.AdvocateLogic = { CEIL, VERDICT_TEXT, stripLabels, studentEvidence, SYSTEM_PROMPT, EMPTY, parseStatus, stripStatus, mergeProgress, checkpoints, marker, detectVerdict, words, problems, runTurn };
+    })(typeof window !== 'undefined' ? window : globalThis);
+    /* ADVOCATE_LOGIC_END */
+    </script>
+    <script type="text/babel">
+        const { useState, useRef, useEffect } = React;
+        
+        // Val Town proxy URL
+        const WORKER_URL = 'https://phil120tutor.val.run/';
+        
+        // SVG Icons
+        const BookOpen = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+        );
+        
+        const Send = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+        );
+        
+        const AlertCircle = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+        );
+        
+        const Download = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+        );
 
-                    if (!response.ok) {
-                        const errorData = await response.json();
-                        console.error('API Error:', errorData);
-                        throw new Error(`API request failed: ${response.status}`);
-                    }
+        function PhilosophyTutor() {
+            const [messages, setMessages] = useState([
+                {
+                    role: 'assistant',
+                    content: "I am The Advocate. My job is to argue against you.\n\nNot because I disagree with you. Because the fastest way to find out whether a position holds is to put the best objection to it, and it is better to meet that objection here than in front of the class.\n\n**How this works:**\n\u2022 You take a side on whether people can be trusted to care about anyone besides themselves\n\u2022 I argue the other side, one objection at a time, and I will always tell you when I am doing it\n\u2022 You answer. If you get stuck, I will show you how arguments like that get answered\n\u2022 When you have met the four checkpoints shown under the chat (or after 12 exchanges), I close the conversation and the page shows one of three results: Well done \u2014 ready to post; Ready to post; or You have completed the assignment \u2014 recommend continued discussion. All three mean this conversation is complete. Download it and submit it with your post.\n\n**Two things worth knowing.** Defending your original position successfully is a full win. You do not have to change your mind, and folding fast is not the goal. And I can be wrong about the readings, so if I say something the text does not, say so.\n\nStart by telling me where you land. Which one is closer to right about people, Mill or Hobbes, and why?"
+                }
+            ]);
+            const [input, setInput] = useState('');
+            const [isLoading, setIsLoading] = useState(false);
+            const [verdict, setVerdict] = useState(null);
+            const [progress, setProgress] = useState(AdvocateLogic.EMPTY);
+            // PROPOSED_BUILD: exchange ceiling and lock are enforced in JS, not only by the model.
+            const EXCHANGE_CEILING = 12;
+            const userTurns = messages.filter(m => m.role === 'user').length;
+            const locked = verdict === 'STRONG' || verdict === 'WEAK' || userTurns >= EXCHANGE_CEILING;
+            const messagesEndRef = useRef(null);
 
-                    const data = await response.json();
-                    const assistantMessage = (data.content || []).find(b => b && b.type === 'text')?.text?.trim() || '';
-                    if (!assistantMessage) throw new Error("Sorry, I didn't get a response. Please try again.");
+            const scrollToBottom = () => {
+                messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+            };
 
-                    const verdictHit = assistantMessage.match(/^(POSITION TESTED|READY TO POST|SESSION ENDED)/m);
-                    if (verdictHit) setVerdict(verdictHit[1]);
+            useEffect(() => {
+                scrollToBottom();
+            }, [messages]);
 
-                    setMessages(prev => [...prev, { role: 'assistant', content: assistantMessage }]);
+            const downloadConversation = () => {
+                let conversationText = "PHIL 120 The Advocate - Mill and Hobbes - Conversation History\n";
+                conversationText += "Downloaded: " + new Date().toLocaleString() + "\n";
+                conversationText += "=" .repeat(60) + "\n\n";
+                
+                messages.forEach((msg, idx) => {
+                    if (idx === 0) return;
+                    const speaker = msg.role === 'user' ? 'STUDENT' : 'THE ADVOCATE';
+                    conversationText += `${speaker}:\n`;
+                    conversationText += msg.content + "\n\n";
+                    if (msg.verdict) conversationText += "[Result: " + AdvocateLogic.VERDICT_TEXT[msg.verdict] + "]\n\n";
+                    conversationText += "-".repeat(60) + "\n\n";
+                });
+                
+                conversationText += "=".repeat(60) + "\nFinal result: " + (verdict ? AdvocateLogic.VERDICT_TEXT[verdict] : "(no result yet)") + "\n";
+                const blob = new Blob([conversationText], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `mill-hobbes-advocate-${new Date().toISOString().split('T')[0]}.txt`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            };
+
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                if (!input.trim() || isLoading || locked) return;
+
+                const userMessage = input.trim();
+                setInput('');
+                setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
+                setIsLoading(true);
+
+                const exchangeNumber = userTurns + 1;
+                const callApi = async (system, msgs) => {
+                    try {
+                        const response = await fetch(WORKER_URL, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                model: 'claude-sonnet-5-5',
+                                // between_tools = thinking OFF on this model; removing it lets thinking eat max_tokens.
+                                thinking: { type: 'between_tools' },
+                                max_tokens: 700,
+                                // Prompt caching: the ~16k-token system prompt is cached for 5 min (reads cost 10%).
+                                system: [{ type: 'text', text: system, cache_control: { type: 'ephemeral' } }],
+                                messages: msgs
+                            })
+                        });
+                        if (!response.ok) { console.error('API Error:', response.status); return ''; }
+                        const data = await response.json();
+                        return (data.content || []).find(b => b && b.type === 'text')?.text?.trim() || '';
+                    } catch (err) { console.error('Error:', err); return ''; }
+                };
+                try {
+                    const r = await AdvocateLogic.runTurn({ history: messages, userMessage, progress, exchangeNumber, callApi, priorVerdict: verdict });
+                    if (r.error) throw new Error('no response');
+                    setProgress(r.progress);
+                    if (r.verdict) setVerdict(r.verdict);
+                    setMessages(prev => [...prev, { role: 'assistant', content: r.text, verdict: r.verdict || undefined }]);
                 } catch (error) {
                     console.error('Error:', error);
                     setMessages(prev => [...prev, { 
-                        role: 'assistant', 
+                        role: 'assistant', isError: true,
                         content: 'I apologize, but I encountered an error. Please try again. If the problem persists, contact your instructor.'
                     }]);
                 } finally {
@@ -586,6 +792,17 @@ leaves having held their ground against a real objection has gotten exactly what
                     fontStyle: 'italic',
                     textShadow: '0 1px 3px rgba(0, 0, 0, 0.5)',
                 },
+                progressBar: { margin: '0 20px 14px', padding: '10px 12px', border: '1px solid rgba(143,176,196,0.3)', borderRadius: '8px', background: 'rgba(0,0,0,0.2)' },
+                progressHead: { display: 'flex', justifyContent: 'space-between', color: '#8FB0C4', fontSize: '0.9rem', fontWeight: '600', marginBottom: '8px', letterSpacing: '0.05em' },
+                progressRow: { display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px' },
+                progressItem: { padding: '6px 8px', borderRadius: '6px', border: '1px solid rgba(143,176,196,0.2)', color: '#94a2ad' },
+                progressItemDone: { border: '1px solid #6f9a63', background: 'rgba(74,103,65,0.35)', color: '#e8e4d9' },
+                progressLabel: { fontSize: '0.85rem', fontWeight: '600' },
+                progressDetail: { fontSize: '0.78rem', fontStyle: 'italic', opacity: 0.85 },
+                badge: { display: 'inline-block', marginTop: '10px', padding: '5px 12px', borderRadius: '6px', fontSize: '0.9rem', fontWeight: '600', letterSpacing: '0.03em' },
+                badge_STRONG: { border: '1px solid rgba(72,160,96,0.6)', background: 'rgba(72,160,96,0.12)', color: '#8FD19E' },
+                badge_AVERAGE: { border: '1px solid rgba(143,176,196,0.6)', background: 'rgba(143,176,196,0.10)', color: '#c3ccd4' },
+                badge_WEAK: { border: '1px solid rgba(214,150,40,0.6)', background: 'rgba(214,150,40,0.12)', color: '#E8B04A' },
                 verdictBanner: { margin: '0 20px 16px', padding: '16px 18px',
                     background: 'linear-gradient(135deg, #1f1c19 0%, #1a1815 100%)',
                     border: '2px solid #8FB0C4', borderRadius: '8px', textAlign: 'center' },
@@ -665,6 +882,11 @@ leaves having held their ground against a real objection has gotten exactly what
                                         <p style={{...styles.messageText, ...(msg.role === 'user' ? styles.userMessageText : {})}}>
                                             {msg.content}
                                         </p>
+                                        {msg.verdict && (
+                                            <div style={{...styles.badge, ...styles['badge_' + msg.verdict]}}>
+                                                {(msg.verdict === 'STRONG' ? '\u2713 ' : msg.verdict === 'AVERAGE' ? '\u25c6 ' : '\u21bb ') + AdvocateLogic.VERDICT_TEXT[msg.verdict]}
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             ))}
@@ -682,20 +904,45 @@ leaves having held their ground against a real objection has gotten exactly what
                             )}
                             <div ref={messagesEndRef} />
                         </div>
+                        {userTurns > 0 && (() => {
+                            const cps = AdvocateLogic.checkpoints(progress);
+                            const items = [
+                                ['Position', cps[0], progress.side !== 'NONE' ? (progress.side === 'MILL' ? 'Mill' : 'Hobbes') : ''],
+                                ['Passage from each author', cps[1], (progress.quote_mill ? 'Mill \u2713' : 'Mill \u2013') + ' \u00b7 ' + (progress.quote_hobbes ? 'Hobbes \u2713' : 'Hobbes \u2013')],
+                                ['Objection answered', cps[2], progress.objections_handled + ' handled'],
+                                ['Post plan + concession', cps[3], (progress.plan ? 'plan \u2713' : 'plan \u2013') + ' \u00b7 ' + (progress.concession ? 'concession \u2713' : 'concession \u2013')],
+                            ];
+                            return (
+                                <div style={styles.progressBar} aria-label="Progress">
+                                    <div style={styles.progressHead}>
+                                        <span>Progress: {cps.filter(Boolean).length} of 4</span>
+                                        <span>Exchange {Math.min(userTurns, EXCHANGE_CEILING)} of {EXCHANGE_CEILING}</span>
+                                    </div>
+                                    <div style={styles.progressRow}>
+                                        {items.map(([label, ok, detail]) => (
+                                            <div key={label} style={{...styles.progressItem, ...(ok ? styles.progressItemDone : {})}}>
+                                                <div style={styles.progressLabel}>{ok ? '\u2713 ' : '\u25cb '}{label}</div>
+                                                <div style={styles.progressDetail}>{detail}</div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            );
+                        })()}
                         {verdict && (
                             <div style={styles.verdictBanner}>
-                                <p style={styles.verdictTitle}>
-                                    {verdict === 'POSITION TESTED' ? 'Position Tested'
-                                      : verdict === 'READY TO POST' ? 'Ready to Post'
-                                      : 'Session Ended'}
-                                </p>
+                                <div style={{...styles.badge, ...styles['badge_' + verdict], fontSize: '1.1rem', margin: '0 auto 10px'}}>
+                                    {(verdict === 'STRONG' ? '\u2713 ' : verdict === 'AVERAGE' ? '\u25c6 ' : '\u21bb ') + AdvocateLogic.VERDICT_TEXT[verdict]}
+                                </div>
                                 <p style={styles.verdictText}>
-                                    {verdict === 'READY TO POST'
-                                      ? 'You can post now, or keep working the thread named above by simply replying.'
-                                      : 'Download your conversation and submit it with your discussion post.'}
+                                    {verdict === 'AVERAGE'
+                                      ? 'Your assignment conversation is complete. Download it and submit it with your post, or keep working the open thread by simply replying.'
+                                      : verdict === 'WEAK'
+                                      ? 'Your assignment conversation is complete. Download it and submit it with your post. A fresh session with a revised position is recommended.'
+                                      : 'Your assignment conversation is complete. Download it and submit it with your discussion post.'}
                                 </p>
                                 <p style={styles.verdictNote}>
-                                    This closes the conversation only. Your instructor grades the assignment.
+                                    The result describes this conversation only. Your instructor grades the assignment.
                                 </p>
                                 <button onClick={downloadConversation} style={styles.verdictButton}>
                                     <Download size={18} />
@@ -712,18 +959,18 @@ leaves having held their ground against a real objection has gotten exactly what
                                     <textarea
                                         value={input}
                                         onChange={(e) => setInput(e.target.value)}
-                                        placeholder="State your position, or answer the objection..."
+                                        placeholder={locked ? "This session is closed. Download your conversation above." : "State your position, or answer the objection..."}
                                         aria-label="Your message to The Advocate"
                                         style={styles.textarea}
                                         rows="3"
-                                        disabled={isLoading}
+                                        disabled={isLoading || locked}
                                     />
                                     <button
                                         type="submit"
-                                        disabled={isLoading || !input.trim()}
+                                        disabled={isLoading || locked || !input.trim()}
                                         style={{
                                             ...styles.sendButton,
-                                            ...(isLoading || !input.trim() ? styles.sendButtonDisabled : {}),
+                                            ...(isLoading || locked || !input.trim() ? styles.sendButtonDisabled : {}),
                                         }}
                                     >
                                         Inquire
