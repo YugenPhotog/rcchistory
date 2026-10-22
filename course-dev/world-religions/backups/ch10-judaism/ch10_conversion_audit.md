@@ -12,7 +12,7 @@ Prepared 2026-10-19 for Steven Austin. Covers REL 210 Ch10 Lectures 1-3 only (th
 
 ## Result
 
-- **Lecture 1** (`rel210-ch10-lecture1-judaism-origins-exodus-temple-diaspora_revFA26.html`, formerly `rel210-ch10-lecture1-judaism-origins-exodus-temple-diaspora.html`): 28 old slides → 32 new slides. 47 old text units are not verbatim in the new deck; 43 are below 90% word coverage. All are listed in the intentional-changes section. **No unexplained content loss.**
+- **Lecture 1** (`rel210-ch10-lecture1-judaism-origins-exodus-temple-diaspora_revFA26.html`, formerly `rel210-ch10-lecture1-judaism-origins-exodus-temple-diaspora.html`): 28 old slides → 32 new slides (35 slides after the 2026-10-22 Abrahamic-covenant pass: AJ, AK, AL added). 47 old text units are not verbatim in the new deck; 43 are below 90% word coverage. All are listed in the intentional-changes section. **No unexplained content loss.**
 - **Lecture 2** (`rel210-ch10-lecture2-judaism-god-covenant-holiness-hope_revFA26.html`, formerly `rel210-ch10-lecture2-judaism-god-covenant-holiness-hope.html`): 31 old slides → 45 new slides. 68 old text units are not verbatim in the new deck; 37 are below 90% word coverage. All are listed in the intentional-changes section. **No unexplained content loss.**
 - **Lecture 3** (`rel210-ch10-lecture3-judaism-text-worship-sacred-practice_revFA26.html`, formerly `rel210-ch10-lecture3-judaism-text-worship-sacred-practice.html`): 27 old slides → 31 new slides. 57 old text units are not verbatim in the new deck; 41 are below 90% word coverage. All are listed in the intentional-changes section. **No unexplained content loss.**
 - Lecture 1 slides B (old 2, Lecture Roadmap) and E (old 5, History, Memory & Sacred Story) were removed on 2026-10-19 at Steven's request; their converted HTML is preserved verbatim in the "L1 slide edits after the _revFA26 rename" section, and the originals remain in the archived pre-edit deck.
@@ -29,7 +29,7 @@ Prepared 2026-10-19 for Steven Austin. Covers REL 210 Ch10 Lectures 1-3 only (th
 | 5 | History, Memory & Sacred Story | removed (ID E retired) | see "L1 slide edits after the _revFA26 rename" | n/a |
 | 6 | Creation: A World of Order & Responsibility | F | Creation: A World of Order & Responsibility | 100% |
 | 7 | The Great Flood: Divine Judgment and Mercy | G | The Great Flood: Divine Judgment and Mercy | 100% |
-| 8 | Covenant People | H, I | Covenant People; The Covenant Promise | 92% |
+| 8 | Covenant People | H, I | Covenant People, Chosen People (retitled 2026-10-22); The Covenant Promise | 92% |
 | 9 | Patriarchal Order | J, AG | Patriarchal Order; The Story of Joseph: The Favored Son | 99% |
 | 10 | Pause and Reflect | K | Pause & Reflect | 25% |
 | 11 | Section II Exodus, Monarchy & Exile | L | Section II: Exodus, Monarchy & Exile | 100% |
@@ -51,10 +51,13 @@ Prepared 2026-10-19 for Steven Austin. Covers REL 210 Ch10 Lectures 1-3 only (th
 | 27 | Antisemitism: A Historical Pattern | AC | Antisemitism: A Historical Pattern | 100% |
 | 28 | Pause and Synthesize | AD | Pause & Reflect | 60% |
 | (new) | (none) | AH | Joseph in Egypt: How Israel Came to Egypt | n/a |
+| (new 2026-10-22) | (none; from Steven's original PowerPoint bullets) | AJ | Abrahamic Covenant: The Call | n/a |
+| (new 2026-10-22) | (none; from Steven's original PowerPoint bullets) | AK | Abrahamic Covenant: Terms & Token | n/a |
+| (new 2026-10-22) | (none; from Steven's original PowerPoint bullets) | AL | Abrahamic Covenant: Blessings | n/a |
 | (new) | (none) | AI | The Maccabean Revolt & Hanukkah | n/a |
 | (new) | (none) | AE | Beyond the Lecture: Modern Jewish Worlds | n/a |
 
-**Full ID list (L1):** A C D F G H I J AG AH K L M N O P Q R S T U V AI W X Y Z AA AB AC AD AE
+**Full ID list (L1, slide order as of 2026-10-22):** A C D F G H AJ AK AL I J AG AH K L M N O P Q R S T U V AI W X Y Z AA AB AC AD AE (35 slides). Retired, never reuse: B, E, AF. Next unused L1 ID: AM.
 
 ## Lecture 2: slide mapping (old slide number → new permanent ID)
 
@@ -859,6 +862,39 @@ Both images are AI-generated WebP files supplied by Steven, 1152×864. They use 
 - **Tests:** the overflow tests were re-run at 960×700, 1280×720 and 1920×1080 and passed. The keyboard and Esc check also passed.
 - **Screenshot:** retaken as `62_L3-AB.png`.
 
+## L1 Section I: fuller Abrahamic covenant (Steven's request, 2026-10-22)
+Requested by Steven: a fuller discussion of the Abrahamic covenant after the Section I divider (C), using his original PowerPoint bullets (Covenant People / Chosen People; Abrahamic Covenant; Patriarchal Order). This pass changed Lecture 1 only. L2, L3, the supplements and `index.html` are untouched.
+
+- **Backups (made first):** `backups/ch10-judaism/rel210-ch10-lecture1-judaism-origins-exodus-temple-diaspora_revFA26_pre-covenant-slides_20261022-121914.html` (SHA-256 da62d9aa4d52…, identical to the deck before this pass) and `backups/ch10-judaism/ch10_conversion_audit_pre-covenant-slides_20261022-121914.md`.
+- **What already existed (merged, not duplicated):** H (Covenant People), I (The Covenant Promise, Gen 17:7) and J (Patriarchal Order: covenant passed father to son, firstborn/primogeniture popup, Jacob's twelve sons as the twelve tribes) followed by AG–AH (Story of Joseph). Steven's **Patriarchal Order** bullets are therefore already covered and were **not added**.
+- **Slide order now:** C D F G **H AJ AK AL I** J AG AH K. The new slides follow H rather than sitting directly after C, because D (names), F (creation) and G (flood) come before Abram in the story; putting covenant slides before creation would break the narrative.
+- **H, retitled "Covenant People, Chosen People"** (merged with Steven's Covenant People / Chosen People bullets):
+  - Bullets: "The history of Judaism begins with Abram (later Abraham) in Genesis 12—though historians still debate when and where he lived" · "God chose Abram and his descendants to establish His covenant (Genesis 17:7), so Jews are known as the 'Chosen People'" · "'People' matters: Judaism is both a religion and an ethnicity".
+  - Card: "Literally, a contract. In the Bible, an agreement between God and his people: a two-way promise of lasting loyalty, sealed by an oath or a sign." The card text before this pass ("Like a contract … sealed by an oath or a sign", reworded earlier per Steven) is preserved in H's notes.
+  - Old bullets replaced (preserved here verbatim): "Jewish tradition traces its story to Abram (later Abraham)" · "God *chose* Abram (and his descendants) to establish His covenant" · "The covenant promise is spelled out in Genesis 17:7 (next slide)".
+  - Popups: `l1-gen17-7` kept unchanged (trigger moved into bullet 2); **new** `l1-deut10-15` (Deut 10:15, NRSV) on "Chosen People".
+  - Notes rewritten in the deck format: Genesis 12 narrowing; the Hebrew Bible as the record of God's dealings with His covenant people; covenant as a two-way promise; chosenness (call to holiness, based on God's love, sustained Jews through a long history; not superiority; Lecture 2 V–W develops it); "people" as religion and ethnicity; date/place hedge. The old notes paragraph "Genesis 12 and 17 shift the narrative…" kept and extended; its "next slide … Genesis 17:7" sentence replaced by a pointer to AJ–AL and I.
+  - Image unchanged (Abraham portrait).
+- **AJ (new), "Abrahamic Covenant: The Call"** (kicker Genesis 12, 15 & 17). Image+text layout (`split` 1.1fr/0.9fr, `ul.tight`):
+  - "The journey: God tells Abram, 'Go from your country… to the land that I will show you' (Gen 12:1)"
+  - "Cut the covenant: Abram cuts animals 'in two, laying each half over against the other' (Gen 15:10)"
+  - "The call: in a theophany, 'the LORD appeared to Abram': 'I will make my covenant between me and you' (Gen 17:1–2)"
+  - Popups: `l1-cut` (*karat*; Jer 34:18) and `l1-theophany` ("A visible manifestation of God to humankind", Steven's definition).
+  - Image **reused**: `images/rel210-ch10-l2-covenant-between-pieces.webp` (L2 T), same alt text, caption "AI-generated illustration: the covenant 'between the pieces' (Genesis 15)". Notes repeat L2's simplification caveat (single row vs. facing rows).
+  - Notes: 2-minute story script (Gen 12:1–4, 15:9–18), the self-curse meaning of the ceremony (marked as a paraphrase, not quoted), the theophany at ninety-nine, sources.
+- **AK (new), "Abrahamic Covenant: Terms & Token"** (kicker Genesis 17:1–12). Four cards (`card-grid cols-2`, L2 U pattern): Abraham's Part (worship, believe, obey; "walk before me, and be blameless"); God's Part ("I will be their God"); A New Name ("your name shall be Abraham", marks his new status); The Token (circumcision at eight days, "a sign of the covenant between me and you"). Citation "All quotations: NRSV"; takeaway "A two-way promise, with a sign carried into every generation." Notes: story script, Sarah's renaming (17:15–16, 17:19), brit milah pointer to Lecture 3, KJV "be thou perfect" as older wording. No image (flag below).
+- **AL (new), "Abrahamic Covenant: Blessings"** (kicker Genesis 12, 15 & 17). Four cards: Posterity (17:4; 17:6), Land (17:8), Protection (15:1), All Families of the Earth (12:3). Takeaway "The blessing begins with one family but reaches all the families of the earth." Notes: story script tied to C's star image (Gen 15:5), links back to F/G and forward to J and Section II; Steven's "father of a multitude" → NRSV "ancestor of a multitude".
+- **I, "The Covenant Promise": moved** from after H to after AL (directly before J). Slide text unchanged. Notes: one placement paragraph added; source line now also says "re-checked 2026-10-22 against bible.oremus.org (NRSV), wording unchanged".
+- **Scripture check:** every NRSV quotation on H, AJ, AK, AL and I (slides, popups and notes) was checked 2026-10-22 against bible.oremus.org (version NRSV): Gen 12:1–4; 15:1–18; 17:1–19; Deut 7:6–8; 10:14–16; Jer 34:18–19. A script confirmed every quoted fragment is a verbatim substring of the oremus text. LORD is set in small caps (same markup as L2 V). KJV wording (Gen 17:1, 17:4–5) appears only in notes, labeled as older wording, checked on biblegateway.com.
+- **PERMANENT SLIDE IDS comment** updated (H retitled; AJ, AK, AL added; I moved). AJ is the next unused L1 ID after AI; L1 never used AJ–AL (B, E, AF stay retired). AJ–AL also exist in L2, but IDs are per deck, as with every other shared letter.
+- **No new CSS.** All markup copies existing classes (`split`, `split-text`, `fig`, `img-caption`, `kicker`, `long-title`, `card-grid cols-2`, `card teal/purple/gold/crimson`, `citation`, `takeaway`, `popup`, `popup-trigger`).
+- **Cross-references:** no pause, Look-back, "Taught on" note or other deck points to L1 H or I by position. K still looks back to D only. `index.html` has no L1 slide count and was not changed.
+- **Spoken-time flag:** the three new slides add roughly 5–6 minutes to Section I.
+- **Overlap flag:** L2 S–W (Covenant People; Abrahamic Covenant: Making the Covenant; Blessings; Chosen People; What Chosenness Means) already teaches much of this from the same PowerPoint bullets. L1 now tells it as story; L2 still treats it as theology. Steven may want to shorten L2 T–U into a recap later (not done; L2 untouched).
+- **Image flag:** AK and AL have no image. A scene of Abraham and Sarah receiving their new names (AK) or of Abram under the stars (AL; C already uses the star image) would help. No images were generated.
+- **Tests (2026-10-22):** L1 at 960×700, 1280×720 and 1920×1080, all 35 slides: no overflow (tallest new slide H, 511 of 700 px), no JS errors, no broken images or HTTP errors (only the local test server's favicon 404), ID labels correct. Keyboard: → / ← walk H → AJ → AK → AL → I → J and back; Tab reaches the popup triggers on H and AJ; Enter and Space open each popup with focus on ×; Esc closes the popup only (no overview) and returns focus to the trigger; with no popup open, Esc toggles the overview. Smallest on-slide text at 1280×720 is the existing caption/kicker style (11.1 px / 13.7 px); body text is at least 16 px.
+- **Not committed or pushed.**
+
 ## Removed (with reason)
 - **L3 B, "Lecture Roadmap: Three Ways Judaism Is Lived"** (2026-10-19, at Steven's request): the section dividers carry the roadmap; ID retired. Learning-goal note moved to A. Verbatim copy in the "L3 slide B removed" section above.
 - **L2 G, "What the Name Teaches"** (2026-10-19 L2 revision pass): merged into F; ID retired. Verbatim copy in the L2 revision section above.
@@ -874,7 +910,11 @@ All Bible quotations in L1–L3 are now the 1989 NRSV, verbatim, labeled "(NRSV)
 
 | Deck/ID | Before | After |
 |---|---|---|
-| L1 H/I | "Genesis 17:7" (reference only); earlier draft quoted KJV | "I will establish my covenant between me and you, and your offspring after you throughout their generations, for an everlasting covenant, to be God to you and to your offspring after you." Genesis 17:7 (NRSV) |
+| L1 H/I | "Genesis 17:7" (reference only); earlier draft quoted KJV; re-checked 2026-10-22 against bible.oremus.org, unchanged | "I will establish my covenant between me and you, and your offspring after you throughout their generations, for an everlasting covenant, to be God to you and to your offspring after you." Genesis 17:7 (NRSV) |
+| L1 H (2026-10-22) | Steven's PPT: Deut 10:15 (NASB 1995 wording, uncited) | Popup: "…yet the LORD set his heart in love on your ancestors alone and chose you, their descendants after them, out of all the peoples, as it is today." Deuteronomy 10:15 (NRSV); notes also quote Deut 7:7–8, Gen 15:7, Gen 12:4 (NRSV) |
+| L1 AJ (2026-10-22) | Steven's PPT: "The Call (Gen 17:1–2)"; "Cut the Covenant (Gen 15:9–10; Jer 34:18)" (references only) | "Go from your country… to the land that I will show you" (Gen 12:1); "in two, laying each half over against the other" (Gen 15:10); "the LORD appeared to Abram"; "I will make my covenant between me and you" (Gen 17:1–2); popup: "like the calf when they cut it in two and passed between its parts" (Jer 34:18). All NRSV |
+| L1 AK (2026-10-22) | Steven's PPT: "Terms (Gen 17:1–8) … be perfect/blameless"; "Token (Gen 17:11–12)" | "walk before me, and be blameless" (17:1); "I will be their God" (17:8); "your name shall be Abraham" (17:5); "a sign of the covenant between me and you" (17:11–12). All NRSV. KJV "be thou perfect" cited in notes only, as older wording |
+| L1 AL (2026-10-22) | Steven's PPT: "father of a multitude of nations," "exceedingly fruitful," "the land where you are now an alien," "I am your shield," all families blessed (Gen 12:3) | "the ancestor of a multitude of nations" (17:4); "exceedingly fruitful" (17:6); "the land where you are now an alien" (17:8); "I am your shield" (15:1); "in you all the families of the earth shall be blessed" (12:3). All NRSV; KJV "a father of many nations" noted as older wording |
 | L1 H, L2 S | Covenant box: "Literally, a contract. In the Bible, an agreement between God and his people; two-way promise" | "Covenant (Hebrew *berit*): Like a contract, it binds two parties with promises. Unlike a contract, it is an ongoing relationship of mutual loyalty between unequal partners—God and Israel—sealed by an oath or a sign." (not a quotation; reworded per Steven) |
 | L2 D | "Hear, O Israel: The Lord our God, the Lord is One" (uncited); "Hear O Isreal" (draft: JPS 1917) | "Hear, O Israel: The LORD is our God, the LORD alone." Deuteronomy 6:4 (NRSV); NRSV footnote alternatives in notes |
 | L2 E | Deut 6:4 "Hear, O Israel: YHWH is our God, YHWH is one" | Same words, labeled "a literal rendering, not a published translation" (unchanged) |
