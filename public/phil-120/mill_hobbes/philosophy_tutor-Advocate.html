@@ -721,13 +721,15 @@ leaves having held their ground against a real objection has gotten exactly what
                                 // between_tools = thinking OFF on this model; removing it lets thinking eat max_tokens.
                                 thinking: { type: 'between_tools' },
                                 max_tokens: 700,
-                                // Prompt caching: the ~16k-token system prompt is cached for 5 min (reads cost 10%).
-                                system: [{ type: 'text', text: system, cache_control: { type: 'ephemeral' } }],
+                                // Prompt caching: the ~16k-token system prompt is cached for 1 hour (reads cost 5% on Sonnet 5.5).
+                                system: [{ type: 'text', text: system, cache_control: { type: 'ephemeral', ttl: '1h' } }],
                                 messages: msgs
                             })
                         });
                         if (!response.ok) { console.error('API Error:', response.status); return ''; }
                         const data = await response.json();
+                        // Prompt-caching check: open DevTools (F12) > Console. Turn 1 should show cache_creation_input_tokens ~16k; later turns cache_read_input_tokens ~16k. Free: usage already comes back with every reply.
+                        if (data.usage) console.log('[Advocate usage]', data.usage);
                         return (data.content || []).find(b => b && b.type === 'text')?.text?.trim() || '';
                     } catch (err) { console.error('Error:', err); return ''; }
                 };
