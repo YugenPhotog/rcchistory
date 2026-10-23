@@ -273,6 +273,12 @@ IMPORTANT INSTRUCTIONS:
                                         <textarea
                                             value={input}
                                             onChange={(e) => setInput(e.target.value)}
+                                            onKeyDown={(e) => {
+                                                if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) {
+                                                    e.preventDefault();
+                                                    if (!isLoading && input.trim()) handleSubmit(e);
+                                                }
+                                            }}
                                             placeholder="Share your response or analysis..."
                                             className="flex-1 border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-slate-500 resize-none"
                                             rows="3"

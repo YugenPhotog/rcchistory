@@ -432,12 +432,13 @@ async function callClio(userText, displayText = null) {
         model: 'claude-sonnet-5-5',
         thinking: { type: 'between_tools' },
         max_tokens: 4096,
-        system: SYSTEM_PROMPT + sessionState,
+        system: [{ type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral', ttl: '1h' } }].concat(sessionState && sessionState.trim() ? [{ type: 'text', text: sessionState }] : []),
         messages: conversation.slice(1).map(m => ({ role: m.role, content: m.content }))
       })
     });
     if (!response.ok) throw new Error('Server returned ' + response.status);
     const data = await response.json();
+    if (data.usage) console.log('[ClioBot usage]', data.usage);
     const reply = extractAssistantMessage(data);
     if (!reply || !reply.trim()) throw new Error("Sorry, I didn't get a response. Please try again.");
 

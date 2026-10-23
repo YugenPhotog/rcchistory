@@ -365,14 +365,6 @@ Write both answers in the boxes below and submit when you are ready. You may dra
                     return;
                 }
 
-                // Lenient time check — pasting is fine; only a minimum time since page load
-                const elapsed = (Date.now() - pageLoadTime.current) / 1000;
-                if (elapsed < MIN_SECONDS) {
-                    const wait = Math.ceil(MIN_SECONDS - elapsed);
-                    setSubmitError(`Please re-read the questions and your answers once more — you can submit in about ${wait} second${wait === 1 ? '' : 's'}. Pasting from Word or another document is fine; nothing needs to be retyped. Just wait, then click Submit again.`);
-                    return;
-                }
-
                 // AI detection on combined submission
                 const detection = detectAI(combined);
                 if (detection.flagged) {
