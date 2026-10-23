@@ -47,123 +47,7 @@
         
         // Val Town proxy URL
         const WORKER_URL = 'https://phil120tutor.val.run/';
-        
-        // SVG Icons
-        const BookOpen = ({ size = 24, className = "" }) => (
-            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-            </svg>
-        );
-        
-        const Send = ({ size = 24, className = "" }) => (
-            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="22" y1="2" x2="11" y2="13"></line>
-                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-            </svg>
-        );
-        
-        const AlertCircle = ({ size = 24, className = "" }) => (
-            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="8" x2="12" y2="12"></line>
-                <line x1="12" y1="16" x2="12.01" y2="16"></line>
-            </svg>
-        );
-        
-        const Download = ({ size = 24, className = "" }) => (
-            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                <polyline points="7 10 12 15 17 10"></polyline>
-                <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-        );
-
-        function PhilosophyTutor() {
-            const [messages, setMessages] = useState([
-                {
-                    role: 'assistant',
-                    content: "I am the Phronimos.\n\nThe name is from your reading. Aristotle says the mean is fixed \"by that principle by which the man of practical wisdom would determine it.\" The Greek for that person is phronimos. I am named after a standard, not a sage \u2014 and I am not Aristotle. I will not tell you what he really meant.\n\nHow this works:\n\u2022 Paste your complete rough draft \u2014 at least three paragraphs covering all three elements.\n\u2022 I ask one question at a time about what you wrote. You answer here, in the chat.\n\u2022 You revise the essay yourself, afterward, on your own.\n\nTwo things worth knowing. A draft that is rough, unfinished, or partly wrong is exactly what I am here for, so do not polish it first. And I can be wrong about the reading \u2014 if I say something the text does not, tell me and we will look at the passage.\n\nPaste your draft when you are ready."
-                }
-            ]);
-            const [input, setInput] = useState('');
-            const [isLoading, setIsLoading] = useState(false);
-            const [verdict, setVerdict] = useState(null);
-            const messagesEndRef = useRef(null);
-
-            const scrollToBottom = () => {
-                messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-            };
-
-            useEffect(() => {
-                scrollToBottom();
-            }, [messages]);
-
-            const downloadConversation = () => {
-                let conversationText = "PHIL 120 The Phronimos - Aristotle, Nicomachean Ethics - Conversation History\n";
-                conversationText += "Downloaded: " + new Date().toLocaleString() + "\n";
-                conversationText += "Bot version: v4 (2026-09-19)\n";
-                conversationText += "=" .repeat(60) + "\n\n";
-                
-                messages.forEach((msg, idx) => {
-                    if (idx === 0) return;
-                    const speaker = msg.role === 'user' ? 'STUDENT' : 'THE PHRONIMOS';
-                    conversationText += `${speaker}:\n`;
-                    conversationText += msg.content + "\n\n";
-                    conversationText += "-".repeat(60) + "\n\n";
-                });
-                
-                const blob = new Blob([conversationText], { type: 'text/plain' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `aristotle-phronimos-${new Date().toISOString().split('T')[0]}.txt`;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-            };
-
-            const handleSubmit = async (e) => {
-                e.preventDefault();
-                if (!input.trim() || isLoading) return;
-
-                const userMessage = input.trim();
-                setInput('');
-                setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
-                setIsLoading(true);
-
-                // Application-side exchange counter. The model never counts its own turns.
-                const EXCHANGE_CEILING = 12;
-                // Dialogue begins at the first assistant reply carrying a checkpoint line.
-                // Drafts refused by the gate are pre-dialogue and cost the student nothing.
-                const gateIdx = messages.findIndex(m => m.role === 'assistant' && m.content.indexOf('Checkpoints completed:') !== -1);
-                const totalUser = messages.filter(m => m.role === 'user').length;
-                const exchangeNumber = gateIdx > 0
-                    ? messages.slice(gateIdx - 1).filter(m => m.role === 'user').length + 1
-                    : (totalUser > 2 ? totalUser + 1 : 1);
-                const atCeiling = exchangeNumber >= EXCHANGE_CEILING;
-                const marker = atCeiling
-                    ? '[Exchange ' + exchangeNumber + ' of ' + EXCHANGE_CEILING
-                      + ' \u2014 FINAL EXCHANGE. Close with a verdict in this reply.]'
-                    : '[Exchange ' + exchangeNumber + ' of ' + EXCHANGE_CEILING + ']';
-                const countedMessage = marker + '\n\n' + userMessage;
-
-                try {
-                    // Call the Val Town proxy
-                    const response = await fetch(WORKER_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            model: 'claude-sonnet-5-5',
-                            thinking: { type: 'between_tools' },
-                            max_tokens: 500,
-                            messages: [
-                                {
-                                    role: 'user',
-                                    content: `====================================================================
+        const SYSTEM_PROMPT = `====================================================================
 IDENTITY
 ====================================================================
 
@@ -728,9 +612,123 @@ There are also three other means, which have a certain likeness to one another, 
 
 9
 
-That moral virtue is a mean, then, and in what sense it is so, and that it is a mean between two vices, the one involving excess, the other deficiency, and that it is such because its character is to aim at what is intermediate in passions and in actions, has been sufficiently stated. Hence also it is no easy task to be good. For in everything it is no easy task to find the middle, e.g. to find the middle of a circle is not for every one but for him who knows; so, too, any one can get angry--that is easy or give or spend money; but to do this to the right person, to the right extent, at the right time, with the right motive, and in the right way, that is not for every one, nor is it easy; wherefore goodness is both rare and laudable and noble.`
-                                },
-                                ...messages.map(msg => ({
+That moral virtue is a mean, then, and in what sense it is so, and that it is a mean between two vices, the one involving excess, the other deficiency, and that it is such because its character is to aim at what is intermediate in passions and in actions, has been sufficiently stated. Hence also it is no easy task to be good. For in everything it is no easy task to find the middle, e.g. to find the middle of a circle is not for every one but for him who knows; so, too, any one can get angry--that is easy or give or spend money; but to do this to the right person, to the right extent, at the right time, with the right motive, and in the right way, that is not for every one, nor is it easy; wherefore goodness is both rare and laudable and noble.`;
+        
+        // SVG Icons
+        const BookOpen = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+        );
+        
+        const Send = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+        );
+        
+        const AlertCircle = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+        );
+        
+        const Download = ({ size = 24, className = "" }) => (
+            <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+        );
+
+        function PhilosophyTutor() {
+            const [messages, setMessages] = useState([
+                {
+                    role: 'assistant',
+                    content: "I am the Phronimos.\n\nThe name is from your reading. Aristotle says the mean is fixed \"by that principle by which the man of practical wisdom would determine it.\" The Greek for that person is phronimos. I am named after a standard, not a sage \u2014 and I am not Aristotle. I will not tell you what he really meant.\n\nHow this works:\n\u2022 Paste your complete rough draft \u2014 at least three paragraphs covering all three elements.\n\u2022 I ask one question at a time about what you wrote. You answer here, in the chat.\n\u2022 You revise the essay yourself, afterward, on your own.\n\nTwo things worth knowing. A draft that is rough, unfinished, or partly wrong is exactly what I am here for, so do not polish it first. And I can be wrong about the reading \u2014 if I say something the text does not, tell me and we will look at the passage.\n\nPaste your draft when you are ready."
+                }
+            ]);
+            const [input, setInput] = useState('');
+            const [isLoading, setIsLoading] = useState(false);
+            const [verdict, setVerdict] = useState(null);
+            const messagesEndRef = useRef(null);
+
+            const scrollToBottom = () => {
+                messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+            };
+
+            useEffect(() => {
+                scrollToBottom();
+            }, [messages]);
+
+            const downloadConversation = () => {
+                let conversationText = "PHIL 120 The Phronimos - Aristotle, Nicomachean Ethics - Conversation History\n";
+                conversationText += "Downloaded: " + new Date().toLocaleString() + "\n";
+                conversationText += "Bot version: v4 (2026-09-19)\n";
+                conversationText += "=" .repeat(60) + "\n\n";
+                
+                messages.forEach((msg, idx) => {
+                    if (idx === 0) return;
+                    const speaker = msg.role === 'user' ? 'STUDENT' : 'THE PHRONIMOS';
+                    conversationText += `${speaker}:\n`;
+                    conversationText += msg.content + "\n\n";
+                    conversationText += "-".repeat(60) + "\n\n";
+                });
+                
+                const blob = new Blob([conversationText], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `aristotle-phronimos-${new Date().toISOString().split('T')[0]}.txt`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            };
+
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                if (!input.trim() || isLoading) return;
+
+                const userMessage = input.trim();
+                setInput('');
+                setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
+                setIsLoading(true);
+
+                // Application-side exchange counter. The model never counts its own turns.
+                const EXCHANGE_CEILING = 12;
+                // Dialogue begins at the first assistant reply carrying a checkpoint line.
+                // Drafts refused by the gate are pre-dialogue and cost the student nothing.
+                const gateIdx = messages.findIndex(m => m.role === 'assistant' && m.content.indexOf('Checkpoints completed:') !== -1);
+                const totalUser = messages.filter(m => m.role === 'user').length;
+                const exchangeNumber = gateIdx > 0
+                    ? messages.slice(gateIdx - 1).filter(m => m.role === 'user').length + 1
+                    : (totalUser > 2 ? totalUser + 1 : 1);
+                const atCeiling = exchangeNumber >= EXCHANGE_CEILING;
+                const marker = atCeiling
+                    ? '[Exchange ' + exchangeNumber + ' of ' + EXCHANGE_CEILING
+                      + ' \u2014 FINAL EXCHANGE. Close with a verdict in this reply.]'
+                    : '[Exchange ' + exchangeNumber + ' of ' + EXCHANGE_CEILING + ']';
+                const countedMessage = marker + '\n\n' + userMessage;
+
+                try {
+                    // Call the Val Town proxy
+                    const response = await fetch(WORKER_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            model: 'claude-sonnet-5-5',
+                            thinking: { type: 'between_tools' },
+                            max_tokens: 500,
+                            system: SYSTEM_PROMPT,
+                            messages: [
+                                ...messages.filter((_, i) => i > 0).map(msg => ({
                                     role: msg.role,
                                     content: msg.content
                                 })),
