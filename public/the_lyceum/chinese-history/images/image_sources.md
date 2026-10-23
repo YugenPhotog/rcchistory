@@ -123,6 +123,51 @@
 - **Attribution:** Gary Todd, "Shang Bronze Yue Axes, Copies of Yue from Fu Hao Tomb," CC0, via Flickr/Wikimedia Commons.
 - **Notes:** These are museum copies rather than the original excavated axes. They were selected because the paired display clearly shows the broad curved blades and dragon/tiger decoration associated with Fu Hao's military and execution authority. The image was cropped and enhanced for projection.
 
+## `HIST270_ch01_lec1_11b_yinxu_sacrificial_pit_skeletons_revFA26.webp`
+
+- **Used on:** Ch01 Lec1 FA26 deck, slide L (feeding-ancestors), added 2026-10-22 (v3).
+- **Description:** Excavated Shang sacrificial pit at Yinxu, seen through protective glass, with several human skeletons and skulls laid side by side.
+- **Source website:** Wikimedia Commons (from Flickr)
+- **Direct source URL:** https://commons.wikimedia.org/wiki/File:Shang_Sacrificial_Burial_Pit_(10197772863).jpg
+- **Original image URL:** https://upload.wikimedia.org/wikipedia/commons/5/55/Shang_Sacrificial_Burial_Pit_%2810197772863%29.jpg
+- **Image/object title:** Shang Sacrificial Burial Pit
+- **Creator/artist:** Gary Todd (Gary Lee Todd), WorldHistoryPics.com
+- **Date/period:** Shang dynasty, Yinxu (Anyang), ca. 1200–1045 BCE; photograph 2013
+- **License/status:** CC0 1.0 (public domain dedication)
+- **Attribution:** Photo: Gary Todd, CC0, via Wikimedia Commons. (Not required; given as courtesy.)
+- **Notes:** Real photograph, not AI. Resized to 1600 px wide and converted to WebP (quality 84). Chosen over the Commons "Shang Sacrificial Pit (…)" series, whose descriptions say the skeletons there are replicas.
+
+## `HIST270_ch01_lec1_M_king_reads_oracle_bone_ai_revFA26.webp`
+
+- **Used on:** Ch01 Lec1 FA26 deck, slide M (high-priest), added 2026-10-23 (v4); replaces `HIST270_ch01_lec1_12_wine_vessels_gu_jue_jia_revFA26.webp`.
+- **Description:** A Shang king on a dais holds a cracked ox scapula; a diviner heats a rod over a brazier; a kneeling scribe waits with a carving knife.
+- **Source:** AI-generated illustration supplied and approved by Steven Austin, 2026-10-23. Not a historical source.
+- **License/status:** Course illustration (AI-generated).
+- **Attribution:** Labeled on the slide as "AI-generated illustration, not a historical source."
+- **Notes:** The beaded flat crown is an anachronism (later Zhou/Han style); flagged in the slide notes. Converted to WebP (1280 x 720, quality 84).
+
+## `HIST270_ch01_lec1_S_lady_hao_leads_army_ai_revFA26.webp`
+
+- **Used on:** Ch01 Lec1 FA26 deck, slide S (lady-hao-general), added 2026-10-23 (v4); replaces the yue-axes photo on that slide (that photo is still used on slides X and Y).
+- **Description:** Lady Hao (Fu Hao) in a horse-drawn chariot raises a bronze yue axe at the head of her army.
+- **Source:** AI-generated illustration supplied and approved by Steven Austin, 2026-10-23. Not a historical source.
+- **License/status:** Course illustration (AI-generated).
+- **Attribution:** Labeled on the slide as "AI-generated illustration, not a historical source."
+- **Notes:** Armor, banners and chariot details are imagined; no source says she fought from a chariot. Flagged in the caption and notes. Converted to WebP (1280 x 720, quality 84).
+
+## `HIST270_ch01_lec1_T_fu_hao_tomb_victims_revFA26.webp`
+
+- **Used on:** Ch01 Lec1 FA26 deck, slide T (followers-victims), added 2026-10-23 (v4); replaces `HIST270_ch01_lec1_15_fu_hao_tomb_reconstruction_revFA26.webp` on that slide (still used on slide AK).
+- **Description:** Reconstruction of the tomb of Fu Hao at Yinxu, Anyang, showing bronzes on the tomb floor and replica skeletons marking the positions of sacrificial victims.
+- **Source website:** Wikimedia Commons (from Flickr)
+- **Direct source URL:** https://commons.wikimedia.org/wiki/File:Fu_Hao_Tomb,_c._1200_BC,_Reign_of_King_Wu_Ding,_Shang_Dynasty_5.jpg
+- **Original image URL:** https://upload.wikimedia.org/wikipedia/commons/8/8d/Fu_Hao_Tomb%2C_c._1200_BC%2C_Reign_of_King_Wu_Ding%2C_Shang_Dynasty_5.jpg
+- **Creator/artist:** Gary Todd (Gary Lee Todd), WorldHistoryPics.com
+- **Date/period:** Tomb ca. 1200 BCE (reign of Wu Ding); museum reconstruction; photograph 2009-12-05
+- **License/status:** CC0 1.0 (public domain dedication)
+- **Attribution:** Photo: Gary Todd, CC0, via Wikimedia Commons.
+- **Notes:** Real photograph of a museum reconstruction; skeletons are display replicas (Commons description: originals in the National Museum, Beijing, and Henan Museum). Portrait; resized to 1067 x 1600 and converted to WebP (quality 84).
+
 ## Needs Review
 
 None. All nine manifest items now have selected images and documented reuse terms. The reconstruction/copy caveats for the Fu Hao tomb and yue axes, and the later Eastern Zhou date of the rammed-earth example, are recorded above.
