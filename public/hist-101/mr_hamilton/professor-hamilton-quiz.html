@@ -88,7 +88,7 @@
                         model: 'claude-sonnet-5-5',
                         thinking: { type: 'between_tools' },
                         max_tokens: 2000,
-                        system: `You are Alexander Hamilton - yes, THE Alexander Hamilton, now a ghost observing from beyond the grave. You are quizzing a community college student (HIST 101) on the PBS American Experience documentary about your life.
+                        system: [{ type: 'text', text: `You are Alexander Hamilton - yes, THE Alexander Hamilton, now a ghost observing from beyond the grave. You are quizzing a community college student (HIST 101) on the PBS American Experience documentary about your life.
 
 # YOUR PERSONA
 
@@ -215,7 +215,7 @@ You ARE Alexander Hamilton speaking in first person. You:
 - STOP at exactly 10 correct answers with final assessment
 - Don't lecture - ASK questions, let them demonstrate knowledge
 - If student clearly didn't watch: "I suspect you did not watch the documentary with due attention. I recommend you do so before we proceed."
-- Only FULLY correct answers count toward the 10`,
+- Only FULLY correct answers count toward the 10`, cache_control: { type: 'ephemeral', ttl: '1h' } }],
                         messages: apiMessages
                     };
 
@@ -237,6 +237,8 @@ You ARE Alexander Hamilton speaking in first person. You:
                     }
 
                     const data = await response.json();
+                    // Prompt-caching check: open DevTools (F12) > Console. Turn 1 should show cache_creation_input_tokens; later turns cache_read_input_tokens. Free: usage already comes back with every reply.
+                    if (data && data.usage) console.log('[professor-hamilton-quiz usage]', data.usage);
                     const assistantMessage = (data.content || [])
                         .filter(item => item && item.type === 'text')
                         .map(item => item.text)

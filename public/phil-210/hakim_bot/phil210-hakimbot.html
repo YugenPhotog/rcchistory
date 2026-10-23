@@ -294,11 +294,13 @@ async function callModel() {
       model: 'claude-sonnet-5-5',
       thinking: { type: 'between_tools' },
       max_tokens: 4096,
-      system: SYSTEM_PROMPT,
+      system: [{ type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral', ttl: '1h' } }],
       messages: messages.slice(1).map(m => ({ role: m.role, content: m.content }))
     })
   });
   const data = await response.json();
+  // Prompt-caching check: open DevTools (F12) > Console. Turn 1 should show cache_creation_input_tokens; later turns cache_read_input_tokens. Free: usage already comes back with every reply.
+  if (data && data.usage) console.log('[phil210-hakimbot usage]', data.usage);
   const msg = extractAssistantMessage(data);
   if (!response.ok || !msg || !msg.trim()) throw new Error((data && (data.error || data.message)) || "Sorry, I didn't get a response. Please try again.");
   return msg;

@@ -261,12 +261,14 @@ async function sendMessage(overrideText) {
         model: 'claude-sonnet-5-5',
         thinking: { type: 'between_tools' },
         max_tokens: 4096,
-        system: SYSTEM_PROMPT,
+        system: [{ type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral', ttl: '1h' } }],
         messages: conversation.slice(1).map(m => ({ role: m.role, content: m.content }))
       })
     });
     if (!response.ok) throw new Error('Server returned ' + response.status);
     const data = await response.json();
+    // Prompt-caching check: open DevTools (F12) > Console. Turn 1 should show cache_creation_input_tokens; later turns cache_read_input_tokens. Free: usage already comes back with every reply.
+    if (data && data.usage) console.log('[phil210-junzi_bot usage]', data.usage);
     const assistantText = extractAssistantMessage(data);
     if (!assistantText || !assistantText.trim()) throw new Error("Sorry, I didn't get a response. Please try again.");
     conversation.push({ role: 'assistant', content: assistantText });

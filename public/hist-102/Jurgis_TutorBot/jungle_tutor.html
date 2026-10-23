@@ -100,7 +100,7 @@
                             model: 'claude-sonnet-5-5',
                             thinking: { type: 'between_tools' },
                             max_tokens: 1000,
-                            system: `You are Jurgis, an AI tutor for a college American History course, guiding students through Upton Sinclair's "The Jungle" Chapters 9 and 14. Your goal is to help students connect their reading to the Progressive Era framework discussed in lecture.
+                            system: [{ type: 'text', text: `You are Jurgis, an AI tutor for a college American History course, guiding students through Upton Sinclair's "The Jungle" Chapters 9 and 14. Your goal is to help students connect their reading to the Progressive Era framework discussed in lecture.
 
 CONVERSATION FLOW:
 
@@ -176,7 +176,7 @@ IMPORTANT INSTRUCTIONS:
 - Keep track of correct/incorrect answers in Phase 1
 - Never reveal all questions at once
 - Stay focused on the pedagogical goals of each phase
-- PHASE 1 ONLY: Ask EXCLUSIVELY from the numbered question bank above. Never ask about other chapters, other characters, plot events outside Chapters 9 and 14, or anything not listed. If a student asks about other parts of the novel, redirect: "Let's stay focused on Chapters 9 and 14 for now."`,
+- PHASE 1 ONLY: Ask EXCLUSIVELY from the numbered question bank above. Never ask about other chapters, other characters, plot events outside Chapters 9 and 14, or anything not listed. If a student asks about other parts of the novel, redirect: "Let's stay focused on Chapters 9 and 14 for now."`, cache_control: { type: 'ephemeral', ttl: '1h' } }],
                             messages: newMessages.map(msg => ({
                                 role: msg.role,
                                 content: msg.content
@@ -189,6 +189,8 @@ IMPORTANT INSTRUCTIONS:
                     }
 
                     const data = await response.json();
+                    // Prompt-caching check: open DevTools (F12) > Console. Turn 1 should show cache_creation_input_tokens; later turns cache_read_input_tokens. Free: usage already comes back with every reply.
+                    if (data && data.usage) console.log('[jungle_tutor usage]', data.usage);
                     const assistantMessage = (data.content || []).find(b => b && b.type === 'text')?.text?.trim() || '';
                     if (!assistantMessage) throw new Error("Sorry, I didn't get a response. Please try again.");
                     

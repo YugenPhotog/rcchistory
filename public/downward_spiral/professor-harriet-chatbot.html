@@ -738,12 +738,14 @@ async function callAPI(userText) {
         model: 'claude-sonnet-5-5',
         thinking: { type: 'between_tools' },
         max_tokens: 700,
-        system: SYSTEM_PROMPT,
+        system: [{ type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral', ttl: '1h' } }],
         messages: history
       })
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
+    // Prompt-caching check: open DevTools (F12) > Console. Turn 1 should show cache_creation_input_tokens; later turns cache_read_input_tokens. Free: usage already comes back with every reply.
+    if (data && data.usage) console.log('[professor-harriet-chatbot usage]', data.usage);
     const text = (data.content || []).filter(b => b && b.type === 'text').map(b => b.text).join('\n').trim();
     if (!text.trim()) throw new Error("Sorry, I didn't get a response. Please try again.");
 

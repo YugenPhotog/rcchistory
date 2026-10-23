@@ -329,7 +329,7 @@ Submit your draft when ready. The full transcript is required for your final sub
             model: 'claude-sonnet-5-5',
             thinking: { type: 'between_tools' },
             max_tokens: 4096,
-            system: SYSTEM_PROMPT,
+            system: [{ type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral', ttl: '1h' } }],
             messages: messages.slice(1).map(msg => ({ role: msg.role, content: msg.content }))
           })
         });
@@ -337,6 +337,8 @@ Submit your draft when ready. The full transcript is required for your final sub
         const raw = await response.text();
         let data;
         try { data = JSON.parse(raw); } catch (_) { data = raw; }
+        // Prompt-caching check: open DevTools (F12) > Console. Turn 1 should show cache_creation_input_tokens; later turns cache_read_input_tokens. Free: usage already comes back with every reply.
+        if (data && typeof data === 'object' && data.usage) console.log('[professor_austin_bot_hist101_ch6 usage]', data.usage);
 
         if (!response.ok) {
           throw new Error('Server returned ' + response.status + ': ' + raw.slice(0, 200));
