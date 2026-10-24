@@ -59,7 +59,14 @@ Type: Crimson Pro 700 for headings, the stat number, quotes and the act-number; 
 
 ## 3. Narrative architecture
 
-Build each lecture as a **story with an argument**, not as a set of RQ "Parts". A main path has about 19–31 slides, and a Pierian Spring appendix of 3–8 slides follows it.
+Build each lecture as a **story with an argument**, not as a set of RQ "Parts". A main path has about 19–31 slides, and a Pierian Spring independent-study section of 3–8 slides follows it.
+
+**Coverage and length rules:**
+
+- **Length:** the main lecture targets about a **50-minute spoken lecture**. This is a guide, not a hard rule.
+- **Every review question is taught:** each Reading Guide review question must be taught somewhere in the chapter's decks.
+- **Overflow review questions go in the Pierian Spring:** a review question that does not fit the main lecture goes in the Pierian Spring independent-study section, with its teaching slides and a reading-guide review slide (`id="ps-rg-qN"`) there.
+- **The Pierian Spring is required independent study, never optional.** It is not covered in class; students read it on their own. Never label it "optional" or say it is not needed for the Reading Guide or the review questions.
 
 **Required lecture path, in order:**
 
@@ -86,8 +93,8 @@ Build each lecture as a **story with an argument**, not as a set of RQ "Parts". 
 9. **Narrative review**: "Retell the story in nine terms." Nine color-coded cards in a three-column grid. The notes retell the story using all nine terms in order.
 10. **In-class writing on the lecture's RQ**, the assessed slide. Use an `activity` box. The prompt is the RQ adapted for the board; the instruction states the sentence count and the required evidence slots, and ends with a forced judgment. The source line reads: *"Adapted from Review Question N in the course textbook, ch. N."* This slide is never skipped.
 11. **Closing bookend**: the cold-open scene revisited. Use a `visual-hero act-hero` or an `image-layout` slide with a closing question, plus the prev/next links: `Previous: <a>…(Lecture N−1)</a> · Next: <a>…(Lecture N+1)</a>`.
-12. **Pierian Spring divider** (`id="pierian-spring"`): a radial teal→forest gradient, "Beyond the lecture" kicker, "Optional Independent Study", a one-line contents list, and the Pope couplet.
-13. **Independent-study slides**, kicker `Independent study · <topic>`. Each ends with a `back-link` to the lecture slide it deepens. The lecture slide carries the matching `ps-link`: *"Optional: Pierian Spring on <topic> →"*.
+12. **Pierian Spring divider** (`id="pierian-spring"`): a radial teal→forest gradient, "Beyond the lecture" kicker, "Independent Study" (`ps-sub`), a `ps-desc` line adapted from the Ch16 model ("Today's lecture ends here. Continue on your own: the stories below finish this chapter's history, and each ends with a review question to answer."; drop the review-question clause if the section has none), notes saying it is not covered in class and students read it on their own, and the Pope couplet.
+13. **Independent-study slides**, kicker `Independent study · <topic>`. Each ends with a `back-link` to the lecture slide it deepens. The lecture slide carries the matching `ps-link`: *"Independent study: Pierian Spring on <topic> →"*.
 
 There are **no** forest-green Part dividers, Pause & Reflect slides or RQ recap slides.
 
