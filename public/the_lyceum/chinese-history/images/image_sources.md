@@ -168,6 +168,35 @@
 - **Attribution:** Photo: Gary Todd, CC0, via Wikimedia Commons.
 - **Notes:** Real photograph of a museum reconstruction; skeletons are display replicas (Commons description: originals in the National Museum, Beijing, and Henan Museum). Portrait; resized to 1067 x 1600 and converted to WebP (quality 84).
 
+## `HIST270_ch01_lec1_AG_yellow_river_loess_ai_revFA26.webp`
+
+- **Used on:** Ch01 Lec1 FA26 deck, slide AG (act1-land), added 2026-10-24; replaces the relief map on that slide (the map is still used on slides D and AF).
+- **Description:** The Yellow River winding past loess hills and millet fields on the North China Plain, about 1300 BCE, with a small walled village.
+- **Source:** AI-generated illustration, approved by Steven Austin, 2026-10-24. Not a historical source.
+- **License/status:** Course illustration (AI-generated).
+- **Attribution:** Labeled on the slide as "AI-generated illustration, not a historical source."
+- **Notes:** The village wall reads as stacked stone; Shang walls were pounded earth (flagged in the notes). Converted to WebP (1280 x 720, quality 82).
+
+## `HIST270_ch01_lec1_AL_rammed_earth_builders_ai_revFA26.webp`
+
+- **Used on:** Ch01 Lec1 FA26 deck, slide AL (act4-labor), added 2026-10-24; replaces the rammed-earth wall photo on that slide (still used on slides W and AF).
+- **Description:** Workers pound earth between wooden boards to raise a Shang city wall, about 1500 BCE, while an overseer with a bronze axe watches.
+- **Source:** AI-generated illustration, approved by Steven Austin, 2026-10-24. Not a historical source.
+- **License/status:** Course illustration (AI-generated).
+- **Attribution:** Labeled on the slide as "AI-generated illustration, not a historical source."
+- **Notes:** Converted to WebP (1280 x 720, quality 82).
+
+## `HIST270_ch01_lec1_11_houmuwu_ding_revFA26.webp`
+
+- **Used on:** Ch01 Lec1 FA26 deck, slide Z (next-writing-bronze), from 2026-10-24; replaces the scapula rubbing there (the rubbing is still used on slide C). The same photograph appears in Lecture 2, slide O.
+- **Description:** The Houmuwu ding, the largest Shang bronze vessel, on display in the National Museum of China.
+- **Direct source URL:** https://commons.wikimedia.org/wiki/File:HouMuWuDingFullView.jpg
+- **Creator/artist:** Mlogic
+- **License/status:** CC BY-SA 3.0
+- **Attribution:** Photo: Mlogic, CC BY-SA 3.0, via Wikimedia Commons (given in slide caption).
+- **Notes:** Identified 2026-10-24 by matching the file against Commons; it had no entry before.
+
+
 ## Needs Review
 
 None. All nine manifest items now have selected images and documented reuse terms. The reconstruction/copy caveats for the Fu Hao tomb and yue axes, and the later Eastern Zhou date of the rammed-earth example, are recorded above.
@@ -453,3 +482,301 @@ None. All nine manifest items now have selected images and documented reuse term
 ## Needs Review
 
 - **`ch02_lec1_iron_tools.jpg`:** The National Museum of China page provides the exact Warring States iron mould requested but only as a small thumbnail and without an explicit reuse license. The delivered teaching composite limits that thumbnail to a labeled supporting reference alongside Gary Todd's CC0 photograph of a period Qin bronze plowshare. Candidate official page: https://www.chnmuseum.cn/portals/0/web/zt/gudai/en/detail3.html. No unambiguously licensed, high-resolution photograph of the same iron mould was located.
+
+# Chapter 1, Lecture 2 (revised FA26 deck)
+
+Files live in `reveal_decks/chapter-01/images/ch01-lec2/`. Deck: `HIST270_ch01_lec2_writing_bronze_wider_world_revised_FA26.html`. Slide letters are permanent IDs.
+
+## `HIST270_ch01_lec2_01_title_card_revFA26.webp`
+- **Used on:** slide A
+- **Source:** converted to WebP from the previous deck image `ch01_lec2_title.jpg`; see its existing `ch01_lec2_…` entry earlier in this file for source, license and attribution.
+
+## `HIST270_ch01_lec2_02_chiang_houmuwu_1948_revFA26.webp`
+- **Used on:** slide B
+- **Description:** Chiang Kai-Shek and the HouMuWu Ding
+- **Source website / URL:** Wikimedia Commons, [File:Chiang and HouMuWu Ding.jpg](https://commons.wikimedia.org/wiki/File:Chiang_and_HouMuWu_Ding.jpg)
+- **Creator / date:** Not clear; 1948-05-29
+- **License:** Public domain
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec2_03_oracle_bone_mariemont_revFA26.webp`
+- **Used on:** slide C
+- **Description:** Piece of a Chinese oracle bone (ox bone), from Anyang (Henan, China), Shang Dynasty, 1200 BC. Now in the Musée de Mariemont. Inscription (fragment of a table of the sexagenary cycle in period V calligraphy): ...己卯庚辰 子己丑庚
+- **Source website / URL:** Wikimedia Commons, [File:Os divinatoire Shang Musée Mariemont 08112015.jpg](https://commons.wikimedia.org/wiki/File:Os_divinatoire_Shang_Mus%C3%A9e_Mariemont_08112015.jpg)
+- **Creator / date:** Vassil; 2015-11-08 16:18:19
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec2_04_wu_ding_plastron_revFA26.webp`
+- **Used on:** slide E
+- **Description:** Wu Ding reign, Anyang. National Museum: China through the Ages, Exhibit 2. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Shang Inscribed Tortoise Plastron (for divination).jpg](https://commons.wikimedia.org/wiki/File:Shang_Inscribed_Tortoise_Plastron_(for_divination).jpg)
+- **Creator / date:** Gary Todd; 2011-09-01 12:34:45
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec2_05_oracle_bone_xiaotun_revFA26.webp`
+- **Used on:** slide F
+- **Description:** Inscribed oracle bone, Shang Dynasty, Xiaotun, Anyang, Henan
+- **Source website / URL:** Wikimedia Commons, [File:Inscribed oracle bone, Shang Dynasty, Xiaotun, Anyang, Henan.jpg](https://commons.wikimedia.org/wiki/File:Inscribed_oracle_bone,_Shang_Dynasty,_Xiaotun,_Anyang,_Henan.jpg)
+- **Creator / date:** Furius; 2024-07-13 06:40:49
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec2_06_ganzhi_table_heji37986_revFA26.webp`
+- **Used on:** slide G
+- **Description:** Complete table of the Chinese sexagenary cycle inscribed on an ox scapula. The piece (Heji 37986) is in the hand of the Huáng 黃 diviner group from period V, which corresponds to the reigns of the last two kings of the Sh
+- **Source website / URL:** Wikimedia Commons, [File:Heji 37986 Ganzhi table (cropped).jpg](https://commons.wikimedia.org/wiki/File:Heji_37986_Ganzhi_table_(cropped).jpg)
+- **Creator / date:** rotated and cropped by Kanguole; 2021-04-15
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec2_07_ce_bamboo_glyph_revFA26.webp`
+- **Used on:** slide H
+- **Description:** This “冊-oracle-Shang.svg” vector image is depicting the character 冊 (2-stroke traditional Kangxi radical 013 冂 + 3 strokes) in the Shang oracle script style. It can be drawn with 7 pen strokes. See also Wiktionary: en, f
+- **Source website / URL:** Wikimedia Commons, [File:冊-oracle.svg](https://commons.wikimedia.org/wiki/File:%E5%86%8A-oracle.svg)
+- **Creator / date:** Digital file creation, see the contributor names shown in the “User” column of the “File history” section below.; See the dates of uploads shown in the “Date/Time” column of the “File history” section below.
+- **License:** Public domain
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec2_08_bronze_inscription_you_lid_revFA26.webp`
+- **Used on:** slide I
+- **Source:** converted to WebP from the previous deck image `ch01_lec2_bronze_inscription.jpg`; see its existing `ch01_lec2_…` entry earlier in this file for source, license and attribution.
+
+## `HIST270_ch01_lec2_09_character_evolution_chart_revFA26.webp`
+- **Used on:** slide J
+- **Source:** converted to WebP from the previous deck image `ch01_lec2_character_evolution.jpg`; see its existing `ch01_lec2_…` entry earlier in this file for source, license and attribution.
+
+## `HIST270_ch01_lec2_10_script_spread_map_revFA26.webp`
+- **Used on:** slide K
+- **Source:** converted to WebP from the previous deck image `ch01_lec2_script_spread_map.jpg`; see its existing `ch01_lec2_…` entry earlier in this file for source, license and attribution.
+
+## `HIST270_ch01_lec2_12_turtle_shell_huayuanzhuang_revFA26.webp`
+- **Used on:** slide M
+- **Description:** Inscribed oracle turtle shell, Shang Dynasty, Huayuanzhuang, Anyang, Henan
+- **Source website / URL:** Wikimedia Commons, [File:Inscribed oracle turtle shell, Shang Dynasty, Huayuanzhuang, Anyang, Henan.jpg](https://commons.wikimedia.org/wiki/File:Inscribed_oracle_turtle_shell,_Shang_Dynasty,_Huayuanzhuang,_Anyang,_Henan.jpg)
+- **Creator / date:** Furius; 2024-07-13 06:40:33
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec2_13_oracle_bone_xiaotun_b_revFA26.webp`
+- **Used on:** slide M
+- **Description:** Inscribed oracle bone, Shang Dynasty, Xiaotun, Anyang, Henan
+- **Source website / URL:** Wikimedia Commons, [File:Inscribed oracle bone2, Shang Dynasty, Xiaotun, Anyang, Henan.jpg](https://commons.wikimedia.org/wiki/File:Inscribed_oracle_bone2,_Shang_Dynasty,_Xiaotun,_Anyang,_Henan.jpg)
+- **Creator / date:** Furius; 2024-07-13 06:39:50
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec2_14_ganzhi_bone_heji38017_revFA26.webp`
+- **Used on:** slide M
+- **Description:** Bone carved with sexagenary table (Heji 38017). Reign of King Di Yi or Di Xin, Yinxu, Anyang. National Museum: China through the Ages, Exhibit 2. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Shang Inscribed Ox Bone (9830634253).jpg](https://commons.wikimedia.org/wiki/File:Shang_Inscribed_Ox_Bone_(9830634253).jpg)
+- **Creator / date:** Gary Todd from Xinzheng, China; 2011-09-01 12:36
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec2_15_casting_apparatus_moulds_revFA26.webp`
+- **Used on:** slide N
+- **Description:** On Site Museum, Yin Ruins, Anyang, Henan, China. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Shang Bronze Casting Apparatus & Clay Moulds (30934169087).jpg](https://commons.wikimedia.org/wiki/File:Shang_Bronze_Casting_Apparatus_%26_Clay_Moulds_(30934169087).jpg)
+- **Creator / date:** Gary Todd from Xinzheng, China; 2018-11-10 16:17
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec2_16_houmuwu_ding_revFA26.webp`
+- **Used on:** slide O
+- **Source:** converted to WebP from the previous deck image `ch01_lec2_houmuwu_ding.jpg`; see its existing `ch01_lec2_…` entry earlier in this file for source, license and attribution.
+
+## `HIST270_ch01_lec2_17_clay_mould_yinxu_revFA26.webp`
+- **Used on:** slide P
+- **Description:** Yinxu Foundry Site, Anyang. Shanghai Museum Bronze Gallery. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Late Shang Clay Mould (10180024614).jpg](https://commons.wikimedia.org/wiki/File:Late_Shang_Clay_Mould_(10180024614).jpg)
+- **Creator / date:** Gary Todd from Xinzheng, China; 2008-08-23 13:47
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec2_18_copper_ingot_tools_revFA26.webp`
+- **Used on:** slide Q
+- **Description:** On Site Museum, Yin Ruins, Anyang, Henan, China. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Shang Copper Ingot, Bronze Casting Implements, & Clay Mould Fragments (45148962364).jpg](https://commons.wikimedia.org/wiki/File:Shang_Copper_Ingot,_Bronze_Casting_Implements,_%26_Clay_Mould_Fragments_(45148962364).jpg)
+- **Creator / date:** Gary Todd from Xinzheng, China; 2018-11-10 16:17
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec2_19_fu_hao_jia_inscribed_revFA26.webp`
+- **Used on:** slide R
+- **Description:** Bronze Rectangular Jia with Inscriptions of Fu Hao, Late Shang Dynasty, excavated from Fu Hao Tomb in Yinxu, Anyang, collection of Henan Museum.
+- **Source website / URL:** Wikimedia Commons, [File:20260520 Bronze Rectangular Jia with Inscriptions of Fu Hao 01.jpg](https://commons.wikimedia.org/wiki/File:20260520_Bronze_Rectangular_Jia_with_Inscriptions_of_Fu_Hao_01.jpg)
+- **Creator / date:** Windmemories; 2026-05-20 20:22:54
+- **License:** CC BY-SA 4.0
+- **Attribution:** Required: Windmemories, CC BY-SA 4.0, via Wikimedia Commons (given in slide caption/credit).
+
+## `HIST270_ch01_lec2_20_fu_hao_triple_yan_revFA26.webp`
+- **Used on:** slide S
+- **Description:** Steamer. Wu Ding reign, Shang, tomb of Fu Hao, Yinxu, Anyang, Henan, 1976. National Museum: China through the Ages, Exhibit 2. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Shang Bronze Triple Yan.jpg](https://commons.wikimedia.org/wiki/File:Shang_Bronze_Triple_Yan.jpg)
+- **Creator / date:** Gary Todd; 2011-09-02 09:14:51
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec2_21_taotie_you_cernuschi_revFA26.webp`
+- **Used on:** slide T
+- **Description:** Auteur(s): Anonyme, fondeur Date de production: Entre -1300 et -1050 Type(s) d'objet(s): Chine, Croyances - Coutumes - Cultes - Cérémonies, Archéologie, Métal, arts du métal Dénomination(s): Vaisselle et ustensile de cui
+- **Source website / URL:** Wikimedia Commons, [File:Vase you 卣, M.C. 6156.jpg](https://commons.wikimedia.org/wiki/File:Vase_you_%E5%8D%A3,_M.C._6156.jpg)
+- **Creator / date:** Anonyme, fondeur; Entre -1300 et -1050
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec2_22_clay_mould_b_revFA26.webp`
+- **Used on:** slide U
+- **Description:** Yinxu Foundry Site, Anyang. Shanghai Museum Bronze Gallery. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Late Shang Clay Mould (10180127945).jpg](https://commons.wikimedia.org/wiki/File:Late_Shang_Clay_Mould_(10180127945).jpg)
+- **Creator / date:** Gary Todd from Xinzheng, China; 2008-08-23 13:47
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec2_23_cicada_ding_revFA26.webp`
+- **Used on:** slide U
+- **Description:** Bronze Ding with Dragon and Cicada Pattern, Shang Dynasty
+- **Source website / URL:** Wikimedia Commons, [File:20250118 Bronze Ding with Dragon and Cicada Pattern.jpg](https://commons.wikimedia.org/wiki/File:20250118_Bronze_Ding_with_Dragon_and_Cicada_Pattern.jpg)
+- **Creator / date:** Windmemories; 2025-01-18 11:17:16
+- **License:** CC BY-SA 4.0
+- **Attribution:** Required: Windmemories, CC BY-SA 4.0, via Wikimedia Commons (given in slide caption/credit).
+
+## `HIST270_ch01_lec2_24_fang_jia_freer_revFA26.webp`
+- **Used on:** slide U
+- **Description:** Freer-Sackler Galleries, Smithsonian Institution, Washington, D.C. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Shang Bronze Fang Jia, Anyang, 1200-1100 BC (10433865973).jpg](https://commons.wikimedia.org/wiki/File:Shang_Bronze_Fang_Jia,_Anyang,_1200-1100_BC_(10433865973).jpg)
+- **Creator / date:** Gary Todd from Xinzheng, China; 2009-07-13 22:21
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec2_25_wider_world_ai_revFA26.webp`
+- **Used on:** slide V
+- **Source:** converted to WebP from the previous deck image `reveal_decks/images/ch01_lec3_writing_bronze_wider_world_bg_FA26.png`.
+- **License / status:** AI-generated course illustration (no prior provenance entry found). Labeled as AI in the slide notes; parasol chariot is anachronistic. Awaiting instructor approval to keep.
+
+## `HIST270_ch01_lec2_26_regional_bronze_map_revFA26.webp`
+- **Used on:** slide W
+- **Source:** converted to WebP from the previous deck image `ch01_lec2_regional_bronze_map.jpg`; see its existing `ch01_lec2_…` entry earlier in this file for source, license and attribution.
+
+## `HIST270_ch01_lec2_27_human_face_ding_hunan_revFA26.webp`
+- **Used on:** slide X
+- **Description:** Bronze Square Ding (Cauldron) with Human Faces, Zhou dynasty (1600 BC-1046 BC), unearthed in Zhaizishan, Huangcai Town, Ningxiang City, Hunan Province, in 1959. It is preserved in Hunan Museum.
+- **Source website / URL:** Wikimedia Commons, [File:Bronze Square Ding (Cauldron) with Human Faces, Zhou dynasty, Hunan Museum, picture1.jpg](https://commons.wikimedia.org/wiki/File:Bronze_Square_Ding_(Cauldron)_with_Human_Faces,_Zhou_dynasty,_Hunan_Museum,_picture1.jpg)
+- **Creator / date:** Huangdan2060; 2018-02-04 15:21:18
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec2_28_xingan_tiger_ding_revFA26.webp`
+- **Used on:** slide Y
+- **Description:** ​新干大洋洲遗址虎耳刻扁足青铜鼎
+- **Source website / URL:** Wikimedia Commons, [File:Jiangxi Provincial Museum 20161105 (11).jpg](https://commons.wikimedia.org/wiki/File:Jiangxi_Provincial_Museum_20161105_(11).jpg)
+- **Creator / date:** Siyuwj; 2016-11-05 14:01:50
+- **License:** CC BY-SA 4.0
+- **Attribution:** Required: Siyuwj, CC BY-SA 4.0, via Wikimedia Commons (given in slide caption/credit).
+
+## `HIST270_ch01_lec2_29_ibex_knife_revFA26.webp`
+- **Used on:** slide Z
+- **Description:** Shang dynasty Bronze ibex-headed knife 13th-11th century Such knives may be the result of contacts with northern people. (Shang knife British Museum (English). www.britishmuseum.org. "In subsequent centuries such knives 
+- **Source website / URL:** Wikimedia Commons, [File:Shang dynasty Bronze ibex-headed knife 13th-11th century.jpg](https://commons.wikimedia.org/wiki/File:Shang_dynasty_Bronze_ibex-headed_knife_13th-11th_century.jpg)
+- **Creator / date:** Ismoon; 2023-11-11
+- **License:** CC BY-SA 4.0
+- **Attribution:** Required: Ismoon, CC BY-SA 4.0, via Wikimedia Commons (given in slide caption/credit).
+
+## `HIST270_ch01_lec2_30_sanxingdui_mask_revFA26.webp`
+- **Used on:** slide AA
+- **Source:** converted to WebP from the previous deck image `ch01_lec2_sanxingdui_mask.jpg`; see its existing `ch01_lec2_…` entry earlier in this file for source, license and attribution.
+
+## `HIST270_ch01_lec2_31_sanxingdui_standing_figure_revFA26.webp`
+- **Used on:** slide AB
+- **Description:** Sanxingdui Museum, Sichuan Province, 2008. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Bronze Colossal Standing Figure, Sanxingdui a.jpg](https://commons.wikimedia.org/wiki/File:Bronze_Colossal_Standing_Figure,_Sanxingdui_a.jpg)
+- **Creator / date:** Gary Todd; 2008-02-11 14:01:25
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec2_32_sanxingdui_city_wall_revFA26.webp`
+- **Used on:** slide AC
+- **Description:** Sanxingdui Museum, Sichuan Province, 2008. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Sanxingdui Shang-era City Wall 1.jpg](https://commons.wikimedia.org/wiki/File:Sanxingdui_Shang-era_City_Wall_1.jpg)
+- **Creator / date:** Gary Todd; 2008-02-11 14:36:31
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec2_33_sanxingdui_gold_foil_head_revFA26.webp`
+- **Used on:** slide AD
+- **Description:** Sanxingdui Museum Gallery 2 (Bronze), Sichuan Province, 2010. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Bronze Head with Gold Foil, Sanxingdui 1b.jpg](https://commons.wikimedia.org/wiki/File:Bronze_Head_with_Gold_Foil,_Sanxingdui_1b.jpg)
+- **Creator / date:** Gary Todd; 2010-04-24 13:20:04
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec2_34_nao_bell_hunan_revFA26.webp`
+- **Used on:** slide AE
+- **Description:** Bronze Nao with animal face patterns, unearthed in 1974 in Laoliangcang Town of Ningxiang, Hunan. Hunan Museum.
+- **Source website / URL:** Wikimedia Commons, [File:Bronze Nao with animal face patterns, unearthed in 1974 in Ningxiang, Hunan, Hunan Museum.jpg](https://commons.wikimedia.org/wiki/File:Bronze_Nao_with_animal_face_patterns,_unearthed_in_1974_in_Ningxiang,_Hunan,_Hunan_Museum.jpg)
+- **Creator / date:** Huangdan2060; 2018-07-05 15:23:34
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec2_35_elephant_zun_hunan_revFA26.webp`
+- **Used on:** slide AE
+- **Description:** Hunan Provincial Museum, Changsha. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Shang Bronze Elephant Zun (10111830614).jpg](https://commons.wikimedia.org/wiki/File:Shang_Bronze_Elephant_Zun_(10111830614).jpg)
+- **Creator / date:** Gary Todd from Xinzheng, China; 2010-08-20 11:24
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec2_36_xingan_you_tripod_revFA26.webp`
+- **Used on:** slide AE
+- **Description:** Bronze You tripod with zoomorphic image, 1200 BCE. Shang Dynasty, discovered in 1989, Dayangzhou, Xingan County, Jian. Jiangxi Provincial Museum
+- **Source website / URL:** Wikimedia Commons, [File:Jiangxi Sheng Bowuguan 20120627-65.jpg](https://commons.wikimedia.org/wiki/File:Jiangxi_Sheng_Bowuguan_20120627-65.jpg)
+- **Creator / date:** Zhangzhugang; 2012-06-27 14:24:28
+- **License:** CC BY-SA 4.0
+- **Attribution:** Required: Zhangzhugang, CC BY-SA 4.0, via Wikimedia Commons (given in slide caption/credit).
+
+## `HIST270_ch01_lec2_37_fu_hao_owl_zun_revFA26.webp`
+- **Used on:** slide AF
+- **Description:** Bronze owl-shaped Zun with inscriptions of Fuhao, front view.
+- **Source website / URL:** Wikimedia Commons, [File:Fuhao Owl Zun front.jpg](https://commons.wikimedia.org/wiki/File:Fuhao_Owl_Zun_front.jpg)
+- **Creator / date:** Cangminzho; 2018-01-05 15:45:13
+- **License:** CC BY-SA 4.0
+- **Attribution:** Required: Cangminzho, CC BY-SA 4.0, via Wikimedia Commons (given in slide caption/credit).
+
+## `HIST270_ch01_lec2_38_li_gui_revFA26.webp`
+- **Used on:** slide AG
+- **Description:** King Wu reign, Lintong, Shaanxi, 1976. National Museum: China through the Ages, Exhibit 2. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Western Zhou "Li" Bronze Gui.jpg](https://commons.wikimedia.org/wiki/File:Western_Zhou_%22Li%22_Bronze_Gui.jpg)
+- **Creator / date:** Gary Todd; 2011-09-01 11:00:49
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec2_40_chariot_burial_revFA26.webp`
+- **Used on:** slide AH
+- **Source:** converted to WebP from the previous deck image `ch01_lec2_chariot_burial.jpg`; see its existing `ch01_lec2_…` entry earlier in this file for source, license and attribution.
+
+## `HIST270_ch01_lec2_41_chariot_horse_fittings_revFA26.webp`
+- **Used on:** slide AI
+- **Description:** On Site Museum, Yin Ruins, Anyang, Henan, China. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Shang Chariot & Horse Heads with Bone & Bronze Fittings.jpg](https://commons.wikimedia.org/wiki/File:Shang_Chariot_%26_Horse_Heads_with_Bone_%26_Bronze_Fittings.jpg)
+- **Creator / date:** Gary Todd; 2018-11-10 16:15:01
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec2_42_jinsha_gold_mask_revFA26.webp`
+- **Used on:** slide AJ
+- **Description:** Jinsha Site Museum, Chengdu, Sichuan. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:2014 Jinsha Gold Mask a.jpg](https://commons.wikimedia.org/wiki/File:2014_Jinsha_Gold_Mask_a.jpg)
+- **Creator / date:** Gary Todd; 2014-04-16 12:53:28
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec2_43_xingan_double_face_head_revFA26.webp`
+- **Used on:** slide AK
+- **Description:** ​新干大洋洲遗址双面神人青铜头像
+- **Source website / URL:** Wikimedia Commons, [File:Jiangxi Provincial Museum 20161105 (4).jpg](https://commons.wikimedia.org/wiki/File:Jiangxi_Provincial_Museum_20161105_(4).jpg)
+- **Creator / date:** Siyuwj; 2016-11-05 14:01:00
+- **License:** CC BY-SA 4.0
+- **Attribution:** Required: Siyuwj, CC BY-SA 4.0, via Wikimedia Commons (given in slide caption/credit).
+
