@@ -98,6 +98,22 @@ Build each lecture as a **story with an argument**, not as a set of RQ "Parts". 
 
 There are **no** forest-green Part dividers, Pause & Reflect slides or RQ recap slides.
 
+### Concept slides
+
+**Purpose.** A concept slide teaches one term or idea that first-year college students (17–19) probably do not know, such as *balance of trade*, *legitimacy* or *partible inheritance*. It sits **immediately before the story slide that needs it**, so students meet the definition just before they use it. **Model:** Ch16 L3 `concept-balance`. (Other Ch16 examples: `concept-tribe`, `concept-loyalism`, `concept-legitimacy`, `concept-cakravartin`, `concept-inquisition`, `concept-partible`, `concept-secret-society`.)
+
+**How many.** Use them only when a story slide depends on a term students are unlikely to know; Ch16 averages about two per deck. Do not add one for a term a popup or a single clause can handle. Keep each slide short: one term (or a closely paired two, e.g. "Secret society · Sect"), a 1–2 sentence definition, and 3–4 beats.
+
+**Pattern (copy from the shell's commented CONCEPT SLIDE):**
+
+- `id="concept-<slug>"` (kebab-case, e.g. `concept-balance`), plus the deck's usual `data-letter` and `<!-- ===== x · concept-<slug> ===== -->` comment if the deck uses them.
+- Kicker: `QN concept · <Term>`, where QN is the review question the following story serves. (The story slide after it uses `QN story · <place> · <date>`.)
+- h2: `Concept: <assertion that defines the term in plain words>`, e.g. "Concept: A Lopsided Balance of Trade Meant Silver Flowed One Way".
+- Layout: `g-40-60` grid. Left: `concept-card` with `cc-label` "Concept", `cc-term`, and `cc-def` (plain definition, no jargon). Right: a `stack` of 3–4 `story-beat`s (teal / gold / red / purple) that apply the term to this chapter and lead into the next slide. No image.
+- Mark non-textbook facts with `<span class="outside">outside the textbook</span>`; link back to an earlier deck with `<a class="recap" … target="_blank">Ch. N LN · id ↗</a>` when the concept was taught before.
+- `source-line` with textbook pages.
+- Notes, Study Buddy voice, 4–5 short paragraphs: define the term in **bold**; ground it in the textbook with a quotation and page; apply it (flag outside material, mention any recap link); bridge to the next story slide; end with `<strong>Check yourself:</strong>` and one question.
+
 ## 4. Slide-face rules
 
 - **Kicker + assertion headline.** The kicker is uppercase, light teal and dot-separated: `Topic · place/date`. The h2 is a full-sentence **claim**, not a topic label; a question is fine for checks.
