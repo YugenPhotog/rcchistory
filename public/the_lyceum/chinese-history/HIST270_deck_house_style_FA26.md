@@ -165,21 +165,35 @@ There are **no** forest-green Part dividers, Pause & Reflect slides or RQ recap 
 | `primary-source`, `check`, `activity`, `objectives` | See §5 |
 | `source-line`, `footer-note`, `gloss`, `ps-link`, `back-link`, `next-link` | Small-print lines |
 
-## 7. Presenter notes — Study Buddy voice (the standard)
+## 7. Study Buddy notes standard
 
-The notes are **written to the student** so that someone who missed class can learn the lecture from the file alone. This follows the Lec 1–2 voice. The instructor-podium voice used in Lec 3–4 is not the standard.
+The notes are **written to a student studying alone**, so someone who missed class can learn the lecture from the file by itself.
 
-- Plain `<p>` paragraphs inside `<aside class="notes">`. No emoji `h3` headers, no Georgia font block and no bracketed cues (`[Pause 3 min]`, `[Key: B]`, `[Image: …]`, `[Skip if behind]`).
-- Write in the second person and present tense: "This slide shows…", "Notice…", "You will see this again at…".
-- **Bold run-in labels** organize a note. Choose the ones that fit:
-  - For images: **Look at the image / portrait / mural.** · **Read the map.**
-  - For sources: **How to read it:** · **Read the record critically.** · **Read the numbers carefully.**
-  - For background and links: **The context:** · **How it connects:** · **What is ahead:**
-  - For checks: **Tips for question N:** · **Study tip:**
-- **Every substantive note includes** a "**Why this matters:**" line where the slide carries the argument, and ends with a "**Check yourself:**" question. This is the last paragraph of every note.
-- **Image notes** describe what the image shows and state its status: AI interpretation versus surviving artifact, and what it can and cannot be used as evidence for.
-- **Textbook anchors** for the lecture's RQ appear verbatim with the page number in the notes of the slide that carries that argument.
-- Typical note length is 150–250 words; short divider slides get 2–4 sentences.
+- **Voice:** second person, present tense ("Notice…", "You will see this again…"). Plain `<p>` paragraphs inside `<aside class="notes">`. Bold run-in labels (**Look at the image.**, **The context:**, **How to read it:**, **Study tip:**) are welcome.
+- **No stage directions or timing** in the notes: no ⏱, minute marks, "slow down", "pause", "[Skip if behind]", "click", or instructor cues. Those go in a separate presenter file (e.g. `HIST270_chNN_lecN_presenter_narratives.md`).
+- **Length:** 120–250 words on content slides; 60–100 words on title and transition slides. Over 300 words means split the slide or trim.
+- **Every slide has notes**, including the title slide. Title notes state the lecture's framing question and explain how to use the deck and its notes.
+- **Required order on content slides:**
+  1. **Hook:** one or two sentences that pull the student in.
+  2. **Context:** who, when, where.
+  3. **Cause and effect:** what happened and why it led to what followed.
+  4. **Image/source note:** one sentence on what the image or source is, and whether it is a real artifact/photo or an AI interpretation.
+  5. **Ebrey page cite** in the form `(p. X)`.
+  6. `<strong>Why this matters:</strong>` one sentence tied to the lecture's big question.
+  7. `<strong>Check yourself:</strong>` one recall question. About every third slide, add a why/how question as well.
+- **Define technical terms on first use**, in plain words.
+- **Reading Guide questions:** when a slide teaches a Reading Guide question, say `Reading Guide Q# (p. X)`, point to the evidence on this slide and earlier ones, and explain how to build an answer (claim, evidence, judgment). **Never write a model or suggested answer**, in the notes or on the slide face. Reading-guide review slides likewise never show suggested answers.
+- **Name slides; never refer to them by letter** ("slide d", "slide e"). Say "the Macartney's goals slide" or link to it.
+
+**Approval gate** (checked by `tools/check_notes.py`): 0 empty notes; 0 stage directions; at least 90% of slides carry an Ebrey page cite; every content slide has both **Why this matters:** and **Check yourself:**. Run:
+
+```
+python3 public/the_lyceum/chinese-history/tools/check_notes.py <deck.html> [more decks…]
+```
+
+It exits nonzero when a deck fails the gate.
+
+**Related layout rules:** the main lecture targets about a 50-minute spoken lecture (a guide, not a hard rule). The Pierian Spring divider and Reading Guide review slides use the green (teal→forest) background. Divider slides (act heroes, Pierian Spring) are full-bleed, preferably with AI art.
 
 ## 8. Images
 
