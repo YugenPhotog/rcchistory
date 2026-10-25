@@ -195,6 +195,9 @@ It exits nonzero when a deck fails the gate.
 
 **Related layout rules:** the main lecture targets about a 50-minute spoken lecture (a guide, not a hard rule). The Pierian Spring divider and Reading Guide review slides use the green (teal→forest) background. Divider slides (act heroes, Pierian Spring) are full-bleed, preferably with AI art.
 
+### Background essay (required)
+Every revised deck gets a per-lecture background essay, written new or revised, in `public/hist-270/background_essays/essays/` (`chN-lN-<slug>.html`; model: `ch1-l1-shang-sacred-state.html`). Instructor-level background that doesn't belong on slides or in Study Buddy notes goes there: historiography, textbook discrepancies, and outside sources. Add or update its card on `background_essays/index.html` (under the chapter's section, with a filter chip). The essay is reviewed with the deck draft and committed with it.
+
 ## 8. Images
 
 - **Path and name:** `images/<lecture-slug>/HIST270_chNN_lecN_NN_<snake_desc>_revFA26.png`. The `NN` is the image's order in the deck; Pierian Spring images use `_ps_`.
