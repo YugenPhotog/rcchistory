@@ -1,0 +1,196 @@
+/* ==========================================================================
+   Shared cross-course Reveal.js deck base (Steven Austin's courses)
+   Extracted from HIST270_deck_shell_FA26.html + approved Ch14/Ch16 revFA26 decks.
+   Reveal.js 4.5.0 (cdnjs) + theme/black. Load THIS file, then a thin course
+   layer that overrides only the custom properties below (and adds course-only
+   components). Do not edit per deck; put deck-specific rules in the deck.
+   STATUS: base only. Not yet wired into any deck.
+   ========================================================================== */
+:root{
+  /* Palette (HIST 270 defaults) */
+  --db-bg:#1A1A1A;            /* background */
+  --db-text:#FAFAFA;          /* body text */
+  --db-accent:#D4AF37;        /* headings, strong, gold accents */
+  --db-accent-bright:#F1D46A; /* title h1 */
+  --db-accent-2:#2C7873;      /* bullets, beat/card borders */
+  --db-accent-2-light:#71B3AD;/* kicker, em, popup triggers */
+  --db-link:#9ED8D2;
+  --db-red:#9B2C2C;           /* cost, failure, limit */
+  --db-purple:#6B4C9A;        /* frontier / foreign / bridge */
+  --db-cream:#F5F1E8;         /* popup bg, quote text */
+  --db-bronze:#8B6F47;        /* popup border */
+  --db-muted:#C9BEAA;         /* source lines, badges */
+  --db-caption:#D9CFBC;
+  --db-instruction:#E9DFC7;
+  --db-outside:#E8C27A;       /* "outside the textbook" flag */
+  /* Reading-guide checkpoint + Pierian Spring */
+  --db-checkpoint-bg:#1B4332;
+  --db-ps-gradient:radial-gradient(circle at 50% 40%, #2C7873 0%, #1B4332 55%, #0F2A20 100%);
+  /* Type */
+  --db-font-head:'Crimson Pro',serif;
+  --db-font-body:'Lora',serif;
+  --db-base-size:1.3em;
+  --db-bullet:"◆ ";
+  /* Hero veil */
+  --db-veil:linear-gradient(90deg,rgba(10,13,14,.94) 0%,rgba(10,13,14,.78) 42%,rgba(10,13,14,.14) 78%,rgba(10,13,14,.28) 100%);
+}
+
+/* ---- Base typography ---------------------------------------------------- */
+.reveal{font-family:var(--db-font-body);font-size:var(--db-base-size);background:var(--db-bg);color:var(--db-text)}
+.reveal h1,.reveal h2,.reveal h3{font-family:var(--db-font-head);font-weight:700;color:var(--db-accent);text-transform:none}
+.reveal h1{font-size:2.9em;line-height:1.08;margin:0 0 .35em}
+.reveal h2{font-size:1.5em;line-height:1.12;margin:0 0 .4em}   /* assertion headline */
+.reveal h3{font-size:1.12em;margin:0 0 .35em}
+.reveal .slides section{text-align:left}
+.reveal p,.reveal li{font-size:.82em;line-height:1.38}
+.reveal strong{color:var(--db-accent)}
+.reveal em{color:var(--db-accent-2-light)}
+.reveal a{color:var(--db-link)}
+.kicker{color:var(--db-accent-2-light);font-size:.68em;letter-spacing:.12em;text-transform:uppercase;margin:0 0 .35em}
+/* Bullets: 3–4 complete-phrase bullets per list (see house style) */
+.reveal ul{list-style:none;margin:.15em 0;padding:0}
+.reveal ul li{margin:.36em 0}
+.reveal ul li::before{content:var(--db-bullet);color:var(--db-accent-2)}
+.reveal ol{margin:.2em 0 0 1.3em;padding:0}
+.reveal ol li::before{content:none}
+.reveal ul.bullets li{font-size:.86em;margin:.5em 0}
+.reveal aside.notes{display:none}
+.reveal section.density-95{font-size:.95em}.reveal section.density-90{font-size:.90em}
+.reveal section.density-85{font-size:.85em}.reveal section.density-80{font-size:.80em}
+.reveal section.density-75{font-size:.75em}
+
+/* ---- Grids -------------------------------------------------------------- */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:.9em;align-items:center}
+.g-40-60{display:grid;grid-template-columns:.8fr 1.2fr;gap:1em;align-items:center}
+.g-55-45{display:grid;grid-template-columns:1.2fr 1fr;gap:.9em;align-items:center}
+.g-45-55{display:grid;grid-template-columns:1fr 1.2fr;gap:.9em;align-items:center}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:.55em;align-items:stretch}
+.stack{display:flex;flex-direction:column;gap:.38em}
+
+/* ---- Story beats, callouts, cards --------------------------------------- */
+.reveal .story-beat{font-size:.74em;line-height:1.32;padding:.45em .65em;background:rgba(44,120,115,.12);border-left:4px solid var(--db-accent-2);border-radius:4px}
+.story-beat b{color:var(--db-accent)}
+.reveal .story-beat.gold{border-color:var(--db-accent);background:rgba(212,175,55,.11)}
+.reveal .story-beat.red{border-color:var(--db-red);background:rgba(155,44,44,.12)}
+.reveal .story-beat.purple{border-color:var(--db-purple);background:rgba(107,76,154,.14)}
+.callout{margin:.65em 0 0;padding:.55em .8em;border-left:4px solid var(--db-accent);background:rgba(212,175,55,.12);font-size:.78em;line-height:1.35}
+.card{background:rgba(255,255,255,.055);border-top:3px solid var(--db-accent-2);border-radius:8px;padding:.55em .7em}
+.card.gold{border-color:var(--db-accent)}.card.red{border-color:var(--db-red)}.card.purple{border-color:var(--db-purple)}
+.reveal .card h3{font-size:.9em;margin:0 0 .25em}
+.reveal .card p,.reveal .card li{font-size:.68em;line-height:1.32;margin:.2em 0}
+.reveal .outside{font-style:italic;color:var(--db-outside)}
+.reveal a.recap{color:var(--db-link);border-bottom:1px dotted var(--db-accent-2);font-size:.85em;white-space:nowrap}
+
+/* ---- Story slide: image + beats ---------------------------------------- */
+.scene-layout{display:grid;grid-template-columns:1.25fr .75fr;gap:1em;align-items:center}
+.scene-layout.reverse{grid-template-columns:.75fr 1.25fr}
+.scene-copy{display:flex;flex-direction:column;gap:.42em}
+
+/* ---- Images + source lines --------------------------------------------- */
+/* Local WebP only; always show the whole image (contain), never crop. */
+.fig{margin:0;padding:.35em;border:1px solid rgba(255,255,255,.24);border-radius:9px;background:rgba(255,255,255,.04);width:fit-content;max-width:100%;margin-left:auto;margin-right:auto}
+.reveal .fig img{display:block!important;width:auto!important;height:auto!important;max-width:100%!important;object-fit:contain!important;margin:0 auto!important;border:0!important;box-shadow:none!important;border-radius:6px!important;background:#111!important}
+.reveal .fig.wide img{width:100%!important}
+.reveal .fig.light img{background:#fff!important}
+.fig figcaption{margin-top:.3em;color:var(--db-caption);font-size:.5em;line-height:1.3}
+.fig figcaption a{color:var(--db-link)}
+.fig figcaption .ai-tag,.visual-credit .ai-tag{color:#E8A898;font-style:italic}
+.h-220 img{max-height:220px!important}.h-260 img{max-height:260px!important}.h-300 img{max-height:300px!important}
+.h-360 img{max-height:360px!important}.h-400 img{max-height:400px!important}.h-460 img{max-height:460px!important}.h-560 img{max-height:560px!important}
+.img-placeholder{display:none;min-height:300px;align-items:center;justify-content:center;flex-direction:column;text-align:center;border:2px dashed var(--db-bronze);border-radius:7px;background:rgba(139,111,71,.12);color:var(--db-muted)}
+.source-line{color:var(--db-muted);font-size:.5em!important;margin-top:.5em!important}
+.footer-note,.gloss{color:var(--db-caption);font-size:.6em!important;margin-top:.35em!important}
+.reveal ul.source-list.two-col{columns:2;column-gap:1.4em;max-width:100%}
+.reveal ul.source-list li{font-size:.56em;margin:0 0 .4em;break-inside:avoid;line-height:1.3}
+.reveal ul.source-list li::before{content:none}
+.reveal ul.source-list li.src-head{font-family:var(--db-font-head);font-size:.8em;color:var(--db-accent);break-after:avoid;margin-top:.2em}
+
+/* ---- Concept slide (model: HIST 270 Ch16 L3 concept-balance) ----------- */
+.reveal .concept-card{border:2px solid var(--db-accent);border-radius:14px;background:rgba(212,175,55,.08);padding:.8em 1em}
+.reveal .cc-label{font:600 .5em var(--db-font-body)!important;letter-spacing:.14em;text-transform:uppercase;color:var(--db-muted);margin:0!important}
+.reveal .cc-term{font-family:var(--db-font-head);font-size:1.25em!important;color:var(--db-accent);margin:.15em 0 .3em!important;line-height:1.1}
+.reveal .cc-def{font-size:.72em!important;color:#F5EEDC;line-height:1.4;margin:0!important}
+
+/* ---- Names / terms box --------------------------------------------------- */
+.reveal .names-box{margin:.5em 0 0;padding:.5em .8em;font-size:.73em;line-height:1.3}
+.reveal .names-box.big{font-size:.8em}
+.reveal .names-box p{margin:.18em 0!important;font-size:1.02em!important}
+.reveal .names-box .nb-title{font-family:var(--db-font-head);font-size:1.15em!important;color:var(--db-accent);margin:0 0 .2em!important}
+.reveal .names-box b{color:#F5EEDC}
+.reveal .names-box span{color:#E8DCC4}
+
+/* ---- Reading-guide checkpoint (green slide) ----------------------------- */
+/* Use: <section class="rg-checkpoint" data-background="#1B4332"> (data-background
+   is still required: Reveal paints backgrounds from the attribute, not CSS). */
+.your-turn-box{border:2px solid var(--db-accent);background:rgba(212,175,55,.08);border-radius:12px;padding:.75em 1em}
+.your-turn-box .rq-label{font-size:.56em!important;letter-spacing:.14em;text-transform:uppercase;color:var(--db-accent-2-light);margin:0 0 .25em!important}
+.your-turn-box .rq-text{font-family:var(--db-font-head);font-size:1.06em!important;line-height:1.3!important;color:var(--db-text);margin:0 0 .55em!important}
+.guide-btn{display:inline-block;font-family:var(--db-font-body);font-size:.62em;font-weight:600;color:#1A1A1A!important;background:var(--db-accent);border-radius:8px;padding:.5em 1em;text-decoration:none!important;border:2px solid var(--db-accent-bright);box-shadow:0 3px 12px rgba(0,0,0,.4)}
+.guide-btn:hover,.guide-btn:focus{background:var(--db-accent-bright);outline:3px solid var(--db-accent-2-light);outline-offset:2px}
+.reveal .yt-tip{font-size:.64em;color:var(--db-instruction);margin:.55em 0 0}
+.reveal .rg-links{font-size:.5em!important;line-height:1.9;margin-top:.6em!important}
+.reveal .rg-links span{color:var(--db-muted);margin-right:.4em}
+.reveal .rg-links a{display:inline-block;color:var(--db-link);border:1px solid var(--db-accent-2);border-radius:12px;padding:0 .55em;margin:0 .15em .2em 0;white-space:nowrap}
+
+/* ---- Pierian Spring divider (Ch14/16) ----------------------------------- */
+/* Use: <section id="pierian-spring" data-background-gradient="radial-gradient(...)"> */
+.reveal .ps-divider{text-align:center;max-width:1300px;margin:0 auto}
+.reveal .ps-divider h2{font-size:2.2em;color:var(--db-accent)}
+.reveal .ps-sub{font-family:var(--db-font-head);font-size:1em!important;color:#F5EEDC;letter-spacing:.08em;text-transform:uppercase}
+.reveal .ps-rule{width:220px;height:3px;background:var(--db-accent);margin:.5em auto .7em}
+.reveal .ps-desc{font-size:.7em!important;color:#E8DCC4}
+.reveal .ps-pope{font-family:var(--db-font-head);font-style:italic;font-size:.8em;color:#F5EEDC;border:none;box-shadow:none;background:none;margin:.8em auto 0;width:auto}
+.reveal .ps-pope small{display:block;font-style:normal;font-family:var(--db-font-body);font-size:.6em;color:var(--db-muted);margin-top:.4em}
+.ps-link{font-size:.56em!important;margin:.45em 0 0!important}
+.back-link{font-size:.56em!important;margin:.35em 0 0!important;text-align:right}
+.ps-link a,.back-link a,.next-link a,.essay-link a{color:var(--db-link);border-bottom:1px dotted var(--db-accent-2);text-decoration:none}
+.essay-link{font-size:.5em!important;margin:.7em 0 0!important;letter-spacing:.04em}
+
+/* ---- Full-bleed section divider / title hero ---------------------------- */
+.visual-hero{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:flex-start}
+.reveal .slides section.visual-hero.present{display:flex!important}
+.reveal .slides>section.visual-hero{top:0!important;height:100%!important;min-height:100%!important;padding:0!important;overflow:visible!important;border-radius:0!important}
+/* Image + veil reach the viewport edges; --rs is written by deck_base.js */
+.reveal .slides>section.visual-hero .art-bg,
+.reveal .slides>section.visual-hero>.img-placeholder,
+.reveal .slides>section.visual-hero .art-veil{position:absolute;inset:auto;left:50%;top:50%;width:calc(100vw / var(--rs,1));height:calc(100vh / var(--rs,1));max-width:none!important;max-height:none!important;transform:translate(-50%,-50%);margin:0;border-radius:0;border:0}
+.reveal .slides>section.visual-hero .art-bg{object-fit:cover;z-index:0}
+.art-veil{z-index:1;background:var(--db-veil)}
+.art-veil.right-heavy{background:linear-gradient(270deg,rgba(10,13,14,.94) 0%,rgba(10,13,14,.8) 44%,rgba(10,13,14,.16) 78%,rgba(10,13,14,.3) 100%)}
+.hero-copy,.act-copy{position:relative;z-index:2;width:52%;padding:.6em 1.1em;text-shadow:0 2px 10px rgba(0,0,0,.85)}
+.reveal .slides>section.visual-hero.copy-right{justify-content:flex-end!important}
+.title-hero h1{font-size:3.1em;line-height:.98;margin:0;color:var(--db-accent-bright);text-shadow:0 4px 22px #000}
+.hero-subtitle{font-family:var(--db-font-head);font-size:1.2em!important;line-height:1.12!important;color:var(--db-text);margin:.35em 0!important;max-width:15em}
+.hero-actline{font-size:.62em!important;color:#D5C7AE;letter-spacing:.06em;text-transform:uppercase}
+.reveal .act-copy h2{font-size:2.4em;line-height:1.02;margin-bottom:.3em}
+.act-copy>p:last-of-type{font-size:.95em;line-height:1.35;max-width:20em}
+.visual-credit{position:absolute;z-index:3;right:.3em;bottom:.3em;color:#E7DDCA;font-size:.42em!important;max-width:44%;line-height:1.3;background:rgba(0,0,0,.55);padding:.3em .5em;border-radius:4px}
+.reveal.overview .slides>section.visual-hero{overflow:hidden!important}
+/* Reveal copies section classes onto background layers; keep hero rules off them */
+.reveal .backgrounds .slide-background{top:0!important;left:0!important}
+.reveal .backgrounds .slide-background.visual-hero{position:absolute!important;min-height:0!important;border-radius:0!important}
+
+/* ---- Permanent slide letter (lower left) + slide number (lower right) --- */
+.slide-letter{position:fixed;left:14px;bottom:12px;font:15px var(--db-font-body);color:var(--db-muted);background:rgba(26,26,26,.75);padding:3px 7px;border-radius:4px;z-index:40;pointer-events:none}
+.slide-letter:empty{display:none}
+.reveal .slide-number{left:auto!important;right:14px!important;bottom:12px!important;font-family:var(--db-font-body);font-size:15px;color:var(--db-muted);background:rgba(26,26,26,.75);padding:3px 7px;border-radius:4px}
+
+/* ---- Popups (house pattern: cream card, bronze border) ------------------ */
+.popup-trigger{color:var(--db-accent-2-light);border-bottom:2px dotted var(--db-accent-2);cursor:pointer}
+.popup-trigger:hover,.popup-trigger:focus{color:var(--db-accent);outline:none}
+.popup{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--db-cream);color:#1A1A1A;padding:1em 1.3em;border-radius:15px;box-shadow:0 8px 32px rgba(0,0,0,.5);width:78%;max-width:640px;max-height:600px;overflow-y:auto;z-index:1000;border:3px solid var(--db-bronze);text-align:left}
+.popup.active{display:block}
+.popup-close{position:absolute;top:6px;right:14px;font-size:1.6em;line-height:1;cursor:pointer;color:var(--db-red)}
+.reveal .popup h3{color:var(--db-bronze);font-size:1.1em;margin:0 1.2em .35em 0}
+.reveal .popup p,.reveal .popup li{font-size:.74em;line-height:1.38;color:#1A1A1A;margin:.3em 0}
+.reveal .popup strong{color:var(--db-red)}
+.reveal .popup em{color:var(--db-accent-2)}
+
+/* ---- Image lightbox (Ch16 pattern) -------------------------------------- */
+img.zoomable{cursor:zoom-in}
+#lightbox{display:none;position:fixed;inset:0;z-index:5000;background:rgba(8,8,8,.94);flex-direction:column;align-items:center;justify-content:center;padding:2.5vh 3vw;cursor:zoom-out}
+#lightbox.open{display:flex}
+#lightbox img{max-width:94vw;max-height:80vh;object-fit:contain;border-radius:6px;background:#111}
+#lightbox .lb-caption{max-width:min(1100px,92vw);margin:.8em 0 0;font:15px/1.4 var(--db-font-body);color:var(--db-instruction);text-align:center}
+
+@media (max-width:900px){.reveal p,.reveal li{font-size:.74em}}
