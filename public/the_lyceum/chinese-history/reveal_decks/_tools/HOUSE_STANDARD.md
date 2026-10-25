@@ -16,10 +16,10 @@
 
 The title slide's note explains how to use the deck (S for notes, arrow keys, Esc for overview, which questions it covers, and the essay link). Nothing addressed to the instructor goes in the notes.
 
-**4. Background essays (professor material).** Instructor content (historiography, teaching cautions, sources and debates, mined from the old notes) goes in one essay per lecture: `public/hist-270/background_essays/essays/chN-lM-<slug>.html` (for example `ch5-l2-early-tang-power.html`). The essays follow the HIST 101 layout:
+**4. Background essays (professor material).** Instructor content (historiography, teaching cautions, sources and debates, mined from the old notes) goes in one essay per lecture: `public/hist-270/background_essays/essays/chNN/chN-lM-<slug>.html`, in a zero-padded chapter folder (for example `ch05/ch5-l2-early-tang-power.html`). The essays follow the HIST 101 layout:
 - topbar with back and print buttons, a progress bar, a table of contents, a `readmeta` line and a `prose` body;
 - callouts `--prompt`, `--payoff`, `--note` and `--source`, plus `quote`/`attrib` blocks and a next-essay pager;
-- the shared stylesheet `../assets/essays.css`.
+- the shared stylesheet `../../assets/essays.css` (essays sit one folder deeper, in `essays/chNN/`).
 
 **5. Reading guide → Your Turn.** Teach each selected question in story slides first, then put a **Your Turn · Review Question N** slide after them. That slide asks the student to answer from memory, has a button that opens the reading guide in a new tab, gives "How to build a strong answer" bullets that name the evidence slides, and includes a self-check. Mark the teaching slides `data-rq="N"` or use the Ch12 kicker "QN story · …". Not every question has to be used; put the unused ones in the Pierian Spring section. todo.md lists the selected questions for each chapter.
 
