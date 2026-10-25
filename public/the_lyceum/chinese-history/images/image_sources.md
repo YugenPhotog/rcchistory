@@ -552,7 +552,7 @@ Files live in `reveal_decks/chapter-01/images/ch01-lec2/`. Deck: `HIST270_ch01_l
 - **Source:** converted to WebP from the previous deck image `ch01_lec2_script_spread_map.jpg`; see its existing `ch01_lec2_…` entry earlier in this file for source, license and attribution.
 
 ## `HIST270_ch01_lec2_12_turtle_shell_huayuanzhuang_revFA26.webp`
-- **Used on:** slide M
+- **Status:** Retired 2026-10-25: not used in the FA26 deck; file archived locally (previously listed as used on slide M).
 - **Description:** Inscribed oracle turtle shell, Shang Dynasty, Huayuanzhuang, Anyang, Henan
 - **Source website / URL:** Wikimedia Commons, [File:Inscribed oracle turtle shell, Shang Dynasty, Huayuanzhuang, Anyang, Henan.jpg](https://commons.wikimedia.org/wiki/File:Inscribed_oracle_turtle_shell,_Shang_Dynasty,_Huayuanzhuang,_Anyang,_Henan.jpg)
 - **Creator / date:** Furius; 2024-07-13 06:40:33
@@ -560,7 +560,7 @@ Files live in `reveal_decks/chapter-01/images/ch01-lec2/`. Deck: `HIST270_ch01_l
 - **Attribution:** None required.
 
 ## `HIST270_ch01_lec2_13_oracle_bone_xiaotun_b_revFA26.webp`
-- **Used on:** slide M
+- **Status:** Retired 2026-10-25: not used in the FA26 deck; file archived locally (previously listed as used on slide M).
 - **Description:** Inscribed oracle bone, Shang Dynasty, Xiaotun, Anyang, Henan
 - **Source website / URL:** Wikimedia Commons, [File:Inscribed oracle bone2, Shang Dynasty, Xiaotun, Anyang, Henan.jpg](https://commons.wikimedia.org/wiki/File:Inscribed_oracle_bone2,_Shang_Dynasty,_Xiaotun,_Anyang,_Henan.jpg)
 - **Creator / date:** Furius; 2024-07-13 06:39:50
@@ -568,7 +568,7 @@ Files live in `reveal_decks/chapter-01/images/ch01-lec2/`. Deck: `HIST270_ch01_l
 - **Attribution:** None required.
 
 ## `HIST270_ch01_lec2_14_ganzhi_bone_heji38017_revFA26.webp`
-- **Used on:** slide M
+- **Status:** Retired 2026-10-25: not used in the FA26 deck; file archived locally (previously listed as used on slide M).
 - **Description:** Bone carved with sexagenary table (Heji 38017). Reign of King Di Yi or Di Xin, Yinxu, Anyang. National Museum: China through the Ages, Exhibit 2. Complete indexed photo collection at WorldHistoryPics.com.
 - **Source website / URL:** Wikimedia Commons, [File:Shang Inscribed Ox Bone (9830634253).jpg](https://commons.wikimedia.org/wiki/File:Shang_Inscribed_Ox_Bone_(9830634253).jpg)
 - **Creator / date:** Gary Todd from Xinzheng, China; 2011-09-01 12:36
@@ -628,7 +628,7 @@ Files live in `reveal_decks/chapter-01/images/ch01-lec2/`. Deck: `HIST270_ch01_l
 - **Attribution:** None required.
 
 ## `HIST270_ch01_lec2_22_clay_mould_b_revFA26.webp`
-- **Used on:** slide U
+- **Status:** Retired 2026-10-25: not used in the FA26 deck; file archived locally (previously listed as used on slide U).
 - **Description:** Yinxu Foundry Site, Anyang. Shanghai Museum Bronze Gallery. Complete indexed photo collection at WorldHistoryPics.com.
 - **Source website / URL:** Wikimedia Commons, [File:Late Shang Clay Mould (10180127945).jpg](https://commons.wikimedia.org/wiki/File:Late_Shang_Clay_Mould_(10180127945).jpg)
 - **Creator / date:** Gary Todd from Xinzheng, China; 2008-08-23 13:47
@@ -636,7 +636,7 @@ Files live in `reveal_decks/chapter-01/images/ch01-lec2/`. Deck: `HIST270_ch01_l
 - **Attribution:** None required.
 
 ## `HIST270_ch01_lec2_23_cicada_ding_revFA26.webp`
-- **Used on:** slide U
+- **Status:** Retired 2026-10-25: not used in the FA26 deck; file archived locally (previously listed as used on slide U).
 - **Description:** Bronze Ding with Dragon and Cicada Pattern, Shang Dynasty
 - **Source website / URL:** Wikimedia Commons, [File:20250118 Bronze Ding with Dragon and Cicada Pattern.jpg](https://commons.wikimedia.org/wiki/File:20250118_Bronze_Ding_with_Dragon_and_Cicada_Pattern.jpg)
 - **Creator / date:** Windmemories; 2025-01-18 11:17:16
@@ -644,7 +644,7 @@ Files live in `reveal_decks/chapter-01/images/ch01-lec2/`. Deck: `HIST270_ch01_l
 - **Attribution:** Required: Windmemories, CC BY-SA 4.0, via Wikimedia Commons (given in slide caption/credit).
 
 ## `HIST270_ch01_lec2_24_fang_jia_freer_revFA26.webp`
-- **Used on:** slide U
+- **Status:** Retired 2026-10-25: not used in the FA26 deck; file archived locally (previously listed as used on slide U).
 - **Description:** Freer-Sackler Galleries, Smithsonian Institution, Washington, D.C. Complete indexed photo collection at WorldHistoryPics.com.
 - **Source website / URL:** Wikimedia Commons, [File:Shang Bronze Fang Jia, Anyang, 1200-1100 BC (10433865973).jpg](https://commons.wikimedia.org/wiki/File:Shang_Bronze_Fang_Jia,_Anyang,_1200-1100_BC_(10433865973).jpg)
 - **Creator / date:** Gary Todd from Xinzheng, China; 2009-07-13 22:21
@@ -713,7 +713,7 @@ Files live in `reveal_decks/chapter-01/images/ch01-lec2/`. Deck: `HIST270_ch01_l
 - **Attribution:** None required.
 
 ## `HIST270_ch01_lec2_34_nao_bell_hunan_revFA26.webp`
-- **Used on:** slide AE
+- **Status:** Retired 2026-10-25: not used in the FA26 deck; file archived locally (previously listed as used on slide AE).
 - **Description:** Bronze Nao with animal face patterns, unearthed in 1974 in Laoliangcang Town of Ningxiang, Hunan. Hunan Museum.
 - **Source website / URL:** Wikimedia Commons, [File:Bronze Nao with animal face patterns, unearthed in 1974 in Ningxiang, Hunan, Hunan Museum.jpg](https://commons.wikimedia.org/wiki/File:Bronze_Nao_with_animal_face_patterns,_unearthed_in_1974_in_Ningxiang,_Hunan,_Hunan_Museum.jpg)
 - **Creator / date:** Huangdan2060; 2018-07-05 15:23:34
@@ -721,7 +721,7 @@ Files live in `reveal_decks/chapter-01/images/ch01-lec2/`. Deck: `HIST270_ch01_l
 - **Attribution:** None required.
 
 ## `HIST270_ch01_lec2_35_elephant_zun_hunan_revFA26.webp`
-- **Used on:** slide AE
+- **Status:** Retired 2026-10-25: not used in the FA26 deck; file archived locally (previously listed as used on slide AE).
 - **Description:** Hunan Provincial Museum, Changsha. Complete indexed photo collection at WorldHistoryPics.com.
 - **Source website / URL:** Wikimedia Commons, [File:Shang Bronze Elephant Zun (10111830614).jpg](https://commons.wikimedia.org/wiki/File:Shang_Bronze_Elephant_Zun_(10111830614).jpg)
 - **Creator / date:** Gary Todd from Xinzheng, China; 2010-08-20 11:24
@@ -729,7 +729,7 @@ Files live in `reveal_decks/chapter-01/images/ch01-lec2/`. Deck: `HIST270_ch01_l
 - **Attribution:** None required.
 
 ## `HIST270_ch01_lec2_36_xingan_you_tripod_revFA26.webp`
-- **Used on:** slide AE
+- **Status:** Retired 2026-10-25: not used in the FA26 deck; file archived locally (previously listed as used on slide AE).
 - **Description:** Bronze You tripod with zoomorphic image, 1200 BCE. Shang Dynasty, discovered in 1989, Dayangzhou, Xingan County, Jian. Jiangxi Provincial Museum
 - **Source website / URL:** Wikimedia Commons, [File:Jiangxi Sheng Bowuguan 20120627-65.jpg](https://commons.wikimedia.org/wiki/File:Jiangxi_Sheng_Bowuguan_20120627-65.jpg)
 - **Creator / date:** Zhangzhugang; 2012-06-27 14:24:28
@@ -753,7 +753,7 @@ Files live in `reveal_decks/chapter-01/images/ch01-lec2/`. Deck: `HIST270_ch01_l
 - **Attribution:** None required.
 
 ## `HIST270_ch01_lec2_40_chariot_burial_revFA26.webp`
-- **Used on:** slide AH
+- **Status:** Retired 2026-10-25: not used in the FA26 deck; file archived locally (previously listed as used on slide AH).
 - **Source:** converted to WebP from the previous deck image `ch01_lec2_chariot_burial.jpg`; see its existing `ch01_lec2_…` entry earlier in this file for source, license and attribution.
 
 ## `HIST270_ch01_lec2_41_chariot_horse_fittings_revFA26.webp`
