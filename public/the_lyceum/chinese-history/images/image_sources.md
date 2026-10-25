@@ -641,7 +641,7 @@ Files live in `reveal_decks/chapter-01/images/ch01-lec2/`. Deck: `HIST270_ch01_l
 - **Source website / URL:** Wikimedia Commons, [File:20250118 Bronze Ding with Dragon and Cicada Pattern.jpg](https://commons.wikimedia.org/wiki/File:20250118_Bronze_Ding_with_Dragon_and_Cicada_Pattern.jpg)
 - **Creator / date:** Windmemories; 2025-01-18 11:17:16
 - **License:** CC BY-SA 4.0
-- **Attribution:** Required: Windmemories, CC BY-SA 4.0, via Wikimedia Commons (given in slide caption/credit).
+- **Attribution:** Required: Windmemories, CC BY-SA 4.0, via Wikimedia Commons.
 
 ## `HIST270_ch01_lec2_24_fang_jia_freer_revFA26.webp`
 - **Status:** Retired 2026-10-25: not used in the FA26 deck; file archived locally (previously listed as used on slide U).
@@ -734,7 +734,7 @@ Files live in `reveal_decks/chapter-01/images/ch01-lec2/`. Deck: `HIST270_ch01_l
 - **Source website / URL:** Wikimedia Commons, [File:Jiangxi Sheng Bowuguan 20120627-65.jpg](https://commons.wikimedia.org/wiki/File:Jiangxi_Sheng_Bowuguan_20120627-65.jpg)
 - **Creator / date:** Zhangzhugang; 2012-06-27 14:24:28
 - **License:** CC BY-SA 4.0
-- **Attribution:** Required: Zhangzhugang, CC BY-SA 4.0, via Wikimedia Commons (given in slide caption/credit).
+- **Attribution:** Required: Zhangzhugang, CC BY-SA 4.0, via Wikimedia Commons.
 
 ## `HIST270_ch01_lec2_37_fu_hao_owl_zun_revFA26.webp`
 - **Used on:** slide AF
