@@ -18,12 +18,37 @@ Chapter 12 is not taught in the classroom. Students work through it independentl
 
 | Deck | Slides | Review Qs | Images | Commit |
 |---|---|---|---|---|
-| `HIST270_ch12_lec1_mongol_conquest_state_building_revFA26.html` | 28 (a–bb) | Q1–Q4 | `images/ch12-lec1/` (16 real, 10 AI) | `2aac9ec` |
-| `HIST270_ch12_lec2_yuan_hierarchy_global_exchange_revFA26.html` | 24 (a–x) | Q5, Q8 | `images/ch12-lec2/` (all real) | `f97d0b0` |
-| `HIST270_ch12_lec3_displaced_elites_yuan_collapse_revFA26.html` | 26 (a–z) | Q6, Q7, Q9, Q10, Q11 | `images/ch12-lec3/` (all real) | `1fe4e71` |
+| `HIST270_ch12_lec1_mongol_conquest_state_building_revised_FA26.html` | 36 (A–AJ) | Q1–Q4 | `images/ch12-lec1/` (22 real, 11 AI) | `b02059d` |
+| `HIST270_ch12_lec2_yuan_hierarchy_global_exchange_revFA26.html` | 24 (a–x) | Q5, Q8 | `images/ch12-lec2/` (all real) | `b02059d` |
+| `HIST270_ch12_lec3_displaced_elites_yuan_collapse_revFA26.html` | 26 (a–z) | Q6, Q7, Q9, Q10, Q11 | `images/ch12-lec3/` (all real) | `b02059d` |
 
-- Slide letters are permanent and stored as `data-letter` on each section. If a new slide is added, it gets the next unused letter.
+- Slide letters are permanent. Lecture 1 stores them as uppercase `data-slide-id` (next unused letter: AK, tracked in `ids.json`). Lectures 2 and 3 store them as lowercase `data-letter`. If a new slide is added, it gets the next unused letter.
+- Lecture 1 replaced the earlier 28-slide `HIST270_ch12_lec1_mongol_conquest_state_building_revFA26.html` (a–bb). A local copy of that older deck sits in `archive/` and is not tracked.
 - The landing page (`chinese-history/index.html`) links to all three FA26 decks.
+
+## Background essays
+
+Committed in `b02059d`. All four are in `public/hist-270/background_essays/essays/ch12/`.
+
+- [Lecture 1: The Mongols Conquered China in Two Stages](../../../../hist-270/background_essays/essays/ch12/ch12-l1-mongol-conquest-state-building.html) (revised)
+- [Lecture 2: Ranks, Registers and Roads: How the Yuan Sorted Its People and Opened Eurasia](../../../../hist-270/background_essays/essays/ch12/ch12-l2-ranks-registers-and-roads.html)
+- [Lecture 3: Scholars, Stages and the Fall of the Yuan](../../../../hist-270/background_essays/essays/ch12/ch12-l3-scholars-stages-and-the-fall-of-yuan.html)
+- [Chapter 12 Research Reconnaissance](../../../../hist-270/background_essays/essays/ch12/ch12-research-reconnaissance.html). Section 8 lists each textbook claim checked, with its verdict and source.
+
+The essays run Chapter 8 Lecture 2 → Ch12 L1 → L2 → L3 → Reconnaissance, and Chapter 14 Lecture 1's Previous link points to the Ch12 L3 essay. Each deck links to its essay. The library index has a Chapter 12 section.
+
+## Source-verified textbook notes (`b02059d`)
+
+Ebrey is contradicted only where a reliable source confirms it. Confirmed slips are explained in the instructor notes with a "Source beyond Ebrey" line, and the sources are listed on each Sources slide under "Further reading beyond Ebrey." No slide carries a visible "outside the textbook" tag.
+
+- **Lecture 1:** Khubilai's reign misprinted as "r. 1360–1394" (B); "only plundered" (F); Dadu "in 1264" (U).
+  - Slide V now says the Phags-pa script was ordered "for official documents across his empire" (*CHC* 6, p. 605).
+- **Lecture 2:** the Mongol killer who "merely had to pay a fine" (f); Ebrey's "new style" of blue-and-white, with Tang blue-and-white recognized as earlier (q).
+- **Lecture 3:**
+  - Both 1313 and 1315 explained (i).
+  - "About 2 percent" of posts set beside Hsiao's "slightly more than 4 percent" (j).
+  - "Ni Can" spelled Ni Zan (r).
+- **Not confirmed, left with cautious wording:** Renzong as the "first" Mongol emperor to read Chinese; Guan Hanqing's play count.
 
 ## Archived (`archive/`)
 
@@ -76,10 +101,19 @@ Steven ran an outside audit of each deck. I checked every point against the deck
 
 ## Open items
 
-- These quotes were translated or recalled without checking against a source, and are worth a spot-check:
-  - **Lecture 1:** Yao Shu's "Cao Bin" line
-  - **Lecture 3:** Dou E's curse, the opening of Wen Tianxiang's *Song of the Righteous Spirit*, Zhao Mengfu's two poems, and Ni Zan's letter
-- These dates are from memory and worth a spot-check:
-  - **Lecture 2:** the Grand Canal dates
-  - **Lecture 3:** Zhang Shicheng taking Gaoyou (1353) and Han Lin'er (1355)
+All the items that were listed here were checked against the sources for `b02059d` and confirmed. They are closed:
+
+- **Quotes:**
+  - **Lecture 1:** Yao Shu's "Cao Bin" line (*Yuan shi* ch. 158).
+  - **Lecture 3:**
+    - Dou E's curse (*Yuanqu xuan*).
+    - The opening of Wen Tianxiang's *Song of the Righteous Spirit*.
+    - Zhao Mengfu's two poems ("My Fault Was Coming Out"; the Palace Museum record of *Elegant Rocks and Sparse Trees*).
+    - Ni Zan's letter to Zhang Zaozhong (*Qingbi ge quanji* juan 10).
+- **Dates:**
+  - **Lecture 2:** the Grand Canal dates. The Jizhou cut was made in 1283, and the Huitong canal opened in February 1289 (*CHC* 6, pp. 477–78). The Tonghui canal was built 1292–93 (*Yuan shi* chs. 64–65). The first sea fleet sailed in 1282 and delivered in 1283.
+  - **Lecture 3:** Zhang Shicheng held Gaoyou by the end of 1353 (*CHC* 7, pp. 30–31). Han Lin'er was enthroned on 16 March 1355 (*CHC* 7, p. 42).
+
+## Tools
+
 - Build and QA tools (lightbox, Your Turn box, QA scripts) are on the bot's computer at `/workspace/ch12/tools/`. They can be reused for other independent-study chapters.
