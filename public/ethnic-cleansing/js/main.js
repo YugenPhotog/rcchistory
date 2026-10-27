@@ -34,10 +34,17 @@ window.addEventListener('scroll', () => {
 
 // Active nav link highlighting
 const navLinks = document.querySelectorAll('.main-nav a');
-const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+// Works with or without ".html" in the address (the live site serves extensionless URLs)
+const pageKey = (path) => {
+    const last = (path || '').split('#')[0].split('?')[0].replace(/\/+$/, '').split('/').pop();
+    const name = (last || 'index').replace(/\.html$/, '');
+    return name === '' ? 'index' : name;
+};
+const onFolderRoot = /\/$/.test(window.location.pathname);
+const currentPage = onFolderRoot ? 'index' : pageKey(window.location.pathname);
 
 navLinks.forEach(link => {
-    if (link.getAttribute('href') === currentPage) {
+    if (pageKey(link.getAttribute('href')) === currentPage) {
         link.classList.add('active');
     } else {
         link.classList.remove('active');
