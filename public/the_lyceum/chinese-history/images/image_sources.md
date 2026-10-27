@@ -780,3 +780,260 @@ Files live in `reveal_decks/chapter-01/images/ch01-lec2/`. Deck: `HIST270_ch01_l
 - **License:** CC BY-SA 4.0
 - **Attribution:** Required: Siyuwj, CC BY-SA 4.0, via Wikimedia Commons (given in slide caption/credit).
 
+
+# Chapter 1, Lecture 3 (revised FA26 deck)
+
+Files live in `reveal_decks/chapter-01/images/ch01-lec3/`. Deck: `HIST270_ch01_lec3_zhou_mandate_lords_songs_revised_FA26.html`. Slide letters are permanent IDs. No image in this deck is AI-generated.
+
+## `HIST270_ch01_lec3_01_title_he_zun_face_revFA26.webp`
+- **Used on:** slide A
+- **Description:** Baoji Bronze Museum. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Western Zhou Bronze Zun (National Treasure) (9925581905).jpg](https://commons.wikimedia.org/wiki/File:Western_Zhou_Bronze_Zun_(National_Treasure)_(9925581905).jpg)
+- **Creator / date:** Gary Todd from Xinzheng, China; 2012-04-04 10:15
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec3_02_li_gui_revFA26.webp`
+- **Used on:** slide B
+- **Description:** Lintong. 32-characters describe King Wu's attack on Shang. Shaanxi History Museum, Xi'an. Complete indexed photo collection at www.WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Early Western Zhou Bronze Gui 01.jpg](https://commons.wikimedia.org/wiki/File:Early_Western_Zhou_Bronze_Gui_01.jpg)
+- **Creator / date:** Gary Lee Todd, Ph.D.; 2019-03-23 14:23:40
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec3_03_bianzhong_bells_revFA26.webp`
+- **Used on:** slide C
+- **Description:** Bell Set (bianzhong). Western Zhou dynasty. Shaanxi History Museum, Xi'an
+- **Source website / URL:** Wikimedia Commons, [File:Xian 2006 6-39.jpg](https://commons.wikimedia.org/wiki/File:Xian_2006_6-39.jpg)
+- **Creator / date:** G41rn8; 2006
+- **License:** CC BY-SA 4.0
+- **Attribution:** Required: G41rn8, CC BY-SA 4.0, via Wikimedia Commons (given in slide caption/credit).
+
+## `HIST270_ch01_lec3_04_act1_chariot_pit_guo_revFA26.webp`
+- **Used on:** slide E
+- **Description:** Late Western Zhou/Early Spring and Autumn, Guo State Tombs and Chariot Burial Museum, Sanmenxia, Henan Province. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Guo State Chariot Pit 10.jpg](https://commons.wikimedia.org/wiki/File:Guo_State_Chariot_Pit_10.jpg)
+- **Creator / date:** Gary Todd; 2010-03-27 12:49:05
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec3_05_muye_campaign_map_revFA26.webp`
+- **Used on:** slide F
+- **Description:** Battle of Muye, the battle during which Zhou overthrew Shang dynasty.
+- **Source website / URL:** Wikimedia Commons, [File:Battle of Muye.jpg](https://commons.wikimedia.org/wiki/File:Battle_of_Muye.jpg)
+- **Creator / date:** SY; 2017-09-21 21:53:39
+- **License:** CC BY-SA 4.0
+- **Attribution:** Required: SY, CC BY-SA 4.0, via Wikimedia Commons (given in slide caption/credit).
+
+## `HIST270_ch01_lec3_06_three_founders_revFA26.webp`
+- **Used on:** slide G
+- **Description:** Portraits of Famous Men - King Wen of Zhou.jpg
+- **Source website / URL:** Wikimedia Commons, [File:Portraits of Famous Men - King Wen of Zhou.jpg](https://commons.wikimedia.org/wiki/File:Portraits_of_Famous_Men_-_King_Wen_of_Zhou.jpg)
+- **Creator / date:** Unknown Chinese artist; 19th - early 20th century
+- **License:** Public domain
+- **Attribution:** None required.
+- **Description:** Portraits of Famous Men - King Wu of Zhou.jpg
+- **Source website / URL:** Wikimedia Commons, [File:Portraits of Famous Men - King Wu of Zhou.jpg](https://commons.wikimedia.org/wiki/File:Portraits_of_Famous_Men_-_King_Wu_of_Zhou.jpg)
+- **Creator / date:** Unknown Chinese artist; 19th - early 20th century
+- **License:** Public domain
+- **Attribution:** None required.
+- **Description:** Portraits of Famous Men - Zhou Gong.jpg
+- **Source website / URL:** Wikimedia Commons, [File:Portraits of Famous Men - Zhou Gong.jpg](https://commons.wikimedia.org/wiki/File:Portraits_of_Famous_Men_-_Zhou_Gong.jpg)
+- **Creator / date:** Unknown Chinese artist; 19th - early 20th century
+- **License:** Public domain
+- **Attribution:** None required.
+- **Note:** composite or crop made for the course from the sources above.
+
+## `HIST270_ch01_lec3_07_he_zun_inscription_revFA26.webp`
+- **Used on:** slide I
+- **Description:** He zun is the oldest artifact that inscribed the word "Middle Kingdom/China (中國)" in the container. Shaughnessy, Edward L. (1997) "Western Zhou bronze inscriptions" in Shaughnessy, Edward L., ed. New Sources of Early Chinese History: An Introduction to the Reading of Inscriptions and Manuscripts, pp. 57–84 ISBN: 978-1-55729-058-8. pp. 77–79.
+- **Source website / URL:** Wikimedia Commons, [File:He zun inscription.jpg](https://commons.wikimedia.org/wiki/File:He_zun_inscription.jpg)
+- **Creator / date:** Unknown authorUnknown author; Early Western Zhou Dynasty
+- **License:** Public domain
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec3_08_shangshu_song_edition_revFA26.webp`
+- **Used on:** slide J
+- **Description:** Commentary on the Book of History, Song edition (宋版尚書正義, sōban shōshoseigi), one of 8 books bound by fukuro-toji, ink on paper, 28.3 × 18.2 cm (11.1 × 7.2 in). Located at Ashikaga Gakko Remain Library (足利学校遺蹟図書館, Ashikaga Gakkō iseki toshōkan), Ashikaga, Tochigi, Japan.
+- **Source website / URL:** Wikimedia Commons, [File:Book of History Commentary.jpg](https://commons.wikimedia.org/wiki/File:Book_of_History_Commentary.jpg)
+- **Creator / date:** Unknown authorUnknown author; before 13th century
+- **License:** Public domain
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec3_09_da_yu_ding_revFA26.webp`
+- **Used on:** slide K
+- **Description:** Yu Bronze Ding, food container in Western Zhou Dynasty (c.11th —771 BC)
+- **Source website / URL:** Wikimedia Commons, [File:Yu Bronze Ding of Western Zhou Dynasty.jpg](https://commons.wikimedia.org/wiki/File:Yu_Bronze_Ding_of_Western_Zhou_Dynasty.jpg)
+- **Creator / date:** Charlie fong; 2012-08-05 16:00:05
+- **License:** CC BY-SA 4.0
+- **Attribution:** Required: Charlie fong, CC BY-SA 4.0, via Wikimedia Commons (given in slide caption/credit).
+
+## `HIST270_ch01_lec3_10_act2_herrmann_zhou_map_revFA26.webp`
+- **Used on:** slide M
+- **Description:** "The Chou Dynasty, 11th–9th Centuries B.C." "according to G. Haloun and others", a map of the Western Zhou Kingdom with its divisions marked as they were understood in the 1930s. The realm's borders near the beginning and end of the period are noted. Historical river courses and coastlines used, with the 1935 coast provided as a dotted line. The kingdoms of "Kou-Wu" (i.e. Gouwu, Suzhou) and "Yu:-Y
+- **Source website / URL:** Wikimedia Commons, [File:Chou Dynasty, 11th-9th Centuries BC.jpg](https://commons.wikimedia.org/wiki/File:Chou_Dynasty,_11th-9th_Centuries_BC.jpg)
+- **Creator / date:** Albert Herrmann & Georg Westermann; 1935
+- **License:** Public domain
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec3_11_zhou_delegated_rule_map_revFA26.webp`
+- **Used on:** slide O
+- **Source:** converted to WebP from the previous deck image `ch01_lec3_zhou_map.jpg` (course-made map on Uwe Dedering’s relief base map, CC BY-SA 3.0); see its existing `ch01_lec3_…` entry earlier in this file.
+
+## `HIST270_ch01_lec3_12_song_ding_revFA26.webp`
+- **Used on:** slide P
+- **Description:** Bronze gallery, Palace Museum, Taipei, Taiwan. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Bronze Ding of Song, Late Western Zhou, 9th C. to 771 BC 1a.jpg](https://commons.wikimedia.org/wiki/File:Bronze_Ding_of_Song,_Late_Western_Zhou,_9th_C._to_771_BC_1a.jpg)
+- **Creator / date:** Gary Todd; 2017-12-08 09:53:06
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec3_13_cowrie_shells_revFA26.webp`
+- **Used on:** slide Q
+- **Description:** Shanghai Museum Coin Gallery. Complete indexed photo collection at www.WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Cowrie Shells Used as Currency.jpg](https://commons.wikimedia.org/wiki/File:Cowrie_Shells_Used_as_Currency.jpg)
+- **Creator / date:** Gary Todd; 2008-08-23 14:08:36
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec3_14_zheng_square_hu_revFA26.webp`
+- **Used on:** slide R
+- **Description:** This type of hu pots often appear in a pair. Two pairs of hu were found at the Li-chia-lou Tomb in Hsin-cheng City, namely Square Hu Pots with Coiled Dargon Pattern, and Square Hu Pots with Crane and Lotus Pattern; this object belongs to the former. The hu is finely made with vivid characteristics. On the top is a hollow carving of coiled serpents, and its handles are both shaped into a coiled dra
+- **Source website / URL:** Wikimedia Commons, [File:李家樓大墓出土蟠龍方壺（局部）.jpg](https://commons.wikimedia.org/wiki/File:%E6%9D%8E%E5%AE%B6%E6%A8%93%E5%A4%A7%E5%A2%93%E5%87%BA%E5%9C%9F%E8%9F%A0%E9%BE%8D%E6%96%B9%E5%A3%BA%EF%BC%88%E5%B1%80%E9%83%A8%EF%BC%89.jpg)
+- **Creator / date:** 氏子; 2023-11-12 14:30:20
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec3_15_jin_marquis_ding_revFA26.webp`
+- **Used on:** slide S
+- **Description:** Tomb 64, Jin State. Shanxi Provincial Museum, Taiyuan. Complete indexed photo collection at www.WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Western Zhou Bronze Ding of Marquis Bang Fu.jpg](https://commons.wikimedia.org/wiki/File:Western_Zhou_Bronze_Ding_of_Marquis_Bang_Fu.jpg)
+- **Creator / date:** Gary Todd; 2013-03-07 14:42:10
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec3_16_fangyi_lid_187_characters_revFA26.webp`
+- **Used on:** slide T
+- **Description:** Early Western Zhou Bronze Fangyi with Lid with 187 Characters, Luoyang
+- **Source website / URL:** Wikimedia Commons, [File:11th-10th Cent. BC Early Western Zhou Bronze Fangyi Lid with 187 Characters, Luoyang 01b.jpg](https://commons.wikimedia.org/wiki/File:11th-10th_Cent._BC_Early_Western_Zhou_Bronze_Fangyi_Lid_with_187_Characters,_Luoyang_01b.jpg)
+- **Creator / date:** Gary Todd; 2011-07-21
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec3_17_act3_zhou_gui_pedestal_revFA26.webp`
+- **Used on:** slide V
+- **Description:** Freer-Sackler Galleries, Smithsonian Institution, Washington, D.C. Complete indexed photo collection at WorldHistoryPics.com. F1938.20
+- **Source website / URL:** Wikimedia Commons, [File:Western Zhou Bronze Gui on Pedestal, Henan, c. 1000 BC (10433670934).jpg](https://commons.wikimedia.org/wiki/File:Western_Zhou_Bronze_Gui_on_Pedestal,_Henan,_c._1000_BC_(10433670934).jpg)
+- **Creator / date:** Gary Todd from Xinzheng, China; 2009-07-13 22:29
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec3_18_shang_style_fangding_revFA26.webp`
+- **Used on:** slide W
+- **Description:** Bronze gallery, Palace Museum, Taipei, Taiwan. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Bronze Ding, Late Shang-Early Western Zhou, 11th C. BC.jpg](https://commons.wikimedia.org/wiki/File:Bronze_Ding,_Late_Shang-Early_Western_Zhou,_11th_C._BC.jpg)
+- **Creator / date:** Gary Todd; 2017-12-08 09:49:21
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec3_19_zhou_oracle_bones_zhouyuan_revFA26.webp`
+- **Used on:** slide X
+- **Description:** Inscribed oracle bones, Western Zhou dynasty (c. 1046 BC – 771 BC), in the Baoji Zhouyuan Museum. Left (Hebu 293): collected from Famen town, Fufeng county, Shaanxi province Right (Hebu 297): unearthed from Qijia hamlet, Fufeng county, Shaanxi province
+- **Source website / URL:** Wikimedia Commons, [File:陕西扶风-西周卜骨-西周-宝鸡周原博物院.jpg](https://commons.wikimedia.org/wiki/File:%E9%99%95%E8%A5%BF%E6%89%B6%E9%A3%8E-%E8%A5%BF%E5%91%A8%E5%8D%9C%E9%AA%A8-%E8%A5%BF%E5%91%A8-%E5%AE%9D%E9%B8%A1%E5%91%A8%E5%8E%9F%E5%8D%9A%E7%89%A9%E9%99%A2.jpg)
+- **Creator / date:** Kcx36; 2023-07-02 17:43:09
+- **License:** CC BY-SA 4.0
+- **Attribution:** Required: Kcx36, CC BY-SA 4.0, via Wikimedia Commons (given in slide caption/credit).
+
+## `HIST270_ch01_lec3_20_act4_odes_of_bin_landscape_revFA26.webp`
+- **Used on:** slide Z
+- **Description:** China; Handscroll; Paintings
+- **Source website / URL:** Wikimedia Commons, [File:南宋 馬和之 詩經豳風圖 卷-Odes of the State of Bin MET DP213064.jpg](https://commons.wikimedia.org/wiki/File:%E5%8D%97%E5%AE%8B_%E9%A6%AC%E5%92%8C%E4%B9%8B_%E8%A9%A9%E7%B6%93%E8%B1%B3%E9%A2%A8%E5%9C%96_%E5%8D%B7-Odes_of_the_State_of_Bin_MET_DP213064.jpg)
+- **Creator / date:** Ma Hezhi; mid-12th century
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec3_21_wild_geese_odes_revFA26.webp`
+- **Used on:** slide AB
+- **Description:** China; Handscroll; Paintings
+- **Source website / URL:** Wikimedia Commons, [File:南宋 馬和之 詩經小雅鴻雁之什六篇圖 卷-Courtly Odes, Beginning with "Wild Geese" MET DP147758.jpg](https://commons.wikimedia.org/wiki/File:%E5%8D%97%E5%AE%8B_%E9%A6%AC%E5%92%8C%E4%B9%8B_%E8%A9%A9%E7%B6%93%E5%B0%8F%E9%9B%85%E9%B4%BB%E9%9B%81%E4%B9%8B%E4%BB%80%E5%85%AD%E7%AF%87%E5%9C%96_%E5%8D%B7-Courtly_Odes,_Beginning_with_%22Wild_Geese%22_MET_DP147758.jpg)
+- **Creator / date:** Ma Hezhi; 12th centurydate QS:P571,+1150-00-00T00:00:00Z/7
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec3_22_zhou_chariot_pit_xian_revFA26.webp`
+- **Used on:** slide AC
+- **Description:** Chang'an District, Xi'an. Shaanxi Provincial Museum, Xi'an, Western Zhou Gallery. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Western Zhou Chariot Pit, Replica (9929142366).jpg](https://commons.wikimedia.org/wiki/File:Western_Zhou_Chariot_Pit,_Replica_(9929142366).jpg)
+- **Creator / date:** Gary Todd from Xinzheng, China; 2009-01-01 00:00
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec3_23_seventh_month_farm_feast_revFA26.webp`
+- **Used on:** slide AD
+- **Description:** China; Handscroll; Paintings
+- **Source website / URL:** Wikimedia Commons, [File:南宋 馬和之 詩經豳風圖 卷-Odes of the State of Bin MET DP213065.jpg](https://commons.wikimedia.org/wiki/File:%E5%8D%97%E5%AE%8B_%E9%A6%AC%E5%92%8C%E4%B9%8B_%E8%A9%A9%E7%B6%93%E8%B1%B3%E9%A2%A8%E5%9C%96_%E5%8D%B7-Odes_of_the_State_of_Bin_MET_DP213065.jpg)
+- **Creator / date:** Ma Hezhi; mid-12th century
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec3_24_jade_zhang_spindle_whorl_revFA26.webp`
+- **Used on:** slide AE
+- **Description:** Shaanxi Provincial Museum, Xi'an, Western Zhou Gallery. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Western Zhou Green Jade Zhang (9928850453).jpg](https://commons.wikimedia.org/wiki/File:Western_Zhou_Green_Jade_Zhang_(9928850453).jpg)
+- **Creator / date:** Gary Todd from Xinzheng, China; 2009-01-01 00:00
+- **License:** CC0
+- **Attribution:** None required.
+- **Description:** Xi'an City Museum. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Western Zhou Stone Spinning Wheel (9923337814).jpg](https://commons.wikimedia.org/wiki/File:Western_Zhou_Stone_Spinning_Wheel_(9923337814).jpg)
+- **Creator / date:** Gary Todd from Xinzheng, China; 2011-10-04 09:38
+- **License:** CC0
+- **Attribution:** None required.
+- **Note:** composite or crop made for the course from the sources above.
+
+## `HIST270_ch01_lec3_25_shi_qiang_pan_zhuangbai_revFA26.webp`
+- **Used on:** slide AG
+- **Description:** ​史墙盘 西周（约前1046一前771年）共王时期 陕西宝鸡扶风县庄白村出土 宝鸡周原博物院藏 史墙盘为国家一级文物，中国首批禁止出境文物。盘型巨大，腹和圈足分别饰凤纹和兽体卷曲纹，雷纹填地，圈足有折边。底部铸有铭文284字，铭文前段颂扬西周文、武、成、康、昭、穆、共（恭）七代周王的功绩，后段记叙微氏家族高祖、烈祖、乙祖、亚祖、文考和做本盘者自身六代的事迹。墙盘所记述的周王政绩与司马迁的《史记·周本纪》中的内容非常吻合，关于微氏家族发展史部分的内容则并不曾见于已知的文献，填补了西周国史微子家族的一段空白，属于重要的历史资料。 Qiang Basin King Gong Era, Western Zhou Dynasty Unearthed from Fufeng County, Baoji City, Shaanxi Province Baoji Zhouyuan Museum
+- **Source website / URL:** Wikimedia Commons, [File:陕西宝鸡扶风县庄白村-史墙盘-西周-宝鸡周原博物院 01.jpg](https://commons.wikimedia.org/wiki/File:%E9%99%95%E8%A5%BF%E5%AE%9D%E9%B8%A1%E6%89%B6%E9%A3%8E%E5%8E%BF%E5%BA%84%E7%99%BD%E6%9D%91-%E5%8F%B2%E5%A2%99%E7%9B%98-%E8%A5%BF%E5%91%A8-%E5%AE%9D%E9%B8%A1%E5%91%A8%E5%8E%9F%E5%8D%9A%E7%89%A9%E9%99%A2_01.jpg)
+- **Creator / date:** Kcx36; 2023-07-02 17:47:28
+- **License:** CC BY-SA 4.0
+- **Attribution:** Required: Kcx36, CC BY-SA 4.0, via Wikimedia Commons (given in slide caption/credit).
+
+## `HIST270_ch01_lec3_26_yan_ox_head_li_revFA26.webp`
+- **Used on:** slide AH
+- **Description:** Site of Yan capital near Beijing. Capital Museum: 2011 visit. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Western Zhou Bronze Ox-head Li 02.jpg](https://commons.wikimedia.org/wiki/File:Western_Zhou_Bronze_Ox-head_Li_02.jpg)
+- **Creator / date:** Gary Todd; 2011-04-09 16:20:28
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec3_27_luoyang_six_horse_chariot_revFA26.webp`
+- **Used on:** slide AI
+- **Description:** Eastern Zhou Chariot Burial and Museum, Luoyang, Henan. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Eastern Zhou Royal Six-horse Chariot Burial, Luoyang 01.jpg](https://commons.wikimedia.org/wiki/File:Eastern_Zhou_Royal_Six-horse_Chariot_Burial,_Luoyang_01.jpg)
+- **Creator / date:** Gary Todd; 2007-04-21 17:38:40
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec3_ps_28_bao_si_qing_print_revFA26.webp`
+- **Used on:** slide AK
+- **Description:** Bao Si, from the 18th century work Hundred Poems of Beautiful Women (Bai Mei Xin Yong Tu Zhuan 百美新詠圖傳) by Yan Xiyuan (颜希源). Woodblock print of drawing by Wang Hui 王翙
+- **Source website / URL:** Wikimedia Commons, [File:Bao Si - Bai Mei Xin Yong.JPG](https://commons.wikimedia.org/wiki/File:Bao_Si_-_Bai_Mei_Xin_Yong.JPG)
+- **Creator / date:** Wang Hui 王翙 (1736-1795); 18th centurydate QS:P,+1750-00-00T00:00:00Z/7
+- **License:** Public domain
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec3_ps_29_yellow_bird_ode_revFA26.webp`
+- **Used on:** slide AL
+- **Description:** China; Handscroll; Paintings
+- **Source website / URL:** Wikimedia Commons, [File:南宋 馬和之 詩經小雅鴻雁之什六篇圖 卷-Courtly Odes, Beginning with "Wild Geese" MET DP147761.jpg](https://commons.wikimedia.org/wiki/File:%E5%8D%97%E5%AE%8B_%E9%A6%AC%E5%92%8C%E4%B9%8B_%E8%A9%A9%E7%B6%93%E5%B0%8F%E9%9B%85%E9%B4%BB%E9%9B%81%E4%B9%8B%E4%BB%80%E5%85%AD%E7%AF%87%E5%9C%96_%E5%8D%B7-Courtly_Odes,_Beginning_with_%22Wild_Geese%22_MET_DP147761.jpg)
+- **Creator / date:** Ma Hezhi; 12th centurydate QS:P571,+1150-00-00T00:00:00Z/7
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch01_lec3_ps_30_guo_ji_ding_set_revFA26.webp`
+- **Used on:** slide AM
+- **Description:** Bronze Ding Set, Gui Set, and Li with Inscriptions of Guo Ji, Western Zhou Dynasty, unearthed at Tomb M2001 of Guo Tombs, collection of Henan Museum
+- **Source website / URL:** Wikimedia Commons, [File:20260408 Bronze Ding Set, Gui Set, and Li with Inscriptions of Guo Ji.jpg](https://commons.wikimedia.org/wiki/File:20260408_Bronze_Ding_Set,_Gui_Set,_and_Li_with_Inscriptions_of_Guo_Ji.jpg)
+- **Creator / date:** Windmemories; 2026-04-08 16:21:36
+- **License:** CC BY-SA 4.0
+- **Attribution:** Required: Windmemories, CC BY-SA 4.0, via Wikimedia Commons (given in slide caption/credit).
