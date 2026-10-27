@@ -1912,7 +1912,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch24_lec1_title.jpg`
+## `ch24_lec1_title.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 24 decks; removed from the repo with them in commit 9bfcc3b (2026-10-26). Untracked archive copy in `reveal_decks/chapter-24/archive/su26-retired-images/`.
 - **Requested description:** 1911 Revolution China photograph.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -1923,7 +1924,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course title graphic created after no additional licensed image was selected.
 
-## `ch24_lec2_title.jpg`
+## `ch24_lec2_title.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 24 decks; removed from the repo with them in commit 9bfcc3b (2026-10-26). Untracked archive copy in `reveal_decks/chapter-24/archive/su26-retired-images/`.
 - **Requested description:** China warlord era soldiers photograph.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -1934,7 +1936,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course title graphic created after no additional licensed image was selected.
 
-## `ch24_lec2_q5_1.jpg`
+## `ch24_lec2_q5_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 24 decks; removed from the repo with them in commit 9bfcc3b (2026-10-26). Untracked archive copy in `reveal_decks/chapter-24/archive/su26-retired-images/`.
 - **Requested description:** Chinese warlord era map.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -1945,7 +1948,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch24_lec2_q6_1.jpg`
+## `ch24_lec2_q6_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 24 decks; removed from the repo with them in commit 9bfcc3b (2026-10-26). Untracked archive copy in `reveal_decks/chapter-24/archive/su26-retired-images/`.
 - **Requested description:** New Youth magazine Chen Duxiu.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -1956,7 +1960,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch24_lec2_q8_1.jpg`
+## `ch24_lec2_q8_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 24 decks; removed from the repo with them in commit 9bfcc3b (2026-10-26). Untracked archive copy in `reveal_decks/chapter-24/archive/su26-retired-images/`.
 - **Requested description:** Shanghai factories 1920 photograph.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -1967,7 +1972,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch24_lec3_title.jpg`
+## `ch24_lec3_title.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 24 decks; removed from the repo with them in commit 9bfcc3b (2026-10-26). Untracked archive copy in `reveal_decks/chapter-24/archive/su26-retired-images/`.
 - **Requested description:** May Fourth Movement protest photograph.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -1978,7 +1984,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course title graphic created after no additional licensed image was selected.
 
-## `ch24_lec3_q10_1.jpg`
+## `ch24_lec3_q10_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 24 decks; removed from the repo with them in commit 9bfcc3b (2026-10-26). Untracked archive copy in `reveal_decks/chapter-24/archive/su26-retired-images/`.
 - **Requested description:** Chinese women students 1920 photograph.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -1989,7 +1996,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch24_lec3_q10_2.jpg`
+## `ch24_lec3_q10_2.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 24 decks; removed from the repo with them in commit 9bfcc3b (2026-10-26). Untracked archive copy in `reveal_decks/chapter-24/archive/su26-retired-images/`.
 - **Requested description:** A historically appropriate artifact, map, site, person, document, or diagram that clarifies interpretive stakes and teaching cautions..
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2000,7 +2008,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch24_lec3_q11_1.jpg`
+## `ch24_lec3_q11_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 24 decks; removed from the repo with them in commit 9bfcc3b (2026-10-26). Untracked archive copy in `reveal_decks/chapter-24/archive/su26-retired-images/`.
 - **Requested description:** Northern Expedition map China.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2011,7 +2020,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch24_lec3_q11_2.jpg`
+## `ch24_lec3_q11_2.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 24 decks; removed from the repo with them in commit 9bfcc3b (2026-10-26). Untracked archive copy in `reveal_decks/chapter-24/archive/su26-retired-images/`.
 - **Requested description:** A historically appropriate artifact, map, site, person, document, or diagram that clarifies interpretive stakes and teaching cautions..
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2664,16 +2674,19 @@ None. All nine manifest items now have selected images and documented reuse term
   **Candidate URL:** https://commons.wikimedia.org/w/index.php?search=First%20Sino%20Japanese%20War%20painting%20treaty&title=Special:MediaSearch&type=image
 
 - **Requested filename:** `ch24_lec1_title.jpg`
+  **Status:** Retired. Used only by the three SU26 Ch. 24 decks; removed from the repo with them in commit 9bfcc3b (2026-10-26). Untracked archive copy in `reveal_decks/chapter-24/archive/su26-retired-images/`.
   **Manifest description/search:** 1911 Revolution China photograph
   **Why not selected:** No relevant clearly licensed Commons raster result met the stricter title check.
   **Candidate URL:** https://commons.wikimedia.org/w/index.php?search=1911%20Revolution%20China%20photograph&title=Special:MediaSearch&type=image
 
 - **Requested filename:** `ch24_lec2_title.jpg`
+  **Status:** Retired. Used only by the three SU26 Ch. 24 decks; removed from the repo with them in commit 9bfcc3b (2026-10-26). Untracked archive copy in `reveal_decks/chapter-24/archive/su26-retired-images/`.
   **Manifest description/search:** China warlord era soldiers photograph
   **Why not selected:** No relevant clearly licensed Commons raster result met the stricter title check.
   **Candidate URL:** https://commons.wikimedia.org/w/index.php?search=China%20warlord%20era%20soldiers%20photograph&title=Special:MediaSearch&type=image
 
 - **Requested filename:** `ch24_lec2_q5_1.jpg`
+  **Status:** Retired. Used only by the three SU26 Ch. 24 decks; removed from the repo with them in commit 9bfcc3b (2026-10-26). Untracked archive copy in `reveal_decks/chapter-24/archive/su26-retired-images/`.
   **Manifest description/search:** Chinese warlord era map
   **Why not selected:** No relevant clearly licensed Commons raster result met the stricter title check.
   **Candidate URL:** https://commons.wikimedia.org/w/index.php?search=Chinese%20warlord%20era%20map&title=Special:MediaSearch&type=image
@@ -3010,7 +3023,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **License/status:** Original course material.
 - **Notes:** Replaced an earlier automated match during contact-sheet review because the source image was misleading, anachronistic, too small, or insufficiently relevant.
 
-## `ch24_lec3_q9_1.jpg` - corrected
+## `ch24_lec3_q9_1.jpg` - corrected - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 24 decks; removed from the repo with them in commit 9bfcc3b (2026-10-26). Untracked archive copy in `reveal_decks/chapter-24/archive/su26-retired-images/`.
 - **Requested description:** The May Fourth Movement and student mobilization.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -3062,7 +3076,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Rebuilt during final provenance reconciliation as a source-independent interpretation card.
 
-## `ch24_lec3_q9_2.jpg`
+## `ch24_lec3_q9_2.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 24 decks; removed from the repo with them in commit 9bfcc3b (2026-10-26). Untracked archive copy in `reveal_decks/chapter-24/archive/su26-retired-images/`.
 - **Requested description:** The May Fourth Movement: interpretive cautions.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -3239,7 +3254,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** Wu Youru, Public domain, via Wikimedia Commons.
 - **Notes:** Source record recovered by perceptually matching the cached original download to the licensed Commons search results. Match distance: 134.
 
-## `ch24_lec1_q1_1.jpg`
+## `ch24_lec1_q1_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 24 decks; removed from the repo with them in commit 9bfcc3b (2026-10-26). Untracked archive copy in `reveal_decks/chapter-24/archive/su26-retired-images/`.
 - **Requested description:** Qing New Army 1911 photograph.
 - **Source website:** Wikimedia Commons.
 - **Direct source URL:** https://commons.wikimedia.org/wiki/File:Qing_New_army_officers_and_soldiers_1911.jpg
@@ -3250,7 +3266,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** Unknown author Unknown author, Public domain, via Wikimedia Commons.
 - **Notes:** Source record recovered by perceptually matching the cached original download to the licensed Commons search results. Match distance: 0.
 
-## `ch24_lec1_q2_1.jpg`
+## `ch24_lec1_q2_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 24 decks; removed from the repo with them in commit 9bfcc3b (2026-10-26). Untracked archive copy in `reveal_decks/chapter-24/archive/su26-retired-images/`.
 - **Requested description:** Liang Qichao portrait.
 - **Source website:** Wikimedia Commons.
 - **Direct source URL:** https://commons.wikimedia.org/wiki/File:Liang_Qichao_portrait.jpg
@@ -3261,7 +3278,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** Unknown author Unknown author, Public domain, via Wikimedia Commons.
 - **Notes:** Source record recovered by perceptually matching the cached original download to the licensed Commons search results. Match distance: 0.
 
-## `ch24_lec1_q3_1.jpg`
+## `ch24_lec1_q3_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 24 decks; removed from the repo with them in commit 9bfcc3b (2026-10-26). Untracked archive copy in `reveal_decks/chapter-24/archive/su26-retired-images/`.
 - **Requested description:** Sun Yat-sen portrait.
 - **Source website:** Wikimedia Commons.
 - **Direct source URL:** https://commons.wikimedia.org/wiki/File:Sun_Yat-sen_2.jpg
@@ -3272,7 +3290,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** Not identified in source metadata, Public domain, via Wikimedia Commons.
 - **Notes:** Source record recovered by perceptually matching the cached original download to the licensed Commons search results. Match distance: 0.
 
-## `ch24_lec1_q4_1.jpg`
+## `ch24_lec1_q4_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 24 decks; removed from the repo with them in commit 9bfcc3b (2026-10-26). Untracked archive copy in `reveal_decks/chapter-24/archive/su26-retired-images/`.
 - **Requested description:** Yuan Shikai portrait.
 - **Source website:** Wikimedia Commons.
 - **Direct source URL:** https://commons.wikimedia.org/wiki/File:Chinese_republic_forever.jpg
@@ -3283,7 +3302,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** Unknown author Unknown author, Public domain, via Wikimedia Commons.
 - **Notes:** Source record recovered by perceptually matching the cached original download to the licensed Commons search results. Match distance: 125.
 
-## `ch24_lec2_q7_1.jpg`
+## `ch24_lec2_q7_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 24 decks; removed from the repo with them in commit 9bfcc3b (2026-10-26). Untracked archive copy in `reveal_decks/chapter-24/archive/su26-retired-images/`.
 - **Requested description:** Lu Xun portrait.
 - **Source website:** Wikimedia Commons.
 - **Direct source URL:** https://commons.wikimedia.org/wiki/File:LuXun1930.jpg
