@@ -1037,3 +1037,16 @@ Files live in `reveal_decks/chapter-01/images/ch01-lec3/`. Deck: `HIST270_ch01_l
 - **Creator / date:** Windmemories; 2026-04-08 16:21:36
 - **License:** CC BY-SA 4.0
 - **Attribution:** Required: Windmemories, CC BY-SA 4.0, via Wikimedia Commons (given in slide caption/credit).
+
+# Chapter 27 Lecture 2 (FA26): AI-generated illustrations
+
+Files live in `reveal_decks/chapter-27/images/ch27-lec2/`. Deck: `HIST270_ch27_lec2_surpass_britain_revFA26.html`. Slide letters are permanent IDs. Every other image in this deck is a real historical photograph or poster (or a modern photograph), credited and linked to Wikimedia Commons in its slide caption.
+
+## `26-flowers-wall-posters-ai.webp`
+
+- **Used on:** Ch27 Lec2 FA26 deck, slide g (flowers-bloom), added 2026-10-27.
+- **Description:** Students in caps and cotton jackets read and copy handwritten wall posters along a brick wall on a Beijing campus, May 1957.
+- **Source:** AI-generated illustration, approved by Steven Austin, 2026-10-27. Not a historical source.
+- **License/status:** Course illustration (AI-generated).
+- **Attribution:** Labeled on the slide as "AI-generated illustration made for this deck … An interpretation, not a historical source," and listed on the sources slide (jj).
+- **Notes:** The characters on the posters are invented and are not real writing. Converted to WebP (1152 x 864, quality 84).
