@@ -2032,7 +2032,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch25_lec1_title.jpg`
+## `ch25_lec1_title.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 25 decks; removed from the repo with them in commit e1367fb (2026-10-26). Untracked archive copy in `reveal_decks/chapter-25/archive/su26-retired-images/`.
 - **Requested description:** Chinese Communist peasant army photograph.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2043,7 +2044,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course title graphic created after no additional licensed image was selected.
 
-## `ch25_lec1_q1_1.jpg`
+## `ch25_lec1_q1_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 25 decks; removed from the repo with them in commit e1367fb (2026-10-26). Untracked archive copy in `reveal_decks/chapter-25/archive/su26-retired-images/`.
 - **Requested description:** Chinese Communist Party Comintern 1920 photograph.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2054,7 +2056,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch25_lec1_q1_2.jpg`
+## `ch25_lec1_q1_2.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 25 decks; removed from the repo with them in commit e1367fb (2026-10-26). Untracked archive copy in `reveal_decks/chapter-25/archive/su26-retired-images/`.
 - **Requested description:** A historically appropriate artifact, map, site, person, document, or diagram that clarifies interpretive stakes and teaching cautions..
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2065,7 +2068,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch25_lec1_q2_1.jpg`
+## `ch25_lec1_q2_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 25 decks; removed from the repo with them in commit e1367fb (2026-10-26). Untracked archive copy in `reveal_decks/chapter-25/archive/su26-retired-images/`.
 - **Requested description:** Mao Zedong Hunan peasant movement.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2076,7 +2080,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch25_lec1_q2_2.jpg`
+## `ch25_lec1_q2_2.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 25 decks; removed from the repo with them in commit e1367fb (2026-10-26). Untracked archive copy in `reveal_decks/chapter-25/archive/su26-retired-images/`.
 - **Requested description:** A historically appropriate artifact, map, site, person, document, or diagram that clarifies interpretive stakes and teaching cautions..
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2087,7 +2092,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch25_lec1_q6_1.jpg`
+## `ch25_lec1_q6_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 25 decks; removed from the repo with them in commit e1367fb (2026-10-26). Untracked archive copy in `reveal_decks/chapter-25/archive/su26-retired-images/`.
 - **Requested description:** Long March map China.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2098,7 +2104,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch25_lec1_q6_2.jpg`
+## `ch25_lec1_q6_2.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 25 decks; removed from the repo with them in commit e1367fb (2026-10-26). Untracked archive copy in `reveal_decks/chapter-25/archive/su26-retired-images/`.
 - **Requested description:** A historically appropriate artifact, map, site, person, document, or diagram that clarifies interpretive stakes and teaching cautions..
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2109,7 +2116,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch25_lec2_q3_1.jpg`
+## `ch25_lec2_q3_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 25 decks; removed from the repo with them in commit e1367fb (2026-10-26). Untracked archive copy in `reveal_decks/chapter-25/archive/su26-retired-images/`.
 - **Requested description:** Nanjing Nationalist government photograph.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2120,7 +2128,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch25_lec2_q4_1.jpg`
+## `ch25_lec2_q4_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 25 decks; removed from the repo with them in commit e1367fb (2026-10-26). Untracked archive copy in `reveal_decks/chapter-25/archive/su26-retired-images/`.
 - **Requested description:** Chiang Kai-shek 1927 photograph.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2131,7 +2140,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch25_lec2_q5_1.jpg`
+## `ch25_lec2_q5_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 25 decks; removed from the repo with them in commit e1367fb (2026-10-26). Untracked archive copy in `reveal_decks/chapter-25/archive/su26-retired-images/`.
 - **Requested description:** Shanghai 1930 street photograph.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2142,7 +2152,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch25_lec2_q11_1.jpg`
+## `ch25_lec2_q11_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 25 decks; removed from the repo with them in commit e1367fb (2026-10-26). Untracked archive copy in `reveal_decks/chapter-25/archive/su26-retired-images/`.
 - **Requested description:** Chinese women qipao 1930 photograph.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2153,7 +2164,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch25_lec3_title.jpg`
+## `ch25_lec3_title.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 25 decks; removed from the repo with them in commit e1367fb (2026-10-26). Untracked archive copy in `reveal_decks/chapter-25/archive/su26-retired-images/`.
 - **Requested description:** Chinese war against Japan photograph.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2164,7 +2176,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course title graphic created after no additional licensed image was selected.
 
-## `ch25_lec3_q7_1.jpg`
+## `ch25_lec3_q7_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 25 decks; removed from the repo with them in commit e1367fb (2026-10-26). Untracked archive copy in `reveal_decks/chapter-25/archive/su26-retired-images/`.
 - **Requested description:** Second United Front China 1937 photograph.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2175,7 +2188,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch25_lec3_q8_1.jpg`
+## `ch25_lec3_q8_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 25 decks; removed from the repo with them in commit e1367fb (2026-10-26). Untracked archive copy in `reveal_decks/chapter-25/archive/su26-retired-images/`.
 - **Requested description:** Chongqing bombing photograph.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2186,7 +2200,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch25_lec3_q9_1.jpg`
+## `ch25_lec3_q9_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 25 decks; removed from the repo with them in commit e1367fb (2026-10-26). Untracked archive copy in `reveal_decks/chapter-25/archive/su26-retired-images/`.
 - **Requested description:** Mao Zedong Yan'an photograph.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2197,7 +2212,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch25_lec3_q10_1.jpg`
+## `ch25_lec3_q10_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 25 decks; removed from the repo with them in commit e1367fb (2026-10-26). Untracked archive copy in `reveal_decks/chapter-25/archive/su26-retired-images/`.
 - **Requested description:** Chinese Civil War map 1949.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2692,6 +2708,7 @@ None. All nine manifest items now have selected images and documented reuse term
   **Candidate URL:** https://commons.wikimedia.org/w/index.php?search=Chinese%20warlord%20era%20map&title=Special:MediaSearch&type=image
 
 - **Requested filename:** `ch25_lec3_q9_1.jpg`
+  **Status:** Retired. Used only by the three SU26 Ch. 25 decks; removed from the repo with them in commit e1367fb (2026-10-26). Untracked archive copy in `reveal_decks/chapter-25/archive/su26-retired-images/`.
   **Manifest description/search:** Mao Zedong Yan'an photograph
   **Why not selected:** No relevant clearly licensed Commons raster result met the stricter title check.
   **Candidate URL:** https://commons.wikimedia.org/w/index.php?search=Mao%20Zedong%20Yan%27an%20photograph&title=Special:MediaSearch&type=image
@@ -3314,7 +3331,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** Unknown author Unknown author, Public domain, via Wikimedia Commons.
 - **Notes:** Source record recovered by perceptually matching the cached original download to the licensed Commons search results. Match distance: 0.
 
-## `ch25_lec2_title.jpg`
+## `ch25_lec2_title.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 25 decks; removed from the repo with them in commit e1367fb (2026-10-26). Untracked archive copy in `reveal_decks/chapter-25/archive/su26-retired-images/`.
 - **Requested description:** Shanghai Bund 1930 photograph.
 - **Source website:** Wikimedia Commons.
 - **Direct source URL:** https://commons.wikimedia.org/wiki/File:1930s_shanghai_city.jpg
