@@ -1050,3 +1050,25 @@ Files live in `reveal_decks/chapter-27/images/ch27-lec2/`. Deck: `HIST270_ch27_l
 - **License/status:** Course illustration (AI-generated).
 - **Attribution:** Labeled on the slide as "AI-generated illustration made for this deck … An interpretation, not a historical source," and listed on the sources slide (jj).
 - **Notes:** The characters on the posters are invented and are not real writing. Converted to WebP (1152 x 864, quality 84).
+
+# Chapter 27 Lecture 3 (FA26): AI-generated illustrations
+
+Files live in `reveal_decks/chapter-27/images/ch27-lec3/`. Deck: `HIST270_ch27_lec3_to_rebel_is_justified_revFA26.html`. Slide letters are permanent IDs. Every other image in this deck is a real historical photograph or painting, credited and linked to Wikimedia Commons in its slide caption.
+
+## `34-qingming-1976-wreaths-ai.webp`
+
+- **Used on:** Ch27 Lec3 FA26 deck, slide x (zhou-dies), added 2026-10-27.
+- **Description:** A crowd in blue and grey jackets lays white paper-chrysanthemum wreaths for Zhou Enlai at the base of the Monument to the People's Heroes, Tiananmen Square, April 1976.
+- **Source:** AI-generated illustration, approved by Steven Austin, 2026-10-27. Not a historical source.
+- **License/status:** Course illustration (AI-generated).
+- **Attribution:** Labeled on the slide as "AI-generated illustration made for this deck … An interpretation, not a historical source," and listed on the sources slide (kk).
+- **Notes:** The carvings and inscription panels on the monument are invented and are not real writing or the real reliefs; the slide caption says so. Converted to WebP (1152 x 864, quality 84).
+
+## `35-mourning-mao-1976-workers-ai.webp`
+
+- **Used on:** Ch27 Lec3 FA26 deck, slide z (mao-dies), added 2026-10-27.
+- **Description:** Factory workers stand in a row by their machines with heads bowed, wearing black armbands and white paper flowers, in mourning for Mao, September 1976.
+- **Source:** AI-generated illustration, approved by Steven Austin, 2026-10-27. Not a historical source.
+- **License/status:** Course illustration (AI-generated).
+- **Attribution:** Labeled on the slide as "AI-generated illustration made for this deck … An interpretation, not a historical source," and listed on the sources slide (kk).
+- **Notes:** No text or portraits in the image. Converted to WebP (1152 x 864, quality 84).

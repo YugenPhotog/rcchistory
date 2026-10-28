@@ -2224,7 +2224,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch27_lec1_title.jpg`
+## `ch27_lec1_title.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 27 decks; removed from the repo with them (2026-10-27), superseded by the three FA26 Ch. 27 decks. Archive copy kept outside the repo in `/workspace/ch27/archive/su26-retired-images/` on the build box.
 - **Requested description:** Mao proclaims People's Republic 1949 photograph.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2235,7 +2236,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course title graphic created after no additional licensed image was selected.
 
-## `ch27_lec1_q1_1.jpg`
+## `ch27_lec1_q1_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 27 decks; removed from the repo with them (2026-10-27), superseded by the three FA26 Ch. 27 decks. Archive copy kept outside the repo in `/workspace/ch27/archive/su26-retired-images/` on the build box.
 - **Requested description:** Founding ceremony People's Republic China 1949.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2246,7 +2248,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch27_lec1_q2_1.jpg`
+## `ch27_lec1_q2_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 27 decks; removed from the repo with them (2026-10-27), superseded by the three FA26 Ch. 27 decks. Archive copy kept outside the repo in `/workspace/ch27/archive/su26-retired-images/` on the build box.
 - **Requested description:** danwei work unit China housing photograph.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2257,7 +2260,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch27_lec1_q3_1.jpg`
+## `ch27_lec1_q3_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 27 decks; removed from the repo with them (2026-10-27), superseded by the three FA26 Ch. 27 decks. Archive copy kept outside the repo in `/workspace/ch27/archive/su26-retired-images/` on the build box.
 - **Requested description:** Chinese People's Volunteers Korean War photograph.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2268,7 +2272,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch27_lec1_q4_1.jpg`
+## `ch27_lec1_q4_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 27 decks; removed from the repo with them (2026-10-27), superseded by the three FA26 Ch. 27 decks. Archive copy kept outside the repo in `/workspace/ch27/archive/su26-retired-images/` on the build box.
 - **Requested description:** Chinese agricultural collective commune photograph.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2279,7 +2284,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch27_lec1_q5_1.jpg`
+## `ch27_lec1_q5_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 27 decks; removed from the repo with them (2026-10-27), superseded by the three FA26 Ch. 27 decks. Archive copy kept outside the repo in `/workspace/ch27/archive/su26-retired-images/` on the build box.
 - **Requested description:** China ethnic minority propaganda poster.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2290,7 +2296,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch27_lec2_title.jpg`
+## `ch27_lec2_title.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 27 decks; removed from the repo with them (2026-10-27), superseded by the three FA26 Ch. 27 decks. Archive copy kept outside the repo in `/workspace/ch27/archive/su26-retired-images/` on the build box.
 - **Requested description:** Great Leap Forward China photograph.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2301,7 +2308,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course title graphic created after no additional licensed image was selected.
 
-## `ch27_lec2_q6_1.jpg`
+## `ch27_lec2_q6_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 27 decks; removed from the repo with them (2026-10-27), superseded by the three FA26 Ch. 27 decks. Archive copy kept outside the repo in `/workspace/ch27/archive/su26-retired-images/` on the build box.
 - **Requested description:** Hundred Flowers Campaign poster.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2312,7 +2320,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch27_lec2_q7_1.jpg`
+## `ch27_lec2_q7_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 27 decks; removed from the repo with them (2026-10-27), superseded by the three FA26 Ch. 27 decks. Archive copy kept outside the repo in `/workspace/ch27/archive/su26-retired-images/` on the build box.
 - **Requested description:** Great Leap Forward backyard furnace photograph.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2323,7 +2332,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch27_lec2_q8_1.jpg`
+## `ch27_lec2_q8_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 27 decks; removed from the repo with them (2026-10-27), superseded by the three FA26 Ch. 27 decks. Archive copy kept outside the repo in `/workspace/ch27/archive/su26-retired-images/` on the build box.
 - **Requested description:** China hukou household registration document.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2334,7 +2344,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch27_lec2_q9_1.jpg`
+## `ch27_lec2_q9_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 27 decks; removed from the repo with them (2026-10-27), superseded by the three FA26 Ch. 27 decks. Archive copy kept outside the repo in `/workspace/ch27/archive/su26-retired-images/` on the build box.
 - **Requested description:** Mao Khrushchev Sino Soviet split photograph.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2345,7 +2356,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch27_lec3_title.jpg`
+## `ch27_lec3_title.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 27 decks; removed from the repo with them (2026-10-27), superseded by the three FA26 Ch. 27 decks. Archive copy kept outside the repo in `/workspace/ch27/archive/su26-retired-images/` on the build box.
 - **Requested description:** Cultural Revolution Red Guards photograph.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2356,7 +2368,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course title graphic created after no additional licensed image was selected.
 
-## `ch27_lec3_q10_1.jpg`
+## `ch27_lec3_q10_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 27 decks; removed from the repo with them (2026-10-27), superseded by the three FA26 Ch. 27 decks. Archive copy kept outside the repo in `/workspace/ch27/archive/su26-retired-images/` on the build box.
 - **Requested description:** Red Guards Cultural Revolution photograph.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2367,7 +2380,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch27_lec3_q10_2.jpg`
+## `ch27_lec3_q10_2.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 27 decks; removed from the repo with them (2026-10-27), superseded by the three FA26 Ch. 27 decks. Archive copy kept outside the repo in `/workspace/ch27/archive/su26-retired-images/` on the build box.
 - **Requested description:** A historically appropriate artifact, map, site, person, document, or diagram that clarifies interpretive stakes and teaching cautions..
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2378,7 +2392,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch27_lec3_q11_1.jpg`
+## `ch27_lec3_q11_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 27 decks; removed from the repo with them (2026-10-27), superseded by the three FA26 Ch. 27 decks. Archive copy kept outside the repo in `/workspace/ch27/archive/su26-retired-images/` on the build box.
 - **Requested description:** People's Liberation Army Cultural Revolution restore order.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2389,7 +2404,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch27_lec3_q11_2.jpg`
+## `ch27_lec3_q11_2.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 27 decks; removed from the repo with them (2026-10-27), superseded by the three FA26 Ch. 27 decks. Archive copy kept outside the repo in `/workspace/ch27/archive/su26-retired-images/` on the build box.
 - **Requested description:** A historically appropriate artifact, map, site, person, document, or diagram that clarifies interpretive stakes and teaching cautions..
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2400,7 +2416,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch27_lec3_q12_1.jpg`
+## `ch27_lec3_q12_1.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 27 decks; removed from the repo with them (2026-10-27), superseded by the three FA26 Ch. 27 decks. Archive copy kept outside the repo in `/workspace/ch27/archive/su26-retired-images/` on the build box.
 - **Requested description:** Tiananmen Incident 1976 photograph.
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
@@ -2411,7 +2428,8 @@ None. All nine manifest items now have selected images and documented reuse term
 - **Attribution:** None required.
 - **Notes:** Original course analytical graphic; explicitly labeled as an interpretive schematic.
 
-## `ch27_lec3_q12_2.jpg`
+## `ch27_lec3_q12_2.jpg` - retired
+- **Status:** Retired. Used only by the three SU26 Ch. 27 decks; removed from the repo with them (2026-10-27), superseded by the three FA26 Ch. 27 decks. Archive copy kept outside the repo in `/workspace/ch27/archive/su26-retired-images/` on the build box.
 - **Requested description:** A historically appropriate artifact, map, site, person, document, or diagram that clarifies interpretive stakes and teaching cautions..
 - **Source website:** Original HIST 270 course graphic; no external image source.
 - **Direct source URL:** Not applicable.
