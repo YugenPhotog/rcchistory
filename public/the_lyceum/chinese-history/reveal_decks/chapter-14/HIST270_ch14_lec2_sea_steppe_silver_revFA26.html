@@ -402,6 +402,35 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
 .reason-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6em;margin:.4em 0 .2em;text-align:left}
 .reveal .reason-grid .card h3{font-size:.8em;margin:0 0 .2em}
 .reveal .reason-grid .card p{font-size:.66em;line-height:1.34}
+.reveal .g-40-60{display:grid;grid-template-columns:.8fr 1.2fr;gap:1em;align-items:center}
+/* ---- Ch. 14 online-study layer (ported from Ch. 27) (FA26): segments, self-checks, narration panel ---- */
+.reveal .seg-progress{display:flex;gap:.35em;margin:.6em 0 0!important}
+.reveal .seg-progress span{display:block;width:3.2em;height:.35em;border-radius:4px;background:rgba(201,190,170,.25)}
+.reveal .seg-progress span.on{background:#D4AF37}
+.reveal .sc-intro{font-size:.56em!important;color:#C9BEAA;margin:.1em 0 .5em!important;text-align:left}
+.reveal .selfcheck{display:grid;grid-template-columns:1fr 1fr;gap:.55em .9em;text-align:left}
+.reveal .sc-item{border:1px solid rgba(44,120,115,.7);border-left:4px solid #2C7873;border-radius:8px;background:rgba(44,120,115,.12);padding:.45em .7em .5em}
+.reveal .sc-q{font-size:.6em!important;line-height:1.35;color:#F5EEDC;margin:0 0 .35em!important}
+.reveal .sc-btn{font:600 .5em Lora,serif;letter-spacing:.05em;color:#0F2A20;background:#9ED8D2;border:0;border-radius:6px;padding:.3em .8em;cursor:pointer}
+.reveal .sc-btn:hover,.reveal .sc-btn:focus{background:#F1D46A;outline:2px solid #F1D46A;outline-offset:2px}
+.reveal .sc-btn[aria-expanded="true"]{background:#D4AF37}
+.reveal .sc-a{margin-top:.35em;border-top:1px dotted #2C7873;padding-top:.3em}
+.reveal .sc-a p{font-size:.56em!important;line-height:1.38;color:#F1D46A;margin:0!important}
+.reveal .rg-links span{color:#C9BEAA}
+#narr-btn{position:fixed;right:112px;bottom:14px;z-index:60;font:600 14px Lora,Georgia,serif;letter-spacing:.06em;color:#0F2A20;background:#9ED8D2;border:0;border-radius:20px;padding:8px 16px;box-shadow:0 2px 8px rgba(0,0,0,.4);cursor:pointer}
+#narr-btn:hover,#narr-btn:focus{background:#F1D46A;outline:2px solid #F1D46A;outline-offset:2px}
+#narr-btn[aria-expanded="true"]{background:#D4AF37}
+#narr-panel{position:fixed;right:18px;bottom:58px;z-index:59;width:min(560px,92vw);max-height:62vh;overflow:auto;background:rgba(15,42,32,.97);border:1px solid #2C7873;border-top:4px solid #D4AF37;border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.55);padding:14px 18px 12px;color:#F5EEDC;font:16px/1.5 Lora,Georgia,serif;text-align:left}
+#narr-panel[hidden]{display:none}
+#narr-panel .np-head{display:flex;justify-content:space-between;align-items:center;margin:0 0 6px;font:600 12px Lora,serif;letter-spacing:.14em;text-transform:uppercase;color:#C9BEAA}
+#narr-panel .np-close{background:none;border:0;color:#C9BEAA;font-size:22px;line-height:1;cursor:pointer}
+#narr-panel .np-close:hover,#narr-panel .np-close:focus{color:#F1D46A}
+#narr-panel .np-body p{margin:0 0 .6em}
+#narr-panel .np-body a{color:#9ED8D2;border-bottom:1px dotted #2C7873;text-decoration:none}
+#narr-panel .np-body strong{color:#F1D46A}
+#narr-panel audio{width:100%;margin:0 0 8px}
+@media print{#narr-btn,#narr-panel{display:none!important}}
+
 </style>
 </head>
 <body>
@@ -421,12 +450,55 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     </figure>
   </div>
   <aside class="notes">
-    <p>Welcome back! This deck is your Study Buddy for the Ming dynasty's frontiers. Work through it at your own pace, as often as you like. Lecture 1 built the Ming throne; this lecture looks outward, to the sea and to the steppe.</p>
-    <p>Here is the story in one breath. The early Ming emperors expected the world to come to them, as envoys bearing gifts. The Yongle emperor (temple name Chengzu) sent huge fleets under the eunuch <strong>Zheng He</strong> across the Indian Ocean, then the court stopped the voyages. On the northern steppe, the early emperors marched armies into Mongolia, then gave up and built walls. Along the coast, the court tried to keep trade inside its rules, but merchants, pirates and American silver forced their way in anyway (Ebrey, Ch. 14, pp. 230, 233–234).</p>
-    <p>The painting is real: a giraffe that arrived at the Ming court as a gift from Bengal in 1414. Real images carry full captions. Scene illustrations labeled AI-generated are modern interpretations, not historical sources.</p>
-    <p>A warning about sources: two pages of the textbook (pp. 231–232) are missing from our copy, and they covered the start of the Zheng He story. The Zheng He slides therefore use other reputable sources, and each slide says so on its source line.</p>
-    <p>How to use the deck: press <strong>S</strong> for these notes, click an image to enlarge it, and press <strong>Esc</strong> for a map of all slides. The letter in the lower-left corner is each slide's permanent name; the slide number is lower right.</p>
-    <p><strong>Check yourself:</strong> Before you start, guess: why might an empire want to control who comes to trade with it?</p>
+    <p>Welcome back! This deck is your Study Buddy for the Ming frontiers, the sea and the steppe.</p>
+    <p>The story in one breath: the early Ming expected the world to come to it bearing gifts. <strong>Zheng He</strong>'s fleets crossed the Indian Ocean, then stopped. Armies marched into Mongolia, then walls went up. Merchants, pirates and American silver broke the court's trade rules (Ebrey, Ch. 14, pp. 230, 233–234).</p>
+    <p>The painting of the giraffe is real. AI-generated scenes are interpretations, not sources.</p>
+    <p>The <a href="#/how-to-use">how-to-use</a> slide comes next.</p>
+    <p><strong>Check yourself:</strong> Why might an empire want to control who comes to trade?</p>
+  </aside>
+</section>
+<!-- ===== jj · How to use this deck ===== -->
+<section id="how-to-use" data-letter="jj">
+  <p class="kicker">Start here · How to study this deck on your own</p>
+  <h2>Three Segments, Self-Checks, and a Narration Button on Every Slide</h2>
+  <div class="steps">
+    <div><span>Click <b>Narration</b> (lower right) or press <kbd>N</kbd> to read the Study Buddy notes for any slide. Press <kbd>N</kbd> or <kbd>Esc</kbd> to close them.</span></div>
+    <div><span>Work through three segments: the sea, the steppe, and the coast. Each ends with an ungraded <b>self-check</b>: answer from memory, then click to see the answer.</span></div>
+    <div><span>After each self-check comes a <b>Review Question</b>. Write your answer in your Reading Guide before you move on.</span></div>
+    <div><span>The <b>Pierian Spring</b> at the end is required independent study: the Dalai Lama, Europe's voyages, the size of the treasure ships, a historians' debate, and the wall itself.</span></div>
+    <div><span>Click any image to enlarge it, and click a <span class="popup-trigger" data-popup="pop-teal" role="button" tabindex="0">teal dotted word</span> for a definition. The small letter in the lower-left corner is each slide's permanent name. All due dates are on Canvas.</span></div>
+  </div>
+  <aside class="notes">
+    <p>Welcome to the second lecture of Chapter 14. Like Lecture 1, this deck is built for you to study on your own, at your own pace.</p>
+    <p>Every slide has Study Buddy notes, like these. Open them with the Narration button or the N key. They explain the slide, define new words, and end with a question. Read the slide first, guess what it is about, then open the notes and check your guess.</p>
+    <p>The main part runs in three segments, one for each frontier: Zheng He's fleets at sea, the long struggle with the Mongols on the steppe, and trade, piracy and silver along the coast (Ebrey, Ch. 14, pp. 230, 233–234). Each segment ends with a self-check, a few quick questions that are never graded, and then a Review Question from the Reading Guide.</p>
+    <p>After the main part comes the Pierian Spring, which is required independent study.</p>
+    <p><strong>Why this matters:</strong> testing yourself as you go is the surest way to remember what you study alone.</p>
+    <p><strong>Check yourself:</strong> Open the narration for this slide, close it with Esc, and then open the teal dotted word. Did both work?</p>
+  </aside>
+</section>
+<!-- ===== kk · Segment 1 ===== -->
+<section id="segment-1" data-letter="kk" class="segment-slide">
+  <p class="kicker">Segment 1 of 3 · 1405–1474</p>
+  <h2>Segment 1: The Treasure Fleet</h2>
+  <div class="g-45-55">
+    <figure class="fig h-400">
+      <img src="images/ch14-lec2/05-tribute-giraffe.webp" alt="Ming hanging scroll of a giraffe led by a turbaned attendant, with a long inscription above">
+      <figcaption><i>Tribute Giraffe with Attendant</i>, full scroll with its poem. The court painter Shen Du (1357–1434) painted the giraffe presented by envoys from Bengal in 1414; the Philadelphia Museum of Art considers this version a later copy, 16th century. Public domain, <a href="https://commons.wikimedia.org/wiki/File:Tribute_Giraffe_with_Attendant.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>.</figcaption>
+    </figure>
+    <div class="stack">
+      <div class="story-beat gold">The Yongle emperor sent a eunuch admiral across the Indian Ocean seven times, and then the court let the fleet rot.</div>
+      <div class="story-beat">This segment teaches the history behind <b>Review Question 4</b>, and it ends with a short self-check and then the question itself.</div>
+      <p class="seg-progress" aria-label="Segment 1 of 3"><span class="on"></span><span></span><span></span></p>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Segment 1 goes to sea. Between 1405 and 1433 the Ming sent seven great fleets under the eunuch <strong>Zheng He</strong> to Southeast Asia, India, Arabia and East Africa, and then it stopped (Ebrey, Ch. 14, p. 233).</p>
+    <p>You will start with the idea that framed all Ming foreign relations, the tribute system, and the outlook behind it, which historians call culturalism. Then you will follow the fleet: its commander, its routes, the giraffes and spices it brought home, the interpreter who wrote it all down, and the officials who said it cost too much.</p>
+    <p>The painting shows a giraffe presented at court in 1414, the most famous gift the voyages produced.</p>
+    <p>As you go, keep two lists: what the voyages were meant to do, and why they ended. Review Question 4 asks for both, with the reasons sorted into economic and political.</p>
+    <p><strong>Why this matters:</strong> the voyages are one of the great "what ifs" of world history, and understanding why they ended tells you how the Ming state set its priorities.</p>
+    <p><strong>Check yourself:</strong> Before you start, guess: why would a government stop something as impressive as these voyages?</p>
   </aside>
 </section>
 <!-- ===== b · tribute-order ===== -->
@@ -440,6 +512,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
       <figcaption><span class="ai-tag">AI-generated illustration</span> in a Ming woodblock-print style, made for this deck: foreign envoys in varied dress kneel with gifts of red coral, ivory tusks and spices in a Ming palace courtyard while officials unroll bolts of patterned silk. An interpretation, not a historical source.</figcaption>
     </figure>
     <div class="stack">
+      <div class="concept-card"><p class="cc-label">Concept</p><p class="cc-term">Tribute system</p><p class="cc-def">A ranked order of diplomacy. Foreign rulers sent envoys with gifts to honor the Chinese emperor, and the emperor answered with gifts of his own and the right to trade.</p></div>
       <div class="story-beat gold">Under the <span class="popup-trigger" data-popup="pop-tribute" role="button" tabindex="0">tribute system</span>, foreign rulers sent envoys with gifts to honor the Chinese emperor.</div>
       <div class="story-beat">The emperor answered with lavish gifts of his own, so tribute was both diplomacy and trade.</div>
       <div class="story-beat purple">The Ming wanted all foreign trade to pass through this system of envoys.</div>
@@ -448,9 +521,9 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   </div>
   <p class="source-line">Sources: Ebrey, Ch. 14, pp. 230, 233–234.</p>
   <aside class="notes">
-    <p>Start with how the Ming court imagined the world. In the <strong>tribute system</strong>, rulers of other countries sent envoys to the Chinese court bearing gifts, called tribute, to honor the emperor. The court received them with ceremony, and the emperor sent them home with generous gifts of his own (Ebrey, pp. 230, 233).</p>
+    <p>Start with how the Ming court imagined the world. The gold card names the system. In the <strong>tribute system</strong>, rulers of other countries sent envoys to the Chinese court bearing gifts, called tribute, to honor the emperor. The court received them with ceremony, and the emperor sent them home with generous gifts of his own (Ebrey, pp. 230, 233).</p>
     <p>The Yongle emperor had expanded and regularized this system (p. 230), and the court used it as a tool: it wanted the Mongols to trade only through the envoy system, and it wanted coastal trade "subordinated to diplomacy" (pp. 233–234).</p>
-    <p>Asia for Educators, a Columbia University teaching site, explains the bargain: neighboring countries recognized the emperor as their superior, and in exchange received benefits such as trade.</p>
+    <p>The bargain was simple. Neighboring countries recognized the emperor as their superior, and in exchange they received benefits, above all the chance to trade.</p>
     <p>The ceremony mattered as much as the gifts. Envoys performed the <strong>ketou</strong>, "knocking the head," spelled kowtow in English: they knelt and touched their foreheads to the floor. The court spoke of the emperor as a parent and of foreign rulers as junior members of the family, a ranking historians call suzerain and vassal. The system asked for recognition, not land: it was defensive, not a plan of conquest.</p>
     <p>The scene image for this slide is an AI-generated interpretation, not a historical source.</p>
     <p><strong>Why this matters:</strong> the tribute system is the frame for this whole lecture. Each frontier story asks what happened when trade would not stay inside it.</p>
@@ -476,9 +549,9 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <p class="source-line">Sources: Ebrey, Ch. 14, pp. 230, 233, for the tribute order; the concept follows Levenson and Fairbank.</p>
   <aside class="notes">
     <p>Look at the map first. Ming court mapmakers painted the Great Ming across the middle of the silk and squeezed foreign lands toward the edges. That picture of the world is the idea behind the tribute system.</p>
-    <p>Historians have a name for this outlook: <strong>culturalism</strong>. It is a modern scholars' word, made famous in the 1950s and 1960s by Joseph Levenson and used by John K. Fairbank, who argued that China moved "from culturalism to nationalism" only around 1900. Culturalism resembles nationalism, because it is a strong sense of belonging. But the loyalty was to a civilization, not to a nation-state with fixed borders. The emperor ruled <em>tianxia</em>, "all under Heaven," and the tribute order put that claim into ceremony (Ebrey, pp. 230, 233).</p>
+    <p>Historians have a name for this outlook: <strong>culturalism</strong>. It is a modern historians' word, not one the Ming used. Culturalism resembles nationalism, because it is a strong sense of belonging. But the loyalty was to a civilization, its classics, rituals and writing, not to a nation-state with fixed borders. The emperor ruled <em>tianxia</em>, "all under Heaven," and the tribute order put that claim into ceremony (Ebrey, pp. 230, 233).</p>
     <p>Two habits followed. Change was supposed to happen within tradition, by restoring the sages' models, so there was no ideology of progress. And foreign goods could be admired as tribute without seeming worth copying.</p>
-    <p>Historians debate the idea. Some argue that ethnic feeling mattered too, as in the Ming founders' rhetoric against the "alien" Mongols. And the Yongle court was curious about the wider world, as the giraffe will show.</p>
+    <p>Keep one more point in mind. Even inside this outlook the Yongle court was curious about the wider world, as the giraffe later in this segment will show. A belief that China was the center did not stop people from wanting to see what lay beyond it.</p>
     <p>The map is a real Ming map of the late 1300s.</p>
     <p><strong>Why this matters:</strong> culturalism is one of the deeper reasons the court later gave up the sea.</p>
     <p><strong>Check yourself:</strong> How is culturalism like nationalism, and how is it different?</p>
@@ -502,12 +575,12 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
       <p class="ps-link">Independent study: <a href="#/ps-treasure-ships">how big were the treasure ships? (slide gg)</a></p>
     </div>
   </div>
-  <p class="source-line">Sources: Ebrey, Ch. 14, p. 233 (bullet 3). Pages 231–232 are missing from our copy; bullets 1–2 are sourced in the notes.</p>
+  <p class="source-line">Sources: Ebrey, Ch. 14, p. 233; Britannica, "Zheng He"; Edward L. Dreyer, <i>Zheng He</i> (2007).</p>
   <aside class="notes">
-    <p>The pages on Zheng He's early life (pp. 231–232) are missing from our copy, so the next paragraphs draw on Britannica, Asia for Educators and Edward Dreyer's history of the voyages.</p>
-    <p><strong>Zheng He</strong> was born around 1371 into a Hui, that is Chinese Muslim, family in Yunnan, under the name Ma He. His father had made the pilgrimage to Mecca. When Ming armies conquered Yunnan in 1381, the boy was captured, castrated and sent into the army as an orderly. By 1390 his unit served under the Prince of Yan, the future Yongle emperor. After he seized the throne, he gave his trusted eunuch the new surname Zheng (Britannica).</p>
-    <p>In 1405 the Yongle emperor put Zheng He in command of the first great fleet. The official <em>Ming History</em> gives 62 treasure ships and 27,800 men; another Ming account gives 63 ships and 27,870 men. A later writer added 255 smaller vessels, the source of the 317 ships often quoted, but Dreyer thinks that counts some ships twice and puts the whole fleet at about 250. Either way, it was one of the largest fleets of its age. Treat any single number with care.</p>
+    <p><strong>Zheng He</strong> was born around 1371 into a Hui, that is Chinese Muslim, family in Yunnan, under the name Ma He. His father had made the pilgrimage to Mecca. When Ming armies conquered Yunnan in 1381, the boy was captured, castrated and sent into the army as an orderly. By 1390 his unit served under the Prince of Yan, the future Yongle emperor. After the prince seized the throne, he gave his trusted eunuch the new surname Zheng.</p>
+    <p>In 1405 the Yongle emperor put Zheng He in command of the first great fleet. By the official count it had 62 great "treasure ships" and 27,800 men, along with many smaller vessels, perhaps about 250 ships in all. It was one of the largest fleets of its age, and numbers for it vary from one record to another.</p>
     <p>Back to the textbook: the fleet's purpose was to visit foreign rulers, transmit messages of China's peaceful intentions, and bestow lavish gifts (p. 233). The scene image for this slide is an AI-generated interpretation, not a historical source.</p>
+    <p><strong>Why this matters:</strong> the Yongle emperor trusted a eunuch from his own household, not a scholar-official, with the grandest venture of his reign.</p>
     <p><strong>Check yourself:</strong> Why might the Yongle emperor have trusted a eunuch from his own household with such a mission?</p>
   </aside>
 </section>
@@ -530,12 +603,13 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
       <figcaption>Modern map of Ming expeditions. Black lines trace Zheng He's seventh voyage (1431–1433): the main fleet (solid) to Hormuz and detachments (dashed and dotted) to Bengal, Aden, Mecca's port Jedda and East Africa. Green and blue lines show other Yongle-era missions over land. Map: Vmenkov. CC BY 1.0, <a href="https://commons.wikimedia.org/wiki/File:Ming-Expeditions.svg" target="_blank" rel="noopener">Wikimedia Commons</a>.</figcaption>
     </figure>
   </div>
-  <p class="source-line">Sources: Ebrey, Ch. 14, p. 233 (bullet 3). Pages 231–232 are missing from our copy; bullets 1–2 are sourced in the notes.</p>
+  <p class="source-line">Sources: Ebrey, Ch. 14, p. 233; Britannica, "Zheng He"; Asia for Educators, "The Ming Voyages."</p>
   <aside class="notes">
-    <p>Between 1405 and 1433 Zheng He's fleets made seven voyages. Britannica and Asia for Educators fill in the story here. The early voyages went through Southeast Asia, by way of Champa, Java and Malacca, to Ceylon and to Calicut on India's southwest coast.</p>
-    <p>Later voyages went farther. Mills and Asia for Educators date the first visit to Hormuz on the Persian Gulf to the fourth voyage, which left in 1413; Britannica places it on the third. Detachments of later fleets visited Aden in Arabia and ports on the East African coast in what are now Somalia and Kenya. The map shows the seventh voyage.</p>
+    <p>Between 1405 and 1433 Zheng He's fleets made seven voyages. The early voyages went through Southeast Asia, by way of Champa, Java and Malacca, to Ceylon and to Calicut on India's southwest coast.</p>
+    <p>Later voyages went farther. The fourth voyage, which left in 1413, reached Hormuz on the Persian Gulf. Detachments of later fleets visited Aden in Arabia and ports on the East African coast in what are now Somalia and Kenya. The map shows the seventh voyage.</p>
     <p>One detail is in the textbook: beginning with the third voyage, rulers who were invited to come to China, or to send envoys, were offered passage on the fleet (p. 233).</p>
-    <p>The small chart on the right is the <strong>Mao Kun map</strong>, printed in the military encyclopedia <i>Wubei zhi</i> in 1621 and thought to be based on the fleet's own sailing directions (Mills, appendix 2). It shows coasts as a long strip, with sailing routes marked between them.</p>
+    <p>The small chart on the right is the <strong>Mao Kun map</strong>, printed in the military encyclopedia <i>Wubei zhi</i> in 1621 and thought to be based on the fleet's own sailing directions. It shows coasts as a long strip, with sailing routes marked between them.</p>
+    <p><strong>Why this matters:</strong> the map turns "seven voyages" into distances you can see. Ming ships reached East Africa decades before Portuguese ships reached India.</p>
     <p><strong>Check yourself:</strong> Name three regions the fleets reached, from nearest to farthest.</p>
   </aside>
 </section>
@@ -557,7 +631,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <p class="source-line">Sources: Ebrey, Ch. 14, p. 233. Painting: Philadelphia Museum of Art record via Wikimedia Commons.</p>
   <aside class="notes">
     <p>The fleets came home full. Besides foreign envoys, Zheng He brought back exotic animals and goods likely to delight the emperor: giraffes and lions from Africa, fine cotton cloth from India, and gems and spices from Southeast Asia (Ebrey, p. 233).</p>
-    <p>The giraffe became the most famous of these gifts. Mills, the translator of Ma Huan, notes that the emperor received his first giraffe from Bengal in 1414, then others from Malindi in East Africa in 1415, from Aden in 1419, and from Mecca in 1433 (Mills, p. 155 n. 10). The one in this painting is the Bengal giraffe of 1414, according to the museum record.</p>
+    <p>The giraffe became the most famous of these gifts. The emperor received his first giraffe from Bengal in 1414, then others from Malindi in East Africa in 1415, from Aden in 1419 and from Mecca in 1433. The one in this painting is the Bengal giraffe of 1414, according to the museum record.</p>
     <p>Think about what the emperor gained. A giraffe was not much use, but it was a living sign that faraway lands honored the Ming. Gifts like these turned diplomacy into a show of prestige.</p>
     <p>The painting is real, though the museum thinks this version is a later copy of Shen Du's original.</p>
     <p><strong>Why this matters:</strong> remember the giraffe when officials complain about the cost. Prestige was hard to measure in silver.</p>
@@ -584,9 +658,10 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <p class="source-line">Sources: Ebrey, Ch. 14, p. 233.</p>
   <aside class="notes">
     <p>Another Muslim who sailed with Zheng He, <strong>Ma Huan</strong>, went on three of the voyages and wrote a book-length account of the places they visited. It gave details about their geography, politics, climate, economy, and local customs (Ebrey, p. 233).</p>
-    <p>Ma Huan could read Arabic script and knew Arabic or Persian, so he joined the fleet as an official translator in 1413, on the first voyage to reach Hormuz (Mills, pp. 34–35). His book is called <i>Yingya shenglan</i>, "The Overall Survey of the Ocean's Shores."</p>
-    <p>Here is one line from it, in the English translation by J. V. G. Mills. It is how Ma Huan opens his chapter on Calicut, the great port on India's southwest coast: "[This is] the great country of the Western Ocean" (Mills, p. 137). He goes on to record that the fleet set up a stone there with an inscription declaring that, though the two lands were more than a hundred thousand <i>li</i> apart, their people were "very similar, happy and prosperous" (p. 138).</p>
+    <p>Ma Huan could read Arabic script and knew Arabic or Persian, so he joined the fleet as an official translator in 1413, on the first voyage to reach Hormuz. His book is called <i>Yingya shenglan</i>, "The Overall Survey of the Ocean's Shores."</p>
+    <p>Here is one line from it, in J. V. G. Mills's English translation. It is how Ma Huan opens his chapter on Calicut, the great port on India's southwest coast: "[This is] the great country of the Western Ocean." He goes on to record that the fleet set up a stone there with an inscription declaring that, though the two lands were more than a hundred thousand <i>li</i> apart, their people were "very similar, happy and prosperous."</p>
     <p>The scene image for this slide is an AI-generated interpretation, not a historical source.</p>
+    <p><strong>Why this matters:</strong> Ma Huan's book is an eyewitness source. It shows the voyages through the eyes of someone on board, not only through court records.</p>
     <p><strong>Check yourself:</strong> Why is an interpreter's account especially valuable evidence for the voyages?</p>
   </aside>
 </section>
@@ -612,6 +687,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <p>The first is money. The voyages did not bring much of a return. Officials complained about the cost of the expeditions, which they saw as wasteful. Building and crewing fleets of very large ships, and handing out lavish gifts at every port, was expensive, and giraffes did not pay for it.</p>
     <p>The second is the emperor. The voyages may have appealed especially to the Yongle emperor, who died in 1424 after the sixth expedition. The next two emperors had other priorities, including dealing with the rising power of the Mongols, the subject of the second part of this lecture.</p>
     <p>Notice that the textbook says "one likely reason" and "another possibility." Historians are not certain, and a good answer keeps that uncertainty. The scene image for this slide is an AI-generated interpretation, not a historical source.</p>
+    <p><strong>Why this matters:</strong> Review Question 4 asks you to separate economic from political reasons, and the textbook offers one of each.</p>
     <p><strong>Check yourself:</strong> Which of the two reasons is economic, and which is political?</p>
   </aside>
 </section>
@@ -631,7 +707,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <p>The officials' complaints about cost, and the change of emperors in 1424, tell you what happened (Ebrey, p. 233). Historians also ask a deeper question: why did no one in the government fight to keep the fleets? Four kinds of reasons answer it.</p>
     <p><strong>Economic.</strong> The Ming state lived mainly on the land tax paid by farmers. Taxes on trade brought in little, so the voyages looked like pure expense. The new Hongxi emperor halted them in 1424, on the advice of officials worried about spending.</p>
     <p><strong>Institutional.</strong> Scholar-officials came from landowning families and rose through the examinations. In the official ranking of occupations, merchants came below farmers, and the state kept them subordinate.</p>
-    <p><strong>Ideological.</strong> Culturalism said China needed nothing from abroad, and Confucian teaching looked down on chasing profit. The fleets were also commanded by eunuchs, whom officials resented. A later story says an official hid or destroyed the voyage records in the 1470s; historians are not sure it is true.</p>
+    <p><strong>Ideological.</strong> Culturalism said China needed nothing from abroad, and Confucian teaching looked down on chasing profit. The fleets were also commanded by eunuchs, whom officials resented.</p>
     <p><strong>Strategic.</strong> The Mongols were the real danger, and Beijing sat close to the steppe, as the second part of this lecture shows.</p>
     <p>Ming society was not anti-trade: private merchants kept sailing all through the dynasty. The distaste belonged to the state.</p>
     <p><strong>Why this matters:</strong> Reading Guide Q4 (p. 233) asks for economic and political factors, and these four sort into those groups.</p>
@@ -658,9 +734,9 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   </div>
   <p class="source-line">Sources: Ebrey, Ch. 14, p. 233.</p>
   <aside class="notes">
-    <p>Zheng He did get one more voyage after his patron's death. He sailed on the seventh and final expedition in 1430–1433, and he died during it (Ebrey, p. 233). Britannica places his death at Calicut in 1433.</p>
+    <p>Zheng He did get one more voyage after his patron's death. He sailed on the seventh and final expedition in 1430–1433, and he died during it (Ebrey, p. 233), probably at Calicut in 1433.</p>
     <p>Then the fleet simply stopped. The boats sat in harbor. Four decades later, in 1474, all the remaining ships with three or more masts were broken up and used for lumber.</p>
-    <p>Pause on that image. The largest fleets of their age were not lost in battle or storm; they were taken apart for wood. The textbook adds that, not long after, the much more modest expeditions of Vasco da Gama and Christopher Columbus changed the course of world history (p. 233). The Pierian Spring returns to that comparison on slide <strong>aa</strong>, <em>ps-europe</em>.</p>
+    <p>Pause on that image. The largest fleets of their age were not lost in battle or storm; they were taken apart for wood. The textbook adds that, not long after, the much more modest expeditions of Vasco da Gama and Christopher Columbus changed the course of world history (p. 233). The Pierian Spring returns to that comparison on the <a href="#/ps-europe">ps-europe</a> slide.</p>
     <p>The scene image for this slide is an AI-generated interpretation, not a historical source.</p>
     <p><strong>Why this matters:</strong> ending the voyages was a choice. The court decided that the sea mattered less than the steppe.</p>
     <p><strong>Check yourself:</strong> What happened to the great ships, and how long after the last voyage?</p>
@@ -686,11 +762,46 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <aside class="notes">
     <p>So what did the voyages achieve? Begin with what the textbook's chapter summary says: Zheng He sailed to enroll more countries in the tribute system (Ebrey, p. 244). In 1431 Zheng He had his own record carved on a stone at Liujiagang, the fleet's home port, and he counted more than thirty countries reached.</p>
     <p>The fleets were diplomatic, but they were armed. In 1407 they captured the pirate chief Chen Zuyi at Palembang on Sumatra, and Ma Huan reports that he was executed at court. In 1411 they seized a king of Ceylon who had attacked them and brought him to Nanjing; the emperor later sent him home. The fleets also backed the new port-state of Malacca.</p>
-    <p>Older textbooks call tribute a defensive expression of culturalism, not aggressive imperialism. At sea that is largely fair: the Ming founded no colonies, unlike the Portuguese after 1500. Some historians, such as Geoff Wade, stress the force and see a harder, coercive edge. On land, remember, the Yongle emperor occupied Vietnam for twenty years.</p>
+    <p>Was this imperialism? At sea the Ming founded no colonies, unlike the Portuguese after 1500; the fleets wanted rulers to honor the emperor and send tribute. But the fleets were armed and used force when they chose to. And on land, remember, the Yongle emperor occupied Vietnam for twenty years.</p>
     <p>The photograph is real: a temple in Java where Zheng He is honored today.</p>
-    <p>Historians reject the popular claim, made by Gavin Menzies, that Zheng He's fleets reached the Americas; there is no reliable evidence for it.</p>
     <p><strong>Why this matters:</strong> Reading Guide Q4 asks about goals; display, tribute and armed diplomacy are all part of a full answer.</p>
     <p><strong>Check yourself:</strong> Give one example of the fleets using force, and explain why the Ming still built no overseas empire.</p>
+  </aside>
+</section>
+<!-- ===== nn · Self-check Segment 1 ===== -->
+<section id="sc-q4" data-letter="nn" data-background="#14302A">
+  <p class="kicker">Self-check · Segment 1 · not graded</p>
+  <h2>Check Yourself: The Treasure Fleet</h2>
+  <p class="sc-intro">Answer each question from memory, out loud or on paper, then click <b>Show answer</b> to check yourself. Nothing here is graded or recorded.</p>
+  <div class="selfcheck">
+    <div class="sc-item">
+      <p class="sc-q"><b>1.</b> In the tribute system, what did each side give and get?</p>
+      <button type="button" class="sc-btn" aria-expanded="false" aria-controls="sc-sc-q4-1">Show answer</button>
+      <div class="sc-a" id="sc-sc-q4-1" hidden><p>Foreign rulers sent envoys and gifts to honor the emperor; the emperor sent lavish gifts back and allowed trade (Ebrey, pp. 230, 233).</p></div>
+    </div>
+    <div class="sc-item">
+      <p class="sc-q"><b>2.</b> What was the stated purpose of Zheng He's fleets?</p>
+      <button type="button" class="sc-btn" aria-expanded="false" aria-controls="sc-sc-q4-2">Show answer</button>
+      <div class="sc-a" id="sc-sc-q4-2" hidden><p>To visit foreign rulers, announce China's peaceful intentions and hand out lavish gifts (p. 233).</p></div>
+    </div>
+    <div class="sc-item">
+      <p class="sc-q"><b>3.</b> Name the four kinds of goods the fleets brought home.</p>
+      <button type="button" class="sc-btn" aria-expanded="false" aria-controls="sc-sc-q4-3">Show answer</button>
+      <div class="sc-a" id="sc-sc-q4-3" hidden><p>Giraffes and lions from Africa, cotton cloth from India, and gems and spices from Southeast Asia (p. 233).</p></div>
+    </div>
+    <div class="sc-item">
+      <p class="sc-q"><b>4.</b> Which reason for ending the voyages is economic, and which is political?</p>
+      <button type="button" class="sc-btn" aria-expanded="false" aria-controls="sc-sc-q4-4">Show answer</button>
+      <div class="sc-a" id="sc-sc-q4-4" hidden><p>Economic: the cost, with little return. Political: the next emperors cared more about the Mongol threat (p. 233).</p></div>
+    </div>
+  </div>
+  <p class="rg-links"><span>Missed one? Go back:</span> <a href="#/tribute-order">tribute-order</a> <a href="#/zheng-he">zheng-he</a> <a href="#/tribute-gifts">tribute-gifts</a> <a href="#/fleet-costs">fleet-costs</a></p>
+  <aside class="notes">
+    <p>Segment 1 is done. Before you open Review Question 4, test yourself. These four questions come from the "Check yourself" prompts on the segment's slides (Ebrey, Ch. 14, pp. 230, 233).</p>
+    <p>Answer each one from memory, out loud or on paper, before you click <strong>Show answer</strong>. If you miss one, use the links at the bottom of the slide to go back to the slide that teaches it.</p>
+    <p>Notice the shape of the four questions. The first two are about goals: the system the fleets served and the mission they were given. The last two are about results and the end: what came home, and why the court stopped. Review Question 4 has the same two halves.</p>
+    <p><strong>Why this matters:</strong> recalling facts without looking is the best preparation for writing an answer in your own words.</p>
+    <p><strong>Check yourself:</strong> Which of the four did you miss or guess, and which slide will you reread before Review Question 4?</p>
   </aside>
 </section>
 
@@ -708,10 +819,35 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <aside class="notes">
     <p>This is your first Reading Guide checkpoint in this lecture. Try to answer on your own before you open the Reading Guide, which opens in a new tab.</p>
     <p>How to build a strong answer:</p>
-    <p>For the <strong>goals</strong>, start with the frame on slide <strong>b</strong> <em>tribute-order</em>, then the mission stated on slide <strong>c</strong> <em>zheng-he</em>: visiting rulers, announcing peaceful intentions, handing out gifts. Slides <strong>d</strong> <em>voyages-map</em> and <strong>e</strong> <em>tribute-gifts</em> show what that looked like in practice, <strong>f</strong> <em>ma-huan</em> shows what the fleet learned, and <strong>ff</strong> <em>voyages-meaning</em> adds armed diplomacy.</p>
-    <p>For the <strong>end</strong> of the voyages, use slides <strong>g</strong> <em>fleet-costs</em>, <strong>ee</strong> <em>four-reasons</em> and <strong>h</strong> <em>fleet-ends</em>, with <strong>dd</strong> <em>concept-culturalism</em> for the ideological reason. The question asks you to separate economic factors from political ones, so label each reason you give.</p>
-    <p>Remember that several details about Zheng He come from Ma Huan, Britannica and other sources, because pages 231–232 are missing from our copy. If you use them, say where they come from.</p>
+    <p>For the <strong>goals</strong>, start with the frame on the <a href="#/tribute-order">tribute-order</a> slide, then the mission stated on the <a href="#/zheng-he">zheng-he</a> slide: visiting rulers, announcing peaceful intentions, handing out gifts. The <a href="#/voyages-map">voyages-map</a> and <a href="#/tribute-gifts">tribute-gifts</a> slides show what that looked like in practice, <a href="#/ma-huan">ma-huan</a> shows what the fleet learned, and <a href="#/voyages-meaning">voyages-meaning</a> adds armed diplomacy.</p>
+    <p>For the <strong>end</strong> of the voyages, use the <a href="#/fleet-costs">fleet-costs</a>, <a href="#/four-reasons">four-reasons</a> and <a href="#/fleet-ends">fleet-ends</a> slides, with <a href="#/concept-culturalism">concept-culturalism</a> for the ideological reason. The question asks you to separate economic factors from political ones, so label each reason you give.</p>
+    <p>Several details about Zheng He come from his interpreter Ma Huan and from the other sources named on the slides' source lines. If you use them, say where they come from.</p>
+    <p><strong>Why this matters:</strong> this question tests whether you can tell what a government wanted from why it stopped, and sort reasons into kinds (Ebrey, p. 233).</p>
     <p><strong>Check yourself:</strong> Can you state one goal, one economic reason and one political reason, each in a single sentence?</p>
+  </aside>
+</section>
+<!-- ===== ll · Segment 2 ===== -->
+<section id="segment-2" data-letter="ll" class="segment-slide">
+  <p class="kicker">Segment 2 of 3 · 1368–1571</p>
+  <h2>Segment 2: The Steppe and the Wall</h2>
+  <div class="g-45-55">
+    <figure class="fig h-400">
+      <img src="images/ch14-lec2/15-great-wall-mutianyu.webp" alt="The brick-faced Ming Great Wall at Mutianyu winding along steep mountain ridges, with watchtowers">
+      <figcaption>The Great Wall at Mutianyu, north of Beijing. Photo: Lloyd Tudor. CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:The_Mutianyu_section_of_the_Great_Wall_of_China.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>.</figcaption>
+    </figure>
+    <div class="stack">
+      <div class="story-beat gold">Ming armies marched into Mongolia, lost an emperor in 1449, refused the Mongols trade, and finally built the wall.</div>
+      <div class="story-beat">This segment teaches the history behind <b>Review Question 5</b>, and it ends with a short self-check and then the question itself.</div>
+      <p class="seg-progress" aria-label="Segment 2 of 3"><span class="on"></span><span class="on"></span><span></span></p>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Segment 2 turns north. The Mongols had ruled China until 1368, and the early Ming emperors feared they would return (Ebrey, Ch. 14, p. 233).</p>
+    <p>You will follow Ming policy through four stages: huge campaigns into Mongolia under the Hongwu and Yongle emperors, their failure against a mobile enemy, the capture of an emperor in 1449 and a siege of Beijing in 1550, and the long quarrel at court over whether to trade with the Mongols, which ended in walls.</p>
+    <p>The photograph shows the wall that came out of that policy, at Mutianyu north of Beijing.</p>
+    <p>As you go, mark each date where policy changed and the reason it changed. Review Question 5 asks you to explain how policy evolved, not just to list events.</p>
+    <p><strong>Why this matters:</strong> the Great Wall that visitors walk today is the record of this policy debate, built mostly in the 1500s.</p>
+    <p><strong>Check yourself:</strong> Before you start, guess: if an enemy can always ride away, what is the best way to fight it?</p>
   </aside>
 </section>
 <!-- ===== j · steppe-campaigns ===== -->
@@ -734,8 +870,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <aside class="notes">
     <p>Now turn north. The early Ming emperors held Mongol fighting men in awe. They had seen what the Mongols had done under Chinggis Khan, and they feared someone might put together another great military machine of the same kind (Ebrey, p. 233).</p>
     <p>They also remembered the Song dynasty, which had paid its powerful northern neighbors to keep the peace. Both emperors were determined not to suffer that fate. Their answer was to attack first.</p>
-    <p>Under these two emperors the Ming sent large, well-provisioned armies into Mongol territory, with as many as 250,000 troops. The Hongwu emperor sent his generals: Xu Da led the great drive of 1372, and Lan Yu routed the Mongols at Lake Buyur in 1388. The Yongle emperor led his five campaigns himself, and he died on the fifth, in 1424, at the age of sixty-four. You met him in the saddle on slide <strong>u</strong> of Lecture 1, <em>yongle-wars</em>.</p>
-    <p>One correction: the textbook says both emperors led their armies into Mongolia in person (p. 233). Only the Yongle emperor did; the Hongwu emperor sent his generals, which is why the slide title says "sent."</p>
+    <p>Under these two emperors the Ming sent large, well-provisioned armies into Mongol territory, with as many as 250,000 troops. The Hongwu emperor sent his generals: Xu Da led the great drive of 1372, and Lan Yu routed the Mongols at Lake Buyur in 1388. The Yongle emperor led his five campaigns himself, and he died on the fifth, in 1424, at the age of sixty-four. You met him in the saddle in Lecture 1, on the <a href="HIST270_ch14_lec1_founders_autocracy_revFA26.html#/yongle-wars" target="_blank" rel="noopener">yongle-wars</a> slide.</p>
     <p>The scene image for this slide is an AI-generated interpretation, not a historical source.</p>
     <p><strong>Why this matters:</strong> this is the starting point of the policy that Review Question 5 asks you to trace: offense.</p>
     <p><strong>Check yourself:</strong> What two fears drove the early Ming emperors to invade Mongolia?</p>
@@ -761,9 +896,9 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <aside class="notes">
     <p>The great campaigns were extremely expensive, and they did not accomplish much, given the Mongols' mobility (Ebrey, p. 233). An army of foot soldiers and supply carts could march for weeks into the grasslands, and the Mongols could simply move their herds and tents out of the way.</p>
     <p>The danger the emperors feared also turned out to be smaller than they thought. After the last Yuan emperor retreated to Mongolia, his loss of China discredited him, and he could not keep the Mongols united. Civil wars followed. Through much of the Ming, the three million or so Mongols were loosely divided into six groups and rarely formed the kind of federation that could seriously threaten China. When one leader did reunite them, Esen in the 1440s, the result was the disaster of 1449 on the next slide.</p>
-    <p>The textbook says the Mongols "never formed" such a federation (p. 233). That is a little too strong: Esen reunited the Mongol groups in the 1440s, so the slide says they "rarely stayed united for long."</p>
     <p>So the policy changed. Later in the dynasty the Ming was less inclined to send armies into Mongolia and concentrated on defending its borders against attack. That shift, from offense to defense, is the core of Review Question 5.</p>
     <p>The scene image for this slide is an AI-generated interpretation, not a historical source.</p>
+    <p><strong>Why this matters:</strong> the failure of the campaigns is the turning point in Review Question 5. It pushed the Ming from offense toward defense.</p>
     <p><strong>Check yourself:</strong> Give two reasons the campaigns into Mongolia achieved so little.</p>
   </aside>
 </section>
@@ -786,9 +921,8 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <p class="source-line">Sources: Ebrey, Ch. 14, pp. 230, 233.</p>
   <aside class="notes">
     <p>Defense did not mean safety. Groups of Mongols could and did raid, and twice in the Ming they seriously threatened the dynasty. The first time was in 1449, when <strong>Esen</strong>, leader of the Western Mongols, the Oirats, captured the emperor (Ebrey, p. 233).</p>
-    <p>You met that emperor in Lecture 1, slide <strong>cc</strong>, <em>yingzong-1449</em>; the link on the slide takes you back there. At twenty-one, encouraged by his favorite eunuch, <strong>Yingzong</strong> led an army against the Mongols himself. The army was destroyed, he was captured, and the Mongols returned him the next year (p. 230).</p>
-    <p>Historians call this the <strong>Tumu Incident</strong>, after Tumu, the place about fifty miles northwest of Beijing where the Ming army was caught (Elverskog, 2017). The textbook gives the army as fifty thousand men; other accounts give much larger figures, so the true size is uncertain.</p>
-    <p>One small correction: the textbook calls Esen "khan" in 1449 (p. 233). He was then the Oirat <i>taishi</i>, or chief minister, and made himself khan only in 1453.</p>
+    <p>You met that emperor in Lecture 1, on the <a href="HIST270_ch14_lec1_founders_autocracy_revFA26.html#/yingzong-1449" target="_blank" rel="noopener">yingzong-1449</a> slide; the link on this slide takes you back there. At twenty-one, encouraged by his favorite eunuch, <strong>Yingzong</strong> led an army against the Mongols himself. The army was destroyed, he was captured, and the Mongols returned him the next year (p. 230).</p>
+    <p>Historians call this the <strong>Tumu Incident</strong>, after Tumu, the place about fifty miles northwest of Beijing where the Ming army was caught. Accounts of the army's size vary widely, from fifty thousand men to far more.</p>
     <p>The scene image for this slide is an AI-generated interpretation, not a historical source.</p>
     <p><strong>Why this matters:</strong> 1449 showed that even a defensive Ming could be humiliated, and it sharpened the court's argument about what to do next.</p>
     <p><strong>Check yourself:</strong> What were the two times the Mongols seriously threatened the Ming? The second is on the next slide.</p>
@@ -812,10 +946,9 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   </div>
   <p class="source-line">Sources: Ebrey, Ch. 14, p. 233.</p>
   <aside class="notes">
-    <p>Here the steppe story meets the tribute system from slide <strong>b</strong>, <em>tribute-order</em>. The Ming was very reluctant to grant Mongol leaders any privileges, such as trading posts along the border. It wanted the different groups of Mongols to trade only through the envoy system (Ebrey, p. 233).</p>
-    <p>Mongol envoys repeatedly made a simple argument: friction could be reduced if regular trade were introduced. The logic, though the textbook does not spell it out: people who could not trade for goods might raid for them. The court refused, again and again.</p>
+    <p>Here the steppe story meets the tribute system from the <a href="#/tribute-order">tribute-order</a> slide. The Ming was very reluctant to grant Mongol leaders any privileges, such as trading posts along the border. It wanted the different groups of Mongols to trade only through the envoy system (Ebrey, p. 233).</p>
+    <p>Mongol envoys repeatedly made a simple argument: friction could be reduced if regular trade were introduced. The logic is easy to see: people who could not trade for goods might raid for them. The court refused, again and again.</p>
     <p>The second great threat came in 1550, when the forces of <strong>Altan Khan</strong>, khan of the Mongols in Inner Mongolia, surrounded Beijing itself. Only in 1571 did the court reach an agreement with Altan Khan. It named him a Ming prince and opened border markets where Mongols could trade horses for Chinese goods.</p>
-    <p>The textbook gives the date as 1570 (p. 233). That was the year Altan's grandson fled to the Ming and talks began; the agreement came on 21 April 1571, when Altan was named Shunyi Wang, "Obedient and Righteous Prince."</p>
     <p>The scene image for this slide is an AI-generated interpretation, not a historical source.</p>
     <p><strong>Why this matters:</strong> the court's rule that trade must go through tribute kept the border tense for more than a century.</p>
     <p><strong>Check yourself:</strong> What did Mongol envoys ask for, and how long did it take the court to agree?</p>
@@ -841,8 +974,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <aside class="notes">
     <p>At court, officials split into two camps. One side argued that the Mongols could be managed by allowing more trade. The other insisted that no concessions be made to them at all (Ebrey, p. 233).</p>
     <p>Meanwhile, on the frontier, by the mid-fifteenth century, administrators of the western sections of the border began connecting their main garrison points with walls. They had some success in trapping groups of Mongol cavalry between them.</p>
-    <p>The decisive step came in 1474, when the court approved the plan of the official Yu Zijun. In a few months, 40,000 troops built about 600 miles of wall along the Ordos frontier (historian F. W. Mote).</p>
-    <p>The textbook dates the first linked walls to the mid-1400s and says walls solved the deadlock (p. 233). Large-scale building really began with Yu Zijun in 1474, and the trade quarrel went on until 1571, so the slide calls the wall a compromise rather than a solution.</p>
+    <p>The decisive step came in 1474, when the court approved the plan of the official Yu Zijun. In a few months, 40,000 troops built about 600 miles of wall along the Ordos frontier.</p>
     <p>Walls offered a way around the argument. Extending the wall was later seen as a solution to the deadlock: the court did not have to choose between trading and fighting. It could build.</p>
     <p>The scene image for this slide is an AI-generated interpretation, not a historical source.</p>
     <p><strong>Why this matters:</strong> the Great Wall you know was not one ancient project. It grew out of this Ming policy debate and a shift from offense to defense.</p>
@@ -850,28 +982,65 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   </aside>
 </section>
 <!-- ===== o · great-wall ===== -->
-<section id="great-wall" data-letter="o" class="visual-hero">
-  <img class="art-bg" src="images/ch14-lec2/15-great-wall-mutianyu.webp" alt="The brick-faced Ming Great Wall at Mutianyu winding along steep mountain ridges, with watchtowers">
-  <div class="art-veil left-heavy"></div>
-  <div class="act-copy">
-    <p class="kicker">Q5 story · North of Beijing · 1500s</p>
-    <h2>The Ming Wall Is the Great Wall Visitors See Today</h2>
+<section id="great-wall" data-letter="o">
+  <p class="kicker">Q5 story · North of Beijing · 1500s</p>
+  <h2>The Ming Wall Is the Great Wall Visitors See Today</h2>
+  <div class="g-55-45">
+    <figure class="fig h-400 wide">
+      <img src="images/ch14-lec2/15-great-wall-mutianyu.webp" alt="The brick-faced Ming Great Wall at Mutianyu winding along steep mountain ridges, with watchtowers">
+      <figcaption>The Great Wall at Mutianyu, north of Beijing. Photo: Lloyd Tudor. CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:The_Mutianyu_section_of_the_Great_Wall_of_China.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>.</figcaption>
+    </figure>
     <div class="stack">
-      <div class="story-beat gold">A 2009 survey found Ming walls and barriers running about 5,500 miles, from Liaoning to Jiayuguan in Gansu.</div>
-      <div class="story-beat">Along its eastern 500 miles, it averages about 35 feet high, with lookout towers every half mile.</div>
-      <div class="story-beat purple">Its brick facing greatly impressed the first Westerners who saw it.</div>
-    </div>
-    <p class="source-line">Sources: Ebrey, Ch. 14, p. 233.</p>
+    <div class="story-beat gold">A 2009 survey found Ming walls and barriers running about 5,500 miles, from Liaoning to Jiayuguan in Gansu.</div>
+    <div class="story-beat">Along its eastern 500 miles, it averages about 35 feet high, with lookout towers every half mile.</div>
+    <div class="story-beat purple">Its brick facing greatly impressed the first Westerners who saw it.</div>
   </div>
-  <p class="visual-credit">The Great Wall at Mutianyu, north of Beijing. Photo: Lloyd Tudor. CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:The_Mutianyu_section_of_the_Great_Wall_of_China.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>.</p>
+  </div>
+  <p class="source-line">Sources: Ebrey, Ch. 14, p. 233.</p>
   <aside class="notes">
     <p>Much of the Ming Great Wall survives today, and it is the wall tourists walk on. It runs from northeast of Beijing into Gansu province in the west (Ebrey, p. 233). A 2009 survey measured the Ming walls, trenches and natural barriers at 8,851.8 km, about 5,500 miles, from Liaoning to Jiayuguan in Gansu.</p>
-    <p>The textbook's "about 1,500 miles" (p. 233) is far too low. The 2009 survey's 8,851.8 km includes trenches and natural barriers; the built wall alone is about 6,260 km, close to 3,900 miles.</p>
+    <p>That figure counts trenches and natural barriers as well as walls. The built wall alone runs about 6,260 km, close to 3,900 miles.</p>
     <p>In the eastern 500 miles, closest to the capital, the walls average about 35 feet high and 20 feet across, with towers every half mile for lookouts. For much of its length the wall is faced with brick. The brick greatly impressed the first Westerners who saw it.</p>
     <p>The photo is real. It shows the section at Mutianyu, north of Beijing, climbing steep ridges with its watchtowers. Ask yourself how many workers, bricks and years a single mile of this took.</p>
     <p>Earlier dynasties built walls too, but the textbook ties this wall to the Ming policy you have just followed: the campaigns failed, the Mongols kept raiding, the court refused to trade, and building became the answer.</p>
     <p><strong>Why this matters:</strong> the Great Wall is the physical result of a policy change from offense to defense.</p>
     <p><strong>Check yourself:</strong> Give the Ming wall's length in the 2009 survey, its height in the east, and the spacing of its towers.</p>
+  </aside>
+</section>
+<!-- ===== oo · Self-check Segment 2 ===== -->
+<section id="sc-q5" data-letter="oo" data-background="#14302A">
+  <p class="kicker">Self-check · Segment 2 · not graded</p>
+  <h2>Check Yourself: The Steppe and the Wall</h2>
+  <p class="sc-intro">Answer each question from memory, out loud or on paper, then click <b>Show answer</b> to check yourself. Nothing here is graded or recorded.</p>
+  <div class="selfcheck">
+    <div class="sc-item">
+      <p class="sc-q"><b>1.</b> What two fears drove the early Ming emperors to invade Mongolia?</p>
+      <button type="button" class="sc-btn" aria-expanded="false" aria-controls="sc-sc-q5-1">Show answer</button>
+      <div class="sc-a" id="sc-sc-q5-1" hidden><p>That the Mongols would build another war machine like Chinggis Khan's, and that the Ming would have to pay them off as the Song had (Ebrey, p. 233).</p></div>
+    </div>
+    <div class="sc-item">
+      <p class="sc-q"><b>2.</b> Give two reasons the campaigns achieved so little.</p>
+      <button type="button" class="sc-btn" aria-expanded="false" aria-controls="sc-sc-q5-2">Show answer</button>
+      <div class="sc-a" id="sc-sc-q5-2" hidden><p>The Mongols could ride away from slow armies, and the divided Mongols were less of a threat than feared (p. 233).</p></div>
+    </div>
+    <div class="sc-item">
+      <p class="sc-q"><b>3.</b> What did Mongol envoys ask for, and when did the court agree?</p>
+      <button type="button" class="sc-btn" aria-expanded="false" aria-controls="sc-sc-q5-3">Show answer</button>
+      <div class="sc-a" id="sc-sc-q5-3" hidden><p>Regular trade at border markets; the court agreed with Altan Khan only in 1571 (p. 233).</p></div>
+    </div>
+    <div class="sc-item">
+      <p class="sc-q"><b>4.</b> How did wall-building get around the quarrel at court?</p>
+      <button type="button" class="sc-btn" aria-expanded="false" aria-controls="sc-sc-q5-4">Show answer</button>
+      <div class="sc-a" id="sc-sc-q5-4" hidden><p>The court did not have to choose between trading and fighting; it could build (p. 233).</p></div>
+    </div>
+  </div>
+  <p class="rg-links"><span>Missed one? Go back:</span> <a href="#/steppe-campaigns">steppe-campaigns</a> <a href="#/campaigns-fail">campaigns-fail</a> <a href="#/trade-deadlock">trade-deadlock</a> <a href="#/wall-decision">wall-decision</a></p>
+  <aside class="notes">
+    <p>Segment 2 is done. Test yourself before Review Question 5. The questions come from the "Check yourself" prompts on the segment's slides (Ebrey, Ch. 14, p. 233).</p>
+    <p>Answer each from memory first, then click <strong>Show answer</strong>. If one stumps you, follow the link back to the slide that teaches it.</p>
+    <p>The four questions run in time order: the reasons for attacking, the reasons the attacks failed, the Mongol demand for trade, and the wall as the court's way out. That order is the backbone of a good answer to Review Question 5, which asks how policy evolved.</p>
+    <p><strong>Why this matters:</strong> a question about change over time needs the steps in the right order, with a reason for each.</p>
+    <p><strong>Check yourself:</strong> Can you put 1424, 1449, 1550 and 1571 in order and say what happened in each year?</p>
   </aside>
 </section>
 <!-- ===== p · Reading Guide Q5 ===== -->
@@ -888,11 +1057,36 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <aside class="notes">
     <p>Your second checkpoint. Answer on your own first, then open the Reading Guide.</p>
     <p>How to build a strong answer:</p>
-    <p>The question asks how policy <strong>evolved</strong>, so organize your answer in time. Begin with the offensive campaigns of the Hongwu and Yongle emperors on slide <strong>j</strong> <em>steppe-campaigns</em>. Explain why they disappointed, using slide <strong>k</strong> <em>campaigns-fail</em>.</p>
-    <p>Then show the pressures that pushed the court toward defense: the capture of the emperor in 1449 on slide <strong>l</strong> <em>tumu-1449</em>, and the long argument over trade and the 1550 siege on slide <strong>m</strong> <em>trade-deadlock</em>.</p>
-    <p>Finish with the result. Slide <strong>n</strong> <em>wall-decision</em> explains why building walls settled the argument, and slide <strong>o</strong> <em>great-wall</em> gives the wall itself.</p>
+    <p>The question asks how policy <strong>evolved</strong>, so organize your answer in time. Begin with the offensive campaigns of the Hongwu and Yongle emperors on the <a href="#/steppe-campaigns">steppe-campaigns</a> slide. Explain why they disappointed, using the <a href="#/campaigns-fail">campaigns-fail</a> slide.</p>
+    <p>Then show the pressures that pushed the court toward defense: the capture of the emperor in 1449 on the <a href="#/tumu-1449">tumu-1449</a> slide, and the long argument over trade and the 1550 siege on the <a href="#/trade-deadlock">trade-deadlock</a> slide.</p>
+    <p>Finish with the result. The <a href="#/wall-decision">wall-decision</a> slide explains why building walls settled the argument, and the <a href="#/great-wall">great-wall</a> slide gives the wall itself.</p>
     <p>Use a few dates as signposts, such as 1424, 1449, 1550 and 1570, but explain the links between them rather than just listing them.</p>
+    <p><strong>Why this matters:</strong> this question asks you to trace change over time, from campaigns to walls, and to explain the pressures behind each step (Ebrey, p. 233).</p>
     <p><strong>Check yourself:</strong> Can you explain in one sentence why walls looked like a better answer than campaigns?</p>
+  </aside>
+</section>
+<!-- ===== mm · Segment 3 ===== -->
+<section id="segment-3" data-letter="mm" class="segment-slide">
+  <p class="kicker">Segment 3 of 3 · 1372–1600</p>
+  <h2>Segment 3: The Sea and the Silver</h2>
+  <div class="g-45-55">
+    <figure class="fig h-400">
+      <img src="images/ch14-lec2/18-nanban-carrack.webp" alt="Japanese gold-leaf folding screen showing a large black Portuguese carrack with crowds of traders and sailors">
+      <figcaption><i>Nanban</i> screen (detail of the left three panels) showing a Portuguese ship arriving to trade in Japan, attributed to Kano Naizen (1570–1616). Museu Nacional de Arte Antiga, Lisbon. Public domain, <a href="https://commons.wikimedia.org/wiki/File:Nanbansen_Carrack_by_Kano_Naizen.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>.</figcaption>
+    </figure>
+    <div class="stack">
+      <div class="story-beat gold">The court tried to keep coastal trade inside its rules; merchants, pirates and American silver forced their way in anyway.</div>
+      <div class="story-beat">This segment teaches the history behind <b>Review Question 6</b>, and it ends with a short self-check and then the question itself.</div>
+      <p class="seg-progress" aria-label="Segment 3 of 3"><span class="on"></span><span class="on"></span><span class="on"></span></p>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Segment 3 goes to the coast. The court wanted trade to stay inside the tribute system, with assigned ports and rare, small missions (Ebrey, Ch. 14, p. 234).</p>
+    <p>You will see how a new international trading community of Japanese, Portuguese, Spanish, Dutch and Chinese merchants outgrew those rules, how pirates raided the coast, and how the court finally eased its restrictions. Then you will follow the silver: from mines in Japan and the Americas, through Manila, into Chinese markets and finally into the tax system itself, along with new crops from the Americas.</p>
+    <p>The screen shows a Portuguese ship arriving to trade in Japan, part of the same sea world.</p>
+    <p>As you go, ask which results the court intended and which it did not. Review Question 6 asks about both.</p>
+    <p><strong>Why this matters:</strong> by 1600 Ming China was tied to a world economy, and its own taxes depended on silver from the other side of the globe.</p>
+    <p><strong>Check yourself:</strong> Before you start, guess: what happens when the rules say trade once in ten years and the profits say trade every season?</p>
   </aside>
 </section>
 <!-- ===== q · port-rules ===== -->
@@ -915,8 +1109,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <p class="source-line">Sources: Ebrey, Ch. 14, p. 234.</p>
   <aside class="notes">
     <p>Now the third frontier: the coast. The court's obsession with the Mongols did not mean its other borders posed no problems (Ebrey, p. 234).</p>
-    <p>On the coast the court wanted trade subordinated to diplomacy, that is, kept inside the tribute system you saw on slide <strong>b</strong>, <em>tribute-order</em>. So it assigned ports. Envoys from Ryukyu were supposed to enter only through Fujian, those from Japan only through Ningbo, those from Indonesia only through Guangzhou.</p>
-    <p>The textbook says envoys "from the Philippines" came in through Fuzhou (p. 234), but the official Ming history assigns the Fujian port to Ryukyu, so the slide says Ryukyu.</p>
+    <p>On the coast the court wanted trade subordinated to diplomacy, that is, kept inside the tribute system you saw on the <a href="#/tribute-order">tribute-order</a> slide. So it assigned ports. Envoys from Ryukyu were supposed to enter only through Fujian, those from Japan only through Ningbo, those from Indonesia only through Guangzhou.</p>
     <p>It also limited the missions. Japanese embassies were to come no more than once in ten years, with two ships and three hundred men.</p>
     <p>From 1372 the founder banned Chinese subjects from sailing abroad to trade, and by 1374 he had closed the maritime trade offices. This sea ban, <i>haijin</i>, is behind the title of this lecture; it was relaxed only in 1567.</p>
     <p>Picture merchants who wanted to trade every season, not once a decade. The scene image is an AI-generated interpretation, not a historical source.</p>
@@ -942,7 +1135,6 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <p class="source-line">Sources: Ebrey, Ch. 14, p. 234. Screen details: Wikimedia Commons record.</p>
   <aside class="notes">
     <p>In the sixteenth century, the court's formal system ran into something it could not control. An international East Asian maritime trading community had formed, made up of Japanese, Portuguese, Spanish, Dutch and Chinese merchants and adventurers (Ebrey, p. 234). The Dutch came last: the first Dutch ship reached Chinese waters, near Macao, in 1601.</p>
-    <p>That is why the slide says the Dutch joined about 1600, although the textbook lists them among the traders of the sixteenth century (p. 234).</p>
     <p>Because the profits to be had from maritime trade were high, both open and <strong>clandestine</strong>, that is secret and illegal, trade took place all along the coast. The textbook's verdict is careful: the formal system "proved unable to contain" this community. It did not stop trade; it only pushed much of it outside the law.</p>
     <p>The screen is real, though it comes from Japan rather than China. Japanese painters called the Portuguese <i>nanban</i>, "southern barbarians," because their ships arrived from the south, and they painted their huge ships and crowds of traders on gold folding screens.</p>
     <p><strong>Why this matters:</strong> restrictive rules did not create this trading world, but they could not hold it back. Be precise about that when you answer Review Question 6.</p>
@@ -968,11 +1160,11 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <p class="source-line">Sources: Ebrey, Ch. 14, p. 234.</p>
   <aside class="notes">
     <p>Boats laden with goods attracted pirates, and the pirates grew so strong that they raided the coast from Shandong in the north to Guangzhou in the south (Ebrey, p. 234).</p>
-    <p>Chinese sources called these raiders <strong>wokou</strong>, "Japanese pirates." Britannica notes that they were mainly Japanese at first but of mixed origin later, and that by the early 1500s most of them were probably Chinese.</p>
-    <p>The Ming response is the surprising part. Instead of expanding its navy, the government forced people to move away from the coast, hoping to starve the pirates out. Remember that the court had broken up its great ships in 1474, on slide <strong>h</strong>, <em>fleet-ends</em>.</p>
+    <p>Chinese sources called these raiders <strong>wokou</strong>, "Japanese pirates." They were mainly Japanese at first but of mixed origin later, and by the early 1500s most of them were probably Chinese.</p>
+    <p>The Ming response is the surprising part. Instead of expanding its navy, the government forced people to move away from the coast, hoping to starve the pirates out. Remember that the court had broken up its great ships in 1474, on the <a href="#/fleet-ends">fleet-ends</a> slide.</p>
     <p>Evacuation was not the whole answer. In the 1550s Hu Zongxian took the surrender of the smuggler chief Wang Zhi, and <strong>Qi Jiguang</strong> drilled a new army of country recruits that by 1563 had destroyed the last major pirate base in Fujian.</p>
     <p>The scroll is real. It is a Ming painting of soldiers fighting the raiders, now in the National Museum of China.</p>
-    <p><strong>Why this matters:</strong> the textbook does not say the trade rules caused the piracy. It says trade drew pirates, and the court chose evacuation over a navy.</p>
+    <p><strong>Why this matters:</strong> read the textbook's wording closely. Trade drew pirates, and the court chose evacuation over a navy. How far the trade rules themselves caused the piracy is a question for you to judge in Review Question 6.</p>
     <p><strong>Check yourself:</strong> What did the Ming government do instead of building a navy, and what did it hope that would achieve?</p>
   </aside>
 </section>
@@ -1041,9 +1233,8 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <p class="source-line">Sources: Ebrey, Ch. 14, p. 234. Engraving: Wikimedia Commons record.</p>
   <aside class="notes">
     <p>Moving people inland did not defeat the pirates. Anti-pirate efforts did not have much success until maritime trade restrictions were eased in the late sixteenth century (Ebrey, p. 234).</p>
-    <p>Why might that work? Once more trade was legal, merchants had less reason to deal with smugglers. The textbook gives the sequence, not that explanation, so treat it as an inference.</p>
+    <p>Why might that work? Once more trade was legal, merchants had less reason to deal with smugglers. That explanation is an inference from the order of events, so present it as your own reasoning.</p>
     <p>Portugal set up its trading base at <strong>Macao</strong>, on the coast near Guangzhou, about 1557, by agreement with local officials. In 1567 the court opened Yuegang in Fujian to Chinese merchants sailing abroad. Portugal held Macao until 1999.</p>
-    <p>The textbook puts Macao "under the new policies" (p. 234), but the order was the other way round: Macao came first, through a local arrangement, and the court eased the ban in 1567.</p>
     <p>The engraving is real, made in the workshop of the engraver Theodor de Bry in Frankfurt in the late 1500s. Like many European images of Asia at the time, it was based on travelers' reports rather than the artist's own visit, so read the details with care.</p>
     <p><strong>Why this matters:</strong> this is how China joined the new global trading network: not by a grand decision, but by easing rules that were not working.</p>
     <p><strong>Check yourself:</strong> What finally reduced piracy, according to the textbook, and what did Portugal gain?</p>
@@ -1055,6 +1246,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <h2>As Silver Poured In, the Ming Began Collecting Its Taxes in Silver</h2>
   <div class="g-45-55">
     <div class="stack">
+      <div class="concept-card"><p class="cc-label">Concept</p><p class="cc-term">Single whip</p><p class="cc-def">A tax reform that bundled the land tax and labor service into one payment, assessed mostly on land and paid in silver.</p></div>
       <div class="story-beat">Families had paid taxes in grain and cloth and owed the state unpaid labor, assigned household by household.</div>
       <div class="story-beat gold">From the 1530s, officials in the south bundled the land tax and labor dues into one payment in silver: the "single whip."</div>
       <div class="story-beat purple">In 1581, after a survey of farmland begun in 1578, the court extended the method across the empire.</div>
@@ -1069,7 +1261,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <aside class="notes">
     <p>Follow the silver one step further, from the docks into the county tax office. The textbook shows silver flooding into China to pay for silk and porcelain (Ebrey, p. 234). The state soon wanted its share in the same metal.</p>
     <p>Under Taizu's system, families paid the land tax mostly in grain and cloth and owed unpaid labor service, assigned household by household. Collecting so many different dues was slow, and the rich found ways to push them onto the poor.</p>
-    <p>From the 1530s, reforming officials in the Yangzi delta and the southeast began to bundle the land tax and the labor dues into a single payment, assessed mostly on land and paid in silver. It was called the <strong>single whip</strong>, a pun on a phrase meaning "one combined item." The reform spread county by county, in fits and starts.</p>
+    <p>From the 1530s, reforming officials in the Yangzi delta and the southeast began to bundle the land tax and the labor dues into a single payment, assessed mostly on land and paid in silver. The gold card gives the short definition. It was called the <strong>single whip</strong>, a pun on a phrase meaning "one combined item." The reform spread county by county, in fits and starts.</p>
     <p>In 1581 the grand secretary Zhang Juzheng, after a farmland survey begun in 1578, ordered the method extended to the whole empire. Even then, remote regions adopted it years later.</p>
     <p>The ingots are real, shown at the Wanli emperor's tomb.</p>
     <p><strong>Why this matters:</strong> once taxes were due in silver, the treasury depended on silver from Japan and the Americas. Lecture 4 shows what happened when it stopped.</p>
@@ -1103,6 +1295,42 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <p><strong>Check yourself:</strong> Why were sweet potatoes and maize especially important?</p>
   </aside>
 </section>
+<!-- ===== pp · Self-check Segment 3 ===== -->
+<section id="sc-q6" data-letter="pp" data-background="#14302A">
+  <p class="kicker">Self-check · Segment 3 · not graded</p>
+  <h2>Check Yourself: The Sea and the Silver</h2>
+  <p class="sc-intro">Answer each question from memory, out loud or on paper, then click <b>Show answer</b> to check yourself. Nothing here is graded or recorded.</p>
+  <div class="selfcheck">
+    <div class="sc-item">
+      <p class="sc-q"><b>1.</b> Through which port did Japanese envoys have to enter, and how often?</p>
+      <button type="button" class="sc-btn" aria-expanded="false" aria-controls="sc-sc-q6-1">Show answer</button>
+      <div class="sc-a" id="sc-sc-q6-1" hidden><p>Ningbo, no more than once every ten years, with two ships and 300 men (Ebrey, p. 234).</p></div>
+    </div>
+    <div class="sc-item">
+      <p class="sc-q"><b>2.</b> What did the Ming do instead of building a navy against pirates?</p>
+      <button type="button" class="sc-btn" aria-expanded="false" aria-controls="sc-sc-q6-2">Show answer</button>
+      <div class="sc-a" id="sc-sc-q6-2" hidden><p>It forced coastal people to move inland, hoping to starve the pirates out (p. 234).</p></div>
+    </div>
+    <div class="sc-item">
+      <p class="sc-q"><b>3.</b> What went out of China, what came in, and through which port?</p>
+      <button type="button" class="sc-btn" aria-expanded="false" aria-controls="sc-sc-q6-3">Show answer</button>
+      <div class="sc-a" id="sc-sc-q6-3" hidden><p>Silk and porcelain went out; silver from Peru and Mexico came in through Manila (p. 234).</p></div>
+    </div>
+    <div class="sc-item">
+      <p class="sc-q"><b>4.</b> What did the single whip combine, and in what was it paid?</p>
+      <button type="button" class="sc-btn" aria-expanded="false" aria-controls="sc-sc-q6-4">Show answer</button>
+      <div class="sc-a" id="sc-sc-q6-4" hidden><p>The land tax and labor service, in one payment in silver.</p></div>
+    </div>
+  </div>
+  <p class="rg-links"><span>Missed one? Go back:</span> <a href="#/port-rules">port-rules</a> <a href="#/pirates">pirates</a> <a href="#/silver-route">silver-route</a> <a href="#/single-whip">single-whip</a></p>
+  <aside class="notes">
+    <p>Segment 3 is done. One more self-check before the last Review Question of this lecture. The questions come from the "Check yourself" prompts on the segment's slides (Ebrey, Ch. 14, p. 234).</p>
+    <p>Answer from memory, then click <strong>Show answer</strong>. Use the links at the bottom to go back to any slide you need.</p>
+    <p>The first two questions are about the court's rules and its response to piracy; the last two are about silver, first as trade and then as taxes. Review Question 6 asks how restrictive policies backfired and how China joined global networks, so these are the two halves of your evidence.</p>
+    <p><strong>Why this matters:</strong> seeing both the rules and the results lets you judge what a policy actually did, not just what it intended.</p>
+    <p><strong>Check yourself:</strong> In one sentence, how did silver connect a Chinese tax office to a mine in Peru?</p>
+  </aside>
+</section>
 <!-- ===== w · Reading Guide Q6 ===== -->
 <section id="rg-q6" data-letter="w" data-background="#1B4332">
   <p class="kicker">Reading Guide · Review Question 6</p>
@@ -1117,9 +1345,10 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <aside class="notes">
     <p>Your third and final checkpoint in this lecture. Answer on your own first, then open the Reading Guide.</p>
     <p>How to build a strong answer:</p>
-    <p>The first part of the question says the trade policies "inadvertently fuel[ed]" piracy. Start with the rules on slide <strong>q</strong> <em>port-rules</em>. Then use slide <strong>r</strong> <em>smuggling</em> and slide <strong>s</strong> <em>pirates</em> to show what happened when trade outgrew them.</p>
-    <p>Be careful here. The textbook says the formal system could not contain trade, that loaded ships attracted pirates, and that the court moved people inland instead of building a navy. It does not say in so many words that the rules caused piracy. A strong answer shows the connection and says how strong the evidence for it is.</p>
-    <p>For the second part, on joining global networks, use slide <strong>t</strong> <em>silver-route</em>, slide <strong>u</strong> <em>policy-eases</em>, slide <strong>ii</strong> <em>single-whip</em> and slide <strong>v</strong> <em>new-crops</em>: silver through Manila, eased restrictions and Macao, taxes paid in silver, and American crops.</p>
+    <p>The first part of the question says the trade policies "inadvertently fuel[ed]" piracy. Start with the rules on the <a href="#/port-rules">port-rules</a> slide. Then use the <a href="#/smuggling">smuggling</a> slide and the <a href="#/pirates">pirates</a> slide to show what happened when trade outgrew them.</p>
+    <p>Be careful here. The textbook says the formal system could not contain trade, that loaded ships attracted pirates, and that the court moved people inland instead of building a navy. Whether the rules themselves caused the piracy is your inference, so show the connection and say how strong the evidence for it is.</p>
+    <p>For the second part, on joining global networks, use the <a href="#/silver-route">silver-route</a> slide, the <a href="#/policy-eases">policy-eases</a> slide, the <a href="#/single-whip">single-whip</a> slide and the <a href="#/new-crops">new-crops</a> slide: silver through Manila, eased restrictions and Macao, taxes paid in silver, and American crops.</p>
+    <p><strong>Why this matters:</strong> this question links policy to its unintended results, and it shows how Ming China was drawn into a world economy (Ebrey, p. 234).</p>
     <p><strong>Check yourself:</strong> Can you name the one change in policy that the textbook says finally made anti-pirate efforts work?</p>
   </aside>
 </section>
@@ -1143,6 +1372,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <p>This lecture followed the Ming out to its frontiers. The court tried to manage the sea and the steppe with tribute, campaigns, port rules and walls. In the end, trade, piracy and silver forced their way in, and by 1600 China was tied to a world economy the court had never planned to join.</p>
     <p>Those changes reached deep into society. American crops let farmers feed more people, and silver poured into the economy. The next lecture moves inside that growing society (Ebrey, pp. 235–240).</p>
     <p>It follows one man, the philosopher Wang Yangming, through the civil service examinations that led to office. The photo shows the kind of place where candidates sat those exams: rows of tiny open cells, each with two boards for a desk and a seat, where a man might spend days writing. The lecture ends in the villages, where his ideas took root.</p>
+    <p><strong>Why this matters:</strong> the frontiers changed life at home. More silver and more food set the stage for the exam culture and village society of the next lecture.</p>
     <p><strong>Check yourself:</strong> Pick one change from this lecture that you expect to matter in the next one, and say why.</p>
   </aside>
 </section>
@@ -1180,8 +1410,8 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <p>The textbook names two developments that shaped later Ming–Mongol relations: the Great Wall, and the Mongols' close ties with Tibetan Buddhism (Ebrey, p. 233). This slide is the second.</p>
     <p>Tibet was then largely ruled by its major monasteries, and when they needed military help they called on rival Mongol leaders. <strong>Tsong-kha-pa</strong> (1357–1419) founded the Yellow Hat, or Gelug-pa, order, whose heads later became known as the <strong>Dalai Lamas</strong> (p. 234).</p>
     <p>In 1578 the third Dalai Lama, at Altan Khan's invitation, met the khan and a large gathering of Mongol princes at Kokonor, the great lake in today's Qinghai. Altan gave him the title <i>Dalai</i>, Mongolian for "ocean." The khan declared Tibetan Buddhism the official religion of all the Mongols, and swore that they would give up blood sacrifice. The Dalai Lama gave him the title "King of Religion." When the third Dalai Lama's reincarnation was found to be Altan Khan's great-grandson, the ties grew even stronger.</p>
-    <p>The textbook gives 1577 and a visit to Mongolia (p. 234); historians date the meeting to 1578, at Kokonor.</p>
     <p>The painting is real; the museum record does not give its date.</p>
+    <p><strong>Why this matters:</strong> the bond between Mongol khans and Tibetan lamas shaped Inner Asia for centuries, and the Qing would later build on it.</p>
     <p><strong>Check yourself:</strong> Why might a Mongol khan want the friendship of a great Tibetan religious leader?</p>
   </aside>
 </section>
@@ -1201,12 +1431,13 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
       <div class="story-beat">The textbook's "Connections: Europe Enters the Scene" tells that story.</div>
     </div>
   </div>
-  <p class="source-line">Sources: Ebrey, Ch. 14, p. 233. The "Connections" essay is not in our copy of the textbook.</p>
+  <p class="source-line">Sources: Ebrey, Ch. 14, p. 233.</p>
   <aside class="notes">
     <p>Put two dates side by side. In 1474 the Ming broke up its remaining ships with three or more masts and used them for lumber (Ebrey, p. 233).</p>
     <p>The textbook then adds: not long after the destruction of Zheng He's fleet, the more modest expeditions of Vasco da Gama and Christopher Columbus changed the course of world history. Those are Columbus's first crossing of the Atlantic in 1492 and da Gama's voyage around Africa to India in 1497–1498. Da Gama landed at Calicut, the same port Zheng He's fleets had visited.</p>
-    <p>The textbook tells that story in a separate essay, "Connections: Europe Enters the Scene." It is not in our copy of the book, so look it up in the printed textbook if you want the full account.</p>
+    <p>The textbook tells that story in a separate essay, "Connections: Europe Enters the Scene." Read it in your textbook for the full account.</p>
     <p>The scene image is an AI-generated interpretation of the difference in scale, not a historical source, and the ships are not drawn to an exact scale.</p>
+    <p><strong>Why this matters:</strong> setting the two fleets side by side shows that size alone did not decide history. What a state chose to do with its ships mattered more.</p>
     <p><strong>Check yourself:</strong> Why do you think historians find this comparison so striking?</p>
   </aside>
 </section>
@@ -1225,11 +1456,11 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
       <div class="story-beat red">Many naval historians doubt a wooden ship that big could sail; estimates today run from under 60 meters to the full official size.</div>
     </div>
   </div>
-  <p class="source-line">Sources: <i>Ming shi</i> 304; Church, <i>Monumenta Serica</i> 53 (2005); Dreyer, <i>Zheng He</i> (2007), ch. 6.</p>
+  <p class="source-line">Sources: Ebrey, Ch. 14, p. 233; <i>Ming shi</i> 304; Church, <i>Monumenta Serica</i> 53 (2005); Dreyer, <i>Zheng He</i> (2007), ch. 6.</p>
   <aside class="notes">
-    <p>This slide takes a closer look at the "treasure ships" you met at the start of the voyages story. How big were they?</p>
+    <p>This slide takes a closer look at the "treasure ships" you met at the start of the voyages story. The textbook says that in 1474 the Ming broke up its remaining ships with three or more masts (Ebrey, p. 233). How big were the biggest?</p>
     <p>The official <em>Ming History</em>, finished in 1739, says the largest measured 44 <em>zhang</em> by 18, roughly 137 by 56 meters, or 450 by 183 feet. That would make them far larger than any wooden ship known from archaeology.</p>
-    <p>In 1957 a rudder post more than 11 meters long was found at the Treasure Boat Shipyard in Nanjing, and two more turned up later. Some Chinese scholars used it to argue for ships of 140 meters or more. The historian Sally Church showed that the calculation used a formula for modern steel ships, and she argues for much smaller vessels. Some scholars also suspect that the official dimensions came from a popular novel about Zheng He published in 1597. Dreyer, by contrast, accepts very large flagships.</p>
+    <p>In 1957 a rudder post more than 11 meters long was found at the Treasure Boat Shipyard in Nanjing, and two more turned up later. Some scholars used it to argue for ships of 140 meters or more. Others point out that the calculation used a formula for modern steel ships, and they argue for much smaller vessels; some suspect that the official dimensions came from a popular novel about Zheng He published in 1597. Still others accept very large flagships.</p>
     <p>The photograph shows a modern full-size model of a middle-sized treasure ship, not a reconstruction of the largest one.</p>
     <p><strong>Why this matters:</strong> numbers in old records need checking, and historians weigh texts against archaeology.</p>
     <p><strong>Check yourself:</strong> What evidence do historians use to estimate the ships' size, and why do they disagree?</p>
@@ -1251,11 +1482,11 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
       <figcaption><span class="ai-tag">AI-generated illustration</span> of a Ming-era treadle chain pump (artist's impression), made for this deck: two farmers pedal a wooden pump that lifts canal water into the rice paddies. The mechanism is simplified. An interpretation, not a historical source.</figcaption>
     </figure>
   </div>
-  <p class="source-line">Sources: Elvin, <i>The Pattern of the Chinese Past</i> (1973); Pomeranz, <i>The Great Divergence</i> (2000).</p>
+  <p class="source-line">Sources: Ebrey, Ch. 14, pp. 234, 240; Elvin, <i>The Pattern of the Chinese Past</i> (1973); Pomeranz, <i>The Great Divergence</i> (2000).</p>
   <aside class="notes">
-    <p>This slide follows a question that the end of the fleet raises: if Ming China was so rich and skilled, why did it not go on to an industrial revolution?</p>
-    <p>The economic historian <strong>Mark Elvin</strong> gave a famous answer in 1973. By late imperial times, he argued, Chinese farming was highly efficient, with irrigation, fertilizers and devices like the treadle chain pump in this picture. The population was huge and labor was cheap, so investing in labor-saving machines did not pay. He called this a <strong>high-level equilibrium trap</strong>: the economy worked so well at its level that nothing pushed it to the next one. Older lectures linked the idea to culturalism, change within tradition with no ideology of progress.</p>
-    <p>Many historians now disagree. <strong>Kenneth Pomeranz</strong>, in <em>The Great Divergence</em> (2000), compared the Yangzi delta with England and found them roughly equal until about 1750. Europe pulled ahead, he argued, largely because of cheap coal and the resources of its American colonies. Others, such as R. Bin Wong, question why "Why not China?" should assume that Europe's path was the normal one.</p>
+    <p>This slide follows a question that the end of the fleet raises. The textbook shows a booming Ming economy: the population more than doubled and market towns spread (Ebrey, pp. 234, 240). If Ming China was so rich and skilled, why did it not go on to an industrial revolution?</p>
+    <p>The economic historian <strong>Mark Elvin</strong> gave a famous answer in 1973. By late imperial times, he argued, Chinese farming was highly efficient, with irrigation, fertilizers and devices like the treadle chain pump pictured here. The population was huge and labor was cheap, so investing in labor-saving machines did not pay. He called this a <strong>high-level equilibrium trap</strong>: the economy worked so well at its level that nothing pushed it to the next one.</p>
+    <p>Many historians now disagree. <strong>Kenneth Pomeranz</strong>, in <em>The Great Divergence</em> (2000), compared the Yangzi delta with England and found them roughly equal until about 1750. Europe pulled ahead, he argued, largely because of cheap coal and the resources of its American colonies. Notice that the question "Why not China?" assumes Europe's path was the normal one; you can ask whether that is fair.</p>
     <p>The picture is an AI-generated artist's impression, not a historical source, and its pump is simplified: a real chain pump pulled a loop of wooden paddles up through a closed wooden trough.</p>
     <p><strong>Why this matters:</strong> "China fell behind" is an argument, not a fact, and historians still debate it.</p>
     <p><strong>Check yourself:</strong> In your own words, what was the "trap," and what was Pomeranz's main objection?</p>
@@ -1279,10 +1510,11 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   </div>
   <p class="source-line">Sources: Ebrey, Ch. 14, p. 233.</p>
   <aside class="notes">
-    <p>A closer look at the wall from slide <strong>o</strong>, <em>great-wall</em>. Much of the Ming Great Wall survives today (Ebrey, p. 233).</p>
+    <p>A closer look at the wall from the <a href="#/great-wall">great-wall</a> slide. Much of the Ming Great Wall survives today (Ebrey, p. 233).</p>
     <p>For much of its length the wall is faced with brick, which gives it its imposing appearance. In the eastern sections, towers stand about every half mile. Soldiers in them kept watch for raiders.</p>
     <p>The photo is real. It shows the inside of one watchtower at Jinshanling, northeast of Beijing: thick brick walls, arched openings for looking out, and stairs up to the roof. Imagine standing guard here through a winter night, watching the hills to the north.</p>
     <p>Notice how the wall and its towers fit the policy you followed in the lecture. Instead of marching armies into Mongolia, the Ming now kept soldiers in fixed posts and waited for raiders to come to them.</p>
+    <p><strong>Why this matters:</strong> the wall's towers and brick show the defensive policy in physical form: soldiers waiting at fixed posts instead of marching onto the steppe.</p>
     <p><strong>Check yourself:</strong> What gave the wall the imposing look that impressed the first Western visitors?</p>
   </aside>
 </section>
@@ -1292,8 +1524,8 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <h2>The Stories in This Deck Rest on These Sources</h2>
   <ul class="source-list two-col">
     <li class="src-head">Textbook</li>
-    <li>Patricia Buckley Ebrey et al., course textbook, Chapter 14, "The Ming Empire in China (1368–1644)," pp. 230, 233–235. Pages 231–232 are missing from our copy.</li>
-    <li class="src-head">Further reading beyond Ebrey</li>
+    <li>Patricia Buckley Ebrey et al., course textbook, Chapter 14, "The Ming Empire in China (1368–1644)," pp. 230, 233–235.</li>
+    <li class="src-head">Other sources</li>
     <li>Ma Huan, <i>Ying-yai sheng-lan: "The Overall Survey of the Ocean's Shores" [1433]</i>, tr. J. V. G. Mills (Hakluyt Society / Cambridge University Press, 1970), pp. 34–35, 137–138, 155, and appendix 2 (the Mao Kun map).</li>
     <li>Jung-pang Lo, "Zheng He," <i>Encyclopaedia Britannica</i>, <a href="https://www.britannica.com/biography/Zheng-He" target="_blank" rel="noopener">britannica.com</a>.</li>
     <li>"The Ming Voyages," Asia for Educators, Columbia University, <a href="https://afe.easia.columbia.edu/special/china_1000ce_mingvoyages.htm" target="_blank" rel="noopener">afe.easia.columbia.edu</a>.</li>
@@ -1319,9 +1551,12 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <li class="src-head">Images (AI-generated)</li>
     <li>Scene illustrations on slides b, c, f, g, h, j, k, l, m, n, q, v, aa and hh are AI-generated interpretations made for this deck. They are not historical sources.</li>
   </ul>
+  <p class="ps-link">Background essay: <a href="../../../../hist-270/background_essays/essays/ch14/ch14-l2-two-frontiers.html" target="_blank" rel="noopener"><i>Two Frontiers</i> ↗</a></p>
   <aside class="notes">
-    <p>Most of this deck comes from Chapter 14 of the course textbook, and each slide's source line gives the page. Two textbook pages on Zheng He (pp. 231–232) are missing from our copy, so the Zheng He slides also draw on Ma Huan's own account, Britannica and Asia for Educators. Wherever a slide or note draws on another source, it names it.</p>
+    <p>Most of this deck comes from Chapter 14 of the course textbook, and each slide's source line gives the page (Ebrey, Ch. 14, pp. 230–235). The Zheng He slides also draw on Ma Huan's own account, Britannica and Asia for Educators. Wherever a slide draws on another source, its source line names it.</p>
     <p>The scene illustrations marked as AI-generated are modern interpretations. Use them to picture a moment, never as evidence.</p>
+    <p>If you want to go further, the background essay linked on this slide, <i>Two Frontiers</i>, retells the lecture as one story. Its last section, "Corrections and Sources Behind the Slide Notes," lists slide by slide where the deck goes beyond the textbook or corrects a detail.</p>
+    <p><strong>Why this matters:</strong> knowing where a claim comes from is how you decide how far to trust it, especially for a story like Zheng He's, where records disagree.</p>
     <p><strong>Check yourself:</strong> Pick one claim on a Zheng He slide and find which source it came from. Why does that matter?</p>
   </aside>
 </section>
@@ -1342,6 +1577,12 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <span class="popup-close" data-popup="pop-federation" role="button" tabindex="0" aria-label="Close">&times;</span>
     <h3>Federation</h3>
     <p>A <strong>federation</strong> here means many separate Mongol groups united under one leader, as they had been under Chinggis Khan. In Ming times the Mongols were loosely divided into about six groups (Ebrey, p. 233).</p>
+  </div>
+  <div id="pop-teal" class="popup" role="dialog" aria-label="Teal dotted words">
+    <span class="popup-close" data-popup="pop-teal" role="button" tabindex="0" aria-label="Close">&times;</span>
+    <h3>Teal dotted words</h3>
+    <p>A <strong>teal dotted word</strong> opens a short definition, like this one. Click the word, read the box, then close it with the &times; mark, the Esc key, or a click outside the box.</p>
+    <p>The definitions use the textbook's own terms wherever it has them.</p>
   </div>
 <div id="slide-letter" class="slide-letter" aria-hidden="true"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
@@ -1414,13 +1655,52 @@ Reveal.on('ready', setRevealScale); Reveal.on('resize', setRevealScale); window.
 
 
 /* Slide-letter badge: shows the current section's data-letter, lower left.
-   Letters (a-z, aa-cc) are PERMANENT identifiers used by the Reading Guide and notes; never re-letter slides. */
+   Letters (a-z, aa-ii) are PERMANENT identifiers used by the Reading Guide and notes; never re-letter slides. Added 2026-10-28 for online study: jj how-to-use, kk/ll/mm segment slides, nn/oo/pp self-checks. Next unused letter: qq. */
 (function(){
   function showLetter(){var s=Reveal.getCurrentSlide();var el=document.getElementById('slide-letter');
     if(el)el.textContent=(s&&s.getAttribute('data-letter'))||'';}
   Reveal.on('ready',showLetter);Reveal.on('slidechanged',showLetter);
   if(Reveal.isReady&&Reveal.isReady())showLetter();
 })();
+
+
+/* ---- Narration panel (online study): shows the current slide's Study Buddy notes on the slide.
+   Button lower right, or the N key; N or Esc closes. A section with data-audio="..." also gets an audio player. ---- */
+(function(){
+  var btn=document.createElement('button'); btn.type='button'; btn.id='narr-btn';
+  btn.setAttribute('aria-controls','narr-panel'); btn.setAttribute('aria-expanded','false'); btn.textContent='Narration';
+  btn.title='Show the Study Buddy notes for this slide (N)';
+  var p=document.createElement('div'); p.id='narr-panel'; p.setAttribute('role','region'); p.setAttribute('aria-label','Study Buddy narration'); p.setAttribute('aria-live','polite'); p.hidden=true;
+  p.innerHTML='<p class="np-head"><span>Study Buddy notes</span><button type="button" class="np-close" aria-label="Close narration">&times;</button></p><div class="np-media"></div><div class="np-body"></div>';
+  document.body.appendChild(p); document.body.appendChild(btn);
+  var body=p.querySelector('.np-body'), media=p.querySelector('.np-media');
+  function fill(){
+    var s=Reveal.getCurrentSlide(); if(!s) return;
+    var n=s.querySelector('aside.notes'); body.innerHTML=n?n.innerHTML:'<p>No notes for this slide.</p>';
+    var a=s.getAttribute('data-audio'); media.innerHTML=a?'<audio controls preload="none" src="'+a+'"></audio>':'';
+    p.scrollTop=0;
+  }
+  function isOpen(){ return !p.hidden; }
+  function openP(){ fill(); p.hidden=false; btn.setAttribute('aria-expanded','true'); }
+  function closeP(){ p.hidden=true; btn.setAttribute('aria-expanded','false'); media.innerHTML=''; }
+  btn.addEventListener('click',function(e){ e.stopPropagation(); isOpen()?closeP():openP(); });
+  p.querySelector('.np-close').addEventListener('click',function(e){ e.stopPropagation(); closeP(); btn.focus(); });
+  window.addEventListener('keydown',function(e){
+    var t=e.target; if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable)) return;
+    if((e.key==='n'||e.key==='N')&&!e.ctrlKey&&!e.metaKey&&!e.altKey){ e.preventDefault(); e.stopImmediatePropagation(); isOpen()?closeP():openP(); return; }
+    if(e.key==='Escape'&&isOpen()){ e.preventDefault(); e.stopImmediatePropagation(); closeP(); }
+  },true);
+  Reveal.on('slidechanged',function(){ if(isOpen()) fill(); });
+})();
+
+/* ---- Self-checks: each Show answer button reveals its own answer; not graded, nothing recorded ---- */
+document.addEventListener('click',function(e){
+  var b=e.target.closest('.sc-btn'); if(!b) return;
+  var a=document.getElementById(b.getAttribute('aria-controls')); if(!a) return;
+  var open=b.getAttribute('aria-expanded')==='true';
+  a.hidden=open; b.setAttribute('aria-expanded',open?'false':'true'); b.textContent=open?'Show answer':'Hide answer';
+});
+
 
 </script>
 </body>
