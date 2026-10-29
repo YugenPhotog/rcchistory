@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ProfessorAustinBot - Primary Source Analysis</title>
+  <title>ProfessorAustinBot – HIST 102 Ch. 16: Chief Joseph & Saum Song Bo</title>
   <style>
     :root {
       --amber-50: #fffbeb;
@@ -89,7 +89,11 @@
       h1 { font-size: 1.5rem; }
       .messages { height: 28rem; padding: 1rem; }
       .avatar.small { width: 2.75rem; height: 2.75rem; }
+      .header > div { min-width: 0; }
+      h1, .subtitle, .tagline { overflow-wrap: anywhere; }
+      h1 { font-size: 1.25rem; }
     }
+    .bubble ol, .bubble ul { margin: .25rem 0 .25rem 1.25rem; padding: 0; }
   </style>
 </head>
 <body>
@@ -114,7 +118,7 @@
         <section id="messages" class="messages" aria-live="polite"></section>
         <form id="chatForm" class="composer">
           <div class="input-row">
-            <textarea id="userInput" placeholder="Paste your draft answers to the three textbook questions..."></textarea>
+            <textarea id="userInput" aria-label="Your response to ProfessorAustinBot" placeholder="Paste your draft answers to the three textbook questions..."></textarea>
             <button id="sendBtn" class="send" type="submit" aria-label="Send message">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
             </button>
@@ -243,6 +247,25 @@ ProfessorAustinBot is a friendly and encouraging tutor. He helps students think 
         .replace(/'/g, '&#039;');
     }
 
+    function renderMarkdown(text) {
+      const inline = s => s
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/(^|[^*])\*(?!\s)([^*]+?)\*(?!\*)/g, '$1<em>$2</em>');
+      const lines = escapeHtml(text).split('\n');
+      let html = '', list = null;
+      for (const line of lines) {
+        const ol = line.match(/^\s*\d+[.)]\s+(.*)$/);
+        const ul = line.match(/^\s*[-*•]\s+(.*)$/);
+        const type = ol ? 'ol' : ul ? 'ul' : null;
+        if (type !== list) { if (list) html += '</' + list + '>'; if (type) html += '<' + type + '>'; list = type; }
+        if (type) html += '<li>' + inline((ol || ul)[1]) + '</li>';
+        else if (line.trim() === '') html += '<br>';
+        else html += inline(line) + '<br>';
+      }
+      if (list) html += '</' + list + '>';
+      return html.replace(/(<br>)+$/, '');
+    }
+
     function renderMessages(extraLoading = false) {
       messagesEl.innerHTML = '';
       for (const message of messages) {
@@ -258,7 +281,8 @@ ProfessorAustinBot is a friendly and encouraging tutor. He helps students think 
         }
         const bubble = document.createElement('div');
         bubble.className = 'bubble';
-        bubble.textContent = message.content;
+        if (message.role === 'assistant') bubble.innerHTML = renderMarkdown(message.content);
+        else bubble.textContent = message.content;
         row.appendChild(bubble);
         messagesEl.appendChild(row);
       }
@@ -308,6 +332,7 @@ ProfessorAustinBot is a friendly and encouraging tutor. He helps students think 
       inputEl.value = '';
       sendBtn.disabled = true;
       messages.push({ role: 'user', content: userMessage });
+      if (!showPhilosopher) interrogationCount += 1;
       setLoading(true);
 
       try {
@@ -339,9 +364,6 @@ ProfessorAustinBot is a friendly and encouraging tutor. He helps students think 
         messages.push({ role: 'assistant', content: assistantMessage });
         if (assistantMessage.includes('Socrates') || assistantMessage.includes('one interrogation suffices')) {
           showPhilosopher = true;
-        }
-        if (!showPhilosopher && assistantMessage.includes('?')) {
-          interrogationCount += 1;
         }
       } catch (error) {
         console.error('ProfessorAustinBot error:', error);
