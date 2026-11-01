@@ -171,5 +171,29 @@
     <p class="footer-quote"><em>"The past is prologue."</em></p>
     <p class="footer-text">Professor Steven Austin | Courses in History &amp; Philosophy</p>
   </footer>
+  <script>
+    (() => {
+      const portrait = document.querySelector('.profile-image');
+      if (!portrait) return;
+
+      const portraits = Array.from({ length: 7 }, (_, index) =>
+        `images/self-portraits/self-portraits (${index + 1}).webp`
+      );
+      const loadedPortraits = portraits.map((src) => {
+        const image = new Image();
+        image.src = src;
+        return image;
+      });
+      let currentPortrait = 0;
+
+      window.setInterval(() => {
+        const nextPortrait = (currentPortrait + 1) % portraits.length;
+        const nextImage = loadedPortraits[nextPortrait];
+        if (!nextImage.complete || nextImage.naturalWidth === 0) return;
+        portrait.src = portraits[nextPortrait];
+        currentPortrait = nextPortrait;
+      }, 5000);
+    })();
+  </script>
 </body>
 </html>
