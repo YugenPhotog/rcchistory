@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- ==========================================================================
+       MINI-LECTURE TEMPLATE  ·  HIST 101 (Steven Austin)
+       A sibling of the full-lecture house style (Ch. 11–12 decks):
+         same Reveal 4.5.0 + black theme + Notes plugin, same 1920×1080 canvas,
+         same Crimson Pro / Lora type, same gold-teal-bronze accents,
+         but on a warm PARCHMENT field (the house popup card, grown into a deck),
+         with a fixed charcoal "MINI-LECTURE" bar and a Back-to-lecture button.
+       Colour rules kept free for the main decks: no forest green (Pierian Spring),
+       no burgundy (section dividers).
+
+       HOW TO USE
+       1. Copy this file into the chapter folder (e.g. chapter-12/hysteria.html).
+       2. Edit the three MINI_* values in the <script> block at the bottom
+          (title shown in the bar, fallback URL of the main lecture slide).
+          The fallback should point to the exact slide, e.g.
+          "ch12_lecture2_moral_labs.html#/asylum-diagnoses".
+       3. Fix image paths: in this template they start "chapter-12/images/…";
+          once the file lives in chapter-12/ they become "images/…".
+       4. Replace the SAMPLE slides; keep the title slide first and the
+          return slide last. Aim for 5–8 slides (≈ 5–10 minutes).
+       5. In the main deck, link with a normal <a href="hysteria.html">Learn more</a>.
+          (Same tab is best: Back then returns to the exact slide. If the link
+          opens a new tab, the button closes that tab or falls back to the URL.)
+
+       SAMPLE CONTENT is drawn lightly from the existing Ch. 12 hysteria.html.
+       ========================================================================== -->
+  <title>Mini-lecture TEMPLATE · Hysteria in 19th-Century America · HIST 101</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+/* ---- Shared house tokens (same names as the full-lecture decks) ---- */
+:root {
+  --antique-gold:#D4AF37; --deep-teal:#2C7873; --bronze-accent:#8B6F47;
+  --dark-charcoal:#1A1A1A; --pure-white:#FAFAFA; --soft-cream:#F5F1E8;
+  /* ---- Mini-lecture tokens (light field; text colours all pass WCAG AA on --mini-paper) ---- */
+  --mini-paper:#F4EEE1;      /* slide field: warm parchment */
+  --mini-card:#FFFCF5;       /* raised cards, image mats */
+  --mini-ink:#1F1B16;        /* body text            14.8:1 */
+  --mini-ink-soft:#4A4036;   /* captions, secondary  8.7:1  */
+  --mini-gold-ink:#7A5A0F;   /* headings (gold, darkened for paper) 5.5:1 */
+  --mini-teal-ink:#1E625C;   /* kickers, bullets, links 6.1:1 */
+  --mini-bronze-ink:#6B5232; /* quote attribution    6.3:1  */
+  --mini-rule:#CDBB93;       /* hairlines and frames (decorative) */
+  --mini-bar-h:64px;
+}
+
+/* ---- Field ---- */
+.reveal-viewport { background:var(--mini-paper); }
+.reveal-viewport::before {                     /* gold "spine" down the left edge */
+  content:""; position:fixed; left:0; top:0; bottom:0; width:12px; z-index:5;
+  background:linear-gradient(180deg,var(--antique-gold),var(--bronze-accent));
+}
+.reveal { font-family:'Lora',serif; color:var(--mini-ink);
+  --r-main-color:var(--mini-ink); --r-heading-color:var(--mini-gold-ink); --r-link-color:var(--mini-teal-ink);
+  --r-link-color-hover:var(--mini-gold-ink); --r-selection-background-color:rgba(212,175,55,.45); --r-selection-color:var(--mini-ink); }
+.reveal ::selection { background:rgba(212,175,55,.45); color:var(--mini-ink); }
+
+/* ---- Slide type scale (house content slides use 32px; same here, nothing below 24px) ---- */
+.reveal .slides section { text-align:left; font-size:34px; line-height:1.45; box-sizing:border-box; padding:calc(var(--mini-bar-h) + 6px) 70px 0 80px; }
+.reveal .slides section h1,.reveal .slides section h2,.reveal .slides section h3 {
+  font-family:'Crimson Pro',serif; text-transform:none; letter-spacing:0; text-shadow:none; }
+.reveal .slides section h1 { font-size:2.15em; font-weight:700; color:var(--mini-gold-ink); line-height:1.08; margin:0 0 .15em; }
+.reveal .slides section h1::after {           /* short gold rule under every slide title */
+  content:""; display:block; width:120px; height:5px; background:var(--antique-gold); margin-top:.22em; border-radius:2px; }
+.reveal .slides section h2 { font-size:1.45em; font-weight:600; color:var(--mini-teal-ink); line-height:1.15; margin:.5em 0 .3em; }
+.reveal .slides section h3 { font-size:1.2em; font-weight:700; color:var(--mini-gold-ink); line-height:1.15; margin:0 0 .3em; }
+.reveal .slides section p,.reveal .slides section li { font-size:1em; line-height:1.45; color:var(--mini-ink); margin:0 0 .4em; }
+.reveal .slides section strong { color:var(--mini-gold-ink); font-weight:700; }
+.reveal .slides section em { color:var(--mini-teal-ink); font-style:italic; }
+.reveal .slides section a { color:var(--mini-teal-ink); text-decoration:underline; text-underline-offset:4px; }
+.reveal .slides section a:hover { color:var(--mini-gold-ink); }
+.reveal .slides section ul { list-style:none; margin:.3em 0 .5em; padding:0; }
+.reveal .slides section ul > li { position:relative; padding-left:1.35em; margin-bottom:.38em; }
+.reveal .slides section ul > li::before { content:"◆"; position:absolute; left:0; top:.05em; color:var(--mini-teal-ink); font-size:.8em; }
+.reveal .slides section ol { margin:.3em 0 .5em 1.4em; }
+.reveal .slides section ol > li::marker { color:var(--mini-gold-ink); font-family:'Crimson Pro',serif; font-weight:700; }
+.kicker { font-family:'Lora',serif; font-size:.78em !important; font-weight:600; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--mini-teal-ink) !important; margin:0 0 .35em !important; }
+.lead { font-size:1.12em !important; max-width:1500px; }
+.source-line { font-size:24px !important; color:var(--mini-ink-soft) !important; margin-top:.9em !important; }
+.reveal .slides section .mini-badge-inline { display:inline-block; font-family:'Lora',serif; font-weight:700; font-size:24px; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--dark-charcoal); background:var(--antique-gold); padding:.28em .8em .24em; border-radius:999px; margin:0; }
+
+/* ---- Fixed mini-lecture bar (outside the scaled canvas, like the house .slide-counter) ---- */
+.mini-bar { position:fixed; top:0; left:0; right:0; height:var(--mini-bar-h); z-index:100; display:flex; align-items:center; gap:18px;
+  padding:0 28px 0 40px; background:var(--dark-charcoal); border-bottom:3px solid var(--antique-gold);
+  font-family:'Lora',serif; font-size:clamp(14px,1.3vw,26px); color:var(--soft-cream); box-shadow:0 2px 10px rgba(0,0,0,.25); }
+.mini-badge { font-weight:700; letter-spacing:.16em; text-transform:uppercase; font-size:.9em; color:var(--dark-charcoal);
+  background:var(--antique-gold); padding:.2em .75em .16em; border-radius:999px; white-space:nowrap; }
+.mini-bar-title { font-family:'Crimson Pro',serif; font-size:1.12em; font-weight:600; color:var(--soft-cream);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1; }
+.mini-counter { font-family:'Crimson Pro',serif; font-weight:600; color:var(--antique-gold); white-space:nowrap; }
+.back-btn { display:inline-flex; align-items:center; gap:.45em; white-space:nowrap; text-decoration:none; font-family:'Lora',serif; font-weight:600;
+  font-size:.95em; color:var(--soft-cream); background:transparent; border:2px solid #4AA89F; border-radius:8px; padding:.18em .8em; cursor:pointer; }
+.back-btn:hover { background:#4AA89F; color:var(--dark-charcoal); }
+.back-btn:focus-visible, .return-btn:focus-visible, .reveal a:focus-visible { outline:3px solid var(--antique-gold); outline-offset:3px; }
+
+/* ---- Title slide (compact: a card, not a full-bleed hero) ---- */
+.reveal .slides section.mini-title { padding-top:var(--mini-bar-h); }
+.reveal .slides section.mini-title .mini-title-card { margin:0 auto; }
+.mini-title-card { background:var(--mini-card); border:1px solid var(--mini-rule); border-left:14px solid var(--antique-gold);
+  border-radius:12px; padding:1.1em 1.4em 1em; width:1480px; max-width:100%; box-sizing:border-box; box-shadow:0 10px 30px rgba(60,45,20,.12); }
+.mini-title-card .mini-badge-inline { margin-bottom:.9em; }
+.reveal .slides section.mini-title h1 { font-size:3.1em; margin:.12em 0 .1em; }
+.mini-sub { font-family:'Crimson Pro',serif; font-size:1.45em !important; color:var(--mini-ink-soft) !important; line-height:1.2 !important; margin:.35em 0 .55em !important; }
+.mini-why { font-size:1em !important; border-top:2px dotted var(--mini-rule); padding-top:.6em; margin-top:.4em !important; }
+.mini-meta { display:flex; flex-wrap:wrap; gap:.5em; margin-top:.7em; }
+.mini-meta span { font-size:24px; font-weight:600; color:var(--mini-teal-ink); border:2px solid rgba(30,98,92,.45); border-radius:999px; padding:.15em .75em; }
+
+/* ---- Callout (house gold box, re-inked for paper) ---- */
+.mini-callout { position:relative; background:rgba(212,175,55,.16); border:2px solid var(--antique-gold); border-left-width:10px;
+  border-radius:8px; padding:.85em 1em .7em; margin:1.1em 0 .4em; font-size:1.05em; }
+.mini-callout .label { position:absolute; top:-.75em; left:.9em; background:var(--dark-charcoal); color:var(--antique-gold);
+  font-size:24px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; padding:.1em .6em; border-radius:4px; }
+.mini-callout p { margin:0 !important; }
+
+/* ---- Image + text ---- */
+.mini-media { display:grid; grid-template-columns:1fr 1fr; gap:1.4em; align-items:center; }
+.mini-media.wide-text { grid-template-columns:1.15fr .85fr; }
+.mini-figure { margin:0; background:var(--mini-card); border:1px solid var(--mini-rule); border-radius:10px; padding:.45em .45em .35em; box-shadow:0 8px 22px rgba(60,45,20,.14); }
+.reveal .mini-figure img { display:block; width:100%; max-width:100%; height:auto; max-height:560px; object-fit:contain; margin:0 !important; border-radius:6px; background:#fff; border:0 !important; box-shadow:none !important; }
+.mini-figure figcaption { font-size:24px; line-height:1.3; color:var(--mini-ink-soft); margin-top:.45em; }
+.img-placeholder { display:none; min-height:360px; align-items:center; justify-content:center; text-align:center; font-style:italic;
+  border:3px dashed var(--bronze-accent); border-radius:8px; color:var(--mini-bronze-ink); background:rgba(139,111,71,.08); }
+
+/* ---- Quote (house gold quote block + bronze attribution) ---- */
+.mini-quote { margin:.6em 0 0; background:var(--mini-card); border-left:10px solid var(--antique-gold); border-radius:8px;
+  padding:.8em 1.1em .7em; box-shadow:0 8px 22px rgba(60,45,20,.1); max-width:1600px; }
+.reveal .mini-quote blockquote { margin:0; width:auto; padding:0; background:none; box-shadow:none; font-family:'Crimson Pro',serif;
+  font-style:italic; font-size:1.55em; line-height:1.3; color:var(--mini-ink); quotes:none; }
+.mini-quote figcaption { margin-top:.6em; text-align:right; font-size:.82em; color:var(--mini-bronze-ink); }
+.mini-quote figcaption cite { font-style:italic; }
+
+/* ---- Two-column compare ---- */
+.mini-compare { display:grid; grid-template-columns:1fr auto 1fr; gap:.8em; align-items:stretch; margin-top:.5em; }
+.mini-compare .col { background:var(--mini-card); border:1px solid var(--mini-rule); border-top:8px solid var(--mini-teal-ink); border-radius:10px; padding:.7em .95em .5em; }
+.mini-compare .col.gold { border-top-color:var(--antique-gold); }
+.mini-compare .col .when { font-size:24px !important; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--mini-ink-soft) !important; margin:0 0 .2em !important; }
+.mini-compare .vs { align-self:center; font-family:'Crimson Pro',serif; font-size:1.6em; font-weight:700; color:var(--mini-gold-ink); }
+.reveal .slides section .mini-compare li { font-size:.95em; }
+
+/* ---- Return slide (charcoal: you are stepping back into the house style) ---- */
+.reveal .slides section.mini-return { text-align:center; }
+.reveal .slides section.mini-return .kicker { color:#9ED8D2 !important; text-align:center; }
+.reveal .slides section.mini-return h1 { color:var(--antique-gold); font-size:3em; }
+.reveal .slides section.mini-return h1::after { margin:.25em auto 0; }
+.reveal .slides section.mini-return p { color:var(--soft-cream); }
+.reveal .slides section.mini-return strong { color:var(--antique-gold); }
+.carry-back { max-width:1350px; margin:.9em auto .2em; background:rgba(212,175,55,.12); border:2px solid var(--antique-gold); border-radius:10px; padding:.75em 1.1em; text-align:left; }
+.carry-back .label { font-size:24px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--antique-gold); margin:0 0 .25em !important; }
+.carry-back p:last-child { font-size:1.1em !important; margin:0 !important; }
+.reveal .slides section.mini-return a.return-btn { display:inline-flex; align-items:center; gap:.5em; margin-top:1em; padding:.45em 1.3em;
+  font-family:'Crimson Pro',serif; font-size:1.5em; font-weight:700; text-decoration:none; color:var(--dark-charcoal);
+  background:var(--antique-gold); border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,.45); }
+.reveal .slides section.mini-return a.return-btn:hover { background:#F1D46A; color:var(--dark-charcoal); }
+.reveal .slides section.mini-return .return-hint { font-size:24px !important; color:#C9BEAA !important; margin-top:.8em !important; }
+
+/* ---- Popups (identical to house) ---- */
+.popup-trigger { color:var(--mini-teal-ink); border-bottom:2px dotted var(--mini-teal-ink); cursor:pointer; }
+.popup-trigger:hover, .popup-trigger:focus { color:var(--mini-gold-ink); outline:none; }
+.popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:var(--soft-cream); color:var(--dark-charcoal);
+  padding:2em; border-radius:15px; box-shadow:0 8px 32px rgba(0,0,0,.5); max-width:min(900px,86vw); max-height:84vh; overflow-y:auto;
+  z-index:1000; border:3px solid var(--bronze-accent); font-family:'Lora',serif; font-size:clamp(15px,1.05vw,21px); line-height:1.5; }
+.popup.active { display:block; }
+.popup-close { position:absolute; top:10px; right:15px; font-size:2em; cursor:pointer; color:#9B2C2C; }
+.popup h3 { font-family:'Crimson Pro',serif; color:var(--bronze-accent); margin:.4em 2em .3em 0; font-size:1.5em; }
+
+.reveal aside.notes { display:none; }
+.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; }
+.reveal .controls { color:var(--mini-teal-ink); }
+.reveal .progress { color:var(--antique-gold); height:5px; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal .slides section, .reveal .backgrounds .slide-background { transition:none !important; }
+}
+@media print { .mini-bar, .reveal-viewport::before { display:none; } }
+  </style>
+</head>
+<body>
+
+<!-- Fixed mini-lecture bar: badge · title · counter · Back button (wired by the script below) -->
+<header class="mini-bar" role="banner">
+  <span class="mini-badge">Mini-lecture</span>
+  <span class="mini-bar-title" id="mini-bar-title">Hysteria in 19th-Century America</span>
+  <span class="mini-counter" aria-live="polite"><span class="sr-only">Slide </span><span id="mini-counter">1 / 7</span></span>
+  <a class="back-btn js-back" href="chapter-12/ch12_lecture2_moral_labs.html#/asylum-diagnoses" aria-label="Back to the main lecture">&larr; Back to main lecture</a>
+</header>
+
+<div class="reveal"><div class="slides">
+
+<!-- =========== 1. TITLE (compact) =========== -->
+<section class="mini-title">
+  <div class="mini-title-card">
+    <p class="mini-badge-inline">Mini-lecture</p>
+    <p class="kicker">Side trip from Ch. 12 · Lecture 2 · Moral Laboratories</p>
+    <h1>Hysteria in 19th-Century America</h1>
+    <p class="mini-sub">How a medical label turned women’s distress, and women’s defiance, into a disease</p>
+    <p class="mini-why"><strong>Why you’re here:</strong> you clicked <em>Learn more</em> next to “Hysteria” on the asylum diagnoses slide. When you finish, the last slide takes you back to that same slide.</p>
+    <div class="mini-meta"><span>≈ 5 minutes</span><span>7 slides</span><span>Template sample</span></div>
+  </div>
+  <aside class="notes"><p>TEMPLATE · Title slide. Keep it to one card: kicker (where this side trip came from), title, one-line subtitle, a "Why you're here" sentence that names the main-deck slide, and two or three meta chips. No full-bleed image here; that is reserved for full lectures.</p></aside>
+</section>
+
+<!-- =========== 2. TEXT + BULLETS =========== -->
+<section>
+  <p class="kicker">The diagnosis</p>
+  <h1>Doctors used “hysteria” as a catch-all diagnosis for women</h1>
+  <p class="lead">The word came from the Greek <em>hystera</em>, “womb.” By the 1800s, American doctors blended that old idea with new theories about the nerves.</p>
+  <ul>
+    <li><strong>Body:</strong> fatigue, insomnia, digestive trouble, pelvic pain</li>
+    <li><strong>Mood:</strong> anxiety, grief, melancholy, sudden tears or anger</li>
+    <li><strong>Behavior:</strong> resisting what a wife or daughter was “supposed” to do</li>
+  </ul>
+  <p class="source-line">Sample content · adapted from the Ch. 12 hysteria reading</p>
+  <aside class="notes"><p>TEMPLATE · Text + bullets. One sentence-style headline, an optional lead line, then three or four bullets with bold labels. Teal diamonds match the house bullets.</p></aside>
+</section>
+
+<!-- =========== 3. IMAGE + TEXT =========== -->
+<section>
+  <p class="kicker">Where it was treated · Trenton, New Jersey, 1848</p>
+  <h1>Asylums treated hysteria as a nervous and moral disorder</h1>
+  <div class="mini-media">
+    <figure class="mini-figure">
+      <img src="chapter-12/images/ch12_L2_trenton_kirkbride.webp" alt="Lithograph of the New Jersey State Lunatic Asylum, a long symmetrical building with wings, above its floor plan" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+      <div class="img-placeholder" aria-hidden="true">Image unavailable: Trenton asylum lithograph</div>
+      <figcaption>New Jersey State Lunatic Asylum, Trenton: Kirkbride-plan lithograph with floor plan, c. 1848. Public domain, via Wikimedia Commons.</figcaption>
+    </figure>
+    <div>
+      <ul>
+        <li>Records describe women as “restless” or of “excitable temperament.”</li>
+        <li>Treatment ran from bed rest and moral instruction to baths and sedatives.</li>
+        <li>Family conflict, grief, or a hard marriage could be enough to send a woman here.</li>
+      </ul>
+    </div>
+  </div>
+  <aside class="notes"><p>TEMPLATE · Image + text. Image on a white mat with a full caption (what, date, source, license). Add class "wide-text" to .mini-media to give the text more room.</p></aside>
+</section>
+
+<!-- =========== 4. QUOTE =========== -->
+<section>
+  <p class="kicker">Primary source · the rest cure</p>
+  <h1>One patient remembered the doctor’s orders word for word</h1>
+  <figure class="mini-quote">
+    <blockquote>“Live as domestic a life as possible. Have your child with you all the time. … Have but two hours’ intellectual life a day. And never touch pen, brush or pencil as long as you live.”</blockquote>
+    <figcaption>— Dr. S. Weir Mitchell’s advice, as Charlotte Perkins Gilman recalled it in <cite>The Living of Charlotte Perkins Gilman</cite> (1935)</figcaption>
+  </figure>
+  <p style="margin-top:.9em">Gilman, a writer, said the cure nearly broke her. She later turned the experience into the story <em>“The Yellow Wallpaper”</em> (1892).</p>
+  <aside class="notes"><p>TEMPLATE · Quote. Crimson Pro italic quote on a white card with the house gold rule on the left; attribution in bronze, right-aligned. One sentence underneath tells students why the source matters.</p></aside>
+</section>
+
+<!-- =========== 5. CALLOUT =========== -->
+<section>
+  <p class="kicker">The big idea</p>
+  <h1>Hysteria tells us more about society than about any disease</h1>
+  <p class="lead">Middle-class women were expected to be pure, calm, and self-controlled. Frustration, ambition, desire, or grief did not fit that picture, so doctors could re-label them as symptoms.</p>
+  <div class="mini-callout">
+    <span class="label">Key point</span>
+    <p>The diagnosis translated <strong>social discomfort</strong> into <strong>medical language</strong>. Calling a woman “sick” could be a way of controlling her.</p>
+  </div>
+  <aside class="notes"><p>TEMPLATE · Callout. One per mini-lecture is usually enough. The charcoal label tab ("Key point", "Remember", "Watch for") ties the box to the charcoal bar.</p></aside>
+</section>
+
+<!-- =========== 6. TWO-COLUMN COMPARE =========== -->
+<section>
+  <p class="kicker">Change over time</p>
+  <h1>By 1900 the diagnosis had started to fade</h1>
+  <div class="mini-compare">
+    <div class="col">
+      <p class="when">Mid-1800s</p>
+      <h3>A disorder of womb and nerves</h3>
+      <ul>
+        <li>Blamed on the female body</li>
+        <li>Treated with rest, baths, tonics</li>
+        <li>Rarely given to men</li>
+      </ul>
+    </div>
+    <div class="vs" aria-hidden="true">→</div>
+    <div class="col gold">
+      <p class="when">Early 1900s</p>
+      <h3>A question of mind and trauma</h3>
+      <ul>
+        <li>New psychiatry spoke of trauma and the unconscious</li>
+        <li>Women’s education and suffrage made the old idea harder to defend</li>
+      </ul>
+    </div>
+  </div>
+  <aside class="notes"><p>TEMPLATE · Two-column compare. Teal top border = the earlier or first side; gold = the later or second side. The arrow can be replaced with "vs." for a debate.</p></aside>
+</section>
+
+<!-- =========== 7. RETURN SLIDE (always last) =========== -->
+<section class="mini-return" data-background="#1A1A1A">
+  <p class="kicker">End of mini-lecture</p>
+  <h1>Back to the asylum diagnoses</h1>
+  <div class="carry-back">
+    <p class="label">Carry this back with you</p>
+    <p>When you see “hysteria” on an asylum list, read it as a label about <strong>gender and power</strong>, not a clear medical condition.</p>
+  </div>
+  <a class="return-btn js-back" href="chapter-12/ch12_lecture2_moral_labs.html#/asylum-diagnoses">&#8617; Return to lecture</a>
+  <p class="return-hint">You will land on the slide you left from.</p>
+  <aside class="notes"><p>TEMPLATE · Return slide. Charcoal field on purpose: the student is stepping back into the full-lecture look. One "carry this back" sentence, then the big gold button. Keep it as the final slide.</p></aside>
+</section>
+
+</div></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+<script>
+/* ---- Edit per mini-lecture ---- */
+const MINI_TITLE    = 'Hysteria in 19th-Century America';
+const MINI_FALLBACK = 'chapter-12/ch12_lecture2_moral_labs.html#/asylum-diagnoses'; // main-deck slide to return to
+
+Reveal.initialize({ width:1920, height:1080, margin:0.04, minScale:0.1, maxScale:1.0,
+  hash:true, slideNumber:false, transition:'slide', plugins:[RevealNotes] });
+
+document.getElementById('mini-bar-title').textContent = MINI_TITLE;
+document.querySelectorAll('.js-back').forEach(a => a.setAttribute('href', MINI_FALLBACK));
+
+function updateMiniCounter(){
+  document.getElementById('mini-counter').textContent = (Reveal.getState().indexh + 1) + ' / ' + Reveal.getTotalSlides();
+}
+Reveal.on('ready', updateMiniCounter);
+Reveal.on('slidechanged', updateMiniCounter);
+
+/* Back to main lecture:
+   1. Came from the main deck in this tab  -> history.back() (lands on the exact slide; Reveal's hash mode does not add history entries).
+   2. Opened in a new tab (target="_blank") -> try to close the tab, revealing the lecture tab underneath.
+   3. Anything else (direct visit, bookmark, close blocked) -> go to the fallback href. */
+function backToLecture(e){
+  e.preventDefault();
+  const fallback = this.getAttribute('href');
+  let sameSite = false;
+  try { sameSite = document.referrer && new URL(document.referrer).origin === location.origin; } catch(_) {}
+  if (sameSite && history.length > 1) { history.back(); return; }
+  if (history.length <= 1) { window.close(); }
+  setTimeout(() => { location.href = fallback; }, 200);
+}
+document.querySelectorAll('.js-back').forEach(a => a.addEventListener('click', backToLecture));
+/* In-deck links like href="#/section-id" jump with Reveal instead of adding a browser-history entry,
+   so the Back button still returns to the main lecture in one step. */
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#/"]'); if (!a) return;
+  const el = document.getElementById(decodeURIComponent(a.getAttribute('href').slice(2)));
+  if (el) { e.preventDefault(); const i = Reveal.getIndices(el); Reveal.slide(i.h, i.v); }
+});
+
+
+/* Popups: same data-popup pattern as the house decks */
+function closePopups(){ document.querySelectorAll('.popup.active').forEach(p => p.classList.remove('active')); }
+document.addEventListener('click', e => {
+  const t = e.target.closest('.popup-trigger');
+  if (t) { const el = document.getElementById(t.dataset.popup); if (el) { closePopups(); el.classList.add('active'); } }
+  if (e.target.classList.contains('popup-close')) closePopups();
+});
+window.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.querySelector('.popup.active')) { closePopups(); e.preventDefault(); e.stopImmediatePropagation(); }
+}, true);
+Reveal.on('slidechanged', closePopups);
+</script>
+</body>
+</html>
