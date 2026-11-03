@@ -427,7 +427,39 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
 .essay-link{font-size:.5em!important;margin:.7em 0 0!important;letter-spacing:.04em}
 .essay-link a{color:#9ED8D2!important;border-bottom:1px dotted #2C7873;text-decoration:none}
 .essay-link a:hover,.essay-link a:focus{color:#F1D46A!important}
+.reveal .g-40-60{display:grid;grid-template-columns:.8fr 1.2fr;gap:1em;align-items:center}
+/* ---- Ch. 16 online-study layer (ported from Ch. 27 and Ch. 14) (FA26): segments, self-checks, narration panel ---- */
+.reveal .seg-progress{display:flex;gap:.35em;margin:.6em 0 0!important}
+.reveal .seg-progress span{display:block;width:3.2em;height:.35em;border-radius:4px;background:rgba(201,190,170,.25)}
+.reveal .seg-progress span.on{background:#D4AF37}
+.reveal .sc-intro{font-size:.56em!important;color:#C9BEAA;margin:.1em 0 .5em!important;text-align:left}
+.reveal .selfcheck{display:grid;grid-template-columns:1fr 1fr;gap:.55em .9em;text-align:left}
+.reveal .sc-item{border:1px solid rgba(44,120,115,.7);border-left:4px solid #2C7873;border-radius:8px;background:rgba(44,120,115,.12);padding:.45em .7em .5em}
+.reveal .sc-q{font-size:.6em!important;line-height:1.35;color:#F5EEDC;margin:0 0 .35em!important}
+.reveal .sc-btn{font:600 .5em Lora,serif;letter-spacing:.05em;color:#0F2A20;background:#9ED8D2;border:0;border-radius:6px;padding:.3em .8em;cursor:pointer}
+.reveal .sc-btn:hover,.reveal .sc-btn:focus{background:#F1D46A;outline:2px solid #F1D46A;outline-offset:2px}
+.reveal .sc-btn[aria-expanded="true"]{background:#D4AF37}
+.reveal .sc-a{margin-top:.35em;border-top:1px dotted #2C7873;padding-top:.3em}
+.reveal .sc-a p{font-size:.56em!important;line-height:1.38;color:#F1D46A;margin:0!important}
+.reveal .rg-links span{color:#C9BEAA}
+#narr-btn{position:fixed;right:112px;bottom:14px;z-index:60;font:600 14px Lora,Georgia,serif;letter-spacing:.06em;color:#0F2A20;background:#9ED8D2;border:0;border-radius:20px;padding:8px 16px;box-shadow:0 2px 8px rgba(0,0,0,.4);cursor:pointer}
+#narr-btn:hover,#narr-btn:focus{background:#F1D46A;outline:2px solid #F1D46A;outline-offset:2px}
+#narr-btn[aria-expanded="true"]{background:#D4AF37}
+#narr-panel{position:fixed;right:18px;bottom:58px;z-index:59;width:min(560px,92vw);max-height:62vh;overflow:auto;background:rgba(15,42,32,.97);border:1px solid #2C7873;border-top:4px solid #D4AF37;border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.55);padding:14px 18px 12px;color:#F5EEDC;font:16px/1.5 Lora,Georgia,serif;text-align:left}
+#narr-panel[hidden]{display:none}
+#narr-panel .np-head{display:flex;justify-content:space-between;align-items:center;margin:0 0 6px;font:600 12px Lora,serif;letter-spacing:.14em;text-transform:uppercase;color:#C9BEAA}
+#narr-panel .np-close{background:none;border:0;color:#C9BEAA;font-size:22px;line-height:1;cursor:pointer}
+#narr-panel .np-close:hover,#narr-panel .np-close:focus{color:#F1D46A}
+#narr-panel .np-body p{margin:0 0 .6em}
+#narr-panel .np-body a{color:#9ED8D2;border-bottom:1px dotted #2C7873;text-decoration:none}
+#narr-panel .np-body strong{color:#F1D46A}
+#narr-panel audio{width:100%;margin:0 0 8px}
+@media print{#narr-btn,#narr-panel{display:none!important}}
+
 </style>
+<!-- Museum theme (layout, color and type only) -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_theme/museum.css">
 </head>
 <body>
 <div class="reveal"><div class="slides">
@@ -447,11 +479,55 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     </figure>
   </div>
   <aside class="notes">
-    <p>Welcome! This deck is your Study Buddy for the last years of the Qing at its height.</p>
-    <p>The story in one breath. In 1793 a British lord arrived with five demands and six hundred cases of gifts, refused to kowtow, and went home with nothing, because the Qing court saw no merit in what he asked. Meanwhile, at home, the population roughly doubled in a century. Sons divided their fathers' farms, women were scarce, and millions of landless men took to the roads and the hills (Ebrey, Ch. 16, pp. 273, 280, 283–286).</p>
-    <p>The cartoon is by the London satirist James Gillray. He drew it in September 1792, as Lord Macartney was setting sail, imagining the British kneeling and the emperor sneering at their toys. A year later the meeting would turn out not so differently. The cartoon and its date come from sources beyond Ebrey.</p>
-    <p>Press <strong>S</strong> for these notes, click an image to enlarge it, and press <strong>Esc</strong> for a map of all slides. The lower-left letter is each slide's permanent name. The spoken lecture ends at the Pierian Spring divider; what follows is required independent study.</p>
+    <p>Welcome! This is your Study Buddy for the late 1700s.</p>
+    <p>The story in one breath. In 1793 a British lord arrived with five demands and six hundred cases of gifts, refused to kowtow, and went home with nothing. Meanwhile the population roughly doubled in a century, and millions of landless men took to the roads and the hills (Ebrey, Ch. 16, pp. 273, 280, 283–286).</p>
+    <p>The cartoon is real: James Gillray drew it in London in 1792, imagining the British kneeling before a sneering emperor.</p>
+    <p>The <a href="#/how-to-use">how-to-use</a> slide comes next.</p>
     <p><strong>Check yourself:</strong> Who is the "kowtow" in our title, and who is the "crowd"?</p>
+  </aside>
+</section>
+<!-- ===== cc · How to use this deck ===== -->
+<section id="how-to-use" data-letter="cc">
+  <p class="kicker">Start here · How to study this deck on your own</p>
+  <h2>Two Segments, Self-Checks, and a Narration Button on Every Slide</h2>
+  <div class="steps">
+    <div><span>Click <b>Narration</b> (lower right) or press <kbd>N</kbd> to read the Study Buddy notes for any slide. Press <kbd>N</kbd> or <kbd>Esc</kbd> to close them.</span></div>
+    <div><span>Work through two segments: the British embassy of 1793, and the doubling of China's population. Each ends with an ungraded <b>self-check</b>: answer from memory, then click to see the answer.</span></div>
+    <div><span>After each self-check comes a <b>Review Question</b>. Write your answer in your Reading Guide before you move on.</span></div>
+    <div><span>The <b>Pierian Spring</b> at the end is required independent study: the Miao of the southern hills, with one more Review Question, and two short stories.</span></div>
+    <div><span>Click any image to enlarge it, and click a <span class="popup-trigger" data-popup="pop-teal" role="button" tabindex="0">teal dotted word</span> for a definition. The small letter in the lower-left corner is each slide's permanent name. All due dates are on Canvas.</span></div>
+  </div>
+  <aside class="notes">
+    <p>Welcome to the third lecture of Chapter 16. Like Lectures 1 and 2, this deck is built for you to study on your own, at your own pace.</p>
+    <p>Every slide has Study Buddy notes, like these. Open them with the Narration button or the N key. They explain the slide, define new words, and end with a question. Read the slide first, guess what it is about, then open the notes and check your guess.</p>
+    <p>The main part runs in two segments: why Britain sent Lord Macartney to China in 1793 and why the Qianlong emperor turned him down, and how the population doubled and what that did to Chinese society (Ebrey, Ch. 16, pp. 273, 280–286). Each segment ends with a self-check, a few quick questions that are never graded, and then a Review Question from the Reading Guide.</p>
+    <p>After the main part comes the Pierian Spring, which is required independent study.</p>
+    <p><strong>Why this matters:</strong> testing yourself as you go is the surest way to remember what you study alone.</p>
+    <p><strong>Check yourself:</strong> Open the narration for this slide, close it with Esc, and then open the teal dotted word. Did both work?</p>
+  </aside>
+</section>
+<!-- ===== dd · Segment 1 ===== -->
+<section id="segment-1" data-letter="dd" class="segment-slide">
+  <p class="kicker">Segment 1 of 2 · 1600s–1793</p>
+  <h2>Segment 1: The Kowtow</h2>
+  <div class="g-45-55">
+    <figure class="fig h-400">
+      <img src="images/ch16-lec3/08-alexander-emperor-approach.webp" alt="Watercolor of a grassy valley ringed by hills, with long rows of officials in blue robes lining a path toward a large round white tent, as the emperor is carried in an open chair under parasols">
+      <figcaption><i>The Approach of the Emperor of China to His Tent in Tartary to Receive the British Ambassador</i>, William Alexander, 1793. Alexander did not attend; he worked from a fellow officer's sketches. Public domain, <a href="https://commons.wikimedia.org/wiki/File:The_Approach_of_the_Emperor_of_China_to_His_Tent_in_Tartary_to_Receive_the_British_Ambassador_(brightened).jpg" target="_blank" rel="noopener">Wikimedia Commons</a>.</figcaption>
+    </figure>
+    <div class="stack">
+      <div class="story-beat gold">Britain wanted tea and new markets; the Qing wanted trade kept at the edge, on its own terms.</div>
+      <div class="story-beat">This segment teaches the history behind <b>Review Question 6</b>, and it ends with a short self-check and then the question itself.</div>
+      <p class="seg-progress" aria-label="Segment 1 of 2"><span class="on"></span><span></span></p>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Segment 1 follows the British embassy of 1793 and the trade system it came to change (Ebrey, Ch. 16, pp. 280–281).</p>
+    <p>You will start with a recap of the Ming tribute system, then follow the tea trade to Guangzhou and its strict rules, learn the idea of a balance of trade, count Macartney's five goals, unpack his gifts, and watch the quarrel over the kowtow and the emperor's answer.</p>
+    <p>The painting is real: the embassy's artist William Alexander shows the emperor arriving at the audience tent.</p>
+    <p>As you go, ask what each side wanted and why the other side would not give it. Review Question 6 asks why Qianlong said no.</p>
+    <p><strong>Why this matters:</strong> this meeting is the background to the Opium War you will study in Chapter 18.</p>
+    <p><strong>Check yourself:</strong> Before you start, guess: what might a trading nation want from China in 1793?</p>
   </aside>
 </section>
 <!-- ===== b · rc-tribute ===== -->
@@ -471,7 +547,6 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <p>Europeans, the textbook says, "were not full players in this system, but they had a marginal presence." Hold on to that phrase. The British would try to change it. Our last lecture ended with their ship arriving in 1793; the last link takes you back to that slide.</p>
     <p><strong>Why this matters:</strong> The Qing inherited this idea that the emperor sets the terms of trade, and it is the root of the 'no' Britain heard in 1793.</p>
     <p><strong>Check yourself:</strong> In the tribute system, who set the rules for trade, the foreigner or the emperor?</p>
-    <p>Instructor note: the textbook's list includes Japan (p. 280). Tokugawa Japan sent no envoys to the Qing; Chinese merchants traded at Nagasaki under Japanese licenses (Toby, 1984).</p>
   </aside>
 </section>
 <!-- ===== c · tea ===== -->
@@ -492,7 +567,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   </div>
   <p class="source-line">Sources: Ebrey, Ch. 16, p. 280.</p>
   <aside class="notes">
-    <p>To understand why a British lord sailed to China, start with a cup of tea. Look at this English family around 1720: the silver kettle, the small porcelain cups, the teapot. Every leaf in that pot came from China, and so, very likely, did the cups. The painting is our addition, from sources beyond Ebrey.</p>
+    <p>To understand why a British lord sailed to China, start with a cup of tea. Look at this English family around 1720: the silver kettle, the small porcelain cups, the teapot. Every leaf in that pot came from China, and so, very likely, did the cups. The painting is real.</p>
     <p>European trade with China was concentrated at <strong>Guangzhou</strong>, which Europeans called <strong>Canton</strong>, in the far south. Soon after 1600 the <strong>Dutch East India Company</strong> had largely pushed the Spanish and Portuguese out of the trade with China, Japan, and the East Indies. Before long the <strong>British East India Company</strong> was competing with the Dutch (Ebrey, p. 280). These were private trading companies, licensed by their governments.</p>
     <p>What did they buy? In the seventeenth century, mostly porcelain and silk. In the eighteenth century, tea. By the end of the century, tea made up <strong>80 percent</strong> of Chinese exports to Europe. Europeans also admired China itself in these years, as a source of luxuries and as a land ruled by wise emperors.</p>
     <p><strong>Why this matters:</strong> Britain's thirst for tea is why it cared enough about China to send an embassy at all.</p>
@@ -517,11 +592,11 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   </div>
   <p class="source-line">Sources: Ebrey, Ch. 16, p. 280.</p>
   <aside class="notes">
-    <p>Now look at where the Europeans actually lived. This row of buildings with flags stood on the riverbank <em>outside</em> the walls of Guangzhou. The British, Dutch, Swedes, and others each had one. They were called "factories," meaning the offices and warehouses of their "factors," or agents. The painting is from 1806, a little after our story; it is from sources beyond Ebrey.</p>
+    <p>Now look at where the Europeans actually lived. This row of buildings with flags stood on the riverbank <em>outside</em> the walls of Guangzhou. They were called "factories," meaning the offices and warehouses of their "factors," or agents. The painting is from 1806, a little after our story.</p>
     <p>The Qing, like the Ming, specified where merchants of each country could trade, and Europeans could trade only in Guangzhou. That was inconvenient. Tea grew mostly in the Yangzi valley, so it had to be carried hundreds of miles south, and the cost was added to the price (Ebrey, p. 280).</p>
-    <p>The Chinese merchants licensed to deal with the Europeans formed their own <strong>guild</strong>, and the government made them guarantee that the Europeans obeyed Qing rules. And the rules were strict. Europeans had to <strong>pay cash</strong> for what they bought. They were forbidden to enter the walled city of Guangzhou, to ride in sedan chairs, to bring women or weapons into their quarters, and to <strong>learn Chinese</strong>.</p>
-    <p>Historians call this arrangement the <strong>Canton system</strong>. The name, and the date when Guangzhou became the only port open to Europeans, 1757, come from sources beyond Ebrey. Click the term for a short definition. The system lasted until the Opium War, which you will meet in Chapter 18.</p>
-    <p><strong>Why this matters:</strong> These rules are exactly what Macartney came to change, so they frame the whole clash.</p>
+    <p>The Chinese merchants licensed to deal with the Europeans formed their own <strong>guild</strong>, and the government made them guarantee that the Europeans obeyed Qing rules. Europeans had to <strong>pay cash</strong> for what they bought. They were forbidden to enter the walled city of Guangzhou, to ride in sedan chairs, to bring women or weapons into their quarters, and to <strong>learn Chinese</strong>.</p>
+    <p>Historians call this arrangement the <strong>Canton system</strong>; from 1757 Guangzhou was the only port open to Europeans. The system lasted until the Opium War, which you will meet in Chapter 18.</p>
+    <p><strong>Why this matters:</strong> Macartney came to change exactly these rules.</p>
     <p><strong>Check yourself:</strong> Name three things Europeans in Guangzhou were not allowed to do.</p>
   </aside>
 </section>
@@ -542,7 +617,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <aside class="notes">
     <p>Here is the economic problem behind the whole story. A <strong>balance of trade</strong> compares what one country sells to another with what it buys from it.</p>
     <p>The British bought more and more tea. But, as the textbook says, "British merchants could not find goods that Chinese merchants would buy from them" (Ebrey, p. 280). So the balance of trade "became more lopsided."</p>
-    <p>How do you pay for goods when the seller wants nothing you make? In cash, and cash meant <strong>silver</strong>. You saw in Chapter 14 how American silver poured into Ming China; the link opens that slide. The British were now paying for tea the same way. That detail is from sources beyond Ebrey.</p>
+    <p>How do you pay for goods when the seller wants nothing you make? In cash, and cash meant <strong>silver</strong>. You saw in Chapter 14 how American silver poured into Ming China; the link opens that slide. The British were now paying for tea the same way.</p>
     <p>Keep this in mind. A merchant nation watching its silver sail away will want to sell something to China. That is one reason Britain sent an ambassador.</p>
     <p><strong>Why this matters:</strong> A silver drain gave Britain a pressing reason to push China for new markets, the pressure behind the kowtow story.</p>
     <p><strong>Check yourself:</strong> Why did the British have to pay for their tea in silver?</p>
@@ -567,8 +642,8 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <p class="source-line">Sources: Ebrey, Ch. 16, p. 280.</p>
   <aside class="notes">
     <p>The merchants were not the only unhappy party. The British government was "suspicious of the British East India Company, which had made great fortunes from its trade with China." It wanted to open direct diplomatic relations with China, partly as a way to curb the company (Ebrey, p. 280).</p>
-    <p>So <strong>King George III</strong> sent <strong>Lord George Macartney</strong>, an experienced diplomat: a former ambassador to Russia and former governor of Madras in India. The portrait was painted just before he sailed by Thomas Hickey, who went along as the embassy's painter; that is from sources beyond Ebrey.</p>
-    <p>Count his goals as I read them. In the textbook's words, "Macartney was instructed to secure a place for British traders near the tea-producing areas, negotiate a commercial treaty, create a desire for British products, arrange for diplomatic representation in Beijing, and open Japan and Southeast Asia to British commerce as well." That is five. Your Reading Guide asks you to copy that sentence, on page 280.</p>
+    <p>So <strong>King George III</strong> sent <strong>Lord George Macartney</strong>, an experienced diplomat: a former ambassador to Russia and former governor of Madras in India. The portrait was painted just before he sailed by Thomas Hickey, who went along as the embassy's painter.</p>
+    <p>Count his goals as you read them. In the textbook's words, "Macartney was instructed to secure a place for British traders near the tea-producing areas, negotiate a commercial treaty, create a desire for British products, arrange for diplomatic representation in Beijing, and open Japan and Southeast Asia to British commerce as well." That is five. Your Reading Guide asks you to copy that sentence, on page 280.</p>
     <p>Notice what they share. Every goal would have broken a Qing rule you saw on the <a href="#/guangzhou-rules">Guangzhou rules</a> slide.</p>
     <p><strong>Why this matters:</strong> Each goal challenged the Qing's control of foreign trade, which is why the court was bound to refuse.</p>
     <p><strong>Check yourself:</strong> Which of Macartney's five goals would have changed the Canton system most?</p>
@@ -594,10 +669,9 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <aside class="notes">
     <p>Picture the embassy as it set out. Macartney traveled with an entourage of <strong>eighty-four</strong> and <strong>six hundred cases</strong> packed with British goods that he hoped would impress the court and attract trade: clocks, telescopes, knives, globes, plate glass, Wedgwood pottery, landscape paintings, woolen cloth, and carpets (Ebrey, p. 280). It was a sales catalogue as much as a gift.</p>
     <p>Now the detail that tells you how little the two sides knew each other. Britain had almost no one who knew Chinese, so Macartney hired two Chinese Catholic priests trained at a college in Naples. One left at Macao; the other, <strong>Li Zibiao</strong>, interpreted all the way to the emperor. The only Briton able to speak Chinese was a <strong>twelve-year-old boy</strong>, who had learned some by talking with Chinese on the long voyage (Ebrey, p. 280).</p>
-    <p>The painting shows that boy. He was George Thomas Staunton, son of Macartney's deputy. Here he is home again, greeting his mother, with a Chinese boy carrying a chest of tea. He grew up to become one of Britain's first serious students of China and translated the Qing law code. All of that is from sources beyond Ebrey.</p>
+    <p>The painting shows that boy. He was George Thomas Staunton, son of Macartney's deputy. Here he is home again, greeting his mother, with a Chinese boy carrying a chest of tea. He grew up to become one of Britain's first serious students of China and translated the Qing law code.</p>
     <p><strong>Why this matters:</strong> The gifts show Britain trying to win trade by impressing the emperor, and why it failed when he was not impressed.</p>
     <p><strong>Check yourself:</strong> What do the gifts tell you about what the British hoped to sell?</p>
-    <p>Instructor note: the textbook calls the boy the party's only Chinese speaker (p. 280); on the priests, see Harrison (2021).</p>
   </aside>
 </section>
 <!-- ===== h · kowtow ===== -->
@@ -619,12 +693,11 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <p class="source-line">Sources: Ebrey, Ch. 16, p. 280.</p>
   <aside class="notes">
     <p>When Macartney reached China in 1793 he asked to see the emperor to present a letter from <strong>King George III</strong>. The letter had been written in Chinese, but "its language was not appropriate for addressing an emperor" (Ebrey, p. 280). Still, the party was allowed to proceed to Beijing.</p>
-    <p>There the real obstacle appeared. When officials instructed him how to behave before the emperor, Macartney objected to performing the <strong>kowtow</strong>: kneeling on both knees and bowing the head to the ground. Click the word for a definition. To the Qing this was ordinary court ritual. To Macartney it meant admitting that his king was the emperor's inferior.</p>
-    <p>Finally a compromise. Macartney was permitted to meet the <strong>Qianlong emperor</strong> more informally at his summer retreat. That retreat was at Rehe, today Chengde, beyond the Great Wall, and the audience took place in a great tent on 14 September 1793, with Macartney kneeling on one knee as he would to his own king. Those details are from sources beyond Ebrey.</p>
-    <p>The picture is by William Alexander, the embassy's artist. Look for the round tent, the lines of officials, and the emperor carried in an open chair under parasols. Alexander was left behind in Beijing and painted it from a colleague's sketches, so it is a reconstruction; that fact is also from sources beyond Ebrey.</p>
-    <p><strong>Why this matters:</strong> The kowtow turned a trade request into a contest over who ranked higher, the core of the lecture's first half.</p>
+    <p>There the real obstacle appeared. When officials instructed him how to behave before the emperor, Macartney objected to performing the <strong>kowtow</strong>: kneeling on both knees and bowing the head to the ground. To the Qing this was ordinary court ritual. To Macartney it meant admitting that his king was the emperor's inferior.</p>
+    <p>Finally a compromise. Macartney was permitted to meet the <strong>Qianlong emperor</strong> more informally at his summer retreat. That retreat was at Rehe, today Chengde, beyond the Great Wall, and the audience took place in a great tent on 14 September 1793, with Macartney kneeling on one knee as he would to his own king.</p>
+    <p>The picture is by William Alexander, the embassy's artist. Look for the round tent, the lines of officials, and the emperor carried in an open chair under parasols. Alexander was left behind in Beijing and painted it from a colleague's sketches, so it is a reconstruction.</p>
+    <p><strong>Why this matters:</strong> the kowtow turned a trade request into a contest over rank.</p>
     <p><strong>Check yourself:</strong> Why did the kowtow matter so much to both sides?</p>
-    <p>Instructor note: the textbook says Macartney "arrived in Guangzhou" and names George II (p. 280); he landed near Tianjin, and the king was George III.</p>
   </aside>
 </section>
 <!-- ===== i · no-merit ===== -->
@@ -646,12 +719,47 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <p class="source-line">Sources: Ebrey, Ch. 16, pp. 280–281; the edict line from E. Backhouse and J. O. P. Bland, <i>Annals and Memoirs of the Court of Peking</i> (1914).</p>
   <aside class="notes">
     <p>After the audience, nothing. "No negotiations followed this meeting, however," the textbook says, "because the Qing court saw no merit in Macartney's requests. It was as interested in maintaining its existing system of regulated trade as Britain was in doing away with it" (Ebrey, p. 280).</p>
-    <p>Think about it from the emperor's side. He was eighty-one and had ruled for nearly sixty years. The Canton system worked: Europeans paid silver for tea, and they were kept at the edge. Every one of Macartney's goals would have weakened that control. The court was wary, too: Britain ruled much of India, and Qianlong suspected it of aiding the Gurkhas of Nepal against him. He quietly ordered stronger coast defenses.</p>
-    <p>Qianlong sent his answer to George III as an edict. One famous line, in an English translation published in 1914: "I set no value on objects strange or ingenious, and have no use for your country's manufactures." The edict and its wording are from sources beyond Ebrey. Historians warn that this translation made the emperor sound more ignorant than he was; the court was refusing a political demand, not just mocking the gifts.</p>
-    <p>The British went home and wrote books about China (see the Pierian Spring). But the textbook ends with a sobering sentence: the Chinese "did not learn much about Europe or Britain from this encounter" (p. 281).</p>
-    <p><strong>Why this matters:</strong> The court's refusal shows the Qing at its height saw no need to change its system for Britain.</p>
+    <p>He was eighty-one and had ruled for nearly sixty years. The Canton system worked: Europeans paid silver for tea, and they were kept at the edge. Every one of Macartney's goals would have weakened that control. The court was wary, too: Britain ruled much of India, and Qianlong suspected it of aiding the Gurkhas of Nepal against him. He quietly ordered stronger coast defenses.</p>
+    <p>Qianlong sent his answer to George III as an edict. One famous line, in a 1914 English translation: "I set no value on objects strange or ingenious, and have no use for your country's manufactures." Be careful with that translation: it makes the emperor sound more ignorant than he was. The court was refusing a political demand, not just mocking the gifts.</p>
+    <p>The British went home and wrote books about China. But the textbook ends with a sobering sentence: the Chinese "did not learn much about Europe or Britain from this encounter" (p. 281).</p>
+    <p><strong>Why this matters:</strong> the Qing at its height saw no need to change its system for Britain.</p>
     <p><strong>Check yourself:</strong> Give one reason why the court saw no merit in Macartney's requests.</p>
-    <p>Source beyond Ebrey: the court's fears and the coast orders (Harrison, 2017; Hevia, 1995).</p>
+  </aside>
+</section>
+<!-- ===== ff · Self-check Segment 1 ===== -->
+<section id="sc-q6" data-letter="ff" data-background="#14302A">
+  <p class="kicker">Self-check · Segment 1 · not graded</p>
+  <h2>Check Yourself: The Kowtow</h2>
+  <p class="sc-intro">Answer each question from memory, out loud or on paper, then click <b>Show answer</b> to check yourself. Nothing here is graded or recorded.</p>
+  <div class="selfcheck">
+    <div class="sc-item">
+      <p class="sc-q"><b>1.</b> What did Europeans most want from China by the late 1700s?</p>
+      <button type="button" class="sc-btn" aria-expanded="false" aria-controls="sc-sc-q6-1">Show answer</button>
+      <div class="sc-a" id="sc-sc-q6-1" hidden><p>Tea, which made up 80 percent of Chinese exports to Europe (Ebrey, p. 280).</p></div>
+    </div>
+    <div class="sc-item">
+      <p class="sc-q"><b>2.</b> Name three things Europeans in Guangzhou were not allowed to do.</p>
+      <button type="button" class="sc-btn" aria-expanded="false" aria-controls="sc-sc-q6-2">Show answer</button>
+      <div class="sc-a" id="sc-sc-q6-2" hidden><p>Enter the walled city, ride in sedan chairs, bring women or weapons into their quarters, or learn Chinese (p. 280).</p></div>
+    </div>
+    <div class="sc-item">
+      <p class="sc-q"><b>3.</b> Why did the British have to pay for their tea in silver?</p>
+      <button type="button" class="sc-btn" aria-expanded="false" aria-controls="sc-sc-q6-3">Show answer</button>
+      <div class="sc-a" id="sc-sc-q6-3" hidden><p>British merchants could not find goods that Chinese merchants would buy from them (p. 280).</p></div>
+    </div>
+    <div class="sc-item">
+      <p class="sc-q"><b>4.</b> Give one reason why the court saw no merit in Macartney's requests.</p>
+      <button type="button" class="sc-btn" aria-expanded="false" aria-controls="sc-sc-q6-4">Show answer</button>
+      <div class="sc-a" id="sc-sc-q6-4" hidden><p>It wanted to keep its system of regulated trade, and every one of his goals would have weakened it (p. 280).</p></div>
+    </div>
+  </div>
+  <p class="rg-links"><span>Missed one? Go back:</span> <a href="#/tea">tea</a> <a href="#/guangzhou-rules">guangzhou-rules</a> <a href="#/concept-balance">concept-balance</a> <a href="#/no-merit">no-merit</a></p>
+  <aside class="notes">
+    <p>Segment 1 is done. Before you open Review Question 6, test yourself. These four questions come from the "Check yourself" prompts on the segment's slides (Ebrey, Ch. 16, p. 280).</p>
+    <p>Answer each one from memory, out loud or on paper, before you click <strong>Show answer</strong>. If you miss one, use the links at the bottom of the slide to go back to the slide that teaches it.</p>
+    <p>The first three questions are about how European trade was regulated and the problem that created for Britain; the last is about the court's answer. Review Question 6 asks for the rules, the mission's goals, and the reasons for the refusal, so link each goal to a rule it would have broken.</p>
+    <p><strong>Why this matters:</strong> recalling facts without looking is the best preparation for writing an answer in your own words.</p>
+    <p><strong>Check yourself:</strong> Which of the four did you miss or guess, and which slide will you reread before Review Question 6?</p>
   </aside>
 </section>
 <!-- ===== j · Reading Guide Review Question 6 ===== -->
@@ -676,6 +784,30 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <p><strong>Check yourself:</strong> Can you connect one of Macartney's goals to one specific Canton rule it would have broken?</p>
   </aside>
 </section>
+<!-- ===== ee · Segment 2 ===== -->
+<section id="segment-2" data-letter="ee" class="segment-slide">
+  <p class="kicker">Segment 2 of 2 · 1700–1800</p>
+  <h2>Segment 2: The Crowd</h2>
+  <div class="g-45-55">
+    <figure class="fig h-400">
+      <img src="images/ch16-lec3/11-xu-yang-changmen.webp" alt="Detail of a long Chinese handscroll: a crowded city street seen from above, packed with shops, banners, boats on a canal, and hundreds of tiny figures">
+      <figcaption>A crowded street at Changmen gate, Suzhou, from Xu Yang's scroll <i>Prosperous Suzhou</i>, 1759. Liaoning Provincial Museum. Public domain, <a href="https://commons.wikimedia.org/wiki/File:Xu_Yang_-_Changmen_street_in_Suzhou.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>.</figcaption>
+    </figure>
+    <div class="stack">
+      <div class="story-beat gold">In a century of peace the population doubled, farms shrank, wives grew scarce, and landless men took to the roads.</div>
+      <div class="story-beat">This segment teaches the history behind <b>Review Question 7</b>, and it ends with a short self-check and then the question itself.</div>
+      <p class="seg-progress" aria-label="Segment 2 of 2"><span class="on"></span><span class="on"></span></p>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Segment 2 turns from the emperor's tent to the crowd. In the eighteenth century China's population nearly doubled (Ebrey, Ch. 16, pp. 273, 283–284).</p>
+    <p>You will see the numbers and the four causes of growth, learn the idea of partible inheritance, and follow its consequences: farms too small to feed a family, a shortage of marriageable women, rootless men looking for work, and settlers pushing into the hills.</p>
+    <p>The painting is real: a crowded street in Suzhou, from a court scroll of 1759.</p>
+    <p>As you go, sort each consequence into economic or social. Review Question 7 asks for both.</p>
+    <p><strong>Why this matters:</strong> the pressures of this century shaped the rebellions and crises of the 1800s.</p>
+    <p><strong>Check yourself:</strong> Before you start, guess: what happens to a farming family's land when every son inherits a share?</p>
+  </aside>
+</section>
 <!-- ===== k · doubled ===== -->
 <section id="doubled" data-letter="k">
   <p class="kicker">Q7 story · Across the empire · 1700–1800</p>
@@ -696,7 +828,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <aside class="notes">
     <p>Now we turn from the emperor's tent to the crowd. For more than a century, China was ruled by just three emperors, Kangxi, Yongzheng, and Qianlong, each "hard working, talented, and committed to making the Qing Dynasty a success." Their policies gave China "a respite from war and disorder" (Ebrey, p. 273).</p>
     <p>And the population grew. It seems to have <strong>nearly doubled</strong> during this period, from between 150 and 175 million to between <strong>300 and 325 million</strong>. You saw in Chapter 14 that the Ming population had already grown; the link takes you back. The Qing doubling came on top of that.</p>
-    <p>To feel the scale: in 1800 roughly a third of the world's people may have lived in China. That comparison comes from sources beyond Ebrey. Look at this street in Suzhou, painted in 1759 by the court painter Xu Yang: shops, signs, boats, and crowds as far as the eye can see. The scroll is also from sources beyond Ebrey.</p>
+    <p>To feel the scale: in 1800 roughly a third of the world's people may have lived in China. Look at this street in Suzhou, painted in 1759 by the court painter Xu Yang: shops, signs, boats, and crowds as far as the eye can see.</p>
     <p><strong>Why this matters:</strong> The doubling is the 'crowd' in the lecture's title, and it reshaped Qing society from the bottom up.</p>
     <p><strong>Check yourself:</strong> Roughly how many people lived in China in 1700, and in 1800?</p>
   </aside>
@@ -723,12 +855,11 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <p class="source-line">Sources: Ebrey, Ch. 16, pp. 273, 283–284; Ch. 14 L2 for New World crops.</p>
   <aside class="notes">
     <p>Why did the population double? The textbook gives four factors in one sentence, the sentence your Reading Guide asks you to copy: "Population growth during the course of the eighteenth century has been attributed to many factors: global warming that extended the growing season; expanded use of New World crops; slowing of the spread of new diseases that had accompanied the sixteenth-century expansion of global traffic; and the efficiency of the Qing government in providing relief in times of famine" (Ebrey, p. 273).</p>
-    <p>Take them one at a time. After the bitter cold of the 1600s, a <strong>milder climate</strong> meant a longer growing season. <strong>New World crops</strong> such as sweet potatoes, white potatoes, and peanuts grew on land "previously rejected as too hilly or infertile" (p. 283); you met them in Chapter 14. The terrible epidemics that came with the first wave of global travel in the 1500s had <strong>slowed</strong>.</p>
-    <p>The fourth factor is the government. When drought or floods ruined a harvest, starving families took to the roads, and epidemics swept the refugee camps. The Qing was "remarkably successful in curbing the death toll of major famines by careful administration of granaries and provision of direct relief," and "its success contributed to the rapid rise in population" (p. 284).</p>
+    <p>Take them one at a time. After the bitter cold of the 1600s, a <strong>milder climate</strong> meant a longer growing season. <strong>New World crops</strong> such as sweet potatoes and peanuts grew on hilly or poor land (p. 283); you met them in Chapter 14. The epidemics of the 1500s had <strong>slowed</strong>.</p>
+    <p>The fourth factor is the government. When drought or floods ruined a harvest, the Qing was "remarkably successful in curbing the death toll of major famines by careful administration of granaries and provision of direct relief," and "its success contributed to the rapid rise in population" (p. 284).</p>
     <p>So good government had an unexpected result: more people than the land could easily feed. That is where the next slides go.</p>
-    <p><strong>Why this matters:</strong> Knowing why the population grew lets you explain why the pressure on land kept rising all century.</p>
+    <p><strong>Why this matters:</strong> the causes of growth explain why the pressure on land kept rising all century.</p>
     <p><strong>Check yourself:</strong> Which of the four factors was a result of Qing policy?</p>
-    <p>Instructor note: the textbook's "global warming" means the milder climate after the coldest decades of the Little Ice Age (Lee and Wang, 1999).</p>
   </aside>
 </section>
 <!-- ===== m · concept-partible ===== -->
@@ -746,7 +877,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   </div>
   <p class="source-line">Sources: Ebrey, Ch. 16, pp. 283–284.</p>
   <aside class="notes">
-    <p>Here is the concept that turns more people into a social problem. <strong>Partible inheritance</strong> means dividing the family land among all the sons, rather than handing it to one heir. The detail that the sons usually received equal shares comes from sources beyond Ebrey.</p>
+    <p>Here is the concept that turns more people into a social problem. <strong>Partible inheritance</strong> means dividing the family land among all the sons, rather than handing it to one heir. The sons usually received equal shares.</p>
     <p>Do the arithmetic. A father with a farm just big enough for one family has three sons who live to adulthood. Each gets a third. If each of them has three sons, each grandson gets a ninth. In a century of rising population, the textbook says, "population growth, coupled with the practice of partible inheritance, led to the proliferation of farms too small to support a family" (Ebrey, p. 284).</p>
     <p>Villages did nothing to protect these small farmers. Chinese villages were "open": they held no land in common, and small farmers "could easily fall into debt and sell or mortgage all or part of their land." Families without enough land put their women and children to sideline work such as weaving mats and baskets, and in winter the men went to nearby towns to look for temporary jobs (p. 283).</p>
     <p><strong>Why this matters:</strong> Divided farms turned population growth into poverty, the link between the 'crowd' and the rootless men.</p>
@@ -773,10 +904,10 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <aside class="notes">
     <p>Population growth had a second, painful consequence, and the textbook states it plainly. "Many men could not marry because of a shortage of marriageable women" (Ebrey, p. 284).</p>
     <p>Two things caused the shortage. At the top of society, "the rich" took "extra women as concubines," secondary wives who lived in the household. At the bottom, poor families "unwilling to rear another daughter" practiced <strong>sex-selective infanticide</strong>: they let some newborn girls die.</p>
-    <p>The shortage had a darker consequence that the textbook does not mention. From sources beyond Ebrey: the historian Matthew Sommer, working from more than a thousand Qing court cases, shows that a scarcity of wives among the poor created a widespread <strong>traffic in women</strong>. Poor families sold daughters into richer households as servants or concubines; a poor man could pay a <strong>bride price</strong> for a wife; and in a crisis a desperate husband might sell his own wife to another man. Traffickers also kidnapped or lured away women and girls to sell. Qing law punished most of these sales, but magistrates knew how common they were.</p>
-    <p>The picture shows the other side of the story: a wedding in a wealthy Suzhou household, with the bride's red sedan chair, musicians, and guests. For a poor man without land, a wedding like this was out of reach.</p>
-    <p>Put the last two slides together. A man with too little land, and no prospect of a wife or children, had little reason to stay in his village. On the next slide, we follow him out.</p>
-    <p><strong>Why this matters:</strong> A shortage of wives left millions of men without families, a social strain the Qing would feel for decades.</p>
+    <p>The shortage had a darker side. Poor families sold daughters into richer households as servants or concubines; a poor man could pay a <strong>bride price</strong> for a wife; and in a crisis a desperate husband might sell his own wife to another man. Traffickers also kidnapped or lured away women and girls. Qing law punished most of these sales, but magistrates knew how common they were.</p>
+    <p>The picture shows a wedding in a wealthy Suzhou household, with the bride's red sedan chair, musicians, and guests. For a poor man without land, a wedding like this was out of reach.</p>
+    <p>A man with too little land and no prospect of a wife had little reason to stay in his village. The next slide follows him out.</p>
+    <p><strong>Why this matters:</strong> millions of men could never start families, a strain the Qing would feel for decades.</p>
     <p><strong>Check yourself:</strong> Name the two causes of the shortage of marriageable women.</p>
   </aside>
 </section>
@@ -799,7 +930,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <p class="source-line">Sources: Ebrey, Ch. 16, p. 284; Ch. 16 L2 for the soul-stealing panic.</p>
   <aside class="notes">
     <p>Now follow the man who left. "Men with little or no land and unable to marry commonly would leave their villages in search of work" (Ebrey, p. 284).</p>
-    <p>Some traveled with their tools to do carpentry or farm work. Others found jobs <strong>pulling the boats</strong> that carried grain up the Grand Canal. In the cities they worked as <strong>dockhands</strong>, <strong>sedan-chair carriers</strong>, or <strong>night-soil collectors</strong>, carrying human waste out to the fields as fertilizer. When copper mines opened in the southwest, unemployed men traveled long distances to work as <strong>miners</strong>.</p>
+    <p>Some traveled with their tools to do carpentry or farm work. Others found jobs <strong>pulling the boats</strong> that carried grain up the Grand Canal. In the cities they worked as <strong>dockhands</strong>, <strong>sedan-chair carriers</strong>, or <strong>night-soil collectors</strong>. When copper mines opened in the southwest, unemployed men traveled long distances to work as <strong>miners</strong>.</p>
     <p>Look at the engraving by the embassy's artist William Alexander. Teams of men turn big capstans to drag a loaded boat up a stone ramp from one canal to the next. The British crossed this one in November 1793. It is a different canal from the Grand Canal, but it is the same kind of muscle work.</p>
     <p>These men made settled people nervous. "Both the government and settled villagers were wary of these rootless men. They were quick to suspect strangers when crimes occurred." Remember the sorcery scare of 1768 from our last lecture, when wandering monks and beggars were accused of clipping queues? The link takes you back. The suspects were exactly these men.</p>
     <p><strong>Why this matters:</strong> Rootless men on the roads were the human cost of the doubling, and officials feared them.</p>
@@ -830,6 +961,42 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <p>The picture comes from one of the illustrated albums that Qing officials made to describe the non-Han peoples of the southwest; here, Red Miao villagers go to their fields. The full story of the Miao is in the Pierian Spring, where it ends with Review Question 11.</p>
     <p><strong>Why this matters:</strong> The push into the hills carried population pressure to the empire's edges, where it turned into conflict.</p>
     <p><strong>Check yourself:</strong> Which crops made the hills worth farming?</p>
+  </aside>
+</section>
+<!-- ===== gg · Self-check Segment 2 ===== -->
+<section id="sc-q7" data-letter="gg" data-background="#14302A">
+  <p class="kicker">Self-check · Segment 2 · not graded</p>
+  <h2>Check Yourself: The Crowd</h2>
+  <p class="sc-intro">Answer each question from memory, out loud or on paper, then click <b>Show answer</b> to check yourself. Nothing here is graded or recorded.</p>
+  <div class="selfcheck">
+    <div class="sc-item">
+      <p class="sc-q"><b>1.</b> Roughly how many people lived in China around 1700, and around 1800?</p>
+      <button type="button" class="sc-btn" aria-expanded="false" aria-controls="sc-sc-q7-1">Show answer</button>
+      <div class="sc-a" id="sc-sc-q7-1" hidden><p>From between 150 and 175 million to between 300 and 325 million (Ebrey, p. 273).</p></div>
+    </div>
+    <div class="sc-item">
+      <p class="sc-q"><b>2.</b> Which of the four causes of growth was a result of Qing policy?</p>
+      <button type="button" class="sc-btn" aria-expanded="false" aria-controls="sc-sc-q7-2">Show answer</button>
+      <div class="sc-a" id="sc-sc-q7-2" hidden><p>Famine relief: careful management of granaries and direct aid to the hungry (pp. 273, 284).</p></div>
+    </div>
+    <div class="sc-item">
+      <p class="sc-q"><b>3.</b> Name the two causes of the shortage of marriageable women.</p>
+      <button type="button" class="sc-btn" aria-expanded="false" aria-controls="sc-sc-q7-3">Show answer</button>
+      <div class="sc-a" id="sc-sc-q7-3" hidden><p>Rich men took extra women as concubines, and poor families let some newborn daughters die (p. 284).</p></div>
+    </div>
+    <div class="sc-item">
+      <p class="sc-q"><b>4.</b> Which crops made the hills worth farming?</p>
+      <button type="button" class="sc-btn" aria-expanded="false" aria-controls="sc-sc-q7-4">Show answer</button>
+      <div class="sc-a" id="sc-sc-q7-4" hidden><p>Sweet potatoes, white potatoes, peanuts, and tobacco, all from the Americas (p. 283).</p></div>
+    </div>
+  </div>
+  <p class="rg-links"><span>Missed one? Go back:</span> <a href="#/doubled">doubled</a> <a href="#/why-growth">why-growth</a> <a href="#/missing-women">missing-women</a> <a href="#/uplands">uplands</a></p>
+  <aside class="notes">
+    <p>Segment 2 is done. One more self-check before Review Question 7. The questions come from the "Check yourself" prompts on the segment's slides (Ebrey, Ch. 16, pp. 273, 283–284).</p>
+    <p>Answer from memory, then click <strong>Show answer</strong>. Use the links at the bottom to go back to any slide you need.</p>
+    <p>The first two questions are about the growth and its causes; the last two are about its consequences. Review Question 7 asks for both, so as you answer, try to link one cause to one consequence, and sort each consequence into economic or social.</p>
+    <p><strong>Why this matters:</strong> a cause-and-effect answer needs both sides in view at once.</p>
+    <p><strong>Check yourself:</strong> Can you trace one chain from "more people" to "rootless men" in three steps?</p>
   </aside>
 </section>
 <!-- ===== q · Reading Guide Review Question 7 ===== -->
@@ -889,7 +1056,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   </div>
   <aside class="notes">
     <p>Welcome to the Pierian Spring. In Greek myth the spring in Pieria was sacred to the Muses, and drinking from it brought knowledge.</p>
-    <p>These slides are required independent study. They follow the settlers you met on the <a href="#/uplands">settlers in the hills</a> slide into the southern hills, and tell what happened to the Miao and other peoples who already lived there. The story ends with the Reading Guide Review Question 11 slide (p. 286).</p>
+    <p>These slides are required independent study. They follow the settlers you met on the <a href="#/uplands">settlers in the hills</a> slide into the southern hills, and tell what happened to the Miao and other peoples who already lived there. The story ends with the Reading Guide Review Question 11 slide.</p>
     <p>Two short stories follow: what the British wrote about China when they got home, and whether ordinary Chinese lived as well as Europeans.</p>
     <p>Work through them at your own pace, with the notes open.</p>
   </aside>
@@ -942,10 +1109,9 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <p>A few names before the story. Throughout the south lived indigenous peoples, "called Miao, Yao, Zhuang, and many other names." The textbook calls them <strong>aboriginal peoples</strong>, people who had lived in an area for centuries before Han settlers arrived. They "were often exploited and treated with contempt" (Ebrey, p. 284).</p>
     <p>The <strong>Miao</strong> are the group our story follows. They lived in the mountains where Hunan, Guizhou, and their neighbors meet.</p>
     <p>The <strong>guest people</strong> are different: they were Han Chinese settlers from the lowlands, moving into the Hunan–Guizhou border just before the great revolt of 1795 (p. 286). The Miao and the officials called them <i>kemin</i>, "guests," newcomers on someone else's land.</p>
-    <p>The picture is a page from a "Miao album," a kind of illustrated guide that Qing officials made to the peoples of the southwest, showing their dress and customs. These albums are from sources beyond Ebrey. They tell us as much about how officials saw these peoples as about the peoples themselves.</p>
+    <p>The picture is a page from a "Miao album," a kind of illustrated guide that Qing officials made to the peoples of the southwest, showing their dress and customs. They tell us as much about how officials saw these peoples as about the peoples themselves.</p>
     <p><strong>Why this matters:</strong> Knowing who already lived in the hills lets you see whose land the growing Han population was taking.</p>
     <p><strong>Check yourself:</strong> Which name in the box refers to Han Chinese, and why were they called guests?</p>
-    <p>Instructor note: the textbook calls the newcomers "a Han ethnic group called the Hakka" (p. 286). The sources say <i>kemin</i>, Han settlers in general; the Hakka are a separate group centered in Guangdong, Fujian, and Jiangxi (Sutton, 2003).</p>
   </aside>
 </section>
 <!-- ===== v · ps-land-taken ===== -->
@@ -969,7 +1135,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <aside class="notes">
     <p>Here is the heart of Review Question 11, in the textbook's words, the sentence your Reading Guide asks you to copy: "As the Han Chinese population swelled, more and more settlers moved into Miao territories, often expropriating Miao land" (Ebrey, p. 286). To <strong>expropriate</strong> is to take someone's property away from them.</p>
     <p>The textbook puts the Miao alongside the secret societies you will meet next lecture, as another group that "often felt aggrieved." And the Miao did not simply give way. They "put up fierce resistance beginning in the 1720s."</p>
-    <p>Why the 1720s? From sources beyond Ebrey: under the Yongzheng emperor, whom you met in our last lecture, the government began replacing the hereditary native chieftains who had governed the southwest for the Ming and Qing with ordinary appointed officials. That opened Miao country to Chinese officials, soldiers, and settlers.</p>
+    <p>Why the 1720s? Under the Yongzheng emperor, whom you met in our last lecture, the government began replacing the hereditary native chieftains who had governed the southwest for the Ming and Qing with ordinary appointed officials. That opened Miao country to Chinese officials, soldiers, and settlers.</p>
     <p>The picture is an AI-generated interpretation made for this deck, not a historical source. Use it to imagine the scene, not as evidence.</p>
     <p><strong>Why this matters:</strong> Lost land is the direct impact of Han growth on the Miao, which is what Review Question 11 asks about.</p>
     <p><strong>Check yourself:</strong> In your own words, what does "expropriating Miao land" mean?</p>
@@ -988,7 +1154,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <p class="source-line">Sources: Ebrey, Ch. 16, pp. 284, 286.</p>
   <aside class="notes">
     <p>The government did see the danger. Officials "repeatedly tried to find ways to separate the Miao and the Han settlers, but with little success" (Ebrey, p. 286).</p>
-    <p>What did separation look like? From sources beyond Ebrey: at different times, rules forbade Han settlers to buy Miao land or to marry Miao, and soldiers garrisoned walls, watchtowers, and forts along the Hunan–Guizhou border. The aim was to draw a line on the map and keep each people on its side.</p>
+    <p>What did separation look like? At different times, rules forbade Han settlers to buy Miao land or to marry Miao, and soldiers garrisoned walls, watchtowers, and forts along the Hunan–Guizhou border. The aim was to draw a line on the map and keep each people on its side.</p>
     <p>It did not work. Settlers were hungry for land, Miao families sold or mortgaged land when they fell into debt, and local officials and clerks often sided with the Han. Meanwhile, the textbook reminds us, the indigenous peoples of the south were "often exploited and treated with contempt" (p. 284).</p>
     <p><strong>Why this matters:</strong> The failed separation shows the Qing could not control the pressure its own growing population created.</p>
     <p><strong>Check yourself:</strong> Why do you think the government's efforts to separate Miao and Han failed?</p>
@@ -1013,12 +1179,11 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <p class="source-line">Sources: Ebrey, Ch. 16, p. 286.</p>
   <aside class="notes">
     <p>The pressure finally broke in 1795. "In 1795 there was a great revolt of Miao along the Hunan-Guizhou border," where Han settlers had recently been moving in (Ebrey, p. 286).</p>
-    <p>From sources beyond Ebrey: the rebel leaders called on their followers to drive out the "guest people," the newcomers, and recover Miao land. The emperor sent his best generals, and two of them died during the campaign. The main fighting lasted into 1797.</p>
+    <p>The rebel leaders called on their followers to drive out the "guest people," the newcomers, and recover Miao land. The emperor sent his best generals, and two of them died during the campaign. The main fighting lasted into 1797.</p>
     <p>The painting is one of a set the Qing court made to celebrate the campaign; the inscription at the top is dated to the spring of 1795. Look at the columns of soldiers with banners and muskets winding through impossible mountains. The court wanted a victory picture, but the terrain shows why the war was so hard.</p>
     <p>And it was hard. The textbook says the Qing "found the Miao uprisings to be as difficult to suppress as the concurrent White Lotus ones," the religious revolt you will meet in our next lecture. In the last years of Qianlong's reign, the empire was fighting at its edges and in its heart at once.</p>
     <p><strong>Why this matters:</strong> The 1795 revolt shows where the century's population pressure finally led on the frontier.</p>
     <p><strong>Check yourself:</strong> Who had recently moved into the Hunan–Guizhou border before the revolt?</p>
-    <p>Instructor note: the textbook names the settlers as Hakka (p. 286); they were Han settlers in general (Sutton, 2003).</p>
   </aside>
 </section>
 <!-- ===== y · Reading Guide Review Question 11 ===== -->
@@ -1060,13 +1225,12 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   </div>
   <p class="source-line">Sources: Ebrey, Ch. 16, pp. 280–281.</p>
   <aside class="notes">
-    <p>The embassy failed in Beijing but succeeded in London's bookshops. "Several members of the Macartney mission wrote books about China on their return. These books, often illustrated, contained descriptions of many elements of Chinese culture and social customs, less rosy than the reports of the Jesuits a century or two earlier" (Ebrey, p. 280).</p>
+    <p>The embassy failed in Beijing but succeeded in London's bookshops. Several members wrote illustrated books about China on their return, "less rosy than the reports of the Jesuits a century or two earlier" (Ebrey, p. 280).</p>
     <p>George Staunton, the boy's father, wrote the official account. He described Chinese women as subjugated: "Women, especially in the lower walks of life, are bred with little other principle than that of implicit obedience to their fathers or their husbands." Peasant wives worked very hard, he wrote, yet were not always allowed to sit at the table (pp. 280–281).</p>
-    <p>Read them critically. From sources beyond Ebrey: apart from the boy, none of the British could read or speak Chinese, and Qing officials kept them to a fixed route. They judged what they saw from the road by British standards. Historians call that <strong>ethnocentric</strong>: treating your own culture as the norm.</p>
-    <p>The textbook says these books showed "more of the complexity of China." More fairly, they swapped the Jesuits' wise, orderly empire for a backward, stagnant one, a picture that shaped British attitudes before the Opium War.</p>
-    <p>One exception, from sources beyond Ebrey: the boy, George Thomas Staunton, learned Chinese and in 1810 published the first English translation of the Qing legal code.</p>
+    <p>Read them critically. Apart from the boy, none of the British could read or speak Chinese, and Qing officials kept them to a fixed route. They judged what they saw by British standards, which historians call <strong>ethnocentric</strong>: treating your own culture as the norm.</p>
+    <p>In place of the Jesuits' wise, orderly empire, these books often painted a backward, stagnant one, a picture that shaped British attitudes before the Opium War.</p>
     <p>William Alexander's 1805 engraving shows the limits: a real period picture of a wealthier lady with her son and a servant. He could draw what he glimpsed; he could not ask her about her life.</p>
-    <p><strong>Why this matters:</strong> These books shaped how Britain saw China after the embassy failed, the other side of the kowtow story.</p>
+    <p><strong>Why this matters:</strong> these books shaped how Britain saw China after the embassy failed.</p>
     <p><strong>Check yourself:</strong> Why should we be careful about using the embassy's books as evidence about Chinese women?</p>
   </aside>
 </section>
@@ -1083,7 +1247,6 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <p class="source-line">Sources: Ebrey, Ch. 16, pp. 273–274.</p>
   <aside class="notes">
     <p>A final puzzle. If China was so crowded, were its people poor? Not necessarily. "Some scholars have recently argued that China's overall standard of living in the mid-eighteenth century was comparable to Europe's and that the standards of China's most developed regions, such as the Jiangnan region, compared favorably to the most developed regions of Europe at the time, such as England and the Netherlands." Life expectancy, food consumption, and even facilities for transportation were at similar levels (Ebrey, pp. 273–274).</p>
-    <p>The best-known of those scholars is Kenneth Pomeranz, whose book <i>The Great Divergence</i> (2000) asked why Europe and China, so alike in 1750, went such different ways after 1800. His name and book are from sources beyond Ebrey.</p>
     <p>You met one of the richest men of Jiangnan in our last lecture: the salt merchant Jiang Chun, who hosted the emperor in his garden. The link takes you back.</p>
     <p>Hold this together with today's lecture. Both can be true: a prosperous core, and millions of landless men and pushed-out hill peoples at its edges.</p>
     <p><strong>Why this matters:</strong> Comparing living standards tests whether the Qing at its height was really falling behind Europe.</p>
@@ -1097,7 +1260,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <ul class="source-list two-col">
     <li class="src-head">Main source</li>
     <li>Patricia Buckley Ebrey, <i>A History of China</i>, Chapter 16, "The Creation of the Manchu Empire (1600–1800)," pp. 273–287. All page references in this deck are to these pages.</li>
-    <li class="src-head">Further reading beyond Ebrey</li>
+    <li class="src-head">Other sources</li>
     <li>Edmund Backhouse and J. O. P. Bland, <i>Annals and Memoirs of the Court of Peking</i> (1914), pp. 322–331, translation of Qianlong's edict to George III (slide i).</li>
     <li>Henrietta Harrison, <i>The Perils of Interpreting</i> (2021) (slide g); James L. Hevia, <i>Cherishing Men from Afar</i> (1995) (slide i).</li>
     <li>Ronald P. Toby, <i>State and Diplomacy in Early Modern Japan</i> (1984) (slide b); James Z. Lee and Wang Feng, <i>One Quarter of Humanity</i> (1999) (slide l).</li>
@@ -1125,9 +1288,10 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   </ul>
   <p class="essay-link"><a href="../../../../hist-270/background_essays/essays/ch16/ch16-l3-the-kowtow-and-the-crowd.html" target="_blank" rel="noopener">Background essay: the historians’ debates behind this lecture ↗</a></p>
   <aside class="notes">
-    <p>Everything in the story slides comes from Ebrey, Chapter 16 (pp. 273–286), and each slide's source line gives the page. Where a slide or note adds something from sources beyond Ebrey, the source line or the notes name it, and the books above are where those facts come from.</p>
-    <p>Be careful with the 1914 translation of Qianlong's edict on the <a href="#/no-merit">"no merit"</a> slide. It is the famous English version, but Henrietta Harrison has shown how it shaped a later, one-sided picture of a self-satisfied China.</p>
+    <p>Almost everything in the story slides comes from Ebrey, Chapter 16 (pp. 273–286), and each slide's source line gives the page. A few details come from other books, such as the date Guangzhou became the only port open to Europeans or the story of the embassy's interpreters. They are listed on this slide under "Other sources."</p>
+    <p>Be careful with the 1914 translation of Qianlong's edict on the <a href="#/no-merit">no-merit</a> slide. It is the famous English version, but it made the emperor sound more self-satisfied than he was.</p>
     <p><strong>Why this matters:</strong> Knowing where each claim comes from lets you judge the evidence behind both halves of the lecture.</p>
+    <p>If you want to go further, the background essay linked on this slide, <i>The Kowtow and the Crowd</i>, retells the lecture as one story. Its section "Corrections and Sources Behind the Slide Notes" lists slide by slide where the deck goes beyond the textbook or corrects a detail.</p>
     <p><strong>Check yourself:</strong> Pick one image in this deck and explain what it can and cannot tell us about the 1700s.</p>
   </aside>
 </section>
@@ -1150,8 +1314,16 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <p>Night-soil collectors carried it in buckets on shoulder poles or by boat to the fields around the cities. It kept city streets cleaner and made the intensive farming of the Yangzi delta possible.</p>
     <p>Ebrey, Ch. 16, p. 284, names the job.</p>
   </div>
+  <div id="pop-teal" class="popup" role="dialog" aria-label="Teal dotted words">
+    <span class="popup-close" data-popup="pop-teal" role="button" tabindex="0" aria-label="Close">&times;</span>
+    <h3>Teal dotted words</h3>
+    <p>A <strong>teal dotted word</strong> opens a short definition, like this one. Click the word, read the box, then close it with the &times; mark, the Esc key, or a click outside the box.</p>
+    <p>The definitions use the textbook's own terms wherever it has them.</p>
+  </div>
 <div id="slide-letter" class="slide-letter" aria-hidden="true"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+<script>window.MUSEUM_LAYOUT={fb:["guangzhou-rules","kowtow","doubled","rootless"],bd:["macartney-goals"],bq:[],map:[]};</script>
+<script src="../_theme/museum.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
 <script>
 /* HIST 270 FA26 deck runtime: Reveal init, house popups, image lightbox. Reusable for Ch. 12 Lectures 1-3. */
@@ -1223,13 +1395,53 @@ Reveal.on('ready', setRevealScale); Reveal.on('resize', setRevealScale); window.
 /* Slide-letter badge: shows the current section's data-letter, lower left.
    Letters run a-z, then aa-bb, in slide order (assigned at first build, 2026-10-23).
    They are PERMANENT identifiers used by the Reading Guide and notes; do not re-letter after publication.
-   Lecture 3: main a-r; Pierian Spring s (divider) through aa; sources bb stays last. */
+   Lecture 3: main a-r; Pierian Spring s (divider) through aa; sources bb stays last.
+   Added 2026-11-03 for online study: cc how-to-use, dd/ee segment slides, ff/gg self-checks. Next unused letter: hh. */
 (function(){
   function showLetter(){var s=Reveal.getCurrentSlide();var el=document.getElementById('slide-letter');
     if(el)el.textContent=(s&&s.getAttribute('data-letter'))||'';}
   Reveal.on('ready',showLetter);Reveal.on('slidechanged',showLetter);
   if(Reveal.isReady&&Reveal.isReady())showLetter();
 })();
+
+
+/* ---- Narration panel (online study): shows the current slide's Study Buddy notes on the slide.
+   Button lower right, or the N key; N or Esc closes. A section with data-audio="..." also gets an audio player. ---- */
+(function(){
+  var btn=document.createElement('button'); btn.type='button'; btn.id='narr-btn';
+  btn.setAttribute('aria-controls','narr-panel'); btn.setAttribute('aria-expanded','false'); btn.textContent='Narration';
+  btn.title='Show the Study Buddy notes for this slide (N)';
+  var p=document.createElement('div'); p.id='narr-panel'; p.setAttribute('role','region'); p.setAttribute('aria-label','Study Buddy narration'); p.setAttribute('aria-live','polite'); p.hidden=true;
+  p.innerHTML='<p class="np-head"><span>Study Buddy notes</span><button type="button" class="np-close" aria-label="Close narration">&times;</button></p><div class="np-media"></div><div class="np-body"></div>';
+  document.body.appendChild(p); document.body.appendChild(btn);
+  var body=p.querySelector('.np-body'), media=p.querySelector('.np-media');
+  function fill(){
+    var s=Reveal.getCurrentSlide(); if(!s) return;
+    var n=s.querySelector('aside.notes'); body.innerHTML=n?n.innerHTML:'<p>No notes for this slide.</p>';
+    var a=s.getAttribute('data-audio'); media.innerHTML=a?'<audio controls preload="none" src="'+a+'"></audio>':'';
+    p.scrollTop=0;
+  }
+  function isOpen(){ return !p.hidden; }
+  function openP(){ fill(); p.hidden=false; btn.setAttribute('aria-expanded','true'); }
+  function closeP(){ p.hidden=true; btn.setAttribute('aria-expanded','false'); media.innerHTML=''; }
+  btn.addEventListener('click',function(e){ e.stopPropagation(); isOpen()?closeP():openP(); });
+  p.querySelector('.np-close').addEventListener('click',function(e){ e.stopPropagation(); closeP(); btn.focus(); });
+  window.addEventListener('keydown',function(e){
+    var t=e.target; if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable)) return;
+    if((e.key==='n'||e.key==='N')&&!e.ctrlKey&&!e.metaKey&&!e.altKey){ e.preventDefault(); e.stopImmediatePropagation(); isOpen()?closeP():openP(); return; }
+    if(e.key==='Escape'&&isOpen()){ e.preventDefault(); e.stopImmediatePropagation(); closeP(); }
+  },true);
+  Reveal.on('slidechanged',function(){ if(isOpen()) fill(); });
+})();
+
+/* ---- Self-checks: each Show answer button reveals its own answer; not graded, nothing recorded ---- */
+document.addEventListener('click',function(e){
+  var b=e.target.closest('.sc-btn'); if(!b) return;
+  var a=document.getElementById(b.getAttribute('aria-controls')); if(!a) return;
+  var open=b.getAttribute('aria-expanded')==='true';
+  a.hidden=open; b.setAttribute('aria-expanded',open?'false':'true'); b.textContent=open?'Show answer':'Hide answer';
+});
+
 
 </script>
 </body>

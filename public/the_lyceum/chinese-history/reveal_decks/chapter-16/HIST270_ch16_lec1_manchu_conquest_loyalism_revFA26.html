@@ -425,7 +425,39 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
 .essay-link{font-size:.5em!important;margin:.7em 0 0!important;letter-spacing:.04em}
 .essay-link a{color:#9ED8D2!important;border-bottom:1px dotted #2C7873;text-decoration:none}
 .essay-link a:hover,.essay-link a:focus{color:#F1D46A!important}
+.reveal .g-40-60{display:grid;grid-template-columns:.8fr 1.2fr;gap:1em;align-items:center}
+/* ---- Ch. 16 online-study layer (ported from Ch. 27 and Ch. 14) (FA26): segments, self-checks, narration panel ---- */
+.reveal .seg-progress{display:flex;gap:.35em;margin:.6em 0 0!important}
+.reveal .seg-progress span{display:block;width:3.2em;height:.35em;border-radius:4px;background:rgba(201,190,170,.25)}
+.reveal .seg-progress span.on{background:#D4AF37}
+.reveal .sc-intro{font-size:.56em!important;color:#C9BEAA;margin:.1em 0 .5em!important;text-align:left}
+.reveal .selfcheck{display:grid;grid-template-columns:1fr 1fr;gap:.55em .9em;text-align:left}
+.reveal .sc-item{border:1px solid rgba(44,120,115,.7);border-left:4px solid #2C7873;border-radius:8px;background:rgba(44,120,115,.12);padding:.45em .7em .5em}
+.reveal .sc-q{font-size:.6em!important;line-height:1.35;color:#F5EEDC;margin:0 0 .35em!important}
+.reveal .sc-btn{font:600 .5em Lora,serif;letter-spacing:.05em;color:#0F2A20;background:#9ED8D2;border:0;border-radius:6px;padding:.3em .8em;cursor:pointer}
+.reveal .sc-btn:hover,.reveal .sc-btn:focus{background:#F1D46A;outline:2px solid #F1D46A;outline-offset:2px}
+.reveal .sc-btn[aria-expanded="true"]{background:#D4AF37}
+.reveal .sc-a{margin-top:.35em;border-top:1px dotted #2C7873;padding-top:.3em}
+.reveal .sc-a p{font-size:.56em!important;line-height:1.38;color:#F1D46A;margin:0!important}
+.reveal .rg-links span{color:#C9BEAA}
+#narr-btn{position:fixed;right:112px;bottom:14px;z-index:60;font:600 14px Lora,Georgia,serif;letter-spacing:.06em;color:#0F2A20;background:#9ED8D2;border:0;border-radius:20px;padding:8px 16px;box-shadow:0 2px 8px rgba(0,0,0,.4);cursor:pointer}
+#narr-btn:hover,#narr-btn:focus{background:#F1D46A;outline:2px solid #F1D46A;outline-offset:2px}
+#narr-btn[aria-expanded="true"]{background:#D4AF37}
+#narr-panel{position:fixed;right:18px;bottom:58px;z-index:59;width:min(560px,92vw);max-height:62vh;overflow:auto;background:rgba(15,42,32,.97);border:1px solid #2C7873;border-top:4px solid #D4AF37;border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.55);padding:14px 18px 12px;color:#F5EEDC;font:16px/1.5 Lora,Georgia,serif;text-align:left}
+#narr-panel[hidden]{display:none}
+#narr-panel .np-head{display:flex;justify-content:space-between;align-items:center;margin:0 0 6px;font:600 12px Lora,serif;letter-spacing:.14em;text-transform:uppercase;color:#C9BEAA}
+#narr-panel .np-close{background:none;border:0;color:#C9BEAA;font-size:22px;line-height:1;cursor:pointer}
+#narr-panel .np-close:hover,#narr-panel .np-close:focus{color:#F1D46A}
+#narr-panel .np-body p{margin:0 0 .6em}
+#narr-panel .np-body a{color:#9ED8D2;border-bottom:1px dotted #2C7873;text-decoration:none}
+#narr-panel .np-body strong{color:#F1D46A}
+#narr-panel audio{width:100%;margin:0 0 8px}
+@media print{#narr-btn,#narr-panel{display:none!important}}
+
 </style>
+<!-- Museum theme (layout, color and type only) -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_theme/museum.css">
 </head>
 <body>
 <div class="reveal"><div class="slides">
@@ -445,11 +477,55 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     </figure>
   </div>
   <aside class="notes">
-    <p>Welcome! This deck is your Study Buddy for the Manchu conquest of China.</p>
-    <p>The story in one breath. In the 1580s the Jurchens lived in small, quarrelling villages beyond the Ming border. A chief named <strong>Nurhaci</strong> united them and organized them into <strong>banners</strong>. In 1644, after rebels took Beijing, a Ming general opened a gate in the Great Wall and let the Manchu armies in. Within weeks they held the capital, and over the next forty years every Chinese had to decide: fight, surrender, die, or withdraw and write (Ebrey, Ch. 16, pp. 270–273).</p>
-    <p>The painting shows the eastern end of the Wall, where it runs into the sea; the gate in our title stood near here. The name Shanhai Pass comes from sources beyond Ebrey, which says only "the eastern end of the Great Wall."</p>
-    <p>How to use the deck: press <strong>S</strong> for these notes, click an image to enlarge it, and press <strong>Esc</strong> for a map of all slides. The lower-left letter is each slide's permanent name. The spoken lecture ends at the Pierian Spring divider; the banner story after it is required independent study.</p>
+    <p>Welcome! This is your Study Buddy for the Manchu conquest.</p>
+    <p>The story in one breath. In the 1580s the Jurchens lived in quarrelling villages beyond the Ming border. Their chief <strong>Nurhaci</strong> organized them into <strong>banners</strong>. In 1644 a Ming general opened a gate in the Great Wall to the Manchus, and for forty years every Chinese had to choose: fight, surrender, die, or withdraw and write (Ebrey, Ch. 16, pp. 270–273).</p>
+    <p>The painting is real: the eastern end of the Great Wall, where it runs into the sea.</p>
+    <p>The <a href="#/how-to-use">how-to-use</a> slide comes next.</p>
     <p><strong>Check yourself:</strong> Which two groups does the title's "gate" connect?</p>
+  </aside>
+</section>
+<!-- ===== oo · How to use this deck ===== -->
+<section id="how-to-use" data-letter="oo">
+  <p class="kicker">Start here · How to study this deck on your own</p>
+  <h2>Two Segments, Self-Checks, and a Narration Button on Every Slide</h2>
+  <div class="steps">
+    <div><span>Click <b>Narration</b> (lower right) or press <kbd>N</kbd> to read the Study Buddy notes for any slide. Press <kbd>N</kbd> or <kbd>Esc</kbd> to close them.</span></div>
+    <div><span>Work through two segments: the banner state Nurhaci built, and the conquest of 1644 and the choices it forced. Each ends with an ungraded <b>self-check</b>: answer from memory, then click to see the answer.</span></div>
+    <div><span>After each self-check comes a <b>Review Question</b>. Write your answer in your Reading Guide before you move on.</span></div>
+    <div><span>The <b>Pierian Spring</b> at the end is required independent study: what became of the bannermen after the conquest, with two more Review Questions.</span></div>
+    <div><span>Click any image to enlarge it, and click a <span class="popup-trigger" data-popup="pop-teal" role="button" tabindex="0">teal dotted word</span> for a definition. The small letter in the lower-left corner is each slide's permanent name. All due dates are on Canvas.</span></div>
+  </div>
+  <aside class="notes">
+    <p>Welcome to the first lecture of Chapter 16. This deck is built for you to study on your own, at your own pace.</p>
+    <p>Every slide has Study Buddy notes, like these. Open them with the Narration button or the N key. They explain the slide, define new words, and end with a question. Read the slide first, guess what it is about, then open the notes and check your guess.</p>
+    <p>The main part runs in two segments: how Nurhaci turned scattered Jurchen villages into a banner state, and how the Manchus came through the Great Wall in 1644 and what Chinese did next (Ebrey, Ch. 16, pp. 270–273). Each segment ends with a self-check, a few quick questions that are never graded, and then a Review Question from the Reading Guide.</p>
+    <p>After the main part comes the Pierian Spring, which is required independent study.</p>
+    <p><strong>Why this matters:</strong> testing yourself as you go is the surest way to remember what you study alone.</p>
+    <p><strong>Check yourself:</strong> Open the narration for this slide, close it with Esc, and then open the teal dotted word. Did both work?</p>
+  </aside>
+</section>
+<!-- ===== pp · Segment 1 ===== -->
+<section id="segment-1" data-letter="pp" class="segment-slide">
+  <p class="kicker">Segment 1 of 2 · 1583–1644</p>
+  <h2>Segment 1: A Banner State</h2>
+  <div class="g-45-55">
+    <figure class="fig h-400">
+      <img src="images/ch16-lec1/08-nurhaci-takes-ula.webp" alt="Black-and-white woodblock-style drawing of armored horsemen with bows and banners riding beneath a walled city, with captions in Manchu, Chinese, and Mongolian">
+      <figcaption>Nurhaci's horsemen take the walled city of Ula, 1613. Illustration from the <i>Manzhou shilu</i> (Veritable Records of the Manchus), redrawn for the Qianlong court in 1779–1781 after a picture book painted in 1635 for Hong Taiji. Public domain, <a href="https://commons.wikimedia.org/wiki/File:%E5%A4%AA%E7%A5%96%E8%B6%81%E5%8A%BF%E5%8F%96%E4%B9%8C%E6%8B%89%E5%9F%8E.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>.</figcaption>
+    </figure>
+    <div class="stack">
+      <div class="story-beat gold">A Jurchen chief united quarrelling villages and built the banners, an army, a community and a government in one.</div>
+      <div class="story-beat">This segment teaches the history behind <b>Review Question 1</b>, and it ends with a short self-check and then the question itself.</div>
+      <p class="seg-progress" aria-label="Segment 1 of 2"><span class="on"></span><span></span></p>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Segment 1 crosses the Ming border to the northeast. In the 1580s the Jurchens lived in small, armed, quarrelling villages; by 1644 they were the Manchus, a state with an army that included Mongols and Chinese (Ebrey, Ch. 16, pp. 270–271).</p>
+    <p>You will start with a recap of the Ming collapse, meet the Jurchens and a Korean visitor to their villages, follow the rise of Nurhaci, sort out the names, and learn the idea of a tribal society. Then you will see how the banners worked.</p>
+    <p>The picture is real: Nurhaci's horsemen taking a rival city, from the Manchus' own illustrated record of his life.</p>
+    <p>As you go, ask what held people together before Nurhaci, and what held them together after. Review Question 1 asks how he transformed his people.</p>
+    <p><strong>Why this matters:</strong> the banners explain how a small people could conquer the largest country in the world.</p>
+    <p><strong>Check yourself:</strong> Before you start, guess: what would a chief need to change to turn rival clans into one army?</p>
   </aside>
 </section>
 <!-- ===== b · rc-ming-fall ===== -->
@@ -496,8 +572,9 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <p class="source-line">Sources: Ebrey, Ch. 16, p. 271; Ch. 8 L1 for the Jurchen Jin.</p>
   <aside class="notes">
     <p>Meet the people of this story. The <strong>Manchus</strong> were descended from the <strong>Jurchens</strong>, the people who had conquered north China in the 1120s and ruled it as the Jin dynasty until the Mongols destroyed them in 1234. You met them in Chapter 8; the link opens that slide (Ebrey, p. 271).</p>
-    <p>Five centuries later, the Jurchens no longer wrote their old language, but they kept the hairstyle. A man shaved the front of his head and wore the rest of his hair in a long braid, the <strong>queue</strong>. Remember that haircut. It will matter a great deal by slide <strong>o</strong>.</p>
+    <p>Five centuries later, the Jurchens no longer wrote their old language, but they kept the hairstyle. A man shaved the front of his head and wore the rest of his hair in a long braid, the <strong>queue</strong>. Remember that haircut. It will matter a great deal by the <a href="#/queue-order">queue-order</a> slide.</p>
     <p>They lived in scattered communities in Manchuria, today's Liaoning, Jilin, and Heilongjiang. In the south they lived alongside Mongols, Koreans, and Chinese. They were not nomads: they hunted, fished, and farmed, and like the Mongols they were superb horsemen and archers. Their society had elites and slaves, often captured Koreans or Chinese.</p>
+    <p><strong>Why this matters:</strong> the Manchus came from a people who had ruled north China before, and their haircut would soon become a test of loyalty for every Chinese man.</p>
     <p><strong>Check yourself:</strong> Name two things the Manchus kept from their Jurchen past and one thing they had lost.</p>
   </aside>
 </section>
@@ -551,8 +628,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <p>He was no stranger to China. In 1590 he led an embassy to Beijing, and in 1592, when Japan invaded Korea, he offered to join the Ming effort to drive the Japanese out of Korea. The Ming and Korea both welcomed Manchu missions, because they saw the Manchus as a counterweight to the Mongols.</p>
     <p>Marriage was a tool of power. Nurhaci and his children married Mongols as well as Manchus, and each marriage cemented an alliance.</p>
     <p>In 1616 he made his ambitions public. He called himself <strong>khan</strong>, a ruler's title on the steppe, of a revived Jin dynasty. In 1618 he listed his grievances against the Ming and went to war, and in 1621 his forces overran Liaodong. The portrait was painted after his death, to honor the founder of the dynasty.</p>
-    <p>Instructor note: the textbook says Nurhaci offered help "the next year" after 1590 and joins the 1616 proclamation to the declaration of war (Ebrey, p. 271). Japan invaded Korea in 1592, and Nurhaci announced his Seven Grievances and attacked Fushun in 1618. The slide gives the corrected dates.</p>
-    <p>Source beyond Ebrey: the 1592 offer and the 1618 declaration (Swope, 2009; Wakeman, 1985).</p>
+    <p><strong>Why this matters:</strong> Nurhaci knew the Ming from the inside, as envoy and would-be ally, before he turned against it.</p>
     <p><strong>Check yourself:</strong> Give two pieces of evidence that Nurhaci knew the Ming world well.</p>
   </aside>
 </section>
@@ -579,9 +655,9 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <aside class="notes">
     <p>Before we go on, sort out the names, because this story uses several for the same people and the same state.</p>
     <p><strong>Jurchen</strong> is the older name of the people. <strong>Manchu</strong> is the name they adopted for themselves (Ebrey, p. 270); in 1635 Hong Taiji ordered his people to use it in place of Jurchen. From here on we will call them Manchus.</p>
-    <p>The state had two names. In 1616 Nurhaci proclaimed a revived <strong>Jin</strong>, reaching back to his Jurchen ancestors. Many books call it the Later Jin; that label comes from sources beyond Ebrey. After Nurhaci died in 1626, his son <strong>Hong Taiji</strong> ruled from <strong>Mukden</strong>, today's Shenyang, and in 1636 renamed the state <strong>Qing</strong>, meaning "pure" (p. 271). The Qing would rule China from 1644 to 1911.</p>
-    <p>Instructor note: the textbook does not date the new name. The 1635 decree is from Crossley (1997).</p>
-    <p>If you want more on Hong Taiji, the independent-study slide <a href="#/ps-hong-taiji">nn, ps-hong-taiji</a> tells his story.</p>
+    <p>The state had two names. In 1616 Nurhaci proclaimed a revived <strong>Jin</strong>, reaching back to his Jurchen ancestors. Many books call it the Later Jin. After Nurhaci died in 1626, his son <strong>Hong Taiji</strong> ruled from <strong>Mukden</strong>, today's Shenyang, and in 1636 renamed the state <strong>Qing</strong>, meaning "pure" (p. 271). The Qing would rule China from 1644 to 1911.</p>
+    <p>If you want more on Hong Taiji, the <a href="#/ps-hong-taiji">ps-hong-taiji</a> slide in the Pierian Spring tells his story.</p>
+    <p><strong>Why this matters:</strong> you will meet all four names in your reading, and they all point to the same people and the same state.</p>
     <p><strong>Check yourself:</strong> What do "Jin" and "Qing" each refer to, and who chose each name?</p>
   </aside>
 </section>
@@ -602,8 +678,9 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <aside class="notes">
     <p>Here is the idea that unlocks Nurhaci's achievement. The textbook says the Manchus, like the Mongols, "had a tribal social structure" (Ebrey, p. 271).</p>
     <p>In a <strong>tribal society</strong>, people are organized by kin: families, clans, and larger groups of related clans. Each group follows its own chief. Loyalty runs to the group, not to a distant state.</p>
-    <p>That explains the scene on slide <a href="#/korean-visitor">d, korean-visitor</a>. Small groups competed for resources, and every man went armed.</p>
+    <p>That explains the scene on the <a href="#/korean-visitor">korean-visitor</a> slide. Small groups competed for resources, and every man went armed.</p>
     <p>It also explains Nurhaci's problem. A chief could win battles, but his followers' first loyalty still belonged to their own clans. If he wanted a lasting state, he had to weaken those old ties and attach people to himself. The next slides show how he did it.</p>
+    <p><strong>Why this matters:</strong> Review Question 1 asks how Nurhaci transformed his people, and you can only see the change if you know where he started.</p>
     <p><strong>Check yourself:</strong> In your own words, why was a tribal society hard to turn into a state?</p>
   </aside>
 </section>
@@ -627,7 +704,8 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <p>Now the key invention. Nurhaci created a new social basis for his armies in units called <strong>banners</strong>, identified by their colors (Ebrey, p. 271).</p>
     <p>Here is the textbook's central sentence, the one your Reading Guide points to: "Each banner was made up of a set of military companies but included the families and slaves of the soldiers as well." So a banner was not just a regiment. It was an army unit, a community, and a way of governing people, all at once.</p>
     <p>Each company had a captain, and the captaincy was <strong>hereditary</strong>, passed from father to son. Many of the commanding officers came from Nurhaci's own lineage. Loyalty now ran up through the banner to Nurhaci's family.</p>
-    <p>The picture comes from the Manchus' own illustrated record of Nurhaci's life. Hong Taiji had two Chinese painters make the pictures in 1635, and the Qianlong court redrew them in 1779 to 1781. This scene shows Nurhaci's horsemen taking the walled city of Ula in 1613; Ula was one of the rival Jurchen tribes his banners swallowed up. The captions are in Manchu, Chinese, and Mongolian, the three languages of the new state. The date of the Ula campaign and the history of the pictures come from sources beyond Ebrey.</p>
+    <p>The picture comes from the Manchus' own illustrated record of Nurhaci's life. Hong Taiji had two Chinese painters make the pictures in 1635, and the Qianlong court redrew them in 1779 to 1781. This scene shows Nurhaci's horsemen taking the walled city of Ula in 1613; Ula was one of the rival Jurchen tribes his banners swallowed up. The captions are in Manchu, Chinese, and Mongolian, the three languages of the new state.</p>
+    <p><strong>Why this matters:</strong> one organization now did the work of an army, a community, and a government, which is the heart of Review Question 1.</p>
     <p><strong>Check yourself:</strong> Who belonged to a banner besides the soldiers?</p>
   </aside>
 </section>
@@ -677,9 +755,45 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <aside class="notes">
     <p>The banners kept growing. New companies and new banners were formed, and by 1644 there were <strong>twenty-four banners</strong>: eight Manchu, eight Mongol, and eight Chinese (Ebrey, p. 271).</p>
     <p>Think about what that means. The organization Nurhaci built did not only unite the Manchus. It also brought in Mongols and Chinese, many of them from Liaodong, under the same system. The textbook calls it a "social-political-military organization that brought together Manchus, Mongols, and Chinese."</p>
-    <p>The diagram shows the three groups side by side. The textbook says only that banners were identified by colors; the specific eight colors in the diagram come from sources beyond Ebrey.</p>
+    <p>The diagram shows the three groups side by side, each with its own set of eight colored banners.</p>
     <p><strong>Why this matters:</strong> when the Manchus came through the Wall in 1644, they arrived with an army that already included Chinese soldiers. That made the conquest far easier.</p>
     <p><strong>Check yourself:</strong> How many banners were there by 1644, and which three peoples did they include?</p>
+  </aside>
+</section>
+<!-- ===== rr · Self-check Segment 1 ===== -->
+<section id="sc-q1" data-letter="rr" data-background="#14302A">
+  <p class="kicker">Self-check · Segment 1 · not graded</p>
+  <h2>Check Yourself: A Banner State</h2>
+  <p class="sc-intro">Answer each question from memory, out loud or on paper, then click <b>Show answer</b> to check yourself. Nothing here is graded or recorded.</p>
+  <div class="selfcheck">
+    <div class="sc-item">
+      <p class="sc-q"><b>1.</b> What did the Korean visitor notice about how Jurchen villages got along?</p>
+      <button type="button" class="sc-btn" aria-expanded="false" aria-controls="sc-sc-q1-1">Show answer</button>
+      <div class="sc-a" id="sc-sc-q1-1" hidden><p>They quarrelled over resources, and men did not leave their village without weapons (Ebrey, p. 271).</p></div>
+    </div>
+    <div class="sc-item">
+      <p class="sc-q"><b>2.</b> Why was a tribal society hard to turn into a state?</p>
+      <button type="button" class="sc-btn" aria-expanded="false" aria-controls="sc-sc-q1-2">Show answer</button>
+      <div class="sc-a" id="sc-sc-q1-2" hidden><p>People owed their first loyalty to their own clan and its chief, not to a distant ruler (p. 271).</p></div>
+    </div>
+    <div class="sc-item">
+      <p class="sc-q"><b>3.</b> Who belonged to a banner besides the soldiers?</p>
+      <button type="button" class="sc-btn" aria-expanded="false" aria-controls="sc-sc-q1-3">Show answer</button>
+      <div class="sc-a" id="sc-sc-q1-3" hidden><p>The soldiers' families and their slaves (p. 271).</p></div>
+    </div>
+    <div class="sc-item">
+      <p class="sc-q"><b>4.</b> Why did Nurhaci split defeated groups among several banners?</p>
+      <button type="button" class="sc-btn" aria-expanded="false" aria-controls="sc-sc-q1-4">Show answer</button>
+      <div class="sc-a" id="sc-sc-q1-4" hidden><p>To lessen their potential for subversion: a clan scattered across banners could not regroup under its old chief (p. 271).</p></div>
+    </div>
+  </div>
+  <p class="rg-links"><span>Missed one? Go back:</span> <a href="#/korean-visitor">korean-visitor</a> <a href="#/concept-tribe">concept-tribe</a> <a href="#/banner-families">banner-families</a> <a href="#/banner-mixing">banner-mixing</a></p>
+  <aside class="notes">
+    <p>Segment 1 is done. Before you open Review Question 1, test yourself. These four questions come from the "Check yourself" prompts on the segment's slides (Ebrey, Ch. 16, p. 271).</p>
+    <p>Answer each one from memory, out loud or on paper, before you click <strong>Show answer</strong>. If you miss one, use the links at the bottom of the slide to go back to the slide that teaches it.</p>
+    <p>The first two questions describe the world before the banners; the last two describe how the banners changed it. Together they give you the before and after that Review Question 1 asks for.</p>
+    <p><strong>Why this matters:</strong> recalling facts without looking is the best preparation for writing an answer in your own words.</p>
+    <p><strong>Check yourself:</strong> Which of the four did you miss or guess, and which slide will you reread before Review Question 1?</p>
   </aside>
 </section>
 <!-- ===== k · Reading Guide Review Question 1 ===== -->
@@ -694,12 +808,37 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <p class="yt-tip">Treat it as a before-and-after: describe the Jurchens before Nurhaci, then show what the banners changed, socially and militarily.</p>
   <p class="rg-links"><span>Go back to the teaching slides:</span> <a href="#/jurchen-heirs">c · jurchen-heirs</a> <a href="#/korean-visitor">d · korean-visitor</a> <a href="#/nurhaci-rise">e · nurhaci-rise</a> <a href="#/names-manchu">f · names-manchu</a> <a href="#/concept-tribe">g · concept-tribe</a> <a href="#/banner-families">h · banner-families</a> <a href="#/banner-mixing">i · banner-mixing</a> <a href="#/twenty-four">j · twenty-four</a></p>
   <aside class="notes">
-    <p>Your first Reading Guide checkpoint. Try to answer on your own before opening the guide; the button opens it in a new tab.</p>
+    <p>Reading Guide Q1 (p. 271). Your first Reading Guide checkpoint. Try to answer on your own before opening the guide; the button opens it in a new tab.</p>
     <p>How to build a strong answer:</p>
-    <p>The first part asks how Nurhaci <strong>transformed</strong> a people into a state. Start with the "before": the scattered, armed villages on <strong>d</strong> <em>korean-visitor</em> and the tribal loyalties on <strong>g</strong> <em>concept-tribe</em>. Then trace Nurhaci's steps on <strong>e</strong> <em>nurhaci-rise</em> and <strong>f</strong> <em>names-manchu</em>.</p>
-    <p>The second part asks how the banners <strong>altered</strong> social and military organization. Keep the two apart. For social, look at who belonged to a banner on <strong>h</strong> <em>banner-families</em> and what happened to defeated clans on <strong>i</strong> <em>banner-mixing</em>. For military, look at hereditary captains on <strong>h</strong> and the twenty-four banners on <strong>j</strong> <em>twenty-four</em>.</p>
-    <p>The guide asks you to copy the sentence beginning "Each banner was…" on page 271. It is quoted in the notes for slide h.</p>
+    <p>The first part asks how Nurhaci <strong>transformed</strong> a people into a state. Start with the "before": the scattered, armed villages on <a href="#/korean-visitor">korean-visitor</a> and the tribal loyalties on <a href="#/concept-tribe">concept-tribe</a>. Then trace Nurhaci's steps on <a href="#/nurhaci-rise">nurhaci-rise</a> and <a href="#/names-manchu">names-manchu</a>.</p>
+    <p>The second part asks how the banners <strong>altered</strong> social and military organization. Keep the two apart. For social, look at who belonged to a banner on <a href="#/banner-families">banner-families</a> and what happened to defeated clans on <a href="#/banner-mixing">banner-mixing</a>. For military, look at hereditary captains on <a href="#/banner-families">banner-families</a> and the twenty-four banners on <a href="#/twenty-four">twenty-four</a>.</p>
+    <p>The guide asks you to copy the sentence beginning "Each banner was…" on page 271. It is quoted in the notes for the <a href="#/banner-families">banner-families</a> slide.</p>
+    <p><strong>Why this matters:</strong> this question asks you to explain a transformation, so you need a clear before and after (Ebrey, p. 271).</p>
     <p><strong>Check yourself:</strong> Can you name one social change and one military change the banners made?</p>
+  </aside>
+</section>
+<!-- ===== qq · Segment 2 ===== -->
+<section id="segment-2" data-letter="qq" class="segment-slide">
+  <p class="kicker">Segment 2 of 2 · 1644–1683</p>
+  <h2>Segment 2: The Gate and the Choice</h2>
+  <div class="g-45-55">
+    <figure class="fig h-400">
+      <img src="images/ch16-lec1/12-first-pass-gate.webp" alt="A massive brick gate tower with a tiled roof on top of a thick wall with an arched tunnel">
+      <figcaption>The gate tower at Shanhaiguan, the fortified pass at the eastern end of the Great Wall; the tower has been restored many times. Photo: Nyx Ning, 2014. CC BY-SA 3.0, <a href="https://commons.wikimedia.org/wiki/File:%E6%B2%B3%E5%8C%97%E7%9C%81_%E5%A4%A9%E4%B8%8B%E7%AC%AC%E4%B8%80%E5%85%B3_-_panoramio.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>.</figcaption>
+    </figure>
+    <div class="stack">
+      <div class="story-beat gold">A Ming general opened the Great Wall, the Manchus took Beijing, and every Chinese had to choose how to respond.</div>
+      <div class="story-beat">This segment teaches the history behind <b>Review Question 2</b>, and it ends with a short self-check and then the question itself.</div>
+      <p class="seg-progress" aria-label="Segment 2 of 2"><span class="on"></span><span class="on"></span></p>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Segment 2 follows the conquest itself. In 1644 rebels held Beijing, and a Ming general at the eastern end of the Great Wall let the Manchus through (Ebrey, Ch. 16, pp. 272–273).</p>
+    <p>You will watch the Manchus take Beijing and push south, see the choices Chinese made at Yangzhou and under the head-shaving order, follow the last loyalists to Taiwan, and meet three thinkers who refused to serve the new dynasty.</p>
+    <p>The photo is real: the gate tower at Shanhai Pass, where the Great Wall meets the sea.</p>
+    <p>As you go, sort each response into fighting, surrendering, dying, or withdrawing to write. Review Question 2 asks about that diversity.</p>
+    <p><strong>Why this matters:</strong> a conquest is not one event but millions of personal choices, and this segment shows them.</p>
+    <p><strong>Check yourself:</strong> Before you start, guess: why might a loyal Ming general open the gate to a foreign army?</p>
   </aside>
 </section>
 <!-- ===== l · gate-opens ===== -->
@@ -723,8 +862,8 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <p>Now the turning point. <strong>Wu Sangui</strong> (1612–1678) was a distinguished Ming general from Liaodong, stationed near the eastern end of the Great Wall. That is where he heard the news: Li Zicheng had captured Beijing, and the emperor was dead (Ebrey, p. 272).</p>
     <p>On the other side of the Wall waited the Manchus, now led by <strong>Dorgon</strong>, Hong Taiji's brother, who was regent for Hong Taiji's five-year-old son. A <strong>regent</strong> rules on behalf of a child emperor. Wu wrote to Dorgon asking for help against the rebels, and the two agreed to join forces.</p>
     <p>The textbook's sentence is short: "Wu opened the gates of the Great Wall to let the Manchus in, and within a couple of weeks they had occupied Beijing." This is the sentence your Reading Guide points to for Review Question 2. Between the gate and Beijing came a battle: on 27 May 1644 Li Zicheng's army attacked Wu at the pass, and Manchu cavalry broke its flank. Li fled to Beijing and then abandoned the city.</p>
-    <p>Instructor note: the textbook has Dorgon propose the alliance and skips the battle (Ebrey, p. 272). In the sources Wu made the appeal; the slide follows them (Wakeman, 1985).</p>
-    <p>The photo shows the gate tower at that pass, rebuilt many times since. The name Shanhai Pass comes from sources beyond Ebrey.</p>
+    <p>The photo shows the gate tower at <strong>Shanhai Pass</strong>, where the Great Wall meets the sea. It has been rebuilt many times since.</p>
+    <p><strong>Why this matters:</strong> one general's choice at one gate decided who would rule China for the next 267 years.</p>
     <p><strong>Check yourself:</strong> Why did Wu Sangui let the Manchus through the Wall?</p>
   </aside>
 </section>
@@ -750,6 +889,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <p>In the south, Ming officials tried an old strategy. They chose a Ming prince as emperor and moved the capital to Nanjing, just as the Song had kept going after losing the north in the 1120s. They even offered to buy the Manchus off, as the Song had once bought off the Jurchens. The link opens the Chapter 8 slide on that earlier crisis.</p>
     <p>Dorgon saw no reason to stop. He sent Wu and Manchu generals after the rebel armies. Li Zicheng was eliminated in 1645 and Zhang Xianzhong in 1647.</p>
     <p>The portrait shows Dorgon, the regent who made these choices for a boy emperor.</p>
+    <p><strong>Why this matters:</strong> the Manchus were not hired help. From the start they meant to rule all of China, and many Chinese generals helped them do it.</p>
     <p><strong>Check yourself:</strong> How did the Ming loyalists in the south try to repeat the Song strategy, and why did it fail?</p>
   </aside>
 </section>
@@ -774,8 +914,8 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <p>As the Qing armies moved south, Chinese faced a choice, and they chose differently. Many generals defected and their soldiers joined the Qing armies. Many local officials simply opened their city gates and surrendered (Ebrey, p. 272).</p>
     <p><strong>Shi Kefa</strong> chose otherwise. He was a scholar-official who had risen to minister of war at Nanjing, and he took charge of the defense, stationing his army at <strong>Yangzhou</strong>. He refused to surrender. A five-day battle followed.</p>
     <p>The Manchu general was so angered by the resistance that he let his army take revenge on the city (p. 273). The sack lasted about ten days. A survivor, Wang Xiuchu, wrote an eyewitness account; later writers put the dead at 800,000, but no one could count them. We will not dwell on the details.</p>
-    <p>Instructor note: the textbook's "hundreds of thousands" (p. 273) cannot be checked; the slide says "a huge number" (Struve, 1993; Meyer-Fong, 2003).</p>
     <p>Others chose death over the new dynasty. As cities in the south fell, large numbers of Ming loyalists committed suicide, and their wives, mothers, and daughters often joined them.</p>
+    <p><strong>Why this matters:</strong> Yangzhou showed every city what resistance could cost, and it became the most remembered tragedy of the conquest.</p>
     <p><strong>Check yourself:</strong> List three different ways Chinese officials responded as the Qing armies advanced south.</p>
   </aside>
 </section>
@@ -797,11 +937,12 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   </div>
   <p class="source-line">Sources: Ebrey, Ch. 16, pp. 271, 273.</p>
   <aside class="notes">
-    <p>Remember the Manchu hairstyle from slide <a href="#/jurchen-heirs">c</a>: the front of the head shaved, the rest worn in a queue. In the summer of 1645, the Manchu command ordered all Chinese serving in its armies to shave their heads the same way, presumably so that it was easy to recognize which side they were on (Ebrey, p. 273).</p>
+    <p>Remember the Manchu hairstyle from the <a href="#/jurchen-heirs">jurchen-heirs</a> slide: the front of the head shaved, the rest worn in a queue. In the summer of 1645, the Manchu command ordered all Chinese serving in its armies to shave their heads the same way, presumably so that it was easy to recognize which side they were on (Ebrey, p. 273).</p>
     <p>Soon the order was extended to <strong>all</strong> Chinese men. A Chinese man who obeyed now looked like a subject of the Manchus. A man who refused marked himself as a rebel.</p>
-    <p>Why would hair matter so much? Chinese men traditionally let their hair grow long and wore it bound up, and many saw that as part of being Chinese and of honoring the bodies their parents gave them. That point about parents comes from sources beyond Ebrey; the textbook says only that the order "aroused deep resentment."</p>
-    <p>Instructor note: the textbook starts the story in 1645 (p. 273). Dorgon first ordered head-shaving in 1644, withdrew the order when it met resistance, and reimposed it in July 1645 (Kuhn, 1990; Wakeman, 1985). The slide's sequence stands.</p>
+    <p>Why would hair matter so much? Chinese men traditionally let their hair grow long and wore it bound up, and many saw that as part of being Chinese and of honoring the bodies their parents gave them. The textbook says the order "aroused deep resentment."</p>
+    <p>The order had a false start. Dorgon first ordered head-shaving in 1644, withdrew the order when it met resistance, and imposed it again in the summer of 1645.</p>
     <p>The painting comes from Canton in 1826, nearly two centuries later. By then the shaved forehead and queue were simply how Chinese men looked.</p>
+    <p><strong>Why this matters:</strong> hair became the visible sign of loyalty, so every Chinese man had to choose in public.</p>
     <p><strong>Check yourself:</strong> Who was the head-shaving order first meant for, and who did it later cover?</p>
   </aside>
 </section>
@@ -856,8 +997,8 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <aside class="notes">
     <p>Resistance did not end with Yangzhou or with the shaved heads. Ming loyalists kept fighting long after there was little hope. The Manchus did not defeat the two main loyalist camps until 1661 and 1662 (Ebrey, p. 273).</p>
     <p>The last holdout was at sea. <strong>Zheng Chenggong</strong>, whom Europeans called <strong>Koxinga</strong>, drove the Dutch from Taiwan in 1662 and made the island his base, but he died that same year. His son and grandson held out until 1683, almost forty years after the Manchus entered Beijing. Look at the box on the slide: two names, one man.</p>
-    <p>Instructor note: the textbook says Zheng himself held out until 1683 (Ebrey, p. 273). He died in 1662; Zheng Jing and then Zheng Keshuang ruled until Shi Lang's fleet took Taiwan (Andrade, 2011).</p>
     <p>The portrait was painted in his own century and is one of the earliest surviving images of him.</p>
+    <p><strong>Why this matters:</strong> loyalist resistance lasted almost forty years, which shows how hard the conquest was to complete.</p>
     <p><strong>Check yourself:</strong> How long after 1644 did the last Ming loyalist resistance hold out, and where?</p>
   </aside>
 </section>
@@ -880,6 +1021,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <p>Ming loyalism came in more than one form. Some loyalists fought: Shi Kefa at Yangzhou, the cities that refused to shave, Koxinga on Taiwan. Some chose death.</p>
     <p>The textbook then says that "Ming loyalism also took less militant forms" (Ebrey, p. 273). Several leading thinkers refused to serve the Qing, and that refusal gave them time to think and write. Their critiques of the Ming led them to question China's whole heritage of rule by dynasties.</p>
     <p>Review Question 2 asks you to compare these two kinds of loyalism. The next three slides give you the thinkers.</p>
+    <p><strong>Why this matters:</strong> Review Question 2 asks you to compare two kinds of loyalism, and you need the word before you can compare them.</p>
     <p><strong>Check yourself:</strong> What is the difference between militant loyalism and the "less militant forms"?</p>
   </aside>
 </section>
@@ -904,8 +1046,8 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <p>The first thinker. <strong>Huang Zongxi</strong> (1610–1695) served the Ming resistance in Zhejiang under the Prince of Lu and followed it in its retreat to the coastal islands. After 1649 he gave up and lived in retirement at his home in Zhejiang province (Ebrey, p. 273).</p>
     <p>The textbook says the conquest was so traumatic that he reconsidered many of the basic ideas of Chinese political order. He decided that the Ming's problems were not minor ones, like poor supervision of eunuchs, but major ones, "such as the imperial institution itself."</p>
     <p>That is a startling conclusion for a Confucian scholar. Think back to Chapter 14 and the Ming founder who ruled as a despot, with no chancellor to check him; the link opens that slide. Huang was asking whether the problem was not one bad emperor but the job of emperor.</p>
-    <p>The page is from an early Qing printing of his best-known political book. Its title comes from sources beyond Ebrey.</p>
-    <p>Instructor note: the textbook places his service at Nanjing (Ebrey, p. 273); he was arrested there, but served the resistance in Zhejiang (de Bary, 1993).</p>
+    <p>The page is from an early Qing printing of his best-known political book, <i>Mingyi daifang lu</i>, often translated <i>Waiting for the Dawn</i>.</p>
+    <p><strong>Why this matters:</strong> Huang turned a dynasty's failure into a question about the whole system of rule by emperors.</p>
     <p><strong>Check yourself:</strong> What did Huang Zongxi decide was the deepest cause of the Ming's failure?</p>
   </aside>
 </section>
@@ -928,11 +1070,11 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <p class="source-line">Sources: Ebrey, Ch. 16, p. 273.</p>
   <aside class="notes">
     <p>The second thinker. <strong>Gu Yanwu</strong> (1613–1682) fought first: he took part in the defense of his native city. Then he watched his adoptive mother starve herself to death rather than live under Manchu rule (Ebrey, p. 273). She had been engaged to a young man of the Gu family who died before the wedding; she lived on as his faithful "widow," and Gu was adopted as his heir. The link opens the Lecture 4 slide on women like her.</p>
-    <p>Instructor note: the textbook says "his mother"; she was his adoptive mother (Weijing Lu, 2008).</p>
     <p>He turned grief into research. Gu traveled across north China looking for the real causes of Ming weakness. He studied subjects Confucian scholars had rarely taken seriously: banking, mining, and farming.</p>
     <p>He had only disdain for scholars who wasted their time on "empty speculation or literary elegance" when practical problems were waiting.</p>
     <p>His diagnosis: the Ming had suffered from <strong>overcentralization</strong>, too much power gathered at the top. His remedy was greater <strong>local autonomy</strong>, more power for people closer to the problems.</p>
     <p>The portrait was drawn long after his death, so treat it as a tribute, not a likeness.</p>
+    <p><strong>Why this matters:</strong> Gu showed that loyalism could become practical research into why a state fails.</p>
     <p><strong>Check yourself:</strong> What did Gu Yanwu think was wrong with the Ming, and what did he propose?</p>
   </aside>
 </section>
@@ -959,7 +1101,44 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <p>Wang wanted to return Confucianism to its roots and to protect Chinese civilization from "barbarians." He insisted that telling Chinese from barbarians mattered as much as telling superior men from petty men.</p>
     <p>He made the point with an image from nature, quoted on the slide. Even ants have rulers who organize them to drive intruders from the nest. The Ming had failed that basic responsibility.</p>
     <p>The portrait is a modern imagining from 1931, not a likeness from his lifetime.</p>
+    <p><strong>Why this matters:</strong> Wang's loyalism defended Chinese civilization itself, not only a fallen dynasty.</p>
     <p><strong>Check yourself:</strong> How does Wang's critique differ from Huang's and Gu's?</p>
+  </aside>
+</section>
+<!-- ===== ss · Self-check Segment 2 ===== -->
+<section id="sc-q2" data-letter="ss" data-background="#14302A">
+  <p class="kicker">Self-check · Segment 2 · not graded</p>
+  <h2>Check Yourself: The Gate and the Choice</h2>
+  <p class="sc-intro">Answer each question from memory, out loud or on paper, then click <b>Show answer</b> to check yourself. Nothing here is graded or recorded.</p>
+  <div class="selfcheck">
+    <div class="sc-item">
+      <p class="sc-q"><b>1.</b> Why did Wu Sangui let the Manchus through the Wall?</p>
+      <button type="button" class="sc-btn" aria-expanded="false" aria-controls="sc-sc-q2-1">Show answer</button>
+      <div class="sc-a" id="sc-sc-q2-1" hidden><p>Li Zicheng had taken Beijing and the emperor was dead, so Wu turned to the Manchus for help against the rebels (Ebrey, p. 272).</p></div>
+    </div>
+    <div class="sc-item">
+      <p class="sc-q"><b>2.</b> Name three ways Chinese officials responded as the Qing armies moved south.</p>
+      <button type="button" class="sc-btn" aria-expanded="false" aria-controls="sc-sc-q2-2">Show answer</button>
+      <div class="sc-a" id="sc-sc-q2-2" hidden><p>Some defected, some opened their gates and surrendered, some resisted like Shi Kefa at Yangzhou, and some killed themselves (pp. 272–273).</p></div>
+    </div>
+    <div class="sc-item">
+      <p class="sc-q"><b>3.</b> Why did the head-shaving order make resistance easier to organize?</p>
+      <button type="button" class="sc-btn" aria-expanded="false" aria-controls="sc-sc-q2-3">Show answer</button>
+      <div class="sc-a" id="sc-sc-q2-3" hidden><p>It aroused deep resentment, even in places that had already surrendered (p. 273).</p></div>
+    </div>
+    <div class="sc-item">
+      <p class="sc-q"><b>4.</b> What did Huang Zongxi decide was the deepest cause of the Ming's failure?</p>
+      <button type="button" class="sc-btn" aria-expanded="false" aria-controls="sc-sc-q2-4">Show answer</button>
+      <div class="sc-a" id="sc-sc-q2-4" hidden><p>Not minor problems like eunuchs, but the imperial institution itself (p. 273).</p></div>
+    </div>
+  </div>
+  <p class="rg-links"><span>Missed one? Go back:</span> <a href="#/gate-opens">gate-opens</a> <a href="#/yangzhou-1645">yangzhou-1645</a> <a href="#/queue-resistance">queue-resistance</a> <a href="#/huang-zongxi">huang-zongxi</a></p>
+  <aside class="notes">
+    <p>Segment 2 is done. One more self-check before Review Question 2. The questions come from the "Check yourself" prompts on the segment's slides (Ebrey, Ch. 16, pp. 272–273).</p>
+    <p>Answer from memory, then click <strong>Show answer</strong>. Use the links at the bottom to go back to any slide you need.</p>
+    <p>The first question is about the collapse, the second and third about the range of responses, and the fourth about the thinkers. Review Question 2 asks you to compare militant loyalists with the "less militant" thinkers, so as you answer, ask what each kind of loyalist wanted.</p>
+    <p><strong>Why this matters:</strong> a comparison needs both sides in view at once.</p>
+    <p><strong>Check yourself:</strong> Can you name one militant loyalist and one thinker, and say how their goals differed?</p>
   </aside>
 </section>
 <!-- ===== v · Reading Guide Review Question 2 ===== -->
@@ -974,12 +1153,13 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <p class="yt-tip">Sort the responses into groups before you write, then compare the two kinds of loyalism point by point.</p>
   <p class="rg-links"><span>Go back to the teaching slides:</span> <a href="#/rc-ming-fall">b · rc-ming-fall</a> <a href="#/gate-opens">l · gate-opens</a> <a href="#/dorgon-goes-on">m · dorgon-goes-on</a> <a href="#/yangzhou-1645">n · yangzhou-1645</a> <a href="#/queue-order">o · queue-order</a> <a href="#/queue-resistance">p · queue-resistance</a> <a href="#/koxinga">q · koxinga</a> <a href="#/concept-loyalism">r · concept-loyalism</a> <a href="#/huang-zongxi">s · huang-zongxi</a> <a href="#/gu-yanwu">t · gu-yanwu</a> <a href="#/wang-fuzhi">u · wang-fuzhi</a></p>
   <aside class="notes">
-    <p>Your second checkpoint. Answer on your own first, then open the Reading Guide.</p>
+    <p>Reading Guide Q2 (p. 272). Your second checkpoint. Answer on your own first, then open the Reading Guide.</p>
     <p>How to build a strong answer:</p>
-    <p>For the collapse, start with the recap on <strong>b</strong> <em>rc-ming-fall</em> and the opened gate on <strong>l</strong> <em>gate-opens</em>.</p>
-    <p>The word <strong>diverse</strong> asks for a range of responses. Collect them from <strong>m</strong> <em>dorgon-goes-on</em> (generals who joined, a prince crowned at Nanjing), <strong>n</strong> <em>yangzhou-1645</em> (surrender, resistance, suicide), <strong>o</strong> and <strong>p</strong> on the head-shaving order, and <strong>q</strong> <em>koxinga</em>.</p>
-    <p>The last part asks you to compare. Use the concept slide <strong>r</strong> <em>concept-loyalism</em>, then the three thinkers on <strong>s</strong>, <strong>t</strong> and <strong>u</strong>. Ask what each kind of loyalist wanted, what they did, and what they blamed for the Ming's fall.</p>
-    <p>The guide asks you to copy the sentence beginning "Wu opened the…" on page 272. It is quoted in the notes for slide l.</p>
+    <p>For the collapse, start with the recap on <a href="#/rc-ming-fall">rc-ming-fall</a> and the opened gate on <a href="#/gate-opens">gate-opens</a>.</p>
+    <p>The word <strong>diverse</strong> asks for a range of responses. Collect them from <a href="#/dorgon-goes-on">dorgon-goes-on</a> (generals who joined, a prince crowned at Nanjing), <a href="#/yangzhou-1645">yangzhou-1645</a> (surrender, resistance, suicide), <a href="#/queue-order">queue-order</a> and <a href="#/queue-resistance">queue-resistance</a> on the head-shaving order, and <a href="#/koxinga">koxinga</a>.</p>
+    <p>The last part asks you to compare. Use the <a href="#/concept-loyalism">concept-loyalism</a> slide, then the three thinkers on <a href="#/huang-zongxi">huang-zongxi</a>, <a href="#/gu-yanwu">gu-yanwu</a> and <a href="#/wang-fuzhi">wang-fuzhi</a>. Ask what each kind of loyalist wanted, what they did, and what they blamed for the Ming's fall.</p>
+    <p>The guide asks you to copy the sentence beginning "Wu opened the…" on page 272. It is quoted in the notes for the <a href="#/gate-opens">gate-opens</a> slide.</p>
+    <p><strong>Why this matters:</strong> this question asks you to see a conquest through the many choices people made, not as a single event (Ebrey, pp. 272–273).</p>
     <p><strong>Check yourself:</strong> Can you name one militant loyalist and one thinker, and say how their goals differed?</p>
   </aside>
 </section>
@@ -1005,6 +1185,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <p>In 1661 the young Shunzhi emperor, the boy for whom Dorgon had been regent, died of smallpox. His successor was chosen in part because he had already survived the disease (Ebrey, p. 274). That boy became the <strong>Kangxi emperor</strong>, shown here in a court portrait from his reign.</p>
     <p>Lecture 2 asks how he and his grandson Qianlong won over the people their armies had conquered. Wu Sangui, the man who opened the gate, will return there too.</p>
     <p>Before Lecture 2, go on to the Pierian Spring: it tells what became of the bannermen after the conquest, and it ends with two review questions.</p>
+    <p><strong>Why this matters:</strong> holding China would take more than armies. The next lecture shows how the new emperors won over the people they had conquered.</p>
     <p><strong>Check yourself:</strong> Why might surviving smallpox have mattered in choosing an emperor?</p>
   </aside>
 </section>
@@ -1018,7 +1199,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   </div>
   <aside class="notes">
     <p>Welcome to the Pierian Spring. In Greek myth the spring in Pieria was sacred to the Muses, and drinking from it brought knowledge.</p>
-    <p>These slides are required independent study. They follow the bannermen you met on slides <a href="#/banner-families">h</a> to <a href="#/twenty-four">j</a> through the next century and a half, from conquerors to garrison families to people struggling with debt. Two Reading Guide checkpoints come along the way: Review Only Question 14 on slide gg and Review Question 4 on slide mm.</p>
+    <p>These slides are required independent study. They follow the bannermen you met on the <a href="#/banner-families">banner-families</a> and <a href="#/twenty-four">twenty-four</a> slides through the next century and a half, from conquerors to garrison families to people struggling with debt. Two Reading Guide checkpoints come along the way: Review Only Question 14 on the <a href="#/ps-rg-q14">ps-rg-q14</a> slide and Review Question 4 on the <a href="#/ps-rg-q4">ps-rg-q4</a> slide.</p>
     <p>Work through them at your own pace, with the notes open.</p>
   </aside>
 </section>
@@ -1039,9 +1220,10 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   </div>
   <p class="source-line">Sources: Ebrey, Ch. 16, p. 277.</p>
   <aside class="notes">
-    <p>Go back to slide <a href="#/banner-families">h, banner-families</a> for a moment. A banner held soldiers, their families, and their slaves. In 1644 that whole community came through the Wall. What happened to it next?</p>
+    <p>Go back to the <a href="#/banner-families">banner-families</a> slide for a moment. A banner held soldiers, their families, and their slaves. In 1644 that whole community came through the Wall. What happened to it next?</p>
     <p>The answer: the banners settled down as the army of occupation. In the first decades of the Qing, as the country was pacified, banner forces were stationed in more than <strong>ninety garrisons</strong> across China, usually within the walls of a city. The three great emperors of the next century used them to maintain military control and to preserve the Manchus' privileges (Ebrey, p. 277).</p>
     <p>The map shows one of them: the walled Manchu quarter inside Hangzhou, drawn in the 1720s. It was a city within a city.</p>
+    <p><strong>Why this matters:</strong> the garrisons turned a conquering army into a permanent, separate population inside Chinese cities.</p>
     <p><strong>Check yourself:</strong> Where were most banner garrisons placed, and what were they for?</p>
   </aside>
 </section>
@@ -1063,11 +1245,11 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <p class="source-line">Sources: Ebrey, Ch. 16, p. 277; map from the Library of Congress.</p>
   <aside class="notes">
     <p>The capital was transformed most of all. All the Chinese who lived in the northern half of Beijing were forced out to clear the area for bannermen, and Beijing became, in the textbook's words, "very much a Manchu city" (Ebrey, p. 277).</p>
-    <p>Imagine being one of those families: your home, your shop, your neighborhood handed to the conquerors. The textbook does not say where they went; it records only the clearing.</p>
+    <p>Imagine being one of those families: your home, your shop, your neighborhood handed to the conquerors.</p>
     <p>Other major cities lost whole districts too. In Hangzhou, Nanjing, Xi'an, and Taiyuan, large sections were cleared for the banners' use.</p>
     <p>The map is a Qing map from 1861, two centuries later, but the walls had not moved. The big square at the top is the northern city, the one cleared for the bannermen, with the palace at its heart. The wider walled city attached below it is the southern city, where the displaced Chinese and the city's markets ended up. The two big walled precincts at the bottom are the Temple of Heaven and the Altar of Agriculture.</p>
+    <p><strong>Why this matters:</strong> the capital itself showed who had won: the conquerors lived at its center.</p>
     <p><strong>Check yourself:</strong> What happened to the Chinese residents of northern Beijing?</p>
-    <p>Source beyond Ebrey: map from the Library of Congress.</p>
   </aside>
 </section>
 <!-- ===== bb · ps-caste ===== -->
@@ -1089,6 +1271,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <p>Unpack that phrase. <strong>Hereditary</strong>: you were a bannerman because your father was. <strong>Occupational</strong>: your group existed to do one kind of work, serving the state as soldiers and officials. <strong>Caste</strong>: a group set apart, with its own rank.</p>
     <p>The separation was deliberate. Bannermen were expected to live apart from non-banner Chinese, and they were not allowed to intermarry with them.</p>
     <p>Notice the word "in a sense." The textbook is borrowing a term to describe the pattern; the Qing did not use it. Keep that caution when you write.</p>
+    <p><strong>Why this matters:</strong> the caste rules explain both the bannermen's privileges and the trap they later fell into.</p>
     <p><strong>Check yourself:</strong> Name two rules that kept bannermen separate from other Chinese.</p>
   </aside>
 </section>
@@ -1115,6 +1298,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <p><strong>Expropriated</strong> means taken by the state from its owners. Two million acres is a lot of farmland, and much of it lay close to the capital.</p>
     <p>Here is the twist. Back in Manchuria, bannermen had farmed their own fields. In China proper they did not. They were not meant to be farmers anymore. The land was worked by others, and the rents paid for the bannermen's support. The next slide shows how.</p>
     <p>The picture is an AI-generated interpretation made for this deck, not a historical source. Use it to imagine the scene, not as evidence.</p>
+    <p><strong>Why this matters:</strong> the whole support system rested on this land, so when the land was lost, the system began to fail.</p>
     <p><strong>Check yourself:</strong> How much land was taken for the banners, and where was it most concentrated?</p>
   </aside>
 </section>
@@ -1141,6 +1325,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <p>Picture a garrison payday: families lining up at the granary, a clerk weighing out silver, porters measuring rice. For the first generation after the conquest, this was a generous bargain. The state fed you; you served the state.</p>
     <p>Now ask the question that drives the rest of this story: what happens to a system like this when the families keep growing but the land and the jobs do not?</p>
     <p>The picture is an AI-generated interpretation made for this deck, not a historical source. Use it to imagine the scene, not as evidence.</p>
+    <p><strong>Why this matters:</strong> stipends made bannermen depend on the state for everything, which mattered when the money ran short.</p>
     <p><strong>Check yourself:</strong> In what two forms were stipends paid, and what extra costs did the state cover?</p>
   </aside>
 </section>
@@ -1166,7 +1351,6 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <p>Here the system began to break. Once the conquest was complete, the banner population grew faster than the need for soldiers. Within a couple of generations, there were not enough positions in the banner armies for all the adult men (Ebrey, p. 277).</p>
     <p>Your Reading Guide sentence for Review Question 4 comes next: "Yet bannermen were not allowed to pursue occupations other than soldier or official." They could not open a shop, learn a trade, or farm. So many led lives of forced idleness, living on stipends paid to their relatives.</p>
     <p>By the Qianlong emperor's reign this had become serious enough that he had many <strong>Chinese</strong> bannermen, above all those in the provincial garrisons, removed from the banner system and reclassified as commoners. That made the banners more Manchu than ever.</p>
-    <p>Instructor note: the textbook says "most" (Ebrey, p. 277); the removals fell mainly on the provincial garrisons (Elliott, 2001).</p>
     <p><strong>Why this matters:</strong> the rule meant to keep bannermen a privileged military elite now trapped them.</p>
     <p>The picture is an AI-generated interpretation made for this deck, not a historical source. Use it to imagine the scene, not as evidence.</p>
     <p><strong>Check yourself:</strong> Why did so many bannermen end up idle?</p>
@@ -1194,8 +1378,9 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <p>Idleness led to debt. The textbook says that despite all their privileges, "impoverishment of the banner population quickly became a problem" (Ebrey, p. 278).</p>
     <p>The government tried to help. From time to time it simply forgave all bannermen's debts. But many bannermen still went bankrupt.</p>
     <p>Then came a fatal shortcut. To find money for stipends, company commanders sometimes sold off banner land. That raised cash today, but it shrank the land whose rents were supposed to pay stipends tomorrow. Each sale made the next shortfall worse.</p>
-    <p>Connect this back to slide <a href="#/ps-land">cc</a>. The whole system rested on the rents from two million acres. Selling the land was eating the seed corn.</p>
+    <p>Connect this back to the <a href="#/ps-land">ps-land</a> slide. The whole system rested on the rents from two million acres. Selling the land was eating the seed corn.</p>
     <p>The picture is an AI-generated interpretation made for this deck, not a historical source. Use it to imagine the scene, not as evidence.</p>
+    <p><strong>Why this matters:</strong> selling banner land shows how a short-term fix made a long-term problem worse.</p>
     <p><strong>Check yourself:</strong> Why did selling banner land make the bannermen's problems worse in the long run?</p>
   </aside>
 </section>
@@ -1211,11 +1396,12 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <p class="yt-tip">Explain the system step by step first, from land to rent to stipend, then follow what went wrong over time.</p>
   <p class="rg-links"><span>Go back to the teaching slides:</span> <a href="#/ps-garrisons">y · ps-garrisons</a> <a href="#/ps-beijing-cleared">z · ps-beijing-cleared</a> <a href="#/ps-caste">bb · ps-caste</a> <a href="#/ps-land">cc · ps-land</a> <a href="#/ps-stipends">dd · ps-stipends</a> <a href="#/ps-too-many">ee · ps-too-many</a> <a href="#/ps-debt">ff · ps-debt</a></p>
   <aside class="notes">
-    <p>Your first independent-study checkpoint. This is a Review Only question, but answer it fully.</p>
+    <p>Reading Guide Review Only Q14 (p. 277). Your first independent-study checkpoint. This is a Review Only question, but answer it fully.</p>
     <p>How to build a strong answer:</p>
-    <p>The <strong>mechanics</strong> part asks how the system worked. Trace the chain: land taken on <strong>cc</strong> <em>ps-land</em>, rents turned into stipends on <strong>dd</strong> <em>ps-stipends</em>, and the garrisons that needed supporting on <strong>y</strong> <em>ps-garrisons</em> and <strong>z</strong> <em>ps-beijing-cleared</em>.</p>
-    <p>The <strong>long-term problems</strong> part asks what went wrong over time. Use <strong>ee</strong> <em>ps-too-many</em> and <strong>ff</strong> <em>ps-debt</em>, and think about how the caste rules on <strong>bb</strong> <em>ps-caste</em> made the problems harder to fix.</p>
-    <p>The guide asks you to copy the sentence beginning "Outside the cities…" on page 277. It is quoted in the notes for slide cc.</p>
+    <p>The <strong>mechanics</strong> part asks how the system worked. Trace the chain: land taken on <a href="#/ps-land">ps-land</a>, rents turned into stipends on <a href="#/ps-stipends">ps-stipends</a>, and the garrisons that needed supporting on <a href="#/ps-garrisons">ps-garrisons</a> and <a href="#/ps-beijing-cleared">ps-beijing-cleared</a>.</p>
+    <p>The <strong>long-term problems</strong> part asks what went wrong over time. Use <a href="#/ps-too-many">ps-too-many</a> and <a href="#/ps-debt">ps-debt</a>, and think about how the caste rules on <a href="#/ps-caste">ps-caste</a> made the problems harder to fix.</p>
+    <p>The guide asks you to copy the sentence beginning "Outside the cities…" on page 277. It is quoted in the notes for the <a href="#/ps-land">ps-land</a> slide.</p>
+    <p><strong>Why this matters:</strong> this question asks you to explain how a system's own rules produced its problems (Ebrey, pp. 277–278).</p>
     <p><strong>Check yourself:</strong> Can you explain, in two linked sentences, how the support system itself created the debt problem?</p>
   </aside>
 </section>
@@ -1241,6 +1427,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <p>Bannermen were poor in money but rich in opportunity, at least on paper. The textbook says they had "facilitated entry into government service" (Ebrey, p. 277).</p>
     <p>Look at the three numbers. Special quotas allowed Manchus to win more than 5 percent of the <strong>jinshi</strong> degrees, the highest exam degree, even though they never exceeded 1 percent of the population. One study found that about 70 percent of positions in the capital's agencies were reserved for bannermen and less than 20 percent for Chinese. They held half of all top posts, and in the provinces about half of the governors and governors-general.</p>
     <p>This should remind you of the Mongols, who sorted their subjects into ranked ethnic categories. The link opens that Chapter 12 slide. Compare carefully: the Qing kept the exams open to Chinese, while giving Manchus a large head start.</p>
+    <p><strong>Why this matters:</strong> privilege in office kept Manchus in control of government, even though the exams stayed open to Chinese.</p>
     <p><strong>Check yourself:</strong> Which number best shows that Manchus were overrepresented in office, and why?</p>
   </aside>
 </section>
@@ -1267,6 +1454,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <p>Second, posture. If a Chinese and a Manchu were both brought into court to testify, the Chinese had to kneel before the magistrate. The Manchu could stand. Picture that scene: the difference in status was visible to everyone in the room.</p>
     <p>Third, punishment. If both were found guilty of the same crime, the Manchu received a lighter sentence. The textbook's example: wearing the <strong>cangue</strong>, a large wooden collar, for sixty days, instead of being exiled for life.</p>
     <p>The picture is an AI-generated interpretation made for this deck, not a historical source. Use it to imagine the scene, not as evidence.</p>
+    <p><strong>Why this matters:</strong> a court that treated two people differently showed everyone in the room who ranked higher.</p>
     <p><strong>Check yourself:</strong> Name the three legal privileges of bannermen.</p>
   </aside>
 </section>
@@ -1292,6 +1480,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <p>It did not work. Bannermen who had grown up in the cities of China proper were rarely willing to go back to farming in the cold northeast. Most, the textbook says, "sneaked back as soon as possible."</p>
     <p>Think about why. For these families, home was now a garrison quarter in Beijing or Hangzhou, not a village in Manchuria. The conquerors had become city people.</p>
     <p>The picture is an AI-generated interpretation made for this deck, not a historical source. Use it to imagine the scene, not as evidence.</p>
+    <p><strong>Why this matters:</strong> the failed resettlement shows how far the bannermen had changed from their ancestors.</p>
     <p><strong>Check yourself:</strong> Why did the resettlement plan fail?</p>
   </aside>
 </section>
@@ -1317,6 +1506,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <p>Within a generation of settling in China proper, they were using the Chinese dialect of Beijing as their common language. The emperors kept telling them to study spoken and written Manchu, but it became a second language learned at school. Some customs survived, such as using personal names alone.</p>
     <p>The skills the state cared about most were horsemanship and archery, and city life and long peace wore them down. The painting shows the Qianlong emperor himself hunting hare on horseback, the example he wanted his bannermen to follow.</p>
     <p>Qianlong knew history. He knew how the Jin Jurchens, back in Chapter 8, had seen their soldiers take up Chinese ways. So he discouraged bannermen from Chinese culture and told them that <strong>frugality</strong>, living simply, was a Manchu trait, even though his own court was as lavish as any in Chinese history.</p>
+    <p><strong>Why this matters:</strong> the emperors feared that if bannermen stopped being Manchu, the dynasty would lose its most loyal base.</p>
     <p><strong>Check yourself:</strong> Name two signs that bannermen were losing their Manchu identity.</p>
   </aside>
 </section>
@@ -1341,6 +1531,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <p>Unlike their counterparts in other large empires, the banner armies never turned on the ruling house, and they never used the resources assigned to them to challenge central authority. Many empires were overthrown by their own soldiers. The Qing was not.</p>
     <p>The portrait shows what the dynasty valued in its bannermen: <strong>Zhanyinbao</strong>, an imperial bodyguard, painted life-size in 1760 in full armor with bow and arrows. The textbook reproduces this portrait.</p>
     <p>So the system was costly and it left many bannermen poor, but it bought the dynasty something precious: an army that stayed loyal.</p>
+    <p><strong>Why this matters:</strong> Review Question 4 asks about status and poverty, and the loyalty that survived both is part of the answer.</p>
     <p><strong>Check yourself:</strong> What does the textbook suggest as the reason the bannermen stayed loyal?</p>
   </aside>
 </section>
@@ -1356,11 +1547,12 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <p class="yt-tip">Build a timeline from conquest army to garrison caste to idle, indebted families, and keep asking what caused each change.</p>
   <p class="rg-links"><span>Go back to the teaching slides:</span> <a href="#/banner-families">h · banner-families</a> <a href="#/twenty-four">j · twenty-four</a> <a href="#/ps-garrisons">y · ps-garrisons</a> <a href="#/ps-caste">bb · ps-caste</a> <a href="#/ps-stipends">dd · ps-stipends</a> <a href="#/ps-too-many">ee · ps-too-many</a> <a href="#/ps-debt">ff · ps-debt</a> <a href="#/ps-privilege-office">hh · ps-privilege-office</a> <a href="#/ps-privilege-law">ii · ps-privilege-law</a> <a href="#/ps-manchuria">jj · ps-manchuria</a> <a href="#/ps-losing-manchu">kk · ps-losing-manchu</a> <a href="#/ps-loyal">ll · ps-loyal</a></p>
   <aside class="notes">
-    <p>Your second independent-study checkpoint.</p>
+    <p>Reading Guide Q4 (p. 277). Your second independent-study checkpoint.</p>
     <p>How to build a strong answer:</p>
-    <p>The first part asks how the banners' <strong>role</strong> and <strong>status</strong> evolved. Start with the conquest banners on <strong>h</strong> <em>banner-families</em> and <strong>j</strong> <em>twenty-four</em>, then the garrisons and caste rules on <strong>y</strong> and <strong>bb</strong>, the privileges on <strong>hh</strong> and <strong>ii</strong>, and the changes on <strong>kk</strong> and <strong>ll</strong>.</p>
-    <p>The second part asks <strong>why</strong> privilege led to poverty. That is a cause-and-effect question. Use <strong>dd</strong> <em>ps-stipends</em>, <strong>ee</strong> <em>ps-too-many</em>, <strong>ff</strong> <em>ps-debt</em> and <strong>jj</strong> <em>ps-manchuria</em>, and look for the rule that turned a privilege into a trap.</p>
-    <p>The guide asks you to copy the sentence beginning "Yet bannermen were…" on page 277. It is quoted in the notes for slide ee.</p>
+    <p>The first part asks how the banners' <strong>role</strong> and <strong>status</strong> evolved. Start with the conquest banners on <a href="#/banner-families">banner-families</a> and <a href="#/twenty-four">twenty-four</a>, then the garrisons and caste rules on <a href="#/ps-garrisons">ps-garrisons</a> and <a href="#/ps-caste">ps-caste</a>, the privileges on <a href="#/ps-privilege-office">ps-privilege-office</a> and <a href="#/ps-privilege-law">ps-privilege-law</a>, and the changes on <a href="#/ps-losing-manchu">ps-losing-manchu</a> and <a href="#/ps-loyal">ps-loyal</a>.</p>
+    <p>The second part asks <strong>why</strong> privilege led to poverty. That is a cause-and-effect question. Use <a href="#/ps-stipends">ps-stipends</a>, <a href="#/ps-too-many">ps-too-many</a>, <a href="#/ps-debt">ps-debt</a> and <a href="#/ps-manchuria">ps-manchuria</a>, and look for the rule that turned a privilege into a trap.</p>
+    <p>The guide asks you to copy the sentence beginning "Yet bannermen were…" on page 277. It is quoted in the notes for the <a href="#/ps-too-many">ps-too-many</a> slide.</p>
+    <p><strong>Why this matters:</strong> this question asks you to follow one group across a century and a half and explain why it changed (Ebrey, pp. 277–279).</p>
     <p><strong>Check yourself:</strong> Can you name the single rule that did the most to turn privilege into poverty, and explain why?</p>
   </aside>
 </section>
@@ -1384,10 +1576,10 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   <aside class="notes">
     <p>A last portrait to fill a gap in the story. Between Nurhaci's death and the gate at the Wall came <strong>Hong Taiji</strong>, Nurhaci's son, who ruled from 1626 to 1643 (Ebrey, p. 271).</p>
     <p>From his capital at Mukden he consolidated the Jin state. He used Chinese bureaucrats, but grudgingly. His real goal was to replace them with a multiethnic elite "equally competent in warfare and documents," men who could fight and write.</p>
-    <p>In 1636 he renamed the state <strong>Qing</strong>, meaning "pure," the name you met on slide <a href="#/names-manchu">f</a>.</p>
-    <p>He died in 1643 at fifty, the year before the conquest. His brother <strong>Dorgon</strong> became the leading regent, with their cousin Jirgalang, for his five-year-old son Fulin, the Shunzhi emperor. That is the Dorgon who made the deal with Wu Sangui on slide <a href="#/gate-opens">l</a>.</p>
+    <p>In 1636 he renamed the state <strong>Qing</strong>, meaning "pure," the name you met on the <a href="#/names-manchu">names-manchu</a> slide.</p>
+    <p>He died in 1643 at fifty, the year before the conquest. His brother <strong>Dorgon</strong> became the leading regent, with their cousin Jirgalang, for his five-year-old son Fulin, the Shunzhi emperor. That is the Dorgon who made the deal with Wu Sangui on the <a href="#/gate-opens">gate-opens</a> slide.</p>
+    <p><strong>Why this matters:</strong> Hong Taiji built the state and the mixed elite that Dorgon carried to Beijing.</p>
     <p><strong>Check yourself:</strong> What kind of officials did Hong Taiji want, and why might that matter for ruling China later?</p>
-    <p>Instructor note: the textbook gives his age at death as forty-six (Ebrey, p. 271); he was born in 1592.</p>
   </aside>
 </section>
 <!-- ===== aa · sources ===== -->
@@ -1398,7 +1590,7 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <li class="src-head">Main source</li>
     <li>Patricia Buckley Ebrey, <i>A History of China</i>, Chapter 16, "The Creation of the Manchu Empire (1600–1800)," pp. 270–287. All page references in this deck are to these pages.</li>
     <li>W. Theodore de Bary and Richard Lufrano, <i>Sources of Chinese Tradition from 1600 Through the Twentieth Century</i> (Columbia University Press, 2000), p. 35, as quoted in Ebrey, p. 273 (Wang Fuzhi).</li>
-    <li class="src-head">Further reading beyond Ebrey</li>
+    <li class="src-head">Other sources</li>
     <li>Frederic Wakeman Jr., <i>The Great Enterprise</i> (1985) (slides e, l, o); Kenneth M. Swope, <i>A Dragon's Head and a Serpent's Tail</i> (2009) (slide e).</li>
     <li>Pamela Kyle Crossley, <i>The Manchus</i> (1997) (slide f); Mark C. Elliott, <i>The Manchu Way</i> (2001) (slide ee).</li>
     <li>Lynn A. Struve, <i>Voices from the Ming-Qing Cataclysm</i> (1993); Tobie Meyer-Fong, <i>Building Culture in Early Qing Yangzhou</i> (2003) (slide n).</li>
@@ -1431,8 +1623,10 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
   </ul>
   <p class="essay-link"><a href="../../../../hist-270/background_essays/essays/ch16/ch16-l1-the-gate-in-the-wall.html" target="_blank" rel="noopener">Background essay: the historians’ debates behind this lecture ↗</a></p>
   <aside class="notes">
-    <p>Everything in the story slides comes from Chapter 16 of the course textbook, and each slide's source line gives the page. Where a caption or note adds something from sources beyond Ebrey, such as the name Shanhai Pass or the title of Huang Zongxi's book, the notes name it, and the books under "Further reading" are where those facts come from.</p>
-    <p>Several portraits here were painted long after their subjects died. Their captions say so. Treat them as tributes, not likenesses.</p>
+    <p>Almost everything in the story slides comes from Chapter 16 of the course textbook, and each slide's source line gives the page. A few details come from other books, such as the name Shanhai Pass or the title of Huang Zongxi's book. They are listed on this slide under "Other sources."</p>
+    <p>Several portraits here were painted long after their subjects died. Their captions say so. Treat them as tributes, not likenesses. The scenes marked as AI-generated are modern interpretations, never evidence.</p>
+    <p>If you want to go further, the background essay linked on this slide, <i>The Gate in the Wall</i>, retells the lecture as one story. Its section "Corrections and Sources Behind the Slide Notes" lists slide by slide where the deck goes beyond the textbook or corrects a detail.</p>
+    <p><strong>Why this matters:</strong> knowing where a claim comes from is how you decide how far to trust it (Ebrey, Ch. 16, pp. 270–279).</p>
     <p><strong>Check yourself:</strong> Pick one real image in this deck and explain what it can and cannot tell us about the Manchu conquest.</p>
   </aside>
 </section>
@@ -1459,8 +1653,16 @@ img.zoomable:focus-visible{outline:3px solid var(--antique-gold)!important;outli
     <h3>Cangue</h3>
     <p>The <strong>cangue</strong> was a large wooden collar locked around a convicted person's neck as a public punishment (Ebrey, p. 278).</p>
   </div>
+  <div id="pop-teal" class="popup" role="dialog" aria-label="Teal dotted words">
+    <span class="popup-close" data-popup="pop-teal" role="button" tabindex="0" aria-label="Close">&times;</span>
+    <h3>Teal dotted words</h3>
+    <p>A <strong>teal dotted word</strong> opens a short definition, like this one. Click the word, read the box, then close it with the &times; mark, the Esc key, or a click outside the box.</p>
+    <p>The definitions use the textbook's own terms wherever it has them.</p>
+  </div>
 <div id="slide-letter" class="slide-letter" aria-hidden="true"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+<script>window.MUSEUM_LAYOUT={fb:["korean-visitor","banner-families","gate-opens","queue-resistance"],bd:["rc-ming-fall","yangzhou-1645","huang-zongxi"],bq:[],map:["jurchen-heirs","ps-beijing-cleared"]};</script>
+<script src="../_theme/museum.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
 <script>
 /* HIST 270 FA26 deck runtime: Reveal init, house popups, image lightbox. Reusable for Ch. 12 Lectures 1-3. */
@@ -1530,7 +1732,7 @@ Reveal.on('ready', setRevealScale); Reveal.on('resize', setRevealScale); window.
 
 
 /* Slide-letter badge: shows the current section's data-letter, lower left.
-   Letters (a-z, aa-nn) are PERMANENT identifiers used by the Reading Guide and notes; never re-letter slides.
+   Letters (a-z, aa-nn) are PERMANENT identifiers used by the Reading Guide and notes; never re-letter slides. Added 2026-11-03 for online study: oo how-to-use, pp/qq segment slides, rr/ss self-checks. Next unused letter: tt.
    Order: main a-w; Pierian Spring x, y, z, bb-nn; sources aa stays last. */
 (function(){
   function showLetter(){var s=Reveal.getCurrentSlide();var el=document.getElementById('slide-letter');
@@ -1538,6 +1740,45 @@ Reveal.on('ready', setRevealScale); Reveal.on('resize', setRevealScale); window.
   Reveal.on('ready',showLetter);Reveal.on('slidechanged',showLetter);
   if(Reveal.isReady&&Reveal.isReady())showLetter();
 })();
+
+
+/* ---- Narration panel (online study): shows the current slide's Study Buddy notes on the slide.
+   Button lower right, or the N key; N or Esc closes. A section with data-audio="..." also gets an audio player. ---- */
+(function(){
+  var btn=document.createElement('button'); btn.type='button'; btn.id='narr-btn';
+  btn.setAttribute('aria-controls','narr-panel'); btn.setAttribute('aria-expanded','false'); btn.textContent='Narration';
+  btn.title='Show the Study Buddy notes for this slide (N)';
+  var p=document.createElement('div'); p.id='narr-panel'; p.setAttribute('role','region'); p.setAttribute('aria-label','Study Buddy narration'); p.setAttribute('aria-live','polite'); p.hidden=true;
+  p.innerHTML='<p class="np-head"><span>Study Buddy notes</span><button type="button" class="np-close" aria-label="Close narration">&times;</button></p><div class="np-media"></div><div class="np-body"></div>';
+  document.body.appendChild(p); document.body.appendChild(btn);
+  var body=p.querySelector('.np-body'), media=p.querySelector('.np-media');
+  function fill(){
+    var s=Reveal.getCurrentSlide(); if(!s) return;
+    var n=s.querySelector('aside.notes'); body.innerHTML=n?n.innerHTML:'<p>No notes for this slide.</p>';
+    var a=s.getAttribute('data-audio'); media.innerHTML=a?'<audio controls preload="none" src="'+a+'"></audio>':'';
+    p.scrollTop=0;
+  }
+  function isOpen(){ return !p.hidden; }
+  function openP(){ fill(); p.hidden=false; btn.setAttribute('aria-expanded','true'); }
+  function closeP(){ p.hidden=true; btn.setAttribute('aria-expanded','false'); media.innerHTML=''; }
+  btn.addEventListener('click',function(e){ e.stopPropagation(); isOpen()?closeP():openP(); });
+  p.querySelector('.np-close').addEventListener('click',function(e){ e.stopPropagation(); closeP(); btn.focus(); });
+  window.addEventListener('keydown',function(e){
+    var t=e.target; if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable)) return;
+    if((e.key==='n'||e.key==='N')&&!e.ctrlKey&&!e.metaKey&&!e.altKey){ e.preventDefault(); e.stopImmediatePropagation(); isOpen()?closeP():openP(); return; }
+    if(e.key==='Escape'&&isOpen()){ e.preventDefault(); e.stopImmediatePropagation(); closeP(); }
+  },true);
+  Reveal.on('slidechanged',function(){ if(isOpen()) fill(); });
+})();
+
+/* ---- Self-checks: each Show answer button reveals its own answer; not graded, nothing recorded ---- */
+document.addEventListener('click',function(e){
+  var b=e.target.closest('.sc-btn'); if(!b) return;
+  var a=document.getElementById(b.getAttribute('aria-controls')); if(!a) return;
+  var open=b.getAttribute('aria-expanded')==='true';
+  a.hidden=open; b.setAttribute('aria-expanded',open?'false':'true'); b.textContent=open?'Show answer':'Hide answer';
+});
+
 
 </script>
 </body>
