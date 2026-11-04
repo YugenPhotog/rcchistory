@@ -560,7 +560,7 @@ Files live in `reveal_decks/chapter-01/images/ch01-lec2/`. Deck: `HIST270_ch01_l
 - **Attribution:** None required.
 
 ## `HIST270_ch01_lec2_13_oracle_bone_xiaotun_b_revFA26.webp`
-- **Status:** Retired 2026-10-25: not used in the FA26 deck; file archived locally (previously listed as used on slide M).
+- **Used on:** slide AQ (seg2-characters, Segment 2 opener), added 2026-11-03 in the Ch. 1 style pass. Previously retired 2026-10-25 (not used in the first FA26 build).
 - **Description:** Inscribed oracle bone, Shang Dynasty, Xiaotun, Anyang, Henan
 - **Source website / URL:** Wikimedia Commons, [File:Inscribed oracle bone2, Shang Dynasty, Xiaotun, Anyang, Henan.jpg](https://commons.wikimedia.org/wiki/File:Inscribed_oracle_bone2,_Shang_Dynasty,_Xiaotun,_Anyang,_Henan.jpg)
 - **Creator / date:** Furius; 2024-07-13 06:39:50
@@ -1072,3 +1072,248 @@ Files live in `reveal_decks/chapter-27/images/ch27-lec3/`. Deck: `HIST270_ch27_l
 - **License/status:** Course illustration (AI-generated).
 - **Attribution:** Labeled on the slide as "AI-generated illustration made for this deck … An interpretation, not a historical source," and listed on the sources slide (kk).
 - **Notes:** No text or portraits in the image. Converted to WebP (1152 x 864, quality 84).
+
+
+# Chapter 2, Lecture 1 (revised FA26 deck, draft built 2026-10-30)
+
+Files live in `reveal_decks/chapter-02/images/ch02-lec1/`. Deck: `HIST270_ch02_lec1_hegemons_war_shi_revised_FA26.html`. Slide letters are permanent IDs. No image in this deck is AI-generated. All images were downloaded from Wikimedia Commons and converted to WebP (longest side at most 1600 px, quality 82).
+
+## `HIST270_ch02_lec1_01_title_duke_wen_scroll_revFA26.webp`
+- **Used on:** slide A
+- **Description:** China; Handscroll; Paintings
+- **Source website / URL:** Wikimedia Commons, [File:南宋 傳李唐 晉文公復國圖 卷-Duke Wen of Jin Recovering His State MET DP152403.jpg](https://commons.wikimedia.org/wiki/File:%E5%8D%97%E5%AE%8B_%E5%82%B3%E6%9D%8E%E5%94%90_%E6%99%89%E6%96%87%E5%85%AC%E5%BE%A9%E5%9C%8B%E5%9C%96_%E5%8D%B7-Duke_Wen_of_Jin_Recovering_His_State_MET_DP152403.jpg)
+- **Creator / date:** Li Tang; mid-12th century
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec1_02_zuozhuan_page_revFA26.webp`
+- **Used on:** slide B
+- **Description:** First page, Li Yuanyang edition of Zuo zhuan (16th century)
+- **Source website / URL:** Wikimedia Commons, [File:Li Yuanyang Zuo zhuan first page.png](https://commons.wikimedia.org/wiki/File:Li_Yuanyang_Zuo_zhuan_first_page.png)
+- **Creator / date:** Chang Wei-tung; 16th century
+- **License:** Public domain
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec1_03_bamboo_slips_hubei_revFA26.webp`
+- **Used on:** slide C
+- **Description:** Hubei Provincial Museum, Wuhan, History of Writing Exhibit. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Warring States Bamboo Slips (10160718806).jpg](https://commons.wikimedia.org/wiki/File:Warring_States_Bamboo_Slips_(10160718806).jpg)
+- **Creator / date:** Gary Todd from Xinzheng, China; 2010-12-03 14:09
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec1_04_act1_six_horse_chariot_revFA26.webp`
+- **Used on:** slide E
+- **Description:** Eastern Zhou Chariot Burial and Museum, Luoyang, Henan. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Eastern Zhou Royal Six-horse Chariot Burial, Luoyang 03.jpg](https://commons.wikimedia.org/wiki/File:Eastern_Zhou_Royal_Six-horse_Chariot_Burial,_Luoyang_03.jpg)
+- **Creator / date:** Gary Todd; 2007-04-21 17:43:30
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec1_05_chinese_plain_5c_map_revFA26.webp`
+- **Used on:** slide F
+- **Description:** Map of the Chinese plain, 5 century BC. Start of the Warring States Period This is a different version of Chinese plain 5c. BC-en.svg created by Yug with the state of Yue being added.
+- **Source website / URL:** Wikimedia Commons, [File:Chinese plain 5c. BC with Yue-en.png](https://commons.wikimedia.org/wiki/File:Chinese_plain_5c._BC_with_Yue-en.png)
+- **Creator / date:** Yug; 2018-04-15
+- **License:** CC BY-SA 3.0
+- **Attribution:** Required: Yug, CC BY-SA 3.0, via Wikimedia Commons (given in slide caption/credit).
+
+## `HIST270_ch02_lec1_06_huan_guanzhong_relief_revFA26.webp`
+- **Used on:** slide H
+- **Description:** Duke Huan of Qi and Guan Zhong depicted on Wu Family Shrines stone-relief.
+- **Source website / URL:** Wikimedia Commons, [File:Qihuangongguanzhong2.jpg](https://commons.wikimedia.org/wiki/File:Qihuangongguanzhong2.jpg)
+- **Creator / date:** unknown; Han Dynasty
+- **License:** Public domain
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec1_07_houma_covenant_tablets_revFA26.webp`
+- **Used on:** slide I
+- **Description:** Houma covenants in the Shanxi Museum
+- **Source website / URL:** Wikimedia Commons, [File:20250602 Houma covenants in the Shanxi Museum (111525).jpg](https://commons.wikimedia.org/wiki/File:20250602_Houma_covenants_in_the_Shanxi_Museum_(111525).jpg)
+- **Creator / date:** Yumeto; 2025-06-02 11:15:25
+- **License:** CC BY-SA 4.0
+- **Attribution:** Required: Yumeto, CC BY-SA 4.0, via Wikimedia Commons (given in slide caption/credit).
+
+## `HIST270_ch02_lec1_08_duke_wen_returns_scroll_revFA26.webp`
+- **Used on:** slide J
+- **Description:** China; Handscroll; Paintings
+- **Source website / URL:** Wikimedia Commons, [File:南宋 傳李唐 晉文公復國圖 卷-Duke Wen of Jin Recovering His State MET DP152404.jpg](https://commons.wikimedia.org/wiki/File:%E5%8D%97%E5%AE%8B_%E5%82%B3%E6%9D%8E%E5%94%90_%E6%99%89%E6%96%87%E5%85%AC%E5%BE%A9%E5%9C%8B%E5%9C%96_%E5%8D%B7-Duke_Wen_of_Jin_Recovering_His_State_MET_DP152404.jpg)
+- **Creator / date:** Li Tang; mid-12th century
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec1_09_warring_states_260_map_revFA26.webp`
+- **Used on:** slide K
+- **Description:** Political map of China during the Warring States period, circa 260 BCE
+- **Source website / URL:** Wikimedia Commons, [File:EN-WarringStatesAll260BCE.jpg](https://commons.wikimedia.org/wiki/File:EN-WarringStatesAll260BCE.jpg)
+- **Creator / date:** Philg88; 2010-10-27
+- **License:** CC BY-SA 3.0
+- **Attribution:** Required: Philg88, CC BY-SA 3.0, via Wikimedia Commons (given in slide caption/credit).
+
+## `HIST270_ch02_lec1_10_king_cuo_ding_revFA26.webp`
+- **Used on:** slide L
+- **Description:** Bronze Ding Tripod with Iron Feet (replica). Unearthed from the tomb of King Cuo.
+- **Source website / URL:** Wikimedia Commons, [File:中山王cuo铁足铜鼎复制品 1547.jpg](https://commons.wikimedia.org/wiki/File:%E4%B8%AD%E5%B1%B1%E7%8E%8Bcuo%E9%93%81%E8%B6%B3%E9%93%9C%E9%BC%8E%E5%A4%8D%E5%88%B6%E5%93%81_1547.jpg)
+- **Creator / date:** Cangminzho; 2018-01-09 15:11:14
+- **License:** CC BY-SA 4.0
+- **Attribution:** Required: Cangminzho, CC BY-SA 4.0, via Wikimedia Commons (given in slide caption/credit).
+
+## `HIST270_ch02_lec1_11_act2_terracotta_pit1_revFA26.webp`
+- **Used on:** slide O
+- **Description:** 2011 visit. Complete indexed photo collection at www.WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Qin Terracotta Army, Pit 1 09.jpg](https://commons.wikimedia.org/wiki/File:Qin_Terracotta_Army,_Pit_1_09.jpg)
+- **Creator / date:** Gary Lee Todd, Ph.D.; 2011-10-03 10:58:42
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec1_12_eastern_zhou_chariot_pit_revFA26.webp`
+- **Used on:** slide P
+- **Description:** Eastern Zhou Chariot Burial and Museum, Luoyang, Henan. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Eastern Zhou Royal Chariot Pit, Luoyang 02.jpg](https://commons.wikimedia.org/wiki/File:Eastern_Zhou_Royal_Chariot_Pit,_Luoyang_02.jpg)
+- **Creator / date:** Gary Todd; 2011-06-11 14:56:08
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec1_13_crossbow_trigger_revFA26.webp`
+- **Used on:** slide R
+- **Description:** Bronze gallery, Palace Museum, Taipei, Taiwan. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Warring States Bronze Crossbow Trigger Mechanism, 3rd C. BC.jpg](https://commons.wikimedia.org/wiki/File:Warring_States_Bronze_Crossbow_Trigger_Mechanism,_3rd_C._BC.jpg)
+- **Creator / date:** Gary Todd; 2017-12-08 11:27:37
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec1_14_iron_helmet_revFA26.webp`
+- **Used on:** slide S
+- **Description:** Yixian County, Hebei. Military Museum: Ancient Weapons. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Warring States Iron Helmet Replica (9874411633).jpg](https://commons.wikimedia.org/wiki/File:Warring_States_Iron_Helmet_Replica_(9874411633).jpg)
+- **Creator / date:** Gary Todd from Xinzheng, China; 2008-09-30 10:50
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec1_15_qi_long_wall_revFA26.webp`
+- **Used on:** slide T
+- **Description:** part of Qi Great Wall
+- **Source website / URL:** Wikimedia Commons, [File:齊長城萊蕪歷城段.jpg](https://commons.wikimedia.org/wiki/File:%E9%BD%8A%E9%95%B7%E5%9F%8E%E8%90%8A%E8%95%AA%E6%AD%B7%E5%9F%8E%E6%AE%B5.jpg)
+- **Creator / date:** Vitsuha; 2024-12-15 13:57:07
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec1_16_wuling_woodblock_revFA26.webp`
+- **Used on:** slide U
+- **Description:** 趙武靈王 繡像東周列國全志
+- **Source website / URL:** Wikimedia Commons, [File:趙武靈王.jpg](https://commons.wikimedia.org/wiki/File:%E8%B6%99%E6%AD%A6%E9%9D%88%E7%8E%8B.jpg)
+- **Creator / date:** 馮夢龍; 1785
+- **License:** Public domain
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec1_17_changping_map_revFA26.webp`
+- **Used on:** slide V
+- **Description:** Map of Battle of Changping between Qin and Zhao states
+- **Source website / URL:** Wikimedia Commons, [File:Battle of Changping.png](https://commons.wikimedia.org/wiki/File:Battle_of_Changping.png)
+- **Creator / date:** SY; 2017-07-10
+- **License:** CC BY-SA 4.0
+- **Attribution:** Required: SY, CC BY-SA 4.0, via Wikimedia Commons (given in slide caption/credit).
+
+## `HIST270_ch02_lec1_18_act3_linzi_model_revFA26.webp`
+- **Used on:** slide Y
+- **Description:** Photograph of a model of the ancient city of Linzi in the Museum of the Qi State.
+- **Source website / URL:** Wikimedia Commons, [File:Linzi model 2010 06 06.jpg](https://commons.wikimedia.org/wiki/File:Linzi_model_2010_06_06.jpg)
+- **Creator / date:** Rolfmueller; 
+- **License:** CC BY-SA 3.0
+- **Attribution:** Required: Rolfmueller, CC BY-SA 3.0, via Wikimedia Commons (given in slide caption/credit).
+
+## `HIST270_ch02_lec1_19_dujiangyan_revFA26.webp`
+- **Used on:** slide AA
+- **Description:** Dujiangyan Irrigation System, Sichuan, China 25 April 2009. Amazingly, the system was originally constructed in 265 BC by Li Bing, Governor of the Shu for the State of Qin. It was built on the River Minjiang, the longest tributary of the Yangtse, which was very prone to flooding at this point. Unfortunately, a very severe earthquake in 1933 destroyed much of the system but it was reconstructed to 
+- **Source website / URL:** Wikimedia Commons, [File:Dujiangyan Irrigation System (50619502968).jpg](https://commons.wikimedia.org/wiki/File:Dujiangyan_Irrigation_System_(50619502968).jpg)
+- **Creator / date:** Hugh Llewelyn from Keynsham, UK; 2009-04-25 06:55
+- **License:** CC BY-SA 2.0
+- **Attribution:** Required: Hugh Llewelyn from Keynsham, UK, CC BY-SA 2.0, via Wikimedia Commons (given in slide caption/credit).
+
+## `HIST270_ch02_lec1_20_iron_tools_revFA26.webp`
+- **Used on:** slide AB
+- **Description:** Hebei Provincial Museum, Shijiazhuang, mostly closed for renovation, 2011. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Warring States Iron Tools (10077804434).jpg](https://commons.wikimedia.org/wiki/File:Warring_States_Iron_Tools_(10077804434).jpg)
+- **Creator / date:** Gary Todd from Xinzheng, China; 2011-10-22 10:48
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec1_21_spade_coins_revFA26.webp`
+- **Used on:** slide AC
+- **Description:** SPADE MONEY ca. 400 - 250 BC PHOTO H# DESCRIPTION DETAILS PRICE 3.182 Square Foot An Yang, 46mm tall, 4.95gm VF $ 125.00.
+- **Source website / URL:** Wikimedia Commons, [File:Square foot spade money (Zhou Dynasty) - Scott Semans.jpg](https://commons.wikimedia.org/wiki/File:Square_foot_spade_money_(Zhou_Dynasty)_-_Scott_Semans.jpg)
+- **Creator / date:** Scott Semans; 2018-08-11
+- **License:** CC BY 3.0
+- **Attribution:** Required: Scott Semans, CC BY 3.0, via Wikimedia Commons (given in slide caption/credit).
+
+## `HIST270_ch02_lec1_22_tiger_tally_revFA26.webp`
+- **Used on:** slide AD
+- **Description:** Shaanxi History Museum, Xi'an. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Qin State Qin Dynasty Bronze Tiger Tally (46552863315).jpg](https://commons.wikimedia.org/wiki/File:Qin_State_Qin_Dynasty_Bronze_Tiger_Tally_(46552863315).jpg)
+- **Creator / date:** Gary Todd from Xinzheng, China; 2019-03-23 14:32
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec1_23_act4_wu_yue_swords_revFA26.webp`
+- **Used on:** slide AG
+- **Description:** Anhui Provincial Museum, Hefei, 2012. Complete indexed photo collection at www.WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Spring & Autumn Bronze Swords of Crown Prince Zhufan of Wu, King Guang of Wu, & Warring States Sword of King Qibeigu of Yue.jpg](https://commons.wikimedia.org/wiki/File:Spring_%26_Autumn_Bronze_Swords_of_Crown_Prince_Zhufan_of_Wu,_King_Guang_of_Wu,_%26_Warring_States_Sword_of_King_Qibeigu_of_Yue.jpg)
+- **Creator / date:** Gary Lee Todd, Ph.D.; 2012-12-28 11:52:09
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec1_24_qin_statute_slips_revFA26.webp`
+- **Used on:** slide AI
+- **Description:** Hubei Provincial Museum, Wuhan, History of Writing Exhibit. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Eighteen Laws of Qin on Qin Bamboo Slips (10160622885).jpg](https://commons.wikimedia.org/wiki/File:Eighteen_Laws_of_Qin_on_Qin_Bamboo_Slips_(10160622885).jpg)
+- **Creator / date:** Gary Todd from Xinzheng, China; 2010-12-03 14:09
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec1_25_guo_bell_revFA26.webp`
+- **Used on:** slide AJ
+- **Description:** Zhou Dynasty, Sanmenxia City Museum, Henan, China. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Spring & Autumn Bronze Bell, Guo State.jpg](https://commons.wikimedia.org/wiki/File:Spring_%26_Autumn_Bronze_Bell,_Guo_State.jpg)
+- **Creator / date:** Gary Todd; 2015-03-20 15:24:02
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec1_26_bamboo_silk_anyang_revFA26.webp`
+- **Used on:** slide AK
+- **Description:** Chinese Writing Museum, Anyang. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Bamboo Slips and Silk in Warring States Period (10185778465).jpg](https://commons.wikimedia.org/wiki/File:Bamboo_Slips_and_Silk_in_Warring_States_Period_(10185778465).jpg)
+- **Creator / date:** Gary Todd from Xinzheng, China; 2011-12-13 12:05
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec1_27_han_infantry_revFA26.webp`
+- **Used on:** slide AN
+- **Description:** Xianyang, Shaanxi, 1965. National Museum: China through the Ages, Exhibit 4. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Western Han Terracotta Infantry.jpg](https://commons.wikimedia.org/wiki/File:Western_Han_Terracotta_Infantry.jpg)
+- **Creator / date:** Gary Todd; 2011-09-01 16:03:51
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec1_ps_28_qin_duke_ding_revFA26.webp`
+- **Used on:** slide AP
+- **Description:** Shanghai Museum Bronze Gallery. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Early Spring & Autumn Bronze Ding of Duke Qin (10179729063).jpg](https://commons.wikimedia.org/wiki/File:Early_Spring_%26_Autumn_Bronze_Ding_of_Duke_Qin_(10179729063).jpg)
+- **Creator / date:** Gary Todd from Xinzheng, China; 2008-08-23 11:39
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec1_ps_29_sunzi_slips_revFA26.webp`
+- **Used on:** slide AQ
+- **Description:** Art of War. Military Museum: Ancient Weapons special exhibit. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Bamboo Slips with Text of Sunzi (9873600775).jpg](https://commons.wikimedia.org/wiki/File:Bamboo_Slips_with_Text_of_Sunzi_(9873600775).jpg)
+- **Creator / date:** Gary Todd from Xinzheng, China; 2008-09-30 14:46
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec1_ps_30_zuozhuan_min_qiji_revFA26.webp`
+- **Used on:** slide AR
+- **Description:** Zuo zhuan, Min Qiji edition, title page (printed 1616)
+- **Source website / URL:** Wikimedia Commons, [File:Zuo zhuan, Min Qiji edition, title page.png](https://commons.wikimedia.org/wiki/File:Zuo_zhuan,_Min_Qiji_edition,_title_page.png)
+- **Creator / date:** White whirlwind; 1616
+- **License:** Public domain
+- **Attribution:** None required.
