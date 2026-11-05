@@ -3490,3 +3490,17 @@ None. All nine manifest items now have selected images and documented reuse term
 - **License/status:** Public Domain.
 - **Attribution:** None required.
 - **Notes:** Traditional portrait selected to anchor discussion of the New Policies and court factionalism.
+
+
+## `ch16-lec3/12-qing-population-bars.webp`
+
+- **Requested filename:** `12-qing-population-bars.webp`
+- **Deck / slide:** HIST 270 Ch16 Lec3 FA26, slide k (`doubled`)
+- **Manifest description:** Museum-theme bar chart of Qing population estimates c. 1700–1850.
+- **Source website:** Made for this deck (not a historical photograph)
+- **Image/object title:** China's Population under the Qing (estimates)
+- **Creator/artist:** Chart made for HIST 270 Study Buddy decks
+- **Date/period:** Data c. 1700–1850; chart FA26
+- **License/status:** Original teaching graphic for this course
+- **Attribution:** Estimates from Patricia Buckley Ebrey, *A History of China*, Ch. 16, p. 273 (c. 1700 and c. 1800 ranges), and Ping-ti Ho, *Studies on the Population of China, 1368–1953* (1959) for mid-Qing and c. 1850 reconstructions.
+- **Notes:** Caption on the slide: "Estimates (Ebrey / Ho)." Xu Yang *Prosperous Suzhou* Changmen detail retained beside the chart on slide k; chart does not replace that historical image.
