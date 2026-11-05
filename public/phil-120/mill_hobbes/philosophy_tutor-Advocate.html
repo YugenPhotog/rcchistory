@@ -336,9 +336,15 @@ CLOSING in this reply when ANY of these holds:
   - The student says they want to stop or end the dialogue, and checkpoints 1-3 are met.
   - The application tells you [FINAL EXCHANGE]. Then you MUST close, whatever the student wrote,
     even "ok" or "bye".
+QUOTE CHECKPOINT GUARD: checkpoint 2 (a student-typed passage from EACH author) is required for
+STRONG or AVERAGE. Do NOT close with STRONG or AVERAGE while checkpoint 2 is unmet. Keep asking
+for the missing student quote. The only exceptions: (a) the student explicitly asks to stop, or
+(b) this is the FINAL EXCHANGE / exchange 12. In those two cases close with WEAK, name which
+author passage is still missing, and invite a fresh session.
 FLOOR / CEILING: no closing before exchange 5. At exchange 12 you MUST close. Before 12, if
-checkpoints are unmet, keep helping; do not close with the lowest tier early unless the student
-asks to stop.
+checkpoints are unmet (especially the student-quote checkpoint), keep helping; do not close with
+STRONG, AVERAGE, or WEAK early unless the student asks to stop (then WEAK if quotes are still
+missing).
 
 WHAT A CLOSING IS AND IS NOT. A closing ends THIS CONVERSATION only. It is not a grade and it
 says nothing about credit, points, marks, or score â€” never use those words. Never say or imply
@@ -622,7 +628,7 @@ leaves having held their ground against a real objection has gotten exactly what
             else if (!p.warmup) m += ' [WARM-UP IS OVER: give the first objection now, at level 1; no passage-naming hint]';
             else m += ' [Pitch any new objection at level ' + p.level + '. Open with: one thing done well + one way to strengthen it]';
             if (n >= CEIL) m += ' [FINAL EXCHANGE: your reply MUST be a CLOSING ending with the VERDICT marker]';
-            else if (n >= 8) m += ' [' + (CEIL - n) + ' exchanges left: close as soon as the closing rule is met]';
+            else if (n >= 8) m += ' [' + (CEIL - n) + ' exchanges left: close only when the closing rule is met; do not close while the student-quote checkpoint (passage from each author) is unmet]';
             return m;
         }
         // Hidden three-tier verdict (Zhu Xi pattern): model ends a closing with "VERDICT: X"; page shows the badge.
@@ -637,19 +643,26 @@ leaves having held their ground against a real objection has gotten exactly what
         const STOP_RE = /\b(stop|i'?m done|give up|quit|bye|end (this|the) (session|conversation)|posting now|i'?ll post)\b/i;
         function words(t) { return (t || '').split(/\s+/).filter(Boolean).length; }
         const FRAME_RE = /_{2,}|\bI lean toward\b|\bI side with\b[^.?!\n]*\bbecause\b|\btry saying\b|\bfill in\b/i;
-        function problems(raw, n, userMessage) {
+        function problems(raw, n, userMessage, progressHint) {
             const t = stripStatus(raw), st = parseStatus(raw), out = [];
             const v = detectVerdict(raw);
+            const stop = STOP_RE.test(userMessage || '');
+            const quotesMet = progressHint ? !!(progressHint.quote_mill && progressHint.quote_hobbes) : null;
             if (v && n < 5) out.push('no closing before exchange 5; keep going with one question');
-            if (v === 'WEAK' && n < CEIL && !STOP_RE.test(userMessage || '')) out.push('do not close with the lowest tier before exchange 12; keep helping with one question and no VERDICT marker');
+            if (v === 'WEAK' && n < CEIL && !stop) out.push('do not close with the lowest tier before exchange 12; keep helping with one question and no VERDICT marker');
+            if (v && (v === 'STRONG' || v === 'AVERAGE') && quotesMet === false && !stop)
+                out.push('do not close while the student-quote checkpoint is unmet; ask for the missing passage from the student and omit the VERDICT marker');
             const limit = detectVerdict(raw) ? 155 : (st && bit(st.help) ? 175 : 140);
             if (words(t) > limit) out.push('too long (' + words(t) + ' words; limit ' + (limit === 140 ? 120 : limit - 15) + ')');
             if (FRAME_RE.test(t)) out.push('contains a blank or sentence frame, which is forbidden');
             // A missing STATUS line no longer triggers a paid regeneration: page-side evidence covers it.
             return out;
         }
-        function fallbackVerdict(kind) {
-            if (kind === 'WEAK') return 'We have reached the 12-exchange limit, so this conversation is complete. Your transcript is ready to download and submit with your discussion post; your instructor grades the work. Some threads are still open, and you are welcome to start a fresh session with a revised position.';
+        function fallbackVerdict(kind, missingNote) {
+            if (kind === 'WEAK') {
+                const gap = missingNote ? (' Still missing: ' + missingNote + '.') : ' Some threads are still open.';
+                return 'We have reached the 12-exchange limit, so this conversation is paused (Keep going). Your transcript is ready to download and submit with your discussion post; your instructor grades the work.' + gap + ' You are welcome to start a fresh session with a revised position.';
+            }
             return 'This conversation is complete. You have stated a position, used a passage from each author, worked through an objection, and said what you will argue and concede. Your transcript is ready to download and submit with your discussion post; your instructor grades the work.';
         }
         // One student turn. callApi(system, messages) -> raw text ('' on failure).
@@ -660,14 +673,18 @@ leaves having held their ground against a real objection has gotten exactly what
             const log = { rewrites: [], forced: null };
             let raw = await callApi(SYSTEM_PROMPT, msgs);
             if (!raw) return { error: true };
-            // Enforce length / no-frames / STATUS presence with one regeneration.
-            let issues = problems(raw, exchangeNumber, userMessage);
+            // Quote credit is page-side from student history; seed the rewrite guard with known evidence so far.
+            const preEv = evidenceFromStudentHistory(history, userMessage);
+            const quoteHint = { quote_mill: Math.max(prog0.quote_mill || 0, preEv.quote_mill),
+                                quote_hobbes: Math.max(prog0.quote_hobbes || 0, preEv.quote_hobbes) };
+            // Enforce length / no-frames / no early close without quotes with one regeneration.
+            let issues = problems(raw, exchangeNumber, userMessage, quoteHint);
             if (issues.length) {
                 const fix = await callApi(SYSTEM_PROMPT, msgs.concat([{ role: 'assistant', content: raw },
                     { role: 'user', content: '[APP: rewrite your last reply. Problems: ' + issues.join('; ') +
                       '. Keep the same point and the single question. About 120 words (130 max); help 160. No blanks or sentence frames. End with the STATUS line. Output only the rewritten reply.]' }]));
                 log.rewrites.push(issues.join('; '));
-                if (fix && problems(fix, exchangeNumber, userMessage).length < issues.length) raw = fix;
+                if (fix && problems(fix, exchangeNumber, userMessage, quoteHint).length < issues.length) raw = fix;
             }
             let verdict = detectVerdict(raw);
             let text = stripLabels(stripStatus(raw));
@@ -710,7 +727,26 @@ leaves having held their ground against a real objection has gotten exactly what
             // No back-to-back closings: after a closing, a new one is allowed only as an upgrade to STRONG,
             // at least two exchanges later, after a further objection handled at level 3+.
             const upgradeOK = () => priorVerdict === 'AVERAGE' && exchangeNumber >= prog.closed_at + 2 && prog.s3 > prog.s3_at_close && strongOK(prog);
-            if (verdict === 'WEAK' && exchangeNumber < CEIL && !STOP_RE.test(userMessage)) verdict = null; // early lowest tier is never accepted
+            const studentStop = STOP_RE.test(userMessage);
+            const quotesMet = !!(prog.quote_mill && prog.quote_hobbes);
+            const missingQuoteNote = !quotesMet
+                ? (!prog.quote_mill && !prog.quote_hobbes
+                    ? 'type a specific passage from Mill and from Hobbes in your own turns'
+                    : (!prog.quote_mill
+                        ? 'type a specific Mill passage in your own turn'
+                        : 'type a specific Hobbes passage in your own turn'))
+                : '';
+            if (verdict === 'WEAK' && exchangeNumber < CEIL && !studentStop) verdict = null; // early lowest tier is never accepted
+            // Page guard: never accept STRONG/AVERAGE while the student-quote checkpoint is unmet.
+            if (verdict && (verdict === 'STRONG' || verdict === 'AVERAGE') && !quotesMet) {
+                if (studentStop || exchangeNumber >= CEIL) {
+                    verdict = 'WEAK';
+                    log.downgradedQuotes = true;
+                } else {
+                    verdict = null; // keep going; ask for the missing quote
+                    log.suppressedQuotes = true;
+                }
+            }
             capStrong();
             if (verdict && priorVerdict && !(verdict === 'STRONG' && upgradeOK())) {
                 const fix = await callApi(SYSTEM_PROMPT, msgs.concat([{ role: 'assistant', content: raw },
@@ -725,7 +761,7 @@ leaves having held their ground against a real objection has gotten exactly what
             // Force a closing only if none has been issued yet (or the upgrade rule is met).
             const mayClose = !priorVerdict || upgradeOK();
             // Adaptive: a student who is doing well gets the chance to earn STRONG before the page forces a closing.
-            const climbing = all && !strongOK(prog) && exchangeNumber < 9 && !STOP_RE.test(userMessage);
+            const climbing = all && !strongOK(prog) && exchangeNumber < 9 && !studentStop;
             if (!verdict && exchangeNumber >= 5 && (all || lenient) && mayClose && !climbing) {
                 const tiers = priorVerdict ? 'STRONG (upgrade)' : all ? (strongOK(prog) ? 'STRONG or AVERAGE (your choice by the criteria)' : 'AVERAGE (the STRONG requirement is not met)') : 'AVERAGE';
                 const v = await callApi(SYSTEM_PROMPT, msgs.slice(0, -1).concat([{ role: 'user', content: msgs[msgs.length - 1].content +
@@ -736,8 +772,23 @@ leaves having held their ground against a real objection has gotten exactly what
                 else if (!priorVerdict) { text = text + '\n\n' + fallbackVerdict('AVERAGE'); verdict = 'AVERAGE'; log.forced = 'fallback'; }
                 capStrong();
                 if (priorVerdict && verdict !== 'STRONG') verdict = null;
+                // Re-apply quote guard after a forced closing attempt.
+                if (verdict && (verdict === 'STRONG' || verdict === 'AVERAGE') && !quotesMet) {
+                    verdict = (studentStop || exchangeNumber >= CEIL) ? 'WEAK' : null;
+                    if (!verdict) log.suppressedQuotes = true;
+                    else log.downgradedQuotes = true;
+                }
             }
-            if (!verdict && exchangeNumber >= CEIL && !priorVerdict) { text += '\n\n' + fallbackVerdict('WEAK'); verdict = 'WEAK'; log.forced = 'fallback-12'; }
+            if (!verdict && studentStop && exchangeNumber >= 5 && !priorVerdict && !quotesMet) {
+                text += '\n\n' + fallbackVerdict('WEAK', missingQuoteNote);
+                verdict = 'WEAK';
+                log.forced = 'stop-missing-quotes';
+            }
+            if (!verdict && exchangeNumber >= CEIL && !priorVerdict) {
+                text += '\n\n' + fallbackVerdict('WEAK', quotesMet ? '' : missingQuoteNote);
+                verdict = 'WEAK';
+                log.forced = quotesMet ? 'fallback-12' : 'fallback-12-missing-quotes';
+            }
             if (verdict) { prog.closed_at = exchangeNumber; prog.s3_at_close = prog.s3; }
             return { text, raw, progress: prog, verdict, log };
         }
@@ -786,7 +837,7 @@ leaves having held their ground against a real objection has gotten exactly what
             const [messages, setMessages] = useState([
                 {
                     role: 'assistant',
-                    content: "I am The Advocate. My job is to argue against you.\n\nNot because I disagree with you. Because the fastest way to find out whether a position holds is to put the best objection to it, and it is better to meet that objection here than in front of the class.\n\n**How this works:**\n\u2022 You take a side on whether people can be trusted to care about anyone besides themselves\n\u2022 Warm-up first: for the first couple of exchanges I just check that we both understand what Mill and Hobbes actually say. No arguing yet\n\u2022 Then I argue the other side, one objection at a time. I will say so the first time I switch into arguing against you\n\u2022 It adapts to you. Objections start easy. Answer well and they get harder; get stuck and I slow down and explain, with only a general nudge toward the readings if you need it. After each answer I tell you one thing you did well and one way to make it stronger\n\u2022 When you have met the four checkpoints shown under the chat (or after 12 exchanges), I close the conversation and the page shows one of three results: Dialogue complete - strong dialogue; Dialogue complete; or Keep going - dialogue paused; continue in a new session. All three mean this conversation is complete. Download it and submit it with your post.\n\n**Two things worth knowing.** Defending your original position successfully is a full win. You do not have to change your mind, and folding fast is not the goal. And I can be wrong about the readings, so if I say something the text does not, say so.\n\nStart by telling me where you land. Which one is closer to right about people, Mill or Hobbes, and why?"
+                    content: "I am The Advocate. My job is to argue against you.\n\nNot because I disagree with you. Because the fastest way to find out whether a position holds is to put the best objection to it, and it is better to meet that objection here than in front of the class.\n\nHow this works:\n\u2022 You take a side on whether people can be trusted to care about anyone besides themselves\n\u2022 Warm-up first: for the first couple of exchanges I just check that we both understand what Mill and Hobbes actually say. No arguing yet\n\u2022 Then I argue the other side, one objection at a time. I will say so the first time I switch into arguing against you\n\u2022 It adapts to you. Objections start easy. Answer well and they get harder; get stuck and I slow down and explain, with only a general nudge toward the readings if you need it. After each answer I tell you one thing you did well and one way to make it stronger\n\u2022 I close when the four checkpoints under the chat are met. If we hit 12 exchanges first, the page pauses with Keep going and flags anything still missing (for example a passage you still need to type from an author). Download the transcript either way and submit it with your post. The three result badges are: Dialogue complete - strong dialogue; Dialogue complete; or Keep going - dialogue paused; continue in a new session.\n\nTwo things worth knowing. Defending your original position successfully is a full win. You do not have to change your mind, and folding fast is not the goal. And I can be wrong about the readings, so if I say something the text does not, say so.\n\nStart by telling me where you land. Which one is closer to right about people, Mill or Hobbes, and why?"
                 }
             ]);
             const [input, setInput] = useState('');
