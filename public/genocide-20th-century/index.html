@@ -54,23 +54,44 @@
     .topbar a:hover { color: var(--ivory); }
 
     /* ---------- Hero ---------- */
-    .hero { position: relative; padding: clamp(4rem, 12vh, 9rem) 0 clamp(3.5rem, 9vh, 6rem); border-bottom: 1px solid var(--rule); overflow: hidden; }
-    .hero::before {
-      content: ""; position: absolute; inset: 0; pointer-events: none;
-      background:
-        radial-gradient(ellipse 60% 50% at 50% 0%, rgba(201,151,63,0.10), transparent 70%),
-        repeating-linear-gradient(0deg, transparent 0 7px, rgba(255,255,255,0.012) 7px 8px);
+    .hero {
+      position: relative;
+      min-height: clamp(28rem, 68vh, 40rem);
+      display: flex;
+      align-items: flex-end;
+      padding: clamp(5rem, 14vh, 8rem) 0 clamp(3rem, 8vh, 5rem);
+      border-bottom: 1px solid var(--rule);
+      overflow: hidden;
+      background-color: var(--stone-900);
+      background-image: url("stormy-barbed-wire-horizon.jpg");
+      background-image: image-set(
+        url("stormy-barbed-wire-horizon.webp") type("image/webp"),
+        url("stormy-barbed-wire-horizon.jpg") type("image/jpeg")
+      );
+      background-size: cover;
+      background-position: center 40%;
+      background-repeat: no-repeat;
     }
-    .hero .wrap { position: relative; text-align: center; }
-    .eyebrow { font-size: 0.78rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ember); margin: 0 0 1.6rem; font-weight: 500; }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(18,19,20,0.55) 0%, rgba(18,19,20,0.35) 35%, rgba(18,19,20,0.72) 70%, rgba(18,19,20,0.92) 100%),
+        radial-gradient(ellipse 70% 55% at 50% 100%, rgba(18,19,20,0.55), transparent 65%);
+    }
+    .hero .wrap { position: relative; z-index: 1; text-align: center; width: min(100% - 3rem, 68rem); margin-inline: auto; }
+    .eyebrow { font-size: 0.78rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ember); margin: 0 0 1.6rem; font-weight: 500; text-shadow: 0 1px 12px rgba(0,0,0,0.55); }
     .hero h1 {
       font-family: var(--font-display); font-weight: 400; margin: 0;
       font-size: clamp(2.8rem, 7.5vw, 5.6rem); line-height: 1.02; letter-spacing: 0.005em; color: var(--ivory);
+      text-shadow: 0 2px 28px rgba(0,0,0,0.65), 0 1px 4px rgba(0,0,0,0.5);
     }
     .hero h1 em { font-style: italic; color: var(--bone); }
-    .hero .sub { font-family: var(--font-display); font-size: clamp(1.25rem, 2.4vw, 1.7rem); font-style: italic; color: var(--ash); margin: 1.4rem auto 0; max-width: 34rem; line-height: 1.35; }
+    .hero .sub { font-family: var(--font-display); font-size: clamp(1.25rem, 2.4vw, 1.7rem); font-style: italic; color: var(--bone); margin: 1.4rem auto 0; max-width: 34rem; line-height: 1.35; text-shadow: 0 1px 16px rgba(0,0,0,0.6); }
     .hero-rule { width: 3.5rem; height: 1px; background: var(--ember); margin: 2.4rem auto; }
-    .hero .lede { max-width: var(--measure); margin: 0 auto; color: var(--bone); font-size: 1.1rem; }
+    .hero .lede { max-width: var(--measure); margin: 0 auto; color: var(--bone); font-size: 1.1rem; text-shadow: 0 1px 12px rgba(0,0,0,0.55); }
 
     /* ---------- Chronology band ---------- */
     .chronology { border-bottom: 1px solid var(--rule); background: var(--stone-800); }
@@ -169,7 +190,7 @@
     </nav>
   </div>
 
-  <header class="hero">
+  <header class="hero" role="banner" aria-label="Genocide in the Twentieth Century">
     <div class="wrap">
       <p class="eyebrow">A Lecture Arc in Three Parts</p>
       <h1>Genocide in the<br><em>Twentieth Century</em></h1>
@@ -201,7 +222,7 @@
         <div class="section-head">
           <span class="num">The Lectures</span>
           <h2 id="lectures-title">One subject, approached three ways</h2>
-          <p>History first, then pattern, then meaning. Each lecture has a slide deck for class, a background essay for reading beforehand, and the narrative script keyed to the slides.</p>
+          <p>History first, then pattern, then meaning. Each lecture's page holds its slide deck, background essay, narrative script, and further resources.</p>
         </div>
 
         <div class="path">
@@ -216,10 +237,7 @@
                 <li>Antisemitism</li><li>Nuremberg Laws</li><li>Final Solution</li><li>Shoah</li><li>Night and Fog</li>
               </ul>
               <div class="materials">
-                <a class="btn primary" href="holocaust/deck/rel210-holocaust-lecture1-holocaust-night-and-fog_revFA26.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="1.5"/><path d="M8 21h8M12 17v4"/></svg>Slide Deck<span class="visually-hidden"> (opens in a new tab)</span></a>
-                <a class="btn" href="holocaust/essay.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h10l4 4v14H5z"/><path d="M15 3v4h4M8 12h8M8 16h8"/></svg>Background Essay</a>
-                <a class="btn" href="holocaust/script.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 10h16M4 14h10M4 18h7"/></svg>Narrative Script</a>
-                <a class="btn" href="holocaust/index.html">Resources &rarr;</a>
+                <a class="btn primary" href="holocaust/index.html">Go to Resource Page<span class="visually-hidden">: Lecture One</span><span aria-hidden="true">&nbsp;&rarr;</span></a>
               </div>
               <p class="note"><strong>Content note:</strong> includes archival photographs of atrocities.</p>
             </div>
@@ -235,10 +253,7 @@
                 <li>Lemkin</li><li>Genocide Convention</li><li>Holodomor</li><li>Khmer Rouge</li><li>Rwanda</li><li>Srebrenica</li><li>Denial</li>
               </ul>
               <div class="materials">
-                <a class="btn primary" href="century-of-genocide/deck/rel210-holocaust-lecture2-century-of-genocide_revFA26.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="1.5"/><path d="M8 21h8M12 17v4"/></svg>Slide Deck<span class="visually-hidden"> (opens in a new tab)</span></a>
-                <a class="btn" href="century-of-genocide/essay.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h10l4 4v14H5z"/><path d="M15 3v4h4M8 12h8M8 16h8"/></svg>Background Essay</a>
-                <a class="btn" href="century-of-genocide/script.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 10h16M4 14h10M4 18h7"/></svg>Narrative Script</a>
-                <a class="btn" href="century-of-genocide/index.html">Resources &rarr;</a>
+                <a class="btn primary" href="century-of-genocide/index.html">Go to Resource Page<span class="visually-hidden">: Lecture Two</span><span aria-hidden="true">&nbsp;&rarr;</span></a>
               </div>
               <p class="note"><strong>Content note:</strong> includes archival photographs of atrocities and descriptions of mass killing and sexual violence.</p>
             </div>
@@ -254,10 +269,7 @@
                 <li>Theodicy</li><li>Jedwabne</li><li>Le Chambon</li><li>Righteous Among the Nations</li><li>Radical evil</li><li>Banality of evil</li>
               </ul>
               <div class="materials">
-                <a class="btn primary" href="problem-of-human-evil/deck/rel210-holocaust-lecture3-problem-of-human-evil_revFA26.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="1.5"/><path d="M8 21h8M12 17v4"/></svg>Slide Deck<span class="visually-hidden"> (opens in a new tab)</span></a>
-                <a class="btn" href="problem-of-human-evil/essay.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h10l4 4v14H5z"/><path d="M15 3v4h4M8 12h8M8 16h8"/></svg>Background Essay</a>
-                <a class="btn" href="problem-of-human-evil/script.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 10h16M4 14h10M4 18h7"/></svg>Narrative Script</a>
-                <a class="btn" href="problem-of-human-evil/index.html">Resources &rarr;</a>
+                <a class="btn primary" href="problem-of-human-evil/index.html">Go to Resource Page<span class="visually-hidden">: Lecture Three</span><span aria-hidden="true">&nbsp;&rarr;</span></a>
               </div>
               <p class="note"><strong>Content note:</strong> describes the hanging of a child at Auschwitz and the burning of a town's Jews in a barn. Images in this deck are AI-generated painted interpretations, not photographs.</p>
             </div>
