@@ -1,6 +1,6 @@
 # Background essay: The Problem of Human Evil
 
-*Plain-text source tracking `public/drafts/problem-of-human-evil/essay.html`, regenerated 6 November 2026. Headings follow that page, sections 1–7.*
+*Plain-text source tracking `public/genocide-20th-century/problem-of-human-evil/essay.html`, regenerated 6 November 2026. Headings follow that page, sections 1–7.*
 
 **Background essay for Lecture 3 · PHIL 210 World Religions · Steven Austin**
 
