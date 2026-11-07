@@ -1,3 +1,31 @@
+REL 210 / PHIL 210 - Christianity (2026 Draft Reconstruction)
+=======================================================
+
+START HERE: index.html
+This unit has six 35-minute classroom lecture decks (two per class meeting).
+Each lecture includes its own Pierian Spring divider followed by REQUIRED
+INDEPENDENT STUDY slides in the SAME HTML deck.
+
+Lecture 1: rel210-ch11-class01-jesus-life-teachings.html
+Lecture 2: rel210-ch11-class02-jesus-miracles-passion.html
+Lecture 3: rel210-ch11-class03-early-imperial-church.html
+Lecture 4: rel210-ch11-class04-creeds-salvation-trinity.html
+Lecture 5: rel210-ch11-class05-medieval-reformation.html
+Lecture 6: rel210-ch11-class06-ethics-worship-global.html
+
+The original three lecture decks remain unchanged for recovery and comparison.
+The standalone rel210-ch11-pierian-spring-required.html is an ARCHIVED MASTER,
+not an additional assigned deck. The global-modern supplemental source has also
+been integrated in summary form across lecture 4-6 independent-study sections.
+
+The Christianity Sacred Text Packet is separate homework using existing course
+instructions, not a classroom block.
+
+Reconstruction details: christianity-2026-rebuild-curriculum-map.md
+Machine-readable slide boundaries: christianity-2026-six-lecture-manifest.json
+
+--- ORIGINAL FULL-CHAPTER SUPPLEMENT REFERENCE ---
+
 Christianity Reveal.js deck
 ============================
 
