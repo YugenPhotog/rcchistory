@@ -1,7 +1,7 @@
 # REL 210 / PHIL 210 — Christianity Unit Reconstruction
 
 **Working location:** `public/drafts/ch11-christianity/`  
-**Revision date:** November 6, 2026 (Pierian Spring integrated with each lecture)  
+**Revision date:** November 8, 2026 (Lecture 2 Passion film consolidation; Pierian Spring preserved)  
 **Status:** Draft instructional sequence, not yet classroom-tested  
 **Working principle:** Original three HTML decks remain unchanged. New six-lecture decks reuse the HTML slide sections, image links, popup content and embedded presenter notes. Transferred slide IDs have source prefixes (e.g. `L3-I`) and preserve original IDs in `data-origin-id`. New slides use `NEW*` or `PS-*` IDs.
 
@@ -32,17 +32,21 @@
 
 ### 2. Miracles, identity, Passion and Easter
 
-**Timing:** Day 1, block 2 (35 minutes)  
+**Timing:** Day 1, block 2 (35 minutes; confirm video duration before class)  
 **File:** [rel210-ch11-class02-jesus-miracles-passion.html](rel210-ch11-class02-jesus-miracles-passion.html)  
-**Classroom slides:** 20  
-**Pierian Spring slides:** 6 (including divider; required independent study)  
-**Total slides:** 26
+**Classroom slides:** 11  
+**Pierian Spring slides:** 5 (including divider; required independent study)  
+**Total slides:** 16
 
-- 0–10: Miracles as signs, selected examples and 2:57 clip
-- 10–19: Messiah, Son of God, 'I AM', Son of Man
-- 19–23: Conflict and Temple confrontation
-- 23–33: Passion, Roman execution, resurrection; still images, not all video clips
-- 33–35: From Jesus to followers
+- Opening: The Gospel accounts frame healing and deliverance as signs of the kingdom.
+- Mark 2: The paralytic, healing, and forgiveness, with an illustrated example.
+- Jesus' identity: Messiah, Son of God, Johannine "I AM", Son of Man.
+- Temple action: Why conflict intensified in Jerusalem.
+- **Single cinematic video slide:** "The Passion and Resurrection of Jesus," with a full-bleed empty tomb at dawn; playback opens in an embedded YouTube player, with an external fallback.
+- Reflection and transition: How resurrection proclamation shaped the earliest Jesus movement.
+- Pierian Spring: Mary and Incarnation, comparative miracle stories, the suffering Son of Man, resurrection traditions, and required study questions.
+
+**Film:** [User-supplied YouTube link](https://youtu.be/fkafXR1R_8Q?is=-AeYYNqWdOn3Dle0). Runtime and content have **not been independently verified**. Source slides L1-K through L1-Q remain in the original deck but no longer form part of the revised classroom sequence.
 
 ### 3. Early and imperial Church
 
@@ -144,13 +148,13 @@ The three original decks contain **135 source slides** (54 + 45 + 36), all retai
 | `L1-H` | Where the Story Comes From | Lecture 1 · classroom (slide 3) |
 | `L1-I` | The Twelve | Lecture 1 · classroom (slide 7) |
 | `L1-J` | John the Baptist & the Wilderness | Lecture 1 · classroom (slide 6) |
-| `L1-K` | The Passion: The Final Week | Lecture 2 · classroom (slide 13) |
-| `L1-L` | The Last Supper (John 13:1 35) | Lecture 2 · classroom (slide 14) |
-| `L1-M` | Jesus Is Condemned Before Pilate (Matt 27:1 2, 11 25) | Lecture 2 · classroom (slide 15) |
-| `L1-N` | Jesus Is Scourged and Crucified (Matt 27:26 50) | Lecture 2 · classroom (slide 16) |
-| `L1-O` | Jesus Is Laid in a Tomb (Matt 27:57 60) | Lecture 2 · classroom (slide 17) |
-| `L1-P` | Jesus Is Resurrected (John 20:3 18) | Lecture 2 · classroom (slide 18) |
-| `L1-Q` | Forty Days, Then the Ascension | Lecture 2 · classroom (slide 19) |
+| `L1-K` | The Passion: The Final Week | Preserved in original source deck only |
+| `L1-L` | The Last Supper (John 13:1 35) | Preserved in original source deck only |
+| `L1-M` | Jesus Is Condemned Before Pilate (Matt 27:1 2, 11 25) | Preserved in original source deck only |
+| `L1-N` | Jesus Is Scourged and Crucified (Matt 27:26 50) | Preserved in original source deck only |
+| `L1-O` | Jesus Is Laid in a Tomb (Matt 27:57 60) | Preserved in original source deck only |
+| `L1-P` | Jesus Is Resurrected (John 20:3 18) | Preserved in original source deck only |
+| `L1-Q` | Forty Days, Then the Ascension | Preserved in original source deck only |
 | `L1-R` | Pause & Reflect | Preserved in original source deck only |
 | `L1-S` | The Earliest Church | Preserved in original source deck only |
 | `L1-T` | Spotlight On: The Earliest Church | Lecture 3 · Pierian Spring (slide 14) |
@@ -276,7 +280,7 @@ The three original decks contain **135 source slides** (54 + 45 + 36), all retai
 - All six decks contain an explicit, visually distinct **Required Independent Study** divider.
 - Slide counter identifies the sequence as **CLASSROOM** before the divider or **REQUIRED STUDY** after it.
 - All original materials remain in the three unchanged source decks; migrated slides retain presenter notes, images, citations, and popup references.
-- Six-deck source slide inventory: **103** source slides reused in the student-facing integrated presentations; **32** original source slides remain archived only.
+- Six-deck source slide inventory: **96** source slides reused in the student-facing integrated presentations; **39** original source slides remain archived only.
 - Required Pierian Spring content includes both existing teaching slides and newly developed context, using material from the previously standalone global-modern Christianity study.
 - **Static check completed, not browser-rehearsed.** The 35-minute pacing is an instructor plan and should be confirmed with live videos and classroom discussion.
 
