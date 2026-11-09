@@ -52,11 +52,11 @@
 
 **Timing:** Day 2, block 1 (35 minutes)  
 **File:** [rel210-ch11-class03-early-imperial-church.html](rel210-ch11-class03-early-imperial-church.html)  
-**Classroom slides:** 12  
-**Pierian Spring slides:** 7 (including divider; required independent study)  
+**Classroom slides:** 13  
+**Pierian Spring slides:** 6 (including divider; required independent study)  
 **Total slides:** 19
 
-- 0–9: Jewish origins, Pentecost and Jerusalem
+- 0–9: Jewish origins, a short Spotlight video excerpt, Pentecost and Jerusalem
 - 9–19: Paul, Gentiles, widening communities
 - 19–27: Growth, persecution, spread beyond Rome
 - 27–35: Constantine, toleration, imperial change
@@ -106,14 +106,14 @@ There is **no assigned seventh Pierian Spring deck**. Students open the correspo
 
 - **Lecture 1**: 20 classroom slides + 6 Pierian Spring slides (including divider) = 26 total.
 - **Lecture 2**: 20 classroom slides + 6 Pierian Spring slides (including divider) = 26 total.
-- **Lecture 3**: 12 classroom slides + 7 Pierian Spring slides (including divider) = 19 total.
+- **Lecture 3**: 13 classroom slides + 6 Pierian Spring slides (including divider) = 19 total.
 - **Lecture 4**: 16 classroom slides + 12 Pierian Spring slides (including divider) = 28 total.
 - **Lecture 5**: 16 classroom slides + 16 Pierian Spring slides (including divider) = 32 total.
 - **Lecture 6**: 15 classroom slides + 13 Pierian Spring slides (including divider) = 28 total.
 
 - **Lecture 1:** The Higher Law video, additional prayer and parables, new commandment, comparative review.
 - **Lecture 2:** Mary and the Incarnation, Gospel miracle comparisons, the suffering Son of Man, Gospel resurrection traditions, review.
-- **Lecture 3:** The earliest Church, early women and household leaders, Jerusalem and Gentiles, meeting spaces, regional growth, review.
+- **Lecture 3:** Early women and household leaders, Jerusalem and Gentiles, meeting spaces, regional growth, review.
 - **Lecture 4:** Soteriology, salvation to all peoples, doctrinal controversies, Trinity, Karl Barth and modern doctrine, review.
 - **Lecture 5:** Iconoclasm, medieval criticism, Scripture, Catholic and Protestant reforms, Roman Inquisition, Bruno and Galileo, fundamentalism, review.
 - **Lecture 6:** Christian symbols, worship and chant, ecumenism, Vatican II, global demographic shifts, African-initiated churches, North American movements, restorationism, review.
@@ -157,19 +157,19 @@ The three original decks contain **135 source slides** (54 + 45 + 36), all retai
 | `L1-Q` | Forty Days, Then the Ascension | Preserved in original source deck only |
 | `L1-R` | Pause & Reflect | Preserved in original source deck only |
 | `L1-S` | The Earliest Church | Preserved in original source deck only |
-| `L1-T` | Spotlight On: The Earliest Church | Lecture 3 · Pierian Spring (slide 14) |
-| `L1-U` | Pentecost and the Earliest Church | Lecture 3 · classroom (slide 3) |
-| `L1-V` | Paul and the Gentile Mission | Lecture 3 · classroom (slide 4) |
-| `L1-W` | From Jewish Movement to Distinct Church | Lecture 3 · classroom (slide 5) |
+| `L1-T` | Spotlight On: The Earliest Church | Lecture 3 · classroom (slide 3) |
+| `L1-U` | Pentecost and the Earliest Church | Lecture 3 · classroom (slide 4) |
+| `L1-V` | Paul and the Gentile Mission | Lecture 3 · classroom (slide 5) |
+| `L1-W` | From Jewish Movement to Distinct Church | Lecture 3 · classroom (slide 6) |
 | `L1-X` | Pause & Reflect | Preserved in original source deck only |
 | `L1-Y` | From Marginal Movement to Imperial Religion | Preserved in original source deck only |
 | `L1-Z` | The Ancient Period | Preserved in original source deck only |
-| `L1-AA` | Growth of the Church: New Leaders | Lecture 3 · classroom (slide 6) |
-| `L1-AB` | Persecution and Martyrs | Lecture 3 · classroom (slide 7) |
-| `L1-AC` | Why Did Christianity Grow? | Lecture 3 · classroom (slide 8) |
-| `L1-AD` | Christianity Beyond the Roman West | Lecture 3 · classroom (slide 9) |
-| `L1-AE` | Constantine at the Milvian Bridge | Lecture 3 · classroom (slide 10) |
-| `L1-AF` | From Toleration to Imperial Religion | Lecture 3 · classroom (slide 11) |
+| `L1-AA` | Growth of the Church: New Leaders | Lecture 3 · classroom (slide 7) |
+| `L1-AB` | Persecution and Martyrs | Lecture 3 · classroom (slide 8) |
+| `L1-AC` | Why Did Christianity Grow? | Lecture 3 · classroom (slide 9) |
+| `L1-AD` | Christianity Beyond the Roman West | Lecture 3 · classroom (slide 10) |
+| `L1-AE` | Constantine at the Milvian Bridge | Lecture 3 · classroom (slide 11) |
+| `L1-AF` | From Toleration to Imperial Religion | Lecture 3 · classroom (slide 12) |
 | `L1-AG` | St. Augustine (354 430) | Lecture 4 · classroom (slide 7) |
 | `L1-AH` | Monasticism | Lecture 5 · classroom (slide 2) |
 | `L1-AI` | Pause & Reflect | Preserved in original source deck only |
