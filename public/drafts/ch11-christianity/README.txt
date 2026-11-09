@@ -13,8 +13,8 @@ Lecture 4: rel210-ch11-class04-creeds-salvation-trinity.html
 Lecture 5: rel210-ch11-class05-medieval-reformation.html
 Lecture 6: rel210-ch11-class06-ethics-worship-global.html
 
-The original three lecture decks remain unchanged for recovery and comparison.
-The standalone rel210-ch11-pierian-spring-required.html is an ARCHIVED MASTER,
+The original three lecture decks are in archive/ for recovery and comparison.
+The standalone archive/rel210-ch11-pierian-spring-required.html is an ARCHIVED MASTER,
 not an additional assigned deck. The global-modern supplemental source has also
 been integrated in summary form across lecture 4-6 independent-study sections.
 

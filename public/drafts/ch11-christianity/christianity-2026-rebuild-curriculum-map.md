@@ -3,7 +3,7 @@
 **Working location:** `public/drafts/ch11-christianity/`  
 **Revision date:** November 8, 2026 (Lecture 2 Passion film consolidation; Pierian Spring preserved)  
 **Status:** Draft instructional sequence, not yet classroom-tested  
-**Working principle:** Original three HTML decks remain unchanged. New six-lecture decks reuse the HTML slide sections, image links, popup content and embedded presenter notes. Transferred slide IDs have source prefixes (e.g. `L3-I`) and preserve original IDs in `data-origin-id`. New slides use `NEW*` or `PS-*` IDs.
+**Working principle:** The original three HTML decks are preserved in archive/. New six-lecture decks reuse the HTML slide sections, image links, popup content and embedded presenter notes. Transferred slide IDs have source prefixes (e.g. `L3-I`) and preserve original IDs in `data-origin-id`. New slides use `NEW*` or `PS-*` IDs.
 
 ## Architecture and requirements
 
@@ -102,7 +102,7 @@
 
 ## Required independent study: integrated with each lecture
 
-There is **no assigned seventh Pierian Spring deck**. Students open the corresponding classroom lecture and advance past its full-bleed **“Pierian Spring: Required Independent Study”** divider. The divider explicitly states that the classroom portion has ended and all subsequent slides are required study. The dedicated older `rel210-ch11-pierian-spring-required.html` and global-modern Christianity deck are now **superseded source archives**, not additional assigned presentations.
+There is **no assigned seventh Pierian Spring deck**. Students open the corresponding classroom lecture and advance past its full-bleed **“Pierian Spring: Required Independent Study”** divider. The divider explicitly states that the classroom portion has ended and all subsequent slides are required study. The dedicated older `archive/rel210-ch11-pierian-spring-required.html` and global-modern Christianity deck are now **superseded source archives**, not additional assigned presentations.
 
 - **Lecture 1**: 20 classroom slides + 6 Pierian Spring slides (including divider) = 26 total.
 - **Lecture 2**: 20 classroom slides + 6 Pierian Spring slides (including divider) = 26 total.
