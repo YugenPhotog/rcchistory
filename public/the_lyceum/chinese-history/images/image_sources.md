@@ -1317,3 +1317,292 @@ Files live in `reveal_decks/chapter-02/images/ch02-lec1/`. Deck: `HIST270_ch02_l
 - **Creator / date:** White whirlwind; 1616
 - **License:** Public domain
 - **Attribution:** None required.
+
+
+# Chapter 2, Lecture 2 (revised FA26 deck, draft built 2026-11-03)
+
+Files live in `reveal_decks/chapter-02/images/ch02-lec2/`. Deck: `HIST270_ch02_lec2_confucius_challengers_revised_FA26.html`. Slide letters are permanent IDs. No image inserted in this deck is AI-generated (AI candidates for a few slides are held for Steven's review under `/workspace/hist270_online_audit/ch02_l2_fixes/ai_candidates/`). All inserted images were downloaded from Wikimedia Commons and converted to WebP (longest side at most 1600 px); some are crops, noted below. Tourist-snapshot replacements applied 2026-11-05; Mencius baby-in-well video added as slide AV.
+
+## `HIST270_ch02_lec2_01_title_confucius_pupils_revFA26.webp`
+- **Used on:** slide A (replaced tourist Apricot Altar photo 2026-11-05)
+- **Description:** Confucius among his pupils, traditional narrative painting.
+- **Source website / URL:** Wikimedia Commons, [File:Confucius among his pupils.jpg](https://commons.wikimedia.org/wiki/File:Confucius_among_his_pupils.jpg)
+- **Creator / date:** Unknown artist; scanned from J. M. Roberts, *East Asia and Classical Greece*
+- **License:** Public domain
+- **Attribution:** None required.
+- **Notes:** Replaced `HIST270_ch02_lec2_01_title_apricot_altar_revFA26.webp` (Qufu tourist snapshot with modern visitors).
+
+
+## `HIST270_ch02_lec2_02_journey_map_revFA26.webp`
+- **Used on:** slide B
+- **Description:** Map showing the journey of Confucius to various states between 497 BC and 484 BC.
+- **Source website / URL:** Wikimedia Commons, [File:Journey of Confucius.png](https://commons.wikimedia.org/wiki/File:Journey_of_Confucius.png)
+- **Creator / date:** SY; 2017-07-09
+- **License:** CC BY-SA 4.0
+- **Attribution:** SY, CC BY-SA 4.0, via Wikimedia Commons.
+
+## `HIST270_ch02_lec2_03_lunyu_890_manuscript_revFA26.webp`
+- **Used on:** slide C
+- **Description:** Manuscript of Lunyu, text by Kong Anguo with commentary by Zheng Xuan. Incomplete manuscript scroll of 11 sheets of fine buff paper, 18 to 22 characters per column, small characters of the commentary split over 2 columns, 26.7 x 434.6 cm Tang dynasty, dated era Longji, 2nd year (i.e. 890 CE), but co
+- **Source website / URL:** Wikimedia Commons, [File:Manuscript of Lunyu, text by Kong Anguo with commentary by Zheng Xuan.jpg](https://commons.wikimedia.org/wiki/File:Manuscript_of_Lunyu,_text_by_Kong_Anguo_with_commentary_by_Zheng_Xuan.jpg)
+- **Creator / date:** Anonymous copyist; dated 890 CE (Longji 2), possibly mid-8th century per BnF (Pelliot chinois 2510)
+- **License:** Public domain
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec2_04_act1_sansetsu_kongzi_revFA26.webp`
+- **Used on:** slide E (replaced modern Qufu rite photo 2026-11-05)
+- **Description:** Kanō Sansetsu, painting of Kongzi (Confucius) from the Great Confucian Figures series.
+- **Source website / URL:** Wikimedia Commons, [File:Great Confucian Figures - Painting of Kongzi by Kanō Sansetsu.jpg](https://commons.wikimedia.org/wiki/File:Great_Confucian_Figures_-_Painting_of_Kongzi_by_Kan%C5%8D_Sansetsu.jpg)
+- **Creator / date:** Kanō Sansetsu (1589–1651); Tokyo National Museum
+- **License:** CC BY 4.0
+- **Attribution:** Kanō Sansetsu / Tokyo National Museum, CC BY 4.0, via Wikimedia Commons.
+- **Notes:** Replaced `HIST270_ch02_lec2_04_act1_confucius_rites_revFA26.webp` (modern Qufu ceremony with tourists/barriers). AI candidate also generated for review: `/workspace/hist270_online_audit/ch02_l2_fixes/ai_candidates/ai_E_act1_confucian_rite_woodblock.jpg`.
+
+
+## `HIST270_ch02_lec2_05_tanyu_apricot_altar_revFA26.webp`
+- **Used on:** slide F
+- **Description:** Depiction of Confucius
+- **Source website / URL:** Wikimedia Commons, [File:Confucius and His Disciples Yanzi and Huizi at the Apricot Altar (Confucius).jpg](https://commons.wikimedia.org/wiki/File:Confucius_and_His_Disciples_Yanzi_and_Huizi_at_the_Apricot_Altar_(Confucius).jpg)
+- **Creator / date:** Kano Tan'yû (1602–1674); Mid-17th century
+- **License:** Public domain
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec2_06_duke_of_zhou_revFA26.webp`
+- **Used on:** slide G
+- **Description:** 周公 Duke of Zhou
+- **Source website / URL:** Wikimedia Commons, [File:歷代聖賢半身像 冊 周公 (Duke of Zhou).png](https://commons.wikimedia.org/wiki/File:%E6%AD%B7%E4%BB%A3%E8%81%96%E8%B3%A2%E5%8D%8A%E8%BA%AB%E5%83%8F_%E5%86%8A_%E5%91%A8%E5%85%AC_(Duke_of_Zhou).png)
+- **Creator / date:** Unknown court artist, album 歷代聖賢半身像 (Busts of sages and worthies through the ages); Ming or Qing dynasty
+- **License:** CC BY 4.0
+- **Attribution:** National Palace Museum, Taipei (Open Data), CC BY 4.0, via Wikimedia Commons.
+
+## `HIST270_ch02_lec2_07_xiaojing_filial_scene_revFA26.webp`
+- **Used on:** slide H
+- **Description:** China; Handscrolls; Paintings
+- **Source website / URL:** Wikimedia Commons, [File:北宋 李公麟 孝經圖 卷-The Classic of Filial Piety MET DP151515.jpg](https://commons.wikimedia.org/wiki/File:%E5%8C%97%E5%AE%8B_%E6%9D%8E%E5%85%AC%E9%BA%9F_%E5%AD%9D%E7%B6%93%E5%9C%96_%E5%8D%B7-The_Classic_of_Filial_Piety_MET_DP151515.jpg)
+- **Creator / date:** Li Gonglin; circa 1085
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec2_08_wudaozi_confucius_revFA26.webp`
+- **Used on:** slide J
+- **Description:** The teaching Confucius. Portrait by Wu Daozi, 685-758, Tang Dynasty.
+- **Source website / URL:** Wikimedia Commons, [File:Confucius Tang Dynasty, black print.jpg](https://commons.wikimedia.org/wiki/File:Confucius_Tang_Dynasty,_black_print.jpg)
+- **Creator / date:** Wu Daozi, 685-758, Tang Dynasty.; 8th century
+- **License:** Public domain
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec2_09_wu_shrine_scholars_revFA26.webp`
+- **Used on:** slide K
+- **Description:** Confucius' disciples or scholars of Wu Family Shrines, tracing from Jinshisuo (金石索)
+- **Source website / URL:** Wikimedia Commons, [File:Confucian scholars of Wu Family Shrines, tracing from Jinshisuo CADAL09010673 金石索(九).jpg](https://commons.wikimedia.org/wiki/File:Confucian_scholars_of_Wu_Family_Shrines,_tracing_from_Jinshisuo_CADAL09010673_%E9%87%91%E7%9F%B3%E7%B4%A2(%E4%B9%9D).jpg)
+- **Creator / date:** ChenDaoIsHere; Han dynasty
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec2_10_zheng_bronze_gui_revFA26.webp`
+- **Used on:** slide L
+- **Description:** Tomb of King of Zheng, c. 575 BC, Xinzheng, 1923. Eastern Zhou Gallery, Henan Provincial Museum, Zhengzhou. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Spring & Autumn Bronze Gui.jpg](https://commons.wikimedia.org/wiki/File:Spring_%26_Autumn_Bronze_Gui.jpg)
+- **Creator / date:** Gary Todd; 2010-02-27 13:02:37
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec2_11_act2_yi_bells_clean_revFA26.webp`
+- **Used on:** slide O (replaced museum shot with visitors 2026-11-05)
+- **Description:** Full set of Marquis Yi of Zeng chime bells without modern visitors in frame.
+- **Source website / URL:** Wikimedia Commons, [File:Two Tone Set-bells of Marquis Yi of Zeng (10166273994).jpg](https://commons.wikimedia.org/wiki/File:Two_Tone_Set-bells_of_Marquis_Yi_of_Zeng_(10166273994).jpg)
+- **Creator / date:** Gary Todd; Hubei Provincial Museum display
+- **License:** CC0
+- **Attribution:** None required.
+- **Notes:** Replaced `HIST270_ch02_lec2_11_act2_yi_bells_revFA26.webp` (Windmemories 2023 photo with museum visitors visible).
+
+
+## `HIST270_ch02_lec2_12_mozi_modern_portrait_revFA26.webp`
+- **Used on:** slide P
+- **Description:** Philosopher
+- **Source website / URL:** Wikimedia Commons, [File:Философ Мо-Цзы.jpg](https://commons.wikimedia.org/wiki/File:%D0%A4%D0%B8%D0%BB%D0%BE%D1%81%D0%BE%D1%84_%D0%9C%D0%BE-%D0%A6%D0%B7%D1%8B.jpg)
+- **Creator / date:** Vjacheslav Rublevskiy; 2021-06-03 01:36:25
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec2_13_yi_bells_detail_revFA26.webp`
+- **Used on:** slide R
+- **Description:** Hubei Provincial Museum, Wuhan, Tomb of Marquis Yi of Zeng Gallery. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Two Tone Set-bells of Marquis Yi of Zeng (10166101994).jpg](https://commons.wikimedia.org/wiki/File:Two_Tone_Set-bells_of_Marquis_Yi_of_Zeng_(10166101994).jpg)
+- **Creator / date:** Gary Todd from Xinzheng, China; 2010-12-02 16:35
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec2_14_xinzheng_rammed_wall_revFA26.webp`
+- **Used on:** slide S
+- **Description:** Roadcut shows yearly layers of rammed earth. Xinzheng City, Henan Province. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Xinzheng Ancient City Wall of Rammed Earth, Eastern Zhou, c. 770-230 BC.jpg](https://commons.wikimedia.org/wiki/File:Xinzheng_Ancient_City_Wall_of_Rammed_Earth,_Eastern_Zhou,_c._770-230_BC.jpg)
+- **Creator / date:** Gary Todd; 2007-05-24 11:23:53
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec2_15_mozi_book_page_revFA26.webp`
+- **Used on:** slide T
+- **Description:** Text of 7th volume of Mozi (墨子卷之七), as wrote at upper-right
+- **Source website / URL:** Wikimedia Commons, [File:Mozi.jpg](https://commons.wikimedia.org/wiki/File:Mozi.jpg)
+- **Creator / date:** Iflwlou; 2008-05-22
+- **License:** Public domain
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec2_16_act3_mayuan_riplets_revFA26.webp`
+- **Used on:** slide W
+- **Description:**
+- **Source website / URL:** Wikimedia Commons, [File:Ma Yuan - Water Album - Ten Thousand Riplets on the Yangzi.jpg](https://commons.wikimedia.org/wiki/File:Ma_Yuan_-_Water_Album_-_Ten_Thousand_Riplets_on_the_Yangzi.jpg)
+- **Creator / date:** Ma Yuan; from 1160 until 1225
+- **License:** Public domain
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec2_17_mencius_king_hui_revFA26.webp`
+- **Used on:** slide Y
+- **Description:** Li Pin Shi Liang (禮聘適梁) depicted the scene of Mencius answering King Hui of Liang how to benefit his state. The illustration was painted in the Ming dynasty and published with other illustrations in Qing dynasty as 孟子聖跡圖.
+- **Source website / URL:** Wikimedia Commons, [File:Li Pin Shi Liang, Illustrations of Mencius.jpg](https://commons.wikimedia.org/wiki/File:Li_Pin_Shi_Liang,_Illustrations_of_Mencius.jpg)
+- **Creator / date:** 胡文煥（明朝萬曆年間出版）; 16th-17th century
+- **License:** Public domain
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec2_18_han_pottery_well_revFA26.webp`
+- **Used on:** slide Z
+- **Description:** Han Gallery, Henan Provincial Museum, Zhengzhou. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Eastern Han Pottery Well (10352343266).jpg](https://commons.wikimedia.org/wiki/File:Eastern_Han_Pottery_Well_(10352343266).jpg)
+- **Creator / date:** Gary Todd from Xinzheng, China; 2010-02-27 13:50
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec2_19_mayuan_autumn_flood_revFA26.webp`
+- **Used on:** slide AA
+- **Description:**
+- **Source website / URL:** Wikimedia Commons, [File:Ma Yuan - Water Album - The Waving Surface of the Autumn Flood.jpg](https://commons.wikimedia.org/wiki/File:Ma_Yuan_-_Water_Album_-_The_Waving_Surface_of_the_Autumn_Flood.jpg)
+- **Creator / date:** Ma Yuan; from 1160 until 1225
+- **License:** Public domain
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec2_20_xunzi_xinge_edition_revFA26.webp`
+- **Used on:** slide AB
+- **Description:** 『荀子』楊倞注 性悪篇 延享2年 葛西市郎兵衞刊 竹添進一郎旧蔵本
+- **Source website / URL:** Wikimedia Commons, [File:Xunzi published in Edo period Japan.jpg](https://commons.wikimedia.org/wiki/File:Xunzi_published_in_Edo_period_Japan.jpg)
+- **Creator / date:** 国立国会図書館; circa 1745
+- **License:** Public Domain
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec2_21_mayuan_yellow_river_revFA26.webp`
+- **Used on:** slide AC
+- **Description:**
+- **Source website / URL:** Wikimedia Commons, [File:Ma Yuan - Water Album - The Yellow River Breaches its Course.jpg](https://commons.wikimedia.org/wiki/File:Ma_Yuan_-_Water_Album_-_The_Yellow_River_Breaches_its_Course.jpg)
+- **Creator / date:** Ma Yuan; from 1160 until 1225
+- **License:** Public domain
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec2_22_silver_inlaid_flask_revFA26.webp`
+- **Used on:** slide AD
+- **Description:** Bronze flask inlaid with silver, Eastern Zhou, 3rd century BCE
+- **Source website / URL:** Wikimedia Commons, [File:3rd century BC Eastern Zhou bronze and silver flask.jpg](https://commons.wikimedia.org/wiki/File:3rd_century_BC_Eastern_Zhou_bronze_and_silver_flask.jpg)
+- **Creator / date:** Photo by rosemania (Flickr); 2007-12-17
+- **License:** CC BY 2.0
+- **Attribution:** rosemania (Flickr), CC BY 2.0, via Wikimedia Commons.
+
+## `HIST270_ch02_lec2_23_laozi_ox_revFA26.webp`
+- **Used on:** slide AG
+- **Description:** The subject deals with the story of Laotzu riding an ox through a pass. It is said that with the fall of the Chou dynasty, Laotzu decided to travel west through the Han Valley Pass. The Pass Commissioner, Yin-hsi, noticed a trail of vapor emanating from the east, deducing that a sage must be approac
+- **Source website / URL:** Wikimedia Commons, [File:Zhang Lu-Laozi Riding an Ox.jpg](https://commons.wikimedia.org/wiki/File:Zhang_Lu-Laozi_Riding_an_Ox.jpg)
+- **Creator / date:** Zhang Lu; Ming dynasty (1368–1644)
+- **License:** Public domain
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec2_ps_24_qufu_dacheng_hall_revFA26.webp`
+- **Used on:** slide AI
+- **Description:** Qufu, Shandong Province. Complete indexed photo collection at WorldHistoryPics.com.
+- **Source website / URL:** Wikimedia Commons, [File:Kongzi (Confucius) Temple, Qufu, Hall of Integration (13035775793).jpg](https://commons.wikimedia.org/wiki/File:Kongzi_(Confucius)_Temple,_Qufu,_Hall_of_Integration_(13035775793).jpg)
+- **Creator / date:** Gary Todd from Xinzheng, China; 2014-03-08 15:40
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec2_ps_25_confucian_worthies_shuilu_revFA26.webp`
+- **Used on:** slide AJ (replaced modern Qufu rite photo 2026-11-05)
+- **Description:** Ming water-land ritual painting of ancient Confucian scholars and worthies (Baoning Temple set).
+- **Source website / URL:** Wikimedia Commons, [File:水陆画宝宁寺往古儒流贤士丹青撰文众.jpg](https://commons.wikimedia.org/wiki/File:%E6%B0%B4%E9%99%86%E7%94%BB%E5%AE%9D%E5%AE%81%E5%AF%BA%E5%BE%80%E5%8F%A4%E5%84%92%E6%B5%81%E8%B4%A4%E5%A3%AB%E4%B8%B9%E9%9D%92%E6%92%B0%E6%96%87%E4%BC%97.jpg)
+- **Creator / date:** Unknown Ming artist; Shanxi Museum
+- **License:** Public domain
+- **Attribution:** None required.
+- **Notes:** Replaced `HIST270_ch02_lec2_ps_25_jikong_rite_revFA26.webp` (modern Qufu performance with tourists/crane). AI candidate also generated: `/workspace/hist270_online_audit/ch02_l2_fixes/ai_candidates/ai_AJ_li_performance_rite_woodblock.jpg`.
+
+
+## `HIST270_ch02_lec2_ps_26_golden_spike_revFA26.webp`
+- **Used on:** slide AK
+- **Description:** The ceremony for the driving of the golden spike at Promontory Summit, Utah on May 10, 1869; completion of the First Transcontinental Railroad. At center left, Samuel S. Montague, Central Pacific Railroad, shakes hands with Grenville M. Dodge, Union Pacific Railroad (center right).
+- **Source website / URL:** Wikimedia Commons, [File:East and West Shaking hands at the laying of last rail Union Pacific Railroad - Restoration.jpg](https://commons.wikimedia.org/wiki/File:East_and_West_Shaking_hands_at_the_laying_of_last_rail_Union_Pacific_Railroad_-_Restoration.jpg)
+- **Creator / date:** Andrew J. Russell / Adam Cuerden; 10 May 1869
+- **License:** Public domain
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec2_ps_27_xiaojing_family_revFA26.webp`
+- **Used on:** slide AL
+- **Description:** China; Handscrolls; Paintings
+- **Source website / URL:** Wikimedia Commons, [File:北宋 李公麟 孝經圖 卷-The Classic of Filial Piety MET DP151528.jpg](https://commons.wikimedia.org/wiki/File:%E5%8C%97%E5%AE%8B_%E6%9D%8E%E5%85%AC%E9%BA%9F_%E5%AD%9D%E7%B6%93%E5%9C%96_%E5%8D%B7-The_Classic_of_Filial_Piety_MET_DP151528.jpg)
+- **Creator / date:** Li Gonglin; circa 1085
+- **License:** CC0
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec2_ps_28_ancestor_portrait_revFA26.webp`
+- **Used on:** slide AM
+- **Description:**
+- **Source website / URL:** Wikimedia Commons, [File:Chinese - Ancestor Portrait of an Aged Man Seated - Walters 3596.jpg](https://commons.wikimedia.org/wiki/File:Chinese_-_Ancestor_Portrait_of_an_Aged_Man_Seated_-_Walters_3596.jpg)
+- **Creator / date:** Anonymous (China); between 1662 and 1916
+- **License:** Public domain
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec2_ps_29_huizong_qin_revFA26.webp`
+- **Used on:** slide AN
+- **Description:** Song Huizong's "Ting Qin Tu" 聽琴圖 Listening to the Qin
+- **Source website / URL:** Wikimedia Commons, [File:Songhuizong cropped 赵佶听琴图轴.jpg](https://commons.wikimedia.org/wiki/File:Songhuizong_cropped_%E8%B5%B5%E4%BD%B6%E5%90%AC%E7%90%B4%E5%9B%BE%E8%BD%B4.jpg)
+- **Creator / date:** Emperor Huizong of Song; 12th century
+- **License:** Public domain
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec2_ps_30_stone_analects_revFA26.webp`
+- **Used on:** slide AO
+- **Description:** ​南宋太学石经，论语，德不孤必有邻。
+- **Source website / URL:** Wikimedia Commons, [File:南宋太学石经 论语 德不孤必有邻.jpg](https://commons.wikimedia.org/wiki/File:%E5%8D%97%E5%AE%8B%E5%A4%AA%E5%AD%A6%E7%9F%B3%E7%BB%8F_%E8%AE%BA%E8%AF%AD_%E5%BE%B7%E4%B8%8D%E5%AD%A4%E5%BF%85%E6%9C%89%E9%82%BB.jpg)
+- **Creator / date:** 三猎; 2016-12-03 15:20:14
+- **License:** CC BY-SA 4.0
+- **Attribution:** 三猎, CC BY-SA 4.0, via Wikimedia Commons.
+
+## `HIST270_ch02_lec2_ps_31_circular_mound_thomson_revFA26.webp`
+- **Used on:** slide AQ (replaced 2021 tourist photo 2026-11-05)
+- **Description:** Southern altar / Circular Mound Altar, Temple of Heaven, late 19th-century photograph.
+- **Source website / URL:** Wikimedia Commons, [File:Southern altar, Temple of Heaven.jpg](https://commons.wikimedia.org/wiki/File:Southern_altar,_Temple_of_Heaven.jpg)
+- **Creator / date:** John Thomson; Beinecke Rare Book & Manuscript Library
+- **License:** Public domain
+- **Attribution:** None required.
+- **Notes:** Replaced `HIST270_ch02_lec2_ps_31_circular_mound_revFA26.webp` (2021 tourist snapshot with crowds). AI candidate also generated: `/workspace/hist270_online_audit/ch02_l2_fixes/ai_candidates/ai_AQ_circular_mound_empty_woodblock.jpg`.
+
+
+## `HIST270_ch02_lec2_ps_32_commencement_1914_revFA26.webp`
+- **Used on:** slide AR (replaced 2023 modern graduation photo 2026-11-05)
+- **Description:** Commencement procession, 1914, illustrating a modern ritual of status change.
+- **Source website / URL:** Wikimedia Commons, [File:Procession at commencement 1914 (3191508196).jpg](https://commons.wikimedia.org/wiki/File:Procession_at_commencement_1914_(3191508196).jpg)
+- **Creator / date:** Frank R. Snyder; Miami University Libraries
+- **License:** Public domain
+- **Attribution:** None required.
+- **Notes:** Replaced `HIST270_ch02_lec2_ps_32_graduation_revFA26.webp` (2023 ULB graduation with modern visitors). Historical commencement photo kept because the slide teaches modern ritual analogies.
+
+
+## `HIST270_ch02_lec2_ps_33_mencius_portrait_revFA26.webp`
+- **Used on:** slide AS
+- **Description:** ​至聖先賢半身像 冊
+- **Source website / URL:** Wikimedia Commons, [File:至聖先賢半身像 冊-005-孟軻.jpg](https://commons.wikimedia.org/wiki/File:%E8%87%B3%E8%81%96%E5%85%88%E8%B3%A2%E5%8D%8A%E8%BA%AB%E5%83%8F_%E5%86%8A-005-%E5%AD%9F%E8%BB%BB.jpg)
+- **Creator / date:** Anonymous; Yuan dynasty (1271-1368)
+- **License:** Public domain
+- **Attribution:** None required.
+
+## `HIST270_ch02_lec2_ps_34_zigong_portrait_revFA26.webp`
+- **Used on:** slide AT
+- **Description:** ​至聖先賢半身像 冊
+- **Source website / URL:** Wikimedia Commons, [File:至聖先賢半身像 冊-010-端木賜.jpg](https://commons.wikimedia.org/wiki/File:%E8%87%B3%E8%81%96%E5%85%88%E8%B3%A2%E5%8D%8A%E8%BA%AB%E5%83%8F_%E5%86%8A-010-%E7%AB%AF%E6%9C%A8%E8%B3%9C.jpg)
+- **Creator / date:** Anonymous; Yuan dynasty (1271-1368)
+- **License:** Public domain
+- **Attribution:** None required.
