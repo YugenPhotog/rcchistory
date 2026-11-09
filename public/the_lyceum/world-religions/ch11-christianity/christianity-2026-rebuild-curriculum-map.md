@@ -1,6 +1,6 @@
 # REL 210 / PHIL 210 — Christianity Unit Reconstruction
 
-**Working location:** `public/drafts/ch11-christianity/`  
+**Working location:** `public/the_lyceum/world-religions/ch11-christianity/`  
 **Revision date:** November 8, 2026 (Lecture 2 Passion film consolidation; Pierian Spring preserved)  
 **Status:** Draft instructional sequence, not yet classroom-tested  
 **Working principle:** The original three HTML decks are preserved in archive/. New six-lecture decks reuse the HTML slide sections, image links, popup content and embedded presenter notes. Transferred slide IDs have source prefixes (e.g. `L3-I`) and preserve original IDs in `data-origin-id`. New slides use `NEW*` or `PS-*` IDs.
@@ -280,7 +280,7 @@ The three original decks contain **135 source slides** (54 + 45 + 36), all retai
 
 ## Audit record
 
-- Exact working location: `public/drafts/ch11-christianity/`.
+- Exact working location: `public/the_lyceum/world-religions/ch11-christianity/`.
 - All six decks contain an explicit, visually distinct **Required Independent Study** divider.
 - Slide counter identifies the sequence as **CLASSROOM** before the divider or **REQUIRED STUDY** after it.
 - All original materials remain in the three unchanged source decks; migrated slides retain presenter notes, images, citations, and popup references.
