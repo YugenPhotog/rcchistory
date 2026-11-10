@@ -3504,3 +3504,17 @@ None. All nine manifest items now have selected images and documented reuse term
 - **License/status:** Original teaching graphic for this course
 - **Attribution:** Estimates from Patricia Buckley Ebrey, *A History of China*, Ch. 16, p. 273 (c. 1700 and c. 1800 ranges), and Ping-ti Ho, *Studies on the Population of China, 1368–1953* (1959) for mid-Qing and c. 1850 reconstructions.
 - **Notes:** Caption on the slide: "Estimates (Ebrey / Ho)." Xu Yang *Prosperous Suzhou* Changmen detail retained beside the chart on slide k; chart does not replace that historical image.
+
+
+## `ch18-lec1/00-opium-war-title.webp`
+
+- **Requested filename:** `00-opium-war-title.webp`
+- **Deck / slide:** HIST 270 Ch18 Lec1 FA26, slide a (`title`)
+- **Manifest description:** Full-bleed AI-generated title montage of the Opium War.
+- **Source website:** Made for this deck (not a historical painting or photograph)
+- **Image/object title:** The Opium War
+- **Creator/artist:** AI-generated illustration made for HIST 270 Study Buddy decks
+- **Date/period:** FA26
+- **License/status:** Original teaching graphic for this course
+- **Attribution:** AI-generated title illustration made for this deck. An interpretation, not a historical source.
+- **Notes:** Converted from the untracked source PNG `The Opium War_ Empire and Conflict.png` (1672 × 941) to WebP at quality 85, native resolution kept (under 1920 px wide). Replaced William John Huggins, *The Opium Ships at Lintin, China, 1824* (`01-lintin-opium-ships.webp`) as the slide a title image. The Lintin file is unused and was left in the folder. Caption and sources list credit this image as AI-generated, not a historical source.
