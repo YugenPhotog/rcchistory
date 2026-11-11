@@ -12,7 +12,7 @@ Landing page: `the_lyceum/american-history/index.html`, Chapter 18 block.
 | Lecture 2A | Picturing Manifest Destiny (shared with Ch. 13 Lecture 2) | `ch18-lecture2A-picturing_manifest_destiny.html` → forwards to `../chapter-13/ch13_lecture2_ch18_lecture2A_picturing_manifest_destiny_revised_FA26.html` |
 | Lecture 3 | Explaining the West (The Turner Thesis) | `ch18-lecture3-turner.html` |
 
-The `*-bkup.html` files are older backups of Lectures 1–3 (not linked from the site).
+Older backups of Lectures 1–3 (`*-bkup.html`) are in `archive/` (not linked from the site).
 
 ## The shared deck and the shortcut
 
