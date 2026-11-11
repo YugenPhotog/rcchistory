@@ -139,3 +139,35 @@ Original HTML:
 ```html
 <aside class="callout callout--payoff" aria-label="Answer synthesis · Q9, for instructor preparation only"><p class="callout__label">Answer synthesis · Q9, for instructor preparation only</p><p><strong>Legalism held that strong government depends on effective laws and procedures rather than on the virtue of rulers and officials. Han Feizi articulated its tenets: assume that subordinates, even wives and concubines, pursue their own interests; trust no one; keep intentions secret and manipulate competition among officials; make laws and prohibitions clear and rewards and punishments automatic; allow no debate that questions the laws. Qin implemented them under Lord Shang: ranks by enemy heads instead of inherited titles, counties under appointed officials instead of fiefs, migrants recruited with land, land made saleable, serf obligations ended but taxes and labor service heavy, and statutes that bound officials with fines. Legalists thought virtue insufficient because it is rare and because even parents calculate advantage; rulers will be no more selfless, so only clear laws can make people work hard and fight wars.</strong></p></aside>
 ```
+
+## Cosmos, Spirits, and Chu
+
+Source: `public/hist-270/background_essays/essays/ch02/ch2-l4-cosmos-spirits-chu.html`
+
+### 1. Answer synthesis · Q10, for instructor preparation only
+
+Context (nearest preceding heading): h2 — Act II: The World of Spirits (Review Question 10)
+
+Plain text:
+
+Answer synthesis · Q10, for instructor preparation only In the late Zhou, natural philosophers explained the natural world through patterns rather than personalities: yin and yang, complementary poles that wax and wane, accounted for day and night, the seasons, and health and illness, and qi (vapors, energy) in excess or imbalance caused disease, as Physician He argued. Such ideas did not displace the spirit world. Illness was still blamed on unsatisfied spirits and malevolent demons and treated with divination, sacrifices to the astral deity Taiyi, and exorcism; spellbooks gave incantations against demons; travelers protected themselves with a threshold ritual calling on Yu. The two ways of thinking coexisted and even mixed: Taiyi was both a star god and a cosmic principle, and occult texts circulated in writing among the same elites who read the philosophers.
+
+Original HTML:
+
+```html
+<aside class="callout callout--payoff" aria-label="Answer synthesis · Q10, for instructor preparation only"><p class="callout__label">Answer synthesis · Q10, for instructor preparation only</p><p><strong>In the late Zhou, natural philosophers explained the natural world through patterns rather than personalities: yin and yang, complementary poles that wax and wane, accounted for day and night, the seasons, and health and illness, and qi (vapors, energy) in excess or imbalance caused disease, as Physician He argued. Such ideas did not displace the spirit world. Illness was still blamed on unsatisfied spirits and malevolent demons and treated with divination, sacrifices to the astral deity Taiyi, and exorcism; spellbooks gave incantations against demons; travelers protected themselves with a threshold ritual calling on Yu. The two ways of thinking coexisted and even mixed: Taiyi was both a star god and a cosmic principle, and occult texts circulated in writing among the same elites who read the philosophers.</strong></p></aside>
+```
+
+### 2. Answer synthesis · Q11, for instructor preparation only
+
+Context (nearest preceding heading): h2 — Act III: Chu, Inside and Apart (Review Question 11)
+
+Plain text:
+
+Answer synthesis · Q11, for instructor preparation only Chu was drawn steadily into the Zhou political sphere: it expanded north and east by absorbing fifty or more states, surveyed its population for taxes and military service in 548 BCE, pioneered counties run by appointed officials rather than hereditary lords, conquered Yue in 334 BCE, and by the third century was a full player in the interstate alliances. Yet the central states never fully accepted it; northern thinkers still called its people barbarians. Chu kept a distinct culture that survives in its waterlogged tombs: richly decorated lacquer and silk, tombs like Baoshan with four chambers of goods and books, and a literature, the Songs of Chu, whose fantastic, shamanic spirit journeys, in Qu Yuan’s “Encountering Sorrow” and songs like the “Lord of the Yellow River,” are worlds apart from the northern Book of Poetry.
+
+Original HTML:
+
+```html
+<aside class="callout callout--payoff" aria-label="Answer synthesis · Q11, for instructor preparation only"><p class="callout__label">Answer synthesis · Q11, for instructor preparation only</p><p><strong>Chu was drawn steadily into the Zhou political sphere: it expanded north and east by absorbing fifty or more states, surveyed its population for taxes and military service in 548 BCE, pioneered counties run by appointed officials rather than hereditary lords, conquered Yue in 334 BCE, and by the third century was a full player in the interstate alliances. Yet the central states never fully accepted it; northern thinkers still called its people barbarians. Chu kept a distinct culture that survives in its waterlogged tombs: richly decorated lacquer and silk, tombs like Baoshan with four chambers of goods and books, and a literature, the <i>Songs of Chu</i>, whose fantastic, shamanic spirit journeys, in Qu Yuan’s “Encountering Sorrow” and songs like the “Lord of the Yellow River,” are worlds apart from the northern <i>Book of Poetry</i>.</strong></p></aside>
+```

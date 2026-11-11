@@ -1606,3 +1606,232 @@ Files live in `reveal_decks/chapter-02/images/ch02-lec2/`. Deck: `HIST270_ch02_l
 - **Creator / date:** Anonymous; Yuan dynasty (1271-1368)
 - **License:** Public domain
 - **Attribution:** None required.
+
+
+# Chapter 2, Lecture 4 (revised FA26 deck, draft built 2026-11-09)
+
+Files live in `reveal_decks/chapter-02/images/ch02-lec4/`. Deck: `HIST270_ch02_lec4_cosmos_spirits_chu_revised_FA26.html`. Slide letters are permanent IDs. Every image in this deck is AI-generated (Grok Bot image generation, 2026-11-09) in the cinematic Eastern Zhou tableau style of Ch02 L1–L3; each is captioned in the deck as an AI-generated interpretation, not a historical record. Generated at 1280×720 and saved as WebP (q80). Draft awaiting Steven's review.
+
+## `HIST270_ch02_lec4_A_cinematic_v1_20261109.webp`
+- **Used on:** slide A
+- **Description:** On a southern river at dusk, a Chu shaman in a feathered robe stands in a dragon-prowed boat under the first stars; one bank glows gold, the other lies in blue shadow.
+- **Source:** AI-generated image (Grok Bot), 2026-11-09; prompt written from the description above.
+- **Prompt brief:** Title mood. A wide southern river at dusk in the state of Chu. In the center, a long lacquered red-and-black boat with a carved dragon-head prow; a shaman in a flowing robe trimmed with pheasant feathers stands at the prow, arms raised toward the sky. Above, the first bright stars appear in a deep blue sky. Left riverbank: hills still lit warm gold by the setting sun (yang). Right riverbank: hills already in cool blue shadow (yin). Reeds, mist on the water. Calm, mysterious, wondrous mood.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation, not a historical record."
+
+## `HIST270_ch02_lec4_B_cinematic_v1_20261109.webp`
+- **Used on:** slide B
+- **Description:** Two diviners kneel beside a sick Chu official’s bed, laying out bundles of divining stalks on a mat, while his wife and son wait anxiously in the doorway.
+- **Source:** AI-generated image (Grok Bot), 2026-11-09; prompt written from the description above.
+- **Prompt brief:** Cold open, 316 BCE, state of Chu. A dim lamplit bedchamber with plain dark wooden walls (no hanging scrolls, no writing) and lacquered red-and-black furniture. A gaunt middle-aged official lies propped on a low bed under a quilt, pale and ill. Kneeling on the floor beside the bed, two diviners in dark robes lay out many long thin dried milfoil stalks in neat rows and bundles on a reed mat, counting them intently; a small bronze lamp burns between them. In the doorway, his anxious wife and grown son watch. Heavy, worried mood; warm lamp light against shadow.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation, not a historical record."
+
+## `HIST270_ch02_lec4_C_cinematic_v1_20261109.webp`
+- **Used on:** slide C
+- **Description:** A college student with headphones studies at night; on her laptop glows a painted river scene with a dragon-prowed boat under the stars.
+- **Source:** AI-generated image (Grok Bot), 2026-11-09; prompt written from the description above.
+- **Prompt brief:** How-to-use slide. A present-day American college student, about 19, studies alone at a desk at night wearing headphones. Her open laptop screen shows a painted scene of a dragon-prowed boat on a river under stars (the deck itself). A spiral notebook with pencil scribbles that are not legible, a mug, warm desk-lamp glow in charcoal, ochre and cream tones; cinematic and inviting. No legible writing on the screen or notebook.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation, not a historical record."
+
+## `HIST270_ch02_lec4_E_cinematic_v1_20261109.webp`
+- **Used on:** slide E
+- **Description:** At dawn, an old astronomer on a city-wall tower marks the shadow of a tall pole while, in the fields below, farmers begin the spring planting.
+- **Source:** AI-generated image (Grok Bot), 2026-11-09; prompt written from the description above.
+- **Prompt brief:** Segment 1 divider, full-bleed. Dawn over a Warring States walled city of rammed earth. Up on the flat top of a wooden watchtower built on the wall, clearly elevated above the fields, an old white-bearded astronomer in plain robes kneels beside a tall upright wooden pole (gnomon) and marks the end of its long shadow on the tower floor with a stick. Below the wall, in misty fields, farmers with oxen and hoes begin spring planting. Soft gold light from the left, cool blue shadows to the right. Leave the left third darker and calmer for overlaid text.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation, not a historical record."
+
+## `HIST270_ch02_lec4_F_cinematic_v1_20261109.webp`
+- **Used on:** slide F
+- **Description:** In a palace garden, a physician examines a seated patient, a musician strikes a row of bronze bells, and an old astronomer points up at the evening sky.
+- **Source:** AI-generated image (Grok Bot), 2026-11-09; prompt written from the description above.
+- **Prompt brief:** Teaching image for natural philosophers. A Warring States palace garden at dusk, three clear groups: left, a physician in dark robes kneels before a seated patient, studying his face and gently lifting his eyelid with one hand; center, a musician strikes a long rack of graded bronze bells hanging from a lacquered wooden frame with a wooden mallet; right, an old astronomer with a white beard and a simple topknot (no tall hat) stands pointing up at the first stars and a single crescent moon while a young student looks up. Calm, curious mood.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation, not a historical record."
+
+## `HIST270_ch02_lec4_H_cinematic_v1_20261109.webp`
+- **Used on:** slide H
+- **Description:** At sunset a farmer drives his ox home through a valley: one hillside glows gold in the last sun, the other already lies in cool blue shadow.
+- **Source:** AI-generated image (Grok Bot), 2026-11-09; prompt written from the description above.
+- **Prompt brief:** Yin-yang teaching image. A wide river valley at sunset in the Warring States countryside. The left hillside facing the sun is lit warm gold, with ripening millet; the right hillside is already in deep cool blue shadow, with a few early stars above it. On the path between them, a farmer in a straw hat leads an ox home, carrying a hoe. A clear, simple contrast of light and shade on one landscape. Peaceful mood.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation, not a historical record."
+
+## `HIST270_ch02_lec4_I_cinematic_v1_20261109.webp`
+- **Used on:** slide I
+- **Description:** A visiting physician kneels to examine the sick Duke of Jin, while behind them two court diviners whisper over bundles of divining stalks.
+- **Source:** AI-generated image (Grok Bot), 2026-11-09; prompt written from the description above.
+- **Prompt brief:** Two explanations in one room, 541 BCE. A Warring-States-era palace bedchamber with bronze lamps and painted screens. Foreground: a calm, sharp-eyed physician in travelling robes kneels beside a sick, heavy-set duke lying on a low lacquered bed, leaning in to study his face while the duke speaks to him. Background, across the room: two court diviners in simple black caps kneel over a reed mat covered with bundles of long thin divining stalks, whispering to each other and glancing at the duke. The duke looks at the physician, not the diviners. No writing anywhere.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation, not a historical record."
+
+## `HIST270_ch02_lec4_J_cinematic_v1_20261109.webp`
+- **Used on:** slide J
+- **Description:** By lamplight, a lacquer painter brushes a red dragon and a white tiger around a ring of stars on the black lid of a wooden chest.
+- **Source:** AI-generated image (Grok Bot), 2026-11-09; prompt written from the description above.
+- **Prompt brief:** Craft scene, about 433 BCE, middle Yangzi. A lamplit workshop. A focused artisan kneels and paints with a fine brush on the curved black-lacquered lid of a wooden clothes chest: a long sinuous red dragon on one side, a white tiger on the other, and a ring of small dots and star clusters between them circling the center. Pots of red and black lacquer beside him. A large set of bronze bells hangs on a frame in the dim background. No writing or characters anywhere on the lid.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation, not a historical record."
+
+## `HIST270_ch02_lec4_K_cinematic_v1_20261109.webp`
+- **Used on:** slide K
+- **Description:** At the court of Qi, the thinker Zou Yan gestures toward five things set before the king: a green sapling, a burning brazier, a mound of yellow earth, a bronze blade and a bowl of water.
+- **Source:** AI-generated image (Grok Bot), 2026-11-09; prompt written from the description above.
+- **Prompt brief:** Teaching image, Warring States court of Qi, about 270 BCE. A lively, confident middle-aged thinker in fine robes stands and gestures with an open hand toward five objects laid out in a clear row on a low lacquered table: a small green sapling in a pot, a bronze brazier with live flames, a mound of yellow earth, a bronze sword blade, and a black bowl of water. A curious king and courtiers lean forward on mats to look. Warm palace light. No writing anywhere.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation, not a historical record."
+
+## `HIST270_ch02_lec4_M_cinematic_v1_20261109.webp`
+- **Used on:** slide M
+- **Description:** At night, a masked exorcist waving a peach-wood bow leads villagers with torches and drums around a farmhouse.
+- **Source:** AI-generated image (Grok Bot), 2026-11-09; prompt written from the description above.
+- **Prompt brief:** Segment 2 divider, full-bleed. A Warring States farming village at night. A masked exorcist in a bearskin cloak and a fierce painted wooden mask with four eyes leaps forward, brandishing a bow of pale peach wood. Behind him, villagers with flaming torches beat drums and bang pots as they circle a thatched farmhouse. Sparks, smoke, moonlight, firelight on faces. Dramatic but not gory. Leave the left third darker for overlaid text.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation, not a historical record."
+
+## `HIST270_ch02_lec4_N_cinematic_v1_20261109.webp`
+- **Used on:** slide N
+- **Description:** A family kneels with offerings of grain and wine before a household altar, while through the open door an old scholar in the courtyard studies the night sky.
+- **Source:** AI-generated image (Grok Bot), 2026-11-09; prompt written from the description above.
+- **Prompt brief:** Two worlds in one home. Interior of a Warring States house at night, warm lamp light. A family of three generations kneels before a low household altar with bowls of grain, a bronze wine cup and burning incense, bowing toward ancestral tablets left blank. Through the open doorway, in the moonlit courtyard, an old scholar in plain robes stands looking up at the stars and pointing, absorbed. No writing anywhere.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation, not a historical record."
+
+## `HIST270_ch02_lec4_P_cinematic_v1_20261109.webp`
+- **Used on:** slide P
+- **Description:** A priest offers a sheep on an outdoor altar to the Chu ancestors while the sick official’s son bows behind him and a diviner holding bundles of stalks looks on.
+- **Source:** AI-generated image (Grok Bot), 2026-11-09; prompt written from the description above.
+- **Prompt brief:** Sacrifice scene, Chu, 316 BCE. An outdoor stone altar under a large tree in a walled courtyard. A priest in dark ritual robes and a tall cap raises his hands over a tethered white sheep beside the altar, which holds bronze vessels of wine and grain. Behind him the sick official’s grown son, in mourning-plain robes, bows low; to one side a diviner holding a bundle of long thin divining stalks looks on. Morning mist; solemn mood. No blood, no writing.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation, not a historical record."
+
+## `HIST270_ch02_lec4_Q_cinematic_v1_20261109.webp`
+- **Used on:** slide Q
+- **Description:** On a hilltop at night, priests raise cups of wine toward the bright pole star, around which the whole sky seems to turn.
+- **Source:** AI-generated image (Grok Bot), 2026-11-09; prompt written from the description above.
+- **Prompt brief:** Hilltop sacrifice at night, Chu, 4th century BCE. Priests in long dark robes stand around a small stone altar with a fire, raising bronze wine cups toward one bright star high in the north. Long-exposure-like faint circular star trails swirl around that single bright star, so the whole sky seems to turn around it. Silhouetted pine trees, distant river valley. Awe and stillness. No writing.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation, not a historical record."
+
+## `HIST270_ch02_lec4_R_cinematic_v1_20261109.webp`
+- **Used on:** slide R
+- **Description:** Inside a farmhouse at night, a mother shields her child while an old woman shouts and swings a peach-wood branch at a shadowy horned demon in the doorway.
+- **Source:** AI-generated image (Grok Bot), 2026-11-09; prompt written from the description above.
+- **Prompt brief:** Exorcism at home, Warring States farmhouse at night. A young mother on the floor clutches her small child. An old grandmother stands between them and the doorway, mouth open in a shout, swinging a pale peach-wood branch. In the doorway looms a shadowy, smoky, horned demon figure with glowing eyes, half dissolving in the dark. Lamp light, flying sparks. Folk-tale drama, not gore. No writing.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation, not a historical record."
+
+## `HIST270_ch02_lec4_S_cinematic_v1_20261109.webp`
+- **Used on:** slide S
+- **Description:** At a city gate at dawn, a traveler kneels on the threshold to draw five lines in the dirt with a stick, a pinch of soil in his other hand, while his companion waits with a loaded ox cart.
+- **Source:** AI-generated image (Grok Bot), 2026-11-09; prompt written from the description above.
+- **Prompt brief:** Travel ritual at dawn. The great timber-and-rammed-earth gate of a Warring States city, doors open onto a road leading to misty hills. On the threshold, a traveler in a hooded travel cloak kneels and draws five parallel lines in the dirt with a short stick, holding a small pinch of soil in his other hand near his chest. Behind him, a companion waits patiently beside an ox cart loaded with bundles. A gate guard watches, unconcerned. No writing on the gate.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation, not a historical record."
+
+## `HIST270_ch02_lec4_T_cinematic_v1_20261109.webp`
+- **Used on:** slide T
+- **Description:** In his courtyard at noon, an old scholar measures the shadow of a pole, while at the gate behind him a servant hangs a peach-wood charm against demons.
+- **Source:** AI-generated image (Grok Bot), 2026-11-09; prompt written from the description above.
+- **Prompt brief:** Two ways of knowing in one courtyard, Warring States, noon. Foreground: an old scholar in plain robes kneels beside an upright wooden pole and measures its short noon shadow with a knotted cord, concentrating. Background: at the courtyard gate, a young servant on a small stool hangs a carved peach-wood charm (a plain wooden plaque shaped like a small figure, no writing) above the doorway. Bright sun, crisp shadows. No writing anywhere.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation, not a historical record."
+
+## `HIST270_ch02_lec4_W_cinematic_v1_20261109.webp`
+- **Used on:** slide W
+- **Description:** A fleet of dragon-prowed Chu boats crosses a misty southern lake past reed marshes, red-and-black banners streaming.
+- **Source:** AI-generated image (Grok Bot), 2026-11-09; prompt written from the description above.
+- **Prompt brief:** Segment 3 divider, full-bleed. A wide misty lake in the middle Yangzi region at morning. A fleet of long war boats with carved dragon-head prows and red-and-black lacquered hulls rows across the water, oars dipping in rhythm; tall plain red-and-black pennants stream from poles (no writing). Reed marshes, water birds, a distant walled town on a low hill. Lush green-gold southern landscape, humid haze. Leave the left third darker for overlaid text.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation, not a historical record."
+
+## `HIST270_ch02_lec4_Y_cinematic_v1_20261109.webp`
+- **Used on:** slide Y
+- **Description:** Chu officials with measuring cords survey newly conquered fields, while villagers watch and an appointed magistrate in a plain cap supervises.
+- **Source:** AI-generated image (Grok Bot), 2026-11-09; prompt written from the description above.
+- **Prompt brief:** Administrative scene, Chu, 6th century BCE. Lush terraced rice and millet fields by a river. Two Chu surveyors stretch a long knotted measuring cord across a field while a scribe kneels nearby holding a bundle of blank bamboo strips and a brush. A stern magistrate in a plain official cap, clearly an appointed bureaucrat not a lord, points and supervises. Local villagers, farmers with hoes and a mother with a child, watch from the edge, uncertain. No writing visible.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation, not a historical record."
+
+## `HIST270_ch02_lec4_Z_cinematic_v1_20261109.webp`
+- **Used on:** slide Z
+- **Description:** In a northern courtyard, Mencius sternly scolds a young student and points away from a rough-dressed southern teacher working with a hoe in the field beyond the wall.
+- **Source:** AI-generated image (Grok Bot), 2026-11-09; prompt written from the description above.
+- **Prompt brief:** Teaching scene, late 4th century BCE, a northern state. In a tidy courtyard of a scholar’s house, a dignified older Mencius in fine scholar’s robes stands and sternly scolds a young student who hangs his head. Mencius points over a low wall toward a field beyond, where a lean southern teacher in coarse hemp clothes and straw sandals works the soil with a hoe beside a few followers. Clear contrast of polished north and rough south. No writing.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation, not a historical record."
+
+## `HIST270_ch02_lec4_AA_cinematic_v1_20261109.webp`
+- **Used on:** slide AA
+- **Description:** A Chu noblewoman in a silk robe embroidered with swirling dragons and phoenixes watches her maids pack red-and-black lacquered boxes and folded silks for a tomb.
+- **Source:** AI-generated image (Grok Bot), 2026-11-09; prompt written from the description above.
+- **Prompt brief:** Material life of the Chu elite, 4th–3rd century BCE. A richly furnished room with lacquered screens. A dignified middle-aged noblewoman stands in a long silk robe embroidered with flowing, curving dragons, phoenixes and birds in red, gold and brown. Her maids kneel and carefully pack folded embroidered silks and red-and-black lacquered boxes, cups and a lacquered zither into wooden chests. Soft window light, rich textures. No writing.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation, not a historical record."
+
+## `HIST270_ch02_lec4_AB_cinematic_v1_20261109.webp`
+- **Used on:** slide AB
+- **Description:** In a Chu workshop, craftsmen tap a lacquer tree for sap, heat it in a pot, and brush red and black layers onto cups painted with two great birds.
+- **Source:** AI-generated image (Grok Bot), 2026-11-09; prompt written from the description above.
+- **Prompt brief:** Process scene, Chu lacquer workshop, early 3rd century BCE. Left background: a worker cuts a notch in the bark of a lacquer tree and catches grey sap in a small bowl. Center: another worker stirs sap in a pot over a low fire. Foreground: a skilled painter kneels at a low bench, brushing glossy red lacquer onto a black oval eared cup decorated with two large curving birds in red, black and yellow; finished shiny cups, bowls and a small box sit drying on racks. No writing.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation, not a historical record."
+
+## `HIST270_ch02_lec4_AC_cinematic_v1_20261109.webp`
+- **Used on:** slide AC
+- **Description:** In 316 BCE, workers lower lacquered boxes, bronze vessels, fans and bundles of bamboo books into the four timber chambers of a deep tomb.
+- **Source:** AI-generated image (Grok Bot), 2026-11-09; prompt written from the description above.
+- **Prompt brief:** Burial in progress, Chu, 316 BCE. Looking down into a deep, stepped earthen tomb pit at a large timber burial structure divided into four open chambers around a central coffin. Workers on ropes and ladders lower and arrange objects: bronze ritual vessels, red-and-black lacquered boxes and low tables, a long-handled feather fan, a bronze mirror, weapons and chariot fittings, and tied bundles of blank bamboo strips. Mourners in white stand at the rim. Overcast light. No writing visible.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation, not a historical record."
+
+## `HIST270_ch02_lec4_AD_cinematic_v1_20261109.webp`
+- **Used on:** slide AD
+- **Description:** Qu Yuan, a gaunt exiled minister in long robes and a tall hat, stands alone on a windy riverbank, gazing up at clouds shaped like a dragon chariot.
+- **Source:** AI-generated image (Grok Bot), 2026-11-09; prompt written from the description above.
+- **Prompt brief:** Qu Yuan in exile, Chu, early 3rd century BCE. A gaunt, dignified middle-aged man with a long beard, tall official hat and long robes with orchid sprigs tucked in his sash stands alone on a windswept riverbank; wind whips his sleeves. He gazes upward at towering clouds that faintly suggest a chariot drawn by two dragons. Swirling dark river below, autumn reeds. Melancholy, visionary mood. No writing.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation, not a historical record."
+
+## `HIST270_ch02_lec4_AI_cinematic_v1_20261109.webp`
+- **Used on:** slide AI
+- **Description:** In 1987, archaeologists in muddy boots lift a waterlogged lacquered box from a timber tomb chamber at Baoshan while a colleague photographs it.
+- **Source:** AI-generated image (Grok Bot), 2026-11-09; prompt written from the description above.
+- **Prompt brief:** Closing bookend, 1987, Hubei, China. A modern archaeological excavation: inside a deep earthen pit, the dark wet timbers of an ancient four-chamber tomb are exposed. Two Chinese archaeologists in 1980s work clothes, rubber boots and cloth caps carefully lift a glistening red-and-black lacquered box from muddy water; a third crouches with a 1980s film camera on a strap. Bamboo bundles lie in shallow water in a trench tray. Overcast daylight, sense of discovery. No legible writing anywhere.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation, not a historical record."
+
+## `HIST270_ch02_lec4_AK_cinematic_v1_20261109.webp`
+- **Used on:** slide AK
+- **Description:** A ruler in fine robes awkwardly guides a plow beside barefoot farmers, while a lean teacher in coarse hemp clothes watches approvingly from the field’s edge.
+- **Source:** AI-generated image (Grok Bot), 2026-11-09; prompt written from the description above.
+- **Prompt brief:** Gentle comedy, Warring States countryside. A muddy spring field. A plump ruler in fine silk robes, sleeves tied back, struggles to steer a wooden plow pulled by an ox, while barefoot farmers beside him plow easily and try not to laugh. At the edge of the field a lean, weathered teacher in coarse undyed hemp clothes and straw sandals stands with arms folded, nodding with approval; two young followers in hemp beside him. Bright daylight. No writing.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation, not a historical record."
+
+## `HIST270_ch02_lec4_AL_cinematic_v1_20261109.webp`
+- **Used on:** slide AL
+- **Description:** By lamplight, a Chu artist paints strange beings and colored trees around the edges of a square of silk, leaving the center blank.
+- **Source:** AI-generated image (Grok Bot), 2026-11-09; prompt written from the description above.
+- **Prompt brief:** Making a cosmic chart, Chu, about 300 BCE. A lamplit room. An artist kneels over a large square of pale silk stretched on a low frame and paints, with a fine brush, strange hybrid creatures around its four edges: a three-headed figure, a bird-headed man, a horned beast, a snake-like being; at each corner of the silk stands a small painted tree, one green, one red, one white, one black. The center of the silk is empty and blank. Pots of mineral pigments beside him. No writing or characters anywhere.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation, not a historical record."
+
+## `HIST270_ch02_lec4_AM_cinematic_v1_20261109.webp`
+- **Used on:** slide AM
+- **Description:** At the Zhou border, the armored king of Chu, his army behind him, leans forward to question a calm Zhou envoy who stands before nine great bronze cauldrons.
+- **Source:** AI-generated image (Grok Bot), 2026-11-09; prompt written from the description above.
+- **Prompt brief:** Confrontation at the Zhou border, 606 BCE. Late afternoon on a riverside plain. Left: the bold king of Chu in lacquered leather armor and a tall crown-like cap leans forward from his chariot, gesturing with curiosity and challenge; ranks of Chu soldiers and red-and-black pennants behind him. Right: a calm, elderly Zhou envoy in dignified court robes stands his ground, hands folded in his sleeves; behind him on a raised earthen terrace stand nine huge three-legged bronze cauldrons. Tense, dignified mood. No writing.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation, not a historical record."
+
+## `HIST270_ch02_lec4_AN_cinematic_v1_20261109.webp`
+- **Used on:** slide AN
+- **Description:** Rowers in long dragon-headed boats race down a river as drummers pound the rhythm and villagers on the bank cheer and toss leaf-wrapped rice dumplings into the water.
+- **Source:** AI-generated image (Grok Bot), 2026-11-09; prompt written from the description above.
+- **Prompt brief:** Traditional Dragon Boat Festival race on a southern river, timeless rural setting with tiled-roof villages (no modern objects). Two long narrow boats with carved painted dragon heads and tails race side by side, each with two rows of rowers pulling hard and a drummer at the center beating a big drum. On the grassy bank, villagers of all ages cheer; a woman tosses small pyramid-shaped dumplings wrapped in green bamboo leaves into the water. Spray, color, joy. No writing on banners.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation, not a historical record."
