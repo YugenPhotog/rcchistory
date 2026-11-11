@@ -1,0 +1,55 @@
+# Chapter 13 decks (HIST 101)
+
+Live site: `https://austin-academics.com/the_lyceum/american-history/presentations/chapter-13/<file>`.
+Landing page: `the_lyceum/american-history/index.html`, Chapter 13 block.
+
+## Current decks
+
+| Slot | Title | File |
+|---|---|---|
+| Lecture 1 | Manifest Destiny and Whig Opposition (Continental Transformation) | `ch13_lecture1_manifestdestiny_revised_FA26.html` |
+| Lecture 1A | Manifest Destiny as Discourse | `ch13_lecture1a_discourse-manifest-destiny.html` |
+| Lecture 2 (also Ch. 18 Lecture 2A) | Picturing Manifest Destiny: Art, Photography, and the Myth of the Vanishing Indian, 1840–1910 | `ch13_lecture2_ch18_lecture2A_picturing_manifest_destiny_revised_FA26.html` |
+| Lecture 3 | Uncle Tom's Cabin: Study Buddy Edition | `uncle_toms_cabin_studybuddy_edition.html` |
+| Dive Deeper | Was U.S. Expansion "Land Theft"? | `was_it_theft.html` |
+| (HIST 101 site page) | Understanding Manifest Destiny as Discourse | `manifest-destiny-discourse.html` (linked from `hist-101/index.html`) |
+
+## The shared deck (Ch. 13 L2 = Ch. 18 L2A)
+
+Picturing Manifest Destiny is one deck used in two chapters. It lives here in chapter-13 with all its images,
+audio, and captions. The file name carries both slots: `ch13_lecture2_ch18_lecture2A_…_revised_FA26.html`.
+
+Chapter 18 has a small forwarding page, `../chapter-18/ch18-lecture2A-picturing_manifest_destiny.html`.
+It opens this deck right away and keeps any slide hash (for example `…#/35`). Link to either one; edit only the deck here.
+
+Slide hashes are slide numbers counting from 0 (`#/35` = slide 36). Each slide also shows a permanent letter
+badge (a–ddd, 56 slides; the next new slide gets **eee**). Useful anchors: Room 5 Remington = `#/35` (jj),
+Remington's Pivot / Hearst telegram = `#/40` (oo), Room 6 Curtis = `#/43` (rr), last slide = `#/55` (ddd).
+
+## What the L2 deck does
+
+- **Audio Guide (G):** 43 short narrated clips (Cassidy voice). Nothing plays until a student clicks ▶ Audio Guide or presses G. Then each room and artwork plays once on arrival. Pause & Reflect and text slides are silent. **Self-paced** mode (off by default) plays each talk and moves on after some quiet looking time.
+- **Captions (CC or C):** synced captions for every clip, off by default, and the choice is remembered. Caption text is the exact script.
+- **Study Buddy (N):** plain-language notes for every slide, including the written transcript of each Audio Guide talk.
+- **Look Closer:** pulsing gold dots on key artworks open a zoomed detail with a short explanation.
+- **Reflections:** a typing box on the six Pause & Reflect slides (h, t, cc, ii, qq, bbb) and the closing question (ddd). Answers autosave in the student's browser only. The last slide (ddd) has the single export panel: name field, **Download my reflections (.txt)** (all seven in one UTF-8 file for Canvas, Windows line endings), and **Clear my answers** with a confirm step.
+- **Music:** soft background music after the first click or key press; ♪ turns it off; it stops on the last slide. Reduced-motion settings turn off the slow zoom and pulsing dots.
+
+## Folder layout
+
+- `images/`: artwork and photos for the Chapter 13 decks (mostly WebP). Some files are used by more than one deck, so check with a search before removing any.
+- `audio/`: `ch13_L2_narr_<letter>_<slug>.mp3` are the L2 Audio Guide clips (named by slide letter). `Cassidy_v3_*.mp3` are the original full recordings the clips were cut from (kept; not used directly by the deck). `Scholarly_Reflections_*.mp3` is the soft background music used by the L2 deck.
+- `audio/captions/`: one WebVTT file per clip (`ch13_L2_narr_<letter>_<slug>.vtt`). The same cues are embedded in the deck, so captions also work when the file is opened from disk.
+- `archive/`: superseded decks, kept for reference and not linked from the site. They may show broken images because they sit one folder deeper.
+
+## Archived in Nov 2026
+
+- `archive/picturing_manifest_destiny_rev_FA25.html` and `archive/picturing_manifest_destiny_rev_Feb26.html`: earlier L2 versions, replaced by the FA26 deck.
+- `archive/ch18-lecture2A-picturing_manifest_destiny.html`: an old partial copy of L2 (Rooms 3–6) that was stored in this folder.
+- `archive/ch13_lecture1_manifestdestiny_FA25.html`: replaced by `ch13_lecture1_manifestdestiny_revised_FA26.html`.
+
+## Notes on the L2 build
+
+- Sources for the narration: 13 clips are cut from Steven's original Cassidy recordings and 30 are new or regenerated in the same voice. Six factual slips in the original recordings were cut out of the audio.
+- One known caption quirk on slide f: the recording says "…imagine the West, most had never been there, as magnificence…", but the script reads "(most had never been there) were learning to imagine the West as…". The caption keeps the script wording in a single cue, so the words on screen match what is spoken but their order inside that cue differs.
+- Do not hand-edit the deck if you plan to rebuild it; the build scripts live outside the repo (on the build box).
