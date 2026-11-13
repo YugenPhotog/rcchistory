@@ -10,12 +10,15 @@ Landing page: `the_lyceum/american-history/index.html`, Chapter 13 block.
 | Lecture 1 | Manifest Destiny and Whig Opposition (Continental Transformation) | `ch13_lecture1_manifestdestiny_revised_FA26.html` |
 | Lecture 1A (class slides) | Manifest Destiny as Discourse: the Reveal deck shown in class | `ch13_lecture1a_discourse-manifest-destiny_slides.html` |
 | Lecture 2 (also Ch. 18 Lecture 2A) | Picturing Manifest Destiny: Art, Photography, and the Myth of the Vanishing Indian, 1840–1910 | `ch13_lecture2_ch18_lecture2A_picturing_manifest_destiny_revised_FA26.html` |
-| Lecture 3 | Uncle Tom's Cabin: Study Buddy Edition | `uncle_toms_cabin_studybuddy_edition.html` |
+| Lecture 3 | The Compromise of 1850 and Uncle Tom's Cabin (40 slides, permanent letters a–ll plus y2, y3) | `ch13_lecture3_compromise_1850_uncle_toms_cabin_FA26.html` |
+| Lecture 3A (mini lecture) | Uncle Tom: From Hero to Insult (16 slides, a–p; fill-in quiz on m exports .txt) | `ch13_lecture3a_uncle_tom_hero_to_insult_FA26.html` |
 | Dive Deeper | Was U.S. Expansion "Land Theft"? | `was_it_theft.html` |
 | Reading assignment | Understanding Manifest Destiny as Discourse: the pre-lecture reading students do on their own (not a slide deck) | `ch13_reading_discourse-manifest-destiny.html` (linked from the landing page and `hist-101/index.html`) |
 
 File names say what each file is for: `_slides` = shown in class; `ch13_reading_` = a reading students do on their own.
 Both discourse files are also linked from the How to Visit slide (b) of Lecture 2, in the "Before you enter the gallery" box.
+
+Slide letters in the Lecture 3 decks are permanent IDs: never re-letter. Slide bb of Lecture 3 links to 3A, and 3A links back. The older `uncle_toms_cabin_studybuddy_edition.html` is in `archive/`.
 
 ## The shared deck (Ch. 13 L2 = Ch. 18 L2A)
 
