@@ -125,6 +125,18 @@
 .reveal .slides section.c .continue-link a:hover { background:#E3C45A; }
 .reveal .slides section.c .continue-link a:focus-visible { outline:3px solid #F2DFA6; outline-offset:3px; }
 .reveal .continue-link { margin:0.5em 0 0 0; font-size:0.82em; }
+/* Pop-up (same pattern as the FA26 HIST 101 decks: dotted teal trigger, cream dialog, close x) */
+.popup-trigger { font:inherit; color:#7CC4BC; background:none; border:none; border-bottom:2px dotted #7CC4BC; padding:0; margin:0; cursor:pointer; line-height:inherit; }
+.popup-trigger:hover { color:var(--antique-gold); border-bottom-color:var(--antique-gold); }
+.popup-trigger .pop-q { display:inline-block; font-family:'Lora',serif; font-size:0.6em; font-weight:600; line-height:1.35em; width:1.35em; text-align:center; border-radius:50%; background:#7CC4BC; color:#10201F; margin-left:0.25em; vertical-align:0.35em; }
+.popup-backdrop { position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:999; }
+.popup-backdrop[hidden], .popup[hidden] { display:none; }
+.popup { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:var(--soft-cream); color:var(--dark-charcoal); padding:28px 34px 24px 34px; border-radius:15px; box-shadow:0 8px 32px rgba(0,0,0,0.5); width:min(680px, calc(100vw - 40px)); max-height:80vh; overflow-y:auto; z-index:1000; border:3px solid var(--bronze-accent); font-family:'Lora',serif; font-size:19px; line-height:1.5; text-align:left; }
+.popup .definition-term { font-family:'Crimson Pro',serif; font-size:30px; font-weight:700; color:var(--rich-purple); margin:0 0 10px 0; }
+.popup p { margin:0 0 0.7em 0; }
+.popup strong { color:#826B21; }
+.popup-close { position:absolute; top:8px; right:12px; font-size:30px; line-height:1; background:none; border:none; cursor:pointer; color:var(--ruby-crimson); padding:4px 8px; border-radius:6px; }
+.popup-trigger:focus-visible, .popup-close:focus-visible { outline:3px solid var(--antique-gold); outline-offset:3px; }
 </style>
 </head>
 <body>
@@ -469,7 +481,7 @@
 <div class="cols">
   <ul>
     <li>In New Orleans, Eva and her father died, and Tom was sold to Simon Legree, a brutal Louisiana cotton planter</li>
-    <li>Legree had also bought two enslaved women, Cassy and Emmeline; they escaped and hid</li>
+    <li>Legree had also bought two enslaved women, <button type="button" class="popup-trigger" data-popup="pop-cassy-emmeline" aria-haspopup="dialog" aria-expanded="false" aria-controls="pop-cassy-emmeline">Cassy and Emmeline<span class="pop-q" aria-hidden="true">?</span></button>; they escaped and hid</li>
     <li>Tom refused to tell where they were hiding, so Legree had him whipped</li>
     <li>Dying from the beating, Tom forgave the two men who whipped him (Sambo and Quimbo)</li>
   </ul>
@@ -549,7 +561,7 @@
       <li>A strong, middle-aged, deeply Christian man who reads his Bible</li>
       <li>Trusted on the Shelby farm, yet sold away from his wife and children to pay debts</li>
       <li>Refuses Legree’s order to whip other enslaved people</li>
-      <li>Refuses to betray Cassy and Emmeline and dies rather than give in: passive resistance and martyrdom</li>
+      <li>Refuses to betray <button type="button" class="popup-trigger" data-popup="pop-cassy-emmeline" aria-haspopup="dialog" aria-expanded="false" aria-controls="pop-cassy-emmeline">Cassy and Emmeline<span class="pop-q" aria-hidden="true">?</span></button> and dies rather than give in: passive resistance and martyrdom</li>
     </ul>
     <p class="callout">Later, “Uncle Tom” became an insult for a servile Black man, largely through stage “Tom shows” and minstrel-style adaptations that made him old and submissive.</p>
       <p class="continue-link"><a href="HIST101_Ch13_Uncle_Tom_From_Hero_to_Insult_FA26.html">How “Uncle Tom” became an insult &rarr;</a></p>
@@ -746,6 +758,15 @@
   <div id="study-buddy-content"></div>
 </div>
 
+<div id="popup-backdrop" class="popup-backdrop" hidden></div>
+<div id="pop-cassy-emmeline" class="popup" role="dialog" aria-modal="true" aria-labelledby="pop-cassy-emmeline-label" hidden>
+  <button type="button" class="popup-close" aria-label="Close">&times;</button>
+  <h2 class="definition-term" id="pop-cassy-emmeline-label">Cassy and Emmeline</h2>
+  <p><strong>Cassy</strong> is an enslaved woman in her late thirties on Simon Legree’s plantation. Legree forces her to be his concubine, a woman he keeps for sex against her will. Slavery has already taken her children from her. Cassy is the one who plans the escape, and at the end of the novel she is revealed to be Eliza’s mother.</p>
+  <p><strong>Emmeline</strong> is an enslaved girl of about fifteen whom Legree buys at a slave auction in New Orleans. He means to make her his next concubine.</p>
+  <p><strong>The escape:</strong> the two women pretend to run away, then hide in the garret (attic) of Legree’s house, which he believes is haunted. Tom knows where they are and refuses to tell. Legree has him beaten to death. Afterward, Cassy and Emmeline get away.</p>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.js"></script>
 <script>
 // Reduced motion: no slide or background transitions when the reader's system asks for less motion.
@@ -813,6 +834,47 @@ document.querySelectorAll('.pier-quiz .mc-option').forEach(function (opt) {
     fb.classList.add('show');
   });
 });
+
+// Cassy and Emmeline pop-up: opens from any .popup-trigger, closes with Esc, the close button, or a click outside.
+(function () {
+  const backdrop = document.getElementById('popup-backdrop');
+  let lastTrigger = null;
+  function openPopup(trigger) {
+    const pop = document.getElementById(trigger.getAttribute('data-popup'));
+    if (!pop) return;
+    closePopups(false);
+    lastTrigger = trigger;
+    pop.hidden = false; backdrop.hidden = false;
+    trigger.setAttribute('aria-expanded', 'true');
+    pop.querySelector('.popup-close').focus();
+  }
+  function closePopups(restore) {
+    document.querySelectorAll('.popup').forEach(function (p) { p.hidden = true; });
+    backdrop.hidden = true;
+    document.querySelectorAll('.popup-trigger').forEach(function (t) { t.setAttribute('aria-expanded', 'false'); });
+    if (restore !== false && lastTrigger) { lastTrigger.focus(); }
+  }
+  window.closePopups = closePopups;
+  document.querySelectorAll('.popup-trigger').forEach(function (t) {
+    t.addEventListener('click', function (e) { e.stopPropagation(); openPopup(t); });
+  });
+  document.querySelectorAll('.popup-close').forEach(function (b) {
+    b.addEventListener('click', function (e) { e.stopPropagation(); closePopups(); });
+  });
+  backdrop.addEventListener('click', function () { closePopups(); });
+  // Capture phase: while a pop-up is open, keys stay with the pop-up (no slide changes); Tab stays on the close button.
+  document.addEventListener('keydown', function (e) {
+    const open = document.querySelector('.popup:not([hidden])');
+    if (open) {
+      e.stopPropagation();
+      if (e.key === 'Escape') { e.preventDefault(); closePopups(); }
+      else if (e.key === 'Tab') { e.preventDefault(); open.querySelector('.popup-close').focus(); }
+      return;
+    }
+    if (e.target && e.target.classList && e.target.classList.contains('popup-trigger') && (e.key === ' ' || e.key === 'Enter')) { e.stopPropagation(); }
+  }, true);
+  deck.on('slidechanged', function () { closePopups(false); });
+})();
 </script>
 </body>
 </html>
