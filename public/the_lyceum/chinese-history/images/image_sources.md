@@ -1835,3 +1835,200 @@ Files live in `reveal_decks/chapter-02/images/ch02-lec4/`. Deck: `HIST270_ch02_l
 - **Prompt brief:** Traditional Dragon Boat Festival race on a southern river, timeless rural setting with tiled-roof villages (no modern objects). Two long narrow boats with carved painted dragon heads and tails race side by side, each with two rows of rowers pulling hard and a drummer at the center beating a big drum. On the grassy bank, villagers of all ages cheer; a woman tosses small pyramid-shaped dumplings wrapped in green bamboo leaves into the water. Spray, color, joy. No writing on banners.
 - **License:** Original generated work for HIST 270; no third-party rights.
 - **Attribution:** "AI-generated interpretation, not a historical record."
+
+# Chapter 3 · Lecture 1 (Ch03 L1): `reveal_decks/chapter-03/images/ch03-lec1/` (style pass approved and published 2026-11-13; AI murals generated 2026-11-13)
+
+Chapter 3 image style: Han tomb-mural / Han pictorial stone-relief painting. AI slots below are PLACEHOLDERS until generated and approved by Steven.
+
+## `HIST270_ch03_lec1_A_title_card.webp`
+- **Used on:** slide A
+- **Description:** Course title card: terracotta warrior, Qin map, coin, title text.
+- **Source:** `reveal_decks/images/ch03_lec1_title1.jpg` converted to WebP (q80). Designed course graphic from the FA26 deck; provenance not recorded (likely AI-assisted composite). Needs confirmation.
+
+## `HIST270_ch03_lec1_B_first_emperor.webp`
+- **Used on:** slide B
+- **Description:** Later painted portrait of the First Emperor (black cap with bead strings, yellow robe).
+- **Source:** `reveal_decks/images/ch03_lec1_first_emperor.jpg` converted to WebP (q80). Carried over from the FA26 images folder (previously unused). Appears to be the widely reproduced later album portrait (public domain, Wikimedia Commons); source to confirm.
+
+## `HIST270_ch03_lec1_M_unification_map.webp`
+- **Used on:** slide M
+- **Description:** Map of Qin expansion and the defeated Warring States.
+- **Source:** `reveal_decks/images/ch03_lec1_unification_map.jpg` converted to WebP (q80). Carried over from the FA26 deck; source not recorded. Needs confirmation.
+
+## `HIST270_ch03_lec1_Q_hanmural_v1_20261113.webp`
+- **Used on:** slide Q (replaces `HIST270_ch03_lec1_Q_standardized_script.webp`, a dark overlay diagram with empty circles)
+- **Description:** Qin workshop: officials compare mismatched provincial measures, coins, and bamboo slips against one official set of standards, while craftsmen and scribes produce uniform copies.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-13 after Steven flagged the old course-made graphic. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec1_S_shuihudi_strips.webp`
+- **Used on:** slide S
+- **Description:** Photograph of excavated Qin bamboo strips.
+- **Source:** `reveal_decks/images/ch03_lec1_shuihudi_strips.jpg` converted to WebP (q80). Carried over from the FA26 deck; photographer/license not recorded. Needs confirmation.
+
+## `HIST270_ch03_lec1_U_hanmural_v1_20261113.webp`
+- **Used on:** slide U (replaces `HIST270_ch03_lec1_U_infrastructure_labor.webp`, a dark overlay diagram with empty circles)
+- **Description:** A magistrate sentences a kneeling farmer; convicts and conscripts are marched into a work gang that builds a road, a canal, an earthen wall, and a burial mound.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-13 after Steven flagged the old course-made graphic. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec1_AJ_terracotta_army.webp`
+- **Used on:** slide AJ
+- **Description:** Photograph of terracotta soldiers in Pit 1.
+- **Source:** `reveal_decks/images/ch03_lec1_terracotta_army.jpg` converted to WebP (q80). Carried over from the FA26 deck; photographer/license not recorded. Needs confirmation.
+
+## `HIST270_ch03_lec1_C_hanmural_v1_20261113.webp`
+- **Used on:** slide C
+- **Description:** A college student with headphones studies at night; on her laptop glows a painted frieze of Qin chariots and marching soldiers.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-13 after Steven approved the image descriptions. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Modern US college dorm desk at night, warm lamp; a young woman with headphones leans toward her laptop, on whose screen glows a Han-tomb-mural-style frieze of chariots and marching soldiers in red, ochre and black; notebook and highlighter beside her. Render the whole scene itself in the Han tomb-mural style (flat mineral colors, bold outlines).
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec1_E_hanmural_v1_20261113.webp`
+- **Used on:** slide E
+- **Description:** Qin officials with brushes and tally boards register a conquered town as soldiers stand guard.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-13 after Steven approved the image descriptions. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural frieze: in the gate of a conquered walled town, Qin officials in black robes and tall caps kneel at low tables writing on bamboo strips while townspeople line up to be counted; Qin crossbowmen and a chariot stand guard; a banner flutters. Horizontal register composition, energetic, cinnabar/ochre/black on plaster.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec1_F_hanmural_v1_20261113.webp`
+- **Used on:** slide F
+- **Description:** A bird’s-eye painted view of a fertile river valley ringed by mountains, with a single fortified pass guarding the way in.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-13 after Steven approved the image descriptions. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural style landscape seen from above: a green, farmed river valley (the Wei River valley) with fields and villages, ringed by stylized ochre mountains; a single fortified gate-pass with a watchtower guards the only road in; tiny chariots on the road. No map labels, no writing.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec1_G_hanmural_v1_20261113.webp`
+- **Used on:** slide G
+- **Description:** A Qin officer presents a rank token to a common soldier before cheering troops, while a noble in silk watches sourly.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-13 after Steven approved the image descriptions. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han pictorial-relief scene: on a parade ground, a Qin officer hands a rank token and a bolt of cloth to a kneeling common foot-soldier in plain armor; ranks of soldiers raise spears in celebration; at the side an aristocrat in silk robes looks on sourly, his privilege slipping. No severed heads shown. Bold outlines, red/black/ochre.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec1_H_hanmural_v1_20261113.webp`
+- **Used on:** slide H
+- **Description:** A wealthy merchant-chancellor in rich robes hosts scholars from rival schools who argue around low tables piled with bamboo books.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-13 after Steven approved the image descriptions. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural banquet-hall scene: a portly, richly dressed merchant-chancellor (Lü Buwei) sits at the center of a hall, gesturing to a ring of scholars in different robes who argue animatedly over bundles of bamboo strips; servants bring wine; a few bolts of silk and strings of coins show his wealth. Lively, crowded register composition. No writing.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec1_I_hanmural_v1_20261113.webp`
+- **Used on:** slide I
+- **Description:** In a town square, a Qin herald reads out the law from a raised platform while townspeople listen and an official sets out a reward and a whip side by side.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-13 after Steven approved the image descriptions. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han pictorial-relief scene: a Qin herald on a raised wooden platform reads out a proclamation (bamboo strips, no visible characters) to a crowd of farmers and townspeople; beside him an official displays a pile of coins and a bolt of silk on one side and a bamboo cane on the other, reward and punishment. Clear, readable composition.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec1_J_hanmural_v1_20261113.webp`
+- **Used on:** slide J
+- **Description:** A stern inspector checks an official’s records at a county office while the nervous official kneels and clerks tally grain sacks.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-13 after Steven approved the image descriptions. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural office scene: a stern imperial inspector in black robes sits on a dais examining bundles of bamboo records; a nervous county official kneels before him; in the background clerks count sacks of grain in a granary with tally sticks. Tension and accountability. No writing.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec1_K_hanmural_v1_20261113.webp`
+- **Used on:** slide K
+- **Description:** A sharp-eyed chancellor kneels before the young Qin king, unrolling a plan as generals wait behind him.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-13 after Steven approved the image descriptions. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural palace scene: the lean, sharp-eyed chancellor Li Si kneels before the young King of Qin on a raised dais, unrolling a long bamboo-strip plan (no characters visible); armored generals wait behind him and a map-like painted landscape hangs on the wall. Intense, purposeful mood.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec1_N_hanmural_v1_20261113.webp`
+- **Used on:** slide N
+- **Description:** A long column of defeated nobles and their families, carts piled with belongings, trudges toward the Qin capital under armed escort.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-13 after Steven approved the image descriptions. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han pictorial-relief procession frieze: a long line of defeated aristocrats in fine but dusty robes, their families and ox-carts piled with chests, trudge along a road toward the gates of a great walled capital (Xianyang); Qin cavalry escort them on both sides. Mood of forced exile. Horizontal register composition.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec1_P_hanmural_v1_20261113.webp`
+- **Used on:** slide P
+- **Description:** Lines of conscripts and convicts haul earth for a new road as an overseer with a tally board counts them.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-13 after Steven approved the image descriptions. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural frieze, dramatic: long lines of conscripted farmers and shaven-headed convicts in red-brown tunics haul baskets of earth and pound rammed-earth for a new road and embankment; an overseer with a tally board and a whip-bearing guard count them; carts and oxen; dust and effort. Horizontal registers, energetic.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec1_R_hanmural_v1_20261113.webp`
+- **Used on:** slide R
+- **Description:** Soldiers toss bundles of bamboo books onto a roaring bonfire as a scholar reaches out in despair and an official watches coldly.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-13 after Steven approved the image descriptions. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural scene, dramatic night: Qin soldiers hurl bundles of bamboo-strip books onto a roaring bonfire in a courtyard; a grief-stricken scholar is held back as he reaches toward the flames; a cold official in black robes supervises; a servant quietly carries away a basket of farming and medicine manuals that are spared. Flames in cinnabar red, sparks, deep black sky. No visible characters.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec1_T_hanmural_v1_20261113.webp`
+- **Used on:** slide T
+- **Description:** A clerk counts out coins on a tally board as a fined farmer is assigned to a work gang, his ox led away to haul for the state.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-13 after Steven approved the image descriptions. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han pictorial-relief scene at a county yard: a clerk at a low table moves counters on a tally board and points; a worried farmer is led to join a work gang of shaven-headed convicts carrying tools; his ox is led off to pull a state cart. Matter-of-fact bureaucratic mood. No writing.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec1_V_hanmural_v1_20261113.webp`
+- **Used on:** slide V
+- **Description:** Conscripts pound rammed earth between wooden boards to raise a frontier wall across bare hills as supply carts arrive.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-13 after Steven approved the image descriptions. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural frieze on the northern frontier: teams of conscripts and convicts pound rammed earth between wooden plank frames to raise a long earthen wall snaking over bare ochre hills; ox-carts haul grain from far away; a mounted Qin general (Meng Tian) surveys; distant nomad horsemen on the horizon. Wind, dust, scale. Earthen wall, not brick.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec1_Z_hanmural_v1_20261113.webp`
+- **Used on:** slide Z
+- **Description:** An imperial carriage procession halts on a dark road as attendants whisper and a sealed letter is handed over in secret.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-13 after Steven approved the image descriptions. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural night scene: a long imperial carriage procession halted on a road under a dark sky; inside the curtained central carriage lies the dead emperor (only hinted at); outside, a scheming palace eunuch in court robes secretly hands a sealed bamboo letter to a messenger on horseback while guards look away. Ominous, conspiratorial; torchlight in cinnabar and black.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec1_AA_hanmural_v1_20261113.webp`
+- **Used on:** slide AA
+- **Description:** In a lamplit palace hall, a scheming eunuch and a nervous chancellor bow to a young new emperor while a brother is led away by guards.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-13 after Steven approved the image descriptions. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural palace interior by lamplight: a sly palace eunuch in court robes and a worried older chancellor bow low before a young, uneasy new emperor on a dais; at the side, guards lead away a bound prince; shadows and hanging curtains. Intrigue and menace.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec1_AB_hanmural_v1_20261113.webp`
+- **Used on:** slide AB
+- **Description:** In pouring rain, mud-soaked conscripts gather around two leaders who raise a makeshift banner and call them to revolt.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-13 after Steven approved the image descriptions. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural scene in heavy rain: a band of mud-soaked conscripts with poles and farm tools gather in a flooded road camp; two leaders (Chen Sheng and Wu Guang) stand on a cart, one raising a makeshift banner on a bamboo pole, rallying them to revolt; slanting rain lines in the mural style. Defiant, electric mood. Banner without writing.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec1_AD_hanmural_v1_20261113.webp`
+- **Used on:** slide AD
+- **Description:** Han-dynasty officials in new robes take over a Qin government office, unpacking the same tally boards, seals, and record bundles.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-13 after Steven approved the image descriptions. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural office scene: early Han officials in red-trimmed robes move into a government hall, unpacking and reusing the same Qin record bundles, tally boards, measuring vessels and road maps left by their predecessors; a Qin-style weight and measuring cup on the table. Mood: continuity under new management. No writing.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec1_AG_hanmural_v1_20261113.webp`
+- **Used on:** slide AG
+- **Description:** On a smoky battlefield at dusk, rival rebel armies with different banners face each other across the ruins of a Qin fort.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-13 after Steven approved the image descriptions. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han pictorial-relief battlefield at dusk: two rival rebel armies with different-colored banners and chariots face off across a smoking, ruined Qin fortress; abandoned Qin standards lie in the dust; a lone rider gallops between them. Sense of an open future. Banners without writing.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec1_AI_hanmural_v1_20261113.webp`
+- **Used on:** slide AI
+- **Description:** A vast earthen burial mound rises above a plain as thousands of workers, carts, and overseers swarm around it.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-13 after Steven approved the image descriptions. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural panorama: a vast stepped earthen burial mound rising above a plain near mountains; thousands of tiny workers haul earth in baskets up ramps, ox-carts bring timber and stone, overseers with banners direct gangs, and a new planned settlement of identical houses for resettled families spreads in rows nearby. Epic scale, frieze composition.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+Replaced (not deleted): `reveal_decks/images/ch03_lec1_tomb_complex.jpg` was a generic “institutions → choices → outcomes” graphic captioned as the tomb complex; slide AI now uses an AI slot. Old file left in place for the original deck.
