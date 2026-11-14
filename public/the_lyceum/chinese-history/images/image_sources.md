@@ -2032,3 +2032,159 @@ Chapter 3 image style: Han tomb-mural / Han pictorial stone-relief painting. AI 
 - **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
 
 Replaced (not deleted): `reveal_decks/images/ch03_lec1_tomb_complex.jpg` was a generic “institutions → choices → outcomes” graphic captioned as the tomb complex; slide AI now uses an AI slot. Old file left in place for the original deck.
+
+# Chapter 24 (Ch24 L1-L4): `reveal_decks/chapter-24/images/ch24-lec1..4/` (FA26 online-style revision approved and published 2026-11-14; 18 AI images generated and approved by Steven 2026-11-14)
+
+Chapter 24 image style: hand-colored woodblock print in the late-Qing Shanghai pictorial (Dianshizhai) tradition, matching the AI images Steven approved for Ch24 on 2026-10-26. Images not listed here were already in the 2026-10-26 build; their sources and licenses are credited on each deck's Sources slide.
+
+## Ch24 L1: Fall of the Qing (`HIST270_ch24_lec1_fall_of_the_qing_revFA26.html`)
+
+### `HIST270_ch24_lec1_JJ_woodblock_v1_20261114.webp`
+- **Used on:** slide JJ (`how-to-use`, how-to-use)
+- **Description:** A college student with headphones studies at night at a laptop; on its screen, soldiers with white armbands stand on a city wall above smoking rooftops.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-14; approved by Steven 2026-11-14. Caption: A college student studies late at night; on her laptop glows a picture of revolutionary soldiers on a city wall in 1911. AI-generated interpretation in the chapter's woodblock-print style, not a historical record.
+- **Prompt brief:** Hand-colored woodblock-print illustration in the style of late-Qing Shanghai pictorial engravings: fine black ink linework with cross-hatching, muted washes of indigo, rust red, ochre and gray-green on warm textured paper; no text, letters, Chinese characters, symbols or writing anywhere. Scene: A college student with headphones studies at night at a laptop; on its screen, soldiers with white armbands stand on a city wall above smoking rooftops.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in the chapter's woodblock-print style, not a historical record."
+
+### `HIST270_ch24_lec1_KK_woodblock_v1_20261114.webp`
+- **Used on:** slide KK (`part1-court-reform`, segment 1)
+- **Description:** Qing officials in court robes and round caps sit at a long table, counting a thin row of silver ingots while two bankers in Western suits and top hats watch.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-14; approved by Steven 2026-11-14. Caption: Qing officials count a thin row of silver ingots while bankers in Western suits look on. AI-generated interpretation in the chapter's woodblock-print style, not a historical record.
+- **Prompt brief:** Hand-colored woodblock-print illustration in the style of late-Qing Shanghai pictorial engravings: fine black ink linework with cross-hatching, muted washes of indigo, rust red, ochre and gray-green on warm textured paper; no text, letters, Chinese characters, symbols or writing anywhere. Scene: Qing officials in court robes and round caps sit at a long table, counting a thin row of silver ingots while two bankers in Western suits and top hats watch.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in the chapter's woodblock-print style, not a historical record."
+
+### `HIST270_ch24_lec1_MM_woodblock_v1_20261114.webp`
+- **Used on:** slide MM (`part2-diagnosis`, segment 2)
+- **Description:** Young Chinese students in long gowns, some with queues, sit on tatami mats around a low table, arguing over a newspaper by lamplight.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-14; approved by Steven 2026-11-14. Caption: Chinese students in Tokyo argue over a newspaper by lamplight, about 1905. AI-generated interpretation in the chapter's woodblock-print style, not a historical record.
+- **Prompt brief:** Hand-colored woodblock-print illustration in the style of late-Qing Shanghai pictorial engravings: fine black ink linework with cross-hatching, muted washes of indigo, rust red, ochre and gray-green on warm textured paper; no text, letters, Chinese characters, symbols or writing anywhere. Scene: Young Chinese students in long gowns, some with queues, sit on tatami mats around a low table, arguing over a newspaper by lamplight.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in the chapter's woodblock-print style, not a historical record."
+
+### `HIST270_ch24_lec1_OO_woodblock_v1_20261114.webp`
+- **Used on:** slide OO (`part3-revolution`, segment 3)
+- **Description:** At dawn, New Army soldiers wearing white armbands stand guard on the gray brick wall of a Chinese river city, rifles shouldered, as smoke rises over the rooftops behind them.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-14; approved by Steven 2026-11-14. Caption: New Army soldiers with white armbands hold the wall of Wuchang, October 1911. AI-generated interpretation in the chapter's woodblock-print style, not a historical record.
+- **Prompt brief:** Hand-colored woodblock-print illustration in the style of late-Qing Shanghai pictorial engravings: fine black ink linework with cross-hatching, muted washes of indigo, rust red, ochre and gray-green on warm textured paper; no text, letters, Chinese characters, symbols or writing anywhere. Scene: At dawn, New Army soldiers wearing white armbands stand guard on the gray brick wall of a Chinese river city, rifles shouldered, as smoke rises over the rooftops behind them.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in the chapter's woodblock-print style, not a historical record."
+
+### `HIST270_ch24_lec1_I_woodblock_v1_20261114.webp`
+- **Used on:** slide I (`japan-model`, japan-model)
+- **Description:** Two Qing commissioners in embroidered court robes and hats listen as a Japanese official in a black frock coat shows them a closed, bound book in a Western-style hall.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-14; approved by Steven 2026-11-14. Caption: Qing commissioners study Japan's constitution with a Japanese official, about 1906. AI-generated interpretation in the chapter's woodblock-print style, not a historical record.
+- **Prompt brief:** Hand-colored woodblock-print illustration in the style of late-Qing Shanghai pictorial engravings: fine black ink linework with cross-hatching, muted washes of indigo, rust red, ochre and gray-green on warm textured paper; no text, letters, Chinese characters, symbols or writing anywhere. Scene: Two Qing commissioners in embroidered court robes and hats listen as a Japanese official in a black frock coat shows them a closed, bound book in a Western-style hall.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in the chapter's woodblock-print style, not a historical record."
+
+### `HIST270_ch24_lec1_HH_woodblock_v1_20261114.webp`
+- **Used on:** slide HH (`ps-royal-terms`, ps-royal-terms)
+- **Description:** A small boy emperor in a yellow robe sits on a large carved throne in an empty palace hall while two elderly eunuchs in dark robes kneel before him.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-14; approved by Steven 2026-11-14. Caption: The boy emperor Puyi, still on his throne inside the Forbidden City after 1912. AI-generated interpretation in the chapter's woodblock-print style, not a historical record.
+- **Prompt brief:** Hand-colored woodblock-print illustration in the style of late-Qing Shanghai pictorial engravings: fine black ink linework with cross-hatching, muted washes of indigo, rust red, ochre and gray-green on warm textured paper; no text, letters, Chinese characters, symbols or writing anywhere. Scene: A small boy emperor in a yellow robe sits on a large carved throne in an empty palace hall while two elderly eunuchs in dark robes kneel before him.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in the chapter's woodblock-print style, not a historical record."
+
+## Ch24 L2: Yuan Shikai and the Warlords (`HIST270_ch24_lec2_yuan_warlords_revFA26.html`)
+
+### `HIST270_ch24_lec2_HH_woodblock_v1_20261114.webp`
+- **Used on:** slide HH (`how-to-use`, how-to-use)
+- **Description:** A student with earbuds studies on a couch at night with a tablet whose screen shows soldiers surrounding a Western-style government building.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-14; approved by Steven 2026-11-14. Caption: A student studies at night; on her tablet, soldiers surround a parliament building in Beijing. AI-generated interpretation in the chapter's woodblock-print style, not a historical record.
+- **Prompt brief:** Hand-colored woodblock-print illustration in the style of late-Qing Shanghai pictorial engravings: fine black ink linework with cross-hatching, muted washes of indigo, rust red, ochre and gray-green on warm textured paper; no text, letters, Chinese characters, symbols or writing anywhere. Scene: A student with earbuds studies on a couch at night with a tablet whose screen shows soldiers surrounding a Western-style government building.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in the chapter's woodblock-print style, not a historical record."
+
+### `HIST270_ch24_lec2_II_woodblock_v1_20261114.webp`
+- **Used on:** slide II (`part1-yuan`, segment 1)
+- **Description:** Soldiers with rifles stand in ranks around a Western-style parliament building in Beijing while men in suits and long gowns file inside.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-14; approved by Steven 2026-11-14. Caption: Soldiers surround the parliament building in Beijing as members arrive to vote, 1913. AI-generated interpretation in the chapter's woodblock-print style, not a historical record.
+- **Prompt brief:** Hand-colored woodblock-print illustration in the style of late-Qing Shanghai pictorial engravings: fine black ink linework with cross-hatching, muted washes of indigo, rust red, ochre and gray-green on warm textured paper; no text, letters, Chinese characters, symbols or writing anywhere. Scene: Soldiers with rifles stand in ranks around a Western-style parliament building in Beijing while men in suits and long gowns file inside.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in the chapter's woodblock-print style, not a historical record."
+
+### `HIST270_ch24_lec2_KK_woodblock_v1_20261114.webp`
+- **Used on:** slide KK (`part2-warlords`, segment 2)
+- **Description:** An armored train full of soldiers halts before a broken railway bridge on the flat north China plain, while villagers with carts watch from a dirt road.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-14; approved by Steven 2026-11-14. Caption: A warlord army's armored train halts at a wrecked railway bridge on the north China plain, 1920s. AI-generated interpretation in the chapter's woodblock-print style, not a historical record.
+- **Prompt brief:** Hand-colored woodblock-print illustration in the style of late-Qing Shanghai pictorial engravings: fine black ink linework with cross-hatching, muted washes of indigo, rust red, ochre and gray-green on warm textured paper; no text, letters, Chinese characters, symbols or writing anywhere. Scene: An armored train full of soldiers halts before a broken railway bridge on the flat north China plain, while villagers with carts watch from a dirt road.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in the chapter's woodblock-print style, not a historical record."
+
+### `HIST270_ch24_lec2_Z_woodblock_v1_20261114.webp`
+- **Used on:** slide Z (`ps-wwi-boom`, ps-wwi-boom)
+- **Description:** Young women and girls in plain cotton jackets tend long rows of spinning machines under skylights in a large cotton mill.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-14; approved by Steven 2026-11-14. Caption: Women and girls tend spinning frames in a Shanghai cotton mill during the wartime boom, about 1918. AI-generated interpretation in the chapter's woodblock-print style, not a historical record.
+- **Prompt brief:** Hand-colored woodblock-print illustration in the style of late-Qing Shanghai pictorial engravings: fine black ink linework with cross-hatching, muted washes of indigo, rust red, ochre and gray-green on warm textured paper; no text, letters, Chinese characters, symbols or writing anywhere. Scene: Young women and girls in plain cotton jackets tend long rows of spinning machines under skylights in a large cotton mill.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in the chapter's woodblock-print style, not a historical record."
+
+## Ch24 L3: New Youth (`HIST270_ch24_lec3_new_youth_revFA26.html`)
+
+### `HIST270_ch24_lec3_JJ_woodblock_v1_20261114.webp`
+- **Used on:** slide JJ (`how-to-use`, how-to-use)
+- **Description:** A student in a hoodie studies at a desk by a window at dusk; on the laptop screen, young people in long gowns crowd around a magazine stall.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-14; approved by Steven 2026-11-14. Caption: A student studies at dusk; on her laptop, young readers crowd a magazine stall in 1910s Beijing. AI-generated interpretation in the chapter's woodblock-print style, not a historical record.
+- **Prompt brief:** Hand-colored woodblock-print illustration in the style of late-Qing Shanghai pictorial engravings: fine black ink linework with cross-hatching, muted washes of indigo, rust red, ochre and gray-green on warm textured paper; no text, letters, Chinese characters, symbols or writing anywhere. Scene: A student in a hoodie studies at a desk by a window at dusk; on the laptop screen, young people in long gowns crowd around a magazine stall.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in the chapter's woodblock-print style, not a historical record."
+
+### `HIST270_ch24_lec3_KK_woodblock_v1_20261114.webp`
+- **Used on:** slide KK (`part1-new-culture`, segment 1)
+- **Description:** Young men in long scholar gowns and a few in student uniforms crowd around a Beijing bookstall, reading thin magazines under paper lanterns.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-14; approved by Steven 2026-11-14. Caption: Students crowd a Beijing bookstall to read the new magazines, about 1918. AI-generated interpretation in the chapter's woodblock-print style, not a historical record.
+- **Prompt brief:** Hand-colored woodblock-print illustration in the style of late-Qing Shanghai pictorial engravings: fine black ink linework with cross-hatching, muted washes of indigo, rust red, ochre and gray-green on warm textured paper; no text, letters, Chinese characters, symbols or writing anywhere. Scene: Young men in long scholar gowns and a few in student uniforms crowd around a Beijing bookstall, reading thin magazines under paper lanterns.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in the chapter's woodblock-print style, not a historical record."
+
+### `HIST270_ch24_lec3_MM_woodblock_v1_20261114.webp`
+- **Used on:** slide MM (`part2-lu-xun`, segment 2)
+- **Description:** A thin boy with a queue hands a folded bundle of clothes across the wooden counter of a dim pawnshop to a clerk in a dark gown.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-14; approved by Steven 2026-11-14. Caption: A boy pawns his family's clothes to pay for his father's medicines, Shaoxing, 1890s. AI-generated interpretation in the chapter's woodblock-print style, not a historical record.
+- **Prompt brief:** Hand-colored woodblock-print illustration in the style of late-Qing Shanghai pictorial engravings: fine black ink linework with cross-hatching, muted washes of indigo, rust red, ochre and gray-green on warm textured paper; no text, letters, Chinese characters, symbols or writing anywhere. Scene: A thin boy with a queue hands a folded bundle of clothes across the wooden counter of a dim pawnshop to a clerk in a dark gown.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in the chapter's woodblock-print style, not a historical record."
+
+### `HIST270_ch24_lec3_OO_woodblock_v1_20261114.webp`
+- **Used on:** slide OO (`part3-women`, segment 3)
+- **Description:** Young Chinese women in short jackets and long skirts, carrying books, walk out through the gate of a girls' school while an older woman with bound feet watches from a doorway.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-14; approved by Steven 2026-11-14. Caption: Students leave a girls' school as an older woman with bound feet watches, 1920s. AI-generated interpretation in the chapter's woodblock-print style, not a historical record.
+- **Prompt brief:** Hand-colored woodblock-print illustration in the style of late-Qing Shanghai pictorial engravings: fine black ink linework with cross-hatching, muted washes of indigo, rust red, ochre and gray-green on warm textured paper; no text, letters, Chinese characters, symbols or writing anywhere. Scene: Young Chinese women in short jackets and long skirts, carrying books, walk out through the gate of a girls' school while an older woman with bound feet watches from a doorway.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in the chapter's woodblock-print style, not a historical record."
+
+### `HIST270_ch24_lec3_CC_woodblock_v1_20261114.webp`
+- **Used on:** slide CC (`rural`, rural)
+- **Description:** Village women in padded indigo jackets spin thread on wooden wheels in a mud-walled farmyard, with a small child, chickens, and a pile of drying grain.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-14; approved by Steven 2026-11-14. Caption: Village women spin thread in a farmyard in north China, 1930s. AI-generated interpretation in the chapter's woodblock-print style, not a historical record.
+- **Prompt brief:** Hand-colored woodblock-print illustration in the style of late-Qing Shanghai pictorial engravings: fine black ink linework with cross-hatching, muted washes of indigo, rust red, ochre and gray-green on warm textured paper; no text, letters, Chinese characters, symbols or writing anywhere. Scene: Village women in padded indigo jackets spin thread on wooden wheels in a mud-walled farmyard, with a small child, chickens, and a pile of drying grain.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in the chapter's woodblock-print style, not a historical record."
+
+## Ch24 L4: May Fourth and the United Front (`HIST270_ch24_lec4_may_fourth_united_front_revFA26.html`)
+
+### `HIST270_ch24_lec4_DD_woodblock_v1_20261114.webp`
+- **Used on:** slide DD (`how-to-use`, how-to-use)
+- **Description:** A student in a denim jacket studies at a table in the evening beside a bowl of noodles; on the laptop screen, students in long gowns march with blank banners past a city wall.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-14; approved by Steven 2026-11-14. Caption: A student studies in the evening; on her laptop, students march past a Beijing city wall in 1919. AI-generated interpretation in the chapter's woodblock-print style, not a historical record.
+- **Prompt brief:** Hand-colored woodblock-print illustration in the style of late-Qing Shanghai pictorial engravings: fine black ink linework with cross-hatching, muted washes of indigo, rust red, ochre and gray-green on warm textured paper; no text, letters, Chinese characters, symbols or writing anywhere. Scene: A student in a denim jacket studies at a table in the evening beside a bowl of noodles; on the laptop screen, students in long gowns march with blank banners past a city wall.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in the chapter's woodblock-print style, not a historical record."
+
+### `HIST270_ch24_lec4_EE_woodblock_v1_20261114.webp`
+- **Used on:** slide EE (`part1-may-fourth`, segment 1)
+- **Description:** Gray Japanese warships lie at anchor off a hilly harbor town of European-style houses with red tile roofs, smoke drifting over the water.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-14; approved by Steven 2026-11-14. Caption: Japanese warships lie off the German-built port of Qingdao, 1914. AI-generated interpretation in the chapter's woodblock-print style, not a historical record.
+- **Prompt brief:** Hand-colored woodblock-print illustration in the style of late-Qing Shanghai pictorial engravings: fine black ink linework with cross-hatching, muted washes of indigo, rust red, ochre and gray-green on warm textured paper; no text, letters, Chinese characters, symbols or writing anywhere. Scene: Gray Japanese warships lie at anchor off a hilly harbor town of European-style houses with red tile roofs, smoke drifting over the water.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in the chapter's woodblock-print style, not a historical record."
+
+### `HIST270_ch24_lec4_GG_woodblock_v1_20261114.webp`
+- **Used on:** slide GG (`part2-united-front`, segment 2)
+- **Description:** A long column of young soldiers in gray uniforms and straw sandals with rifles and bedrolls marches along a raised dirt road between flooded rice fields, while farmers pause to watch.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-14; approved by Steven 2026-11-14. Caption: Soldiers of the Northern Expedition march north between rice fields, 1926. AI-generated interpretation in the chapter's woodblock-print style, not a historical record.
+- **Prompt brief:** Hand-colored woodblock-print illustration in the style of late-Qing Shanghai pictorial engravings: fine black ink linework with cross-hatching, muted washes of indigo, rust red, ochre and gray-green on warm textured paper; no text, letters, Chinese characters, symbols or writing anywhere. Scene: A long column of young soldiers in gray uniforms and straw sandals with rifles and bedrolls marches along a raised dirt road between flooded rice fields, while farmers pause to watch.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in the chapter's woodblock-print style, not a historical record."
