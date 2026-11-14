@@ -8,4 +8,4 @@ Reminder: these packets are meant to be **in-class, flipped-classroom assignment
 - There's no chatbot step and no PDF step.
 
 ## Packets
-- uncle_toms_cabin/hist101-uncle-tom-student-packet.html: Uncle Tom in Stowe's own words (Chapters 5, 33, 40). It goes with Chapter 13, Lecture 3A, "Uncle Tom: From Hero to Insult".
+- uncle_toms_cabin/hist101-uncle-tom-student-packet.html: Uncle Tom in Stowe's own words (Chapters 5, 33, 40). It goes with Chapter 13, Lecture 4A, "Uncle Tom: From Hero to Insult".
