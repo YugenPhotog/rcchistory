@@ -2188,3 +2188,227 @@ Chapter 24 image style: hand-colored woodblock print in the late-Qing Shanghai p
 - **Prompt brief:** Hand-colored woodblock-print illustration in the style of late-Qing Shanghai pictorial engravings: fine black ink linework with cross-hatching, muted washes of indigo, rust red, ochre and gray-green on warm textured paper; no text, letters, Chinese characters, symbols or writing anywhere. Scene: A long column of young soldiers in gray uniforms and straw sandals with rifles and bedrolls marches along a raised dirt road between flooded rice fields, while farmers pause to watch.
 - **License:** Original generated work for HIST 270; no third-party rights.
 - **Attribution:** "AI-generated interpretation in the chapter's woodblock-print style, not a historical record."
+
+# Chapter 3 · Lecture 2 (Ch03 L2): `reveal_decks/chapter-03/images/ch03-lec2/` (style pass approved and published 2026-11-16; AI murals generated 2026-11-15, approved 2026-11-16)
+
+Chapter 3 image style: Han tomb-mural / Han pictorial stone-relief painting. The nine course illustrations below were carried over from the original FA26 deck and converted to WebP. The 21 mural slots were generated 2026-11-15 and approved by Steven 2026-11-16. The chalkboard cartoon was supplied by Steven Austin on 2026-11-16 for the three concept slides (AT, AU, AV); it may be reused in later decks.
+
+## `HIST270_ch03_lec2_A_title_card.webp`
+- **Used on:** slide A
+- **Description:** Course title card: a Han emperor and court, a map of the Han realm, coins and bamboo books, with the lecture title.
+- **Source:** `reveal_decks/images/ch03_lec2_title1.jpg` (and related title art) converted to WebP. Designed course graphic from the FA26 deck; provenance not recorded (likely AI-assisted composite). Needs confirmation.
+
+## `HIST270_ch03_lec2_I_han_gaozu.webp`
+- **Used on:** slide I
+- **Description:** A seated Han emperor in dark ceremonial robes with red trim, his hands resting on his knees, in a palace hall with red banners.
+- **Source:** `reveal_decks/images/han_gaozu.jpg` converted to WebP. Carried over from the FA26 deck; later painted or drawn portrait, photographer/artist and license not recorded. Needs confirmation.
+
+## `HIST270_ch03_lec2_V_xiongnu_frontier_map.webp`
+- **Used on:** slide V
+- **Description:** Map of the Xiongnu frontier and the Han dynasty about 200 BCE to 100 CE: the Xiongnu steppe confederation across the north, the Han empire in the south with its capital at Chang'an, the Gobi Desert, the Ordos loop, the Hexi Corridor, and the Great Wall line.
+- **Source:** `reveal_decks/images/xiongnu_frontier_map.jpg` converted to WebP. Carried over from the FA26 deck; course map, source not recorded. Needs confirmation.
+
+## `HIST270_ch03_lec2_W_xiongnu_warrior.webp`
+- **Used on:** slide W
+- **Description:** A Xiongnu horseman in a fur hat and fur-trimmed coat, with a bow and quiver, rides across the steppe with felt tents and grazing herds behind him.
+- **Source:** `reveal_decks/images/xiongnu_warrior.jpg` converted to WebP. Carried over from the FA26 deck; course illustration, artist and license not recorded. Needs confirmation.
+
+## `HIST270_ch03_lec2_X_heqin_marriage.webp`
+- **Used on:** slide X
+- **Description:** A sepia drawing of a marriage-alliance ceremony: a Han princess in long robes stands before a steppe ruler in armor, with Han officials on one side and mounted steppe warriors on the other.
+- **Source:** `reveal_decks/images/heqin_marriage.webp` copied/recompressed. Carried over from the FA26 deck; sepia course drawing, artist and license not recorded. Needs confirmation.
+
+## `HIST270_ch03_lec2_Z_han_warrior.webp`
+- **Used on:** slide Z
+- **Description:** A Han soldier in lamellar armor and a red-plumed helmet stands with a halberd on a hillside beside a frontier wall and watchtower.
+- **Source:** `reveal_decks/images/han_warrior.jpg` converted to WebP. Carried over from the FA26 deck; course illustration, artist and license not recorded. Needs confirmation.
+
+## `HIST270_ch03_lec2_AD_emperor_wu.webp`
+- **Used on:** slide AD
+- **Description:** Emperor Wu of Han seated on a throne in an ornate palace hall, surrounded by officials in black caps, with bronze vessels and bamboo scrolls before him and red banners behind.
+- **Source:** `reveal_decks/images/emperor_wu.jpg` converted to WebP. Carried over from the FA26 deck; later palace portrait, artist and license not recorded. Needs confirmation.
+
+## `HIST270_ch03_lec2_AG_han_dynasty_scholar_official.webp`
+- **Used on:** slide AG
+- **Description:** A sepia drawing of a Han scholar-official in a tall cap and layered robes holding an open scroll, with students and a palace courtyard behind him.
+- **Source:** `reveal_decks/images/han_dynasty_scholar_official.webp` copied/recompressed. Carried over from the FA26 deck; sepia course drawing, artist and license not recorded. Needs confirmation.
+
+## `HIST270_ch03_lec2_AP_han_dynasty_empress_lu.webp`
+- **Used on:** slide AP
+- **Description:** A Han empress in dark red and black layered robes and an ornate gold headdress sits with folded hands in a palace hall.
+- **Source:** `reveal_decks/images/han_dynasty_empress_lu.jpg` converted to WebP. Carried over from the FA26 deck; later palace portrait, artist and license not recorded. Needs confirmation.
+
+## `HIST270_concept_chalkboard_professor.webp`
+- **Used on:** slides AT (concept-selective-inheritance), AU (concept-state-monopoly), and AV (concept-remonstrance)
+- **Description:** Cartoon of a smiling professor in a tweed jacket and bow tie standing beside a large blank chalkboard. Term and definition are written on the board in the slide layout, not painted into the file.
+- **Source:** Supplied by Steven Austin, 2026-11-16. Converted from the source JPEG to WebP (1500 × 844, quality 85) for this lecture. The blank-board file is kept so it can be reused on later concept slides.
+- **License:** Course image supplied by the instructor; not a historical source.
+- **Attribution:** "Professor Austin at the chalkboard. Cartoon supplied by Steven Austin; not a historical source."
+
+## `HIST270_ch03_lec2_B_mural_v1_20261115.webp`
+- **Used on:** slide B
+- **Description:** A Han emperor on a raised dais receives kneeling officials holding bamboo records, while a Confucian scholar with scrolls stands beside armed guards.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-15; approved by Steven 2026-11-16. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural scene, palace hall: a Han emperor on a raised dais receives a row of kneeling officials in black caps holding bundles of bamboo records; to one side a robed Confucian scholar holds scrolls, to the other side armored guards with halberds stand at attention, showing moral learning and bureaucratic force side by side. Horizontal register, cinnabar/ochre/black on plaster.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec2_C_mural_v1_20261115.webp`
+- **Used on:** slide C
+- **Description:** A student studies at night with headphones; on the laptop screen glows a painted frieze of a Han emperor greeting mounted envoys.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-15; approved by Steven 2026-11-16. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Modern US college dorm desk at night with a warm lamp; a young man with headphones leans toward his laptop, on whose screen glows a Han-tomb-mural frieze of a Han emperor greeting mounted steppe envoys; notebook and pen beside him. Render the whole scene itself in the Han tomb-mural style (flat mineral colors, bold black outlines). No writing on screen or notebook.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec2_E_mural_v1_20261115.webp`
+- **Used on:** slide E
+- **Description:** Rebel soldiers and townspeople cheer as a commoner general rides through a city gate under new banners.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-15; approved by Steven 2026-11-16. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural frieze: a commoner general (Liu Bang) in plain armor rides a horse through the open gate of a walled city, followed by foot soldiers with new red banners; townspeople and farmers line the road and cheer; behind him the old black banners of Qin lie trampled on the ground. Energetic horizontal register, cinnabar/ochre/black on plaster. No writing on banners.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec2_F_mural_v1_20261115.webp`
+- **Used on:** slide F
+- **Description:** Rebels with farm tools and spears storm the gate of a Qin palace while officials in black robes flee with bundles of records.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-15; approved by Steven 2026-11-16. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural scene: a crowd of rebels, some with farm tools and some with spears, storm the great gate of a Qin palace; officials in black Qin robes flee down the steps clutching bundles of bamboo records; black Qin banners fall; smoke rises behind the roofs. Dramatic, energetic, cinnabar/ochre/black. No writing.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec2_H_mural_v1_20261115.webp`
+- **Used on:** slide H
+- **Description:** A general in a tent shares out gold and bolts of silk to kneeling commanders and advisers, while banners of many allied armies stand outside.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-15; approved by Steven 2026-11-16. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural scene: inside an open command tent, Liu Bang in plain armor hands bolts of silk and gold ingots to kneeling commanders and robed advisers; through the tent opening, many different allied banners and horsemen are visible across a plain, a coalition army. Bold outlines, cinnabar/ochre/malachite/black. No writing on banners.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec2_J_mural_v1_20261115.webp`
+- **Used on:** slide J
+- **Description:** Farmers plow and sow fields in spring while a county clerk with a tally board records households beside a village gate.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-15; approved by Steven 2026-11-16. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural / pictorial-relief farming scene in two registers: in the upper register farmers drive oxen pulling plows and sow seed in spring fields; in the lower register a county clerk with a tally board and brush sits at a low table by a village gate recording a family of farmers. Peaceful, recovering countryside. No writing.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec2_K_mural_v1_20261115.webp`
+- **Used on:** slide K
+- **Description:** A Han official copies old bamboo records onto fresh strips while a servant carries out a basket of discarded wooden punishment tools.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-15; approved by Steven 2026-11-16. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural office scene: a Han official in a black cap kneels at a low table copying bundles of old bamboo records onto fresh strips, keeping the system; behind him a servant carries away a basket of discarded wooden cangues and shackles, removing harsh features; shelves of record bundles line the wall. Calm, clear composition, ochre/cinnabar/black. No visible characters.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec2_M_mural_v1_20261115.webp`
+- **Used on:** slide M
+- **Description:** A county magistrate on a dais hears two farmers in a dispute while clerks record the case and villagers bring tax grain in carts.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-15; approved by Steven 2026-11-16. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural scene in two registers: upper register, a county magistrate in a black cap sits on a low dais under a canopy hearing two farmers arguing a land dispute, clerks with brushes recording the case; lower register, villagers bring carts of tax grain to a county granary as an official counts sacks with tally sticks. Bold outlines, cinnabar/ochre/black. No writing.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec2_N_mural_v1_20261115.webp`
+- **Used on:** slide N
+- **Description:** A boy emperor on the throne, his mother behind a screen, regional kings with retainers, and a eunuch whispering at his ear.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-15; approved by Steven 2026-11-16. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural palace scene with dramatic tension: a small boy emperor sits on a large throne; behind a painted screen his mother, the empress dowager, watches; at one side regional kings in rich robes stand with armed retainers; a palace eunuch bends to whisper in the boy's ear; officials kneel uneasily. Cinnabar/ochre/black on plaster, horizontal register. No writing.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec2_O_mural_v1_20261115.webp`
+- **Used on:** slide O
+- **Description:** A regional king reviews his own army and storehouses outside his walled capital, far from the emperor's palace on the horizon.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-15; approved by Steven 2026-11-16. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural scene: in the foreground a regional king in rich robes and a tall cap reviews his own ranks of foot soldiers and cavalry outside his walled capital, with full granaries and a treasury behind him; far away on the horizon, small and distant, the emperor's palace roofs. Sense of independent regional power. Cinnabar/ochre/malachite/black. No writing.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec2_P_mural_v1_20261115.webp`
+- **Used on:** slide P
+- **Description:** Mounted steppe archers gallop past a Han watchtower and rammed-earth wall while farmers in the fields below run for the gate.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-15; approved by Steven 2026-11-16. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural / pictorial-relief frieze: on the left, a band of mounted steppe archers in fur caps gallop at full speed, drawing bows; on the right, a Han rammed-earth wall with a wooden watchtower where a sentry raises a signal; below, farmers drop their hoes and run toward the town gate. Dynamic motion, bold outlines, ochre/cinnabar/black. Dignified depiction of the riders, no caricature.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec2_R_mural_v1_20261115.webp`
+- **Used on:** slide R
+- **Description:** Han imperial cavalry under a general's banner cut off a column of rebel kings' troops at a river crossing.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-15; approved by Steven 2026-11-16. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han pictorial-relief battle frieze: Han imperial cavalry and chariots under a general's tall banner sweep in from the right to cut off a column of rebel soldiers and supply carts at a river crossing; rebel banners in disarray; a rebel king in a chariot turns to flee. Energetic, horizontal register, bold outlines, cinnabar/ochre/black. No gore, no writing on banners.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec2_U_mural_v1_20261115.webp`
+- **Used on:** slide U
+- **Description:** Han envoys lead a princess's carriage and carts of silk toward a camp of felt tents, watched by mounted steppe warriors.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-15; approved by Steven 2026-11-16. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural frieze across the steppe: a procession of Han envoys on horseback escorts a covered carriage carrying a bride-princess and ox-carts loaded with bolts of silk and jars of grain toward a camp of round felt tents; mounted Xiongnu warriors with bows watch from a ridge; wide grassland with stylized hills. Dignified depiction of the steppe riders, no caricature. Cinnabar/ochre/malachite/black. No writing.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec2_Y_mural_v1_20261115.webp`
+- **Used on:** slide Y
+- **Description:** In the upper register, Han carts of silk roll north to a steppe camp; in the lower register, steppe horsemen raid a Han border village anyway.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-15; approved by Steven 2026-11-16. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural composition in two horizontal registers: upper register, a line of Han ox-carts loaded with bolts of silk and grain sacks rolls north and is received at a Xiongnu felt-tent camp, where a seated ruler accepts them; lower register, mounted riders sweep into a Han frontier village, villagers flee and a watchtower signal fire burns. Shows gifts and raids happening at the same time. Dignified, no caricature. Cinnabar/ochre/black. No writing.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec2_AC_mural_v1_20261115.webp`
+- **Used on:** slide AC
+- **Description:** At a state ironworks, workers pour molten iron while officials weigh salt and count coins for the treasury.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-15; approved by Steven 2026-11-16. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural / pictorial-relief workshop scene in two registers: upper register, workers at a state ironworks pump large bellows and pour glowing molten iron into molds beside a furnace; lower register, officials in black caps weigh sacks of salt on a balance and count strings of round coins into treasury chests while armored soldiers wait to carry supplies to the frontier. Energetic, cinnabar/ochre/black. No writing.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec2_AE_mural_v1_20261115.webp`
+- **Used on:** slide AE
+- **Description:** At a salt works, state officials take over the boiling pans while a wealthy merchant is turned away with his empty carts.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-15; approved by Steven 2026-11-16. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han pictorial-relief salt-works scene, inspired by real Han salt-well reliefs: workers boil brine in large iron pans over furnaces beside a tall wooden derrick; state officials in black caps supervise and stamp sacks (no visible characters); at the edge a wealthy private merchant in fine robes is turned away by a guard, his ox-carts empty. Cinnabar/ochre/black on stone texture. No writing.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec2_AF_mural_v1_20261115.webp`
+- **Used on:** slide AF
+- **Description:** Students in scholar caps kneel in rows at a national academy, reciting the classics before a master.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-15; approved by Steven 2026-11-16. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural scene: in a large open hall of the imperial academy, rows of young students in scholar caps kneel at low desks with bamboo-strip books, reciting before a seated master with a long beard; court officials in black caps observe from the side; a courtyard with pines beyond. Calm, ordered composition, ochre/cinnabar/malachite/black. No visible characters.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec2_AH_mural_v1_20261115.webp`
+- **Used on:** slide AH
+- **Description:** A Confucian official kneels before an angry emperor, holding up a bamboo memorial of criticism while other officials bow low in fear.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-15; approved by Steven 2026-11-16. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural palace scene with tension: a Confucian official in a black cap kneels firmly before a seated, angry emperor and holds up a bundle of bamboo strips (a memorial of criticism, no visible characters); the emperor leans forward with a stern gesture; other officials bow low in fear; guards stand by. Bold outlines, cinnabar/ochre/black. No writing.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec2_AI_mural_v1_20261115.webp`
+- **Used on:** slide AI
+- **Description:** A balanced scene: on one side a scholar teaches from bamboo books, on the other clerks tally records and a magistrate judges, both beneath one imperial canopy.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-15; approved by Steven 2026-11-16. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural composition divided into two halves under a single imperial canopy at the top: left half, a Confucian master teaches students from bamboo-strip books; right half, clerks tally records and a magistrate passes judgment with guards beside him; the two halves meet at the center below a seated emperor. Balanced, symmetrical, cinnabar/ochre/black. No visible characters.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec2_AN_mural_v1_20261115.webp`
+- **Used on:** slide AN
+- **Description:** A bird's-eye view of the walled Han capital Chang'an at dawn: palaces, markets, and roads busy with carts, officials, and farmers.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-15; approved by Steven 2026-11-16. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural style bird's-eye view of a great walled capital (Chang'an) at dawn: palace halls with tiled roofs in the center, a busy market quarter, wide roads with ox-carts, officials on horseback, farmers carrying produce through the gates; fields and the river beyond the walls. Lively, cinnabar/ochre/malachite/black. No writing.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec2_AQ_mural_v1_20261115.webp`
+- **Used on:** slide AQ
+- **Description:** Liu princes and senior officials with armed guards burst into a palace hall where members of the empress's clan sit in high seats.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-15; approved by Steven 2026-11-16. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **Prompt brief:** Han tomb-mural palace scene, tense: Liu princes in princely caps and senior officials, backed by armed palace guards with halberds, stride into a hall where members of an empress's clan in rich robes sit in high seats and rise in alarm; an empty throne under a canopy at the center. Dramatic but no gore. Cinnabar/ochre/black. No writing.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
