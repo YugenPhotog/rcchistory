@@ -10,12 +10,190 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&amp;family=Lora:wght@400;500;600&amp;family=Inter:wght@500;600;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/site-enhancements.css">
+  <!-- TEMPORARY THANKSGIVING THEME (Nov 2026). To revert: copy index_standard.html over index.html. -->
+  <style>
+    :root {
+      --tg-pumpkin: #d9661f;
+      --tg-pumpkin-dark: #a8461a;
+      --tg-cranberry: #8e1f2f;
+      --tg-gold: #e0a83a;
+      --tg-brown: #3b2416;
+      --tg-cocoa: #5a3824;
+      --tg-cream: #fbf3e4;
+      --tg-paper: #fffaf1;
+      --tg-line: #e6cfae;
+    }
+    body.home-page {
+      background:
+        radial-gradient(circle at 8% 12%, rgba(224, 168, 58, 0.10) 0, transparent 38%),
+        radial-gradient(circle at 92% 60%, rgba(142, 31, 47, 0.07) 0, transparent 40%),
+        var(--tg-cream);
+    }
+    .home-hero {
+      position: relative;
+      overflow: hidden;
+      min-height: clamp(320px, 42vw, 520px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        linear-gradient(180deg, rgba(30, 15, 6, 0.30) 0%, rgba(30, 15, 6, 0.55) 70%, rgba(30, 15, 6, 0.80) 100%),
+        url("images/thanksgiving/harvest_hero.webp") center 60% / cover no-repeat,
+        var(--tg-brown);
+      border-bottom: 6px solid var(--tg-gold);
+    }
+    .home-hero .banner-content {
+      position: relative;
+      z-index: 1;
+      background: rgba(43, 24, 12, 0.55);
+      backdrop-filter: blur(2px);
+      border: 1px solid rgba(224, 168, 58, 0.55);
+      border-radius: 14px;
+      padding: 1.6rem clamp(1.2rem, 4vw, 2.6rem);
+      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.35);
+    }
+    .home-hero .banner-main-title { color: #fff6e6; text-shadow: 0 3px 12px rgba(0, 0, 0, 0.55); }
+    .home-hero .banner-subtitle, .home-hero .banner-quote { color: #f6dfbd; }
+    .home-hero .eyebrow { color: var(--tg-gold); }
+    .home-hero .banner-quote em { color: var(--tg-gold); }
+    .tg-ribbon {
+      display: inline-block;
+      margin: 0 0 0.9rem;
+      padding: 0.35rem 1rem;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--tg-cranberry), var(--tg-pumpkin));
+      color: #fff6e6;
+      font: 700 0.8rem/1.2 Inter, sans-serif;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    .main-nav { background: linear-gradient(90deg, var(--tg-brown), var(--tg-cocoa) 50%, var(--tg-brown)); border-bottom: 3px solid var(--tg-pumpkin); }
+    .nav-link:hover, .nav-link:focus-visible { color: var(--tg-gold); border-bottom-color: var(--tg-gold); }
+
+    .tg-garland {
+      display: block;
+      width: min(760px, 94%);
+      height: auto;
+      margin: 0.5rem auto 0;
+      pointer-events: none;
+      user-select: none;
+    }
+    .tg-greeting {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 1.8rem;
+      align-items: center;
+      margin: 0.5rem auto 2rem;
+      padding: 1.6rem 2rem;
+      background: #f8eacd;
+      border: 2px dashed var(--tg-pumpkin);
+      border-radius: 18px;
+      box-shadow: 0 10px 26px rgba(90, 56, 36, 0.14);
+    }
+    .tg-greeting img { width: 100%; height: auto; border-radius: 50%; mix-blend-mode: multiply; }
+    .tg-greeting h2 {
+      font: 900 clamp(1.6rem, 3.2vw, 2.3rem)/1.15 'Playfair Display', serif;
+      color: var(--tg-cranberry);
+      margin: 0.2rem 0 0.6rem;
+    }
+    .tg-greeting p { color: var(--tg-brown); margin: 0 0 0.7rem; }
+    .tg-greeting .eyebrow { color: var(--tg-pumpkin-dark); }
+    .tg-fact {
+      background: var(--tg-paper);
+      border-left: 5px solid var(--tg-gold);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-size: 0.95rem;
+    }
+    .tg-fact strong { color: var(--tg-cranberry); font-family: Inter, sans-serif; letter-spacing: 0.04em; }
+
+    .eyebrow, .course-kicker, .modality-label { color: var(--tg-pumpkin-dark); }
+    .section-title { color: var(--tg-brown); }
+    .catalog-card {
+      background: var(--tg-paper);
+      border-color: var(--tg-line);
+      border-top: 6px solid var(--tg-pumpkin);
+      position: relative;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .catalog-card:nth-child(3n+2) { border-top-color: var(--tg-cranberry); }
+    .catalog-card:nth-child(3n) { border-top-color: var(--tg-gold); }
+    .catalog-card::after {
+      content: "\1F341";
+      position: absolute;
+      top: 0.8rem;
+      right: 1rem;
+      font-size: 1.35rem;
+      opacity: 0.85;
+      transform: rotate(18deg);
+      pointer-events: none;
+    }
+    .catalog-card:nth-child(even)::after { content: "\1F342"; transform: rotate(-14deg); }
+    .catalog-card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(90, 56, 36, 0.18); }
+    .catalog-card h3 { color: var(--tg-brown); }
+    .modality-card { background: #fbefd9; border-color: #e3c08f; }
+    .modality-card.online { background: #f6e3d9; border-color: #dcae98; }
+    .modality-card strong { color: var(--tg-cranberry); }
+    .course-button { background: var(--tg-pumpkin-dark); color: #fff; }
+    .course-button:hover, .course-button:focus-visible { background: var(--tg-cranberry); }
+    .upcoming-course { background: linear-gradient(145deg, var(--tg-paper), #f7e4c4); }
+    .lyceum-card { background: linear-gradient(145deg, #4a2a1a, #2a170d); border-top-color: var(--tg-gold); }
+    .lyceum-card .course-kicker, .lyceum-card .access-note { color: var(--tg-gold) !important; }
+    .resource-card { background: var(--tg-paper); border-color: var(--tg-line); border-bottom: 4px solid var(--tg-gold); }
+    .resource-card strong { color: var(--tg-cranberry); }
+    .resource-card:hover { border-color: var(--tg-pumpkin); }
+    .content-box { background: var(--tg-paper); border-color: var(--tg-line); }
+    .contact-item { background: #f8eacd; border-color: var(--tg-line); }
+    .contact-item a { color: var(--tg-cranberry); }
+    .quote-accent { border-left-color: var(--tg-pumpkin); }
+    .site-footer { background: linear-gradient(90deg, var(--tg-brown), var(--tg-cranberry), var(--tg-brown)); color: #fff2dc; }
+    .site-footer .footer-text, .site-footer .footer-quote { color: #fff2dc; }
+    .tg-footer-note { margin-top: 0.4rem; color: var(--tg-gold); font-family: Inter, sans-serif; font-size: 0.85rem; letter-spacing: 0.05em; }
+
+    /* Falling leaves: purely decorative, never blocks clicks */
+    .tg-leaves { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 50; }
+    .tg-leaf {
+      position: absolute;
+      top: -60px;
+      width: 26px;
+      height: 26px;
+      opacity: 0.85;
+      animation: tg-fall linear infinite, tg-sway ease-in-out infinite alternate;
+    }
+    @keyframes tg-fall { to { transform: translateY(115vh) rotate(540deg); } }
+    @keyframes tg-sway { from { margin-left: -30px; } to { margin-left: 30px; } }
+    .tg-leaf-toggle {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      z-index: 60;
+      border: 0;
+      border-radius: 999px;
+      padding: 0.55rem 0.9rem;
+      background: var(--tg-brown);
+      color: #fff2dc;
+      font: 600 0.8rem Inter, sans-serif;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+      cursor: pointer;
+    }
+    .tg-leaf-toggle:hover, .tg-leaf-toggle:focus-visible { background: var(--tg-cranberry); }
+    @media (prefers-reduced-motion: reduce) {
+      .tg-leaves, .tg-leaf-toggle { display: none; }
+      .catalog-card, .modality-card { transition: none; }
+    }
+    @media (max-width: 700px) {
+      .tg-greeting { grid-template-columns: 1fr; text-align: center; padding: 1.3rem; }
+      .tg-greeting img { max-width: 170px; margin: 0 auto; }
+    }
+  </style>
 </head>
 <body class="home-page">
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <header class="text-banner home-hero">
     <div class="banner-content">
+      <p class="tg-ribbon"><span aria-hidden="true">&#127810;</span> Happy Thanksgiving <span aria-hidden="true">&#127810;</span></p>
       <p class="eyebrow">History | Philosophy | Religion</p>
       <h1 class="banner-main-title">Professor Steven Austin</h1>
       <p class="banner-subtitle">Courses and Digital Learning Resources</p>
@@ -33,6 +211,16 @@
   </nav>
 
   <main id="main-content" class="container">
+    <img class="tg-garland" src="images/thanksgiving/leaf_garland.webp" alt="" aria-hidden="true" width="1280" height="319">
+    <section class="tg-greeting" aria-labelledby="tg-greeting-title">
+      <img src="images/thanksgiving/professor_turkey.webp" alt="A cheerful cartoon turkey in spectacles and a tweed cap, reading a history book beside a pumpkin" width="520" height="520">
+      <div>
+        <p class="eyebrow">A Seasonal Note</p>
+        <h2 id="tg-greeting-title">Happy Thanksgiving from Professor Austin!</h2>
+        <p>I am grateful for every student who brings curiosity, questions, and good evidence to class. Enjoy the break, rest up, eat well, and come back ready for the final stretch of the semester.</p>
+        <p class="tg-fact"><strong>History Bite:</strong> Thanksgiving became a national holiday after Sarah Josepha Hale spent years writing letters to presidents. Abraham Lincoln finally proclaimed it in 1863, in the middle of the Civil War. In 1939 Franklin Roosevelt moved it a week earlier (critics called it "Franksgiving"), and in 1941 Congress fixed it on the fourth Thursday of November.</p>
+      </div>
+    </section>
     <section class="welcome-section compact-intro" aria-labelledby="welcome-title">
       <p class="eyebrow">An Evergreen Academic Library</p>
       <h2 id="welcome-title" class="section-title">Choose Your Course</h2>
@@ -131,6 +319,8 @@
       </div>
     </section>
 
+    <img class="tg-garland" src="images/thanksgiving/leaf_garland.webp" alt="" aria-hidden="true" width="1280" height="319" loading="lazy">
+
     <section id="resources" class="resource-section" aria-labelledby="resources-title">
       <p class="eyebrow">Public Resources</p>
       <h2 id="resources-title" class="section-title">Learning Beyond the Course Page</h2>
@@ -170,6 +360,7 @@
   <footer class="site-footer">
     <p class="footer-quote"><em>"The past is prologue."</em></p>
     <p class="footer-text">Professor Steven Austin | Courses in History &amp; Philosophy</p>
+    <p class="tg-footer-note"><span aria-hidden="true">&#127809;</span> Wishing you a warm and restful Thanksgiving <span aria-hidden="true">&#129383;</span></p>
   </footer>
   <script>
     (() => {
@@ -193,6 +384,50 @@
         portrait.src = portraits[nextPortrait];
         currentPortrait = nextPortrait;
       }, 5000);
+    })();
+  </script>
+  <script>
+    /* Temporary Thanksgiving falling leaves (decorative only) */
+    (() => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const colors = ['#d9661f', '#8e1f2f', '#e0a83a', '#a8461a', '#b5651d', '#c0392b'];
+      const leafPath = 'M12 1 L14.2 6.5 L19.5 4.8 L17.4 9.8 L23 11 L18.2 14 L20.5 18.8 L14.6 17.6 L13 23 L12 23 L11 17.6 L3.5 18.8 L5.8 14 L1 11 L6.6 9.8 L4.5 4.8 L9.8 6.5 Z';
+      const layer = document.createElement('div');
+      layer.className = 'tg-leaves';
+      layer.setAttribute('aria-hidden', 'true');
+      const count = window.innerWidth < 700 ? 8 : 16;
+      for (let i = 0; i < count; i++) {
+        const leaf = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        leaf.setAttribute('viewBox', '0 0 24 24');
+        leaf.classList.add('tg-leaf');
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', leafPath);
+        path.setAttribute('fill', colors[i % colors.length]);
+        leaf.appendChild(path);
+        const size = 16 + Math.random() * 18;
+        leaf.style.width = size + 'px';
+        leaf.style.height = size + 'px';
+        leaf.style.left = (Math.random() * 100) + 'vw';
+        const fall = 11 + Math.random() * 12;
+        const sway = 2.5 + Math.random() * 3;
+        leaf.style.animationDuration = fall + 's, ' + sway + 's';
+        leaf.style.animationDelay = (-Math.random() * fall) + 's, 0s';
+        layer.appendChild(leaf);
+      }
+      document.body.appendChild(layer);
+
+      const toggle = document.createElement('button');
+      toggle.type = 'button';
+      toggle.className = 'tg-leaf-toggle';
+      toggle.setAttribute('aria-pressed', 'true');
+      toggle.textContent = '\u{1F341} Pause leaves';
+      toggle.addEventListener('click', () => {
+        const on = layer.style.display !== 'none';
+        layer.style.display = on ? 'none' : '';
+        toggle.setAttribute('aria-pressed', String(!on));
+        toggle.textContent = on ? '\u{1F341} Let leaves fall' : '\u{1F341} Pause leaves';
+      });
+      document.body.appendChild(toggle);
     })();
   </script>
 </body>
