@@ -2412,3 +2412,140 @@ Chapter 3 image style: Han tomb-mural / Han pictorial stone-relief painting. The
 - **Prompt brief:** Han tomb-mural palace scene, tense: Liu princes in princely caps and senior officials, backed by armed palace guards with halberds, stride into a hall where members of an empress's clan in rich robes sit in high seats and rise in alarm; an empty throne under a canopy at the center. Dramatic but no gore. Cinnabar/ochre/black. No writing.
 - **License:** Original generated work for HIST 270; no third-party rights.
 - **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+# Chapter 3 · Lecture 4 (Ch03 L4): `reveal_decks/chapter-03/images/ch03-lec4/` (House Style pass approved and published 2026-11-18; AI murals generated 2026-11-18)
+
+Chapter 3 image style: Han tomb-mural / Han pictorial stone-relief painting. The 14 murals below were generated 2026-11-18 and approved for publication by Steven 2026-11-18. Two images show real objects (Q, AB); M is a course map. The new chalkboard cartoon (Han envoy) lives in the shared folder `reveal_decks/shared/concept-chalkboards/` and may be reused in later decks.
+
+## `HIST270_ch03_lec4_A_mural_v1_20261118.webp`
+- **Used on:** slide title
+- **Description:** A Han envoy’s caravan, officials on horseback with a yak-tail-tassel envoy’s staff, soldiers, and Bactrian camels carrying silk, leaves a Han timber gate tower on a rammed-earth wall, heading toward desert and snowy mountains.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18; approved by Steven 2026-11-18. v1 rejected (European stone castle gate) and regenerated. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec4_D_mural_v1_20261118.webp`
+- **Used on:** slide D (Segment 1 opener)
+- **Description:** Emperor Wu, seated on a dais, hands the envoy’s staff to the kneeling Zhang Qian; attendants and a steppe guide in fur kneel behind, before a painted mountain screen.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18; approved by Steven 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec4_E_mural_v1_20261118.webp`
+- **Used on:** slide E
+- **Description:** A Han army column with infantry, chariots, and grain carts marches into empty grassland while Xiongnu horsemen ride away, leaving an abandoned felt-tent camp.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18; approved by Steven 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec4_G_mural_v1_20261118.webp`
+- **Used on:** slide G
+- **Description:** The captive Zhang Qian sits holding his envoy’s staff outside a felt tent in a Xiongnu camp; two guards with bows stand nearby; horses and sheep graze.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18; approved by Steven 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec4_H_mural_v1_20261118.webp`
+- **Used on:** slide H
+- **Description:** A gray Zhang Qian kneels before Emperor Wu, gesturing west as he reports; a low table holds a bolt of silk, a blue glass cup, and bamboo records; scribes write on bamboo strips.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18; approved by Steven 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec4_J_mural_v1_20261118.webp`
+- **Used on:** slide J (Segment 2 opener)
+- **Description:** A camel caravan approaches a walled oasis town with poplars and irrigated fields; two Han soldiers watch from a watchtower with a red banner.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18; approved by Steven 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec4_L_mural_v1_20261118.webp`
+- **Used on:** slide L
+- **Description:** A Han general in a red cloak leads infantry, crossbowmen, cavalry, and pack horses over a snowy mountain pass toward Ferghana.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18; approved by Steven 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec4_N_mural_v1_20261118.webp`
+- **Used on:** slide N
+- **Description:** Outside a Han frontier fort gate, Sogdian and Parthian merchants in tall felt caps and belted coats and an Indian merchant in a white wrap and turban lead loaded Bactrian camels; a Han soldier with a halberd and a clerk with bamboo strips watch.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18; approved by Steven 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec4_O_mural_v1_20261118.webp`
+- **Used on:** slide O
+- **Description:** A Han estate courtyard: a groom leads two horses, a servant opens a chest of gold, glass cups and beads lie on a table, and women sort walnuts, pomegranates, sesame, and coriander while an official examines a pomegranate.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18; approved by Steven 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec4_P_mural_v1_20261118.webp`
+- **Used on:** slide P
+- **Description:** Under a tile roof, three women reel silk from cocoons in a basin, twist thread on a wheel, and weave patterned silk on a treadle loom, after the Han tomb scene in Ebrey p. 48.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18; approved by Steven 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec4_S_mural_v1_20261118.webp`
+- **Used on:** slide S (Segment 3 opener)
+- **Description:** Three Han scholar-officials kneel around an unrolled painted silk map of the western lands in a lamp-lit library of bamboo scrolls.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18; approved by Steven 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec4_T_mural_v1_20261118.webp`
+- **Used on:** slide T
+- **Description:** A Han envoy and attendants walk through the market of a Parthian city with an arched iwan hall and flat-roofed houses; merchants sell glass vessels and cloth; a local scribe writes on a scroll.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18; approved by Steven 2026-11-18. v1 rejected (domes and minaret, anachronistic) and regenerated. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec4_U_mural_v1_20261118.webp`
+- **Used on:** slide U
+- **Description:** Ban Chao, in armor and a red cloak, meets an oasis city’s ruler, who offers a bowl and leads a horse forward at a mud-brick gate; Han crossbowmen on a ridge behind as a show of force.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18; approved by Steven 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec4_AC_mural_v1_20261118.webp`
+- **Used on:** slide AC
+- **Description:** A shaggy two-humped Bactrian camel in its winter coat carries cargo through a snowy valley, led by a cameleer in fur; a second camel follows.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18; approved by Steven 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec4_AD_mural_v1_20261118.webp`
+- **Used on:** slide AD
+- **Description:** A traveling teacher from India in an ochre robe, a bundle of books on his back, walks and talks with a Han merchant beside a camel line near an oasis.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18; approved by Steven 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec4_M_map_v1_20261118.webp`
+- **Used on:** slide M
+- **Description:** Course map, "The Silk Road, about 100 BCE": Han territory and Chang'an, the Western Regions under Han overlordship (dashed), northern and southern routes around the Taklamakan Desert, Niya, the Pamir Mountains, Ferghana with the 104 and 102 BCE campaign arrow, Bactria, Parthia, India, the Xiongnu steppe, and an arrow toward Rome.
+- **Source:** Drawn for HIST 270 with matplotlib from Natural Earth public-domain coastline, river, and shaded-relief data, 2026-11-18. Routes and borders approximate; compare Ebrey, Map 3.1.
+- **License:** Original course graphic; Natural Earth data is public domain.
+- **Attribution:** "Course map. Base data: Natural Earth (public domain)."
+
+## `HIST270_ch03_lec4_Q_niya_arm_cover_commons.webp`
+- **Used on:** slide Q
+- **Description:** The "Five Planets appear in the east" brocade silk arm cover from Niya tomb 8 (excavated 1995), late Han to Jin period, about 2nd–3rd century CE, 12.5 x 18.5 cm; Xinjiang Uygur Autonomous Region Museum. The textile illustrated in Ebrey's Material Culture box (p. 53).
+- **Source:** Wikimedia Commons, File:"Five stars rising in the East" armband.jpg (https://commons.wikimedia.org/wiki/File:%22Five_stars_rising_in_the_East%22_armband.jpg), converted to WebP (750 px wide).
+- **License:** Public domain.
+- **Attribution:** "Photograph, Wikimedia Commons (public domain)."
+
+## `HIST270_ch03_lec4_AB_xiongnu_plaque_met.webp`
+- **Used on:** slide AB
+- **Description:** Plaque with tiger devouring ram, Xiongnu, about 2nd century BCE, bronze (The Met's date).
+- **Source:** The Metropolitan Museum of Art, object 324084 (https://www.metmuseum.org/art/collection/search/324084), Open Access image, converted to WebP (1600 px).
+- **License:** Public domain (CC0, Met Open Access).
+- **Attribution:** "The Metropolitan Museum of Art, Open Access (public domain)."
+
+## `HIST270_concept_chalkboard_zhang_qian.webp` (shared folder `reveal_decks/shared/concept-chalkboards/`)
+- **Used on:** Ch03 L4 slide F (concept: envoy); available to later decks
+- **Description:** Chalkboard cartoon of a smiling Han envoy (imagined as Zhang Qian) with a short beard, black cap, dark blue and red robe, and a tall yak-tail-tassel envoy's staff, beside a blank chalkboard.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18 in the style of Steven Austin's professor chalkboard cartoon; approved by Steven 2026-11-18 ("love the new chalkboard").
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "Course cartoon, AI-generated in the style of Professor Austin's chalkboard cartoon; not a portrait or historical source."
