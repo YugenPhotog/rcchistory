@@ -160,6 +160,19 @@
             font-weight: 600;
         }
     </style>
+    <style id="study-buddy-css">
+        /* Open Study Buddy panel (ported from the HIST 270 FA26 online-study layer): shows the current slide's notes on screen. */
+        #narr-btn{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;z-index:60;font:600 14px Lora,Georgia,serif;letter-spacing:.06em;color:#0F2A20;background:#9ED8D2;border:0;border-radius:20px;padding:8px 16px;box-shadow:0 2px 8px rgba(0,0,0,.4);cursor:pointer}
+        #narr-btn:hover,#narr-btn:focus{background:#F1D46A;outline:2px solid #F1D46A;outline-offset:2px}
+        #narr-btn[aria-expanded="true"]{background:#D4AF37}
+        #narr-panel{position:fixed;right:18px;bottom:62px;z-index:59;width:min(600px,92vw);max-height:66vh;overflow:auto;background:#FFFAF0;border:1px solid #2C7873;border-top:4px solid #D4AF37;border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.55);padding:14px 18px 12px;color:#333;font:16px/1.5 Lora,Georgia,serif;text-align:left}
+        #narr-panel[hidden]{display:none}
+        #narr-panel .np-head{display:flex;justify-content:space-between;align-items:center;margin:0 0 6px;font:600 12px Lora,serif;letter-spacing:.14em;text-transform:uppercase;color:#2C7873}
+        #narr-panel .np-close{background:none;border:0;color:#2C7873;font-size:22px;line-height:1;cursor:pointer}
+        #narr-panel .np-close:hover,#narr-panel .np-close:focus{color:#9B2C2C}
+        #narr-panel audio{width:100%;margin:0 0 8px}
+        @media print{#narr-btn,#narr-panel{display:none!important}}
+    </style>
 </head>
 <body>
     <div class="reveal">
@@ -1966,5 +1979,37 @@
             }
         });
     </script>
+
+    <script id="study-buddy-js">
+        /* Open Study Buddy: shows the current slide's notes on screen. Button at the bottom, or the N key; N or Esc closes.
+           A section with data-audio="..." also gets an audio player (none recorded yet). Ported from the HIST 270 FA26 online-study layer. */
+        (function(){
+          var btn=document.createElement('button'); btn.type='button'; btn.id='narr-btn';
+          btn.setAttribute('aria-controls','narr-panel'); btn.setAttribute('aria-expanded','false'); btn.setAttribute('aria-label','Open Study Buddy'); btn.textContent='Open Study Buddy';
+          btn.title='Open Study Buddy notes for this slide (N)';
+          var p=document.createElement('div'); p.id='narr-panel'; p.setAttribute('role','region'); p.setAttribute('aria-label','Study Buddy notes'); p.setAttribute('aria-live','polite'); p.hidden=true;
+          p.innerHTML='<p class="np-head"><span>Study Buddy notes</span><button type="button" class="np-close" aria-label="Close Study Buddy">&times;</button></p><div class="np-media"></div><div class="np-body"></div>';
+          document.body.appendChild(p); document.body.appendChild(btn);
+          var body=p.querySelector('.np-body'), media=p.querySelector('.np-media');
+          function fill(){
+            var s=Reveal.getCurrentSlide(); if(!s) return;
+            var n=s.querySelector('aside.notes'); body.innerHTML=n?n.innerHTML:'<p>No notes for this slide.</p>';
+            var a=s.getAttribute('data-audio'); media.innerHTML=a?'<audio controls preload="none" src="'+a+'"></audio>':'';
+            p.scrollTop=0;
+          }
+          function isOpen(){ return !p.hidden; }
+          function openP(){ fill(); p.hidden=false; btn.setAttribute('aria-expanded','true'); }
+          function closeP(){ p.hidden=true; btn.setAttribute('aria-expanded','false'); media.innerHTML=''; }
+          btn.addEventListener('click',function(e){ e.stopPropagation(); isOpen()?closeP():openP(); });
+          p.querySelector('.np-close').addEventListener('click',function(e){ e.stopPropagation(); closeP(); btn.focus(); });
+          window.addEventListener('keydown',function(e){
+            var t=e.target; if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable)) return;
+            if((e.key==='n'||e.key==='N')&&!e.ctrlKey&&!e.metaKey&&!e.altKey){ e.preventDefault(); e.stopImmediatePropagation(); isOpen()?closeP():openP(); return; }
+            if(e.key==='Escape'&&isOpen()&&!document.querySelector('.popup.active')){ e.preventDefault(); e.stopImmediatePropagation(); closeP(); }
+          },true);
+          Reveal.on('slidechanged',function(){ if(isOpen()) fill(); });
+        })();
+    </script>
+
 </body>
 </html>
