@@ -39,6 +39,113 @@
 <body>
     <div id="root"></div>
     
+    <script>
+    /* PHIL_QGUARD_START: shared one-question checker for PHIL 120 tutor bots (plain JS). */
+    (function (g) {
+        const TAIL_RE = /^\s*(?:Checkpoints completed:.*|VERDICT\s*:.*|<!--[\s\S]*?-->)\s*$/gim;
+        const WH = '(?:what|why|how|who|which|where|whether|when)';
+        const AUX = '(?:does|do|did|is|are|was|were|would|should|could|can|will|has|have|might|must)';
+        const SUBJ = '(?:it|he|she|they|you|that|this|the|anyone|anything|your|his|her|their|there|we|i|socrates|euthyphro|aristotle|mill|hobbes|plato|kant)';
+        const COMPOUND_RES = [
+            new RegExp(',\\s*(?:and|or)\\s+' + WH + '\\b', 'i'),                       // "..., and what ...?"
+            new RegExp(',\\s*and\\s+' + AUX + '\\s+' + SUBJ + '\\b', 'i'),              // "..., and does the text ...?"
+            new RegExp('\\s(?:and|but)\\s+(?:why|how)\\s+' + AUX + '\\b', 'i')          // "... and why does it matter?"
+        ];
+        const IMPERATIVE_ASK_RE = /^\s*(?:(?:then|and|also|now|next|so|first|second)\s*,?\s+)?(?:tell me|explain|describe|say (?:what|why|how|whether)|show me|name (?:the|one|two)|put (?:it|that) in your own words|give me)\b/i;
+        const EMBEDDED_ASK_RE = /\b(?:and|then)\s+(?:tell me|explain|describe|show me)\b/i;
+        function body(t) {
+            return String(t || '').replace(/<!--[\s\S]*?-->/g, '').replace(/<!--[\s\S]*$/, '').replace(TAIL_RE, '').replace(/\n{3,}/g, '\n\n').trim();
+        }
+        function stripQuoted(t) {
+            return String(t || '').replace(/"[^"\n]*"/g, ' ').replace(/\u201c[^\u201d\n]*\u201d/g, ' ');
+        }
+        function sentences(t) {
+            return String(t || '').replace(/\s+/g, ' ').match(/[^.?!]+(?:[.?!]+["\u201d\u2019')]*|$)/g) || [];
+        }
+        function compoundIndex(s) {
+            let best = -1;
+            COMPOUND_RES.forEach(re => { const m = re.exec(s); if (m && (best < 0 || m.index < best)) best = m.index; });
+            return best;
+        }
+        function endsWithQuestion(t) { return /\?["\u201d\u2019')\]]*\s*$/.test(body(t)); }
+        function audit(t) {
+            const b = body(t);
+            const bare = stripQuoted(b);
+            let qMarks = (bare.match(/\?/g) || []).length;
+            const endsQ = endsWithQuestion(b);
+            if (!qMarks && endsQ) qMarks = 1;   // the question itself sits inside quotation marks
+            const sents = sentences(bare);
+            const imperatives = sents.filter(s => !/\?/.test(s) && (IMPERATIVE_ASK_RE.test(s) || EMBEDDED_ASK_RE.test(s))).length;
+            const compound = sents.some(s => /\?/.test(s) && compoundIndex(s) >= 0);
+            return { qMarks, imperatives, asks: qMarks + imperatives, compound, endsWithQuestion: endsQ };
+        }
+        // null when the reply is fine; otherwise { code, msg }.
+        function problem(t) {
+            const a = audit(t);
+            if (a.asks === 0) return { code: 'no-question', msg: 'End your reply with exactly ONE question. This reply has none.' };
+            if (a.asks > 1 || a.compound) return { code: 'multi-question', msg: 'Ask exactly ONE question with ONE question mark. You asked ' + a.asks + (a.compound ? ' (including a two-part "..., and does/what ...?" question)' : '') + '. Keep only the most important one; no "Then tell me" second asks.' };
+            if (!a.endsWithQuestion) return { code: 'not-last', msg: 'Your one question must be the LAST sentence of the reply (only the checkpoint or STATUS line may follow it).' };
+            return null;
+        }
+        // Keep everything up to the first question; cut a two-part question at its second clause.
+        function trim(t, opts) {
+            const raw = body(t);
+            if (opts && opts.keep === 'last') {
+                // Keep the LAST question; drop earlier question sentences and stacked imperative asks.
+                const paras = raw.split(/\n\s*\n/).map(p => p.match(/(?:"[^"\n]*"|\u201c[^\u201d\n]*\u201d|[^.?!"\u201c])+(?:[.?!]+["\u201d\u2019')]*|$)/g) || [p]);
+                let lastP = -1, lastS = -1;
+                paras.forEach((ss, i) => ss.forEach((s, j) => { if (/\?/.test(stripQuoted(s)) || /\?["\u201d\u2019')]*\s*$/.test(s)) { lastP = i; lastS = j; } }));
+                if (lastP < 0) return trim(t);
+                const out = [];
+                for (let i = 0; i <= lastP; i++) {
+                    const keep = [];
+                    paras[i].forEach((s, j) => {
+                        if (i === lastP && j > lastS) return;
+                        const bare = stripQuoted(s), isQ = /\?/.test(bare) || /\?["\u201d\u2019')]*\s*$/.test(s);
+                        if (isQ && !(i === lastP && j === lastS)) return;
+                        if (!isQ && (IMPERATIVE_ASK_RE.test(bare) || EMBEDDED_ASK_RE.test(bare))) return;
+                        if (i === lastP && j === lastS) { const ci = compoundIndex(s); if (ci > 0) s = s.slice(0, ci).replace(/[\s,;:]+$/, '') + '?'; }
+                        keep.push(s);
+                    });
+                    if (keep.length) out.push(keep.join('').trim());
+                }
+                return out.join('\n\n').trim();
+            }
+            const paras = raw.split(/\n\s*\n/);
+            const out = []; let done = false;
+            for (const p of paras) {
+                if (done) break;
+                const parts = p.match(/(?:"[^"\n]*"|\u201c[^\u201d\n]*\u201d|[^.?!"\u201c])+(?:[.?!]+["\u201d\u2019')]*|$)/g) || [p];
+                const keep = [];
+                for (let s of parts) {
+                    if (!s.trim()) continue;
+                    const bare = stripQuoted(s);
+                    if (/\?/.test(bare) || /\?["\u201d\u2019')]*\s*$/.test(s)) {
+                        const ci = compoundIndex(s);
+                        if (ci > 0) s = s.slice(0, ci).replace(/[\s,;:]+$/, '') + '?';
+                        keep.push(s); done = true; break;
+                    }
+                    if (IMPERATIVE_ASK_RE.test(bare) || EMBEDDED_ASK_RE.test(bare)) continue; // drop stacked imperative asks
+                    keep.push(s);
+                }
+                if (keep.length) out.push(keep.join('').trim());
+            }
+            return out.join('\n\n').trim();
+        }
+        // Apply the fallback after a failed rewrite. Returns the fixed body (tail lines are the caller's job).
+        function fallback(t, fallbackQuestion, opts) {
+            const a = audit(t);
+            let b = body(t);
+            if (a.asks === 0) return (b ? b + '\n\n' : '') + (fallbackQuestion || 'What do you think?');
+            b = trim(t, opts);
+            if (!audit(b).endsWithQuestion) b = b.replace(/\s+$/, '') + '\n\n' + (fallbackQuestion || 'What do you think?');
+            return b;
+        }
+        const NOTE = '[APP CORRECTION: your reply below was not shown to the student. Rewrite it so it ends with exactly ONE question (one question mark, no second ask, no "..., and does/what ...?" two-part question, nothing after the question except any required checkpoint or STATUS line). Keep the same point and length. Output only the rewritten reply.]';
+        g.PhilQ = { audit, problem, trim, fallback, body, compoundIndex, NOTE, endsWithQuestion };
+    })(typeof window !== 'undefined' ? window : globalThis);
+    /* PHIL_QGUARD_END */
+    </script>
     <script type="text/babel">
         const { useState, useRef, useEffect } = React;
         
@@ -298,8 +405,11 @@ FORBIDDEN MOVES
 HOW TO CONDUCT THE DIALOGUE
 ====================================================================
 
-ONE question per turn. Two only when genuinely paired. Never three or more. Multiple questions
-produce multiple shallow answers.
+ONE question per turn: exactly one question mark, and the question is the LAST sentence of the
+reply (only the checkpoint line may follow it). No two-part questions joined by "..., and does
+...?" or "... and why does ...?", and no second ask after your question. Multiple questions
+produce multiple shallow answers. The application counts question marks and sends back a reply
+that breaks this rule. Verdicts ask no question.
 
 Keep every reply under 120 words. You are the interlocutor, not the lecturer. If your reply is
 longer than the student's last message, it is too long.
@@ -319,7 +429,8 @@ COMPLETION AND VERDICT
 
 Every student message you receive is prefixed with [Exchange N of 12]. That number is counted
 by the application, not by you. Treat it as authoritative and never estimate or recount it.
-Exchange 1 is the student's initial draft. Never mention the marker to the student.
+Exchange 1 is the draft that opened the dialogue; drafts refused at the gate are not counted.
+Never mention the marker to the student.
 
 Track four checkpoints:
   1. The student has stated, in their own words, what the dilemma asks: whether holiness comes
@@ -456,9 +567,15 @@ concept. Bring it back and we will dig in."
 NEVER refuse the same student twice. If they return with anything longer after one refusal, open
 the dialogue regardless.
 
-ANSWERS BEFORE REVISION. Open the conversation with:
-"Please answer each question directly in your own words BEFORE revising your draft. Revising
-should come after we work through the questions, not instead of answering them."
+BEFORE THE DIALOGUE BEGINS, every paste is a fresh draft submission, never a "revision." The
+application marks these messages [PRE-DIALOGUE]. A fuller draft sent after a refusal is THE
+draft: open the dialogue on it. ANSWERS BEFORE REVISION and RESUBMISSION below apply only
+after the dialogue has begun (after your first reply that carries the checkpoint line).
+
+ANSWERS BEFORE REVISION. In your first reply to an accepted draft, before your first question,
+say:
+"From here on, please answer each question in the chat in your own words before revising your
+draft. Revising comes after we work through the questions, not instead of answering them."
 If a student sends a revised draft without answering, do not respond to the revision. Restate
 the outstanding question and ask for their thinking.
 If that revision contains a flat factual error about the text, you may correct that ONE error in
@@ -565,6 +682,30 @@ leaves with your answers has not.`;
             </svg>
         );
 
+        // Render assistant text: blank-line paragraphs, "- " / "\u2022 " / "* " list lines as real lists, **bold** as strong.
+        function renderInline(text, keyBase) {
+            const parts = String(text).split(/(\*\*[^*\n]+\*\*)/g);
+            return parts.map((p, i) => /^\*\*[^*\n]+\*\*$/.test(p)
+                ? <strong key={keyBase + '-b' + i}>{p.slice(2, -2)}</strong>
+                : <React.Fragment key={keyBase + '-t' + i}>{p}</React.Fragment>);
+        }
+        function renderRich(content, textStyle) {
+            const blocks = String(content || '').replace(/\r/g, '').split(/\n\s*\n/);
+            const out = [];
+            blocks.forEach((block, bi) => {
+                const lines = block.split('\n');
+                let para = [], items = [];
+                const flushPara = () => { if (para.length) { out.push(<p key={'p' + bi + '-' + out.length} style={{...textStyle, margin: '0 0 10px 0'}}>{renderInline(para.join('\n'), 'p' + bi + out.length)}</p>); para = []; } };
+                const flushList = () => { if (items.length) { out.push(<ul key={'u' + bi + '-' + out.length} style={{...textStyle, margin: '0 0 10px 0', paddingLeft: '1.4em', whiteSpace: 'normal'}}>{items.map((it, ii) => <li key={ii} style={{marginBottom: '4px'}}>{renderInline(it, 'l' + bi + ii)}</li>)}</ul>); items = []; } };
+                lines.forEach(line => {
+                    const m = line.match(/^\s*(?:[-*\u2022])\s+(.*)$/);
+                    if (m) { flushPara(); items.push(m[1]); }
+                    else { flushList(); para.push(line); }
+                });
+                flushPara(); flushList();
+            });
+            return out;
+        }
         function PhilosophyTutor() {
             const [messages, setMessages] = useState([
                 {
@@ -591,7 +732,7 @@ leaves with your answers has not.`;
                 conversationText += "=" .repeat(60) + "\n\n";
                 
                 messages.forEach((msg, idx) => {
-                    if (idx === 0) return;
+                    if (idx === 0 || msg.isError) return;
                     const speaker = msg.role === 'user' ? 'STUDENT' : 'SOCRATESBOT';
                     conversationText += `${speaker}:\n`;
                     conversationText += msg.content + "\n\n";
@@ -619,23 +760,38 @@ leaves with your answers has not.`;
                 setIsLoading(true);
 
                 // Application-side exchange counter. The model never counts its own turns.
+                // The dialogue begins at the first reply that carries a checkpoint line. Before that, every paste
+                // is a fresh draft submission (never a "revision"), and refused drafts cost the student nothing.
                 const EXCHANGE_CEILING = 12;
-                const exchangeNumber = messages.filter(m => m.role === 'user').length + 1;
-                // Stuck streak: consecutive student turns (ending with this one) that say they are lost, ask for help, or are empty.
+                const history = messages.filter((m, i) => i > 0 && !m.isError);
+                const gateIdx = history.findIndex(m => m.role === 'assistant' && /Checkpoints completed:/i.test(m.content));
+                const started = gateIdx > 0;
+                const exchangeNumber = started
+                    ? history.slice(gateIdx - 1).filter(m => m.role === 'user').length + 1
+                    : 1;
+                const refusals = started ? 0 : history.filter(m => m.role === 'assistant').length;
+                const preNote = started ? ''
+                    : ' [PRE-DIALOGUE: no draft has been accepted yet. Treat this message as THE draft, not a revision of an earlier submission. If it meets the gate, open the dialogue now with your first question and the checkpoint line.'
+                      + (refusals >= 1 ? ' You have already refused once: NEVER refuse twice, so open the dialogue now.' : '') + ']';
+                // Stuck streak: consecutive student turns after the draft (ending with this one) that say they are lost, ask for help, or are empty.
                 const STUCK_RE = /\b(i don'?t (know|understand|get)|i do not (know|understand)|idk|confus\w*|stuck|lost|no idea|what do you mean|can you help|help me|just tell me|what(?:'s| is) the answer)\b/i;
                 const EMPTY_RE = /^\s*(\?+|\.+|idk|i dunno|dunno|not sure|no idea|nothing|no clue|huh|what)\s*[.!?]*\s*$/i;
-                const userTurns = messages.filter(m => m.role === 'user').map(m => m.content).concat([userMessage]);
+                const userTurns = started ? history.slice(gateIdx).filter(m => m.role === 'user').map(m => m.content).concat([userMessage]) : [];
                 let stuck = 0;
-                for (let i = userTurns.length - 1; i >= 1; i--) {
+                for (let i = userTurns.length - 1; i >= 0; i--) {
                     const t = userTurns[i];
                     if (EMPTY_RE.test(t) || (STUCK_RE.test(t) && t.split(/\s+/).length < 40)) stuck++; else break;
                 }
                 const stuckNote = stuck >= 2
                     ? ' [STUCK ' + stuck + ': TEACH-THEN-APPLY now. Explain the point in two or three plain sentences anchored in a verbatim quotation from the excerpt, then ask ONE application question on a concrete case.]'
                     : stuck === 1 ? ' [STUCK 1: one scaffold only; do not explain the point yet.]' : '';
-                const countedMessage = '[Exchange ' + exchangeNumber + ' of ' + EXCHANGE_CEILING + ']' + stuckNote + '\n\n' + userMessage;
+                const countedMessage = '[Exchange ' + exchangeNumber + ' of ' + EXCHANGE_CEILING + ']' + preNote + stuckNote + '\n\n' + userMessage;
+                const apiMessages = [
+                    ...history.map(msg => ({ role: msg.role, content: msg.content })),
+                    { role: 'user', content: countedMessage }
+                ];
 
-                try {
+                const callApi = async (msgs) => {
                     // Call the Val Town proxy
                     const response = await fetch(WORKER_URL, {
                         method: 'POST',
@@ -647,32 +803,43 @@ leaves with your answers has not.`;
                             thinking: { type: 'between_tools' },
                             max_tokens: 1000,
                             system: [{ type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral', ttl: '1h' } }],
-                            messages: [
-                                ...messages.filter((_, i) => i > 0).map(msg => ({
-                                    role: msg.role,
-                                    content: msg.content
-                                })),
-                                {
-                                    role: 'user',
-                                    content: countedMessage
-                                }
-                            ]
+                            messages: msgs
                         })
                     });
-
                     if (!response.ok) {
-                        const errorData = await response.json();
+                        let errorData = null;
+                        try { errorData = await response.json(); } catch (err) {}
                         console.error('API Error:', errorData);
                         throw new Error(`API request failed: ${response.status}`);
                     }
-
                     const data = await response.json();
                     // Prompt-caching check: open DevTools (F12) > Console. Turn 1 should show cache_creation_input_tokens; later turns cache_read_input_tokens. Free: usage already comes back with every reply.
                     if (data && data.usage) console.log('[philosophy_tutor-Euthyphro usage]', data.usage);
-                    const assistantMessage = (data.content || []).find(b => b && b.type === 'text')?.text?.trim() || '';
+                    return (data.content || []).find(b => b && b.type === 'text')?.text?.trim() || '';
+                };
+
+                try {
+                    let assistantMessage = await callApi(apiMessages);
                     if (!assistantMessage) throw new Error("Sorry, I didn't get a response. Please try again.");
 
-                    const verdictHit = assistantMessage.match(/^(DIALOGUE COMPLETE|REQUIREMENTS MET|SESSION ENDED)/m);
+                    const VERDICT_RE = /^(DIALOGUE COMPLETE|REQUIREMENTS MET|SESSION ENDED)/m;
+                    // One question per reply, ending the reply. Exempt: closings, gate refusals, and replies after a closing.
+                    const exempt = (t) => VERDICT_RE.test(t)
+                        || (!started && !/Checkpoints completed:/i.test(t))
+                        || ((verdict === 'DIALOGUE COMPLETE' || verdict === 'SESSION ENDED') && !/Checkpoints completed:/i.test(t))
+                        || (verdict === 'REQUIREMENTS MET' && !/Checkpoints completed:/i.test(t));
+                    if (!exempt(assistantMessage) && window.PhilQ.problem(assistantMessage)) {
+                        const issue = window.PhilQ.problem(assistantMessage);
+                        let fixed = '';
+                        try { fixed = await callApi(apiMessages.concat([{ role: 'assistant', content: assistantMessage }, { role: 'user', content: window.PhilQ.NOTE + ' Problem: ' + issue.msg }])); } catch (err) { fixed = ''; }
+                        if (fixed && (exempt(fixed) || !window.PhilQ.problem(fixed))) assistantMessage = fixed;
+                        else {
+                            const cpLine = (assistantMessage.match(/^\s*Checkpoints completed:.*$/im) || [''])[0].trim();
+                            assistantMessage = window.PhilQ.fallback(assistantMessage, 'What in the text leads you there?') + (cpLine ? '\n\n' + cpLine : '');
+                        }
+                    }
+
+                    const verdictHit = assistantMessage.match(VERDICT_RE);
                     if (verdictHit) setVerdict(verdictHit[1]);
 
                     setMessages(prev => [...prev, { role: 'assistant', content: assistantMessage }]);
@@ -680,6 +847,7 @@ leaves with your answers has not.`;
                     console.error('Error:', error);
                     setMessages(prev => [...prev, { 
                         role: 'assistant', 
+                        isError: true,
                         content: 'I apologize, but I encountered an error. Please try again. If the problem persists, contact your instructor.'
                     }]);
                 } finally {
@@ -943,9 +1111,13 @@ leaves with your answers has not.`;
                                         {msg.role === 'assistant' && (
                                             <div style={styles.messageLabel}>Socrates</div>
                                         )}
-                                        <p style={{...styles.messageText, ...(msg.role === 'user' ? styles.userMessageText : {})}}>
-                                            {msg.content}
-                                        </p>
+                                        {msg.role === 'user' ? (
+                                            <p style={{...styles.messageText, ...styles.userMessageText}}>
+                                                {msg.content}
+                                            </p>
+                                        ) : (
+                                            <div>{renderRich(msg.content, styles.messageText)}</div>
+                                        )}
                                     </div>
                                 </div>
                             ))}
@@ -1017,7 +1189,7 @@ leaves with your answers has not.`;
                         <div className="greek-key greek-key-bottom"></div>
                     </div>
                     
-                    <p style={styles.footer}>"The unexamined life is not worth living" · An educational tool for exploring Socratic dialogue · rev 2026-11-20</p>
+                    <p style={styles.footer}>"The unexamined life is not worth living" · An educational tool for exploring Socratic dialogue · rev 2026-11-20b</p>
                 </div>
             );
         }

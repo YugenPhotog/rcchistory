@@ -41,6 +41,111 @@
     
 
     <script>
+    /* PHIL_QGUARD_START: shared one-question checker for PHIL 120 tutor bots (plain JS). */
+    (function (g) {
+        const TAIL_RE = /^\s*(?:Checkpoints completed:.*|VERDICT\s*:.*|<!--[\s\S]*?-->)\s*$/gim;
+        const WH = '(?:what|why|how|who|which|where|whether|when)';
+        const AUX = '(?:does|do|did|is|are|was|were|would|should|could|can|will|has|have|might|must)';
+        const SUBJ = '(?:it|he|she|they|you|that|this|the|anyone|anything|your|his|her|their|there|we|i|socrates|euthyphro|aristotle|mill|hobbes|plato|kant)';
+        const COMPOUND_RES = [
+            new RegExp(',\\s*(?:and|or)\\s+' + WH + '\\b', 'i'),                       // "..., and what ...?"
+            new RegExp(',\\s*and\\s+' + AUX + '\\s+' + SUBJ + '\\b', 'i'),              // "..., and does the text ...?"
+            new RegExp('\\s(?:and|but)\\s+(?:why|how)\\s+' + AUX + '\\b', 'i')          // "... and why does it matter?"
+        ];
+        const IMPERATIVE_ASK_RE = /^\s*(?:(?:then|and|also|now|next|so|first|second)\s*,?\s+)?(?:tell me|explain|describe|say (?:what|why|how|whether)|show me|name (?:the|one|two)|put (?:it|that) in your own words|give me)\b/i;
+        const EMBEDDED_ASK_RE = /\b(?:and|then)\s+(?:tell me|explain|describe|show me)\b/i;
+        function body(t) {
+            return String(t || '').replace(/<!--[\s\S]*?-->/g, '').replace(/<!--[\s\S]*$/, '').replace(TAIL_RE, '').replace(/\n{3,}/g, '\n\n').trim();
+        }
+        function stripQuoted(t) {
+            return String(t || '').replace(/"[^"\n]*"/g, ' ').replace(/\u201c[^\u201d\n]*\u201d/g, ' ');
+        }
+        function sentences(t) {
+            return String(t || '').replace(/\s+/g, ' ').match(/[^.?!]+(?:[.?!]+["\u201d\u2019')]*|$)/g) || [];
+        }
+        function compoundIndex(s) {
+            let best = -1;
+            COMPOUND_RES.forEach(re => { const m = re.exec(s); if (m && (best < 0 || m.index < best)) best = m.index; });
+            return best;
+        }
+        function endsWithQuestion(t) { return /\?["\u201d\u2019')\]]*\s*$/.test(body(t)); }
+        function audit(t) {
+            const b = body(t);
+            const bare = stripQuoted(b);
+            let qMarks = (bare.match(/\?/g) || []).length;
+            const endsQ = endsWithQuestion(b);
+            if (!qMarks && endsQ) qMarks = 1;   // the question itself sits inside quotation marks
+            const sents = sentences(bare);
+            const imperatives = sents.filter(s => !/\?/.test(s) && (IMPERATIVE_ASK_RE.test(s) || EMBEDDED_ASK_RE.test(s))).length;
+            const compound = sents.some(s => /\?/.test(s) && compoundIndex(s) >= 0);
+            return { qMarks, imperatives, asks: qMarks + imperatives, compound, endsWithQuestion: endsQ };
+        }
+        // null when the reply is fine; otherwise { code, msg }.
+        function problem(t) {
+            const a = audit(t);
+            if (a.asks === 0) return { code: 'no-question', msg: 'End your reply with exactly ONE question. This reply has none.' };
+            if (a.asks > 1 || a.compound) return { code: 'multi-question', msg: 'Ask exactly ONE question with ONE question mark. You asked ' + a.asks + (a.compound ? ' (including a two-part "..., and does/what ...?" question)' : '') + '. Keep only the most important one; no "Then tell me" second asks.' };
+            if (!a.endsWithQuestion) return { code: 'not-last', msg: 'Your one question must be the LAST sentence of the reply (only the checkpoint or STATUS line may follow it).' };
+            return null;
+        }
+        // Keep everything up to the first question; cut a two-part question at its second clause.
+        function trim(t, opts) {
+            const raw = body(t);
+            if (opts && opts.keep === 'last') {
+                // Keep the LAST question; drop earlier question sentences and stacked imperative asks.
+                const paras = raw.split(/\n\s*\n/).map(p => p.match(/(?:"[^"\n]*"|\u201c[^\u201d\n]*\u201d|[^.?!"\u201c])+(?:[.?!]+["\u201d\u2019')]*|$)/g) || [p]);
+                let lastP = -1, lastS = -1;
+                paras.forEach((ss, i) => ss.forEach((s, j) => { if (/\?/.test(stripQuoted(s)) || /\?["\u201d\u2019')]*\s*$/.test(s)) { lastP = i; lastS = j; } }));
+                if (lastP < 0) return trim(t);
+                const out = [];
+                for (let i = 0; i <= lastP; i++) {
+                    const keep = [];
+                    paras[i].forEach((s, j) => {
+                        if (i === lastP && j > lastS) return;
+                        const bare = stripQuoted(s), isQ = /\?/.test(bare) || /\?["\u201d\u2019')]*\s*$/.test(s);
+                        if (isQ && !(i === lastP && j === lastS)) return;
+                        if (!isQ && (IMPERATIVE_ASK_RE.test(bare) || EMBEDDED_ASK_RE.test(bare))) return;
+                        if (i === lastP && j === lastS) { const ci = compoundIndex(s); if (ci > 0) s = s.slice(0, ci).replace(/[\s,;:]+$/, '') + '?'; }
+                        keep.push(s);
+                    });
+                    if (keep.length) out.push(keep.join('').trim());
+                }
+                return out.join('\n\n').trim();
+            }
+            const paras = raw.split(/\n\s*\n/);
+            const out = []; let done = false;
+            for (const p of paras) {
+                if (done) break;
+                const parts = p.match(/(?:"[^"\n]*"|\u201c[^\u201d\n]*\u201d|[^.?!"\u201c])+(?:[.?!]+["\u201d\u2019')]*|$)/g) || [p];
+                const keep = [];
+                for (let s of parts) {
+                    if (!s.trim()) continue;
+                    const bare = stripQuoted(s);
+                    if (/\?/.test(bare) || /\?["\u201d\u2019')]*\s*$/.test(s)) {
+                        const ci = compoundIndex(s);
+                        if (ci > 0) s = s.slice(0, ci).replace(/[\s,;:]+$/, '') + '?';
+                        keep.push(s); done = true; break;
+                    }
+                    if (IMPERATIVE_ASK_RE.test(bare) || EMBEDDED_ASK_RE.test(bare)) continue; // drop stacked imperative asks
+                    keep.push(s);
+                }
+                if (keep.length) out.push(keep.join('').trim());
+            }
+            return out.join('\n\n').trim();
+        }
+        // Apply the fallback after a failed rewrite. Returns the fixed body (tail lines are the caller's job).
+        function fallback(t, fallbackQuestion, opts) {
+            const a = audit(t);
+            let b = body(t);
+            if (a.asks === 0) return (b ? b + '\n\n' : '') + (fallbackQuestion || 'What do you think?');
+            b = trim(t, opts);
+            if (!audit(b).endsWithQuestion) b = b.replace(/\s+$/, '') + '\n\n' + (fallbackQuestion || 'What do you think?');
+            return b;
+        }
+        const NOTE = '[APP CORRECTION: your reply below was not shown to the student. Rewrite it so it ends with exactly ONE question (one question mark, no second ask, no "..., and does/what ...?" two-part question, nothing after the question except any required checkpoint or STATUS line). Keep the same point and length. Output only the rewritten reply.]';
+        g.PhilQ = { audit, problem, trim, fallback, body, compoundIndex, NOTE, endsWithQuestion };
+    })(typeof window !== 'undefined' ? window : globalThis);
+    /* PHIL_QGUARD_END */
     /* ADVOCATE_LOGIC_START: plain JS, shared by the page and the test harness. */
     (function (g) {
         const CEIL = 12;
@@ -159,7 +264,11 @@ words, to this effect (fill in the OPPOSITE author):
 After that first use, drop the boilerplate. Do not repeat the framing every turn. Never reply to
 claims, examples, or concerns the student did not raise.
 
-ONE objection per turn. Never two. Never a list. Never a leading wrap-up like "Hasn't Hobbes
+ONE objection per turn. Never two. Never a list. ONE QUESTION per reply: exactly one question
+mark, and the question is the last sentence (only the hidden STATUS line may follow it). No
+"..., and does ...?" two-part questions and no second ask such as "Is there a passage you would
+use?" after your question. The page counts question marks and sends back a reply that breaks
+this rule. Closings ask no question. Never a leading wrap-up like "Hasn't Hobbes
 won?" or "So Mill is right, then?" Ask a genuine question that leaves both sides open.
 
 GRADUATED PRESSURE (baseline; Adaptive Coaching below can refine levels). Start gently. Move up
@@ -310,9 +419,15 @@ Checkpoints are CUMULATIVE across the whole conversation. Once met, a checkpoint
 Four checkpoints:
   1. They have stated a clear position on whether people can be trusted, and named which author
      they side with. A thesis may appear anywhere in a student turn.
-  2. They have typed or pasted a specific passage (quote or clear paraphrase of a specific line)
-     from EACH author in a STUDENT turn. Passages YOU quoted do not count. Re-scan earlier
-     STUDENT turns before every STATUS update and before any closing.
+  2. They have typed or pasted a specific passage from EACH author in a STUDENT turn. The page
+     checks this itself: a passage counts only when the student's own message contains at least
+     SIX WORDS IN A ROW copied exactly from that author's excerpt above (quotation marks help; a
+     paraphrase does not count for this checkpoint, though it is fine in the discussion).
+     Passages YOU quoted never count. The APP PROGRESS note tells you which author is still
+     missing. When you ask for it, ask once, plainly, and say exactly what counts, for example:
+     "Which Mill sentence supports your side? Copy it from the reading into the chat, at least
+     six words exactly as printed, in quotation marks." Do not ask again on the very next turn;
+     keep the dialogue moving and come back to it later if it is still missing.
   3. They have answered at least one serious objection without simply folding (see resolution
      rules above). An open thread does not satisfy this.
   4. They have said what they will argue in their discussion board post, and what they are
@@ -334,9 +449,9 @@ hides it from the student and from the transcript:
 <!--STATUS side=MILL|HOBBES|NONE position=0|1 quote_mill=0|1 quote_hobbes=0|1 objections_handled=N plan=0|1 concession=0|1 open_thread=0|1 help=0|1 level=1..4 warmup=0|1 verdict=NONE|STRONG|AVERAGE|WEAK-->
   side: the side the STUDENT holds (not the side you argue).
   position=1 once they have committed to a side (checkpoint 1).
-  quote_mill / quote_hobbes=1 only when a STUDENT turn contains a quote or clear paraphrase of a
-    specific line from that author. Bot quotes never count. Prefer evidence the student typed or
-    pasted; do not award credit for a mere keyword echo of your last message.
+  quote_mill / quote_hobbes=1 only when a STUDENT turn contains at least six words in a row
+    copied from that author's excerpt. Bot quotes never count. The page re-checks this and its
+    value wins, so do not tell the student a passage counted unless APP PROGRESS shows it.
   objections_handled: how many times in total you have said "That objection is handled."
   plan=1 / concession=1 once those appear in any student turn.
   open_thread=1 if an objection is currently marked as an open thread.
@@ -569,7 +684,12 @@ leaves having held their ground against a real objection has gotten exactly what
             const t = studentText || '', out = [];
             const re = /"([^"\n]{12,})"|'([^'\n]{12,})'|[\u201c]([^\u201d\n]{12,})[\u201d]/g;
             let m;
-            while ((m = re.exec(t))) out.push({ text: m[1] || m[2] || m[3], quoted: true });
+            while ((m = re.exec(t))) {
+                const q = m[1] || m[2] || m[3];
+                out.push({ text: q, quoted: true });
+                // Quotes with ellipses or [brackets]: each piece is checked on its own.
+                q.split(/\.{3}|\u2026|\[[^\]]*\]/).forEach(seg => { if (seg.trim() && seg.trim() !== q.trim()) out.push({ text: seg, quoted: true }); });
+            }
             // Whole turn: catches pasted excerpt lines without quotation marks (stricter window).
             out.push({ text: t, quoted: false });
             return out;
@@ -653,6 +773,10 @@ leaves having held their ground against a real objection has gotten exactly what
             if (!p.warmup && n <= 3) m += ' [WARM-UP (exchange ' + n + ' of up to 3): check their understanding of the text; no objections yet]';
             else if (!p.warmup) m += ' [WARM-UP IS OVER: give the first objection now, at level 1; no passage-naming hint]';
             else m += ' [Pitch any new objection at level ' + p.level + '. Open with: one thing done well + one way to strengthen it]';
+            if (p.warmup && n >= 4 && !(p.quote_mill && p.quote_hobbes)) {
+                const miss = !p.quote_mill && !p.quote_hobbes ? 'Mill and Hobbes' : (!p.quote_mill ? 'Mill' : 'Hobbes');
+                m += ' [PASSAGE CHECK: the page has not yet found a student-typed passage from ' + miss + ' (six or more words in a row copied from the excerpt). If you have not asked in your last reply, you may ask once, plainly, saying exactly what counts. Do not tell them it counted until APP PROGRESS shows it.]';
+            }
             if (n >= CEIL) m += ' [FINAL EXCHANGE: your reply MUST be a CLOSING ending with the VERDICT marker]';
             else if (n >= 8) m += ' [' + (CEIL - n) + ' exchanges left: close only when the closing rule is met; do not close while the student-quote checkpoint (passage from each author) is unmet]';
             return m;
@@ -681,10 +805,12 @@ leaves having held their ground against a real objection has gotten exactly what
         const STOP_RE = /\b(stop|i'?m done|give up|quit|bye|end (this|the) (session|conversation)|posting now|i'?ll post)\b/i;
         function words(t) { return (t || '').split(/\s+/).filter(Boolean).length; }
         const FRAME_RE = /_{2,}|\bI lean toward\b|\bI side with\b[^.?!\n]*\bbecause\b|\btry saying\b|\bfill in\b/i;
-        function problems(raw, n, userMessage, progressHint) {
+        function problems(raw, n, userMessage, progressHint, opts) {
             const t = stripStatus(raw), st = parseStatus(raw), out = [];
             const v = detectVerdict(raw);
             const stop = STOP_RE.test(userMessage || '');
+            // One question per reply, and it ends the reply (closings and post-closing replies are exempt).
+            if (!v && !(opts && opts.priorVerdict) && !stop) { const qp = g.PhilQ.problem(stripLabels(t)); if (qp) out.push(qp.msg); }
             const quotesMet = progressHint ? !!(progressHint.quote_mill && progressHint.quote_hobbes) : null;
             if (v && n < 5) out.push('no closing before exchange 5; keep going with one question');
             if (v === 'WEAK' && n < CEIL && !stop) out.push('do not close with the lowest tier before exchange 12; keep helping with one question and no VERDICT marker');
@@ -716,16 +842,22 @@ leaves having held their ground against a real objection has gotten exactly what
             const quoteHint = { quote_mill: Math.max(prog0.quote_mill || 0, preEv.quote_mill),
                                 quote_hobbes: Math.max(prog0.quote_hobbes || 0, preEv.quote_hobbes) };
             // Enforce length / no-frames / no early close without quotes with one regeneration.
-            let issues = problems(raw, exchangeNumber, userMessage, quoteHint);
+            const qOpts = { priorVerdict };
+            let issues = problems(raw, exchangeNumber, userMessage, quoteHint, qOpts);
             if (issues.length) {
                 const fix = await callApi(SYSTEM_PROMPT, msgs.concat([{ role: 'assistant', content: raw },
                     { role: 'user', content: '[APP: rewrite your last reply. Problems: ' + issues.join('; ') +
                       '. Keep the same point and the single question. About 120 words (130 max); help 160. No blanks or sentence frames. End with the STATUS line. Output only the rewritten reply.]' }]));
                 log.rewrites.push(issues.join('; '));
-                if (fix && problems(fix, exchangeNumber, userMessage, quoteHint).length < issues.length) raw = fix;
+                if (fix && problems(fix, exchangeNumber, userMessage, quoteHint, qOpts).length < issues.length) raw = fix;
             }
             let verdict = detectVerdict(raw);
             let text = stripLabels(stripStatus(raw));
+            // Fallback when the rewrite still breaks the one-question rule: trim to the first question, or add one.
+            if (!verdict && !priorVerdict && !STOP_RE.test(userMessage || '') && g.PhilQ.problem(text)) {
+                text = g.PhilQ.fallback(text, prog0.warmup ? 'How would you answer that?' : 'In your own words, what does that passage mean?');
+                log.rewrites.push('question-fallback');
+            }
             const handledSaid = (history.concat([{ role: 'assistant', content: text }]).filter(m => m.role === 'assistant')
                                  .map(m => (m.content.match(/objection is handled/gi) || []).length).reduce((a, b) => a + b, 0));
             // STATUS may guide side/level, but passage credit is page-authoritative from STUDENT history only.
@@ -871,6 +1003,30 @@ leaves having held their ground against a real objection has gotten exactly what
             </svg>
         );
 
+        // Render assistant text: blank-line paragraphs, "- " / "\u2022 " / "* " list lines as real lists, **bold** as strong.
+        function renderInline(text, keyBase) {
+            const parts = String(text).split(/(\*\*[^*\n]+\*\*)/g);
+            return parts.map((p, i) => /^\*\*[^*\n]+\*\*$/.test(p)
+                ? <strong key={keyBase + '-b' + i}>{p.slice(2, -2)}</strong>
+                : <React.Fragment key={keyBase + '-t' + i}>{p}</React.Fragment>);
+        }
+        function renderRich(content, textStyle) {
+            const blocks = String(content || '').replace(/\r/g, '').split(/\n\s*\n/);
+            const out = [];
+            blocks.forEach((block, bi) => {
+                const lines = block.split('\n');
+                let para = [], items = [];
+                const flushPara = () => { if (para.length) { out.push(<p key={'p' + bi + '-' + out.length} style={{...textStyle, margin: '0 0 10px 0'}}>{renderInline(para.join('\n'), 'p' + bi + out.length)}</p>); para = []; } };
+                const flushList = () => { if (items.length) { out.push(<ul key={'u' + bi + '-' + out.length} style={{...textStyle, margin: '0 0 10px 0', paddingLeft: '1.4em', whiteSpace: 'normal'}}>{items.map((it, ii) => <li key={ii} style={{marginBottom: '4px'}}>{renderInline(it, 'l' + bi + ii)}</li>)}</ul>); items = []; } };
+                lines.forEach(line => {
+                    const m = line.match(/^\s*(?:[-*\u2022])\s+(.*)$/);
+                    if (m) { flushPara(); items.push(m[1]); }
+                    else { flushList(); para.push(line); }
+                });
+                flushPara(); flushList();
+            });
+            return out;
+        }
         function PhilosophyTutor() {
             const [messages, setMessages] = useState([
                 {
@@ -1203,9 +1359,13 @@ leaves having held their ground against a real objection has gotten exactly what
                                         {msg.role === 'assistant' && (
                                             <div style={styles.messageLabel}>The Advocate</div>
                                         )}
-                                        <p style={{...styles.messageText, ...(msg.role === 'user' ? styles.userMessageText : {})}}>
-                                            {msg.content}
-                                        </p>
+                                        {msg.role === 'user' ? (
+                                            <p style={{...styles.messageText, ...styles.userMessageText}}>
+                                                {msg.content}
+                                            </p>
+                                        ) : (
+                                            <div>{renderRich(msg.content, styles.messageText)}</div>
+                                        )}
                                         {msg.verdict && (
                                             <div style={{...styles.badge, ...styles['badge_' + msg.verdict]}}>
                                                 {(msg.verdict === 'STRONG' ? '\u2713 ' : msg.verdict === 'AVERAGE' ? '\u25c6 ' : '\u21bb ') + AdvocateLogic.VERDICT_TEXT[msg.verdict]}
@@ -1310,7 +1470,7 @@ leaves having held their ground against a real objection has gotten exactly what
                         <div className="greek-key greek-key-bottom"></div>
                     </div>
                     
-                    <p style={styles.footer}>"The best objection is the one you meet before anyone else raises it" &middot; An educational tool for testing arguments &middot; rev 2026-11-20</p>
+                    <p style={styles.footer}>"The best objection is the one you meet before anyone else raises it" &middot; An educational tool for testing arguments &middot; rev 2026-11-20b</p>
                 </div>
             );
         }

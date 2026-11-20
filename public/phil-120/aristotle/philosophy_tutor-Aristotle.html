@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <!-- The Phronimos - PHIL 120 Aristotle, Nicomachean Ethics Book II
+     v5.1 built 2026-11-20 (live-smoke fixes: shared question checker incl. zero-question and
+          two-part questions, rendered lists in closes, visible checkpoint tracker)
      v5  built 2026-11-20 (one-question guard, page-verified checkpoints and close guard,
          pacing, student-only quote credit, teach-then-apply for stuck students, sessionStorage + retry)
      v4  built 2026-09-19
@@ -45,6 +47,111 @@
     <div id="root"></div>
     
     <script>
+    /* PHIL_QGUARD_START: shared one-question checker for PHIL 120 tutor bots (plain JS). */
+    (function (g) {
+        const TAIL_RE = /^\s*(?:Checkpoints completed:.*|VERDICT\s*:.*|<!--[\s\S]*?-->)\s*$/gim;
+        const WH = '(?:what|why|how|who|which|where|whether|when)';
+        const AUX = '(?:does|do|did|is|are|was|were|would|should|could|can|will|has|have|might|must)';
+        const SUBJ = '(?:it|he|she|they|you|that|this|the|anyone|anything|your|his|her|their|there|we|i|socrates|euthyphro|aristotle|mill|hobbes|plato|kant)';
+        const COMPOUND_RES = [
+            new RegExp(',\\s*(?:and|or)\\s+' + WH + '\\b', 'i'),                       // "..., and what ...?"
+            new RegExp(',\\s*and\\s+' + AUX + '\\s+' + SUBJ + '\\b', 'i'),              // "..., and does the text ...?"
+            new RegExp('\\s(?:and|but)\\s+(?:why|how)\\s+' + AUX + '\\b', 'i')          // "... and why does it matter?"
+        ];
+        const IMPERATIVE_ASK_RE = /^\s*(?:(?:then|and|also|now|next|so|first|second)\s*,?\s+)?(?:tell me|explain|describe|say (?:what|why|how|whether)|show me|name (?:the|one|two)|put (?:it|that) in your own words|give me)\b/i;
+        const EMBEDDED_ASK_RE = /\b(?:and|then)\s+(?:tell me|explain|describe|show me)\b/i;
+        function body(t) {
+            return String(t || '').replace(/<!--[\s\S]*?-->/g, '').replace(/<!--[\s\S]*$/, '').replace(TAIL_RE, '').replace(/\n{3,}/g, '\n\n').trim();
+        }
+        function stripQuoted(t) {
+            return String(t || '').replace(/"[^"\n]*"/g, ' ').replace(/\u201c[^\u201d\n]*\u201d/g, ' ');
+        }
+        function sentences(t) {
+            return String(t || '').replace(/\s+/g, ' ').match(/[^.?!]+(?:[.?!]+["\u201d\u2019')]*|$)/g) || [];
+        }
+        function compoundIndex(s) {
+            let best = -1;
+            COMPOUND_RES.forEach(re => { const m = re.exec(s); if (m && (best < 0 || m.index < best)) best = m.index; });
+            return best;
+        }
+        function endsWithQuestion(t) { return /\?["\u201d\u2019')\]]*\s*$/.test(body(t)); }
+        function audit(t) {
+            const b = body(t);
+            const bare = stripQuoted(b);
+            let qMarks = (bare.match(/\?/g) || []).length;
+            const endsQ = endsWithQuestion(b);
+            if (!qMarks && endsQ) qMarks = 1;   // the question itself sits inside quotation marks
+            const sents = sentences(bare);
+            const imperatives = sents.filter(s => !/\?/.test(s) && (IMPERATIVE_ASK_RE.test(s) || EMBEDDED_ASK_RE.test(s))).length;
+            const compound = sents.some(s => /\?/.test(s) && compoundIndex(s) >= 0);
+            return { qMarks, imperatives, asks: qMarks + imperatives, compound, endsWithQuestion: endsQ };
+        }
+        // null when the reply is fine; otherwise { code, msg }.
+        function problem(t) {
+            const a = audit(t);
+            if (a.asks === 0) return { code: 'no-question', msg: 'End your reply with exactly ONE question. This reply has none.' };
+            if (a.asks > 1 || a.compound) return { code: 'multi-question', msg: 'Ask exactly ONE question with ONE question mark. You asked ' + a.asks + (a.compound ? ' (including a two-part "..., and does/what ...?" question)' : '') + '. Keep only the most important one; no "Then tell me" second asks.' };
+            if (!a.endsWithQuestion) return { code: 'not-last', msg: 'Your one question must be the LAST sentence of the reply (only the checkpoint or STATUS line may follow it).' };
+            return null;
+        }
+        // Keep everything up to the first question; cut a two-part question at its second clause.
+        function trim(t, opts) {
+            const raw = body(t);
+            if (opts && opts.keep === 'last') {
+                // Keep the LAST question; drop earlier question sentences and stacked imperative asks.
+                const paras = raw.split(/\n\s*\n/).map(p => p.match(/(?:"[^"\n]*"|\u201c[^\u201d\n]*\u201d|[^.?!"\u201c])+(?:[.?!]+["\u201d\u2019')]*|$)/g) || [p]);
+                let lastP = -1, lastS = -1;
+                paras.forEach((ss, i) => ss.forEach((s, j) => { if (/\?/.test(stripQuoted(s)) || /\?["\u201d\u2019')]*\s*$/.test(s)) { lastP = i; lastS = j; } }));
+                if (lastP < 0) return trim(t);
+                const out = [];
+                for (let i = 0; i <= lastP; i++) {
+                    const keep = [];
+                    paras[i].forEach((s, j) => {
+                        if (i === lastP && j > lastS) return;
+                        const bare = stripQuoted(s), isQ = /\?/.test(bare) || /\?["\u201d\u2019')]*\s*$/.test(s);
+                        if (isQ && !(i === lastP && j === lastS)) return;
+                        if (!isQ && (IMPERATIVE_ASK_RE.test(bare) || EMBEDDED_ASK_RE.test(bare))) return;
+                        if (i === lastP && j === lastS) { const ci = compoundIndex(s); if (ci > 0) s = s.slice(0, ci).replace(/[\s,;:]+$/, '') + '?'; }
+                        keep.push(s);
+                    });
+                    if (keep.length) out.push(keep.join('').trim());
+                }
+                return out.join('\n\n').trim();
+            }
+            const paras = raw.split(/\n\s*\n/);
+            const out = []; let done = false;
+            for (const p of paras) {
+                if (done) break;
+                const parts = p.match(/(?:"[^"\n]*"|\u201c[^\u201d\n]*\u201d|[^.?!"\u201c])+(?:[.?!]+["\u201d\u2019')]*|$)/g) || [p];
+                const keep = [];
+                for (let s of parts) {
+                    if (!s.trim()) continue;
+                    const bare = stripQuoted(s);
+                    if (/\?/.test(bare) || /\?["\u201d\u2019')]*\s*$/.test(s)) {
+                        const ci = compoundIndex(s);
+                        if (ci > 0) s = s.slice(0, ci).replace(/[\s,;:]+$/, '') + '?';
+                        keep.push(s); done = true; break;
+                    }
+                    if (IMPERATIVE_ASK_RE.test(bare) || EMBEDDED_ASK_RE.test(bare)) continue; // drop stacked imperative asks
+                    keep.push(s);
+                }
+                if (keep.length) out.push(keep.join('').trim());
+            }
+            return out.join('\n\n').trim();
+        }
+        // Apply the fallback after a failed rewrite. Returns the fixed body (tail lines are the caller's job).
+        function fallback(t, fallbackQuestion, opts) {
+            const a = audit(t);
+            let b = body(t);
+            if (a.asks === 0) return (b ? b + '\n\n' : '') + (fallbackQuestion || 'What do you think?');
+            b = trim(t, opts);
+            if (!audit(b).endsWithQuestion) b = b.replace(/\s+$/, '') + '\n\n' + (fallbackQuestion || 'What do you think?');
+            return b;
+        }
+        const NOTE = '[APP CORRECTION: your reply below was not shown to the student. Rewrite it so it ends with exactly ONE question (one question mark, no second ask, no "..., and does/what ...?" two-part question, nothing after the question except any required checkpoint or STATUS line). Keep the same point and length. Output only the rewritten reply.]';
+        g.PhilQ = { audit, problem, trim, fallback, body, compoundIndex, NOTE, endsWithQuestion };
+    })(typeof window !== 'undefined' ? window : globalThis);
+    /* PHIL_QGUARD_END */
     /* PHRONIMOS_LOGIC_START: plain JS, shared by the page and the test harness. */
     (function (g) {
         const CEIL = 16;            // exchange ceiling (was 12 in v4); the draft counts as exchange 1
@@ -774,38 +881,10 @@ That moral virtue is a mean, then, and in what sense it is so, and that it is a 
         function sentences(t) {
             return String(t || '').replace(/\s+/g, ' ').match(/[^.?!]+(?:[.?!]+["\u201d\u2019')]*|$)/g) || [];
         }
-        const IMPERATIVE_ASK_RE = /^\s*(?:(?:then|and|also|now|next|so|first|second)\s*,?\s+)?(?:tell me|explain|describe|say (?:what|why|how|whether)|show me|name (?:the|one|two)|put (?:it|that) in your own words|give me)\b/i;
-        const EMBEDDED_ASK_RE = /\b(?:and|then)\s+(?:tell me|explain|describe|show me)\b/i;
-        const COMPOUND_RE = /,\s*(?:and|or)\s+(?:what|why|how|who|which|where|whether|when)\b[^?]*\?/i;
-        function questionAudit(t) {
-            const body = stripQuoted(stripCheckpointLine(stripStatus(t)));
-            const qMarks = (body.match(/\?/g) || []).length;
-            const sents = sentences(body);
-            const imperatives = sents.filter(s => !/\?/.test(s) && (IMPERATIVE_ASK_RE.test(s) || EMBEDDED_ASK_RE.test(s))).length;
-            const compound = sents.some(s => /\?/.test(s) && COMPOUND_RE.test(s));
-            return { qMarks, imperatives, asks: qMarks + imperatives, compound };
-        }
-        // Fallback: keep everything up to and including the first ask; drop later asks.
-        function trimToOneQuestion(t) {
-            const raw = stripCheckpointLine(stripStatus(t));
-            const paras = raw.split(/\n\s*\n/);
-            const out = []; let asked = false;
-            for (const p of paras) {
-                if (asked) break;
-                const keep = [];
-                // Split into sentences while leaving quoted passages intact.
-                const parts = p.match(/(?:"[^"\n]*"|\u201c[^\u201d\n]*\u201d|[^.?!"\u201c])+(?:[.?!]+["\u201d\u2019')]*|$)/g) || [p];
-                for (const s of parts) {
-                    if (!s.trim()) continue;
-                    const bare = stripQuoted(s);
-                    const isAsk = /\?/.test(bare) || IMPERATIVE_ASK_RE.test(bare) || EMBEDDED_ASK_RE.test(bare);
-                    keep.push(s);
-                    if (isAsk) { asked = true; break; }
-                }
-                if (keep.length) out.push(keep.join('').trim());
-            }
-            return out.join('\n\n').trim();
-        }
+        // One-question rule: shared checker (window.PhilQ, loaded in the script above).
+        function questionAudit(t) { return g.PhilQ.audit(stripCheckpointLine(stripStatus(t))); }
+        function trimToOneQuestion(t) { return g.PhilQ.trim(stripCheckpointLine(stripStatus(t))); }
+        function questionProblem(t) { return g.PhilQ.problem(stripCheckpointLine(stripStatus(t))); }
 
         // ---- Quote credit: only words the student actually typed ---------------
         const ATTRIB_RES = [
@@ -1045,9 +1124,8 @@ That moral virtue is a mean, then, and in what sense it is so, and that it is a 
                 if (!verdictAtStart(text)) problems.push({ code: 'verdict-position', msg: 'The verdict phrase must be the very first characters of the reply.' });
                 if (/\?/.test(stripQuoted(text))) problems.push({ code: 'verdict-question', msg: 'A closing contains no question.' });
             } else if (inDlg && !ctx.rmDecline) {
-                const qa = questionAudit(text);
-                if (qa.asks > 1 || qa.compound) problems.push({ code: 'multi-question', msg: 'Ask exactly ONE question with ONE question mark. You asked ' + qa.asks + (qa.compound ? ' (including a compound "..., and what ...?" question)' : '') + '. Keep only the most important one; no "Then tell me" second asks.' });
-                else if (qa.asks === 0 && (ctx.kind === 'answer' || ctx.startsNow)) problems.push({ code: 'no-question', msg: 'End with exactly one question.' });
+                const qp = questionProblem(text);
+                if (qp) problems.push(qp);
             }
             const bad = misattributions(text, ctx.studentTexts);
             if (bad.length) problems.push({ code: 'misattributed', msg: 'You credited the student with words they never typed: ' + bad.map(b => '"' + b.quote.slice(0, 80) + '"').join(', ') + '. Only say "you wrote/quoted" for their exact words. If it is from the reading, say "Aristotle writes".' });
@@ -1127,8 +1205,12 @@ That moral virtue is a mean, then, and in what sense it is so, and that it is a 
             if (verdict && !verdictAtStart(text)) { const i = text.search(VERDICT_RE); text = text.slice(i).replace(/^\s+/, ''); log.fallbacks.push('verdict-position'); }
             if (verdict) text = text.replace(/\?/g, '.');
             if (!verdict && started && !ctx.rmDecline) {
-                const qa = questionAudit(text);
-                if (qa.asks > 1) { text = trimToOneQuestion(text); log.fallbacks.push('trim-questions'); }
+                const qp = questionProblem(text);
+                if (qp) {
+                    const el = (st.focus && !cpsAfter[st.focus]) ? st.focus : (openElements(cpsAfter)[0] || 'compare');
+                    text = g.PhilQ.fallback(stripCheckpointLine(text), fallbackQuestion(el, ctx.raised));
+                    log.fallbacks.push(qp.code === 'no-question' ? 'add-question' : 'trim-questions');
+                }
             }
             if (misattributions(text, studentTexts).length) { text = fixMisattributions(text, studentTexts); log.fallbacks.push('fix-attribution'); }
 
@@ -1204,9 +1286,33 @@ That moral virtue is a mean, then, and in what sense it is so, and that it is a 
             </svg>
         );
 
+        // Render assistant text: blank-line paragraphs, "- " / "\u2022 " / "* " list lines as real lists, **bold** as strong.
+        function renderInline(text, keyBase) {
+            const parts = String(text).split(/(\*\*[^*\n]+\*\*)/g);
+            return parts.map((p, i) => /^\*\*[^*\n]+\*\*$/.test(p)
+                ? <strong key={keyBase + '-b' + i}>{p.slice(2, -2)}</strong>
+                : <React.Fragment key={keyBase + '-t' + i}>{p}</React.Fragment>);
+        }
+        function renderRich(content, textStyle) {
+            const blocks = String(content || '').replace(/\r/g, '').split(/\n\s*\n/);
+            const out = [];
+            blocks.forEach((block, bi) => {
+                const lines = block.split('\n');
+                let para = [], items = [];
+                const flushPara = () => { if (para.length) { out.push(<p key={'p' + bi + '-' + out.length} style={{...textStyle, margin: '0 0 10px 0'}}>{renderInline(para.join('\n'), 'p' + bi + out.length)}</p>); para = []; } };
+                const flushList = () => { if (items.length) { out.push(<ul key={'u' + bi + '-' + out.length} style={{...textStyle, margin: '0 0 10px 0', paddingLeft: '1.4em', whiteSpace: 'normal'}}>{items.map((it, ii) => <li key={ii} style={{marginBottom: '4px'}}>{renderInline(it, 'l' + bi + ii)}</li>)}</ul>); items = []; } };
+                lines.forEach(line => {
+                    const m = line.match(/^\s*(?:[-*\u2022])\s+(.*)$/);
+                    if (m) { flushPara(); items.push(m[1]); }
+                    else { flushList(); para.push(line); }
+                });
+                flushPara(); flushList();
+            });
+            return out;
+        }
         const PL = window.PhronimosLogic;
         const STORAGE_KEY = 'phil120-phronimos-v5';
-        const BOT_VERSION = 'v5 (2026-11-20)';
+        const BOT_VERSION = 'v5.1 (2026-11-20)';
         const INTRO_MESSAGE = { role: 'assistant', content: "I am the Phronimos.\n\nThe name is from your reading. Aristotle says the mean is fixed \"by that principle by which the man of practical wisdom would determine it.\" The Greek for that person is phronimos. I am named after a standard, not a sage \u2014 and I am not Aristotle. I will not tell you what he really meant.\n\nHow this works:\n\u2022 Paste your complete rough draft \u2014 at least three paragraphs covering all three elements.\n\u2022 I ask one question at a time about what you wrote. You answer here, in the chat.\n\u2022 You revise the essay yourself, afterward, on your own.\n\nTwo things worth knowing. A draft that is rough, unfinished, or partly wrong is exactly what I am here for, so do not polish it first. And I can be wrong about the reading \u2014 if I say something the text does not, tell me and we will look at the passage.\n\nPaste your draft when you are ready." };
         function loadSaved() {
             try {
@@ -1500,6 +1606,7 @@ That moral virtue is a mean, then, and in what sense it is so, and that it is a 
                     fontStyle: 'italic',
                     textShadow: '0 1px 3px rgba(0, 0, 0, 0.5)',
                 },
+                tracker: { color: '#e8e4d9', fontSize: '0.95rem', margin: '0 auto 0 0' },
                 toolRow: { marginTop: '12px', display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-end', alignItems: 'center', gap: '10px' },
                 confirmBox: { display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '8px' },
                 confirmText: { color: '#e8e4d9', fontSize: '0.95rem' },
@@ -1560,6 +1667,9 @@ That moral virtue is a mean, then, and in what sense it is so, and that it is a 
                             </div>
                             {messages.length > 1 && (
                                 <div style={styles.toolRow}>
+                                    {engine.started && (
+                                        <p role="status" aria-live="polite" style={styles.tracker}>Checkpoints completed: {PL.cpCount(engine.cps)} of 4</p>
+                                    )}
                                     {!confirmReset ? (
                                         <button type="button" onClick={() => setConfirmReset(true)} style={styles.downloadButton} disabled={isLoading}>
                                             <span>Start over</span>
@@ -1595,9 +1705,13 @@ That moral virtue is a mean, then, and in what sense it is so, and that it is a 
                                         {msg.role === 'assistant' && (
                                             <div style={styles.messageLabel}>{msg.isError ? 'Connection problem' : 'The Phronimos'}</div>
                                         )}
-                                        <p style={{...styles.messageText, ...(msg.role === 'user' ? styles.userMessageText : {})}}>
-                                            {msg.content}
-                                        </p>
+                                        {msg.role === 'user' ? (
+                                            <p style={{...styles.messageText, ...styles.userMessageText}}>
+                                                {msg.content}
+                                            </p>
+                                        ) : (
+                                            <div>{renderRich(msg.content, styles.messageText)}</div>
+                                        )}
                                     </div>
                                 </div>
                             ))}
@@ -1627,6 +1741,7 @@ That moral virtue is a mean, then, and in what sense it is so, and that it is a 
                                       ? 'You can keep going on the open thread named above by replying below, or stop here, download your conversation, and take it into your revision.'
                                       : 'This conversation is closed. Download it and submit it with your essay and your original draft.'}
                                 </p>
+                                <p style={styles.verdictText}>Checkpoints completed: {PL.cpCount(engine.cps)} of 4</p>
                                 <p style={styles.verdictNote}>
                                     {verdict === 'REQUIREMENTS MET' && !closed
                                       ? 'This is not a grade. Your instructor grades the assignment.'
@@ -1676,7 +1791,7 @@ That moral virtue is a mean, then, and in what sense it is so, and that it is a 
                         <div className="greek-key greek-key-bottom"></div>
                     </div>
                     
-                    <p style={styles.footer}>"Conduct has to do with individual cases" &middot; A thinking tool for revision, not a writing tool &middot; v5 &middot; 2026-11-20</p>
+                    <p style={styles.footer}>"Conduct has to do with individual cases" &middot; A thinking tool for revision, not a writing tool &middot; v5.1 &middot; 2026-11-20</p>
                 </div>
             );
         }

@@ -260,8 +260,115 @@
 
 </div>
 
-<p class="footer">A steelman is the opposite of a straw man &middot; An educational tool for testing moral arguments &middot; rev 2026-11-20</p>
+<p class="footer">A steelman is the opposite of a straw man &middot; An educational tool for testing moral arguments &middot; rev 2026-11-20b</p>
 
+<script>
+    /* PHIL_QGUARD_START: shared one-question checker for PHIL 120 tutor bots (plain JS). */
+    (function (g) {
+        const TAIL_RE = /^\s*(?:Checkpoints completed:.*|VERDICT\s*:.*|<!--[\s\S]*?-->)\s*$/gim;
+        const WH = '(?:what|why|how|who|which|where|whether|when)';
+        const AUX = '(?:does|do|did|is|are|was|were|would|should|could|can|will|has|have|might|must)';
+        const SUBJ = '(?:it|he|she|they|you|that|this|the|anyone|anything|your|his|her|their|there|we|i|socrates|euthyphro|aristotle|mill|hobbes|plato|kant)';
+        const COMPOUND_RES = [
+            new RegExp(',\\s*(?:and|or)\\s+' + WH + '\\b', 'i'),                       // "..., and what ...?"
+            new RegExp(',\\s*and\\s+' + AUX + '\\s+' + SUBJ + '\\b', 'i'),              // "..., and does the text ...?"
+            new RegExp('\\s(?:and|but)\\s+(?:why|how)\\s+' + AUX + '\\b', 'i')          // "... and why does it matter?"
+        ];
+        const IMPERATIVE_ASK_RE = /^\s*(?:(?:then|and|also|now|next|so|first|second)\s*,?\s+)?(?:tell me|explain|describe|say (?:what|why|how|whether)|show me|name (?:the|one|two)|put (?:it|that) in your own words|give me)\b/i;
+        const EMBEDDED_ASK_RE = /\b(?:and|then)\s+(?:tell me|explain|describe|show me)\b/i;
+        function body(t) {
+            return String(t || '').replace(/<!--[\s\S]*?-->/g, '').replace(/<!--[\s\S]*$/, '').replace(TAIL_RE, '').replace(/\n{3,}/g, '\n\n').trim();
+        }
+        function stripQuoted(t) {
+            return String(t || '').replace(/"[^"\n]*"/g, ' ').replace(/\u201c[^\u201d\n]*\u201d/g, ' ');
+        }
+        function sentences(t) {
+            return String(t || '').replace(/\s+/g, ' ').match(/[^.?!]+(?:[.?!]+["\u201d\u2019')]*|$)/g) || [];
+        }
+        function compoundIndex(s) {
+            let best = -1;
+            COMPOUND_RES.forEach(re => { const m = re.exec(s); if (m && (best < 0 || m.index < best)) best = m.index; });
+            return best;
+        }
+        function endsWithQuestion(t) { return /\?["\u201d\u2019')\]]*\s*$/.test(body(t)); }
+        function audit(t) {
+            const b = body(t);
+            const bare = stripQuoted(b);
+            let qMarks = (bare.match(/\?/g) || []).length;
+            const endsQ = endsWithQuestion(b);
+            if (!qMarks && endsQ) qMarks = 1;   // the question itself sits inside quotation marks
+            const sents = sentences(bare);
+            const imperatives = sents.filter(s => !/\?/.test(s) && (IMPERATIVE_ASK_RE.test(s) || EMBEDDED_ASK_RE.test(s))).length;
+            const compound = sents.some(s => /\?/.test(s) && compoundIndex(s) >= 0);
+            return { qMarks, imperatives, asks: qMarks + imperatives, compound, endsWithQuestion: endsQ };
+        }
+        // null when the reply is fine; otherwise { code, msg }.
+        function problem(t) {
+            const a = audit(t);
+            if (a.asks === 0) return { code: 'no-question', msg: 'End your reply with exactly ONE question. This reply has none.' };
+            if (a.asks > 1 || a.compound) return { code: 'multi-question', msg: 'Ask exactly ONE question with ONE question mark. You asked ' + a.asks + (a.compound ? ' (including a two-part "..., and does/what ...?" question)' : '') + '. Keep only the most important one; no "Then tell me" second asks.' };
+            if (!a.endsWithQuestion) return { code: 'not-last', msg: 'Your one question must be the LAST sentence of the reply (only the checkpoint or STATUS line may follow it).' };
+            return null;
+        }
+        // Keep everything up to the first question; cut a two-part question at its second clause.
+        function trim(t, opts) {
+            const raw = body(t);
+            if (opts && opts.keep === 'last') {
+                // Keep the LAST question; drop earlier question sentences and stacked imperative asks.
+                const paras = raw.split(/\n\s*\n/).map(p => p.match(/(?:"[^"\n]*"|\u201c[^\u201d\n]*\u201d|[^.?!"\u201c])+(?:[.?!]+["\u201d\u2019')]*|$)/g) || [p]);
+                let lastP = -1, lastS = -1;
+                paras.forEach((ss, i) => ss.forEach((s, j) => { if (/\?/.test(stripQuoted(s)) || /\?["\u201d\u2019')]*\s*$/.test(s)) { lastP = i; lastS = j; } }));
+                if (lastP < 0) return trim(t);
+                const out = [];
+                for (let i = 0; i <= lastP; i++) {
+                    const keep = [];
+                    paras[i].forEach((s, j) => {
+                        if (i === lastP && j > lastS) return;
+                        const bare = stripQuoted(s), isQ = /\?/.test(bare) || /\?["\u201d\u2019')]*\s*$/.test(s);
+                        if (isQ && !(i === lastP && j === lastS)) return;
+                        if (!isQ && (IMPERATIVE_ASK_RE.test(bare) || EMBEDDED_ASK_RE.test(bare))) return;
+                        if (i === lastP && j === lastS) { const ci = compoundIndex(s); if (ci > 0) s = s.slice(0, ci).replace(/[\s,;:]+$/, '') + '?'; }
+                        keep.push(s);
+                    });
+                    if (keep.length) out.push(keep.join('').trim());
+                }
+                return out.join('\n\n').trim();
+            }
+            const paras = raw.split(/\n\s*\n/);
+            const out = []; let done = false;
+            for (const p of paras) {
+                if (done) break;
+                const parts = p.match(/(?:"[^"\n]*"|\u201c[^\u201d\n]*\u201d|[^.?!"\u201c])+(?:[.?!]+["\u201d\u2019')]*|$)/g) || [p];
+                const keep = [];
+                for (let s of parts) {
+                    if (!s.trim()) continue;
+                    const bare = stripQuoted(s);
+                    if (/\?/.test(bare) || /\?["\u201d\u2019')]*\s*$/.test(s)) {
+                        const ci = compoundIndex(s);
+                        if (ci > 0) s = s.slice(0, ci).replace(/[\s,;:]+$/, '') + '?';
+                        keep.push(s); done = true; break;
+                    }
+                    if (IMPERATIVE_ASK_RE.test(bare) || EMBEDDED_ASK_RE.test(bare)) continue; // drop stacked imperative asks
+                    keep.push(s);
+                }
+                if (keep.length) out.push(keep.join('').trim());
+            }
+            return out.join('\n\n').trim();
+        }
+        // Apply the fallback after a failed rewrite. Returns the fixed body (tail lines are the caller's job).
+        function fallback(t, fallbackQuestion, opts) {
+            const a = audit(t);
+            let b = body(t);
+            if (a.asks === 0) return (b ? b + '\n\n' : '') + (fallbackQuestion || 'What do you think?');
+            b = trim(t, opts);
+            if (!audit(b).endsWithQuestion) b = b.replace(/\s+$/, '') + '\n\n' + (fallbackQuestion || 'What do you think?');
+            return b;
+        }
+        const NOTE = '[APP CORRECTION: your reply below was not shown to the student. Rewrite it so it ends with exactly ONE question (one question mark, no second ask, no "..., and does/what ...?" two-part question, nothing after the question except any required checkpoint or STATUS line). Keep the same point and length. Output only the rewritten reply.]';
+        g.PhilQ = { audit, problem, trim, fallback, body, compoundIndex, NOTE, endsWithQuestion };
+    })(typeof window !== 'undefined' ? window : globalThis);
+    /* PHIL_QGUARD_END */
+</script>
 <script>
 (function () {
   'use strict';
@@ -301,10 +408,10 @@
 "",
 "ROUND ONE, THE DRAFT. The student pastes a complete draft. Do not begin testing until you have one. If they paste a fragment, an outline, a topic idea, or a single paragraph, tell them warmly that you need the complete draft first, because you cannot test an argument that is not finished yet, and ask them to return when they have one.",
 "When the complete draft arrives, do all of the following in one reply:",
-"(a) Name the position they are actually defending, in your own words, and ask them to confirm you have it right. Getting this wrong wastes the whole conversation.",
+"(a) Name the position they are actually defending, in your own words, and tell them to correct you if you have it wrong. Make this a statement, not a question: your one question comes in (d). Getting this wrong wastes the whole conversation.",
 "(b) Identify one genuine strength, only if one exists. Do not manufacture praise.",
 "(c) Build the single strongest objection to their position, stated the way its own defenders would state it, in a short paragraph. One objection, the best one, not a list.",
-"(d) Ask them directly whether their draft as written answers THIS version of the objection, or a weaker version of it.",
+"(d) End with ONE question: ask them directly whether their draft as written answers THIS version of the objection, or a weaker version of it.",
 "Keep this reply under roughly 250 words. You are not producing a report.",
 "",
 "ROUND TWO, THE PRESSURE. The student responds. Now press on whichever of these is weakest in their draft, and name it specifically:",
@@ -312,7 +419,7 @@
 "- Does their response to the objection answer it, or restate their thesis in different words?",
 "- Is the textbook's argument represented accurately, or reshaped to be easier to defeat?",
 "- Does the conclusion follow from the reasoning that precedes it, or does it arrive from somewhere else?",
-"Pick at most two of these. Ask about them concretely. Then tell the student plainly that the next step is to revise the draft and paste the revision.",
+"Press on ONE of these per reply, concretely, with one question. You may take up a second one in a later reply. When the pressure has done its work (usually after one or two exchanges), tell the student plainly that the next step is to revise the draft and paste the revision, and end that same reply with one question, for example which change they will make first. Never send a reply that is only an instruction.",
 "",
 "ROUND THREE, THE REVISION. The student pastes a revised draft. Compare it against the original and against the specific objection you raised.",
 "The question is never whether the draft got longer. The question is whether the objection you raised is now actually addressed in the text. If it is not, say so without accusation: 'I raised the point about X and I do not see it taken up here. Where in this version did you answer it?' Then let them try again.",
@@ -362,6 +469,9 @@
 "Never assign or predict a grade, score, or percentage.",
 "Never state or imply your own view on the moral issue.",
 "Never use inflated praise such as 'Excellent!' or 'Brilliant!' for a thin or evasive response.",
+"",
+"ONE QUESTION PER REPLY",
+"Every reply in the dialogue ends with exactly ONE question: one question mark, and the question is the last sentence. No second question, no 'Have I got that right?' followed by another question, and no two-part question joined by '..., and does ...?'. The application counts question marks and sends back a reply that breaks this rule. The only replies without a question are a refusal to begin without a complete draft, the closing verdict, and a distress response.",
 "",
 "TONE AND FORMAT",
 "Direct, composed, and confident, with dry warmth. You are formidable but you are on the student's side, and that should come through. Speak in plain sentences. Keep replies under roughly 250 words. Write in flowing prose, not bulleted lists, and never number your points like a rubric. Do not open with flattery. Do not close every message with the same stock phrase.",
@@ -492,6 +602,7 @@
     out += 'Exported: ' + new Date().toLocaleString() + '\n';
     out += new Array(61).join('=') + '\n\n';
     for (var i = 1; i < messages.length; i++) {
+      if (messages[i].isError) continue;
       out += (messages[i].role === 'user' ? 'STUDENT' : 'STEELMAN') + ':\n';
       out += messages[i].content + '\n\n';
       out += new Array(61).join('-') + '\n\n';
@@ -535,31 +646,54 @@
       ? '[STUCK ' + stuck + ': TEACH-THEN-APPLY now. Explain the point in two or three plain sentences anchored in a verbatim quotation from their draft or a passage they pasted, then ask ONE application question on a concrete case.]\n\n'
       : (stuck === 1 ? '[STUCK 1: one scaffold only; do not explain the point yet.]\n\n' : '');
 
-    var payload = {
-      model: 'claude-sonnet-5-5',
-      thinking: { type: 'between_tools' },
-      max_tokens: 2000,
-      system: [{ type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral', ttl: '1h' } }],
-      messages: messages.slice(1).map(function (m, i, arr) {
-        var isLast = i === arr.length - 1 && m.role === 'user';
-        return { role: m.role, content: isLast ? stuckNote + m.content : m.content };
-      })
-    };
+    var apiMessages = messages.slice(1).filter(function (m) { return !m.isError; }).map(function (m, i, arr) {
+      var isLast = i === arr.length - 1 && m.role === 'user';
+      return { role: m.role, content: isLast ? stuckNote + m.content : m.content };
+    });
 
-    fetch(WORKER_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    })
-      .then(function (res) {
-        if (!res.ok) throw new Error('Request failed: ' + res.status);
-        return res.json();
+    function callProxy(msgs) {
+      var payload = {
+        model: 'claude-sonnet-5-5',
+        thinking: { type: 'between_tools' },
+        max_tokens: 1000,
+        system: [{ type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral', ttl: '1h' } }],
+        messages: msgs
+      };
+      return fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
       })
-      .then(function (data) {
-        // Prompt-caching check: open DevTools (F12) > Console. Turn 1 should show cache_creation_input_tokens; later turns cache_read_input_tokens. Free: usage already comes back with every reply.
-        if (data && data.usage) console.log('[phil120-steelman usage]', data.usage);
-        var reply = extractAssistantMessage(data);
+        .then(function (res) {
+          if (!res.ok) throw new Error('Request failed: ' + res.status);
+          return res.json();
+        })
+        .then(function (data) {
+          // Prompt-caching check: open DevTools (F12) > Console. Turn 1 should show cache_creation_input_tokens; later turns cache_read_input_tokens. Free: usage already comes back with every reply.
+          if (data && data.usage) console.log('[phil120-steelman usage]', data.usage);
+          return extractAssistantMessage(data);
+        });
+    }
+
+    // One question per reply, ending the reply. Exempt: before a complete draft has arrived (gate refusals),
+    // the closing verdict, and distress responses.
+    var hasDraft = messages.some(function (m) { return m.role === 'user' && m.content.split(/\s+/).length >= 300; });
+    function exemptFromQuestionRule(t) {
+      return !hasDraft || /holds up against it|download (?:the |your |this )?transcript/i.test(t) || /counsel/i.test(t);
+    }
+
+    callProxy(apiMessages)
+      .then(function (reply) {
         if (!reply || !reply.trim()) throw new Error("Sorry, I didn't get a response. Please try again.");
+        var issue = exemptFromQuestionRule(reply) ? null : window.PhilQ.problem(reply);
+        if (!issue) return reply;
+        return callProxy(apiMessages.concat([{ role: 'assistant', content: reply }, { role: 'user', content: window.PhilQ.NOTE + ' Problem: ' + issue.msg }]))
+          .then(function (fixed) {
+            if (fixed && fixed.trim() && (exemptFromQuestionRule(fixed) || !window.PhilQ.problem(fixed))) return fixed;
+            return window.PhilQ.fallback(reply, 'What would you say to that objection?', { keep: 'last' });
+          }, function () { return window.PhilQ.fallback(reply, 'What would you say to that objection?', { keep: 'last' }); });
+      })
+      .then(function (reply) {
         messages.push({ role: 'assistant', content: reply });
       })
       .catch(function (err) {
@@ -568,6 +702,7 @@
         elInput.value = value;
         messages.push({
           role: 'assistant',
+          isError: true,
           content: 'Something went wrong reaching the server. Your message has been put back in the box below. Click Test It to try again. If this keeps happening, contact your instructor.'
         });
       })
