@@ -2549,3 +2549,304 @@ Chapter 3 image style: Han tomb-mural / Han pictorial stone-relief painting. The
 - **Source:** AI-generated image (Grok Bot), generated 2026-11-18 in the style of Steven Austin's professor chalkboard cartoon; approved by Steven 2026-11-18 ("love the new chalkboard").
 - **License:** Original generated work for HIST 270; no third-party rights.
 - **Attribution:** "Course cartoon, AI-generated in the style of Professor Austin's chalkboard cartoon; not a portrait or historical source."
+# Chapter 3 · Mini-lecture: Empress Lü and the Problem of Regency (Ch03 mini-Lü): `reveal_decks/chapter-03/images/ch03-mini-lu/` (House Style deck approved and published 2026-11-20; AI murals approved 2026-11-20)
+
+Chapter 3 image style: Han tomb-mural / Han pictorial stone-relief painting. Eight murals (A, D, F, J, K, L, O, R) were generated for this mini-lecture and approved by Steven on 2026-11-20. Two images show real or later historical artworks (G, P). Slide W is an AI-generated imagined portrait of Cixi, made to resemble the Qing album painting on slide P, and was approved with the deck on 2026-11-20. The shared chalkboard cartoon of a Han emperor lives in `reveal_decks/shared/concept-chalkboards/` (already documented with Ch03 L2/L4) and is reused on slide E.
+
+## `HIST270_ch03_mini_lu_A_mural.webp`
+- **Used on:** slide A (title)
+- **Description:** Empress Lü (Lǚ) stands behind a boy emperor as officials kneel.
+- **Source:** AI-generated image (Grok Bot), approved by Steven 2026-11-20. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_mini_lu_D_mural.webp`
+- **Used on:** slide D (Segment 1 opener)
+- **Description:** The funeral of Emperor Gaozu (Gāozǔ), 195 BCE, with his widow and heir following.
+- **Source:** AI-generated image (Grok Bot), approved by Steven 2026-11-20. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_mini_lu_F_mural.webp`
+- **Used on:** slide F
+- **Description:** A child on the throne, a regent at his side, and rival groups at court.
+- **Source:** AI-generated image (Grok Bot), approved by Steven 2026-11-20. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_mini_lu_G_empress_jade_seal.webp`
+- **Used on:** slide G
+- **Description:** Jade seal carved with the words "Seal of the Empress," Western Han, found in 1968 near the tomb of Emperor Gaozu (Gāozǔ) and often linked to Empress Lü (Lǚ). Shaanxi History Museum, Xi'an.
+- **Source:** Photograph by Gary Todd, 2009, via Wikimedia Commons. CC0.
+- **License:** CC0 (public domain).
+- **Attribution:** "Photo: Gary Todd, 2009, CC0, via Wikimedia Commons."
+
+## `HIST270_ch03_mini_lu_J_mural.webp`
+- **Used on:** slide J
+- **Description:** Empress Lü (Lǚ) places a boy emperor on the throne.
+- **Source:** AI-generated image (Grok Bot), approved by Steven 2026-11-20. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_mini_lu_K_mural.webp`
+- **Used on:** slide K
+- **Description:** Empress Lü (Lǚ) gives royal titles to her relatives as Liu (Liú) princes look on.
+- **Source:** AI-generated image (Grok Bot), approved by Steven 2026-11-20. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_mini_lu_L_mural.webp`
+- **Used on:** slide L
+- **Description:** Officials offer the seal to Liu Heng (Liú Héng), the future Emperor Wen (Wén), 180 BCE.
+- **Source:** AI-generated image (Grok Bot), approved by Steven 2026-11-20. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_mini_lu_O_mural.webp`
+- **Used on:** slide O (Segment 2 opener)
+- **Description:** The same court scene repeats across the centuries, in stacked registers.
+- **Source:** AI-generated image (Grok Bot), approved by Steven 2026-11-20. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_mini_lu_P_wu_zetian_portrait.webp`
+- **Used on:** slide P
+- **Description:** Wu Zetian (Wǔ Zétiān), an imagined portrait painted many centuries after her death, Qing dynasty; not a likeness from her lifetime.
+- **Source:** Wikimedia Commons, public domain (Qing-era imagined portrait).
+- **License:** Public domain.
+- **Attribution:** "Public domain, via Wikimedia Commons."
+
+## `HIST270_ch03_mini_lu_R_mural.webp`
+- **Used on:** slide R
+- **Description:** An empty throne: who fills it when the emperor cannot?
+- **Source:** AI-generated image (Grok Bot), approved by Steven 2026-11-20. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_mini_lu_W_cixi_portrait.webp`
+- **Used on:** slide W
+- **Description:** Cixi (Cíxǐ), an AI-generated imagined portrait in the style of a later painted album; not a photograph and not a likeness from her lifetime.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-20 and approved with the deck on 2026-11-20. Made to resemble the Qing album painting on slide P.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated imagined portrait in the style of a later painted album; not a photograph and not a likeness from her lifetime."
+
+# Chapter 3 · Lecture 3 (Ch03 L3): `reveal_decks/chapter-03/images/ch03-lec3/` (House Style pass approved and published 2026-11-18; AI murals generated 2026-11-18)
+
+Chapter 3 image style: Han tomb-mural / Han pictorial stone-relief painting. The murals below were generated 2026-11-18 for the House Style revision of Lecture 3. One image shows a real historical artwork (U, a Wu Family Shrines rubbing). AE is a course map. Shared chalkboard cartoons (already documented with earlier decks) are reused on concept slides G, W, AU, and AF.
+
+## `HIST270_ch03_lec3_A_title_card.webp`
+- **Used on:** slide A (title)
+- **Description:** Course title card (sage, figurines, coin, bamboo books, caravan, burning city). A designed graphic, not a historical source.
+- **Source:** Course title graphic for the FA26 L3 deck, converted to WebP.
+- **License:** Original course material.
+- **Attribution:** "A designed graphic, not a historical source."
+
+## `HIST270_ch03_lec3_D_mural_v1_20261118.webp`
+- **Used on:** slide D
+- **Description:** On a palace terrace at night, court astronomers point to the stars while ritual specialists burn offerings; below, a farming family kneels before a diviner with a divining board and counting sticks.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec3_F_mural_v1_20261118.webp`
+- **Used on:** slide F
+- **Description:** On the peak of Mount Tai (Tàishān), a Han emperor offers a sacrifice to Heaven before an altar, while ritual specialists burn incense and a long procession winds up the mountain.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec3_H_mural_v1_20261118.webp`
+- **Used on:** slide H
+- **Description:** A Han emperor stands at the center of a painted cosmos: sun and moon above, fields and rivers below, and around him a green dragon, a red bird, a white tiger, and a black tortoise marking the directions.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec3_BF_mural_v1_20261118.webp`
+- **Used on:** slide BF
+- **Description:** In a palace hall, a gray-bearded Confucian scholar, imagined as Dong Zhongshu (Dǒng Zhòngshū), kneels to advise a young emperor beside a stand of bamboo-strip books, beneath a wall painting of sun, moon, mountains, and fields.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec3_I_mural_v1_20261118.webp`
+- **Used on:** slide I
+- **Description:** At his writing table, a Han scholar, imagined as Wang Chong (Wáng Chōng), waves away a diviner with a divining board, while a worried family holding offerings waits to hear whether the day is lucky.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec3_J_mural_v1_20261118.webp`
+- **Used on:** slide J
+- **Description:** In one register, a scribe struggles to carry heavy bundles of bamboo strips tied with cord; in the next, workers lift wet plant fiber on screens and a scribe unrolls a light paper scroll.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec3_M_mural_v1_20261118.webp`
+- **Used on:** slide M
+- **Description:** A Han historian with a servant and a pack mule visits an ancient battlefield, where an old farmer points out ruined walls while the historian records notes on bamboo strips.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec3_N_mural_v1_20261118.webp`
+- **Used on:** slide N
+- **Description:** In a Han archive lined with bundled bamboo books, an elderly court astronomer, Sima Tan (Sīmǎ Tán), hands a bundle of records to his son Sima Qian (Sīmǎ Qiān).
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec3_O_mural_v1_20261118.webp`
+- **Used on:** slide O
+- **Description:** By lamplight, a Han historian compares two unrolled bamboo-strip documents beside an ancient bronze cauldron, his travel cloak and walking staff behind him.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec3_R_mural_v1_20261118.webp`
+- **Used on:** slide R
+- **Description:** A Han village in horizontal registers: farmers plow with a pair of oxen, women weave at a loom in a courtyard, and a landlord watches from the gate of a walled house.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec3_S_mural_v1_20261118.webp`
+- **Used on:** slide S
+- **Description:** Villagers carry baskets of earth to repair a river dike during their month of labor service, while a county official with a tally stick counts the workers.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec3_T_mural_v1_20261118.webp`
+- **Used on:** slide T
+- **Description:** Two oxen pull a Han plow guided by a farmer, while nearby a worker pumps water with a treadle pump and a woman grinds grain with a stone hand mill.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec3_U_wu_family_shrine_rubbing.webp`
+- **Used on:** slide U
+- **Description:** Chariots and horsemen of a wealthy family, ink rubbing of a stone relief from the Wu Family Shrines (Wǔ), Jiaxiang, Shandong, 2nd century CE.
+- **Source:** Wikimedia Commons, public domain.
+- **License:** Public domain.
+- **Attribution:** "Public domain, via Wikimedia Commons."
+
+## `HIST270_ch03_lec3_V_mural_v1_20261118.webp`
+- **Used on:** slide V
+- **Description:** In a Han household courtyard, a gray-haired family head sits on a raised mat while his grown sons kneel before him, a widow guides her young son, and a bride arrives by carriage from another family.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec3_X_mural_v1_20261118.webp`
+- **Used on:** slide X
+- **Description:** A grown son kneels to serve food to his elderly parents while his wife brings them warm robes, in the style of the famous filial-son scenes painted on Han tomb walls.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec3_Y_mural_v1_20261118.webp`
+- **Used on:** slide Y
+- **Description:** In a palace hall, the scholar Ban Zhao (Bān Zhāo) teaches a group of palace women from a bamboo-strip book, while a young empress listens from a raised seat.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec3_AC_mural_v1_20261118.webp`
+- **Used on:** slide AC
+- **Description:** Families of Han migrants pole loaded boats and lead oxcarts south along a river valley, past rice paddies, green hills, and villages of raised wooden houses.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec3_AE_map_v1_20261118.webp`
+- **Used on:** slide AE
+- **Description:** Course map: Han expansion about 100 BCE. Chang'an (Cháng'ān) was the capital; Dian (Diān) and Nam Viet (Nányuè in Chinese) were conquered by Emperor Wu's armies.
+- **Source:** Drawn for this course from Natural Earth data; borders approximate. Generated 2026-11-18.
+- **License:** Original course map.
+- **Attribution:** "Drawn for this course from Natural Earth data; borders approximate."
+
+## `HIST270_ch03_lec3_BG_mural_v1_20261118.webp`
+- **Used on:** slide BG
+- **Description:** Foreign envoys present gifts to the seated Han emperor, while Han officials load carts with far larger return gifts of rolled silk and silk floss.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec3_AL_mural_v1_20261118.webp`
+- **Used on:** slide AL
+- **Description:** A great Han palace at dusk: inside its walls, rival groups of officials, women of the empress's family, and palace attendants gather in separate courtyards while storm clouds build overhead.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec3_AN_mural_v1_20261118.webp`
+- **Used on:** slide AN
+- **Description:** A stern regent in scholar's robes, imagined as Wang Mang (Wáng Mǎng), stands beside an infant emperor on the throne and addresses kneeling officials, while an elderly grand empress dowager watches from beside a screen.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec3_AO_mural_v1_20261118.webp`
+- **Used on:** slide AO
+- **Description:** Officials of a new dynasty open a public granary to hungry farmers, measure field boundaries with ropes, and unchain a line of freed slaves.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec3_AP_mural_v1_20261118.webp`
+- **Used on:** slide AP
+- **Description:** The Yellow River bursts through its dikes; farmers flee across flooded fields with children and livestock, while armed rebels gather on a distant hill.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec3_AR_mural_v1_20261118.webp`
+- **Used on:** slide AR
+- **Description:** Inside the palace's inner gate, eunuch attendants serve the emperor wine and bring him a message, while officials in tall caps wait outside the gate.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec3_AV_mural_v1_20261118.webp`
+- **Used on:** slide AV
+- **Description:** Guards lead officials in scholars' caps, hands bound, through a palace gate toward a prison, while eunuchs watch from a balcony above.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec3_AW_mural_v1_20261118.webp`
+- **Used on:** slide AW
+- **Description:** A walled Han manor with corner watchtowers: the landlord feasts in the main hall while tenant farmers deliver grain and armed retainers guard the gate.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec3_AG_mural_v1_20261118.webp`
+- **Used on:** slide AG
+- **Description:** At a riverside camp among palm trees, a former Qin general, Zhao Tuo (Zhào Tuó), welcomes tattooed local warriors carrying bronze drums into his army, while a Han settler and a local bride stand together nearby.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec3_AH_mural_v1_20261118.webp`
+- **Used on:** slide AH
+- **Description:** Two Vietnamese noblewomen with swords lead local chiefs and armed followers as they storm the wooden gate of a Han stronghold.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec3_BC_mural_v1_20261118.webp`
+- **Used on:** slide BC
+- **Description:** Soldier-farmers plow fields beneath a Han watchtower on the Great Wall, while sentries scan the steppe and supply carts arrive along the wall road.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
+
+## `HIST270_ch03_lec3_BD_mural_v1_20261118.webp`
+- **Used on:** slide BD
+- **Description:** A mixed Han frontier army on the march: armored Han cavalry and Xiongnu horsemen in fur hats ride together under the same banners.
+- **Source:** AI-generated image (Grok Bot), generated 2026-11-18. Caption: AI-generated interpretation in Han tomb-mural style, not a historical record.
+- **License:** Original generated work for HIST 270; no third-party rights.
+- **Attribution:** "AI-generated interpretation in Han tomb-mural style, not a historical record."
