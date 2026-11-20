@@ -260,7 +260,7 @@
 
 </div>
 
-<p class="footer">A steelman is the opposite of a straw man &middot; An educational tool for testing moral arguments</p>
+<p class="footer">A steelman is the opposite of a straw man &middot; An educational tool for testing moral arguments &middot; rev 2026-11-20</p>
 
 <script>
 (function () {
@@ -334,6 +334,12 @@
 "- A re-paste of draft material offered in place of an answer to your question.",
 "- An answer to a different question than the one you asked.",
 "When a response does not count, never accuse the student of gaming the assignment and never refuse to continue. Redirect warmly and specifically. For example: 'That tells me you agree with me, but not why. What would you actually say to someone who holds the other position?' Or: 'You have given me the draft again rather than an answer. In your own words, what is your response to the objection?' Stay patient. Many of these students are underprepared, not dishonest.",
+"",
+"TEACH-THEN-APPLY: WHEN A STUDENT IS GENUINELY STUCK",
+"First time a student is stuck on a point, give ONE scaffold: restate the objection more plainly, point them back to the relevant part of their own draft or the textbook argument they summarized, or offer a small concrete situation, and ask one question.",
+"Genuinely stuck means stuck for TWO exchanges on the same point: they say they do not understand, ask for help, or give two wrong or empty answers ('idk,' '?') to the same question. A brief answer is not stuck; a thin answer gets the SUBSTANTIVE ENGAGEMENT redirect above. The application may add [STUCK N] before their message; you also judge wrong answers yourself.",
+"When the student is genuinely stuck, in the same reply: (1) TEACH: explain the point plainly in two or three sentences, anchored in a verbatim quotation. You do not have the textbook in front of you, so quote the student's own draft or a passage the student pasted into this conversation, exactly as written, and never invent or reconstruct a textbook quotation. Explain what the objection claims or what the theory actually requires, for example what a utilitarian calculation would have to weigh in their case. (2) APPLY: ask ONE application question that has the student use that point, in their own words, on a small concrete case tied to their issue.",
+"If the student then applies the point correctly in their own words, treat that point as answered and move on to the next one. If partly, take one more exchange on it, then move on. Teaching the point is not taking a side and not writing for them: you still hold no moral position, never tell them which evidence or quotations to use, and never give them a sentence, thesis, or improved paragraph for their project.",
 "",
 "POSSIBLE AI-GENERATED WORK",
 "If a draft shows clear signs of machine generation, such as polished graduate-level prose that does not match the student's conversational replies, perfectly uniform structure with no personal voice, claims about the textbook chapter that do not correspond to anything in it, or terminology never introduced in this course, raise it once, directly and without accusation:",
@@ -516,13 +522,27 @@
     elSend.disabled = true;
     render();
 
+    // Stuck streak: consecutive student turns (ending with this one) that say they are lost, ask for help, or are empty.
+    var STUCK_RE = /\b(i don'?t (know|understand|get)|i do not (know|understand)|idk|confus\w*|stuck|lost|no idea|what do you mean|can you help|help me|just tell me|what(?:'s| is) the answer)\b/i;
+    var EMPTY_RE = /^\s*(\?+|\.+|idk|i dunno|dunno|not sure|no idea|nothing|no clue|huh|what)\s*[.!?]*\s*$/i;
+    var userTurns = messages.filter(function (m) { return m.role === 'user'; }).map(function (m) { return m.content; });
+    var stuck = 0;
+    for (var si = userTurns.length - 1; si >= 1; si--) {
+      var ut = userTurns[si];
+      if (EMPTY_RE.test(ut) || (STUCK_RE.test(ut) && ut.split(/\s+/).length < 40)) stuck++; else break;
+    }
+    var stuckNote = stuck >= 2
+      ? '[STUCK ' + stuck + ': TEACH-THEN-APPLY now. Explain the point in two or three plain sentences anchored in a verbatim quotation from their draft or a passage they pasted, then ask ONE application question on a concrete case.]\n\n'
+      : (stuck === 1 ? '[STUCK 1: one scaffold only; do not explain the point yet.]\n\n' : '');
+
     var payload = {
       model: 'claude-sonnet-5-5',
       thinking: { type: 'between_tools' },
       max_tokens: 2000,
       system: [{ type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral', ttl: '1h' } }],
-      messages: messages.slice(1).map(function (m) {
-        return { role: m.role, content: m.content };
+      messages: messages.slice(1).map(function (m, i, arr) {
+        var isLast = i === arr.length - 1 && m.role === 'user';
+        return { role: m.role, content: isLast ? stuckNote + m.content : m.content };
       })
     };
 

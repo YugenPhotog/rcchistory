@@ -288,7 +288,8 @@ FORBIDDEN MOVES
 - Never tell a student an interpretation is "exactly right," "accurate," or "correct."
 - Never offer a two-option choice where you supply both options. Ask an open question.
 - Never supply a philosophical term the student has not used. If they are groping toward a
-  concept, tell them to check their textbook and name it themselves. Do not say "there is a
+  concept, tell them to check their textbook and name it themselves. (TEACH-THEN-APPLY may
+  explain an idea in the excerpt in plain words; it still does not supply the term.) Do not say "there is a
   famous term for this" and then eventually supply it.
 - If a student's later phrasing closely echoes your own earlier phrasing, that is your idea,
   not theirs. Ask them to restate it differently before you acknowledge it.
@@ -481,7 +482,29 @@ not move on. Ask them to say more in two or three sentences, and what in the tex
 there.
 
 DO NOT DO THEIR THINKING. If asked what is missing, what the answer is, or what Socrates is
-really arguing, redirect with a question. Never supply a list of what their draft lacks.
+really arguing, redirect with a question the first time. Never supply a list of what their
+draft lacks. If they are genuinely stuck, use TEACH-THEN-APPLY below instead of redirecting
+again.
+
+TEACH-THEN-APPLY. First time a student is stuck on a point, give ONE scaffold: point them to
+the place in the excerpt, break a hard line into its parts and ask about one, or restate your
+question more plainly. Genuinely stuck means stuck for TWO exchanges on the same point: they
+say they do not understand, ask for help, or give two wrong or empty answers ("idk," "?") to
+the same question. A brief answer is not stuck; a thin answer gets the THIN ANSWERS treatment
+above. The application marks [STUCK N] after the exchange marker; you also judge wrong answers
+yourself. When the student is genuinely stuck, in the same reply:
+  1. TEACH: explain the point plainly in two or three sentences, anchored in a verbatim
+     quotation from the excerpt. Example: Socrates asks "whether the pious or holy is beloved
+     by the gods because it is holy, or holy because it is beloved of the gods." In plain
+     words: does the gods' love make a thing holy, or do they love it because it already is?
+  2. APPLY: ask ONE application question that has the student use that point, in their own
+     words, on a small concrete case. Example: "If a coach praises a play because it was
+     smart, which comes first, the praise or the smartness?"
+If the student then applies the point correctly in their own words, count the checkpoint and
+move on. If partly, take one more exchange on it, then move on. Stay under 120 words. Teaching
+the text is not writing the essay: never give them a sentence, thesis, or model paragraph for
+their draft, and still never supply a course term they have not used (explain the idea in
+plain words; let them name it from the textbook).
 
 PERSONAL BELIEF. Students may disclose religious commitments. Acknowledge without evaluating,
 then return to the text: "Set your own view aside for a moment. What is Euthyphro committed to
@@ -598,7 +621,19 @@ leaves with your answers has not.`;
                 // Application-side exchange counter. The model never counts its own turns.
                 const EXCHANGE_CEILING = 12;
                 const exchangeNumber = messages.filter(m => m.role === 'user').length + 1;
-                const countedMessage = '[Exchange ' + exchangeNumber + ' of ' + EXCHANGE_CEILING + ']\n\n' + userMessage;
+                // Stuck streak: consecutive student turns (ending with this one) that say they are lost, ask for help, or are empty.
+                const STUCK_RE = /\b(i don'?t (know|understand|get)|i do not (know|understand)|idk|confus\w*|stuck|lost|no idea|what do you mean|can you help|help me|just tell me|what(?:'s| is) the answer)\b/i;
+                const EMPTY_RE = /^\s*(\?+|\.+|idk|i dunno|dunno|not sure|no idea|nothing|no clue|huh|what)\s*[.!?]*\s*$/i;
+                const userTurns = messages.filter(m => m.role === 'user').map(m => m.content).concat([userMessage]);
+                let stuck = 0;
+                for (let i = userTurns.length - 1; i >= 1; i--) {
+                    const t = userTurns[i];
+                    if (EMPTY_RE.test(t) || (STUCK_RE.test(t) && t.split(/\s+/).length < 40)) stuck++; else break;
+                }
+                const stuckNote = stuck >= 2
+                    ? ' [STUCK ' + stuck + ': TEACH-THEN-APPLY now. Explain the point in two or three plain sentences anchored in a verbatim quotation from the excerpt, then ask ONE application question on a concrete case.]'
+                    : stuck === 1 ? ' [STUCK 1: one scaffold only; do not explain the point yet.]' : '';
+                const countedMessage = '[Exchange ' + exchangeNumber + ' of ' + EXCHANGE_CEILING + ']' + stuckNote + '\n\n' + userMessage;
 
                 try {
                     // Call the Val Town proxy
@@ -982,7 +1017,7 @@ leaves with your answers has not.`;
                         <div className="greek-key greek-key-bottom"></div>
                     </div>
                     
-                    <p style={styles.footer}>"The unexamined life is not worth living" · An educational tool for exploring Socratic dialogue</p>
+                    <p style={styles.footer}>"The unexamined life is not worth living" · An educational tool for exploring Socratic dialogue · rev 2026-11-20</p>
                 </div>
             );
         }
